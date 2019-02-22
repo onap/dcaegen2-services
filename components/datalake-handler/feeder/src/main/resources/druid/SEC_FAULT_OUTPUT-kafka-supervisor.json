@@ -1,0 +1,207 @@
+{
+	"type": "kafka",
+	"dataSchema": {
+		"dataSource": "unauthenticated.SEC_FAULT_OUTPUT",
+		"parser": {
+			"type": "string",
+			"parseSpec": {
+				"format": "json",
+				"flattenSpec": {
+					"useFieldDiscovery": false,
+					"fields": [
+						{
+							"type": "path",
+							"name": "event:commonEventHeader:sourceId",
+							"expr": "$.event.commonEventHeader.sourceId"
+						},
+						{
+							"type": "path",
+							"name": "event:commonEventHeader:startEpochMicrosec",
+							"expr": "$.event.commonEventHeader.startEpochMicrosec"
+						},
+						{
+							"type": "path",
+							"name": "event:commonEventHeader:eventId",
+							"expr": "$.event.commonEventHeader.eventId"
+						},
+						{
+							"type": "path",
+							"name": "event:commonEventHeader:domain",
+							"expr": "$.event.commonEventHeader.domain"
+						},
+						{
+							"type": "path",
+							"name": "event:commonEventHeader:lastEpochMicrosec",
+							"expr": "$.event.commonEventHeader.lastEpochMicrosec"
+						},
+						{
+							"type": "path",
+							"name": "event:commonEventHeader:eventName",
+							"expr": "$.event.commonEventHeader.eventName"
+						},
+						{
+							"type": "path",
+							"name": "event:commonEventHeader:sourceName",
+							"expr": "$.event.commonEventHeader.sourceName"
+						},
+						{
+							"type": "path",
+							"name": "event:commonEventHeader:priority",
+							"expr": "$.event.commonEventHeader.priority"
+						},
+						{
+							"type": "path",
+							"name": "event:commonEventHeader:version",
+							"expr": "$.event.commonEventHeader.version"
+						},
+						{
+							"type": "path",
+							"name": "event:commonEventHeader:reportingEntityName",
+							"expr": "$.event.commonEventHeader.reportingEntityName"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:eventSeverity",
+							"expr": "$.event.faultFields.eventSeverity"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmCondition",
+							"expr": "$.event.faultFields.alarmCondition"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:faultFieldsVersion",
+							"expr": "$.event.faultFields.faultFieldsVersion"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:specificProblem",
+							"expr": "$.event.faultFields.specificProblem"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[0]:name",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[0].name"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[0]:value",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[0].value"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[1]:name",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[1].name"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[1]:value",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[1].value"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[2]:name",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[2].name"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[2]:value",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[2].value"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[3]:name",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[3].name"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[3]:value",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[3].value"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[4]:name",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[4].name"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[4]:value",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[4].value"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[5]:name",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[5].name"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[5]:value",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[5].value"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[6]:name",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[6].name"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:alarmAdditionalInformation[6]:value",
+							"expr": "$.event.faultFields.alarmAdditionalInformation[6].value"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:eventSourceType",
+							"expr": "$.event.faultFields.eventSourceType"
+						},
+						{
+							"type": "path",
+							"name": "event:faultFields:vfStatus",
+							"expr": "$.event.faultFields.vfStatus"
+						}
+					]
+				},
+				"timestampSpec": {
+					"column": "event:commonEventHeader:startEpochMicrosec",
+					"format": "millis"
+				},
+				"dimensionsSpec": {
+					"dimensions": [],
+					"dimensionsExclusions": [
+					]
+				}
+			}
+		},
+		"metricsSpec": [],
+		"granularitySpec": {
+			"type": "uniform",
+			"segmentGranularity": "HOUR",
+			"queryGranularity": "MINUTE",
+			"rollup": false
+		},
+		"transformSpec": {
+			"transforms": [
+				{
+					"type": "expression",
+					"name": "timestamp",
+					"expression": "closedLoopAlarmStart/1000"
+				}
+			]
+		}
+	},
+	"tuningConfig": {
+		"type": "kafka",
+		"reportParseExceptions": true
+	},
+	"ioConfig": {
+		"topic": "unauthenticated.SEC_FAULT_OUTPUT",
+		"replicas": 1,
+		"startDelay": "PT1S",
+		"taskDuration": "PT1H",
+		"completionTimeout": "PT30M",
+		"consumerProperties": {
+			"bootstrap.servers": "dl_dmaap:9092"
+		},
+		"useEarliestOffset": true
+	}
+}
