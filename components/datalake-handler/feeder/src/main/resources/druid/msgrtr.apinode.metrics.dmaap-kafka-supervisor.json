@@ -1,0 +1,309 @@
+{
+	"type": "kafka",
+	"dataSchema": {
+		"dataSource": "msgrtr.apinode.metrics.dmaap",
+		"parser": {
+			"type": "string",
+			"parseSpec": {
+				"format": "json",
+				"flattenSpec": {
+					"useFieldDiscovery": false,
+					"fields": [
+						{
+							"type": "path",
+							"name": "sendEpsShort:summary",
+							"expr": "$.sendEpsShort.summary"
+						},
+						{
+							"type": "path",
+							"name": "sendEpsShort:raw",
+							"expr": "$.sendEpsShort.raw"
+						},
+						{
+							"type": "path",
+							"name": "recvEpsInstant:summary",
+							"expr": "$.recvEpsInstant.summary"
+						},
+						{
+							"type": "path",
+							"name": "recvEpsInstant:raw",
+							"expr": "$.recvEpsInstant.raw"
+						},
+						{
+							"type": "path",
+							"name": "fanOut:summary",
+							"expr": "$.fanOut.summary"
+						},
+						{
+							"type": "path",
+							"name": "fanOut:raw",
+							"expr": "$.fanOut.raw"
+						},
+						{
+							"type": "path",
+							"name": "sendEpsLong:summary",
+							"expr": "$.sendEpsLong.summary"
+						},
+						{
+							"type": "path",
+							"name": "sendEpsLong:raw",
+							"expr": "$.sendEpsLong.raw"
+						},
+						{
+							"type": "path",
+							"name": "kafkaConsumerTimeouts:summary",
+							"expr": "$.kafkaConsumerTimeouts.summary"
+						},
+						{
+							"type": "path",
+							"name": "kafkaConsumerTimeouts:raw",
+							"expr": "$.kafkaConsumerTimeouts.raw"
+						},
+						{
+							"type": "path",
+							"name": "recvEpsLong:summary",
+							"expr": "$.recvEpsLong.summary"
+						},
+						{
+							"type": "path",
+							"name": "recvEpsLong:raw",
+							"expr": "$.recvEpsLong.raw"
+						},
+						{
+							"type": "path",
+							"name": "sendEpsInstant:summary",
+							"expr": "$.sendEpsInstant.summary"
+						},
+						{
+							"type": "path",
+							"name": "sendEpsInstant:raw",
+							"expr": "$.sendEpsInstant.raw"
+						},
+						{
+							"type": "path",
+							"name": "recvEpsShort:summary",
+							"expr": "$.recvEpsShort.summary"
+						},
+						{
+							"type": "path",
+							"name": "recvEpsShort:raw",
+							"expr": "$.recvEpsShort.raw"
+						},
+						{
+							"type": "path",
+							"name": "kafkaConsumerClaims:summary",
+							"expr": "$.kafkaConsumerClaims.summary"
+						},
+						{
+							"type": "path",
+							"name": "kafkaConsumerClaims:raw",
+							"expr": "$.kafkaConsumerClaims.raw"
+						},
+						{
+							"type": "path",
+							"name": "version:summary",
+							"expr": "$.version.summary"
+						},
+						{
+							"type": "path",
+							"name": "version:raw",
+							"expr": "$.version.raw"
+						},
+						{
+							"type": "path",
+							"name": "upTime:summary",
+							"expr": "$.upTime.summary"
+						},
+						{
+							"type": "path",
+							"name": "upTime:raw",
+							"expr": "$.upTime.raw"
+						},
+						{
+							"type": "path",
+							"name": "sendTotalEvents:summary",
+							"expr": "$.sendTotalEvents.summary"
+						},
+						{
+							"type": "path",
+							"name": "sendTotalEvents:raw",
+							"expr": "$.sendTotalEvents.raw"
+						},
+						{
+							"type": "path",
+							"name": "hostname",
+							"expr": "$.hostname"
+						},
+						{
+							"type": "path",
+							"name": "kafkaConsumerCacheMiss:summary",
+							"expr": "$.kafkaConsumerCacheMiss.summary"
+						},
+						{
+							"type": "path",
+							"name": "kafkaConsumerCacheMiss:raw",
+							"expr": "$.kafkaConsumerCacheMiss.raw"
+						},
+						{
+							"type": "path",
+							"name": "metricsSendTime",
+							"expr": "$.metricsSendTime"
+						},
+						{
+							"type": "path",
+							"name": "kafkaConsumerCacheHit:summary",
+							"expr": "$.kafkaConsumerCacheHit.summary"
+						},
+						{
+							"type": "path",
+							"name": "kafkaConsumerCacheHit:raw",
+							"expr": "$.kafkaConsumerCacheHit.raw"
+						},
+						{
+							"type": "path",
+							"name": "now",
+							"expr": "$.now"
+						},
+						{
+							"type": "path",
+							"name": "transactionEnabled",
+							"expr": "$.transactionEnabled"
+						},
+						{
+							"type": "path",
+							"name": "startTime:summary",
+							"expr": "$.startTime.summary"
+						},
+						{
+							"type": "path",
+							"name": "startTime:raw",
+							"expr": "$.startTime.raw"
+						},
+						{
+							"type": "path",
+							"name": "recvTotalEvents:summary",
+							"expr": "$.recvTotalEvents.summary"
+						},
+						{
+							"type": "path",
+							"name": "recvTotalEvents:raw",
+							"expr": "$.recvTotalEvents.raw"
+						}
+					]
+				},
+				"timestampSpec": {
+					"column": "now",
+					"format": "millis"
+				},
+				"dimensionsSpec": {
+					"dimensions": [
+						"sendEpsShort:summary",
+						{
+							"type": "double",
+							"name": "sendEpsShort:raw"
+						},
+						"recvEpsInstant:summary",
+						{
+							"type": "double",
+							"name": "recvEpsInstant:raw"
+						},
+						"fanOut:summary",
+						{
+							"type": "double",
+							"name": "fanOut:raw"
+						},
+						"sendEpsLong:summary",
+						{
+							"type": "double",
+							"name": "sendEpsLong:raw"
+						},
+						"kafkaConsumerTimeouts:summary",
+						{
+							"type": "long",
+							"name": "kafkaConsumerTimeouts:raw"
+						},
+						"recvEpsLong:summary",
+						{
+							"type": "double",
+							"name": "recvEpsLong:raw"
+						},
+						"sendEpsInstant:summary",
+						{
+							"type": "double",
+							"name": "sendEpsInstant:raw"
+						},
+						"recvEpsShort:summary",
+						{
+							"type": "double",
+							"name": "recvEpsShort:raw"
+						},
+						"kafkaConsumerClaims:summary",
+						{
+							"type": "long",
+							"name": "kafkaConsumerClaims:raw"
+						},
+						"version:summary",
+						"upTime:summary",
+						{
+							"type": "long",
+							"name": "upTime:raw"
+						},
+						"sendTotalEvents:summary",
+						{
+							"type": "long",
+							"name": "sendTotalEvents:raw"
+						},
+						"hostname",
+						"kafkaConsumerCacheMiss:summary",
+						{
+							"type": "long",
+							"name": "kafkaConsumerCacheMiss:raw"
+						},
+						"metricsSendTime",
+						"kafkaConsumerCacheHit:summary",
+						{
+							"type": "long",
+							"name": "kafkaConsumerCacheHit:raw"
+						},
+						"transactionEnabled",
+						"startTime:summary",
+						{
+							"type": "long",
+							"name": "startTime:raw"
+						},
+						"recvTotalEvents:summary",
+						{
+							"type": "long",
+							"name": "recvTotalEvents:raw"
+						}
+					],
+					"dimensionsExclusions": [
+					]
+				}
+			}
+		},
+		"metricsSpec": [],
+		"granularitySpec": {
+			"type": "uniform",
+			"segmentGranularity": "HOUR",
+			"queryGranularity": "MINUTE",
+			"rollup": false
+		},
+		"transformSpec": null
+	},
+	"tuningConfig": {
+		"type": "kafka",
+		"reportParseExceptions": true
+	},
+	"ioConfig": {
+		"topic": "msgrtr.apinode.metrics.dmaap",
+		"replicas": 1,
+		"startDelay": "PT1S",
+		"taskDuration": "PT1H",
+		"completionTimeout": "PT30M",
+		"consumerProperties": {
+			"bootstrap.servers": "dl_dmaap:9092"
+		},
+		"useEarliestOffset": true
+	}
+}

@@ -1,0 +1,234 @@
+{
+	"type": "kafka",
+	"dataSchema": {
+		"dataSource": "AAI-EVENT",
+		"parser": {
+			"type": "string",
+			"parseSpec": {
+				"format": "json",
+				"flattenSpec": {
+					"useFieldDiscovery": false,
+					"fields": [
+{
+"type": "path",
+"name": "cambria:partition",
+"expr": "$.cambria.partition"
+},
+{
+"type": "path",
+"name": "event-header:severity",
+"expr": "$.event-header.severity"
+},
+{
+"type": "path",
+"name": "event-header:entity-type",
+"expr": "$.event-header.entity-type"
+},
+{
+"type": "path",
+"name": "event-header:top-entity-type",
+"expr": "$.event-header.top-entity-type"
+},
+{
+"type": "path",
+"name": "event-header:entity-link",
+"expr": "$.event-header.entity-link"
+},
+{
+"type": "path",
+"name": "event-header:event-type",
+"expr": "$.event-header.event-type"
+},
+{
+"type": "path",
+"name": "event-header:domain",
+"expr": "$.event-header.domain"
+},
+{
+"type": "path",
+"name": "event-header:action",
+"expr": "$.event-header.action"
+},
+{
+"type": "path",
+"name": "event-header:sequence-number",
+"expr": "$.event-header.sequence-number"
+},
+{
+"type": "path",
+"name": "event-header:id",
+"expr": "$.event-header.id"
+},
+{
+"type": "path",
+"name": "event-header:source-name",
+"expr": "$.event-header.source-name"
+},
+{
+"type": "path",
+"name": "event-header:version",
+"expr": "$.event-header.version"
+},
+{
+"type": "path",
+"name": "event-header:timestamp",
+"expr": "$.event-header.timestamp"
+},
+{
+"type": "path",
+"name": "entity:thirdparty-sdnc-id",
+"expr": "$.entity.thirdparty-sdnc-id"
+},
+{
+"type": "path",
+"name": "entity:resource-version",
+"expr": "$.entity.resource-version"
+},
+{
+"type": "path",
+"name": "entity:location",
+"expr": "$.entity.location"
+},
+{
+"type": "path",
+"name": "entity:product-name",
+"expr": "$.entity.product-name"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:esr-system-info-id",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].esr-system-info-id"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:system-type",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].system-type"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:service-url",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].service-url"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:ssl-cacert",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].ssl-cacert"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:type",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].type"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:ssl-insecure",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].ssl-insecure"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:system-status",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].system-status"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:version",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].version"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:passive",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].passive"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:password",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].password"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:protocol",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].protocol"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:ip-address",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].ip-address"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:cloud-domain",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].cloud-domain"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:user-name",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].user-name"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:system-name",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].system-name"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:port",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].port"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:vendor",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].vendor"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:resource-version",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].resource-version"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:remote-path",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].remote-path"
+},
+{
+"type": "path",
+"name": "entity:esr-system-info-list:esr-system-info[0]:default-tenant",
+"expr": "$.entity.esr-system-info-list.esr-system-info[0].default-tenant"
+}
+					]
+				},
+				"timestampSpec": {
+					"column": "event-header:timestamp",
+					"format": "yyyyMMdd-HH:mm:ss:SSS"
+				},
+				"dimensionsSpec": {
+					"dimensions": [],
+					"dimensionsExclusions": [
+						"cambria.partition","password"
+					]
+				}
+			}
+		},
+		"metricsSpec": [],
+		"granularitySpec": {
+			"type": "uniform",
+			"segmentGranularity": "HOUR",
+			"queryGranularity": "MINUTE",
+			"rollup": false
+		}
+	},
+	"tuningConfig": {
+		"type": "kafka",
+		"reportParseExceptions": true
+	},
+	"ioConfig": {
+		"topic": "AAI-EVENT",
+		"replicas": 1,
+		"startDelay": "PT1S",
+		"taskDuration": "PT1H",
+		"completionTimeout": "PT30M",
+		"consumerProperties": {
+			"bootstrap.servers": "dl_dmaap:9092"
+		},
+		"useEarliestOffset": true
+	}
+}
