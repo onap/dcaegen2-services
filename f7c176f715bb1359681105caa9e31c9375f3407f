@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9f22291_293628db",
+        "filename": "components/datalake-handler/admin/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-02-27T04:37:29Z",
+      "side": 1,
+      "message": "remove commented lines",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 47
+      },
+      "revId": "f7c176f715bb1359681105caa9e31c9375f3407f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06dc3455_e6bd83a2",
+        "filename": "components/datalake-handler/collector/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-02-27T04:37:29Z",
+      "side": 1,
+      "message": "remove comments",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 47
+      },
+      "revId": "f7c176f715bb1359681105caa9e31c9375f3407f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "378380a0_ac8fcc63",
+        "filename": "components/datalake-handler/feeder/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-02-27T04:37:29Z",
+      "side": 1,
+      "message": "remove all commented lines",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 19
+      },
+      "revId": "f7c176f715bb1359681105caa9e31c9375f3407f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8dba0cbc_b956e4fd",
+        "filename": "components/datalake-handler/feeder/src/assembly/Dockerfile",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-02-27T04:37:29Z",
+      "side": 1,
+      "message": "add an appuser to avoid running process as root",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 22
+      },
+      "revId": "f7c176f715bb1359681105caa9e31c9375f3407f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c191fb61_cb9d14c5",
+        "filename": "components/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-02-27T04:37:29Z",
+      "side": 1,
+      "message": "1.2.2",
+      "range": {
+        "startLine": 10,
+        "startChar": 11,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "f7c176f715bb1359681105caa9e31c9375f3407f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d9ab5db_97864c60",
+        "filename": "components/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-02-27T04:37:29Z",
+      "side": 1,
+      "message": "1.0.0-SNAPSHOT",
+      "range": {
+        "startLine": 15,
+        "startChar": 10,
+        "endLine": 15,
+        "endChar": 13
+      },
+      "revId": "f7c176f715bb1359681105caa9e31c9375f3407f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
