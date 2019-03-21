@@ -1,0 +1,251 @@
+{
+  "self": {
+    "version": "1.0.0",
+    "name": "dcae-bbs-event-processor",
+    "description": "Processes events for PNF relocation and CPE authentication",
+    "component_type": "docker"
+  },
+  "streams": {
+    "subscribes": [
+      {
+        "format": "PNF_Reregistration_internal",
+        "version": "1.0.0",
+        "type": "message_router",
+        "config_key" : "pnf_reregistration"
+      },
+      {
+        "format": "VES_specification",
+        "version": "7.30.1",
+        "type": "message_router",
+        "config_key" : "cpe_authentication"
+      }
+    ],
+    "publishes": [
+      {
+        "format": "DCAE_CL_Output",
+        "version": "1.0.1",
+        "type": "message_router",
+        "config_key": "close_loop"
+      }
+    ]
+  },
+  "services": {
+    "calls": [
+      {
+        "config_key": "aai-interaction",
+        "request": {
+            "format": "AAI_Interaction",
+            "version": "1.0.0"
+            },
+        "response": {
+            "format": "AAI_Interaction",
+            "version": "1.0.0"
+            }
+      }
+    ],
+    "provides": []
+  },
+  "parameters": [
+    {
+      "name": "dmaap.protocol",
+      "value": "http",
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": false,
+      "description": "DmaaP protocol used for any DMaaP interaction"
+    },
+    {
+      "name": "dmaap.contentType",
+      "value": "application/json",
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": false,
+      "description": "DmaaP content type"
+    },
+    {
+      "name": "dmaap.consumer.consumerId",
+      "value": "c12",
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": true,
+      "description": "DmaaP consumer consumer ID"
+    },
+    {
+      "name": "dmaap.consumer.consumerGroup",
+      "value": "OpenDcae-c12",
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": true,
+      "description": "DmaaP consumer consumer group"
+    },
+    {
+      "name": "dmaap.messageLimit",
+      "value": 1,
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": false,
+      "description": "DmaaP message limit"
+    },
+    {
+      "name": "dmaap.timeoutMs",
+      "value": -1,
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": false,
+      "description": "DmaaP timeout in millis"
+    },
+    {
+      "name": "aai.host",
+      "value": "aai.onap.svc.cluster.local",
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": true,
+      "description": "AAI enrichment host"
+    },
+    {
+      "name": "aai.port",
+      "value": 8443,
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": true,
+      "description": "AAI enrichment port"
+    },
+    {
+      "name": "aai.protocol",
+      "value": "https",
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": true,
+      "description": "AAI protocol"
+    },
+    {
+      "name": "aai.username",
+      "value": "AAI",
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": false,
+      "description": "AAI username"
+    },
+    {
+      "name": "aai.password",
+      "value": "AAI",
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": false,
+      "description": "AAI password"
+    },
+    {
+      "name": "aai.aaiIgnoreSslCertificateErrors",
+      "value": true,
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": false,
+      "description": "Ignore SSL Certificate errors for AAI"
+    },
+    {
+      "name": "application.pipelinesPollingIntervalSec",
+      "value": 30,
+      "constraints": [
+        {
+          "greater_or_equal": 15
+        }
+      ],
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": false,
+      "description": "Polling interval in seconds for executing event processing reactive pipelines"
+    },
+    {
+      "name": "application.pipelinesTimeoutSec",
+      "value": 15,
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": false,
+      "description": "Timeout in seconds to wait in reactive pipelines processing"
+    },
+    {
+      "name": "application.cbsPollingIntervalSec",
+      "value": 300,
+      "constraints": [
+        {
+          "greater_or_equal": 20
+        }
+      ],
+      "designer_editable": true,
+      "policy_editable": false,
+      "sourced_at_deployment": true,
+      "description": "Polling interval in seconds for fetching configuration from Consul via CBS service"
+    },
+    {
+      "name": "application.reregistration.policyScope",
+      "value": "policyScope",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Hard-coded value for Policy Scope parameter in Policy triggering event to be published"
+    },
+    {
+      "name": "application.reregistration.clControlName",
+      "value": "controlName",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Hard-coded value for CL control name parameter in Policy triggering event to be published"
+    },
+    {
+      "name": "application.cpe.authentication.policyScope",
+      "value": "policyScope",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Hard-coded value for CL control nam parameter in Policy triggering event to be published"
+    },
+    {
+      "name": "application.cpe.authentication.clControlName",
+      "value": "controlName",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Hard-coded value for CL control nam parameter in Policy triggering event to be published"
+    },
+    {
+      "name": "application.reregistration.configKey",
+      "value": "pnf_reregistration",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Config-key for PNF re-registration"
+    }
+    ,
+    {
+      "name": "application.cpeAuth.configKey",
+      "value": "cpe_authentication",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Config-key for CPE authentication"
+    },
+    {
+      "name": "application.closeLoop.configKey",
+      "value": "close_loop",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Config-key for Close Loop"
+    }
+  ],
+  "auxilary": {
+    "healthcheck": {
+        "type": "http",
+        "interval": "180s",
+        "timeout": "5s",
+        "endpoint": "/heartbeat"
+    }
+  },
+  "artifacts": [
+    {
+    "uri": "nexus3.onap.org:10003/dcae-services/org.onap.dcaegen2.services.components.bbs-event-processor:1.0.0-SNAPSHOT",
+    "type": "docker image"
+    }
+  ]
+}  

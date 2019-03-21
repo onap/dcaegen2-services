@@ -1,0 +1,73 @@
+spring:
+  profiles:
+    active: production
+server:
+  port: 8100
+configs:
+  dmaap:
+    consumer:
+      re-registration:
+        dmaapHostName: localhost
+        dmaapPortNumber: 2222
+        dmaapTopicName: /events/unauthenticated.PNF_Update
+        dmaapProtocol: http
+        dmaapContentType: application/json
+        consumerId: c12
+        consumerGroup: OpenDcae-c12
+        timeoutMs: -1
+        messageLimit: 1
+      cpe-authentication:
+        dmaapHostName: localhost
+        dmaapPortNumber: 2222
+        dmaapTopicName: /events/unauthenticated.CPE_Authentication
+        dmaapProtocol: http
+        dmaapContentType: application/json
+        consumerId: c12
+        consumerGroup: OpenDcae-c12
+        timeoutMs: -1
+        messageLimit: 1
+    producer:
+      dmaapHostName: localhost
+      dmaapPortNumber: 2223
+      dmaapTopicName: /events/unauthenticated.DCAE_CL_OUTPUT
+      dmaapProtocol: http
+      dmaapContentType: application/json
+  aai:
+    client:
+      aaiHost: localhost
+      aaiPort: 8080
+      aaiProtocol: https
+      aaiUserName: AAI
+      aaiUserPassword: AAI
+      aaiIgnoreSslCertificateErrors: true
+      aaiHeaders:
+        X-FromAppId: bbs
+        X-TransactionId: 9999
+        Accept: application/json
+        Real-Time: true
+        Content-Type: application/json
+  security:
+    trustStorePath: change it
+    trustStorePasswordPath: change it
+    keyStorePath: change it
+    keyStorePasswordPath: change it
+    enableAaiCertAuth: false
+    enableDmaapCertAuth: false
+  application:
+    pipelinesPollingIntervalSec: 30
+    pipelinesTimeoutSec: 15
+    re-registration:
+      policyScope: policyScope
+      clControlName: controlName
+    cpe-authentication:
+      policyScope: policyScope
+      clControlName: controlName
+logging:
+  level:
+    ROOT: ERROR
+    org.onap.bbs: INFO
+    org.onap.dcaegen2: WARN
+    reactor.ipc.netty.http.client: WARN
+    org.springframework: ERROR
+    org.springframework.data: ERROR
+    org.springframework.web.reactive: WARN
