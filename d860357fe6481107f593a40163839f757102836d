@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b77cf2c_b241d9bd",
+        "filename": "components/bbs-event-processor/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-03-22T16:07:12Z",
+      "side": 1,
+      "message": "should include steps to build and run (as standalone app/docker/ under k8s) + brief description of run time properties",
+      "revId": "d860357fe6481107f593a40163839f757102836d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
