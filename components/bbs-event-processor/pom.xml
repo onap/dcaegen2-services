@@ -14,7 +14,7 @@
     <artifactId>bbs-event-processor</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     
-    <name>bbs-event-processor</name>
+    <name>dcaegen2-services-bbs-event-processor</name>
     <description>BBS Re-Registration and CPE Authentication Handler</description>
     <packaging>jar</packaging>
 
