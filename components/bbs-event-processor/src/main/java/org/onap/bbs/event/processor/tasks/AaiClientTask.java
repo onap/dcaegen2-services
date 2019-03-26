@@ -22,7 +22,6 @@ package org.onap.bbs.event.processor.tasks;
 
 import org.onap.bbs.event.processor.model.PnfAaiObject;
 import org.onap.bbs.event.processor.model.ServiceInstanceAaiObject;
-import org.onap.bbs.event.processor.utilities.AaiReactiveClient;
 
 import reactor.core.publisher.Mono;
 
@@ -31,6 +30,4 @@ public interface AaiClientTask {
     Mono<PnfAaiObject> executePnfRetrieval(String taskName, String url);
 
     Mono<ServiceInstanceAaiObject> executeServiceInstanceRetrieval(String taskName, String url);
-
-    AaiReactiveClient resolveClient();
 }

@@ -20,9 +20,12 @@
 
 package org.onap.bbs.event.processor.tasks;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.net.ssl.SSLException;
 
 import org.onap.bbs.event.processor.config.ApplicationConfiguration;
+import org.onap.bbs.event.processor.config.ConfigurationChangeObserver;
 import org.onap.bbs.event.processor.exceptions.EmptyDmaapResponseException;
 import org.onap.bbs.event.processor.model.CpeAuthenticationConsumerDmaapModel;
 import org.onap.bbs.event.processor.utilities.CpeAuthenticationDmaapConsumerJsonParser;
@@ -38,15 +41,21 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
-public class DmaapCpeAuthenticationConsumerTaskImpl implements DmaapCpeAuthenticationConsumerTask {
+public class DmaapCpeAuthenticationConsumerTaskImpl
+        implements DmaapCpeAuthenticationConsumerTask, ConfigurationChangeObserver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DmaapCpeAuthenticationConsumerTaskImpl.class);
-    private final ApplicationConfiguration configuration;
+    private ApplicationConfiguration configuration;
     private final CpeAuthenticationDmaapConsumerJsonParser cpeAuthenticationDmaapConsumerJsonParser;
     private final ConsumerReactiveHttpClientFactory httpClientFactory;
 
+    private static final EmptyDmaapResponseException EMPTY_DMAAP_EXCEPTION =
+            new EmptyDmaapResponseException("CPE Authentication: Got an empty response from DMaaP");
+
+    private DMaaPConsumerReactiveHttpClient httpClient;
+
     @Autowired
-    public DmaapCpeAuthenticationConsumerTaskImpl(ApplicationConfiguration configuration) {
+    public DmaapCpeAuthenticationConsumerTaskImpl(ApplicationConfiguration configuration) throws SSLException {
         this(configuration, new CpeAuthenticationDmaapConsumerJsonParser(),
                 new ConsumerReactiveHttpClientFactory(new DMaaPReactiveWebClientFactory()));
     }
@@ -54,20 +63,45 @@ public class DmaapCpeAuthenticationConsumerTaskImpl implements DmaapCpeAuthentic
     DmaapCpeAuthenticationConsumerTaskImpl(ApplicationConfiguration configuration,
                                            CpeAuthenticationDmaapConsumerJsonParser
                                                    cpeAuthenticationDmaapConsumerJsonParser,
-                                           ConsumerReactiveHttpClientFactory httpClientFactory) {
+                                           ConsumerReactiveHttpClientFactory httpClientFactory) throws SSLException {
         this.configuration = configuration;
         this.cpeAuthenticationDmaapConsumerJsonParser = cpeAuthenticationDmaapConsumerJsonParser;
         this.httpClientFactory = httpClientFactory;
+
+        httpClient = httpClientFactory.create(this.configuration.getDmaapCpeAuthenticationConsumerConfiguration());
+    }
+
+    @PostConstruct
+    void registerForConfigChanges() {
+        configuration.register(this);
+    }
+
+    @PreDestroy
+    void unRegisterForConfigChanges() {
+        configuration.unRegister(this);
+    }
+
+    @Override
+    public synchronized void updateConfiguration(ApplicationConfiguration configuration) {
+        try {
+            this.configuration = configuration;
+            LOGGER.info("DMaaP CPE authentication consumer update due to new application configuration");
+            httpClient = httpClientFactory.create(this.configuration.getDmaapCpeAuthenticationConsumerConfiguration());
+        } catch (SSLException e) {
+            LOGGER.error("Error while updating HTTP Client after a config update: SSL exception");
+        }
     }
 
     @Override
     public Flux<CpeAuthenticationConsumerDmaapModel> execute(String taskName) throws SSLException {
         LOGGER.debug("Executing task for CPE-Authentication with name \"{}\"", taskName);
-        DMaaPConsumerReactiveHttpClient dmaaPConsumerReactiveHttpClient = resolveClient();
-        Mono<String> response = dmaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse();
+        DMaaPConsumerReactiveHttpClient httpClient;
+        synchronized (this) {
+            httpClient = getHttpClient();
+        }
+        Mono<String> response = httpClient.getDMaaPConsumerResponse();
         return cpeAuthenticationDmaapConsumerJsonParser.extractModelFromDmaap(response)
-                .switchIfEmpty(Flux.error(
-                        new EmptyDmaapResponseException("CPE Authentication: Got an empty response from DMaaP")))
+                .switchIfEmpty(Flux.error(EMPTY_DMAAP_EXCEPTION))
                 .doOnError(e -> {
                     if (!(e instanceof EmptyDmaapResponseException)) {
                         LOGGER.error("DMaaP Consumption Exception: {}", e.getMessage());
@@ -75,8 +109,7 @@ public class DmaapCpeAuthenticationConsumerTaskImpl implements DmaapCpeAuthentic
                 });
     }
 
-    @Override
-    public DMaaPConsumerReactiveHttpClient resolveClient() throws SSLException {
-        return httpClientFactory.create(configuration.getDmaapCpeAuthenticationConsumerConfiguration());
+    private DMaaPConsumerReactiveHttpClient getHttpClient() {
+        return httpClient;
     }
 }

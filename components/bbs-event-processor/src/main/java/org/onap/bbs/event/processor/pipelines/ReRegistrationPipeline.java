@@ -20,7 +20,14 @@
 
 package org.onap.bbs.event.processor.pipelines;
 
+import static org.onap.bbs.event.processor.config.ApplicationConstants.CLOSED_LOOP_EVENT_STATUS;
+import static org.onap.bbs.event.processor.config.ApplicationConstants.CLOSE_LOOP_TARGET;
+import static org.onap.bbs.event.processor.config.ApplicationConstants.CLOSE_LOOP_TARGET_TYPE;
+import static org.onap.bbs.event.processor.config.ApplicationConstants.CLOSE_LOOP_VERSION;
 import static org.onap.bbs.event.processor.config.ApplicationConstants.CONSUME_REREGISTRATION_TASK_NAME;
+import static org.onap.bbs.event.processor.config.ApplicationConstants.DCAE_BBS_EVENT_PROCESSOR_MS_INSTANCE;
+import static org.onap.bbs.event.processor.config.ApplicationConstants.FROM;
+import static org.onap.bbs.event.processor.config.ApplicationConstants.POLICY_VERSION;
 import static org.onap.bbs.event.processor.config.ApplicationConstants.RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME;
 import static org.onap.bbs.event.processor.config.ApplicationConstants.RETRIEVE_PNF_TASK_NAME;
 import static org.onap.dcaegen2.services.sdk.rest.services.model.logging.MdcVariables.INSTANCE_UUID;
@@ -37,8 +44,6 @@ import java.util.concurrent.TimeoutException;
 import javax.net.ssl.SSLException;
 
 import org.onap.bbs.event.processor.config.ApplicationConfiguration;
-import org.onap.bbs.event.processor.exceptions.AaiTaskException;
-import org.onap.bbs.event.processor.exceptions.DmaapException;
 import org.onap.bbs.event.processor.exceptions.EmptyDmaapResponseException;
 import org.onap.bbs.event.processor.model.ControlLoopPublisherDmaapModel;
 import org.onap.bbs.event.processor.model.ImmutableControlLoopPublisherDmaapModel;
@@ -65,14 +70,7 @@ public class ReRegistrationPipeline {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReRegistrationPipeline.class);
 
-    private static final String DCAE_BBS_EVENT_PROCESSOR_MS_INSTANCE = "DCAE.BBS_event_processor_mSInstance";
-    private static final String POLICY_VERSION = "1.0.0.5";
     private static final String POLICY_NAME = "Nomadic_ONT";
-    private static final String CLOSE_LOOP_TARGET_TYPE = "VM";
-    private static final String CLOSED_LOOP_EVENT_STATUS = "ONSET";
-    private static final String CLOSE_LOOP_VERSION = "1.0.2";
-    private static final String CLOSE_LOOP_TARGET = "vserver.vserver-name";
-    private static final String FROM = "DCAE";
 
     private DmaapReRegistrationConsumerTask consumerTask;
     private DmaapPublisherTask publisherTask;
@@ -144,11 +142,13 @@ public class ReRegistrationPipeline {
                             if (e instanceof TimeoutException) {
                                 LOGGER.warn("Timed out waiting for DMaaP response");
                             } else if (e instanceof EmptyDmaapResponseException) {
-                                LOGGER.warn("Nothing to consume from DMaaP");
+                                LOGGER.info("Nothing to consume from DMaaP");
+                            } else {
+                                LOGGER.error("DMaaP Consumer error: {}", e.getMessage());
                             }
                         })
                         .onErrorResume(
-                            e -> (e instanceof EmptyDmaapResponseException || e instanceof TimeoutException),
+                            e -> e instanceof Exception,
                             e -> Mono.empty())
                         .map(event -> {
                             // For each message, we have to keep separate state. This state will be enhanced
@@ -179,7 +179,7 @@ public class ReRegistrationPipeline {
                         e.getMessage())
                 )
                 .onErrorResume(
-                    e -> e instanceof AaiTaskException || e instanceof TimeoutException,
+                    e -> e instanceof Exception,
                     e -> Mono.empty())
                 .map(p -> {
                     state.setPnfAaiObject(p);
@@ -204,9 +204,9 @@ public class ReRegistrationPipeline {
         // towards the HSI CFS service
         String serviceInstanceId = pnf.getRelationshipListAaiObject().getRelationshipEntries()
                 .stream()
-                .filter(e -> e.getRelatedTo().equals("service-instance"))
+                .filter(e -> "service-instance".equals(e.getRelatedTo()))
                 .flatMap(e -> e.getRelationshipData().stream())
-                .filter(d -> d.getRelationshipKey().equals("service-instance.service-instance-id"))
+                .filter(d -> "service-instance.service-instance-id".equals(d.getRelationshipKey()))
                 .map(RelationshipListAaiObject.RelationshipDataEntryAaiObject::getRelationshipValue)
                 .findFirst().orElse("");
 
@@ -228,7 +228,7 @@ public class ReRegistrationPipeline {
                         e.getMessage())
                 )
                 .onErrorResume(
-                    e -> e instanceof AaiTaskException || e instanceof TimeoutException,
+                    e -> e instanceof Exception,
                     e -> Mono.empty())
                 .map(s -> {
                     state.setHsiCfsServiceInstance(s);
@@ -241,7 +241,7 @@ public class ReRegistrationPipeline {
                 state.getPnfAaiObject().getRelationshipListAaiObject().getRelationshipEntries();
 
         // If no logical-link, fail further processing
-        if (relationshipEntries.stream().noneMatch(e -> e.getRelatedTo().equals("logical-link"))) {
+        if (relationshipEntries.stream().noneMatch(e -> "logical-link".equals(e.getRelatedTo()))) {
             LOGGER.warn("PNF {} does not have any logical-links bridged. Stop further processing",
                     state.getPnfAaiObject().getPnfName());
             return true;
@@ -250,7 +250,7 @@ public class ReRegistrationPipeline {
         // Assuming PNF will only have one logical-link per BBS use case design
         boolean isNotRelocation = relationshipEntries
                 .stream()
-                .filter(e -> e.getRelatedTo().equals("logical-link"))
+                .filter(e -> "logical-link".equals(e.getRelatedTo()))
                 .flatMap(e -> e.getRelationshipData().stream())
                 .anyMatch(d -> d.getRelationshipValue()
                         .equals(state.getReRegistrationEvent().getAttachmentPoint()));
@@ -278,7 +278,7 @@ public class ReRegistrationPipeline {
                 )
                 .doOnError(e -> LOGGER.error("Error while triggering Policy: {}", e.getMessage()))
                 .onErrorResume(
-                    e -> e instanceof DmaapException || e instanceof TimeoutException,
+                    e -> e instanceof Exception,
                     e -> Mono.empty());
     }
 

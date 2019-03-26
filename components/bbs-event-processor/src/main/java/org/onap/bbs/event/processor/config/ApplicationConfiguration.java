@@ -210,7 +210,7 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
     private GeneratedAppConfigObject.StreamsObject getStreamsObject(
             Map<String, GeneratedAppConfigObject.StreamsObject> map, String configKey, String messageName) {
         GeneratedAppConfigObject.StreamsObject streamsObject = map.get(configKey);
-        if (!streamsObject.type().equals(STREAMS_TYPE)) {
+        if (!STREAMS_TYPE.equals(streamsObject.type())) {
             throw new ApplicationEnvironmentException(String.format("%s requires information about"
                     + " message-router topic in ONAP", messageName));
         }

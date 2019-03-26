@@ -32,5 +32,14 @@ public class ApplicationConstants {
     public static final String IN_SERVICE_NAME_IN_ONAP = "inService";
     public static final String OUT_OF_SERVICE_NAME_IN_ONAP = "outOfService";
 
+    // Close Loop Constants
+    public static final String DCAE_BBS_EVENT_PROCESSOR_MS_INSTANCE = "DCAE.BBS_event_processor_mSInstance";
+    public static final String POLICY_VERSION = "1.0.0.5";
+    public static final String CLOSE_LOOP_TARGET_TYPE = "VM";
+    public static final String CLOSED_LOOP_EVENT_STATUS = "ONSET";
+    public static final String CLOSE_LOOP_VERSION = "1.0.2";
+    public static final String CLOSE_LOOP_TARGET = "vserver.vserver-name";
+    public static final String FROM = "DCAE";
+
     private ApplicationConstants() {}
 }
