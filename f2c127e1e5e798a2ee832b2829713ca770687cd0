@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e049fa99_f191dd6d",
+        "filename": "components/datalake-handler/pom.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-03-26T03:55:41Z",
+      "side": 1,
+      "message": "This should be removed as we identified another issue since the job is triggered for components/datalake-handler/pom.xml, the components/pom.xml doesn\u0027t get triggered. Pls chk bbs-eventprocessor pom and jjb to align accordingly.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 10
+      },
+      "revId": "f2c127e1e5e798a2ee832b2829713ca770687cd0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
