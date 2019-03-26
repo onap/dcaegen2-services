@@ -40,6 +40,24 @@ public class GenericProperties {
 
     private int pipelinesTimeoutSec;
 
+    @NotBlank
+    private String policyVersion;
+
+    @NotBlank
+    private String clTargetType;
+
+    @NotBlank
+    private String clEventStatus;
+
+    @NotBlank
+    private String clVersion;
+
+    @NotBlank
+    private String clTarget;
+
+    @NotBlank
+    private String clOriginator;
+
     private ReRegistrationGenericProperties reRegistration;
 
     private CpeAuthenticationGenericProperties cpeAuthentication;

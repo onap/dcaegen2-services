@@ -69,7 +69,7 @@ public class AaiReactiveClient implements ConfigurationChangeObserver {
         this.gson = gson;
         this.sslFactory = new SslFactory();
 
-        aaiClientConfiguration = configuration.getAaiClientConfiguration();
+        aaiClientConfiguration = this.configuration.getAaiClientConfiguration();
         setupWebClient();
     }
 
@@ -84,22 +84,24 @@ public class AaiReactiveClient implements ConfigurationChangeObserver {
     }
 
     @Override
-    public void updateConfiguration(ApplicationConfiguration configuration) {
+    public void updateConfiguration() {
         AaiClientConfiguration newConfiguration = configuration.getAaiClientConfiguration();
         if (aaiClientConfiguration.equals(newConfiguration)) {
-            LOGGER.debug("No Configuration changes necessary for AAI Reactive client");
+            LOGGER.info("No Configuration changes necessary for AAI Reactive client");
         } else {
-            LOGGER.debug("AAI Reactive client must be re-configured");
-            aaiClientConfiguration = newConfiguration;
-            try {
-                setupWebClient();
-            } catch (SSLException e) {
-                LOGGER.error("AAI Reactive client error while re-configuring WebClient");
+            synchronized (this) {
+                LOGGER.info("AAI Reactive client must be re-configured");
+                aaiClientConfiguration = newConfiguration;
+                try {
+                    setupWebClient();
+                } catch (SSLException e) {
+                    LOGGER.error("AAI Reactive client error while re-configuring WebClient");
+                }
             }
         }
     }
 
-    private synchronized void setupWebClient() throws SSLException {
+    private void setupWebClient() throws SSLException {
         SslContext sslContext = createSslContext();
 
         ClientHttpConnector reactorClientHttpConnector = new ReactorClientHttpConnector(
@@ -127,8 +129,9 @@ public class AaiReactiveClient implements ConfigurationChangeObserver {
         return performReactiveHttpGet(url, ServiceInstanceAaiObject.class);
     }
 
-    private synchronized <T> Mono<T> performReactiveHttpGet(String url, Class<T> responseType) {
+    private <T> Mono<T> performReactiveHttpGet(String url, Class<T> responseType) {
         LOGGER.debug("Will issue Reactive GET request to URL ({}) for object ({})", url, responseType.getName());
+        WebClient webClient = getWebClient();
         return webClient
                 .get()
                 .uri(url)
@@ -185,5 +188,9 @@ public class AaiReactiveClient implements ConfigurationChangeObserver {
             );
         }
         return sslFactory.createInsecureContext();
+    }
+
+    private synchronized WebClient getWebClient() {
+        return webClient;
     }
 }

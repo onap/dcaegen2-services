@@ -25,5 +25,5 @@ application_rereg_cl_control_name: clControlNameReReg
 application_cpeAuth_policy_scope: policyScopeCpeAuth
 application_cpeAuth_cl_control_name: clControlNameCpeAuth
 application_cbs_polling_interval_sec: 120
-dmaap_consumer_id: c12 
+dmaap_consumer_id: c12
 dmaap_consumer_group: OpenDcae-c12

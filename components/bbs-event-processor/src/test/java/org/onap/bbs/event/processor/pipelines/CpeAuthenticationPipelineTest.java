@@ -98,6 +98,18 @@ class CpeAuthenticationPipelineTest {
                 .thenReturn("controlName");
         when(configuration.getCpeAuthenticationCloseLoopPolicyScope())
                 .thenReturn("policyScope");
+        when(configuration.getPolicyVersion())
+                .thenReturn("1.0.0");
+        when(configuration.getCloseLoopTargetType())
+                .thenReturn("VM");
+        when(configuration.getCloseLoopEventStatus())
+                .thenReturn("ONSET");
+        when(configuration.getCloseLoopVersion())
+                .thenReturn("1.0.2");
+        when(configuration.getCloseLoopTarget())
+                .thenReturn("CL-Target");
+        when(configuration.getCloseLoopOriginator())
+                .thenReturn("DCAE-BBS-ep");
 
         pipeline = new CpeAuthenticationPipeline(configuration, consumerTask,
                 publisherTask, aaiClientTask, new HashMap<>());

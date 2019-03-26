@@ -20,7 +20,11 @@
 
 package org.onap.bbs.event.processor.tasks;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.onap.bbs.event.processor.config.ApplicationConfiguration;
+import org.onap.bbs.event.processor.config.ConfigurationChangeObserver;
 import org.onap.bbs.event.processor.exceptions.DmaapException;
 import org.onap.bbs.event.processor.model.ControlLoopPublisherDmaapModel;
 import org.onap.bbs.event.processor.utilities.ControlLoopJsonBodyBuilder;
@@ -36,11 +40,13 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
-public class DmaapPublisherTaskImpl implements DmaapPublisherTask {
+public class DmaapPublisherTaskImpl implements DmaapPublisherTask, ConfigurationChangeObserver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DmaapPublisherTaskImpl.class);
-    private final ApplicationConfiguration configuration;
+    private ApplicationConfiguration configuration;
     private final PublisherReactiveHttpClientFactory httpClientFactory;
+
+    private DMaaPPublisherReactiveHttpClient httpClient;
 
     @Autowired
     DmaapPublisherTaskImpl(ApplicationConfiguration configuration) {
@@ -52,6 +58,24 @@ public class DmaapPublisherTaskImpl implements DmaapPublisherTask {
                            PublisherReactiveHttpClientFactory httpClientFactory) {
         this.configuration = configuration;
         this.httpClientFactory = httpClientFactory;
+
+        httpClient = httpClientFactory.create(this.configuration.getDmaapPublisherConfiguration());
+    }
+
+    @PostConstruct
+    void registerForConfigChanges() {
+        configuration.register(this);
+    }
+
+    @PreDestroy
+    void unRegisterForConfigChanges() {
+        configuration.unRegister(this);
+    }
+
+    @Override
+    public synchronized void updateConfiguration() {
+        LOGGER.info("DMaaP Publisher update due to new application configuration");
+        httpClient = httpClientFactory.create(this.configuration.getDmaapPublisherConfiguration());
     }
 
     @Override
@@ -60,12 +84,11 @@ public class DmaapPublisherTaskImpl implements DmaapPublisherTask {
             throw new DmaapException("Cannot invoke a DMaaP Publish task with a null message");
         }
         LOGGER.info("Executing task for publishing control loop message \n{}", controlLoopPublisherDmaapModel);
-        DMaaPPublisherReactiveHttpClient dmaapPublisherReactiveHttpClient = resolveClient();
-        return dmaapPublisherReactiveHttpClient.getDMaaPProducerResponse(controlLoopPublisherDmaapModel);
+        DMaaPPublisherReactiveHttpClient httpClient = getHttpClient();
+        return httpClient.getDMaaPProducerResponse(controlLoopPublisherDmaapModel);
     }
 
-    @Override
-    public DMaaPPublisherReactiveHttpClient resolveClient() {
-        return httpClientFactory.create(configuration.getDmaapPublisherConfiguration());
+    private synchronized DMaaPPublisherReactiveHttpClient getHttpClient() {
+        return httpClient;
     }
 }

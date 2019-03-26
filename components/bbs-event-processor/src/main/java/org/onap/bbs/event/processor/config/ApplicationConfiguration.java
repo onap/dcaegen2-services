@@ -93,51 +93,74 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
 
     @Override
     public synchronized void notifyObservers() {
-        observers.forEach(o -> o.updateConfiguration(this));
+        observers.forEach(ConfigurationChangeObserver::updateConfiguration);
     }
 
-    public DmaapConsumerConfiguration getDmaapReRegistrationConsumerConfiguration() {
+    public synchronized DmaapConsumerConfiguration getDmaapReRegistrationConsumerConfiguration() {
         return dmaapReRegistrationConsumerConfiguration;
     }
 
-    public DmaapConsumerConfiguration getDmaapCpeAuthenticationConsumerConfiguration() {
+    public synchronized DmaapConsumerConfiguration getDmaapCpeAuthenticationConsumerConfiguration() {
         return dmaapCpeAuthenticationConsumerConfiguration;
     }
 
-    public DmaapPublisherConfiguration getDmaapPublisherConfiguration() {
+    public synchronized DmaapPublisherConfiguration getDmaapPublisherConfiguration() {
         return dmaapPublisherConfiguration;
     }
 
-    public AaiClientConfiguration getAaiClientConfiguration() {
+    public synchronized AaiClientConfiguration getAaiClientConfiguration() {
         return aaiClientConfiguration;
     }
 
-    public int getPipelinesPollingIntervalInSeconds() {
+    public synchronized int getPipelinesPollingIntervalInSeconds() {
         return genericProperties.getPipelinesPollingIntervalSec();
     }
 
-    public int getPipelinesTimeoutInSeconds() {
+    public synchronized int getPipelinesTimeoutInSeconds() {
         return genericProperties.getPipelinesTimeoutSec();
     }
 
-    public int getCbsPollingInterval() {
+    public synchronized String getPolicyVersion() {
+        return genericProperties.getPolicyVersion();
+    }
+
+    public synchronized String getCloseLoopTargetType() {
+        return genericProperties.getClTargetType();
+    }
+
+    public synchronized String getCloseLoopEventStatus() {
+        return genericProperties.getClEventStatus();
+    }
+
+    public synchronized String getCloseLoopVersion() {
+        return genericProperties.getClVersion();
+    }
+
+    public synchronized String getCloseLoopTarget() {
+        return genericProperties.getClTarget();
+    }
+
+    public String getCloseLoopOriginator() {
+        return genericProperties.getClOriginator();
+    }
+
+    public synchronized int getCbsPollingInterval() {
         return cbsPollingInterval;
     }
 
-    public String getReRegistrationCloseLoopPolicyScope() {
-
+    public synchronized String getReRegistrationCloseLoopPolicyScope() {
         return genericProperties.getReRegistration().getPolicyScope();
     }
 
-    public String getReRegistrationCloseLoopControlName() {
+    public synchronized String getReRegistrationCloseLoopControlName() {
         return genericProperties.getReRegistration().getClControlName();
     }
 
-    public String getCpeAuthenticationCloseLoopPolicyScope() {
+    public synchronized String getCpeAuthenticationCloseLoopPolicyScope() {
         return genericProperties.getCpeAuthentication().getPolicyScope();
     }
 
-    public String getCpeAuthenticationCloseLoopControlName() {
+    public synchronized String getCpeAuthenticationCloseLoopControlName() {
         return genericProperties.getCpeAuthentication().getClControlName();
     }
 
@@ -147,61 +170,71 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
      */
     public void updateCurrentConfiguration(GeneratedAppConfigObject newConfiguration) {
 
-        cbsPollingInterval = newConfiguration.cbsPollingIntervalSec();
+        synchronized (this) {
+            cbsPollingInterval = newConfiguration.cbsPollingIntervalSec();
 
-        GeneratedAppConfigObject.StreamsObject reRegObject = getStreamsObject(newConfiguration.streamSubscribesMap(),
-                newConfiguration.reRegConfigKey(), "PNF Re-Registration");
-        TopicUrlInfo topicUrlInfo = parseTopicUrl(reRegObject.dmaapInfo().topicUrl());
-        dmaapReRegistrationConsumerProperties.setDmaapHostName(topicUrlInfo.getHost());
-        dmaapReRegistrationConsumerProperties.setDmaapPortNumber(topicUrlInfo.getPort());
-        dmaapReRegistrationConsumerProperties.setDmaapProtocol(newConfiguration.dmaapProtocol());
-        dmaapReRegistrationConsumerProperties.setDmaapContentType(newConfiguration.dmaapContentType());
-        dmaapReRegistrationConsumerProperties.setDmaapTopicName(topicUrlInfo.getTopicName());
-        dmaapReRegistrationConsumerProperties.setConsumerId(newConfiguration.dmaapConsumerConsumerId());
-        dmaapReRegistrationConsumerProperties.setConsumerGroup(newConfiguration.dmaapConsumerConsumerGroup());
-        dmaapReRegistrationConsumerProperties.setMessageLimit(newConfiguration.dmaapMessageLimit());
-        dmaapReRegistrationConsumerProperties.setTimeoutMs(newConfiguration.dmaapTimeoutMs());
-        constructDmaapReRegistrationConfiguration();
+            GeneratedAppConfigObject.StreamsObject reRegObject =
+                    getStreamsObject(newConfiguration.streamSubscribesMap(), newConfiguration.reRegConfigKey(),
+                            "PNF Re-Registration");
+            TopicUrlInfo topicUrlInfo = parseTopicUrl(reRegObject.dmaapInfo().topicUrl());
+            dmaapReRegistrationConsumerProperties.setDmaapHostName(topicUrlInfo.getHost());
+            dmaapReRegistrationConsumerProperties.setDmaapPortNumber(topicUrlInfo.getPort());
+            dmaapReRegistrationConsumerProperties.setDmaapProtocol(newConfiguration.dmaapProtocol());
+            dmaapReRegistrationConsumerProperties.setDmaapContentType(newConfiguration.dmaapContentType());
+            dmaapReRegistrationConsumerProperties.setDmaapTopicName(topicUrlInfo.getTopicName());
+            dmaapReRegistrationConsumerProperties.setConsumerId(newConfiguration.dmaapConsumerConsumerId());
+            dmaapReRegistrationConsumerProperties.setConsumerGroup(newConfiguration.dmaapConsumerConsumerGroup());
+            dmaapReRegistrationConsumerProperties.setMessageLimit(newConfiguration.dmaapMessageLimit());
+            dmaapReRegistrationConsumerProperties.setTimeoutMs(newConfiguration.dmaapTimeoutMs());
+            constructDmaapReRegistrationConfiguration();
 
-        GeneratedAppConfigObject.StreamsObject cpeAuthObject = getStreamsObject(newConfiguration.streamSubscribesMap(),
-                newConfiguration.cpeAuthConfigKey(), "CPE Authentication");
-        topicUrlInfo = parseTopicUrl(cpeAuthObject.dmaapInfo().topicUrl());
-        dmaapCpeAuthenticationConsumerProperties.setDmaapHostName(topicUrlInfo.getHost());
-        dmaapCpeAuthenticationConsumerProperties.setDmaapPortNumber(topicUrlInfo.getPort());
-        dmaapCpeAuthenticationConsumerProperties.setDmaapProtocol(newConfiguration.dmaapProtocol());
-        dmaapCpeAuthenticationConsumerProperties.setDmaapContentType(newConfiguration.dmaapContentType());
-        dmaapCpeAuthenticationConsumerProperties.setDmaapTopicName(topicUrlInfo.getTopicName());
-        dmaapCpeAuthenticationConsumerProperties.setConsumerId(newConfiguration.dmaapConsumerConsumerId());
-        dmaapCpeAuthenticationConsumerProperties.setConsumerGroup(newConfiguration.dmaapConsumerConsumerGroup());
-        dmaapCpeAuthenticationConsumerProperties.setMessageLimit(newConfiguration.dmaapMessageLimit());
-        dmaapCpeAuthenticationConsumerProperties.setTimeoutMs(newConfiguration.dmaapTimeoutMs());
-        constructDmaapCpeAuthenticationConfiguration();
+            GeneratedAppConfigObject.StreamsObject cpeAuthObject =
+                    getStreamsObject(newConfiguration.streamSubscribesMap(), newConfiguration.cpeAuthConfigKey(),
+                            "CPE Authentication");
+            topicUrlInfo = parseTopicUrl(cpeAuthObject.dmaapInfo().topicUrl());
+            dmaapCpeAuthenticationConsumerProperties.setDmaapHostName(topicUrlInfo.getHost());
+            dmaapCpeAuthenticationConsumerProperties.setDmaapPortNumber(topicUrlInfo.getPort());
+            dmaapCpeAuthenticationConsumerProperties.setDmaapProtocol(newConfiguration.dmaapProtocol());
+            dmaapCpeAuthenticationConsumerProperties.setDmaapContentType(newConfiguration.dmaapContentType());
+            dmaapCpeAuthenticationConsumerProperties.setDmaapTopicName(topicUrlInfo.getTopicName());
+            dmaapCpeAuthenticationConsumerProperties.setConsumerId(newConfiguration.dmaapConsumerConsumerId());
+            dmaapCpeAuthenticationConsumerProperties.setConsumerGroup(newConfiguration.dmaapConsumerConsumerGroup());
+            dmaapCpeAuthenticationConsumerProperties.setMessageLimit(newConfiguration.dmaapMessageLimit());
+            dmaapCpeAuthenticationConsumerProperties.setTimeoutMs(newConfiguration.dmaapTimeoutMs());
+            constructDmaapCpeAuthenticationConfiguration();
 
-        GeneratedAppConfigObject.StreamsObject closeLoopObject = getStreamsObject(newConfiguration.streamPublishesMap(),
-                newConfiguration.closeLoopConfigKey(), "Close Loop");
-        topicUrlInfo = parseTopicUrl(closeLoopObject.dmaapInfo().topicUrl());
-        dmaapProducerProperties.setDmaapHostName(topicUrlInfo.getHost());
-        dmaapProducerProperties.setDmaapPortNumber(topicUrlInfo.getPort());
-        dmaapProducerProperties.setDmaapProtocol(newConfiguration.dmaapProtocol());
-        dmaapProducerProperties.setDmaapContentType(newConfiguration.dmaapContentType());
-        dmaapProducerProperties.setDmaapTopicName(topicUrlInfo.getTopicName());
-        constructDmaapProducerConfiguration();
+            GeneratedAppConfigObject.StreamsObject closeLoopObject =
+                    getStreamsObject(newConfiguration.streamPublishesMap(), newConfiguration.closeLoopConfigKey(),
+                            "Close Loop");
+            topicUrlInfo = parseTopicUrl(closeLoopObject.dmaapInfo().topicUrl());
+            dmaapProducerProperties.setDmaapHostName(topicUrlInfo.getHost());
+            dmaapProducerProperties.setDmaapPortNumber(topicUrlInfo.getPort());
+            dmaapProducerProperties.setDmaapProtocol(newConfiguration.dmaapProtocol());
+            dmaapProducerProperties.setDmaapContentType(newConfiguration.dmaapContentType());
+            dmaapProducerProperties.setDmaapTopicName(topicUrlInfo.getTopicName());
+            constructDmaapProducerConfiguration();
 
-        aaiClientProperties.setAaiHost(newConfiguration.aaiHost());
-        aaiClientProperties.setAaiPort(newConfiguration.aaiPort());
-        aaiClientProperties.setAaiProtocol(newConfiguration.aaiProtocol());
-        aaiClientProperties.setAaiUserName(newConfiguration.aaiUsername());
-        aaiClientProperties.setAaiUserPassword(newConfiguration.aaiPassword());
-        aaiClientProperties.setAaiIgnoreSslCertificateErrors(newConfiguration.aaiIgnoreSslCertificateErrors());
-        constructAaiConfiguration();
+            aaiClientProperties.setAaiHost(newConfiguration.aaiHost());
+            aaiClientProperties.setAaiPort(newConfiguration.aaiPort());
+            aaiClientProperties.setAaiProtocol(newConfiguration.aaiProtocol());
+            aaiClientProperties.setAaiUserName(newConfiguration.aaiUsername());
+            aaiClientProperties.setAaiUserPassword(newConfiguration.aaiPassword());
+            aaiClientProperties.setAaiIgnoreSslCertificateErrors(newConfiguration.aaiIgnoreSslCertificateErrors());
+            constructAaiConfiguration();
 
-
-        genericProperties.setPipelinesPollingIntervalSec(newConfiguration.pipelinesPollingIntervalSec());
-        genericProperties.setPipelinesTimeoutSec(newConfiguration.pipelinesTimeoutSec());
-        genericProperties.getReRegistration().setPolicyScope(newConfiguration.reRegistrationPolicyScope());
-        genericProperties.getReRegistration().setClControlName(newConfiguration.reRegistrationClControlName());
-        genericProperties.getCpeAuthentication().setPolicyScope(newConfiguration.cpeAuthPolicyScope());
-        genericProperties.getCpeAuthentication().setClControlName(newConfiguration.cpeAuthClControlName());
+            genericProperties.setPipelinesPollingIntervalSec(newConfiguration.pipelinesPollingIntervalSec());
+            genericProperties.setPipelinesTimeoutSec(newConfiguration.pipelinesTimeoutSec());
+            genericProperties.setPolicyVersion(newConfiguration.policyVersion());
+            genericProperties.setClTargetType(newConfiguration.closeLoopTargetType());
+            genericProperties.setClEventStatus(newConfiguration.closeLoopEventStatus());
+            genericProperties.setClVersion(newConfiguration.closeLoopVersion());
+            genericProperties.setClTarget(newConfiguration.closeLoopTarget());
+            genericProperties.setClOriginator(newConfiguration.closeLoopOriginator());
+            genericProperties.getReRegistration().setPolicyScope(newConfiguration.reRegistrationPolicyScope());
+            genericProperties.getReRegistration().setClControlName(newConfiguration.reRegistrationClControlName());
+            genericProperties.getCpeAuthentication().setPolicyScope(newConfiguration.cpeAuthPolicyScope());
+            genericProperties.getCpeAuthentication().setClControlName(newConfiguration.cpeAuthClControlName());
+        }
 
         notifyObservers();
     }
@@ -210,7 +243,7 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
     private GeneratedAppConfigObject.StreamsObject getStreamsObject(
             Map<String, GeneratedAppConfigObject.StreamsObject> map, String configKey, String messageName) {
         GeneratedAppConfigObject.StreamsObject streamsObject = map.get(configKey);
-        if (!streamsObject.type().equals(STREAMS_TYPE)) {
+        if (!STREAMS_TYPE.equals(streamsObject.type())) {
             throw new ApplicationEnvironmentException(String.format("%s requires information about"
                     + " message-router topic in ONAP", messageName));
         }

@@ -21,7 +21,6 @@
 package org.onap.bbs.event.processor.tasks;
 
 import org.onap.bbs.event.processor.model.ControlLoopPublisherDmaapModel;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.producer.DMaaPPublisherReactiveHttpClient;
 import org.springframework.http.ResponseEntity;
 
 import reactor.core.publisher.Mono;
@@ -29,6 +28,4 @@ import reactor.core.publisher.Mono;
 public interface DmaapPublisherTask {
 
     Mono<ResponseEntity<String>> execute(ControlLoopPublisherDmaapModel controlLoopPublisherDmaapModel);
-
-    DMaaPPublisherReactiveHttpClient resolveClient();
 }

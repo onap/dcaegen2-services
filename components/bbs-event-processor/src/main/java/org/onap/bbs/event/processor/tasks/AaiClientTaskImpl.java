@@ -39,7 +39,7 @@ public class AaiClientTaskImpl implements AaiClientTask {
     private final AaiReactiveClient reactiveClient;
 
     @Autowired
-    public AaiClientTaskImpl(AaiReactiveClient reactiveClient) {
+    AaiClientTaskImpl(AaiReactiveClient reactiveClient) {
         this.reactiveClient = reactiveClient;
     }
 
@@ -49,7 +49,7 @@ public class AaiClientTaskImpl implements AaiClientTask {
             throw new AaiTaskException("Cannot invoke an A&AI client task with an invalid URL");
         }
         LOGGER.info("Executing task ({}) for retrieving PNF object", taskName);
-        return resolveClient().getPnfObjectDataFor(url);
+        return reactiveClient.getPnfObjectDataFor(url);
     }
 
     @Override
@@ -58,11 +58,6 @@ public class AaiClientTaskImpl implements AaiClientTask {
             throw new AaiTaskException("Cannot invoke an A&AI client task with an invalid URL");
         }
         LOGGER.info("Executing task ({}) for retrieving Service Instance object", taskName);
-        return resolveClient().getServiceInstanceObjectDataFor(url);
-    }
-
-    @Override
-    public AaiReactiveClient resolveClient() {
-        return reactiveClient;
+        return reactiveClient.getServiceInstanceObjectDataFor(url);
     }
 }
