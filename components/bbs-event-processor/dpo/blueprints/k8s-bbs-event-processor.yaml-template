@@ -21,7 +21,7 @@ tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
   - "http://www.getcloudify.org/spec/cloudify/3.4/types.yaml"
-  - {{ ONAPTEMPLATE_RAWREPOURL_org_onap_dcaegen2_platform_plugins_releases }}/k8splugin/1.4.5/k8splugin_types.yaml
+  - https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/R3/k8splugin/1.4.4/k8splugin_types.yaml
 
 inputs:
   aai_enrichment_host:
@@ -47,7 +47,31 @@ inputs:
   cpe_authentication_url:
     type: string
   close_loop_url:
-    type: string  
+    type: string
+  application_policy_version:
+    description: Policy version value for building CL events
+    type: string
+    default: "1.0.0.5"
+  application_cl_target_type:
+    description: Close Loop target type value for building CL events
+    type: string
+    default: "VM"
+  application_cl_event_status:
+    description: Close Loop event status value for building CL events
+    type: string
+    default: "ONSET"
+  application_cl_version:
+    description: Close Loop version value for building CL events
+    type: string
+    default: "1.0.2"
+  application_cl_target:
+    description: Close Loop target value for building CL events
+    type: string
+    default: "vserver.vserver-name"
+  application_cl_originator:
+    description: Close Loop originator value for building CL events
+    type: string
+    default: "DCAE-BBS-ep"
   application_rereg_policy_scope:
     description: Policy Scope value for building PNF relocation CL event
     type: string
@@ -101,6 +125,12 @@ node_templates:
         application.pipelinesPollingIntervalSec: 30
         application.pipelinesTimeoutSec: 15
         application.cbsPollingIntervalSec: { get_input: application_cbs_polling_interval_sec }
+        application.policyVersion: { get_input: application_policy_version }
+        application.clTargetType: { get_input: application_cl_target_type }
+        application.clEventStatus: { get_input: application_cl_event_status }
+        application.clVersion: { get_input: application_cl_version }
+        application.clTarget: { get_input: application_cl_target }
+        application.clOriginator: { get_input: application_cl_originator }
         application.reregistration.policyScope: { get_input: application_rereg_policy_scope }
         application.reregistration.clControlName: { get_input: application_rereg_cl_control_name }
         application.cpe.authentication.policyScope: { get_input: application_cpeAuth_policy_scope }

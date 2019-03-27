@@ -112,17 +112,13 @@ public class Scheduler implements ConfigurationChangeObserver {
     }
 
     @Override
-    public void updateConfiguration(ApplicationConfiguration newConfiguration) {
-        if (newConfiguration.getPipelinesPollingIntervalInSeconds() != currentPipelinesPollingInterval
-                || newConfiguration.getCbsPollingInterval() != currentCbsPollingInterval) {
-            configuration = newConfiguration;
-        }
-        if (newConfiguration.getPipelinesPollingIntervalInSeconds() != currentPipelinesPollingInterval) {
+    public void updateConfiguration() {
+        if (configuration.getPipelinesPollingIntervalInSeconds() != currentPipelinesPollingInterval) {
             LOGGER.info("Pipelines Polling interval has changed. Re-scheduling processing pipelines");
             cancelScheduledProcessingTasks();
             reScheduleProcessingTasks();
         }
-        int newCbsPollingInterval = newConfiguration.getCbsPollingInterval();
+        int newCbsPollingInterval = configuration.getCbsPollingInterval();
         if (newCbsPollingInterval != currentCbsPollingInterval) {
             if (newCbsPollingInterval < DEFAULT_CBS_POLLING_INTERVAL) {
                 LOGGER.warn("CBS Polling interval is too small ({}). Will not re-schedule CBS job",

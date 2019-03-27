@@ -27,10 +27,13 @@ public class ApplicationConstants {
     public static final String RETRIEVE_PNF_TASK_NAME = "PNF Retrieval";
     public static final String RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME = "HSI CFS Service Instance Retrieval";
 
-    public static final String STREAMS_TYPE = "message_router";
+    static final String STREAMS_TYPE = "message_router";
 
     public static final String IN_SERVICE_NAME_IN_ONAP = "inService";
     public static final String OUT_OF_SERVICE_NAME_IN_ONAP = "outOfService";
+
+    // Close Loop Constants
+    public static final String DCAE_BBS_EVENT_PROCESSOR_MS_INSTANCE = "DCAE.BBS_event_processor_mSInstance";
 
     private ApplicationConstants() {}
 }

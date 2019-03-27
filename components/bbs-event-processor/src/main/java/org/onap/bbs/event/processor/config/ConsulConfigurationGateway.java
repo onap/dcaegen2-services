@@ -79,17 +79,7 @@ public class ConsulConfigurationGateway {
                             getMissingEnvironmentVariables()));
         }
 
-        RequestDiagnosticContext diagnosticContext = RequestDiagnosticContext.create();
-
-        // Necessary properties from the environment (Consul host:port, service-name (hostname), CBS name)
-        EnvProperties env = EnvProperties.fromEnvironment();
-
-        // Create the client and use it to get the configuration
-        cbsFetchPipeline = CbsClientFactory.createCbsClient(env)
-                .doOnError(e -> LOGGER.warn("CBS Configuration fetch failed with error: {}", e))
-                .retry(e -> true)
-                .flatMapMany(cbsClient -> cbsClient.updates(diagnosticContext, initialDelay, period))
-                .subscribe(this::parseConsulRetrievedConfiguration, this::handleErrors);
+        fetchConfig(initialDelay, period);
     }
 
     boolean environmentNotReady() {
@@ -121,6 +111,25 @@ public class ConsulConfigurationGateway {
 
     private void handleErrors(Throwable throwable) {
         LOGGER.error("Periodic CBS configuration polling was terminated with error: {}", throwable);
+        LOGGER.info("Will restart CBS configuration fetching job due to abnormal termination."
+                + " Will start fetching after 60 seconds (please correct configuration in the meantime)"
+                + " and it will then poll every {} seconds (reverting to default)",
+                configuration.getCbsPollingInterval());
+        fetchConfig(Duration.ofSeconds(60), Duration.ofSeconds(configuration.getCbsPollingInterval()));
+    }
+
+    private void fetchConfig(Duration initialDelay, Duration period) {
+        RequestDiagnosticContext diagnosticContext = RequestDiagnosticContext.create();
+
+        // Necessary properties from the environment (Consul host:port, service-name (hostname), CBS name)
+        EnvProperties env = EnvProperties.fromEnvironment();
+
+        // Create the client and use it to get the configuration
+        cbsFetchPipeline = CbsClientFactory.createCbsClient(env)
+                .doOnError(e -> LOGGER.warn("CBS Configuration fetch failed with error: {}", e))
+                .retry(e -> true)
+                .flatMapMany(cbsClient -> cbsClient.updates(diagnosticContext, initialDelay, period))
+                .subscribe(this::parseConsulRetrievedConfiguration, this::handleErrors);
     }
 
     @NotNull
@@ -149,11 +158,20 @@ public class ConsulConfigurationGateway {
         final int pipelinesPollingIntervalSec = configObject.get("application.pipelinesPollingIntervalSec").getAsInt();
         final int pipelinesTimeoutSec = configObject.get("application.pipelinesTimeoutSec").getAsInt();
         final int cbsPollingIntervalSec = configObject.get("application.cbsPollingIntervalSec").getAsInt();
+
         final String reRegPolicyScope = configObject.get("application.reregistration.policyScope").getAsString();
         final String reRegClControlName = configObject.get("application.reregistration.clControlName").getAsString();
         final String cpeAuthPolicyScope = configObject.get("application.cpe.authentication.policyScope").getAsString();
         final String cpeAuthClControlName =
                 configObject.get("application.cpe.authentication.clControlName").getAsString();
+
+        final String policyVersion = configObject.get("application.policyVersion").getAsString();
+        final String closeLoopTargetType = configObject.get("application.clTargetType").getAsString();
+        final String closeLoopEventStatus = configObject.get("application.clEventStatus").getAsString();
+        final String closeLoopVersion = configObject.get("application.clVersion").getAsString();
+        final String closeLoopTarget = configObject.get("application.clTarget").getAsString();
+        final String closeLoopOriginator = configObject.get("application.clOriginator").getAsString();
+
         final String reRegConfigKey = configObject.get("application.reregistration.configKey").getAsString();
         final String cpeAuthConfigKey = configObject.get("application.cpeAuth.configKey").getAsString();
         final String closeLoopConfigKey = configObject.get("application.closeLoop.configKey").getAsString();
@@ -179,6 +197,12 @@ public class ConsulConfigurationGateway {
                 .cbsPollingIntervalSec(cbsPollingIntervalSec)
                 .reRegistrationPolicyScope(reRegPolicyScope)
                 .reRegistrationClControlName(reRegClControlName)
+                .policyVersion(policyVersion)
+                .closeLoopTargetType(closeLoopTargetType)
+                .closeLoopEventStatus(closeLoopEventStatus)
+                .closeLoopVersion(closeLoopVersion)
+                .closeLoopTarget(closeLoopTarget)
+                .closeLoopOriginator(closeLoopOriginator)
                 .cpeAuthPolicyScope(cpeAuthPolicyScope)
                 .cpeAuthClControlName(cpeAuthClControlName)
                 .reRegConfigKey(reRegConfigKey)

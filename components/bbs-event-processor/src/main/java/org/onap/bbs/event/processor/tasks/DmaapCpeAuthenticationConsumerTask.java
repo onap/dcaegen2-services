@@ -23,13 +23,10 @@ package org.onap.bbs.event.processor.tasks;
 import javax.net.ssl.SSLException;
 
 import org.onap.bbs.event.processor.model.CpeAuthenticationConsumerDmaapModel;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.consumer.DMaaPConsumerReactiveHttpClient;
 
 import reactor.core.publisher.Flux;
 
 public interface DmaapCpeAuthenticationConsumerTask {
 
     Flux<CpeAuthenticationConsumerDmaapModel> execute(String object) throws SSLException;
-
-    DMaaPConsumerReactiveHttpClient resolveClient() throws SSLException;
 }

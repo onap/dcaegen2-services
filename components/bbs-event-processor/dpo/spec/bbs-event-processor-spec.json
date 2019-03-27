@@ -52,7 +52,7 @@
       "designer_editable": true,
       "policy_editable": false,
       "sourced_at_deployment": false,
-      "description": "DmaaP protocol used for any DMaaP interaction"
+      "description": "DMaaP protocol used for any DMaaP interaction"
     },
     {
       "name": "dmaap.contentType",
@@ -60,7 +60,7 @@
       "designer_editable": true,
       "policy_editable": false,
       "sourced_at_deployment": false,
-      "description": "DmaaP content type"
+      "description": "DMaaP content type"
     },
     {
       "name": "dmaap.consumer.consumerId",
@@ -68,7 +68,7 @@
       "designer_editable": true,
       "policy_editable": false,
       "sourced_at_deployment": true,
-      "description": "DmaaP consumer consumer ID"
+      "description": "DMaaP consumer consumer ID"
     },
     {
       "name": "dmaap.consumer.consumerGroup",
@@ -76,7 +76,7 @@
       "designer_editable": true,
       "policy_editable": false,
       "sourced_at_deployment": true,
-      "description": "DmaaP consumer consumer group"
+      "description": "DMaaP consumer consumer group"
     },
     {
       "name": "dmaap.messageLimit",
@@ -84,7 +84,7 @@
       "designer_editable": true,
       "policy_editable": false,
       "sourced_at_deployment": false,
-      "description": "DmaaP message limit"
+      "description": "DMaaP message limit"
     },
     {
       "name": "dmaap.timeoutMs",
@@ -92,7 +92,7 @@
       "designer_editable": true,
       "policy_editable": false,
       "sourced_at_deployment": false,
-      "description": "DmaaP timeout in millis"
+      "description": "DMaaP timeout in millis"
     },
     {
       "name": "aai.host",
@@ -168,7 +168,7 @@
       "value": 300,
       "constraints": [
         {
-          "greater_or_equal": 20
+          "greater_or_equal": 30
         }
       ],
       "designer_editable": true,
@@ -177,12 +177,60 @@
       "description": "Polling interval in seconds for fetching configuration from Consul via CBS service"
     },
     {
+      "name": "application.policyVersion",
+      "value": "1.0.0.5",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Policy Version parameter in Policy triggering event to be published"
+    },
+    {
+      "name": "application.clTargetType",
+      "value": "VM",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Close Loop target type parameter in Policy triggering event to be published"
+    },
+    {
+      "name": "application.clEventStatus",
+      "value": "ONSET",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Close Loop event status parameter in Policy triggering event to be published"
+    },
+    {
+      "name": "application.clVersion",
+      "value": "1.0.2",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Close Loop version parameter in Policy triggering event to be published"
+    },
+    {
+      "name": "application.clTarget",
+      "value": "vserver.vserver-name",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Close Loop target parameter in Policy triggering event to be published"
+    },
+    {
+      "name": "application.clOriginator",
+      "value": "DCAE-BBS-ep",
+      "designer_editable": false,
+      "policy_editable": true,
+      "sourced_at_deployment": true,
+      "description": "Close Loop originator parameter in Policy triggering event to be published"
+    },
+    {
       "name": "application.reregistration.policyScope",
       "value": "policyScope",
       "designer_editable": false,
       "policy_editable": true,
       "sourced_at_deployment": true,
-      "description": "Hard-coded value for Policy Scope parameter in Policy triggering event to be published"
+      "description": "Policy Scope parameter in Policy triggering event to be published"
     },
     {
       "name": "application.reregistration.clControlName",
@@ -190,7 +238,7 @@
       "designer_editable": false,
       "policy_editable": true,
       "sourced_at_deployment": true,
-      "description": "Hard-coded value for CL control name parameter in Policy triggering event to be published"
+      "description": "Close Loop control name parameter in Policy triggering event to be published"
     },
     {
       "name": "application.cpe.authentication.policyScope",
@@ -198,7 +246,7 @@
       "designer_editable": false,
       "policy_editable": true,
       "sourced_at_deployment": true,
-      "description": "Hard-coded value for CL control nam parameter in Policy triggering event to be published"
+      "description": "Policy Scope parameter in Policy triggering event to be published"
     },
     {
       "name": "application.cpe.authentication.clControlName",
@@ -206,7 +254,7 @@
       "designer_editable": false,
       "policy_editable": true,
       "sourced_at_deployment": true,
-      "description": "Hard-coded value for CL control nam parameter in Policy triggering event to be published"
+      "description": "Close Loop control nam parameter in Policy triggering event to be published"
     },
     {
       "name": "application.reregistration.configKey",

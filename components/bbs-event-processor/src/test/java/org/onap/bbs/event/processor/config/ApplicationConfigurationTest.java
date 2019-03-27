@@ -95,6 +95,12 @@ import org.springframework.test.context.TestPropertySource;
         "configs.security.enableAaiCertAuth=true",
         "configs.application.pipelinesPollingIntervalSec=30",
         "configs.application.pipelinesTimeoutSec=15",
+        "configs.application.policyVersion=1.0.0",
+        "configs.application.clTargetType=VM",
+        "configs.application.clEventStatus=ONSET",
+        "configs.application.clVersion=1.0.2",
+        "configs.application.clTarget=vserver.vserver-name",
+        "configs.application.clOriginator=DCAE-bbs-event-processor",
         "configs.application.re-registration.policyScope=reRegPolicyScope",
         "configs.application.re-registration.clControlName=reRegControlName",
         "configs.application.cpe-authentication.policyScope=cpeAuthPolicyScope",
@@ -191,6 +197,12 @@ class ApplicationConfigurationTest {
         assertAll("Generic Application Properties",
             () -> assertEquals(30, configuration.getPipelinesPollingIntervalInSeconds()),
             () -> assertEquals(15, configuration.getPipelinesTimeoutInSeconds()),
+            () -> assertEquals("1.0.0", configuration.getPolicyVersion()),
+            () -> assertEquals("VM", configuration.getCloseLoopTargetType()),
+            () -> assertEquals("ONSET", configuration.getCloseLoopEventStatus()),
+            () -> assertEquals("1.0.2", configuration.getCloseLoopVersion()),
+            () -> assertEquals("vserver.vserver-name", configuration.getCloseLoopTarget()),
+            () -> assertEquals("DCAE-bbs-event-processor", configuration.getCloseLoopOriginator()),
             () -> assertEquals("reRegPolicyScope", configuration.getReRegistrationCloseLoopPolicyScope()),
             () -> assertEquals("cpeAuthPolicyScope", configuration.getCpeAuthenticationCloseLoopPolicyScope()),
             () -> assertEquals("reRegControlName", configuration.getReRegistrationCloseLoopControlName()),
@@ -261,6 +273,12 @@ class ApplicationConfigurationTest {
                 .pipelinesPollingIntervalSec(20)
                 .pipelinesTimeoutSec(20)
                 .cbsPollingIntervalSec(180)
+                .policyVersion("2.0.0")
+                .closeLoopTargetType("VM2")
+                .closeLoopEventStatus("ONSET-update")
+                .closeLoopVersion("2.0.2")
+                .closeLoopTarget("Target-update")
+                .closeLoopOriginator("Originator-update")
                 .reRegistrationPolicyScope("policyScope-update")
                 .reRegistrationClControlName("controlName-update")
                 .cpeAuthPolicyScope("policyScope-update")
@@ -341,6 +359,12 @@ class ApplicationConfigurationTest {
             () -> assertEquals(20, configuration.getPipelinesPollingIntervalInSeconds()),
             () -> assertEquals(20, configuration.getPipelinesTimeoutInSeconds()),
             () -> assertEquals(180, configuration.getCbsPollingInterval()),
+            () -> assertEquals("2.0.0", configuration.getPolicyVersion()),
+            () -> assertEquals("VM2", configuration.getCloseLoopTargetType()),
+            () -> assertEquals("ONSET-update", configuration.getCloseLoopEventStatus()),
+            () -> assertEquals("2.0.2", configuration.getCloseLoopVersion()),
+            () -> assertEquals("Target-update", configuration.getCloseLoopTarget()),
+            () -> assertEquals("Originator-update", configuration.getCloseLoopOriginator()),
             () -> assertEquals("policyScope-update", configuration.getReRegistrationCloseLoopPolicyScope()),
             () -> assertEquals("policyScope-update", configuration.getCpeAuthenticationCloseLoopPolicyScope()),
             () -> assertEquals("controlName-update", configuration.getReRegistrationCloseLoopControlName()),

@@ -74,6 +74,12 @@ class ConsulConfigurationGatewayTest {
                 + "\"application.reregistration.clControlName\": \"controlName\","
                 + "\"application.cpe.authentication.policyScope\": \"policyScope\","
                 + "\"application.cpe.authentication.clControlName\": \"controlName\","
+                + "\"application.policyVersion\": \"1.0\","
+                + "\"application.clTargetType\": \"VM\","
+                + "\"application.clEventStatus\": \"ONSET\","
+                + "\"application.clVersion\": \"1.0.2\","
+                + "\"application.clTarget\": \"vserver.vserver-name\","
+                + "\"application.clOriginator\": \"DCAE-bbs-event-processor\","
                 + "\"application.reregistration.configKey\": \"config_key_2\","
                 + "\"application.cpeAuth.configKey\": \"config_key_1\","
                 + "\"application.closeLoop.configKey\": \"config_key_3\","
@@ -186,6 +192,12 @@ class ConsulConfigurationGatewayTest {
                 .reRegistrationClControlName("controlName")
                 .cpeAuthPolicyScope("policyScope")
                 .cpeAuthClControlName("controlName")
+                .policyVersion("1.0")
+                .closeLoopTargetType("VM")
+                .closeLoopEventStatus("ONSET")
+                .closeLoopVersion("1.0.2")
+                .closeLoopTarget("vserver.vserver-name")
+                .closeLoopOriginator("DCAE-bbs-event-processor")
                 .reRegConfigKey("config_key_2")
                 .cpeAuthConfigKey("config_key_1")
                 .closeLoopConfigKey("config_key_3")

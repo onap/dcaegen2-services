@@ -23,8 +23,7 @@ package org.onap.bbs.event.processor.config;
 public interface ConfigurationChangeObserver {
 
     /**
-     * Take actions upon new application configuration.
-     * @param configuration new application configuration (complete configuration)
+     * Take actions upon updates in application configuration.
      */
-    void updateConfiguration(ApplicationConfiguration configuration);
+    void updateConfiguration();
 }

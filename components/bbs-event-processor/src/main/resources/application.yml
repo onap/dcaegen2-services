@@ -56,6 +56,12 @@ configs:
   application:
     pipelinesPollingIntervalSec: 30
     pipelinesTimeoutSec: 15
+    policyVersion: 1.0.0.5
+    clTargetType: VM
+    clEventStatus: ONSET
+    clVersion: 1.0.2
+    clTarget: vserver.vserver-name
+    clOriginator: DCAE-bbs-event-processor
     re-registration:
       policyScope: policyScope
       clControlName: controlName

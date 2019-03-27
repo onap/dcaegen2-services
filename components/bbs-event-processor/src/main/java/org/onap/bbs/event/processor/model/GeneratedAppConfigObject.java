@@ -74,8 +74,7 @@ public interface GeneratedAppConfigObject {
     @SerializedName(value = "application.pipelinesTimeoutSec", alternate = "application.pipelinesTimeoutSec")
     int pipelinesTimeoutSec();
 
-    @SerializedName(value = "application.cbsPollingIntervalSec",
-            alternate = "application.cbsPollingIntervalSec")
+    @SerializedName(value = "application.cbsPollingIntervalSec", alternate = "application.cbsPollingIntervalSec")
     int cbsPollingIntervalSec();
 
     @SerializedName(value = "application.reregistration.policyScope",
@@ -93,6 +92,24 @@ public interface GeneratedAppConfigObject {
     @SerializedName(value = "application.cpe.authentication.clControlName",
             alternate = "application.reregistration.clControlName")
     String cpeAuthClControlName();
+
+    @SerializedName(value = "application.policyVersion", alternate = "application.policyVersion")
+    String policyVersion();
+
+    @SerializedName(value = "application.clTargetType", alternate = "application.clTargetType")
+    String closeLoopTargetType();
+
+    @SerializedName(value = "application.clEventStatus", alternate = "application.clEventStatus")
+    String closeLoopEventStatus();
+
+    @SerializedName(value = "application.clVersion", alternate = "application.clVersion")
+    String closeLoopVersion();
+
+    @SerializedName(value = "application.clTarget", alternate = "application.clTarget")
+    String closeLoopTarget();
+
+    @SerializedName(value = "application.clOriginator", alternate = "application.clOriginator")
+    String closeLoopOriginator();
 
     @SerializedName(value = "application.reregistration.configKey", alternate = "application.reregistration.configKey")
     String reRegConfigKey();
