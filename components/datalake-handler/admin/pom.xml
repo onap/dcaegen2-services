@@ -10,7 +10,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>org.onap.datalake</groupId>
+	<groupId>org.onap.dcaegen2.services.components.datalake-handler</groupId>
 	<artifactId>admin</artifactId>
 	<packaging>pom</packaging>
 	<name>DataLake Admin</name>
