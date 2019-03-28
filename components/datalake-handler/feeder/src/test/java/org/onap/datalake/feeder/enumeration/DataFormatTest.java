@@ -19,28 +19,27 @@
 */
 package org.onap.datalake.feeder.enumeration;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test; 
+
 /**
- * Data format of DMaaP messages
+ * Test Data format of DMaaP messages
  * 
  * @author Guobiao Mo
  *
  */
-public enum DataFormat {
-	JSON, XML, YAML, TEXT; 	
+public class DataFormatTest {
+    @Test
+    public void fromString() {
+        assertEquals(DataFormat.JSON, DataFormat.fromString("json"));
+        assertEquals(DataFormat.XML, DataFormat.fromString("xml"));
+        assertEquals(DataFormat.YAML, DataFormat.fromString("YAML"));
+        assertEquals(DataFormat.TEXT, DataFormat.fromString("Text"));
+    }
 
-    public static DataFormat fromString(String s) {
-        if ("JSON".equalsIgnoreCase(s)) {
-            return JSON;
-        }
-        if ("XML".equalsIgnoreCase(s)) {
-            return XML;
-        }
-        if ("YAML".equalsIgnoreCase(s)) {
-            return YAML;
-        }
-        if ("TEXT".equalsIgnoreCase(s)) {
-            return TEXT;
-        }
-        throw new IllegalArgumentException("Invalid value for format: " + s);
+    @Test(expected = IllegalArgumentException.class)
+    public void fromStringWithException() {
+    	DataFormat.fromString("test");
     }
 }
