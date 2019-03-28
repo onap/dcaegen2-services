@@ -33,10 +33,14 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.onap.datalake.feeder.enumeration.DataFormat;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
+
+import lombok.Getter;
+import lombok.Setter;
 
 
 /*
@@ -56,6 +60,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeType;
  * dimension type default is string, in msgrtr.apinode.metrics.dmaap , many are long/double, so need to generate dimensionsSpec, this is done at the end of printFlattenSpec()
  */
 
+@Getter
 public class DruidSupervisorGenerator {
 
 	Template template = null;
@@ -73,12 +78,12 @@ public class DruidSupervisorGenerator {
 
 		context = new VelocityContext();
 
-		context.put("host", "dl_dmaap_kf");
+		context.put("host", "message-router-kafka:9092");//TODO get from config
 
 		template = Velocity.getTemplate("druid/kafka-supervisor-template.vm");
 	}
 
-	public void printNode(String prefix, JsonNode node) {
+	private void printNode(String prefix, JsonNode node) {
 
 		// lets see what type the node is
 		//		System.out.println("NodeType=" + node.getNodeType() + ", isContainerNode=" + node.isContainerNode() + ", " + node); // prints OBJECT
@@ -109,7 +114,7 @@ public class DruidSupervisorGenerator {
 
 	}
 
-	public void printFlattenSpec(JsonNodeType type, String path) {
+	private void printFlattenSpec(JsonNodeType type, String path) {
 		String name = path.substring(2).replace('.', ':');
 		// lets see what type the node is
 		System.out.println("{");
@@ -151,7 +156,6 @@ public class DruidSupervisorGenerator {
 		context.put("topic", topic);
 		context.put("timestamp", "event-header:timestamp");//FIXME hard coded, should be topic based
 		context.put("timestampFormat", "yyyyMMdd-HH:mm:ss:SSS");//FIXME hard coded, should be topic based
-
 		context.put("dimensions", dimensions);
 
 		BufferedWriter out = new BufferedWriter(new FileWriter(outputFileName));

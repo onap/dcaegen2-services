@@ -2,7 +2,7 @@
 * ============LICENSE_START=======================================================
 * ONAP : DCAE
 * ================================================================================
-* Copyright 2018 TechMahindra
+* Copyright 2019 China Mobile
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -17,30 +17,27 @@
 * limitations under the License.
 * ============LICENSE_END=========================================================
 */
-package org.onap.datalake.feeder.enumeration;
+
+package org.onap.datalake.feeder.util;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
 
 /**
- * Data format of DMaaP messages
+ * test utils
  * 
  * @author Guobiao Mo
  *
  */
-public enum DataFormat {
-	JSON, XML, YAML, TEXT; 	
+public class UtilTest {
+   
+    @Test
+    //only dot(.) in key got replaced
+	public void replaceDotInKey() {
+		String a = "\"u-y.t.y-t\":\"u.gfh\",\\\"jg.h\\\":\"j_9889\"";
+		String b = "\"u-y_t_y-t\":\"u.gfh\",\\\"jg_h\\\":\"j_9889\"";
 
-    public static DataFormat fromString(String s) {
-        if ("JSON".equalsIgnoreCase(s)) {
-            return JSON;
-        }
-        if ("XML".equalsIgnoreCase(s)) {
-            return XML;
-        }
-        if ("YAML".equalsIgnoreCase(s)) {
-            return YAML;
-        }
-        if ("TEXT".equalsIgnoreCase(s)) {
-            return TEXT;
-        }
-        throw new IllegalArgumentException("Invalid value for format: " + s);
-    }
+        assertEquals(Util.replaceDotInKey(a), b);   
+	}
 }
