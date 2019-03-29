@@ -21,7 +21,7 @@ tosca_definitions_version: cloudify_dsl_1_3
 
 imports:
   - "http://www.getcloudify.org/spec/cloudify/3.4/types.yaml"
-  - https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/R3/k8splugin/1.4.4/k8splugin_types.yaml
+  - https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/R4/k8splugin/1.4.11/k8splugin_types.yaml
 
 inputs:
   aai_enrichment_host:
@@ -87,6 +87,9 @@ inputs:
   application_cbs_polling_interval_sec:
     type: integer
     default: 300
+  application_logging_level:
+    type: string
+    default: "INFO"
   dmaap_consumer_id:
     type: string
   dmaap_consumer_group:
@@ -138,6 +141,7 @@ node_templates:
         application.reregistration.configKey: "pnf_reregistration"
         application.cpeAuth.configKey: "cpe_authentication"
         application.closeLoop.configKey: "close_loop"
+        application.loggingLevel: { get_input: application_logging_level }
       host_port:
           { get_input: host_port }
       container_port:

@@ -280,6 +280,14 @@
       "policy_editable": true,
       "sourced_at_deployment": true,
       "description": "Config-key for Close Loop"
+    },
+    {
+      "name": "application.loggingLevel",
+      "value": "INFO",
+      "designer_editable": false,
+      "policy_editable": false,
+      "sourced_at_deployment": true,
+      "description": "Application Logging Level"
     }
   ],
   "auxilary": {
@@ -292,7 +300,7 @@
   },
   "artifacts": [
     {
-    "uri": "nexus3.onap.org:10003/dcae-services/org.onap.dcaegen2.services.components.bbs-event-processor:1.0.0-SNAPSHOT",
+    "uri": "nexus3.onap.org:10003/onap/org.onap.dcaegen2.services.components.bbs-event-processor:latest",
     "type": "docker image"
     }
   ]

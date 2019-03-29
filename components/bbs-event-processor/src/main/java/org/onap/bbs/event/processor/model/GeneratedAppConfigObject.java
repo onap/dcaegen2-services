@@ -120,6 +120,9 @@ public interface GeneratedAppConfigObject {
     @SerializedName(value = "application.closeLoop.configKey", alternate = "application.closeLoop.configKey")
     String closeLoopConfigKey();
 
+    @SerializedName(value = "application.loggingLevel", alternate = "application.loggingLevel")
+    String loggingLevel();
+
     @SerializedName(value = "streams_subscribes", alternate = "streams_subscribes")
     Map<String, StreamsObject> streamSubscribesMap();
 

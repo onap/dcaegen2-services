@@ -176,6 +176,8 @@ public class ConsulConfigurationGateway {
         final String cpeAuthConfigKey = configObject.get("application.cpeAuth.configKey").getAsString();
         final String closeLoopConfigKey = configObject.get("application.closeLoop.configKey").getAsString();
 
+        final String loggingLevel = configObject.get("application.loggingLevel").getAsString();
+
         final JsonObject streamsPublishes = configObject.getAsJsonObject("streams_publishes");
         final JsonObject streamsSubscribes = configObject.getAsJsonObject("streams_subscribes");
 
@@ -208,6 +210,7 @@ public class ConsulConfigurationGateway {
                 .reRegConfigKey(reRegConfigKey)
                 .cpeAuthConfigKey(cpeAuthConfigKey)
                 .closeLoopConfigKey(closeLoopConfigKey)
+                .loggingLevel(loggingLevel)
                 .streamSubscribesMap(parseStreamsObjects(streamsSubscribes))
                 .streamPublishesMap(parseStreamsObjects(streamsPublishes))
                 .build();

@@ -286,6 +286,7 @@ class ApplicationConfigurationTest {
                 .reRegConfigKey("config_key_1")
                 .cpeAuthConfigKey("config_key_2")
                 .closeLoopConfigKey("config_key_3")
+                .loggingLevel("TRACE")
                 .streamSubscribesMap(subscribes)
                 .streamPublishesMap(Collections.singletonMap("config_key_3", streamsObject3))
                 .build();

@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import org.onap.bbs.event.processor.exceptions.ApplicationEnvironmentException;
 import org.onap.bbs.event.processor.exceptions.ConfigurationParsingException;
 import org.onap.bbs.event.processor.model.GeneratedAppConfigObject;
+import org.onap.bbs.event.processor.utilities.LoggingUtil;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.DmaapConsumerConfiguration;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.DmaapPublisherConfiguration;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.ImmutableDmaapConsumerConfiguration;
@@ -234,6 +235,8 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
             genericProperties.getReRegistration().setClControlName(newConfiguration.reRegistrationClControlName());
             genericProperties.getCpeAuthentication().setPolicyScope(newConfiguration.cpeAuthPolicyScope());
             genericProperties.getCpeAuthentication().setClControlName(newConfiguration.cpeAuthClControlName());
+
+            LoggingUtil.changeLoggingLevel(newConfiguration.loggingLevel());
         }
 
         notifyObservers();

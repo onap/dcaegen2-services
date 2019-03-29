@@ -83,6 +83,7 @@ class ConsulConfigurationGatewayTest {
                 + "\"application.reregistration.configKey\": \"config_key_2\","
                 + "\"application.cpeAuth.configKey\": \"config_key_1\","
                 + "\"application.closeLoop.configKey\": \"config_key_3\","
+                + "\"application.loggingLevel\": \"TRACE\","
                 + "\"streams_subscribes\": {"
                 + "\"config_key_1\": {"
                 + "\"type\": \"message_router\","
@@ -201,6 +202,7 @@ class ConsulConfigurationGatewayTest {
                 .reRegConfigKey("config_key_2")
                 .cpeAuthConfigKey("config_key_1")
                 .closeLoopConfigKey("config_key_3")
+                .loggingLevel("TRACE")
                 .streamSubscribesMap(subscribes)
                 .streamPublishesMap(Collections.singletonMap("config_key_3", streamsObject3))
                 .build();

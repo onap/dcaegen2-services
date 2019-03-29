@@ -30,12 +30,14 @@ import java.util.concurrent.Executors;
 import org.onap.bbs.event.processor.pipelines.CpeAuthenticationPipeline;
 import org.onap.bbs.event.processor.pipelines.ReRegistrationPipeline;
 import org.onap.bbs.event.processor.pipelines.Scheduler;
+import org.onap.bbs.event.processor.utilities.LoggingUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -170,5 +172,25 @@ public class BbsEventProcessorController {
                     Mono.just(new ResponseEntity<>("Cancellation failed\n", HttpStatus.NOT_ACCEPTABLE))
             );
         }
+    }
+
+    /**
+     * Change logging level for BBS code.
+     * @param level new logging level
+     * @return Proper HTTP response based on change logging level result
+     */
+    @PostMapping("logging/{level}")
+    public Mono<ResponseEntity<String>> changeLoggingLevel(@PathVariable String level) {
+
+        if (LoggingUtil.changeLoggingLevel(level)) {
+            LOGGER.info("Changed logging level to {}", level);
+            return Mono.defer(() ->
+                    Mono.just(new ResponseEntity<>("Changed BBS event processor logging level\n", HttpStatus.OK))
+            );
+
+        }
+        return Mono.defer(() ->
+                Mono.just(new ResponseEntity<>("Unacceptable logging level\n", HttpStatus.NOT_ACCEPTABLE))
+        );
     }
 }
