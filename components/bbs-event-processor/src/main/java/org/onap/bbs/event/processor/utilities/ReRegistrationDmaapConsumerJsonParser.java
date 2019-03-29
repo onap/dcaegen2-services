@@ -28,6 +28,7 @@ import static org.onap.bbs.event.processor.utilities.ReRegistrationEventFields.C
 import static org.onap.bbs.event.processor.utilities.ReRegistrationEventFields.REMOTE_ID;
 import static org.onap.bbs.event.processor.utilities.ReRegistrationEventFields.SVLAN;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -49,6 +50,7 @@ import reactor.core.publisher.Mono;
 public class ReRegistrationDmaapConsumerJsonParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReRegistrationDmaapConsumerJsonParser.class);
+    private static final Gson gson = new Gson();
 
     private static final String RE_REGISTRATION_DUMPING_TEMPLATE = "%n{"
             + "\"" + CORRELATION_ID + COMMON_FORMAT + ","
@@ -103,6 +105,8 @@ public class ReRegistrationDmaapConsumerJsonParser {
     }
 
     private Mono<ReRegistrationConsumerDmaapModel> transform(JsonObject dmaapResponseJsonObject) {
+
+        LOGGER.trace("Event from DMaaP to be parsed: \n{}", gson.toJson(dmaapResponseJsonObject));
 
         if (!containsProperHeaders(dmaapResponseJsonObject)) {
             LOGGER.warn("Incorrect JsonObject - missing headers");

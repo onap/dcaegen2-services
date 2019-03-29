@@ -33,6 +33,7 @@ import static org.onap.bbs.event.processor.utilities.CpeAuthenticationEventField
 import static org.onap.bbs.event.processor.utilities.CpeAuthenticationEventFields.STATE_INTERFACE;
 import static org.onap.bbs.event.processor.utilities.CpeAuthenticationEventFields.SW_VERSION;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -54,6 +55,7 @@ import reactor.core.publisher.Mono;
 public class CpeAuthenticationDmaapConsumerJsonParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CpeAuthenticationDmaapConsumerJsonParser.class);
+    private static final Gson gson = new Gson();
 
     private static final String CPE_AUTHENTICATION_DUMPING_TEMPLATE = "%n{"
             + "\"" + CORRELATION_ID + COMMON_FORMAT + ","
@@ -110,6 +112,8 @@ public class CpeAuthenticationDmaapConsumerJsonParser {
     }
 
     private Mono<CpeAuthenticationConsumerDmaapModel> transform(JsonObject dmaapResponseJsonObject) {
+
+        LOGGER.trace("Event from DMaaP to be parsed: \n{}", gson.toJson(dmaapResponseJsonObject));
 
         if (!containsProperHeaders(dmaapResponseJsonObject)) {
             LOGGER.warn("Incorrect CPE Authentication JSON event - missing headers");
