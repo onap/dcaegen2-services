@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da382ab6_73b4c489",
+        "filename": "components/bbs-event-processor/dpo/spec/bbs-event-processor-spec.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 2683
+      },
+      "writtenOn": "2019-04-01T06:09:06Z",
+      "side": 1,
+      "message": "You probably shouldn\u0027t use :latest in blueprints and descriptors. In a few months :latest will point to ElAlto image. For now you can use your snapshot project version. After release switch to release version (will be tagged manually by Vijay\u0026LF).",
+      "range": {
+        "startLine": 303,
+        "startChar": 97,
+        "endLine": 303,
+        "endChar": 103
+      },
+      "revId": "6fc05d4e13760b8e72cef7563ea5138b2f15d0d1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c0a9114_a877c68f",
+        "filename": "components/bbs-event-processor/src/main/java/org/onap/bbs/event/processor/controllers/BbsEventProcessorController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 2683
+      },
+      "writtenOn": "2019-04-01T06:09:06Z",
+      "side": 1,
+      "message": "The reason for using defer is that by design reactive streams are lazy \u003d they shouldn\u0027t do anything until a subscription is made. Hence you have two options here:\n\n1. Wrap the whole method with single return Mono.defer and return these Mono.just without further wrapping - preferable because is lazy.\n2. Get rid of these `Mono.defer`s if you thing the job to be done (if-logic) is minor overhead and the time of subscription doesn\u0027t matter - will violate laziness but may be justified.",
+      "range": {
+        "startLine": 192,
+        "startChar": 15,
+        "endLine": 192,
+        "endChar": 31
+      },
+      "revId": "6fc05d4e13760b8e72cef7563ea5138b2f15d0d1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
