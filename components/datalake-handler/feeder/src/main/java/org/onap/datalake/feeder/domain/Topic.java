@@ -23,10 +23,14 @@ import java.util.function.Predicate;
 
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 import org.onap.datalake.feeder.enumeration.DataFormat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.couchbase.core.mapping.Document;
+
+import lombok.Setter;
  
 /**
  * Domain class representing topic table in Couchbase
@@ -35,6 +39,7 @@ import org.springframework.data.couchbase.core.mapping.Document;
  *
  */
 @Document
+@Setter
 public class Topic {
 	@NotNull
 	@Id
@@ -77,6 +82,9 @@ public class Topic {
 	
 	//if this flag is true, need to correlate alarm cleared message to previous alarm 
 	private Boolean correlateClearedMessage;
+	
+	//the value in the JSON with this path will be used as DB id
+	private String messageIdPath;
 
 	public Topic() {
 	}
@@ -123,12 +131,16 @@ public class Topic {
 
 	//if 'this' Topic does not have the setting, use default Topic's
 	private boolean is(Boolean b, Predicate<Topic> pre) {
+		return is(b, pre, false);
+	}
+	
+	private boolean is(Boolean b, Predicate<Topic> pre, boolean defaultValue) {
 		if (b != null) {
 			return b;
 		} else if (defaultTopic != null) {
 			return pre.test(defaultTopic);
 		} else {
-			return false;
+			return defaultValue;
 		}
 	}
 
@@ -148,18 +160,33 @@ public class Topic {
 		return is(supportDruid, Topic::isSupportDruid);
 	}
 
+	//extract DB id from a JSON attribute, TODO support multiple attributes
+	public String getMessageId(JSONObject json) {
+		String id = null;
+		
+		if(StringUtils.isNotBlank(messageIdPath)) {
+			id = json.query(messageIdPath).toString();
+		}
+		
+		return id;
+	}
+	
 	@Override
 	public String toString() {
 		return id;
 	}
 
-	// for testing
-	public static void main(String[] args) {
-		Topic defaultTopic=new Topic("def");
-		Topic test = new Topic("test");
-		test.setDefaultTopic(defaultTopic);
-		defaultTopic.supportElasticsearch=true;
-		boolean b = test.isSupportElasticsearch();
-		System.out.println(b);
+	/**
+	 * @return the messageIdPath
+	 */
+	public String getMessageIdPath() {
+		return messageIdPath;
+	}
+
+	/**
+	 * @param messageIdPath the messageIdPath to set
+	 */
+	public void setMessageIdPath(String messageIdPath) {
+		this.messageIdPath = messageIdPath;
 	}
 }

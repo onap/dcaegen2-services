@@ -20,10 +20,13 @@
 
 package org.onap.datalake.feeder.config;
 
-import java.util.Set;
-
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.ComponentScan;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -37,8 +40,12 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@Configuration
+@SpringBootConfiguration
 @ConfigurationProperties
+//@ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = CouchbaseConfiguration.class))
+//https://stackoverflow.com/questions/29344313/prevent-application-commandlinerunner-classes-from-executing-during-junit-test
+@EnableAutoConfiguration
+//@Profile("test")
 public class ApplicationConfiguration {
 
 	private String couchbaseHost;
@@ -48,10 +55,6 @@ public class ApplicationConfiguration {
 
 	//    private int mongodbPort;    
 	//  private String mongodbDatabase;    
-
-	private boolean storeJson;
-	private boolean storeYaml;
-	private boolean storeXml;
 
 	private String dmaapZookeeperHostPort;
 	private String dmaapKafkaHostPort;

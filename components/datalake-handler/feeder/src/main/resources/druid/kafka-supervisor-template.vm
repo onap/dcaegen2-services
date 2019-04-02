@@ -1,0 +1,57 @@
+{
+	"type": "kafka",
+	"dataSchema": {
+		"dataSource": "$topic",
+		"parser": {
+			"type": "string",
+			"parseSpec": {
+				"format": "json",
+				"flattenSpec": {
+					"useFieldDiscovery": false,
+					"fields": [
+					#foreach($flatten in $dimensions)
+					
+					{
+"type": "path",
+"name": "$flatten[0]",
+"expr": "$flatten[1]"
+},
+					#end
+					]
+				},
+				"timestampSpec": {
+					"column": "$timestamp",
+					"format": "$timestampFormat"
+				},
+				"dimensionsSpec": {
+					"dimensions": [
+					],
+					"dimensionsExclusions": [
+					]
+				}
+			}
+		},
+		"metricsSpec": [],
+		"granularitySpec": {
+			"type": "uniform",
+			"segmentGranularity": "HOUR",
+			"queryGranularity": "MINUTE",
+			"rollup": false
+		}
+	},
+	"tuningConfig": {
+		"type": "kafka",
+		"reportParseExceptions": true
+	},
+	"ioConfig": {
+		"topic": "$topic",
+		"replicas": 1,
+		"startDelay": "PT1S",
+		"taskDuration": "PT1H",
+		"completionTimeout": "PT30M",
+		"consumerProperties": {
+			"bootstrap.servers": "$host"
+		},
+		"useEarliestOffset": true
+	}
+}
