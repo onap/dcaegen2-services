@@ -87,7 +87,8 @@ public class DmaapCpeAuthenticationConsumerTaskImpl
             LOGGER.info("DMaaP CPE authentication consumer update due to new application configuration");
             httpClient = httpClientFactory.create(this.configuration.getDmaapCpeAuthenticationConsumerConfiguration());
         } catch (SSLException e) {
-            LOGGER.error("Error while updating HTTP Client after a config update: SSL exception");
+            LOGGER.error("SSL error while updating HTTP Client after a config update");
+            LOGGER.debug("SSL exception\n", e);
         }
     }
 
@@ -101,6 +102,7 @@ public class DmaapCpeAuthenticationConsumerTaskImpl
                 .doOnError(e -> {
                     if (!(e instanceof EmptyDmaapResponseException)) {
                         LOGGER.error("DMaaP Consumption Exception: {}", e.getMessage());
+                        LOGGER.debug("Exception\n", e);
                     }
                 });
     }

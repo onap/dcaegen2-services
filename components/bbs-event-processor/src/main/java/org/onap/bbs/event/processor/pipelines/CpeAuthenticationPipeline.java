@@ -140,6 +140,7 @@ public class CpeAuthenticationPipeline {
                                 LOGGER.info("Nothing to consume from DMaaP");
                             } else {
                                 LOGGER.error("DMaaP Consumer error: {}", e.getMessage());
+                                LOGGER.debug("Error\n", e);
                             }
                         })
                         .onErrorResume(
