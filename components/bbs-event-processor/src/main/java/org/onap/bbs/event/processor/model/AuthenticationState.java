@@ -28,11 +28,11 @@ public enum AuthenticationState {
     IN_SERVICE(IN_SERVICE_NAME_IN_ONAP),
     OUT_OF_SERVICE(OUT_OF_SERVICE_NAME_IN_ONAP);
 
+    private String nameInOnap;
+
     AuthenticationState(String nameInOnap) {
         this.nameInOnap = nameInOnap;
     }
-
-    private String nameInOnap;
 
     public String getNameInOnap() {
         return nameInOnap;

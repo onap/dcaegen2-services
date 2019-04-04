@@ -95,7 +95,8 @@ public class AaiReactiveClient implements ConfigurationChangeObserver {
                 try {
                     setupWebClient();
                 } catch (SSLException e) {
-                    LOGGER.error("AAI Reactive client error while re-configuring WebClient");
+                    LOGGER.error("AAI Reactive client error while re-configuring WebClient: SSL exception {}",
+                            e.getMessage());
                 }
             }
         }

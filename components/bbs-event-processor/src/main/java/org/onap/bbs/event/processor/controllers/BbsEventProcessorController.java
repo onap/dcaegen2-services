@@ -47,6 +47,8 @@ import reactor.core.publisher.Mono;
 @Api(value = "BbsEventProcessorController", description = "Manage bbs-event-processor microService")
 public class BbsEventProcessorController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(BbsEventProcessorController.class);
+
     private ReRegistrationPipeline reRegistrationPipeline;
     private CpeAuthenticationPipeline cpeAuthenticationPipeline;
     private Scheduler scheduler;
@@ -65,8 +67,6 @@ public class BbsEventProcessorController {
         this.cpeAuthenticationPipeline = cpeAuthenticationPipeline;
         this.scheduler = scheduler;
     }
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(BbsEventProcessorController.class);
 
     /**
      * Responds to health-check heartbeats.
@@ -180,6 +180,13 @@ public class BbsEventProcessorController {
      * @return Proper HTTP response based on change logging level result
      */
     @PostMapping("logging/{level}")
+    @ApiOperation(value = "Returns result of request to change application logging level")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Application logging level was successfully changed"),
+            @ApiResponse(code = 401, message = "Not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Resource access is forbidden"),
+            @ApiResponse(code = 404, message = "Resource is not found"),
+            @ApiResponse(code = 406, message = "Application logging level change failure. Check logs")})
     public Mono<ResponseEntity<String>> changeLoggingLevel(@PathVariable String level) {
         return Mono.defer(() ->  {
                 if (LoggingUtil.changeLoggingLevel(level)) {

@@ -87,7 +87,7 @@ public class DmaapReRegistrationConsumerTaskImpl implements DmaapReRegistrationC
             LOGGER.info("DMaaP PNF reregistration consumer update due to new application configuration");
             httpClient = httpClientFactory.create(this.configuration.getDmaapReRegistrationConsumerConfiguration());
         } catch (SSLException e) {
-            LOGGER.error("Error while updating HTTP Client after a config update: SSL exception");
+            LOGGER.error("Error while updating HTTP Client after a config update: SSL exception {}", e.getMessage());
         }
     }
 
