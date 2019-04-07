@@ -27,7 +27,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
  
 import org.json.JSONObject;
-import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,18 +57,20 @@ public class CouchbaseService {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private ApplicationConfiguration config;
-
+	private DbService dbService;
+	
 	Bucket bucket;		
 
 	@PostConstruct
 	private void init() {
         // Initialize Couchbase Connection
-        Cluster cluster = CouchbaseCluster.create(config.getCouchbaseHost());
-        cluster.authenticate(config.getCouchbaseUser(), config.getCouchbasePass());
-        bucket = cluster.openBucket(config.getCouchbaseBucket());
+		
+		Db couchbase = dbService.getCouchbase();
+        Cluster cluster = CouchbaseCluster.create(couchbase.getHost());
+        cluster.authenticate(couchbase.getLogin(), couchbase.getPass());
+        bucket = cluster.openBucket(couchbase.getProperty1());
 
-		log.info("Connect to Couchbase " + config.getCouchbaseHost());
+		log.info("Connect to Couchbase " + couchbase.getHost());
 		
         // Create a N1QL Primary Index (but ignore if it exists)
         bucket.bucketManager().createN1qlPrimaryIndex(true, false);                 
@@ -90,15 +92,21 @@ public class CouchbaseService {
 			//setup TTL
 			int expiry = (int) (timestamp/1000L) + topic.getTtl()*3600*24; //in second
 			
-			String id = getId(topic.getId());
+			String id = getId(topic, json);
 			JsonDocument doc = JsonDocument.create(id, expiry, jsonObject);
 			documents.add(doc);
 		}
 		saveDocuments(documents);		
 	}
 
-
-	private String getId(String topicStr) {
+	public String getId(Topic topic, JSONObject json) {
+		//if this topic requires extract id from JSON
+		String id = topic.getMessageId(json);
+		if(id != null) {
+			return id;
+		}
+		
+		String topicStr= topic.getName();		
 		//String id = topicStr+":"+timestamp+":"+UUID.randomUUID();
 
 		//https://forums.couchbase.com/t/how-to-set-an-auto-increment-id/4892/2
@@ -106,7 +114,7 @@ public class CouchbaseService {
 		// increment by 1, initialize at 0 if counter doc not found
 		//TODO how slow is this compared with above UUID approach?
 		JsonLongDocument nextIdNumber = bucket.counter(topicStr, 1, 0); //like 12345 
-		String id = topicStr +":"+ nextIdNumber.content();
+		id = topicStr +":"+ nextIdNumber.content();
 		
 		return id;
 	}

@@ -18,38 +18,50 @@
 * ============LICENSE_END=========================================================
 */
 
-package org.onap.datalake.feeder.config;
+package org.onap.datalake.feeder.service;
 
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import java.util.Optional;
 
-import lombok.Getter;
-import lombok.Setter;
+import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.repository.DbRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * Mapping from src/main/resources/application.properties to Java configuration
- * object
+ * Service for Dbs 
  * 
  * @author Guobiao Mo
  *
  */
-@Getter
-@Setter
-@SpringBootConfiguration
-@ConfigurationProperties
-@EnableAutoConfiguration
-public class ApplicationConfiguration {
+@Service
+public class DbService {
 
-	private String dmaapZookeeperHostPort;
-	private String dmaapKafkaHostPort;
-	private String dmaapKafkaGroup;
-	private long dmaapKafkaTimeout;
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	private int dmaapCheckNewTopicIntervalInSec;
+	@Autowired
+	private DbRepository dbRepository;
+	
+	public Db getDb(String name) {
+		Optional<Db> ret = dbRepository.findById(name);
+		return ret.isPresent() ? ret.get() : null;
+	}	
 
-	private int kafkaConsumerCount;
+	public Db getCouchbase() {
+		return getDb("Couchbase");
+	}
 
-	private boolean async;
+	public Db getElasticsearch() {
+		return getDb("Elasticsearch");
+	}
+
+	public Db getMongoDB() {
+		return getDb("MongoDB");
+	}
+
+	public Db getDruid() {
+		return getDb("Druid");
+	}	
 
 }

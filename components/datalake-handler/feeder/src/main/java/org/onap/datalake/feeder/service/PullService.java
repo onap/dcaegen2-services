@@ -27,8 +27,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.PostConstruct;
-
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,10 +56,13 @@ public class PullService {
 	@Autowired
 	private ApplicationConfiguration config;
 
-	@PostConstruct
-	private void init() {
+	/**
+	 * @return the isRunning
+	 */
+	public boolean isRunning() {
+		return isRunning;
 	}
-
+ 
 	/**
 	 * start pulling.
 	 * 
@@ -109,6 +110,7 @@ public class PullService {
 			executorService.awaitTermination(10L, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 			logger.error("executor.awaitTermination", e);
+			Thread.currentThread().interrupt();
 		}
 		
 		isRunning = false;

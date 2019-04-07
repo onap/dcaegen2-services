@@ -19,10 +19,18 @@
 */
 package org.onap.datalake.feeder.repository;
 
+import org.onap.datalake.feeder.domain.Db;
+
+import org.springframework.data.repository.CrudRepository;
+
 /**
+ * 
+ * Db Repository 
+ * 
  * @author Guobiao Mo
  *
- */
-public interface TopicRepositoryCustom  {
-	long updateTopic(String topic, Boolean state);
+ */ 
+
+public interface DbRepository extends CrudRepository<Db, String> {
+
 }

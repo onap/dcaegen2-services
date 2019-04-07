@@ -1,0 +1,57 @@
+{
+	"_id": "5bb3d3b45bea3f41300960f8",
+	"event": {
+		"commonEventHeader": {
+			"sourceId": "/networks/network=providerId%2F5555%2FclientId%2F6666%2FtopologyId%2F100/node=11.11.11.11/termination-point=27",
+			"startEpochMicrosec": "1537438335829000",
+			"eventId": "2ef8b41b-b081-477b-9d0b-1aaaa3b69857",
+			"domain": "fault",
+			"lastEpochMicrosec": 1537438335829000,
+			"eventName": "Fault_Route_Status",
+			"sourceName": "/networks/network=providerId%2F5555%2FclientId%2F6666%2FtopologyId%2F100/node=11.11.11.11/termination-point=27",
+			"priority": "High",
+			"version": 3,
+			"reportingEntityName": "Domain_Contorller"
+		},
+		"faultFields": {
+			"eventSeverity": "CRITICAL",
+			"alarmCondition": "Route_Status",
+			"faultFieldsVersion": 2,
+			"specificProblem": "Fault_SOTN_Service_Status",
+			"alarmAdditionalInformation": [
+				{
+					"name": "networkId",
+					"value": "providerId%2F5555%2FclientId%2F6666%2FtopologyId%2F100"
+				},
+				{
+					"name": "node",
+					"value": "11.11.11.11"
+				},
+				{
+					"name": "tp-id",
+					"value": "27"
+				},
+				{
+					"name": "oper-status",
+					"value": "down"
+				},
+				{
+					"name": "network-ref",
+					"value": "providerId/5555/clientId/6666/topologyId/33"
+				},
+				{
+					"name": "node-ref",
+					"value": "0.51.0.103"
+				},
+				{
+					"name": "tp-ref",
+					"value": "4"
+				}
+			],
+			"eventSourceType": "other",
+			"vfStatus": "Active"
+		}
+	},
+	"_dl_type_": "JSON",
+	"_dl_text_": "{\"event\":{\"commonEventHeader\":{\"sourceId\":\"/networks/network=providerId%2F5555%2FclientId%2F6666%2FtopologyId%2F100/node=11.11.11.11/termination-point=27\",\"startEpochMicrosec\":1537438335829000,\"eventId\":\"2ef8b41b-b081-477b-9d0b-1aaaa3b69857\",\"domain\":\"fault\",\"lastEpochMicrosec\":1537438335829000,\"eventName\":\"Fault_Route_Status\",\"sourceName\":\"/networks/network=providerId%2F5555%2FclientId%2F6666%2FtopologyId%2F100/node=11.11.11.11/termination-point=27\",\"priority\":\"High\",\"version\":3,\"reportingEntityName\":\"Domain_Contorller\"},\"faultFields\":{\"eventSeverity\":\"CRITICAL\",\"alarmCondition\":\"Route_Status\",\"faultFieldsVersion\":2,\"specificProblem\":\"Fault_SOTN_Service_Status\",\"alarmAdditionalInformation\":[{\"name\":\"networkId\",\"value\":\"providerId%2F5555%2FclientId%2F6666%2FtopologyId%2F100\"},{\"name\":\"node\",\"value\":\"11.11.11.11\"},{\"name\":\"tp-id\",\"value\":\"27\"},{\"name\":\"oper-status\",\"value\":\"down\"},{\"name\":\"network-ref\",\"value\":\"providerId/5555/clientId/6666/topologyId/33\"},{\"name\":\"node-ref\",\"value\":\"0.51.0.103\"},{\"name\":\"tp-ref\",\"value\":\"4\"}],\"eventSourceType\":\"other\",\"vfStatus\":\"Active\"}}}"
+}

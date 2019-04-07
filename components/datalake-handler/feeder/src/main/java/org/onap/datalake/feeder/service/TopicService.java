@@ -34,8 +34,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Service for topics topic setting is stored in Couchbase, bucket 'dl', see
- * application.properties for Spring setup
+ * Service for topics 
  * 
  * @author Guobiao Mo
  *
@@ -68,15 +67,14 @@ public class TopicService {
 		return null;
 	}
 		
+	//TODO caller should not modify the returned topic, maybe return a clone
 	public Topic getEffectiveTopic(String topicStr, boolean ensureTableExist) throws IOException {
 		Topic topic = getTopic(topicStr);
 		if (topic == null) {
-			topic = new Topic(topicStr);
+			topic = getDefaultTopic();
 		}
-
-		topic.setDefaultTopic(getDefaultTopic());
 		
-		if(ensureTableExist && topic.isEnabled() && topic.isSupportElasticsearch()) { 
+		if(ensureTableExist && topic.isEnabled() && topic.supportElasticsearch()) { 
 			elasticsearchService.ensureTableExist(topicStr); 
 		}
 		return topic;
