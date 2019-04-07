@@ -1,6 +1,6 @@
 /*
 * ============LICENSE_START=======================================================
-* ONAP : DATALAKE
+* ONAP : DataLake
 * ================================================================================
 * Copyright 2019 China Mobile
 *=================================================================================
@@ -17,39 +17,28 @@
 * limitations under the License.
 * ============LICENSE_END=========================================================
 */
+package org.onap.datalake.feeder.domain;
 
-package org.onap.datalake.feeder.config;
-
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-import lombok.Getter;
-import lombok.Setter;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import org.junit.Test;
+ 
 /**
- * Mapping from src/main/resources/application.properties to Java configuration
- * object
+ * Test Db
  * 
  * @author Guobiao Mo
  *
  */
-@Getter
-@Setter
-@SpringBootConfiguration
-@ConfigurationProperties
-@EnableAutoConfiguration
-public class ApplicationConfiguration {
+ 
+public class DbTest {	
 
-	private String dmaapZookeeperHostPort;
-	private String dmaapKafkaHostPort;
-	private String dmaapKafkaGroup;
-	private long dmaapKafkaTimeout;
-
-	private int dmaapCheckNewTopicIntervalInSec;
-
-	private int kafkaConsumerCount;
-
-	private boolean async;
-
+    @Test
+	public void testIs() {
+		Db couchbase=new Db("Couchbase");
+		Db mongoDB=new Db("MongoDB");
+		Db mongoDB2=new Db("MongoDB");
+		assertNotEquals(couchbase.hashCode(), mongoDB.hashCode());
+		assertNotEquals(couchbase, mongoDB);
+		assertEquals(mongoDB, mongoDB2);		
+	}
 }

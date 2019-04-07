@@ -1,0 +1,75 @@
+{
+	"_id": {
+		"$oid": "5bb3d3aa5bea3f41300957c6"
+	},
+	"sendEpsShort": {
+		"summary": "0.0 send eps (10 mins)",
+		"raw": 0
+	},
+	"recvEpsInstant": {
+		"summary": "0.03333333333333333 recv eps (1 min)",
+		"raw": 0.03333333333333333
+	},
+	"fanOut": {
+		"summary": "0.7051873815491838 sends per recv",
+		"raw": 0.7051873815491838
+	},
+	"sendEpsLong": {
+		"summary": "0.0 send eps (1 hr)",
+		"raw": 0
+	},
+	"kafkaConsumerTimeouts": {
+		"summary": "164 Kafka Consumers Timedout",
+		"raw": 164
+	},
+	"recvEpsLong": {
+		"summary": "0.03333333333333333 recv eps (1 hr)",
+		"raw": 0.03333333333333333
+	},
+	"sendEpsInstant": {
+		"summary": "0.0 send eps (1 min)",
+		"raw": 0
+	},
+	"recvEpsShort": {
+		"summary": "0.03333333333333333 recv eps (10 mins)",
+		"raw": 0.03333333333333333
+	},
+	"kafkaConsumerClaims": {
+		"summary": "1 Kafka Consumers Claimed",
+		"raw": 1
+	},
+	"version": {
+		"summary": "Version 1.1.3",
+		"raw": 0
+	},
+	"upTime": {
+		"summary": "604800 seconds since start",
+		"raw": 604800
+	},
+	"sendTotalEvents": {
+		"summary": "46139 Total events sent since start",
+		"raw": 46139
+	},
+	"hostname": "3d5704fccbc5",
+	"kafkaConsumerCacheMiss": {
+		"summary": "179 Kafka Consumer Cache Misses",
+		"raw": 179
+	},
+	"metricsSendTime": "1537639709 Metrics Send Time (epoch); 2018-09-22T18:08:29UTC",
+	"kafkaConsumerCacheHit": {
+		"summary": "317143 Kafka Consumer Cache Hits",
+		"raw": 317143
+	},
+	"now": 1537639709380,
+	"transactionEnabled": false,
+	"startTime": {
+		"summary": "1537034908 Start Time (epoch); 2018-09-15T18:08:28UTC",
+		"raw": 1537034908
+	},
+	"recvTotalEvents": {
+		"summary": "65428 Total events received since start",
+		"raw": 65428
+	},
+	"_dl_type_": "JSON",
+	"_dl_text_": "{\"sendEpsShort\":{\"summary\":\"0.0 send eps (10 mins)\",\"raw\":0},\"recvEpsInstant\":{\"summary\":\"0.03333333333333333 recv eps (1 min)\",\"raw\":0.03333333333333333},\"fanOut\":{\"summary\":\"0.7051873815491838 sends per recv\",\"raw\":0.7051873815491838},\"sendEpsLong\":{\"summary\":\"0.0 send eps (1 hr)\",\"raw\":0},\"kafkaConsumerTimeouts\":{\"summary\":\"164 Kafka Consumers Timedout\",\"raw\":164},\"recvEpsLong\":{\"summary\":\"0.03333333333333333 recv eps (1 hr)\",\"raw\":0.03333333333333333},\"sendEpsInstant\":{\"summary\":\"0.0 send eps (1 min)\",\"raw\":0},\"recvEpsShort\":{\"summary\":\"0.03333333333333333 recv eps (10 mins)\",\"raw\":0.03333333333333333},\"kafkaConsumerClaims\":{\"summary\":\"1 Kafka Consumers Claimed\",\"raw\":1},\"version\":{\"summary\":\"Version 1.1.3\",\"raw\":0},\"upTime\":{\"summary\":\"604800 seconds since start\",\"raw\":604800},\"sendTotalEvents\":{\"summary\":\"46139 Total events sent since start\",\"raw\":46139},\"hostname\":\"3d5704fccbc5\",\"kafkaConsumerCacheMiss\":{\"summary\":\"179 Kafka Consumer Cache Misses\",\"raw\":179},\"metricsSendTime\":\"1537639709 Metrics Send Time (epoch); 2018-09-22T18:08:29UTC\",\"kafkaConsumerCacheHit\":{\"summary\":\"317143 Kafka Consumer Cache Hits\",\"raw\":317143},\"now\":1537639709380,\"transactionEnabled\":false,\"startTime\":{\"summary\":\"1537034908 Start Time (epoch); 2018-09-15T18:08:28UTC\",\"raw\":1537034908},\"recvTotalEvents\":{\"summary\":\"65428 Total events received since start\",\"raw\":65428}}"
+}

@@ -23,8 +23,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
+
 import org.json.JSONObject;
-import org.junit.Test; 
+import org.junit.Test;
+import org.onap.datalake.feeder.enumeration.DataFormat; 
  
 /**
  * Test Topic
@@ -50,17 +53,49 @@ public class TopicTest {
     }
 
     @Test
+    public void getMessageIdFromMultipleAttributes() {
+    	String text = "{ data: { data2 : { value : 'hello'}, data3 : 'world'}}";
+    	
+    	JSONObject json = new JSONObject(text);
+    	
+    	Topic topic = new Topic("test getMessageId");
+    	topic.setMessageIdPath("/data/data2/value,/data/data3");
+    	
+    	String value = topic.getMessageId(json);
+
+        assertEquals(value, "hello^world");    	
+    }
+
+    @Test
 	public void testIs() {
-		Topic defaultTopic=new Topic("default");
+		Topic defaultTopic=new Topic("_DL_DEFAULT_");
 		Topic testTopic = new Topic("test");
 		testTopic.setDefaultTopic(defaultTopic);
+
+		assertTrue(defaultTopic.isDefault());
+		assertFalse(testTopic.isDefault());		
+
+		assertTrue(testTopic.equals(new Topic("test")));
+		assertEquals(testTopic.hashCode(), (new Topic("test")).hashCode());
 		
-		defaultTopic.setSupportElasticsearch(true);		
-		boolean b = testTopic.isSupportElasticsearch();
-		assertTrue(b);
+		defaultTopic.setDbs(new HashSet<>());
+		defaultTopic.getDbs().add(new Db("Elasticsearch"));		
+		assertTrue(testTopic.supportElasticsearch());
+		assertFalse(testTopic.supportCouchbase());
+		assertFalse(testTopic.supportDruid());
+		assertFalse(testTopic.supportMongoDB());		
 		
-		defaultTopic.setSupportElasticsearch(false);		
-		b = testTopic.isSupportElasticsearch();
-		assertFalse(b);
+		defaultTopic.getDbs().remove(new Db("Elasticsearch"));	
+		assertFalse(testTopic.supportElasticsearch());
+		
+		defaultTopic.setCorrelateClearedMessage(true);
+		defaultTopic.setDataFormat("XML");
+		defaultTopic.setEnabled(true);
+		defaultTopic.setSaveRaw(true);		
+		assertTrue(testTopic.isCorrelateClearedMessage());
+		assertTrue(testTopic.isEnabled());
+		assertTrue(testTopic.isSaveRaw()); 
+		
+		assertEquals(defaultTopic.getDataFormat(), DataFormat.XML);
 	}
 }
