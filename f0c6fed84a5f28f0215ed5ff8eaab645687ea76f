@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90be575e_c19e1e1d",
+        "filename": "components/bbs-event-processor/src/main/java/org/onap/bbs/event/processor/tasks/DmaapCpeAuthenticationConsumerTaskImpl.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 2683
+      },
+      "writtenOn": "2019-04-08T07:00:51Z",
+      "side": 1,
+      "message": "Consider adding a log with whole `e` (stack trace) on debug level. Applies to other classes, too. It will make future debugging easier.",
+      "revId": "f0c6fed84a5f28f0215ed5ff8eaab645687ea76f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
