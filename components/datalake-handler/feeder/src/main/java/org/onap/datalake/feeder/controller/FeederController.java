@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,8 +38,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping(value = "/pull", produces = { MediaType.TEXT_PLAIN_VALUE })
-public class PullController {
+@RequestMapping(value = "/feeder", produces = { MediaType.TEXT_PLAIN_VALUE })
+public class FeederController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
@@ -49,7 +50,7 @@ public class PullController {
      * @return message that application is started
      * @throws IOException 
      */
-    @RequestMapping("/start")
+    @GetMapping("/start")
     public String start() throws IOException {
     	log.info("DataLake feeder starting to pull data from DMaaP...");
     	pullService.start();
@@ -59,7 +60,7 @@ public class PullController {
     /**
      * @return message that application stop process is triggered
      */
-    @RequestMapping("/stop")
+    @GetMapping("/stop")
     public String stop() {    	
     	pullService.shutdown();
     	log.info("DataLake feeder is stopped.");
@@ -68,9 +69,9 @@ public class PullController {
     /**
      * @return feeder status
      */
-    @RequestMapping("/status")
+    @GetMapping("/status")
     public String status() {    	
-    	String status = "to be impletemented";
+    	String status = "Feeder is running: "+pullService.isRunning();
     	log.info("senting feeder status ...");//TODO we can send what topics are monitored, how many messages are sent, etc. 
     	return status;
     }    

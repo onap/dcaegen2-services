@@ -227,7 +227,7 @@
 		"taskDuration": "PT1H",
 		"completionTimeout": "PT30M",
 		"consumerProperties": {
-			"bootstrap.servers": "dl_dmaap:9092"
+			"bootstrap.servers": "message-router-kafka:9092"
 		},
 		"useEarliestOffset": true
 	}

@@ -1,0 +1,52 @@
+{
+	"_id": "5bb3dfae5bea3f1cb49d4f3f",
+	"cambria.partition": "AAI",
+	"event-header": {
+		"severity": "NORMAL",
+		"entity-type": "esr-thirdparty-sdnc",
+		"top-entity-type": "esr-thirdparty-sdnc",
+		"entity-link": "/aai/v11/external-system/esr-thirdparty-sdnc-list/esr-thirdparty-sdnc/SDWANController1",
+		"event-type": "AAI-EVENT",
+		"domain": "dev",
+		"action": "CREATE",
+		"sequence-number": "0",
+		"id": "69f2935f-c3c1-4a63-b3f1-519c3898328b",
+		"source-name": "ying",
+		"version": "v11",
+		"timestamp": "20180919-06:20:44:216"
+	},
+	"entity": {
+		"thirdparty-sdnc-id": "SDWANController1",
+		"resource-version": "1537338043473",
+		"location": "Core",
+		"product-name": "SD-WAN",
+		"esr-system-info-list": {
+			"esr-system-info": [
+				{
+					"esr-system-info-id": "SDWANController1-ESR-1",
+					"system-type": "example-system-type-val-12078",
+					"service-url": "https://172.19.48.77:18008",
+					"ssl-cacert": "example-ssl-cacert-val-20589",
+					"type": "WAN",
+					"ssl-insecure": true,
+					"system-status": "example-system-status-val-23435",
+					"version": "V3R1",
+					"passive": true,
+					"password": "Onap@12345",
+					"protocol": "RESTCONF",
+					"ip-address": "172.19.48.77",
+					"cloud-domain": "example-cloud-domain-val-76077",
+					"user-name": "northapi1@huawei.com",
+					"system-name": "SDWANController",
+					"port": "18008",
+					"vendor": "IP-WAN",
+					"resource-version": "1537338044166",
+					"remote-path": "example-remotepath-val-5833",
+					"default-tenant": "example-default-tenant-val-71148"
+				}
+			]
+		}
+	},
+	"_dl_type_": "JSON",
+	"_dl_text_": "{\"cambria.partition\":\"AAI\",\"event-header\":{\"severity\":\"NORMAL\",\"entity-type\":\"esr-thirdparty-sdnc\",\"top-entity-type\":\"esr-thirdparty-sdnc\",\"entity-link\":\"/aai/v11/external-system/esr-thirdparty-sdnc-list/esr-thirdparty-sdnc/SDWANController1\",\"event-type\":\"AAI-EVENT\",\"domain\":\"dev\",\"action\":\"CREATE\",\"sequence-number\":\"0\",\"id\":\"69f2935f-c3c1-4a63-b3f1-519c3898328b\",\"source-name\":\"ying\",\"version\":\"v11\",\"timestamp\":\"20180919-06:20:44:216\"},\"entity\":{\"thirdparty-sdnc-id\":\"SDWANController1\",\"resource-version\":\"1537338043473\",\"location\":\"Core\",\"product-name\":\"SD-WAN\",\"esr-system-info-list\":{\"esr-system-info\":[{\"esr-system-info-id\":\"SDWANController1-ESR-1\",\"system-type\":\"example-system-type-val-12078\",\"service-url\":\"https://172.19.48.77:18008\",\"ssl-cacert\":\"example-ssl-cacert-val-20589\",\"type\":\"WAN\",\"ssl-insecure\":true,\"system-status\":\"example-system-status-val-23435\",\"version\":\"V3R1\",\"passive\":true,\"password\":\"Onap@12345\",\"protocol\":\"RESTCONF\",\"ip-address\":\"172.19.48.77\",\"cloud-domain\":\"example-cloud-domain-val-76077\",\"user-name\":\"northapi1@huawei.com\",\"system-name\":\"SDWANController\",\"port\":\"18008\",\"vendor\":\"IP-WAN\",\"resource-version\":\"1537338044166\",\"remote-path\":\"example-remotepath-val-5833\",\"default-tenant\":\"example-default-tenant-val-71148\"}]}}}"
+}

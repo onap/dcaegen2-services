@@ -31,12 +31,18 @@
 		<springcouchbase.version>3.1.2.RELEASE</springcouchbase.version>
 		<jackson.version>2.9.6</jackson.version>
 		<kafka.version>2.0.0</kafka.version>
-		<elasticsearchjava.version>6.6.0</elasticsearchjava.version>
+		<elasticsearchjava.version>6.7.0</elasticsearchjava.version>
 
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+
+			<dependency>
+    			<groupId>org.mariadb.jdbc</groupId>
+    			<artifactId>mariadb-java-client</artifactId>
+    			<version>2.4.1</version>
+			</dependency>
 
 			<dependency>
 				<groupId>commons-io</groupId>
@@ -142,6 +148,13 @@
 				<version>${springboot.version}</version>
 			</dependency>
 			<!-- end::actuator[] -->
+			
+        	<dependency>
+            	<groupId>org.springframework.boot</groupId>
+         	   <artifactId>spring-boot-starter-data-jpa</artifactId>
+				<version>${springboot.version}</version>
+       		</dependency>
+        
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-data-couchbase</artifactId>

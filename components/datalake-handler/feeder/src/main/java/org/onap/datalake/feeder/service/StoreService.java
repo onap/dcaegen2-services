@@ -152,11 +152,11 @@ public class StoreService {
 	}
 
 	private void saveJsons(Topic topic, List<JSONObject> jsons) {
-		if (topic.isSupportCouchbase()) {
+		if (topic.supportCouchbase()) {
 			couchbaseService.saveJsons(topic, jsons);
 		}
 
-		if (topic.isSupportElasticsearch()) {
+		if (topic.supportElasticsearch()) {
 			elasticsearchService.saveJsons(topic, jsons);
 		}
 	}

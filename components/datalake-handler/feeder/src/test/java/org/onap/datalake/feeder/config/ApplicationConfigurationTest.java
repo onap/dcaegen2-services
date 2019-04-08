@@ -56,10 +56,6 @@ public class ApplicationConfigurationTest {
 
 	@Test
 	public void readConfig() {
-		assertNotNull(config.getCouchbaseHost());
-		assertNotNull(config.getCouchbaseUser());
-		assertNotNull(config.getCouchbasePass());
-		assertNotNull(config.getCouchbaseBucket());
 
 		assertNotNull(config.getDmaapZookeeperHostPort());
 		assertNotNull(config.getDmaapKafkaHostPort());
