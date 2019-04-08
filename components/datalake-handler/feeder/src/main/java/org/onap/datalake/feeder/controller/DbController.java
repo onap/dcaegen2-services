@@ -42,8 +42,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 /**
- * This controller manages the big data storage settings. All the settings are saved in database. 
+ * This controller manages the big data storage settings. All the settings are
+ * saved in database.
  * 
  * @author Guobiao Mo
  *
@@ -51,19 +57,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/dbs", produces = { MediaType.APPLICATION_JSON_VALUE })
+//@Api(value = "db", consumes = "application/json", produces = "application/json")
 public class DbController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private DbRepository dbRepository;
-	
+
 	@Autowired
 	private DbService dbService;
 
 	//list all dbs 
 	@GetMapping("/")
 	@ResponseBody
+	@ApiOperation(value="Get all databases' details.")
 	public Iterable<Db> list() throws IOException {
 		Iterable<Db> ret = dbRepository.findAll();
 		return ret;
@@ -71,18 +79,23 @@ public class DbController {
 
 	//Read a db
 	//the topics are missing in the return, since in we use @JsonBackReference on Db's topics 
-	//need to the the following method to retrieve the topic list
-	@GetMapping("/{name}")
+	//need to the the following method to retrieve the topic list 
+	@GetMapping("/{dbName}")
 	@ResponseBody
-	public Db getDb(@PathVariable("name") String dbName) throws IOException {
+	@ApiOperation(value="Get a database's details.")
+	public Db getDb(@PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
 		Db db = dbService.getDb(dbName);
+		if (db == null) {
+			sendError(response, 404, "Db not found: " + dbName);
+		}
 		return db;
 	}
 
 	//Read topics in a DB 
-	@GetMapping("/{name}/topics")
+	@GetMapping("/{dbName}/topics")
 	@ResponseBody
-	public Set<Topic> getDbTopics(@PathVariable("name") String dbName) throws IOException {
+	@ApiOperation(value="Get a database's all topics.")
+	public Set<Topic> getDbTopics(@PathVariable("dbName") String dbName) throws IOException {
 		Db db = dbService.getDb(dbName);
 		Set<Topic> topics = db.getTopics();
 		return topics;
@@ -91,45 +104,46 @@ public class DbController {
 	//Update Db
 	@PutMapping("/")
 	@ResponseBody
+	@ApiOperation(value="Update a database.")
 	public Db updateDb(@RequestBody Db db, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
-			sendError(response, 400, "Error parsing DB: "+result.toString());
-			return null; 
+			sendError(response, 400, "Error parsing DB: " + result.toString());
+			return null;
 		}
 
-		Db oldDb = getDb(db.getName());
+		Db oldDb = dbService.getDb(db.getName());
 		if (oldDb == null) {
-			sendError(response, 404, "Db not found: "+db.getName());
-			return null; 
+			sendError(response, 404, "Db not found: " + db.getName());
+			return null;
 		} else {
-			dbRepository.save(db);			
+			dbRepository.save(db);
 			return db;
 		}
 	}
 
-	//create a new Db  
 	@PostMapping("/")
 	@ResponseBody
+	@ApiOperation(value="Create a new database.")
 	public Db createDb(@RequestBody Db db, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
-			sendError(response, 400, "Error parsing DB: "+result.toString());
+			sendError(response, 400, "Error parsing DB: " + result.toString());
 			return null;
 		}
 
-		Db oldDb = getDb(db.getName());
+		Db oldDb = dbService.getDb(db.getName());
 		if (oldDb != null) {
-			sendError(response, 400, "Db already exists: "+db.getName());
+			sendError(response, 400, "Db already exists: " + db.getName());
 			return null;
 		} else {
-			dbRepository.save(db);			
+			dbRepository.save(db);
 			return db;
 		}
 	}
 
 	private void sendError(HttpServletResponse response, int sc, String msg) throws IOException {
 		log.info(msg);
-		response.sendError(sc, msg);		
+		response.sendError(sc, msg);
 	}
 }
