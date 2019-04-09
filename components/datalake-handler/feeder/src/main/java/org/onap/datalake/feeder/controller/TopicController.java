@@ -46,6 +46,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * This controller manages topic settings. 
  * 
@@ -75,43 +77,43 @@ public class TopicController {
 	@Autowired
 	private DbService dbService;
 	
-	//list all topics in DMaaP
 	@GetMapping("/dmaap/")
 	@ResponseBody
+	@ApiOperation(value="List all topics in DMaaP.")
 	public List<String> listDmaapTopics() throws IOException {
 		return dmaapService.getTopics();
 	}
 
-	//list all topics 
 	@GetMapping("/")
 	@ResponseBody
+	@ApiOperation(value="List all topics' details.")
 	public Iterable<Topic> list() throws IOException {
 		Iterable<Topic> ret = topicRepository.findAll();
 		return ret;
 	}
 
-	//Read a topic
-	@GetMapping("/{topicname}")
+	@GetMapping("/{topicName}")
 	@ResponseBody
-	public Topic getTopic(@PathVariable("topicname") String topicName) throws IOException {
+	@ApiOperation(value="Get a topic's details.")
+	public Topic getTopic(@PathVariable("topicName") String topicName) throws IOException {
 		Topic topic = topicService.getTopic(topicName);
 		return topic;
 	}
 
-	//Read DBs in a topic 
-	@GetMapping("/{topicname}/dbs")
+	@GetMapping("/{topicName}/dbs")
 	@ResponseBody
-	public Set<Db> getTopicDbs(@PathVariable("topicname") String topicName) throws IOException {
+	@ApiOperation(value="Get all DBs in a topic.")
+	public Set<Db> getTopicDbs(@PathVariable("topicName") String topicName) throws IOException {
 		Topic topic = topicService.getTopic(topicName);
 		Set<Db> dbs = topic.getDbs();
 		return dbs;
 	}
 
-	//Update Topic
-	//This is not a partial update: old topic is wiped out, and new topic is created base on the input json. 
+	//This is not a partial update: old topic is wiped out, and new topic is created based on the input json. 
 	//One exception is that old DBs are kept
 	@PutMapping("/")
 	@ResponseBody
+	@ApiOperation(value="Update a topic.")
 	public Topic updateTopic(@RequestBody Topic topic, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
@@ -134,10 +136,10 @@ public class TopicController {
 			return topic;
 		}
 	}
-
-	//create a new Topic  
+ 
 	@PostMapping("/")
 	@ResponseBody
+	@ApiOperation(value="Create a new topic.")
 	public Topic createTopic(@RequestBody Topic topic, BindingResult result, HttpServletResponse response) throws IOException {
 		
 		if (result.hasErrors()) {
@@ -160,10 +162,10 @@ public class TopicController {
 		}
 	}
 
-	//delete a db from the topic
-	@DeleteMapping("/{topicname}/db/{dbname}")
+	@DeleteMapping("/{topicName}/db/{dbName}")
 	@ResponseBody
-	public Set<Db> deleteDb(@PathVariable("topicname") String topicName, @PathVariable("dbname") String dbName, HttpServletResponse response) throws IOException {
+	@ApiOperation(value="Delete a DB from a topic.")
+	public Set<Db> deleteDb(@PathVariable("topicName") String topicName, @PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
 		Topic topic = topicService.getTopic(topicName);
 		Set<Db> dbs = topic.getDbs();
 		dbs.remove(new Db(dbName));
@@ -172,10 +174,10 @@ public class TopicController {
 		return topic.getDbs();		 
 	}
 
-	//add a db to the topic
-	@PutMapping("/{topicname}/db/{dbname}")
+	@PutMapping("/{topicName}/db/{dbName}")
 	@ResponseBody
-	public Set<Db> addDb(@PathVariable("topicname") String topicName, @PathVariable("dbname") String dbName, HttpServletResponse response) throws IOException {
+	@ApiOperation(value="Add a DB to a topic.")
+	public Set<Db> addDb(@PathVariable("topicName") String topicName, @PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
 		Topic topic = topicService.getTopic(topicName);
 		Set<Db> dbs = topic.getDbs();		
 

@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+
 /**
  * This controller controls DL data feeder.
  * 
@@ -51,6 +53,7 @@ public class FeederController {
      * @throws IOException 
      */
     @GetMapping("/start")
+	@ApiOperation(value="Start pulling data.")
     public String start() throws IOException {
     	log.info("DataLake feeder starting to pull data from DMaaP...");
     	pullService.start();
@@ -61,6 +64,7 @@ public class FeederController {
      * @return message that application stop process is triggered
      */
     @GetMapping("/stop")
+	@ApiOperation(value="Stop pulling data.")
     public String stop() {    	
     	pullService.shutdown();
     	log.info("DataLake feeder is stopped.");
@@ -70,6 +74,7 @@ public class FeederController {
      * @return feeder status
      */
     @GetMapping("/status")
+	@ApiOperation(value="Retrieve feeder status.")
     public String status() {    	
     	String status = "Feeder is running: "+pullService.isRunning();
     	log.info("senting feeder status ...");//TODO we can send what topics are monitored, how many messages are sent, etc. 
