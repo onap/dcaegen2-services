@@ -20,6 +20,10 @@
 
 package org.onap.bbs.event.processor.tasks;
 
+import com.google.gson.JsonElement;
+
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.net.ssl.SSLException;
@@ -85,6 +89,8 @@ public class DmaapCpeAuthenticationConsumerTaskImpl
     public synchronized void updateConfiguration() {
         try {
             LOGGER.info("DMaaP CPE authentication consumer update due to new application configuration");
+            LOGGER.info("Creating secure context with:\n {}",
+                    this.configuration.getDmaapCpeAuthenticationConsumerConfiguration());
             httpClient = httpClientFactory.create(this.configuration.getDmaapCpeAuthenticationConsumerConfiguration());
         } catch (SSLException e) {
             LOGGER.error("SSL error while updating HTTP Client after a config update");
@@ -96,7 +102,7 @@ public class DmaapCpeAuthenticationConsumerTaskImpl
     public Flux<CpeAuthenticationConsumerDmaapModel> execute(String taskName) {
         LOGGER.debug("Executing task for CPE-Authentication with name \"{}\"", taskName);
         DMaaPConsumerReactiveHttpClient httpClient = getHttpClient();
-        Mono<String> response = httpClient.getDMaaPConsumerResponse();
+        Mono<JsonElement> response = httpClient.getDMaaPConsumerResponse(Optional.empty());
         return cpeAuthenticationDmaapConsumerJsonParser.extractModelFromDmaap(response)
                 .switchIfEmpty(Flux.error(EMPTY_DMAAP_EXCEPTION))
                 .doOnError(e -> {

@@ -26,6 +26,11 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
+import java.util.Optional;
+
 import javax.net.ssl.SSLException;
 
 import org.junit.Assert;
@@ -59,7 +64,8 @@ class DmaapReRegistrationConsumerTaskImplTest {
     private static DmaapReRegistrationConsumerTaskImpl dmaapConsumerTask;
     private static ReRegistrationConsumerDmaapModel reRegistrationConsumerDmaapModel;
     private static DMaaPConsumerReactiveHttpClient dMaaPConsumerReactiveHttpClient;
-    private static String message;
+    private static String eventsArray;
+    private static Gson gson = new Gson();
 
     @BeforeAll
     static void setUp() throws SSLException {
@@ -91,12 +97,10 @@ class DmaapReRegistrationConsumerTaskImplTest {
                 .sVlan(svlan)
                 .build();
 
-        message = String.format("[" + RE_REGISTRATION_EVENT_TEMPLATE + "]",
-                sourceName,
-                attachmentPoint,
-                remoteId,
-                cvlan,
-                svlan);
+        String event = String.format(RE_REGISTRATION_EVENT_TEMPLATE, sourceName, attachmentPoint, remoteId,
+                cvlan, svlan);
+
+        eventsArray = "[" + event + "]";
     }
 
     @AfterEach
@@ -105,23 +109,26 @@ class DmaapReRegistrationConsumerTaskImplTest {
     }
 
     @Test
-    void passingEmptyMessage_NothingHappens() throws Exception {
-        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse()).thenReturn(Mono.just(""));
+    void passingEmptyMessage_NothingHappens() {
+        JsonElement empty = gson.toJsonTree("");
+        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse(Optional.empty())).thenReturn(Mono.just(empty));
 
         StepVerifier.create(dmaapConsumerTask.execute("Sample input"))
                 .expectSubscription()
                 .expectError(EmptyDmaapResponseException.class);
-        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse();
+        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse(Optional.empty());
     }
 
     @Test
-    void passingNormalMessage_ResponseSucceeds() throws Exception {
-        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse()).thenReturn(Mono.just(message));
+    void passingNormalMessage_ResponseSucceeds() {
+        JsonElement normalEventsArray = gson.toJsonTree(eventsArray);
+        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse(Optional.empty()))
+                .thenReturn(Mono.just(normalEventsArray));
 
         StepVerifier.create(dmaapConsumerTask.execute("Sample input"))
                 .expectSubscription()
                 .consumeNextWith(e -> Assert.assertEquals(e, reRegistrationConsumerDmaapModel));
-        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse();
+        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse(Optional.empty());
     }
 
     private static DmaapConsumerConfiguration testVersionOfDmaapConsumerConfiguration() {

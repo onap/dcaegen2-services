@@ -48,11 +48,11 @@ import org.onap.bbs.event.processor.model.ServiceInstanceAaiObject;
 import org.onap.bbs.event.processor.tasks.AaiClientTask;
 import org.onap.bbs.event.processor.tasks.DmaapPublisherTask;
 import org.onap.bbs.event.processor.tasks.DmaapReRegistrationConsumerTask;
+import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -98,7 +98,7 @@ public class ReRegistrationPipeline {
         LOGGER.trace("Reactive PNF Re-registration pipeline subscribed - Execution started");
     }
 
-    Flux<ResponseEntity<String>> executePipeline() {
+    Flux<HttpResponse> executePipeline() {
         return
             // Consume Re-Registration from DMaaP
             consumeReRegistrationsFromDmaap()
@@ -110,11 +110,11 @@ public class ReRegistrationPipeline {
             .flatMap(this::triggerPolicy);
     }
 
-    private void onSuccess(ResponseEntity<String> responseCode) {
-        MDC.put(RESPONSE_CODE, responseCode.getStatusCode().toString());
+    private void onSuccess(HttpResponse responseCode) {
+        MDC.put(RESPONSE_CODE, String.valueOf(responseCode.statusCode()));
         LOGGER.info("PNF Re-Registration event successfully handled. "
                         + "Publishing to DMaaP for Policy returned a status code of ({} {})",
-                responseCode.getStatusCode().value(), responseCode.getStatusCode().getReasonPhrase());
+                responseCode.statusCode(), responseCode.statusReason());
         MDC.remove(RESPONSE_CODE);
     }
 
@@ -170,8 +170,10 @@ public class ReRegistrationPipeline {
                 .doOnError(TimeoutException.class,
                         e -> LOGGER.warn("Timed out waiting for A&AI response")
                 )
-                .doOnError(e -> LOGGER.error("Error while retrieving PNF: {}",
-                        e.getMessage())
+                .doOnError(e -> {
+                            LOGGER.error("Error while retrieving PNF: {}", e.getMessage());
+                            LOGGER.debug("Error\n", e);
+                        }
                 )
                 .onErrorResume(
                     e -> e instanceof Exception,
@@ -219,8 +221,10 @@ public class ReRegistrationPipeline {
                 .doOnError(TimeoutException.class,
                         e -> LOGGER.warn("Timed out waiting for A&AI response")
                 )
-                .doOnError(e -> LOGGER.error("Error while retrieving HSI CFS Service instance: {}",
-                        e.getMessage())
+                .doOnError(e -> {
+                            LOGGER.error("Error while retrieving HSI CFS Service instance: {}", e.getMessage());
+                            LOGGER.debug("Error\n", e);
+                        }
                 )
                 .onErrorResume(
                     e -> e instanceof Exception,
@@ -259,7 +263,7 @@ public class ReRegistrationPipeline {
         return isNotRelocation;
     }
 
-    private Mono<ResponseEntity<String>> triggerPolicy(PipelineState state) {
+    private Mono<HttpResponse> triggerPolicy(PipelineState state) {
 
         if (state == null || state.getHsiCfsServiceInstance() == null) {
             return Mono.empty();
