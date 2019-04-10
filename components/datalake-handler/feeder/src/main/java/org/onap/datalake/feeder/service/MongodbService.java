@@ -28,6 +28,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 
 import org.json.JSONObject;
@@ -41,6 +42,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.MongoClientOptions.Builder;
+import com.mongodb.MongoCredential;
+import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
@@ -66,8 +71,31 @@ public class MongodbService {
 	private void init() {
 		Db mongodb = dbService.getMongoDB();
 
-		mongoClient = new MongoClient(mongodb.getHost(), mongodb.getPort());
-		database = mongoClient.getDatabase(mongodb.getProperty1());
+		String host = mongodb.getHost();
+
+		Integer port = mongodb.getPort();
+		if (port == null || port == 0) {
+			port = 27017; //MongoDB default
+		}
+
+		String databaseName = mongodb.getDatabase();
+		String userName = mongodb.getLogin();
+		String password = mongodb.getPass();
+
+		MongoCredential credential = null;
+		if (StringUtils.isNoneBlank(userName) && StringUtils.isNoneBlank(password)) {
+			credential = MongoCredential.createCredential(userName, databaseName, password.toCharArray());
+		}
+
+		Builder builder = MongoClientOptions.builder();
+		builder.serverSelectionTimeout(30000);//server selection timeout, in milliseconds
+		
+		//http://mongodb.github.io/mongo-java-driver/3.0/driver/reference/connecting/ssl/
+		builder.sslEnabled(Boolean.TRUE.equals(mongodb.getEncrypt()));// getEncrypt() can be null
+		MongoClientOptions options = builder.build();
+
+		mongoClient = new MongoClient(new ServerAddress(host, port), credential, options);
+		database = mongoClient.getDatabase(mongodb.getDatabase());
 	}
 
 	@PreDestroy
@@ -88,7 +116,7 @@ public class MongodbService {
 			documents.add(doc);
 		}
 
-		String collectionName = topic.getName().replaceAll("[^a-zA-Z0-9]","");//remove - _ .
+		String collectionName = topic.getName().replaceAll("[^a-zA-Z0-9]", "");//remove - _ .
 		MongoCollection<Document> collection = mongoCollectionMap.computeIfAbsent(collectionName, k -> database.getCollection(k));
 		collection.insertMany(documents);
 

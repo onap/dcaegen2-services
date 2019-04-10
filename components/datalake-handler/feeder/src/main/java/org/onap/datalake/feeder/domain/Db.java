@@ -51,6 +51,9 @@ public class Db {
 	private String login;
 	private String pass;
 
+	private String database;
+	private Boolean encrypt;
+	
 	private String property1;
 	private String property2;
 	private String property3;

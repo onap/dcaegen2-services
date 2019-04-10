@@ -68,7 +68,7 @@ public class CouchbaseService {
 		Db couchbase = dbService.getCouchbase();
         Cluster cluster = CouchbaseCluster.create(couchbase.getHost());
         cluster.authenticate(couchbase.getLogin(), couchbase.getPass());
-        bucket = cluster.openBucket(couchbase.getProperty1());
+        bucket = cluster.openBucket(couchbase.getDatabase());
 
 		log.info("Connect to Couchbase " + couchbase.getHost());
 		
