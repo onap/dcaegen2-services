@@ -71,7 +71,8 @@ public class TopicService {
 	public Topic getEffectiveTopic(String topicStr, boolean ensureTableExist) throws IOException {
 		Topic topic = getTopic(topicStr);
 		if (topic == null) {
-			topic = getDefaultTopic();
+			topic = new Topic(topicStr);
+			topic.setDefaultTopic(getDefaultTopic());
 		}
 		
 		if(ensureTableExist && topic.isEnabled() && topic.supportElasticsearch()) { 

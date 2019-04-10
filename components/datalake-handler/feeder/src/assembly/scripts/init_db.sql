@@ -21,6 +21,7 @@ CREATE TABLE `topic` (
 CREATE TABLE `db` (
   `name` varchar(255) NOT NULL,
   `host` varchar(255) DEFAULT NULL,
+  `port` int(11) DEFAULT NULL,
   `login` varchar(255) DEFAULT NULL,
   `pass` varchar(255) DEFAULT NULL,
   `property1` varchar(255) DEFAULT NULL,
@@ -40,9 +41,9 @@ CREATE TABLE `map_db_topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-insert into db (name,host,login,pass,property1) values ('Couchbase','dl_couchbase','dmaap','dmaap1234','dmaap');
+insert into db (name,host,login,pass,property1) values ('Couchbase','dl_couchbase','dl','dl1234','dl');
 insert into db (name,host) values ('Elasticsearch','dl_es');
-insert into db (name,host) values ('MongoDB','dl_mongodb');
+insert into db (name,host,port,property1) values ('MongoDB','dl_mongodb',27017,'datalake');
 insert into db (name,host) values ('Druid','dl_druid');
 
 
@@ -51,4 +52,4 @@ insert into `topic`(`name`,`enabled`,`save_raw`,`ttl`,`data_format`) values ('_D
 insert into `topic`(`name`,`enabled`) values ('__consumer_offsets',0);
 
 
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','_DL_DEFAULT_'); 
+insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','_DL_DEFAULT_');

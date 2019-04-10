@@ -63,6 +63,9 @@ public class StoreService {
 	private TopicService topicService;
 
 	@Autowired
+	private MongodbService mongodbService;
+
+	@Autowired
 	private CouchbaseService couchbaseService;
 
 	@Autowired
@@ -152,6 +155,10 @@ public class StoreService {
 	}
 
 	private void saveJsons(Topic topic, List<JSONObject> jsons) {
+		if (topic.supportMongoDB()) {
+			mongodbService.saveJsons(topic, jsons);
+		}
+
 		if (topic.supportCouchbase()) {
 			couchbaseService.saveJsons(topic, jsons);
 		}

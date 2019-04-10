@@ -79,14 +79,14 @@ public class TopicController {
 	
 	@GetMapping("/dmaap/")
 	@ResponseBody
-	@ApiOperation(value="List all topics in DMaaP.")
+	@ApiOperation(value="List all topic names in DMaaP.")
 	public List<String> listDmaapTopics() throws IOException {
 		return dmaapService.getTopics();
 	}
 
 	@GetMapping("/")
 	@ResponseBody
-	@ApiOperation(value="List all topics' details.")
+	@ApiOperation(value="List all topics' settings.")
 	public Iterable<Topic> list() throws IOException {
 		Iterable<Topic> ret = topicRepository.findAll();
 		return ret;
@@ -94,7 +94,7 @@ public class TopicController {
 
 	@GetMapping("/{topicName}")
 	@ResponseBody
-	@ApiOperation(value="Get a topic's details.")
+	@ApiOperation(value="Get a topic's settings.")
 	public Topic getTopic(@PathVariable("topicName") String topicName) throws IOException {
 		Topic topic = topicService.getTopic(topicName);
 		return topic;

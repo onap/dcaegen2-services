@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.Setter;
- 
+
 /**
  * Domain class representing bid data storage
  * 
@@ -47,37 +47,44 @@ public class Db {
 	private String name;
 
 	private String host;
+	private Integer port;
 	private String login;
 	private String pass;
 
 	private String property1;
 	private String property2;
-	private String property3;	 
+	private String property3;
 
 	@JsonBackReference
-	@ManyToMany(mappedBy = "dbs", cascade=CascadeType.ALL)
+	@ManyToMany(mappedBy = "dbs", cascade = CascadeType.ALL)
 	/*
-    @ManyToMany(cascade=CascadeType.ALL)//, fetch=FetchType.EAGER) 
-    @JoinTable(	name 				= "map_db_topic",
-    			joinColumns 		= {  @JoinColumn(name="db_name")  },
-    			inverseJoinColumns 	= {  @JoinColumn(name="topic_name")  }
-    ) */
-    protected Set<Topic> topics;	
-	
+	@ManyToMany(cascade=CascadeType.ALL)//, fetch=FetchType.EAGER) 
+	@JoinTable(	name 				= "map_db_topic",
+				joinColumns 		= {  @JoinColumn(name="db_name")  },
+				inverseJoinColumns 	= {  @JoinColumn(name="topic_name")  }
+	) */
+	protected Set<Topic> topics;
+
 	public Db() {
 	}
 
 	public Db(String name) {
 		this.name = name;
 	}
- 
+
 	@Override
-	public boolean equals(Object obj) {		
-		return name.equals(((Db)obj).getName());		
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+
+		if (this.getClass() != obj.getClass())
+			return false;
+
+		return name.equals(((Db) obj).getName());
 	}
 
 	@Override
 	public int hashCode() {
-		return name.hashCode();		
+		return name.hashCode();
 	}
 }

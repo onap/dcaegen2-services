@@ -29,9 +29,9 @@ import javax.annotation.PreDestroy;
 import org.apache.http.HttpHost;
 import org.elasticsearch.ElasticsearchStatusException;
 import org.elasticsearch.action.ActionListener;
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
-import org.elasticsearch.action.admin.indices.get.GetIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexResponse;
+import org.elasticsearch.client.indices.GetIndexRequest; 
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -100,15 +100,14 @@ public class ElasticsearchService {
 	public void ensureTableExist(String topic) throws IOException {
 		String topicLower = topic.toLowerCase();
 		
-		GetIndexRequest request = new GetIndexRequest();
-		request.indices(topicLower);
+		GetIndexRequest request = new GetIndexRequest(topicLower); 
 		
 		boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);
 		if(!exists){
 			CreateIndexRequest createIndexRequest = new CreateIndexRequest(topicLower); 
 			CreateIndexResponse createIndexResponse = client.indices().create(createIndexRequest, RequestOptions.DEFAULT);		
 			log.info(createIndexResponse.index()+" : created "+createIndexResponse.isAcknowledged());
-		} 
+		}
 	}
 	
 	//TTL is not supported in Elasticsearch 5.0 and later, what can we do? FIXME

@@ -41,9 +41,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.Setter;
- 
+
 /**
- * Domain class representing topic 
+ * Domain class representing topic
  * 
  * @author Guobiao Mo
  *
@@ -56,7 +56,7 @@ public class Topic {
 	@Id
 	private String name;//topic name 
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL) 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "default_topic", nullable = true)
 	private Topic defaultTopic;
 
@@ -67,18 +67,18 @@ public class Topic {
 	//@ManyToMany(mappedBy = "topics", cascade=CascadeType.ALL)
 	@JsonBackReference
 	//@JsonManagedReference
-    @ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER) 
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(	name 				= "map_db_topic",
     			joinColumns 		= {  @JoinColumn(name="topic_name")  },
     			inverseJoinColumns 	= {  @JoinColumn(name="db_name")  }
     )
 	protected Set<Db> dbs;
-	
+
 	/**
-	 *  indicate if we should monitor this topic
+	 * indicate if we should monitor this topic
 	 */
 	private Boolean enabled;
-	
+
 	/**
 	 * save raw message text
 	 */
@@ -94,12 +94,12 @@ public class Topic {
 	/**
 	 * TTL in day
 	 */
-	private Integer ttl; 
-	
+	private Integer ttl;
+
 	//if this flag is true, need to correlate alarm cleared message to previous alarm 
 	@Column(name = "correlate_cleared_message")
 	private Boolean correlateClearedMessage;
-	
+
 	//the value in the JSON with this path will be used as DB id
 	@Column(name = "message_id_path")
 	private String messageIdPath;
@@ -114,15 +114,15 @@ public class Topic {
 	public boolean isDefault() {
 		return "_DL_DEFAULT_".equals(name);
 	}
-	
+
 	public boolean isEnabled() {
-		return is(enabled, Topic::isEnabled);	
+		return is(enabled, Topic::isEnabled);
 	}
 
 	public boolean isCorrelateClearedMessage() {
 		return is(correlateClearedMessage, Topic::isCorrelateClearedMessage);
 	}
-	
+
 	public int getTtl() {
 		if (ttl != null) {
 			return ttl;
@@ -130,9 +130,9 @@ public class Topic {
 			return defaultTopic.getTtl();
 		} else {
 			return 3650;//default to 10 years for safe
-		}		
+		}
 	}
-	
+
 	public DataFormat getDataFormat() {
 		if (dataFormat != null) {
 			return DataFormat.fromString(dataFormat);
@@ -147,7 +147,7 @@ public class Topic {
 	private boolean is(Boolean b, Predicate<Topic> pre) {
 		return is(b, pre, false);
 	}
-	
+
 	private boolean is(Boolean b, Predicate<Topic> pre, boolean defaultValue) {
 		if (b != null) {
 			return b;
@@ -178,53 +178,59 @@ public class Topic {
 		return containDb("MongoDB");
 	}
 
-	private boolean containDb(String dbName) {		
+	private boolean containDb(String dbName) {
 		Db db = new Db(dbName);
-		
-		if(dbs!=null && dbs.contains(db)) {
+
+		if (dbs != null && dbs.contains(db)) {
 			return true;
 		}
-		
+
 		if (defaultTopic != null) {
 			return defaultTopic.containDb(dbName);
 		} else {
 			return false;
 		}
 	}
-	
+
 	//extract DB id from JSON attributes, support multiple attributes
 	public String getMessageId(JSONObject json) {
 		String id = null;
-		
-		if(StringUtils.isNotBlank(messageIdPath)) {
-			String[] paths=messageIdPath.split(",");
-			
-			StringBuilder sb= new StringBuilder();
-			for(int i=0; i<paths.length; i++) {
-				if(i>0) {
-					sb.append('^');					
+
+		if (StringUtils.isNotBlank(messageIdPath)) {
+			String[] paths = messageIdPath.split(",");
+
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < paths.length; i++) {
+				if (i > 0) {
+					sb.append('^');
 				}
-				sb.append(json.query(paths[i]).toString());				
+				sb.append(json.query(paths[i]).toString());
 			}
 			id = sb.toString();
 		}
-		
+
 		return id;
 	}
-	
+
 	@Override
 	public String toString() {
 		return name;
 	}
 
 	@Override
-	public boolean equals(Object obj) {		
-		return name.equals(((Topic)obj).getName());		
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+
+		if (this.getClass() != obj.getClass())
+			return false;
+
+		return name.equals(((Topic) obj).getName());
 	}
 
 	@Override
 	public int hashCode() {
-		return name.hashCode();		
+		return name.hashCode();
 	}
-	
+
 }
