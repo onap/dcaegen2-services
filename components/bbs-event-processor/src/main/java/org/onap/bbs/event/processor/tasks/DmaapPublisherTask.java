@@ -21,11 +21,11 @@
 package org.onap.bbs.event.processor.tasks;
 
 import org.onap.bbs.event.processor.model.ControlLoopPublisherDmaapModel;
-import org.springframework.http.ResponseEntity;
+import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
 
 import reactor.core.publisher.Mono;
 
 public interface DmaapPublisherTask {
 
-    Mono<ResponseEntity<String>> execute(ControlLoopPublisherDmaapModel controlLoopPublisherDmaapModel);
+    Mono<HttpResponse> execute(ControlLoopPublisherDmaapModel controlLoopPublisherDmaapModel);
 }

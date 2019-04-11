@@ -26,13 +26,17 @@ imports:
 inputs:
   aai_enrichment_host:
     type: string
-    default: "aai"
+    default: "aai.onap"
   aai_enrichment_port:
     type: integer
     default: 8443
   aai_enrichment_protocol:
     type: string
     default: "https"
+  aai_secure_enable_cert:
+    type: boolean
+    description: enable certificates-based connection with AAI
+    default: true
   tag_version:
     type: string
   replicas:
@@ -90,10 +94,20 @@ inputs:
   application_logging_level:
     type: string
     default: "INFO"
+  dmaap_username:
+    type: string
+    default: admin
+  dmaap_password:
+    type: string
+    default: admin
   dmaap_consumer_id:
     type: string
   dmaap_consumer_group:
     type: string
+  dmaap_secure_enable_cert:
+    type: boolean
+    description: enable certificates-based connection with DMaaP
+    default: true
 node_templates:
   bbs-event-processor:
     type: dcae.nodes.ContainerizedPlatformComponent
@@ -102,18 +116,24 @@ node_templates:
         streams_subscribes:
           pnf_reregistration:
             type: message_router
+            aaf_username: { get_input: dmaap_username }
+            aaf_password: { get_input: dmaap_password }
             dmaap_info:
               topic_url: { get_input: pnf_reregistration_url }
           cpe_authentication:
             type: message_router
+            aaf_username: { get_input: dmaap_username }
+            aaf_password: { get_input: dmaap_password }
             dmaap_info:
               topic_url: { get_input: cpe_authentication_url }
         streams_publishes:
           close_loop:
             type: message_router
+            aaf_username: { get_input: dmaap_username }
+            aaf_password: { get_input: dmaap_password }
             dmaap_info:
               topic_url: { get_input: close_loop_url }
-        dmaap.protocol: "http"
+        dmaap.protocol: "https"
         dmaap.contentType: "application/json"
         dmaap.consumer.consumerId: { get_input: dmaap_consumer_id }
         dmaap.consumer.consumerGroup: { get_input: dmaap_consumer_group }
@@ -142,6 +162,12 @@ node_templates:
         application.cpeAuth.configKey: "cpe_authentication"
         application.closeLoop.configKey: "close_loop"
         application.loggingLevel: { get_input: application_logging_level }
+        application.ssl.keyStorePath: "/opt/app/bbs-event-processor/etc/cert/cert.jks"
+        application.ssl.keyStorePasswordPath: "/opt/app/bbs-event-processor/etc/cert/jks.pass"
+        application.ssl.trustStorePath: "/opt/app/bbs-event-processor/etc/cert/trust.jks"
+        application.ssl.trustStorePasswordPath: "/opt/app/bbs-event-processor/etc/cert/trust.pass"
+        application.ssl.enableAaiCertAuth: { get_input: aai_secure_enable_cert }
+        application.ssl.enableDmaapCertAuth: { get_input: dmaap_secure_enable_cert }
       host_port:
           { get_input: host_port }
       container_port:
@@ -160,5 +186,5 @@ node_templates:
       log_info:
         log_directory: "/opt/app/bbs-event-processor/logs"
       tls_info:
-        cert_directory: '/opt/app/bbs-event-processor/etc/cert/'
-        use_tls: false
+        cert_directory: '/opt/app/bbs-event-processor/etc/cert'
+        use_tls: true

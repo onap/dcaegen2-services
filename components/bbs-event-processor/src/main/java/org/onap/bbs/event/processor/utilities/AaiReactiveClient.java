@@ -181,6 +181,7 @@ public class AaiReactiveClient implements ConfigurationChangeObserver {
 
     private SslContext createSslContext() throws SSLException {
         if (aaiClientConfiguration.enableAaiCertAuth()) {
+            LOGGER.info("Creating secure context with:\n {}", aaiClientConfiguration);
             return sslFactory.createSecureContext(
                     aaiClientConfiguration.keyStorePath(),
                     aaiClientConfiguration.keyStorePasswordPath(),

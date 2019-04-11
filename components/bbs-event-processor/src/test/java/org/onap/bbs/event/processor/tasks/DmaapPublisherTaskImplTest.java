@@ -30,6 +30,9 @@ import static org.mockito.Mockito.when;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
+
+import javax.net.ssl.SSLException;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -39,12 +42,12 @@ import org.onap.bbs.event.processor.config.ApplicationConfiguration;
 import org.onap.bbs.event.processor.exceptions.DmaapException;
 import org.onap.bbs.event.processor.model.ControlLoopPublisherDmaapModel;
 import org.onap.bbs.event.processor.model.ImmutableControlLoopPublisherDmaapModel;
+import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.DmaapPublisherConfiguration;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.ImmutableDmaapPublisherConfiguration;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.producer.DMaaPPublisherReactiveHttpClient;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.producer.PublisherReactiveHttpClientFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -112,46 +115,46 @@ class DmaapPublisherTaskImplTest {
     }
 
     @Test
-    void passingNormalMessage_ReactiveClientProcessesIt() throws DmaapException {
-        ResponseEntity<String> responseEntity = setupMocks(HttpStatus.OK.value());
-        when(responseEntity.getStatusCode()).thenReturn(HttpStatus.OK);
+    void passingNormalMessage_ReactiveClientProcessesIt() throws DmaapException, SSLException {
+        HttpResponse response = setupMocks(HttpStatus.OK.value());
+
         StepVerifier.create(task.execute(controlLoopPublisherDmaapModel)).expectSubscription()
-                .expectNext(responseEntity).verifyComplete();
+                .expectNext(response).verifyComplete();
 
         verify(reactiveHttpClient, times(1))
-                .getDMaaPProducerResponse(controlLoopPublisherDmaapModel);
+                .getDMaaPProducerResponse(controlLoopPublisherDmaapModel, Optional.empty());
         verifyNoMoreInteractions(reactiveHttpClient);
     }
 
     @Test
-    void passingNormalMessage_IncorrectResponseIsHandled() throws DmaapException {
-        ResponseEntity<String> responseEntity = setupMocks(HttpStatus.UNAUTHORIZED.value());
-        when(responseEntity.getStatusCode()).thenReturn(HttpStatus.UNAUTHORIZED);
+    void passingNormalMessage_IncorrectResponseIsHandled() throws DmaapException, SSLException {
+        HttpResponse response = setupMocks(HttpStatus.UNAUTHORIZED.value());
+
         StepVerifier.create(task.execute(controlLoopPublisherDmaapModel)).expectSubscription()
-                .expectNext(responseEntity).verifyComplete();
+                .expectNext(response).verifyComplete();
 
         verify(reactiveHttpClient, times(1))
-                .getDMaaPProducerResponse(controlLoopPublisherDmaapModel);
+                .getDMaaPProducerResponse(controlLoopPublisherDmaapModel, Optional.empty());
         verifyNoMoreInteractions(reactiveHttpClient);
     }
 
     // We can safely suppress unchecked assignment warning here since it is a mock class
     @SuppressWarnings("unchecked")
-    private ResponseEntity<String> setupMocks(Integer httpResponseCode) {
+    private HttpResponse setupMocks(Integer httpResponseCode) throws SSLException {
 
-        ResponseEntity<String> responseEntity = mock(ResponseEntity.class);
-        when(responseEntity.getStatusCode()).thenReturn(HttpStatus.valueOf(httpResponseCode));
+        HttpResponse response = mock(HttpResponse.class);
+        when(response.statusCode()).thenReturn(httpResponseCode);
 
         reactiveHttpClient = mock(DMaaPPublisherReactiveHttpClient.class);
-        when(reactiveHttpClient.getDMaaPProducerResponse(any()))
-                .thenReturn(Mono.just(responseEntity));
+        when(reactiveHttpClient.getDMaaPProducerResponse(any(), any(Optional.class)))
+                .thenReturn(Mono.just(response));
 
         PublisherReactiveHttpClientFactory httpClientFactory = mock(PublisherReactiveHttpClientFactory.class);
         doReturn(reactiveHttpClient).when(httpClientFactory).create(dmaapPublisherConfiguration);
 
         task = new DmaapPublisherTaskImpl(configuration, httpClientFactory);
 
-        return responseEntity;
+        return response;
     }
 
     private static DmaapPublisherConfiguration testVersionOfDmaapPublisherConfiguration() {

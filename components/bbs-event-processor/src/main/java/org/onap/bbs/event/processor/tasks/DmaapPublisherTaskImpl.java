@@ -20,21 +20,24 @@
 
 package org.onap.bbs.event.processor.tasks;
 
+import java.util.Optional;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.net.ssl.SSLException;
 
 import org.onap.bbs.event.processor.config.ApplicationConfiguration;
 import org.onap.bbs.event.processor.config.ConfigurationChangeObserver;
 import org.onap.bbs.event.processor.exceptions.DmaapException;
 import org.onap.bbs.event.processor.model.ControlLoopPublisherDmaapModel;
 import org.onap.bbs.event.processor.utilities.ControlLoopJsonBodyBuilder;
+import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.producer.DMaaPPublisherReactiveHttpClient;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.producer.DmaaPRestTemplateFactory;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.producer.PublisherReactiveHttpClientFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import reactor.core.publisher.Mono;
@@ -59,7 +62,12 @@ public class DmaapPublisherTaskImpl implements DmaapPublisherTask, Configuration
         this.configuration = configuration;
         this.httpClientFactory = httpClientFactory;
 
-        httpClient = httpClientFactory.create(this.configuration.getDmaapPublisherConfiguration());
+        try {
+            httpClient = httpClientFactory.create(this.configuration.getDmaapPublisherConfiguration());
+        } catch (SSLException e) {
+            LOGGER.error("SSL error while creating HTTP Client: {}", e.getMessage());
+            LOGGER.debug("SSL exception\n", e);
+        }
     }
 
     @PostConstruct
@@ -75,17 +83,24 @@ public class DmaapPublisherTaskImpl implements DmaapPublisherTask, Configuration
     @Override
     public synchronized void updateConfiguration() {
         LOGGER.info("DMaaP Publisher update due to new application configuration");
-        httpClient = httpClientFactory.create(this.configuration.getDmaapPublisherConfiguration());
+        try {
+            LOGGER.info("Creating secure context with:\n {}", this.configuration.getDmaapPublisherConfiguration());
+            httpClient = httpClientFactory.create(this.configuration.getDmaapPublisherConfiguration());
+        } catch (SSLException e) {
+            LOGGER.error("SSL error while updating HTTP Client after a config update: {}", e.getMessage());
+            LOGGER.debug("SSL exception\n", e);
+        }
     }
 
     @Override
-    public Mono<ResponseEntity<String>> execute(ControlLoopPublisherDmaapModel controlLoopPublisherDmaapModel) {
+    public Mono<HttpResponse> execute(ControlLoopPublisherDmaapModel controlLoopPublisherDmaapModel) {
         if (controlLoopPublisherDmaapModel == null) {
             throw new DmaapException("Cannot invoke a DMaaP Publish task with a null message");
         }
-        LOGGER.info("Executing task for publishing control loop message \n{}", controlLoopPublisherDmaapModel);
+        LOGGER.info("Executing task for publishing control loop message");
+        LOGGER.debug("CL message \n{}", controlLoopPublisherDmaapModel);
         DMaaPPublisherReactiveHttpClient httpClient = getHttpClient();
-        return httpClient.getDMaaPProducerResponse(controlLoopPublisherDmaapModel);
+        return httpClient.getDMaaPProducerResponse(controlLoopPublisherDmaapModel, Optional.empty());
     }
 
     private synchronized DMaaPPublisherReactiveHttpClient getHttpClient() {

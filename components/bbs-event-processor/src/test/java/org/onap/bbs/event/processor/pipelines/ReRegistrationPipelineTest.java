@@ -64,15 +64,13 @@ import org.onap.bbs.event.processor.model.ServiceInstanceAaiObject;
 import org.onap.bbs.event.processor.tasks.AaiClientTask;
 import org.onap.bbs.event.processor.tasks.DmaapPublisherTask;
 import org.onap.bbs.event.processor.tasks.DmaapReRegistrationConsumerTask;
+import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-// We can safely suppress unchecked assignment warnings for the ResponseEntity mock
-@SuppressWarnings("unchecked")
 @DisplayName("PNF Re-registration Pipeline Unit-Tests")
 class ReRegistrationPipelineTest {
 
@@ -82,12 +80,12 @@ class ReRegistrationPipelineTest {
     private DmaapPublisherTask publisherTask;
     private AaiClientTask aaiClientTask;
 
-    private ResponseEntity<String> responseEntity;
+    private HttpResponse httpResponse;
 
     @BeforeEach
     void setup() {
 
-        responseEntity = Mockito.mock(ResponseEntity.class);
+        httpResponse = Mockito.mock(HttpResponse.class);
 
         configuration = Mockito.mock(ApplicationConfiguration.class);
         consumerTask = Mockito.mock(DmaapReRegistrationConsumerTask.class);
@@ -262,8 +260,8 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(responseEntity.getStatusCode()).thenReturn(HttpStatus.valueOf(HttpStatus.OK.value()));
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(responseEntity));
+        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
@@ -312,13 +310,13 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(responseEntity.getStatusCode()).thenReturn(HttpStatus.valueOf(HttpStatus.OK.value()));
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(responseEntity));
+        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK, r.getStatusCode()))
+                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
                 .verifyComplete();
 
         verify(publisherTask).execute(any(ControlLoopPublisherDmaapModel.class));
@@ -384,14 +382,14 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl2))
                 .thenReturn(Mono.just(hsiCfsServiceInstance2));
 
-        when(responseEntity.getStatusCode()).thenReturn(HttpStatus.valueOf(HttpStatus.OK.value()));
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(responseEntity));
+        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK, r.getStatusCode()))
-                .assertNext(r -> assertEquals(HttpStatus.OK, r.getStatusCode()))
+                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
+                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
                 .verifyComplete();
 
         verify(publisherTask, times(2)).execute(any(ControlLoopPublisherDmaapModel.class));
@@ -491,13 +489,13 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl2))
                 .thenReturn(Mono.just(hsiCfsServiceInstance2));
 
-        when(responseEntity.getStatusCode()).thenReturn(HttpStatus.valueOf(HttpStatus.OK.value()));
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(responseEntity));
+        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK, r.getStatusCode()))
+                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
                 .verifyComplete();
 
         verify(publisherTask).execute(any(ControlLoopPublisherDmaapModel.class));
@@ -551,13 +549,13 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(responseEntity.getStatusCode()).thenReturn(HttpStatus.valueOf(HttpStatus.OK.value()));
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(responseEntity));
+        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK, r.getStatusCode()))
+                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
                 .verifyComplete();
 
         verify(aaiClientTask, times(2)).executePnfRetrieval(anyString(), anyString());
@@ -613,13 +611,13 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(responseEntity.getStatusCode()).thenReturn(HttpStatus.valueOf(HttpStatus.OK.value()));
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(responseEntity));
+        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK, r.getStatusCode()))
+                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
                 .verifyComplete();
 
         verify(aaiClientTask, times(2))

@@ -26,6 +26,11 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
+import java.util.Optional;
+
 import javax.net.ssl.SSLException;
 
 import org.junit.Assert;
@@ -62,6 +67,7 @@ class DmaapCpeAuthenticationConsumerTaskImplTest {
     private static CpeAuthenticationConsumerDmaapModel cpeAuthenticationConsumerDmaapModel;
     private static DMaaPConsumerReactiveHttpClient dMaaPConsumerReactiveHttpClient;
     private static String eventsArray;
+    private static Gson gson = new Gson();
 
     @BeforeAll
     static void setUp() throws SSLException {
@@ -108,22 +114,25 @@ class DmaapCpeAuthenticationConsumerTaskImplTest {
 
     @Test
     void passingEmptyMessage_NothingHappens() throws Exception {
-        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse()).thenReturn(Mono.just(""));
+        JsonElement empty = gson.toJsonTree("");
+        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse(Optional.empty())).thenReturn(Mono.just(empty));
 
         StepVerifier.create(dmaapConsumerTask.execute("Sample input"))
                 .expectSubscription()
                 .expectError(EmptyDmaapResponseException.class);
-        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse();
+        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse(Optional.empty());
     }
 
     @Test
     void passingNormalMessage_ResponseSucceeds() throws Exception {
-        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse()).thenReturn(Mono.just(eventsArray));
+        JsonElement normalEventsArray = gson.toJsonTree(eventsArray);
+        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse(Optional.empty()))
+                .thenReturn(Mono.just(normalEventsArray));
 
         StepVerifier.create(dmaapConsumerTask.execute("Sample input"))
                 .expectSubscription()
                 .consumeNextWith(e -> Assert.assertEquals(e, cpeAuthenticationConsumerDmaapModel));
-        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse();
+        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse(Optional.empty());
     }
 
     private static DmaapConsumerConfiguration testVersionOfDmaapConsumerConfiguration() {

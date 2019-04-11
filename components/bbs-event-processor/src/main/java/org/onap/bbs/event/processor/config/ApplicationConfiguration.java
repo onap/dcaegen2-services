@@ -174,6 +174,13 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
         synchronized (this) {
             cbsPollingInterval = newConfiguration.cbsPollingIntervalSec();
 
+            securityProperties.setEnableAaiCertAuth(newConfiguration.enableAaiCertAuth());
+            securityProperties.setEnableDmaapCertAuth(newConfiguration.enableDmaapCertAuth());
+            securityProperties.setKeyStorePath(newConfiguration.keyStorePath());
+            securityProperties.setKeyStorePasswordPath(newConfiguration.keyStorePasswordPath());
+            securityProperties.setTrustStorePath(newConfiguration.trustStorePath());
+            securityProperties.setTrustStorePasswordPath(newConfiguration.trustStorePasswordPath());
+
             GeneratedAppConfigObject.StreamsObject reRegObject =
                     getStreamsObject(newConfiguration.streamSubscribesMap(), newConfiguration.reRegConfigKey(),
                             "PNF Re-Registration");
@@ -181,6 +188,8 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
             dmaapReRegistrationConsumerProperties.setDmaapHostName(topicUrlInfo.getHost());
             dmaapReRegistrationConsumerProperties.setDmaapPortNumber(topicUrlInfo.getPort());
             dmaapReRegistrationConsumerProperties.setDmaapProtocol(newConfiguration.dmaapProtocol());
+            dmaapReRegistrationConsumerProperties.setDmaapUserName(reRegObject.aafUsername());
+            dmaapReRegistrationConsumerProperties.setDmaapUserPassword(reRegObject.aafPassword());
             dmaapReRegistrationConsumerProperties.setDmaapContentType(newConfiguration.dmaapContentType());
             dmaapReRegistrationConsumerProperties.setDmaapTopicName(topicUrlInfo.getTopicName());
             dmaapReRegistrationConsumerProperties.setConsumerId(newConfiguration.dmaapConsumerConsumerId());
@@ -196,6 +205,8 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
             dmaapCpeAuthenticationConsumerProperties.setDmaapHostName(topicUrlInfo.getHost());
             dmaapCpeAuthenticationConsumerProperties.setDmaapPortNumber(topicUrlInfo.getPort());
             dmaapCpeAuthenticationConsumerProperties.setDmaapProtocol(newConfiguration.dmaapProtocol());
+            dmaapCpeAuthenticationConsumerProperties.setDmaapUserName(cpeAuthObject.aafUsername());
+            dmaapCpeAuthenticationConsumerProperties.setDmaapUserPassword(cpeAuthObject.aafPassword());
             dmaapCpeAuthenticationConsumerProperties.setDmaapContentType(newConfiguration.dmaapContentType());
             dmaapCpeAuthenticationConsumerProperties.setDmaapTopicName(topicUrlInfo.getTopicName());
             dmaapCpeAuthenticationConsumerProperties.setConsumerId(newConfiguration.dmaapConsumerConsumerId());
@@ -211,6 +222,8 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
             dmaapProducerProperties.setDmaapHostName(topicUrlInfo.getHost());
             dmaapProducerProperties.setDmaapPortNumber(topicUrlInfo.getPort());
             dmaapProducerProperties.setDmaapProtocol(newConfiguration.dmaapProtocol());
+            dmaapProducerProperties.setDmaapUserName(closeLoopObject.aafUsername());
+            dmaapProducerProperties.setDmaapUserPassword(closeLoopObject.aafPassword());
             dmaapProducerProperties.setDmaapContentType(newConfiguration.dmaapContentType());
             dmaapProducerProperties.setDmaapTopicName(topicUrlInfo.getTopicName());
             constructDmaapProducerConfiguration();
@@ -361,7 +374,7 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
             throw new ConfigurationParsingException("Wrong topic name structure");
         }
         topicUrlInfo.setPort(Integer.valueOf(tokensAfterHost[0]));
-        topicUrlInfo.setTopicName("/events/" + tokensAfterHost[1]);
+        topicUrlInfo.setTopicName("events/" + tokensAfterHost[1]);
 
         return topicUrlInfo;
     }

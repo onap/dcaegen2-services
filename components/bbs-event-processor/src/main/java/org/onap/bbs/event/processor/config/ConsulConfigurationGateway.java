@@ -39,6 +39,8 @@ import org.onap.bbs.event.processor.model.ImmutableDmaapInfo;
 import org.onap.bbs.event.processor.model.ImmutableGeneratedAppConfigObject;
 import org.onap.bbs.event.processor.model.ImmutableStreamsObject;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsClientFactory;
+import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsRequests;
+import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.CbsRequest;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.EnvProperties;
 import org.onap.dcaegen2.services.sdk.rest.services.model.logging.RequestDiagnosticContext;
 import org.slf4j.Logger;
@@ -123,12 +125,12 @@ public class ConsulConfigurationGateway {
 
         // Necessary properties from the environment (Consul host:port, service-name (hostname), CBS name)
         EnvProperties env = EnvProperties.fromEnvironment();
-
+        CbsRequest cbsRequest = CbsRequests.getConfiguration(diagnosticContext);
         // Create the client and use it to get the configuration
         cbsFetchPipeline = CbsClientFactory.createCbsClient(env)
                 .doOnError(e -> LOGGER.warn("CBS Configuration fetch failed with error: {}", e))
                 .retry(e -> true)
-                .flatMapMany(cbsClient -> cbsClient.updates(diagnosticContext, initialDelay, period))
+                .flatMapMany(cbsClient -> cbsClient.updates(cbsRequest, initialDelay, period))
                 .subscribe(this::parseConsulRetrievedConfiguration, this::handleErrors);
     }
 
@@ -178,6 +180,13 @@ public class ConsulConfigurationGateway {
 
         final String loggingLevel = configObject.get("application.loggingLevel").getAsString();
 
+        final String keyStorePath = configObject.get("application.ssl.keyStorePath").getAsString();
+        final String keyStorePasswordPath = configObject.get("application.ssl.keyStorePasswordPath").getAsString();
+        final String trustStorePath = configObject.get("application.ssl.trustStorePath").getAsString();
+        final String trustStorePasswordPath = configObject.get("application.ssl.trustStorePasswordPath").getAsString();
+        final boolean aaiEnableCertAuth = configObject.get("application.ssl.enableAaiCertAuth").getAsBoolean();
+        final boolean dmaapEnableCertAuth = configObject.get("application.ssl.enableDmaapCertAuth").getAsBoolean();
+
         final JsonObject streamsPublishes = configObject.getAsJsonObject("streams_publishes");
         final JsonObject streamsSubscribes = configObject.getAsJsonObject("streams_subscribes");
 
@@ -211,6 +220,12 @@ public class ConsulConfigurationGateway {
                 .cpeAuthConfigKey(cpeAuthConfigKey)
                 .closeLoopConfigKey(closeLoopConfigKey)
                 .loggingLevel(loggingLevel)
+                .keyStorePath(keyStorePath)
+                .keyStorePasswordPath(keyStorePasswordPath)
+                .trustStorePath(trustStorePath)
+                .trustStorePasswordPath(trustStorePasswordPath)
+                .enableAaiCertAuth(aaiEnableCertAuth)
+                .enableDmaapCertAuth(dmaapEnableCertAuth)
                 .streamSubscribesMap(parseStreamsObjects(streamsSubscribes))
                 .streamPublishesMap(parseStreamsObjects(streamsPublishes))
                 .build();

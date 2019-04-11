@@ -300,7 +300,7 @@
   },
   "artifacts": [
     {
-    "uri": "nexus3.onap.org:10003/onap/org.onap.dcaegen2.services.components.bbs-event-processor:1.0.0-SNAPSHOT",
+    "uri": "nexus3.onap.org:10001/onap/org.onap.dcaegen2.services.components.bbs-event-processor:1.0.0-SNAPSHOT",
     "type": "docker image"
     }
   ]

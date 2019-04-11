@@ -123,6 +123,25 @@ public interface GeneratedAppConfigObject {
     @SerializedName(value = "application.loggingLevel", alternate = "application.loggingLevel")
     String loggingLevel();
 
+    @SerializedName(value = "application.ssl.trustStorePath", alternate = "application.ssl.trustStorePath")
+    String trustStorePath();
+
+    @SerializedName(value = "application.ssl.trustStorePasswordPath",
+            alternate = "application.ssl.trustStorePasswordPath")
+    String trustStorePasswordPath();
+
+    @SerializedName(value = "application.ssl.keyStorePath", alternate = "application.ssl.keyStorePath")
+    String keyStorePath();
+
+    @SerializedName(value = "application.ssl.keyStorePasswordPath", alternate = "application.ssl.keyStorePasswordPath")
+    String keyStorePasswordPath();
+
+    @SerializedName(value = "application.ssl.enableAaiCertAuth", alternate = "application.ssl.enableAaiCertAuth")
+    boolean enableAaiCertAuth();
+
+    @SerializedName(value = "application.ssl.enableDmaapCertAuth", alternate = "application.ssl.enableDmaapCertAuth")
+    boolean enableDmaapCertAuth();
+
     @SerializedName(value = "streams_subscribes", alternate = "streams_subscribes")
     Map<String, StreamsObject> streamSubscribesMap();
 

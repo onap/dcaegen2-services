@@ -24,7 +24,9 @@ import static org.mockito.Mockito.spy;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
+import java.io.StringReader;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -89,21 +91,22 @@ class ReRegistrationDmaapConsumerJsonParserTest {
     }
 
     @Test
-    void passingNonJson_EmptyFluxIsReturned() {
+    void passingNonJson_getIllegalStateException() {
 
         ReRegistrationDmaapConsumerJsonParser consumerJsonParser = new ReRegistrationDmaapConsumerJsonParser();
-
-        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just("not JSON")))
+        JsonReader jsonReader = new JsonReader(new StringReader("not JSON"));
+        jsonReader.setLenient(true);
+        JsonElement notJson = jsonParser.parse(jsonReader).getAsJsonPrimitive();
+        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(notJson)))
                 .expectSubscription()
-                .verifyComplete();
+                .verifyError(IllegalStateException.class);
     }
 
     @Test
     void passingNoEvents_EmptyFluxIsReturned() {
 
         ReRegistrationDmaapConsumerJsonParser consumerJsonParser = new ReRegistrationDmaapConsumerJsonParser();
-
-        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just("[]")))
+        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse("[]"))))
                 .expectSubscription()
                 .verifyComplete();
     }
@@ -135,7 +138,7 @@ class ReRegistrationDmaapConsumerJsonParserTest {
                 .sVlan(svlan)
                 .build();
 
-        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(eventsArray)))
+        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
                 .expectNext(expectedEventObject);
     }
@@ -165,7 +168,7 @@ class ReRegistrationDmaapConsumerJsonParserTest {
         Mockito.doReturn(Optional.of(jsonElement2.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement2);
 
-        String eventsArray = "[" + firstEvent + secondEvent + "]";
+        String eventsArray = "[" + firstEvent + "," + secondEvent + "]";
 
         ReRegistrationConsumerDmaapModel expectedFirstEventObject = ImmutableReRegistrationConsumerDmaapModel.builder()
                 .correlationId(correlationId1)
@@ -182,7 +185,7 @@ class ReRegistrationDmaapConsumerJsonParserTest {
                 .sVlan(svlan)
                 .build();
 
-        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(eventsArray)))
+        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
                 .expectNext(expectedFirstEventObject)
                 .expectNext(expectedSecondEventObject);
@@ -209,7 +212,7 @@ class ReRegistrationDmaapConsumerJsonParserTest {
 
         String eventsArray = "[" + event + "]";
 
-        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(eventsArray)))
+        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
                 .verifyComplete();
     }
@@ -235,7 +238,7 @@ class ReRegistrationDmaapConsumerJsonParserTest {
 
         String eventsArray = "[" + event + "]";
 
-        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(eventsArray)))
+        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
                 .verifyComplete();
     }
@@ -261,7 +264,7 @@ class ReRegistrationDmaapConsumerJsonParserTest {
 
         String eventsArray = "[" + event + "]";
 
-        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(eventsArray)))
+        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
                 .verifyComplete();
     }
@@ -289,7 +292,7 @@ class ReRegistrationDmaapConsumerJsonParserTest {
 
         String eventsArray = "[" + event + "]";
 
-        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(eventsArray)))
+        StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
                 .verifyComplete();
     }

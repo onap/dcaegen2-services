@@ -84,6 +84,12 @@ class ConsulConfigurationGatewayTest {
                 + "\"application.cpeAuth.configKey\": \"config_key_1\","
                 + "\"application.closeLoop.configKey\": \"config_key_3\","
                 + "\"application.loggingLevel\": \"TRACE\","
+                + "\"application.ssl.keyStorePath\": \"/opt/app/bbs-event-processor/etc/cert/key.p12\","
+                + "\"application.ssl.keyStorePasswordPath\": \"/opt/app/bbs-event-processor/etc/cert/key.pass\","
+                + "\"application.ssl.trustStorePath\": \"/opt/app/bbs-event-processor/etc/cert/trust.jks\","
+                + "\"application.ssl.trustStorePasswordPath\": \"/opt/app/bbs-event-processor/etc/cert/trust.pass\","
+                + "\"application.ssl.enableAaiCertAuth\": true,"
+                + "\"application.ssl.enableDmaapCertAuth\": true,"
                 + "\"streams_subscribes\": {"
                 + "\"config_key_1\": {"
                 + "\"type\": \"message_router\","
@@ -203,6 +209,12 @@ class ConsulConfigurationGatewayTest {
                 .cpeAuthConfigKey("config_key_1")
                 .closeLoopConfigKey("config_key_3")
                 .loggingLevel("TRACE")
+                .keyStorePath("/opt/app/bbs-event-processor/etc/cert/key.p12")
+                .keyStorePasswordPath("/opt/app/bbs-event-processor/etc/cert/key.pass")
+                .trustStorePath("/opt/app/bbs-event-processor/etc/cert/trust.jks")
+                .trustStorePasswordPath("/opt/app/bbs-event-processor/etc/cert/trust.pass")
+                .enableAaiCertAuth(true)
+                .enableDmaapCertAuth(true)
                 .streamSubscribesMap(subscribes)
                 .streamPublishesMap(Collections.singletonMap("config_key_3", streamsObject3))
                 .build();
