@@ -51,5 +51,6 @@ public class ApplicationConfiguration {
 	private int kafkaConsumerCount;
 
 	private boolean async;
+	private boolean enableSSL;
 
 }
