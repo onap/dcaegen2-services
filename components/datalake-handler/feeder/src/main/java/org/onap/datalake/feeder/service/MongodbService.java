@@ -32,7 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bson.Document;
 
 import org.json.JSONObject;
-
+import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.slf4j.Logger;
@@ -50,7 +50,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 /**
- * Service to use MongoDB
+ * Service for using MongoDB
  * 
  * @author Guobiao Mo
  *
@@ -59,6 +59,9 @@ import com.mongodb.client.MongoDatabase;
 public class MongodbService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private ApplicationConfiguration config;
 
 	@Autowired
 	private DbService dbService;
@@ -89,13 +92,19 @@ public class MongodbService {
 
 		Builder builder = MongoClientOptions.builder();
 		builder.serverSelectionTimeout(30000);//server selection timeout, in milliseconds
-		
+
 		//http://mongodb.github.io/mongo-java-driver/3.0/driver/reference/connecting/ssl/
-		builder.sslEnabled(Boolean.TRUE.equals(mongodb.getEncrypt()));// getEncrypt() can be null
+		if (config.isEnableSSL()) {
+			builder.sslEnabled(Boolean.TRUE.equals(mongodb.getEncrypt()));// getEncrypt() can be null
+		}
 		MongoClientOptions options = builder.build();
 
-		mongoClient = new MongoClient(new ServerAddress(host, port), credential, options);
-		database = mongoClient.getDatabase(mongodb.getDatabase());
+		if (credential == null) {
+			mongoClient = new MongoClient(new ServerAddress(host, port), options);
+		} else {
+			mongoClient = new MongoClient(new ServerAddress(host, port), credential, options);
+		}
+		database = mongoClient.getDatabase(databaseName);
 	}
 
 	@PreDestroy
