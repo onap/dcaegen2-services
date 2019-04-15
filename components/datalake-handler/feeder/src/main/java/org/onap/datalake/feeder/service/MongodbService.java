@@ -48,6 +48,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.DB;
 
 /**
  * Service for using MongoDB
@@ -62,6 +63,7 @@ public class MongodbService {
 
 	@Autowired
 	private ApplicationConfiguration config;
+        private boolean dbReady = false;
 
 	@Autowired
 	private DbService dbService;
@@ -98,13 +100,30 @@ public class MongodbService {
 			builder.sslEnabled(Boolean.TRUE.equals(mongodb.getEncrypt()));// getEncrypt() can be null
 		}
 		MongoClientOptions options = builder.build();
+		List<ServerAddress> addrs = new ArrayList<ServerAddress>();
 
-		if (credential == null) {
-			mongoClient = new MongoClient(new ServerAddress(host, port), options);
-		} else {
-			mongoClient = new MongoClient(new ServerAddress(host, port), credential, options);
+		addrs.add(new ServerAddress(host, port)); // FIXME should be a list of address
+
+
+		try {
+			if(StringUtils.isNoneBlank(userName) && StringUtils.isNoneBlank(password))
+			{
+				credential = MongoCredential.createCredential(userName, databaseName, password.toCharArray());
+				List<MongoCredential> credentialList = new ArrayList<MongoCredential>();
+				credentialList.add(credential);
+				mongoClient = new MongoClient(addrs, credentialList, options);
+			}else
+			{
+				mongoClient = new MongoClient(addrs, options);
+			}
+		}catch(Exception ex){
+			dbReady = false;
+			log.error("Fail to initiate MongoDB" + mongodb.getHost());
+			return;
 		}
-		database = mongoClient.getDatabase(databaseName);
+		database = mongoClient.getDatabase(mongodb.getDatabase());
+		dbReady = true;
+
 	}
 
 	@PreDestroy
@@ -113,6 +132,8 @@ public class MongodbService {
 	}
 
 	public void saveJsons(Topic topic, List<JSONObject> jsons) {
+		if(dbReady == false)
+			return;
 		List<Document> documents = new ArrayList<>(jsons.size());
 		for (JSONObject json : jsons) {
 			//convert org.json JSONObject to MongoDB Document
