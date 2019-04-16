@@ -1,0 +1,175 @@
+{
+	"type": "kafka",
+	"dataSchema": {
+		"dataSource": "unauthenticated.DCAE_CL_OUTPUT",
+		"parser": {
+			"type": "string",
+			"parseSpec": {
+				"format": "json",
+				"flattenSpec": {
+					"useFieldDiscovery": false,
+					"fields": [
+					
+					{
+"type": "path",
+"name": "_id",
+"expr": "$._id"
+},
+					
+					{
+"type": "path",
+"name": "closedLoopEventClient",
+"expr": "$.closedLoopEventClient"
+},
+					
+					{
+"type": "path",
+"name": "policyVersion",
+"expr": "$.policyVersion"
+},
+					
+					{
+"type": "path",
+"name": "policyName",
+"expr": "$.policyName"
+},
+					
+					{
+"type": "path",
+"name": "policyScope",
+"expr": "$.policyScope"
+},
+					
+					{
+"type": "path",
+"name": "target_type",
+"expr": "$.target_type"
+},
+					
+					{
+"type": "path",
+"name": "AAI:serviceType",
+"expr": "$.AAI.serviceType"
+},
+					
+					{
+"type": "path",
+"name": "AAI:service-instance_service-instance-id",
+"expr": "$.AAI.service-instance_service-instance-id"
+},
+					
+					{
+"type": "path",
+"name": "AAI:globalSubscriberId",
+"expr": "$.AAI.globalSubscriberId"
+},
+					
+					{
+"type": "path",
+"name": "AAI:vserver_vserver-name",
+"expr": "$.AAI.vserver_vserver-name"
+},
+					
+					{
+"type": "path",
+"name": "AAI:network-information_network-id",
+"expr": "$.AAI.network-information_network-id"
+},
+					
+					{
+"type": "path",
+"name": "closedLoopAlarmStart",
+"expr": "$.closedLoopAlarmStart"
+},
+					
+					{
+"type": "path",
+"name": "closedLoopEventStatus",
+"expr": "$.closedLoopEventStatus"
+},
+					
+					{
+"type": "path",
+"name": "version",
+"expr": "$.version"
+},
+					
+					{
+"type": "path",
+"name": "closedLoopControlName",
+"expr": "$.closedLoopControlName"
+},
+					
+					{
+"type": "path",
+"name": "target",
+"expr": "$.target"
+},
+					
+					{
+"type": "path",
+"name": "closedLoopAlarmEnd",
+"expr": "$.closedLoopAlarmEnd"
+},
+					
+					{
+"type": "path",
+"name": "requestID",
+"expr": "$.requestID"
+},
+					
+					{
+"type": "path",
+"name": "from",
+"expr": "$.from"
+},
+					
+					{
+"type": "path",
+"name": "_dl_type_",
+"expr": "$._dl_type_"
+},
+					
+					{
+"type": "path",
+"name": "_dl_text_",
+"expr": "$._dl_text_"
+},
+					]
+				},
+				"timestampSpec": {
+					"column": "event-header:timestamp",
+					"format": "yyyyMMdd-HH:mm:ss:SSS"
+				},
+				"dimensionsSpec": {
+					"dimensions": [
+					],
+					"dimensionsExclusions": [
+					]
+				}
+			}
+		},
+		"metricsSpec": [],
+		"granularitySpec": {
+			"type": "uniform",
+			"segmentGranularity": "HOUR",
+			"queryGranularity": "MINUTE",
+			"rollup": false
+		}
+	},
+	"tuningConfig": {
+		"type": "kafka",
+		"reportParseExceptions": true
+	},
+	"ioConfig": {
+		"topic": "unauthenticated.DCAE_CL_OUTPUT",
+		"replicas": 1,
+		"startDelay": "PT1S",
+		"taskDuration": "PT1H",
+		"completionTimeout": "PT30M",
+		"consumerProperties": {
+			"bootstrap.servers": "message-router-kafka:9092"
+		},
+		"useEarliestOffset": true
+	}
+}
