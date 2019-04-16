@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fed6084_603cf1ac",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/MongodbService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-16T19:21:18Z",
+      "side": 1,
+      "message": "Should be removed?",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 3
+      },
+      "revId": "4a315e06b47803f80b54282c98db8aa52e3cc585",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3216832_86226aa6",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/MongodbService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-16T19:21:18Z",
+      "side": 1,
+      "message": "When this happens, admin UI should show a alert.\nWe may do the same for other DBs.",
+      "range": {
+        "startLine": 120,
+        "startChar": 3,
+        "endLine": 122,
+        "endChar": 10
+      },
+      "revId": "4a315e06b47803f80b54282c98db8aa52e3cc585",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af07ffed_1ddf36cd",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/MongodbService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-16T19:21:18Z",
+      "side": 1,
+      "message": "Need to throw an exception, to notify caller.",
+      "range": {
+        "startLine": 135,
+        "startChar": 2,
+        "endLine": 136,
+        "endChar": 10
+      },
+      "revId": "4a315e06b47803f80b54282c98db8aa52e3cc585",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
