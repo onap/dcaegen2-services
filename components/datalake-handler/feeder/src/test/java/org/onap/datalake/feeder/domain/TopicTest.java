@@ -27,6 +27,7 @@ import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -61,8 +62,10 @@ public class TopicTest {
         topic.setMessageIdPath("/data/data2/value,/data/data3");
 
         String value = topic.getMessageId(json);
-
         assertEquals(value, "hello^world");
+
+        topic.setMessageIdPath("");
+        assertNull(topic.getMessageId(json));
 
         Topic defaultTopic = new Topic("_DL_DEFAULT_");
         Topic testTopic = new Topic("test");

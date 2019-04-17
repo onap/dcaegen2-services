@@ -55,11 +55,4 @@ public class Util {
 			return replaceDotInKey(newJson);// there maybe more to replace
 		}
 	}
-
-	public static void main(String[] args) {
-		String a = "\"u-y.t.y-t\":\"u.gfh\",\\\"jg.h\\\":\"j_9889\"";
-		String b = replaceDotInKey(a);
-		System.out.println(a);
-		System.out.println(b);
-	}
 }

@@ -60,6 +60,7 @@ public class ApplicationConfigurationTest {
 
         assertTrue(config.getKafkaConsumerCount() > 0);
         assertNotNull(config.isAsync());
+        assertNotNull(config.isEnableSSL());
     }
 
 }

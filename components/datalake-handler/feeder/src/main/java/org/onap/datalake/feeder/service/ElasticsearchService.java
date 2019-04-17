@@ -27,7 +27,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.apache.http.HttpHost;
-import org.elasticsearch.ElasticsearchStatusException;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
@@ -69,6 +68,9 @@ public class ElasticsearchService {
 	private RestHighLevelClient client;
 	ActionListener<BulkResponse> listener;
 
+
+//ES Encrypted communication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_encrypted_communication.html#_encrypted_communication
+//Basic authentication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_basic_authentication.html
 	@PostConstruct
 	private void init() {
 		Db elasticsearch = dbService.getElasticsearch();
@@ -77,7 +79,7 @@ public class ElasticsearchService {
 		// Initialize the Connection
 		client = new RestHighLevelClient(RestClient.builder(new HttpHost(elasticsearchHost, 9200, "http"), new HttpHost(elasticsearchHost, 9201, "http")));
 
-		log.info("Connect to Elasticsearch Host " + elasticsearchHost);
+		log.info("Connect to Elasticsearch Host {}", elasticsearchHost);
 
 		listener = new ActionListener<BulkResponse>() {
 			@Override
@@ -106,7 +108,7 @@ public class ElasticsearchService {
 		if(!exists){
 			CreateIndexRequest createIndexRequest = new CreateIndexRequest(topicLower); 
 			CreateIndexResponse createIndexResponse = client.indices().create(createIndexRequest, RequestOptions.DEFAULT);		
-			log.info(createIndexResponse.index()+" : created "+createIndexResponse.isAcknowledged());
+			log.info("{} : created {}", createIndexResponse.index(), createIndexResponse.isAcknowledged());
 		}
 	}
 	

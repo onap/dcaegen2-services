@@ -27,9 +27,9 @@
 		<java.version>1.8</java.version>
 
 		<mongojava.version>3.10.1</mongojava.version>
-		<springboot.version>2.1.0.RELEASE</springboot.version>
+		<springboot.version>2.1.4.RELEASE</springboot.version>
 		<springcouchbase.version>3.1.2.RELEASE</springcouchbase.version>
-		<jackson.version>2.9.6</jackson.version>
+		<jackson.version>2.9.8</jackson.version>
 		<kafka.version>2.0.0</kafka.version>
 		<elasticsearchjava.version>7.0.0</elasticsearchjava.version>
 
