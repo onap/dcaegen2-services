@@ -49,10 +49,10 @@ public class PullService {
 	private boolean isRunning = false;
 	private ExecutorService executorService;
 	private List<PullThread> consumers;
-	
+
 	@Autowired
 	private ApplicationContext context;
-	
+
 	@Autowired
 	private ApplicationConfiguration config;
 
@@ -62,13 +62,13 @@ public class PullService {
 	public boolean isRunning() {
 		return isRunning;
 	}
- 
+
 	/**
 	 * start pulling.
 	 * 
 	 * @throws IOException
 	 */
-	public synchronized void start() throws IOException {
+	public synchronized void start() {
 		if (isRunning) {
 			return;
 		}
@@ -80,15 +80,15 @@ public class PullService {
 		executorService = Executors.newFixedThreadPool(numConsumers);
 		consumers = new ArrayList<>(numConsumers);
 
-		for (int i = 0; i < numConsumers; i++) { 
+		for (int i = 0; i < numConsumers; i++) {
 			PullThread puller = context.getBean(PullThread.class, i);
 			consumers.add(puller);
 			executorService.submit(puller);
 		}
 
 		isRunning = true;
-		
-		Runtime.getRuntime().addShutdownHook(new Thread(()->shutdown())) ; 
+
+		Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
 	}
 
 	/**
@@ -103,16 +103,16 @@ public class PullService {
 		for (PullThread puller : consumers) {
 			puller.shutdown();
 		}
-		
+
 		executorService.shutdown();
-		
+
 		try {
 			executorService.awaitTermination(10L, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 			logger.error("executor.awaitTermination", e);
 			Thread.currentThread().interrupt();
 		}
-		
+
 		isRunning = false;
 	}
 

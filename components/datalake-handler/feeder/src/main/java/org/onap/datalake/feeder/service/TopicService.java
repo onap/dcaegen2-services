@@ -23,9 +23,6 @@ package org.onap.datalake.feeder.service;
 import java.io.IOException;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.slf4j.Logger;
@@ -50,14 +47,6 @@ public class TopicService {
 	@Autowired
 	private ElasticsearchService elasticsearchService;
 	
-	@PostConstruct
-	private void init() {
-	}
-
-	@PreDestroy
-	public void cleanUp() {
-	}
-
 	public Topic getEffectiveTopic(String topicStr) {
 		try {
 			return getEffectiveTopic(topicStr, false);

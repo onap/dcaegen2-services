@@ -33,15 +33,19 @@ import static org.junit.Assert.assertEquals;
  */
 public class UtilTest {
 
-    @Test
-    //only dot(.) in key got replaced
-    public void replaceDotInKey() {
-        String a = "\"u-y.t.y-t\":\"u.gfh\",\\\"jg.h\\\":\"j_9889\"";
-        String b = "\"u-y_t_y-t\":\"u.gfh\",\\\"jg_h\\\":\"j_9889\"";
+	@Test
+	//only dot(.) in key got replaced
+	public void replaceDotInKey() {
+		new Util();
 
-        assertEquals(Util.replaceDotInKey(a), b);
+		String a = "\"u-y.t.y-t\":\"u.gfh\",\\\"jg.h\\\":\"j_9889\"";
+		String b = "\"u-y_t_y-t\":\"u.gfh\",\\\"jg_h\\\":\"j_9889\"";
 
-        String[] strArray2 = {"test1", "test2", "test3"};
-        Util.main(strArray2);
-    }
+		assertEquals(Util.replaceDotInKey(a), b);
+	}
+
+	@Test(expected = IOException.class)
+	public void validateNull() throws IOException {
+		Util.getTextFromFile("no_such_file");
+	}
 }

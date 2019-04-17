@@ -25,8 +25,7 @@ import org.onap.datalake.feeder.service.PullService;
 
 public class ApplicationTest {
     @Test
-    //only dot(.) in key got replaced
-    public void replaceDotInKey() {
+    public void testRunner() {
         Application application = new Application();
         application.commandLineRunner(new PullService());
     }
