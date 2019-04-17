@@ -100,7 +100,7 @@ public class Topic {
 	@Column(name = "correlate_cleared_message")
 	private Boolean correlateClearedMessage;
 
-	//the value in the JSON with this path will be used as DB id
+	//paths to the values in the JSON that are used to composite DB id, comma separated, example: "/event-header/id,/event-header/entity-type,/entity/product-name"
 	@Column(name = "message_id_path")
 	private String messageIdPath;
 

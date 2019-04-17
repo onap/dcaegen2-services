@@ -70,7 +70,7 @@ public class CouchbaseService {
         cluster.authenticate(couchbase.getLogin(), couchbase.getPass());
         bucket = cluster.openBucket(couchbase.getDatabase());
 
-		log.info("Connect to Couchbase " + couchbase.getHost());
+		log.info("Connect to Couchbase {}", couchbase.getHost());
 		
         // Create a N1QL Primary Index (but ignore if it exists)
         bucket.bucketManager().createN1qlPrimaryIndex(true, false);                 
