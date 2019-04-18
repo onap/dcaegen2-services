@@ -22,12 +22,15 @@ package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import com.google.gson.Gson;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.search.*;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest; 
@@ -37,10 +40,19 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.MatchPhraseQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.rest.RestStatus;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.JsonObject;
 import org.onap.datalake.feeder.domain.Topic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,20 +151,121 @@ public class ElasticsearchService {
 		}
 	}
 	
-	private boolean correlateClearedMessage(JSONObject json) {
+	public boolean correlateClearedMessage(JSONObject json) {
 		boolean found = true;
-				
-		/*TODO
-		 * 1. check if this is a alarm cleared message
-		 * 2. search previous alarm message
-		 * 3. update previous message, if success, set found=true
-		 */
-		//for Sonar test, remove the following
-		if(json.isNull("kkkkk")) {
-			found = false;
+		Gson gson = new Gson();
+
+		try {
+
+			JsonObject jsonObject = gson.fromJson(json.toString(),JsonObject.class);
+
+			String eventName = jsonObject.getEvent().getCommonEventHeader().getEventName();
+			Long startEpochMicrosec = jsonObject.getEvent().getCommonEventHeader().getStartEpochMicrosec();
+			Long lastEpochMicrosec = jsonObject.getEvent().getCommonEventHeader().getLastEpochMicrosec();
+
+			if (eventName != null && (startEpochMicrosec.toString().length() >= 13 || lastEpochMicrosec.toString().length() >= 13)) {
+
+				if (eventName.contains("Cleared")) {
+					jsonObject.getEvent().getFaultFields().setVfStatus("close");
+					//jsonObject.getEvent().getCommonEventHeader().getEventName().replace("Cleared","");
+					//search
+					SearchRequest request = new SearchRequest();
+					SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+					String eventName2 = eventName.replace("Cleared","");
+					String reportingEntityName = jsonObject.getEvent().getCommonEventHeader().getReportingEntityName();
+					String specificProblem = jsonObject.getEvent().getFaultFields().getSpecificProblem();
+
+					MatchPhraseQueryBuilder mpqb1 = QueryBuilders
+							.matchPhraseQuery("event.commonEventHeader.eventName",eventName2);
+					MatchPhraseQueryBuilder mpqb2 = QueryBuilders
+							.matchPhraseQuery("event.commonEventHeader.reportingEntityName",reportingEntityName);
+					MatchPhraseQueryBuilder mpqb3 = QueryBuilders
+							.matchPhraseQuery("event.faultFields.specificProblem",specificProblem);
+					QueryBuilder qb = QueryBuilders.boolQuery().must(mpqb1).must(mpqb2).must(mpqb3);
+					sourceBuilder.query(qb);
+					request.source(sourceBuilder);
+					sourceBuilder.from(0);
+					sourceBuilder.size(10);
+					sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
+
+					SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+
+					RestStatus status = response.status();
+					TimeValue took = response.getTook();
+					Boolean terminatedEarly = response.isTerminatedEarly();
+					boolean timedOut = response.isTimedOut();
+
+					int totalShards = response.getTotalShards();
+					int successfulShards = response.getSuccessfulShards();
+					int failedShards = response.getFailedShards();
+					for (ShardSearchFailure failure : response.getShardFailures()) {
+						// failures should be handled here
+					}
+
+					SearchHits hits = response.getHits();
+					long totalHits = hits.getTotalHits();
+					float maxScore = hits.getMaxScore();
+					SearchHit[] searchHits = hits.getHits();
+					String sourceAsString = null;
+					//es doc
+					String index = null;
+					String type = null;
+					String id = null;
+					for (SearchHit hit : searchHits) {
+						// do something with the SearchHit
+						index = hit.getIndex();
+						type = hit.getType();
+						id = hit.getId();
+						float score = hit.getScore();
+						//get _source value
+						sourceAsString = hit.getSourceAsString(); //jsonString
+
+					}
+					log.info("id:"+id+"index:"+index+"type:"+type);
+					log.info(sourceAsString);
+					// json -> object
+					JsonObject jsonObjectSource = gson.fromJson(sourceAsString,JsonObject.class);
+					log.info("object str"+jsonObjectSource);
+
+					jsonObjectSource.getEvent().getCommonEventHeader().setStartEpochMicrosec(startEpochMicrosec);
+					jsonObjectSource.getEvent().getCommonEventHeader().setLastEpochMicrosec(lastEpochMicrosec);
+					jsonObjectSource.getEvent().getFaultFields().setVfStatus(jsonObject.getEvent().getFaultFields().getVfStatus());
+
+					String jsonString = gson.toJson(jsonObjectSource);
+
+					log.info(jsonString);
+					//update
+					BulkRequest bulkRequest = new BulkRequest();
+					bulkRequest.add(new IndexRequest(index,type,id).source(jsonString, XContentType.JSON));
+
+					if(config.isAsync()) {
+						client.bulkAsync(bulkRequest, RequestOptions.DEFAULT, listener);
+					}else {
+						try {
+							client.bulk(bulkRequest, RequestOptions.DEFAULT);
+						} catch (IOException e) {
+							log.error(id , e);
+						}
+					}
+
+					found = true;
+
+				} else {
+
+					//no Cleared
+					found = false;
+				}
+
+			} else {
+				log.info("event is null");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		return found; 
+
+		return found;
 	}
 
 }

@@ -31,7 +31,7 @@
 		<springcouchbase.version>3.1.2.RELEASE</springcouchbase.version>
 		<jackson.version>2.9.8</jackson.version>
 		<kafka.version>2.0.0</kafka.version>
-		<elasticsearchjava.version>7.0.0</elasticsearchjava.version>
+		<elasticsearchjava.version>6.7.0</elasticsearchjava.version>
 
 	</properties>
 
