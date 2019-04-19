@@ -22,7 +22,7 @@ CREATE TABLE `db` (
   `name` varchar(255) NOT NULL,
   `host` varchar(255) DEFAULT NULL,
   `port` int(11) DEFAULT NULL,
-  `database` varchar(255) DEFAULT NULL,
+  `database_name` varchar(255) DEFAULT NULL,
   `encrypt` bit(1) DEFAULT NULL,
   `login` varchar(255) DEFAULT NULL,
   `pass` varchar(255) DEFAULT NULL,
@@ -43,10 +43,10 @@ CREATE TABLE `map_db_topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-insert into db (name,host,login,pass,`database`) values ('Couchbase','dl_couchbase','dl','dl1234','datalake');
-insert into db (name,host) values ('Elasticsearch','dl_es');
-insert into db (name,host,port,`database`) values ('MongoDB','dl_mongodb',27017,'datalake');
-insert into db (name,host) values ('Druid','dl_druid');
+insert into db (`name`,`host`,`login`,`pass`,`database`) values ('Couchbase','dl_couchbase','dl','dl1234','datalake');
+insert into db (`name`,`host`) values ('Elasticsearch','dl_es');
+insert into db (`name`,`host`,`port`,`database`) values ('MongoDB','dl_mongodb',27017,'datalake');
+insert into db (`name`,`host`) values ('Druid','dl_druid');
 
 
 -- in production, default enabled should be off

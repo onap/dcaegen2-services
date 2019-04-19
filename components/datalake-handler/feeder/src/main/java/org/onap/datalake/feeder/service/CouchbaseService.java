@@ -59,21 +59,26 @@ public class CouchbaseService {
 	@Autowired
 	private DbService dbService;
 	
-	Bucket bucket;		
+	Bucket bucket;
+	private boolean isReady = false;
 
 	@PostConstruct
 	private void init() {
         // Initialize Couchbase Connection
-		
-		Db couchbase = dbService.getCouchbase();
-        Cluster cluster = CouchbaseCluster.create(couchbase.getHost());
-        cluster.authenticate(couchbase.getLogin(), couchbase.getPass());
-        bucket = cluster.openBucket(couchbase.getDatabase());
-
-		log.info("Connect to Couchbase {}", couchbase.getHost());
-		
-        // Create a N1QL Primary Index (but ignore if it exists)
-        bucket.bucketManager().createN1qlPrimaryIndex(true, false);                 
+        try {
+            Db couchbase = dbService.getCouchbase();
+            Cluster cluster = CouchbaseCluster.create(couchbase.getHost());
+            cluster.authenticate(couchbase.getLogin(), couchbase.getPass());
+            bucket = cluster.openBucket(couchbase.getDatabase());
+            log.info("Connect to Couchbase {}", couchbase.getHost());
+            // Create a N1QL Primary Index (but ignore if it exists)
+            bucket.bucketManager().createN1qlPrimaryIndex(true, false);
+        }
+        catch(Exception	ex)
+        {
+            isReady = false;
+        }
+        isReady = true;
 	}
 
 	@PreDestroy
