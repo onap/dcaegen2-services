@@ -1,0 +1,326 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e4124a2_37f35aca",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "Get all database names",
+      "range": {
+        "startLine": 75,
+        "startChar": 22,
+        "endLine": 75,
+        "endChar": 48
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "648e219f_3f0d4693",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "will this be any different from the input one?",
+      "range": {
+        "startLine": 119,
+        "startChar": 3,
+        "endLine": 119,
+        "endChar": 27
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb579cdb_80df1efd",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "this is un-needed, since we can find the name in dbConfig",
+      "range": {
+        "startLine": 149,
+        "startChar": 15,
+        "endLine": 149,
+        "endChar": 23
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eaa0feb1_5c87d68e",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "\"DbConfig dbConfig\" is better",
+      "range": {
+        "startLine": 152,
+        "startChar": 94,
+        "endLine": 152,
+        "endChar": 105
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0912a669_4367ec36",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "no need",
+      "range": {
+        "startLine": 164,
+        "startChar": 17,
+        "endLine": 164,
+        "endChar": 27
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4bbd539f_61e4865a",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "we may create a constructor\noldDb \u003d new Db(dbConfig)",
+      "range": {
+        "startLine": 165,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 4
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c61c9b56_898ac642",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "We may create a method in class Db, \nDbConfig retMsg \u003d oldDb.getDbConfig()\nmove this block to the method.",
+      "range": {
+        "startLine": 176,
+        "startChar": 1,
+        "endLine": 183,
+        "endChar": 30
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b8ac969_8b868a82",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "move this line to after line 196",
+      "range": {
+        "startLine": 200,
+        "startChar": 29,
+        "endLine": 203,
+        "endChar": 3
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f370abf_8e04dd17",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "fix this",
+      "range": {
+        "startLine": 229,
+        "startChar": 22,
+        "endLine": 229,
+        "endChar": 49
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "feb31255_c5059e67",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/domain/dbConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "Change to \"DbConfig\"",
+      "range": {
+        "startLine": 44,
+        "startChar": 13,
+        "endLine": 44,
+        "endChar": 21
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a926383_4ae08a34",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/domain/postReturnBody.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "Change to \"PostReturnBody\"",
+      "range": {
+        "startLine": 42,
+        "startChar": 13,
+        "endLine": 42,
+        "endChar": 27
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b17965aa_dc87cd30",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Db.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "Are these necessary?",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b02f743_a9d9f454",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Db.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "mysql may not like this name. We can change it to \u0027db\u0027.",
+      "range": {
+        "startLine": 64,
+        "startChar": 1,
+        "endLine": 64,
+        "endChar": 27
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "38894416_b72ab05a",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Db.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T19:13:59Z",
+      "side": 1,
+      "message": "Will this change have impact on Topic? Did you test the Topic REST API?",
+      "range": {
+        "startLine": 80,
+        "startChar": 1,
+        "endLine": 84,
+        "endChar": 2
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
