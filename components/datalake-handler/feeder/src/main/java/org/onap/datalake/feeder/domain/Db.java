@@ -31,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.checkerframework.checker.units.qual.C;
 
 /**
  * Domain class representing bid data storage
@@ -44,28 +45,42 @@ import lombok.Setter;
 @Table(name = "db")
 public class Db {
 	@Id
+	@Column(name="`name`")
 	private String name;
 
+	@Column(name="`host`")
 	private String host;
+
+	@Column(name="`port`")
 	private Integer port;
+
+	@Column(name="`login`")
 	private String login;
+
+	@Column(name="`pass`")
 	private String pass;
 
+	@Column(name="`database`")
 	private String database;
+
+	@Column(name="`encrypt`")
 	private Boolean encrypt;
-	
+
+	@Column(name="`property1`")
 	private String property1;
+
+	@Column(name="`property2`")
 	private String property2;
+
+	@Column(name="`property3`")
 	private String property3;
 
 	@JsonBackReference
-	@ManyToMany(mappedBy = "dbs", cascade = CascadeType.ALL)
-	/*
-	@ManyToMany(cascade=CascadeType.ALL)//, fetch=FetchType.EAGER) 
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(	name 				= "map_db_topic",
-				joinColumns 		= {  @JoinColumn(name="db_name")  },
-				inverseJoinColumns 	= {  @JoinColumn(name="topic_name")  }
-	) */
+			joinColumns 		= {  @JoinColumn(name="db_name")  },
+			inverseJoinColumns 	= {  @JoinColumn(name="topic_name")  }
+	)
 	protected Set<Topic> topics;
 
 	public Db() {
