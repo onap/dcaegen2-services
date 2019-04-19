@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e44390dc_62bc399f",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T06:39:54Z",
+      "side": 1,
+      "message": "should be private?",
+      "range": {
+        "startLine": 154,
+        "startChar": 1,
+        "endLine": 154,
+        "endChar": 7
+      },
+      "revId": "37183dfbb3eb310eaa7c0b3148bbb8ec954c0d79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6dc97cb_447aa157",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T06:39:54Z",
+      "side": 1,
+      "message": "false",
+      "range": {
+        "startLine": 155,
+        "startChar": 18,
+        "endLine": 155,
+        "endChar": 22
+      },
+      "revId": "37183dfbb3eb310eaa7c0b3148bbb8ec954c0d79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e61697f7_f918da1e",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T06:39:54Z",
+      "side": 1,
+      "message": "is this necessary? we can safely assume it is Epoch Microsec.\nif it is necessary, can do startEpochMicrosec\u003e1000000000000L",
+      "range": {
+        "startLine": 166,
+        "startChar": 25,
+        "endLine": 166,
+        "endChar": 122
+      },
+      "revId": "37183dfbb3eb310eaa7c0b3148bbb8ec954c0d79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "208f9358_ec12b8af",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T06:39:54Z",
+      "side": 1,
+      "message": "is endWith() better?",
+      "range": {
+        "startLine": 168,
+        "startChar": 18,
+        "endLine": 168,
+        "endChar": 26
+      },
+      "revId": "37183dfbb3eb310eaa7c0b3148bbb8ec954c0d79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6c47bfc_6c82ca91",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T06:39:54Z",
+      "side": 1,
+      "message": "If these 3 can uniquely identify a record, we can use them to composite an ID. Then we can query by ID.",
+      "range": {
+        "startLine": 179,
+        "startChar": 50,
+        "endLine": 184,
+        "endChar": 78
+      },
+      "revId": "37183dfbb3eb310eaa7c0b3148bbb8ec954c0d79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "80a89c5d_cc7174c7",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T06:39:54Z",
+      "side": 1,
+      "message": "This means that we only pick the last one. How many do we expect?",
+      "range": {
+        "startLine": 215,
+        "startChar": 5,
+        "endLine": 224,
+        "endChar": 6
+      },
+      "revId": "37183dfbb3eb310eaa7c0b3148bbb8ec954c0d79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23c12124_9e5ea503",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T06:39:54Z",
+      "side": 1,
+      "message": "we lost original info. Should we use other fields for the new times?",
+      "range": {
+        "startLine": 231,
+        "startChar": 5,
+        "endLine": 232,
+        "endChar": 96
+      },
+      "revId": "37183dfbb3eb310eaa7c0b3148bbb8ec954c0d79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6cf9a9ce_778acfe0",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T06:39:54Z",
+      "side": 1,
+      "message": "this bulkRequest contains only one record.",
+      "range": {
+        "startLine": 243,
+        "startChar": 23,
+        "endLine": 243,
+        "endChar": 34
+      },
+      "revId": "37183dfbb3eb310eaa7c0b3148bbb8ec954c0d79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86a0320b_dcc6ca95",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-19T06:39:54Z",
+      "side": 1,
+      "message": "debug",
+      "range": {
+        "startLine": 261,
+        "startChar": 8,
+        "endLine": 261,
+        "endChar": 12
+      },
+      "revId": "37183dfbb3eb310eaa7c0b3148bbb8ec954c0d79",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
