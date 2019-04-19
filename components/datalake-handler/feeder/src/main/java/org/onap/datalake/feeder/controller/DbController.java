@@ -20,27 +20,24 @@
 package org.onap.datalake.feeder.controller;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 
+import io.swagger.annotations.*;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.DbRepository;
+import org.onap.datalake.feeder.repository.TopicRepository;
 import org.onap.datalake.feeder.service.DbService;
+import org.onap.datalake.feeder.controller.domain.dbConfig;
+import org.onap.datalake.feeder.controller.domain.postReturnBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -57,6 +54,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping(value = "/dbs", produces = { MediaType.APPLICATION_JSON_VALUE })
+
 //@Api(value = "db", consumes = "application/json", produces = "application/json")
 public class DbController {
 
@@ -66,46 +64,92 @@ public class DbController {
 	private DbRepository dbRepository;
 
 	@Autowired
+	private TopicRepository topicRepository;
+
+	@Autowired
 	private DbService dbService;
 
 	//list all dbs 
-	@GetMapping("/")
+	@GetMapping("")
 	@ResponseBody
 	@ApiOperation(value="Get all databases' details.")
-	public Iterable<Db> list() throws IOException {
+	//public Iterable<Db> list() throws IOException {
+	public List<String> list() throws IOException {
 		Iterable<Db> ret = dbRepository.findAll();
-		return ret;
+		List<String> retString = new ArrayList<>();
+		for(Db db : ret)
+		{
+			log.info(db.getName());
+			retString.add(db.getName());
+
+		}
+		return retString;
 	}
 
-	//Read a db
+	//Create a  DB
+	@PostMapping("")
+	@ResponseBody
+	@ApiOperation(value="Create a new database.")
+	public postReturnBody<dbConfig> createDb(@RequestBody dbConfig db, BindingResult result, HttpServletResponse response) throws IOException {
+		if (result.hasErrors()) {
+			sendError(response, 400, "Malformed format of Post body: " + result.toString());
+			return null;
+		}
+
+		Db oldDb = dbService.getDb(db.getName());
+		if (oldDb != null) {
+			sendError(response, 400, "Db already exists: " + db.getName());
+			return null;
+		} else {
+			Db newdb = new Db();
+			newdb.setName(new String(db.getName()));
+			newdb.setHost(new String(db.getHost()));
+			newdb.setPort(db.getPort());
+			newdb.setLogin(new String(db.getLogin()));
+			newdb.setPass(new String(db.getPassword()));
+			newdb.setEncrypt(false);
+
+			if(db.getName() != "Elecsticsearch" || db.getName() != "Druid")
+			{
+				newdb.setDatabase(new String(db.getDatabase()));
+			}
+			dbRepository.save(newdb);
+			dbConfig retMsg;
+			postReturnBody<dbConfig> retBody = new postReturnBody<>();
+			retMsg = new dbConfig();
+			retMsg.setName(db.getName());
+			retMsg.setHost(db.getHost());
+			retMsg.setPort(db.getPort());
+			retBody.setReturnBody(retMsg);
+			retBody.setStatusCode(200);
+			return retBody;
+		}
+	}
+
+	//Show a db
 	//the topics are missing in the return, since in we use @JsonBackReference on Db's topics 
 	//need to the the following method to retrieve the topic list 
 	@GetMapping("/{dbName}")
 	@ResponseBody
 	@ApiOperation(value="Get a database's details.")
 	public Db getDb(@PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
-		Db db = dbService.getDb(dbName);
+		/*Db db = dbService.getDb(dbName);
+		if (db == null) {
+			sendError(response, 404, "Db not found: " + dbName);
+		}*/
+		Db db = dbRepository.findByName(dbName);
 		if (db == null) {
 			sendError(response, 404, "Db not found: " + dbName);
 		}
 		return db;
 	}
 
-	//Read topics in a DB 
-	@GetMapping("/{dbName}/topics")
-	@ResponseBody
-	@ApiOperation(value="Get a database's all topics.")
-	public Set<Topic> getDbTopics(@PathVariable("dbName") String dbName) throws IOException {
-		Db db = dbService.getDb(dbName);
-		Set<Topic> topics = db.getTopics();
-		return topics;
-	}
 
 	//Update Db
-	@PutMapping("/")
+	@PutMapping("/{dbName}")
 	@ResponseBody
 	@ApiOperation(value="Update a database.")
-	public Db updateDb(@RequestBody Db db, BindingResult result, HttpServletResponse response) throws IOException {
+	public postReturnBody<dbConfig> updateDb(@PathVariable("dbName") String dbName, @RequestBody dbConfig db, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
 			sendError(response, 400, "Error parsing DB: " + result.toString());
@@ -117,29 +161,80 @@ public class DbController {
 			sendError(response, 404, "Db not found: " + db.getName());
 			return null;
 		} else {
-			dbRepository.save(db);
-			return db;
+			oldDb.setName(new String(db.getName()));
+			oldDb.setHost(new String(db.getHost()));
+			oldDb.setPort(db.getPort());
+			oldDb.setLogin(new String(db.getLogin()));
+			oldDb.setPass(new String(db.getPassword()));
+			oldDb.setEncrypt(false);
+
+			if(oldDb.getName() != "Elecsticsearch" || oldDb.getName() != "Druid")
+			{
+				oldDb.setDatabase(new String(db.getDatabase()));
+			}
+			dbRepository.save(oldDb);
+			dbConfig retMsg;
+			postReturnBody<dbConfig> retBody = new postReturnBody<>();
+			retMsg = new dbConfig();
+			retMsg.setName(db.getName());
+			retMsg.setHost(db.getHost());
+			retMsg.setPort(db.getPort());
+			retBody.setReturnBody(retMsg);
+			retBody.setStatusCode(200);
+			return retBody;
 		}
 	}
 
-	@PostMapping("/")
+	//Delete a db
+	//the topics are missing in the return, since in we use @JsonBackReference on Db's topics
+	//need to the the following method to retrieve the topic list
+	@DeleteMapping("/{dbName}")
 	@ResponseBody
-	@ApiOperation(value="Create a new database.")
-	public Db createDb(@RequestBody Db db, BindingResult result, HttpServletResponse response) throws IOException {
+	@ApiOperation(value="Delete a database.")
+	public void deleteDb(@PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
 
-		if (result.hasErrors()) {
-			sendError(response, 400, "Error parsing DB: " + result.toString());
-			return null;
+		Db delDb = dbRepository.findByName(dbName);
+		Set<Topic> topicRelation = delDb.getTopics();
+		topicRelation.clear();
+		dbRepository.save(delDb);
+		dbRepository.delete(delDb);
+		if (delDb == null) {
+			sendError(response, 404, "Db not found: " + dbName);
 		}
+		response.setStatus(204);
+	}
 
-		Db oldDb = dbService.getDb(db.getName());
-		if (oldDb != null) {
-			sendError(response, 400, "Db already exists: " + db.getName());
+	//Read topics in a DB
+	@GetMapping("/{dbName}/topics")
+	@ResponseBody
+	@ApiOperation(value="Get a database's all topics.")
+	public Set<Topic> getDbTopics(@PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
+		//Db db = dbService.getDb(dbName);
+		Set<Topic> topics;
+		try {
+			Db db = dbRepository.findByName(dbName);
+			topics = db.getTopics();
+		}catch(Exception ex)
+		{
+			sendError(response, 404, "DB: " + dbName + " or Topics not found");
 			return null;
-		} else {
-			dbRepository.save(db);
-			return db;
+
 		}
+		return topics;
+	}
+
+
+	@PostMapping("/verify")
+	@ResponseBody
+	@ApiOperation(value="Get a database's all topics.")
+	public postReturnBody<dbConfig> verifyDbConnection(@RequestBody dbConfig db, HttpServletResponse response) throws IOException {
+
+		/*
+			Not implemented yet.
+		 */
+
+		response.setStatus(501);
+		return null;
 	}
 
 	private void sendError(HttpServletResponse response, int sc, String msg) throws IOException {

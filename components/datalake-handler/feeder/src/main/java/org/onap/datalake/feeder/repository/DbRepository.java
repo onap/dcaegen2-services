@@ -33,4 +33,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface DbRepository extends CrudRepository<Db, String> {
 
+    Db findByName(String Name);
+
 }
