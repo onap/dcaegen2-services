@@ -67,7 +67,7 @@ public class Topic {
 	//@ManyToMany(mappedBy = "topics", cascade=CascadeType.ALL)
 	@JsonBackReference
 	//@JsonManagedReference
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(	name 				= "map_db_topic",
     			joinColumns 		= {  @JoinColumn(name="topic_name")  },
     			inverseJoinColumns 	= {  @JoinColumn(name="db_name")  }
