@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "b78508c9_73b01382",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-04-20T14:04:40Z",
+      "side": 1,
+      "message": "We try to avoid return anything from the HTTP request directly.",
+      "parentUuid": "648e219f_3f0d4693",
+      "range": {
+        "startLine": 119,
+        "startChar": 3,
+        "endLine": 119,
+        "endChar": 27
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb579cdb_80df1efd",
         "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
         "patchSetId": 5
@@ -59,6 +83,30 @@
       "writtenOn": "2019-04-19T19:13:59Z",
       "side": 1,
       "message": "this is un-needed, since we can find the name in dbConfig",
+      "range": {
+        "startLine": 149,
+        "startChar": 15,
+        "endLine": 149,
+        "endChar": 23
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "60fe23a4_24da38b2",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-04-20T14:04:40Z",
+      "side": 1,
+      "message": "It\u0027s the API definition. We try to make the API format consistency rather than simplify the REST Path or the HTTP body.",
+      "parentUuid": "fb579cdb_80df1efd",
       "range": {
         "startLine": 149,
         "startChar": 15,
@@ -117,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "ab977a05_cf657e0f",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-04-20T14:04:40Z",
+      "side": 1,
+      "message": "The objects are from the HTTP request. To create a new object for a db operation is safer than reference it directly.",
+      "parentUuid": "0912a669_4367ec36",
+      "range": {
+        "startLine": 164,
+        "startChar": 17,
+        "endLine": 164,
+        "endChar": 27
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bbd539f_61e4865a",
         "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
         "patchSetId": 5
@@ -140,6 +212,30 @@
     },
     {
       "key": {
+        "uuid": "949d9e4a_9f95373b",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-04-20T14:04:40Z",
+      "side": 1,
+      "message": "it the update API. I think we can use the delDB without cloning or create a new object.",
+      "parentUuid": "4bbd539f_61e4865a",
+      "range": {
+        "startLine": 165,
+        "startChar": 3,
+        "endLine": 174,
+        "endChar": 4
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c61c9b56_898ac642",
         "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
         "patchSetId": 5
@@ -151,6 +247,30 @@
       "writtenOn": "2019-04-19T19:13:59Z",
       "side": 1,
       "message": "We may create a method in class Db, \nDbConfig retMsg \u003d oldDb.getDbConfig()\nmove this block to the method.",
+      "range": {
+        "startLine": 176,
+        "startChar": 1,
+        "endLine": 183,
+        "endChar": 30
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f70273e_03331fd6",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-04-20T14:04:40Z",
+      "side": 1,
+      "message": "We should not process any HTTP message in class Db. We can implement a function in the DbController to manipulate the HTTP messages.",
+      "parentUuid": "c61c9b56_898ac642",
       "range": {
         "startLine": 176,
         "startChar": 1,
@@ -278,6 +398,30 @@
     },
     {
       "key": {
+        "uuid": "b33cdb84_baa9ce3a",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Db.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-04-20T14:04:40Z",
+      "side": 1,
+      "message": "Yes or it leads the spring crash at run time.",
+      "parentUuid": "b17965aa_dc87cd30",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b02f743_a9d9f454",
         "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Db.java",
         "patchSetId": 5
@@ -301,6 +445,30 @@
     },
     {
       "key": {
+        "uuid": "cfb84220_b6cc09ed",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Db.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-04-20T14:04:40Z",
+      "side": 1,
+      "message": "databaseName should be more suitable.",
+      "parentUuid": "5b02f743_a9d9f454",
+      "range": {
+        "startLine": 64,
+        "startChar": 1,
+        "endLine": 64,
+        "endChar": 27
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "38894416_b72ab05a",
         "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Db.java",
         "patchSetId": 5
@@ -312,6 +480,30 @@
       "writtenOn": "2019-04-19T19:13:59Z",
       "side": 1,
       "message": "Will this change have impact on Topic? Did you test the Topic REST API?",
+      "range": {
+        "startLine": 80,
+        "startChar": 1,
+        "endLine": 84,
+        "endChar": 2
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5108c67c_77bfe24e",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Db.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-04-20T14:04:40Z",
+      "side": 1,
+      "message": "Wait for me finishing the Topic APIs.",
+      "parentUuid": "38894416_b72ab05a",
       "range": {
         "startLine": 80,
         "startChar": 1,
