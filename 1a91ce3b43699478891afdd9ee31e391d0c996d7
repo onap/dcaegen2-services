@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "cf5fef37_5cb7929b",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-21T06:18:50Z",
+      "side": 1,
+      "message": "use String.equals() to compare 2 Strings",
+      "range": {
+        "startLine": 112,
+        "startChar": 18,
+        "endLine": 112,
+        "endChar": 22
+      },
+      "revId": "1a91ce3b43699478891afdd9ee31e391d0c996d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "648e219f_3f0d4693",
         "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
         "patchSetId": 5
