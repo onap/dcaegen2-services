@@ -43,9 +43,6 @@ inputs:
     type: integer
     description: number of instances
     default: 1
-  host_port:
-    description: port on Kubernetes host where bbs-event-processor API will be exposed
-    default: 0
   pnf_reregistration_url:
     type: string
   cpe_authentication_url:
@@ -110,7 +107,7 @@ inputs:
     default: true
 node_templates:
   bbs-event-processor:
-    type: dcae.nodes.ContainerizedPlatformComponent
+    type: dcae.nodes.ContainerizedServiceComponent
     properties:
       application_config:
         streams_subscribes:
@@ -168,10 +165,6 @@ node_templates:
         application.ssl.trustStorePasswordPath: "/opt/app/bbs-event-processor/etc/cert/trust.pass"
         application.ssl.enableAaiCertAuth: { get_input: aai_secure_enable_cert }
         application.ssl.enableDmaapCertAuth: { get_input: dmaap_secure_enable_cert }
-      host_port:
-          { get_input: host_port }
-      container_port:
-        8100
       docker_config:
         healthcheck:
           endpoint: /heartbeat
@@ -181,10 +174,15 @@ node_templates:
       image:
         { get_input: tag_version }
       replicas: {get_input: replicas}
-      name: 'bbs-event-processor'
-      dns_name: 'bbs-event-processor'
+      service_component_type: 'bbs-event-processor'
       log_info:
         log_directory: "/opt/app/bbs-event-processor/logs"
       tls_info:
         cert_directory: '/opt/app/bbs-event-processor/etc/cert'
         use_tls: true
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        start:
+          inputs:
+            ports:
+              - concat: ["8100:", "30810"]

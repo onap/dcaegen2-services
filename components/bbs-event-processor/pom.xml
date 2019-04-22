@@ -40,7 +40,6 @@
         <bbs-event-processor.main.class>org.onap.bbs.event.processor.Application</bbs-event-processor.main.class>
         <dependency.dir.name>libs</dependency.dir.name>
         <dependency.dir.location>${project.build.directory}/${dependency.dir.name}</dependency.dir.location>
-        <docker.artifact.dir>/opt</docker.artifact.dir>
         <docker.image.name>onap/${project.groupId}.${project.artifactId}</docker.image.name>
         <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
     </properties>
@@ -249,8 +248,8 @@
                 </plugin>
                 <plugin>
                     <groupId>com.spotify</groupId>
-                    <artifactId>docker-maven-plugin</artifactId>
-                    <version>1.2.0</version>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>1.4.10</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -323,29 +322,17 @@
             </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
                 <configuration>
-                    <serverId>${onap.nexus.dockerregistry.daily}</serverId>
-                    <imageName>${docker.image.name}</imageName>
-                    <imageTags>
-                        <tag>latest</tag>
-                    </imageTags>
-                    <baseImage>openjdk:${java.version}-jre-alpine</baseImage>
-                    <workdir>${docker.artifact.dir}</workdir>
-                    <resources>
-                        <resource>
-                            <directory>${dependency.dir.location}</directory>
-                            <targetPath>${dependency.dir.name}</targetPath>
-                        </resource>
-                        <resource>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                    <exposes>
-                        <expose>8100</expose>
-                    </exposes>
-                    <entryPoint>["java", "-jar", "${project.build.finalName}.jar"]</entryPoint>
+                    <contextDirectory>${project.basedir}</contextDirectory>
+                    <repository>${docker.image.name}</repository>
+                    <tag>latest</tag>
+                    <buildArgs>
+                        <PROJECT_BUILD_DIR_NAME>target</PROJECT_BUILD_DIR_NAME>
+                        <DEPENDENCIES_DIR>${dependency.dir.name}</DEPENDENCIES_DIR>
+                        <DOCKER_ARTIFACT_DIR>/opt</DOCKER_ARTIFACT_DIR>
+                        <FINAL_JAR>${project.build.finalName}.jar</FINAL_JAR>
+                    </buildArgs>
                 </configuration>
                 <executions>
                     <execution>
@@ -360,11 +347,11 @@
                         <phase>deploy</phase>
                         <goals>
                             <goal>tag</goal>
+                            <goal>push</goal>
                         </goals>
                         <configuration>
-                            <image>${docker.image.name}:latest</image>
-                            <newName>${onap.nexus.dockerregistry.daily}/${docker.image.name}:latest</newName>
-                            <pushImage>true</pushImage>
+                            <repository>${onap.nexus.dockerregistry.daily}/${docker.image.name}</repository>
+                            <tag>latest</tag>
                         </configuration>
                     </execution>
                     <execution>
@@ -372,11 +359,11 @@
                         <phase>deploy</phase>
                         <goals>
                             <goal>tag</goal>
+                            <goal>push</goal>
                         </goals>
                         <configuration>
-                            <image>${docker.image.name}:latest</image>
-                            <newName>${onap.nexus.dockerregistry.daily}/${docker.image.name}:${project.version}</newName>
-                            <pushImage>true</pushImage>
+                            <repository>${onap.nexus.dockerregistry.daily}/${docker.image.name}</repository>
+                            <tag>${project.version}</tag>
                         </configuration>
                     </execution>
                     <execution>
@@ -384,11 +371,11 @@
                         <phase>deploy</phase>
                         <goals>
                             <goal>tag</goal>
+                            <goal>push</goal>
                         </goals>
                         <configuration>
-                            <image>${docker.image.name}:latest</image>
-                            <newName>${onap.nexus.dockerregistry.daily}/${docker.image.name}:${project.version}-${maven.build.timestamp}Z</newName>
-                            <pushImage>true</pushImage>
+                            <repository>${onap.nexus.dockerregistry.daily}/${docker.image.name}</repository>
+                            <tag>${project.version}-${maven.build.timestamp}Z</tag>
                         </configuration>
                     </execution>
                 </executions>
