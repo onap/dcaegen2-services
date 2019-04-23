@@ -61,6 +61,9 @@ public class ApplicationConfigurationTest {
         assertTrue(config.getKafkaConsumerCount() > 0);
         assertNotNull(config.isAsync());
         assertNotNull(config.isEnableSSL());
+        assertNotNull(config.getDefaultTopicName());
+        assertNotNull(config.getRawDataLabel());
+        assertNotNull(config.getTimestampLabel());
     }
 
 }

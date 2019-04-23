@@ -23,6 +23,7 @@ package org.onap.datalake.feeder.service;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.slf4j.Logger;
@@ -41,6 +42,9 @@ public class TopicService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+	@Autowired
+	private ApplicationConfiguration config;
+	
 	@Autowired
 	private TopicRepository topicRepository;
 
@@ -76,7 +80,13 @@ public class TopicService {
 	}
 
 	public Topic getDefaultTopic() {
-		return getTopic("_DL_DEFAULT_");
+		return getTopic(config.getDefaultTopicName());
 	}
 
+	public boolean istDefaultTopic(Topic topic) {
+		if (topic == null) {
+			return false;
+		}
+		return topic.getName().equals(config.getDefaultTopicName());
+	}
 }

@@ -53,4 +53,8 @@ public class ApplicationConfiguration {
 	private boolean async;
 	private boolean enableSSL;
 
+	private String timestampLabel;
+	private String rawDataLabel;
+	
+	private String defaultTopicName;
 }

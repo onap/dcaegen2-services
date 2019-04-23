@@ -23,6 +23,7 @@ package org.onap.datalake.feeder.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
@@ -36,6 +37,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.TopicRepository;
@@ -49,6 +51,11 @@ import org.onap.datalake.feeder.repository.TopicRepository;
 @RunWith(MockitoJUnitRunner.class)
 public class TopicServiceTest {
 
+	static String DEFAULT_TOPIC_NAME = "_DL_DEFAULT_";
+
+	@Mock
+	private ApplicationConfiguration config;
+	
 	@Mock
 	private TopicRepository topicRepository;
 
@@ -74,9 +81,10 @@ public class TopicServiceTest {
 
 	@Test
 	public void testGetDefaultTopic() {
-		String name = "_DL_DEFAULT_";
-		when(topicRepository.findById(name)).thenReturn(Optional.of(new Topic(name)));
-		assertEquals(topicService.getDefaultTopic(), new Topic(name));
+		when(topicRepository.findById(DEFAULT_TOPIC_NAME)).thenReturn(Optional.of(new Topic(DEFAULT_TOPIC_NAME)));
+		when(config.getDefaultTopicName()).thenReturn(DEFAULT_TOPIC_NAME);
+		assertEquals(topicService.getDefaultTopic(), new Topic(DEFAULT_TOPIC_NAME));
+		assertTrue(topicService.istDefaultTopic(new Topic(DEFAULT_TOPIC_NAME)));
 	}
 
 	@Test(expected = IOException.class)

@@ -192,6 +192,7 @@ public class DbController {
 		Db delDb = dbRepository.findByName(dbName);
 		if (delDb == null) {
 			sendError(response, 404, "Db not found: " + dbName);
+			return;
 		}
 		Set<Topic> topicRelation = delDb.getTopics();
 		topicRelation.clear();

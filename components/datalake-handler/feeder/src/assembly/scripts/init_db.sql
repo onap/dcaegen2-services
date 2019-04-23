@@ -43,9 +43,9 @@ CREATE TABLE `map_db_topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-insert into db (`name`,`host`,`login`,`pass`,`database`) values ('Couchbase','dl_couchbase','dl','dl1234','datalake');
+insert into db (`name`,`host`,`login`,`pass`,`database_name`) values ('Couchbase','dl_couchbase','dl','dl1234','datalake');
 insert into db (`name`,`host`) values ('Elasticsearch','dl_es');
-insert into db (`name`,`host`,`port`,`database`) values ('MongoDB','dl_mongodb',27017,'datalake');
+insert into db (`name`,`host`,`port`,`database_name`) values ('MongoDB','dl_mongodb',27017,'datalake');
 insert into db (`name`,`host`) values ('Druid','dl_druid');
 
 

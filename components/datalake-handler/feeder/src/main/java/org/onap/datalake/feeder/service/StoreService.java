@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map; 
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -34,6 +34,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
+import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.enumeration.DataFormat;
 import org.slf4j.Logger;
@@ -41,16 +42,17 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
- 
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory; 
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
  * Service to store messages to varieties of DBs
  * 
- * comment out YAML support, since AML is for config and don't see this data type in DMaaP. Do we need to support XML?
+ * comment out YAML support, since AML is for config and don't see this data
+ * type in DMaaP. Do we need to support XML?
  * 
  * @author Guobiao Mo
  *
@@ -58,6 +60,9 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 @Service
 public class StoreService {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private ApplicationConfiguration config;
 
 	@Autowired
 	private TopicService topicService;
@@ -71,9 +76,9 @@ public class StoreService {
 	@Autowired
 	private ElasticsearchService elasticsearchService;
 
-	private Map<String, Topic> topicMap = new HashMap<>(); 
+	private Map<String, Topic> topicMap = new HashMap<>();
 
-	private ObjectMapper yamlReader;	
+	private ObjectMapper yamlReader;
 
 	@PostConstruct
 	private void init() {
@@ -112,14 +117,14 @@ public class StoreService {
 		String text = pair.getRight();
 
 		//for debug, to be remove
-//		String topicStr = topic.getId();
-//		if (!"TestTopic1".equals(topicStr) && !"msgrtr.apinode.metrics.dmaap".equals(topicStr) && !"AAI-EVENT".equals(topicStr) && !"unauthenticated.DCAE_CL_OUTPUT".equals(topicStr) && !"unauthenticated.SEC_FAULT_OUTPUT".equals(topicStr)) {
-	//		log.debug("{} ={}", topicStr, text);
+		//		String topicStr = topic.getId();
+		//		if (!"TestTopic1".equals(topicStr) && !"msgrtr.apinode.metrics.dmaap".equals(topicStr) && !"AAI-EVENT".equals(topicStr) && !"unauthenticated.DCAE_CL_OUTPUT".equals(topicStr) && !"unauthenticated.SEC_FAULT_OUTPUT".equals(topicStr)) {
+		//		log.debug("{} ={}", topicStr, text);
 		//}
 
 		boolean storeRaw = topic.isSaveRaw();
 
-		JSONObject json = null;		
+		JSONObject json = null;
 
 		DataFormat dataFormat = topic.getDataFormat();
 
@@ -129,7 +134,7 @@ public class StoreService {
 			break;
 		case XML://XML and YAML can be directly inserted into ES, we may not need to convert it to JSON 
 			json = XML.toJSONObject(text);
-			break;		
+			break;
 		case YAML:// Do we need to support YAML?
 			Object obj = yamlReader.readValue(text, Object.class);
 			ObjectMapper jsonWriter = new ObjectMapper();
@@ -145,10 +150,11 @@ public class StoreService {
 		//FIXME for debug, to be remove
 		json.remove("_id");
 		json.remove("_dl_text_");
+		json.remove("_dl_type_");
 
-		json.put("_ts", timestamp);
+		json.put(config.getTimestampLabel(), timestamp);
 		if (storeRaw) {
-			json.put("_text", text);
+			json.put(config.getRawDataLabel(), text);
 		}
 
 		return json;

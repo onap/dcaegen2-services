@@ -34,6 +34,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Topic;
 
 import java.util.ArrayList;
@@ -98,6 +99,8 @@ public class CouchbaseServiceTest {
 
     @Test
     public void testSaveJsonsWithTopicId() {
+    	ApplicationConfiguration appConfig = new ApplicationConfiguration();
+    	appConfig.setTimestampLabel("datalake_ts_");
 
         String text = "{ data: { data2 : { value : 'hello'}}}";
 
@@ -106,16 +109,19 @@ public class CouchbaseServiceTest {
         Topic topic = new Topic("test getMessageId");
         topic.setMessageIdPath("/data/data2/value");
         List<JSONObject> jsons = new ArrayList<>();
-        json.put("_ts", 1234);
+        json.put(appConfig.getTimestampLabel(), 1234);
         jsons.add(json);
         CouchbaseService couchbaseService = new CouchbaseService();
         couchbaseService.bucket = bucket;
+        couchbaseService.config = appConfig;
         couchbaseService.saveJsons(topic, jsons);
 
     }
 
     @Test
     public void testSaveJsonsWithOutTopicId() {
+    	ApplicationConfiguration appConfig = new ApplicationConfiguration();
+    	appConfig.setTimestampLabel("datalake_ts_");
 
         String text = "{ data: { data2 : { value : 'hello'}}}";
 
@@ -123,10 +129,11 @@ public class CouchbaseServiceTest {
 
         Topic topic = new Topic("test getMessageId");
         List<JSONObject> jsons = new ArrayList<>();
-        json.put("_ts", 1234);
+        json.put(appConfig.getTimestampLabel(), 1234);
         jsons.add(json);
         CouchbaseService couchbaseService = new CouchbaseService();
         couchbaseService.bucket = bucket;
+        couchbaseService.config = appConfig;
         couchbaseService.saveJsons(topic, jsons);
     }
 

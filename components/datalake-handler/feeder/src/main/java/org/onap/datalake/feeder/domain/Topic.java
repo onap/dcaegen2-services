@@ -111,10 +111,6 @@ public class Topic {
 		this.name = name;
 	}
 
-	public boolean isDefault() {
-		return "_DL_DEFAULT_".equals(name);
-	}
-
 	public boolean isEnabled() {
 		return is(enabled, Topic::isEnabled);
 	}

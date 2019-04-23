@@ -98,9 +98,6 @@ public class TopicTest {
         Topic testTopic = new Topic("test");
         testTopic.setDefaultTopic(defaultTopic);
 
-        assertTrue(defaultTopic.isDefault());
-        assertFalse(testTopic.isDefault());
-
         assertTrue(testTopic.equals(new Topic("test")));
         assertEquals(testTopic.hashCode(), (new Topic("test")).hashCode());
 

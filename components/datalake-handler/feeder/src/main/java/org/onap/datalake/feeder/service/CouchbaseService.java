@@ -27,6 +27,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
  
 import org.json.JSONObject;
+import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.slf4j.Logger;
@@ -57,6 +58,9 @@ public class CouchbaseService {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
+	ApplicationConfiguration config;
+
+	@Autowired
 	private DbService dbService;
 	
 	Bucket bucket;
@@ -73,12 +77,12 @@ public class CouchbaseService {
             log.info("Connect to Couchbase {}", couchbase.getHost());
             // Create a N1QL Primary Index (but ignore if it exists)
             bucket.bucketManager().createN1qlPrimaryIndex(true, false);
+            isReady = true;
         }
         catch(Exception	ex)
         {
             isReady = false;
         }
-        isReady = true;
 	}
 
 	@PreDestroy
@@ -92,7 +96,7 @@ public class CouchbaseService {
 			//convert to Couchbase JsonObject from org.json JSONObject
 			JsonObject jsonObject = JsonObject.fromJson(json.toString());	
 
-			long timestamp = jsonObject.getLong("_ts");//this is Kafka time stamp, which is added in StoreService.messageToJson()
+			long timestamp = jsonObject.getLong(config.getTimestampLabel());//this is Kafka time stamp, which is added in StoreService.messageToJson()
 
 			//setup TTL
 			int expiry = (int) (timestamp/1000L) + topic.getTtl()*3600*24; //in second
@@ -102,6 +106,7 @@ public class CouchbaseService {
 			documents.add(doc);
 		}
 		saveDocuments(documents);		
+		log.debug("saved text to topic = {}, this batch count = {} ", topic, documents.size());	
 	}
 
 	public String getId(Topic topic, JSONObject json) {

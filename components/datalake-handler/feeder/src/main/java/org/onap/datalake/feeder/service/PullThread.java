@@ -125,7 +125,7 @@ public class PullThread implements Runnable {
 					List<ConsumerRecord<String, String>> partitionRecords = records.records(partition);
 					for (ConsumerRecord<String, String> record : partitionRecords) {
 						messages.add(Pair.of(record.timestamp(), record.value()));
-						log.debug("threadid={} topic={}, timestamp={} key={}, offset={}, partition={}, value={}", id, record.topic(), record.timestamp(), record.key(), record.offset(), record.partition(), record.value());
+						//log.debug("threadid={} topic={}, timestamp={} key={}, offset={}, partition={}, value={}", id, record.topic(), record.timestamp(), record.key(), record.offset(), record.partition(), record.value());
 					}
 					storeService.saveMessages(partition.topic(), messages);
 					log.info("topic={} count={}", partition.topic(), partitionRecords.size());//TODO we may record this number to DB

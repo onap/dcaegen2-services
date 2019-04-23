@@ -49,18 +49,19 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * This controller manages topic settings. 
+ * This controller manages topic settings.
  * 
- * Topic "_DL_DEFAULT_" acts as the default. For example, if a topic's enabled=null, _DL_DEFAULT_.enabled is used for that topic. 
- * All the settings are saved in database. 
- * topic "_DL_DEFAULT_" is populated at setup by a DB script.
+ * Topic "_DL_DEFAULT_" acts as the default. For example, if a topic's
+ * enabled=null, _DL_DEFAULT_.enabled is used for that topic. All the settings
+ * are saved in database. topic "_DL_DEFAULT_" is populated at setup by a DB
+ * script.
  * 
  * @author Guobiao Mo
  *
  */
 
 @RestController
-@RequestMapping(value = "/topics", produces = { MediaType.APPLICATION_JSON_VALUE })//, consumes= {MediaType.APPLICATION_JSON_UTF8_VALUE})
+@RequestMapping(value = "/topics", produces = { MediaType.APPLICATION_JSON_VALUE }) //, consumes= {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class TopicController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -70,23 +71,23 @@ public class TopicController {
 
 	@Autowired
 	private TopicRepository topicRepository;
-	
+
 	@Autowired
 	private TopicService topicService;
 
 	@Autowired
 	private DbService dbService;
-	
+
 	@GetMapping("/dmaap/")
 	@ResponseBody
-	@ApiOperation(value="List all topic names in DMaaP.")
+	@ApiOperation(value = "List all topic names in DMaaP.")
 	public List<String> listDmaapTopics() throws IOException {
 		return dmaapService.getTopics();
 	}
 
 	@GetMapping("/")
 	@ResponseBody
-	@ApiOperation(value="List all topics' settings.")
+	@ApiOperation(value = "List all topics' settings.")
 	public Iterable<Topic> list() throws IOException {
 		Iterable<Topic> ret = topicRepository.findAll();
 		return ret;
@@ -94,7 +95,7 @@ public class TopicController {
 
 	@GetMapping("/{topicName}")
 	@ResponseBody
-	@ApiOperation(value="Get a topic's settings.")
+	@ApiOperation(value = "Get a topic's settings.")
 	public Topic getTopic(@PathVariable("topicName") String topicName) throws IOException {
 		Topic topic = topicService.getTopic(topicName);
 		return topic;
@@ -102,7 +103,7 @@ public class TopicController {
 
 	@GetMapping("/{topicName}/dbs")
 	@ResponseBody
-	@ApiOperation(value="Get all DBs in a topic.")
+	@ApiOperation(value = "Get all DBs in a topic.")
 	public Set<Db> getTopicDbs(@PathVariable("topicName") String topicName) throws IOException {
 		Topic topic = topicService.getTopic(topicName);
 		Set<Db> dbs = topic.getDbs();
@@ -113,50 +114,50 @@ public class TopicController {
 	//One exception is that old DBs are kept
 	@PutMapping("/")
 	@ResponseBody
-	@ApiOperation(value="Update a topic.")
+	@ApiOperation(value = "Update a topic.")
 	public Topic updateTopic(@RequestBody Topic topic, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
-			sendError(response, 400, "Error parsing Topic: "+result.toString());
-			return null; 
+			sendError(response, 400, "Error parsing Topic: " + result.toString());
+			return null;
 		}
 
 		Topic oldTopic = getTopic(topic.getName());
 		if (oldTopic == null) {
-			sendError(response, 404, "Topic not found "+topic.getName());
-			return null; 
+			sendError(response, 404, "Topic not found " + topic.getName());
+			return null;
 		} else {
-			if(!topic.isDefault()) {
+			if (!topicService.istDefaultTopic(topic)) {
 				Topic defaultTopic = topicService.getDefaultTopic();
 				topic.setDefaultTopic(defaultTopic);
 			}
-			
+
 			topic.setDbs(oldTopic.getDbs());
 			topicRepository.save(topic);
 			return topic;
 		}
 	}
- 
+
 	@PostMapping("/")
 	@ResponseBody
-	@ApiOperation(value="Create a new topic.")
+	@ApiOperation(value = "Create a new topic.")
 	public Topic createTopic(@RequestBody Topic topic, BindingResult result, HttpServletResponse response) throws IOException {
-		
+
 		if (result.hasErrors()) {
-			sendError(response, 400, "Error parsing Topic: "+result.toString());
+			sendError(response, 400, "Error parsing Topic: " + result.toString());
 			return null;
 		}
 
 		Topic oldTopic = getTopic(topic.getName());
 		if (oldTopic != null) {
-			sendError(response, 400, "Topic already exists "+topic.getName());
+			sendError(response, 400, "Topic already exists " + topic.getName());
 			return null;
 		} else {
-			if(!topic.isDefault()) {
+			if (!topicService.istDefaultTopic(topic)) {
 				Topic defaultTopic = topicService.getDefaultTopic();
 				topic.setDefaultTopic(defaultTopic);
 			}
-			
+
 			topicRepository.save(topic);
 			return topic;
 		}
@@ -164,32 +165,32 @@ public class TopicController {
 
 	@DeleteMapping("/{topicName}/db/{dbName}")
 	@ResponseBody
-	@ApiOperation(value="Delete a DB from a topic.")
+	@ApiOperation(value = "Delete a DB from a topic.")
 	public Set<Db> deleteDb(@PathVariable("topicName") String topicName, @PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
 		Topic topic = topicService.getTopic(topicName);
 		Set<Db> dbs = topic.getDbs();
 		dbs.remove(new Db(dbName));
-		 
+
 		topicRepository.save(topic);
-		return topic.getDbs();		 
+		return topic.getDbs();
 	}
 
 	@PutMapping("/{topicName}/db/{dbName}")
 	@ResponseBody
-	@ApiOperation(value="Add a DB to a topic.")
+	@ApiOperation(value = "Add a DB to a topic.")
 	public Set<Db> addDb(@PathVariable("topicName") String topicName, @PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
 		Topic topic = topicService.getTopic(topicName);
-		Set<Db> dbs = topic.getDbs();		
+		Set<Db> dbs = topic.getDbs();
 
-		Db db = dbService.getDb(dbName);		
+		Db db = dbService.getDb(dbName);
 		dbs.add(db);
-		 
+
 		topicRepository.save(topic);
-		return topic.getDbs();		 
+		return topic.getDbs();
 	}
-	
+
 	private void sendError(HttpServletResponse response, int sc, String msg) throws IOException {
 		log.info(msg);
-		response.sendError(sc, msg);		
+		response.sendError(sc, msg);
 	}
 }
