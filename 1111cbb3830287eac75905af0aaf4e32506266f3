@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5270afc5_8b0a5b0a",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-23T06:23:13Z",
+      "side": 1,
+      "message": "if eName is like \"ClearedEvent_Cleared\", this is a problem.\nSince we want to remove the last \"Cleared\", we can use substring().",
+      "range": {
+        "startLine": 180,
+        "startChar": 25,
+        "endLine": 180,
+        "endChar": 47
+      },
+      "revId": "1111cbb3830287eac75905af0aaf4e32506266f3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d17f971_7de66b9e",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-23T06:23:13Z",
+      "side": 1,
+      "message": "move this block to init(), just like listener in line 101\n\nshould log the error in line 205",
+      "range": {
+        "startLine": 195,
+        "startChar": 5,
+        "endLine": 207,
+        "endChar": 7
+      },
+      "revId": "1111cbb3830287eac75905af0aaf4e32506266f3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71c1670e_f4740f78",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-23T06:23:13Z",
+      "side": 1,
+      "message": "for async, we don\u0027t know what to set for found.\nLet\u0027s don\u0027t support async for cleared messages.\ncleared messages amount should not be too many.",
+      "range": {
+        "startLine": 209,
+        "startChar": 5,
+        "endLine": 211,
+        "endChar": 71
+      },
+      "revId": "1111cbb3830287eac75905af0aaf4e32506266f3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ab4960c_21bb3e37",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-23T06:23:13Z",
+      "side": 1,
+      "message": "found should be false where there is an exception",
+      "range": {
+        "startLine": 218,
+        "startChar": 8,
+        "endLine": 228,
+        "endChar": 7
+      },
+      "revId": "1111cbb3830287eac75905af0aaf4e32506266f3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2104f2c_95bffc0d",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-23T06:23:13Z",
+      "side": 1,
+      "message": "found\u003dtrue",
+      "range": {
+        "startLine": 253,
+        "startChar": 3,
+        "endLine": 253,
+        "endChar": 32
+      },
+      "revId": "1111cbb3830287eac75905af0aaf4e32506266f3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd98305a_4e2883b5",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-23T06:23:13Z",
+      "side": 1,
+      "message": "found\u003dfalse",
+      "range": {
+        "startLine": 262,
+        "startChar": 3,
+        "endLine": 262,
+        "endChar": 11
+      },
+      "revId": "1111cbb3830287eac75905af0aaf4e32506266f3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3ee6f9c_cec6e5d4",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-23T06:23:13Z",
+      "side": 1,
+      "message": "here we can reuse listener defined in line 101",
+      "range": {
+        "startLine": 272,
+        "startChar": 2,
+        "endLine": 282,
+        "endChar": 4
+      },
+      "revId": "1111cbb3830287eac75905af0aaf4e32506266f3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46df204e_012b791a",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-23T06:23:13Z",
+      "side": 1,
+      "message": "don\u0027t need this if we don\u0027t support async",
+      "range": {
+        "startLine": 284,
+        "startChar": 2,
+        "endLine": 285,
+        "endChar": 69
+      },
+      "revId": "1111cbb3830287eac75905af0aaf4e32506266f3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
