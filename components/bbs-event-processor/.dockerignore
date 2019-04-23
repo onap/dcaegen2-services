@@ -1,0 +1,5 @@
+dpo
+src
+target
+!target/libs/*
+!target/*.jar
