@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8cd751a_e37215f0",
+        "filename": "components/bbs-event-processor/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-04-24T15:59:38Z",
+      "side": 1,
+      "message": "This doesn\u0027t work on push; the username/pwd gets passed along with settings during build. Let me check with LF on the error.",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 330,
+        "endChar": 47
+      },
+      "revId": "25bfb9c2139dcd466b8a920469bebff1d720931d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
