@@ -57,4 +57,6 @@ public class ApplicationConfiguration {
 	private String rawDataLabel;
 	
 	private String defaultTopicName;
+
+	private String type;
 }
