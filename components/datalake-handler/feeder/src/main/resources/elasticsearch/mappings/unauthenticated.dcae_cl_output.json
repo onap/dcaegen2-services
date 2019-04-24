@@ -1,0 +1,22 @@
+{
+	"template":"unauthenticated.dcae_cl_output",
+	"order":1,
+	"mappings":{
+		"_default_":{
+			"properties":{
+				"datalake_ts_":{
+					"type":"date",
+					"format":"epoch_millis"
+				},
+				"closedLoopAlarmStart":{
+					"type":"date",
+					"format":"epoch_millis"
+				},
+				"closedLoopAlarmEnd":{
+					"type":"date",
+					"format":"epoch_millis"
+				}
+			}
+		}
+	}
+}

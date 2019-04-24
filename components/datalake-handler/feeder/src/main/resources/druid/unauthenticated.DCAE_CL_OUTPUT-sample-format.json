@@ -1,5 +1,7 @@
 {
-	"_id": "5bb3d3ad5bea3f41300959ba",
+	"_id": {
+		"$oid": "5bb3d3ad5bea3f41300959ba"
+	},
 	"closedLoopEventClient": "DCAE.HolmesInstance",
 	"policyVersion": "1.0.0.5",
 	"policyName": "CCVPN",
@@ -12,14 +14,14 @@
 		"vserver_vserver-name": "TBD",
 		"network-information_network-id": "providerId%2F5555%2FclientId%2F6666%2FtopologyId%2F200"
 	},
-	"closedLoopAlarmStart": "1532769303924000",
+	"closedLoopAlarmStart": 1532769303924,
 	"closedLoopEventStatus": "ONSET",
 	"version": "1.0.2",
 	"closedLoopControlName": "ControlLoop-CCVPN-2179b738-fd36-4843-a71a-a8c24c70c66b",
 	"target": "vserver.vserver-name",
-	"closedLoopAlarmEnd": "1532769303924000",
+	"closedLoopAlarmEnd": 1532769303924,
 	"requestID": "6f455b14-efd9-450a-bf78-e47d55b6da87",
 	"from": "DCAE",
 	"_dl_type_": "JSON",
-	"_dl_text_": "{\"closedLoopEventClient\":\"DCAE.HolmesInstance\",\"policyVersion\":\"1.0.0.5\",\"policyName\":\"CCVPN\",\"policyScope\":\"service=SOTNService,type=SampleType,closedLoopControlName=CL-CCVPN-d925ed73-8231-4d02-9545-db4e101f88f8\",\"target_type\":\"VM\",\"AAI\":{\"serviceType\":\"TestService\",\"service-instance.service-instance-id\":\"200\",\"globalSubscriberId\":\"Customer1\",\"vserver.vserver-name\":\"TBD\",\"network-information.network-id\":\"providerId%2F5555%2FclientId%2F6666%2FtopologyId%2F200\"},\"closedLoopAlarmStart\":1532769303924000,\"closedLoopEventStatus\":\"ONSET\",\"version\":\"1.0.2\",\"closedLoopControlName\":\"ControlLoop-CCVPN-2179b738-fd36-4843-a71a-a8c24c70c66b\",\"target\":\"vserver.vserver-name\",\"closedLoopAlarmEnd\":1532769303924000,\"requestID\":\"6f455b14-efd9-450a-bf78-e47d55b6da87\",\"from\":\"DCAE\"}"
+	"_dl_text_": "{\"closedLoopEventClient\":\"DCAE.HolmesInstance\",\"policyVersion\":\"1.0.0.5\",\"policyName\":\"CCVPN\",\"policyScope\":\"service=SOTNService,type=SampleType,closedLoopControlName=CL-CCVPN-d925ed73-8231-4d02-9545-db4e101f88f8\",\"target_type\":\"VM\",\"AAI\":{\"serviceType\":\"TestService\",\"service-instance.service-instance-id\":\"200\",\"globalSubscriberId\":\"Customer1\",\"vserver.vserver-name\":\"TBD\",\"network-information.network-id\":\"providerId%2F5555%2FclientId%2F6666%2FtopologyId%2F200\"},\"closedLoopAlarmStart\":1532769303924,\"closedLoopEventStatus\":\"ONSET\",\"version\":\"1.0.2\",\"closedLoopControlName\":\"ControlLoop-CCVPN-2179b738-fd36-4843-a71a-a8c24c70c66b\",\"target\":\"vserver.vserver-name\",\"closedLoopAlarmEnd\":1532769303924,\"requestID\":\"6f455b14-efd9-450a-bf78-e47d55b6da87\",\"from\":\"DCAE\"}"
 }
