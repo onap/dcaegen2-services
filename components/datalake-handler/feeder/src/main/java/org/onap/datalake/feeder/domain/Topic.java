@@ -54,14 +54,15 @@ import lombok.Setter;
 @Table(name = "topic")
 public class Topic {
 	@Id
+	@Column(name="`name`")
 	private String name;//topic name 
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "default_topic", nullable = true)
-	private Topic defaultTopic;
 
-	//for protected Kafka topics
+		//for protected Kafka topics
+	@Column(name = "`login`")
 	private String login;
+
+	@Column(name = "`pass`")
 	private String pass;
 
 	//@ManyToMany(mappedBy = "topics", cascade=CascadeType.ALL)
@@ -77,18 +78,20 @@ public class Topic {
 	/**
 	 * indicate if we should monitor this topic
 	 */
+	@Column(name="`enabled`")
 	private Boolean enabled;
 
 	/**
 	 * save raw message text
 	 */
-	@Column(name = "save_raw")
+	@Column(name = "`save_raw`")
 	private Boolean saveRaw;
 
 	/**
 	 * need to explicitly tell feeder the data format of the message.
 	 * support JSON, XML, YAML, TEXT
 	 */
+	@Column(name="`data_format`")
 	private String dataFormat;
 
 	/**
@@ -97,11 +100,11 @@ public class Topic {
 	private Integer ttl;
 
 	//if this flag is true, need to correlate alarm cleared message to previous alarm 
-	@Column(name = "correlate_cleared_message")
+	@Column(name = "`correlate_cleared_message`")
 	private Boolean correlateClearedMessage;
 
 	//paths to the values in the JSON that are used to composite DB id, comma separated, example: "/event-header/id,/event-header/entity-type,/entity/product-name"
-	@Column(name = "message_id_path")
+	@Column(name = "`message_id_path`")
 	private String messageIdPath;
 
 	public Topic() {
@@ -109,6 +112,10 @@ public class Topic {
 
 	public Topic(String name) {
 		this.name = name;
+	}
+
+	public boolean isDefault() {
+		return "_DL_DEFAULT_".equals(name);
 	}
 
 	public boolean isEnabled() {
@@ -122,9 +129,7 @@ public class Topic {
 	public int getTtl() {
 		if (ttl != null) {
 			return ttl;
-		} else if (defaultTopic != null) {
-			return defaultTopic.getTtl();
-		} else {
+		}  else {
 			return 3650;//default to 10 years for safe
 		}
 	}
@@ -132,9 +137,7 @@ public class Topic {
 	public DataFormat getDataFormat() {
 		if (dataFormat != null) {
 			return DataFormat.fromString(dataFormat);
-		} else if (defaultTopic != null) {
-			return defaultTopic.getDataFormat();
-		} else {
+		}  else {
 			return null;
 		}
 	}
@@ -147,9 +150,7 @@ public class Topic {
 	private boolean is(Boolean b, Predicate<Topic> pre, boolean defaultValue) {
 		if (b != null) {
 			return b;
-		} else if (defaultTopic != null) {
-			return pre.test(defaultTopic);
-		} else {
+		}  else {
 			return defaultValue;
 		}
 	}
@@ -179,10 +180,6 @@ public class Topic {
 
 		if (dbs != null && dbs.contains(db)) {
 			return true;
-		}
-
-		if (defaultTopic != null) {
-			return defaultTopic.containDb(dbName);
 		} else {
 			return false;
 		}

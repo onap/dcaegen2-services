@@ -21,10 +21,17 @@
 package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
+import org.checkerframework.checker.units.qual.A;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.controller.domain.TopicConfig;
+import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.repository.DbRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +57,10 @@ public class TopicService {
 
 	@Autowired
 	private ElasticsearchService elasticsearchService;
+
+
+	@Autowired
+	private DbRepository dbRepository;
 	
 	public Topic getEffectiveTopic(String topicStr) {
 		try {
@@ -59,13 +70,14 @@ public class TopicService {
 		}
 		return null;
 	}
-		
+
 	//TODO caller should not modify the returned topic, maybe return a clone
 	public Topic getEffectiveTopic(String topicStr, boolean ensureTableExist) throws IOException {
 		Topic topic = getTopic(topicStr);
 		if (topic == null) {
 			topic = new Topic(topicStr);
-			topic.setDefaultTopic(getDefaultTopic());
+			topicRepository.save(topic);
+			//topic.setDefaultTopic(getDefaultTopic());
 		}
 		
 		if(ensureTableExist && topic.isEnabled() && topic.supportElasticsearch()) { 
@@ -89,4 +101,50 @@ public class TopicService {
 		}
 		return topic.getName().equals(config.getDefaultTopicName());
 	}
+
+	public void fillTopicConfiguration(TopicConfig tConfig, Topic wTopic)
+	{
+		fillTopic(tConfig, wTopic);
+	}
+
+	public Topic fillTopicConfiguration(TopicConfig tConfig)
+	{
+		Topic topic = new Topic();
+		fillTopic(tConfig, topic);
+		return topic;
+	}
+
+	private void fillTopic(TopicConfig tConfig, Topic topic)
+	{
+		Set<Db> relateDb = new HashSet<>();
+		topic.setName(tConfig.getName());
+		topic.setLogin(tConfig.getLogin());
+		topic.setPass(tConfig.getPassword());
+		topic.setEnabled(tConfig.isEnable());
+		topic.setSaveRaw(tConfig.isSave_raw());
+		topic.setTtl(tConfig.getTtl());
+		topic.setCorrelateClearedMessage(tConfig.isCorrelated_clearred_message());
+		topic.setDataFormat(tConfig.getData_format());
+		topic.setMessageIdPath(tConfig.getMessage_id_path());
+
+		if(tConfig.getSinkdbs() != null) {
+			for (String item : tConfig.getSinkdbs()) {
+				Db sinkdb = dbRepository.findByName(item);
+				if (sinkdb != null) {
+					relateDb.add(sinkdb);
+				}
+			}
+			if(relateDb.size() > 0)
+				topic.setDbs(relateDb);
+			else if(relateDb.size() == 0)
+			{
+				topic.getDbs().clear();
+			}
+		}else
+		{
+			topic.setDbs(relateDb);
+		}
+
+	}
+
 }

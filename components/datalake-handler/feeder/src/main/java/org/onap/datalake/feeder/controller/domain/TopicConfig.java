@@ -22,24 +22,38 @@ package org.onap.datalake.feeder.controller.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.repository.DbRepository;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 /**
- *   Unified POST/PUT return format
- *   {
- *       statusCode: int,
- *       message: {
- *                   return body ...
- *       }
- *   }
+ * JSON request body for Topic manipulation.
  *
- *   @author Kate Hsuan
+ * @author Kate Hsuan
  *
  */
 
-@Setter
 @Getter
-public class PostReturnBody<T> {
-    private int statusCode;
-    private T returnBody;
+@Setter
+
+public class TopicConfig {
+
+    private String name;
+    private String login;
+    private String password;
+    private List<String> sinkdbs;
+    private boolean enable;
+    private boolean save_raw;
+    private String data_format;
+    private int ttl;
+    private boolean correlated_clearred_message;
+    private String message_id_path;
+
+
+
 }
