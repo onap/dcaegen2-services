@@ -1,7 +1,5 @@
 {
-	"_id": {
-		"$oid": "5bb3d3ad5bea3f41300959ba"
-	},
+	"_id": "5bb3d3ad5bea3f41300959ba",
 	"closedLoopEventClient": "DCAE.HolmesInstance",
 	"policyVersion": "1.0.0.5",
 	"policyName": "CCVPN",
