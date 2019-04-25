@@ -1,0 +1,187 @@
+/*-
+ * ============LICENSE_START=======================================================
+ * ONAP : DATALAKE
+ * ================================================================================
+ * Copyright (C) 2018-2019 Huawei. All rights reserved.
+ * ================================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END=========================================================
+ */
+
+package org.onap.datalake.feeder.controller;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.onap.datalake.feeder.controller.domain.DbConfig;
+import org.onap.datalake.feeder.controller.domain.PostReturnBody;
+import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.repository.DbRepository;
+import org.onap.datalake.feeder.service.DbService;
+import org.springframework.validation.BindingResult;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+@RunWith(MockitoJUnitRunner.class)
+public class DbControllerTest {
+
+    @Mock
+    private HttpServletResponse httpServletResponse;
+
+    @Mock
+    private DbRepository dbRepository;
+
+    @Mock
+    private BindingResult mockBindingResult;
+
+    @InjectMocks
+    private DbService dbService1;
+
+    public DbConfig getDbConfig() {
+        DbConfig dbConfig = new DbConfig();
+        dbConfig.setName("Elecsticsearch");
+        dbConfig.setHost("localhost");
+        dbConfig.setLogin("root");
+        dbConfig.setPassword("root123");
+        dbConfig.setDatabase("Elecsticsearch");
+        dbConfig.setPort(123);
+        dbConfig.setPoperties("driver");
+        return dbConfig;
+    }
+
+    public void setAccessPrivateFields(DbController dbController) throws NoSuchFieldException,
+            IllegalAccessException {
+        Field dbService = dbController.getClass().getDeclaredField("dbService");
+        dbService.setAccessible(true);
+        dbService.set(dbController, dbService1);
+        Field dbRepository1 = dbController.getClass().getDeclaredField("dbRepository");
+        dbRepository1.setAccessible(true);
+        dbRepository1.set(dbController, dbRepository);
+    }
+
+    @Before
+    public void setupTest() {
+        MockitoAnnotations.initMocks(this);
+        // While the default boolean return value for a mock is 'false',
+        // it's good to be explicit anyway:
+        when(mockBindingResult.hasErrors()).thenReturn(false);
+    }
+
+    @Test
+    public void testCreateDb() throws IOException, NoSuchFieldException, IllegalAccessException {
+        DbController dbController = new DbController();
+        DbConfig dbConfig = getDbConfig();
+        setAccessPrivateFields(dbController);
+        PostReturnBody<DbConfig> db = dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
+        assertEquals(200, db.getStatusCode());
+        when(mockBindingResult.hasErrors()).thenReturn(true);
+        db = dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
+        assertEquals(null, db);
+    }
+
+    @Test
+    public void testUpdateDb() throws IOException, NoSuchFieldException, IllegalAccessException {
+        DbController dbController = new DbController();
+        DbConfig dbConfig = getDbConfig();
+        when(mockBindingResult.hasErrors()).thenReturn(true);
+        PostReturnBody<DbConfig> db = dbController.updateDb("Elecsticsearch", dbConfig, mockBindingResult,
+                                                            httpServletResponse);
+        assertEquals(null, db);
+        when(mockBindingResult.hasErrors()).thenReturn(false);
+        setAccessPrivateFields(dbController);
+        db = dbController.updateDb("Elecsticsearch", dbConfig, mockBindingResult,
+                                   httpServletResponse);
+        assertEquals(null, db);
+        when(mockBindingResult.hasErrors()).thenReturn(false);
+        String name = "Elecsticsearch";
+        when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+        db = dbController.updateDb("Elecsticsearch", dbConfig, mockBindingResult,
+                                   httpServletResponse);
+        assertEquals(200, db.getStatusCode());
+        Db elecsticsearch = dbController.getDb("Elecsticsearch", httpServletResponse);
+        assertEquals(null, elecsticsearch);
+    }
+
+    @Test
+    public void testGetAllDbs() throws IOException, IllegalAccessException, NoSuchFieldException {
+        DbController dbController = new DbController();
+        String name = "Elecsticsearch";
+        List<Db> dbs = new ArrayList<>();
+        dbs.add(new Db(name));
+        setAccessPrivateFields(dbController);
+        when(dbRepository.findAll()).thenReturn(dbs);
+        List<String> list = dbController.list();
+        for (String dbName : list) {
+            assertEquals("Elecsticsearch", dbName);
+        }
+        dbController.deleteDb("Elecsticsearch", httpServletResponse);
+    }
+
+
+    @Test
+    public void testDeleteDb() throws IOException, IllegalAccessException, NoSuchFieldException {
+        DbController dbController = new DbController();
+        String dbName = "Elecsticsearch";
+        String topicName = "a";
+        Topic topic = new Topic(topicName);
+        topic.setEnabled(true);
+        Set<Topic> topics = new HashSet<>();
+        topics.add(topic);
+        Db db1 = new Db(dbName);
+        db1.setTopics(topics);
+        setAccessPrivateFields(dbController);
+        Set<Topic> elecsticsearch = dbController.getDbTopics(dbName, httpServletResponse);
+        assertEquals(null, elecsticsearch);
+        when(dbRepository.findByName(dbName)).thenReturn(db1);
+        elecsticsearch = dbController.getDbTopics(dbName, httpServletResponse);
+        for (Topic anElecsticsearch : elecsticsearch) {
+            assertEquals(new Topic(topicName), anElecsticsearch);
+        }
+        dbController.deleteDb(dbName, httpServletResponse);
+    }
+
+    @Test
+    public void testPostReturnBody() throws IOException, NoSuchFieldException, IllegalAccessException {
+        DbController dbController = new DbController();
+        DbConfig dbConfig = getDbConfig();
+        setAccessPrivateFields(dbController);
+        String name = "Elecsticsearch";
+        when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+        PostReturnBody<DbConfig> db = dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
+        assertEquals(null, db);
+    }
+
+    @Test
+    public void testVerifyConnection() throws IOException {
+        DbController dbController = new DbController();
+        DbConfig dbConfig = getDbConfig();
+        PostReturnBody<DbConfig> dbConfigPostReturnBody = dbController.verifyDbConnection(dbConfig, httpServletResponse);
+        assertEquals(null, dbConfigPostReturnBody);
+    }
+
+}
