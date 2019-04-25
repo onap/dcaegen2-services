@@ -27,6 +27,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.controller.domain.PostReturnBody;
+import org.onap.datalake.feeder.controller.domain.TopicConfig;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.TopicRepository;
@@ -60,6 +62,10 @@ public class TopicControllerTest {
 
     @Mock
     private TopicRepository topicRepository;
+
+    @Mock
+
+    private TopicService topicServiceMock;
 
     @InjectMocks
     private TopicService topicService1;
@@ -95,79 +101,51 @@ public class TopicControllerTest {
     }
 
     @Test
+    public void testListTopic() throws IOException, NoSuchFieldException, IllegalAccessException{
+        TopicController topicController = new TopicController();
+        setAccessPrivateFields(topicController);
+    }
+
+    @Test
     public void testCreateTopic() throws IOException, NoSuchFieldException, IllegalAccessException {
         TopicController topicController = new TopicController();
         setAccessPrivateFields(topicController);
-        when(topicRepository.findById(DEFAULT_TOPIC_NAME)).thenReturn(Optional.of(new Topic(DEFAULT_TOPIC_NAME)));
-        when(config.getDefaultTopicName()).thenReturn(DEFAULT_TOPIC_NAME);
-        Topic topicName = topicController.createTopic(new Topic("a"), mockBindingResult, httpServletResponse);
-        assertEquals(new Topic("a"), topicName);
+        //when(topicRepository.findById("ab")).thenReturn(Optional.of(new Topic("ab")));
+       // when(config.getDefaultTopicName()).thenReturn(DEFAULT_TOPIC_NAME);
+        PostReturnBody<TopicConfig> postTopic = topicController.createTopic(new TopicConfig(), mockBindingResult, httpServletResponse);
+        assertEquals(postTopic.getStatusCode(), 200);
         when(mockBindingResult.hasErrors()).thenReturn(true);
-        topicName = topicController.createTopic(new Topic("a"), mockBindingResult, httpServletResponse);
-        assertEquals(null, topicName);
+        PostReturnBody<TopicConfig> topicConfig= topicController.createTopic(new TopicConfig(), mockBindingResult, httpServletResponse);
+        assertEquals(null, topicConfig);
         when(mockBindingResult.hasErrors()).thenReturn(false);
-        Topic a = new Topic("a");
-        a.setName("a");
-        when(topicRepository.findById("a")).thenReturn(Optional.of(a));
-        topicName = topicController.createTopic(new Topic("a"), mockBindingResult, httpServletResponse);
-        assertEquals(null, topicName);
+        TopicConfig a = new TopicConfig();
+        a.setName(DEFAULT_TOPIC_NAME);
+        when(topicRepository.findById(DEFAULT_TOPIC_NAME)).thenReturn(Optional.of(new Topic(DEFAULT_TOPIC_NAME)));
+        PostReturnBody<TopicConfig> postTopic2= topicController.createTopic(a, mockBindingResult, httpServletResponse);
+        assertEquals(null, postTopic2);
     }
 
     @Test
     public void testUpdateTopic() throws IOException, NoSuchFieldException, IllegalAccessException {
         TopicController topicController = new TopicController();
         setAccessPrivateFields(topicController);
-        Topic topicName = topicController.updateTopic(new Topic("a"), mockBindingResult, httpServletResponse);
-        assertEquals(null, topicName);
+        PostReturnBody<TopicConfig> postTopic = topicController.updateTopic("a", new TopicConfig(), mockBindingResult, httpServletResponse);
+        assertEquals(null, postTopic);
         Topic a = new Topic("a");
         a.setName("a");
         when(topicRepository.findById("a")).thenReturn(Optional.of(a));
-        topicName = topicController.updateTopic(new Topic("a"), mockBindingResult, httpServletResponse);
-        assertEquals(new Topic("a"), topicName);
+        TopicConfig ac = new TopicConfig();
+        ac.setName("a");
+        ac.setEnable(true);
+        PostReturnBody<TopicConfig> postConfig1 = topicController.updateTopic("a", ac, mockBindingResult, httpServletResponse);
+        assertEquals(200, postConfig1.getStatusCode());
+        TopicConfig ret = postConfig1.getReturnBody();
+        assertEquals("a", ret.getName());
+        assertEquals(true, ret.isEnable());
         when(mockBindingResult.hasErrors()).thenReturn(true);
-        topicName = topicController.updateTopic(new Topic("a"), mockBindingResult, httpServletResponse);
-        assertEquals(null, topicName);
+        PostReturnBody<TopicConfig> postConfig2 = topicController.updateTopic("a", ac, mockBindingResult, httpServletResponse);
+        assertEquals(null, postConfig2);
 
-        ArrayList<Topic> topics = new ArrayList<>();
-        topics.add(a);
-        when(topicRepository.findAll()).thenReturn(topics);
-        Iterable<Topic> list = topicController.list();
-        for (Topic newTopic : list) {
-            assertEquals(a, newTopic);
-        }
-    }
-
-    @Test
-    public void testAddDb() throws NoSuchFieldException, IllegalAccessException, IOException {
-        TopicController topicController = new TopicController();
-        setAccessPrivateFields(topicController);
-        String dbName = "Elecsticsearch";
-        String name = "a";
-        Topic topic = new Topic(name);
-        topic.setEnabled(true);
-        Set<Db> dbSet = new HashSet<>();
-        dbSet.add(new Db(dbName));
-        topic.setDbs(dbSet);
-
-        when(topicRepository.findById(name)).thenReturn(Optional.of(topic));
-        topicController.addDb("a", dbName, httpServletResponse);
-        topicController.deleteDb("a", dbName, httpServletResponse);
-    }
-
-    @Test
-    public void testGetTopicDbs() throws NoSuchFieldException, IllegalAccessException, IOException {
-        TopicController topicController = new TopicController();
-        setAccessPrivateFields(topicController);
-        String dbName = "Elecsticsearch";
-        String name = "a";
-        Topic topic = new Topic(name);
-        topic.setEnabled(true);
-        Set<Db> dbSet = new HashSet<>();
-        dbSet.add(new Db(dbName));
-        topic.setDbs(dbSet);
-
-        when(topicRepository.findById(name)).thenReturn(Optional.of(topic));
-        topicController.getTopicDbs("a");
     }
 
     @Test

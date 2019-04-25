@@ -69,19 +69,16 @@ public class TopicTest {
 
         Topic defaultTopic = new Topic("_DL_DEFAULT_");
         Topic testTopic = new Topic("test");
-        testTopic.setDefaultTopic(defaultTopic);
 
         assertEquals(3650, testTopic.getTtl());
         defaultTopic.setTtl(20);
-        assertEquals(20, testTopic.getTtl());
-        topic.setDefaultTopic(new Topic("defaultTopic"));
+        assertEquals(20, defaultTopic.getTtl());
         topic.setLogin("root");
         topic.setPass("root123");
         topic.setEnabled(true);
         topic.setSaveRaw(true);
         topic.setCorrelateClearedMessage(true);
         topic.setMessageIdPath("/data/data2/value");
-        assertTrue("defaultTopic".equals(topic.getDefaultTopic().toString()));
         assertTrue("root".equals(topic.getLogin()));
         assertTrue("root123".equals(topic.getPass()));
         assertFalse("true".equals(topic.getEnabled()));
@@ -96,14 +93,13 @@ public class TopicTest {
     public void testIs() {
         Topic defaultTopic = new Topic("_DL_DEFAULT_");
         Topic testTopic = new Topic("test");
-        testTopic.setDefaultTopic(defaultTopic);
 
         assertTrue(testTopic.equals(new Topic("test")));
         assertEquals(testTopic.hashCode(), (new Topic("test")).hashCode());
 
         defaultTopic.setDbs(new HashSet<>());
         defaultTopic.getDbs().add(new Db("Elasticsearch"));
-        assertTrue(testTopic.supportElasticsearch());
+        assertTrue(defaultTopic.supportElasticsearch());
         assertFalse(testTopic.supportCouchbase());
         assertFalse(testTopic.supportDruid());
         assertFalse(testTopic.supportMongoDB());
@@ -116,9 +112,9 @@ public class TopicTest {
         defaultTopic.setDataFormat("XML");
         defaultTopic.setEnabled(true);
         defaultTopic.setSaveRaw(true);
-        assertTrue(testTopic.isCorrelateClearedMessage());
-        assertTrue(testTopic.isEnabled());
-        assertTrue(testTopic.isSaveRaw());
+        assertTrue(defaultTopic.isCorrelateClearedMessage());
+        assertTrue(defaultTopic.isEnabled());
+        assertTrue(defaultTopic.isSaveRaw());
 
         assertEquals(defaultTopic.getDataFormat(), DataFormat.XML);
 
