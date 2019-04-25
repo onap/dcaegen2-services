@@ -20,6 +20,7 @@
 package org.onap.datalake.feeder.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +28,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.controller.domain.PostReturnBody;
+import org.onap.datalake.feeder.controller.domain.TopicConfig;
+import org.onap.datalake.feeder.repository.DbRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.onap.datalake.feeder.service.DbService;
 import org.onap.datalake.feeder.service.DmaapService;
@@ -57,11 +61,11 @@ import io.swagger.annotations.ApiOperation;
  * script.
  * 
  * @author Guobiao Mo
- *
+ * @contributor Kate Hsuan @ QCT
  */
 
 @RestController
-@RequestMapping(value = "/topics", produces = { MediaType.APPLICATION_JSON_VALUE }) //, consumes= {MediaType.APPLICATION_JSON_UTF8_VALUE})
+@RequestMapping(value = "/topics", produces = { MediaType.APPLICATION_JSON_VALUE })//, consumes= {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class TopicController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -71,6 +75,9 @@ public class TopicController {
 
 	@Autowired
 	private TopicRepository topicRepository;
+
+	@Autowired
+	private DbRepository dbRepository;
 
 	@Autowired
 	private TopicService topicService;
@@ -85,112 +92,115 @@ public class TopicController {
 		return dmaapService.getTopics();
 	}
 
-	@GetMapping("/")
+	@GetMapping("")
 	@ResponseBody
-	@ApiOperation(value = "List all topics' settings.")
-	public Iterable<Topic> list() throws IOException {
+	@ApiOperation(value="List all topics")
+	public List<String> list() throws IOException {
 		Iterable<Topic> ret = topicRepository.findAll();
-		return ret;
+		List<String> retString = new ArrayList<>();
+		for(Topic item : ret)
+		{
+			if(!item.getName().equals("_DL_DEFAULT_") && !item.getName().equals("__consumer_offsets"))
+				retString.add(item.getName());
+		}
+		return retString;
+	}
+
+	@PostMapping("")
+	@ResponseBody
+	@ApiOperation(value="Create a new topic.")
+	public PostReturnBody<TopicConfig> createTopic(@RequestBody TopicConfig topicConfig, BindingResult result, HttpServletResponse response) throws IOException {
+
+		if (result.hasErrors()) {
+			sendError(response, 400, "Error parsing Topic: "+result.toString());
+			return null;
+		}
+		Topic oldTopic = topicService.getTopic(topicConfig.getName());
+		if (oldTopic != null) {
+			sendError(response, 400, "Topic already exists "+topicConfig.getName());
+			return null;
+		} else {
+			Topic wTopic = new Topic();
+			PostReturnBody<TopicConfig> retBody = new PostReturnBody<>();
+			topicConfig.fillDbConfiguration(wTopic, dbRepository);
+			topicRepository.save(wTopic);
+			mkPostReturnBody(retBody, 200, wTopic);
+			return retBody;
+		}
 	}
 
 	@GetMapping("/{topicName}")
 	@ResponseBody
-	@ApiOperation(value = "Get a topic's settings.")
-	public Topic getTopic(@PathVariable("topicName") String topicName) throws IOException {
+	@ApiOperation(value="Get a topic's settings.")
+	public TopicConfig getTopic(@PathVariable("topicName") String topicName, HttpServletResponse response) throws IOException {
 		Topic topic = topicService.getTopic(topicName);
-		return topic;
+		if(topic == null) {
+			sendError(response, 404, "Topic not found");
+		}
+		TopicConfig tConfig = new TopicConfig();
+		mkReturnMessage(topic, tConfig);
+		return tConfig;
 	}
 
-	@GetMapping("/{topicName}/dbs")
-	@ResponseBody
-	@ApiOperation(value = "Get all DBs in a topic.")
-	public Set<Db> getTopicDbs(@PathVariable("topicName") String topicName) throws IOException {
-		Topic topic = topicService.getTopic(topicName);
-		Set<Db> dbs = topic.getDbs();
-		return dbs;
-	}
-
-	//This is not a partial update: old topic is wiped out, and new topic is created based on the input json. 
+	//This is not a partial update: old topic is wiped out, and new topic is created based on the input json.
 	//One exception is that old DBs are kept
-	@PutMapping("/")
+	@PutMapping("/{topicName}")
 	@ResponseBody
-	@ApiOperation(value = "Update a topic.")
-	public Topic updateTopic(@RequestBody Topic topic, BindingResult result, HttpServletResponse response) throws IOException {
+	@ApiOperation(value="Update a topic.")
+	public PostReturnBody<TopicConfig> updateTopic(@PathVariable("topicName") String topicName, @RequestBody TopicConfig topicConfig, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
-			sendError(response, 400, "Error parsing Topic: " + result.toString());
+			sendError(response, 400, "Error parsing Topic: "+result.toString());
 			return null;
 		}
 
-		Topic oldTopic = getTopic(topic.getName());
+		if(!topicName.equals(topicConfig.getName()))
+		{
+			sendError(response, 400, "Topic name mismatch" + topicName + topicConfig.getName());
+			return null;
+		}
+
+		Topic oldTopic = topicService.getTopic(topicConfig.getName());
 		if (oldTopic == null) {
-			sendError(response, 404, "Topic not found " + topic.getName());
+			sendError(response, 404, "Topic not found "+topicConfig.getName());
 			return null;
 		} else {
-			if (!topicService.istDefaultTopic(topic)) {
-				Topic defaultTopic = topicService.getDefaultTopic();
-				topic.setDefaultTopic(defaultTopic);
-			}
-
-			topic.setDbs(oldTopic.getDbs());
-			topicRepository.save(topic);
-			return topic;
+			PostReturnBody<TopicConfig> retBody = new PostReturnBody<>();
+			topicConfig.fillDbConfiguration(oldTopic, dbRepository);
+			topicRepository.save(oldTopic);
+			mkPostReturnBody(retBody, 200, oldTopic);
+			return retBody;
 		}
 	}
 
-	@PostMapping("/")
-	@ResponseBody
-	@ApiOperation(value = "Create a new topic.")
-	public Topic createTopic(@RequestBody Topic topic, BindingResult result, HttpServletResponse response) throws IOException {
-
-		if (result.hasErrors()) {
-			sendError(response, 400, "Error parsing Topic: " + result.toString());
-			return null;
+    private void mkReturnMessage(Topic topic, TopicConfig tConfig)
+	{
+		tConfig.setName(topic.getName());
+		tConfig.setEnable(topic.getEnabled());
+		if(topic.getDataFormat() != null)
+			tConfig.setData_format(topic.getDataFormat().toString());
+		tConfig.setSave_raw(topic.getSaveRaw());
+		tConfig.setCorrelated_clearred_message((topic.getCorrelateClearedMessage() == null) ? topic.getCorrelateClearedMessage() : false);
+		tConfig.setMessage_id_path(topic.getMessageIdPath());
+		Set<Db> topicDb = topic.getDbs();
+		List<String> dbList = new ArrayList<>();
+		for(Db item: topicDb)
+		{
+			dbList.add(item.getName());
 		}
-
-		Topic oldTopic = getTopic(topic.getName());
-		if (oldTopic != null) {
-			sendError(response, 400, "Topic already exists " + topic.getName());
-			return null;
-		} else {
-			if (!topicService.istDefaultTopic(topic)) {
-				Topic defaultTopic = topicService.getDefaultTopic();
-				topic.setDefaultTopic(defaultTopic);
-			}
-
-			topicRepository.save(topic);
-			return topic;
-		}
+		tConfig.setSinkdbs(dbList);
 	}
 
-	@DeleteMapping("/{topicName}/db/{dbName}")
-	@ResponseBody
-	@ApiOperation(value = "Delete a DB from a topic.")
-	public Set<Db> deleteDb(@PathVariable("topicName") String topicName, @PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
-		Topic topic = topicService.getTopic(topicName);
-		Set<Db> dbs = topic.getDbs();
-		dbs.remove(new Db(dbName));
-
-		topicRepository.save(topic);
-		return topic.getDbs();
+	private void mkPostReturnBody(PostReturnBody<TopicConfig> retBody, int statusCode, Topic topic)
+	{
+		TopicConfig retTopic = new TopicConfig();
+        retBody.setStatusCode(statusCode);
+        mkReturnMessage(topic, retTopic);
+        retBody.setReturnBody(retTopic);
 	}
-
-	@PutMapping("/{topicName}/db/{dbName}")
-	@ResponseBody
-	@ApiOperation(value = "Add a DB to a topic.")
-	public Set<Db> addDb(@PathVariable("topicName") String topicName, @PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
-		Topic topic = topicService.getTopic(topicName);
-		Set<Db> dbs = topic.getDbs();
-
-		Db db = dbService.getDb(dbName);
-		dbs.add(db);
-
-		topicRepository.save(topic);
-		return topic.getDbs();
-	}
-
+	
 	private void sendError(HttpServletResponse response, int sc, String msg) throws IOException {
 		log.info(msg);
-		response.sendError(sc, msg);
+		response.sendError(sc, msg);		
 	}
 }

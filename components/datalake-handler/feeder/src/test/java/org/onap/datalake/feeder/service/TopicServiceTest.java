@@ -79,13 +79,6 @@ public class TopicServiceTest {
 		assertNull(topicService.getTopic(name));
 	}
 
-	@Test
-	public void testGetDefaultTopic() {
-		when(topicRepository.findById(DEFAULT_TOPIC_NAME)).thenReturn(Optional.of(new Topic(DEFAULT_TOPIC_NAME)));
-		when(config.getDefaultTopicName()).thenReturn(DEFAULT_TOPIC_NAME);
-		assertEquals(topicService.getDefaultTopic(), new Topic(DEFAULT_TOPIC_NAME));
-		assertTrue(topicService.istDefaultTopic(new Topic(DEFAULT_TOPIC_NAME)));
-	}
 
 	@Test(expected = IOException.class)
 	public void testGetEffectiveTopic() throws IOException {

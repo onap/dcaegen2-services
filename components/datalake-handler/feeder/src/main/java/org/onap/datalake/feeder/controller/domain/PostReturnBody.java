@@ -25,7 +25,7 @@ import lombok.Setter;
 
 
 /**
- *   Unified POST return format
+ *   Unified POST/PUT return format
  *   {
  *       statusCode: int,
  *       message: {

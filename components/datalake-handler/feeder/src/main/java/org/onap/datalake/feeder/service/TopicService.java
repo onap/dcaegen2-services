@@ -65,7 +65,8 @@ public class TopicService {
 		Topic topic = getTopic(topicStr);
 		if (topic == null) {
 			topic = new Topic(topicStr);
-			topic.setDefaultTopic(getDefaultTopic());
+			topicRepository.save(topic);
+			//topic.setDefaultTopic(getDefaultTopic());
 		}
 		
 		if(ensureTableExist && topic.isEnabled() && topic.supportElasticsearch()) { 
@@ -80,13 +81,7 @@ public class TopicService {
 	}
 
 	public Topic getDefaultTopic() {
-		return getTopic(config.getDefaultTopicName());
+		return getTopic("_DL_DEFAULT_");
 	}
 
-	public boolean istDefaultTopic(Topic topic) {
-		if (topic == null) {
-			return false;
-		}
-		return topic.getName().equals(config.getDefaultTopicName());
-	}
 }
