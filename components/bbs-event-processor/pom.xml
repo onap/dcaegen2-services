@@ -326,8 +326,6 @@
                 <configuration>
                     <contextDirectory>${project.basedir}</contextDirectory>
                     <repository>${docker.image.name}</repository>
-                    <username>docker</username>
-                    <password>docker</password>
                     <tag>latest</tag>
                     <buildArgs>
                         <PROJECT_BUILD_DIR_NAME>target</PROJECT_BUILD_DIR_NAME>
@@ -354,6 +352,7 @@
                         <configuration>
                             <repository>${onap.nexus.dockerregistry.daily}/${docker.image.name}</repository>
                             <tag>latest</tag>
+                            <useMavenSettingsForAuth>true</useMavenSettingsForAuth> 
                         </configuration>
                     </execution>
                     <execution>
@@ -366,6 +365,7 @@
                         <configuration>
                             <repository>${onap.nexus.dockerregistry.daily}/${docker.image.name}</repository>
                             <tag>${project.version}</tag>
+                            <useMavenSettingsForAuth>true</useMavenSettingsForAuth> 
                         </configuration>
                     </execution>
                     <execution>
@@ -378,6 +378,7 @@
                         <configuration>
                             <repository>${onap.nexus.dockerregistry.daily}/${docker.image.name}</repository>
                             <tag>${project.version}-${maven.build.timestamp}Z</tag>
+                            <useMavenSettingsForAuth>true</useMavenSettingsForAuth> 
                         </configuration>
                     </execution>
                 </executions>
