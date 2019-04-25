@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b58febd1_29870651",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/TopicService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-25T16:21:45Z",
+      "side": 0,
+      "message": "I like to keep the old logic, move the logic out from domain.\nconfig.getDefaultTopicName() is better than hard coded \"_DL_DEFAULT_\".",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 2
+      },
+      "revId": "2235ecd224f0734d2d48cd49e0c63a7ad0200abf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}

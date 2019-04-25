@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d68ebcba_4259caca",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/TopicController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-25T16:21:45Z",
+      "side": 1,
+      "message": "TopicConfig is a domain object, we should minimize the logic there. line 123 and 125 can be combined as\nTopic wTopic \u003d topicService.newTopic(topicConfig);\nMove TopicConfig.fillDbConfiguration() there.",
+      "range": {
+        "startLine": 125,
+        "startChar": 3,
+        "endLine": 125,
+        "endChar": 57
+      },
+      "revId": "1f3d7c55012cb42a401821435ea17640cc55e7db",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a4a7922_d058c32a",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/TopicController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-25T16:21:45Z",
+      "side": 1,
+      "message": "use topicService.fillDbConfiguration()\n\ntopicService.newTopic(fillDbConfiguration) can reuse this method.",
+      "range": {
+        "startLine": 169,
+        "startChar": 3,
+        "endLine": 169,
+        "endChar": 59
+      },
+      "revId": "1f3d7c55012cb42a401821435ea17640cc55e7db",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "938122f5_503a7e8a",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/domain/TopicConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-25T16:21:45Z",
+      "side": 1,
+      "message": "should this method name be \u0027fillTopicConfiguration\u0027?",
+      "range": {
+        "startLine": 59,
+        "startChar": 16,
+        "endLine": 59,
+        "endChar": 35
+      },
+      "revId": "1f3d7c55012cb42a401821435ea17640cc55e7db",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce8219f8_e089d249",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Topic.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-25T16:21:45Z",
+      "side": 1,
+      "message": "This was moved to TopicService.istDefaultTopic()",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 2
+      },
+      "revId": "1f3d7c55012cb42a401821435ea17640cc55e7db",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
