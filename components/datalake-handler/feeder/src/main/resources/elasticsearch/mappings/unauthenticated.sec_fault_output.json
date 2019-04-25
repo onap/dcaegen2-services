@@ -1,0 +1,22 @@
+{
+	"template":"unauthenticated.sec_fault_output",
+	"order":1,
+	"mappings":{
+		"_default_":{
+			"properties":{
+				"datalake_ts_":{
+					"type":"date",
+					"format":"epoch_millis"
+				},
+				"event.commonEventHeader.startEpochMicrosec":{
+					"type":"date",
+					"format":"epoch_millis"
+				},
+				"event.commonEventHeader.lastEpochMicrosec":{
+					"type":"date",
+					"format":"epoch_millis"
+				}
+			}
+		}
+	}
+}
