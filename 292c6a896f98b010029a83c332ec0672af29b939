@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15118f15_84e346fb",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/TopicController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-26T18:07:19Z",
+      "side": 1,
+      "message": "Create a new method, need to exclude \"__consumer_offsets\" and maybe \"msgrtr.apinode.metrics.dmaap\" which are not ONAP business related. This list should be stored in application.properties.",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 103,
+        "endChar": 35
+      },
+      "revId": "292c6a896f98b010029a83c332ec0672af29b939",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1529d740_ab1e3c76",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/TopicController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-04-26T18:07:19Z",
+      "side": 1,
+      "message": "better placed in topicService.fillTopicConfiguration(topicConfig);",
+      "range": {
+        "startLine": 125,
+        "startChar": 3,
+        "endLine": 126,
+        "endChar": 24
+      },
+      "revId": "292c6a896f98b010029a83c332ec0672af29b939",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
