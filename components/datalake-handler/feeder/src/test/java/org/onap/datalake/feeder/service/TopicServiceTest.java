@@ -89,6 +89,8 @@ public class TopicServiceTest {
 		dbSet.add(new Db("Elasticsearch"));
 		topic.setDbs(dbSet);
 
+		when(config.getDefaultTopicName()).thenReturn(DEFAULT_TOPIC_NAME);
+		when(topicRepository.findById(DEFAULT_TOPIC_NAME)).thenReturn(Optional.of(topic));
 		when(topicRepository.findById(name)).thenReturn(Optional.of(topic));
 		when(topicRepository.findById(null)).thenReturn(Optional.empty());
 		doThrow(IOException.class).when(elasticsearchService).ensureTableExist(name);
