@@ -61,7 +61,7 @@ public class DmaapServiceTest {
         assertNotEquals(list, dmaapService.getTopics());
     }
 
-    /*@Test
+    @Test
     public void testGetActiveTopics() throws IOException {
 
         List<String> list = new ArrayList<>();
@@ -80,5 +80,5 @@ public class DmaapServiceTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }
