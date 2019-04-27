@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
-import org.onap.datalake.feeder.controller.domain.TopicConfig;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.repository.DbRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.onap.datalake.feeder.service.DbService;
@@ -77,25 +77,19 @@ public class TopicController {
 	private TopicRepository topicRepository;
 
 	@Autowired
-	private DbRepository dbRepository;
-
-	@Autowired
 	private TopicService topicService;
-
-	@Autowired
-	private DbService dbService;
 
 	@GetMapping("/dmaap/")
 	@ResponseBody
 	@ApiOperation(value = "List all topic names in DMaaP.")
-	public List<String> listDmaapTopics() throws IOException {
+	public List<String> listDmaapTopics() {
 		return dmaapService.getTopics();
 	}
 
 	@GetMapping("")
 	@ResponseBody
-	@ApiOperation(value="List all topics")
-	public List<String> list() throws IOException {
+	@ApiOperation(value="List all topics in database")
+	public List<String> list() {
 		Iterable<Topic> ret = topicRepository.findAll();
 		List<String> retString = new ArrayList<>();
 		for(Topic item : ret)
@@ -137,10 +131,9 @@ public class TopicController {
 		Topic topic = topicService.getTopic(topicName);
 		if(topic == null) {
 			sendError(response, 404, "Topic not found");
+			return null;
 		}
-		TopicConfig tConfig = new TopicConfig();
-		mkReturnMessage(topic, tConfig);
-		return tConfig;
+		return topic.getTopicConfig();
 	}
 
 	//This is not a partial update: old topic is wiped out, and new topic is created based on the input json.
@@ -174,31 +167,10 @@ public class TopicController {
 		}
 	}
 
-    private void mkReturnMessage(Topic topic, TopicConfig tConfig)
-	{
-		tConfig.setName(topic.getName());
-		tConfig.setEnable(topic.getEnabled());
-		if(topic.getDataFormat() != null)
-			tConfig.setData_format(topic.getDataFormat().toString());
-		tConfig.setSave_raw(topic.getSaveRaw());
-		tConfig.setCorrelated_clearred_message((topic.getCorrelateClearedMessage() == null) ? topic.getCorrelateClearedMessage() : false);
-		tConfig.setMessage_id_path(topic.getMessageIdPath());
-		tConfig.setTtl(topic.getTtl());
-		Set<Db> topicDb = topic.getDbs();
-		List<String> dbList = new ArrayList<>();
-		for(Db item: topicDb)
-		{
-			dbList.add(item.getName());
-		}
-		tConfig.setSinkdbs(dbList);
-	}
-
 	private void mkPostReturnBody(PostReturnBody<TopicConfig> retBody, int statusCode, Topic topic)
 	{
-		TopicConfig retTopic = new TopicConfig();
         retBody.setStatusCode(statusCode);
-        mkReturnMessage(topic, retTopic);
-        retBody.setReturnBody(retTopic);
+        retBody.setReturnBody(topic.getTopicConfig());
 	}
 	
 	private void sendError(HttpServletResponse response, int sc, String msg) throws IOException {

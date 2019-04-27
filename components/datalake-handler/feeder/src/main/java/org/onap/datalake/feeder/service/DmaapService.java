@@ -22,6 +22,7 @@ package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -78,8 +79,11 @@ public class DmaapService {
 		}
 	}	
 
-	public List<String> getActiveTopics() throws IOException {  
-		List<String> allTopics = new ArrayList<>(getTopics());
+	public List<String> getActiveTopics() throws IOException {  		 
+		List<String> allTopics = getTopics();
+		if(allTopics == null) {
+			return Collections.emptyList();
+		}
 
 		List<String> ret = new ArrayList<>();
 		for (String topicStr : allTopics) {

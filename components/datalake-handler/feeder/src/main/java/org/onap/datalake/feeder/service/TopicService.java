@@ -21,14 +21,12 @@
 package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import org.checkerframework.checker.units.qual.A;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
-import org.onap.datalake.feeder.controller.domain.TopicConfig;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.DbRepository;
@@ -61,7 +59,7 @@ public class TopicService {
 
 	@Autowired
 	private DbRepository dbRepository;
-	
+
 	public Topic getEffectiveTopic(String topicStr) {
 		try {
 			return getEffectiveTopic(topicStr, false);
@@ -71,13 +69,11 @@ public class TopicService {
 		return null;
 	}
 
-	//TODO caller should not modify the returned topic, maybe return a clone
 	public Topic getEffectiveTopic(String topicStr, boolean ensureTableExist) throws IOException {
 		Topic topic = getTopic(topicStr);
 		if (topic == null) {
-			topic = new Topic(topicStr);
-			topicRepository.save(topic);
-			//topic.setDefaultTopic(getDefaultTopic());
+			topic = getDefaultTopic().clone();
+			topic.setName(topicStr);
 		}
 		
 		if(ensureTableExist && topic.isEnabled() && topic.supportElasticsearch()) { 
@@ -121,11 +117,11 @@ public class TopicService {
 		topic.setLogin(tConfig.getLogin());
 		topic.setPass(tConfig.getPassword());
 		topic.setEnabled(tConfig.isEnable());
-		topic.setSaveRaw(tConfig.isSave_raw());
+		topic.setSaveRaw(tConfig.isSaveRaw());
 		topic.setTtl(tConfig.getTtl());
-		topic.setCorrelateClearedMessage(tConfig.isCorrelated_clearred_message());
-		topic.setDataFormat(tConfig.getData_format());
-		topic.setMessageIdPath(tConfig.getMessage_id_path());
+		topic.setCorrelateClearedMessage(tConfig.isCorrelatedClearredMessage());
+		topic.setDataFormat(tConfig.getDataFormat());
+		topic.setMessageIdPath(tConfig.getMessageIdPath());
 
 		if(tConfig.getSinkdbs() != null) {
 			for (String item : tConfig.getSinkdbs()) {

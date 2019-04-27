@@ -28,7 +28,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
-import org.onap.datalake.feeder.controller.domain.TopicConfig;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.TopicRepository;
@@ -95,9 +95,9 @@ public class TopicControllerTest {
         Field topicRepository1 = topicController.getClass().getDeclaredField("topicRepository");
         topicRepository1.setAccessible(true);
         topicRepository1.set(topicController, topicRepository);
-        Field dbService = topicController.getClass().getDeclaredField("dbService");
-        dbService.setAccessible(true);
-        dbService.set(topicController, dbService1);
+//        Field dbService = topicController.getClass().getDeclaredField("dbService");
+  //      dbService.setAccessible(true);
+    //    dbService.set(topicController, dbService1);
     }
 
     @Test
