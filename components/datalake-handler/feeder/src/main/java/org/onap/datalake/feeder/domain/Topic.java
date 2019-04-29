@@ -19,10 +19,10 @@
 */
 package org.onap.datalake.feeder.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,11 +30,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.enumeration.DataFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -114,16 +114,32 @@ public class Topic {
 		this.name = name;
 	}
 
+	public Topic clone() {	//TODO will use TopicConfig
+		Topic ret = new Topic();
+		ret.setCorrelateClearedMessage(correlateClearedMessage);
+		ret.setDataFormat(dataFormat);
+		ret.setDbs(dbs);
+		ret.setEnabled(enabled);
+		ret.setLogin(login);
+		ret.setMessageIdPath(messageIdPath);
+		ret.setName(name);
+		ret.setPass(pass);
+		ret.setSaveRaw(saveRaw);
+		ret.setTtl(ttl);
+		
+		return ret;
+	}
+	
 	public boolean isDefault() {
 		return "_DL_DEFAULT_".equals(name);
 	}
 
 	public boolean isEnabled() {
-		return is(enabled, Topic::isEnabled);
+		return is(enabled);
 	}
 
 	public boolean isCorrelateClearedMessage() {
-		return is(correlateClearedMessage, Topic::isCorrelateClearedMessage);
+		return is(correlateClearedMessage);
 	}
 
 	public int getTtl() {
@@ -142,12 +158,11 @@ public class Topic {
 		}
 	}
 
-	//if 'this' Topic does not have the setting, use default Topic's
-	private boolean is(Boolean b, Predicate<Topic> pre) {
-		return is(b, pre, false);
+	private boolean is(Boolean b) {
+		return is(b, false);
 	}
 
-	private boolean is(Boolean b, Predicate<Topic> pre, boolean defaultValue) {
+	private boolean is(Boolean b, boolean defaultValue) {
 		if (b != null) {
 			return b;
 		}  else {
@@ -156,7 +171,7 @@ public class Topic {
 	}
 
 	public boolean isSaveRaw() {
-		return is(saveRaw, Topic::isSaveRaw);
+		return is(saveRaw);
 	}
 
 	public boolean supportElasticsearch() {
@@ -203,6 +218,28 @@ public class Topic {
 		}
 
 		return id;
+	}
+
+	public TopicConfig getTopicConfig() {
+		TopicConfig tConfig = new TopicConfig();
+		
+		tConfig.setName(getName());
+		tConfig.setEnable(getEnabled());
+		if(getDataFormat() != null)
+			tConfig.setDataFormat(getDataFormat().toString());
+		tConfig.setSaveRaw(getSaveRaw());
+		tConfig.setCorrelatedClearredMessage((getCorrelateClearedMessage() == null) ? getCorrelateClearedMessage() : false);
+		tConfig.setMessageIdPath(getMessageIdPath());
+		tConfig.setTtl(getTtl());
+		Set<Db> topicDb = getDbs();
+		List<String> dbList = new ArrayList<>();
+		for(Db item: topicDb)
+		{
+			dbList.add(item.getName());
+		}
+		tConfig.setSinkdbs(dbList);
+		
+		return tConfig;
 	}
 
 	@Override

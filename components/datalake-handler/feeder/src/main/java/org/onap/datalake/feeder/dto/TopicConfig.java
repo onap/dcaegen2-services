@@ -18,7 +18,7 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.datalake.feeder.controller.domain;
+package org.onap.datalake.feeder.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -48,11 +48,11 @@ public class TopicConfig {
     private String password;
     private List<String> sinkdbs;
     private boolean enable;
-    private boolean save_raw;
-    private String data_format;
+    private boolean saveRaw;
+    private String dataFormat;
     private int ttl;
-    private boolean correlated_clearred_message;
-    private String message_id_path;
+    private boolean correlatedClearredMessage;
+    private String messageIdPath;
 
 
 
