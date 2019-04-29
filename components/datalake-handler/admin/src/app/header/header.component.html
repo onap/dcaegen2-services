@@ -1,0 +1,10 @@
+<div class="d-flex">
+  <div class="mr-auto title">
+    {{ title | translate }}
+  </div>
+  <div class="ml-auto">
+    <select class="form-control lang-select" [(ngModel)]="selectedLang" (ngModelChange)="changeLanguage(selectedLang)">
+      <option class="lang" *ngFor="let lang of langs" [value]=lang.value>{{ lang.name }}</option>
+    </select>
+  </div>
+</div>

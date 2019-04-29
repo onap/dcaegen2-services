@@ -1,0 +1,8 @@
+{
+  "/topics/*": {
+    "target": "http://10.103.12.175:1680",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

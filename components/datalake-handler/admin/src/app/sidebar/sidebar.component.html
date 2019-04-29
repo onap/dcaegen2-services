@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-md">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="fas fa-align-justify"></span>
+  </button>
+  <div class="collapse navbar-collapse nav" id="navbarSupportedContent">
+    <ul class="navbar-nav flex-column" routerLinkActive="active">
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+          routerLink="/feeder">
+          <i class="fas fa-tachometer-alt"></i>
+          {{"SIDEBAR.FEDDFER" | translate}}
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+          routerLink="/topics">
+          <i class="fas fa-cube"></i>
+          {{"SIDEBAR.TOPICS" | translate}}
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+          routerLink="/database">
+          <i class="fas fa-database" aria-hidden="true"></i>
+          {{"SIDEBAR.DATABASE" | translate}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
