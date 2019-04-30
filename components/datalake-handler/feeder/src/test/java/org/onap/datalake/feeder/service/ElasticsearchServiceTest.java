@@ -89,7 +89,7 @@ public class ElasticsearchServiceTest {
         when(config.getElasticsearchType()).thenReturn("doc");
         when(config.isAsync()).thenReturn(true);
 
-        elasticsearchService.saveJsons(topic, jsons);
+        elasticsearchService.saveJsons(topic.getTopicConfig(), jsons);
 
     }
 }

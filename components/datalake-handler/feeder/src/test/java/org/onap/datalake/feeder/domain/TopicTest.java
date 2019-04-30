@@ -19,7 +19,6 @@
  */
 package org.onap.datalake.feeder.domain;
 
-import org.json.JSONObject;
 import org.junit.Test;
 import org.onap.datalake.feeder.enumeration.DataFormat;
 
@@ -27,7 +26,6 @@ import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -39,34 +37,8 @@ import static org.junit.Assert.assertTrue;
 public class TopicTest {
 
     @Test
-    public void getMessageId() {
-        String text = "{ data: { data2 : { value : 'hello'}}}";
-
-        JSONObject json = new JSONObject(text);
-
-        Topic topic = new Topic("test getMessageId");
-        topic.setMessageIdPath("/data/data2/value");
-
-        String value = topic.getMessageId(json);
-
-        assertEquals(value, "hello");
-    }
-
-    @Test
     public void getMessageIdFromMultipleAttributes() {
-        String text = "{ data: { data2 : { value : 'hello'}, data3 : 'world'}}";
-
-        JSONObject json = new JSONObject(text);
-
-        Topic topic = new Topic("test getMessageId");
-        topic.setMessageIdPath("/data/data2/value,/data/data3");
-
-        String value = topic.getMessageId(json);
-        assertEquals(value, "hello^world");
-
-        topic.setMessageIdPath("");
-        assertNull(topic.getMessageId(json));
-
+        Topic topic = new Topic("test getMessageId"); 
         Topic defaultTopic = new Topic("_DL_DEFAULT_");
         Topic testTopic = new Topic("test");
 
@@ -99,13 +71,6 @@ public class TopicTest {
 
         defaultTopic.setDbs(new HashSet<>());
         defaultTopic.getDbs().add(new Db("Elasticsearch"));
-        assertTrue(defaultTopic.supportElasticsearch());
-        assertFalse(testTopic.supportCouchbase());
-        assertFalse(testTopic.supportDruid());
-        assertFalse(testTopic.supportMongoDB());
-
-        defaultTopic.getDbs().remove(new Db("Elasticsearch"));
-        assertFalse(testTopic.supportElasticsearch());
 
         assertEquals(defaultTopic.getDataFormat(), null);
         defaultTopic.setCorrelateClearedMessage(true);
@@ -116,7 +81,7 @@ public class TopicTest {
         assertTrue(defaultTopic.isEnabled());
         assertTrue(defaultTopic.isSaveRaw());
 
-        assertEquals(defaultTopic.getDataFormat(), DataFormat.XML);
+        assertEquals(defaultTopic.getTopicConfig().getDataFormat2(), DataFormat.XML);
 
         defaultTopic.setDataFormat(null);
         assertEquals(testTopic.getDataFormat(), null);

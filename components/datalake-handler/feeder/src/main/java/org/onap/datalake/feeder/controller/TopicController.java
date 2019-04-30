@@ -55,10 +55,10 @@ import io.swagger.annotations.ApiOperation;
 /**
  * This controller manages topic settings.
  * 
- * Topic "_DL_DEFAULT_" acts as the default. For example, if a topic's
- * enabled=null, _DL_DEFAULT_.enabled is used for that topic. All the settings
- * are saved in database. topic "_DL_DEFAULT_" is populated at setup by a DB
- * script.
+ * Topic "_DL_DEFAULT_" acts as the default. 
+ * If a topic is not present in database, "_DL_DEFAULT_" is used for it.
+ * If a topic is present in database, itself should be complete, and no setting from "_DL_DEFAULT_" is used.
+ * Topic "_DL_DEFAULT_" is populated at setup by a DB script.
  * 
  * @author Guobiao Mo
  * @contributor Kate Hsuan @ QCT
@@ -88,7 +88,7 @@ public class TopicController {
 
 	@GetMapping("")
 	@ResponseBody
-	@ApiOperation(value="List all topics in database")
+	@ApiOperation(value="List all topic names in database")
 	public List<String> list() {
 		Iterable<Topic> ret = topicRepository.findAll();
 		List<String> retString = new ArrayList<>();
@@ -114,13 +114,11 @@ public class TopicController {
 			sendError(response, 400, "Topic already exists "+topicConfig.getName());
 			return null;
 		} else {
-			PostReturnBody<TopicConfig> retBody = new PostReturnBody<>();
 			Topic wTopic = topicService.fillTopicConfiguration(topicConfig);
 			if(wTopic.getTtl() == 0)
 				wTopic.setTtl(3650);
-			topicRepository.save(wTopic);
-			mkPostReturnBody(retBody, 200, wTopic);
-			return retBody;
+			topicRepository.save(wTopic); 
+			return mkPostReturnBody(200, wTopic);
 		}
 	}
 
@@ -159,18 +157,19 @@ public class TopicController {
 			sendError(response, 404, "Topic not found "+topicConfig.getName());
 			return null;
 		} else {
-			PostReturnBody<TopicConfig> retBody = new PostReturnBody<>();
 			topicService.fillTopicConfiguration(topicConfig, oldTopic);
 			topicRepository.save(oldTopic);
-			mkPostReturnBody(retBody, 200, oldTopic);
-			return retBody;
+			return mkPostReturnBody(200, oldTopic);
 		}
 	}
 
-	private void mkPostReturnBody(PostReturnBody<TopicConfig> retBody, int statusCode, Topic topic)
+	private PostReturnBody<TopicConfig> mkPostReturnBody(int statusCode, Topic topic)
 	{
+		PostReturnBody<TopicConfig> retBody = new PostReturnBody<>();
         retBody.setStatusCode(statusCode);
         retBody.setReturnBody(topic.getTopicConfig());
+        
+        return retBody;
 	}
 	
 	private void sendError(HttpServletResponse response, int sc, String msg) throws IOException {

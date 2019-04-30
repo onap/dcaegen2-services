@@ -136,12 +136,12 @@ public class TopicControllerTest {
         when(topicRepository.findById("a")).thenReturn(Optional.of(a));
         TopicConfig ac = new TopicConfig();
         ac.setName("a");
-        ac.setEnable(true);
+        ac.setEnabled(true);
         PostReturnBody<TopicConfig> postConfig1 = topicController.updateTopic("a", ac, mockBindingResult, httpServletResponse);
         assertEquals(200, postConfig1.getStatusCode());
         TopicConfig ret = postConfig1.getReturnBody();
         assertEquals("a", ret.getName());
-        assertEquals(true, ret.isEnable());
+        assertEquals(true, ret.isEnabled());
         when(mockBindingResult.hasErrors()).thenReturn(true);
         PostReturnBody<TopicConfig> postConfig2 = topicController.updateTopic("a", ac, mockBindingResult, httpServletResponse);
         assertEquals(null, postConfig2);

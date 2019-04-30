@@ -34,7 +34,7 @@ import org.bson.Document;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +48,6 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.DB;
 
 /**
  * Service for using MongoDB
@@ -131,7 +130,7 @@ public class MongodbService {
 		mongoClient.close();
 	}
 
-	public void saveJsons(Topic topic, List<JSONObject> jsons) {
+	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) {
 		if(dbReady == false)
 			return;
 		List<Document> documents = new ArrayList<>(jsons.size());
@@ -150,7 +149,7 @@ public class MongodbService {
 		MongoCollection<Document> collection = mongoCollectionMap.computeIfAbsent(collectionName, k -> database.getCollection(k));
 		collection.insertMany(documents);
 
-		log.debug("saved text to topic = {}, topic total count = {} ", topic, collection.countDocuments());
+		log.debug("saved text to topic = {}, batch count = {} ", topic, jsons.size());
 	}
 
 }

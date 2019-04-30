@@ -45,6 +45,7 @@ public class ApplicationConfiguration {
 	private String dmaapKafkaHostPort;
 	private String dmaapKafkaGroup;
 	private long dmaapKafkaTimeout;
+	private String[] dmaapKafkaExclude;
 
 	private int dmaapCheckNewTopicIntervalInSec;
 

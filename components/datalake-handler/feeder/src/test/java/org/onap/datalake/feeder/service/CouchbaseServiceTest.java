@@ -114,7 +114,7 @@ public class CouchbaseServiceTest {
         CouchbaseService couchbaseService = new CouchbaseService();
         couchbaseService.bucket = bucket;
         couchbaseService.config = appConfig;
-        couchbaseService.saveJsons(topic, jsons);
+        couchbaseService.saveJsons(topic.getTopicConfig(), jsons);
 
     }
 
@@ -134,7 +134,7 @@ public class CouchbaseServiceTest {
         CouchbaseService couchbaseService = new CouchbaseService();
         couchbaseService.bucket = bucket;
         couchbaseService.config = appConfig;
-        couchbaseService.saveJsons(topic, jsons);
+        couchbaseService.saveJsons(topic.getTopicConfig(), jsons);
     }
 
     @Test

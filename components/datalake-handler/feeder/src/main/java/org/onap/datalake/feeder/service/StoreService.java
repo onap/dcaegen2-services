@@ -36,6 +36,7 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.enumeration.DataFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,7 +77,7 @@ public class StoreService {
 	@Autowired
 	private ElasticsearchService elasticsearchService;
 
-	private Map<String, Topic> topicMap = new HashMap<>();
+	private Map<String, TopicConfig> topicMap = new HashMap<>();
 
 	private ObjectMapper yamlReader;
 
@@ -94,7 +95,7 @@ public class StoreService {
 			return;
 		}
 
-		Topic topic = topicMap.computeIfAbsent(topicStr, k -> { //TODO get topic updated settings from DB periodically
+		TopicConfig topic = topicMap.computeIfAbsent(topicStr, k -> { //TODO get topic updated settings from DB periodically
 			return topicService.getEffectiveTopic(topicStr);
 		});
 
@@ -111,7 +112,7 @@ public class StoreService {
 		saveJsons(topic, docs);
 	}
 
-	private JSONObject messageToJson(Topic topic, Pair<Long, String> pair) throws JSONException, JsonParseException, JsonMappingException, IOException {
+	private JSONObject messageToJson(TopicConfig topic, Pair<Long, String> pair) throws JSONException, JsonParseException, JsonMappingException, IOException {
 
 		long timestamp = pair.getLeft();
 		String text = pair.getRight();
@@ -126,7 +127,7 @@ public class StoreService {
 
 		JSONObject json = null;
 
-		DataFormat dataFormat = topic.getDataFormat();
+		DataFormat dataFormat = topic.getDataFormat2();
 
 		switch (dataFormat) {
 		case JSON:
@@ -160,7 +161,7 @@ public class StoreService {
 		return json;
 	}
 
-	private void saveJsons(Topic topic, List<JSONObject> jsons) {
+	private void saveJsons(TopicConfig topic, List<JSONObject> jsons) {
 		if (topic.supportMongoDB()) {
 			mongodbService.saveJsons(topic, jsons);
 		}

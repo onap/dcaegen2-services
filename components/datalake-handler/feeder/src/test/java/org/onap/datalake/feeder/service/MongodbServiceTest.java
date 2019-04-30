@@ -83,6 +83,6 @@ public class MongodbServiceTest {
         jsons.add(jsonObject);
         jsons.add(jsonObject2);
 
-        mongodbService.saveJsons(topic, jsons);
+        mongodbService.saveJsons(topic.getTopicConfig(), jsons);
     }
 }
