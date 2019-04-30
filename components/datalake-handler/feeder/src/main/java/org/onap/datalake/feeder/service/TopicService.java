@@ -60,7 +60,7 @@ public class TopicService {
 	@Autowired
 	private DbRepository dbRepository;
 
-	public Topic getEffectiveTopic(String topicStr) {
+	public TopicConfig getEffectiveTopic(String topicStr) {
 		try {
 			return getEffectiveTopic(topicStr, false);
 		} catch (IOException e) {
@@ -69,17 +69,18 @@ public class TopicService {
 		return null;
 	}
 
-	public Topic getEffectiveTopic(String topicStr, boolean ensureTableExist) throws IOException {
+	public TopicConfig getEffectiveTopic(String topicStr, boolean ensureTableExist) throws IOException {
 		Topic topic = getTopic(topicStr);
 		if (topic == null) {
-			topic = getDefaultTopic().clone();
-			topic.setName(topicStr);
+			topic = getDefaultTopic();
 		}
+		TopicConfig topicConfig = topic.getTopicConfig();
+		topicConfig.setName(topicStr);//need to change name if it comes from DefaultTopic
 		
-		if(ensureTableExist && topic.isEnabled() && topic.supportElasticsearch()) { 
+		if(ensureTableExist && topicConfig.isEnabled() && topicConfig.supportElasticsearch()) {
 			elasticsearchService.ensureTableExist(topicStr); 
 		}
-		return topic;
+		return topicConfig;
 	}
 
 	public Topic getTopic(String topicStr) {
@@ -116,10 +117,10 @@ public class TopicService {
 		topic.setName(tConfig.getName());
 		topic.setLogin(tConfig.getLogin());
 		topic.setPass(tConfig.getPassword());
-		topic.setEnabled(tConfig.isEnable());
+		topic.setEnabled(tConfig.isEnabled());
 		topic.setSaveRaw(tConfig.isSaveRaw());
 		topic.setTtl(tConfig.getTtl());
-		topic.setCorrelateClearedMessage(tConfig.isCorrelatedClearredMessage());
+		topic.setCorrelateClearedMessage(tConfig.isCorrelateClearedMessage());
 		topic.setDataFormat(tConfig.getDataFormat());
 		topic.setMessageIdPath(tConfig.getMessageIdPath());
 

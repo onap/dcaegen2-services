@@ -25,13 +25,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
-import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,12 +52,6 @@ public class DmaapService {
 	@Autowired
 	private TopicService topicService;
 
-	
-	@PostConstruct
-	private void init() {		
-
-	}
-
 	//get all topic names from Zookeeper
 	public List<String> getTopics() {
 		try {
@@ -67,28 +59,32 @@ public class DmaapService {
 				@Override
 				public void process(WatchedEvent event) {
 					// TODO monitor new topics
-					
+
 				}
-	        };
+			};
 			ZooKeeper zk = new ZooKeeper(config.getDmaapZookeeperHostPort(), 10000, watcher);
-	        List<String> topics = zk.getChildren("/brokers/topics", false);
-	        return topics;
+			List<String> topics = zk.getChildren("/brokers/topics", false);
+			String[] excludes = config.getDmaapKafkaExclude();
+			for (String exclude : excludes) {
+				topics.remove(exclude);
+			}
+			return topics;
 		} catch (Exception e) {
 			log.error("Can not get topic list from Zookeeper, for testing, going to use hard coded topic list.", e);
-			return null;
+			return Collections.emptyList();
 		}
-	}	
+	}
 
-	public List<String> getActiveTopics() throws IOException {  		 
+	public List<String> getActiveTopics() throws IOException {
 		List<String> allTopics = getTopics();
-		if(allTopics == null) {
+		if (allTopics == null) {
 			return Collections.emptyList();
 		}
 
 		List<String> ret = new ArrayList<>();
 		for (String topicStr : allTopics) {
-			Topic topic = topicService.getEffectiveTopic(topicStr, true);
-			if (topic.isEnabled()) {
+			TopicConfig topicConfig = topicService.getEffectiveTopic(topicStr, true);
+			if (topicConfig.isEnabled()) {
 				ret.add(topicStr);
 			}
 		}

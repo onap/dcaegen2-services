@@ -30,6 +30,7 @@ import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,7 +91,7 @@ public class CouchbaseService {
 		bucket.close();
 	} 
 
-	public void saveJsons(Topic topic, List<JSONObject> jsons) { 
+	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) { 
 		List<JsonDocument> documents= new ArrayList<>(jsons.size());
 		for(JSONObject json : jsons) {
 			//convert to Couchbase JsonObject from org.json JSONObject
@@ -109,7 +110,7 @@ public class CouchbaseService {
 		log.debug("saved text to topic = {}, this batch count = {} ", topic, documents.size());	
 	}
 
-	public String getId(Topic topic, JSONObject json) {
+	public String getId(TopicConfig topic, JSONObject json) {
 		//if this topic requires extract id from JSON
 		String id = topic.getMessageId(json);
 		if(id != null) {

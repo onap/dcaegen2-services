@@ -82,6 +82,7 @@ public class PullThread implements Runnable {
 	private void init() {
 		async = config.isAsync();
 		Properties consumerConfig = getConsumerConfig();
+		log.info("Kafka ConsumerConfig: {}", consumerConfig);
 		consumer = new KafkaConsumer<>(consumerConfig);
 	}
 

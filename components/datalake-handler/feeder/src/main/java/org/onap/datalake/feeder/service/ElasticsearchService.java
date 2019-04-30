@@ -47,7 +47,7 @@ import org.elasticsearch.rest.RestStatus;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -112,6 +112,7 @@ public class ElasticsearchService {
 		
 		boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);
 		if(!exists){
+			//TODO submit mapping template
 			CreateIndexRequest createIndexRequest = new CreateIndexRequest(topicLower); 
 			CreateIndexResponse createIndexResponse = client.indices().create(createIndexRequest, RequestOptions.DEFAULT);		
 			log.info("{} : created {}", createIndexResponse.index(), createIndexResponse.isAcknowledged());
@@ -119,7 +120,7 @@ public class ElasticsearchService {
 	}
 	
 	//TTL is not supported in Elasticsearch 5.0 and later, what can we do? FIXME
-	public void saveJsons(Topic topic, List<JSONObject> jsons) {
+	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) {
 		BulkRequest request = new BulkRequest();
 
 		for (JSONObject json : jsons) {
@@ -134,6 +135,9 @@ public class ElasticsearchService {
 
 			request.add(new IndexRequest(topic.getName().toLowerCase(), config.getElasticsearchType(), id).source(json.toString(), XContentType.JSON));
 		}
+
+		log.debug("saving text to topic = {}, batch count = {} ", topic, jsons.size());
+		
 		if(config.isAsync()) {
 			client.bulkAsync(request, RequestOptions.DEFAULT, listener);			
 		}else {
@@ -155,7 +159,7 @@ public class ElasticsearchService {
 	 * The search API can only query all data or based on the fields in the source.
 	 * So use the get API, three parameters: index, type, document id
 	 */
-	private boolean correlateClearedMessage(Topic topic, JSONObject json) {
+	private boolean correlateClearedMessage(TopicConfig topic, JSONObject json) {
 		boolean found = false;
 		String eName = null;
 
