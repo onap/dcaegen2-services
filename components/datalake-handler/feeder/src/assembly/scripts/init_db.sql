@@ -17,6 +17,7 @@ CREATE TABLE `topic` (
 
 CREATE TABLE `db` (
   `name` varchar(255) NOT NULL,
+  `enabled` bit(1) DEFAULT NULL,
   `host` varchar(255) DEFAULT NULL,
   `port` int(11) DEFAULT NULL,
   `database_name` varchar(255) DEFAULT NULL,
@@ -38,6 +39,43 @@ CREATE TABLE `map_db_topic` (
   CONSTRAINT `FK_topic_name` FOREIGN KEY (`topic_name`) REFERENCES `topic` (`name`),
   CONSTRAINT `FK_db_name` FOREIGN KEY (`db_name`) REFERENCES `db` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `dashboard_template` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `body` text DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `topic` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_topic` (`topic`),
+  KEY `FK_type` (`type`),
+  CONSTRAINT `FK_topic` FOREIGN KEY (`topic`) REFERENCES `topic` (`name`) ON DELETE SET NULL,
+  CONSTRAINT `FK_type` FOREIGN KEY (`type`) REFERENCES `dashboard_type` (`name`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `dashboard_type` (
+  `name` varchar(255) NOT NULL,
+  `dashboard` varchar(255) DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  KEY `FK_dashboard` (`dashboard`),
+  CONSTRAINT `FK_dashboard` FOREIGN KEY (`dashboard`) REFERENCES `dashboard` (`name`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `dashboard` (
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `type` varchar(255) DEFAULT NULL,
+  `address` varchar(500) DEFAULT NULL,
+  `port` int(5) unsigned DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `related_db` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`name`),
+  KEY `FK_related_db` (`related_db`),
+  CONSTRAINT `FK_related_db` FOREIGN KEY (`related_db`) REFERENCES `db` (`name`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 insert into db (`name`,`host`,`login`,`pass`,`database_name`) values ('Couchbase','dl_couchbase','dl','dl1234','datalake');
