@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20e2c1bf_35712dd8",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-01T23:58:08Z",
+      "side": 1,
+      "message": "`type` is better",
+      "range": {
+        "startLine": 46,
+        "startChar": 3,
+        "endLine": 46,
+        "endChar": 17
+      },
+      "revId": "5c0ffed64c292a0df33bd4f75ec0daf2a04cf599",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9eeb176a_6d28410f",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-01T23:58:08Z",
+      "side": 1,
+      "message": "These info should be \u0027DB\u0027 table.",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 49
+      },
+      "revId": "5c0ffed64c292a0df33bd4f75ec0daf2a04cf599",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fb9e9b_f7c5a060",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-01T23:58:08Z",
+      "side": 1,
+      "message": "`body` or `content` is better",
+      "range": {
+        "startLine": 51,
+        "startChar": 3,
+        "endLine": 51,
+        "endChar": 17
+      },
+      "revId": "5c0ffed64c292a0df33bd4f75ec0daf2a04cf599",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea51bdc9_58c5818d",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-01T23:58:08Z",
+      "side": 1,
+      "message": "I suggest we link to \u0027dashboard_template_type\u0027, then \u0027dashboard_template_type\u0027 has a link to `db`.",
+      "range": {
+        "startLine": 52,
+        "startChar": 3,
+        "endLine": 52,
+        "endChar": 19
+      },
+      "revId": "5c0ffed64c292a0df33bd4f75ec0daf2a04cf599",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3f1c5bd_bd27cb61",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-01T23:58:08Z",
+      "side": 1,
+      "message": "1 is better?",
+      "range": {
+        "startLine": 57,
+        "startChar": 31,
+        "endLine": 57,
+        "endChar": 32
+      },
+      "revId": "5c0ffed64c292a0df33bd4f75ec0daf2a04cf599",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
