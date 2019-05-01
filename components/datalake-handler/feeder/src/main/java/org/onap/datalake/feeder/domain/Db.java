@@ -49,6 +49,9 @@ public class Db {
 	@Column(name="`name`")
 	private String name;
 
+	@Column(name="`enabled`")
+	private boolean	enabled;
+
 	@Column(name="`host`")
 	private String host;
 
