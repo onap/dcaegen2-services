@@ -40,6 +40,37 @@ CREATE TABLE `map_db_topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE `dashboard_template` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `body` text DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `topic` varchar(255) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_topic` (`topic`),
+  KEY `FK_type` (`type`),
+  CONSTRAINT `FK_topic` FOREIGN KEY (`topic`) REFERENCES `topic` (`name`) ON DELETE SET NULL,
+  CONSTRAINT `FK_type` FOREIGN KEY (`type`) REFERENCES `dashboard_type` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `dashboard_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `enabled` bit(1) DEFAULT NULL,
+  `dashboard_type` varchar(100) DEFAULT NULL,
+  `dashboard_addr` varchar(20) DEFAULT NULL,
+  `dashboard_port` int(6) unsigned zerofill DEFAULT NULL,
+  `dashboard_username` varchar(200) DEFAULT NULL,
+  `dashboard_password` varchar(200) DEFAULT NULL,
+  `related_database` varchar(255) DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_related_database` (`related_database`),
+  CONSTRAINT `FK_related_database` FOREIGN KEY (`related_database`) REFERENCES `db` (`name`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+
 insert into db (`name`,`host`,`login`,`pass`,`database_name`) values ('Couchbase','dl_couchbase','dl','dl1234','datalake');
 insert into db (`name`,`host`) values ('Elasticsearch','dl_es');
 insert into db (`name`,`host`,`port`,`database_name`) values ('MongoDB','dl_mongodb',27017,'datalake');
