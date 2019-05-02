@@ -41,6 +41,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mongodb.bulk.BulkWriteError;
+import com.mongodb.MongoBulkWriteException;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientOptions.Builder;
@@ -48,6 +50,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.InsertManyOptions;
 
 /**
  * Service for using MongoDB
@@ -62,7 +65,7 @@ public class MongodbService {
 
 	@Autowired
 	private ApplicationConfiguration config;
-        private boolean dbReady = false;
+	private boolean dbReady = false;
 
 	@Autowired
 	private DbService dbService;
@@ -70,6 +73,7 @@ public class MongodbService {
 	private MongoDatabase database;
 	private MongoClient mongoClient;
 	private Map<String, MongoCollection<Document>> mongoCollectionMap = new HashMap<>();
+	private InsertManyOptions insertManyOptions;
 
 	@PostConstruct
 	private void init() {
@@ -103,26 +107,26 @@ public class MongodbService {
 
 		addrs.add(new ServerAddress(host, port)); // FIXME should be a list of address
 
-
 		try {
-			if(StringUtils.isNoneBlank(userName) && StringUtils.isNoneBlank(password))
-			{
+			if (StringUtils.isNoneBlank(userName) && StringUtils.isNoneBlank(password)) {
 				credential = MongoCredential.createCredential(userName, databaseName, password.toCharArray());
 				List<MongoCredential> credentialList = new ArrayList<MongoCredential>();
 				credentialList.add(credential);
 				mongoClient = new MongoClient(addrs, credentialList, options);
-			}else
-			{
+			} else {
 				mongoClient = new MongoClient(addrs, options);
 			}
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			dbReady = false;
 			log.error("Fail to initiate MongoDB" + mongodb.getHost());
 			return;
 		}
 		database = mongoClient.getDatabase(mongodb.getDatabase());
-		dbReady = true;
 
+		insertManyOptions = new InsertManyOptions();
+		insertManyOptions.ordered(false);
+
+		dbReady = true;
 	}
 
 	@PreDestroy
@@ -131,7 +135,7 @@ public class MongodbService {
 	}
 
 	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) {
-		if(dbReady == false)
+		if (dbReady == false)
 			return;
 		List<Document> documents = new ArrayList<>(jsons.size());
 		for (JSONObject json : jsons) {
@@ -147,7 +151,15 @@ public class MongodbService {
 
 		String collectionName = topic.getName().replaceAll("[^a-zA-Z0-9]", "");//remove - _ .
 		MongoCollection<Document> collection = mongoCollectionMap.computeIfAbsent(collectionName, k -> database.getCollection(k));
-		collection.insertMany(documents);
+
+		try {
+			collection.insertMany(documents, insertManyOptions);
+		} catch (MongoBulkWriteException e) {
+			List<BulkWriteError> bulkWriteErrors = e.getWriteErrors();
+			for (BulkWriteError bulkWriteError : bulkWriteErrors) {
+				log.error("Failed record: {}", bulkWriteError);
+			}
+		}
 
 		log.debug("saved text to topic = {}, batch count = {} ", topic, jsons.size());
 	}
