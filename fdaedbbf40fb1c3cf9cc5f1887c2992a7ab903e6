@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e3905975_1506df8e",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-02T17:58:50Z",
+      "side": 1,
+      "message": "should be key",
+      "range": {
+        "startLine": 61,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 17
+      },
+      "revId": "fdaedbbf40fb1c3cf9cc5f1887c2992a7ab903e6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1ace623_1f83f7c6",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-02T17:58:50Z",
+      "side": 1,
+      "message": "for M:1 relation, these should be moved to 1 side. \nFor example, we may have type Kibana_dashboard and Kibana_search, both linked to \u0027Kibana\u0027 in DB table.",
+      "range": {
+        "startLine": 62,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 49
+      },
+      "revId": "fdaedbbf40fb1c3cf9cc5f1887c2992a7ab903e6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
