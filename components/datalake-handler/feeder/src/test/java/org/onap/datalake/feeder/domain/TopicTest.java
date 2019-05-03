@@ -68,6 +68,7 @@ public class TopicTest {
 
         assertTrue(testTopic.equals(new Topic("test")));
         assertEquals(testTopic.hashCode(), (new Topic("test")).hashCode());
+        assertEquals(testTopic.toString(), "test");
 
         defaultTopic.setDbs(new HashSet<>());
         defaultTopic.getDbs().add(new Db("Elasticsearch"));

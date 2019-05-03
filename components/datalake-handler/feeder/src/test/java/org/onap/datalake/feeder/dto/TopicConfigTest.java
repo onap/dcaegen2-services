@@ -28,6 +28,7 @@ import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -79,13 +80,20 @@ public class TopicConfigTest {
     public void testIs() {
         Topic testTopic = new Topic("test");
 
-        assertTrue(testTopic.equals(new Topic("test")));
-        assertEquals(testTopic.hashCode(), (new Topic("test")).hashCode());
-
+        TopicConfig testTopicConfig = testTopic.getTopicConfig();
+        testTopicConfig.setSinkdbs(null);
+        assertFalse(testTopicConfig.supportElasticsearch());
+        assertNull(testTopicConfig.getDataFormat2());
+                
         testTopic.setDbs(new HashSet<>());
         testTopic.getDbs().add(new Db("Elasticsearch"));
         
-        TopicConfig testTopicConfig = testTopic.getTopicConfig();
+        testTopicConfig = testTopic.getTopicConfig();
+
+        assertEquals(testTopicConfig, new Topic("test").getTopicConfig());
+        assertNotEquals(testTopicConfig, testTopic);
+        assertNotEquals(testTopicConfig, null);
+        assertEquals(testTopicConfig.hashCode(), (new Topic("test").getTopicConfig()).hashCode());
         
         assertTrue(testTopicConfig.supportElasticsearch());
         assertFalse(testTopicConfig.supportCouchbase());

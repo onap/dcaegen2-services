@@ -106,7 +106,11 @@ public class CouchbaseService {
 			JsonDocument doc = JsonDocument.create(id, expiry, jsonObject);
 			documents.add(doc);
 		}
-		saveDocuments(documents);		
+		try {
+			saveDocuments(documents);
+		}catch(Exception e) {
+			log.error("error saving to Couchbase.", e);
+		}
 		log.debug("saved text to topic = {}, this batch count = {} ", topic, documents.size());	
 	}
 
