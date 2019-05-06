@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59c4d55f_4518a35f",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-06T19:48:24Z",
+      "side": 1,
+      "message": "we need enabled flag for table `db`\n\n  `enabled` bit(1) DEFAULT NULL,",
+      "range": {
+        "startLine": 18,
+        "startChar": 14,
+        "endLine": 18,
+        "endChar": 16
+      },
+      "revId": "67ff96a1579177d3403c710dc23ee93bc4d5731c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "48e77750_9176e477",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-06T19:48:24Z",
+      "side": 1,
+      "message": "suggest a different name\ndashboards -\u003e config_system",
+      "range": {
+        "startLine": 42,
+        "startChar": 14,
+        "endLine": 42,
+        "endChar": 23
+      },
+      "revId": "67ff96a1579177d3403c710dc23ee93bc4d5731c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4064ef54_66b7be5b",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-06T19:48:24Z",
+      "side": 1,
+      "message": "use name as table key, like table `topic` and `db`",
+      "range": {
+        "startLine": 44,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 7
+      },
+      "revId": "67ff96a1579177d3403c710dc23ee93bc4d5731c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7f4fef66_36c4950c",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-06T19:48:24Z",
+      "side": 1,
+      "message": "suggest a different name\ndashboard_type -\u003e config_type",
+      "range": {
+        "startLine": 56,
+        "startChar": 14,
+        "endLine": 56,
+        "endChar": 28
+      },
+      "revId": "67ff96a1579177d3403c710dc23ee93bc4d5731c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a06511fa_095984e0",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-06T19:48:24Z",
+      "side": 1,
+      "message": "use name as table key",
+      "range": {
+        "startLine": 58,
+        "startChar": 3,
+        "endLine": 58,
+        "endChar": 7
+      },
+      "revId": "67ff96a1579177d3403c710dc23ee93bc4d5731c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bdcfe130_20dc7a43",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-06T19:48:24Z",
+      "side": 1,
+      "message": "suggest a different name\ndashboard_template -\u003e config_template",
+      "range": {
+        "startLine": 65,
+        "startChar": 14,
+        "endLine": 65,
+        "endChar": 32
+      },
+      "revId": "67ff96a1579177d3403c710dc23ee93bc4d5731c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
