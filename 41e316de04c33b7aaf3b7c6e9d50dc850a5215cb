@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8d2869c_bcf4ec69",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-06T06:11:32Z",
+      "side": 1,
+      "message": "does this table have any foreign key?",
+      "range": {
+        "startLine": 43,
+        "startChar": 12,
+        "endLine": 43,
+        "endChar": 26
+      },
+      "revId": "41e316de04c33b7aaf3b7c6e9d50dc850a5215cb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69d272fc_f05effe6",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-06T06:11:32Z",
+      "side": 1,
+      "message": "if id is both primary key and foreign key, then the 2 tables should be combined.",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 77
+      },
+      "revId": "41e316de04c33b7aaf3b7c6e9d50dc850a5215cb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
