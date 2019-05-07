@@ -16,7 +16,7 @@
 # ============LICENSE_END=========================================================
 
 
-tag_version: nexus3.onap.org:10001/onap/org.onap.dcaegen2.services.components.bbs-event-processor:1.0.0-SNAPSHOT
+tag_version: nexus3.onap.org:10001/onap/org.onap.dcaegen2.services.components.bbs-event-processor:1.1.0
 pnf_reregistration_url: https:message-router:3905/events/unauthenticated.PNF_UPDATE
 cpe_authentication_url: https:message-router:3905/events/unauthenticated.CPE_AUTHENTICATION
 close_loop_url: https:message-router:3905/events/unauthenticated.DCAE_CL_OUTPUT
