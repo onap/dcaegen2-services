@@ -143,6 +143,7 @@ public class Topic {
 		TopicConfig tConfig = new TopicConfig();
 
 		tConfig.setName(getName());
+		tConfig.setLogin(getLogin());
 		tConfig.setEnabled(isEnabled());
 		tConfig.setDataFormat(dataFormat);
 		tConfig.setSaveRaw(isSaveRaw());

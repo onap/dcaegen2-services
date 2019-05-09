@@ -35,6 +35,7 @@ import lombok.Setter;
 public class DbConfig {
     private String name;
     private String host;
+    private boolean enabled;
     private String login;
     private String password;
     private String database;

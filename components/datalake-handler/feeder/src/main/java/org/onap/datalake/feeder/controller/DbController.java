@@ -105,11 +105,12 @@ public class DbController {
 			newdb.setName(dbConfig.getName());
 			newdb.setHost(dbConfig.getHost());
 			newdb.setPort(dbConfig.getPort());
+			newdb.setEnabled(dbConfig.isEnabled());
 			newdb.setLogin(dbConfig.getLogin());
 			newdb.setPass(dbConfig.getPassword());
 			newdb.setEncrypt(false);
 
-			if(dbConfig.getName().equals("Elecsticsearch") || dbConfig.getName().equals("Druid"))
+			if(!dbConfig.getName().equals("Elecsticsearch") || !dbConfig.getName().equals("Druid"))
 			{
 				newdb.setDatabase(new String(dbConfig.getDatabase()));
 			}
@@ -154,6 +155,12 @@ public class DbController {
 			return null;
 		}
 
+		if(!dbName.equals(dbConfig.getName()))
+		{
+			sendError(response, 400, "Mismatch DB name.");
+			return null;
+		}
+
 		Db oldDb = dbService.getDb(dbConfig.getName());
 		if (oldDb == null) {
 			sendError(response, 404, "Db not found: " + dbConfig.getName());
@@ -162,11 +169,12 @@ public class DbController {
 			oldDb.setName(dbConfig.getName());
 			oldDb.setHost(dbConfig.getHost());
 			oldDb.setPort(dbConfig.getPort());
+			oldDb.setEnabled(dbConfig.isEnabled());
 			oldDb.setLogin(dbConfig.getLogin());
 			oldDb.setPass(dbConfig.getPassword());
 			oldDb.setEncrypt(false);
 
-			if(oldDb.getName().equals("Elecsticsearch") || oldDb.getName().equals("Druid"))
+			if(!oldDb.getName().equals("Elecsticsearch") || !oldDb.getName().equals("Druid"))
 			{
 				oldDb.setDatabase(dbConfig.getDatabase());
 			}
@@ -238,7 +246,12 @@ public class DbController {
 	{
 		dbConfigMsg.setName(db.getName());
 		dbConfigMsg.setHost(db.getHost());
+		dbConfigMsg.setEnabled(db.isEnabled());
 		dbConfigMsg.setPort(db.getPort());
+		dbConfigMsg.setLogin(db.getLogin());
+		dbConfigMsg.setDatabase(db.getDatabase());
+
+
 	}
 
 	private void sendError(HttpServletResponse response, int sc, String msg) throws IOException {

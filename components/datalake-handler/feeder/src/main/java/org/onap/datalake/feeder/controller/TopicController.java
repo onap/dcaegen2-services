@@ -163,6 +163,23 @@ public class TopicController {
 		}
 	}
 
+	@DeleteMapping("/{topicName}")
+	@ResponseBody
+	@ApiOperation(value="Update a topic.")
+	public void deleteTopic(@PathVariable("topicName") String topicName, HttpServletResponse response) throws IOException
+	{
+		Topic oldTopic = topicService.getTopic(topicName);
+		if (oldTopic == null) {
+			sendError(response, 404, "Topic not found "+topicName);
+		} else {
+			Set<Db> dbRelation = oldTopic.getDbs();
+			dbRelation.clear();
+			topicRepository.save(oldTopic);
+			topicRepository.delete(oldTopic);
+			response.setStatus(204);
+		}
+	}
+
 	private PostReturnBody<TopicConfig> mkPostReturnBody(int statusCode, Topic topic)
 	{
 		PostReturnBody<TopicConfig> retBody = new PostReturnBody<>();
