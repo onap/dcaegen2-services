@@ -108,7 +108,7 @@ public class DbController {
 			newdb.setEnabled(dbConfig.isEnabled());
 			newdb.setLogin(dbConfig.getLogin());
 			newdb.setPass(dbConfig.getPassword());
-			newdb.setEncrypt(false);
+			newdb.setEncrypt(dbConfig.isEncrypt());
 
 			if(!dbConfig.getName().equals("Elecsticsearch") || !dbConfig.getName().equals("Druid"))
 			{
@@ -172,7 +172,7 @@ public class DbController {
 			oldDb.setEnabled(dbConfig.isEnabled());
 			oldDb.setLogin(dbConfig.getLogin());
 			oldDb.setPass(dbConfig.getPassword());
-			oldDb.setEncrypt(false);
+			oldDb.setEncrypt(dbConfig.isEncrypt());
 
 			if(!oldDb.getName().equals("Elecsticsearch") || !oldDb.getName().equals("Druid"))
 			{

@@ -38,6 +38,7 @@ public class DbConfig {
     private boolean enabled;
     private String login;
     private String password;
+    private boolean encrypt;
     private String database;
     private int port;
     private String poperties;
