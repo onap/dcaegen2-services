@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93c7ff66_42d9036b",
+        "filename": "components/datalake-handler/admin/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-05-10T19:20:30Z",
+      "side": 1,
+      "message": "This should be passed during runtime and not part of docker build",
+      "range": {
+        "startLine": 9,
+        "startChar": 20,
+        "endLine": 9,
+        "endChar": 44
+      },
+      "revId": "df321300b52ec4b92e6632efb155762a5a472727",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04c86fbe_61868270",
+        "filename": "components/datalake-handler/admin/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-05-10T19:20:30Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 20,
+        "startChar": 20,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "df321300b52ec4b92e6632efb155762a5a472727",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
