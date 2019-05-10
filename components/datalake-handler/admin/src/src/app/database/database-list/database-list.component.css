@@ -1,0 +1,41 @@
+.db-block {
+  min-width: 180px;
+  min-height: 180px;
+  padding: 10px;
+}
+
+.db-panel {
+  background: #FFFFFF;
+  box-shadow: 3px 3px 11px 0 #D2D3D5;
+  border-radius: 20px;
+  position: relative;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #313032;
+  text-align: center;
+  padding: 10px;
+}
+
+.db-dropdown {
+  background-color: #ffffff;
+}
+
+.db-dropdown:hover {
+  background-color: #ffffff;
+}
+
+.db-config-icon {
+  color: #5DBEBB;
+  background-color: #ffffff;
+}
+
+.db-config-icon:hover {
+  background-color: #D2D3D5;
+}
+
+.dropdown-item {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}

@@ -1,0 +1,144 @@
+<div class="p-1">
+  <div class="modal-header pb-0 border-0">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <label class="dl-h3">{{ title }}</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-body border-0">
+    <div class="container-fluid">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-4"><label class="dl-emphasis1">Status</label></div>
+
+          <div class="col-md-8">
+            <label class="dl-switch">
+              <input id="switch" type="checkbox" [(ngModel)]="tempEnabled" />
+              <span class="dl-slider round"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-12">
+            <label class="dl-emphasis1" for="inputUserName">Authentication</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <input #t_login [value]="topic.login" class="form-control dl-input-text" id="inputUserName" type="text"
+              placeholder="Username" />
+          </div>
+          <div class="col-md-6">
+            <input #t_password [value]="topic.password" class="form-control dl-input-text" id="inputPass" type="text"
+              placeholder="Password" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="dl-emphasis1">Data format</label>
+          </div>
+          <div class="col-md-6">
+            <label class="dl-emphasis1">TTL (days)</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <select #t_dataFormat class="custom-select dl-input-text" id="selDataFormat">
+              <option *ngFor="let item of dataFormats" [selected]="item == topic.dataFormat">
+                {{ item }}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <input #t_ttl [value]="topic.ttl" class="form-control dl-input-text" id="inputTtl" type="text"
+              placeholder="3650" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-12"><label class="dl-emphasis1">Sink</label></div>
+        </div>
+        <div class="row d-flex flex-wrap">
+          <div *ngFor="let db of dbs" class="col-md-6 pb-1">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text dl-input-chk-label">
+                  <input id="chk_{{ db }}" type="checkbox" [checked]="this.topic.sinkdbs.includes(db)"
+                    (click)="this.updateSelectedDB($event, db)" />
+                  <span class="dl-input-checkmark"></span>
+                </label>
+              </div>
+              <label class="form-control dl-input-chk" for="chk_{{ db }}">
+                {{ db }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-12">
+            <label class="dl-emphasis1">Raw data</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text dl-input-chk-label">
+                  <input id="chkSaveRaw" [(ngModel)]="tempSaveRaw" type="checkbox" />
+                  <span class="dl-input-checkmark"></span>
+                </label>
+              </div>
+              <label class="form-control dl-input-chk" for="chkSaveRaw">
+                Save
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer border-0 pt-0 pb-2">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 p-0">
+
+        </div>
+        <div class="col-md-3 p-1">
+          <span>
+            <button type="button" class="btn dl-btn-dark btn-block" (click)="this.passBack()">
+              Save
+            </button>
+          </span>
+        </div>
+        <div class="col-md-3 p-1">
+          <span>
+            <button type="button" class="btn dl-btn-light btn-block" (click)="activeModal.close('Close click')">
+              Cancel
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

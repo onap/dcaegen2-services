@@ -1,0 +1,550 @@
+/*
+* ============LICENSE_START=======================================================
+* ONAP : DataLake
+* ================================================================================
+* Copyright 2019 QCT
+*=================================================================================
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+* ============LICENSE_END=========================================================
+*/
+
+
+/**
+ *
+ * @author Ekko Chang
+ *
+ */
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+#container {
+  height: 100%;
+}
+
+/*
+  Navigation
+*/
+.path {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #313032;
+  line-height: 20px;
+}
+
+/*
+  Menu
+*/
+.menu-header {
+  background-color: #313449;
+  /* max-width: 250px; */
+}
+
+.menu {
+  background-color: #313449;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-align: left;
+  /* max-width: 250px; */
+}
+
+.menu .nav {
+  justify-content: center;
+}
+
+.menu .nav-item .active {
+  background-color: #ffffff;
+  color: #313449;
+  border-radius: 10px;
+}
+
+.menu .nav-link {
+  color: #ffffff;
+}
+
+.menu .nav-item :hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+/*
+  Header
+*/
+.header {
+  background-color: #f2f8fb;
+}
+
+.header .lang-select {
+  background-color: #f2f8fb;
+  border: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  color: #313032;
+  text-align: center;
+}
+
+hr {
+  border: 0.5px solid #A8A9AC;
+  margin: 10px 0 10px 0;
+}
+
+/*
+  Content
+*/
+.content {
+  height: 100%;
+  overflow: auto;
+  min-height: 100vh;
+  background-color: #f2f8fb;
+}
+
+/*
+  bootstrap table theme
+*/
+.ngx-datatable.bootstrap {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  height: 75vh;
+}
+
+.ngx-datatable.bootstrap .datatable-header {
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: #5DBEBB;
+  text-align: left;
+  border-bottom: 1px solid #BDBEC0;
+  /* height: unset !important; */
+}
+
+.ngx-datatable.bootstrap .datatable-header .datatable-header-cell {
+  padding: 0.75rem;
+  /* border-bottom: 1px solid #d1d4d7; */
+}
+
+.ngx-datatable.bootstrap .datatable-header .datatable-header-cell .datatable-header-cell-label {
+  height: 100%;
+}
+
+.ngx-datatable.bootstrap .datatable-body {
+  height: 100%;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  color: #313032;
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid #F2F2F2;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even {
+  background-color: #FFFFFF;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell {
+  align-items: middle !important;
+  display: flex !important;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row.active {
+  background-color: #1483ff;
+  color: #fff;
+}
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row:hover {
+  background-color: #5DBEBB;
+}
+
+.ngx-datatable.bootstrap .datatable-footer {
+  background: #5dbebb;
+  color: #ededed;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .page-count {
+  padding: 0 1.2rem;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager {
+  margin: 0 10px;
+  vertical-align: middle;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li {
+  margin: 10px 0px;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled).active a,
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled):hover a {
+  background-color: #545454;
+  font-weight: bold;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager a {
+  height: 22px;
+  min-width: 24px;
+  line-height: 22px;
+  padding: 0;
+  border-radius: 3px;
+  margin: 0 3px;
+  text-align: center;
+  vertical-align: top;
+  text-decoration: none;
+  color: #ededed;
+}
+
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager .datatable-icon-left,
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager .datatable-icon-skip,
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager .datatable-icon-right,
+.ngx-datatable.bootstrap .datatable-footer .datatable-pager .datatable-icon-prev {
+  line-height: 27px;
+}
+
+.dl-icon-enable {
+  color: #5dbebb;
+}
+
+.dl-icon-disable {
+  color: #d2d3d5;
+}
+
+.dl-icon-unconfig {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #19a2a2;
+  text-align: left;
+  background-color: rgb(93, 190, 187, 0.3);
+  border: 1px solid #19a2a2;
+  border-radius: 2px;
+}
+
+.dl-icon-config {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #bdbec0;
+  text-align: left;
+  background-color: rgb(189, 190, 192, 0.3);
+  border: 1px solid #bdbec0;
+  border-radius: 2px;
+}
+
+.dl-db-icon-hover-enable .tooltip-inner {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #19a2a2;
+  background-color: rgba(93, 190, 187, 0.3);
+  border: 1px solid #19a2a2;
+  border-radius: 2px;
+}
+
+.dl-db-icon-hover-enable .arrow {
+  display: none;
+}
+
+.dl-db-icon-hover-disable .tooltip-inner {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #bdbec0;
+  background-color: rgba(189, 190, 192, 0.3);
+  border: 1px solid #bdbec0;
+  border-radius: 2px;
+}
+
+.dl-db-icon-hover-disable .arrow {
+  display: none;
+}
+
+.action-icon-setting {
+  margin: -15px 0 0 0;
+}
+
+/*
+  Form elements
+*/
+
+/* Heading */
+.dl-h1 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-size: 120px;
+  letter-spacing: 5px;
+}
+
+.dl-h2 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 35px;
+  letter-spacing: 2px;
+}
+
+.dl-h3 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 25px;
+  letter-spacing: 2px;
+}
+
+.dl-h4 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 25px;
+  letter-spacing: 2px;
+}
+
+.dl-emphasis1 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.dl-nodata {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #bdbec0;
+}
+
+/* Input: textbox */
+.dl-input-text-search {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #313032;
+
+  text-align: left;
+  border: 1px solid #5dbebb;
+  border-radius: 2px;
+}
+
+.dl-input-text {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #313032;
+
+  text-align: left;
+  background-color: #ffffff;
+  box-shadow: 3px 3px 11px 0 #d2d3d5;
+  border-radius: 8px;
+  border-width: 0px;
+}
+
+.dl-input-text:disabled,
+.dl-input-text[readonly] {
+  background-color: #ffffff;
+  opacity: 1;
+}
+
+/* Input: checkbox */
+.dl-input-chk {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #313032;
+
+  background-color: #ffffff;
+  box-shadow: 9px 3px 11px 0 #d2d3d5;
+  border-radius: 8px;
+  border-width: 0px;
+}
+
+.dl-input-chk-label {
+  background-color: #ffffff;
+  box-shadow: 3px 3px 13px 0 #d2d3d5;
+  border-width: 0;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.dl-input-chk-label input {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.dl-input-checkmark {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  height: 20px;
+  width: 20px;
+  background-color: #ffffff;
+  border: 2px solid #d2d3d5;
+  border-radius: 7px;
+}
+
+/* On mouse-over, add a grey background color */
+.dl-input-chk-label:hover input~.dl-input-checkmark {
+  background-color: #f2f8fb;
+}
+
+/* When the checkbox is checked, add a blue background */
+.dl-input-chk-label input:checked~.dl-input-checkmark {
+  background-color: #5dbebb;
+  border: 2px solid #5dbebb;
+}
+
+/* Create the dl-input-checkmark/indicator (hidden when not checked) */
+.dl-input-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the dl-input-checkmark when checked */
+.dl-input-chk-label input:checked~.dl-input-checkmark:after {
+  display: block;
+}
+
+/* Style the dl-input-checkmark/indicator */
+.dl-input-chk-label .dl-input-checkmark:after {
+  left: 5.5px;
+  top: 1px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/*
+  Input: Button
+*/
+.dl-btn-light {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #a8a9ac;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #a8a9ac;
+}
+
+.dl-btn-light:hover {
+  color: #a8a9ac;
+  background-color: #f2f8fb;
+}
+
+.dl-btn-dark {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #ffffff;
+  text-align: center;
+  background-color: #5dbebb;
+  border-radius: 6px;
+}
+
+.dl-btn-dark:hover {
+  color: #ffffff;
+  background-color: #19a2a2;
+}
+
+/*
+  Input: Toggle (switch)
+*/
+.dl-switch {
+  position: relative;
+  display: inline-block;
+  width: 54px;
+  height: 28px;
+}
+
+.dl-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.dl-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #a8a9ac;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.dl-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input#switch:checked+.dl-slider {
+  background-color: #5dbebb;
+}
+
+input#switch:focus+.dl-slider {
+  box-shadow: 0 0 1px #5dbebb;
+}
+
+input#switch:checked+.dl-slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.dl-slider.round {
+  border-radius: 16px;
+}
+
+.dl-slider.round:before {
+  border-radius: 50%;
+}
+
+.dl-md-modal .modal-dialog {
+  max-width: 565px;
+}

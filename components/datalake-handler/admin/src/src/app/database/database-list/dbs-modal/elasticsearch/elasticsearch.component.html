@@ -1,0 +1,101 @@
+<div class="p-1">
+  <div class="modal-header pb-0 border-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <label class="dl-h3">Search engine | Elasticsearch</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-body border-0 ml-4 mr-4">
+    <div class="container">
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3"><label class="dl-emphasis1" for="inputHost">Host</label></div>
+          <div class="col-md-4">
+            <input [(ngModel)]="this.tempDb.host" class="form-control dl-input-text" id="inputHost" type="text"
+              placeholder="">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3"><label class="dl-emphasis1" for="inputPort">Port</label></div>
+          <div class="col-md-2">
+            <input [(ngModel)]="this.tempDb.port" class="form-control dl-input-text" id="inputPort" type="text"
+              placeholder="">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3"><label class="dl-emphasis1" for="inputUserName">Authentication</label></div>
+          <div class="col-sm-4">
+            <input [(ngModel)]="this.tempDb.login" class="form-control dl-input-text" id="inputUserName" type="text"
+              placeholder="Username">
+          </div>
+          <div class="col-sm-4">
+            <input [(ngModel)]="this.tempDb.pass" class="form-control dl-input-text" id="inputPass" type="text"
+              placeholder="Password">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3"><label class="dl-emphasis1" for="inputSsl">SSL</label></div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text dl-input-chk-label">
+                  <input id="chkSsl" [(ngModel)]="this.tempDb.encrypt" type="checkbox" />
+                  <span class="dl-input-checkmark"></span>
+                </label>
+              </div>
+              <label class="form-control dl-input-chk" for="chkSsl">
+                Enable
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="modal-footer border-0 pt-0 pb-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 p-0">
+
+        </div>
+        <div class="col-md-3 p-1">
+          <span>
+            <button type="button" class="btn dl-btn-dark btn-block" (click)="this.passBack()">
+              Save
+            </button>
+          </span>
+        </div>
+        <div class="col-md-3 p-1">
+          <span>
+            <button type="button" class="btn dl-btn-light btn-block" (click)="activeModal.close('Close click')">
+              Cancel
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

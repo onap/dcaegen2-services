@@ -1,0 +1,23 @@
+<div id="container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 menu-header pl-1 pr-1"></div>
+      <div class="col-md-10 header pt-2">
+        <app-header></app-header>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2 menu pl-1 pr-1">
+        <app-sidebar></app-sidebar>
+      </div>
+
+      <div class="col-md-10 content pl-4 pr-4">
+        <hr>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

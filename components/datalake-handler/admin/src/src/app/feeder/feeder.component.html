@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-12 path">
+    Home > DataLake Feeder
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-3 p-2">
+    <div class="dashboard-panel">
+      <div class="row">
+        <div class="col-md-12 dl-h4 feeder-title">
+          Topics
+        </div>
+        <div *ngIf="this.chkTopicContent() == true" class="col-md-12">
+          <div class="d-flex justify-content-center feeder-info">
+            <div class="align-self-center">
+              <label class="dl-h1 feeder-info-font">
+                {{ topicContent }}
+              </label>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="this.chkTopicContent() == false" class="col-md-12">
+          <div class="d-flex justify-content-center feeder-info">
+            <div class="align-self-center">
+              <label class="dl-nodata">
+                {{ topicContent }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

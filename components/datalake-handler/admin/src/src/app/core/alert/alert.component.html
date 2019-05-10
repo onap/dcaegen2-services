@@ -1,0 +1,46 @@
+<div class="p-1">
+  <div class="modal-header border-0 p-2">
+
+  </div>
+
+  <div class="modal-body border-0 p-1">
+
+    <div class="container">
+
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="align-self-center p-2">
+          <i class="fas fa-exclamation-circle fa-2x alert-icon"></i>
+        </div>
+        <div class="align-self-center p-1">
+          <label class="alert-msg">
+            {{ this.message }}
+          </label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="modal-footer border-0 p-1">
+    <div class="container align-content-center">
+      <div class="row">
+        <div class="col-md-6 p-1">
+          <span>
+            <button type="button" class="btn dl-btn-dark btn-block" (click)="this.passBack()">
+              OK
+            </button>
+          </span>
+        </div>
+        <div class="col-md-6 p-1">
+          <span>
+            <button type="button" ngbAutofocus class="btn dl-btn-light btn-block"
+              (click)="activeModal.close('Close click')">
+              Cancel
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

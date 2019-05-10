@@ -1,0 +1,8 @@
+{
+  "/datalake/v1": {
+    "target": DL_FEEDER_HOST,
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

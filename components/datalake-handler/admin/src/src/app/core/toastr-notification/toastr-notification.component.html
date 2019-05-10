@@ -1,0 +1,8 @@
+<div id="toast-container" class="toast-top-right" *ngFor="let item of notifications">
+  <div class="toast {{cssClass(item) }}" aria-live="polite" style="display: block;">
+    <button type="button" class="toast-close-button" role="button" (click)="removeNotification(item)">×</button>
+    <div class="toast-message">
+      {{item.message}}
+    </div>
+  </div>
+</div>

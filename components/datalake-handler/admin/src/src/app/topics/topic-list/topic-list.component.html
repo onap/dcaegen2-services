@@ -1,0 +1,399 @@
+<div class="topic-list-panel">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-end p-2">
+        <!-- Search bar -->
+        <div class="p-1">
+          <div class="input-group">
+            <input #searchText type="text" class="form-control dl-input-text-search" placeholder="Search..."
+              (keyup)="this.updateFilter($event.target.value)" />
+            <div class="input-group-append">
+              <button type="button" class="btn dl-btn-dark">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- button -->
+        <div class="p-1">
+          <button class="btn dl-btn-dark" (click)="openTopicModal('config')">
+            Default configuration
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- datatable -->
+  <div class="row">
+    <div class="col-md-12">
+      <ngx-datatable #mydatatable class="bootstrap" [rows]="topics" [columnMode]="'force'" [headerHeight]="40"
+        [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
+        [loadingIndicator]="loadingIndicator" [messages]="mesgNoData" [limit]="10">
+        <ngx-datatable-column [width]="30" name="Status" prop="enabled" cellClass="d-flex justify-content-center pr-3">
+          <div>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <span *ngIf="row.enabled">
+                <i class="fas fa-circle dl-icon-enable" aria-hidden="true"></i>
+              </span>
+              <span *ngIf="!row.enabled">
+                <i class="fas fa-circle dl-icon-disable" aria-hidden="true"></i>
+              </span>
+            </ng-template>
+          </div>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [width]="350" name="Name" prop="name">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{ row.name }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [width]="100" name="Sink" prop="sinkdbs">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <!-- Couchbase enable -->
+            <span *ngIf="row.sinkdbs.includes('Couchbase')" class="pr-1" placement="bottom" ngbTooltip="Couchbase"
+              container="body" tooltipClass="dl-db-icon-hover-enable" [openDelay]="300" [closeDelay]="500">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" width="20" height="20" viewBox="-408 285.3 25 25"
+                style="enable-background:new -408 285.3 25 25;" xml:space="preserve">
+                <path [ngStyle]="{
+                    fill: row.sinkdbs.includes('Couchbase')
+                      ? '#5DBEBB'
+                      : '#D2D3D5'
+                  }"
+                  d="M-395.5,285.3c-6.9,0-12.5,5.6-12.5,12.5s5.6,12.5,12.5,12.5s12.5-5.6,12.5-12.5S-388.6,285.3-395.5,285.3z
+                          M-387.1,300c0,0.8-0.4,1.4-1.3,1.6c-1.5,0.3-4.6,0.4-7.2,0.4s-5.7-0.2-7.2-0.4c-0.8-0.2-1.3-0.8-1.3-1.6v-4.9
+                        c0-0.8,0.6-1.5,1.3-1.6c0.4-0.1,1.5-0.2,2.2-0.2c0.3,0,0.5,0.2,0.5,0.6v3.4l4.4-0.1l4.4,0.1v-3.4c0-0.4,0.2-0.6,0.5-0.6
+                        c0.8,0,1.8,0.1,2.2,0.2c0.7,0.1,1.3,0.8,1.3,1.6C-387.1,296.7-387.1,298.3-387.1,300L-387.1,300z" />
+              </svg>
+            </span>
+            <!-- Couchbase disable -->
+            <span *ngIf="!row.sinkdbs.includes('Couchbase')" class="pr-1" placement="bottom" ngbTooltip="Couchbase"
+              container="body" tooltipClass="dl-db-icon-hover-disable" [openDelay]="300" [closeDelay]="500">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" width="20" height="20" viewBox="-408 285.3 25 25"
+                style="enable-background:new -408 285.3 25 25;" xml:space="preserve">
+                <path [ngStyle]="{
+                    fill: row.sinkdbs.includes('Couchbase')
+                      ? '#5DBEBB'
+                      : '#D2D3D5'
+                  }"
+                  d="M-395.5,285.3c-6.9,0-12.5,5.6-12.5,12.5s5.6,12.5,12.5,12.5s12.5-5.6,12.5-12.5S-388.6,285.3-395.5,285.3z
+                          M-387.1,300c0,0.8-0.4,1.4-1.3,1.6c-1.5,0.3-4.6,0.4-7.2,0.4s-5.7-0.2-7.2-0.4c-0.8-0.2-1.3-0.8-1.3-1.6v-4.9
+                        c0-0.8,0.6-1.5,1.3-1.6c0.4-0.1,1.5-0.2,2.2-0.2c0.3,0,0.5,0.2,0.5,0.6v3.4l4.4-0.1l4.4,0.1v-3.4c0-0.4,0.2-0.6,0.5-0.6
+                        c0.8,0,1.8,0.1,2.2,0.2c0.7,0.1,1.3,0.8,1.3,1.6C-387.1,296.7-387.1,298.3-387.1,300L-387.1,300z" />
+              </svg>
+            </span>
+
+            <!-- Druid enable -->
+            <span *ngIf="row.sinkdbs.includes('Druid')" class="pr-1" placement="bottom" ngbTooltip="Druid"
+              container="body" tooltipClass="dl-db-icon-hover-enable" [openDelay]="300" [closeDelay]="500">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" width="20" height="20" viewBox="-403 285.3 34 25"
+                style="enable-background:new -403 285.3 34 25;" xml:space="preserve">
+                <g>
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Druid')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }"
+                    d="M-385.5,285.3c2.2,0,4.3,0,6.5,0c4.2,0,8,2.7,9.4,6.6c0.6,1.7,0.8,3.4,0.6,5.2c-0.3,2.6-1,5-2.5,7.2
+                   c-2.3,3.4-5.5,5.2-9.5,5.8c-1.4,0.2-2.7,0.2-4.1,0.2c-0.6,0-0.9-0.3-0.9-0.7c0-0.5,0.3-0.9,0.8-0.9c0.6,0,1.2,0,1.9,0
+                   c3.7-0.1,7-1.4,9.6-4.2c1.8-1.9,2.7-4.3,3-6.9c0.2-1.8,0.2-3.6-0.5-5.3c-1.1-2.6-3.1-4.2-5.8-5c-1.1-0.3-2.1-0.3-3.2-0.4
+                   c-4,0-8.1,0-12.1,0c-0.2,0-0.3,0-0.5,0c-0.4,0-0.7-0.4-0.7-0.8s0.3-0.7,0.6-0.8c0.2,0,0.4,0,0.6,0L-385.5,285.3L-385.5,285.3z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Druid')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }" d="M-389.7,304.6h-7.2c-0.2,0-0.3,0-0.5,0c-0.4-0.1-0.7-0.3-0.7-0.7c0-0.4,0.2-0.7,0.6-0.9
+                   c0.2-0.1,0.5-0.1,0.8-0.1c4.7,0,9.5,0,14.2,0c1.7,0,3.1-0.6,4.2-1.8c1-1,1.5-2.3,1.6-3.7c0.1-1.1,0-2.1-0.7-3.1
+                   c-0.8-1-1.8-1.5-3.1-1.5c-4.5,0-9,0-13.5,0c-0.5,0-1,0-1.4-0.1c-0.4,0-0.6-0.3-0.7-0.7c0-0.5,0.2-0.8,0.6-0.9c0.1,0,0.3,0,0.4,0
+                   h14.4c2.4,0,4.5,1.5,5.3,3.8c0.5,1.6,0.4,3.3-0.3,4.8c-1.2,3-3.9,4.9-7.2,4.9C-385,304.6-387.3,304.6-389.7,304.6L-389.7,304.6z
+                    M-400.4,292.6c-0.6,0-1.1,0-1.7,0c-0.5,0-0.8-0.3-0.9-0.7s0.2-0.8,0.7-0.9c0.3,0,0.5-0.1,0.8-0.1c0.8,0,1.5,0,2.3,0
+                   c0.2,0,0.5,0,0.7,0.1c0.4,0.1,0.6,0.5,0.6,0.9s-0.3,0.7-0.7,0.7C-399.2,292.7-399.8,292.6-400.4,292.6L-400.4,292.6z M-390.3,310.3
+                   c-0.5,0-1,0-1.6,0c-0.5,0-0.8-0.3-0.9-0.7c0-0.5,0.3-0.9,0.7-0.9c1.1-0.1,2.2-0.1,3.4,0c0.4,0,0.8,0.4,0.7,0.8l0,0
+                   c0,0.5-0.4,0.7-0.9,0.8L-390.3,310.3L-390.3,310.3z" />
+                </g>
+              </svg>
+            </span>
+            <!-- Druid disable -->
+            <span *ngIf="!row.sinkdbs.includes('Druid')" class="pr-1" placement="bottom" ngbTooltip="Druid"
+              container="body" tooltipClass="dl-db-icon-hover-disable" [openDelay]="300" [closeDelay]="500">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" width="20" height="20" viewBox="-403 285.3 34 25"
+                style="enable-background:new -403 285.3 34 25;" xml:space="preserve">
+                <g>
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Druid')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }"
+                    d="M-385.5,285.3c2.2,0,4.3,0,6.5,0c4.2,0,8,2.7,9.4,6.6c0.6,1.7,0.8,3.4,0.6,5.2c-0.3,2.6-1,5-2.5,7.2
+                   c-2.3,3.4-5.5,5.2-9.5,5.8c-1.4,0.2-2.7,0.2-4.1,0.2c-0.6,0-0.9-0.3-0.9-0.7c0-0.5,0.3-0.9,0.8-0.9c0.6,0,1.2,0,1.9,0
+                   c3.7-0.1,7-1.4,9.6-4.2c1.8-1.9,2.7-4.3,3-6.9c0.2-1.8,0.2-3.6-0.5-5.3c-1.1-2.6-3.1-4.2-5.8-5c-1.1-0.3-2.1-0.3-3.2-0.4
+                   c-4,0-8.1,0-12.1,0c-0.2,0-0.3,0-0.5,0c-0.4,0-0.7-0.4-0.7-0.8s0.3-0.7,0.6-0.8c0.2,0,0.4,0,0.6,0L-385.5,285.3L-385.5,285.3z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Druid')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }" d="M-389.7,304.6h-7.2c-0.2,0-0.3,0-0.5,0c-0.4-0.1-0.7-0.3-0.7-0.7c0-0.4,0.2-0.7,0.6-0.9
+                   c0.2-0.1,0.5-0.1,0.8-0.1c4.7,0,9.5,0,14.2,0c1.7,0,3.1-0.6,4.2-1.8c1-1,1.5-2.3,1.6-3.7c0.1-1.1,0-2.1-0.7-3.1
+                   c-0.8-1-1.8-1.5-3.1-1.5c-4.5,0-9,0-13.5,0c-0.5,0-1,0-1.4-0.1c-0.4,0-0.6-0.3-0.7-0.7c0-0.5,0.2-0.8,0.6-0.9c0.1,0,0.3,0,0.4,0
+                   h14.4c2.4,0,4.5,1.5,5.3,3.8c0.5,1.6,0.4,3.3-0.3,4.8c-1.2,3-3.9,4.9-7.2,4.9C-385,304.6-387.3,304.6-389.7,304.6L-389.7,304.6z
+                    M-400.4,292.6c-0.6,0-1.1,0-1.7,0c-0.5,0-0.8-0.3-0.9-0.7s0.2-0.8,0.7-0.9c0.3,0,0.5-0.1,0.8-0.1c0.8,0,1.5,0,2.3,0
+                   c0.2,0,0.5,0,0.7,0.1c0.4,0.1,0.6,0.5,0.6,0.9s-0.3,0.7-0.7,0.7C-399.2,292.7-399.8,292.6-400.4,292.6L-400.4,292.6z M-390.3,310.3
+                   c-0.5,0-1,0-1.6,0c-0.5,0-0.8-0.3-0.9-0.7c0-0.5,0.3-0.9,0.7-0.9c1.1-0.1,2.2-0.1,3.4,0c0.4,0,0.8,0.4,0.7,0.8l0,0
+                   c0,0.5-0.4,0.7-0.9,0.8L-390.3,310.3L-390.3,310.3z" />
+                </g>
+              </svg>
+            </span>
+
+            <!-- Elasticsearch enable -->
+            <span *ngIf="row.sinkdbs.includes('Elasticsearch')" class="pr-1" placement="bottom"
+              ngbTooltip="Elasticsearch" container="body" tooltipClass="dl-db-icon-hover-enable" [openDelay]="300"
+              [closeDelay]="500">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" width="20" height="20" viewBox="2066.4 284.8 25.1 25"
+                style="enable-background:new 2066.4 284.8 25.1 25;" xml:space="preserve">
+                <g>
+                  <path style="fill: #FFFFFF" d="M2091.6,297.9c0-2.1-1.3-3.9-3.3-4.7c0.1-0.4,0.1-0.9,0.1-1.4c0-3.9-3.2-7.1-7.1-7.1c-2.3,0-4.4,1.1-5.7,3
+                 c-0.7-0.5-1.5-0.8-2.3-0.8c-2.1,0-3.8,1.7-3.8,3.8c0,0.5,0.1,0.9,0.2,1.3c-2,0.7-3.3,2.6-3.3,4.7c0,2.1,1.3,4,3.3,4.7
+                 c-0.1,0.4-0.1,0.9-0.1,1.4c0,3.9,3.2,7.1,7.1,7.1c2.3,0,4.4-1.1,5.7-3c0.7,0.5,1.5,0.8,2.3,0.8c2.1,0,3.8-1.7,3.8-3.8
+                 c0-0.5-0.1-0.9-0.2-1.3C2090.2,301.8,2091.6,300,2091.6,297.9L2091.6,297.9z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }" d="M2076.3,295.5l5.6,2.6l5.7-5c0.1-0.4,0.1-0.8,0.1-1.3c0-3.5-2.8-6.3-6.3-6.3c-2.1,0-4,1-5.2,2.7l-0.9,4.9
+                 L2076.3,295.5L2076.3,295.5z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }" d="M2070.5,301.4c-0.1,0.4-0.1,0.8-0.1,1.3c0,3.5,2.8,6.3,6.3,6.3c2.1,0,4.1-1,5.2-2.8l0.9-4.9l-1.3-2.4l-5.6-2.6
+                 L2070.5,301.4L2070.5,301.4z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }" d="M2070.4,291.7l3.8,0.9l0.9-4.4c-0.5-0.4-1.2-0.6-1.8-0.6c-1.7,0-3,1.4-3,3
+                 C2070.2,291.1,2070.3,291.4,2070.4,291.7L2070.4,291.7z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }"
+                    d="M2070.1,292.7c-1.7,0.6-2.9,2.2-2.9,4c0,1.8,1.1,3.3,2.7,4l5.4-4.9l-1-2.1L2070.1,292.7L2070.1,292.7z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }" d="M2082.9,306.3c0.5,0.4,1.2,0.6,1.8,0.6c1.7,0,3-1.4,3-3c0-0.4-0.1-0.7-0.2-1l-3.8-0.9L2082.9,306.3
+                 L2082.9,306.3z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }"
+                    d="M2083.7,300.9l4.2,1c1.7-0.6,2.9-2.2,2.9-4c0-1.8-1.1-3.3-2.7-4l-5.5,4.8L2083.7,300.9L2083.7,300.9z" />
+                </g>
+              </svg>
+            </span>
+            <!-- Elasticsearch disable -->
+            <span *ngIf="!row.sinkdbs.includes('Elasticsearch')" class="pr-1" placement="bottom"
+              ngbTooltip="Elasticsearch" container="body" tooltipClass="dl-db-icon-hover-disable" [openDelay]="300"
+              [closeDelay]="500">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" width="20" height="20" viewBox="2066.4 284.8 25.1 25"
+                style="enable-background:new 2066.4 284.8 25.1 25;" xml:space="preserve">
+                <g>
+                  <path style="fill: #FFFFFF" d="M2091.6,297.9c0-2.1-1.3-3.9-3.3-4.7c0.1-0.4,0.1-0.9,0.1-1.4c0-3.9-3.2-7.1-7.1-7.1c-2.3,0-4.4,1.1-5.7,3
+                 c-0.7-0.5-1.5-0.8-2.3-0.8c-2.1,0-3.8,1.7-3.8,3.8c0,0.5,0.1,0.9,0.2,1.3c-2,0.7-3.3,2.6-3.3,4.7c0,2.1,1.3,4,3.3,4.7
+                 c-0.1,0.4-0.1,0.9-0.1,1.4c0,3.9,3.2,7.1,7.1,7.1c2.3,0,4.4-1.1,5.7-3c0.7,0.5,1.5,0.8,2.3,0.8c2.1,0,3.8-1.7,3.8-3.8
+                 c0-0.5-0.1-0.9-0.2-1.3C2090.2,301.8,2091.6,300,2091.6,297.9L2091.6,297.9z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }" d="M2076.3,295.5l5.6,2.6l5.7-5c0.1-0.4,0.1-0.8,0.1-1.3c0-3.5-2.8-6.3-6.3-6.3c-2.1,0-4,1-5.2,2.7l-0.9,4.9
+                 L2076.3,295.5L2076.3,295.5z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }" d="M2070.5,301.4c-0.1,0.4-0.1,0.8-0.1,1.3c0,3.5,2.8,6.3,6.3,6.3c2.1,0,4.1-1,5.2-2.8l0.9-4.9l-1.3-2.4l-5.6-2.6
+                 L2070.5,301.4L2070.5,301.4z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }" d="M2070.4,291.7l3.8,0.9l0.9-4.4c-0.5-0.4-1.2-0.6-1.8-0.6c-1.7,0-3,1.4-3,3
+                 C2070.2,291.1,2070.3,291.4,2070.4,291.7L2070.4,291.7z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }"
+                    d="M2070.1,292.7c-1.7,0.6-2.9,2.2-2.9,4c0,1.8,1.1,3.3,2.7,4l5.4-4.9l-1-2.1L2070.1,292.7L2070.1,292.7z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }" d="M2082.9,306.3c0.5,0.4,1.2,0.6,1.8,0.6c1.7,0,3-1.4,3-3c0-0.4-0.1-0.7-0.2-1l-3.8-0.9L2082.9,306.3
+                 L2082.9,306.3z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('Elasticsearch')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }"
+                    d="M2083.7,300.9l4.2,1c1.7-0.6,2.9-2.2,2.9-4c0-1.8-1.1-3.3-2.7-4l-5.5,4.8L2083.7,300.9L2083.7,300.9z" />
+                </g>
+              </svg>
+            </span>
+
+            <!-- MongoDB enable -->
+            <span *ngIf="row.sinkdbs.includes('MongoDB')" class="pr-1" placement="bottom" ngbTooltip="MongoDB"
+              container="body" tooltipClass="dl-db-icon-hover-enable" [openDelay]="300" [closeDelay]="500">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" width="20" height="20" viewBox="-397.2 285.8 11.2 25"
+                style="enable-background:new -397.2 285.8 11.2 25;" xml:space="preserve">
+                <g transform="matrix(1.2754196 0 0 1.2754196 -16.030009 -21.83192)">
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('MongoDB')
+                        ? '#19A2A2'
+                        : '#C4C6C8'
+                    }"
+                    d="M-294.5,241.2c0.2,0.3,0.4,0.7,0.5,1c0.1,0.2,0.2,0.4,0.4,0.5c0.4,0.4,0.9,0.9,1.2,1.4
+                 c0.9,1.2,1.5,2.5,1.9,3.9c0.3,0.9,0.4,1.7,0.4,2.6c0,2.7-0.9,4.9-2.7,6.8c-0.3,0.3-0.6,0.6-1,0.8c-0.2,0-0.3-0.2-0.4-0.3
+                 c-0.2-0.2-0.2-0.5-0.3-0.8c-0.1-0.3-0.1-0.6-0.1-1c0,0,0-0.1,0-0.2C-294.4,256.1-294.6,241.3-294.5,241.2z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('MongoDB')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }"
+                    d="M-294.5,241.2C-294.5,241.2-294.5,241.2-294.5,241.2c-0.1,0.2-0.2,0.4-0.3,0.6c-0.1,0.2-0.3,0.3-0.5,0.5
+                 c-0.9,0.8-1.7,1.8-2.3,2.9c-0.8,1.5-1.2,3.1-1.3,4.8c0,0.6,0.2,2.8,0.4,3.4c0.5,1.6,1.4,3,2.7,4.2c0.3,0.3,0.6,0.5,0.9,0.8
+                 c0.1,0,0.1-0.1,0.1-0.2c0-0.2,0.1-0.3,0.1-0.4c0.1-0.5,0.2-1.1,0.2-1.6C-294.4,256.2-294.4,241.3-294.5,241.2L-294.5,241.2z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('MongoDB')
+                        ? '#CEEBEA'
+                        : '#C2BFBF'
+                    }" d="M-294,258.9c0-0.2,0.2-0.4,0.3-0.7c-0.1,0-0.2-0.2-0.3-0.3c-0.1-0.1-0.1-0.2-0.2-0.4c-0.2-0.4-0.2-0.9-0.2-1.4
+                 c0,0,0-0.1,0-0.2s0-0.1,0-0.2c0,0-0.1,0.4-0.1,0.5c0,0.5-0.1,1-0.2,1.4c0,0.2,0,0.4-0.2,0.5c0,0,0,0,0,0.1c0.2,0.5,0.2,1.1,0.3,1.7
+                 v0.2c0,0.3,0,0.2,0.2,0.3c0.1,0,0.2,0,0.3,0.1c0.1,0,0.1,0,0.1-0.1c0-0.1,0-0.2,0-0.4c0-0.3,0-0.7,0-1
+                 C-294,259.3-294,259.1-294,258.9z" />
+                </g>
+              </svg>
+            </span>
+            <!-- MongoDB disable -->
+            <span *ngIf="!row.sinkdbs.includes('MongoDB')" class="pr-1" placement="bottom" ngbTooltip="MongoDB"
+              container="body" tooltipClass="dl-db-icon-hover-disable" [openDelay]="300" [closeDelay]="500">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" width="20" height="20" viewBox="-397.2 285.8 11.2 25"
+                style="enable-background:new -397.2 285.8 11.2 25;" xml:space="preserve">
+                <g transform="matrix(1.2754196 0 0 1.2754196 -16.030009 -21.83192)">
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('MongoDB')
+                        ? '#19A2A2'
+                        : '#C4C6C8'
+                    }"
+                    d="M-294.5,241.2c0.2,0.3,0.4,0.7,0.5,1c0.1,0.2,0.2,0.4,0.4,0.5c0.4,0.4,0.9,0.9,1.2,1.4
+                 c0.9,1.2,1.5,2.5,1.9,3.9c0.3,0.9,0.4,1.7,0.4,2.6c0,2.7-0.9,4.9-2.7,6.8c-0.3,0.3-0.6,0.6-1,0.8c-0.2,0-0.3-0.2-0.4-0.3
+                 c-0.2-0.2-0.2-0.5-0.3-0.8c-0.1-0.3-0.1-0.6-0.1-1c0,0,0-0.1,0-0.2C-294.4,256.1-294.6,241.3-294.5,241.2z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('MongoDB')
+                        ? '#5DBEBB'
+                        : '#D2D3D5'
+                    }"
+                    d="M-294.5,241.2C-294.5,241.2-294.5,241.2-294.5,241.2c-0.1,0.2-0.2,0.4-0.3,0.6c-0.1,0.2-0.3,0.3-0.5,0.5
+                 c-0.9,0.8-1.7,1.8-2.3,2.9c-0.8,1.5-1.2,3.1-1.3,4.8c0,0.6,0.2,2.8,0.4,3.4c0.5,1.6,1.4,3,2.7,4.2c0.3,0.3,0.6,0.5,0.9,0.8
+                 c0.1,0,0.1-0.1,0.1-0.2c0-0.2,0.1-0.3,0.1-0.4c0.1-0.5,0.2-1.1,0.2-1.6C-294.4,256.2-294.4,241.3-294.5,241.2L-294.5,241.2z" />
+                  <path [ngStyle]="{
+                      fill: row.sinkdbs.includes('MongoDB')
+                        ? '#CEEBEA'
+                        : '#C2BFBF'
+                    }" d="M-294,258.9c0-0.2,0.2-0.4,0.3-0.7c-0.1,0-0.2-0.2-0.3-0.3c-0.1-0.1-0.1-0.2-0.2-0.4c-0.2-0.4-0.2-0.9-0.2-1.4
+                 c0,0,0-0.1,0-0.2s0-0.1,0-0.2c0,0-0.1,0.4-0.1,0.5c0,0.5-0.1,1-0.2,1.4c0,0.2,0,0.4-0.2,0.5c0,0,0,0,0,0.1c0.2,0.5,0.2,1.1,0.3,1.7
+                 v0.2c0,0.3,0,0.2,0.2,0.3c0.1,0,0.2,0,0.3,0.1c0.1,0,0.1,0,0.1-0.1c0-0.1,0-0.2,0-0.4c0-0.3,0-0.7,0-1
+                 C-294,259.3-294,259.1-294,258.9z" />
+                </g>
+              </svg>
+            </span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [width]="40" name="TTL" prop="ttl">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span>{{ row.ttl }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [width]="100" name="Authentication" prop="login"
+          cellClass="d-flex justify-content-center pr-3">
+          <div>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <span *ngIf="row.login">
+                <i class="fas fa-unlock-alt dl-icon-enable" aria-hidden="true"></i>
+                ​
+              </span>
+              <span *ngIf="!row.login">
+                <i class="fa fa-unlock-alt dl-icon-disable" aria-hidden="true"></i>
+                ​
+              </span>
+
+            </ng-template>
+          </div>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [width]="100" name="Save raw data" prop="saveRaw"
+          cellClass="d-flex justify-content-center pr-3">
+          <div>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <span *ngIf="row.saveRaw">
+                <i class="fas fa-check dl-icon-enable" aria-hidden="true"></i>
+              </span>
+              <span *ngIf="!row.saveRaw">
+                <i class="fas fa-check dl-icon-disable" aria-hidden="true"></i>
+              </span>
+            </ng-template>
+          </div>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [width]="85" name="Setting" prop="type">
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <span class="dl-icon-unconfig" *ngIf="row.type">&nbsp;&nbsp;Configured&nbsp;&nbsp;</span>
+            <span class="dl-icon-config" *ngIf="!row.type">&nbsp;&nbsp;Unconfigured&nbsp;&nbsp;</span>
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column [width]="50" name="" sortable="false" cellClass="d-flex justify-content-center pr-3">
+          <div>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <span>
+                <button md-icon-button class="btn action-icon-setting" (click)="this.openTopicModal(row.name)">
+                  <i class="fas fa-cog fa-xs"></i>
+                </button>
+              </span>
+            </ng-template>
+          </div>
+        </ngx-datatable-column>
+
+        <ngx-datatable-footer>
+          <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
+            let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
+            <div class="page-count">
+              total: {{rowCount.toLocaleString()}} {{totalMessage}}
+            </div>
+            <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'" [pagerRightArrowIcon]="'datatable-icon-right'"
+              [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage"
+              [size]="pageSize" [count]="rowCount" [hidden]="!((rowCount / pageSize) > 1)"
+              (change)="table.onFooterPage($event)">
+            </datatable-pager>
+          </ng-template>
+        </ngx-datatable-footer>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
