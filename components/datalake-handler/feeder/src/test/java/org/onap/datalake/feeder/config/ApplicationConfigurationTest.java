@@ -26,7 +26,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -60,12 +59,20 @@ public class ApplicationConfigurationTest {
         assertTrue(config.getDmaapCheckNewTopicIntervalInSec() > 0);
 
         assertTrue(config.getKafkaConsumerCount() > 0);
+
+        assertNotNull(config.getDmaapKafkaExclude());
+        
         assertNotNull(config.isAsync());
         assertNotNull(config.isEnableSSL());
         assertNotNull(config.getDefaultTopicName());
         assertNotNull(config.getRawDataLabel());
         assertNotNull(config.getTimestampLabel());
-        assertEquals(null, config.getElasticsearchType());
+        assertNotNull(config.getElasticsearchType());
+        
+      //HDFS
+        assertTrue(config.getHdfsBatchSize()>0);
+        assertTrue(config.getHdfsBufferSize()>0);
+        assertTrue(config.getHdfsFlushInterval()>0);
     }
 
 }

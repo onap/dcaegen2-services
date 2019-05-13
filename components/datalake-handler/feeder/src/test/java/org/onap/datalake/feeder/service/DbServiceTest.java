@@ -91,4 +91,11 @@ public class DbServiceTest {
 		assertEquals(dbService.getDruid(), new Db(name));
 	}
 
+	@Test
+	public void testGetHdfs() {
+		String name = "HDFS";
+		when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+		assertEquals(dbService.getHdfs(), new Db(name));
+	}
+
 }

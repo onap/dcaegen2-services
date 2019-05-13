@@ -54,7 +54,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PullThread implements Runnable {
 
 	@Autowired
@@ -90,7 +90,8 @@ public class PullThread implements Runnable {
 		Properties consumerConfig = new Properties();
 
 		consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, config.getDmaapKafkaHostPort());
-		consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG,  config.getDmaapKafkaGroup());
+		consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, config.getDmaapKafkaGroup());
+		consumerConfig.put(ConsumerConfig.CLIENT_ID_CONFIG, String.valueOf(id));
 		consumerConfig.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 		consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 		consumerConfig.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
@@ -119,28 +120,29 @@ public class PullThread implements Runnable {
 			while (active.get()) {
 
 				ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(config.getDmaapKafkaTimeout()));
-                if (records != null) {
-                    List<Pair<Long, String>> messages = new ArrayList<>(records.count());
-                    for (TopicPartition partition : records.partitions()) {
-                        messages.clear();
-                        List<ConsumerRecord<String, String>> partitionRecords = records.records(partition);
-                        for (ConsumerRecord<String, String> record : partitionRecords) {
-                            messages.add(Pair.of(record.timestamp(), record.value()));
-                            //log.debug("threadid={} topic={}, timestamp={} key={}, offset={}, partition={}, value={}", id, record.topic(), record.timestamp(), record.key(), record.offset(), record.partition(), record.value());
-                        }
-                        storeService.saveMessages(partition.topic(), messages);
-                        log.info("topic={} count={}", partition.topic(), partitionRecords.size());//TODO we may record this number to DB
+				if (records != null) {
+					List<Pair<Long, String>> messages = new ArrayList<>(records.count());
+					for (TopicPartition partition : records.partitions()) {
+						messages.clear();
+						List<ConsumerRecord<String, String>> partitionRecords = records.records(partition);
+						for (ConsumerRecord<String, String> record : partitionRecords) {
+							messages.add(Pair.of(record.timestamp(), record.value()));
+							//log.debug("threadid={} topic={}, timestamp={} key={}, offset={}, partition={}, value={}", id, record.topic(), record.timestamp(), record.key(), record.offset(), record.partition(), record.value());
+						}
+						storeService.saveMessages(partition.topic(), messages);
+						log.info("saved to topic={} count={}", partition.topic(), partitionRecords.size());//TODO we may record this number to DB
 
-                        if (!async) {//for reliability, sync commit offset to Kafka, this slows down a bit
-                            long lastOffset = partitionRecords.get(partitionRecords.size() - 1).offset();
-                            consumer.commitSync(Collections.singletonMap(partition, new OffsetAndMetadata(lastOffset + 1)));
-                        }
-                    }
+						if (!async) {//for reliability, sync commit offset to Kafka, this slows down a bit
+							long lastOffset = partitionRecords.get(partitionRecords.size() - 1).offset();
+							consumer.commitSync(Collections.singletonMap(partition, new OffsetAndMetadata(lastOffset + 1)));
+						}
+					}
 
-                    if (async) {//for high Throughput, async commit offset in batch to Kafka
-                        consumer.commitAsync();
-                    }
-                }
+					if (async) {//for high Throughput, async commit offset in batch to Kafka
+						consumer.commitAsync();
+					}
+				}
+				storeService.flushStall();
 			}
 		} catch (Exception e) {
 			log.error("Puller {} run():   exception={}", id, e.getMessage());
@@ -153,6 +155,7 @@ public class PullThread implements Runnable {
 	public void shutdown() {
 		active.set(false);
 		consumer.wakeup();
+		consumer.unsubscribe();
 	}
 
 	private class DummyRebalanceListener implements ConsumerRebalanceListener {

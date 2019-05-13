@@ -46,8 +46,6 @@ public class PullServiceTest {
     @Mock
     private ApplicationConfiguration config;
 
-    private boolean isRunning = false;
-
     @Mock
     private ExecutorService executorService;
 

@@ -135,7 +135,7 @@ public class MongodbService {
 	}
 
 	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) {
-		if (dbReady == false)
+		if (dbReady == false)//TOD throw exception
 			return;
 		List<Document> documents = new ArrayList<>(jsons.size());
 		for (JSONObject json : jsons) {

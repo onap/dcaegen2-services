@@ -9,7 +9,7 @@
 		</layout>
 	</appender>
 
-	<logger name="com.mkyong.web" level="debug"
+	<logger name="org.onap.datalake" level="debug"
 		additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>

@@ -28,7 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Service for Dbs 
+ * Service for Dbs
  * 
  * @author Guobiao Mo
  *
@@ -38,11 +38,11 @@ public class DbService {
 
 	@Autowired
 	private DbRepository dbRepository;
-	
+
 	public Db getDb(String name) {
 		Optional<Db> ret = dbRepository.findById(name);
 		return ret.isPresent() ? ret.get() : null;
-	}	
+	}
 
 	public Db getCouchbase() {
 		return getDb("Couchbase");
@@ -58,6 +58,10 @@ public class DbService {
 
 	public Db getDruid() {
 		return getDb("Druid");
-	}	
+	}
+
+	public Db getHdfs() {
+		return getDb("HDFS");
+	}
 
 }

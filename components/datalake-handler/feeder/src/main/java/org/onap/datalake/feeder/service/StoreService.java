@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -35,7 +34,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
-import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.enumeration.DataFormat;
 import org.slf4j.Logger;
@@ -77,6 +75,9 @@ public class StoreService {
 	@Autowired
 	private ElasticsearchService elasticsearchService;
 
+	@Autowired
+	private HdfsService hdfsService;
+
 	private Map<String, TopicConfig> topicMap = new HashMap<>();
 
 	private ObjectMapper yamlReader;
@@ -84,10 +85,6 @@ public class StoreService {
 	@PostConstruct
 	private void init() {
 		yamlReader = new ObjectMapper(new YAMLFactory());
-	}
-
-	@PreDestroy
-	public void cleanUp() {
 	}
 
 	public void saveMessages(String topicStr, List<Pair<Long, String>> messages) {//pair=ts+text
@@ -109,7 +106,7 @@ public class StoreService {
 			}
 		}
 
-		saveJsons(topic, docs);
+		saveJsons(topic, docs, messages);
 	}
 
 	private JSONObject messageToJson(TopicConfig topic, Pair<Long, String> pair) throws JSONException, JsonParseException, JsonMappingException, IOException {
@@ -161,7 +158,7 @@ public class StoreService {
 		return json;
 	}
 
-	private void saveJsons(TopicConfig topic, List<JSONObject> jsons) {
+	private void saveJsons(TopicConfig topic, List<JSONObject> jsons, List<Pair<Long, String>> messages) {
 		if (topic.supportMongoDB()) {
 			mongodbService.saveJsons(topic, jsons);
 		}
@@ -173,6 +170,13 @@ public class StoreService {
 		if (topic.supportElasticsearch()) {
 			elasticsearchService.saveJsons(topic, jsons);
 		}
+
+		if (topic.supportHdfs()) {
+			hdfsService.saveMessages(topic, messages);
+		}
 	}
 
+	public void flushStall() {
+		hdfsService.flushStall();
+	}
 }

@@ -82,6 +82,7 @@ insert into db (`name`,`host`,`login`,`pass`,`database_name`) values ('Couchbase
 insert into db (`name`,`host`) values ('Elasticsearch','dl_es');
 insert into db (`name`,`host`,`port`,`database_name`) values ('MongoDB','dl_mongodb',27017,'datalake');
 insert into db (`name`,`host`) values ('Druid','dl_druid');
+insert into db (`name`,`host`) values ('HDFS','dlhdfs');
 
 
 -- in production, default enabled should be off
@@ -94,3 +95,4 @@ insert into `map_db_topic`(`db_name`,`topic_name`) values ('Couchbase','_DL_DEFA
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('Elasticsearch','_DL_DEFAULT_');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','_DL_DEFAULT_');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('Druid','_DL_DEFAULT_');
+insert into `map_db_topic`(`db_name`,`topic_name`) values ('HDFS','_DL_DEFAULT_');

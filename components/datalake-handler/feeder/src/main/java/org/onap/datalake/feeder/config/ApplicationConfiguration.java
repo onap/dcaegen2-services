@@ -41,6 +41,16 @@ import lombok.Setter;
 @EnableAutoConfiguration
 public class ApplicationConfiguration {
 
+	//App general
+	private boolean async;
+	private boolean enableSSL;
+
+	private String timestampLabel;
+	private String rawDataLabel;
+
+	private String defaultTopicName;
+
+	//DMaaP
 	private String dmaapZookeeperHostPort;
 	private String dmaapKafkaHostPort;
 	private String dmaapKafkaGroup;
@@ -51,13 +61,10 @@ public class ApplicationConfiguration {
 
 	private int kafkaConsumerCount;
 
-	private boolean async;
-	private boolean enableSSL;
-
-	private String timestampLabel;
-	private String rawDataLabel;
-	
-	private String defaultTopicName;
-
 	private String elasticsearchType;
+
+	//HDFS
+	private int hdfsBufferSize;	
+	private long hdfsFlushInterval;
+	private int hdfsBatchSize;
 }

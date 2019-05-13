@@ -84,7 +84,7 @@ public class ElasticsearchService {
 		// Initialize the Connection
 		client = new RestHighLevelClient(RestClient.builder(new HttpHost(elasticsearchHost, 9200, "http"), new HttpHost(elasticsearchHost, 9201, "http")));
 
-		log.info("Connect to Elasticsearch Host {}", elasticsearchHost);
+		log.info("Connected to Elasticsearch Host {}", elasticsearchHost);
 
 		listener = new ActionListener<BulkResponse>() {
 			@Override

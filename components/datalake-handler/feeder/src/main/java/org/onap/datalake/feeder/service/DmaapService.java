@@ -22,6 +22,7 @@ package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -65,9 +66,7 @@ public class DmaapService {
 			ZooKeeper zk = new ZooKeeper(config.getDmaapZookeeperHostPort(), 10000, watcher);
 			List<String> topics = zk.getChildren("/brokers/topics", false);
 			String[] excludes = config.getDmaapKafkaExclude();
-			for (String exclude : excludes) {
-				topics.remove(exclude);
-			}
+			topics.removeAll(Arrays.asList(excludes));
 			return topics;
 		} catch (Exception e) {
 			log.error("Can not get topic list from Zookeeper, for testing, going to use hard coded topic list.", e);
@@ -81,7 +80,7 @@ public class DmaapService {
 			return Collections.emptyList();
 		}
 
-		List<String> ret = new ArrayList<>();
+		List<String> ret = new ArrayList<>(allTopics.size());
 		for (String topicStr : allTopics) {
 			TopicConfig topicConfig = topicService.getEffectiveTopic(topicStr, true);
 			if (topicConfig.isEnabled()) {

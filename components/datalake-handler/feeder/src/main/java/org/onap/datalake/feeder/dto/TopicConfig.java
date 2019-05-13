@@ -60,7 +60,11 @@ public class TopicConfig {
 		}
 	}
 
-	
+
+	public boolean supportHdfs() {
+		return containDb("HDFS");
+	}
+
 	public boolean supportElasticsearch() {
 		return containDb("Elasticsearch");//TODO string hard codes
 	}

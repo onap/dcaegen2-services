@@ -99,6 +99,7 @@ public class TopicConfigTest {
         assertFalse(testTopicConfig.supportCouchbase());
         assertFalse(testTopicConfig.supportDruid());
         assertFalse(testTopicConfig.supportMongoDB());
+        assertFalse(testTopicConfig.supportHdfs());
 
         testTopic.getDbs().remove(new Db("Elasticsearch"));
         testTopicConfig = testTopic.getTopicConfig();
