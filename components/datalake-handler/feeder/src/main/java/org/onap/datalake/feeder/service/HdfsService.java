@@ -140,8 +140,10 @@ public class HdfsService {
 
 			String hdfsuri = String.format("hdfs://%s:%s", hdfs.getHost(), port);
 			hdfsConfig.set("fs.defaultFS", hdfsuri);
-
-			log.info("Connecting to -- {}", hdfsuri);
+			//hdfsConfig.set("hadoop.job.ugi", hdfs.getLogin());
+			System.setProperty("HADOOP_USER_NAME", hdfs.getLogin());
+			
+			log.info("Connecting to -- {} as {}", hdfsuri, hdfs.getLogin());
 
 			fileSystem = FileSystem.get(hdfsConfig);
 

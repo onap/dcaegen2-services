@@ -82,7 +82,7 @@ insert into db (`name`,`host`,`login`,`pass`,`database_name`) values ('Couchbase
 insert into db (`name`,`host`) values ('Elasticsearch','dl_es');
 insert into db (`name`,`host`,`port`,`database_name`) values ('MongoDB','dl_mongodb',27017,'datalake');
 insert into db (`name`,`host`) values ('Druid','dl_druid');
-insert into db (`name`,`host`) values ('HDFS','dlhdfs');
+insert into db (`name`,`host`,`login`) values ('HDFS','dlhdfs','dl');
 
 
 -- in production, default enabled should be off
