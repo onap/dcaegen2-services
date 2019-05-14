@@ -1,0 +1,8 @@
+{
+  "/datalake/v1": {
+    "target": "http://192.168.1.97:1680",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

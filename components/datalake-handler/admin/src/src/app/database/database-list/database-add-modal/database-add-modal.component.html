@@ -1,0 +1,255 @@
+<!--
+============LICENSE_START=======================================================
+ONAP : DataLake
+================================================================================
+Copyright 2019 QCT
+=================================================================================
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+============LICENSE_END=========================================================
+-->
+
+<div class="p-0">
+  <div class="modal-title p-0 pb-4 w-25 border-right">
+
+  </div>
+
+  <div class="modal-body p-0">
+    <div class="d-flex">
+
+      <!-- Menu -->
+      <div class="flex-fill w-25 border-right">
+        <div class="nav flex-column nav-pills" id="menu-tab1" role="tablist" aria-orientation="vertical">
+
+          <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab"
+            aria-controls="v-pills-all" aria-selected="true">All</a>
+
+          <a class="nav-link" id="v-pills-olap-tab" data-toggle="pill" href="#v-pills-olap" role="tab"
+            aria-controls="v-pills-olap" aria-selected="false">OLAP</a>
+
+          <a class="nav-link" id="v-pills-doc-tab" data-toggle="pill" href="#v-pills-doc" role="tab"
+            aria-controls="v-pills-doc" aria-selected="false">Document</a>
+
+          <a class="nav-link" id="v-pills-search-tab" data-toggle="pill" href="#v-pills-search" role="tab"
+            aria-controls="v-pills-search" aria-selected="false">Search Engine</a>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="flex-fill w-75">
+
+        <div class="tab-content mb-auto" id="v-pills-tabContent" style="height: 320px;">
+          <!-- All -->
+          <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+            <div class="nav flex-column nav-pills" id="menu-tab2" role="tablist" aria-orientation="vertical">
+              <a class="nav-link" (click)="this.clickItem('Couchbase')" data-toggle="pill" role="tab"
+                aria-selected="true">Couchbase</a>
+              <a class="nav-link" (click)="this.clickItem('Druid')" data-toggle="pill" role="tab"
+                aria-selected="true">Druid</a>
+              <a class="nav-link" (click)="this.clickItem('Elasticsearch')" data-toggle="pill" role="tab"
+                aria-selected="true">Elasticsearch</a>
+              <a class="nav-link" (click)="this.clickItem('MongoDB')" data-toggle="pill" role="tab"
+                aria-selected="true">MongoDB</a>
+            </div>
+          </div>
+
+          <!-- OLAP -->
+          <div class="tab-pane fade" id="v-pills-olap" role="tabpanel" aria-labelledby="v-pills-olap-tab">
+            <div class="nav flex-column nav-pills" id="menu-tab2" role="tablist" aria-orientation="vertical">
+              <a class="nav-link" (click)="this.clickItem('Druid')" data-toggle="pill" role="tab"
+                aria-selected="true">Druid</a>
+            </div>
+          </div>
+
+          <!-- Document -->
+          <div class="tab-pane fade" id="v-pills-doc" role="tabpanel" aria-labelledby="v-pills-doc-tab">
+            <div class="nav flex-column nav-pills" id="menu-tab2" role="tablist" aria-orientation="vertical">
+              <a class="nav-link" (click)="this.clickItem('Couchbase')" data-toggle="pill" role="tab"
+                aria-selected="true">Couchbase</a>
+              <a class="nav-link" (click)="this.clickItem('MongoDB')" data-toggle="pill" role="tab"
+                aria-selected="true">MongoDB</a>
+            </div>
+          </div>
+
+          <!-- Search engine -->
+          <div class="tab-pane fade" id="v-pills-search" role="tabpanel" aria-labelledby="v-pills-search-tab">
+            <div class="nav flex-column nav-pills" id="menu-tab2" role="tablist" aria-orientation="vertical">
+              <a class="nav-link" (click)="this.clickItem('Elasticsearch')" data-toggle="pill" role="tab"
+                aria-selected="true">Elasticsearch</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex mt-auto justify-content-end p-3">
+          <div class="p-1 col-sm-3">
+            <span>
+              <button type="button" class="btn dl-btn-dark btn-block" (click)="this.passBack()">
+                Next
+              </button>
+            </span>
+          </div>
+          <div class="p-1 col-sm-3">
+            <span>
+              <button type="button" class="btn dl-btn-light btn-block" (click)="activeModal.close('Close click')">
+                Cancel
+              </button>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- <div class="container-fluid p-0">
+      <div class="row m-0 p-0">
+        <div class="col-md-4 border-right"></div>
+        <div class="col-md-8"></div>
+      </div>
+      <div class="row m-0 p-0 border border-danger" style="height: 350px;">
+        <div class="col-md-4 border-right">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab"
+              aria-controls="v-pills-all" aria-selected="true">All</a>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+              1111111111111111
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row m-0 p-0 border border-info">
+        <div class="col-md-6 p-0">
+
+        </div>
+        <div class="col-md-3 p-1">
+          <span>
+            <button type="button" class="btn dl-btn-dark btn-block" (click)="this.passBack()">
+              Next
+            </button>
+          </span>
+        </div>
+        <div class="col-md-3 p-1">
+          <span>
+            <button type="button" class="btn dl-btn-light btn-block" (click)="activeModal.close('Close click')">
+              Cancel
+            </button>
+          </span>
+        </div>
+      </div>
+
+       <div class="d-flex justify-content-center">
+
+        <div class="p-0 border-right">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab"
+              aria-controls="v-pills-all" aria-selected="true">All</a>
+          </div>
+        </div>
+
+        <div class="p-0">
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+              1111111111111111
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="mb-auto">
+          <div class="row">
+            <div class="col-md-6 p-0">
+
+            </div>
+            <div class="col-md-3 p-1">
+              <span>
+                <button type="button" class="btn dl-btn-dark btn-block" (click)="this.passBack()">
+                  Next
+                </button>
+              </span>
+            </div>
+            <div class="col-md-3 p-1">
+              <span>
+                <button type="button" class="btn dl-btn-light btn-block" (click)="activeModal.close('Close click')">
+                  Cancel
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
+    <!-- <div class="row">
+        <div class="col-sm-4">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+              aria-controls="v-pills-home" aria-selected="true">Home</a>
+            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+              aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
+              aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab"
+              aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+          </div>
+
+        </div>
+        <div class="col-sm-8">
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+              1111111111111111
+            </div>
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+              2222222222222222222
+            </div>
+            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+              33333333333333333
+            </div>
+            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+              4444444444444
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
+  </div>
+</div>
+
+
+<!-- <div class="modal-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 p-0">
+
+        </div>
+        <div class="col-md-3 p-1">
+          <span>
+            <button type="button" class="btn dl-btn-dark btn-block" (click)="this.passBack()">
+              Next
+            </button>
+          </span>
+        </div>
+        <div class="col-md-3 p-1">
+          <span>
+            <button type="button" class="btn dl-btn-light btn-block" (click)="activeModal.close('Close click')">
+              Cancel
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div> -->
