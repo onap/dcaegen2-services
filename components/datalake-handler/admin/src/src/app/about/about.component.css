@@ -18,15 +18,30 @@
  * ============LICENSE_END=========================================================
  */
 
-import { TestBed } from "@angular/core/testing";
+.about-block {
+  height: 80vh;
+}
 
-import { HeaderService } from "./header.service";
+.about-panel {
+  background: #FFFFFF;
+  box-shadow: 3px 3px 11px 0 #D2D3D5;
+  border-radius: 20px;
+}
 
-describe("HeaderService", () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+.about-title {
+  color: #5DBEBB;
+  font-weight: 800;
+  padding-bottom: 20px;
+}
 
-  it("should be created", () => {
-    const service: HeaderService = TestBed.get(HeaderService);
-    expect(service).toBeTruthy();
-  });
-});
+.about-bold {
+  color: #313032;
+  font-weight: 800;
+}
+
+.about-info {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #A8A9AC;
+}

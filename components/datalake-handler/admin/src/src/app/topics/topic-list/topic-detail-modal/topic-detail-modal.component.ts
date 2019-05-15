@@ -35,6 +35,7 @@ import {
 } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { RestApiService } from "src/app/core/services/rest-api.service";
+import { AdminService } from "src/app/core/services/admin.service";
 import { Topic } from "src/app/core/models/topic.model";
 
 @Component({
@@ -62,6 +63,7 @@ export class TopicDetailModalComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
+    public adminService: AdminService,
     private restApiService: RestApiService
   ) {
     this.getDbs();
@@ -90,19 +92,16 @@ export class TopicDetailModalComponent implements OnInit {
   getDbs() {
     this.dbs = [];
     this.restApiService.getDbList().subscribe((data: {}) => {
-      //console.log(data);
       this.dbs = data;
     });
   }
 
   updateSelectedDB(event: any, name: string) {
     if (event.target.checked) {
-      console.log("checked");
       if (!this.tempSeletedDbs.find(db => db === name)) {
         this.tempSeletedDbs.push(name);
       }
     } else {
-      console.log("unchecked");
       const index = this.tempSeletedDbs.indexOf(name, 0);
       if (index > -1) {
         this.tempSeletedDbs.splice(index, 1);
@@ -142,29 +141,12 @@ export class TopicDetailModalComponent implements OnInit {
       }
     }
 
-    console.log("==================================");
-    console.log("Update topic name: " + this.topic.name);
-    console.log("Update topic login: " + this.topic.login);
-    console.log("Update topic password: " + this.topic.password);
-    console.log("Update topic sinkdbs: " + this.topic.sinkdbs);
-    console.log("Update topic enabled: " + this.topic.enabled);
-    console.log("Update topic saveRaw: " + this.topic.saveRaw);
-    console.log("Update topic dataFormat: " + this.topic.dataFormat);
-    console.log("Update topic ttl: " + this.topic.ttl);
-    console.log(
-      "Update topic correlateClearedMessage: " +
-        this.topic.correlateClearedMessage
-    );
-    console.log("Update topic messageIdPath: " + this.topic.messageIdPath);
-
     // Reset to default
     if (this.topic.sinkdbs.length == 0) {
       this.topic.type = false;
     } else {
       this.topic.type = true;
     }
-    console.log("Update topic type: " + this.topic.type);
-    console.log("==================================");
     this.passEntry.emit(this.topic);
   }
 }

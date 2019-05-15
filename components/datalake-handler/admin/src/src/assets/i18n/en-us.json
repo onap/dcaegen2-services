@@ -1,8 +1,37 @@
 {
-  "HELLO": "Hello1234",
   "SIDEBAR": {
     "FEDDFER": "DataLake Feeder",
     "TOPICS": "Topics",
-    "DATABASE": "Database"
-  }
+    "DATABASE": "Database",
+    "ABOUT": "About"
+  },
+
+  "NAME": "Name",
+  "STATUS": "Status",
+  "SINK": "Sink",
+  "AUTHENTICATION": "Authentication",
+  "DATA_FORMAT": "Data format",
+  "TTL": "TTL",
+  "SAVE_RAW_DATA": "Save raw data",
+  "CORRELATE_CLEARED_MESSAGE": "Correlate cleared message",
+  "DEFAULT_CONFIGURATIONS": "Default configurations",
+  "ID_EXTRACTION": "ID extraction",
+  "CONFIGURED": "Configured",
+  "UNCONFIGURED": "Unconfigured",
+
+  "DATABASE_CONNECTIONS": "Database connections",
+  "BUCKET": "Bucket",
+  "HOST": "Host",
+  "PORT": "Port",
+  "ENABLE_SSL": "Enable SSL",
+  "VERIFY": "Verify",
+  "SETTING": "Setting",
+
+  "DOCUMENT_STORE": "Document store",
+  "SEARCH_ENGINE": "Search engine",
+
+  "DELETE": "Delete",
+  "ERROR_CODE": "Error Code",
+  "SUCCESS_UPDATED": "Success updated",
+  "TOPIC_DEFAULT_CONF_NOTICE": "Notice: This topic uses the default topics settings."
 }

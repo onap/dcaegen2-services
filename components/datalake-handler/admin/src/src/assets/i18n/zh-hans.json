@@ -1,8 +1,37 @@
 {
-  "HELLO": "你抖音了沒",
   "SIDEBAR": {
-    "FEDDFER": "资料湖",
-    "TOPICS": "主题",
-    "DATABASE": "数据库"
-  }
+    "FEDDFER": "DataLake Feeder",
+    "TOPICS": "Topics",
+    "DATABASE": "Database",
+    "ABOUT": "About"
+  },
+
+  "NAME": "名称",
+  "STATUS": "状态",
+  "SINK": "数据库",
+  "AUTHENTICATION": "身份验证​",
+  "DATA_FORMAT": "数据格式",
+  "TTL": "数据失效时间",
+  "SAVE_RAW_DATA": "保存原始数据",
+  "CORRELATE_CLEARED_MESSAGE": "关联已清除的消息​",
+  "DEFAULT_CONFIGURATIONS": "默认配置​",
+  "ID_EXTRACTION": "ID提取​",
+  "CONFIGURED": "已配置",
+  "UNCONFIGURED": "未配置​",
+
+  "DATABASE_CONNECTIONS": "数据库连接​",
+  "BUCKET": "Bucket",
+  "HOST": "主机​",
+  "PORT": "端口​",
+  "ENABLE_SSL": "使用SSL​",
+  "VERIFY": "验证​",
+  "SETTING": "设置",
+
+  "DOCUMENT_STORE": "文档存储",
+  "SEARCH_ENGINE": "搜索引擎",
+
+  "DELETE": "删除",
+  "ERROR_CODE": "错误代码​",
+  "SUCCESS_UPDATED": "更新成功​",
+  "TOPIC_DEFAULT_CONF_NOTICE": "注意: 本Topic使用默认Topic设置。​"
 }

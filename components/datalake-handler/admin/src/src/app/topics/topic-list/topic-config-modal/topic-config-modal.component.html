@@ -1,9 +1,29 @@
+<!--
+============LICENSE_START=======================================================
+ONAP : DataLake
+================================================================================
+Copyright 2019 QCT
+=================================================================================
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+============LICENSE_END=========================================================
+-->
+
 <div class="p-1">
   <div class="modal-header pb-0 border-0">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <label class="dl-h3">{{ title }}</label>
+          <label class="dl-h3">{{ "DEFAULT_CONFIGURATIONS" | translate }}</label>
         </div>
       </div>
 
@@ -19,7 +39,7 @@
     <div class="container-fluid">
       <div class="form-group">
         <div class="row">
-          <div class="col-md-4"><label class="dl-emphasis1">Status</label></div>
+          <div class="col-md-4"><label class="dl-emphasis1">{{ 'STATUS' | translate }}</label></div>
 
           <div class="col-md-8">
             <label class="dl-switch">
@@ -33,7 +53,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-12">
-            <label class="dl-emphasis1" for="inputUserName">Authentication</label>
+            <label class="dl-emphasis1" for="inputUserName">{{ 'AUTHENTICATION' | translate }}</label>
           </div>
         </div>
         <div class="row">
@@ -42,8 +62,8 @@
               placeholder="Username" />
           </div>
           <div class="col-md-6">
-            <input #t_password [value]="topic.password" class="form-control dl-input-text" id="inputPass" type="text"
-              placeholder="Password" />
+            <input #t_password [value]="topic.password" class="form-control dl-input-text" id="inputPass"
+              type="password" placeholder="Password" />
           </div>
         </div>
       </div>
@@ -51,10 +71,10 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
-            <label class="dl-emphasis1">Data format</label>
+            <label class="dl-emphasis1">{{ 'DATA_FORMAT' | translate }}</label>
           </div>
           <div class="col-md-6">
-            <label class="dl-emphasis1">TTL (days)</label>
+            <label class="dl-emphasis1">{{ 'TTL' | translate }} (days)</label>
           </div>
         </div>
         <div class="row">
@@ -66,14 +86,14 @@
           </div>
           <div class="col-md-6">
             <input #t_ttl [value]="topic.ttl" class="form-control dl-input-text" id="inputTtl" type="text"
-              placeholder="3650" />
+              placeholder="3650" (input)="this.adminService.onKeyPressNumber($event)" />
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <div class="row">
-          <div class="col-md-12"><label class="dl-emphasis1">Sink</label></div>
+          <div class="col-md-12"><label class="dl-emphasis1">{{ 'SINK' | translate }}</label></div>
         </div>
         <div class="row d-flex flex-wrap">
           <div *ngFor="let db of dbs" class="col-md-6 pb-1">
@@ -96,7 +116,7 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-12">
-            <label class="dl-emphasis1">Raw data</label>
+            <label class="dl-emphasis1">{{ 'SAVE_RAW_DATA' | translate }}</label>
           </div>
         </div>
         <div class="row">

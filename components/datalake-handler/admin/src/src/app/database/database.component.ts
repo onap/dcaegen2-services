@@ -25,7 +25,7 @@
  */
 
 import { Component, OnInit } from "@angular/core";
-import { HeaderService } from "../core/services/header.service";
+import { AdminService } from "../core/services/admin.service";
 
 @Component({
   selector: "app-database",
@@ -33,8 +33,8 @@ import { HeaderService } from "../core/services/header.service";
   styleUrls: ["./database.component.css"]
 })
 export class DatabaseComponent implements OnInit {
-  constructor(private headerService: HeaderService) {
-    this.headerService.setTitle("SIDEBAR.DATABASE");
+  constructor(private adminService: AdminService) {
+    this.adminService.setTitle("SIDEBAR.DATABASE");
   }
 
   ngOnInit() {}

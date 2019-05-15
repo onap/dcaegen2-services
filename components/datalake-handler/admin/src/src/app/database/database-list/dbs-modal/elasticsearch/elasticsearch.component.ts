@@ -27,6 +27,7 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { Db } from "src/app/core/models/db.model";
+import { AdminService } from "src/app/core/services/admin.service";
 
 @Component({
   selector: "app-elasticsearch",
@@ -38,7 +39,10 @@ export class ElasticsearchComponent {
   @Input() db: Db;
   tempDb: Db;
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(
+    public activeModal: NgbActiveModal,
+    public adminService: AdminService
+  ) {}
 
   ngOnInit() {
     // cache for display
@@ -58,18 +62,6 @@ export class ElasticsearchComponent {
 
   passBack() {
     this.db = this.tempDb;
-
-    console.log("==================================");
-    console.log("Update db name: " + this.db.name);
-    console.log("Update db enabled: " + this.db.enabled);
-    console.log("Update db host: " + this.db.host);
-    console.log("Update db port: " + this.db.port);
-    console.log("Update db database: " + this.db.database);
-    console.log("Update db encrypt: " + this.db.encrypt);
-    console.log("Update db login: " + this.db.login);
-    console.log("Update db pass: " + this.db.pass);
-    console.log("==================================");
-
     this.passEntry.emit(this.db);
   }
 }

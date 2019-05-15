@@ -25,7 +25,7 @@
  */
 
 import { Component, OnInit } from "@angular/core";
-import { HeaderService } from "src/app/core/services/header.service";
+import { AdminService } from "src/app/core/services/admin.service";
 import { RestApiService } from "src/app/core/services/rest-api.service";
 
 // notify
@@ -40,11 +40,11 @@ export class FeederComponent implements OnInit {
   topicContent: string = "";
 
   constructor(
-    private headerService: HeaderService,
+    private adminService: AdminService,
     private restApiService: RestApiService,
     private notificationService: ToastrNotificationService
   ) {
-    this.headerService.setTitle("SIDEBAR.FEDDFER");
+    this.adminService.setTitle("SIDEBAR.FEDDFER");
     this.restApiService.getTopicsFromFeeder().subscribe(
       res => {
         // TODO: -1, because __consumer_offsets

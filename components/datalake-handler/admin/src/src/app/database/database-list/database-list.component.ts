@@ -196,7 +196,6 @@ export class DatabaseListComponent implements OnInit {
       this.tempDbDetail = receiveEntry;
       if (index != -1) {
         // Db name found, to update db
-        console.log("Update database: " + this.tempDbDetail.name);
         this.restApiService.upadteDb(this.tempDbDetail).subscribe(
           res => {
             this.dbs[index] = this.tempDbDetail;
@@ -210,7 +209,6 @@ export class DatabaseListComponent implements OnInit {
         );
       } else {
         // Db name not found, to insert db
-        console.log("Inserte database: " + this.tempDbDetail.name);
         this.restApiService.addDb(this.tempDbDetail).subscribe(
           res => {
             this.dbs.push(this.tempDbDetail);

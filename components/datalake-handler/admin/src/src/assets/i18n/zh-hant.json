@@ -1,8 +1,38 @@
 {
-  "HELLO": "安安",
   "SIDEBAR": {
-    "FEDDFER": "資料湖",
-    "TOPICS": "主題",
-    "DATABASE": "資料庫"
-  }
+    "FEDDFER": "DataLake Feeder",
+    "TOPICS": "Topics",
+    "DATABASE": "Database",
+    "ABOUT": "About"
+  },
+
+  "NAME": "名稱",
+  "STATUS": "狀態​",
+  "SINK": "資料庫",
+  "AUTHENTICATION": "身份驗證​",
+  "DATA_FORMAT": "檔案格式​",
+  "TTL": "存活時間​",
+  "SAVE_RAW_DATA": "保存原始資料​",
+  "CORRELATE_CLEARED_MESSAGE": "關聯已清除的訊息​",
+  "DEFAULT_CONFIGURATIONS": "預設配置​",
+  "ID_EXTRACTION": "ID提取​",
+  "CONFIGURED": "已配置",
+  "UNCONFIGURED": "未配置​",
+
+
+  "DATABASE_CONNECTIONS": "資料庫連線​",
+  "BUCKET": "Bucket",
+  "HOST": "主機",
+  "PORT": "埠",
+  "ENABLE_SSL": "使用SSL​",
+  "VERIFY": "驗證​",
+  "SETTING": "設定",
+
+  "DOCUMENT_STORE": "文檔儲存",
+  "SEARCH_ENGINE": "搜尋引擎",
+
+  "DELETE": "刪除",
+  "ERROR_CODE": "錯誤代碼",
+  "SUCCESS_UPDATED": "更新成功​",
+  "TOPIC_DEFAULT_CONF_NOTICE": "注意：此Topic目前使用預設配置。​"
 }

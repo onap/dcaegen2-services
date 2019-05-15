@@ -41,7 +41,7 @@ import { DatabaseComponent } from "./database/database.component";
 import { TopicListComponent } from "./topics/topic-list/topic-list.component";
 
 // Service
-import { HeaderService } from "./core/services/header.service";
+import { AdminService } from "./core/services/admin.service";
 import { RestApiService } from "./core/services/rest-api.service";
 import { ToastrNotificationService } from "src/app/core/services/toastr-notification.service";
 
@@ -70,6 +70,7 @@ import { TopicDetailModalComponent } from "./topics/topic-list/topic-detail-moda
 import { TopicConfigModalComponent } from "./topics/topic-list/topic-config-modal/topic-config-modal.component";
 import { ToastrNotificationComponent } from "./core/toastr-notification/toastr-notification.component";
 import { AlertComponent } from "./core/alert/alert.component";
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { AlertComponent } from "./core/alert/alert.component";
     TopicDetailModalComponent,
     TopicConfigModalComponent,
     ToastrNotificationComponent,
-    AlertComponent
+    AlertComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +108,7 @@ import { AlertComponent } from "./core/alert/alert.component";
     FormsModule,
     NgxDatatableModule
   ],
-  providers: [HeaderService, RestApiService, ToastrNotificationService],
+  providers: [AdminService, RestApiService, ToastrNotificationService],
   bootstrap: [AppComponent],
   entryComponents: [
     AlertComponent,
