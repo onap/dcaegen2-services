@@ -18,34 +18,27 @@
  * ============LICENSE_END=========================================================
  */
 
-/**
- *
- * @author Ekko Chang
- *
- */
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { AboutComponent } from "./about.component";
 
-import { FeederComponent } from "./feeder/feeder.component";
-import { TopicsComponent } from "./topics/topics.component";
-import { DatabaseComponent } from "./database/database.component";
-import { AboutComponent } from "./about/about.component";
+describe("AboutComponent", () => {
+  let component: AboutComponent;
+  let fixture: ComponentFixture<AboutComponent>;
 
-const routes: Routes = [
-  { path: "", redirectTo: "/feeder", pathMatch: "full" },
-  { path: "feeder", component: FeederComponent },
-  { path: "topics", component: TopicsComponent },
-  { path: "database", component: DatabaseComponent },
-  { path: "about", component: AboutComponent }
-];
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [AboutComponent]
+    }).compileComponents();
+  }));
 
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      useHash: true
-    })
-  ],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {}
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AboutComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it("should create", () => {
+    expect(component).toBeTruthy();
+  });
+});

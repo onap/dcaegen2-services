@@ -24,28 +24,18 @@
  *
  */
 
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { AdminService } from "../core/services/admin.service";
 
-import { FeederComponent } from "./feeder/feeder.component";
-import { TopicsComponent } from "./topics/topics.component";
-import { DatabaseComponent } from "./database/database.component";
-import { AboutComponent } from "./about/about.component";
-
-const routes: Routes = [
-  { path: "", redirectTo: "/feeder", pathMatch: "full" },
-  { path: "feeder", component: FeederComponent },
-  { path: "topics", component: TopicsComponent },
-  { path: "database", component: DatabaseComponent },
-  { path: "about", component: AboutComponent }
-];
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      useHash: true
-    })
-  ],
-  exports: [RouterModule]
+@Component({
+  selector: "app-about",
+  templateUrl: "./about.component.html",
+  styleUrls: ["./about.component.css"]
 })
-export class AppRoutingModule {}
+export class AboutComponent implements OnInit {
+  constructor(private adminService: AdminService) {
+    this.adminService.setTitle("SIDEBAR.ABOUT");
+  }
+
+  ngOnInit() {}
+}

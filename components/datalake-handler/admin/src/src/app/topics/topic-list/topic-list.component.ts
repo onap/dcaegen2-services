@@ -89,15 +89,12 @@ export class TopicListComponent {
   async initData() {
     this.topicListDmaap = [];
     this.topicListDmaap = await this.getTopicList("dmaap");
-    console.log("topic list from dmaap: " + this.topicListDmaap);
 
     this.topicListFeeder = [];
     this.topicListFeeder = await this.getTopicList("feeder");
-    console.log("topic list from feeder: " + this.topicListFeeder);
 
     this.topicDefaultConfig = new Topic();
     this.topicDefaultConfig = await this.getTopicDefaultConfig();
-    console.log("topic default config name: " + this.topicDefaultConfig.name);
 
     return true;
   }

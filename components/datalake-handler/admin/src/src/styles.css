@@ -552,3 +552,15 @@ input#switch:checked+.dl-slider:before {
 .dl-md-modal .modal-dialog {
   max-width: 565px;
 }
+
+.dl-notice {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #0091FF;
+  text-align: left;
+  background-color: rgba(13, 169, 226, 0.30);
+  border: 2px solid #0DA9E2;
+  border-radius: 6px;
+  padding: 4px 4px 4px 10px;
+}

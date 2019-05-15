@@ -18,23 +18,15 @@
  * ============LICENSE_END=========================================================
  */
 
-/**
- * This service is to set the page title from different components.
- *
- * @author Ekko Chang
- *
- */
+import { TestBed } from "@angular/core/testing";
 
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { AdminService } from "./admin.service";
 
-@Injectable()
-export class HeaderService {
-  public title = new BehaviorSubject("Title");
+describe("AdminService", () => {
+  beforeEach(() => TestBed.configureTestingModule({}));
 
-  constructor() {}
-
-  setTitle(title: string) {
-    this.title.next(title);
-  }
-}
+  it("should be created", () => {
+    const service: AdminService = TestBed.get(AdminService);
+    expect(service).toBeTruthy();
+  });
+});

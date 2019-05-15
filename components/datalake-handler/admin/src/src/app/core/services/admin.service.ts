@@ -19,33 +19,26 @@
  */
 
 /**
+ * This service is to set the page title from different components.
  *
  * @author Ekko Chang
  *
  */
 
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
-import { FeederComponent } from "./feeder/feeder.component";
-import { TopicsComponent } from "./topics/topics.component";
-import { DatabaseComponent } from "./database/database.component";
-import { AboutComponent } from "./about/about.component";
+@Injectable()
+export class AdminService {
+  public title = new BehaviorSubject("Title");
 
-const routes: Routes = [
-  { path: "", redirectTo: "/feeder", pathMatch: "full" },
-  { path: "feeder", component: FeederComponent },
-  { path: "topics", component: TopicsComponent },
-  { path: "database", component: DatabaseComponent },
-  { path: "about", component: AboutComponent }
-];
+  constructor() {}
 
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      useHash: true
-    })
-  ],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {}
+  setTitle(title: string) {
+    this.title.next(title);
+  }
+
+  onKeyPressNumber(data: any) {
+    return (data.target.value = data.target.value.replace(/[^0-9.]/g, ""));
+  }
+}

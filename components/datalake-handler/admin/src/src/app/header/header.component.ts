@@ -25,7 +25,7 @@
  */
 
 import { Component } from "@angular/core";
-import { HeaderService } from "../core/services/header.service";
+import { AdminService } from "../core/services/admin.service";
 import { TranslateService } from "@ngx-translate/core";
 
 @Component({
@@ -44,21 +44,20 @@ export class HeaderComponent {
   ];
 
   constructor(
-    private headerService: HeaderService,
+    private adminService: AdminService,
     private translateService: TranslateService
   ) {
     this.translateService.setDefaultLang("en-us");
   }
 
   ngOnInit() {
-    this.headerService.title.subscribe(title => {
+    this.adminService.title.subscribe(title => {
       this.title = title;
     });
-    this.selectedLang = "en-us";
+    this.selectedLang = this.translateService.defaultLang;
   }
 
   changeLanguage(lang: string) {
-    console.log("Selected:" + lang);
     this.translateService.use(lang);
   }
 }
