@@ -67,6 +67,7 @@ public class DmaapService {
 			List<String> topics = zk.getChildren("/brokers/topics", false);
 			String[] excludes = config.getDmaapKafkaExclude();
 			topics.removeAll(Arrays.asList(excludes));
+			zk.close();
 			return topics;
 		} catch (Exception e) {
 			log.error("Can not get topic list from Zookeeper, for testing, going to use hard coded topic list.", e);
