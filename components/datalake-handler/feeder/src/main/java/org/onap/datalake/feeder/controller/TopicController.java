@@ -79,7 +79,7 @@ public class TopicController {
 	@Autowired
 	private TopicService topicService;
 
-	@GetMapping("/dmaap/")
+	@GetMapping("/dmaap")
 	@ResponseBody
 	@ApiOperation(value = "List all topic names in DMaaP.")
 	public List<String> listDmaapTopics() {
