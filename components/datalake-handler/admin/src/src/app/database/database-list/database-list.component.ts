@@ -42,21 +42,29 @@ import { AlertComponent } from "src/app/core/alert/alert.component";
 // Notify
 import { ToastrNotificationService } from "src/app/core/services/toastr-notification.service";
 
+// Loading spinner
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: "app-database-list",
   templateUrl: "./database-list.component.html",
   styleUrls: ["./database-list.component.css"]
 })
 export class DatabaseListComponent implements OnInit {
+  pageFinished: Boolean = false;
+
   dbList: any = [];
   dbs: Db[] = [];
+
+  loading: Boolean = true;
 
   tempDbDetail: Db;
 
   constructor(
     private restApiService: RestApiService,
     private notificationService: ToastrNotificationService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService
   ) {
     this.initData().then(data => {
       this.initDbsList(this.dbList).then(data => {
@@ -65,13 +73,16 @@ export class DatabaseListComponent implements OnInit {
     });
   }
 
-  @ViewChild("addDbModal") private addDBModal: ElementRef;
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.spinner.show();
+  }
 
   async initData() {
     this.dbList = [];
     this.dbList = await this.getDbList();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 500);
   }
 
   getDbList() {
