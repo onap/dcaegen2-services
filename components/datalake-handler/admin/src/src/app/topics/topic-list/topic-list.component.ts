@@ -36,6 +36,9 @@ import { TopicConfigModalComponent } from "./topic-config-modal/topic-config-mod
 // notify
 import { ToastrNotificationService } from "src/app/core/services/toastr-notification.service";
 
+// Loading spinner
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: "app-topic-list",
   templateUrl: "./topic-list.component.html",
@@ -67,7 +70,8 @@ export class TopicListComponent {
   constructor(
     private restApiService: RestApiService,
     private modalService: NgbModal,
-    private notificationService: ToastrNotificationService
+    private notificationService: ToastrNotificationService,
+    private spinner: NgxSpinnerService
   ) {
     setTimeout(() => {
       this.loadingIndicator = false;
@@ -79,12 +83,17 @@ export class TopicListComponent {
           // for cache of datatable
           this.temp = [...data];
           this.topics = data;
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 500);
         }
       );
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.spinner.show();
+  }
 
   async initData() {
     this.topicListDmaap = [];
