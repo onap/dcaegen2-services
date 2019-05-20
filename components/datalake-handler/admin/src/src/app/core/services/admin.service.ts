@@ -34,10 +34,16 @@ export class AdminService {
 
   constructor() {}
 
+  /*
+   *  Set header title
+   */
   setTitle(title: string) {
     this.title.next(title);
   }
 
+  /*
+   *  Form validate
+   */
   onKeyPressNumber(data: any) {
     return (data.target.value = data.target.value.replace(/[^0-9.]/g, ""));
   }
