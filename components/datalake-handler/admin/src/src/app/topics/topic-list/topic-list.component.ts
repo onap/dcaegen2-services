@@ -36,6 +36,9 @@ import { TopicConfigModalComponent } from "./topic-config-modal/topic-config-mod
 // notify
 import { ToastrNotificationService } from "src/app/core/services/toastr-notification.service";
 
+// Loading spinner
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: "app-topic-list",
   templateUrl: "./topic-list.component.html",
@@ -52,7 +55,6 @@ export class TopicListComponent {
 
   loadingIndicator: boolean = true;
   mesgNoData = {
-    // {emptyMessage: `<div></div> 'No Data' | translate, selectedMessage: false}`
     emptyMessage: `
       <div class="d-flex justify-content-center">
         <div class="p-2">
@@ -63,11 +65,13 @@ export class TopicListComponent {
   };
 
   @ViewChild("searchText") searchText: ElementRef;
+  @ViewChild("mydatatable") topicTable;
 
   constructor(
     private restApiService: RestApiService,
     private modalService: NgbModal,
-    private notificationService: ToastrNotificationService
+    private notificationService: ToastrNotificationService,
+    private spinner: NgxSpinnerService
   ) {
     setTimeout(() => {
       this.loadingIndicator = false;
@@ -79,12 +83,17 @@ export class TopicListComponent {
           // for cache of datatable
           this.temp = [...data];
           this.topics = data;
+          setTimeout(() => {
+            this.spinner.hide();
+          }, 500);
         }
       );
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.spinner.show();
+  }
 
   async initData() {
     this.topicListDmaap = [];
@@ -197,6 +206,20 @@ export class TopicListComponent {
           .subscribe(
             res => {
               this.topicDefaultConfig = receivedEntry;
+              this.topics.forEach(t => {
+                if (!t.type) {
+                  // Unconfigure topics
+                  t.login = this.topicDefaultConfig.login;
+                  t.password = this.topicDefaultConfig.password;
+                  t.sinkdbs = this.topicDefaultConfig.sinkdbs;
+                  t.enabled = this.topicDefaultConfig.enabled;
+                  t.saveRaw = this.topicDefaultConfig.saveRaw;
+                  t.dataFormat = this.topicDefaultConfig.dataFormat;
+                  t.ttl = this.topicDefaultConfig.ttl;
+                  t.correlateClearedMessage = this.topicDefaultConfig.correlateClearedMessage;
+                  t.messageIdPath = this.topicDefaultConfig.messageIdPath;
+                }
+              });
               this.notificationService.success("Success updated.");
               modalRef.close();
             },
@@ -287,12 +310,6 @@ export class TopicListComponent {
               this.updateFilter(this.searchText.nativeElement.value);
             }
           );
-
-          // temp code
-          // this.topics[index] = this.tempTopicDetail;
-          // this.temp[index] = this.topics[index];
-          // this.notificationService.success("Success deleted.");
-          // modalRef.close();
         }
       });
     }

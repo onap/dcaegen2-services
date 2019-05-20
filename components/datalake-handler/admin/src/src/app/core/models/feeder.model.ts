@@ -19,32 +19,12 @@
  */
 
 /**
- * This service is to set the page title from different components.
  *
  * @author Ekko Chang
  *
  */
 
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
-
-@Injectable()
-export class AdminService {
-  public title = new BehaviorSubject("Title");
-
-  constructor() {}
-
-  /*
-   *  Set header title
-   */
-  setTitle(title: string) {
-    this.title.next(title);
-  }
-
-  /*
-   *  Form validate
-   */
-  onKeyPressNumber(data: any) {
-    return (data.target.value = data.target.value.replace(/[^0-9.]/g, ""));
-  }
+export class Feeder {
+  running: boolean;
+  version: string;
 }

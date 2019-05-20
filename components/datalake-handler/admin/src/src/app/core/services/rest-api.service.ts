@@ -34,7 +34,7 @@ import { throwError } from "rxjs";
 import { Topic } from "src/app/core/models/topic.model";
 import { Db } from "src/app/core/models/db.model";
 
-const endpoint = "/datalake/v1/";
+const prefix = "/datalake/v1/";
 const httpOptions = {
   headers: new HttpHeaders({
     "Content-Type": "application/json"
@@ -62,8 +62,8 @@ export class RestApiService {
       errorMessage = error.error.message;
     } else {
       // Get server-side error
-      errorMessage = `Error Code: ${error.status}`;
-      console.log(`Error Code: ${error.status}\nMessage: ${error.message}`);
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      console.log(errorMessage);
     }
     return throwError(errorMessage);
   }
@@ -72,7 +72,7 @@ export class RestApiService {
     Topic default config
   */
   getTopicDefaultConfig(): Observable<any> {
-    return this.http.get(endpoint + "topics/_DL_DEFAULT_").pipe(
+    return this.http.get(prefix + "topics/_DL_DEFAULT_").pipe(
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -81,7 +81,7 @@ export class RestApiService {
 
   updateTopicDefaultConfig(t: Topic): Observable<any> {
     return this.http
-      .put(endpoint + "topics/_DL_DEFAULT_", JSON.stringify(t), httpOptions)
+      .put(prefix + "topics/_DL_DEFAULT_", JSON.stringify(t), httpOptions)
       .pipe(
         retry(1),
         tap(_ => this.extractData),
@@ -93,7 +93,7 @@ export class RestApiService {
     Topics
   */
   getTopicsFromDmaap(): Observable<any> {
-    return this.http.get(endpoint + "topics/dmaap/").pipe(
+    return this.http.get(prefix + "topics/dmaap").pipe(
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -101,7 +101,7 @@ export class RestApiService {
   }
 
   getTopicsFromFeeder(): Observable<any> {
-    return this.http.get(endpoint + "topics").pipe(
+    return this.http.get(prefix + "topics").pipe(
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -109,7 +109,7 @@ export class RestApiService {
   }
 
   getTopicDetail(name: string): Observable<any> {
-    return this.http.get(endpoint + "topics/" + name).pipe(
+    return this.http.get(prefix + "topics/" + name).pipe(
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -118,7 +118,7 @@ export class RestApiService {
 
   addTopic(t: Topic): Observable<any> {
     return this.http
-      .post<any>(endpoint + "topics", JSON.stringify(t), httpOptions)
+      .post<any>(prefix + "topics", JSON.stringify(t), httpOptions)
       .pipe(
         retry(1),
         tap(_ => console.log(`add topic name=${t.name}`)),
@@ -128,7 +128,7 @@ export class RestApiService {
 
   upadteTopic(t: Topic): Observable<any> {
     return this.http
-      .put(endpoint + "topics/" + t.name, JSON.stringify(t), httpOptions)
+      .put(prefix + "topics/" + t.name, JSON.stringify(t), httpOptions)
       .pipe(
         retry(1),
         tap(_ => this.extractData),
@@ -137,7 +137,7 @@ export class RestApiService {
   }
 
   deleteTopic(name: string): Observable<any> {
-    return this.http.delete(endpoint + "topics/" + name, httpOptions).pipe(
+    return this.http.delete(prefix + "topics/" + name, httpOptions).pipe(
       retry(1),
       tap(_ => console.log(`deleted topic name=${name}`)),
       catchError(this.handleError)
@@ -148,7 +148,7 @@ export class RestApiService {
     Database
   */
   getDbList(): Observable<any> {
-    return this.http.get(endpoint + "dbs").pipe(
+    return this.http.get(prefix + "dbs").pipe(
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -156,7 +156,7 @@ export class RestApiService {
   }
 
   getDbDetail(name: string): Observable<any> {
-    return this.http.get(endpoint + "dbs/" + name).pipe(
+    return this.http.get(prefix + "dbs/" + name).pipe(
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -165,7 +165,7 @@ export class RestApiService {
 
   addDb(d: Db): Observable<any> {
     return this.http
-      .post<any>(endpoint + "dbs", JSON.stringify(d), httpOptions)
+      .post<any>(prefix + "dbs", JSON.stringify(d), httpOptions)
       .pipe(
         retry(1),
         tap(_ => console.log(`add db name=${d.name}`)),
@@ -175,7 +175,7 @@ export class RestApiService {
 
   upadteDb(d: Db): Observable<any> {
     return this.http
-      .put(endpoint + "dbs/" + d.name, JSON.stringify(d), httpOptions)
+      .put(prefix + "dbs/" + d.name, JSON.stringify(d), httpOptions)
       .pipe(
         retry(1),
         tap(_ => this.extractData),
@@ -184,9 +184,36 @@ export class RestApiService {
   }
 
   deleteDb(name: string): Observable<any> {
-    return this.http.delete(endpoint + "dbs/" + name, httpOptions).pipe(
+    return this.http.delete(prefix + "dbs/" + name, httpOptions).pipe(
       retry(1),
       tap(_ => console.log(`deleted db name=${name}`)),
+      catchError(this.handleError)
+    );
+  }
+
+  /*
+    Feeder
+  */
+  startFeeder() {
+    return this.http.post<any>(prefix + "feeder/start", "", httpOptions).pipe(
+      retry(1),
+      tap(_ => console.log(`start feeder`)),
+      catchError(this.handleError)
+    );
+  }
+
+  stopFeeder() {
+    return this.http.post<any>(prefix + "feeder/stop", "", httpOptions).pipe(
+      retry(1),
+      tap(_ => console.log(`stop feeder`)),
+      catchError(this.handleError)
+    );
+  }
+
+  getFeederstatus() {
+    return this.http.get(prefix + "feeder/status").pipe(
+      retry(1),
+      map(this.extractData),
       catchError(this.handleError)
     );
   }

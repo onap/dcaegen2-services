@@ -25,7 +25,8 @@
  */
 
 import { Component, OnInit } from "@angular/core";
-import { AdminService } from "../core/services/admin.service";
+import { AdminService } from "src/app/core/services/admin.service";
+import { RestApiService } from "src/app/core/services/rest-api.service";
 
 @Component({
   selector: "app-about",
@@ -33,9 +34,19 @@ import { AdminService } from "../core/services/admin.service";
   styleUrls: ["./about.component.css"]
 })
 export class AboutComponent implements OnInit {
-  constructor(private adminService: AdminService) {
+  feeder: any = [];
+
+  constructor(
+    private adminService: AdminService,
+    private restApiService: RestApiService
+  ) {
     this.adminService.setTitle("SIDEBAR.ABOUT");
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Get datalake feeder version
+    this.restApiService.getFeederstatus().subscribe(data => {
+      this.feeder = data;
+    });
+  }
 }

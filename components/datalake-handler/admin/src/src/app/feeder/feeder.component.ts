@@ -27,9 +27,13 @@
 import { Component, OnInit } from "@angular/core";
 import { AdminService } from "src/app/core/services/admin.service";
 import { RestApiService } from "src/app/core/services/rest-api.service";
+import { HeaderComponent } from "src/app/header/header.component";
 
 // notify
 import { ToastrNotificationService } from "src/app/core/services/toastr-notification.service";
+
+// Loading spinner
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-feeder",
@@ -42,22 +46,31 @@ export class FeederComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private restApiService: RestApiService,
-    private notificationService: ToastrNotificationService
+    private notificationService: ToastrNotificationService,
+    private spinner: NgxSpinnerService
   ) {
     this.adminService.setTitle("SIDEBAR.FEDDFER");
     this.restApiService.getTopicsFromFeeder().subscribe(
       res => {
         // TODO: -1, because __consumer_offsets
         this.topicContent = (res.length - 1).toString();
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 500);
       },
       err => {
         this.topicContent = "No Data";
         this.notificationService.error(err);
+        setTimeout(() => {
+          this.spinner.hide();
+        }, 500);
       }
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.spinner.show();
+  }
 
   chkTopicContent() {
     if (this.topicContent == "No Data") {

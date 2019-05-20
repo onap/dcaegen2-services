@@ -18,19 +18,26 @@ limitations under the License.
 ============LICENSE_END=========================================================
 -->
 
-
-<div class="d-flex">
-  <div class="mr-auto pl-2 dl-h2">
+<div class="d-flex align-items-center">
+  <div class="pt-2 align-self-center dl-h2">
     {{ title | translate }}
   </div>
-  <div class="ml-auto pr-3">
+
+  <!-- Only for feeder page -->
+  <div class="pt-3 pl-2 align-self-center" *ngIf="this.title == 'SIDEBAR.FEDDFER'">
+    <label class="dl-switch">
+      <input id="switch" type="checkbox" [(ngModel)]="this.feeder.running"
+        (ngModelChange)="this.changeFeederStatus()" />
+      <span class="dl-slider round"></span>
+    </label>
+  </div>
+
+  <div class="pt-2 align-self-center ml-auto">
     <app-toastr-notification></app-toastr-notification>
-    <div class="pt-2">
-      <select class="form-control lang-select" [(ngModel)]="selectedLang"
-        (ngModelChange)="changeLanguage(selectedLang)">
-        <option class="" *ngFor="let lang of langs" [value]=lang.value>{{ lang.name }}</option>
+    <div>
+      <select class="lang-select" [(ngModel)]="selectedLang" (ngModelChange)="changeLanguage(selectedLang)">
+        <option *ngFor="let lang of langs" [value]=lang.value>{{ lang.name }}</option>
       </select>
     </div>
-
   </div>
 </div>

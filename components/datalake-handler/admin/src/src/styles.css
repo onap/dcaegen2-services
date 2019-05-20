@@ -58,7 +58,6 @@ body {
 */
 .menu-header {
   background-color: #313449;
-  /* max-width: 250px; */
 }
 
 .menu {
@@ -66,27 +65,35 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   font-size: 14px;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   color: #ffffff;
   text-align: left;
-  /* max-width: 250px; */
 }
 
 .menu .nav {
   justify-content: center;
+  min-width: 220px;
 }
 
-.menu .nav-item .active {
-  background-color: #ffffff;
+.menu .nav-item {
+  padding-left: 12px;
+  padding-right: 10px;
+}
+
+.menu .navbar-expand-lg .navbar-nav .nav-link {
+  color: #ffffff;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.menu .navbar-expand-lg .navbar-nav .nav-item .active {
   color: #313449;
+  background-color: #ffffff;
   border-radius: 10px;
 }
 
-.menu .nav-link {
-  color: #ffffff;
-}
-
-.menu .nav-item :hover {
+.menu .navbar-expand-lg .navbar-nav .nav-item :hover {
+  color: #FFFFFF;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
 }
@@ -96,10 +103,11 @@ body {
 */
 .header {
   background-color: #f2f8fb;
+  height: 62px;
 }
 
 .header .lang-select {
-  background-color: #f2f8fb;
+  background-color: transparent;
   border: none;
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
@@ -117,7 +125,6 @@ hr {
   Content
 */
 .content {
-  height: 100%;
   overflow: auto;
   min-height: 100vh;
   background-color: #f2f8fb;
@@ -171,9 +178,6 @@ hr {
 .ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell {
   align-items: center !important;
   display: flex !important;
-
-  /* display: inline-block;
-  text-align: left; */
 }
 
 .ngx-datatable.bootstrap .datatable-body .datatable-body-row.active {
@@ -370,6 +374,11 @@ hr {
   opacity: 1;
 }
 
+.input-group-text {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
 /* Input: checkbox */
 .dl-input-chk {
   font-family: "Open Sans", sans-serif;
@@ -549,10 +558,22 @@ input#switch:checked+.dl-slider:before {
   border-radius: 50%;
 }
 
+/*
+  Modal windows
+*/
 .dl-md-modal .modal-dialog {
   max-width: 565px;
 }
 
+.modal-content {
+  -webkit-border-radius: 20px !important;
+  -moz-border-radius: 20px !important;
+  border-radius: 20px !important;
+}
+
+/*
+  Modal notice
+*/
 .dl-notice {
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
