@@ -26,9 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -40,7 +38,7 @@ import io.swagger.annotations.ApiOperation;
  */
 
 @RestController
-@RequestMapping(value = "/feeder", produces = { MediaType.TEXT_PLAIN_VALUE })
+@RequestMapping(value = "/feeder", produces = { MediaType.APPLICATION_JSON_VALUE })
 public class FeederController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -52,23 +50,30 @@ public class FeederController {
      * @return message that application is started
      * @throws IOException 
      */
-    @GetMapping("/start")
+    @PostMapping("/start")
+    @ResponseBody
 	@ApiOperation(value="Start pulling data.")
     public String start() throws IOException {
     	log.info("DataLake feeder starting to pull data from DMaaP...");
-    	pullService.start();
-        return "DataLake feeder is running.";
+    	if(pullService.isRunning() == false) {
+            pullService.start();
+        }
+        return "{\"running\": true}";
     }
 
     /**
      * @return message that application stop process is triggered
      */
-    @GetMapping("/stop")
+    @PostMapping("/stop")
+    @ResponseBody
 	@ApiOperation(value="Stop pulling data.")
-    public String stop() {    	
-    	pullService.shutdown();
+    public String stop() {
+        if(pullService.isRunning() == true)
+        {
+            pullService.shutdown();
+        }
     	log.info("DataLake feeder is stopped.");
-    	return "DataLake feeder is stopped.";
+    	return "{\"running\": false}";
     }
     /**
      * @return feeder status
@@ -77,7 +82,9 @@ public class FeederController {
 	@ApiOperation(value="Retrieve feeder status.")
     public String status() {    	
     	String status = "Feeder is running: "+pullService.isRunning();
-    	log.info("senting feeder status ...");//TODO we can send what topics are monitored, how many messages are sent, etc. 
-    	return status;
-    }    
+    	log.info("senting feeder status ...");//TODO we can send what topics are monitored, how many messages are sent, etc.
+
+        return "{\"version\": \"0.0.1\", \"running\":"+pullService.isRunning()+"}";
+
+    }
 }
