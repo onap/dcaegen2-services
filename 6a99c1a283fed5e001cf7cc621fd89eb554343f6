@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7770c143_ecfacd8f",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/FeederController.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-21T06:22:01Z",
+      "side": 1,
+      "message": "move this to application.properties",
+      "range": {
+        "startLine": 87,
+        "startChar": 32,
+        "endLine": 87,
+        "endChar": 37
+      },
+      "revId": "6a99c1a283fed5e001cf7cc621fd89eb554343f6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
