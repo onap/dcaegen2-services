@@ -67,4 +67,7 @@ public class ApplicationConfiguration {
 	private int hdfsBufferSize;	
 	private long hdfsFlushInterval;
 	private int hdfsBatchSize;
+
+	//Version
+	private String DatalakeVersion;
 }

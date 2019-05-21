@@ -94,7 +94,7 @@ public class FeederControllerTest {
         ConsumerRecords<String, String> records = ConsumerRecords.empty();
         when(kafkaConsumer.poll(2)).thenReturn(records);
         String start = feederController.start();
-        assertEquals("DataLake feeder is running.", start);
+        assertEquals("{\"running\": true}", start);
     }
 
     @Test
@@ -102,14 +102,17 @@ public class FeederControllerTest {
         FeederController feederController = new FeederController();
         setAccessPrivateFields(feederController);
         String stop = feederController.stop();
-        assertEquals("DataLake feeder is stopped.", stop);
+        assertEquals("{\"running\": false}", stop);
     }
 
     @Test
     public void testStatus() throws NoSuchFieldException, IllegalAccessException {
+        ApplicationConfiguration conf = new ApplicationConfiguration();
+        conf.setDatalakeVersion("0.0.1");
         FeederController feederController = new FeederController();
+        feederController.config = conf;
         setAccessPrivateFields(feederController);
         String status = feederController.status();
-        assertEquals("Feeder is running: false", status);
+        assertEquals("{\"version\": \"0.0.1\", \"running\": false}", status);
     }
 }
