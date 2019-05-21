@@ -155,7 +155,6 @@ public class PullThread implements Runnable {
 	public void shutdown() {
 		active.set(false);
 		consumer.wakeup();
-		consumer.unsubscribe();
 	}
 
 	private class DummyRebalanceListener implements ConsumerRebalanceListener {
