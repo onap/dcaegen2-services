@@ -70,7 +70,10 @@ import { TopicDetailModalComponent } from "./topics/topic-list/topic-detail-moda
 import { TopicConfigModalComponent } from "./topics/topic-list/topic-config-modal/topic-config-modal.component";
 import { ToastrNotificationComponent } from "./core/toastr-notification/toastr-notification.component";
 import { AlertComponent } from "./core/alert/alert.component";
-import { AboutComponent } from './about/about.component';
+import { AboutComponent } from "./about/about.component";
+
+// Loading spinner
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -106,7 +109,8 @@ import { AboutComponent } from './about/about.component';
       }
     }),
     FormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    NgxSpinnerModule
   ],
   providers: [AdminService, RestApiService, ToastrNotificationService],
   bootstrap: [AppComponent],

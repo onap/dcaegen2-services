@@ -24,9 +24,14 @@
  *
  */
 
-import { Component } from "@angular/core";
+import { Component, Output } from "@angular/core";
 import { AdminService } from "../core/services/admin.service";
 import { TranslateService } from "@ngx-translate/core";
+import { Feeder } from "src/app/core/models/feeder.model";
+import { RestApiService } from "src/app/core/services/rest-api.service";
+
+// notify
+import { ToastrNotificationService } from "src/app/core/services/toastr-notification.service";
 
 @Component({
   selector: "app-header",
@@ -35,6 +40,7 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class HeaderComponent {
   title = "PageTitle";
+  feeder: any = [];
 
   selectedLang: String;
   langs: Array<any> = [
@@ -45,6 +51,8 @@ export class HeaderComponent {
 
   constructor(
     private adminService: AdminService,
+    private restApiService: RestApiService,
+    private notificationService: ToastrNotificationService,
     private translateService: TranslateService
   ) {
     this.translateService.setDefaultLang("en-us");
@@ -55,9 +63,64 @@ export class HeaderComponent {
       this.title = title;
     });
     this.selectedLang = this.translateService.defaultLang;
+
+    if ((this.title = "SIDEBAR.FEDDFER")) {
+      this.restApiService.getFeederstatus().subscribe((data: {}) => {
+        this.feeder = new Feeder();
+        this.feeder = data;
+      });
+    }
   }
 
   changeLanguage(lang: string) {
     this.translateService.use(lang);
+  }
+
+  changeFeederStatus() {
+    if (this.feeder.running) {
+      this.restApiService.startFeeder().subscribe(
+        res => {
+          this.notificationService.success("Success start feeder.");
+        },
+        err => {
+          this.feeder.running = false;
+          this.notificationService.error(err);
+        }
+      );
+    } else {
+      this.restApiService.stopFeeder().subscribe(
+        res => {
+          this.notificationService.success("Success stop feeder.");
+        },
+        err => {
+          this.feeder.running = true;
+          this.notificationService.error(err);
+        }
+      );
+    }
+  }
+
+  /*
+   *  Feeder
+   */
+  getFeederStatus() {
+    return this.restApiService.getFeederstatus().toPromise();
+  }
+
+  setFeederStatus(status: string) {
+    var data;
+
+    switch (status) {
+      case "start":
+        data = true;
+        console.log("start feeder");
+        break;
+      case "stop":
+        data = false;
+        console.log("stop feeder");
+        break;
+    }
+
+    return data;
   }
 }

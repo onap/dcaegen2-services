@@ -18,14 +18,11 @@
  * ============LICENSE_END=========================================================
  */
 
-.about-block {
-  height: 80vh;
-}
-
 .about-panel {
   background: #FFFFFF;
   box-shadow: 3px 3px 11px 0 #D2D3D5;
   border-radius: 20px;
+  padding: 30px 30px;
 }
 
 .about-title {
@@ -41,7 +38,7 @@
 
 .about-info {
   font-family: "Open Sans", sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 14px;
   color: #A8A9AC;
 }

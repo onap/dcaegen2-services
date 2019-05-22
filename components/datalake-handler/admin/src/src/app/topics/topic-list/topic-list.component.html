@@ -1,3 +1,23 @@
+<!--
+============LICENSE_START=======================================================
+ONAP : DataLake
+================================================================================
+Copyright 2019 QCT
+=================================================================================
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+============LICENSE_END=========================================================
+-->
+
 <div class="topic-list-panel">
   <div class="row">
     <div class="col-md-12">
@@ -31,7 +51,8 @@
       <ngx-datatable #mydatatable class="bootstrap" [rows]="topics" [columnMode]="'force'" [headerHeight]="40"
         [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
         [loadingIndicator]="loadingIndicator" [messages]="mesgNoData" [limit]="10">
-        <ngx-datatable-column [width]="30" name="{{ 'STATUS' | translate }}" prop="enabled"
+
+        <ngx-datatable-column [width]="60" name="{{ 'STATUS' | translate }}" prop="enabled"
           headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
           <div>
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -346,7 +367,7 @@
           </div>
         </ngx-datatable-column>
 
-        <ngx-datatable-column [width]="100" name="{{ 'SAVE_RAW_DATA' | translate }}" prop="saveRaw"
+        <ngx-datatable-column [width]="120" name="{{ 'SAVE_RAW_DATA' | translate }}" prop="saveRaw"
           headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
           <div>
             <ng-template let-row="row" ngx-datatable-cell-template>
@@ -360,7 +381,7 @@
           </div>
         </ngx-datatable-column>
 
-        <ngx-datatable-column [width]="85" name="{{ 'SETTING' | translate }}" prop="type"
+        <ngx-datatable-column [width]="100" name="{{ 'SETTING' | translate }}" prop="type"
           headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <span class="dl-icon-unconfig"
@@ -384,12 +405,12 @@
           <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
             let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
             <div class="page-count">
-              total: {{ rowCount.toLocaleString() }} {{ totalMessage }}
+              total: {{ rowCount.toLocaleString() }}
             </div>
             <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'" [pagerRightArrowIcon]="'datatable-icon-right'"
               [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage"
               [size]="pageSize" [count]="rowCount" [hidden]="!(rowCount / pageSize > 1)"
-              (change)="table.onFooterPage($event)">
+              (change)="topicTable.onFooterPage($event)">
             </datatable-pager>
           </ng-template>
         </ngx-datatable-footer>

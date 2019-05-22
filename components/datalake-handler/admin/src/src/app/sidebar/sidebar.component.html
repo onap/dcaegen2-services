@@ -18,10 +18,10 @@ limitations under the License.
 ============LICENSE_END=========================================================
 -->
 
-<nav class="navbar navbar-expand-md">
+<nav class="navbar navbar-expand-lg p-0">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="fas fa-align-justify"></span>
+    <span class="fas fa-bars" style="color:#FFFFFF"></span>
   </button>
   <div class="collapse navbar-collapse nav" id="navbarSupportedContent">
     <ul class="navbar-nav flex-column" routerLinkActive="active">
@@ -29,7 +29,7 @@ limitations under the License.
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
           routerLink="/feeder">
-          <i class="fas fa-tachometer-alt"></i>
+          <i class="fas fa-tachometer-alt">&nbsp;</i>
           {{"SIDEBAR.FEDDFER" | translate}}
         </a>
       </li>
@@ -37,7 +37,7 @@ limitations under the License.
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
           routerLink="/topics">
-          <i class="fas fa-cube"></i>
+          <i class="fas fa-cube">&nbsp;</i>
           {{"SIDEBAR.TOPICS" | translate}}
         </a>
       </li>
@@ -45,7 +45,7 @@ limitations under the License.
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
           routerLink="/database">
-          <i class="fas fa-database" aria-hidden="true"></i>
+          <i class="fas fa-database" aria-hidden="true">&nbsp;</i>
           {{"SIDEBAR.DATABASE" | translate}}
         </a>
       </li>
@@ -53,7 +53,7 @@ limitations under the License.
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
           routerLink="/about">
-          <i class="fas fa-info-circle" aria-hidden="true"></i>
+          <i class="fas fa-info-circle" aria-hidden="true">&nbsp;</i>
           {{"SIDEBAR.ABOUT" | translate}}
         </a>
       </li>

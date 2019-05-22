@@ -19,25 +19,36 @@ limitations under the License.
 -->
 
 <div id="container">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2 menu-header pl-1 pr-1"></div>
-      <div class="col-md-10 header pt-2">
-        <app-header></app-header>
+
+  <div class="container-fluid p-0">
+    <div class="d-flex align-items-stretch">
+
+      <div class="d-flex flex-column menu">
+        <!-- Logo -->
+        <div class="mr-auto header">
+        </div>
+        <!-- Sidebar -->
+        <div class="mr-auto">
+          <app-sidebar></app-sidebar>
+        </div>
       </div>
+
+
+      <div class="w-100 d-flex flex-column">
+        <!-- Header -->
+        <div class="pl-4 pr-4 flex-fill header">
+          <app-header></app-header>
+        </div>
+        <!-- Content -->
+        <div class="pl-4 pr-4 flex-fill content">
+          <hr>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2 menu pl-1 pr-1">
-        <app-sidebar></app-sidebar>
-      </div>
-
-      <div class="col-md-10 content pl-4 pr-4">
-        <hr>
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-  </div>
-</div>
+  <ngx-spinner bdOpacity=0.5 bdColor="rgba(51,51,51,0.85)" size="default" color="#5dbebb" type="ball-clip-rotate"
+    [fullScreen]="true">
+  </ngx-spinner>
