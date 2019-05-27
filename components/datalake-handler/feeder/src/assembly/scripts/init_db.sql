@@ -96,3 +96,7 @@ insert into `map_db_topic`(`db_name`,`topic_name`) values ('Elasticsearch','_DL_
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','_DL_DEFAULT_');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('Druid','_DL_DEFAULT_');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('HDFS','_DL_DEFAULT_');
+
+insert into `dashboard_type`(`name`, `dashboard`) values ('Kibana', 'Kibana');
+
+insert into `dashboard`(`name`, `related_db`) values ('Kibana', 'Elasticsearch');
