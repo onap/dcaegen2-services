@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5360904_03b88a09",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/TemplateController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-05-27T03:32:05Z",
+      "side": 1,
+      "message": "\"POST /template\" can be used to create a template. \"/create\" should be unnecessary.",
+      "range": {
+        "startLine": 51,
+        "startChar": 27,
+        "endLine": 51,
+        "endChar": 37
+      },
+      "revId": "0319fdab1900c0361098ecf08653a01fb680d0aa",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee22927e_67e0e4bf",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/TemplateController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-05-27T03:32:05Z",
+      "side": 1,
+      "message": "Could be \"DELETE /template/{id}\".",
+      "range": {
+        "startLine": 68,
+        "startChar": 28,
+        "endLine": 68,
+        "endChar": 42
+      },
+      "revId": "0319fdab1900c0361098ecf08653a01fb680d0aa",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f120f9f_c96da426",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/TemplateController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-05-27T03:32:05Z",
+      "side": 1,
+      "message": "It could be modified to \"PUT /template/{id}\". We already defined the operations of GET, POST, PUT, and DELETE for list, create, update, and delete, respectively.",
+      "range": {
+        "startLine": 85,
+        "startChar": 20,
+        "endLine": 85,
+        "endChar": 67
+      },
+      "revId": "0319fdab1900c0361098ecf08653a01fb680d0aa",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "556d7782_21a7b7fd",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/TemplateController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-05-27T03:32:05Z",
+      "side": 1,
+      "message": "It could be modified to \"GET /template\". Also, an API \"GET /template/{id}\" could be written to show the detail of the template.",
+      "range": {
+        "startLine": 111,
+        "startChar": 21,
+        "endLine": 111,
+        "endChar": 67
+      },
+      "revId": "0319fdab1900c0361098ecf08653a01fb680d0aa",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26d0a9ac_91d54dbc",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/TemplateController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-05-27T03:32:05Z",
+      "side": 1,
+      "message": "We suggest that GET is not suitable for defining to perform an action. ReqesyMethod POST is more suitable than GET since POST body can carry more information for data checking and for future development.",
+      "range": {
+        "startLine": 126,
+        "startChar": 20,
+        "endLine": 126,
+        "endChar": 70
+      },
+      "revId": "0319fdab1900c0361098ecf08653a01fb680d0aa",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "697e4dfd_92dccb68",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/repository/TemplateRepository.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-05-27T03:32:05Z",
+      "side": 1,
+      "message": "We suggest that it should follow the ORM database manipulation method.",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 154
+      },
+      "revId": "0319fdab1900c0361098ecf08653a01fb680d0aa",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
