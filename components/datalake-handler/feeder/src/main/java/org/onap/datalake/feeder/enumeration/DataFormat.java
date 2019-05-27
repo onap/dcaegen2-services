@@ -26,21 +26,20 @@ package org.onap.datalake.feeder.enumeration;
  *
  */
 public enum DataFormat {
-	JSON, XML, YAML, TEXT; 	
+	JSON("JSON"), XML("XML"), YAML("YAML"), TEXT("TEXT");
 
-    public static DataFormat fromString(String s) {
-        if ("JSON".equalsIgnoreCase(s)) {
-            return JSON;
-        }
-        if ("XML".equalsIgnoreCase(s)) {
-            return XML;
-        }
-        if ("YAML".equalsIgnoreCase(s)) {
-            return YAML;
-        }
-        if ("TEXT".equalsIgnoreCase(s)) {
-            return TEXT;
-        }
-        throw new IllegalArgumentException("Invalid value for format: " + s);
-    }
+	private final String name;
+
+	DataFormat(String name) {
+		this.name = name;
+	}
+
+	public static DataFormat fromString(String s) {
+		for (DataFormat df : DataFormat.values()) {
+			if (df.name.equalsIgnoreCase(s)) {
+				return df;
+			}
+		}
+		throw new IllegalArgumentException("Invalid value for format: " + s);
+	}
 }

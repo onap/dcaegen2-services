@@ -55,4 +55,8 @@ public class Util {
 			return replaceDotInKey(newJson);// there maybe more to replace
 		}
 	}
+	
+	public static boolean isStall(long lastTime, long checkInterval) {
+		return System.currentTimeMillis() > lastTime + checkInterval;
+	}
 }

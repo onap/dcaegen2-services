@@ -57,7 +57,7 @@ public class ApplicationConfiguration {
 	private long dmaapKafkaTimeout;
 	private String[] dmaapKafkaExclude;
 
-	private int dmaapCheckNewTopicIntervalInSec;
+	private int dmaapCheckNewTopicInterval; //in millisecond
 
 	private int kafkaConsumerCount;
 
@@ -69,5 +69,5 @@ public class ApplicationConfiguration {
 	private int hdfsBatchSize;
 
 	//Version
-	private String DatalakeVersion;
+	private String datalakeVersion;
 }

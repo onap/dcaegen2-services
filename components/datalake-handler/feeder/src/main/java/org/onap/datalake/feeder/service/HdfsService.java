@@ -21,6 +21,7 @@
 package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +40,7 @@ import org.apache.hadoop.fs.Path;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.dto.TopicConfig;
+import org.onap.datalake.feeder.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,31 +87,44 @@ public class HdfsService {
 
 		public void flush(String topic) {
 			try {
-				saveMessages(topic, data);
-				data.clear();
-				lastFlush = System.currentTimeMillis();
-				log.debug("done flush, topic={}, buffer size={}", topic, data.size());
+				if (!data.isEmpty()) {
+					saveMessages(topic, data);
+					data.clear();
+					lastFlush = System.currentTimeMillis();
+				}
 			} catch (IOException e) {
 				log.error("error saving to HDFS." + topic, e);
 			}
 		}
 
 		public void flushStall(String topic) {
-			if (!data.isEmpty() && System.currentTimeMillis() > lastFlush + config.getHdfsFlushInterval()) {
+			if (!data.isEmpty() && Util.isStall(lastFlush, config.getHdfsFlushInterval())) {
 				log.debug("going to flushStall topic={}, buffer size={}", topic, data.size());
 				flush(topic);
 			}
 		}
 
+		public void addData(List<Pair<Long, String>> messages) {
+			if (data.isEmpty()) { //reset the last flush time stamp to current if no existing data in buffer
+				lastFlush = System.currentTimeMillis();
+			}
+
+			messages.stream().forEach(message -> data.add(message.getRight()));//note that message left is not used			
+		}
+
 		private void saveMessages(String topic, List<String> bufferList) throws IOException {
 
-			String thread = Thread.currentThread().getName();
+			long thread = Thread.currentThread().getId();
 			Date date = new Date();
 			String day = dayFormat.get().format(date);
 			String time = timeFormat.get().format(date);
-			String filePath = String.format("/datalake/%s/%s/%s-%s", topic, day, time, thread);
+
+			InetAddress inetAddress = InetAddress.getLocalHost();
+			String hostName = inetAddress.getHostName();
+
+			String filePath = String.format("/datalake/%s/%s/%s-%s-%s", topic, day, time, hostName, thread);
 			Path path = new Path(filePath);
-			log.debug("writing to HDFS {}", filePath);
+			log.debug("writing {} to HDFS {}", bufferList.size(), filePath);
 
 			// Create a new file and write data to it.
 			FSDataOutputStream out = fileSystem.create(path, true, config.getHdfsBufferSize());
@@ -140,9 +155,8 @@ public class HdfsService {
 
 			String hdfsuri = String.format("hdfs://%s:%s", hdfs.getHost(), port);
 			hdfsConfig.set("fs.defaultFS", hdfsuri);
-			//hdfsConfig.set("hadoop.job.ugi", hdfs.getLogin());
 			System.setProperty("HADOOP_USER_NAME", hdfs.getLogin());
-			
+
 			log.info("Connecting to -- {} as {}", hdfsuri, hdfs.getLogin());
 
 			fileSystem = FileSystem.get(hdfsConfig);
@@ -179,12 +193,12 @@ public class HdfsService {
 		Map<String, Buffer> bufferMap = bufferLocal.get();
 		final Buffer buffer = bufferMap.computeIfAbsent(topicStr, k -> new Buffer());
 
-		List<String> bufferData = buffer.getData();
+		buffer.addData(messages);
 
-		messages.stream().forEach(message -> bufferData.add(message.getRight()));//note that message left is not used
-
-		if (bufferData.size() >= config.getHdfsBatchSize()) {
+		if (!config.isAsync() || buffer.getData().size() >= config.getHdfsBatchSize()) {
 			buffer.flush(topicStr);
+		} else {
+			log.debug("buffer size too small to flush: bufferData.size() {} < config.getHdfsBatchSize() {}", buffer.getData().size(), config.getHdfsBatchSize());
 		}
 	}
 

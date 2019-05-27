@@ -56,7 +56,7 @@ public class ApplicationConfigurationTest {
         assertNotNull(config.getDmaapKafkaHostPort());
         assertNotNull(config.getDmaapKafkaGroup());
         assertTrue(config.getDmaapKafkaTimeout() > 0L);
-        assertTrue(config.getDmaapCheckNewTopicIntervalInSec() > 0);
+        assertTrue(config.getDmaapCheckNewTopicInterval() > 0);
 
         assertTrue(config.getKafkaConsumerCount() > 0);
 

@@ -50,7 +50,7 @@ public class PullServiceTest {
     private ExecutorService executorService;
 
     @Mock
-    private List<PullThread> consumers;
+    private List<Puller> consumers;
 
     @Test
     public void isRunning() {

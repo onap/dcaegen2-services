@@ -54,36 +54,28 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class PullThread implements Runnable {
-
-	@Autowired
-	private DmaapService dmaapService;
+//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+public class Puller implements Runnable {
 
 	@Autowired
 	private StoreService storeService;
+
+	@Autowired
+	private TopicConfigPollingService topicConfigPollingService;
 
 	@Autowired
 	private ApplicationConfiguration config;
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	private KafkaConsumer<String, String> consumer; //<String, String> is key-value type, in our case key is empty, value is JSON text
-	private int id;
+	private ThreadLocal<KafkaConsumer<String, String>> consumerLocal = new ThreadLocal<>(); //<String, String> is key-value type, in our case key is empty, value is JSON text 
 
-	private final AtomicBoolean active = new AtomicBoolean(false);
+	private boolean active = false;
 	private boolean async;
-
-	public PullThread(int id) {
-		this.id = id;
-	}
 
 	@PostConstruct
 	private void init() {
 		async = config.isAsync();
-		Properties consumerConfig = getConsumerConfig();
-		log.info("Kafka ConsumerConfig: {}", consumerConfig);
-		consumer = new KafkaConsumer<>(consumerConfig);
 	}
 
 	private Properties getConsumerConfig() {
@@ -91,12 +83,15 @@ public class PullThread implements Runnable {
 
 		consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, config.getDmaapKafkaHostPort());
 		consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, config.getDmaapKafkaGroup());
-		consumerConfig.put(ConsumerConfig.CLIENT_ID_CONFIG, String.valueOf(id));
+		consumerConfig.put(ConsumerConfig.CLIENT_ID_CONFIG, String.valueOf(Thread.currentThread().getId()));
 		consumerConfig.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 		consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 		consumerConfig.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 		consumerConfig.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "org.apache.kafka.clients.consumer.RoundRobinAssignor");
 		consumerConfig.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+
+		//		consumerConfig.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
+		//	consumerConfig.put("sasl.mechanism", "PLAIN");
 
 		return consumerConfig;
 	}
@@ -106,55 +101,69 @@ public class PullThread implements Runnable {
 	 */
 	@Override
 	public void run() {
-		active.set(true);
+		active = true;
+		Properties consumerConfig = getConsumerConfig();
+		log.info("Kafka ConsumerConfig: {}", consumerConfig);
+		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(consumerConfig);
+		consumerLocal.set(consumer);
 
 		DummyRebalanceListener rebalanceListener = new DummyRebalanceListener();
 
 		try {
-			List<String> topics = dmaapService.getActiveTopics(); //TODO get updated topic list within loop
-
-			log.info("Thread {} going to subscribe to topics: {}", id, topics);
-
-			consumer.subscribe(topics, rebalanceListener);
-
-			while (active.get()) {
-
-				ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(config.getDmaapKafkaTimeout()));
-				if (records != null) {
-					List<Pair<Long, String>> messages = new ArrayList<>(records.count());
-					for (TopicPartition partition : records.partitions()) {
-						messages.clear();
-						List<ConsumerRecord<String, String>> partitionRecords = records.records(partition);
-						for (ConsumerRecord<String, String> record : partitionRecords) {
-							messages.add(Pair.of(record.timestamp(), record.value()));
-							//log.debug("threadid={} topic={}, timestamp={} key={}, offset={}, partition={}, value={}", id, record.topic(), record.timestamp(), record.key(), record.offset(), record.partition(), record.value());
-						}
-						storeService.saveMessages(partition.topic(), messages);
-						log.info("saved to topic={} count={}", partition.topic(), partitionRecords.size());//TODO we may record this number to DB
-
-						if (!async) {//for reliability, sync commit offset to Kafka, this slows down a bit
-							long lastOffset = partitionRecords.get(partitionRecords.size() - 1).offset();
-							consumer.commitSync(Collections.singletonMap(partition, new OffsetAndMetadata(lastOffset + 1)));
-						}
-					}
-
-					if (async) {//for high Throughput, async commit offset in batch to Kafka
-						consumer.commitAsync();
-					}
+			while (active) {
+				if (topicConfigPollingService.isActiveTopicsChanged(true)) {//true means update local version as well
+					List<String> topics = topicConfigPollingService.getActiveTopics();
+					log.info("Active Topic list is changed, subscribe to the latest topics: {}", topics);
+					consumer.subscribe(topics, rebalanceListener);
 				}
-				storeService.flushStall();
+
+				pull();
 			}
+			storeService.flush(); // force flush all buffer
 		} catch (Exception e) {
-			log.error("Puller {} run():   exception={}", id, e.getMessage());
-			log.error("", e);
+			log.error("Puller run() exception.", e);
 		} finally {
 			consumer.close();
+			log.info("Puller exited run().");
 		}
 	}
 
+	private void pull() {
+		KafkaConsumer<String, String> consumer = consumerLocal.get();
+
+		log.debug("pulling...");
+		ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(config.getDmaapKafkaTimeout()));
+		log.debug("done pulling.");
+
+		if (records != null && records.count() > 0) {
+			List<Pair<Long, String>> messages = new ArrayList<>(records.count());
+			for (TopicPartition partition : records.partitions()) {
+				messages.clear();
+				List<ConsumerRecord<String, String>> partitionRecords = records.records(partition);
+				for (ConsumerRecord<String, String> record : partitionRecords) {
+					messages.add(Pair.of(record.timestamp(), record.value()));
+					//log.debug("threadid={} topic={}, timestamp={} key={}, offset={}, partition={}, value={}", id, record.topic(), record.timestamp(), record.key(), record.offset(), record.partition(), record.value());
+				}
+				storeService.saveMessages(partition.topic(), messages);
+				log.info("saved to topic={} count={}", partition.topic(), partitionRecords.size());//TODO we may record this number to DB
+
+				if (!async) {//for reliability, sync commit offset to Kafka, this slows down a bit
+					long lastOffset = partitionRecords.get(partitionRecords.size() - 1).offset();
+					consumer.commitSync(Collections.singletonMap(partition, new OffsetAndMetadata(lastOffset + 1)));
+				}
+			}
+
+			if (async) {//for high Throughput, async commit offset in batch to Kafka
+				consumer.commitAsync();
+			}
+		} else {
+			log.debug("no record from this polling.");
+		}
+		storeService.flushStall();
+	}
+
 	public void shutdown() {
-		active.set(false);
-		consumer.wakeup();
+		active = false;
 	}
 
 	private class DummyRebalanceListener implements ConsumerRebalanceListener {

@@ -21,8 +21,6 @@
 package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -31,7 +29,6 @@ import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 /**
@@ -48,11 +45,14 @@ public class PullService {
 
 	private boolean isRunning = false;
 	private ExecutorService executorService;
-	private List<PullThread> consumers;
+	private Thread topicConfigPollingThread;
 
 	@Autowired
-	private ApplicationContext context;
+	private Puller puller;
 
+	@Autowired
+	private TopicConfigPollingService topicConfigPollingService;
+	
 	@Autowired
 	private ApplicationConfiguration config;
 
@@ -74,17 +74,16 @@ public class PullService {
 		}
 
 		logger.info("start pulling ...");
-
 		int numConsumers = config.getKafkaConsumerCount();
-
 		executorService = Executors.newFixedThreadPool(numConsumers);
-		consumers = new ArrayList<>(numConsumers);
 
 		for (int i = 0; i < numConsumers; i++) {
-			PullThread puller = context.getBean(PullThread.class, i);
-			consumers.add(puller);
 			executorService.submit(puller);
 		}
+		
+		topicConfigPollingThread = new Thread(topicConfigPollingService);
+		topicConfigPollingThread.setName("TopicConfigPolling");
+		topicConfigPollingThread.start();
 
 		isRunning = true;
 
@@ -100,14 +99,16 @@ public class PullService {
 		}
 
 		logger.info("stop pulling ...");
-		for (PullThread puller : consumers) {
-			puller.shutdown();
-		}
+		puller.shutdown();
 
-		executorService.shutdown();
+		logger.info("stop TopicConfigPollingService ...");
+		topicConfigPollingService.shutdown();
 
 		try {
-			executorService.awaitTermination(10L, TimeUnit.SECONDS);
+			topicConfigPollingThread.join();
+			
+			executorService.shutdown();
+			executorService.awaitTermination(120L, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
 			logger.error("executor.awaitTermination", e);
 			Thread.currentThread().interrupt();

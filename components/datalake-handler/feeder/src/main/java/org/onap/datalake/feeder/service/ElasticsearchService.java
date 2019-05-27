@@ -55,7 +55,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Service to use Elasticsearch
+ * Elasticsearch Service for table creation, data submission, as well as data pre-processing. 
  * 
  * @author Guobiao Mo
  *
@@ -172,11 +172,7 @@ public class ElasticsearchService {
 				String reportingEntityName = json.query("/event/commonEventHeader/reportingEntityName").toString();
 				String specificProblem = json.query("/event/faultFields/specificProblem").toString();
 
-				String id = null;
-				StringBuilder stringBuilder = new StringBuilder();
-				stringBuilder = stringBuilder.append(name).append('^').append(reportingEntityName).append('^').append(specificProblem);
-
-				id = stringBuilder.toString();//example: id = "aaaa^cccc^bbbbb"
+				String id = String.join("^", name, reportingEntityName, specificProblem);//example: id = "aaaa^cccc^bbbbb"
 				String index = topic.getName().toLowerCase();
 
 				//get

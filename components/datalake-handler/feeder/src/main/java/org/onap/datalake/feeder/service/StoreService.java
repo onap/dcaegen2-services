@@ -22,15 +22,12 @@ package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.tuple.Pair;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
@@ -38,12 +35,9 @@ import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.enumeration.DataFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
@@ -64,7 +58,7 @@ public class StoreService {
 	private ApplicationConfiguration config;
 
 	@Autowired
-	private TopicService topicService;
+	private TopicConfigPollingService configPollingService;
 
 	@Autowired
 	private MongodbService mongodbService;
@@ -78,8 +72,6 @@ public class StoreService {
 	@Autowired
 	private HdfsService hdfsService;
 
-	private Map<String, TopicConfig> topicMap = new HashMap<>();
-
 	private ObjectMapper yamlReader;
 
 	@PostConstruct
@@ -88,28 +80,26 @@ public class StoreService {
 	}
 
 	public void saveMessages(String topicStr, List<Pair<Long, String>> messages) {//pair=ts+text
-		if (messages == null || messages.isEmpty()) {
+		if (CollectionUtils.isEmpty(messages)) {
 			return;
 		}
 
-		TopicConfig topic = topicMap.computeIfAbsent(topicStr, k -> { //TODO get topic updated settings from DB periodically
-			return topicService.getEffectiveTopic(topicStr);
-		});
+		TopicConfig topicConfig = configPollingService.getEffectiveTopicConfig(topicStr);
 
 		List<JSONObject> docs = new ArrayList<>();
 
 		for (Pair<Long, String> pair : messages) {
 			try {
-				docs.add(messageToJson(topic, pair));
-			} catch (Exception e) {
+				docs.add(messageToJson(topicConfig, pair));
+			} catch (IOException e) {
 				log.error(pair.getRight(), e);
 			}
 		}
 
-		saveJsons(topic, docs, messages);
+		saveJsons(topicConfig, docs, messages);
 	}
 
-	private JSONObject messageToJson(TopicConfig topic, Pair<Long, String> pair) throws JSONException, JsonParseException, JsonMappingException, IOException {
+	private JSONObject messageToJson(TopicConfig topic, Pair<Long, String> pair) throws IOException {
 
 		long timestamp = pair.getLeft();
 		String text = pair.getRight();
@@ -176,7 +166,11 @@ public class StoreService {
 		}
 	}
 
-	public void flushStall() {
+	public void flush() { //force flush all buffer 
+		hdfsService.flush(); 
+	}
+	
+	public void flushStall() { //flush stall buffer
 		hdfsService.flushStall();
 	}
 }

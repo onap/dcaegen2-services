@@ -22,6 +22,7 @@ package org.onap.datalake.feeder.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -32,7 +33,6 @@ import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,10 +40,10 @@ import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.CouchbaseCluster;
 import com.couchbase.client.java.document.JsonDocument;
-import com.couchbase.client.java.document.JsonLongDocument;
 import com.couchbase.client.java.document.json.JsonObject;
 import com.couchbase.client.java.env.CouchbaseEnvironment;
 import com.couchbase.client.java.env.DefaultCouchbaseEnvironment;
+import com.couchbase.client.java.error.DocumentAlreadyExistsException;
 
 import rx.Observable;
 import rx.functions.Func1;
@@ -83,7 +83,7 @@ public class CouchbaseService {
 			// Create a N1QL Primary Index (but ignore if it exists)
 			bucket.bucketManager().createN1qlPrimaryIndex(true, false);
 
-			log.info("Connected to Couchbase {}", couchbase.getHost());
+			log.info("Connected to Couchbase {} as {}", couchbase.getHost(), couchbase.getLogin());
 			isReady = true;
 		} catch (Exception ex) {
 			log.error("error connection to Couchbase.", ex);
@@ -113,6 +113,16 @@ public class CouchbaseService {
 		}
 		try {
 			saveDocuments(documents);
+		} catch (DocumentAlreadyExistsException e) {
+			log.error("Some or all the following ids are duplicate.");
+			for(JsonDocument document : documents) {
+				log.error("saveJsons() DocumentAlreadyExistsException {}", document.id());
+			}
+		} catch (rx.exceptions.CompositeException e) {
+			List<Throwable> causes = e.getExceptions();
+			for(Throwable cause : causes) {
+				log.error("saveJsons() CompositeException cause {}", cause.getMessage());
+			}			
 		} catch (Exception e) {
 			log.error("error saving to Couchbase.", e);
 		}
@@ -127,14 +137,15 @@ public class CouchbaseService {
 		}
 
 		String topicStr = topic.getName();
-		//String id = topicStr+":"+timestamp+":"+UUID.randomUUID();
+		id = topicStr+":"+UUID.randomUUID();
 
 		//https://forums.couchbase.com/t/how-to-set-an-auto-increment-id/4892/2
 		//atomically get the next sequence number:
 		// increment by 1, initialize at 0 if counter doc not found
 		//TODO how slow is this compared with above UUID approach?
-		JsonLongDocument nextIdNumber = bucket.counter(topicStr, 1, 0); //like 12345 
-		id = topicStr + ":" + nextIdNumber.content();
+		//sometimes this gives java.util.concurrent.TimeoutException
+		//JsonLongDocument nextIdNumber = bucket.counter(topicStr, 1, 0); //like 12345 
+		//id = topicStr + ":" + nextIdNumber.content();
 
 		return id;
 	}
