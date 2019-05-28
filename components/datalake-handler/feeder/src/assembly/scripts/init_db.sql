@@ -40,31 +40,32 @@ CREATE TABLE `map_db_topic` (
   CONSTRAINT `FK_db_name` FOREIGN KEY (`db_name`) REFERENCES `db` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `dashboard` (
+CREATE TABLE `portal` (
   `name` varchar(255) NOT NULL DEFAULT '',
-  `type` varchar(255) DEFAULT NULL,
-  `address` varchar(500) DEFAULT NULL,
+  `enabled` bit(1) DEFAULT 0,
+  `host` varchar(500) DEFAULT NULL,
   `port` int(5) unsigned DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `login` varchar(255) DEFAULT NULL,
+  `pass` varchar(255) DEFAULT NULL,
   `related_db` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`name`),
   KEY `FK_related_db` (`related_db`),
   CONSTRAINT `FK_related_db` FOREIGN KEY (`related_db`) REFERENCES `db` (`name`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `dashboard_type` (
+CREATE TABLE `design_type` (
   `name` varchar(255) NOT NULL,
-  `dashboard` varchar(255) DEFAULT NULL,
+  `portal` varchar(255) DEFAULT NULL,
   `note` text DEFAULT NULL,
   PRIMARY KEY (`name`),
-  KEY `FK_dashboard` (`dashboard`),
-  CONSTRAINT `FK_dashboard` FOREIGN KEY (`dashboard`) REFERENCES `dashboard` (`name`) ON DELETE SET NULL
+  KEY `FK_portal` (`portal`),
+  CONSTRAINT `FK_portal` FOREIGN KEY (`portal`) REFERENCES `portal` (`name`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `dashboard_template` (
+CREATE TABLE `portal_design` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `submitted` bit(1) DEFAULT 0,
   `body` text DEFAULT NULL,
   `note` text DEFAULT NULL,
   `topic` varchar(255) DEFAULT NULL,
@@ -73,7 +74,7 @@ CREATE TABLE `dashboard_template` (
   KEY `FK_topic` (`topic`),
   KEY `FK_type` (`type`),
   CONSTRAINT `FK_topic` FOREIGN KEY (`topic`) REFERENCES `topic` (`name`) ON DELETE SET NULL,
-  CONSTRAINT `FK_type` FOREIGN KEY (`type`) REFERENCES `dashboard_type` (`name`) ON DELETE SET NULL
+  CONSTRAINT `FK_type` FOREIGN KEY (`type`) REFERENCES `design_type` (`name`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 insert into db (`name`,`host`,`login`,`pass`,`database_name`) values ('Couchbase','dl_couchbase','dl','dl1234','datalake');
@@ -99,3 +100,15 @@ insert into `map_db_topic`(`db_name`,`topic_name`) values ('Elasticsearch','unau
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','unauthenticated.SEC_FAULT_OUTPUT');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('Druid','unauthenticated.SEC_FAULT_OUTPUT');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('HDFS','unauthenticated.SEC_FAULT_OUTPUT');
+
+
+insert into portal (`name`,`related_db`, host) values ('Kibana', 'Elasticsearch', 'dl_es');
+insert into portal (`name`,`related_db`) values ('Elasticsearch', 'Elasticsearch');
+insert into portal (`name`,`related_db`) values ('Druid', 'Druid');
+
+insert into design_type (`name`,`portal`) values ('Kibana Dashboard', 'Kibana');
+insert into design_type (`name`,`portal`) values ('Kibana Search', 'Kibana');
+insert into design_type (`name`,`portal`) values ('Kibana Visualization', 'Kibana');
+insert into design_type (`name`,`portal`) values ('Elasticsearch Field Mapping Template', 'Elasticsearch');
+insert into design_type (`name`,`portal`) values ('Druid Kafka Indexing Service Supervisor', 'Druid');
+
