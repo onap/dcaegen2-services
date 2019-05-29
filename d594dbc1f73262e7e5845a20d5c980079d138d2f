@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16fdcf79_2398d851",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/PortalController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "Please address Kate\u0027s comments \nhttps://gerrit.onap.org/r/c/dcaegen2/services/+/88512/1/components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/TemplateController.java",
+      "range": {
+        "startLine": 44,
+        "startChar": 13,
+        "endLine": 44,
+        "endChar": 30
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50cd3bc8_ef7a3a57",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Portal.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "Should be type \u0027Db\u0027",
+      "range": {
+        "startLine": 60,
+        "startChar": 12,
+        "endLine": 60,
+        "endChar": 18
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5ce4c61_316f814e",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/PortalDesign.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "should be type \u0027Topic\u0027",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 19
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e532d42_51bc4fd6",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/PortalDesign.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "should be type \u0027DesignType\u0027, and need to create a class \u0027DesignType\u0027.",
+      "range": {
+        "startLine": 61,
+        "startChar": 12,
+        "endLine": 61,
+        "endChar": 19
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d624f02_ef8d0abc",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/repository/DesignRepository.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "PortalDesignCrudRepository",
+      "range": {
+        "startLine": 35,
+        "startChar": 17,
+        "endLine": 35,
+        "endChar": 34
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ed4aa22_c16913d4",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/repository/DesignRepository.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "select d1.host, d1.port but return only String?\nrename to getHostInfoByDesignId()",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 34
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "104e975e_fb95c092",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/repository/DesignRepository.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "move to TopicRepository, rename to getTopicNames",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 32
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21cc32f1_b72005ee",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/repository/DesignRepository.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "move to DesignTypeRepository",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 33
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bead8c4_c005caba",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/repository/PortalRepository.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "take a look at Example 1.4. Query creation from method names\nhttps://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 28
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30658620_11d2842d",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/repository/PortalRepository.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "rename to getNames, \ndo we need to order by name?",
+      "range": {
+        "startLine": 40,
+        "startChar": 3,
+        "endLine": 41,
+        "endChar": 27
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebb1bd10_08590f91",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/repository/PortalRepository.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "should get Portal by id, then get Db from the Portal object.",
+      "range": {
+        "startLine": 43,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 37
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bc3a3b3_b179c6ae",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/repository/PortalRepository.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-29T05:22:52Z",
+      "side": 1,
+      "message": "Should use JPA save method",
+      "range": {
+        "startLine": 46,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 36
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
