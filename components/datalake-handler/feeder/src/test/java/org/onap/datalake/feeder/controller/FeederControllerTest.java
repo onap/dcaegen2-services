@@ -19,100 +19,58 @@
  */
 package org.onap.datalake.feeder.controller;
 
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.onap.datalake.feeder.config.ApplicationConfiguration;
-import org.onap.datalake.feeder.service.DmaapService;
-import org.onap.datalake.feeder.service.PullService;
-import org.onap.datalake.feeder.service.Puller;
-import org.springframework.context.ApplicationContext;
-
-import java.io.IOException;
-import java.lang.reflect.Field;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.service.PullService;
+
+@RunWith(MockitoJUnitRunner.class)
 public class FeederControllerTest {
+	@Mock
+	private PullService pullService1;
 
-    @InjectMocks
-    private PullService pullService1;
+	@Mock
+	private ApplicationConfiguration config;
 
-    @Mock
-    private ApplicationConfiguration config;
+	@InjectMocks
+	private FeederController feederController;
 
-    @Mock
-    private ApplicationContext context;
+	@Test
+	public void testStart() throws IOException {
+		when(pullService1.isRunning()).thenReturn(true);
+		String start = feederController.start();
+		assertEquals("{\"running\": true}", start);
 
-    @Mock
-    private DmaapService dmaapService1;
+		when(pullService1.isRunning()).thenReturn(false);
+		start = feederController.start();
+		assertEquals("{\"running\": true}", start);
+	}
 
-    @Mock
-    private KafkaConsumer<String, String> kafkaConsumer;
+	@Test
+	public void testStop() {
+		when(pullService1.isRunning()).thenReturn(true);
+		String stop = feederController.stop();
+		assertEquals("{\"running\": false}", stop);
 
-    @Before
-    public void setupTest() {
-        MockitoAnnotations.initMocks(this);
-    }
+		when(pullService1.isRunning()).thenReturn(false);
+		stop = feederController.stop();
+		assertEquals("{\"running\": false}", stop);
+	}
 
-    private void setAccessPrivateFields(FeederController feederController) throws NoSuchFieldException,
-            IllegalAccessException {
-        Field pullService = feederController.getClass().getDeclaredField("pullService");
-        pullService.setAccessible(true);
-        pullService.set(feederController, pullService1);
-    }
+	@Test
+	public void testStatus() {
+		when(pullService1.isRunning()).thenReturn(false);
+		when(config.getDatalakeVersion()).thenReturn("0.0.1");
 
-    @Test
-    public void testStart() throws IOException, NoSuchFieldException, IllegalAccessException {
-        FeederController feederController = new FeederController();
-        setAccessPrivateFields(feederController);
-        PullService pullService2 = new PullService();
-        Field applicationConfig = pullService2.getClass().getDeclaredField("config");
-        applicationConfig.setAccessible(true);
-        applicationConfig.set(pullService2, config);
-/*        Field applicationContext = pullService2.getClass().getDeclaredField("context");
-        applicationContext.setAccessible(true);
-        applicationContext.set(pullService2, context);
-        when(config.getKafkaConsumerCount()).thenReturn(1);
-        Puller pullThread = new Puller();
-        Field dmaapService = pullThread.getClass().getDeclaredField("dmaapService");
-        dmaapService.setAccessible(true);
-        dmaapService.set(pullThread, dmaapService1);
-        /*Field kafkaConsumer1 = pullThread.getClass().getDeclaredField("consumer");
-        kafkaConsumer1.setAccessible(true);
-        kafkaConsumer1.set(pullThread, kafkaConsumer);
-        applicationConfig = pullThread.getClass().getDeclaredField("config");
-        applicationConfig.setAccessible(true);
-        applicationConfig.set(pullThread, config);
-        when(context.getBean(Puller.class, 0)).thenReturn(pullThread);
-        ConsumerRecords<String, String> records = ConsumerRecords.empty();
-        when(kafkaConsumer.poll(2)).thenReturn(records);
-        String start = feederController.start();
-        assertEquals("{\"running\": true}", start);*/
-    }
-
-    @Test
-    public void testStop() throws NoSuchFieldException, IllegalAccessException {
-        FeederController feederController = new FeederController();
-        setAccessPrivateFields(feederController);
-        String stop = feederController.stop();
-        assertEquals("{\"running\": false}", stop);
-    }
-
-    @Test
-    public void testStatus() throws NoSuchFieldException, IllegalAccessException {
-        ApplicationConfiguration conf = new ApplicationConfiguration();
-        conf.setDatalakeVersion("0.0.1");
-        FeederController feederController = new FeederController();
-        feederController.config = conf;
-        setAccessPrivateFields(feederController);
-        String status = feederController.status();
-        assertEquals("{\"version\": \"0.0.1\", \"running\": false}", status);
-    }
+		String status = feederController.status();
+		assertEquals("{\"version\": \"0.0.1\", \"running\": false}", status);
+	}
 }

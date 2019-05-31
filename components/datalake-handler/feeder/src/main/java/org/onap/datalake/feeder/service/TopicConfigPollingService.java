@@ -102,6 +102,7 @@ public class TopicConfigPollingService implements Runnable {
 				Thread.sleep(config.getDmaapCheckNewTopicInterval());
 			} catch (InterruptedException e) {
 				log.error("Thread.sleep(config.getDmaapCheckNewTopicInterval())", e);
+				Thread.currentThread().interrupt();
 			}
 
 			try {

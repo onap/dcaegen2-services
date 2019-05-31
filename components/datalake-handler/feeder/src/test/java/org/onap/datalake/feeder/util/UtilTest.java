@@ -25,6 +25,8 @@ import org.junit.Test;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * test utils
@@ -48,4 +50,17 @@ public class UtilTest {
 	public void validateNull() throws IOException {
 		Util.getTextFromFile("no_such_file");
 	}
+
+	@Test
+	//only dot(.) in key got replaced
+	public void isStall() {
+		long lastTime = 10L;
+		long checkInterval = 10000L;
+
+		assertTrue(Util.isStall(lastTime, checkInterval));
+
+		lastTime = System.currentTimeMillis();
+		assertFalse(Util.isStall(lastTime, checkInterval));
+	}
+
 }

@@ -91,8 +91,9 @@ public class StoreService {
 		for (Pair<Long, String> pair : messages) {
 			try {
 				docs.add(messageToJson(topicConfig, pair));
-			} catch (IOException e) {
-				log.error(pair.getRight(), e);
+			} catch (Exception e) {
+				//may see org.json.JSONException.
+				log.error("Error when converting this message to JSON: " + pair.getRight(), e);
 			}
 		}
 

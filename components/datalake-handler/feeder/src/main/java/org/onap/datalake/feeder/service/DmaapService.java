@@ -58,11 +58,13 @@ public class DmaapService {
 	@Autowired
 	private TopicService topicService;
 
-	ZooKeeper zk;
+	private ZooKeeper zk;
 
 	@PreDestroy
 	public void cleanUp() throws InterruptedException {
-		zk.close();
+		if (zk != null) {
+			zk.close();
+		}
 	}
 
 	@PostConstruct
@@ -71,6 +73,7 @@ public class DmaapService {
 	}
 
 	//get all topic names from Zookeeper
+	//This method returns empty list if nothing found.
 	public List<String> getTopics() {
 		try {
 			if (zk == null) {
@@ -84,7 +87,7 @@ public class DmaapService {
 			return topics;
 		} catch (Exception e) {
 			zk = null;
-			log.error("Can not get topic list from Zookeeper, for testing, going to use hard coded topic list.", e);
+			log.error("Can not get topic list from Zookeeper, return empty list.", e);
 			return Collections.emptyList();
 		}
 	}
@@ -119,9 +122,6 @@ public class DmaapService {
 	public List<TopicConfig> getActiveTopicConfigs() throws IOException {
 		log.debug("entering getActiveTopicConfigs()...");
 		List<String> allTopics = getTopics();
-		if (allTopics == null) {
-			return Collections.emptyList();
-		}
 
 		List<TopicConfig> ret = new ArrayList<>(allTopics.size());
 		for (String topicStr : allTopics) {
