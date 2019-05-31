@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67b63b9a_7a2c4d75",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/PortalDesignController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-31T08:20:15Z",
+      "side": 1,
+      "message": "is String[] better?",
+      "range": {
+        "startLine": 127,
+        "startChar": 8,
+        "endLine": 127,
+        "endChar": 14
+      },
+      "revId": "97dacd8189fa6fc60c9727533e71d30a9048ec6c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d21e2b31_48821721",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/PortalDesignController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-31T08:20:15Z",
+      "side": 1,
+      "message": "These can be null, then go to Portal\u0027s DB to get them.",
+      "range": {
+        "startLine": 131,
+        "startChar": 2,
+        "endLine": 132,
+        "endChar": 74
+      },
+      "revId": "97dacd8189fa6fc60c9727533e71d30a9048ec6c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "311842e7_2e0c96a1",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/dto/PortalConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-31T08:20:15Z",
+      "side": 1,
+      "message": "Should be String",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 15
+      },
+      "revId": "97dacd8189fa6fc60c9727533e71d30a9048ec6c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55547dbb_6189d203",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/dto/PortalDesignConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-31T08:20:15Z",
+      "side": 1,
+      "message": "String?",
+      "range": {
+        "startLine": 48,
+        "startChar": 12,
+        "endLine": 48,
+        "endChar": 17
+      },
+      "revId": "97dacd8189fa6fc60c9727533e71d30a9048ec6c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d60e661a_610a4c50",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/dto/PortalDesignConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-31T08:20:15Z",
+      "side": 1,
+      "message": "String?",
+      "range": {
+        "startLine": 50,
+        "startChar": 12,
+        "endLine": 50,
+        "endChar": 23
+      },
+      "revId": "97dacd8189fa6fc60c9727533e71d30a9048ec6c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98d27c38_5921fafe",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/util/HttpClientUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-05-31T08:20:15Z",
+      "side": 1,
+      "message": "rename to sendKibanaPost since the header \"kbn-xsrf\" is Kibana specific.",
+      "range": {
+        "startLine": 40,
+        "startChar": 25,
+        "endLine": 40,
+        "endChar": 33
+      },
+      "revId": "97dacd8189fa6fc60c9727533e71d30a9048ec6c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
