@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "a467d652_00630311",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DesignController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2019-05-31T01:45:02Z",
+      "side": 1,
+      "message": "HTTP GET/POST/PUT/DELETE can be used to instead the URL path name.\nGET/template list\nGET /template/{id} show detail of a particular template\nPOST/template create\nPUT /template/{id} update\nDELETE /template/{id} delete",
+      "range": {
+        "startLine": 55,
+        "startChar": 28,
+        "endLine": 55,
+        "endChar": 44
+      },
+      "revId": "d594dbc1f73262e7e5845a20d5c980079d138d2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16fdcf79_2398d851",
         "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/PortalController.java",
         "patchSetId": 1
