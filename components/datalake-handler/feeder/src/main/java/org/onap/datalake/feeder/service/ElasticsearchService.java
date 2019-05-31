@@ -47,7 +47,10 @@ import org.elasticsearch.rest.RestStatus;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.PortalDesign;
 import org.onap.datalake.feeder.dto.TopicConfig;
+import org.onap.datalake.feeder.repository.PortalDesignRepository;
+import org.onap.datalake.feeder.util.HttpClientUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,7 +73,10 @@ public class ElasticsearchService {
 
 	@Autowired
 	private DbService dbService;
-
+	
+    @Autowired
+    private PortalDesignRepository portalDesignRepository;
+    
 	private RestHighLevelClient client;
 	ActionListener<BulkResponse> listener;
 
@@ -112,6 +118,13 @@ public class ElasticsearchService {
 		boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);
 		if (!exists) {
 			//TODO submit mapping template
+			PortalDesign portalDesign = portalDesignRepository.findByName(topicLower);
+			
+			if (portalDesign!=null){
+				String body = portalDesign.getBody();
+				
+				HttpClientUtil.sendPost(dbService.getElasticsearch().getHost()+":9200/_template/my_logs", body);
+			}
 			CreateIndexRequest createIndexRequest = new CreateIndexRequest(topicLower);
 			CreateIndexResponse createIndexResponse = client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
 			log.info("{} : created {}", createIndexResponse.index(), createIndexResponse.isAcknowledged());
