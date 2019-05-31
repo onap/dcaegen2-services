@@ -70,4 +70,7 @@ public class ApplicationConfiguration {
 
 	//Version
 	private String datalakeVersion;
+  
+  	//Kibana
+	private String KibanaDashboardImportApi;
 }
