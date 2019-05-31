@@ -49,6 +49,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -64,6 +65,7 @@ import io.swagger.annotations.ApiOperation;
  * @contributor Kate Hsuan @ QCT
  */
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/topics", produces = { MediaType.APPLICATION_JSON_VALUE })//, consumes= {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class TopicController {
