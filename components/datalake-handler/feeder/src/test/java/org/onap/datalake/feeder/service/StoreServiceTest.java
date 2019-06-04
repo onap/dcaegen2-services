@@ -93,6 +93,8 @@ public class StoreServiceTest {
 		testInit();
 
 		TopicConfig topicConfig = createTopicConfig("test1", "JSON");
+		topicConfig.setAggregateArrayPath("/test");
+		topicConfig.setFlattenArrayPath("/test");
 
 		topicConfig = createTopicConfig("test2", "XML");
 		topicConfig.setSaveRaw(false);

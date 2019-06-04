@@ -77,6 +77,23 @@ public class TopicConfigTest {
     }
 
     @Test
+    public void testArrayPath() {
+        Topic topic = new Topic("testArrayPath");
+        topic.setAggregateArrayPath("/data/data2/value,/data/data3");
+        topic.setFlattenArrayPath("/data/data2/value,/data/data3");
+
+        TopicConfig topicConfig = topic.getTopicConfig();
+
+        String[] value = topicConfig.getAggregateArrayPath2();
+        assertEquals(value[0], "/data/data2/value");
+        assertEquals(value[1], "/data/data3");
+
+        value = topicConfig.getFlattenArrayPath2();
+        assertEquals(value[0], "/data/data2/value");
+        assertEquals(value[1], "/data/data3");
+    }
+
+    @Test
     public void testIs() {
         Topic testTopic = new Topic("test");
 

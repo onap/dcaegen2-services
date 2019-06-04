@@ -21,6 +21,7 @@
 package org.onap.datalake.feeder.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -70,6 +71,8 @@ public class TopicServiceTest {
 		String name = "a";
 		when(topicRepository.findById(name)).thenReturn(Optional.of(new Topic(name)));
 		assertEquals(topicService.getTopic(name), new Topic(name));
+		
+		assertFalse(topicService.istDefaultTopic(new Topic(name)));
 	}
 
 	@Test

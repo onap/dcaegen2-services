@@ -27,12 +27,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 import org.json.XML;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.enumeration.DataFormat;
+import org.onap.datalake.feeder.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +102,7 @@ public class StoreService {
 		saveJsons(topicConfig, docs, messages);
 	}
 
-	private JSONObject messageToJson(TopicConfig topic, Pair<Long, String> pair) throws IOException {
+	private JSONObject messageToJson(TopicConfig topicConfig, Pair<Long, String> pair) throws IOException {
 
 		long timestamp = pair.getLeft();
 		String text = pair.getRight();
@@ -111,11 +113,11 @@ public class StoreService {
 		//		log.debug("{} ={}", topicStr, text);
 		//}
 
-		boolean storeRaw = topic.isSaveRaw();
+		boolean storeRaw = topicConfig.isSaveRaw();
 
 		JSONObject json = null;
 
-		DataFormat dataFormat = topic.getDataFormat2();
+		DataFormat dataFormat = topicConfig.getDataFormat2();
 
 		switch (dataFormat) {
 		case JSON:
@@ -146,6 +148,20 @@ public class StoreService {
 			json.put(config.getRawDataLabel(), text);
 		}
 
+		if (StringUtils.isNotBlank(topicConfig.getAggregateArrayPath())) {
+			String[] paths = topicConfig.getAggregateArrayPath2();
+			for (String path : paths) {
+				JsonUtil.arrayAggregate(path, json);
+			}
+		}
+
+		if (StringUtils.isNotBlank(topicConfig.getFlattenArrayPath())) {
+			String[] paths = topicConfig.getFlattenArrayPath2();
+			for (String path : paths) {
+				JsonUtil.flattenArray(path, json);
+			}
+		}
+
 		return json;
 	}
 
@@ -168,9 +184,9 @@ public class StoreService {
 	}
 
 	public void flush() { //force flush all buffer 
-		hdfsService.flush(); 
+		hdfsService.flush();
 	}
-	
+
 	public void flushStall() { //flush stall buffer
 		hdfsService.flushStall();
 	}

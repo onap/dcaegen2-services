@@ -68,6 +68,7 @@ public class ApplicationConfigurationTest {
         assertNotNull(config.getRawDataLabel());
         assertNotNull(config.getTimestampLabel());
         assertNotNull(config.getElasticsearchType());
+        assertNotNull(config.getDatalakeVersion());
         
       //HDFS
         assertTrue(config.getHdfsBatchSize()>0);
