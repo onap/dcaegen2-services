@@ -51,6 +51,8 @@ public class TopicConfig {
 	private int ttl;
 	private boolean correlateClearedMessage;
 	private String messageIdPath;
+	private String aggregateArrayPath;
+	private String flattenArrayPath;
 
 	public DataFormat getDataFormat2() {
 		if (dataFormat != null) {
@@ -59,7 +61,6 @@ public class TopicConfig {
 			return null;
 		}
 	}
-
 
 	public boolean supportHdfs() {
 		return containDb("HDFS");
@@ -103,6 +104,26 @@ public class TopicConfig {
 		}
 
 		return id;
+	}
+
+	public String[] getAggregateArrayPath2() {
+		String[] ret = null;
+
+		if (StringUtils.isNotBlank(aggregateArrayPath)) {
+			ret = aggregateArrayPath.split(",");
+		}
+
+		return ret;
+	}
+
+	public String[] getFlatArrayPath2() {
+		String[] ret = null;
+
+		if (StringUtils.isNotBlank(flattenArrayPath)) {
+			ret = flattenArrayPath.split(",");
+		}
+
+		return ret;
 	}
 
 	@Override

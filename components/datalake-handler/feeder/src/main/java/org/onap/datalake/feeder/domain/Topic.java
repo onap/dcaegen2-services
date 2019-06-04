@@ -100,6 +100,15 @@ public class Topic {
 	@Column(name = "`message_id_path`")
 	private String messageIdPath;
 
+	//paths to the array that need aggregation, comma separated, example: "/event/measurementsForVfScalingFields/diskUsageArray,/event/measurementsForVfScalingFields/cpuUsageArray,/event/measurementsForVfScalingFields/vNicPerformanceArray"
+	@Column(name = "`aggregate_array_path`") 
+	private String aggregateArrayPath;
+
+	//paths to the element in array that need flatten, this element is used as label, comma separated, 
+	//example: "/event/measurementsForVfScalingFields/astriMeasurement/astriDPMeasurementArray/astriInterface,..."
+	@Column(name = "`flatten_array_path`") 
+	private String flattenArrayPath;
+	
 	public Topic() {
 	}
 
@@ -149,6 +158,8 @@ public class Topic {
 		tConfig.setSaveRaw(isSaveRaw());
 		tConfig.setCorrelateClearedMessage(isCorrelateClearedMessage());
 		tConfig.setMessageIdPath(getMessageIdPath());
+		tConfig.setAggregateArrayPath(getAggregateArrayPath());
+		tConfig.setFlattenArrayPath(getFlattenArrayPath());
 		tConfig.setTtl(getTtl());
 		Set<Db> topicDb = getDbs();
 		List<String> dbList = new ArrayList<>();

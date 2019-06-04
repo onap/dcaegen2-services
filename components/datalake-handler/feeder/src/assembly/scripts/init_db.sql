@@ -7,6 +7,8 @@ CREATE TABLE `topic` (
   `enabled` bit(1) DEFAULT 0,
   `login` varchar(255) DEFAULT NULL,
   `message_id_path` varchar(255) DEFAULT NULL,
+  `aggregate_array_path` varchar(2000) DEFAULT NULL,
+  `flatten_array_path` varchar(2000) DEFAULT NULL,
   `pass` varchar(255) DEFAULT NULL,
   `save_raw` bit(1) DEFAULT NULL,
   `ttl` int(11) DEFAULT NULL,
@@ -86,6 +88,12 @@ insert into db (`name`,`host`,`login`) values ('HDFS','dlhdfs','dl');
 
 -- in production, default enabled should be off
 insert into `topic`(`name`,`enabled`,`save_raw`,`ttl`,`data_format`) values ('_DL_DEFAULT_',1,0,3650,'JSON');
+insert into `topic`(`name`,correlate_cleared_message,`enabled`, message_id_path,`data_format`) values ('unauthenticated.SEC_FAULT_OUTPUT',1,1,'/event/commonEventHeader/eventName,/event/commonEventHeader/reportingEntityName,/event/faultFields/specificProblem,/event/commonEventHeader/eventId','JSON');
+insert into `topic`(`name`,`enabled`, aggregate_array_path,flatten_array_path,`data_format`) 
+values ('unauthenticated.VES_MEASUREMENT_OUTPUT',1,
+'/event/measurementsForVfScalingFields/diskUsageArray,/event/measurementsForVfScalingFields/cpuUsageArray,/event/measurementsForVfScalingFields/vNicPerformanceArray',
+'/event/measurementsForVfScalingFields/astriMeasurement/astriDPMeasurementArray/astriInterface',
+'JSON');
 
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('Couchbase','_DL_DEFAULT_');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('Elasticsearch','_DL_DEFAULT_');
@@ -93,14 +101,17 @@ insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','_DL_DEFAUL
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('Druid','_DL_DEFAULT_');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('HDFS','_DL_DEFAULT_');
 
-insert into `topic`(`name`,correlate_cleared_message,`enabled`, message_id_path,`data_format`) values ('unauthenticated.SEC_FAULT_OUTPUT',1,1,'/event/commonEventHeader/eventName,/event/commonEventHeader/reportingEntityName,/event/faultFields/specificProblem,/event/commonEventHeader/eventId','JSON');
-
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('Couchbase','unauthenticated.SEC_FAULT_OUTPUT');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('Elasticsearch','unauthenticated.SEC_FAULT_OUTPUT');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','unauthenticated.SEC_FAULT_OUTPUT');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('Druid','unauthenticated.SEC_FAULT_OUTPUT');
 insert into `map_db_topic`(`db_name`,`topic_name`) values ('HDFS','unauthenticated.SEC_FAULT_OUTPUT');
 
+insert into `map_db_topic`(`db_name`,`topic_name`) values ('Couchbase','unauthenticated.VES_MEASUREMENT_OUTPUT');
+insert into `map_db_topic`(`db_name`,`topic_name`) values ('Elasticsearch','unauthenticated.VES_MEASUREMENT_OUTPUT');
+insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','unauthenticated.VES_MEASUREMENT_OUTPUT');
+insert into `map_db_topic`(`db_name`,`topic_name`) values ('Druid','unauthenticated.VES_MEASUREMENT_OUTPUT');
+insert into `map_db_topic`(`db_name`,`topic_name`) values ('HDFS','unauthenticated.VES_MEASUREMENT_OUTPUT');
 
 insert into portal (`name`,`related_db`, host) values ('Kibana', 'Elasticsearch', 'dl_es');
 insert into portal (`name`,`related_db`) values ('Elasticsearch', 'Elasticsearch');

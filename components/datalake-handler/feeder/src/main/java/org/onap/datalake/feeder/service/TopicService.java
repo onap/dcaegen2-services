@@ -123,6 +123,8 @@ public class TopicService {
 		topic.setCorrelateClearedMessage(tConfig.isCorrelateClearedMessage());
 		topic.setDataFormat(tConfig.getDataFormat());
 		topic.setMessageIdPath(tConfig.getMessageIdPath());
+		topic.setAggregateArrayPath(tConfig.getAggregateArrayPath());
+		topic.setFlattenArrayPath(tConfig.getFlattenArrayPath());
 
 		if(tConfig.getSinkdbs() != null) {
 			for (String item : tConfig.getSinkdbs()) {

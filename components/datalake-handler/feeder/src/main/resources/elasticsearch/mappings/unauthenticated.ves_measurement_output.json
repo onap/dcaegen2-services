@@ -1,0 +1,31 @@
+{ 
+	"mappings": { 
+			"properties": {
+				"datalake_ts_": {
+					"type": "date",
+					"format": "epoch_millis"
+				},				
+				"event.commonEventHeader.internalHeaderFields.collectorTimeStamp": {
+					"type": "date",
+					"format":"EEE, MM dd yyyy HH:mm:ss z"
+				},
+				"event.commonEventHeader.startEpochMicrosec": {
+					"type": "date",
+					"format": "epoch_millis"
+				},
+				"event.commonEventHeader.lastEpochMicrosec": {
+					"type": "date",
+					"format": "epoch_millis"
+				},
+				"event.measurementsForVfScalingFields.diskUsageArray": {
+					"type": "nested"
+				},
+				"event.measurementsForVfScalingFields.cpuUsageArray": {
+					"type": "nested"
+				},
+				"event.measurementsForVfScalingFields.vNicPerformanceArray": {
+					"type": "nested"
+				}
+			} 
+	}
+}
