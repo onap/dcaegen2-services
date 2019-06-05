@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e9e6359_c53fd4e0",
+        "filename": "components/datalake-handler/admin/src/src/app/core/services/dashboard-api.service.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-05T14:54:46Z",
+      "side": 1,
+      "message": "These REST functions should be written in core/services/rest-api.service.ts",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 34
+      },
+      "revId": "ac8777fb0928ad74eefccce2149074bf7cb2f131",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c752b6cb_c9f093d2",
+        "filename": "components/datalake-handler/admin/src/src/app/dashboard-setting/dashboard-list/dashboard-list.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-05T14:54:46Z",
+      "side": 1,
+      "message": "Please use {{ \u0027xxxxx\u0027 | translate }} to render multiple language",
+      "range": {
+        "startLine": 189,
+        "startChar": 14,
+        "endLine": 195,
+        "endChar": 15
+      },
+      "revId": "ac8777fb0928ad74eefccce2149074bf7cb2f131",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
