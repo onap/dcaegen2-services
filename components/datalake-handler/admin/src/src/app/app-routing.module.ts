@@ -31,13 +31,18 @@ import { FeederComponent } from "./feeder/feeder.component";
 import { TopicsComponent } from "./topics/topics.component";
 import { DatabaseComponent } from "./database/database.component";
 import { AboutComponent } from "./about/about.component";
+import { DashboardSettingComponent } from './dashboard-setting/dashboard-setting.component';
+import { DashboardListComponent } from './dashboard-setting/dashboard-list/dashboard-list.component';
+import { TemplateComponent } from './dashboard-setting/template/template.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/feeder", pathMatch: "full" },
   { path: "feeder", component: FeederComponent },
   { path: "topics", component: TopicsComponent },
   { path: "database", component: DatabaseComponent },
-  { path: "about", component: AboutComponent }
+  { path: "about", component: AboutComponent },
+  { path: 'dashboard-setting/dashboard-list', component: DashboardListComponent},
+  { path: 'dashboard-setting/template', component: TemplateComponent},
 ];
 
 @NgModule({

@@ -3,6 +3,9 @@
     "FEDDFER": "DataLake Feeder",
     "TOPICS": "Topics",
     "DATABASE": "Database",
+    "DASHBOARD":"Dashboard Setting",
+    "DASHBOARDLIST":"Dashboard List",
+    "TEMPLATE":"Template",
     "ABOUT": "About"
   },
 
@@ -33,5 +36,27 @@
   "DELETE": "Delete",
   "ERROR_CODE": "Error Code",
   "SUCCESS_UPDATED": "Success updated",
-  "TOPIC_DEFAULT_CONF_NOTICE": "Notice: This topic uses the default topics settings."
+  "TOPIC_DEFAULT_CONF_NOTICE": "Notice: This topic uses the default topics settings.",
+
+  "HOME":"Home",
+  "ConfigDashboard":"Config Dashboard",
+  "EDIT":"Edit",
+  "OK":"OK",
+  "Save":"Save",
+  "Cancel":"Cancel",
+  "NewDashboard":"New dashboard",
+  "DestinationType":"Destination type",
+  "InputValue":"input value",
+  "Username":"Username",
+  "Password":"Password",
+
+
+  "No":"No",
+  "TEMPLATE_NAME":"Template name",
+  "TEMPLATE_TYPE":"Template type",
+  "TOPICS_NAME":"Topics name",
+  "DEPLOY_TO_DASHBOARD":"Deploy to dashboard",
+  "DEPLOY":"Deploy",
+  "NEW_TEMPLATE":"New template",
+  "TEMPLATE_BODY":"Template Body"
 }

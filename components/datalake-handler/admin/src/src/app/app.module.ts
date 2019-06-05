@@ -74,6 +74,13 @@ import { AboutComponent } from "./about/about.component";
 
 // Loading spinner
 import { NgxSpinnerModule } from "ngx-spinner";
+import { DashboardSettingComponent } from './dashboard-setting/dashboard-setting.component';
+import { DashboardListComponent } from './dashboard-setting/dashboard-list/dashboard-list.component';
+import { TemplateComponent } from './dashboard-setting/template/template.component';
+import { CreateDashboardComponent } from './dashboard-setting/dashboard-list/create-dashboard/create-dashboard.component';
+import { TemplateListComponent } from './dashboard-setting/template/template-list/template-list.component';
+import { NewTemplateModalComponent } from './dashboard-setting/template/template-list/new-template-modal/new-template-modal.component';
+import { EditTemplateModalComponent } from './dashboard-setting/template/template-list/edit-template-modal/edit-template-modal.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +101,15 @@ import { NgxSpinnerModule } from "ngx-spinner";
     TopicConfigModalComponent,
     ToastrNotificationComponent,
     AlertComponent,
-    AboutComponent
+    AboutComponent,
+    DashboardSettingComponent,
+    DashboardListComponent,
+    CreateDashboardComponent,
+    TemplateComponent, 
+    TemplateListComponent,
+    NewTemplateModalComponent,
+    EditTemplateModalComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -122,7 +137,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ElasticsearchComponent,
     MongodbComponent,
     TopicDetailModalComponent,
-    TopicConfigModalComponent
+    TopicConfigModalComponent,
+    CreateDashboardComponent,
+ 	NewTemplateModalComponent,
+    EditTemplateModalComponent
   ]
 })
 export class AppModule {}

@@ -56,6 +56,7 @@ export class HeaderComponent {
     private translateService: TranslateService
   ) {
     this.translateService.setDefaultLang("en-us");
+    sessionStorage.setItem("selectedLang","en-us");
   }
 
   ngOnInit() {
@@ -74,6 +75,7 @@ export class HeaderComponent {
 
   changeLanguage(lang: string) {
     this.translateService.use(lang);
+    sessionStorage.setItem("selectedLang",lang);
   }
 
   changeFeederStatus() {

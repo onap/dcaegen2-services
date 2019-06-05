@@ -3,6 +3,9 @@
     "FEDDFER": "DataLake Feeder",
     "TOPICS": "Topics",
     "DATABASE": "Database",
+    "DASHBOARD":"儀表板設置",
+    "DASHBOARDLIST":"儀表板列表",
+    "TEMPLATE":"模板",
     "ABOUT": "About"
   },
 
@@ -34,5 +37,26 @@
   "DELETE": "刪除",
   "ERROR_CODE": "錯誤代碼",
   "SUCCESS_UPDATED": "更新成功​",
-  "TOPIC_DEFAULT_CONF_NOTICE": "注意：此Topic目前使用預設配置。​"
+  "TOPIC_DEFAULT_CONF_NOTICE": "注意：此Topic目前使用預設配置。​",
+
+  "HOME":"首頁",
+  "ConfigDashboard":"配置儀表板",
+  "EDIT":"編輯",
+  "OK":"確認",
+  "Save":"保存",
+  "Cancel":"取消",
+  "NewDashboard":"新建儀表板",
+  "DestinationType":"目標類型",
+  "InputValue":"輸入值",
+  "Username":"用戶名",
+  "Password":"密碼",
+  
+    "No":"No",
+  "TEMPLATE_NAME":"模板名稱",
+  "TEMPLATE_TYPE":"模板類型",
+  "TOPICS_NAME":"Topics名稱",
+  "DEPLOY_TO_DASHBOARD":"部署到儀表板",
+  "DEPLOY":"部署",
+  "NEW_TEMPLATE":"新建模板",
+  "TEMPLATE_BODY":"模板體"
 }
