@@ -380,6 +380,10 @@ hr {
 }
 
 /* Input: checkbox */
+.input-group-text {
+  padding: .375rem 16px;
+}
+
 .dl-input-chk {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;

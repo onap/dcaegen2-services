@@ -37,6 +37,7 @@ import { CouchbaseComponent } from "./dbs-modal/couchbase/couchbase.component";
 import { DruidComponent } from "./dbs-modal/druid/druid.component";
 import { ElasticsearchComponent } from "./dbs-modal/elasticsearch/elasticsearch.component";
 import { MongodbComponent } from "./dbs-modal/mongodb/mongodb.component";
+import { HdfsComponent } from "./dbs-modal/hdfs/hdfs.component";
 import { AlertComponent } from "src/app/core/alert/alert.component";
 
 // Notify
@@ -185,6 +186,13 @@ export class DatabaseListComponent implements OnInit {
       }
       case "MongoDB": {
         modalRef = this.modalService.open(MongodbComponent, {
+          size: "lg",
+          centered: true
+        });
+        break;
+      }
+      case "HDFS": {
+        modalRef = this.modalService.open(HdfsComponent, {
           size: "lg",
           centered: true
         });

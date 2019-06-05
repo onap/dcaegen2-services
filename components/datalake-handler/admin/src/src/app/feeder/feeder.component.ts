@@ -52,8 +52,7 @@ export class FeederComponent implements OnInit {
     this.adminService.setTitle("SIDEBAR.FEDDFER");
     this.restApiService.getTopicsFromFeeder().subscribe(
       res => {
-        // TODO: -1, because __consumer_offsets
-        this.topicContent = (res.length - 1).toString();
+        this.topicContent = res.length.toString();
         setTimeout(() => {
           this.spinner.hide();
         }, 500);

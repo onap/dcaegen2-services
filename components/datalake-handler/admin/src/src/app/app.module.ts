@@ -61,6 +61,7 @@ import { DatabaseListComponent } from "./database/database-list/database-list.co
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 import { CouchbaseComponent } from "./database/database-list/dbs-modal/couchbase/couchbase.component";
 import { MongodbComponent } from "./database/database-list/dbs-modal/mongodb/mongodb.component";
+import { HdfsComponent } from "./database/database-list/dbs-modal/hdfs/hdfs.component";
 import { DatabaseAddModalComponent } from "./database/database-list/database-add-modal/database-add-modal.component";
 import { ElasticsearchComponent } from "./database/database-list/dbs-modal/elasticsearch/elasticsearch.component";
 import { DruidComponent } from "./database/database-list/dbs-modal/druid/druid.component";
@@ -87,6 +88,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     DatabaseListComponent,
     CouchbaseComponent,
     MongodbComponent,
+    HdfsComponent,
     DatabaseAddModalComponent,
     ElasticsearchComponent,
     DruidComponent,
@@ -121,6 +123,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     DruidComponent,
     ElasticsearchComponent,
     MongodbComponent,
+    HdfsComponent,
     TopicDetailModalComponent,
     TopicConfigModalComponent
   ]
