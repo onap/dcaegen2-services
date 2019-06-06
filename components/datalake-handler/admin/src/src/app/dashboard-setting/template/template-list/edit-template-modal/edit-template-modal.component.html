@@ -13,3 +13,94 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
+<div class="p-1">
+    <div class="modal-header pb-0 border-0">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <label class="dl-h3">{{ templateInputTitle }}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body border-0">
+      <div class="container-fluid">
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <label class="dl-emphasis1" for="inputtemplateName">{{ 'TEMPLATE_NAME' | translate }}</label>
+            </div>
+            <div class="col-md-4">
+              <input  #inputtemplateName [(ngModel)]="this.templateInput.name" class="form-control dl-input-text" type="text" placeholder="Username" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="dl-emphasis1" for="templatebody">{{ 'TEMPLATE_BODY'| translate }}</label>
+              </div>
+              <div class="col-md-8">
+                  <textarea #templatebody [(ngModel)]="this.templateInput.body"  class="form-control dl-input-text" placeholder="Put the template design here..." rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-4">
+              <label class="dl-emphasis1">{{ 'TEMPLATE_TYPE' | translate }}</label>
+            </div>
+            <div class="col-md-6">
+              <select #templatetype class="custom-select dl-input-text" id="selDataFormat">
+                <option *ngFor="let item of templatetypedata" [selected]="item == this.templateInput.type">{{item}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+              <div class="col-md-4">
+                <label class="dl-emphasis1">{{ 'TOPICS' | translate }}</label>
+              </div>
+              <div class="col-md-6">
+                <select #topic class="custom-select dl-input-text" id="selDataFormat">
+                  <option *ngFor="let item of topicname" [selected]="item == this.templateInput.topic">{{item}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+    <div class="modal-footer border-0 pt-0 pb-2">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 p-0">
+          </div>
+          <div class="col-md-3 p-1">
+            <span>
+              <button type="button" class="btn dl-btn-dark btn-block" (click)="this.passBack()">
+                Save
+              </button>
+            </span>
+          </div>
+          <div class="col-md-3 p-1">
+            <span>
+              <button type="button" class="btn dl-btn-light btn-block" (click)="activeModal.close('Close click')">
+                Cancel
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
