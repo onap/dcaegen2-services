@@ -62,14 +62,18 @@ limitations under the License.
         </a>
         <ul class="navbar-nav flex-column navbar-nav-nohover"  [ngbCollapse]="this.dashboard">
           <li class="nav-item">
-            <a class="nav-link" style="padding-left: 23px;" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
-               routerLink="/dashboard-setting/dashboard-list">
+            <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+               routerLink="/dashboard-setting/dashboard-list"
+               style="padding-left: 23px;"
+            >
               {{"SIDEBAR.DASHBOARDLIST" | translate}}
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="padding-left: 23px;" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
-               routerLink="dashboard-setting/template">
+            <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+               routerLink="dashboard-setting/template"
+               style="padding-left: 23px;"
+            >
               {{"SIDEBAR.TEMPLATE" | translate}}
             </a>
           </li>
