@@ -64,7 +64,7 @@ export class DashboardApiService {
   Dashboard
 */
   getDashboardList(): Observable<any> {
-    let url = prefix + "portals/true"; //onilne
+    let url = prefix + "portals"; //onilne
     return this.http.get(url).pipe(
       retry(1),
       map(this.extractData),
@@ -109,7 +109,7 @@ export class DashboardApiService {
   }
 
   getDashboardName(): Observable<any> {
-    let url = prefix + "portals/getNames/false"; //onilne
+    let url = prefix + "portals/getNames?enabled=false"; //onilne
     return this.http.get(url).pipe(
       retry(1),
       map(this.extractData),
@@ -177,7 +177,7 @@ export class DashboardApiService {
   deployTemplateKibana(id, body): Observable<any> {
     body.submitted = true;
     console.log(id,body,'this.deployTemplateKibana()');
-    return this.http.post(prefix+"portalDesigns/" + id, body).pipe(   //online
+    return this.http.post(prefix+"portalDesigns/deploy/" + id, body).pipe(   //online
       retry(1),
       map(this.extractData2),
       catchError(this.handleError)
