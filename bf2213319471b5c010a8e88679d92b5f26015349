@@ -22,6 +22,30 @@
       "revId": "bf2213319471b5c010a8e88679d92b5f26015349",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e75387b_62d7a979",
+        "filename": "components/datalake-handler/admin/src/src/app/core/services/dashboard-api.service.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-06T06:01:14Z",
+      "side": 1,
+      "message": "It is ok to use query string for filtering. \nHave a look at the last section of this page https://restfulapi.net/resource-naming/",
+      "parentUuid": "f60b6a50_25f4726d",
+      "range": {
+        "startLine": 111,
+        "startChar": 1,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "bf2213319471b5c010a8e88679d92b5f26015349",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
