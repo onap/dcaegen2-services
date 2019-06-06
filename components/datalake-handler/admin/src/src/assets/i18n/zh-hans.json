@@ -3,6 +3,9 @@
     "FEDDFER": "DataLake Feeder",
     "TOPICS": "Topics",
     "DATABASE": "Database",
+    "DASHBOARD":"仪表板设置",
+    "DASHBOARDLIST":"仪表板列表",
+    "TEMPLATE":"模板",
     "ABOUT": "About"
   },
 
@@ -33,5 +36,26 @@
   "DELETE": "删除",
   "ERROR_CODE": "错误代码​",
   "SUCCESS_UPDATED": "更新成功​",
-  "TOPIC_DEFAULT_CONF_NOTICE": "注意: 本Topic使用默认Topic设置。​"
+  "TOPIC_DEFAULT_CONF_NOTICE": "注意: 本Topic使用默认Topic设置。​",
+
+  "HOME":"首页",
+  "ConfigDashboard":"配置仪表板",
+  "EDIT":"编辑",
+  "OK":"确认",
+  "Save":"保存",
+  "Cancel":"取消",
+  "NewDashboard":"新建仪表板",
+  "DestinationType":"目标类型",
+  "InputValue":"输入值",
+  "Username":"用户名",
+  "Password":"密码",
+  
+    "No":"No",
+  "TEMPLATE_NAME":"模板名称",
+  "TEMPLATE_TYPE":"模板类型",
+  "TOPICS_NAME":"Topics名称",
+  "DEPLOY_TO_DASHBOARD":"部署到仪表盘",
+  "DEPLOY":"部署",
+  "NEW_TEMPLATE":"新建模板",
+  "TEMPLATE_BODY":"模板体"
 }

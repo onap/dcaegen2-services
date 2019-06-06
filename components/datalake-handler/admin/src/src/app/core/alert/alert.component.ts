@@ -35,11 +35,13 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 })
 export class AlertComponent {
   @Input() message: string;
+  @Input() dashboardDeteleModelShow;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
   constructor(public activeModal: NgbActiveModal) {}
 
   passBack() {
+    console.log(this.dashboardDeteleModelShow,"dashboardDeteleModelShow");
     this.passEntry.emit(true);
   }
 }

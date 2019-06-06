@@ -17,3 +17,9 @@
 * limitations under the License.
 * ============LICENSE_END=========================================================
 */
+.navbar-nav-nohover:hover{
+  background: transparent!important;
+}
+.navbar-nav-nohover:hover li{
+  background: transparent!important;
+}

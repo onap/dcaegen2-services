@@ -34,7 +34,7 @@ limitations under the License.
         </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item ">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
           routerLink="/topics">
           <i class="fas fa-cube">&nbsp;</i>
@@ -48,6 +48,32 @@ limitations under the License.
           <i class="fas fa-database" aria-hidden="true">&nbsp;</i>
           {{"SIDEBAR.DATABASE" | translate}}
         </a>
+      </li>
+
+      <li class="nav-item " >
+        <a  (click)="this.dashboard = !this.dashboard"
+            class="nav-link"
+            style="color: #ffffff!important;background: transparent!important;cursor: pointer"
+            [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+            routerLink="{{dashboard==true?'/dashboard-setting/dashboard-list':'javascript:void(0)'}}"
+        >
+          <i class="fas fa-chart-line" aria-hidden="true">&nbsp;</i>
+          {{"SIDEBAR.DASHBOARD" | translate}}
+        </a>
+        <ul class="navbar-nav flex-column navbar-nav-nohover"  [ngbCollapse]="this.dashboard">
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+               routerLink="/dashboard-setting/dashboard-list">
+              {{"SIDEBAR.DASHBOARDLIST" | translate}}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+               routerLink="dashboard-setting/template">
+              {{"SIDEBAR.TEMPLATE" | translate}}
+            </a>
+          </li>
+        </ul>
       </li>
 
       <li class="nav-item">

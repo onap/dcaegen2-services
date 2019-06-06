@@ -18,12 +18,12 @@ limitations under the License.
 ============LICENSE_END=========================================================
 -->
 
-<div class="p-1">
+<div class="p-1" [ngClass]="{'alert-delete-model':this.dashboardDeteleModelShow == true}">
   <div class="modal-header border-0 p-2">
 
   </div>
 
-  <div class="modal-body border-0 p-1">
+  <div class="modal-body border-0 p-1 " [ngClass]="{'alert-delete-title':this.dashboardDeteleModelShow == true}">
 
     <div class="container">
 
@@ -41,13 +41,13 @@ limitations under the License.
     </div>
   </div>
 
-  <div class="modal-footer border-0 p-1">
+  <div class="modal-footer border-0 p-1 " [ngClass]="{'alert-delete-content':this.dashboardDeteleModelShow == true}">
     <div class="container align-content-center">
       <div class="row">
         <div class="col-md-6 p-1">
           <span>
             <button type="button" class="btn dl-btn-dark btn-block" (click)="this.passBack()">
-              OK
+              {{"OK" | translate}}
             </button>
           </span>
         </div>
@@ -55,7 +55,7 @@ limitations under the License.
           <span>
             <button type="button" ngbAutofocus class="btn dl-btn-light btn-block"
               (click)="activeModal.close('Close click')">
-              Cancel
+              {{"Cancel" | translate}}
             </button>
           </span>
         </div>

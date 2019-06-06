@@ -589,3 +589,12 @@ input#switch:checked+.dl-slider:before {
   border-radius: 6px;
   padding: 4px 4px 4px 10px;
 }
+.p-1.alert-delete-model{
+  padding: 0.25rem 0.5rem;
+}
+.p-1 .alert-delete-title{
+  padding: 1.25rem 1.5rem!important;
+}
+.p-1 .alert-delete-content{
+  padding: 1.25rem 4.5rem!important;
+}
