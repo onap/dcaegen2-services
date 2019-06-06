@@ -46,6 +46,30 @@
       "revId": "bf2213319471b5c010a8e88679d92b5f26015349",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da58292a_1ba51beb",
+        "filename": "components/datalake-handler/admin/src/src/app/core/services/dashboard-api.service.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 5495
+      },
+      "writtenOn": "2019-06-06T09:58:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e75387b_62d7a979",
+      "range": {
+        "startLine": 111,
+        "startChar": 1,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "bf2213319471b5c010a8e88679d92b5f26015349",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
