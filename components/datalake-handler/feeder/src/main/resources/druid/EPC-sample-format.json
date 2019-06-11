@@ -1,0 +1,51 @@
+{
+	"event": {
+		"measurementsForVfScalingFields": {
+			"additionalMeasurements": [],
+			"measurementInterval": 10,
+			"astriMeasurement": {
+				"valuesAreSuspect": "true",
+				"astriDPHost": "DP5-10.213.1.143",
+				"astriDPMeasurementArray": [
+					{
+						"astriDPtx_pps": 0,
+						"astriDPrx_error_packets": 0,
+						"astriDPrx_throughput": 16619551392,
+						"astriInterface": "port1",
+						"astriDPtx_throughput": 0,
+						"astriDPrx_pps": 1675357,
+						"astriDPrx_missed_packets": 0
+					},
+					{
+						"astriDPtx_pps": 586325,
+						"astriDPrx_error_packets": 0,
+						"astriDPrx_throughput": 5984991232,
+						"astriInterface": "port0",
+						"astriDPtx_throughput": 309579600,
+						"astriDPrx_pps": 586304,
+						"astriDPrx_missed_packets": 0
+					}
+				]
+			},
+			"measurementsForVfScalingVersion": 2
+		},
+		"commonEventHeader": {
+			"eventId": "84891",
+			"reportingEntityId": "localhost",
+			"domain": "measurementsForVfScaling",
+			"lastEpochMicrosec": 1558757056,
+			"reportingEntityName": "localhost",
+			"sourceId": "DP5-10.213.1.143",
+			"eventType": "platform",
+			"sequence": 0,
+			"internalHeaderFields": {
+				"collectorTimeStamp": "Sat, 05 25 2019 04:04:16 UTC"
+			},
+			"priority": "Normal",
+			"sourceName": "DP5-10.213.1.143",
+			"eventName": "",
+			"version": 2,
+			"startEpochMicrosec": 1558757046
+		}
+	}
+}

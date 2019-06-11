@@ -1,0 +1,1131 @@
+{
+	"type": "kafka",
+	"dataSchema": {
+		"dataSource": "HW-aggs",
+		"parser": {
+			"type": "string",
+			"parseSpec": {
+				"format": "json",
+				"flattenSpec": {
+					"useFieldDiscovery": false,
+					"fields": [ 
+						{
+							"type": "path",
+							"name": "memoryUsageArray.memorySlabUnrecl",
+							"expr": "$.event.measurementsForVfScalingFields.memoryUsageArray_average.memorySlabUnrecl"
+						},
+						{
+							"type": "path",
+							"name": "memoryUsageArray.memorySlabRecl",
+							"expr": "$.event.measurementsForVfScalingFields.memoryUsageArray_average.memorySlabRecl"
+						},
+						{
+							"type": "path",
+							"name": "memoryUsageArray.memoryCached",
+							"expr": "$.event.measurementsForVfScalingFields.memoryUsageArray_average.memoryCached"
+						},
+						{
+							"type": "path",
+							"name": "memoryUsageArray.memoryBuffered",
+							"expr": "$.event.measurementsForVfScalingFields.memoryUsageArray_average.memoryBuffered"
+						},
+						{
+							"type": "path",
+							"name": "memoryUsageArray.memoryUsed",
+							"expr": "$.event.measurementsForVfScalingFields.memoryUsageArray_average.memoryUsed"
+						},
+						{
+							"type": "path",
+							"name": "memoryUsageArray.memoryFree",
+							"expr": "$.event.measurementsForVfScalingFields.memoryUsageArray_average.memoryFree"
+						},
+						{
+							"type": "path",
+							"name": "measurementsForVfScalingVersion",
+							"expr": "$.event.measurementsForVfScalingFields.measurementsForVfScalingVersion"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_count",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_count"
+						}, 
+						{
+							"type": "path",
+							"name": "cpuUsageArray_min.cpuUsageSystem",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_min.cpuUsageSystem"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_min.percentUsage",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_min.percentUsage"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_min.cpuWait",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_min.cpuWait"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_min.cpuIdentifier",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_min.cpuIdentifier"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_min.cpuUsageUser",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_min.cpuUsageUser"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_min.cpuIdle",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_min.cpuIdle"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_count",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_count"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_average.diskIoTimeLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_average.diskIoTimeLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_average.diskOctetsWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_average.diskOctetsWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_average.diskMergedReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_average.diskMergedReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_average.diskOpsWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_average.diskOpsWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_average.diskTimeWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_average.diskTimeWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_average.diskTimeReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_average.diskTimeReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_average.diskOctetsReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_average.diskOctetsReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_average.diskOpsReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_average.diskOpsReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_average.diskMergedWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_average.diskMergedWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_sum.cpuUsageSystem",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_sum.cpuUsageSystem"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_sum.percentUsage",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_sum.percentUsage"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_sum.cpuWait",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_sum.cpuWait"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_sum.cpuIdentifier",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_sum.cpuIdentifier"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_sum.cpuUsageUser",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_sum.cpuUsageUser"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_sum.cpuIdle",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_sum.cpuIdle"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_max.receivedOctetsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_max.receivedOctetsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_max.transmittedErrorPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_max.transmittedErrorPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_max.transmittedTotalPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_max.transmittedTotalPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_max.receivedErrorPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_max.receivedErrorPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_max.transmittedOctetsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_max.transmittedOctetsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_max.receivedDiscardedPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_max.receivedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_max.receivedTotalPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_max.receivedTotalPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_max.transmittedDiscardedPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_max.transmittedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_count",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_count"
+						}, 
+						{
+							"type": "path",
+							"name": "diskUsageArray_max.diskIoTimeLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_max.diskIoTimeLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_max.diskOctetsWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_max.diskOctetsWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_max.diskMergedReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_max.diskMergedReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_max.diskOpsWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_max.diskOpsWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_max.diskTimeWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_max.diskTimeWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_max.diskTimeReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_max.diskTimeReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_max.diskOctetsReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_max.diskOctetsReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_max.diskOpsReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_max.diskOpsReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_max.diskMergedWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_max.diskMergedWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "measurementInterval",
+							"expr": "$.event.measurementsForVfScalingFields.measurementInterval"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_average.cpuUsageSystem",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_average.cpuUsageSystem"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_average.percentUsage",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_average.percentUsage"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_average.cpuWait",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_average.cpuWait"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_average.cpuIdentifier",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_average.cpuIdentifier"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_average.cpuUsageUser",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_average.cpuUsageUser"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_average.cpuIdle",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_average.cpuIdle"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_sum.receivedOctetsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_sum.receivedOctetsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_sum.transmittedErrorPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_sum.transmittedErrorPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_sum.transmittedTotalPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_sum.transmittedTotalPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_sum.receivedErrorPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_sum.receivedErrorPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_sum.transmittedOctetsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_sum.transmittedOctetsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_sum.receivedDiscardedPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_sum.receivedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_sum.receivedTotalPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_sum.receivedTotalPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_sum.transmittedDiscardedPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_sum.transmittedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_average.receivedOctetsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_average.receivedOctetsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_average.transmittedErrorPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_average.transmittedErrorPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_average.transmittedTotalPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_average.transmittedTotalPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_average.receivedErrorPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_average.receivedErrorPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_average.transmittedOctetsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_average.transmittedOctetsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_average.receivedDiscardedPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_average.receivedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_average.receivedTotalPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_average.receivedTotalPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_average.transmittedDiscardedPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_average.transmittedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_min.diskIoTimeLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_min.diskIoTimeLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_min.diskOctetsWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_min.diskOctetsWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_min.diskMergedReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_min.diskMergedReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_min.diskOpsWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_min.diskOpsWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_min.diskTimeWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_min.diskTimeWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_min.diskTimeReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_min.diskTimeReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_min.diskOctetsReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_min.diskOctetsReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_min.diskOpsReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_min.diskOpsReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_min.diskMergedWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_min.diskMergedWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_min.receivedOctetsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_min.receivedOctetsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_min.transmittedErrorPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_min.transmittedErrorPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_min.transmittedTotalPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_min.transmittedTotalPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_min.receivedErrorPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_min.receivedErrorPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_min.transmittedOctetsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_min.transmittedOctetsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_min.receivedDiscardedPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_min.receivedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_min.receivedTotalPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_min.receivedTotalPacketsAccumulated"
+						},
+						{
+							"type": "path",
+							"name": "vNicPerformanceArray_min.transmittedDiscardedPacketsAccumulated",
+							"expr": "$.event.measurementsForVfScalingFields.vNicPerformanceArray_min.transmittedDiscardedPacketsAccumulated"
+						}, 
+						{
+							"type": "path",
+							"name": "cpuUsageArray_max.cpuUsageSystem",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_max.cpuUsageSystem"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_max.percentUsage",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_max.percentUsage"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_max.cpuWait",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_max.cpuWait"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_max.cpuIdentifier",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_max.cpuIdentifier"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_max.cpuUsageUser",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_max.cpuUsageUser"
+						},
+						{
+							"type": "path",
+							"name": "cpuUsageArray_max.cpuIdle",
+							"expr": "$.event.measurementsForVfScalingFields.cpuUsageArray_max.cpuIdle"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_sum.diskIoTimeLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_sum.diskIoTimeLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_sum.diskOctetsWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_sum.diskOctetsWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_sum.diskMergedReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_sum.diskMergedReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_sum.diskOpsWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_sum.diskOpsWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_sum.diskTimeWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_sum.diskTimeWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_sum.diskTimeReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_sum.diskTimeReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_sum.diskOctetsReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_sum.diskOctetsReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_sum.diskOpsReadLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_sum.diskOpsReadLast"
+						},
+						{
+							"type": "path",
+							"name": "diskUsageArray_sum.diskMergedWriteLast",
+							"expr": "$.event.measurementsForVfScalingFields.diskUsageArray_sum.diskMergedWriteLast"
+						},
+						{
+							"type": "path",
+							"name": "datalake_ts_",
+							"expr": "$.datalake_ts_"
+						},
+						{
+							"type": "path",
+							"name": "eventId",
+							"expr": "$.event.commonEventHeader.eventId"
+						},
+						{
+							"type": "path",
+							"name": "reportingEntityId",
+							"expr": "$.event.commonEventHeader.reportingEntityId"
+						},
+						{
+							"type": "path",
+							"name": "lastEpochMicrosec",
+							"expr": "$.event.commonEventHeader.lastEpochMicrosec"
+						},
+						{
+							"type": "path",
+							"name": "reportingEntityName",
+							"expr": "$.event.commonEventHeader.reportingEntityName"
+						},
+						{
+							"type": "path",
+							"name": "sourceId",
+							"expr": "$.event.commonEventHeader.sourceId"
+						},
+						{
+							"type": "path",
+							"name": "eventType",
+							"expr": "$.event.commonEventHeader.eventType"
+						},
+						{
+							"type": "path",
+							"name": "sequence",
+							"expr": "$.event.commonEventHeader.sequence"
+						},
+						{
+							"type": "path",
+							"name": "collectorTimeStamp",
+							"expr": "$.event.commonEventHeader.internalHeaderFields.collectorTimeStamp"
+						},
+						{
+							"type": "path",
+							"name": "priority",
+							"expr": "$.event.commonEventHeader.priority"
+						},
+						{
+							"type": "path",
+							"name": "sourceName",
+							"expr": "$.event.commonEventHeader.sourceName"
+						},
+						{
+							"type": "path",
+							"name": "eventName",
+							"expr": "$.event.commonEventHeader.eventName"
+						},
+						{
+							"type": "path",
+							"name": "startEpochMicrosec",
+							"expr": "$.event.commonEventHeader.startEpochMicrosec"
+						}
+					]
+				},
+				"timestampSpec": {
+					"column": "collectorTimeStamp",
+					"format": "EEE, MM dd yyyy HH:mm:ss z"
+				},
+				"dimensionsSpec": {
+					"dimensions": [],
+					"dimensionsExclusions": []
+				}
+			}
+		},
+		"metricsSpec": [{
+							"type": "doubleSum",
+							"name": "memoryUsageArray.memorySlabUnrecl",
+							"fieldName": "memoryUsageArray.memorySlabUnrecl"
+						},
+						{
+							"type": "doubleSum",
+							"name": "memoryUsageArray.memorySlabRecl",
+							"fieldName": "memoryUsageArray.memorySlabRecl"
+						},
+						{
+							"type": "doubleSum",
+							"name": "memoryUsageArray.memoryCached",
+							"fieldName": "memoryUsageArray.memoryCached"
+						},
+						{
+							"type": "doubleSum",
+							"name": "memoryUsageArray.memoryBuffered",
+							"fieldName": "memoryUsageArray.memoryBuffered"
+						},
+						{
+							"type": "doubleSum",
+							"name": "memoryUsageArray.memoryUsed",
+							"fieldName": "memoryUsageArray.memoryUsed"
+						},
+						{
+							"type": "doubleSum",
+							"name": "memoryUsageArray.memoryFree",
+							"fieldName": "memoryUsageArray.memoryFree"
+						}, 
+						{
+							"type": "longSum",
+							"name": "cpuUsageArray_count",
+							"fieldName": "cpuUsageArray_count"
+						}, 
+						{
+							"type": "doubleMin",
+							"name": "cpuUsageArray_min.cpuUsageSystem",
+							"fieldName": "cpuUsageArray_min.cpuUsageSystem"
+						},
+						{
+							"type": "doubleMin",
+							"name": "cpuUsageArray_min.percentUsage",
+							"fieldName": "cpuUsageArray_min.percentUsage"
+						},
+						{
+							"type": "doubleMin",
+							"name": "cpuUsageArray_min.cpuWait",
+							"fieldName": "cpuUsageArray_min.cpuWait"
+						},
+						{
+							"type": "doubleMin",
+							"name": "cpuUsageArray_min.cpuIdentifier",
+							"fieldName": "cpuUsageArray_min.cpuIdentifier"
+						},
+						{
+							"type": "doubleMin",
+							"name": "cpuUsageArray_min.cpuUsageUser",
+							"fieldName": "cpuUsageArray_min.cpuUsageUser"
+						},
+						{
+							"type": "doubleMin",
+							"name": "cpuUsageArray_min.cpuIdle",
+							"fieldName": "cpuUsageArray_min.cpuIdle"
+						},
+						{
+							"type": "longSum",
+							"name": "vNicPerformanceArray_count",
+							"fieldName": "vNicPerformanceArray_count"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_average.diskIoTimeLast",
+							"fieldName": "diskUsageArray_average.diskIoTimeLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_average.diskOctetsWriteLast",
+							"fieldName": "diskUsageArray_average.diskOctetsWriteLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_average.diskMergedReadLast",
+							"fieldName": "diskUsageArray_average.diskMergedReadLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_average.diskOpsWriteLast",
+							"fieldName": "diskUsageArray_average.diskOpsWriteLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_average.diskTimeWriteLast",
+							"fieldName": "diskUsageArray_average.diskTimeWriteLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_average.diskTimeReadLast",
+							"fieldName": "diskUsageArray_average.diskTimeReadLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_average.diskOctetsReadLast",
+							"fieldName": "diskUsageArray_average.diskOctetsReadLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_average.diskOpsReadLast",
+							"fieldName": "diskUsageArray_average.diskOpsReadLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_average.diskMergedWriteLast",
+							"fieldName": "diskUsageArray_average.diskMergedWriteLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_sum.cpuUsageSystem",
+							"fieldName": "cpuUsageArray_sum.cpuUsageSystem"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_sum.percentUsage",
+							"fieldName": "cpuUsageArray_sum.percentUsage"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_sum.cpuWait",
+							"fieldName": "cpuUsageArray_sum.cpuWait"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_sum.cpuIdentifier",
+							"fieldName": "cpuUsageArray_sum.cpuIdentifier"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_sum.cpuUsageUser",
+							"fieldName": "cpuUsageArray_sum.cpuUsageUser"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_sum.cpuIdle",
+							"fieldName": "cpuUsageArray_sum.cpuIdle"
+						},
+						{
+							"type": "doubleMax",
+							"name": "vNicPerformanceArray_max.receivedOctetsAccumulated",
+							"fieldName": "vNicPerformanceArray_max.receivedOctetsAccumulated"
+						},
+						{
+							"type": "doubleMax",
+							"name": "vNicPerformanceArray_max.transmittedErrorPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_max.transmittedErrorPacketsAccumulated"
+						},
+						{
+							"type": "doubleMax",
+							"name": "vNicPerformanceArray_max.transmittedTotalPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_max.transmittedTotalPacketsAccumulated"
+						},
+						{
+							"type": "doubleMax",
+							"name": "vNicPerformanceArray_max.receivedErrorPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_max.receivedErrorPacketsAccumulated"
+						},
+						{
+							"type": "doubleMax",
+							"name": "vNicPerformanceArray_max.transmittedOctetsAccumulated",
+							"fieldName": "vNicPerformanceArray_max.transmittedOctetsAccumulated"
+						},
+						{
+							"type": "doubleMax",
+							"name": "vNicPerformanceArray_max.receivedDiscardedPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_max.receivedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "doubleMax",
+							"name": "vNicPerformanceArray_max.receivedTotalPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_max.receivedTotalPacketsAccumulated"
+						},
+						{
+							"type": "doubleMax",
+							"name": "vNicPerformanceArray_max.transmittedDiscardedPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_max.transmittedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "longSum",
+							"name": "diskUsageArray_count",
+							"fieldName": "diskUsageArray_count"
+						}, 
+						{
+							"type": "doubleMax",
+							"name": "diskUsageArray_max.diskIoTimeLast",
+							"fieldName": "diskUsageArray_max.diskIoTimeLast"
+						},
+						{
+							"type": "doubleMax",
+							"name": "diskUsageArray_max.diskOctetsWriteLast",
+							"fieldName": "diskUsageArray_max.diskOctetsWriteLast"
+						},
+						{
+							"type": "doubleMax",
+							"name": "diskUsageArray_max.diskMergedReadLast",
+							"fieldName": "diskUsageArray_max.diskMergedReadLast"
+						},
+						{
+							"type": "doubleMax",
+							"name": "diskUsageArray_max.diskOpsWriteLast",
+							"fieldName": "diskUsageArray_max.diskOpsWriteLast"
+						},
+						{
+							"type": "doubleMax",
+							"name": "diskUsageArray_max.diskTimeWriteLast",
+							"fieldName": "diskUsageArray_max.diskTimeWriteLast"
+						},
+						{
+							"type": "doubleMax",
+							"name": "diskUsageArray_max.diskTimeReadLast",
+							"fieldName": "diskUsageArray_max.diskTimeReadLast"
+						},
+						{
+							"type": "doubleMax",
+							"name": "diskUsageArray_max.diskOctetsReadLast",
+							"fieldName": "diskUsageArray_max.diskOctetsReadLast"
+						},
+						{
+							"type": "doubleMax",
+							"name": "diskUsageArray_max.diskOpsReadLast",
+							"fieldName": "diskUsageArray_max.diskOpsReadLast"
+						},
+						{
+							"type": "doubleMax",
+							"name": "diskUsageArray_max.diskMergedWriteLast",
+							"fieldName": "diskUsageArray_max.diskMergedWriteLast"
+						}, 
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_average.cpuUsageSystem",
+							"fieldName": "cpuUsageArray_average.cpuUsageSystem"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_average.percentUsage",
+							"fieldName": "cpuUsageArray_average.percentUsage"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_average.cpuWait",
+							"fieldName": "cpuUsageArray_average.cpuWait"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_average.cpuIdentifier",
+							"fieldName": "cpuUsageArray_average.cpuIdentifier"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_average.cpuUsageUser",
+							"fieldName": "cpuUsageArray_average.cpuUsageUser"
+						},
+						{
+							"type": "doubleSum",
+							"name": "cpuUsageArray_average.cpuIdle",
+							"fieldName": "cpuUsageArray_average.cpuIdle"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_sum.receivedOctetsAccumulated",
+							"fieldName": "vNicPerformanceArray_sum.receivedOctetsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_sum.transmittedErrorPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_sum.transmittedErrorPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_sum.transmittedTotalPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_sum.transmittedTotalPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_sum.receivedErrorPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_sum.receivedErrorPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_sum.transmittedOctetsAccumulated",
+							"fieldName": "vNicPerformanceArray_sum.transmittedOctetsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_sum.receivedDiscardedPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_sum.receivedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_sum.receivedTotalPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_sum.receivedTotalPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_sum.transmittedDiscardedPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_sum.transmittedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_average.receivedOctetsAccumulated",
+							"fieldName": "vNicPerformanceArray_average.receivedOctetsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_average.transmittedErrorPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_average.transmittedErrorPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_average.transmittedTotalPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_average.transmittedTotalPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_average.receivedErrorPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_average.receivedErrorPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_average.transmittedOctetsAccumulated",
+							"fieldName": "vNicPerformanceArray_average.transmittedOctetsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_average.receivedDiscardedPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_average.receivedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_average.receivedTotalPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_average.receivedTotalPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_average.transmittedDiscardedPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_average.transmittedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "doubleMin",
+							"name": "diskUsageArray_min.diskIoTimeLast",
+							"fieldName": "diskUsageArray_min.diskIoTimeLast"
+						},
+						{
+							"type": "doubleMin",
+							"name": "diskUsageArray_min.diskOctetsWriteLast",
+							"fieldName": "diskUsageArray_min.diskOctetsWriteLast"
+						},
+						{
+							"type": "doubleMin",
+							"name": "diskUsageArray_min.diskMergedReadLast",
+							"fieldName": "diskUsageArray_min.diskMergedReadLast"
+						},
+						{
+							"type": "doubleMin",
+							"name": "diskUsageArray_min.diskOpsWriteLast",
+							"fieldName": "diskUsageArray_min.diskOpsWriteLast"
+						},
+						{
+							"type": "doubleMin",
+							"name": "diskUsageArray_min.diskTimeWriteLast",
+							"fieldName": "diskUsageArray_min.diskTimeWriteLast"
+						},
+						{
+							"type": "doubleMin",
+							"name": "diskUsageArray_min.diskTimeReadLast",
+							"fieldName": "diskUsageArray_min.diskTimeReadLast"
+						},
+						{
+							"type": "doubleMin",
+							"name": "diskUsageArray_min.diskOctetsReadLast",
+							"fieldName": "diskUsageArray_min.diskOctetsReadLast"
+						},
+						{
+							"type": "doubleMin",
+							"name": "diskUsageArray_min.diskOpsReadLast",
+							"fieldName": "diskUsageArray_min.diskOpsReadLast"
+						},
+						{
+							"type": "doubleMin",
+							"name": "diskUsageArray_min.diskMergedWriteLast",
+							"fieldName": "diskUsageArray_min.diskMergedWriteLast"
+						},
+						{
+							"type": "doubleMin",
+							"name": "vNicPerformanceArray_min.receivedOctetsAccumulated",
+							"fieldName": "vNicPerformanceArray_min.receivedOctetsAccumulated"
+						},
+						{
+							"type": "doubleMin",
+							"name": "vNicPerformanceArray_min.transmittedErrorPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_min.transmittedErrorPacketsAccumulated"
+						},
+						{
+							"type": "doubleMin",
+							"name": "vNicPerformanceArray_min.transmittedTotalPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_min.transmittedTotalPacketsAccumulated"
+						},
+						{
+							"type": "doubleMin",
+							"name": "vNicPerformanceArray_min.receivedErrorPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_min.receivedErrorPacketsAccumulated"
+						},
+						{
+							"type": "doubleSum",
+							"name": "vNicPerformanceArray_min.transmittedOctetsAccumulated",
+							"fieldName": "vNicPerformanceArray_min.transmittedOctetsAccumulated"
+						},
+						{
+							"type": "doubleMin",
+							"name": "vNicPerformanceArray_min.receivedDiscardedPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_min.receivedDiscardedPacketsAccumulated"
+						},
+						{
+							"type": "doubleMin",
+							"name": "vNicPerformanceArray_min.receivedTotalPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_min.receivedTotalPacketsAccumulated"
+						},
+						{
+							"type": "doubleMin",
+							"name": "vNicPerformanceArray_min.transmittedDiscardedPacketsAccumulated",
+							"fieldName": "vNicPerformanceArray_min.transmittedDiscardedPacketsAccumulated"
+						}, 
+						{
+							"type": "doubleMax",
+							"name": "cpuUsageArray_max.cpuUsageSystem",
+							"fieldName": "cpuUsageArray_max.cpuUsageSystem"
+						},
+						{
+							"type": "doubleMax",
+							"name": "cpuUsageArray_max.percentUsage",
+							"fieldName": "cpuUsageArray_max.percentUsage"
+						},
+						{
+							"type": "doubleMax",
+							"name": "cpuUsageArray_max.cpuWait",
+							"fieldName": "cpuUsageArray_max.cpuWait"
+						},
+						{
+							"type": "doubleMax",
+							"name": "cpuUsageArray_max.cpuIdentifier",
+							"fieldName": "cpuUsageArray_max.cpuIdentifier"
+						},
+						{
+							"type": "doubleMax",
+							"name": "cpuUsageArray_max.cpuUsageUser",
+							"fieldName": "cpuUsageArray_max.cpuUsageUser"
+						},
+						{
+							"type": "doubleMax",
+							"name": "cpuUsageArray_max.cpuIdle",
+							"fieldName": "cpuUsageArray_max.cpuIdle"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_sum.diskIoTimeLast",
+							"fieldName": "diskUsageArray_sum.diskIoTimeLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_sum.diskOctetsWriteLast",
+							"fieldName": "diskUsageArray_sum.diskOctetsWriteLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_sum.diskMergedReadLast",
+							"fieldName": "diskUsageArray_sum.diskMergedReadLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_sum.diskOpsWriteLast",
+							"fieldName": "diskUsageArray_sum.diskOpsWriteLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_sum.diskTimeWriteLast",
+							"fieldName": "diskUsageArray_sum.diskTimeWriteLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_sum.diskTimeReadLast",
+							"fieldName": "diskUsageArray_sum.diskTimeReadLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_sum.diskOctetsReadLast",
+							"fieldName": "diskUsageArray_sum.diskOctetsReadLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_sum.diskOpsReadLast",
+							"fieldName": "diskUsageArray_sum.diskOpsReadLast"
+						},
+						{
+							"type": "doubleSum",
+							"name": "diskUsageArray_sum.diskMergedWriteLast",
+							"fieldName": "diskUsageArray_sum.diskMergedWriteLast"
+						}],
+		"granularitySpec": {
+			"type": "uniform",
+			"segmentGranularity": "HOUR",
+			"queryGranularity": "MINUTE",
+			"rollup": true
+		}
+	},
+	"tuningConfig": {
+		"type": "kafka",
+		"reportParseExceptions": true
+	},
+	"ioConfig": {
+		"topic": "HW-aggs",
+		"replicas": 1,
+		"startDelay": "PT1S",
+		"taskDuration": "PT1H",
+		"completionTimeout": "PT30M",
+		"consumerProperties": {
+			"bootstrap.servers": "message-router-kafka:9092"
+		},
+		"useEarliestOffset": true
+	}
+}

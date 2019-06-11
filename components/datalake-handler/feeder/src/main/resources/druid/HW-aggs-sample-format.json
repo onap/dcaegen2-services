@@ -1,0 +1,179 @@
+{
+	"event": {
+		"commonEventHeader": {
+			"sourceId": "compute-2",
+			"startEpochMicrosec": 1558850006,
+			"eventId": "17252",
+			"reportingEntityId": "localhost",
+			"internalHeaderFields": {
+				"collectorTimeStamp": "Sun, 05 26 2019 05:53:36 UTC"
+			},
+			"eventType": "platform",
+			"priority": "Normal",
+			"version": 2,
+			"reportingEntityName": "localhost",
+			"sequence": 0,
+			"domain": "measurementsForVfScaling",
+			"lastEpochMicrosec": 1558850016,
+			"eventName": "",
+			"sourceName": "compute-2"
+		},
+		"measurementsForVfScalingFields": {
+			"memoryUsageArray_sum": {
+				"memorySlabUnrecl": 634188,
+				"memorySlabRecl": 486928,
+				"memoryCached": 7635224,
+				"memoryBuffered": 2100,
+				"memoryUsed": 4.6876648E7,
+				"memoryFree": 3.47144859648E11
+			},
+			"memoryUsageArray_average": {
+				"memorySlabUnrecl": 634188,
+				"memorySlabRecl": 486928,
+				"memoryCached": 7635224,
+				"memoryBuffered": 2100,
+				"memoryUsed": 4.6876648E7,
+				"memoryFree": 3.47144859648E11
+			},
+			"measurementsForVfScalingVersion": 2,
+			"cpuUsageArray_count": 88,
+			"memoryUsageArray_min": {
+				"memorySlabUnrecl": 634188,
+				"memorySlabRecl": 486928,
+				"memoryCached": 7635224,
+				"memoryBuffered": 2100,
+				"memoryUsed": 4.6876648E7,
+				"memoryFree": 3.47144859648E11
+			},
+			"cpuUsageArray_min": {
+				"cpuUsageSystem": 0,
+				"percentUsage": 0,
+				"cpuWait": 0,
+				"cpuIdentifier": 0,
+				"cpuUsageUser": 0,
+				"cpuIdle": 0
+			},
+			"vNicPerformanceArray_count": 51, 
+			"diskUsageArray_average": {
+				"diskIoTimeLast": 6.633306574873333,
+				"diskOctetsWriteLast": 1801687.4324733336,
+				"diskMergedReadLast": 0,
+				"diskOpsWriteLast": 336.9987602213334,
+				"diskTimeWriteLast": 1.4666613132266668,
+				"diskTimeReadLast": 0,
+				"diskOctetsReadLast": 0,
+				"diskOpsReadLast": 0,
+				"diskMergedWriteLast": 15.266605225866664
+			},
+			"cpuUsageArray_sum": {
+				"cpuUsageSystem": 31.499984875965808,
+				"percentUsage": 0,
+				"cpuWait": 0.0999987854677,
+				"cpuIdentifier": 3828,
+				"cpuUsageUser": 464.402795424227,
+				"cpuIdle": 31.499984875965808
+			},
+			"vNicPerformanceArray_max": {
+				"receivedOctetsAccumulated": 7420055.60296,
+				"transmittedErrorPacketsAccumulated": 4.9E-324,
+				"transmittedTotalPacketsAccumulated": 3891.02709722,
+				"receivedErrorPacketsAccumulated": 4.9E-324,
+				"transmittedOctetsAccumulated": 7030576.37061,
+				"receivedDiscardedPacketsAccumulated": 0.200002362849,
+				"receivedTotalPacketsAccumulated": 5127.16747474,
+				"transmittedDiscardedPacketsAccumulated": 0.200000846185
+			},
+			"diskUsageArray_count": 3,
+			"memoryUsageArray_max": {
+				"memorySlabUnrecl": 634188,
+				"memorySlabRecl": 486928,
+				"memoryCached": 7635224,
+				"memoryBuffered": 2100,
+				"memoryUsed": 4.6876648E7,
+				"memoryFree": 3.47144859648E11
+			}, 
+			"diskUsageArray_max": {
+				"diskIoTimeLast": 9.99995970463,
+				"diskOctetsWriteLast": 2702532.45109,
+				"diskMergedReadLast": 4.9E-324,
+				"diskOpsWriteLast": 506.098328814,
+				"diskTimeWriteLast": 2.19999284748,
+				"diskTimeReadLast": 4.9E-324,
+				"diskOctetsReadLast": 4.9E-324,
+				"diskOpsReadLast": 4.9E-324,
+				"diskMergedWriteLast": 22.8999080073
+			},
+			"measurementInterval": 10, 
+			"cpuUsageArray_average": {
+				"cpuUsageSystem": 0.35795437359052057,
+				"percentUsage": 0,
+				"cpuWait": 0.0011363498348602272,
+				"cpuIdentifier": 43.5,
+				"cpuUsageUser": 5.277304493457125,
+				"cpuIdle": 0.35795437359052057
+			},
+			"vNicPerformanceArray_sum": {
+				"receivedOctetsAccumulated": 2.497791331284713E7,
+				"transmittedErrorPacketsAccumulated": 0,
+				"transmittedTotalPacketsAccumulated": 5657.180629766652,
+				"receivedErrorPacketsAccumulated": 0,
+				"transmittedOctetsAccumulated": 2.497472905660059E7,
+				"receivedDiscardedPacketsAccumulated": 0.200002362849,
+				"receivedTotalPacketsAccumulated": 6834.521263097156,
+				"transmittedDiscardedPacketsAccumulated": 0.200000846185
+			},
+			"vNicPerformanceArray_average": {
+				"receivedOctetsAccumulated": 489763.0061342575,
+				"transmittedErrorPacketsAccumulated": 0,
+				"transmittedTotalPacketsAccumulated": 110.92511038758141,
+				"receivedErrorPacketsAccumulated": 0,
+				"transmittedOctetsAccumulated": 489700.56973726646,
+				"receivedDiscardedPacketsAccumulated": 0.003921614957823529,
+				"receivedTotalPacketsAccumulated": 134.01022084504228,
+				"transmittedDiscardedPacketsAccumulated": 0.003921585219313725
+			},
+			"diskUsageArray_min": {
+				"diskIoTimeLast": 0,
+				"diskOctetsWriteLast": 0,
+				"diskMergedReadLast": 0,
+				"diskOpsWriteLast": 0,
+				"diskTimeWriteLast": 0,
+				"diskTimeReadLast": 0,
+				"diskOctetsReadLast": 0,
+				"diskOpsReadLast": 0,
+				"diskMergedWriteLast": 0
+			},
+			"vNicPerformanceArray_min": {
+				"receivedOctetsAccumulated": 0,
+				"transmittedErrorPacketsAccumulated": 0,
+				"transmittedTotalPacketsAccumulated": 0,
+				"receivedErrorPacketsAccumulated": 0,
+				"transmittedOctetsAccumulated": 0,
+				"receivedDiscardedPacketsAccumulated": 0,
+				"receivedTotalPacketsAccumulated": 0,
+				"transmittedDiscardedPacketsAccumulated": 0
+			},
+			"memoryUsageArray_count": 1,
+			"cpuUsageArray_max": {
+				"cpuUsageSystem": 1.90000067932,
+				"percentUsage": 4.9E-324,
+				"cpuWait": 0.0999987854677,
+				"cpuIdentifier": 87,
+				"cpuUsageUser": 98.1005644149,
+				"cpuIdle": 1.90000067932
+			},
+			"diskUsageArray_sum": {
+				"diskIoTimeLast": 19.89991972462,
+				"diskOctetsWriteLast": 5405062.297420001,
+				"diskMergedReadLast": 0,
+				"diskOpsWriteLast": 1010.9962806640001,
+				"diskTimeWriteLast": 4.39998393968,
+				"diskTimeReadLast": 0,
+				"diskOctetsReadLast": 0,
+				"diskOpsReadLast": 0,
+				"diskMergedWriteLast": 45.799815677599995
+			}
+		}
+	},
+	"datalake_ts_": 1560149458487
+}
