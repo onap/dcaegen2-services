@@ -74,11 +74,11 @@ public class PortalControllerTest {
 
         PortalController testPortalController = new PortalController();
         setAccessPrivateFields(testPortalController);
-        Portal testPortal = filldomain();
+        Portal testPortal = fillDomain();
         when(portalRepository.findById("Kibana")).thenReturn(Optional.of(testPortal));
         PostReturnBody<PortalConfig> postPortal = testPortalController.updatePortal(testPortal.getPortalConfig(), mockBindingResult, httpServletResponse);
         assertEquals(postPortal.getStatusCode(), 200);
-        when(mockBindingResult.hasErrors()).thenReturn(true);
+        //when(mockBindingResult.hasErrors()).thenReturn(true);
 
     }
 
@@ -88,7 +88,7 @@ public class PortalControllerTest {
 
         PortalController testPortalController = new PortalController();
         setAccessPrivateFields(testPortalController);
-        Portal testPortal = filldomain();
+        Portal testPortal = fillDomain();
         List<Portal> portalList = new ArrayList<>();
         portalList.add(testPortal);
         when(portalRepository.findAll()).thenReturn(portalList);
@@ -108,7 +108,7 @@ public class PortalControllerTest {
     }
 
 
-    public Portal filldomain(){
+    public Portal fillDomain(){
         Portal portal = new Portal();
         portal.setName("Kibana");
         portal.setEnabled(true);
