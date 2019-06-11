@@ -88,30 +88,30 @@ insert into db (`name`,`host`,`login`) values ('HDFS','dlhdfs','dl');
 
 -- in production, default enabled should be off
 insert into `topic`(`name`,`enabled`,`save_raw`,`ttl`,`data_format`) values ('_DL_DEFAULT_',1,0,3650,'JSON');
+insert into `map_db_topic`(`db_name`,`topic_name`) select `name`, '_DL_DEFAULT_' from db;
+
+
 insert into `topic`(`name`,correlate_cleared_message,`enabled`, message_id_path,`data_format`) values ('unauthenticated.SEC_FAULT_OUTPUT',1,1,'/event/commonEventHeader/eventName,/event/commonEventHeader/reportingEntityName,/event/faultFields/specificProblem,/event/commonEventHeader/eventId','JSON');
+insert into `map_db_topic`(`db_name`,`topic_name`) select `name`, 'unauthenticated.SEC_FAULT_OUTPUT' from db;
+
 insert into `topic`(`name`,`enabled`, aggregate_array_path,flatten_array_path,`data_format`) 
 values ('unauthenticated.VES_MEASUREMENT_OUTPUT',1,
-'/event/measurementsForVfScalingFields/diskUsageArray,/event/measurementsForVfScalingFields/cpuUsageArray,/event/measurementsForVfScalingFields/vNicPerformanceArray',
+'/event/measurementsForVfScalingFields/memoryUsageArray,/event/measurementsForVfScalingFields/diskUsageArray,/event/measurementsForVfScalingFields/cpuUsageArray,/event/measurementsForVfScalingFields/vNicPerformanceArray',
 '/event/measurementsForVfScalingFields/astriMeasurement/astriDPMeasurementArray/astriInterface',
 'JSON');
+insert into `map_db_topic`(`db_name`,`topic_name`) select `name`, 'unauthenticated.VES_MEASUREMENT_OUTPUT' from db;
 
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('Couchbase','_DL_DEFAULT_');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('Elasticsearch','_DL_DEFAULT_');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','_DL_DEFAULT_');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('Druid','_DL_DEFAULT_');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('HDFS','_DL_DEFAULT_');
+insert into `topic`(`name`,`enabled`,  flatten_array_path,`data_format`) 
+values ('EPC',1, 
+'/event/measurementsForVfScalingFields/astriMeasurement/astriDPMeasurementArray/astriInterface',
+'JSON');
+insert into `map_db_topic`(`db_name`,`topic_name`) select `name`, 'EPC' from db;
 
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('Couchbase','unauthenticated.SEC_FAULT_OUTPUT');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('Elasticsearch','unauthenticated.SEC_FAULT_OUTPUT');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','unauthenticated.SEC_FAULT_OUTPUT');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('Druid','unauthenticated.SEC_FAULT_OUTPUT');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('HDFS','unauthenticated.SEC_FAULT_OUTPUT');
-
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('Couchbase','unauthenticated.VES_MEASUREMENT_OUTPUT');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('Elasticsearch','unauthenticated.VES_MEASUREMENT_OUTPUT');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('MongoDB','unauthenticated.VES_MEASUREMENT_OUTPUT');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('Druid','unauthenticated.VES_MEASUREMENT_OUTPUT');
-insert into `map_db_topic`(`db_name`,`topic_name`) values ('HDFS','unauthenticated.VES_MEASUREMENT_OUTPUT');
+insert into `topic`(`name`,`enabled`, aggregate_array_path,`data_format`) 
+values ('HW',1,
+'/event/measurementsForVfScalingFields/memoryUsageArray,/event/measurementsForVfScalingFields/diskUsageArray,/event/measurementsForVfScalingFields/cpuUsageArray,/event/measurementsForVfScalingFields/vNicPerformanceArray',
+'JSON');
+insert into `map_db_topic`(`db_name`,`topic_name`) select `name`, 'HW' from db;
 
 insert into portal (`name`,`related_db`, host) values ('Kibana', 'Elasticsearch', 'dl_es');
 insert into portal (`name`,`related_db`) values ('Elasticsearch', 'Elasticsearch');
@@ -121,5 +121,5 @@ insert into design_type (`name`,`portal`) values ('Kibana Dashboard', 'Kibana');
 insert into design_type (`name`,`portal`) values ('Kibana Search', 'Kibana');
 insert into design_type (`name`,`portal`) values ('Kibana Visualization', 'Kibana');
 insert into design_type (`name`,`portal`) values ('Elasticsearch Field Mapping Template', 'Elasticsearch');
-insert into design_type (`name`,`portal`) values ('Druid Kafka Indexing Service Supervisor', 'Druid');
+insert into design_type (`name`,`portal`) values ('Druid Kafka Indexing Service Supervisor Spec', 'Druid');
 

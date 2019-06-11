@@ -1,0 +1,247 @@
+{
+	"type": "kafka",
+	"dataSchema": {
+		"dataSource": "EPC",
+		"parser": {
+			"type": "string",
+			"parseSpec": {
+				"format": "json",
+				"flattenSpec": {
+					"useFieldDiscovery": false,
+					"fields": [
+						{
+							"type": "path",
+							"name": "astriDPHost",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPHost"
+						},
+						{
+							"type": "path",
+							"name": "port1-astriDPtx_pps",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[0].astriDPtx_pps"
+						},
+						{
+							"type": "path",
+							"name": "port1-astriDPrx_error_packets",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[0].astriDPrx_error_packets"
+						},
+						{
+							"type": "path",
+							"name": "port1-astriDPrx_throughput",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[0].astriDPrx_throughput"
+						},
+						{
+							"type": "path",
+							"name": "port1-astriInterface",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[0].astriInterface"
+						},
+						{
+							"type": "path",
+							"name": "port1-astriDPtx_throughput",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[0].astriDPtx_throughput"
+						},
+						{
+							"type": "path",
+							"name": "port1-astriDPrx_pps",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[0].astriDPrx_pps"
+						},
+						{
+							"type": "path",
+							"name": "port1-astriDPrx_missed_packets",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[0].astriDPrx_missed_packets"
+						},
+						{
+							"type": "path",
+							"name": "port0-astriDPtx_pps",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[1].astriDPtx_pps"
+						},
+						{
+							"type": "path",
+							"name": "port0-astriDPrx_error_packets",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[1].astriDPrx_error_packets"
+						},
+						{
+							"type": "path",
+							"name": "port0-astriDPrx_throughput",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[1].astriDPrx_throughput"
+						},
+						{
+							"type": "path",
+							"name": "port0-astriInterface",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[1].astriInterface"
+						},
+						{
+							"type": "path",
+							"name": "port0-astriDPtx_throughput",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[1].astriDPtx_throughput"
+						},
+						{
+							"type": "path",
+							"name": "port0-astriDPrx_pps",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[1].astriDPrx_pps"
+						},
+						{
+							"type": "path",
+							"name": "port0-astriDPrx_missed_packets",
+							"expr": "$.event.measurementsForVfScalingFields.astriMeasurement.astriDPMeasurementArray[1].astriDPrx_missed_packets"
+						},
+						{
+							"type": "path",
+							"name": "eventId",
+							"expr": "$.event.commonEventHeader.eventId"
+						},
+						{
+							"type": "path",
+							"name": "reportingEntityId",
+							"expr": "$.event.commonEventHeader.reportingEntityId"
+						},
+						{
+							"type": "path",
+							"name": "lastEpochMicrosec",
+							"expr": "$.event.commonEventHeader.lastEpochMicrosec"
+						},
+						{
+							"type": "path",
+							"name": "reportingEntityName",
+							"expr": "$.event.commonEventHeader.reportingEntityName"
+						},
+						{
+							"type": "path",
+							"name": "sourceId",
+							"expr": "$.event.commonEventHeader.sourceId"
+						},
+						{
+							"type": "path",
+							"name": "eventType",
+							"expr": "$.event.commonEventHeader.eventType"
+						},
+						{
+							"type": "path",
+							"name": "sequence",
+							"expr": "$.event.commonEventHeader.sequence"
+						},
+						{
+							"type": "path",
+							"name": "collectorTimeStamp",
+							"expr": "$.event.commonEventHeader.internalHeaderFields.collectorTimeStamp"
+						},
+						{
+							"type": "path",
+							"name": "priority",
+							"expr": "$.event.commonEventHeader.priority"
+						},
+						{
+							"type": "path",
+							"name": "sourceName",
+							"expr": "$.event.commonEventHeader.sourceName"
+						},
+						{
+							"type": "path",
+							"name": "eventName",
+							"expr": "$.event.commonEventHeader.eventName"
+						},
+						{
+							"type": "path",
+							"name": "startEpochMicrosec",
+							"expr": "$.event.commonEventHeader.startEpochMicrosec"
+						}
+					]
+				},
+				"timestampSpec": {
+					"column": "collectorTimeStamp",
+					"format": "EEE, MM dd yyyy HH:mm:ss z"
+				},
+				"dimensionsSpec": {
+					"dimensions": [],
+					"dimensionsExclusions": []
+				}
+			}
+		},
+		"metricsSpec": [
+			{
+				"type": "count",
+				"name": "count"
+			},
+			{
+				"type": "longSum",
+				"name": "port0-astriDPtx_pps",
+				"fieldName": "port0-astriDPtx_pps"
+			},
+			{
+				"type": "longSum",
+				"name": "port0-astriDPrx_error_packets",
+				"fieldName": "port0-astriDPrx_error_packets"
+			},
+			{
+				"type": "longSum",
+				"name": "port0-astriDPrx_throughput",
+				"fieldName": "port0-astriDPrx_throughput"
+			},
+			{
+				"type": "longSum",
+				"name": "port0-astriDPtx_throughput",
+				"fieldName": "port0-astriDPtx_throughput"
+			},
+			{
+				"type": "longSum",
+				"name": "port0-astriDPrx_pps",
+				"fieldName": "port0-astriDPrx_pps"
+			},
+			{
+				"type": "longSum",
+				"name": "port0-astriDPrx_missed_packets",
+				"fieldName": "port0-astriDPrx_missed_packets"
+			},
+			{
+				"type": "longSum",
+				"name": "port1-astriDPtx_pps",
+				"fieldName": "port1-astriDPtx_pps"
+			},
+			{
+				"type": "longSum",
+				"name": "port1-astriDPrx_error_packets",
+				"fieldName": "port1-astriDPrx_error_packets"
+			},
+			{
+				"type": "longSum",
+				"name": "port1-astriDPrx_throughput",
+				"fieldName": "port1-astriDPrx_throughput"
+			},
+			{
+				"type": "longSum",
+				"name": "port1-astriDPtx_throughput",
+				"fieldName": "port1-astriDPtx_throughput"
+			},
+			{
+				"type": "longSum",
+				"name": "port1-astriDPrx_pps",
+				"fieldName": "port1-astriDPrx_pps"
+			},
+			{
+				"type": "longSum",
+				"name": "port1-astriDPrx_missed_packets",
+				"fieldName": "port1-astriDPrx_missed_packets"
+			}
+		],
+		"granularitySpec": {
+			"type": "uniform",
+			"segmentGranularity": "HOUR",
+			"queryGranularity": "MINUTE",
+			"rollup": true
+		}
+	},
+	"tuningConfig": {
+		"type": "kafka",
+		"reportParseExceptions": true
+	},
+	"ioConfig": {
+		"topic": "EPC",
+		"replicas": 1,
+		"startDelay": "PT1S",
+		"taskDuration": "PT1H",
+		"completionTimeout": "PT30M",
+		"consumerProperties": {
+			"bootstrap.servers": "message-router-kafka:9092"
+		},
+		"useEarliestOffset": true
+	}
+}
