@@ -23,20 +23,24 @@
 
   <!-- Database list -->
   <div *ngFor="let db of this.dbs;let thisIndex=index" class="col-sm-2 db-block">
-    <div class="db-panel" style="height: 100%">
-      <div class="d-flex flex-column align-content-center">
+    <div class="db-panel"
+         style="height: 100%;cursor: pointer"
+         (click)="this.openDashboardModal(thisIndex)"
+          [ngClass]="{'deleteDisplay':db.enabled== false}"
+    >
+      <div class="d-flex flex-column align-content-center" style="margin-top: 1.5rem;">
         <div class="ml-auto dropdown db-dropdown mr-2" data-boundary="window">
-          <a class="badge badge-light db-dropdown" data-toggle="dropdown" style="cursor: pointer">
-            <i class="fas fa-ellipsis-h fa-2x db-config-icon"></i>
-          </a>
-          <div class="dropdown-menu action-btn">
-            <button class="dropdown-item" type="button" (click)="this.openDashboardModal(thisIndex)">
-              {{ 'EDIT' | translate }}
-            </button>
-            <button class="dropdown-item" type="button" (click)="this.deleteDashboard(thisIndex)">
-              {{ 'DELETE' | translate }}
-            </button>
-          </div>
+          <!--<a class="badge badge-light db-dropdown" data-toggle="dropdown" style="cursor: pointer">-->
+            <!--<i class="fas fa-ellipsis-h fa-2x db-config-icon"></i>-->
+          <!--</a>-->
+          <!--<div class="dropdown-menu action-btn">-->
+            <!--<button class="dropdown-item" type="button" (click)="this.openDashboardModal(thisIndex)">-->
+              <!--{{ 'EDIT' | translate }}-->
+            <!--</button>-->
+            <!--<button class="dropdown-item" type="button" (click)="this.deleteDashboard(thisIndex)">-->
+              <!--{{ 'DELETE' | translate }}-->
+            <!--</button>-->
+          <!--</div>-->
         </div>
 
         <div>
@@ -197,46 +201,12 @@ M33x3Llz5s+fLxFeCIL4T4ABAKZ9PUaesuDFAAAAAElFTkSuQmCC" transform="matrix(1 0 0 1 
           <div class="mt-auto">
             <i class="fa fa-check-circle" aria-hidden="true"
                [ngClass]="{'truecheck':db.enabled == true,'falsecheck':db.enabled == false}"></i>
-            {{ db.host }}
+            {{ db.name }}
           </div>
         </div>
 
       </div>
     </div>
   </div>
-
-  <!-- Add -->
-  <div class="col-sm-2 db-block">
-    <div class="db-panel">
-      <div class="d-flex flex-column align-content-center">
-        <div class="ml-auto dropdown db-dropdown mr-2" style="visibility: hidden;" data-boundary="window">
-          <a class="badge badge-light db-dropdown" data-toggle="dropdown">
-            <i class="fas fa-ellipsis-h fa-2x db-config-icon"></i>
-          </a>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" type="button">
-              <i class="fas fa-times db-config-icon"></i> Delete
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <button type="button" class="btn" (click)="this.openCreateModal()">
-            <div class="align-self-center" style="height: 130px;">
-              <div style="width:100px; height:100px;">
-                <i class="fas fa-plus fa-3x pt-4 dl-icon-enable"></i>
-              </div>
-            </div>
-
-            <div class="mt-auto" style="visibility: hidden;">
-              add
-            </div>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
 </div>
 

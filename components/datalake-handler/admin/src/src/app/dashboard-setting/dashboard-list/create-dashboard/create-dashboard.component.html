@@ -20,7 +20,7 @@
       <div class="row">
         <div class="col-md-12">
           <label class="dl-h3" *ngIf="this.tempDb.name==undefined">{{ "NewDashboard" | translate}}</label>
-          <label class="dl-h3" style="letter-spacing: 0" *ngIf="this.tempDb.name!=undefined">{{this.tempDb.name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{tempDbNameTitle}}</label>
+          <label class="dl-h3" style="letter-spacing: 0" *ngIf="this.tempDb.name!=undefined">{{this.tempDb.name}}</label>
         </div>
       </div>
 
@@ -37,14 +37,10 @@
 
       <div class="form-group">
         <div class="row">
-          <div class="col-md-3"><label class="dl-emphasis1" for="inputBucket">{{ "DestinationType" | translate}}</label></div>
+          <div class="col-md-3"><label class="dl-emphasis1" for="inputBucket">{{ "NAME" | translate}}</label></div>
           <div class="col-md-4">
-            <select #t_dataDashboardName  class="custom-select dl-input-text" id="inputBucket" *ngIf="this.tempDb.name ==undefined" >
-              <option *ngFor="let item of nameArr" [selected]="item==this.tempDb.name">
-                {{ item }}</option>
-            </select>
-            <select #t_dataDashboardName  class="custom-select dl-input-text select-disabled"  *ngIf="this.tempDb.name !=undefined" disabled >
-              <option [selected]="this.tempDb.name==this.tempDb.name">
+            <select #t_dataDashboardName  class="custom-select dl-input-text select-disabled"  *ngIf="this.tempDb.name !=undefined" disabled="disabled" id="inputBucket" style="background: rgba(233, 236, 239, 0.5)">
+              <option [selected]="this.tempDb.name==this.tempDb.name" >
                 {{ this.tempDb.name }}</option>
             </select>
           </div>
@@ -56,7 +52,7 @@
           <div class="col-md-3"><label class="dl-emphasis1" for="inputHost">{{ "HOST" | translate}}</label></div>
           <div class="col-md-4">
             <input [(ngModel)]="this.tempDb.host" class="form-control dl-input-text" id="inputHost" type="text"
-                   placeholder="{{ 'InputValue' | translate}}">
+                   placeholder="{{ 'InputValue' | translate}}" [disabled]="!this.tempDb.enabled" [attr.disabled]='!this.tempDb.enabled?true:undefined'>
           </div>
         </div>
       </div>
@@ -66,7 +62,7 @@
           <div class="col-md-3"><label class="dl-emphasis1" for="inputPort">{{ "PORT" | translate}}</label></div>
           <div class="col-md-3">
             <input [(ngModel)]="this.tempDb.port" class="form-control dl-input-text" id="inputPort" type="text"
-                   placeholder="{{ 'InputValue' | translate}}" (input)="this.adminService.onKeyPressNumber($event)">
+                   placeholder="{{ 'InputValue' | translate}}" (input)="this.adminService.onKeyPressNumber($event)" [disabled]="!this.tempDb.enabled" [attr.disabled]='!this.tempDb.enabled?true:undefined'>
           </div>
         </div>
       </div>
@@ -77,14 +73,34 @@
                                        for="inputUserName">{{ "AUTHENTICATION" | translate}}</label></div>
           <div class="col-sm-4">
             <input [(ngModel)]="this.tempDb.login" class="form-control dl-input-text" id="inputUserName" type="text"
-                   placeholder="{{ 'Username' | translate}}">
+                   placeholder="{{ 'Username' | translate}}" [disabled]="!this.tempDb.enabled" [attr.disabled]='!this.tempDb.enabled?true:undefined'>
           </div>
           <div class="col-sm-4">
             <input [(ngModel)]="this.tempDb.pass" class="form-control dl-input-text" id="inputPass" type="password"
-                   placeholder=" {{ 'Password' | translate}}">
+                   placeholder=" {{ 'Password' | translate}}" [disabled]="!this.tempDb.enabled" [attr.disabled]='!this.tempDb.enabled?true:undefined'>
           </div>
         </div>
       </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3"><label class="dl-emphasis1" for="inputEnabled">{{ "Enabled" | translate}}</label></div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text dl-input-chk-label">
+                  <input id="chkSsl" [(ngModel)]="this.tempDb.enabled" type="checkbox" />
+                  <span class="dl-input-checkmark"></span>
+                </label>
+              </div>
+              <label class="form-control dl-input-chk" for="chkSsl">
+                Enable
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 

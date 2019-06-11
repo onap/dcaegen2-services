@@ -45,7 +45,8 @@ export class DashboardListComponent implements OnInit {
   tempDbDetail: Dashboard;
   selectedLangs = sessionStorage.getItem("selectedLang");
   dashboardDeteleModelShow = true;
-  nameArr = [];
+
+  // nameArr = [];
 
   constructor(
     private adminService: AdminService,
@@ -56,7 +57,7 @@ export class DashboardListComponent implements OnInit {
   ) {
     // Set page title
     this.adminService.setTitle("SIDEBAR.DASHBOARDLIST");
-    this.getName();
+    // this.getName();
     this.initData().then(data => {
       this.initDbsList(this.dbList).then(data => {
         this.dbs = data;
@@ -81,7 +82,6 @@ export class DashboardListComponent implements OnInit {
   getDbList() {
     var data: any;
     data = this.dashboardApiService.getDashboardList().toPromise();
-
     return data;
   }
 
@@ -105,52 +105,29 @@ export class DashboardListComponent implements OnInit {
     return d;
   }
 
-
-  openCreateModal() {
-    let thisIndex = -1;
-    this.openDashboardModal(thisIndex);
-  }
-
   openDashboardModal(thisIndex: number) {
     var modalRef, index;
     this.selectedLangs = sessionStorage.getItem("selectedLang");
     let tips = "";
-
-
     index = thisIndex;
     console.log(index, "index,add or edit");
-    this.tempDbDetail = new Dashboard();
-    if (index != -1) {
-      modalRef = this.modalService.open(CreateDashboardComponent, {
-        size: "lg",
-        centered: true
-      });
-      modalRef.componentInstance.dashboard = this.dbs[index];
-    } else {
-      if(this.nameArr.length == 0 && this.dbs.length>0){
-        console.log("All types have been created, you cannot create existing types again.");
-         return false;
-      }else {
-        modalRef = this.modalService.open(CreateDashboardComponent, {
-          size: "lg",
-          centered: true
-        });
-        modalRef.componentInstance.dashboard = this.tempDbDetail;
-      }
-
-    }
-    modalRef.componentInstance.nameArr = this.nameArr;
+    modalRef = this.modalService.open(CreateDashboardComponent, {
+      size: "lg",
+      centered: true
+    });
+    modalRef.componentInstance.dashboard = this.dbs[index];
     modalRef.componentInstance.passEntry.subscribe(receiveEntry => {
-      this.tempDbDetail = receiveEntry;
-      let host = this.tempDbDetail.host;
+      this.dbs[index] = receiveEntry;
+      let host = this.dbs[index].host;
+      let enabled = this.dbs[index].enabled;
       console.log(receiveEntry);
-      if (index != -1) {
+      if (enabled == true) {
         // Db name found, to update db
-        this.dashboardApiService.upadteDashboard(this.tempDbDetail).subscribe(
+        this.dashboardApiService.createUpadteDashboard(this.dbs[index]).subscribe(
           res => {
             console.log(res);
             if (res.statusCode == 200) {
-              this.dbs[index] = this.tempDbDetail;
+              this.initData();
               if (this.selectedLangs == "en-us") {
                 tips = "Success updated."
               } else if (this.selectedLangs == "zh-hans") {
@@ -177,30 +154,27 @@ export class DashboardListComponent implements OnInit {
           }
         );
       } else {
-        // Db name not found, to insert db
-        this.dashboardApiService.addDashboard(this.tempDbDetail).subscribe(
+        this.dashboardApiService.deleteDashboard(this.dbs[thisIndex]).subscribe(
           res => {
             console.log(res);
-            let tips = "";
             if (res.statusCode == 200) {
-              this.dbs.push(this.tempDbDetail);
-              this.dbs = [...this.dbs];
-              this.getName();
+              this.initData();
               if (this.selectedLangs == "en-us") {
-                tips = "Success inserted."
+                tips = "Success deleted."
               } else if (this.selectedLangs == "zh-hans") {
-                tips = "新增成功。"
+                tips = "删除成功。"
               } else if (this.selectedLangs == "zh-hant") {
-                tips = "新增成功。"
+                tips = "刪除成功。"
               }
               this.notificationService.success('"' + host + '"' + tips);
-            }else {
+            } else {
+              this.dbs[thisIndex].enabled = true;
               if (this.selectedLangs == "en-us") {
-                tips = "Fail inserted."
+                tips = "Fail deleted."
               } else if (this.selectedLangs == "zh-hans") {
-                tips = "新增失败。"
+                tips = "删除失败。"
               } else if (this.selectedLangs == "zh-hant") {
-                tips = "新增失敗。"
+                tips = "刪除失敗。"
               }
               this.notificationService.error('"' + host + '"' + tips);
             }
@@ -211,73 +185,9 @@ export class DashboardListComponent implements OnInit {
             modalRef.close();
           }
         );
+
       }
+
     });
   }
-
-  deleteDashboard(thisIndex: number) {
-    this.selectedLangs = sessionStorage.getItem("selectedLang");
-    const index = thisIndex, host = this.dbs[thisIndex]["host"];
-    let tips = "";
-    if (this.selectedLangs == "en-us") {
-      tips = "Are you sure you want to delete ";
-    } else if (this.selectedLangs == "zh-hans") {
-      tips = "您确定您要删除";
-    } else if (this.selectedLangs == "zh-hant") {
-      tips = "您確定您要刪除";
-    }
-    const modalRef = this.modalService.open(AlertComponent, {
-      // size: "sm",
-      centered: true
-    });
-    modalRef.componentInstance.dashboardDeteleModelShow = this.dashboardDeteleModelShow;
-    modalRef.componentInstance.message =
-      tips + '"'+host + '"' + ' ?';
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      // Delete database
-      this.dbs[thisIndex].enabled = false;
-      this.dashboardApiService.deleteDashboard(this.dbs[thisIndex]).subscribe(
-        res => {
-          console.log(res);
-          if (res.statusCode == 200) {
-            // this.dbs[index].enabled = false;
-            this.dbs.splice(index, 1);
-            this.getName();
-            if (this.selectedLangs == "en-us") {
-              tips = "Success deleted."
-            } else if (this.selectedLangs == "zh-hans") {
-              tips = "删除成功。"
-            } else if (this.selectedLangs == "zh-hant") {
-              tips = "刪除成功。"
-            }
-            this.notificationService.success('"' + host + '"' + tips);
-          } else {
-            this.dbs[thisIndex].enabled = true;
-            if (this.selectedLangs == "en-us") {
-              tips = "Fail deleted."
-            } else if (this.selectedLangs == "zh-hans") {
-              tips = "删除失败。"
-            } else if (this.selectedLangs == "zh-hant") {
-              tips = "刪除失敗。"
-            }
-            this.notificationService.error('"' + host + '"' + tips);
-          }
-          modalRef.close();
-        },
-        err => {
-          this.notificationService.error(err);
-          modalRef.close();
-        }
-      );
-    });
-  }
-
-  getName(){
-    this.dashboardApiService.getDashboardName().subscribe(data => {
-      this.nameArr = data;
-      console.log(this.nameArr,"this.nameArr111");
-    });
-    console.log(this.nameArr,"this.nameArr222");
-  }
-
 }

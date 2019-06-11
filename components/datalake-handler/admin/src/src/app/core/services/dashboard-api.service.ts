@@ -72,20 +72,9 @@ export class DashboardApiService {
     );
   }
 
-  addDashboard(d: Dashboard): Observable<any> {
-    console.log(d,"add dashboard body");
-    let url = prefix + "portals"; //onilne
-    return this.http
-      .put<any>(url, d)
-      .pipe(
-        retry(1),
-        tap(_ => console.log(`add db name=${d.name}`)),
-        catchError(this.handleError)
-      );
-  }
-
-  upadteDashboard(d: Dashboard): Observable<any> {
-    console.log(d,"add dashboard body");
+  createUpadteDashboard(d: Dashboard): Observable<any> {
+    console.log(d,"add or update dashboard body");
+    // let url = prefix +"/dashboard-list/successCreteOrEditDemo.json"; //local
     let url = prefix + "portals";//onilne
     return this.http
       .put(url, d)
@@ -108,14 +97,15 @@ export class DashboardApiService {
       );
   }
 
-  getDashboardName(): Observable<any> {
-    let url = prefix + "portals/getNames?enabled=false"; //onilne
-    return this.http.get(url).pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
-  }
+  // getDashboardName(): Observable<any> {
+  //   // let url = prefix +"/dashboard-list/getDashboardName.json"; //local
+  //   let url = prefix + "portals/getNames?enabled=false"; //onilne
+  //   return this.http.get(url).pipe(
+  //     retry(1),
+  //     map(this.extractData),
+  //     catchError(this.handleError)
+  //   );
+  // }
 
   /*
     Template
