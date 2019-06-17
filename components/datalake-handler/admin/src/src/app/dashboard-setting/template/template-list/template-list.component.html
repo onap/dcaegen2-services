@@ -42,20 +42,20 @@
   <!-- datatable -->
   <div class="row">
     <div class="col-md-12">
-      <ngx-datatable #mydatatable class="bootstrap" [rows]="template_list" [columnMode]="'force'" [headerHeight]="40"
+      <ngx-datatable #mytemlate class="bootstrap" [rows]="template_list" [columnMode]="'force'" [headerHeight]="40"
         [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-        [loadingIndicator]="loadingIndicator" [messages]="mesgNoData" [limit]="10">
+        [loadingIndicator]="loadingIndicator" [messages]="mesgNoData" [limit]="10"  (activate)="onActivate($event)">
 
-        <ngx-datatable-column [width]="40" name="{{ 'No' | translate }}" prop="id"
-          headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-          <div>
-            <ng-template let-row="row">
-              <span>{{ row.id }}</span>
-            </ng-template>
-          </div>
-        </ngx-datatable-column>
+        <!--<ngx-datatable-column [width]="40" name="{{ 'No' | translate }}" prop="id"-->
+          <!--headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">-->
+          <!--<div>-->
+            <!--<ng-template let-row="row">-->
+              <!--<span>{{ row.id }}</span>-->
+            <!--</ng-template>-->
+          <!--</div>-->
+        <!--</ngx-datatable-column>-->
 
-        <ngx-datatable-column [width]="200" name="{{ 'TEMPLATE_NAME' | translate }}" prop="name">
+        <ngx-datatable-column [width]="100" name="{{ 'TEMPLATE_NAME' | translate }}" prop="name" headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
           <ng-template let-row="row" ngx-datatable-cell-template>
             <span>{{ row.name }}</span>
           </ng-template>
@@ -413,7 +413,7 @@
           headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
           <div>
             <ng-template let-row="row" ngx-datatable-cell-template>
-              <span  (click)="this.deployTemplate(row.id);"  class="dl-btn-dark">&nbsp;&nbsp;{{ 'DEPLOY' | translate }}&nbsp;&nbsp;</span>
+              <span  (click)="this.deployTemplate(row.id);"  class="dl-btn-dark" style="cursor: pointer">&nbsp;&nbsp;{{ 'DEPLOY' | translate }}&nbsp;&nbsp;</span>
             </ng-template>
           </div>
         </ngx-datatable-column>
@@ -422,11 +422,6 @@
             <span>
               <button class="btn action-icon-setting" (click)="this.deleteTemplateModel(row.id);">
                 <i class="fas fa-trash-alt fa-xs"></i>
-              </button>
-            </span>
-            <span>
-              <button class="btn action-icon-setting" (click)="this.editTemplateModal(row.id);">
-                <i class="fas fa-cog fa-xs"></i>
               </button>
             </span>
           </ng-template>

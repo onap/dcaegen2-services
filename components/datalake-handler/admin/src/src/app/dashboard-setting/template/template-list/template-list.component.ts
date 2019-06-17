@@ -51,7 +51,6 @@ export class TemplateListComponent {
     `
   };
   @ViewChild("searchText") searchText: ElementRef;
-
   constructor(
     private modalService: NgbModal,
     private dashboardApiService: DashboardApiService,
@@ -115,7 +114,7 @@ export class TemplateListComponent {
     this.selectedLangs = sessionStorage.getItem("selectedLang");
     let tips = "";
     const modalRef = this.modalService.open(NewTemplateModalComponent, {
-      windowClass: "dl-md-modal",
+      windowClass: "dl-md-modal templatess",
       centered: true
     });
     this.Template_New = new Template();
@@ -137,22 +136,22 @@ export class TemplateListComponent {
               this.template_list = [...this.template_list];
               console.log(this.template_list, "this.template_list,inserted");
               if (this.selectedLangs == "en-us") {
-                tips = "Success inserted."
+                tips = "Successfully created."
               } else if (this.selectedLangs == "zh-hans") {
                 tips = "新增成功。"
               } else if (this.selectedLangs == "zh-hant") {
                 tips = "新增成功。"
               }
-              this.notificationService.success('"' + name + '"' + tips);
+              this.notificationService.success(tips);
             } else {
               if (this.selectedLangs == "en-us") {
-                tips = "Fail inserted."
+                tips = "Fail created."
               } else if (this.selectedLangs == "zh-hans") {
                 tips = "新增失败。"
               } else if (this.selectedLangs == "zh-hant") {
                 tips = "新增失敗。"
               }
-              this.notificationService.error('"' + name + '"' + tips);
+              this.notificationService.error(tips);
             }
             modalRef.close();
           },
@@ -164,13 +163,23 @@ export class TemplateListComponent {
     });
   }
 
-  editTemplateModal(id: number) {
+  onActivate(event) {
+    const emitType = event.type;
+    if(emitType == "dblclick"){
+      console.log('Activate Event', event);
+      let id = event.row.id;
+      this.editTemplateModal(id);
+    }
+
+  }
+
+  editTemplateModal(id) {
     this.selectedLangs = sessionStorage.getItem("selectedLang");
     let tips = "";
     const index = this.template_list.findIndex(t => t.id === id);
     // const name = this.template_list[index].name;
     const modalRef = this.modalService.open(EditTemplateModalComponent, {
-      windowClass: "dl-md-modal",
+      windowClass: "dl-md-modal templatess",
       centered: true
     });
     modalRef.componentInstance.selectedLangs = this.selectedLangs;
@@ -188,7 +197,7 @@ export class TemplateListComponent {
               this.template_list = [...this.template_list];
               console.log(this.template_list, "this.template_list,update");
               if (this.selectedLangs == "en-us") {
-                tips = "Success updated."
+                tips = "Successfully updated."
               } else if (this.selectedLangs == "zh-hans") {
                 tips = "更新成功。"
               } else if (this.selectedLangs == "zh-hant") {
@@ -246,13 +255,13 @@ export class TemplateListComponent {
             this.template_list.splice(index, 1);
             this.template_list = [...this.template_list];
             if (this.selectedLangs == "en-us") {
-              tips = "Success deleted."
+              tips = "Successfully deleted."
             } else if (this.selectedLangs == "zh-hans") {
               tips = "删除成功。"
             } else if (this.selectedLangs == "zh-hant") {
               tips = "刪除成功。"
             }
-            this.notificationService.success('"' + name + '"' + tips);
+            this.notificationService.success(tips);
           } else {
             console.log("Fail deleted template");
             if (this.selectedLangs == "en-us") {
@@ -262,7 +271,7 @@ export class TemplateListComponent {
             } else if (this.selectedLangs == "zh-hant") {
               tips = "刪除失敗。"
             }
-            this.notificationService.error('"' + name + '"' + tips);
+            this.notificationService.error(tips);
           }
 
           modalRef.close();
@@ -298,7 +307,7 @@ export class TemplateListComponent {
         console.log(JSON.stringify(res).length,"JSON.stringify(res).length");
         if (JSON.stringify(res).length<=2) {
           if (this.selectedLangs == "en-us") {
-            tips = "Success deploy."
+            tips = "deploy successful."
           } else if (this.selectedLangs == "zh-hans") {
             tips = "部署成功。"
           } else if (this.selectedLangs == "zh-hant") {
@@ -307,7 +316,7 @@ export class TemplateListComponent {
           this.notificationService.success('"' + name + '"' + tips);
         } else {
           if (this.selectedLangs == "en-us") {
-            tips = "Fail deleted."
+            tips = "deploy fail."
           } else if (this.selectedLangs == "zh-hans") {
             tips = "部署失败。"
           } else if (this.selectedLangs == "zh-hant") {

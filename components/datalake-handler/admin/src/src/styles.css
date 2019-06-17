@@ -65,7 +65,7 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   font-size: 14px;
-  letter-spacing: 0.6px;
+  letter-spacing: 1px;
   color: #ffffff;
   text-align: left;
 }
@@ -82,7 +82,7 @@ body {
 
 .menu .navbar-expand-lg .navbar-nav .nav-link {
   color: #ffffff;
-  padding-left: 20px;
+  /*padding-left: 20px;*/
   padding-right: 20px;
 }
 
@@ -600,4 +600,15 @@ input#switch:checked+.dl-slider:before {
 
 .p-1 .alert-delete-content {
   padding: 1.25rem 4.5rem !important;
+}
+ngb-modal-window.templatess .modal-dialog-centered {
+  max-width: 900px !important;
+  overflow: auto !important;
+}
+.close-btn-icon{
+  color: #b5b6b8;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  float: right;
+  cursor: pointer;
 }

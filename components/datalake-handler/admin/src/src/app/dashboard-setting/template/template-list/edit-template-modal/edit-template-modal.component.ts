@@ -70,6 +70,7 @@ export class EditTemplateModalComponent implements OnInit {
     };
     this.templateInput = feed;
     this.templateInputTitle = ""+this.edittemplate.name;
+    console.log(this.templateInput,"this.templateInput")
   }
   getTopicName(){
     this.dashboardApiService.getTopicName().subscribe(data => {

@@ -34,7 +34,7 @@
 export class Template {
     id:number;
     name:string;
-    submitted:true;
+    submitted:false;
     body: string;
     note:string;
     topic: string;
@@ -43,7 +43,7 @@ export class Template {
 
 export class newTemplate {
   name:string;
-  submitted:true;
+  submitted:false;
   body: string;
   note:string;
   topic: string;
