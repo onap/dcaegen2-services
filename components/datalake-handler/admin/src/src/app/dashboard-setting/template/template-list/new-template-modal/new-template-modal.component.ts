@@ -102,7 +102,7 @@ export class NewTemplateModalComponent implements OnInit {
     this.template.designType = this.templatetype.nativeElement.value;
     this.template.topic = this.topic.nativeElement.value;
     // this.template.id = this.templatelist_length+1;
-    this.template.submitted = true;
+    this.template.submitted = false;
     this.template.note = "";
     console.log(this.template);
     this.passEntry.emit(this.template);
