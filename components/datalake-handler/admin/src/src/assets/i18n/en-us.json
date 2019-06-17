@@ -4,7 +4,7 @@
     "TOPICS": "Topics",
     "DATABASE": "Database",
     "DASHBOARD":"Dashboard Setting",
-    "DASHBOARDLIST":"Dashboard List",
+    "DASHBOARDLIST":"Dashboard",
     "TEMPLATE":"Template",
     "ABOUT": "About"
   },
@@ -46,16 +46,17 @@
   "Cancel":"Cancel",
   "NewDashboard":"New dashboard",
   "DestinationType":"Destination type",
-  "InputValue":"input value",
+  "InputValue":"Default",
   "Username":"Username",
   "Password":"Password",
+  "Enabled":"Enabled",
 
 
   "No":"No",
-  "TEMPLATE_NAME":"Template name",
-  "TEMPLATE_TYPE":"Template type",
-  "TOPICS_NAME":"Topics name",
-  "DEPLOY_TO_DASHBOARD":"Deploy to dashboard",
+  "TEMPLATE_NAME":"Name",
+  "TEMPLATE_TYPE":"Type",
+  "TOPICS_NAME":"Topic",
+  "DEPLOY_TO_DASHBOARD":"Deploy",
   "DEPLOY":"Deploy",
   "NEW_TEMPLATE":"New template",
   "TEMPLATE_BODY":"Template Body"

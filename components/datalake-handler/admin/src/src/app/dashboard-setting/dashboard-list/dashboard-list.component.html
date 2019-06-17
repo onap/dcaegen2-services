@@ -22,8 +22,11 @@
 <div class="d-flex flex-wrap">
 
   <!-- Database list -->
-  <div *ngFor="let db of this.dbs;let thisIndex=index" class="col-sm-3 db-block">
-    <div class="db-panel" style="height: 100%;cursor: pointer" (click)="this.openDashboardModal(thisIndex)">
+  <div *ngFor="let db of this.dbs;let thisIndex=index" class="col-sm-2 db-block">
+    <div class="db-panel"
+         style="height: 100%;cursor: pointer"
+         (click)="this.openDashboardModal(thisIndex)"
+    >
       <div class="d-flex flex-column align-content-center" style="margin-top: 1.5rem;">
         <div class="ml-auto dropdown db-dropdown mr-2" data-boundary="window">
           <!--<a class="badge badge-light db-dropdown" data-toggle="dropdown" style="cursor: pointer">-->

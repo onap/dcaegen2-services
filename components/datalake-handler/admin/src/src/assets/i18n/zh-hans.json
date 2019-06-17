@@ -4,7 +4,7 @@
     "TOPICS": "Topics",
     "DATABASE": "Database",
     "DASHBOARD":"仪表板设置",
-    "DASHBOARDLIST":"仪表板列表",
+    "DASHBOARDLIST":"仪表板",
     "TEMPLATE":"模板",
     "ABOUT": "About"
   },
@@ -46,15 +46,16 @@
   "Cancel":"取消",
   "NewDashboard":"新建仪表板",
   "DestinationType":"目标类型",
-  "InputValue":"输入值",
+  "InputValue":"默认",
   "Username":"用户名",
   "Password":"密码",
-  
+  "Enabled":"启用",
+
     "No":"No",
-  "TEMPLATE_NAME":"模板名称",
-  "TEMPLATE_TYPE":"模板类型",
-  "TOPICS_NAME":"Topics名称",
-  "DEPLOY_TO_DASHBOARD":"部署到仪表盘",
+  "TEMPLATE_NAME":"名称",
+  "TEMPLATE_TYPE":"类型",
+  "TOPICS_NAME":"主题",
+  "DEPLOY_TO_DASHBOARD":"部署",
   "DEPLOY":"部署",
   "NEW_TEMPLATE":"新建模板",
   "TEMPLATE_BODY":"模板体"

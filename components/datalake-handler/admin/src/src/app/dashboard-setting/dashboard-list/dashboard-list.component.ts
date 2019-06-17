@@ -43,7 +43,7 @@ export class DashboardListComponent implements OnInit {
   loading: Boolean = true;
 
   tempDbDetail: Dashboard;
-  selectedLangs = sessionStorage.getItem("selectedLang");
+  selectedLangs = sessionStorage.getItem("selectedLang") || "en-us";
   dashboardDeteleModelShow = true;
 
   // nameArr = [];
@@ -107,7 +107,7 @@ export class DashboardListComponent implements OnInit {
 
   openDashboardModal(thisIndex: number) {
     var modalRef, index;
-    this.selectedLangs = sessionStorage.getItem("selectedLang");
+    this.selectedLangs = sessionStorage.getItem("selectedLang") || "en-us";
     let tips = "";
     index = thisIndex;
     console.log(index, "index,add or edit");

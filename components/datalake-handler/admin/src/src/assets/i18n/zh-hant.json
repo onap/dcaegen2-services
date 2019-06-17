@@ -4,7 +4,7 @@
     "TOPICS": "Topics",
     "DATABASE": "Database",
     "DASHBOARD":"儀表板設置",
-    "DASHBOARDLIST":"儀表板列表",
+    "DASHBOARDLIST":"儀表板",
     "TEMPLATE":"模板",
     "ABOUT": "About"
   },
@@ -47,15 +47,16 @@
   "Cancel":"取消",
   "NewDashboard":"新建儀表板",
   "DestinationType":"目標類型",
-  "InputValue":"輸入值",
+  "InputValue":"默認",
   "Username":"用戶名",
   "Password":"密碼",
-  
+  "Enabled":"啟用",
+
     "No":"No",
-  "TEMPLATE_NAME":"模板名稱",
-  "TEMPLATE_TYPE":"模板類型",
-  "TOPICS_NAME":"Topics名稱",
-  "DEPLOY_TO_DASHBOARD":"部署到儀表板",
+  "TEMPLATE_NAME":"名稱",
+  "TEMPLATE_TYPE":"類型",
+  "TOPICS_NAME":"主題",
+  "DEPLOY_TO_DASHBOARD":"部署",
   "DEPLOY":"部署",
   "NEW_TEMPLATE":"新建模板",
   "TEMPLATE_BODY":"模板體"
