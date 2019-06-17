@@ -19,6 +19,7 @@
       <div class="row">
         <div class="col-md-12">
           <label class="dl-h3">{{ "NEW_TEMPLATE" | translate }}</label>
+          <i class="fas fa-plus fa-2x close-btn-icon" (click)="activeModal.close('Close click')"></i>
         </div>
       </div>
       <div class="row">
@@ -33,10 +34,10 @@
 
       <div class="form-group">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label class="dl-emphasis1" for="inputtemplateName">{{ 'TEMPLATE_NAME' | translate }}</label>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-5">
             <input #inputtemplateName [(ngModel)]="this.templateInput.name" class="form-control dl-input-text" type="text" name="inputtemplateName" placeholder="Username" required="required"/>
           </div>
         </div>
@@ -44,21 +45,21 @@
 
       <div class="form-group">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
               <label class="dl-emphasis1" for="templatebody">{{ 'TEMPLATE_BODY'| translate }}</label>
             </div>
-            <div class="col-md-8">
-                <textarea #templatebody [(ngModel)]="this.templateInput.body" class="form-control dl-input-text" placeholder="Put the template design here..." rows="3"></textarea>
+            <div class="col-md-9">
+                <textarea #templatebody [(ngModel)]="this.templateInput.body" class="form-control dl-input-text" placeholder="Put the template design here..." rows="3" style="min-height: 300px!important;"></textarea>
             </div>
           </div>
         </div>
 
       <div class="form-group">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label class="dl-emphasis1">{{ 'TEMPLATE_TYPE' | translate }}</label>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-7">
             <select #templatetype class="custom-select dl-input-text">
               <option *ngFor="let item of templatetypedata" [selected]="item==templatetypedata[0]">{{item}}</option>
             </select>
@@ -68,10 +69,10 @@
 
       <div class="form-group">
           <div class="row">
-            <div class="col-md-4">
-              <label class="dl-emphasis1">{{ 'TOPICS' | translate }}</label>
+            <div class="col-md-3">
+              <label class="dl-emphasis1">{{ 'TOPICS_NAME' | translate }}</label>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
               <select #topic class="custom-select dl-input-text">
                 <option *ngFor="let item of topicname" [selected]="item==topicname[0]">{{item}}</option>
               </select>
