@@ -88,14 +88,11 @@
           <div class="col-md-3">
             <div class="input-group">
               <div class="input-group-prepend">
-                <label class="input-group-text dl-input-chk-label">
-                  <input id="chkSsl" [(ngModel)]="this.tempDb.enabled" type="checkbox" />
-                  <span class="dl-input-checkmark"></span>
+                <label class="dl-switch">
+                  <input id="switch" type="checkbox" [(ngModel)]="this.tempDb.enabled" />
+                  <span class="dl-slider round"></span>
                 </label>
               </div>
-              <label class="form-control dl-input-chk" for="chkSsl">
-                Enable
-              </label>
             </div>
           </div>
         </div>

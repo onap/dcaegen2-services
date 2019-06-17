@@ -36,5 +36,5 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {}
 
-  dashboard = true;
+  dashboard = false;
 }
