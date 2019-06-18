@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4a53ff2_f224a41b",
+        "filename": "components/datalake-handler/admin/src/src/app/core/models/template.model.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-18T02:22:29Z",
+      "side": 1,
+      "message": "Are the type of data should be \"boolean\"?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 1
+      },
+      "revId": "36c3fe5e288558e5abbfee2bb1737f81ed9cbc78",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
