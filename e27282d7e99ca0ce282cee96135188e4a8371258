@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d57d4bb1_19219a9b",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Topic.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 0,
+      "message": "Let\u0027s keep explicit import. It is easier to read.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 31
+      },
+      "revId": "e27282d7e99ca0ce282cee96135188e4a8371258",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5acc32ea_64fb57a7",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/PortalDesignService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 0,
+      "message": "user can specify his own port.",
+      "range": {
+        "startLine": 126,
+        "startChar": 3,
+        "endLine": 126,
+        "endChar": 45
+      },
+      "revId": "e27282d7e99ca0ce282cee96135188e4a8371258",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}

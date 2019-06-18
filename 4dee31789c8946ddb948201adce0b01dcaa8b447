@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1c4e85f_95602fad",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/config/ApplicationConfiguration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "First letter should be lowercase.",
+      "range": {
+        "startLine": 75,
+        "startChar": 16,
+        "endLine": 76,
+        "endChar": 28
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a111e62e_121341d7",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/PortalDesignController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "portalDesignService.deployPortalDesign should return true if success.\n\nIf there is a problem, deployPortalDesign() should throw an exception, which contains details on what was wrong, and this details should be passed to UI.",
+      "range": {
+        "startLine": 157,
+        "startChar": 3,
+        "endLine": 160,
+        "endChar": 4
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1abc4192_ec96d94a",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/PortalDesignController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "if fails, should not come to here",
+      "range": {
+        "startLine": 161,
+        "startChar": 3,
+        "endLine": 163,
+        "endChar": 27
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88865867_458640d0",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "PortalDesignService.deploy(portalDesign)",
+      "range": {
+        "startLine": 128,
+        "startChar": 21,
+        "endLine": 128,
+        "endChar": 68
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "695ce1fe_c812e057",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "print error message, but continue.",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 131,
+        "endChar": 7
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "441700c4_7ad8f9fe",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "move the following block to PortalDesignService",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 4
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0962dc7c_04cd6314",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "rename to postEsMappingTemplate",
+      "range": {
+        "startLine": 262,
+        "startChar": 16,
+        "endLine": 262,
+        "endChar": 36
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9e56a24_91e47d45",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "return true if success, throw exception if error",
+      "range": {
+        "startLine": 262,
+        "startChar": 8,
+        "endLine": 262,
+        "endChar": 15
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53086cd9_0003a98b",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/ElasticsearchService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "move this to sendPostToKibana()",
+      "range": {
+        "startLine": 268,
+        "startChar": 3,
+        "endLine": 279,
+        "endChar": 4
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "275f232d_bc2098ce",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/PortalDesignService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "Move this block to HttpClientUtil.sendPostToKibana()",
+      "range": {
+        "startLine": 134,
+        "startChar": 76,
+        "endLine": 151,
+        "endChar": 14
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70aaf9b8_9b2eb77e",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/PortalDesignService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "rename to deploy()",
+      "range": {
+        "startLine": 155,
+        "startChar": 16,
+        "endLine": 155,
+        "endChar": 34
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40cc9a70_09fe5c81",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/PortalDesignService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-18T21:16:39Z",
+      "side": 1,
+      "message": "use equals() since each design type has different deployment.\n\nI added a new column to table design_type. UI should use column \u0027display\u0027.\nhttps://gerrit.onap.org/r/#/c/dcaegen2/services/+/90117/",
+      "range": {
+        "startLine": 157,
+        "startChar": 85,
+        "endLine": 157,
+        "endChar": 95
+      },
+      "revId": "4dee31789c8946ddb948201adce0b01dcaa8b447",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
