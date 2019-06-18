@@ -21,11 +21,14 @@
 package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.elasticsearch.ElasticsearchException;
@@ -47,7 +50,10 @@ import org.elasticsearch.rest.RestStatus;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.PortalDesign;
+import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.dto.TopicConfig;
+import org.onap.datalake.feeder.util.HttpClientUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,6 +79,9 @@ public class ElasticsearchService {
 
 	private RestHighLevelClient client;
 	ActionListener<BulkResponse> listener;
+
+	@Autowired
+	private TopicService topicService;
 
 	//ES Encrypted communication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_encrypted_communication.html#_encrypted_communication
 	//Basic authentication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_basic_authentication.html
@@ -111,7 +120,19 @@ public class ElasticsearchService {
 
 		boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);
 		if (!exists) {
-			//TODO submit mapping template
+			Topic oldTopic = topicService.getTopic(topic);
+			if (topic != null) {
+				List<PortalDesign> portalDesigns = oldTopic.getPortalDesigns();
+				if (portalDesigns != null && portalDesigns.size() > 0) {
+					for (PortalDesign portalDesign : portalDesigns) {
+						boolean flag = setEsMappingTemplate(portalDesign, topicLower);
+						if (!flag) {
+							continue;
+						}
+					}
+				}
+
+			}
 			CreateIndexRequest createIndexRequest = new CreateIndexRequest(topicLower);
 			CreateIndexResponse createIndexResponse = client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
 			log.info("{} : created {}", createIndexResponse.index(), createIndexResponse.isAcknowledged());
@@ -226,6 +247,42 @@ public class ElasticsearchService {
 		}
 
 		return found;
+	}
+
+
+	/**
+	 * successed resp:
+	 * {
+	 *     "acknowledged": true
+	 * }
+	 * @param portalDesign
+	 * @param templateName
+	 * @return flag
+	 */
+	public boolean setEsMappingTemplate(PortalDesign portalDesign, String templateName) {
+		boolean flag = false;
+		String requestBody = portalDesign.getBody();
+		String response = "";
+		try {
+			response = HttpClientUtil.sendPostToKibana("http://"+dbService.getElasticsearch().getHost()+":9200/_template/"+templateName, requestBody);
+			Gson gson = new Gson();
+			Map<String, Object> map = new HashMap<>();
+			map = gson.fromJson(response, map.getClass());
+			for(String key : map.keySet()){
+				if ("acknowledged".equals(key) && (boolean) map.get("acknowledged") == true) {
+					log.info("SetEsMappingTemplate successed");
+					break;
+				} else {
+					log.debug("failed");
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			log.debug("SetEsMappingTemplate failed", e.getMessage());
+			return true;
+		}
+
+		return flag;
 	}
 
 }

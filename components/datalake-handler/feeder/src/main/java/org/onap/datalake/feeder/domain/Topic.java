@@ -23,14 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.onap.datalake.feeder.dto.TopicConfig;
 
@@ -108,6 +101,10 @@ public class Topic {
 	//example: "/event/measurementsForVfScalingFields/astriMeasurement/astriDPMeasurementArray/astriInterface,..."
 	@Column(name = "`flatten_array_path`") 
 	private String flattenArrayPath;
+
+	@OneToMany(mappedBy = "topic")
+	@JsonBackReference
+	private List<PortalDesign> portalDesigns;
 	
 	public Topic() {
 	}

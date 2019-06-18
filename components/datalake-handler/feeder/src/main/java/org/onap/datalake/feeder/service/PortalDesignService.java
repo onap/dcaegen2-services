@@ -59,6 +59,9 @@ public class PortalDesignService {
 	@Autowired
 	private ApplicationConfiguration applicationConfiguration;
 
+	@Autowired
+	private ElasticsearchService elasticsearchService;
+
 	public PortalDesign fillPortalDesignConfiguration(PortalDesignConfig portalDesignConfig) throws Exception
 	{
 		PortalDesign portalDesign = new PortalDesign();
@@ -108,25 +111,23 @@ public class PortalDesignService {
 	}
 
 
-	private String kibanaImportUrl(String host, Integer port){
-		return "http://"+host+":"+port+applicationConfiguration.getKibanaDashboardImportApi();
+	private String kibanaImportUrl(String host){
+		return "http://"+host+":"+applicationConfiguration.getKibanaPort()+applicationConfiguration.getKibanaDashboardImportApi();
 	}
 
 
-	public boolean deployKibanaImport(PortalDesign portalDesign) {
+	private boolean deployKibanaImport(PortalDesign portalDesign) {
 		boolean flag = false;
 		String requestBody = portalDesign.getBody();
 		Portal portal = portalDesign.getDesignType().getPortal();
 		String portalHost = portal.getHost();
-		Integer portalPort = portal.getPort();
 		String url = "";
 
-		if (portalHost == null || portalPort == null) {
+		if (portalHost == null) {
 			String dbHost = portal.getDb().getHost();
-			Integer dbPort = portal.getDb().getPort();
-			url = kibanaImportUrl(dbHost, dbPort);
+			url = kibanaImportUrl(dbHost);
 		} else {
-			url = kibanaImportUrl(portalHost, portalPort);
+			url = kibanaImportUrl(portalHost);
 		}
 
 		//Send httpclient to kibana
@@ -146,6 +147,20 @@ public class PortalDesignService {
 					}
 				}
 			}
+		}
+		return flag;
+	}
+
+
+	public boolean deployPortalDesign(PortalDesign portalDesign){
+		boolean flag =false;
+		if (portalDesign.getDesignType() != null && portalDesign.getDesignType().getName().startsWith("Kibana")) {
+			flag = deployKibanaImport(portalDesign);
+		} else if (portalDesign.getDesignType() != null && portalDesign.getDesignType().getName().startsWith("Elasticsearch")) {
+			flag = elasticsearchService.setEsMappingTemplate(portalDesign, portalDesign.getTopic().getName().toLowerCase());
+		} else {
+			//TODO Druid import
+			flag =true;
 		}
 		return flag;
 	}

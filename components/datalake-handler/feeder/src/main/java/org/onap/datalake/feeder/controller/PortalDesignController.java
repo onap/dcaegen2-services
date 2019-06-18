@@ -154,16 +154,8 @@ public class PortalDesignController {
 		PortalDesign portalDesign = null;
 		try {
 			portalDesign = portalDesignRepository.findById(id).get();
-			if (portalDesign.getDesignType() != null && portalDesign.getDesignType().getName().startsWith("Kibana")) {
-				boolean flag = portalDesignService.deployKibanaImport(portalDesign);
-				if (flag) {
-					sendError(response, 400, "DeployPortalDesign failed, id: "+id);
-				}
-			} else if (portalDesign.getDesignType() != null && portalDesign.getDesignType().getName().startsWith("Elasticsearch")) {
-				//TODO Elasticsearch template import
-				sendError(response, 400, "DeployPortalDesign failed, id: "+id);
-			} else {
-				//TODO Druid import
+			boolean flag = portalDesignService.deployPortalDesign(portalDesign);
+			if (flag) {
 				sendError(response, 400, "DeployPortalDesign failed, id: "+id);
 			}
 			portalDesign.setSubmitted(true);

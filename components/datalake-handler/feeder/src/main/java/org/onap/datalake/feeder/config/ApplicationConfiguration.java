@@ -73,4 +73,5 @@ public class ApplicationConfiguration {
   
   	//Kibana
 	private String KibanaDashboardImportApi;
+	private Integer KibanaPort;
 }
