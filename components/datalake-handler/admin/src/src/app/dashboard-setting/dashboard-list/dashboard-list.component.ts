@@ -43,7 +43,6 @@ export class DashboardListComponent implements OnInit {
   loading: Boolean = true;
 
   tempDbDetail: Dashboard;
-  selectedLangs = sessionStorage.getItem("selectedLang") || "en-us";
   dashboardDeteleModelShow = true;
 
   // nameArr = [];
@@ -107,8 +106,6 @@ export class DashboardListComponent implements OnInit {
 
   openDashboardModal(thisIndex: number) {
     var modalRef, index;
-    this.selectedLangs = sessionStorage.getItem("selectedLang") || "en-us";
-    let tips = "";
     index = thisIndex;
     console.log(index, "index,add or edit");
     modalRef = this.modalService.open(CreateDashboardComponent, {
@@ -128,23 +125,9 @@ export class DashboardListComponent implements OnInit {
             console.log(res);
             if (res.statusCode == 200) {
               this.initData();
-              if (this.selectedLangs == "en-us") {
-                tips = "Success updated."
-              } else if (this.selectedLangs == "zh-hans") {
-                tips = "更新成功。"
-              } else if (this.selectedLangs == "zh-hant") {
-                tips = "更新成功。"
-              }
-              this.notificationService.success('"' + host + '"' + tips);
+              this.notificationService.success("SUCCESSFULLY_UPDATED");
             } else {
-              if (this.selectedLangs == "en-us") {
-                tips = "Fail updated."
-              } else if (this.selectedLangs == "zh-hans") {
-                tips = "更新失败。"
-              } else if (this.selectedLangs == "zh-hant") {
-                tips = "更新失敗。"
-              }
-              this.notificationService.error('"' + host + '"' + tips);
+              this.notificationService.error("FAILED_UPDATED");
             }
             modalRef.close();
           },
@@ -159,24 +142,10 @@ export class DashboardListComponent implements OnInit {
             console.log(res);
             if (res.statusCode == 200) {
               this.initData();
-              if (this.selectedLangs == "en-us") {
-                tips = "Success deleted."
-              } else if (this.selectedLangs == "zh-hans") {
-                tips = "删除成功。"
-              } else if (this.selectedLangs == "zh-hant") {
-                tips = "刪除成功。"
-              }
-              this.notificationService.success('"' + host + '"' + tips);
+              this.notificationService.success("SUCCESSFULLY_DELETED");
             } else {
               this.dbs[thisIndex].enabled = true;
-              if (this.selectedLangs == "en-us") {
-                tips = "Fail deleted."
-              } else if (this.selectedLangs == "zh-hans") {
-                tips = "删除失败。"
-              } else if (this.selectedLangs == "zh-hant") {
-                tips = "刪除失敗。"
-              }
-              this.notificationService.error('"' + host + '"' + tips);
+              this.notificationService.error("FAILED_DELETED");
             }
             modalRef.close();
           },
