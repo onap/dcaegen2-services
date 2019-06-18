@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d53450a4_50dfde48",
+        "filename": "components/datalake-handler/admin/src/src/app/dashboard-setting/template/template-list/template-list.component.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-18T06:13:50Z",
+      "side": 1,
+      "message": "Capitalize the first letter",
+      "range": {
+        "startLine": 308,
+        "startChar": 8,
+        "endLine": 326,
+        "endChar": 9
+      },
+      "revId": "fa3e7ed5a16683d046fc10b834f9c9c4a57aaccf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
