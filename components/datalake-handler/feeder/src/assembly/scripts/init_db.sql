@@ -57,6 +57,7 @@ CREATE TABLE `portal` (
 
 CREATE TABLE `design_type` (
   `name` varchar(255) NOT NULL,
+  `display` varchar(255) NOT NULL,
   `portal` varchar(255) DEFAULT NULL,
   `note` text DEFAULT NULL,
   PRIMARY KEY (`name`),
@@ -117,9 +118,9 @@ insert into portal (`name`,`related_db`, host) values ('Kibana', 'Elasticsearch'
 insert into portal (`name`,`related_db`) values ('Elasticsearch', 'Elasticsearch');
 insert into portal (`name`,`related_db`) values ('Druid', 'Druid');
 
-insert into design_type (`name`,`portal`) values ('Kibana Dashboard', 'Kibana');
-insert into design_type (`name`,`portal`) values ('Kibana Search', 'Kibana');
-insert into design_type (`name`,`portal`) values ('Kibana Visualization', 'Kibana');
-insert into design_type (`name`,`portal`) values ('Elasticsearch Field Mapping Template', 'Elasticsearch');
-insert into design_type (`name`,`portal`) values ('Druid Kafka Indexing Service Supervisor Spec', 'Druid');
+insert into design_type (`name`,`display`,`portal`) values ('kibana_db', 'Kibana Dashboard', 'Kibana');
+insert into design_type (`name`,`display`,`portal`) values ('kibana_search', 'Kibana Search', 'Kibana');
+insert into design_type (`name`,`display`,`portal`) values ('kibana_visual', 'Kibana Visualization', 'Kibana');
+insert into design_type (`name`,`display`,`portal`) values ('es_mapping', 'Elasticsearch Field Mapping Template', 'Elasticsearch');
+insert into design_type (`name`,`display`,`portal`) values ('druid_kafka_spec', 'Druid Kafka Indexing Service Supervisor Spec', 'Druid');
 

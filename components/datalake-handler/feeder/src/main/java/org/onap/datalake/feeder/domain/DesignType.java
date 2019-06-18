@@ -47,6 +47,9 @@ public class DesignType {
     @JsonBackReference
     private Portal portal;
 
+    @Column(name = "`display`")
+    private String display;
+
     @Column(name = "`note`")
     private String note;
 
