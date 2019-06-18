@@ -14,7 +14,7 @@
   "SINK": "数据库",
   "AUTHENTICATION": "身份验证​",
   "DATA_FORMAT": "数据格式",
-  "TTL": "数据失效时间",
+  "TTL": "失效时间(天)",
   "SAVE_RAW_DATA": "保存原始数据",
   "CORRELATE_CLEARED_MESSAGE": "关联已清除的消息​",
   "DEFAULT_CONFIGURATIONS": "默认配置​",
@@ -26,7 +26,7 @@
   "BUCKET": "Bucket",
   "HOST": "主机​",
   "PORT": "端口​",
-  "ENABLE_SSL": "使用SSL​",
+  "ENABLE_SSL": "加密通信​",
   "VERIFY": "验证​",
   "SETTING": "设置",
 
@@ -58,5 +58,15 @@
   "DEPLOY_TO_DASHBOARD":"部署",
   "DEPLOY":"部署",
   "NEW_TEMPLATE":"新建模板",
-  "TEMPLATE_BODY":"模板体"
+  "TEMPLATE_BODY":"模板体",
+
+  "SUCCESSFULLY_CREARED":"创建成功",
+  "FAILED_CREARED":"创建失败",
+  "SUCCESSFULLY_UPDATED":"更新成功",
+  "FAILED_UPDATED":"更新失败",
+  "SUCCESSFULLY_DELETED":"删除成功",
+  "FAILED_DELETED":"删除失败",
+  "Deploy_SUCCESSFULLY":"部署成功",
+  "Deploy_FAILED":"部署失败",
+  "ARE_YOU_SURE_DELETE":"您确定您要删除吗？"
 }

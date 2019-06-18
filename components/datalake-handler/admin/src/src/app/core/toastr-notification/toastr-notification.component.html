@@ -23,7 +23,7 @@ limitations under the License.
   <div class="toast {{cssClass(item) }}" aria-live="polite" style="display: block;">
     <button type="button" class="toast-close-button" role="button" (click)="removeNotification(item)">×</button>
     <div class="toast-message">
-      {{item.message}}
+      {{item.message  | translate}}
     </div>
   </div>
 </div>
