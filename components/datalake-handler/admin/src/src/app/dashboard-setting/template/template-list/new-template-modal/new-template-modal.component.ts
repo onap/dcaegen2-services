@@ -37,7 +37,6 @@ import {AlertComponent} from "../../../../core/alert/alert.component";
 export class NewTemplateModalComponent implements OnInit {
   @Input() template: newTemplate;
   @Input() templatelist_length;
-  @Input() selectedLangs;
   templateInput: newTemplate
   templatetypedata: Array<any> = [];
   topicname: Array<any> = [];
@@ -87,21 +86,12 @@ export class NewTemplateModalComponent implements OnInit {
 
   passBack() {
     if(this.templateInput.name == '' || this.templateInput.name == undefined){
-      let tips = "";
-      if (this.selectedLangs == "en-us") {
-        tips = "Name input is required."
-      } else if (this.selectedLangs == "zh-hans") {
-        tips = "名字输入项是必填项。"
-      } else if (this.selectedLangs == "zh-hant") {
-        tips = "名字輸入項是必填項。"
-      }
       return false;
     }
     this.template = this.templateInput;
     console.log(this.templateInput);
     this.template.designType = this.templatetype.nativeElement.value;
     this.template.topic = this.topic.nativeElement.value;
-    // this.template.id = this.templatelist_length+1;
     this.template.submitted = false;
     this.template.note = "";
     console.log(this.template);
