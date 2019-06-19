@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1553017c_b6b16c62",
+        "filename": "components/datalake-handler/admin/src/src/app/core/services/rest-api.service.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-19T03:19:52Z",
+      "side": 1,
+      "message": "The corresponds between HTTP method and CRUD as below:\nHTTP Verb -\u003e CRUD\nPOST-\u003eCreate\nGET-\u003eRead\nPUT-\u003eUpdate\nDELETE-\u003eDelete",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 3
+      },
+      "revId": "47bd0aad80f53e2cc33d35de50bfab88cac3cdc2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "988eb4af_c3b5acc7",
+        "filename": "components/datalake-handler/admin/src/src/app/database/database-list/dbs-modal/couchbase/couchbase.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-19T03:19:52Z",
+      "side": 1,
+      "message": "Remove the comment, because TODO is done.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 47
+      },
+      "revId": "47bd0aad80f53e2cc33d35de50bfab88cac3cdc2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cb29b33_c3c3b176",
+        "filename": "components/datalake-handler/admin/src/src/app/database/database-list/dbs-modal/druid/druid.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-19T03:19:52Z",
+      "side": 1,
+      "message": "Remove the comment, because TODO is done.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 47
+      },
+      "revId": "47bd0aad80f53e2cc33d35de50bfab88cac3cdc2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4dcceeb0_1ad5c1ea",
+        "filename": "components/datalake-handler/admin/src/src/app/database/database-list/dbs-modal/elasticsearch/elasticsearch.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-19T03:19:52Z",
+      "side": 1,
+      "message": "Remove the comment, because TODO is done.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 47
+      },
+      "revId": "47bd0aad80f53e2cc33d35de50bfab88cac3cdc2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c3b6d40_b798f4a1",
+        "filename": "components/datalake-handler/admin/src/src/app/database/database-list/dbs-modal/hdfs/hdfs.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-19T03:19:52Z",
+      "side": 1,
+      "message": "Remove the comment, because TODO is done.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 47
+      },
+      "revId": "47bd0aad80f53e2cc33d35de50bfab88cac3cdc2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19eac030_b045d38a",
+        "filename": "components/datalake-handler/admin/src/src/app/database/database-list/dbs-modal/mongodb/mongodb.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-19T03:19:52Z",
+      "side": 1,
+      "message": "Remove the comment, because TODO is done.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 47
+      },
+      "revId": "47bd0aad80f53e2cc33d35de50bfab88cac3cdc2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
