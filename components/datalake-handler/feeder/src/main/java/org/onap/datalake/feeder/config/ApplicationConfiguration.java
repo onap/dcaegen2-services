@@ -54,6 +54,10 @@ public class ApplicationConfiguration {
 	private String dmaapZookeeperHostPort;
 	private String dmaapKafkaHostPort;
 	private String dmaapKafkaGroup;
+	private String dmaapKafkaLogin;
+	private String dmaapKafkaPass;
+	private String dmaapKafkaSecurityProtocol;
+	
 	private long dmaapKafkaTimeout;
 	private String[] dmaapKafkaExclude;
 
