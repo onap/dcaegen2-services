@@ -36,7 +36,6 @@ import {AlertComponent} from "../../../../core/alert/alert.component";
 })
 export class EditTemplateModalComponent implements OnInit {
   @Input() edittemplate: Template;
-  @Input() selectedLangs;
   templateInput: Template;
   templatetypedata: Array<any> = [];
   topicname: Array<any> = [];
@@ -86,14 +85,6 @@ export class EditTemplateModalComponent implements OnInit {
 
   passBack() {
     if(this.templateInput.name == '' || this.templateInput.name == undefined){
-      let tips = "";
-      if (this.selectedLangs == "en-us") {
-        tips = "Name is required input."
-      } else if (this.selectedLangs == "zh-hans") {
-        tips = "名字是必填输入项。"
-      } else if (this.selectedLangs == "zh-hant") {
-        tips = "名字是必填輸入項。"
-      }
       return false;
     }
     this.edittemplate = this.templateInput;
