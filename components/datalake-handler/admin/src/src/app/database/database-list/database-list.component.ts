@@ -134,31 +134,6 @@ export class DatabaseListComponent implements OnInit {
     });
   }
 
-  deleteDb(name: string) {
-    const index = this.dbs.findIndex(d => d.name === name);
-    const modalRef = this.modalService.open(AlertComponent, {
-      size: "sm",
-      centered: true
-    });
-
-    modalRef.componentInstance.message =
-      'Are you sure you want to delete " ' + name + '" ?';
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      // Delete database
-      this.restApiService.deleteDb(name).subscribe(
-        res => {
-          this.dbs.splice(index, 1);
-          this.notificationService.success("Success deleted.");
-          modalRef.close();
-        },
-        err => {
-          this.notificationService.error(err);
-          modalRef.close();
-        }
-      );
-    });
-  }
-
   openDetailModal(name: string) {
     var modalRef, index;
 
@@ -210,15 +185,20 @@ export class DatabaseListComponent implements OnInit {
     } else {
       modalRef.componentInstance.db = this.tempDbDetail;
     }
-
     modalRef.componentInstance.passEntry.subscribe(receiveEntry => {
       this.tempDbDetail = receiveEntry;
-      if (index != -1) {
-        // Db name found, to update db
+      let enabled = receiveEntry.enabled;
+      console.log(this.tempDbDetail,"this.tempDbDetail");
+      if(enabled == true){
         this.restApiService.upadteDb(this.tempDbDetail).subscribe(
           res => {
-            this.dbs[index] = this.tempDbDetail;
-            this.notificationService.success("Success updated.");
+            console.log(res);
+            if (res.statusCode == 200) {
+              this.dbs[index] = this.tempDbDetail;
+              this.notificationService.success("SUCCESSFULLY_UPDATED");
+            }else {
+              this.notificationService.error("FAILED_UPDATED");
+            }
             modalRef.close();
           },
           err => {
@@ -226,12 +206,16 @@ export class DatabaseListComponent implements OnInit {
             modalRef.close();
           }
         );
-      } else {
-        // Db name not found, to insert db
-        this.restApiService.addDb(this.tempDbDetail).subscribe(
+      }else {
+        this.restApiService.deleteDb(this.dbs[index]).subscribe(
           res => {
-            this.dbs.push(this.tempDbDetail);
-            this.notificationService.success("Success inserted.");
+            console.log(res);
+            if (res.statusCode == 200) {
+              this.dbs[index] = this.tempDbDetail;
+              this.notificationService.success("SUCCESSFULLY_DELETED");
+            }else {
+              this.dbs[index].encrypt = true;
+            }
             modalRef.close();
           },
           err => {

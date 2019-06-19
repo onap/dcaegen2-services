@@ -165,7 +165,7 @@ export class RestApiService {
 
   addDb(d: Db): Observable<any> {
     return this.http
-      .post<any>(prefix + "dbs", JSON.stringify(d), httpOptions)
+      .put<any>(prefix + "dbs", d)
       .pipe(
         retry(1),
         tap(_ => console.log(`add db name=${d.name}`)),
@@ -175,7 +175,7 @@ export class RestApiService {
 
   upadteDb(d: Db): Observable<any> {
     return this.http
-      .put(prefix + "dbs/" + d.name, JSON.stringify(d), httpOptions)
+      .put(prefix + "dbs", d)
       .pipe(
         retry(1),
         tap(_ => this.extractData),
@@ -183,8 +183,8 @@ export class RestApiService {
       );
   }
 
-  deleteDb(name: string): Observable<any> {
-    return this.http.delete(prefix + "dbs/" + name, httpOptions).pipe(
+  deleteDb(d: Db): Observable<any> {
+    return this.http.put(prefix + "dbs",d).pipe(
       retry(1),
       tap(_ => console.log(`deleted db name=${name}`)),
       catchError(this.handleError)

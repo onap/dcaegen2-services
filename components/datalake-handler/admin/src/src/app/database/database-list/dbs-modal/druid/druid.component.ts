@@ -49,7 +49,7 @@ export class DruidComponent {
     this.tempDb = new Db();
     const feed = {
       name: "Druid",
-      enabled: true, // TODO: enable
+      enabled: this.db.enabled, // TODO: enable
       host: this.db.host,
       port: this.db.port,
       database: this.db.database,
