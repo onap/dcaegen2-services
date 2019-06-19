@@ -540,15 +540,15 @@ hr {
   transition: 0.4s;
 }
 
-input#switch:checked+.dl-slider {
+input#switch:checked+.dl-slider,input#switchs:checked+.dl-slider {
   background-color: #5dbebb;
 }
 
-input#switch:focus+.dl-slider {
+input#switch:focus+.dl-slider,input#switchs:checked+.dl-slider  {
   box-shadow: 0 0 1px #5dbebb;
 }
 
-input#switch:checked+.dl-slider:before {
+input#switch:checked+.dl-slider:before,input#switchs:checked+.dl-slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -611,4 +611,10 @@ ngb-modal-window.templatess .modal-dialog-centered {
   transform: rotate(45deg);
   float: right;
   cursor: pointer;
+}
+.truecheck{
+  color:#5DBEBB
+}
+.falsecheck{
+  color:#BDBEC0
 }

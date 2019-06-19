@@ -49,7 +49,7 @@ export class HdfsComponent {
     this.tempDb = new Db();
     const feed = {
       name: "HDFS",
-      enabled: true, // TODO: enable
+      enabled: this.db.enabled,
       host: this.db.host,
       port: this.db.port,
       database: this.db.database,

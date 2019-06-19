@@ -49,7 +49,7 @@ export class MongodbComponent {
     this.tempDb = new Db();
     const feed = {
       name: "MongoDB",
-      enabled: true, // TODO: enable
+      enabled: this.db.enabled,
       host: this.db.host,
       port: this.db.port,
       database: this.db.database,

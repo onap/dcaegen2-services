@@ -162,33 +162,15 @@ export class RestApiService {
       catchError(this.handleError)
     );
   }
-
-  addDb(d: Db): Observable<any> {
-    return this.http
-      .post<any>(prefix + "dbs", JSON.stringify(d), httpOptions)
-      .pipe(
-        retry(1),
-        tap(_ => console.log(`add db name=${d.name}`)),
-        catchError(this.handleError)
-      );
-  }
-
+  
   upadteDb(d: Db): Observable<any> {
     return this.http
-      .put(prefix + "dbs/" + d.name, JSON.stringify(d), httpOptions)
+      .put(prefix + "dbs", d)
       .pipe(
         retry(1),
         tap(_ => this.extractData),
         catchError(this.handleError)
       );
-  }
-
-  deleteDb(name: string): Observable<any> {
-    return this.http.delete(prefix + "dbs/" + name, httpOptions).pipe(
-      retry(1),
-      tap(_ => console.log(`deleted db name=${name}`)),
-      catchError(this.handleError)
-    );
   }
 
   /*

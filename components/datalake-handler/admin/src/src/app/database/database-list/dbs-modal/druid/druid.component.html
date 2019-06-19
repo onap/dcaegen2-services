@@ -24,6 +24,7 @@ limitations under the License.
       <div class="row">
         <div class="col-md-12">
           <label class="dl-h3">OLAP store | Druid</label>
+          <i class="fas fa-plus fa-2x close-btn-icon" (click)="activeModal.close('Close click')"></i>
         </div>
       </div>
 
@@ -38,15 +39,15 @@ limitations under the License.
   <div class="modal-body border-0 ml-4 mr-4">
     <div class="container">
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-3"><label class="dl-emphasis1" for="inputBucket">Database</label></div>
-          <div class="col-md-4">
-            <input [(ngModel)]="this.tempDb.database" class="form-control dl-input-text" id="inputBucket" type="text"
-              placeholder="">
-          </div>
-        </div>
-      </div>
+      <!--<div class="form-group">-->
+        <!--<div class="row">-->
+          <!--<div class="col-md-3"><label class="dl-emphasis1" for="inputBucket">Database</label></div>-->
+          <!--<div class="col-md-4">-->
+            <!--<input [(ngModel)]="this.tempDb.database" class="form-control dl-input-text" id="inputBucket" type="text"-->
+              <!--placeholder="">-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
 
       <div class="form-group">
         <div class="row">
@@ -63,7 +64,7 @@ limitations under the License.
           <div class="col-md-3"><label class="dl-emphasis1" for="inputPort">{{ "PORT" | translate}}</label></div>
           <div class="col-md-2">
             <input [(ngModel)]="this.tempDb.port" class="form-control dl-input-text" id="inputPort" type="text"
-              placeholder="" (input)="this.adminService.onKeyPressNumber($event)">
+              placeholder="Default" (input)="this.adminService.onKeyPressNumber($event)">
           </div>
         </div>
       </div>
@@ -85,18 +86,31 @@ limitations under the License.
 
       <div class="form-group">
         <div class="row">
-          <div class="col-md-3"><label class="dl-emphasis1" for="inputSsl">{{ "ENABLE_SSL" | translate}}</label></div>
+          <div class="col-md-3"><label class="dl-emphasis1" for="switchs">{{ "ENABLE_SSL" | translate}}</label></div>
           <div class="col-md-3">
             <div class="input-group">
               <div class="input-group-prepend">
-                <label class="input-group-text dl-input-chk-label">
-                  <input id="chkSsl" [(ngModel)]="this.tempDb.encrypt" type="checkbox" />
-                  <span class="dl-input-checkmark"></span>
+                <label class="dl-switch">
+                  <input id="switchs" type="checkbox" [(ngModel)]="this.tempDb.encrypt" />
+                  <span class="dl-slider round"></span>
                 </label>
               </div>
-              <label class="form-control dl-input-chk" for="chkSsl">
-                Enable
-              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-3"><label class="dl-emphasis1" for="switch">{{ "Enabled" | translate}}</label></div>
+          <div class="col-md-3">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="dl-switch">
+                  <input id="switch" type="checkbox" [(ngModel)]="this.tempDb.enabled" />
+                  <span class="dl-slider round"></span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
