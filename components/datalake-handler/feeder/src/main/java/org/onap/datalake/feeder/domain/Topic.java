@@ -161,14 +161,20 @@ public class Topic {
 		tConfig.setAggregateArrayPath(getAggregateArrayPath());
 		tConfig.setFlattenArrayPath(getFlattenArrayPath());
 		tConfig.setTtl(getTtl());
+		
 		Set<Db> topicDb = getDbs();
 		List<String> dbList = new ArrayList<>();
+		List<String> enabledDbList = new ArrayList<>();
 		if (topicDb != null) {
 			for (Db item : topicDb) {
 				dbList.add(item.getName());
+				if(item.isEnabled()) {
+					enabledDbList.add(item.getName());
+				}
 			}
 		}
 		tConfig.setSinkdbs(dbList);
+		tConfig.setEnabledSinkdbs(enabledDbList);
 
 		return tConfig;
 	}
