@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 China Mobile
+ * Copyright 2019 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,26 +24,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * JSON request body for portalDesign Config.
+ * JSON request body for DesignType Config.
  *
  * @author guochunmeng
+ *
  */
-
-@Getter
 @Setter
-public class PortalDesignConfig {
-
-    private Integer id;
-
-    private String name;
-
-    private Boolean submitted;
-
-    private String body;
-
-    private String note;
-
-    private String topic;
+@Getter
+public class DesignTypeConfig {
 
     private String designType;
 
