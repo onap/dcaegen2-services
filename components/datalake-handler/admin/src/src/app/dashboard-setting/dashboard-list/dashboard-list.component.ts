@@ -56,7 +56,14 @@ export class DashboardListComponent implements OnInit {
   ) {
     // Set page title
     this.adminService.setTitle("SIDEBAR.DASHBOARDLIST");
-    // this.getName();
+    this.initList();
+
+  }
+
+  ngOnInit() {
+    this.spinner.show();
+  }
+  initList(){
     this.initData().then(data => {
       this.initDbsList(this.dbList).then(data => {
         this.dbs = data;
@@ -64,11 +71,6 @@ export class DashboardListComponent implements OnInit {
       });
     });
   }
-
-  ngOnInit() {
-    this.spinner.show();
-  }
-
 
   async initData() {
     this.dbList = [];
@@ -124,7 +126,7 @@ export class DashboardListComponent implements OnInit {
           res => {
             console.log(res);
             if (res.statusCode == 200) {
-              this.initData();
+              this.initList();
               this.notificationService.success("SUCCESSFULLY_UPDATED");
             } else {
               this.notificationService.error("FAILED_UPDATED");
@@ -141,7 +143,7 @@ export class DashboardListComponent implements OnInit {
           res => {
             console.log(res);
             if (res.statusCode == 200) {
-              this.initData();
+              this.initList();
               this.notificationService.success("SUCCESSFULLY_DELETED");
             } else {
               this.dbs[thisIndex].enabled = true;
