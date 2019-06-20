@@ -4,8 +4,8 @@
     "TOPICS": "Topics",
     "DATABASE": "Database",
     "DASHBOARD":"Dashboard Setting",
-    "DASHBOARDLIST":"Dashboard",
-    "TEMPLATE":"Template",
+    "DASHBOARDLIST":"portal",
+    "TEMPLATE":"design",
     "ABOUT": "About"
   },
 
@@ -58,7 +58,7 @@
   "TOPICS_NAME":"Topic",
   "DEPLOY_TO_DASHBOARD":"Deploy",
   "DEPLOY":"Deploy",
-  "NEW_TEMPLATE":"New template",
+  "NEW_TEMPLATE":"New design",
   "TEMPLATE_BODY":"Body",
 
   "SUCCESSFULLY_CREARED":"Successfully created.",
