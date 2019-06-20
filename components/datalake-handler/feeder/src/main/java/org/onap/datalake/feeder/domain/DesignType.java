@@ -24,6 +24,7 @@ package org.onap.datalake.feeder.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
+import org.onap.datalake.feeder.dto.DesignTypeConfig;
 
 import javax.persistence.*;
 
@@ -52,5 +53,13 @@ public class DesignType {
 
     @Column(name = "`note`")
     private String note;
+
+    public DesignTypeConfig getDesignTypeConfig() {
+
+        DesignTypeConfig designTypeConfig = new DesignTypeConfig();
+        designTypeConfig.setDesignType(getName());
+        designTypeConfig.setDisplay(getDisplay());
+        return designTypeConfig;
+    }
 
 }

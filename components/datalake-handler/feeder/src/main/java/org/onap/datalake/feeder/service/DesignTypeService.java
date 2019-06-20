@@ -24,7 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.onap.datalake.feeder.domain.DesignType;
+import org.onap.datalake.feeder.dto.DesignTypeConfig;
 import org.onap.datalake.feeder.repository.DesignTypeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,22 +38,25 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DesignTypeService {
-	
+
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	DesignTypeRepository designTypeRepository;
-	
-	public List<String> listNames(){
+
+	public List<DesignTypeConfig> getDesignTypes(){
 		
-		List<String> names = new ArrayList<>();
-		
-		Iterable<DesignType> ret = designTypeRepository.findAll();
-		
-		for(DesignType designType:ret) {
-			
-			names.add(designType.getName());
-			
+		List<DesignType> designTypeList = null;
+		List<DesignTypeConfig> designTypeConfigList = new ArrayList<>();
+		designTypeList = (List<DesignType>)designTypeRepository.findAll();
+		if (designTypeList != null && designTypeList.size() > 0) {
+			log.info("DesignTypeList is not null");
+			for(DesignType designType : designTypeList) {
+				designTypeConfigList.add(designType.getDesignTypeConfig());
+			}
 		}
 		
-		return names;
+		return designTypeConfigList;
 	}
+
 }
