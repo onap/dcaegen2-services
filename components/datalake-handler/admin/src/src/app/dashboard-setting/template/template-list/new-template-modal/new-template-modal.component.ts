@@ -54,6 +54,7 @@ export class NewTemplateModalComponent implements OnInit {
   ) { }
   inputtemplateName = null;
   templatebody = null;
+  fileName = null;
 
   ngOnInit() {
     this.getTopicName();
@@ -66,7 +67,8 @@ export class NewTemplateModalComponent implements OnInit {
       body: this.template.body,
       note: this.template.note,
       topic: this.template.topic,
-      designType: this.template.designType
+      designType:  this.template.designType,
+      display: this.template.display
     };
     this.templateInput = feed;
   }
@@ -84,13 +86,27 @@ export class NewTemplateModalComponent implements OnInit {
     });
   }
 
+  jsReadFiles(){
+    var thiss =this;
+    var file =(<HTMLInputElement>document.querySelector("#f-file")).files[0];
+    this.fileName = file.name;
+    var reader = new FileReader();
+    reader.onload = function() {
+      console.log(this.result,"this.result");
+      thiss.templateInput.body = String(this.result);
+    }
+    reader.readAsText(file);
+  }
   passBack() {
     if(this.templateInput.name == '' || this.templateInput.name == undefined){
       return false;
     }
     this.template = this.templateInput;
     console.log(this.templateInput);
-    this.template.designType = this.templatetype.nativeElement.value;
+    this.template.display = this.templatetype.nativeElement.value;
+    this.template.designType = this.templatetypedata.find((item) => {
+        return item.display == this.template.display
+    }).designType;
     this.template.topic = this.topic.nativeElement.value;
     this.template.submitted = false;
     this.template.note = "";
