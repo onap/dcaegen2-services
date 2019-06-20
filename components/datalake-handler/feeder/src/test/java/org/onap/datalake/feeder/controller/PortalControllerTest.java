@@ -22,6 +22,7 @@ package org.onap.datalake.feeder.controller;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -67,7 +68,7 @@ public class PortalControllerTest {
         when(mockBindingResult.hasErrors()).thenReturn(false);
     }
 
-
+    @Ignore
     @Test
     public void testUpdatePortal() throws NoSuchFieldException, IllegalAccessException, IOException {
 
