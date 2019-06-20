@@ -65,7 +65,7 @@ export class CreateDashboardComponent implements OnInit {
 
 
   passBack() {
-    if(this.tempDb.host == '' || this.tempDb.host == undefined){
+    if(this.tempDb.host == null && this.tempDb.port == null && this.tempDb.login == null && this.tempDb.pass == null){
       return false;
     }
     this.dashboard = this.tempDb;

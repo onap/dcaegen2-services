@@ -21,6 +21,7 @@
         <div class="col-md-12">
           <label class="dl-h3" *ngIf="this.tempDb.name==undefined">{{ "NewDashboard" | translate}}</label>
           <label class="dl-h3" style="letter-spacing: 0" *ngIf="this.tempDb.name!=undefined">{{this.tempDb.name}}</label>
+          <i class="fas fa-plus fa-2x close-btn-icon" (click)="activeModal.close('Close click')"></i>
         </div>
       </div>
 
@@ -52,7 +53,7 @@
           <div class="col-md-3"><label class="dl-emphasis1" for="inputHost">{{ "HOST" | translate}}</label></div>
           <div class="col-md-4">
             <input [(ngModel)]="this.tempDb.host" class="form-control dl-input-text" id="inputHost" type="text"
-                   placeholder="{{ 'InputValue' | translate}}" [disabled]="!this.tempDb.enabled" [attr.disabled]='!this.tempDb.enabled?true:undefined'>
+                   placeholder="{{ 'InputValue' | translate}}" >
           </div>
         </div>
       </div>
@@ -62,7 +63,7 @@
           <div class="col-md-3"><label class="dl-emphasis1" for="inputPort">{{ "PORT" | translate}}</label></div>
           <div class="col-md-3">
             <input [(ngModel)]="this.tempDb.port" class="form-control dl-input-text" id="inputPort" type="text"
-                   placeholder="{{ 'InputValue' | translate}}" (input)="this.adminService.onKeyPressNumber($event)" [disabled]="!this.tempDb.enabled" [attr.disabled]='!this.tempDb.enabled?true:undefined'>
+                   placeholder="{{ 'InputValue' | translate}}" (input)="this.adminService.onKeyPressNumber($event)" >
           </div>
         </div>
       </div>
@@ -73,11 +74,11 @@
                                        for="inputUserName">{{ "AUTHENTICATION" | translate}}</label></div>
           <div class="col-sm-4">
             <input [(ngModel)]="this.tempDb.login" class="form-control dl-input-text" id="inputUserName" type="text"
-                   placeholder="{{ 'Username' | translate}}" [disabled]="!this.tempDb.enabled" [attr.disabled]='!this.tempDb.enabled?true:undefined'>
+                   placeholder="{{ 'Username' | translate}}" >
           </div>
           <div class="col-sm-4">
             <input [(ngModel)]="this.tempDb.pass" class="form-control dl-input-text" id="inputPass" type="password"
-                   placeholder=" {{ 'Password' | translate}}" [disabled]="!this.tempDb.enabled" [attr.disabled]='!this.tempDb.enabled?true:undefined'>
+                   placeholder=" {{ 'Password' | translate}}" >
           </div>
         </div>
       </div>
