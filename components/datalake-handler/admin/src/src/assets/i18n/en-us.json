@@ -3,9 +3,9 @@
     "FEDDFER": "DataLake Feeder",
     "TOPICS": "Topics",
     "DATABASE": "Database",
-    "DASHBOARD":"Dashboard Setting",
-    "DASHBOARDLIST":"portal",
-    "TEMPLATE":"design",
+    "DASHBOARD":"Portal Setting",
+    "DASHBOARDLIST":"Portal",
+    "TEMPLATE":"Design",
     "ABOUT": "About"
   },
 
@@ -39,12 +39,12 @@
   "TOPIC_DEFAULT_CONF_NOTICE": "Notice: This topic uses the default topics settings.",
 
   "HOME":"Home",
-  "ConfigDashboard":"Config Dashboard",
+  "ConfigDashboard":"Config Portal",
   "EDIT":"Edit",
   "OK":"OK",
   "Save":"Save",
   "Cancel":"Cancel",
-  "NewDashboard":"New dashboard",
+  "NewDashboard":"New Portal",
   "DestinationType":"Destination type",
   "InputValue":"Default",
   "Username":"Username",
@@ -60,6 +60,7 @@
   "DEPLOY":"Deploy",
   "NEW_TEMPLATE":"New design",
   "TEMPLATE_BODY":"Body",
+  "FIELUPLOAD":"fileUpload",
 
   "SUCCESSFULLY_CREARED":"Successfully created.",
   "FAILED_CREARED":"Failed updated.",

@@ -59,6 +59,7 @@
   "DEPLOY":"部署",
   "NEW_TEMPLATE":"新建模板",
   "TEMPLATE_BODY":"模板体",
+  "FIELUPLOAD":"文件上传",
 
   "SUCCESSFULLY_CREARED":"创建成功",
   "FAILED_CREARED":"创建失败",

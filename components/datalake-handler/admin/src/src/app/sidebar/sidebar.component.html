@@ -50,35 +50,23 @@ limitations under the License.
         </a>
       </li>
 
-      <li class="nav-item " >
-        <a  (click)="this.dashboard = !this.dashboard"
-            class="nav-link"
-            style="color: #ffffff!important;background: transparent!important;cursor: pointer"
-            [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
-            routerLink="{{dashboard==true?'/dashboard-setting/dashboard-list':'javascript:void(0)'}}"
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+           routerLink="/dashboard-setting/dashboard-list"
         >
-          <i class="fas fa-chart-line" aria-hidden="true">&nbsp;</i>
-          {{"SIDEBAR.DASHBOARD" | translate}}
+          <i class="fas fa-external-link-alt" aria-hidden="true">&nbsp;</i>
+          {{"SIDEBAR.DASHBOARDLIST" | translate}}
         </a>
-        <ul class="navbar-nav flex-column navbar-nav-nohover"  [ngbCollapse]="this.dashboard">
-          <li class="nav-item">
-            <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
-               routerLink="/dashboard-setting/dashboard-list"
-               style="padding-left: 23px;"
-            >
-              {{"SIDEBAR.DASHBOARDLIST" | translate}}
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
-               routerLink="dashboard-setting/template"
-               style="padding-left: 23px;"
-            >
-              {{"SIDEBAR.TEMPLATE" | translate}}
-            </a>
-          </li>
-        </ul>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+           routerLink="dashboard-setting/template"
+        >
+          <i class="far fa-file-image" aria-hidden="true">&nbsp;</i>
+          {{"SIDEBAR.TEMPLATE" | translate}}
+        </a>
+      </li>
+
 
       <li class="nav-item">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
