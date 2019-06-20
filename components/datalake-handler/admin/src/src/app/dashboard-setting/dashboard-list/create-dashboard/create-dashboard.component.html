@@ -21,6 +21,7 @@
         <div class="col-md-12">
           <label class="dl-h3" *ngIf="this.tempDb.name==undefined">{{ "NewDashboard" | translate}}</label>
           <label class="dl-h3" style="letter-spacing: 0" *ngIf="this.tempDb.name!=undefined">{{this.tempDb.name}}</label>
+          <i class="fas fa-plus fa-2x close-btn-icon" (click)="activeModal.close('Close click')"></i>
         </div>
       </div>
 

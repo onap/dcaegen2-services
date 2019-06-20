@@ -370,8 +370,8 @@ hr {
 
 .dl-input-text:disabled,
 .dl-input-text[readonly] {
-  background-color: #ffffff;
-  opacity: 1;
+  background-color: rgba(233, 236, 239, 0.5);
+  /*opacity: 1;*/
 }
 
 .input-group-text {
@@ -618,3 +618,16 @@ ngb-modal-window.templatess .modal-dialog-centered {
 .falsecheck{
   color:#BDBEC0
 }
+input::-webkit-input-placeholder{
+color:#313032!important;
+}
+:-moz-placeholder{
+  color: #313032 !important;
+}
+::-moz-placeholder{
+  color: #313032 !important;
+}
+:-ms-input-placeholder{
+  color: #313032 !important;
+}
+
