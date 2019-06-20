@@ -52,6 +52,7 @@ export class EditTemplateModalComponent implements OnInit {
 
   inputtemplateName = null;
   templateInputTitle = "";
+  fileName = null;
 
   ngOnInit() {
     this.getTopicName();
@@ -65,7 +66,8 @@ export class EditTemplateModalComponent implements OnInit {
       body: this.edittemplate.body,
       note: this.edittemplate.note,
       topic: this.edittemplate.topic,
-      designType: this.edittemplate.designType
+      designType:  this.edittemplate.designType,
+      display: this.edittemplate.display
     };
     this.templateInput = feed;
     this.templateInputTitle = ""+this.edittemplate.name;
@@ -83,12 +85,28 @@ export class EditTemplateModalComponent implements OnInit {
     });
   }
 
+  jsReadFiles(){
+    var thiss =this;
+    var file = (<HTMLInputElement>document.querySelector("#f-file")).files[0];
+    this.fileName = file.name;
+    var reader = new FileReader();
+    reader.onload = function() {
+      console.log(this.result);
+      thiss.templateInput.body = String(this.result);
+    }
+    reader.readAsText(file);
+  }
+
   passBack() {
     if(this.templateInput.name == '' || this.templateInput.name == undefined){
       return false;
     }
+    console.log(this.templateInput);
     this.edittemplate = this.templateInput;
-    this.edittemplate.designType = this.templatetype.nativeElement.value;
+    this.edittemplate.display = this.templatetype.nativeElement.value;
+    this.edittemplate.designType = this.templatetypedata.find((item) => {
+      return item.display == this.edittemplate.display
+    }).designType;
     this.edittemplate.topic = this.topic.nativeElement.value;
     this.passEntry.emit(this.edittemplate);
   }

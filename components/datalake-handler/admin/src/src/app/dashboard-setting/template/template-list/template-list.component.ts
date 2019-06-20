@@ -103,6 +103,7 @@ export class TemplateListComponent {
         note: data["note"],
         topic: data["topic"],
         designType: data["designType"],
+        display: data["display"],
       };
       t.push(feed);
     }

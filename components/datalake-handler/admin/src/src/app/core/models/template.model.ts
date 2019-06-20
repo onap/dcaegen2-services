@@ -39,6 +39,7 @@ export class Template {
     note:string;
     topic: string;
     designType: string;
+    display:string;
   }
 
 export class newTemplate {
@@ -48,4 +49,5 @@ export class newTemplate {
   note:string;
   topic: string;
   designType: string;
+  display:string;
 }
