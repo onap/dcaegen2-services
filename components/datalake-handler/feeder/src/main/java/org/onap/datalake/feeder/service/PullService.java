@@ -52,7 +52,7 @@ public class PullService {
 
 	@Autowired
 	private TopicConfigPollingService topicConfigPollingService;
-	
+
 	@Autowired
 	private ApplicationConfiguration config;
 
@@ -80,7 +80,7 @@ public class PullService {
 		for (int i = 0; i < numConsumers; i++) {
 			executorService.submit(puller);
 		}
-		
+
 		topicConfigPollingThread = new Thread(topicConfigPollingService);
 		topicConfigPollingThread.setName("TopicConfigPolling");
 		topicConfigPollingThread.start();
@@ -98,22 +98,27 @@ public class PullService {
 			return;
 		}
 
-		logger.info("stop pulling ...");
-		puller.shutdown();
-
-		logger.info("stop TopicConfigPollingService ...");
-		topicConfigPollingService.shutdown();
-
+		config.getShutdownLock().writeLock().lock();
 		try {
+			logger.info("stop pulling ...");
+			puller.shutdown();
+
+			logger.info("stop TopicConfigPollingService ...");
+			topicConfigPollingService.shutdown();
+
 			topicConfigPollingThread.join();
-			
+
 			executorService.shutdown();
 			executorService.awaitTermination(120L, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
-			logger.error("executor.awaitTermination", e);
+			logger.error("shutdown(): executor.awaitTermination", e);
 			Thread.currentThread().interrupt();
+		} catch (Exception e) {
+			logger.error("shutdown error.", e);
+		} finally {
+			config.getShutdownLock().writeLock().unlock();
 		}
-
+		
 		isRunning = false;
 	}
 

@@ -131,7 +131,14 @@ public class MongodbService {
 
 	@PreDestroy
 	public void cleanUp() {
-		mongoClient.close();
+		config.getShutdownLock().readLock().lock();
+
+		try {
+			log.info("mongoClient.close() at cleanUp.");
+			mongoClient.close();
+		} finally {
+			config.getShutdownLock().readLock().unlock();
+		}
 	}
 
 	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) {

@@ -93,7 +93,14 @@ public class CouchbaseService {
 
 	@PreDestroy
 	public void cleanUp() {
-		bucket.close();
+		config.getShutdownLock().readLock().lock();
+
+		try {
+			log.info("bucket.close() at cleanUp.");
+			bucket.close();
+		} finally {
+			config.getShutdownLock().readLock().unlock();
+		}
 	}
 
 	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) {

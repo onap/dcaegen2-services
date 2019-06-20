@@ -20,6 +20,8 @@
 
 package org.onap.datalake.feeder.config;
 
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -41,6 +43,8 @@ import lombok.Setter;
 @EnableAutoConfiguration
 public class ApplicationConfiguration {
 
+	final ReentrantReadWriteLock shutdownLock = new ReentrantReadWriteLock();
+	
 	//App general
 	private boolean async;
 	private boolean enableSSL;

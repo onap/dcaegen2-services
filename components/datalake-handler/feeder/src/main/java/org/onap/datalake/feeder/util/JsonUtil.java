@@ -22,7 +22,6 @@ package org.onap.datalake.feeder.util;
 
 import java.util.HashMap;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
