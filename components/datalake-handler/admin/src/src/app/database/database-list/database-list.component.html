@@ -21,21 +21,9 @@ limitations under the License.
 <div class="d-flex flex-wrap">
   <!-- Database list -->
   <div *ngFor="let db of this.dbs" class="col-sm-3 db-block">
-    <div class="db-panel">
+    <div class="db-panel" (click)="this.openDetailModal(db.name)" style="cursor: pointer;padding: 40px;">
       <div class="d-flex flex-column align-content-center">
-        <div class="ml-auto dropdown db-dropdown mr-2" data-boundary="window">
-          <a class="badge badge-light db-dropdown" data-toggle="dropdown">
-            <i class="fas fa-ellipsis-h fa-2x db-config-icon"></i>
-          </a>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" type="button" (click)="this.deleteDb(db.name)">
-              <i class="fas fa-times db-config-icon"></i> {{ 'DELETE' | translate }}
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <button type="button" class="btn" (click)="this.openDetailModal(db.name)">
+        <div class="db-box">
             <div class="align-self-center" style="height: 130px;">
               <!-- Couchbase -->
               <div class="p-0" *ngIf="db.name == 'Couchbase'">
@@ -234,48 +222,14 @@ limitations under the License.
                 </span>
               </div>
             </div>
-
             <div class="mt-auto">
+              <i class="fa fa-check-circle" aria-hidden="true"
+                 [ngClass]="{'truecheck':db.enabled == true,'falsecheck':db.enabled == false}"></i>
               {{ db.name }}
             </div>
-          </button>
         </div>
 
       </div>
     </div>
   </div>
-
-  <!-- Add -->
-  <div class="col-sm-3 db-block">
-    <div class="db-panel">
-      <div class="d-flex flex-column align-content-center">
-        <div class="ml-auto dropdown db-dropdown mr-2" style="visibility: hidden;" data-boundary="window">
-          <a class="badge badge-light db-dropdown" data-toggle="dropdown">
-            <i class="fas fa-ellipsis-h fa-2x db-config-icon"></i>
-          </a>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" type="button">
-              <i class="fas fa-times db-config-icon"></i> Delete
-            </button>
-          </div>
-        </div>
-
-        <div>
-          <button type="button" class="btn" (click)="this.openAddModal()">
-            <div class="align-self-center" style="height: 130px;">
-              <div style="width:100px; height:100px;">
-                <i class="fas fa-plus fa-3x pt-4 dl-icon-enable"></i>
-              </div>
-            </div>
-
-            <div class="mt-auto" style="visibility: hidden;">
-              add
-            </div>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
 </div>
