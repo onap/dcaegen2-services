@@ -37,8 +37,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Topic;
 
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CouchbaseServiceTest {
@@ -141,6 +144,8 @@ public class CouchbaseServiceTest {
     public void testCleanupBucket() {
         CouchbaseService couchbaseService = new CouchbaseService();
         couchbaseService.bucket = bucket;
+    	ApplicationConfiguration appConfig = new ApplicationConfiguration();
+        couchbaseService.config = appConfig;
         couchbaseService.cleanUp();
     }
 

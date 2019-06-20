@@ -83,7 +83,7 @@ public class TopicServiceTest {
 	}
 
 
-	@Test(expected = IOException.class)
+	@Test
 	public void testGetEffectiveTopic() throws IOException {
 		String name = "a";
 		Topic topic = new Topic(name);
@@ -96,7 +96,6 @@ public class TopicServiceTest {
 		when(topicRepository.findById(DEFAULT_TOPIC_NAME)).thenReturn(Optional.of(topic));
 		when(topicRepository.findById(name)).thenReturn(Optional.of(topic));
 		when(topicRepository.findById(null)).thenReturn(Optional.empty());
-		doThrow(IOException.class).when(elasticsearchService).ensureTableExist(name);
 
 		assertEquals(topicService.getEffectiveTopic(name), topicService.getEffectiveTopic(name, false));
 

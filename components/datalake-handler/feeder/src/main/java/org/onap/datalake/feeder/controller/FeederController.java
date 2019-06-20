@@ -58,9 +58,12 @@ public class FeederController {
     @ResponseBody
 	@ApiOperation(value="Start pulling data.")
     public String start() throws IOException {
-    	log.info("DataLake feeder starting to pull data from DMaaP...");
+    	log.info("Going to start DataLake feeder ...");
     	if(pullService.isRunning() == false) {
             pullService.start();
+        	log.info("DataLake feeder started.");
+        }else {
+        	log.info("DataLake feeder already started.");        	
         }
         return "{\"running\": true}";
     }
@@ -72,11 +75,14 @@ public class FeederController {
     @ResponseBody
 	@ApiOperation(value="Stop pulling data.")
     public String stop() {
+    	log.info("Going to stop DataLake feeder ...");
         if(pullService.isRunning() == true)
         {
             pullService.shutdown();
+        	log.info("DataLake feeder is stopped.");
+        }else {
+        	log.info("DataLake feeder already stopped.");
         }
-    	log.info("DataLake feeder is stopped.");
     	return "{\"running\": false}";
     }
     /**

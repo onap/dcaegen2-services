@@ -33,10 +33,13 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Topic;
 
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MongodbServiceTest {
@@ -62,7 +65,7 @@ public class MongodbServiceTest {
 
     @Test
     public void cleanUp() {
-
+		when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
         mongodbService.cleanUp();
     }
 

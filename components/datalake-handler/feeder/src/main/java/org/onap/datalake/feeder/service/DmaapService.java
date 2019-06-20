@@ -62,8 +62,15 @@ public class DmaapService {
 
 	@PreDestroy
 	public void cleanUp() throws InterruptedException {
-		if (zk != null) {
-			zk.close();
+		config.getShutdownLock().readLock().lock();
+
+		try {
+			if (zk != null) {
+				log.info("cleanUp() called, close zk.");
+				zk.close();
+			}
+		} finally {
+			config.getShutdownLock().readLock().unlock();
 		}
 	}
 

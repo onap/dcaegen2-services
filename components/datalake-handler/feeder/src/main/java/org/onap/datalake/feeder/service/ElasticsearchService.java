@@ -73,7 +73,7 @@ public class ElasticsearchService {
 
 	private RestHighLevelClient client;
 	ActionListener<BulkResponse> listener;
-
+	
 	//ES Encrypted communication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_encrypted_communication.html#_encrypted_communication
 	//Basic authentication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_basic_authentication.html
 	@PostConstruct
@@ -89,7 +89,9 @@ public class ElasticsearchService {
 		listener = new ActionListener<BulkResponse>() {
 			@Override
 			public void onResponse(BulkResponse bulkResponse) {
-
+				if(bulkResponse.hasFailures()) {
+					log.debug(bulkResponse.buildFailureMessage());
+				}
 			}
 
 			@Override
@@ -101,7 +103,16 @@ public class ElasticsearchService {
 
 	@PreDestroy
 	public void cleanUp() throws IOException {
-		client.close();
+		config.getShutdownLock().readLock().lock();
+
+		try {
+			log.info("cleanUp() closing Elasticsearch client.");
+			client.close();
+		} catch (IOException e) {
+			log.error("client.close() at cleanUp.", e);
+		} finally {
+			config.getShutdownLock().readLock().unlock();
+		}
 	}
 
 	public void ensureTableExist(String topic) throws IOException {
@@ -120,6 +131,7 @@ public class ElasticsearchService {
 
 	//TTL is not supported in Elasticsearch 5.0 and later, what can we do? FIXME
 	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) {
+		
 		BulkRequest request = new BulkRequest();
 
 		for (JSONObject json : jsons) {
@@ -128,11 +140,11 @@ public class ElasticsearchService {
 				if (found) {
 					continue;
 				}
-			}
-
+			}			
+			
 			String id = topic.getMessageId(json); //id can be null
-
-			request.add(new IndexRequest(topic.getName().toLowerCase(), config.getElasticsearchType(), id).source(json.toString(), XContentType.JSON));
+			
+ 			request.add(new IndexRequest(topic.getName().toLowerCase(), config.getElasticsearchType(), id).source(json.toString(), XContentType.JSON));
 		}
 
 		log.debug("saving text to topic = {}, batch count = {} ", topic, jsons.size());
@@ -141,13 +153,17 @@ public class ElasticsearchService {
 			client.bulkAsync(request, RequestOptions.DEFAULT, listener);
 		} else {
 			try {
-				client.bulk(request, RequestOptions.DEFAULT);
+				BulkResponse bulkResponse = client.bulk(request, RequestOptions.DEFAULT);
+				if(bulkResponse.hasFailures()) {
+					log.debug(bulkResponse.buildFailureMessage());
+				}
 			} catch (IOException e) {
 				log.error(topic.getName(), e);
 			}
 		}
+		
 	}
-
+ 	
 	/**
 	 *
 	 * @param topic

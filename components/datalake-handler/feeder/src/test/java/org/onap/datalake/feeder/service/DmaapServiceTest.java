@@ -26,6 +26,7 @@ import static org.mockito.Mockito.when;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,6 +59,8 @@ public class DmaapServiceTest {
 //		when(config.getDmaapKafkaExclude()).thenReturn(new String[] { "AAI-EVENT" });
         when(config.getDmaapZookeeperHostPort()).thenReturn(DMAPP_ZOOKEEPER_HOST_PORT);
         assertNotEquals(list, dmaapService.getTopics());
+
+		when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
     	dmaapService.cleanUp();
     }
 

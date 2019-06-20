@@ -37,6 +37,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.util.ShutdownHookManager;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.dto.TopicConfig;
@@ -93,7 +94,7 @@ public class HdfsService {
 					lastFlush = System.currentTimeMillis();
 				}
 			} catch (IOException e) {
-				log.error("error saving to HDFS." + topic, e);
+				log.error("{} error saving to HDFS. {}", topic, e.getMessage());
 			}
 		}
 
@@ -134,11 +135,12 @@ public class HdfsService {
 					out.writeUTF(message);
 					out.write('\n');
 				} catch (IOException e) {
-					log.error("error writing to HDFS.", e);
+					log.error("error writing to HDFS. {}", e.getMessage());
 				}
 			});
 
 			out.close();
+			log.debug("Done writing {} to HDFS {}", bufferList.size(), filePath);
 		}
 	}
 
@@ -161,6 +163,10 @@ public class HdfsService {
 
 			fileSystem = FileSystem.get(hdfsConfig);
 
+			//disable Hadoop Shutdown Hook, we need the HDFS connection to flush data
+			ShutdownHookManager hadoopShutdownHookManager = ShutdownHookManager.get();
+			hadoopShutdownHookManager.clearShutdownHooks();
+
 			isReady = true;
 		} catch (Exception ex) {
 			log.error("error connection to HDFS.", ex);
@@ -170,20 +176,27 @@ public class HdfsService {
 
 	@PreDestroy
 	public void cleanUp() {
+		config.getShutdownLock().readLock().lock();
+
 		try {
+			log.info("fileSystem.close() at cleanUp.");
 			flush();
 			fileSystem.close();
 		} catch (IOException e) {
 			log.error("fileSystem.close() at cleanUp.", e);
+		} finally {
+			config.getShutdownLock().readLock().unlock();
 		}
 	}
 
 	public void flush() {
+		log.info("Force flush ALL data, regardless of stall");
 		bufferLocal.get().forEach((topic, buffer) -> buffer.flush(topic));
 	}
 
 	//if no new data comes in for a topic for a while, need to flush its buffer
 	public void flushStall() {
+		log.debug("Flush stall data");
 		bufferLocal.get().forEach((topic, buffer) -> buffer.flushStall(topic));
 	}
 
@@ -198,7 +211,7 @@ public class HdfsService {
 		if (!config.isAsync() || buffer.getData().size() >= config.getHdfsBatchSize()) {
 			buffer.flush(topicStr);
 		} else {
-			log.debug("buffer size too small to flush: bufferData.size() {} < config.getHdfsBatchSize() {}", buffer.getData().size(), config.getHdfsBatchSize());
+			log.debug("buffer size too small to flush {}: bufferData.size() {} < config.getHdfsBatchSize() {}", topicStr, buffer.getData().size(), config.getHdfsBatchSize());
 		}
 	}
 
