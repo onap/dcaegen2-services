@@ -53,6 +53,8 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PortalDesignControllerTest {
+  
+    static String Kibana_Dashboard_Import_Api = "/api/kibana/dashboards/import?exclude=index-pattern";
 
     @Mock
     private HttpServletResponse httpServletResponse;
@@ -140,8 +142,8 @@ public class PortalDesignControllerTest {
         PortalDesign testPortalDesign = fillDomain();
         Integer id = 1;
         testPortalDesign.setId(1);
+      	when(applicationConfiguration.getKibanaDashboardImportApi()).thenReturn(Kibana_Dashboard_Import_Api);
         when(portalDesignRepository.findById(id)).thenReturn((Optional.of(testPortalDesign)));
-        when(applicationConfiguration.getKibanaDashboardImportApi()).thenReturn("/api/kibana/dashboards/import?exclude=index-pattern");
         testPortalDesignController.deployPortalDesign(id, httpServletResponse);
     }
 
