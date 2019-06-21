@@ -65,7 +65,6 @@ import io.swagger.annotations.ApiOperation;
  * @contributor Kate Hsuan @ QCT
  */
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/topics", produces = { MediaType.APPLICATION_JSON_VALUE })//, consumes= {MediaType.APPLICATION_JSON_UTF8_VALUE})
 public class TopicController {
