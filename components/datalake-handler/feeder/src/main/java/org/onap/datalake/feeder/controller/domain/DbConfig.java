@@ -40,6 +40,6 @@ public class DbConfig {
     private String password;
     private boolean encrypt;
     private String database;
-    private int port;
+    private Integer port;
     private String poperties;
 }
