@@ -51,7 +51,7 @@ import io.swagger.annotations.ApiResponses;
  * @author Guobiao Mo
  *
  */
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/dbs", produces = { MediaType.APPLICATION_JSON_VALUE })
 
@@ -226,6 +226,45 @@ public class DbController {
 
 		}
 		return topics;
+	}
+
+
+	//Update Db
+	@PutMapping("")
+	@ResponseBody
+	@ApiOperation(value="Update a database.")
+	public PostReturnBody<DbConfig> modifyDb(@RequestBody DbConfig dbConfig, BindingResult result, HttpServletResponse response) throws IOException {
+
+		if (result.hasErrors()) {
+			sendError(response, 400, "Error parsing DB: " + result.toString());
+			return null;
+		}
+
+		Db oldDb = dbService.getDb(dbConfig.getName());
+		if (oldDb == null) {
+			sendError(response, 404, "Db not found: " + dbConfig.getName());
+			return null;
+		} else {
+			oldDb.setHost(dbConfig.getHost());
+			oldDb.setPort(dbConfig.getPort());
+			oldDb.setEnabled(dbConfig.isEnabled());
+			oldDb.setLogin(dbConfig.getLogin());
+			oldDb.setPass(dbConfig.getPassword());
+			oldDb.setEncrypt(dbConfig.isEncrypt());
+			if (!oldDb.getName().equals("Elecsticsearch") || !oldDb.getName().equals("Druid")) {
+				oldDb.setDatabase(dbConfig.getDatabase());
+			}
+
+			dbRepository.save(oldDb);
+			DbConfig retMsg;
+			PostReturnBody<DbConfig> retBody = new PostReturnBody<>();
+			retMsg = new DbConfig();
+			composeRetMessagefromDbConfig(oldDb, retMsg);
+			retBody.setReturnBody(retMsg);
+			retBody.setStatusCode(200);
+			return retBody;
+		}
+
 	}
 
 
