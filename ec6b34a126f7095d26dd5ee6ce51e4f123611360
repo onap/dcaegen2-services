@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c16ed28_ed4d7941",
+        "filename": "components/datalake-handler/admin/src/src/app/core/models/topic.model.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-06-21T09:30:49Z",
+      "side": 1,
+      "message": "Why do we need this model \"newTopic\"? It\u0027s duplicated.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "ec6b34a126f7095d26dd5ee6ce51e4f123611360",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
