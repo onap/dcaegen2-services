@@ -45,6 +45,7 @@ public class TopicConfig {
 	private String login;
 	private String password;
 	private List<String> sinkdbs;
+	private List<String> enabledSinkdbs;//only include enabled db
 	private boolean enabled;
 	private boolean saveRaw;
 	private String dataFormat;
@@ -63,27 +64,27 @@ public class TopicConfig {
 	}
 
 	public boolean supportHdfs() {
-		return containDb("HDFS");
+		return supportDb("HDFS");
 	}
 
 	public boolean supportElasticsearch() {
-		return containDb("Elasticsearch");//TODO string hard codes
+		return supportDb("Elasticsearch");//TODO string hard codes
 	}
 
 	public boolean supportCouchbase() {
-		return containDb("Couchbase");
+		return supportDb("Couchbase");
 	}
 
 	public boolean supportDruid() {
-		return containDb("Druid");
+		return supportDb("Druid");
 	}
 
 	public boolean supportMongoDB() {
-		return containDb("MongoDB");
+		return supportDb("MongoDB");
 	}
 
-	private boolean containDb(String dbName) {
-		return (sinkdbs != null && sinkdbs.contains(dbName));
+	private boolean supportDb(String dbName) {
+		return (enabledSinkdbs != null && enabledSinkdbs.contains(dbName));
 	}
 
 	//extract DB id from JSON attributes, support multiple attributes
@@ -128,7 +129,7 @@ public class TopicConfig {
 
 	@Override
 	public String toString() {
-		return name;
+		return String.format("Topic %s(enabled=%s, enabledSinkdbs=%s)", name, enabled, enabledSinkdbs);
 	}
 
 	@Override

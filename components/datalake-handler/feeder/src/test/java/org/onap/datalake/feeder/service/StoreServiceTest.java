@@ -20,6 +20,7 @@
 
 package org.onap.datalake.feeder.service;
 
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.lang.reflect.InvocationTargetException;
@@ -108,6 +109,12 @@ public class StoreServiceTest {
 		topicConfig.getSinkdbs().add("MongoDB");
 		topicConfig.getSinkdbs().add("HDFS");
 
+
+		topicConfig.setEnabledSinkdbs(new ArrayList<>());
+		topicConfig.getEnabledSinkdbs().add("Elasticsearch");
+		assertTrue(topicConfig.supportElasticsearch());
+		
+		
 		createTopicConfig("test4", "TEXT");
 
 		when(config.getTimestampLabel()).thenReturn("ts");

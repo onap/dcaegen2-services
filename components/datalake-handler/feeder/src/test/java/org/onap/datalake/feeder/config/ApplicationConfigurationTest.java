@@ -27,6 +27,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -57,6 +58,10 @@ public class ApplicationConfigurationTest {
         assertNotNull(config.getDmaapKafkaGroup());
         assertTrue(config.getDmaapKafkaTimeout() > 0L);
         assertTrue(config.getDmaapCheckNewTopicInterval() > 0);
+        
+        assertNull(config.getDmaapKafkaLogin());
+        assertNull(config.getDmaapKafkaPass());
+        assertNull(config.getDmaapKafkaSecurityProtocol());
 
         assertTrue(config.getKafkaConsumerCount() > 0);
 

@@ -99,11 +99,14 @@ public class TopicConfigTest {
 
         TopicConfig testTopicConfig = testTopic.getTopicConfig();
         testTopicConfig.setSinkdbs(null);
+        testTopicConfig.setEnabledSinkdbs(null);
         assertFalse(testTopicConfig.supportElasticsearch());
         assertNull(testTopicConfig.getDataFormat2());
                 
         testTopic.setDbs(new HashSet<>());
-        testTopic.getDbs().add(new Db("Elasticsearch"));
+        Db esDb = new Db("Elasticsearch");
+        esDb.setEnabled(true);
+        testTopic.getDbs().add(esDb);
         
         testTopicConfig = testTopic.getTopicConfig();
 
