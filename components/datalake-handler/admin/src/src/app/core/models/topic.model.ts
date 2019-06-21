@@ -37,3 +37,16 @@ export class Topic {
   // for UI display
   type: boolean; // 1: Configure 0: Unconfiure
 }
+
+export class newTopic {
+  name: string;
+  login: string;
+  password: string;
+  sinkdbs: any;
+  enabled: boolean;
+  saveRaw: boolean;
+  dataFormat: string;
+  ttl: number;
+  correlateClearedMessage: boolean;
+  messageIdPath: string;
+}

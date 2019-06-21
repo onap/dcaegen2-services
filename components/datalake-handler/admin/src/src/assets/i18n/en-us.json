@@ -21,6 +21,7 @@
   "ID_EXTRACTION": "ID extraction",
   "CONFIGURED": "Configured",
   "UNCONFIGURED": "Unconfigured",
+  "NEW_TOPIC":"New topic",
 
   "DATABASE_CONNECTIONS": "Database connections",
   "BUCKET": "Bucket",
