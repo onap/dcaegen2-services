@@ -21,6 +21,7 @@
   "ID_EXTRACTION": "ID提取​",
   "CONFIGURED": "已配置",
   "UNCONFIGURED": "未配置​",
+  "NEW_TOPIC":"新建主题",
 
   "DATABASE_CONNECTIONS": "数据库连接​",
   "BUCKET": "Bucket",

@@ -116,9 +116,19 @@ export class RestApiService {
     );
   }
 
+  addNewTopic(t: Topic): Observable<any> {
+    return this.http
+      .post<any>(prefix + "topics", t)
+      .pipe(
+        retry(1),
+        tap(_ => console.log(`add topic name=${t.name}`)),
+        catchError(this.handleError)
+      );
+  }
+
   addTopic(t: Topic): Observable<any> {
     return this.http
-      .post<any>(prefix + "topics", JSON.stringify(t), httpOptions)
+      .post<any>(prefix + "topics", t)
       .pipe(
         retry(1),
         tap(_ => console.log(`add topic name=${t.name}`)),
@@ -128,7 +138,7 @@ export class RestApiService {
 
   upadteTopic(t: Topic): Observable<any> {
     return this.http
-      .put(prefix + "topics/" + t.name, JSON.stringify(t), httpOptions)
+      .put(prefix + "topics/" + t.name, t)
       .pipe(
         retry(1),
         tap(_ => this.extractData),
@@ -137,7 +147,7 @@ export class RestApiService {
   }
 
   deleteTopic(name: string): Observable<any> {
-    return this.http.delete(prefix + "topics/" + name, httpOptions).pipe(
+    return this.http.delete(prefix + "topics/" + name).pipe(
       retry(1),
       tap(_ => console.log(`deleted topic name=${name}`)),
       catchError(this.handleError)
