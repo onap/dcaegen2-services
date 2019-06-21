@@ -20,8 +20,11 @@
 
 package org.onap.datalake.feeder.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.onap.datalake.feeder.domain.DesignType;
+import org.onap.datalake.feeder.dto.DesignTypeConfig;
 import org.onap.datalake.feeder.service.DesignTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,7 +37,6 @@ import io.swagger.annotations.ApiOperation;
  *
  * @author guochunmeng
  */
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/designTypes", produces = { MediaType.APPLICATION_JSON_VALUE })
 public class DesignTypeController {
@@ -44,11 +46,9 @@ public class DesignTypeController {
 	
 	@GetMapping("")
 	@ResponseBody
-	@ApiOperation(value="List all designTypes names")
-    public List<String> getTemplateTypeName() {
-
-        return designTypeService.listNames();
-
+	@ApiOperation(value="List all designTypes")
+    public List<DesignTypeConfig> getDesignType() {
+		return designTypeService.getDesignTypes();
     }
     
 }
