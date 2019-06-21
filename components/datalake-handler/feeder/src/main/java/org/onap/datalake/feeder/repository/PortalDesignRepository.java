@@ -21,7 +21,6 @@
 package org.onap.datalake.feeder.repository;
 
 import org.onap.datalake.feeder.domain.PortalDesign;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -33,7 +32,5 @@ import java.util.List;
  */
 
 public interface PortalDesignRepository extends CrudRepository<PortalDesign, Integer> {
-    
-    PortalDesign findByName(String name);
     
 }
