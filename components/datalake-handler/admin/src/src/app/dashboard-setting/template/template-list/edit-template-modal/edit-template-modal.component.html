@@ -34,10 +34,10 @@
 
         <div class="form-group">
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
               <label class="dl-emphasis1" for="inputtemplateName">{{ 'TEMPLATE_NAME' | translate }}</label>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
               <input  #inputtemplateName [(ngModel)]="this.templateInput.name" class="form-control dl-input-text" type="text" placeholder="Username" />
             </div>
           </div>
@@ -45,10 +45,10 @@
 
         <div class="form-group">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <label class="dl-emphasis1" for="templatebody">{{ 'TEMPLATE_BODY'| translate }}</label>
               </div>
-              <div class="col-md-9">
+              <div class="col-md-10">
                   <textarea #templatebody [(ngModel)]="this.templateInput.body"  class="form-control dl-input-text" placeholder="Put the template design here..." rows="3" style="min-height: 300px!important;"></textarea>
               </div>
             </div>
@@ -56,12 +56,32 @@
 
         <div class="form-group">
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
+              <label class="dl-emphasis1" style="line-height: 2.25rem">{{ 'FIELUPLOAD' | translate }}</label>
+            </div>
+            <div class="col-md-2 p-1" style="position: relative;
+    margin-left: 0.5rem;">
+              <input type="file" id="f-file" (change)="this.jsReadFiles()" />
+              <label for="f-file" style="height: 100%;width: 100%;">
+                <button type="button" class="btn dl-btn-dark btn-block" style="cursor: pointer">
+                  {{ 'FIELUPLOAD' | translate }}
+                </button>
+              </label>
+            </div>
+            <div class="col-md-2">
+              <span style="line-height: 2.25rem">{{this.fileName}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-2">
               <label class="dl-emphasis1">{{ 'TEMPLATE_TYPE' | translate }}</label>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-8">
               <select #templatetype class="custom-select dl-input-text" id="selDataFormat">
-                <option *ngFor="let item of templatetypedata" [selected]="item == this.templateInput.designType">{{item}}</option>
+                <option *ngFor="let item of templatetypedata" [selected]="item.display == this.templateInput.display">{{item.display}}</option>
               </select>
             </div>
           </div>
@@ -69,10 +89,10 @@
 
         <div class="form-group">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-2">
                 <label class="dl-emphasis1">{{ 'TOPICS_NAME' | translate }}</label>
               </div>
-              <div class="col-md-7">
+              <div class="col-md-8">
                 <select #topic class="custom-select dl-input-text" id="selDataFormat">
                   <option *ngFor="let item of topicname" [selected]="item == this.templateInput.topic">{{item}}</option>
                 </select>
