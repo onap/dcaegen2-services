@@ -55,7 +55,7 @@ public class DesignTypeControllerTest {
         DesignType testDesignType = fillDomain();
         List<String> designTypeNamesList = new ArrayList<>();
         designTypeNamesList.add(testDesignType.getName());
-        assertEquals(1, testDesignTypeController.getTemplateTypeName().size());
+        assertEquals(1, testDesignTypeController.getDesignType().size());
     }
 
     public void setAccessPrivateFields(DesignTypeController designTypeController) throws NoSuchFieldException, IllegalAccessException {

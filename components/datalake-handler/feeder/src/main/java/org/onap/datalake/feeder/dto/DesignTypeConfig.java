@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 China Mobile
+ * Copyright 2019 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,48 +18,23 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.datalake.feeder.domain;
+package org.onap.datalake.feeder.dto;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
-import org.onap.datalake.feeder.dto.DesignTypeConfig;
-
-import javax.persistence.*;
 
 /**
- * Domain class representing design_type
+ * JSON request body for DesignType Config.
  *
  * @author guochunmeng
+ *
  */
-@Getter
 @Setter
-@Entity
-@Table(name = "design_type")
-public class DesignType {
+@Getter
+public class DesignTypeConfig {
 
-    @Id
-    @Column(name = "`name`")
-    private String name;
+    private String designType;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="portal")
-    @JsonBackReference
-    private Portal portal;
-
-    @Column(name = "`display`")
     private String display;
-
-    @Column(name = "`note`")
-    private String note;
-
-    public DesignTypeConfig getDesignTypeConfig() {
-
-        DesignTypeConfig designTypeConfig = new DesignTypeConfig();
-        designTypeConfig.setDesignType(getName());
-        designTypeConfig.setDisplay(getDisplay());
-        return designTypeConfig;
-    }
 
 }
