@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31e32d70_b8cf26bf",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-22T20:08:14Z",
+      "side": 1,
+      "message": "only keep one of the 2 update methods",
+      "range": {
+        "startLine": 150,
+        "startChar": 33,
+        "endLine": 150,
+        "endChar": 41
+      },
+      "revId": "a53c8681091d66b0b61b2468a7f3a38601530fc2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae60c314_4a34e2f1",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/domain/DbConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-22T20:08:14Z",
+      "side": 1,
+      "message": "move this class to org.onap.datalake.feeder.dto",
+      "range": {
+        "startLine": 20,
+        "startChar": 8,
+        "endLine": 20,
+        "endChar": 50
+      },
+      "revId": "a53c8681091d66b0b61b2468a7f3a38601530fc2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
