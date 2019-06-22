@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2e143b3_1f65ab32",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/PortalDesignService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-22T20:30:22Z",
+      "side": 1,
+      "message": "combine these 2 methods",
+      "range": {
+        "startLine": 165,
+        "startChar": 2,
+        "endLine": 167,
+        "endChar": 68
+      },
+      "revId": "a0618e614f5866e3cd44b7c634229e547f591172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68cc9318_62b3cf66",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/PortalDesignService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-06-22T20:30:22Z",
+      "side": 1,
+      "message": "combine these 2 methods",
+      "range": {
+        "startLine": 191,
+        "startChar": 22,
+        "endLine": 192,
+        "endChar": 64
+      },
+      "revId": "a0618e614f5866e3cd44b7c634229e547f591172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
