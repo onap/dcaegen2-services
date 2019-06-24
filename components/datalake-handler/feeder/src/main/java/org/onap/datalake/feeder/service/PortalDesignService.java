@@ -20,12 +20,10 @@
 
 package org.onap.datalake.feeder.service;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
-import com.google.gson.Gson;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.DesignType;
 import org.onap.datalake.feeder.domain.Portal;
@@ -35,6 +33,8 @@ import org.onap.datalake.feeder.dto.PortalDesignConfig;
 import org.onap.datalake.feeder.repository.DesignTypeRepository;
 import org.onap.datalake.feeder.repository.PortalDesignRepository;
 import org.onap.datalake.feeder.util.HttpClientUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +46,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PortalDesignService {
-	
+
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+	static String POST_FLAG;
+
     @Autowired
     private PortalDesignRepository portalDesignRepository;
 
@@ -58,6 +62,9 @@ public class PortalDesignService {
 
 	@Autowired
 	private ApplicationConfiguration applicationConfiguration;
+
+	@Autowired
+	private DbService dbService;
 
 	public PortalDesign fillPortalDesignConfiguration(PortalDesignConfig portalDesignConfig) throws Exception
 	{
@@ -73,13 +80,9 @@ public class PortalDesignService {
 	private void fillPortalDesign(PortalDesignConfig portalDesignConfig, PortalDesign portalDesign) throws IllegalArgumentException {
 
 		portalDesign.setId(portalDesignConfig.getId());
-
 		portalDesign.setBody(portalDesignConfig.getBody());
-
 		portalDesign.setName(portalDesignConfig.getName());
-
 		portalDesign.setNote(portalDesignConfig.getNote());
-
 		portalDesign.setSubmitted(portalDesignConfig.getSubmitted());
 
 		if (portalDesignConfig.getTopic() != null) {
@@ -108,13 +111,46 @@ public class PortalDesignService {
 	}
 
 
-	private String kibanaImportUrl(String host, Integer port){
-		return "http://"+host+":"+port+applicationConfiguration.getKibanaDashboardImportApi();
+	public List<PortalDesignConfig> queryAllPortalDesign(){
+
+		List<PortalDesign> portalDesignList = null;
+		List<PortalDesignConfig> portalDesignConfigList = new ArrayList<>();
+		portalDesignList = (List<PortalDesign>) portalDesignRepository.findAll();
+		if (portalDesignList != null && portalDesignList.size() > 0) {
+			log.info("PortalDesignList is not null");
+			for (PortalDesign portalDesign : portalDesignList) {
+				portalDesignConfigList.add(portalDesign.getPortalDesignConfig());
+			}
+		}
+		return portalDesignConfigList;
 	}
 
 
-	public boolean deployKibanaImport(PortalDesign portalDesign) {
-		boolean flag = false;
+	public boolean deploy(PortalDesign portalDesign){
+		boolean flag =true;
+		String designTypeName = portalDesign.getDesignType().getName();
+		if (portalDesign.getDesignType() != null && "kibana_db".equals(designTypeName)) {
+			flag = deployKibanaImport(portalDesign);
+		} else if (portalDesign.getDesignType() != null && "kibana_visual".equals(designTypeName)) {
+			//TODO
+			flag =false;
+		} else if (portalDesign.getDesignType() != null && "kibana_search".equals(designTypeName)) {
+			//TODO
+			flag = false;
+		} else if (portalDesign.getDesignType() != null && "es_mapping".equals(designTypeName)) {
+			flag = postEsMappingTemplate(portalDesign, portalDesign.getTopic().getName().toLowerCase());
+		} else if (portalDesign.getDesignType() != null && "druid_kafka_spec".equals(designTypeName)) {
+			//TODO
+			flag =false;
+		} else {
+			flag =false;
+		}
+		return flag;
+	}
+
+
+	private boolean deployKibanaImport(PortalDesign portalDesign) throws RuntimeException {
+		POST_FLAG = "KibanaDashboardImport";
 		String requestBody = portalDesign.getBody();
 		Portal portal = portalDesign.getDesignType().getPortal();
 		String portalHost = portal.getHost();
@@ -128,26 +164,32 @@ public class PortalDesignService {
 		} else {
 			url = kibanaImportUrl(portalHost, portalPort);
 		}
+		return HttpClientUtil.sendPostHttpClient(url, requestBody, POST_FLAG);
 
-		//Send httpclient to kibana
-		String kibanaResponse = HttpClientUtil.sendPostToKibana(url, requestBody);
-		Gson gson = new Gson();
-		Map<String, Object> map = new HashMap<>();
-		map = gson.fromJson(kibanaResponse, map.getClass());
-		List objectsList = (List) map.get("objects");
+	}
 
-		if (objectsList != null && objectsList.size() > 0) {
-			Map<String, Object> map2 = new HashMap<>();
-			for (int i = 0; i < objectsList.size(); i++){
-				map2 = (Map<String, Object>)objectsList.get(i);
-				for(String key : map2.keySet()){
-					if ("error".equals(key)) {
-						return true;
-					}
-				}
-			}
+
+	private String kibanaImportUrl(String host, Integer port){
+		if (port == null) {
+			port = applicationConfiguration.getKibanaPort();
 		}
-		return flag;
+		return "http://"+host+":"+port+applicationConfiguration.getKibanaDashboardImportApi();
+	}
+
+
+	/**
+	 * successed resp:
+	 * {
+	 *     "acknowledged": true
+	 * }
+	 * @param portalDesign
+	 * @param templateName
+	 * @return flag
+	 */
+	public boolean postEsMappingTemplate(PortalDesign portalDesign, String templateName) throws RuntimeException {
+		POST_FLAG = "ElasticsearchMappingTemplate";
+		String requestBody = portalDesign.getBody();
+		return HttpClientUtil.sendPostHttpClient("http://"+dbService.getElasticsearch().getHost()+":9200/_template/"+templateName, requestBody, POST_FLAG);
 	}
 
 }
