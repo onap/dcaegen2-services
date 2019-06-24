@@ -80,5 +80,6 @@ public class ApplicationConfiguration {
 	private String datalakeVersion;
   
   	//Kibana
-	private String KibanaDashboardImportApi;
+	private String kibanaDashboardImportApi;
+	private Integer kibanaPort;
 }
