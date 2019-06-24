@@ -17,7 +17,7 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
-package org.onap.datalake.feeder.controller.domain;
+package org.onap.datalake.feeder.dto;
 
 
 import lombok.Getter;
@@ -40,6 +40,6 @@ public class DbConfig {
     private String password;
     private boolean encrypt;
     private String database;
-    private int port;
+    private Integer port;
     private String poperties;
 }
