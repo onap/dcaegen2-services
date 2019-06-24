@@ -20,6 +20,7 @@
 
 package org.onap.datalake.feeder.util;
 
+import com.google.gson.Gson;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -29,6 +30,10 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * HttpClient
  *
@@ -37,7 +42,13 @@ import org.apache.http.util.EntityUtils;
  */
 public class HttpClientUtil {
 
-    public static String sendPostToKibana(String url, String json){
+    private final static String KIBANA_DASHBOARD_IMPORT = "KibanaDashboardImport";
+
+    private final static String ELASTICSEARCH_MAPPING_TEMPLATE = "ElasticsearchMappingTemplate";
+
+    public static boolean sendPostHttpClient(String url, String json, String postFlag){
+
+        boolean flag = true;
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost(url);
         String response = null;
@@ -55,10 +66,55 @@ public class HttpClientUtil {
                 String result = EntityUtils.toString(res.getEntity());
                 response = result;
             }
+            Gson gson = new Gson();
+            Map<String, Object> map = new HashMap<>();
+            map = gson.fromJson(response, map.getClass());
+            switch (postFlag) {
+                case KIBANA_DASHBOARD_IMPORT:
+                    flag = flagOfKibanaDashboardImport(map);
+                    break;
+                case ELASTICSEARCH_MAPPING_TEMPLATE :
+                    flag = flagOfPostEsMappingTemplate(map);
+                    break;
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return response;
+        return flag;
+    }
+
+
+    private static boolean flagOfKibanaDashboardImport(Map<String, Object> map) {
+
+        boolean flag = true;
+        List objectsList = (List) map.get("objects");
+
+        if (objectsList != null && objectsList.size() > 0) {
+            Map<String, Object> map2 = new HashMap<>();
+            for (int i = 0; i < objectsList.size(); i++){
+                map2 = (Map<String, Object>)objectsList.get(i);
+                for(String key : map2.keySet()){
+                    if ("error".equals(key)) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return flag;
+    }
+
+
+    private static boolean flagOfPostEsMappingTemplate(Map<String, Object> map) {
+
+        boolean flag = true;
+        for(String key : map.keySet()){
+            if ("acknowledged".equals(key) && (boolean) map.get("acknowledged") == true) {
+                break;
+            } else {
+                flag = false;
+            }
+        }
+        return flag;
     }
 
 }
