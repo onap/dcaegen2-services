@@ -24,13 +24,12 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletResponse;
 
-import io.swagger.annotations.*;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.DbRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.onap.datalake.feeder.service.DbService;
-import org.onap.datalake.feeder.controller.domain.DbConfig;
+import org.onap.datalake.feeder.dto.DbConfig;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,10 +38,7 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 /**
  * This controller manages the big data storage settings. All the settings are
@@ -144,51 +140,6 @@ public class DbController {
 	}
 
 
-	//Update Db
-	@PutMapping("/{dbName}")
-	@ResponseBody
-	@ApiOperation(value="Update a database.")
-	public PostReturnBody<DbConfig> updateDb(@PathVariable("dbName") String dbName, @RequestBody DbConfig dbConfig, BindingResult result, HttpServletResponse response) throws IOException {
-
-		if (result.hasErrors()) {
-			sendError(response, 400, "Error parsing DB: " + result.toString());
-			return null;
-		}
-
-		if(!dbName.equals(dbConfig.getName()))
-		{
-			sendError(response, 400, "Mismatch DB name.");
-			return null;
-		}
-
-		Db oldDb = dbService.getDb(dbConfig.getName());
-		if (oldDb == null) {
-			sendError(response, 404, "Db not found: " + dbConfig.getName());
-			return null;
-		} else {
-			oldDb.setName(dbConfig.getName());
-			oldDb.setHost(dbConfig.getHost());
-			oldDb.setPort(dbConfig.getPort());
-			oldDb.setEnabled(dbConfig.isEnabled());
-			oldDb.setLogin(dbConfig.getLogin());
-			oldDb.setPass(dbConfig.getPassword());
-			oldDb.setEncrypt(dbConfig.isEncrypt());
-
-			if(!oldDb.getName().equals("Elecsticsearch") || !oldDb.getName().equals("Druid"))
-			{
-				oldDb.setDatabase(dbConfig.getDatabase());
-			}
-			dbRepository.save(oldDb);
-			DbConfig retMsg;
-			PostReturnBody<DbConfig> retBody = new PostReturnBody<>();
-			retMsg = new DbConfig();
-			composeRetMessagefromDbConfig(oldDb, retMsg);
-			retBody.setReturnBody(retMsg);
-			retBody.setStatusCode(200);
-			return retBody;
-		}
-	}
-
 	//Delete a db
 	//the topics are missing in the return, since in we use @JsonBackReference on Db's topics
 	//need to the the following method to retrieve the topic list
@@ -226,6 +177,45 @@ public class DbController {
 
 		}
 		return topics;
+	}
+
+
+	//Update Db
+	@PutMapping("")
+	@ResponseBody
+	@ApiOperation(value="Update a database.")
+	public PostReturnBody<DbConfig> updateDb(@RequestBody DbConfig dbConfig, BindingResult result, HttpServletResponse response) throws IOException {
+
+		if (result.hasErrors()) {
+			sendError(response, 400, "Error parsing DB: " + result.toString());
+			return null;
+		}
+
+		Db oldDb = dbService.getDb(dbConfig.getName());
+		if (oldDb == null) {
+			sendError(response, 404, "Db not found: " + dbConfig.getName());
+			return null;
+		} else {
+			oldDb.setHost(dbConfig.getHost());
+			oldDb.setPort(dbConfig.getPort());
+			oldDb.setEnabled(dbConfig.isEnabled());
+			oldDb.setLogin(dbConfig.getLogin());
+			oldDb.setPass(dbConfig.getPassword());
+			oldDb.setEncrypt(dbConfig.isEncrypt());
+			if (!oldDb.getName().equals("Elecsticsearch") || !oldDb.getName().equals("Druid")) {
+				oldDb.setDatabase(dbConfig.getDatabase());
+			}
+
+			dbRepository.save(oldDb);
+			DbConfig retMsg;
+			PostReturnBody<DbConfig> retBody = new PostReturnBody<>();
+			retMsg = new DbConfig();
+			composeRetMessagefromDbConfig(oldDb, retMsg);
+			retBody.setReturnBody(retMsg);
+			retBody.setStatusCode(200);
+			return retBody;
+		}
+
 	}
 
 

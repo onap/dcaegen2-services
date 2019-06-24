@@ -27,7 +27,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.onap.datalake.feeder.controller.domain.DbConfig;
+import org.onap.datalake.feeder.dto.DbConfig;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
@@ -109,18 +109,18 @@ public class DbControllerTest {
         DbController dbController = new DbController();
         DbConfig dbConfig = getDbConfig();
         when(mockBindingResult.hasErrors()).thenReturn(true);
-        PostReturnBody<DbConfig> db = dbController.updateDb("Elecsticsearch", dbConfig, mockBindingResult,
+        PostReturnBody<DbConfig> db = dbController.updateDb(dbConfig, mockBindingResult,
                                                             httpServletResponse);
         assertEquals(null, db);
         when(mockBindingResult.hasErrors()).thenReturn(false);
         setAccessPrivateFields(dbController);
-        db = dbController.updateDb("Elecsticsearch", dbConfig, mockBindingResult,
+        db = dbController.updateDb(dbConfig, mockBindingResult,
                                    httpServletResponse);
         assertEquals(null, db);
         when(mockBindingResult.hasErrors()).thenReturn(false);
         String name = "Elecsticsearch";
         when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
-        db = dbController.updateDb("Elecsticsearch", dbConfig, mockBindingResult,
+        db = dbController.updateDb(dbConfig, mockBindingResult,
                                    httpServletResponse);
         assertEquals(200, db.getStatusCode());
         Db elecsticsearch = dbController.getDb("Elecsticsearch", httpServletResponse);
