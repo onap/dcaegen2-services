@@ -47,4 +47,6 @@ public class PortalDesignConfig {
 
     private String designType;
 
+    private String display;
+
 }
