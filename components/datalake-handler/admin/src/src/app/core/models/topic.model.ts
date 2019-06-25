@@ -37,3 +37,4 @@ export class Topic {
   // for UI display
   type: boolean; // 1: Configure 0: Unconfiure
 }
+

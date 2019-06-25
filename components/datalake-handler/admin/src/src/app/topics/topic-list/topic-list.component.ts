@@ -32,12 +32,14 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 // modal
 import { TopicDetailModalComponent } from "./topic-detail-modal/topic-detail-modal.component";
 import { TopicConfigModalComponent } from "./topic-config-modal/topic-config-modal.component";
+import { NewTopicModelComponent } from "./new-topic-model/new-topic-model.component";
 
 // notify
 import { ToastrNotificationService } from "src/app/core/services/toastr-notification.service";
 
 // Loading spinner
 import { NgxSpinnerService } from "ngx-spinner";
+import {AlertComponent} from "../../core/alert/alert.component";
 
 @Component({
   selector: "app-topic-list",
@@ -52,6 +54,7 @@ export class TopicListComponent {
   topics: Topic[] = [];
   temp: Topic[] = []; // cache for topics
   tempTopicDetail: Topic; // temp for a topic
+  tempNewTopic: Topic; // temp for a newtopic
 
   loadingIndicator: boolean = true;
   mesgNoData = {
@@ -76,7 +79,15 @@ export class TopicListComponent {
     setTimeout(() => {
       this.loadingIndicator = false;
     }, 5000);
+    this.init()
 
+  }
+
+  ngOnInit() {
+    this.spinner.show();
+  }
+
+  init(){
     this.initData().then(data => {
       this.initTopicList(this.topicListDmaap, this.topicListFeeder).then(
         data => {
@@ -89,10 +100,6 @@ export class TopicListComponent {
         }
       );
     });
-  }
-
-  ngOnInit() {
-    this.spinner.show();
   }
 
   async initData() {
@@ -133,7 +140,8 @@ export class TopicListComponent {
 
     // dmaap has topics
     if (dmaapList.length > 0) {
-      for (var i = 0; i < dmaapList.length; i++) {
+      let listLength = dmaapList.length>feederList.length ? dmaapList.length:feederList.length;
+      for (var i = 0; i < listLength; i++) {
         if (feederList.includes(dmaapList[i])) {
           let data = await this.getTopicDetail(dmaapList[i]);
           let feed = {
@@ -150,7 +158,7 @@ export class TopicListComponent {
             type: true
           };
           t.push(feed);
-        } else {
+        } else if(!feederList.includes(dmaapList[i]) && dmaapList[i]!=undefined){
           let feed = {
             name: dmaapList[i],
             login: this.topicDefaultConfig.login,
@@ -164,6 +172,24 @@ export class TopicListComponent {
               .correlateClearedMessage,
             messageIdPath: this.topicDefaultConfig.messageIdPath,
             type: false
+          };
+          t.push(feed);
+        }
+        if(!dmaapList.includes(feederList[i]) && feederList[i]!=undefined){
+          let data = await this.getTopicDetail(feederList[i]);
+          let feed = {
+            name: feederList[i],
+            login: data.login,
+            password: data.password,
+            sinkdbs: data.sinkdbs,
+            enabled: data.enabled,
+            saveRaw: data.saveRaw,
+            dataFormat: data.dataFormat,
+            ttl: data.ttl,
+            correlateClearedMessage: data.correlateClearedMessage,
+            messageIdPath: data.messageIdPath,
+            type: true,
+            topicDb:true
           };
           t.push(feed);
         }
@@ -190,6 +216,43 @@ export class TopicListComponent {
     }
 
     return t;
+  }
+
+  onActivate(event) {
+    const emitType = event.type;
+    if(emitType == "dblclick"){
+      console.log('Activate Event', event);
+      let name = event.row.name;
+      this.openTopicModal(name);
+    }
+
+  }
+
+  openNewTopicModal(){
+    const modalRef = this.modalService.open(NewTopicModelComponent, {
+      size: "lg",
+      centered: true
+    });
+    modalRef.componentInstance.newTopic = this.tempNewTopic;
+    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
+      console.log(receivedEntry,"newtopic receivedEntry");
+      this.tempNewTopic = receivedEntry;
+      this.restApiService.addNewTopic(this.tempNewTopic).subscribe(
+        res => {
+          this.init();
+          this.notificationService.success("SUCCESSFULLY_CREARED");
+          modalRef.close();
+          this.updateFilter(this.searchText.nativeElement.value);
+        },
+        err => {
+          this.notificationService.error(err);
+          modalRef.close();
+          this.updateFilter(this.searchText.nativeElement.value);
+        }
+      );
+    })
+
+
   }
 
   openTopicModal(name: string) {
@@ -238,7 +301,6 @@ export class TopicListComponent {
       modalRef.componentInstance.topic = this.temp[index];
       modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
         this.tempTopicDetail = receivedEntry;
-
         // Configured topic
         if (this.tempTopicDetail.type) {
           this.restApiService.getTopicsFromFeeder().subscribe(
@@ -249,7 +311,7 @@ export class TopicListComponent {
                   res => {
                     this.temp[index] = this.tempTopicDetail;
                     this.topics = this.temp;
-                    this.notificationService.success("Success updated.");
+                    this.notificationService.success("SUCCESSFULLY_UPDATED");
                     modalRef.close();
                     this.updateFilter(this.searchText.nativeElement.value);
                   },
@@ -263,7 +325,8 @@ export class TopicListComponent {
                 // Insert topic from db
                 this.restApiService.addTopic(this.tempTopicDetail).subscribe(
                   res => {
-                    this.notificationService.success("Success inserted.");
+                    this.init();
+                    this.notificationService.success("SUCCESSFULLY_CREARED");
                     modalRef.close();
                     this.updateFilter(this.searchText.nativeElement.value);
                   },
@@ -284,23 +347,8 @@ export class TopicListComponent {
           // Reset to default and delete topic from db
           this.restApiService.deleteTopic(this.tempTopicDetail.name).subscribe(
             res => {
-              this.temp[index].enabled = this.topicDefaultConfig.enabled;
-              this.temp[index].login = this.topicDefaultConfig.login;
-              this.temp[index].password = this.topicDefaultConfig.password;
-              this.temp[index].sinkdbs = this.topicDefaultConfig.sinkdbs;
-              this.temp[index].dataFormat = this.topicDefaultConfig.dataFormat;
-              this.temp[index].ttl = this.topicDefaultConfig.ttl;
-              this.temp[index].saveRaw = this.topicDefaultConfig.saveRaw;
-              this.temp[
-                index
-              ].correlateClearedMessage = this.topicDefaultConfig.correlateClearedMessage;
-              this.temp[
-                index
-              ].messageIdPath = this.topicDefaultConfig.messageIdPath;
-              this.temp[index].type = false;
-
-              this.topics = this.temp;
-              this.notificationService.success("Success deleted.");
+              this.init();
+              this.notificationService.success("SUCCESSFULLY_DELETED");
               modalRef.close();
               this.updateFilter(this.searchText.nativeElement.value);
             },
@@ -313,6 +361,32 @@ export class TopicListComponent {
         }
       });
     }
+  }
+
+  deleteTopicModal(name: string){
+    const index = this.temp.findIndex(t => t.name === name);
+    const modalRef = this.modalService.open(AlertComponent, {
+      size: "sm",
+      centered: true
+    });
+    modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
+    console.log(this.temp[index]);
+    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
+      this.restApiService.deleteTopic(this.temp[index].name).subscribe(
+        res => {
+          this.init();
+          this.notificationService.success("SUCCESSFULLY_DELETED");
+          modalRef.close();
+          this.updateFilter(this.searchText.nativeElement.value);
+        },
+        err => {
+          this.notificationService.error(err);
+          modalRef.close();
+          this.updateFilter(this.searchText.nativeElement.value);
+        }
+      );
+
+    })
   }
 
   getTopicDetail(name: string) {

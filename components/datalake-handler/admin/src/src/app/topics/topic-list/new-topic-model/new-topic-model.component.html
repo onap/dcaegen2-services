@@ -1,21 +1,17 @@
 <!--
-============LICENSE_START=======================================================
-ONAP : DataLake
-================================================================================
-Copyright 2019 QCT
-=================================================================================
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+    Copyright (C) 2019 CMCC, Inc. and others. All rights reserved.
 
-     http://www.apache.org/licenses/LICENSE-2.0
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-============LICENSE_END=========================================================
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 -->
 
 <div class="p-1">
@@ -24,22 +20,22 @@ limitations under the License.
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <label class="dl-h3">{{ topic.name }}</label>
+          <label class="dl-h3">{{ "NEW_TOPIC" | translate}}</label>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-12">
-          <hr>
-        </div>
+      <!--<div class="row">-->
+        <!--<div class="col-md-12">-->
+          <!--<hr>-->
+        <!--</div>-->
 
-        <div *ngIf="!topic.type" class="col-md-12">
-          <div class="dl-notice">
-            {{ "TOPIC_DEFAULT_CONF_NOTICE" | translate}}
-          </div>
-        </div>
+        <!--<div *ngIf="!newTopic.type" class="col-md-12">-->
+          <!--<div class="dl-notice">-->
+            <!--{{ "TOPIC_DEFAULT_CONF_NOTICE" | translate}}-->
+          <!--</div>-->
+        <!--</div>-->
 
-      </div>
+      <!--</div>-->
     </div>
 
 
@@ -52,25 +48,35 @@ limitations under the License.
 
           <div class="col-md-8">
             <label class="dl-switch">
-              <input #t_enable id="switch" type="checkbox" [(ngModel)]="tempEnabled" />
+              <input #t_enable id="switch" type="checkbox" [(ngModel)]="TopicInput.enabled" />
               <span class="dl-slider round"></span>
             </label>
           </div>
         </div>
       </div>
-
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="dl-emphasis1" for="inputUserName">{{ 'NAME' | translate }}</label>
+          </div>
+          <div class="col-md-8">
+            <input #t_topicname [value]="TopicInput.name" class="form-control dl-input-text" id="inputTopicName" type="text"
+                   placeholder="Topic name" />
+          </div>
+        </div>
+      </div>
       <div class="form-group">
         <div class="row">
           <div class="col-md-4">
             <label class="dl-emphasis1" for="inputUserName">{{ 'AUTHENTICATION' | translate }}</label>
           </div>
           <div class="col-md-4">
-            <input #t_login [value]="topic.login" class="form-control dl-input-text" id="inputUserName" type="text"
-              placeholder="Username" />
+            <input #t_login [value]="TopicInput.login" class="form-control dl-input-text" id="inputUserName" type="text"
+                   placeholder="Username" />
           </div>
           <div class="col-md-4">
-            <input #t_password [value]="topic.password" class="form-control dl-input-text" id="inputPass"
-              type="password" placeholder="Password" />
+            <input #t_password [value]="TopicInput.password" class="form-control dl-input-text" id="inputPass"
+                   type="password" placeholder="Password" />
           </div>
         </div>
       </div>
@@ -86,8 +92,8 @@ limitations under the License.
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <label class="input-group-text dl-input-chk-label">
-                      <input id="chk_{{ db }}" type="checkbox" [checked]="this.topic.sinkdbs.includes(db)"
-                        (change)="this.updateSelectedDB($event, db)" />
+                      <input id="chk_{{ db }}" type="checkbox" [checked]="TopicInput.sinkdbs.includes(db)"
+                             (change)="this.updateSelectedDB($event, db)" />
                       <span class="dl-input-checkmark"></span>
                     </label>
                   </div>
@@ -108,7 +114,7 @@ limitations under the License.
           </div>
           <div class="col-md-4">
             <select #t_dataFormat class="custom-select dl-input-text" id="selDataFormat">
-              <option *ngFor="let item of dataFormats" [selected]="item == topic.dataFormat">
+              <option *ngFor="let item of dataFormats" [selected]="item == dataFormats[0]">
                 {{ item }}</option>
             </select>
           </div>
@@ -121,8 +127,8 @@ limitations under the License.
             <label class="dl-emphasis1">{{ 'TTL' | translate }} (days)</label>
           </div>
           <div class="col-md-4">
-            <input #t_ttl [value]="topic.ttl" class="form-control dl-input-text" id="inputTtl" type="text"
-              placeholder="3650" (input)="this.adminService.onKeyPressNumber($event)" />
+            <input #t_ttl [value]="TopicInput.ttl" class="form-control dl-input-text" id="inputTtl" type="text"
+                   placeholder="3650" (input)="this.adminService.onKeyPressNumber($event)" />
           </div>
         </div>
       </div>
@@ -136,7 +142,7 @@ limitations under the License.
             <div class="input-group">
               <div class="input-group-prepend">
                 <label class="input-group-text dl-input-chk-label">
-                  <input #t_saveRaw id="chkSaveRaw" [(ngModel)]="tempSaveRaw" type="checkbox" />
+                  <input #t_saveRaw id="chkSaveRaw" [(ngModel)]="TopicInput.saveRaw" type="checkbox" />
                   <span class="dl-input-checkmark"></span>
                 </label>
               </div>
@@ -157,7 +163,7 @@ limitations under the License.
             <div class="input-group">
               <div class="input-group-prepend">
                 <label class="input-group-text dl-input-chk-label">
-                  <input #t_msg id="chkMsg" [(ngModel)]="tempMsg" type="checkbox" />
+                  <input #t_msg id="chkMsg" [(ngModel)]="TopicInput.correlateClearedMessage" type="checkbox" />
                   <span class="dl-input-checkmark"></span>
                 </label>
               </div>
@@ -178,7 +184,7 @@ limitations under the License.
             <div class="d-flex row align-items-center" *ngFor="let field of idExFields; let i = index">
               <div class="col-md-8 order-1">
                 <input [(ngModel)]="field.item" class="form-control dl-input-text" placeholder="/event-header/id"
-                  type="text" [value]="field.item" />
+                       type="text" [value]="field.item" />
               </div>
               <div class="order-2">
                 <button type="button" class="btn dl-icon-enable p-2" (click)="addIdField(i)">

@@ -82,6 +82,7 @@ import { CreateDashboardComponent } from './dashboard-setting/dashboard-list/cre
 import { TemplateListComponent } from './dashboard-setting/template/template-list/template-list.component';
 import { NewTemplateModalComponent } from './dashboard-setting/template/template-list/new-template-modal/new-template-modal.component';
 import { EditTemplateModalComponent } from './dashboard-setting/template/template-list/edit-template-modal/edit-template-modal.component';
+import { NewTopicModelComponent } from './topics/topic-list/new-topic-model/new-topic-model.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { EditTemplateModalComponent } from './dashboard-setting/template/templat
     TemplateListComponent,
     NewTemplateModalComponent,
     EditTemplateModalComponent,
+    NewTopicModelComponent,
 
   ],
   imports: [
@@ -141,6 +143,7 @@ import { EditTemplateModalComponent } from './dashboard-setting/template/templat
     HdfsComponent,
     TopicDetailModalComponent,
     TopicConfigModalComponent,
+    NewTopicModelComponent,
     CreateDashboardComponent,
  	NewTemplateModalComponent,
     EditTemplateModalComponent
