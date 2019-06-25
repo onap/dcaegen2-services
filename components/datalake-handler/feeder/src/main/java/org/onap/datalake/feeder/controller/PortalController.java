@@ -70,17 +70,8 @@ public class PortalController {
         Portal portal = null;
         try {
             portal = portalRepository.findById(portalConfig.getName()).get();
-            if (portalConfig.getEnabled() == false) {
-                log.info("Disable portal "+portalConfig.getName());
-                portal.setPort(null);
-                portal.setHost(null);
-                portal.setLogin(null);
-                portal.setPass(null);
-                portal.setEnabled(false);
-            }else {
-                log.info("Update portal "+portalConfig);
-                portalService.fillPortalConfiguration(portalConfig, portal);
-            }
+            log.info("Update portal "+portalConfig);
+            portalService.fillPortalConfiguration(portalConfig, portal);
             portalRepository.save(portal);
             return mkPostReturnBody(200, portal);
         } catch (Exception e) {
