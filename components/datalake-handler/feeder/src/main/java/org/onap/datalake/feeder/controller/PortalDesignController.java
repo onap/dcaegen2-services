@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.ApiOperation;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +45,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author guochunmeng
  */
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/portalDesigns", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PortalDesignController {
@@ -132,17 +130,7 @@ public class PortalDesignController {
 	@ResponseBody
 	@ApiOperation(value="List all PortalDesigns")
     public List<PortalDesignConfig> queryAllPortalDesign(){
-
-		List<PortalDesign> portalDesignList = null;
-		List<PortalDesignConfig> portalDesignConfigList = new ArrayList<>();
-		portalDesignList = (List<PortalDesign>) portalDesignRepository.findAll();
-		if (portalDesignList != null && portalDesignList.size() > 0) {
-			log.info("PortalDesignList is not null");
-			for (PortalDesign portalDesign : portalDesignList) {
-				portalDesignConfigList.add(portalDesign.getPortalDesignConfig());
-			}
-		}
-		return portalDesignConfigList;
+		return portalDesignService.queryAllPortalDesign();
     }
 
 
@@ -154,21 +142,20 @@ public class PortalDesignController {
 		PortalDesign portalDesign = null;
 		try {
 			portalDesign = portalDesignRepository.findById(id).get();
-			if (portalDesign.getDesignType() != null && portalDesign.getDesignType().getName().startsWith("Kibana")) {
-				boolean flag = portalDesignService.deployKibanaImport(portalDesign);
+			boolean flag;
+			try {
+				flag = portalDesignService.deploy(portalDesign);
 				if (flag) {
+					portalDesign.setSubmitted(true);
+					portalDesignRepository.save(portalDesign);
+					response.setStatus(204);
+				} else {
 					sendError(response, 400, "DeployPortalDesign failed, id: "+id);
 				}
-			} else if (portalDesign.getDesignType() != null && portalDesign.getDesignType().getName().startsWith("Elasticsearch")) {
-				//TODO Elasticsearch template import
-				sendError(response, 400, "DeployPortalDesign failed, id: "+id);
-			} else {
-				//TODO Druid import
-				sendError(response, 400, "DeployPortalDesign failed, id: "+id);
+			} catch (Exception e) {
+				log.debug("The request failed", e.getMessage());
+				sendError(response, 400, "The request failed : "+e.getMessage());
 			}
-			portalDesign.setSubmitted(true);
-			portalDesignRepository.save(portalDesign);
-			response.setStatus(204);
 		} catch (Exception e) {
 			log.debug("PortalDesign is null", e.getMessage());
 			sendError(response, 400, "PortalDesign not found, id: "+id);
