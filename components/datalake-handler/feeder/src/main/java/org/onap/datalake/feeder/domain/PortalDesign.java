@@ -72,18 +72,13 @@ public class PortalDesign {
     	PortalDesignConfig portalDesignConfig = new PortalDesignConfig();
 
         portalDesignConfig.setId(getId());
-
 		portalDesignConfig.setBody(getBody());
-		
 		portalDesignConfig.setName(getName());
-		
 		portalDesignConfig.setNote(getNote());
-		
 		portalDesignConfig.setSubmitted(getSubmitted());
-		
 		portalDesignConfig.setTopic(getTopic().getName());
-		
 		portalDesignConfig.setDesignType(getDesignType().getName());
+        portalDesignConfig.setDisplay(getDesignType().getDisplay());
 		
 		return portalDesignConfig;
     }
