@@ -26,6 +26,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.onap.datalake.feeder.dto.DesignTypeConfig;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 /**
@@ -40,16 +43,25 @@ import javax.persistence.*;
 public class DesignType {
 
     @Id
+    @Column(name = "`id`")
+    private String id;
+    
     @Column(name = "`name`")
     private String name;
 
+    //To be removed
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="portal")
     @JsonBackReference
     private Portal portal;
 
-    @Column(name = "`display`")
-    private String display;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="db_type_id", nullable = false)
+    @JsonBackReference
+    private DbType dbType;    
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "designType")
+	protected Set<PortalDesign> designs = new HashSet<>();
 
     @Column(name = "`note`")
     private String note;
@@ -58,7 +70,7 @@ public class DesignType {
 
         DesignTypeConfig designTypeConfig = new DesignTypeConfig();
         designTypeConfig.setDesignType(getName());
-        designTypeConfig.setDisplay(getDisplay());
+        //designTypeConfig.setDisplay(getDisplay());
         return designTypeConfig;
     }
 

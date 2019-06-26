@@ -40,6 +40,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.Kafka;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,13 +72,19 @@ public class Puller implements Runnable {
 
 	private boolean active = false;
 	private boolean async;
+	
+	private Kafka kafka;
+
+	public Puller(Kafka kafka) {
+		this.kafka = kafka;
+	}
 
 	@PostConstruct
 	private void init() {
 		async = config.isAsync();
 	}
 
-	private Properties getConsumerConfig() {
+	private Properties getConsumerConfig() {//00
 		Properties consumerConfig = new Properties();
 
 		consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, config.getDmaapKafkaHostPort());
@@ -105,7 +112,7 @@ public class Puller implements Runnable {
 	public void run() {
 		active = true;
 		Properties consumerConfig = getConsumerConfig();
-		log.info("Kafka ConsumerConfig: {}", consumerConfig);
+		log.info("Kafka: {}, ConsumerConfig: {}", kafka, consumerConfig);
 		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(consumerConfig);
 		consumerLocal.set(consumer);
 
@@ -114,7 +121,7 @@ public class Puller implements Runnable {
 		try {
 			while (active) {
 				if (topicConfigPollingService.isActiveTopicsChanged(true)) {//true means update local version as well
-					List<String> topics = topicConfigPollingService.getActiveTopics();
+					List<String> topics = topicConfigPollingService.getActiveTopics(kafka);//00
 					log.info("Active Topic list is changed, subscribe to the latest topics: {}", topics);
 					consumer.subscribe(topics, rebalanceListener);
 				}
@@ -146,7 +153,7 @@ public class Puller implements Runnable {
 					messages.add(Pair.of(record.timestamp(), record.value()));
 					//log.debug("threadid={} topic={}, timestamp={} key={}, offset={}, partition={}, value={}", id, record.topic(), record.timestamp(), record.key(), record.offset(), record.partition(), record.value());
 				}
-				storeService.saveMessages(partition.topic(), messages);
+				storeService.saveMessages(kafka, partition.topic(), messages);//00
 				log.info("saved to topic={} count={}", partition.topic(), partitionRecords.size());//TODO we may record this number to DB
 
 				if (!async) {//for reliability, sync commit offset to Kafka, this slows down a bit

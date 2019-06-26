@@ -45,7 +45,7 @@ import org.springframework.context.ApplicationContext;
 public class PullerTest {
 
 	@InjectMocks
-	private Puller puller = new Puller();
+	private Puller puller = new Puller(null);
 
 	@Mock
 	private ApplicationContext context;

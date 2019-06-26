@@ -19,26 +19,22 @@
 */
 package org.onap.datalake.feeder.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
 
 /**
- * Domain class representing bid data storage
+ * Domain class representing bid data storage type
  * 
  * @author Guobiao Mo
  *
@@ -46,68 +42,35 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "db")
-public class Db {
+@Table(name = "db_type")
+public class DbType {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "`id`")
-    private Integer id;
+	@Column(name="`id`")
+	private String id;
 
 	@Column(name="`name`")
 	private String name;
 
-	@Column(name="`enabled`")
-	private boolean	enabled;
+	@Column(name="`default_port`")
+	private Integer defaultPort;
 
-	@Column(name="`host`")
-	private String host;
+	@Column(name="`tool`")
+	private Boolean tool;
+ 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "dbType")
+	protected Set<Db> dbs = new HashSet<>();
 
-	@Column(name="`port`")
-	private Integer port;
-
-	@Column(name="`login`")
-	private String login;
-
-	@Column(name="`pass`")
-	private String pass;
-
-	@Column(name="`database_name`")
-	private String database;
-
-	@Column(name="`encrypt`")
-	private Boolean encrypt;
-
-	@Column(name="`property1`")
-	private String property1;
-
-	@Column(name="`property2`")
-	private String property2;
-
-	@Column(name="`property3`")
-	private String property3;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "db_type_id", nullable = false)
-	private DbType dbType;
-	
-	@JsonBackReference
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(	name 				= "map_db_topic",
-			joinColumns 		= {  @JoinColumn(name="db_id")  },
-			inverseJoinColumns 	= {  @JoinColumn(name="topic_id")  }
-	)
-	private Set<Topic> topics;
-
-	public Db() {
+	public DbType() {
 	}
 
-	public Db(String name) {
+	public DbType(String id, String name) {
+		this.id = id;
 		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Db %s (name=%, enabled=%s)", id, name, enabled);
+		return String.format("DbType %s (name=%s)", id, name);
 	}
 
 	@Override
@@ -118,11 +81,12 @@ public class Db {
 		if (this.getClass() != obj.getClass())
 			return false;
 
-		return name.equals(((Db) obj).getName());
+		return id.equals(((DbType) obj).getId());
 	}
 
 	@Override
 	public int hashCode() {
-		return name.hashCode();
+		return id.hashCode();
 	}
+
 }

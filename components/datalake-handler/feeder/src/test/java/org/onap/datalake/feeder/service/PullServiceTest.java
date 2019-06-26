@@ -60,7 +60,7 @@ public class PullServiceTest {
     @Test(expected = NullPointerException.class)
     public void start() {
 
-        when(config.getKafkaConsumerCount()).thenReturn(1);
+        //when(config.getKafkaConsumerCount()).thenReturn(1);
 
         pullService.start();
     }

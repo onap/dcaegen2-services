@@ -34,8 +34,9 @@ public class PortalDesignTest {
         portalDesign.setSubmitted(false);
         portalDesign.setBody("jsonString");
         portalDesign.setName("templateTest");
+        portalDesign.setTopicName(new TopicName("x"));
         Topic topic = new Topic("_DL_DEFAULT_");
-        portalDesign.setTopic(topic);
+        portalDesign.setTopicName(topic.getTopicName());
         DesignType designType = new DesignType();
         designType.setName("Kibana");
         portalDesign.setDesignType(designType);
@@ -43,7 +44,7 @@ public class PortalDesignTest {
         assertFalse("1".equals(portalDesign.getId()));
         assertTrue("templateTest".equals(portalDesign.getName()));
         assertTrue("jsonString".equals(portalDesign.getBody()));
-        assertFalse("_DL_DEFAULT_".equals(portalDesign.getTopic()));
+        assertFalse("_DL_DEFAULT_".equals(portalDesign.getTopicName()));
         assertTrue("test".equals(portalDesign.getNote()));
         assertFalse("Kibana".equals(portalDesign.getDesignType()));
         assertFalse("false".equals(portalDesign.getSubmitted()));

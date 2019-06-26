@@ -35,6 +35,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.springframework.context.ApplicationContext;
 
@@ -70,6 +71,9 @@ public class StoreServiceTest {
 
 	@Mock
 	private HdfsService hdfsService;
+	
+	@Mock
+	private Kafka kafka;
 
 	public void testInit() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
 		Method init = storeService.getClass().getDeclaredMethod("init");
@@ -124,29 +128,29 @@ public class StoreServiceTest {
 		List<Pair<Long, String>> messages = new ArrayList<>();
 		messages.add(Pair.of(100L, "{test: 1}"));
 
-		storeService.saveMessages("test1", messages);
+		storeService.saveMessages(kafka, "test1", messages);
 
 		//XML
 		List<Pair<Long, String>> messagesXml = new ArrayList<>();
 		messagesXml.add(Pair.of(100L, "<test></test>")); 
 		messagesXml.add(Pair.of(100L, "<test></test"));//bad xml to trigger exception
 
-		storeService.saveMessages("test2", messagesXml);
+		storeService.saveMessages(kafka, "test2", messagesXml);
 
 		//YAML
 		List<Pair<Long, String>> messagesYaml = new ArrayList<>();
 		messagesYaml.add(Pair.of(100L, "test: yes"));
 
-		storeService.saveMessages("test3", messagesYaml);
+		storeService.saveMessages(kafka, "test3", messagesYaml);
 
 		//TEXT
 		List<Pair<Long, String>> messagesText = new ArrayList<>();
 		messagesText.add(Pair.of(100L, "test message"));
 
-		storeService.saveMessages("test4", messagesText);
+		storeService.saveMessages(kafka, "test4", messagesText);
 
 		//Null mesg
-		storeService.saveMessages("test", null);
+		storeService.saveMessages(kafka, "test", null);
 	}
 
 	@Test

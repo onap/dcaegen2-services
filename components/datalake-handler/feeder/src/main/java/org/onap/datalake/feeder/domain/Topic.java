@@ -30,6 +30,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.onap.datalake.feeder.dto.TopicConfig;
@@ -51,9 +52,13 @@ import lombok.Setter;
 @Table(name = "topic")
 public class Topic {
 	@Id
-	@Column(name = "`name`")
-	private String name;//topic name 
+    @Column(name = "`id`")
+    private Integer id;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "topic_name_id", nullable = false)
+	private TopicName topicName;//topic name 
+	
 	//for protected Kafka topics
 	@Column(name = "`login`")
 	private String login;
@@ -65,8 +70,12 @@ public class Topic {
 	@JsonBackReference
 	//@JsonManagedReference
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "map_db_topic", joinColumns = { @JoinColumn(name = "topic_name") }, inverseJoinColumns = { @JoinColumn(name = "db_name") })
+	@JoinTable(name = "map_db_topic", joinColumns = { @JoinColumn(name = "topic_id") }, inverseJoinColumns = { @JoinColumn(name = "db_id") })
 	protected Set<Db> dbs;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "map_kafka_topic", joinColumns = { @JoinColumn(name = "topic_id") }, inverseJoinColumns = { @JoinColumn(name = "kafka_id") })
+	protected Set<Kafka> kafkas;
 
 	/**
 	 * indicate if we should monitor this topic
@@ -90,6 +99,7 @@ public class Topic {
 	/**
 	 * TTL in day
 	 */
+	@Column(name = "`ttl_day`")
 	private Integer ttl;
 
 	//if this flag is true, need to correlate alarm cleared message to previous alarm 
@@ -112,10 +122,14 @@ public class Topic {
 	public Topic() {
 	}
 
-	public Topic(String name) {
-		this.name = name;
+	public Topic(String name) {//TODO
+		//this.name = name;
 	}
 
+	public String getName() {
+		return topicName.getId();
+	}
+	
 	public boolean isEnabled() {
 		return is(enabled);
 	}
@@ -151,7 +165,7 @@ public class Topic {
 	public TopicConfig getTopicConfig() {
 		TopicConfig tConfig = new TopicConfig();
 
-		tConfig.setName(getName());
+		//tConfig.setName(getName());
 		tConfig.setLogin(getLogin());
 		tConfig.setEnabled(isEnabled());
 		tConfig.setDataFormat(dataFormat);
@@ -181,7 +195,7 @@ public class Topic {
 
 	@Override
 	public String toString() {
-		return name;
+		return String.format("Topic %s (enabled=%s, dbs=%s, kafkas=%s)", topicName, enabled, dbs, kafkas);
 	}
 
 	@Override
@@ -192,12 +206,12 @@ public class Topic {
 		if (this.getClass() != obj.getClass())
 			return false;
 
-		return name.equals(((Topic) obj).getName());
+		return id.equals(((Topic) obj).getId());
 	}
 
 	@Override
 	public int hashCode() {
-		return name.hashCode();
+		return id;
 	}
 
 }

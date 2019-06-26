@@ -52,49 +52,49 @@ public class DbServiceTest {
 	@Test
 	public void testGetDb() {
 		String name = "a";
-		when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+		when(dbRepository.findByName(name)).thenReturn(new Db(name));
 		assertEquals(dbService.getDb(name), new Db(name));
 	}
 
 	@Test
 	public void testGetDbNull() {
 		String name = null;
-		when(dbRepository.findById(name)).thenReturn(Optional.empty());
+		when(dbRepository.findByName(name)).thenReturn(null);
 		assertNull(dbService.getDb(name));
 	}
 
 	@Test
 	public void testGetCouchbase() {
 		String name = "Couchbase";
-		when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+		when(dbRepository.findByName(name)).thenReturn(new Db(name));
 		assertEquals(dbService.getCouchbase(), new Db(name));
 	}
 
 	@Test
 	public void testGetElasticsearch() {
 		String name = "Elasticsearch";
-		when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+		when(dbRepository.findByName(name)).thenReturn(new Db(name));
 		assertEquals(dbService.getElasticsearch(), new Db(name));
 	}
 
 	@Test
 	public void testGetMongoDB() {
 		String name = "MongoDB";
-		when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+		when(dbRepository.findByName(name)).thenReturn(new Db(name));
 		assertEquals(dbService.getMongoDB(), new Db(name));
 	}
 
 	@Test
 	public void testGetDruid() {
 		String name = "Druid";
-		when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+		when(dbRepository.findByName(name)).thenReturn(new Db(name));
 		assertEquals(dbService.getDruid(), new Db(name));
 	}
 
 	@Test
 	public void testGetHdfs() {
 		String name = "HDFS";
-		when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+		when(dbRepository.findByName(name)).thenReturn(new Db(name));
 		assertEquals(dbService.getHdfs(), new Db(name));
 	}
 

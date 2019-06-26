@@ -1,8 +1,8 @@
 /*
 * ============LICENSE_START=======================================================
-* ONAP : DATALAKE
+* ONAP : DCAE
 * ================================================================================
-* Copyright 2019 China Mobile
+* Copyright 2018 TechMahindra
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -17,50 +17,29 @@
 * limitations under the License.
 * ============LICENSE_END=========================================================
 */
+package org.onap.datalake.feeder.enumeration;
 
-package org.onap.datalake.feeder.service;
+import static org.junit.Assert.assertEquals;
 
-import java.util.Optional;
-
-import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.repository.DbRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.junit.Test; 
 
 /**
- * Service for Dbs
+ * Test Data format of DMaaP messages
  * 
  * @author Guobiao Mo
  *
  */
-@Service
-public class DbService {
+public class DbTypeEnumTest {
+    @Test
+    public void fromString() {
+        assertEquals(DbTypeEnum.CB, DbTypeEnum.fromString("Couchbase")); 
+        System.out.println(DbTypeEnum.CB.name());
+    }
 
-	@Autowired
-	private DbRepository dbRepository;
-
-	public Db getDb(String name) {
-		return dbRepository.findByName(name);
-	}
-
-	public Db getCouchbase() {
-		return getDb("Couchbase");
-	}
-
-	public Db getElasticsearch() {
-		return getDb("Elasticsearch");
-	}
-
-	public Db getMongoDB() {
-		return getDb("MongoDB");
-	}
-
-	public Db getDruid() {
-		return getDb("Druid");
-	}
-
-	public Db getHdfs() {
-		return getDb("HDFS");
-	}
-
+    @Test(expected = IllegalArgumentException.class)
+    public void fromStringWithException() {
+    	DbTypeEnum.fromString("test");
+    }
+    
+    
 }

@@ -60,7 +60,9 @@ public class DbTest {
         mongoDB2.setProperty2("property2");
         mongoDB2.setProperty3("property3");
         Set<Topic> hash_set = new HashSet<>();
-        hash_set.add(new Topic("topic1"));
+        Topic topic = new Topic("topic1");
+        topic.setId(1);
+        hash_set.add(topic);
         mongoDB2.setTopics(hash_set);
         assertTrue("localhost".equals(mongoDB2.getHost()));
         assertFalse("1234".equals(mongoDB2.getPort()));

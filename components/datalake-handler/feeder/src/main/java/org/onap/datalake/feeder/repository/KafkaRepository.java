@@ -19,18 +19,17 @@
 */
 package org.onap.datalake.feeder.repository;
 
-import org.onap.datalake.feeder.domain.Topic;
-
+import org.onap.datalake.feeder.domain.Kafka;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  * 
- * Topic Repository 
+ * Kafka Repository 
  * 
  * @author Guobiao Mo
  *
  */ 
 
-public interface TopicRepository extends CrudRepository<Topic, Integer> {
+public interface KafkaRepository extends CrudRepository<Kafka, String> {
 
 }
