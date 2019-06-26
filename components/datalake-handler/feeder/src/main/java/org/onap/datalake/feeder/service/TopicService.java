@@ -84,7 +84,7 @@ public class TopicService {
 	}
 
 	public Topic getTopic(String topicStr) {
-		Optional<Topic> ret = topicRepository.findById(topicStr);
+		Optional<Topic> ret = topicRepository.findById(null);//FIXME
 		return ret.isPresent() ? ret.get() : null;
 	}
 
@@ -96,7 +96,7 @@ public class TopicService {
 		if (topic == null) {
 			return false;
 		}
-		return topic.getName().equals(config.getDefaultTopicName());
+		return true;//topic.getName().equals(config.getDefaultTopicName());
 	}
 
 	public void fillTopicConfiguration(TopicConfig tConfig, Topic wTopic)
@@ -114,7 +114,7 @@ public class TopicService {
 	private void fillTopic(TopicConfig tConfig, Topic topic)
 	{
 		Set<Db> relateDb = new HashSet<>();
-		topic.setName(tConfig.getName());
+		//topic.setName(tConfig.getName());
 		topic.setLogin(tConfig.getLogin());
 		topic.setPass(tConfig.getPassword());
 		topic.setEnabled(tConfig.isEnabled());

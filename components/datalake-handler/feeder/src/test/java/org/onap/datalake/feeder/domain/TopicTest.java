@@ -26,6 +26,7 @@ import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -65,10 +66,13 @@ public class TopicTest {
     public void testIs() {
         Topic defaultTopic = new Topic("_DL_DEFAULT_");
         Topic testTopic = new Topic("test");
+        testTopic.setId(1);
+        Topic testTopic2 = new Topic("test2");
+        testTopic2.setId(1);
 
-        assertTrue(testTopic.equals(new Topic("test")));
-        assertEquals(testTopic.hashCode(), (new Topic("test")).hashCode());
-        assertEquals(testTopic.toString(), "test");
+        assertTrue(testTopic.equals(testTopic2));
+        assertEquals(testTopic.hashCode(), testTopic2.hashCode());
+        assertNotEquals(testTopic.toString(), "test");
 
         defaultTopic.setDbs(new HashSet<>());
         defaultTopic.getDbs().add(new Db("Elasticsearch"));

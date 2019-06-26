@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.onap.datalake.feeder.domain.DesignType;
 import org.onap.datalake.feeder.domain.PortalDesign;
 import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.domain.TopicName;
 
 import static org.junit.Assert.*;
 
@@ -34,14 +35,14 @@ public class PortalDesignConfigTest {
 
         PortalDesign testPortaldesign = new PortalDesign();
         testPortaldesign.setId(1);
-        testPortaldesign.setTopic(new Topic("test"));
+        testPortaldesign.setTopicName(new TopicName("test"));
         DesignType testDesignType = new DesignType();
         testDesignType.setName("test");
         testPortaldesign.setDesignType(testDesignType);
 
         PortalDesign testPortaldesign2 = new PortalDesign();
         testPortaldesign2.setId(1);
-        testPortaldesign2.setTopic(new Topic("test"));
+        testPortaldesign2.setTopicName(new TopicName("test"));
         DesignType testDesignType2 = new DesignType();
         testDesignType2.setName("test");
         testPortaldesign2.setDesignType(testDesignType2);

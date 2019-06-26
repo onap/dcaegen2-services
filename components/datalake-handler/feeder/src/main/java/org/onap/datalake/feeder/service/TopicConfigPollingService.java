@@ -30,6 +30,7 @@ import javax.annotation.PostConstruct;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,7 +85,7 @@ public class TopicConfigPollingService implements Runnable {
 		return changed;
 	}
 
-	public List<String> getActiveTopics() {
+	public List<String> getActiveTopics(Kafka kafka) {
 		return activeTopics;
 	}
 

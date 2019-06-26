@@ -88,7 +88,7 @@ public class PortalDesignService {
 		if (portalDesignConfig.getTopic() != null) {
 			Topic topic = topicService.getTopic(portalDesignConfig.getTopic());
 			if (topic == null) throw new IllegalArgumentException("topic is null");
-			portalDesign.setTopic(topic);
+			portalDesign.setTopicName(topic.getTopicName());
 		}else {
 			throw new IllegalArgumentException("Can not find topic in DB, topic name: "+portalDesignConfig.getTopic());
 		}
@@ -138,7 +138,7 @@ public class PortalDesignService {
 			//TODO
 			flag = false;
 		} else if (portalDesign.getDesignType() != null && "es_mapping".equals(designTypeName)) {
-			flag = postEsMappingTemplate(portalDesign, portalDesign.getTopic().getName().toLowerCase());
+			flag = postEsMappingTemplate(portalDesign, portalDesign.getTopicName().getId().toLowerCase());
 		} else if (portalDesign.getDesignType() != null && "druid_kafka_spec".equals(designTypeName)) {
 			//TODO
 			flag =false;

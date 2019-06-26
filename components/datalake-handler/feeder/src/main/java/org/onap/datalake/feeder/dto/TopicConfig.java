@@ -129,7 +129,7 @@ public class TopicConfig {
 
 	@Override
 	public String toString() {
-		return String.format("Topic %s(enabled=%s, enabledSinkdbs=%s)", name, enabled, enabledSinkdbs);
+		return String.format("TopicConfig %s(enabled=%s, enabledSinkdbs=%s)", name, enabled, enabledSinkdbs);
 	}
 
 	@Override

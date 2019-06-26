@@ -24,12 +24,14 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 import org.onap.datalake.feeder.dto.PortalDesignConfig;
 
 /**
- * Domain class representing portal_design
+ * Domain class representing design
  *
  * @author guochunmeng
  */
@@ -37,7 +39,7 @@ import org.onap.datalake.feeder.dto.PortalDesignConfig;
 @Getter
 @Setter
 @Entity
-@Table(name = "portal_design")
+@Table(name = "design")
 public class PortalDesign {
 
     @Id
@@ -48,6 +50,10 @@ public class PortalDesign {
     @Column(name = "`name`")
     private String name;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "topic_name_id", nullable = false)
+	private TopicName topicName;//topic name 
+	
     @Column(name = "`submitted`")
     private Boolean submitted;
 
@@ -58,15 +64,17 @@ public class PortalDesign {
     private String note;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "topic")
-    @JsonBackReference
-    private Topic topic;
-
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "type")
+    @JoinColumn(name = "design_type_id", nullable = false)
     @JsonBackReference
     private DesignType designType;
-    
+
+	//@ManyToMany(mappedBy = "topics", cascade=CascadeType.ALL)
+	@JsonBackReference
+	//@JsonManagedReference
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "map_db_design", joinColumns = { @JoinColumn(name = "design_id") }, inverseJoinColumns = { @JoinColumn(name = "db_id") })
+	protected Set<Db> dbs;
+
     public PortalDesignConfig getPortalDesignConfig() {
     	
     	PortalDesignConfig portalDesignConfig = new PortalDesignConfig();
@@ -76,9 +84,9 @@ public class PortalDesign {
 		portalDesignConfig.setName(getName());
 		portalDesignConfig.setNote(getNote());
 		portalDesignConfig.setSubmitted(getSubmitted());
-		portalDesignConfig.setTopic(getTopic().getName());
-		portalDesignConfig.setDesignType(getDesignType().getName());
-        portalDesignConfig.setDisplay(getDesignType().getDisplay());
+		portalDesignConfig.setTopic(getTopicName().getId());
+		portalDesignConfig.setDesignType(getDesignType().getId());
+        portalDesignConfig.setDisplay(getDesignType().getName());
 		
 		return portalDesignConfig;
     }

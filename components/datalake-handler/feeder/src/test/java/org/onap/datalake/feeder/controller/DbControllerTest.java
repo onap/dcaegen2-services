@@ -45,6 +45,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -119,12 +121,12 @@ public class DbControllerTest {
         assertEquals(null, db);
         when(mockBindingResult.hasErrors()).thenReturn(false);
         String name = "Elecsticsearch";
-        when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+        when(dbRepository.findByName(name)).thenReturn(new Db(name));
         db = dbController.updateDb(dbConfig, mockBindingResult,
                                    httpServletResponse);
         assertEquals(200, db.getStatusCode());
         Db elecsticsearch = dbController.getDb("Elecsticsearch", httpServletResponse);
-        assertEquals(null, elecsticsearch);
+        assertNotNull(elecsticsearch);
     }
 
     @Test
@@ -150,6 +152,7 @@ public class DbControllerTest {
         String topicName = "a";
         Topic topic = new Topic(topicName);
         topic.setEnabled(true);
+        topic.setId(1);
         Set<Topic> topics = new HashSet<>();
         topics.add(topic);
         Db db1 = new Db(dbName);
@@ -160,7 +163,9 @@ public class DbControllerTest {
         when(dbRepository.findByName(dbName)).thenReturn(db1);
         elecsticsearch = dbController.getDbTopics(dbName, httpServletResponse);
         for (Topic anElecsticsearch : elecsticsearch) {
-            assertEquals(new Topic(topicName), anElecsticsearch);
+        	Topic tmp = new Topic(topicName);
+        	tmp.setId(2);
+            assertNotEquals(tmp, anElecsticsearch);
         }
         dbController.deleteDb(dbName, httpServletResponse);
     }
@@ -171,7 +176,7 @@ public class DbControllerTest {
         DbConfig dbConfig = getDbConfig();
         setAccessPrivateFields(dbController);
         String name = "Elecsticsearch";
-        when(dbRepository.findById(name)).thenReturn(Optional.of(new Db(name)));
+        when(dbRepository.findByName(name)).thenReturn(new Db(name));
         PostReturnBody<DbConfig> db = dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
         assertEquals(null, db);
     }

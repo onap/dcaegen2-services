@@ -24,13 +24,10 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
@@ -38,7 +35,7 @@ import lombok.Setter;
 
 
 /**
- * Domain class representing bid data storage
+ * Domain class representing Kafka cluster
  * 
  * @author Guobiao Mo
  *
@@ -46,68 +43,70 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "db")
-public class Db {
+@Table(name = "kafka")
+public class Kafka {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "`id`")
-    private Integer id;
-
+	@Column(name="`id`")
+	private String id;
+	
 	@Column(name="`name`")
 	private String name;
 
 	@Column(name="`enabled`")
 	private boolean	enabled;
 
-	@Column(name="`host`")
-	private String host;
+	@Column(name="broker_list")
+	private String brokerList;//message-router-kafka:9092,message-router-kafka2:9092
 
-	@Column(name="`port`")
-	private Integer port;
+	@Column(name="`zk`")
+	private String zooKeeper;//message-router-zookeeper:2181
 
+	@Column(name="`group`", columnDefinition = "varchar(255) DEFAULT 'datalake'")
+	private String group;
+
+	@Column(name="`secure`", columnDefinition = " bit(1) DEFAULT 0")
+	private Boolean secure;
+	
 	@Column(name="`login`")
 	private String login;
 
 	@Column(name="`pass`")
 	private String pass;
 
-	@Column(name="`database_name`")
-	private String database;
+	@Column(name="`security_protocol`")
+	private String securityProtocol;
 
-	@Column(name="`encrypt`")
-	private Boolean encrypt;
+	//by default, all topics started with '__' are excluded, here one can explicitly include them
+	//example: '__consumer_offsets,__transaction_state'
+	@Column(name="`included_topic`")
+	private String includedTopic;
+	
+	//@Column(name="`excluded_topic`", columnDefinition = "varchar(1023) default '__consumer_offsets,__transaction_state'")
+	@Column(name="`excluded_topic`")
+	private String excludedTopic;
 
-	@Column(name="`property1`")
-	private String property1;
+	@Column(name="`consumer_count`", columnDefinition = "integer default 3")
+	private Integer consumerCount;
+	
+	//don't show this field in admin UI 
+	@Column(name="`timeout_sec`", columnDefinition = "integer default 10")
+	private Integer timeout;
 
-	@Column(name="`property2`")
-	private String property2;
-
-	@Column(name="`property3`")
-	private String property3;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "db_type_id", nullable = false)
-	private DbType dbType;
+	//don't show this field in admin UI 
+	@Column(name="`check_topic_interval_sec`", columnDefinition = "integer default 10")
+	private Integer checkTopicInterval;
 	
 	@JsonBackReference
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(	name 				= "map_db_topic",
-			joinColumns 		= {  @JoinColumn(name="db_id")  },
+	@JoinTable(	name 				= "map_kafka_topic",
+			joinColumns 		= {  @JoinColumn(name="kafka_id")  },
 			inverseJoinColumns 	= {  @JoinColumn(name="topic_id")  }
 	)
 	private Set<Topic> topics;
 
-	public Db() {
-	}
-
-	public Db(String name) {
-		this.name = name;
-	}
-
 	@Override
 	public String toString() {
-		return String.format("Db %s (name=%, enabled=%s)", id, name, enabled);
+		return String.format("Kafka %s (name=%, enabled=%s)", id, name, enabled);
 	}
 
 	@Override
@@ -118,11 +117,11 @@ public class Db {
 		if (this.getClass() != obj.getClass())
 			return false;
 
-		return name.equals(((Db) obj).getName());
+		return id.equals(((Kafka) obj).getId());
 	}
 
 	@Override
 	public int hashCode() {
-		return name.hashCode();
+		return id.hashCode();
 	}
 }

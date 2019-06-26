@@ -32,6 +32,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.json.JSONObject;
 import org.json.XML;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.enumeration.DataFormat;
 import org.onap.datalake.feeder.util.JsonUtil;
@@ -81,7 +82,7 @@ public class StoreService {
 		yamlReader = new ObjectMapper(new YAMLFactory());
 	}
 
-	public void saveMessages(String topicStr, List<Pair<Long, String>> messages) {//pair=ts+text
+	public void saveMessages(Kafka kafka, String topicStr, List<Pair<Long, String>> messages) {//pair=ts+text
 		if (CollectionUtils.isEmpty(messages)) {
 			return;
 		}

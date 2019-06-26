@@ -37,6 +37,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.Kafka;
 
 /**
  * Test TopicConfigPollingService
@@ -99,8 +100,9 @@ public class TopicConfigPollingServiceTest {
 
 	@Test
 	public void testGet() {
+		Kafka kafka=null;
 		assertNull(topicConfigPollingService.getEffectiveTopicConfig("test"));
-		assertNull(topicConfigPollingService.getActiveTopics());
+		assertNull(topicConfigPollingService.getActiveTopics(kafka));
 
 	}
 }
