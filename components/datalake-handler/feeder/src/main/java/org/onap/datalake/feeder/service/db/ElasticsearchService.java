@@ -53,6 +53,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -62,6 +63,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
+@Scope("prototype")
 public class ElasticsearchService implements DbStoreService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -71,15 +73,9 @@ public class ElasticsearchService implements DbStoreService {
 	@Autowired
 	private ApplicationConfiguration config;
 
-	//@Autowired
-//	private DbService dbService;
-
 	private RestHighLevelClient client;
 	ActionListener<BulkResponse> listener;
-
-	public ElasticsearchService( ) {
-		
-	}
+	
 	public ElasticsearchService(Db db) {
 		elasticsearch = db;
 	}
@@ -88,7 +84,6 @@ public class ElasticsearchService implements DbStoreService {
 	//Basic authentication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_basic_authentication.html
 	@PostConstruct
 	private void init() {
-		//Db elasticsearch = dbService.getElasticsearch();
 		String elasticsearchHost = elasticsearch.getHost();
 
 		// Initialize the Connection

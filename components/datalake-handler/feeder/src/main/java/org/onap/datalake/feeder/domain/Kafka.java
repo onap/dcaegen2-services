@@ -105,7 +105,7 @@ public class Kafka {
 
 	@Override
 	public String toString() {
-		return String.format("Kafka %s (name=%, enabled=%s)", id, name, enabled);
+		return String.format("Kafka %s (name=%s, enabled=%s)", id, name, enabled);
 	}
 
 	@Override

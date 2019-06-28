@@ -35,6 +35,7 @@ import org.onap.datalake.feeder.domain.Topic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.couchbase.client.java.Bucket;
@@ -56,6 +57,7 @@ import rx.functions.Func1;
  *
  */
 @Service
+@Scope("prototype")
 public class CouchbaseService implements DbStoreService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -64,17 +66,8 @@ public class CouchbaseService implements DbStoreService {
 	ApplicationConfiguration config;
 	
 	private Db couchbase;
-/*
-	@Autowired
-	private DbService dbService;
-
-	private boolean isReady = false;
-*/
 	Bucket bucket;
-
-	public CouchbaseService( ) {
-		
-	}
+	
 	public CouchbaseService(Db db) {
 		couchbase = db;
 	}

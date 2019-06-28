@@ -41,7 +41,6 @@ import org.onap.datalake.feeder.service.db.ElasticsearchService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 /**
@@ -59,9 +58,6 @@ public class TopicService {
 	private ApplicationConfiguration config;
 
 	@Autowired
-	private ApplicationContext context;
-
-	@Autowired
 	private TopicNameRepository topicNameRepository;
 
 	@Autowired
@@ -70,6 +66,9 @@ public class TopicService {
 	@Autowired
 	private DbRepository dbRepository;
 
+	@Autowired
+	private DbService dbService;
+	
 	public List<EffectiveTopic> getEnabledEffectiveTopic(Kafka kafka, String topicStr, boolean ensureTableExist) throws IOException {
 
 		List<Topic> topics = findTopics(kafka, topicStr);
@@ -88,7 +87,7 @@ public class TopicService {
 			if (ensureTableExist) {
 				for (Db db : topic.getDbs()) {
 					if (db.isElasticsearch()) {
-						ElasticsearchService elasticsearchService = context.getBean(ElasticsearchService.class, db);
+						ElasticsearchService elasticsearchService = (ElasticsearchService) dbService.findDbStoreService(db);						
 						elasticsearchService.ensureTableExist(topicStr);
 					}
 				}

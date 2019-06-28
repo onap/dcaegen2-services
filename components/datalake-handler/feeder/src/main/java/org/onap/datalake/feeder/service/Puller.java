@@ -43,6 +43,7 @@ import org.onap.datalake.feeder.domain.Kafka;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -53,6 +54,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
+@Scope("prototype")
 public class Puller implements Runnable {
 
 	@Autowired
@@ -72,10 +74,7 @@ public class Puller implements Runnable {
 	private boolean async;
 	
 	private Kafka kafka;
-
-	public Puller( ) {
-		
-	}
+	
 	public Puller(Kafka kafka) {
 		this.kafka = kafka;
 	}

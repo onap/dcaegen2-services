@@ -39,6 +39,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.mongodb.bulk.BulkWriteError;
@@ -59,6 +60,7 @@ import com.mongodb.client.model.InsertManyOptions;
  *
  */
 @Service
+@Scope("prototype")
 public class MongodbService implements DbStoreService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -77,8 +79,6 @@ public class MongodbService implements DbStoreService {
 	private Map<String, MongoCollection<Document>> mongoCollectionMap = new HashMap<>();
 	private InsertManyOptions insertManyOptions;
 
-	public MongodbService( ) { 
-	}
 	public MongodbService(Db db) {
 		mongodb = db;
 	}

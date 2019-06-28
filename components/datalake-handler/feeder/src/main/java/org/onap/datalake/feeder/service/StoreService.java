@@ -35,22 +35,14 @@ import org.json.JSONObject;
 import org.json.XML;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.domain.DbType;
 import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.domain.Kafka;
-import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.enumeration.DataFormat;
-import org.onap.datalake.feeder.enumeration.DbTypeEnum;
-import org.onap.datalake.feeder.service.db.CouchbaseService;
 import org.onap.datalake.feeder.service.db.DbStoreService;
-import org.onap.datalake.feeder.service.db.ElasticsearchService;
-import org.onap.datalake.feeder.service.db.HdfsService;
-import org.onap.datalake.feeder.service.db.MongodbService;
 import org.onap.datalake.feeder.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -73,7 +65,7 @@ public class StoreService {
 	private ApplicationConfiguration config;
 
 	@Autowired
-	private ApplicationContext context;
+	private DbService dbService;
 
 	@Autowired
 	private TopicConfigPollingService configPollingService;
@@ -91,11 +83,11 @@ public class StoreService {
 		}
 
 		Collection<EffectiveTopic> effectiveTopics = configPollingService.getEffectiveTopic(kafka, topicStr);
-		for(EffectiveTopic effectiveTopic:effectiveTopics) {
+		for (EffectiveTopic effectiveTopic : effectiveTopics) {
 			saveMessagesForTopic(effectiveTopic, messages);
 		}
 	}
-	
+
 	private void saveMessagesForTopic(EffectiveTopic effectiveTopic, List<Pair<Long, String>> messages) {
 		if (!effectiveTopic.getTopic().isEnabled()) {
 			log.error("we should not come here {}", effectiveTopic);
@@ -116,11 +108,13 @@ public class StoreService {
 		Set<Db> dbs = effectiveTopic.getTopic().getDbs();
 
 		for (Db db : dbs) {
-			if (db.getDbType().isTool() || !db.isEnabled()) {
+			if (db.isTool() || db.isDruid() || !db.isEnabled()) {
 				continue;
 			}
-			DbStoreService dbStoreService = findDbStoreService(db);
-			dbStoreService.saveJsons(effectiveTopic, docs);
+			DbStoreService dbStoreService = dbService.findDbStoreService(db);
+			if (dbStoreService != null) {
+				dbStoreService.saveJsons(effectiveTopic, docs);
+			}
 		}
 	}
 
@@ -128,12 +122,6 @@ public class StoreService {
 
 		long timestamp = pair.getLeft();
 		String text = pair.getRight();
-
-		//for debug, to be remove
-		//		String topicStr = topic.getId();
-		//		if (!"TestTopic1".equals(topicStr) && !"msgrtr.apinode.metrics.dmaap".equals(topicStr) && !"AAI-EVENT".equals(topicStr) && !"unauthenticated.DCAE_CL_OUTPUT".equals(topicStr) && !"unauthenticated.SEC_FAULT_OUTPUT".equals(topicStr)) {
-		//		log.debug("{} ={}", topicStr, text);
-		//}
 
 		boolean storeRaw = effectiveTopic.getTopic().isSaveRaw();
 
@@ -187,29 +175,11 @@ public class StoreService {
 		return json;
 	}
 
-	private DbStoreService findDbStoreService(Db db) {
-		DbType dbType = db.getDbType();
-		DbTypeEnum dbTypeEnum = DbTypeEnum.valueOf(dbType.getId());
-		switch (dbTypeEnum) {
-		case CB:
-			return context.getBean(CouchbaseService.class, db);
-		case ES:
-			return context.getBean(ElasticsearchService.class, db);
-		case HDFS:
-			return context.getBean(HdfsService.class, db);
-		case MONGO:
-			return context.getBean(MongodbService.class, db);
-		default:
-			log.error("we should not come here {}", dbTypeEnum);
-			return null;
-		}
-	}
-
 	public void flush() { //force flush all buffer 
-//		hdfsService.flush();
+		//		hdfsService.flush();
 	}
 
 	public void flushStall() { //flush stall buffer
-	//	hdfsService.flushStall();
+		//	hdfsService.flushStall();
 	}
 }

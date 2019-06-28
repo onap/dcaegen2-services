@@ -50,7 +50,6 @@ public class PullService {
 
 	private boolean isRunning = false;
 	private ExecutorService executorService;
-//	private Thread topicConfigPollingThread;
 	private Set<Puller> pullers;
 
 	@Autowired
@@ -95,10 +94,7 @@ public class PullService {
 		}
 
 		executorService.submit(topicConfigPollingService);
-		/*topicConfigPollingThread = new Thread(topicConfigPollingService);
-		topicConfigPollingThread.setName("TopicConfigPolling");
-		topicConfigPollingThread.start();
-*/
+		
 		isRunning = true;
 
 		Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
@@ -126,11 +122,6 @@ public class PullService {
 			for (Puller puller : pullers) {
 				puller.shutdown();
 			}
-
-//			logger.info("stop TopicConfigPollingService ...");
-//			topicConfigPollingService.shutdown();
-
-	//		topicConfigPollingThread.join();
 
 			logger.info("stop executorService ...");
 			executorService.shutdown();

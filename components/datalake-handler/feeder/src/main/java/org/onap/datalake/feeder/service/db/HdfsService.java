@@ -47,6 +47,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import lombok.Getter;
@@ -59,6 +60,7 @@ import lombok.Setter;
  *
  */
 @Service
+@Scope("prototype")
 public class HdfsService implements DbStoreService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -150,9 +152,6 @@ public class HdfsService implements DbStoreService {
 			out.close();
 			log.debug("Done writing {} to HDFS {}", bufferList.size(), filePath);
 		}
-	}
-
-	public HdfsService( ) { 
 	}
 
 	public HdfsService(Db db) {

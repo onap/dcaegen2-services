@@ -101,6 +101,10 @@ public class Db {
 	)
 	private Set<Topic> topics;
 
+	public boolean isTool() {
+		return dbType.isTool();
+	}
+	
 	public boolean isHdfs() {
 		return isDb(DbTypeEnum.HDFS);
 	}
@@ -127,7 +131,7 @@ public class Db {
 	
 	@Override
 	public String toString() {
-		return String.format("Db %s (name=%, enabled=%s)", id, name, enabled);
+		return String.format("Db %s (name=%s, enabled=%s)", id, name, enabled);
 	}
 
 	@Override

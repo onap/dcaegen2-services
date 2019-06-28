@@ -61,14 +61,15 @@ public class TopicConfigPollingService implements Runnable {
 	private KafkaRepository kafkaRepository;
 	
 	//effectiveTopic Map, 1st key is kafkaId, 2nd is topic name, the value is a list of EffectiveTopic.
-	private Map<String, Map<String, List<EffectiveTopic>>> effectiveTopicMap = new HashMap<>();;
+	private Map<String, Map<String, List<EffectiveTopic>>> effectiveTopicMap = new HashMap<>();
 	//private Map<String, TopicConfig> effectiveTopicConfigMap;
 
 	//monitor Kafka topic list changes
 	private Map<String, Set<String>> activeTopicMap;
 	
-	private ThreadLocal<Map<String, Integer>> activeTopicsVersionLocal = new ThreadLocal<>();
-	private Map<String, Integer> currentActiveTopicsVersionMap = new HashMap<>();
+	private ThreadLocal<Map<String, Integer>> activeTopicsVersionLocal =   ThreadLocal.withInitial(HashMap::new);//topic name:version
+	private Map<String, Integer> currentActiveTopicsVersionMap = new HashMap<>();//topic name:version
+	private Map<String, DmaapService> dmaapServiceMap = new HashMap<>();//kafka id:DmaapService
 
 	private boolean active = false;
 
@@ -169,7 +170,11 @@ public class TopicConfigPollingService implements Runnable {
 	private Set<String> poll(Kafka kafka) throws IOException {
 		log.debug("poll(), use dmaapService to getActiveTopicConfigs...");
 
-		DmaapService dmaapService = context.getBean(DmaapService.class, kafka);
+		DmaapService dmaapService =  dmaapServiceMap.get(kafka.getId());
+		if(dmaapService==null) {
+			dmaapService = context.getBean(DmaapService.class, kafka);
+			dmaapServiceMap.put(kafka.getId(), dmaapService);
+		}
 				
 		Map<String, List<EffectiveTopic>> activeEffectiveTopics = dmaapService.getActiveEffectiveTopic();
 		effectiveTopicMap.put(kafka.getId(), activeEffectiveTopics);

@@ -21,7 +21,6 @@
 package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -32,6 +31,7 @@ import java.util.concurrent.CountDownLatch;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
@@ -39,10 +39,10 @@ import org.apache.zookeeper.ZooKeeper;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.domain.Kafka;
-import org.onap.datalake.feeder.dto.TopicConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -52,6 +52,7 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
+@Scope("prototype")
 public class DmaapService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -145,8 +146,10 @@ public class DmaapService {
 			log.debug("get topic setting from DB: {}.", topicStr);
 
 			List<EffectiveTopic> effectiveTopics= topicService.getEnabledEffectiveTopic(kafka, topicStr, true);
-			
-			ret.put(topicStr , effectiveTopics);
+			if(CollectionUtils.isNotEmpty(effectiveTopics )) {
+				log.debug("add effectiveTopics  {}:{}.", topicStr, effectiveTopics);
+				ret.put(topicStr , effectiveTopics);
+			}
 			
 		}
 		return ret;
