@@ -54,6 +54,8 @@ public class ApplicationConfiguration {
 
 	private String defaultTopicName;
 
+	private int checkTopicInterval; //in millisecond
+/*
 	//DMaaP
 	private String dmaapZookeeperHostPort;
 	private String dmaapKafkaHostPort;
@@ -68,7 +70,7 @@ public class ApplicationConfiguration {
 	private int dmaapCheckNewTopicInterval; //in millisecond
 
 	private int kafkaConsumerCount;
-
+*/
 	private String elasticsearchType;
 
 	//HDFS

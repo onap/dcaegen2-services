@@ -20,6 +20,7 @@
 package org.onap.datalake.feeder.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -33,7 +34,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 import org.onap.datalake.feeder.dto.TopicConfig;
+import org.onap.datalake.feeder.enumeration.DataFormat;
+import org.onap.datalake.feeder.enumeration.DbTypeEnum;
+import org.onap.datalake.feeder.service.db.CouchbaseService;
+import org.onap.datalake.feeder.service.db.DbStoreService;
+import org.onap.datalake.feeder.service.db.ElasticsearchService;
+import org.onap.datalake.feeder.service.db.HdfsService;
+import org.onap.datalake.feeder.service.db.MongodbService;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -71,30 +81,30 @@ public class Topic {
 	//@JsonManagedReference
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "map_db_topic", joinColumns = { @JoinColumn(name = "topic_id") }, inverseJoinColumns = { @JoinColumn(name = "db_id") })
-	protected Set<Db> dbs;
+	protected Set<Db> dbs=new HashSet<>();
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "map_kafka_topic", joinColumns = { @JoinColumn(name = "topic_id") }, inverseJoinColumns = { @JoinColumn(name = "kafka_id") })
-	protected Set<Kafka> kafkas;
+	protected Set<Kafka> kafkas=new HashSet<>();
 
 	/**
 	 * indicate if we should monitor this topic
 	 */
-	@Column(name = "`enabled`")
-	private Boolean enabled;
+	@Column(name = "`enabled`", nullable = false)
+	private boolean enabled;
 
 	/**
 	 * save raw message text
 	 */
-	@Column(name = "`save_raw`")
-	private Boolean saveRaw;
+	@Column(name = "`save_raw`", nullable = false, columnDefinition = " bit(1) DEFAULT 0")
+	private boolean saveRaw;
 
 	/**
 	 * need to explicitly tell feeder the data format of the message. support JSON,
 	 * XML, YAML, TEXT
 	 */
 	@Column(name = "`data_format`")
-	private String dataFormat;
+	protected String dataFormat;
 
 	/**
 	 * TTL in day
@@ -103,41 +113,33 @@ public class Topic {
 	private Integer ttl;
 
 	//if this flag is true, need to correlate alarm cleared message to previous alarm 
-	@Column(name = "`correlate_cleared_message`")
-	private Boolean correlateClearedMessage;
+	@Column(name = "`correlate_cleared_message`", nullable = false, columnDefinition = " bit(1) DEFAULT 0")
+	private boolean correlateClearedMessage;
 
 	//paths to the values in the JSON that are used to composite DB id, comma separated, example: "/event-header/id,/event-header/entity-type,/entity/product-name"
 	@Column(name = "`message_id_path`")
-	private String messageIdPath;
+	protected String messageIdPath;
 
 	//paths to the array that need aggregation, comma separated, example: "/event/measurementsForVfScalingFields/diskUsageArray,/event/measurementsForVfScalingFields/cpuUsageArray,/event/measurementsForVfScalingFields/vNicPerformanceArray"
-	@Column(name = "`aggregate_array_path`") 
-	private String aggregateArrayPath;
+	@Column(name = "`aggregate_array_path`")
+	protected String aggregateArrayPath;
 
 	//paths to the element in array that need flatten, this element is used as label, comma separated, 
 	//example: "/event/measurementsForVfScalingFields/astriMeasurement/astriDPMeasurementArray/astriInterface,..."
-	@Column(name = "`flatten_array_path`") 
-	private String flattenArrayPath;
+	@Column(name = "`flatten_array_path`")
+	protected String flattenArrayPath;
 	
 	public Topic() {
 	}
-
+/*
 	public Topic(String name) {//TODO
 		//this.name = name;
 	}
-
+*/
 	public String getName() {
 		return topicName.getId();
 	}
 	
-	public boolean isEnabled() {
-		return is(enabled);
-	}
-
-	public boolean isCorrelateClearedMessage() {
-		return is(correlateClearedMessage);
-	}
-
 	public int getTtl() {
 		if (ttl != null) {
 			return ttl;
@@ -145,27 +147,86 @@ public class Topic {
 			return 3650;//default to 10 years for safe
 		}
 	}
-
-	private boolean is(Boolean b) {
-		return is(b, false);
+/*
+	public boolean supportHdfs() {
+		return supportDb(DbTypeEnum.HDFS);
 	}
 
-	private boolean is(Boolean b, boolean defaultValue) {
-		if (b != null) {
-			return b;
+	public boolean supportElasticsearch() {
+		return supportDb(DbTypeEnum.ES);
+	}
+
+	public boolean supportCouchbase() {
+		return supportDb(DbTypeEnum.CB);
+	}
+
+	public boolean supportDruid() {
+		return supportDb(DbTypeEnum.DRUID);
+	}
+
+	public boolean supportMongoDB() {
+		return supportDb(DbTypeEnum.MONGO);
+	}
+
+	private boolean supportDb(DbTypeEnum dbTypeEnum) {
+		for(Db db : dbs) {
+			
+		}
+	}
+*/
+	public DataFormat getDataFormat2() {
+		if (dataFormat != null) {
+			return DataFormat.fromString(dataFormat);
 		} else {
-			return defaultValue;
+			return null;
 		}
 	}
 
-	public boolean isSaveRaw() {
-		return is(saveRaw);
+	public String[] getAggregateArrayPath2() {
+		String[] ret = null;
+
+		if (StringUtils.isNotBlank(aggregateArrayPath)) {
+			ret = aggregateArrayPath.split(",");
+		}
+
+		return ret;
+	}
+
+	public String[] getFlattenArrayPath2() {
+		String[] ret = null;
+
+		if (StringUtils.isNotBlank(flattenArrayPath)) {
+			ret = flattenArrayPath.split(",");
+		}
+
+		return ret;
+	}
+
+	//extract DB id from JSON attributes, support multiple attributes
+	public String getMessageId(JSONObject json) {
+		String id = null;
+
+		if (StringUtils.isNotBlank(messageIdPath)) {
+			String[] paths = messageIdPath.split(",");
+
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < paths.length; i++) {
+				if (i > 0) {
+					sb.append('^');
+				}
+				sb.append(json.query(paths[i]).toString());
+			}
+			id = sb.toString();
+		}
+
+		return id;
 	}
 
 	public TopicConfig getTopicConfig() {
 		TopicConfig tConfig = new TopicConfig();
 
-		//tConfig.setName(getName());
+		tConfig.setId(getId());
+		tConfig.setName(getName());
 		tConfig.setLogin(getLogin());
 		tConfig.setEnabled(isEnabled());
 		tConfig.setDataFormat(dataFormat);

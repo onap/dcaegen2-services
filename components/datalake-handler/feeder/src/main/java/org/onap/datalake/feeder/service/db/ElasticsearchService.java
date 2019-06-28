@@ -18,7 +18,7 @@
 * ============LICENSE_END=========================================================
 */
 
-package org.onap.datalake.feeder.service;
+package org.onap.datalake.feeder.service.db;
 
 import java.io.IOException;
 import java.util.List;
@@ -47,7 +47,8 @@ import org.elasticsearch.rest.RestStatus;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.dto.TopicConfig;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
+import org.onap.datalake.feeder.domain.Topic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,24 +62,33 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class ElasticsearchService {
+public class ElasticsearchService implements DbStoreService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	private Db elasticsearch;
 
 	@Autowired
 	private ApplicationConfiguration config;
 
-	@Autowired
-	private DbService dbService;
+	//@Autowired
+//	private DbService dbService;
 
 	private RestHighLevelClient client;
 	ActionListener<BulkResponse> listener;
+
+	public ElasticsearchService( ) {
+		
+	}
+	public ElasticsearchService(Db db) {
+		elasticsearch = db;
+	}
 	
 	//ES Encrypted communication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_encrypted_communication.html#_encrypted_communication
 	//Basic authentication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_basic_authentication.html
 	@PostConstruct
 	private void init() {
-		Db elasticsearch = dbService.getElasticsearch();
+		//Db elasticsearch = dbService.getElasticsearch();
 		String elasticsearchHost = elasticsearch.getHost();
 
 		// Initialize the Connection
@@ -130,24 +140,25 @@ public class ElasticsearchService {
 	}
 
 	//TTL is not supported in Elasticsearch 5.0 and later, what can we do? FIXME
-	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) {
+	@Override
+	public void saveJsons(EffectiveTopic effectiveTopic, List<JSONObject> jsons) {
 		
 		BulkRequest request = new BulkRequest();
 
 		for (JSONObject json : jsons) {
-			if (topic.isCorrelateClearedMessage()) {
-				boolean found = correlateClearedMessage(topic, json);
+			if (effectiveTopic.getTopic().isCorrelateClearedMessage()) {
+				boolean found = correlateClearedMessage(effectiveTopic.getTopic(), json);
 				if (found) {
 					continue;
 				}
 			}			
 			
-			String id = topic.getMessageId(json); //id can be null
+			String id = effectiveTopic.getTopic().getMessageId(json); //id can be null
 			
- 			request.add(new IndexRequest(topic.getName().toLowerCase(), config.getElasticsearchType(), id).source(json.toString(), XContentType.JSON));
+ 			request.add(new IndexRequest(effectiveTopic.getName().toLowerCase(), config.getElasticsearchType(), id).source(json.toString(), XContentType.JSON));
 		}
 
-		log.debug("saving text to topic = {}, batch count = {} ", topic, jsons.size());
+		log.debug("saving text to effectiveTopic = {}, batch count = {} ", effectiveTopic, jsons.size());
 
 		if (config.isAsync()) {
 			client.bulkAsync(request, RequestOptions.DEFAULT, listener);
@@ -158,7 +169,7 @@ public class ElasticsearchService {
 					log.debug(bulkResponse.buildFailureMessage());
 				}
 			} catch (IOException e) {
-				log.error(topic.getName(), e);
+				log.error(effectiveTopic.getName(), e);
 			}
 		}
 		
@@ -175,7 +186,7 @@ public class ElasticsearchService {
 	 *         source. So use the get API, three parameters: index, type, document
 	 *         id
 	 */
-	private boolean correlateClearedMessage(TopicConfig topic, JSONObject json) {
+	private boolean correlateClearedMessage(Topic topic, JSONObject json) {
 		boolean found = false;
 		String eName = null;
 

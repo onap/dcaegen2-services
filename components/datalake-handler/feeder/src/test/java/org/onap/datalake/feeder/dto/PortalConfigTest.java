@@ -23,6 +23,7 @@ package org.onap.datalake.feeder.dto;
 import org.junit.Test;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Portal;
+import org.onap.datalake.feeder.util.TestUtil;
 
 import static org.junit.Assert.*;
 
@@ -33,10 +34,10 @@ public class PortalConfigTest {
 
         Portal testPortal = new Portal();
         testPortal.setName("Kibana");
-        testPortal.setDb(new Db("Elasticsearch"));
+        testPortal.setDb(TestUtil.newDb("Elasticsearch"));
         Portal testPortal2 = new Portal();
         testPortal2.setName("Kibana");
-        testPortal2.setDb(new Db("Elasticsearch"));
+        testPortal2.setDb(TestUtil.newDb("Elasticsearch"));
         PortalConfig testPortalConfig = testPortal.getPortalConfig();
         assertNotEquals(testPortalConfig, testPortal2.getPortalConfig());
         assertNotEquals(testPortalConfig, testPortal);

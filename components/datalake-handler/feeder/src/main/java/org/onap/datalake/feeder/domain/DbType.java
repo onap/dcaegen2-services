@@ -48,14 +48,14 @@ public class DbType {
 	@Column(name="`id`")
 	private String id;
 
-	@Column(name="`name`")
+	@Column(name="`name`", nullable = false)
 	private String name;
 
 	@Column(name="`default_port`")
 	private Integer defaultPort;
 
-	@Column(name="`tool`")
-	private Boolean tool;
+	@Column(name="`tool`", nullable = false)
+	private boolean tool;
  
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "dbType")
 	protected Set<Db> dbs = new HashSet<>();

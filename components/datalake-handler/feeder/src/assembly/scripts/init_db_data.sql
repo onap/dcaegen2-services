@@ -1,10 +1,8 @@
 INSERT INTO datalake.kafka(
    id
   ,name
-  ,check_topic_interval_sec
   ,consumer_count
   ,enabled
-  ,excluded_topic
   ,`group`
   ,broker_list
   ,included_topic
@@ -17,10 +15,8 @@ INSERT INTO datalake.kafka(
 ) VALUES (
   'KAFKA_1'
   ,'main Kafka cluster' -- name - IN varchar(255)
-  ,10   -- check_topic_sec - IN int(11)
   ,3   -- consumer_count - IN int(11)
   ,1   -- enabled - IN bit(1)
-  ,''  -- excluded_topic - IN varchar(255)
   ,'dlgroup'  -- group - IN varchar(255)
   ,'message-router-kafka:9092'  -- host_port - IN varchar(255)
   ,''  -- included_topic - IN varchar(255)

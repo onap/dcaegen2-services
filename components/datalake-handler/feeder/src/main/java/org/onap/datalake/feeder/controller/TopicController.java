@@ -27,17 +27,18 @@ import java.util.Set;
 import javax.servlet.http.HttpServletResponse;
 
 import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
 import org.onap.datalake.feeder.dto.TopicConfig;
-import org.onap.datalake.feeder.repository.DbRepository;
+import org.onap.datalake.feeder.repository.KafkaRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
-import org.onap.datalake.feeder.service.DbService;
 import org.onap.datalake.feeder.service.DmaapService;
 import org.onap.datalake.feeder.service.TopicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -71,19 +72,27 @@ public class TopicController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private DmaapService dmaapService;
+	//@Autowired
+	//private DmaapService dmaapService;
 
+	@Autowired
+	private ApplicationContext context;
+
+	@Autowired
+	private KafkaRepository kafkaRepository;
+	
 	@Autowired
 	private TopicRepository topicRepository;
 
 	@Autowired
 	private TopicService topicService;
 
-	@GetMapping("/dmaap")
+	@GetMapping("/dmaap/{kafkaId}")
 	@ResponseBody
 	@ApiOperation(value = "List all topic names in DMaaP.")
-	public List<String> listDmaapTopics() {
+	public List<String> listDmaapTopics(@PathVariable("kafkaId") String kafkaId ) {
+		Kafka kafka = kafkaRepository.findById(kafkaId).get();
+		DmaapService dmaapService = context.getBean(DmaapService.class, kafka); 
 		return dmaapService.getTopics();
 	}
 
@@ -95,7 +104,7 @@ public class TopicController {
 		List<String> retString = new ArrayList<>();
 		for(Topic item : ret)
 		{
-			if(!topicService.istDefaultTopic(item))
+			if(!topicService.isDefaultTopic(item))
 				retString.add(item.getName());
 		}
 		return retString;
@@ -110,24 +119,25 @@ public class TopicController {
 			sendError(response, 400, "Error parsing Topic: "+result.toString());
 			return null;
 		}
-		Topic oldTopic = topicService.getTopic(topicConfig.getName());
+		/*Topic oldTopic = topicService.getTopic(topicConfig.getName());
 		if (oldTopic != null) {
 			sendError(response, 400, "Topic already exists "+topicConfig.getName());
 			return null;
-		} else {
+		} else {*/
 			Topic wTopic = topicService.fillTopicConfiguration(topicConfig);
 			if(wTopic.getTtl() == 0)
 				wTopic.setTtl(3650);
 			topicRepository.save(wTopic); 
 			return mkPostReturnBody(200, wTopic);
-		}
+		//}
+			//FIXME need to connect to Kafka
 	}
 
-	@GetMapping("/{topicName}")
+	@GetMapping("/{topicId}")
 	@ResponseBody
 	@ApiOperation(value="Get a topic's settings.")
-	public TopicConfig getTopic(@PathVariable("topicName") String topicName, HttpServletResponse response) throws IOException {
-		Topic topic = topicService.getTopic(topicName);
+	public TopicConfig getTopic(@PathVariable("topicId") int topicId, HttpServletResponse response) throws IOException {
+		Topic topic = topicService.getTopic(topicId);
 		if(topic == null) {
 			sendError(response, 404, "Topic not found");
 			return null;
@@ -137,23 +147,23 @@ public class TopicController {
 
 	//This is not a partial update: old topic is wiped out, and new topic is created based on the input json.
 	//One exception is that old DBs are kept
-	@PutMapping("/{topicName}")
+	@PutMapping("/{topicId}")
 	@ResponseBody
 	@ApiOperation(value="Update a topic.")
-	public PostReturnBody<TopicConfig> updateTopic(@PathVariable("topicName") String topicName, @RequestBody TopicConfig topicConfig, BindingResult result, HttpServletResponse response) throws IOException {
+	public PostReturnBody<TopicConfig> updateTopic(@PathVariable("topicId") int topicId, @RequestBody TopicConfig topicConfig, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
 			sendError(response, 400, "Error parsing Topic: "+result.toString());
 			return null;
 		}
 
-		if(!topicName.equals(topicConfig.getName()))
+		if(topicId!=topicConfig.getId())
 		{
-			sendError(response, 400, "Topic name mismatch" + topicName + topicConfig.getName());
+			sendError(response, 400, "Topic name mismatch" + topicId + topicConfig);
 			return null;
 		}
 
-		Topic oldTopic = topicService.getTopic(topicConfig.getName());
+		Topic oldTopic = topicService.getTopic(topicId);
 		if (oldTopic == null) {
 			sendError(response, 404, "Topic not found "+topicConfig.getName());
 			return null;
@@ -164,14 +174,14 @@ public class TopicController {
 		}
 	}
 
-	@DeleteMapping("/{topicName}")
+	@DeleteMapping("/{topicId}")
 	@ResponseBody
-	@ApiOperation(value="Update a topic.")
-	public void deleteTopic(@PathVariable("topicName") String topicName, HttpServletResponse response) throws IOException
+	@ApiOperation(value="Delete a topic.")
+	public void deleteTopic(@PathVariable("topicId") int topicId, HttpServletResponse response) throws IOException
 	{
-		Topic oldTopic = topicService.getTopic(topicName);
+		Topic oldTopic = topicService.getTopic(topicId);
 		if (oldTopic == null) {
-			sendError(response, 404, "Topic not found "+topicName);
+			sendError(response, 404, "Topic not found "+topicId);
 		} else {
 			Set<Db> dbRelation = oldTopic.getDbs();
 			dbRelation.clear();

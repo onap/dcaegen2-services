@@ -91,7 +91,7 @@ public class PortalDesignControllerTest {
         PortalDesignController testPortalDesignController = new PortalDesignController();
         setAccessPrivateFields(testPortalDesignController);
         PortalDesign testPortalDesign = fillDomain();
-        when(topicService.getTopic("unauthenticated.SEC_FAULT_OUTPUT")).thenReturn(new Topic("unauthenticated.SEC_FAULT_OUTPUT"));
+        //when(topicService.getTopic(0)).thenReturn(new Topic("unauthenticated.SEC_FAULT_OUTPUT"));
 //        when(designTypeRepository.findById("Kibana Dashboard")).thenReturn(Optional.of(testPortalDesign.getDesignType()));
         PostReturnBody<PortalDesignConfig> postPortal = testPortalDesignController.createPortalDesign(testPortalDesign.getPortalDesignConfig(), mockBindingResult, httpServletResponse);
         //assertEquals(postPortal.getStatusCode(), 200);
@@ -106,7 +106,7 @@ public class PortalDesignControllerTest {
         PortalDesign testPortalDesign = fillDomain();
         Integer id = 1;
         when(portalDesignRepository.findById(id)).thenReturn((Optional.of(testPortalDesign)));
-        when(topicService.getTopic("unauthenticated.SEC_FAULT_OUTPUT")).thenReturn(new Topic("unauthenticated.SEC_FAULT_OUTPUT"));
+        //when(topicService.getTopic(0)).thenReturn(new Topic("unauthenticated.SEC_FAULT_OUTPUT"));
  //       when(designTypeRepository.findById("Kibana Dashboard")).thenReturn(Optional.of(testPortalDesign.getDesignType()));
         PostReturnBody<PortalDesignConfig> postPortal = testPortalDesignController.updatePortalDesign(testPortalDesign.getPortalDesignConfig(), mockBindingResult, id, httpServletResponse);
         //assertEquals(postPortal.getStatusCode(), 200);

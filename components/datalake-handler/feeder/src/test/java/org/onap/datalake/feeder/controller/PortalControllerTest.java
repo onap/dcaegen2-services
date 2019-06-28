@@ -115,7 +115,7 @@ public class PortalControllerTest {
         portal.setPort(5601);
         portal.setLogin("admin");
         portal.setPass("password");
-        portal.setDb(new Db("Elasticsearch"));
+        portal.setDb(new Db());
         return  portal;
     }
 }

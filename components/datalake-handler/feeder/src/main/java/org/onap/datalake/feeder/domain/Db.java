@@ -32,6 +32,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.onap.datalake.feeder.enumeration.DbTypeEnum;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -51,12 +54,12 @@ public class Db {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "`id`")
-    private Integer id;
+    private int id;
 
 	@Column(name="`name`")
 	private String name;
 
-	@Column(name="`enabled`")
+	@Column(name="`enabled`", nullable = false)
 	private boolean	enabled;
 
 	@Column(name="`host`")
@@ -98,13 +101,30 @@ public class Db {
 	)
 	private Set<Topic> topics;
 
-	public Db() {
+	public boolean isHdfs() {
+		return isDb(DbTypeEnum.HDFS);
 	}
 
-	public Db(String name) {
-		this.name = name;
+	public boolean isElasticsearch() {
+		return isDb(DbTypeEnum.ES);
 	}
 
+	public boolean isCouchbase() {
+		return isDb(DbTypeEnum.CB);
+	}
+
+	public boolean isDruid() {
+		return isDb(DbTypeEnum.DRUID);
+	}
+
+	public boolean isMongoDB() {
+		return isDb(DbTypeEnum.MONGO);
+	}
+
+	private boolean isDb(DbTypeEnum dbTypeEnum) {
+		return  dbTypeEnum.equals(DbTypeEnum.valueOf(dbType.getId()));
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("Db %s (name=%, enabled=%s)", id, name, enabled);

@@ -27,8 +27,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.DbRepository;
-import org.onap.datalake.feeder.repository.TopicRepository;
-import org.onap.datalake.feeder.service.DbService;
 import org.onap.datalake.feeder.dto.DbConfig;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
 import org.slf4j.Logger;
@@ -59,12 +57,6 @@ public class DbController {
 	@Autowired
 	private DbRepository dbRepository;
 
-	@Autowired
-	private TopicRepository topicRepository;
-
-	@Autowired
-	private DbService dbService;
-
 	//list all dbs 
 	@GetMapping("")
 	@ResponseBody
@@ -92,11 +84,11 @@ public class DbController {
 			return null;
 		}
 
-		Db oldDb = dbService.getDb(dbConfig.getName());
+/*		Db oldDb = dbService.getDb(dbConfig.getName());
 		if (oldDb != null) {
 			sendError(response, 400, "Db already exists: " + dbConfig.getName());
 			return null;
-		} else {
+		} else {*/
 			Db newdb = new Db();
 			newdb.setName(dbConfig.getName());
 			newdb.setHost(dbConfig.getHost());
@@ -118,7 +110,7 @@ public class DbController {
 			retBody.setReturnBody(retMsg);
 			retBody.setStatusCode(200);
 			return retBody;
-		}
+		//}
 	}
 
 	//Show a db
@@ -191,7 +183,7 @@ public class DbController {
 			return null;
 		}
 
-		Db oldDb = dbService.getDb(dbConfig.getName());
+		Db oldDb = dbRepository.findById(dbConfig.getId()).get();
 		if (oldDb == null) {
 			sendError(response, 404, "Db not found: " + dbConfig.getName());
 			return null;

@@ -1,8 +1,8 @@
 /*
 * ============LICENSE_START=======================================================
-* ONAP : DCAE
+* ONAP : DataLake
 * ================================================================================
-* Copyright 2018 TechMahindra
+* Copyright 2019 China Mobile
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -17,21 +17,48 @@
 * limitations under the License.
 * ============LICENSE_END=========================================================
 */
-package org.onap.datalake.feeder.enumeration;
+package org.onap.datalake.feeder.domain;
 
 /**
- * Database type
+ * A warper of parent Topic
  * 
  * @author Guobiao Mo
  *
  */
-public enum DbTypeEnum { 
-	CB("Couchbase"), DRUID("Druid"), ES("Elasticsearch"), HDFS("HDFS"), MONGO("MongoDB"), KIBANA("Kibana"), SUPERSET("Superset");
+ 
+public class EffectiveTopic {
+	private Topic topic; //base Topic
+	
+	String name;
 
-	private final String name;
+	public EffectiveTopic(Topic baseTopic) {
+		topic = baseTopic;
+	}
 
-	DbTypeEnum(String name) {
+	public EffectiveTopic(Topic baseTopic, String name ) {
+		topic = baseTopic;
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name==null?topic.getName():name;
+	}
+
+	public void setName(String name) {
 		this.name = name;
 	}
 
+	public Topic getTopic() {
+		return topic;
+	}
+ 
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("EffectiveTopic %s (base Topic=%s)", getName(), topic.toString());
+	}
+ 
 }

@@ -52,20 +52,6 @@ public class ApplicationConfigurationTest {
 
     @Test
     public void readConfig() {
-
-        assertNotNull(config.getDmaapZookeeperHostPort());
-        assertNotNull(config.getDmaapKafkaHostPort());
-        assertNotNull(config.getDmaapKafkaGroup());
-        assertTrue(config.getDmaapKafkaTimeout() > 0L);
-        assertTrue(config.getDmaapCheckNewTopicInterval() > 0);
-        
-        assertNull(config.getDmaapKafkaLogin());
-        assertNull(config.getDmaapKafkaPass());
-        assertNull(config.getDmaapKafkaSecurityProtocol());
-
-        assertTrue(config.getKafkaConsumerCount() > 0);
-
-        assertNotNull(config.getDmaapKafkaExclude());
         
         assertNotNull(config.isAsync());
         assertNotNull(config.isEnableSSL());

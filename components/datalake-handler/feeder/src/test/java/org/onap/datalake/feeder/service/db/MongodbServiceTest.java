@@ -18,11 +18,12 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.datalake.feeder.service;
+package org.onap.datalake.feeder.service.db;
 
-import org.elasticsearch.action.ActionListener;
-import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.client.RestHighLevelClient;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,47 +33,47 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.domain.TopicName;
+import org.onap.datalake.feeder.service.DbService;
+import org.onap.datalake.feeder.service.db.MongodbService;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ElasticsearchServiceTest {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-    static String DEFAULT_TOPIC_NAME = "_DL_DEFAULT_";
+@RunWith(MockitoJUnitRunner.class)
+public class MongodbServiceTest {
 
     @InjectMocks
-    private ElasticsearchService elasticsearchService;
+    private MongodbService mongodbService;
 
     @Mock
     private ApplicationConfiguration config;
 
     @Mock
-    private RestHighLevelClient client;
-
-    @Mock
-    ActionListener<BulkResponse> listener;
-
-    @Mock
     private DbService dbService;
 
-    @Test(expected = NullPointerException.class)
-    public void testCleanUp() throws IOException {
+    @Mock
+    private MongoDatabase database;
 
-        elasticsearchService.cleanUp();
+    @Mock
+    private MongoClient mongoClient;
 
+    @Mock
+    private Map<String, MongoCollection<Document>> mongoCollectionMap = new HashMap<>();
+
+
+    @Test
+    public void cleanUp() {
+	//	when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
+//        mongodbService.cleanUp();
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testEnsureTableExist() throws IOException {
-
-        elasticsearchService.ensureTableExist(DEFAULT_TOPIC_NAME);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testSaveJsons() {
+    @Test
+    public void saveJsons() {
 
         Topic topic = new Topic();
         topic.setTopicName(new TopicName("unauthenticated.SEC_FAULT_OUTPUT"));
@@ -87,10 +88,7 @@ public class ElasticsearchServiceTest {
         List<JSONObject> jsons = new ArrayList<>();
         jsons.add(jsonObject);
         jsons.add(jsonObject2);
-//        when(config.getElasticsearchType()).thenReturn("doc");
-  //      when(config.isAsync()).thenReturn(true);
 
-        elasticsearchService.saveJsons(topic.getTopicConfig(), jsons);
-
+        //mongodbService.saveJsons(topic.getTopicConfig(), jsons);
     }
 }

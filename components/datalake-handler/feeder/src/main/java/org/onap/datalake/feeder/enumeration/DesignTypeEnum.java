@@ -19,27 +19,20 @@
 */
 package org.onap.datalake.feeder.enumeration;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test; 
-
 /**
- * Test Data format of DMaaP messages
+ * Design type
  * 
  * @author Guobiao Mo
  *
  */
-public class DbTypeEnumTest {
-    @Test
-    public void fromString() {
-        assertEquals(DbTypeEnum.CB, DbTypeEnum.fromString("Couchbase")); 
-        System.out.println(DbTypeEnum.CB.name());
-    }
+public enum DesignTypeEnum { 
+	KIBANA_DB("Kibana Dashboard"), KIBANA_SEARCH("Kibana Search"), KIBANA_VISUAL("Kibana Visualization"), 
+	ES_MAPPING("Elasticsearch Field Mapping Template"), DRUID_KAFKA_SPEC("Druid Kafka Indexing Service Supervisor Spec");
 
-    @Test(expected = IllegalArgumentException.class)
-    public void fromStringWithException() {
-    	DbTypeEnum.fromString("test");
-    }
-    
-    
+	private final String name;
+
+	DesignTypeEnum(String name) {
+		this.name = name;
+	}
+
 }

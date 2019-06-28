@@ -18,7 +18,7 @@
 * ============LICENSE_END=========================================================
 */
 
-package org.onap.datalake.feeder.service;
+package org.onap.datalake.feeder.service.db;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,8 @@ import javax.annotation.PreDestroy;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.dto.TopicConfig;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
+import org.onap.datalake.feeder.domain.Topic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,25 +56,33 @@ import rx.functions.Func1;
  *
  */
 @Service
-public class CouchbaseService {
+public class CouchbaseService implements DbStoreService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	ApplicationConfiguration config;
-
+	
+	private Db couchbase;
+/*
 	@Autowired
 	private DbService dbService;
 
-	Bucket bucket;
 	private boolean isReady = false;
+*/
+	Bucket bucket;
 
+	public CouchbaseService( ) {
+		
+	}
+	public CouchbaseService(Db db) {
+		couchbase = db;
+	}
+	
 	@PostConstruct
 	private void init() {
 		// Initialize Couchbase Connection
 		try {
-			Db couchbase = dbService.getCouchbase();
-
 			//this tunes the SDK (to customize connection timeout)
 			CouchbaseEnvironment env = DefaultCouchbaseEnvironment.builder().connectTimeout(60000) // 60s, default is 5s
 					.build();
@@ -84,10 +93,10 @@ public class CouchbaseService {
 			bucket.bucketManager().createN1qlPrimaryIndex(true, false);
 
 			log.info("Connected to Couchbase {} as {}", couchbase.getHost(), couchbase.getLogin());
-			isReady = true;
+//			isReady = true;
 		} catch (Exception ex) {
 			log.error("error connection to Couchbase.", ex);
-			isReady = false;
+	//		isReady = false;
 		}
 	}
 
@@ -103,7 +112,8 @@ public class CouchbaseService {
 		}
 	}
 
-	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) {
+	@Override
+	public void saveJsons(EffectiveTopic effectiveTopic, List<JSONObject> jsons) {
 		List<JsonDocument> documents = new ArrayList<>(jsons.size());
 		for (JSONObject json : jsons) {
 			//convert to Couchbase JsonObject from org.json JSONObject
@@ -112,9 +122,9 @@ public class CouchbaseService {
 			long timestamp = jsonObject.getLong(config.getTimestampLabel());//this is Kafka time stamp, which is added in StoreService.messageToJson()
 
 			//setup TTL
-			int expiry = (int) (timestamp / 1000L) + topic.getTtl() * 3600 * 24; //in second
+			int expiry = (int) (timestamp / 1000L) + effectiveTopic.getTopic().getTtl() * 3600 * 24; //in second
 
-			String id = getId(topic, json);
+			String id = getId(effectiveTopic.getTopic(), json);
 			JsonDocument doc = JsonDocument.create(id, expiry, jsonObject);
 			documents.add(doc);
 		}
@@ -133,10 +143,10 @@ public class CouchbaseService {
 		} catch (Exception e) {
 			log.error("error saving to Couchbase.", e);
 		}
-		log.debug("saved text to topic = {}, this batch count = {} ", topic, documents.size());
+		log.debug("saved text to topic = {}, this batch count = {} ", effectiveTopic, documents.size());
 	}
 
-	public String getId(TopicConfig topic, JSONObject json) {
+	public String getId(Topic topic, JSONObject json) {
 		//if this topic requires extract id from JSON
 		String id = topic.getMessageId(json);
 		if (id != null) {

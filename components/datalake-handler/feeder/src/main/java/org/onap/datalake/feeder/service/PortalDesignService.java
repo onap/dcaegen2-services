@@ -23,15 +23,27 @@ package org.onap.datalake.feeder.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.DbType;
 import org.onap.datalake.feeder.domain.DesignType;
 import org.onap.datalake.feeder.domain.Portal;
 import org.onap.datalake.feeder.domain.PortalDesign;
 import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.domain.TopicName;
 import org.onap.datalake.feeder.dto.PortalDesignConfig;
+import org.onap.datalake.feeder.enumeration.DbTypeEnum;
+import org.onap.datalake.feeder.enumeration.DesignTypeEnum;
 import org.onap.datalake.feeder.repository.DesignTypeRepository;
 import org.onap.datalake.feeder.repository.PortalDesignRepository;
+import org.onap.datalake.feeder.repository.TopicNameRepository;
+import org.onap.datalake.feeder.service.db.CouchbaseService;
+import org.onap.datalake.feeder.service.db.DbStoreService;
+import org.onap.datalake.feeder.service.db.ElasticsearchService;
+import org.onap.datalake.feeder.service.db.HdfsService;
+import org.onap.datalake.feeder.service.db.MongodbService;
 import org.onap.datalake.feeder.util.HttpClientUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,11 +63,11 @@ public class PortalDesignService {
 
 	static String POST_FLAG;
 
-    @Autowired
-    private PortalDesignRepository portalDesignRepository;
+	@Autowired
+	private PortalDesignRepository portalDesignRepository;
 
-    @Autowired
-	private TopicService topicService;
+	@Autowired
+	private TopicNameRepository topicNameRepository;
 
 	@Autowired
 	private DesignTypeRepository designTypeRepository;
@@ -63,17 +75,13 @@ public class PortalDesignService {
 	@Autowired
 	private ApplicationConfiguration applicationConfiguration;
 
-	@Autowired
-	private DbService dbService;
-
-	public PortalDesign fillPortalDesignConfiguration(PortalDesignConfig portalDesignConfig) throws Exception
-	{
+	public PortalDesign fillPortalDesignConfiguration(PortalDesignConfig portalDesignConfig) throws Exception {
 		PortalDesign portalDesign = new PortalDesign();
 		fillPortalDesign(portalDesignConfig, portalDesign);
 		return portalDesign;
 	}
-	public void fillPortalDesignConfiguration(PortalDesignConfig portalDesignConfig, PortalDesign portalDesign) throws Exception
-	{
+
+	public void fillPortalDesignConfiguration(PortalDesignConfig portalDesignConfig, PortalDesign portalDesign) throws Exception {
 		fillPortalDesign(portalDesignConfig, portalDesign);
 	}
 
@@ -86,32 +94,34 @@ public class PortalDesignService {
 		portalDesign.setSubmitted(portalDesignConfig.getSubmitted());
 
 		if (portalDesignConfig.getTopic() != null) {
-			Topic topic = topicService.getTopic(portalDesignConfig.getTopic());
-			if (topic == null) throw new IllegalArgumentException("topic is null");
-			portalDesign.setTopicName(topic.getTopicName());
-		}else {
-			throw new IllegalArgumentException("Can not find topic in DB, topic name: "+portalDesignConfig.getTopic());
+			Optional<TopicName> topicName = topicNameRepository.findById(portalDesignConfig.getTopic());
+			if (topicName.isPresent()) {
+				portalDesign.setTopicName(topicName.get());
+			} else {
+				throw new IllegalArgumentException("topic is null " + portalDesignConfig.getTopic());
+			}
+		} else {
+			throw new IllegalArgumentException("Can not find topic in DB, topic name: " + portalDesignConfig.getTopic());
 		}
 
 		if (portalDesignConfig.getDesignType() != null) {
 			DesignType designType = designTypeRepository.findById(portalDesignConfig.getDesignType()).get();
-			if (designType == null) throw new IllegalArgumentException("designType is null");
+			if (designType == null)
+				throw new IllegalArgumentException("designType is null");
 			portalDesign.setDesignType(designType);
-		}else {
-			throw new IllegalArgumentException("Can not find designType in Design_type, designType name "+portalDesignConfig.getDesignType());
+		} else {
+			throw new IllegalArgumentException("Can not find designType in Design_type, designType name " + portalDesignConfig.getDesignType());
 		}
 
 	}
 
-	
 	public PortalDesign getPortalDesign(Integer id) {
-		
+
 		Optional<PortalDesign> ret = portalDesignRepository.findById(id);
 		return ret.isPresent() ? ret.get() : null;
 	}
 
-
-	public List<PortalDesignConfig> queryAllPortalDesign(){
+	public List<PortalDesignConfig> queryAllPortalDesign() {
 
 		List<PortalDesign> portalDesignList = null;
 		List<PortalDesignConfig> portalDesignConfigList = new ArrayList<>();
@@ -125,29 +135,20 @@ public class PortalDesignService {
 		return portalDesignConfigList;
 	}
 
+	public boolean deploy(PortalDesign portalDesign) {
+		DesignType designType = portalDesign.getDesignType();
+		DesignTypeEnum designTypeEnum = DesignTypeEnum.valueOf(designType.getId());
 
-	public boolean deploy(PortalDesign portalDesign){
-		boolean flag =true;
-		String designTypeName = portalDesign.getDesignType().getName();
-		if (portalDesign.getDesignType() != null && "kibana_db".equals(designTypeName)) {
-			flag = deployKibanaImport(portalDesign);
-		} else if (portalDesign.getDesignType() != null && "kibana_visual".equals(designTypeName)) {
-			//TODO
-			flag =false;
-		} else if (portalDesign.getDesignType() != null && "kibana_search".equals(designTypeName)) {
-			//TODO
-			flag = false;
-		} else if (portalDesign.getDesignType() != null && "es_mapping".equals(designTypeName)) {
-			flag = postEsMappingTemplate(portalDesign, portalDesign.getTopicName().getId().toLowerCase());
-		} else if (portalDesign.getDesignType() != null && "druid_kafka_spec".equals(designTypeName)) {
-			//TODO
-			flag =false;
-		} else {
-			flag =false;
+		switch (designTypeEnum) {
+		case KIBANA_DB:
+			return deployKibanaImport(portalDesign);
+		case ES_MAPPING:
+			return postEsMappingTemplate(portalDesign, portalDesign.getTopicName().getId().toLowerCase());
+		default:
+			log.error("Not implemented {}", designTypeEnum);
+			return false;
 		}
-		return flag;
 	}
-
 
 	private boolean deployKibanaImport(PortalDesign portalDesign) throws RuntimeException {
 		POST_FLAG = "KibanaDashboardImport";
@@ -168,20 +169,16 @@ public class PortalDesignService {
 
 	}
 
-
-	private String kibanaImportUrl(String host, Integer port){
+	private String kibanaImportUrl(String host, Integer port) {
 		if (port == null) {
 			port = applicationConfiguration.getKibanaPort();
 		}
-		return "http://"+host+":"+port+applicationConfiguration.getKibanaDashboardImportApi();
+		return "http://" + host + ":" + port + applicationConfiguration.getKibanaDashboardImportApi();
 	}
 
-
 	/**
-	 * successed resp:
-	 * {
-	 *     "acknowledged": true
-	 * }
+	 * successed resp: { "acknowledged": true }
+	 * 
 	 * @param portalDesign
 	 * @param templateName
 	 * @return flag
@@ -189,7 +186,13 @@ public class PortalDesignService {
 	public boolean postEsMappingTemplate(PortalDesign portalDesign, String templateName) throws RuntimeException {
 		POST_FLAG = "ElasticsearchMappingTemplate";
 		String requestBody = portalDesign.getBody();
-		return HttpClientUtil.sendPostHttpClient("http://"+dbService.getElasticsearch().getHost()+":9200/_template/"+templateName, requestBody, POST_FLAG);
+
+		//FIXME
+		Set<Db> dbs = portalDesign.getDbs();
+		//submit to each ES in dbs
+
+		//return HttpClientUtil.sendPostHttpClient("http://"+dbService.getElasticsearch().getHost()+":9200/_template/"+templateName, requestBody, POST_FLAG);
+		return false;
 	}
 
 }

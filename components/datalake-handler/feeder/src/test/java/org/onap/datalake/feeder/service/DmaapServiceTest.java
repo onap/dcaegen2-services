@@ -57,11 +57,11 @@ public class DmaapServiceTest {
         list.add("unauthenticated.SEC_FAULT_OUTPUT");
         list.add("msgrtr.apinode.metrics.dmaap");
 //		when(config.getDmaapKafkaExclude()).thenReturn(new String[] { "AAI-EVENT" });
-        when(config.getDmaapZookeeperHostPort()).thenReturn(DMAPP_ZOOKEEPER_HOST_PORT);
+        //when(config.getDmaapZookeeperHostPort()).thenReturn(DMAPP_ZOOKEEPER_HOST_PORT);
         assertNotEquals(list, dmaapService.getTopics());
 
-		when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
-    	dmaapService.cleanUp();
+		//when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
+    	//dmaapService.cleanUp();
     }
 
     @Test
@@ -74,9 +74,9 @@ public class DmaapServiceTest {
         list.add("unauthenticated.SEC_FAULT_OUTPUT");
         list.add("msgrtr.apinode.metrics.dmaap");
 
-        when(config.getDmaapZookeeperHostPort()).thenReturn(DMAPP_ZOOKEEPER_HOST_PORT);
+        //when(config.getDmaapZookeeperHostPort()).thenReturn(DMAPP_ZOOKEEPER_HOST_PORT);
         try {
-        	assertNotEquals(list, dmaapService.getActiveTopicConfigs());
+        	assertNotEquals(list, dmaapService.getActiveEffectiveTopic());
         } catch (Exception e) {
             e.printStackTrace();
         }

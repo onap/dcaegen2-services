@@ -56,7 +56,7 @@ public class DruidSupervisorGeneratorTest {
         assertNotNull(gen.getTemplate());
 
         String host = (String) context.get("host");
-        assertEquals(host, config.getDmaapKafkaHostPort());
+        //assertEquals(host, config.getDmaapKafkaHostPort());
 
         String[] strArray2 = {"test1", "test2", "test3"};
 

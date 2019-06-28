@@ -70,12 +70,7 @@ public class PullerTest {
 	@Test
 	public void testRun() throws InterruptedException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
 		testInit();
-
-		when(config.getDmaapKafkaHostPort()).thenReturn("test:1000");
-		when(config.getDmaapKafkaGroup()).thenReturn("test");
-		when(config.getDmaapKafkaLogin()).thenReturn("login");
-		when(config.getDmaapKafkaPass()).thenReturn("pass");
-		when(config.getDmaapKafkaSecurityProtocol()).thenReturn("TEXT");
+ 
 
 		Thread thread = new Thread(puller);
 		thread.start();
