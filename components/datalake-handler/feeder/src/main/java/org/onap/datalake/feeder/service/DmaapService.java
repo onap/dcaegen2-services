@@ -24,7 +24,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 import javax.annotation.PostConstruct;
@@ -35,6 +37,8 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.apache.zookeeper.ZooKeeper;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
+import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +64,12 @@ public class DmaapService {
 
 	private ZooKeeper zk;
 
+	private Kafka kafka;
+
+	public DmaapService(Kafka kafka) {
+		this.kafka = kafka;
+	}
+
 	@PreDestroy
 	public void cleanUp() throws InterruptedException {
 		config.getShutdownLock().readLock().lock();
@@ -76,7 +86,7 @@ public class DmaapService {
 
 	@PostConstruct
 	private void init() throws IOException, InterruptedException {
-		zk = connect(config.getDmaapZookeeperHostPort());
+		zk = connect(kafka.getZooKeeper());
 	}
 
 	//get all topic names from Zookeeper
@@ -84,11 +94,11 @@ public class DmaapService {
 	public List<String> getTopics() {
 		try {
 			if (zk == null) {
-				zk = connect(config.getDmaapZookeeperHostPort());
+				zk = connect(kafka.getZooKeeper());
 			}
-			log.info("connecting to ZooKeeper {} for a list of topics.", config.getDmaapZookeeperHostPort());
+			log.info("connecting to ZooKeeper {} for a list of topics.", kafka.getZooKeeper());
 			List<String> topics = zk.getChildren("/brokers/topics", false);
-			String[] excludes = config.getDmaapKafkaExclude();
+			String[]  excludes = kafka.getExcludedTopic().split(",");
 			topics.removeAll(Arrays.asList(excludes));
 			log.info("list of topics: {}", topics);
 			return topics;
@@ -100,7 +110,7 @@ public class DmaapService {
 	}
 
 	private ZooKeeper connect(String host) throws IOException, InterruptedException {
-		log.info("connecting to ZooKeeper {} ...", config.getDmaapZookeeperHostPort());
+		log.info("connecting to ZooKeeper {} ...", kafka.getZooKeeper());
 		CountDownLatch connectedSignal = new CountDownLatch(1);
 		ZooKeeper ret = new ZooKeeper(host, 10000, new Watcher() {
 			public void process(WatchedEvent we) {
@@ -126,18 +136,18 @@ public class DmaapService {
 			return ret;
 		}
 	*/
-	public List<TopicConfig> getActiveTopicConfigs() throws IOException {
+	public Map<String, List<EffectiveTopic>> getActiveEffectiveTopic() throws IOException {
 		log.debug("entering getActiveTopicConfigs()...");
-		List<String> allTopics = getTopics();
+		List<String> allTopics = getTopics(); //topics in Kafka cluster TODO update table topic_name with new topics
 
-		List<TopicConfig> ret = new ArrayList<>(allTopics.size());
+		Map<String, List<EffectiveTopic>> ret = new HashMap<>();
 		for (String topicStr : allTopics) {
 			log.debug("get topic setting from DB: {}.", topicStr);
 
-			TopicConfig topicConfig = topicService.getEffectiveTopic(topicStr, true);
-			if (topicConfig.isEnabled()) {
-				ret.add(topicConfig);
-			}
+			List<EffectiveTopic> effectiveTopics= topicService.getEnabledEffectiveTopic(kafka, topicStr, true);
+			
+			ret.put(topicStr , effectiveTopics);
+			
 		}
 		return ret;
 	}

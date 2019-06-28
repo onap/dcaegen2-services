@@ -19,21 +19,17 @@
 */
 package org.onap.datalake.feeder.repository;
 
-import java.util.List;
-
-import org.onap.datalake.feeder.domain.Portal;
-import org.onap.datalake.feeder.domain.Topic;
-
+import org.onap.datalake.feeder.domain.TopicName;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  * 
- * Topic Repository 
+ * TopicName Repository 
  * 
  * @author Guobiao Mo
  *
  */ 
 
-public interface TopicRepository extends CrudRepository<Topic, Integer> {
-	  //List<Topic> findByTopicName(String topicStr);
+public interface TopicNameRepository extends CrudRepository<TopicName, String> {
+
 }

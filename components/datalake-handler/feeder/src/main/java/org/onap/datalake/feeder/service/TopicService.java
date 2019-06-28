@@ -21,23 +21,31 @@
 package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
+import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.DbRepository;
+import org.onap.datalake.feeder.repository.TopicNameRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
+import org.onap.datalake.feeder.service.db.ElasticsearchService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 /**
- * Service for topics 
+ * Service for topics
  * 
  * @author Guobiao Mo
  *
@@ -49,72 +57,90 @@ public class TopicService {
 
 	@Autowired
 	private ApplicationConfiguration config;
-	
+
+	@Autowired
+	private ApplicationContext context;
+
+	@Autowired
+	private TopicNameRepository topicNameRepository;
+
 	@Autowired
 	private TopicRepository topicRepository;
 
 	@Autowired
-	private ElasticsearchService elasticsearchService;
-
-
-	@Autowired
 	private DbRepository dbRepository;
 
-	public TopicConfig getEffectiveTopic(String topicStr) {
-		try {
-			return getEffectiveTopic(topicStr, false);
-		} catch (IOException e) {
-			log.error(topicStr, e);
+	public List<EffectiveTopic> getEnabledEffectiveTopic(Kafka kafka, String topicStr, boolean ensureTableExist) throws IOException {
+
+		List<Topic> topics = findTopics(kafka, topicStr);
+		if (CollectionUtils.isEmpty(topics)) {
+			topics = new ArrayList<>();
+			topics.add(getDefaultTopic(kafka));
 		}
-		return null;
+
+		List<EffectiveTopic> ret = new ArrayList<>();
+		for (Topic topic : topics) {
+			if (!topic.isEnabled()) {
+				continue;
+			}
+			ret.add(new EffectiveTopic(topic, topicStr));
+
+			if (ensureTableExist) {
+				for (Db db : topic.getDbs()) {
+					if (db.isElasticsearch()) {
+						ElasticsearchService elasticsearchService = context.getBean(ElasticsearchService.class, db);
+						elasticsearchService.ensureTableExist(topicStr);
+					}
+				}
+			}
+		}
+
+		return ret;
 	}
 
-	public TopicConfig getEffectiveTopic(String topicStr, boolean ensureTableExist) throws IOException {
-		Topic topic = getTopic(topicStr);
-		if (topic == null) {
-			topic = getDefaultTopic();
-		}
-		TopicConfig topicConfig = topic.getTopicConfig();
-		topicConfig.setName(topicStr);//need to change name if it comes from DefaultTopic
+	//TODO use query
+	public List<Topic> findTopics(Kafka kafka, String topicStr) {
+		List<Topic> ret = new ArrayList<>();
 		
-		if(ensureTableExist && topicConfig.isEnabled() && topicConfig.supportElasticsearch()) {
-			elasticsearchService.ensureTableExist(topicStr); 
+		Iterable<Topic> allTopics = topicRepository.findAll();
+		for(Topic topic: allTopics) {
+			if(topic.getKafkas().contains(kafka ) && topic.getTopicName().getId().equals(topicStr)){
+				ret.add(topic);
+			}
 		}
-		return topicConfig;
+		return ret;
 	}
 
-	public Topic getTopic(String topicStr) {
-		Optional<Topic> ret = topicRepository.findById(null);//FIXME
+	public Topic getTopic(int topicId) {
+		Optional<Topic> ret = topicRepository.findById(topicId);
 		return ret.isPresent() ? ret.get() : null;
 	}
 
-	public Topic getDefaultTopic() {
-		return getTopic(config.getDefaultTopicName());
+	public Topic getDefaultTopic(Kafka kafka) {
+		return findTopics(kafka, config.getDefaultTopicName()).get(0);
 	}
 
-	public boolean istDefaultTopic(Topic topic) {
+	public boolean isDefaultTopic(Topic topic) {
 		if (topic == null) {
 			return false;
 		}
-		return true;//topic.getName().equals(config.getDefaultTopicName());
+		return topic.getName().equals(config.getDefaultTopicName());
 	}
 
-	public void fillTopicConfiguration(TopicConfig tConfig, Topic wTopic)
-	{
+	public void fillTopicConfiguration(TopicConfig tConfig, Topic wTopic) {
 		fillTopic(tConfig, wTopic);
 	}
 
-	public Topic fillTopicConfiguration(TopicConfig tConfig)
-	{
+	public Topic fillTopicConfiguration(TopicConfig tConfig) {
 		Topic topic = new Topic();
 		fillTopic(tConfig, topic);
 		return topic;
 	}
 
-	private void fillTopic(TopicConfig tConfig, Topic topic)
-	{
+	private void fillTopic(TopicConfig tConfig, Topic topic) {
 		Set<Db> relateDb = new HashSet<>();
-		//topic.setName(tConfig.getName());
+		topic.setId(tConfig.getId());
+		topic.setTopicName(topicNameRepository.findById(tConfig.getName()).get());
 		topic.setLogin(tConfig.getLogin());
 		topic.setPass(tConfig.getPassword());
 		topic.setEnabled(tConfig.isEnabled());
@@ -126,24 +152,21 @@ public class TopicService {
 		topic.setAggregateArrayPath(tConfig.getAggregateArrayPath());
 		topic.setFlattenArrayPath(tConfig.getFlattenArrayPath());
 
-		if(tConfig.getSinkdbs() != null) {
+		if (tConfig.getSinkdbs() != null) {
 			for (String item : tConfig.getSinkdbs()) {
 				Db sinkdb = dbRepository.findByName(item);
 				if (sinkdb != null) {
 					relateDb.add(sinkdb);
 				}
 			}
-			if(relateDb.size() > 0)
+			if (relateDb.size() > 0)
 				topic.setDbs(relateDb);
-			else if(relateDb.size() == 0)
-			{
+			else if (relateDb.size() == 0) {
 				topic.getDbs().clear();
 			}
-		}else
-		{
+		} else {
 			topic.setDbs(relateDb);
 		}
-
 	}
 
 }

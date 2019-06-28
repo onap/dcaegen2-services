@@ -33,6 +33,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DbConfig {
+    private int id;
     private String name;
     private String host;
     private boolean enabled;

@@ -49,23 +49,23 @@ public class Kafka {
 	@Column(name="`id`")
 	private String id;
 	
-	@Column(name="`name`")
+	@Column(name="`name`", nullable = false)
 	private String name;
 
-	@Column(name="`enabled`")
+	@Column(name="`enabled`", nullable = false)
 	private boolean	enabled;
 
-	@Column(name="broker_list")
+	@Column(name="broker_list", nullable = false)
 	private String brokerList;//message-router-kafka:9092,message-router-kafka2:9092
 
-	@Column(name="`zk`")
+	@Column(name="`zk`", nullable = false)
 	private String zooKeeper;//message-router-zookeeper:2181
 
 	@Column(name="`group`", columnDefinition = "varchar(255) DEFAULT 'datalake'")
 	private String group;
 
 	@Column(name="`secure`", columnDefinition = " bit(1) DEFAULT 0")
-	private Boolean secure;
+	private boolean secure;
 	
 	@Column(name="`login`")
 	private String login;
@@ -81,8 +81,7 @@ public class Kafka {
 	@Column(name="`included_topic`")
 	private String includedTopic;
 	
-	//@Column(name="`excluded_topic`", columnDefinition = "varchar(1023) default '__consumer_offsets,__transaction_state'")
-	@Column(name="`excluded_topic`")
+	@Column(name="`excluded_topic`", columnDefinition = "varchar(1023) default '__consumer_offsets,__transaction_state'")
 	private String excludedTopic;
 
 	@Column(name="`consumer_count`", columnDefinition = "integer default 3")
@@ -93,8 +92,8 @@ public class Kafka {
 	private Integer timeout;
 
 	//don't show this field in admin UI 
-	@Column(name="`check_topic_interval_sec`", columnDefinition = "integer default 10")
-	private Integer checkTopicInterval;
+	//@Column(name="`check_topic_interval_sec`", columnDefinition = "integer default 10")
+//	private Integer checkTopicInterval;
 	
 	@JsonBackReference
 	@ManyToMany(fetch = FetchType.EAGER)

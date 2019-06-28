@@ -41,6 +41,7 @@ import org.onap.datalake.feeder.enumeration.DataFormat;
 
 public class TopicConfig {
 
+	private int id;
 	private String name;
 	private String login;
 	private String password;
@@ -54,79 +55,7 @@ public class TopicConfig {
 	private String messageIdPath;
 	private String aggregateArrayPath;
 	private String flattenArrayPath;
-
-	public DataFormat getDataFormat2() {
-		if (dataFormat != null) {
-			return DataFormat.fromString(dataFormat);
-		} else {
-			return null;
-		}
-	}
-
-	public boolean supportHdfs() {
-		return supportDb("HDFS");
-	}
-
-	public boolean supportElasticsearch() {
-		return supportDb("Elasticsearch");//TODO string hard codes
-	}
-
-	public boolean supportCouchbase() {
-		return supportDb("Couchbase");
-	}
-
-	public boolean supportDruid() {
-		return supportDb("Druid");
-	}
-
-	public boolean supportMongoDB() {
-		return supportDb("MongoDB");
-	}
-
-	private boolean supportDb(String dbName) {
-		return (enabledSinkdbs != null && enabledSinkdbs.contains(dbName));
-	}
-
-	//extract DB id from JSON attributes, support multiple attributes
-	public String getMessageId(JSONObject json) {
-		String id = null;
-
-		if (StringUtils.isNotBlank(messageIdPath)) {
-			String[] paths = messageIdPath.split(",");
-
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < paths.length; i++) {
-				if (i > 0) {
-					sb.append('^');
-				}
-				sb.append(json.query(paths[i]).toString());
-			}
-			id = sb.toString();
-		}
-
-		return id;
-	}
-
-	public String[] getAggregateArrayPath2() {
-		String[] ret = null;
-
-		if (StringUtils.isNotBlank(aggregateArrayPath)) {
-			ret = aggregateArrayPath.split(",");
-		}
-
-		return ret;
-	}
-
-	public String[] getFlattenArrayPath2() {
-		String[] ret = null;
-
-		if (StringUtils.isNotBlank(flattenArrayPath)) {
-			ret = flattenArrayPath.split(",");
-		}
-
-		return ret;
-	}
-
+	
 	@Override
 	public String toString() {
 		return String.format("TopicConfig %s(enabled=%s, enabledSinkdbs=%s)", name, enabled, enabledSinkdbs);

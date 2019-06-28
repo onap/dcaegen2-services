@@ -18,7 +18,7 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.datalake.feeder.service;
+package org.onap.datalake.feeder.service.db;
 
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.CouchbaseCluster;
@@ -35,7 +35,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.service.db.CouchbaseService;
+import org.onap.datalake.feeder.util.TestUtil;
 
 import static org.mockito.Mockito.when;
 
@@ -109,15 +113,15 @@ public class CouchbaseServiceTest {
 
         JSONObject json = new JSONObject(text);
 
-        Topic topic = new Topic("test getMessageId");
+        Topic topic = TestUtil.newTopic("test getMessageId");
         topic.setMessageIdPath("/data/data2/value");
         List<JSONObject> jsons = new ArrayList<>();
         json.put(appConfig.getTimestampLabel(), 1234);
         jsons.add(json);
-        CouchbaseService couchbaseService = new CouchbaseService();
+        CouchbaseService couchbaseService = new CouchbaseService(new Db());
         couchbaseService.bucket = bucket;
         couchbaseService.config = appConfig;
-        couchbaseService.saveJsons(topic.getTopicConfig(), jsons);
+ //       couchbaseService.saveJsons(topic.getTopicConfig(), jsons);
 
     }
 
@@ -130,19 +134,19 @@ public class CouchbaseServiceTest {
 
         JSONObject json = new JSONObject(text);
 
-        Topic topic = new Topic("test getMessageId");
+        Topic topic = TestUtil.newTopic("test getMessageId");
         List<JSONObject> jsons = new ArrayList<>();
         json.put(appConfig.getTimestampLabel(), 1234);
         jsons.add(json);
-        CouchbaseService couchbaseService = new CouchbaseService();
+        CouchbaseService couchbaseService = new CouchbaseService(new Db());
         couchbaseService.bucket = bucket;
         couchbaseService.config = appConfig;
-        couchbaseService.saveJsons(topic.getTopicConfig(), jsons);
+//        couchbaseService.saveJsons(topic.getTopicConfig(), jsons);
     }
 
     @Test
     public void testCleanupBucket() {
-        CouchbaseService couchbaseService = new CouchbaseService();
+        CouchbaseService couchbaseService = new CouchbaseService(new Db());
         couchbaseService.bucket = bucket;
     	ApplicationConfiguration appConfig = new ApplicationConfiguration();
         couchbaseService.config = appConfig;

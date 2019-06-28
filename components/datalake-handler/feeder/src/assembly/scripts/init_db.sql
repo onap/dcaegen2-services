@@ -10,15 +10,15 @@ CREATE TABLE `topic_name` (
 CREATE TABLE `db_type` (
   `id` varchar(255) NOT NULL,
   `default_port` int(11) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `tool` bit(1) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `tool` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `db` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `database_name` varchar(255) DEFAULT NULL,
-  `enabled` bit(1) DEFAULT NULL,
+  `enabled` bit(1) NOT NULL,
   `encrypt` bit(1) DEFAULT NULL,
   `host` varchar(255) DEFAULT NULL,
   `login` varchar(255) DEFAULT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `db` (
   PRIMARY KEY (`id`),
   KEY `FK3njadtw43ieph7ftt4kxdhcko` (`db_type_id`),
   CONSTRAINT `FK3njadtw43ieph7ftt4kxdhcko` FOREIGN KEY (`db_type_id`) REFERENCES `db_type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `portal` (
   `name` varchar(255) NOT NULL,
@@ -47,7 +47,6 @@ CREATE TABLE `portal` (
   CONSTRAINT `FKtl6e8ydm1k7k9r5ukv9j0bd0n` FOREIGN KEY (`related_db`) REFERENCES `db` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE `design_type` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -60,7 +59,6 @@ CREATE TABLE `design_type` (
   CONSTRAINT `FKm8rkv2qkq01gsmeq1c3y4w02x` FOREIGN KEY (`db_type_id`) REFERENCES `db_type` (`id`),
   CONSTRAINT `FKs2nspbhf5wv5d152l4j69yjhi` FOREIGN KEY (`portal`) REFERENCES `portal` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `design` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -75,46 +73,43 @@ CREATE TABLE `design` (
   KEY `FKabb8e74230glxpaiai4aqsr34` (`topic_name_id`),
   CONSTRAINT `FKabb8e74230glxpaiai4aqsr34` FOREIGN KEY (`topic_name_id`) REFERENCES `topic_name` (`id`),
   CONSTRAINT `FKo43yi6aputq6kwqqu8eqbspm5` FOREIGN KEY (`design_type_id`) REFERENCES `design_type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `kafka` (
   `id` varchar(255) NOT NULL,
-  `broker_list` varchar(255) DEFAULT NULL,
-  `check_topic_interval_sec` int(11) DEFAULT 10,
+  `broker_list` varchar(255) NOT NULL,
   `consumer_count` int(11) DEFAULT 3,
-  `enabled` bit(1) DEFAULT NULL,
-  `excluded_topic` varchar(255) DEFAULT NULL,
+  `enabled` bit(1) NOT NULL,
+  `excluded_topic` varchar(1023) DEFAULT '__consumer_offsets,__transaction_state',
   `group` varchar(255) DEFAULT 'datalake',
   `included_topic` varchar(255) DEFAULT NULL,
   `login` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
   `pass` varchar(255) DEFAULT NULL,
   `secure` bit(1) DEFAULT b'0',
   `security_protocol` varchar(255) DEFAULT NULL,
   `timeout_sec` int(11) DEFAULT 10,
-  `zk` varchar(255) DEFAULT NULL,
+  `zk` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `topic` (
   `id` int(11) NOT NULL,
   `aggregate_array_path` varchar(255) DEFAULT NULL,
-  `correlate_cleared_message` bit(1) DEFAULT NULL,
+  `correlate_cleared_message` bit(1) NOT NULL DEFAULT b'0',
   `data_format` varchar(255) DEFAULT NULL,
-  `enabled` bit(1) DEFAULT NULL,
+  `enabled` bit(1) NOT NULL,
   `flatten_array_path` varchar(255) DEFAULT NULL,
   `login` varchar(255) DEFAULT NULL,
   `message_id_path` varchar(255) DEFAULT NULL,
   `pass` varchar(255) DEFAULT NULL,
-  `save_raw` bit(1) DEFAULT NULL,
+  `save_raw` bit(1) NOT NULL DEFAULT b'0',
   `ttl_day` int(11) DEFAULT NULL,
   `topic_name_id` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKj3pldlfaokdhqjfva8n3pkjca` (`topic_name_id`),
   CONSTRAINT `FKj3pldlfaokdhqjfva8n3pkjca` FOREIGN KEY (`topic_name_id`) REFERENCES `topic_name` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 CREATE TABLE `map_db_design` (
   `design_id` int(11) NOT NULL,

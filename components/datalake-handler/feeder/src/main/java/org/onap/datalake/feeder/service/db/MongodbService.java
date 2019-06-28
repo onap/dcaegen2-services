@@ -18,7 +18,7 @@
 * ============LICENSE_END=========================================================
 */
 
-package org.onap.datalake.feeder.service;
+package org.onap.datalake.feeder.service.db;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ import org.bson.Document;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.dto.TopicConfig;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,26 +59,32 @@ import com.mongodb.client.model.InsertManyOptions;
  *
  */
 @Service
-public class MongodbService {
+public class MongodbService implements DbStoreService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	private Db mongodb;
 
 	@Autowired
 	private ApplicationConfiguration config;
 	private boolean dbReady = false;
 
-	@Autowired
-	private DbService dbService;
+	//@Autowired
+//	private DbService dbService;
 
 	private MongoDatabase database;
 	private MongoClient mongoClient;
 	private Map<String, MongoCollection<Document>> mongoCollectionMap = new HashMap<>();
 	private InsertManyOptions insertManyOptions;
 
+	public MongodbService( ) { 
+	}
+	public MongodbService(Db db) {
+		mongodb = db;
+	}
+	
 	@PostConstruct
 	private void init() {
-		Db mongodb = dbService.getMongoDB();
-
 		String host = mongodb.getHost();
 
 		Integer port = mongodb.getPort();
@@ -141,7 +147,7 @@ public class MongodbService {
 		}
 	}
 
-	public void saveJsons(TopicConfig topic, List<JSONObject> jsons) {
+	public void saveJsons(EffectiveTopic effectiveTopic, List<JSONObject> jsons) {
 		if (dbReady == false)//TOD throw exception
 			return;
 		List<Document> documents = new ArrayList<>(jsons.size());
@@ -149,14 +155,14 @@ public class MongodbService {
 			//convert org.json JSONObject to MongoDB Document
 			Document doc = Document.parse(json.toString());
 
-			String id = topic.getMessageId(json); //id can be null
+			String id = effectiveTopic.getTopic().getMessageId(json); //id can be null
 			if (id != null) {
 				doc.put("_id", id);
 			}
 			documents.add(doc);
 		}
 
-		String collectionName = topic.getName().replaceAll("[^a-zA-Z0-9]", "");//remove - _ .
+		String collectionName = effectiveTopic.getName().replaceAll("[^a-zA-Z0-9]", "");//remove - _ .
 		MongoCollection<Document> collection = mongoCollectionMap.computeIfAbsent(collectionName, k -> database.getCollection(k));
 
 		try {
@@ -168,7 +174,7 @@ public class MongodbService {
 			}
 		}
 
-		log.debug("saved text to topic = {}, batch count = {} ", topic, jsons.size());
+		log.debug("saved text to effectiveTopic = {}, batch count = {} ", effectiveTopic, jsons.size());
 	}
 
 }

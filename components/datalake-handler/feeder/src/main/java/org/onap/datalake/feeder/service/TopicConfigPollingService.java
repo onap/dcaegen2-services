@@ -21,20 +21,23 @@
 package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.domain.Kafka;
-import org.onap.datalake.feeder.dto.TopicConfig;
+import org.onap.datalake.feeder.repository.KafkaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 /**
@@ -52,45 +55,56 @@ public class TopicConfigPollingService implements Runnable {
 	ApplicationConfiguration config;
 
 	@Autowired
-	private DmaapService dmaapService;
+	private ApplicationContext context;
 
-	//effective TopicConfig Map
-	private Map<String, TopicConfig> effectiveTopicConfigMap = new HashMap<>();
+	@Autowired
+	private KafkaRepository kafkaRepository;
+	
+	//effectiveTopic Map, 1st key is kafkaId, 2nd is topic name, the value is a list of EffectiveTopic.
+	private Map<String, Map<String, List<EffectiveTopic>>> effectiveTopicMap = new HashMap<>();;
+	//private Map<String, TopicConfig> effectiveTopicConfigMap;
 
 	//monitor Kafka topic list changes
-	private List<String> activeTopics;
-	private ThreadLocal<Integer> activeTopicsVersionLocal = ThreadLocal.withInitial(() -> -1);
-	private int currentActiveTopicsVersion = -1;
+	private Map<String, Set<String>> activeTopicMap;
+	
+	private ThreadLocal<Map<String, Integer>> activeTopicsVersionLocal = new ThreadLocal<>();
+	private Map<String, Integer> currentActiveTopicsVersionMap = new HashMap<>();
 
 	private boolean active = false;
 
 	@PostConstruct
 	private void init() {
 		try {
-			log.info("init(), ccalling poll()...");
-			activeTopics = poll();
-			currentActiveTopicsVersion++;
+			log.info("init(), calling poll()...");
+			activeTopicMap = poll();
 		} catch (Exception ex) {
 			log.error("error connection to HDFS.", ex);
 		}
 	}
 
-	public boolean isActiveTopicsChanged(boolean update) {//update=true means sync local version 
-		boolean changed = currentActiveTopicsVersion > activeTopicsVersionLocal.get();
-		log.debug("isActiveTopicsChanged={}, currentActiveTopicsVersion={} local={}", changed, currentActiveTopicsVersion, activeTopicsVersionLocal.get());
-		if (changed && update) {
-			activeTopicsVersionLocal.set(currentActiveTopicsVersion);
+	public boolean isActiveTopicsChanged(Kafka kafka) {//update=true means sync local version
+		String kafkaId = kafka.getId();
+		int currentActiveTopicsVersion = currentActiveTopicsVersionMap.getOrDefault(kafkaId, 1);//init did one version
+		int localActiveTopicsVersion = activeTopicsVersionLocal.get().getOrDefault(kafkaId, 0);
+		
+		boolean changed = currentActiveTopicsVersion > localActiveTopicsVersion;
+		log.debug("kafkaId={} isActiveTopicsChanged={}, currentActiveTopicsVersion={} local={}", kafkaId, changed, currentActiveTopicsVersion, localActiveTopicsVersion);
+		if (changed) {
+			activeTopicsVersionLocal.get().put(kafkaId, currentActiveTopicsVersion);
 		}
 
 		return changed;
 	}
 
-	public List<String> getActiveTopics(Kafka kafka) {
-		return activeTopics;
+	//get a list of topic names to monitor
+	public Collection<String> getActiveTopics(Kafka kafka) {
+		return activeTopicMap.get(kafka.getId());
 	}
 
-	public TopicConfig getEffectiveTopicConfig(String topicStr) {
-		return effectiveTopicConfigMap.get(topicStr);
+	//get the EffectiveTopics given kafka and topic name
+	public Collection<EffectiveTopic> getEffectiveTopic(Kafka kafka, String topicStr) {
+		Map<String, List<EffectiveTopic>> effectiveTopicMapKafka= effectiveTopicMap.get(kafka.getId());  
+		return effectiveTopicMapKafka.get(topicStr);
 	}
 
 	@Override
@@ -100,7 +114,7 @@ public class TopicConfigPollingService implements Runnable {
 
 		while (active) {
 			try { //sleep first since we already pool in init()
-				Thread.sleep(config.getDmaapCheckNewTopicInterval());
+				Thread.sleep(config.getCheckTopicInterval());
 				if(!active) {
 					break;
 				}
@@ -110,15 +124,23 @@ public class TopicConfigPollingService implements Runnable {
 			}
 
 			try {
-				List<String> newTopics = poll();
-				if (!CollectionUtils.isEqualCollection(activeTopics, newTopics)) {
-					log.info("activeTopics list is updated, old={}", activeTopics);
-					log.info("activeTopics list is updated, new={}", newTopics);
+				Map<String, Set<String>> newTopicsMap = poll();
+				
+				for(Map.Entry<String, Set<String>> entry:newTopicsMap.entrySet()) {
+					String kafkaId = entry.getKey();
+					Set<String>  newTopics = entry.getValue();
+					
+					Set<String> activeTopics = activeTopicMap.get(kafkaId);
 
-					activeTopics = newTopics;
-					currentActiveTopicsVersion++;
-				} else {
-					log.debug("activeTopics list is not updated.");
+					if (!CollectionUtils.isEqualCollection(activeTopics, newTopics)) {
+						log.info("activeTopics list is updated, old={}", activeTopics);
+						log.info("activeTopics list is updated, new={}", newTopics);
+
+						activeTopicMap.put(kafkaId, newTopics);
+						currentActiveTopicsVersionMap.put(kafkaId, currentActiveTopicsVersionMap.getOrDefault(kafkaId, 1)+1);
+					} else {
+						log.debug("activeTopics list is not updated.");
+					}
 				}
 			} catch (IOException e) {
 				log.error("dmaapService.getActiveTopics()", e);
@@ -132,17 +154,27 @@ public class TopicConfigPollingService implements Runnable {
 		active = false;
 	}
 
-	private List<String> poll() throws IOException {
+	private Map<String, Set<String>>  poll() throws IOException {
+		Map<String, Set<String>> ret = new HashMap<>();
+		Iterable<Kafka> kafkas = kafkaRepository.findAll();
+		for (Kafka kafka : kafkas) {
+			if (kafka.isEnabled()) {
+				Set<String> topics = poll(kafka);
+				ret.put(kafka.getId(), topics);
+			}
+		}
+		return ret;
+	}
+
+	private Set<String> poll(Kafka kafka) throws IOException {
 		log.debug("poll(), use dmaapService to getActiveTopicConfigs...");
-		List<TopicConfig> activeTopicConfigs = dmaapService.getActiveTopicConfigs();
-		Map<String, TopicConfig> tempEffectiveTopicConfigMap = new HashMap<>();
 
-		activeTopicConfigs.stream().forEach(topicConfig -> tempEffectiveTopicConfigMap.put(topicConfig.getName(), topicConfig));
-		effectiveTopicConfigMap = tempEffectiveTopicConfigMap;
-		log.debug("poll(), effectiveTopicConfigMap={}", effectiveTopicConfigMap);
+		DmaapService dmaapService = context.getBean(DmaapService.class, kafka);
+				
+		Map<String, List<EffectiveTopic>> activeEffectiveTopics = dmaapService.getActiveEffectiveTopic();
+		effectiveTopicMap.put(kafka.getId(), activeEffectiveTopics);
 
-		List<String> ret = new ArrayList<>(activeTopicConfigs.size());
-		activeTopicConfigs.stream().forEach(topicConfig -> ret.add(topicConfig.getName()));
+		Set<String> ret = activeEffectiveTopics.keySet(); 
 
 		return ret;
 	}

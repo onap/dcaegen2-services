@@ -20,9 +20,6 @@
 
 package org.onap.datalake.feeder.service;
 
-import java.util.Optional;
-
-import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.repository.DbRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,29 +35,4 @@ public class DbService {
 
 	@Autowired
 	private DbRepository dbRepository;
-
-	public Db getDb(String name) {
-		return dbRepository.findByName(name);
-	}
-
-	public Db getCouchbase() {
-		return getDb("Couchbase");
-	}
-
-	public Db getElasticsearch() {
-		return getDb("Elasticsearch");
-	}
-
-	public Db getMongoDB() {
-		return getDb("MongoDB");
-	}
-
-	public Db getDruid() {
-		return getDb("Druid");
-	}
-
-	public Db getHdfs() {
-		return getDb("HDFS");
-	}
-
 }

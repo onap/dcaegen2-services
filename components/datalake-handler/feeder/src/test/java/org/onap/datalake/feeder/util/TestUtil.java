@@ -1,6 +1,6 @@
 /*
  * ============LICENSE_START=======================================================
- * ONAP : DATALAKE
+ * ONAP : DCAE
  * ================================================================================
  * Copyright 2019 China Mobile
  *=================================================================================
@@ -18,33 +18,42 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.datalake.feeder.domain;
+package org.onap.datalake.feeder.util;
 
 import org.junit.Test;
-import org.onap.datalake.feeder.util.TestUtil;
+import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.domain.TopicName;
 
-import static org.junit.Assert.*;
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class PortalTest {
+/**
+ * test utils
+ *
+ * @author Guobiao Mo
+ */
+public class TestUtil {
 
-    @Test
-    public void testIs() {
+    static int i=0;
 
-        Portal portal = new Portal();
-        portal.setName("Kibana");
-        portal.setEnabled(true);
-        portal.setHost("localhost");
-        portal.setPort(5601);
-        portal.setLogin("admin");
-        portal.setPass("password");
-        portal.setDb(TestUtil.newDb("Elasticsearch"));
-        assertTrue("Kibana".equals(portal.getName()));
-        assertFalse("true".equals(portal.getEnabled()));
-        assertTrue("localhost".equals(portal.getHost()));
-        assertFalse("5601".equals(portal.getPort()));
-        assertTrue("admin".equals(portal.getLogin()));
-        assertTrue("password".equals(portal.getPass()));
-        assertFalse("Elasticsearch".equals(portal.getDb()));
+    public static Db newDb(String name) {
+    	Db db = new Db();
+    	db.setId(i++);
+    	db.setName(name);    	
+    	return db;
     }
+
+    public static  Topic newTopic(String name) {
+    	Topic topic = new Topic();
+    	topic.setId(i++);
+    	topic.setTopicName(new TopicName(name));
+    	
+    	return topic;
+    }
+
+
 }

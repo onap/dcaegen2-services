@@ -21,6 +21,7 @@
 package org.onap.datalake.feeder.domain;
 
 import org.junit.Test;
+import org.onap.datalake.feeder.util.TestUtil;
 
 import static org.junit.Assert.*;
 
@@ -35,7 +36,7 @@ public class PortalDesignTest {
         portalDesign.setBody("jsonString");
         portalDesign.setName("templateTest");
         portalDesign.setTopicName(new TopicName("x"));
-        Topic topic = new Topic("_DL_DEFAULT_");
+        Topic topic = TestUtil.newTopic("_DL_DEFAULT_");
         portalDesign.setTopicName(topic.getTopicName());
         DesignType designType = new DesignType();
         designType.setName("Kibana");

@@ -42,6 +42,7 @@ import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.TopicRepository;
+import org.onap.datalake.feeder.service.db.ElasticsearchService;
 
 /**
  * Test Service for Topic
@@ -80,7 +81,7 @@ public class TopicServiceTest {
 	public void testGetTopicNull() {
 		String name = null;
 //		when(topicRepository.findById(0)).thenReturn(null);
-		assertNull(topicService.getTopic(name));
+		assertNull(topicService.getTopic(0));
 	}
 
 /*

@@ -29,7 +29,6 @@ import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -54,7 +53,6 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-//@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class Puller implements Runnable {
 
 	@Autowired
@@ -75,6 +73,9 @@ public class Puller implements Runnable {
 	
 	private Kafka kafka;
 
+	public Puller( ) {
+		
+	}
 	public Puller(Kafka kafka) {
 		this.kafka = kafka;
 	}
@@ -84,11 +85,11 @@ public class Puller implements Runnable {
 		async = config.isAsync();
 	}
 
-	private Properties getConsumerConfig() {//00
+	private Properties getConsumerConfig() {
 		Properties consumerConfig = new Properties();
 
-		consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, config.getDmaapKafkaHostPort());
-		consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, config.getDmaapKafkaGroup());
+		consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBrokerList());
+		consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, kafka.getGroup());
 		consumerConfig.put(ConsumerConfig.CLIENT_ID_CONFIG, String.valueOf(Thread.currentThread().getId()));
 		consumerConfig.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 		consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
@@ -96,10 +97,10 @@ public class Puller implements Runnable {
 		consumerConfig.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "org.apache.kafka.clients.consumer.RoundRobinAssignor");
 		consumerConfig.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 
-		if (StringUtils.isNotBlank(config.getDmaapKafkaLogin())) {
-			String jaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=" + config.getDmaapKafkaLogin() + " password=" + config.getDmaapKafkaPass() + " serviceName=kafka;";
+		if (kafka.isSecure()) {
+			String jaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=" + kafka.getLogin() + " password=" + kafka.getPass() + " serviceName=kafka;";
 			consumerConfig.put("sasl.jaas.config", jaas);
-			consumerConfig.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, config.getDmaapKafkaSecurityProtocol());
+			consumerConfig.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, kafka.getSecurityProtocol());
 			consumerConfig.put("sasl.mechanism", "PLAIN");
 		}
 		return consumerConfig;
@@ -120,8 +121,8 @@ public class Puller implements Runnable {
 
 		try {
 			while (active) {
-				if (topicConfigPollingService.isActiveTopicsChanged(true)) {//true means update local version as well
-					List<String> topics = topicConfigPollingService.getActiveTopics(kafka);//00
+				if (topicConfigPollingService.isActiveTopicsChanged(kafka)) {
+					Collection<String> topics = topicConfigPollingService.getActiveTopics(kafka); 
 					log.info("Active Topic list is changed, subscribe to the latest topics: {}", topics);
 					consumer.subscribe(topics, rebalanceListener);
 				}
@@ -141,7 +142,7 @@ public class Puller implements Runnable {
 		KafkaConsumer<String, String> consumer = consumerLocal.get();
 
 		log.debug("pulling...");
-		ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(config.getDmaapKafkaTimeout()));
+		ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(kafka.getTimeout()));
 		log.debug("done pulling.");
 
 		if (records != null && records.count() > 0) {
@@ -153,7 +154,7 @@ public class Puller implements Runnable {
 					messages.add(Pair.of(record.timestamp(), record.value()));
 					//log.debug("threadid={} topic={}, timestamp={} key={}, offset={}, partition={}, value={}", id, record.topic(), record.timestamp(), record.key(), record.offset(), record.partition(), record.value());
 				}
-				storeService.saveMessages(kafka, partition.topic(), messages);//00
+				storeService.saveMessages(kafka, partition.topic(), messages);
 				log.info("saved to topic={} count={}", partition.topic(), partitionRecords.size());//TODO we may record this number to DB
 
 				if (!async) {//for reliability, sync commit offset to Kafka, this slows down a bit

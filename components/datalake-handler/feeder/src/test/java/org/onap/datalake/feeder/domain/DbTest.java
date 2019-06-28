@@ -20,6 +20,7 @@
 package org.onap.datalake.feeder.domain;
 
 import org.junit.Test;
+import org.onap.datalake.feeder.util.TestUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,9 +41,9 @@ public class DbTest {
     @Test
     public void testIs() {
 
-        Db couchbase = new Db("Couchbase");
-        Db mongoDB = new Db("MongoDB");
-        Db mongoDB2 = new Db("MongoDB");
+        Db couchbase = TestUtil.newDb("Couchbase");
+        Db mongoDB = TestUtil.newDb("MongoDB");
+        Db mongoDB2 = TestUtil.newDb("MongoDB");
         assertNotEquals(couchbase.hashCode(), mongoDB.hashCode());
         assertNotEquals(couchbase, mongoDB);
         assertEquals(mongoDB, mongoDB2);
@@ -60,7 +61,7 @@ public class DbTest {
         mongoDB2.setProperty2("property2");
         mongoDB2.setProperty3("property3");
         Set<Topic> hash_set = new HashSet<>();
-        Topic topic = new Topic("topic1");
+        Topic topic = TestUtil.newTopic("topic1");
         topic.setId(1);
         hash_set.add(topic);
         mongoDB2.setTopics(hash_set);

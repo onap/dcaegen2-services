@@ -18,7 +18,7 @@
 * ============LICENSE_END=========================================================
 */
 
-package org.onap.datalake.feeder.service;
+package org.onap.datalake.feeder.service.db;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -38,9 +38,10 @@ import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.util.ShutdownHookManager;
+import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.dto.TopicConfig;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,15 +59,14 @@ import lombok.Setter;
  *
  */
 @Service
-public class HdfsService {
+public class HdfsService implements DbStoreService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	private Db hdfs;
 
 	@Autowired
 	ApplicationConfiguration config;
-
-	@Autowired
-	private DbService dbService;
 
 	FileSystem fileSystem;
 	private boolean isReady = false;
@@ -113,6 +113,14 @@ public class HdfsService {
 			messages.stream().forEach(message -> data.add(message.getRight()));//note that message left is not used			
 		}
 
+		public void addData2(List<JSONObject> messages) {
+			if (data.isEmpty()) { //reset the last flush time stamp to current if no existing data in buffer
+				lastFlush = System.currentTimeMillis();
+			}
+
+			messages.stream().forEach(message -> data.add(message.toString()));	
+		}
+
 		private void saveMessages(String topic, List<String> bufferList) throws IOException {
 
 			long thread = Thread.currentThread().getId();
@@ -144,12 +152,17 @@ public class HdfsService {
 		}
 	}
 
+	public HdfsService( ) { 
+	}
+
+	public HdfsService(Db db) {
+		hdfs = db;
+	}
+	
 	@PostConstruct
 	private void init() {
 		// Initialize HDFS Connection 
 		try {
-			Db hdfs = dbService.getHdfs();
-
 			//Get configuration of Hadoop system
 			Configuration hdfsConfig = new Configuration();
 
@@ -200,7 +213,8 @@ public class HdfsService {
 		bufferLocal.get().forEach((topic, buffer) -> buffer.flushStall(topic));
 	}
 
-	public void saveMessages(TopicConfig topic, List<Pair<Long, String>> messages) {
+	//used if raw data should be saved
+	public void saveMessages(EffectiveTopic topic, List<Pair<Long, String>> messages) {
 		String topicStr = topic.getName();
 
 		Map<String, Buffer> bufferMap = bufferLocal.get();
@@ -215,4 +229,21 @@ public class HdfsService {
 		}
 	}
 
+	@Override
+	public void saveJsons(EffectiveTopic topic, List<JSONObject> jsons) {
+		String topicStr = topic.getName();
+
+		Map<String, Buffer> bufferMap = bufferLocal.get();
+		final Buffer buffer = bufferMap.computeIfAbsent(topicStr, k -> new Buffer());
+
+		buffer.addData2(jsons);
+
+		if (!config.isAsync() || buffer.getData().size() >= config.getHdfsBatchSize()) {
+			buffer.flush(topicStr);
+		} else {
+			log.debug("buffer size too small to flush {}: bufferData.size() {} < config.getHdfsBatchSize() {}", topicStr, buffer.getData().size(), config.getHdfsBatchSize());
+		}
+		
+	}
+ 	
 }

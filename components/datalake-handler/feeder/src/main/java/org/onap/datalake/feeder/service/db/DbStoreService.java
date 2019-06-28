@@ -1,8 +1,8 @@
 /*
 * ============LICENSE_START=======================================================
-* ONAP : DCAE
+* ONAP : DATALAKE
 * ================================================================================
-* Copyright 2018 TechMahindra
+* Copyright 2018 China Mobile
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -17,21 +17,21 @@
 * limitations under the License.
 * ============LICENSE_END=========================================================
 */
-package org.onap.datalake.feeder.enumeration;
+
+package org.onap.datalake.feeder.service.db;
+
+import java.util.List;
+
+import org.json.JSONObject;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
 
 /**
- * Database type
+ * Interface for all db store services
  * 
  * @author Guobiao Mo
  *
- */
-public enum DbTypeEnum { 
-	CB("Couchbase"), DRUID("Druid"), ES("Elasticsearch"), HDFS("HDFS"), MONGO("MongoDB"), KIBANA("Kibana"), SUPERSET("Superset");
+ */ 
+public interface DbStoreService {
 
-	private final String name;
-
-	DbTypeEnum(String name) {
-		this.name = name;
-	}
-
+	void saveJsons(EffectiveTopic topic, List<JSONObject> jsons);
 }
