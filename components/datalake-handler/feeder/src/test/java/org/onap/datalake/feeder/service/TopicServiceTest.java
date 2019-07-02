@@ -29,18 +29,26 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
+import org.elasticsearch.client.IndicesClient;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.GetIndexRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
-import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.domain.*;
+import org.onap.datalake.feeder.dto.TopicConfig;
+import org.onap.datalake.feeder.enumeration.DbTypeEnum;
+import org.onap.datalake.feeder.repository.DbRepository;
+import org.onap.datalake.feeder.repository.TopicNameRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.onap.datalake.feeder.service.db.ElasticsearchService;
 
@@ -64,24 +72,94 @@ public class TopicServiceTest {
 	@Mock
 	private ElasticsearchService elasticsearchService;
 
+	@Mock
+	private DbService dbService;
+
+	@Mock
+	private DbRepository dbRepository;
+
+	@Mock
+	private TopicNameRepository topicNameRepository;
+
 	@InjectMocks
 	private TopicService topicService;
 
-	/*
-	@Test
-	public void testGetTopic() {
-		String name = "a";
-		when(topicRepository.findById(name)).thenReturn(Optional.of(new Topic(name)));
-		assertEquals(topicService.getTopic(name), new Topic(name));
-		
-		assertFalse(topicService.istDefaultTopic(new Topic(name)));
+	@Test(expected = NullPointerException.class)
+	public void testGetTopic() throws IOException{
+		List<Topic> topics = new ArrayList<>();
+		Topic topic = new Topic();
+		DbType dbType = new DbType();
+		Set<Kafka> kafkas = new HashSet<>();
+		Set<Db> dbs = new HashSet<>();
+		Db db = new Db();
+		db.setName("Elasticsearch");
+		dbs.add(db);
+
+		dbType.setId("ES");
+		db.setDbType(dbType);
+
+		Kafka kafka = new Kafka();
+		kafka.setId("1234");
+		kafkas.add(kafka);
+
+		TopicName topicName = new TopicName();
+		topicName.setId("1234");
+
+		topic.setTopicName(topicName);
+		topic.setKafkas(kafkas);
+		topic.setEnabled(true);
+		topic.setDbs(dbs);
+		topics.add(topic);
+		when(topicRepository.findAll()).thenReturn(topics);
+		when((ElasticsearchService)dbService.findDbStoreService(db)).thenReturn(new ElasticsearchService(db));
+		topicService.findTopics(kafka,topicName.getId());
+		topicService.getEnabledEffectiveTopic(kafka,topicName.getId(),true);
+
 	}
-*/
 	@Test
 	public void testGetTopicNull() {
-		String name = null;
-//		when(topicRepository.findById(0)).thenReturn(null);
-		assertNull(topicService.getTopic(0));
+		Topic topic = new Topic();
+		TopicName topicName = new TopicName();
+		topicName.setId("_DL_DEFAULT_");
+		topic.setId(1234);
+		topic.setTopicName(topicName);
+		Optional<Topic> optional = Optional.of(topic);
+		when(topicRepository.findById(0)).thenReturn(optional);
+		when(config.getDefaultTopicName()).thenReturn("_DL_DEFAULT_");
+		assertEquals(topic,topicService.getTopic(0));
+		assertTrue(topicService.isDefaultTopic(topic));
+	}
+
+	@Test
+	public void testFillTopic(){
+		TopicConfig tConfig = new TopicConfig();
+		tConfig.setId(1234);
+		tConfig.setName("1234");
+		tConfig.setLogin("1234");
+		tConfig.setPassword("1234");
+		tConfig.setEnabled(true);
+		tConfig.setSaveRaw(true);
+		tConfig.setDataFormat("1234");
+		tConfig.setTtl(1234);
+		tConfig.setCorrelateClearedMessage(true);
+		tConfig.setMessageIdPath("1234");
+		tConfig.setAggregateArrayPath("1234");
+		tConfig.setFlattenArrayPath("1234");
+		List<String> sinkdbs = new ArrayList<>();
+		sinkdbs.add("Elasticsearch");
+		tConfig.setSinkdbs(sinkdbs);
+
+		Db db = new Db();
+		db.setName("Elasticsearch");
+
+		TopicName topicName = new TopicName();
+		topicName.setId("1234");
+
+		Optional<TopicName> optional = Optional.of(topicName);
+		when(dbRepository.findByName("Elasticsearch")).thenReturn(db);
+		when(topicNameRepository.findById(tConfig.getName())).thenReturn(optional);
+
+		topicService.fillTopicConfiguration(tConfig);
 	}
 
 /*
