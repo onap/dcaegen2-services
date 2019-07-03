@@ -21,18 +21,22 @@
 package org.onap.datalake.feeder.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.when;
-
-import java.util.Optional;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.DbType;
 import org.onap.datalake.feeder.repository.DbRepository;
+import org.onap.datalake.feeder.service.db.CouchbaseService;
+import org.onap.datalake.feeder.service.db.ElasticsearchService;
+import org.onap.datalake.feeder.service.db.HdfsService;
+import org.onap.datalake.feeder.service.db.MongodbService;
+import org.springframework.context.ApplicationContext;
+
 
 /**
  * Test Service for Dbs 
@@ -42,6 +46,12 @@ import org.onap.datalake.feeder.repository.DbRepository;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class DbServiceTest {
+
+	@Mock
+	private DbType dbType;
+
+	@Mock
+	private ApplicationContext context;
 
 	@Mock
 	private DbRepository dbRepository;
@@ -54,6 +64,29 @@ public class DbServiceTest {
 		String name = "a";
 		//when(dbRepository.findByName(name)).thenReturn(new Db(name));
 		assertEquals("a", name);
+	}
+
+	@Test
+	public void testFindDbStoreService(){
+		when(dbType.getId()).thenReturn("CB","ES","HDFS","MONGO","KIBANA");
+
+		Db db = Mockito.mock(Db.class);
+		when(db.getId()).thenReturn(1,2,3,4,5,6,7,8,9);
+		when(db.getDbType()).thenReturn(dbType);
+
+		when(context.getBean(CouchbaseService.class, db)).thenReturn(new CouchbaseService(db));
+		when(context.getBean(ElasticsearchService.class, db)).thenReturn(new ElasticsearchService(db));
+		when(context.getBean(HdfsService.class, db)).thenReturn(new HdfsService(db));
+		when(context.getBean(MongodbService.class, db)).thenReturn(new MongodbService(db));
+
+		dbService.findDbStoreService(db);
+		dbService.findDbStoreService(db);
+		dbService.findDbStoreService(db);
+		dbService.findDbStoreService(db);
+		dbService.findDbStoreService(db);
+
+
+
 	}
 	
 	/*
