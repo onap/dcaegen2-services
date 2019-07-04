@@ -32,6 +32,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
+import org.onap.datalake.feeder.dto.KafkaConfig;
 
 
 /**
@@ -122,5 +123,26 @@ public class Kafka {
 	@Override
 	public int hashCode() {
 		return id.hashCode();
+	}
+
+	public KafkaConfig getKafkaConfig() {
+		KafkaConfig kafkaConfig = new KafkaConfig();
+
+		kafkaConfig.setId(getId());
+		kafkaConfig.setBrokerList(getBrokerList());
+		kafkaConfig.setConsumerCount(getConsumerCount());
+		kafkaConfig.setEnabled(isEnabled());
+		kafkaConfig.setExcludedTopic(getExcludedTopic());
+		kafkaConfig.setGroup(getGroup());
+		kafkaConfig.setIncludedTopic(getIncludedTopic());
+		kafkaConfig.setLogin(getLogin());
+		kafkaConfig.setName(getName());
+		kafkaConfig.setPass(getPass());
+		kafkaConfig.setSecure(isSecure());
+		kafkaConfig.setSecurityProtocol(getSecurityProtocol());
+		kafkaConfig.setTimeout(getTimeout());
+		kafkaConfig.setZooKeeper(getZooKeeper());
+
+		return kafkaConfig;
 	}
 }
