@@ -35,6 +35,7 @@ import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.DbRepository;
+import org.onap.datalake.feeder.repository.KafkaRepository;
 import org.onap.datalake.feeder.repository.TopicNameRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.onap.datalake.feeder.service.db.ElasticsearchService;
@@ -68,6 +69,9 @@ public class TopicService {
 
 	@Autowired
 	private DbService dbService;
+
+	@Autowired
+	private KafkaRepository kafkaRepository;
 	
 	public List<EffectiveTopic> getEnabledEffectiveTopic(Kafka kafka, String topicStr, boolean ensureTableExist) throws IOException {
 
@@ -165,6 +169,23 @@ public class TopicService {
 			}
 		} else {
 			topic.setDbs(relateDb);
+		}
+
+		Set<Kafka> relateKafka = new HashSet<>();
+		if (tConfig.getSinkKafkas() != null) {
+			for (String item : tConfig.getSinkKafkas()) {
+				Optional<Kafka> sinkKafka = kafkaRepository.findById(item);
+				if (sinkKafka.isPresent()) {
+					relateKafka.add(sinkKafka.get());
+				}
+			}
+			if (relateKafka.size() > 0) {
+				topic.setKafkas(relateKafka);
+			} else if (relateKafka.size() == 0) {
+				topic.getKafkas().clear();
+			}
+		} else {
+			topic.setKafkas(relateKafka);
 		}
 	}
 

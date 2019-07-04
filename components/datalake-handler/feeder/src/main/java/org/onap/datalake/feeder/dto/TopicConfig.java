@@ -55,6 +55,7 @@ public class TopicConfig {
 	private String messageIdPath;
 	private String aggregateArrayPath;
 	private String flattenArrayPath;
+	private List<String> sinkKafkas;
 	
 	@Override
 	public String toString() {
