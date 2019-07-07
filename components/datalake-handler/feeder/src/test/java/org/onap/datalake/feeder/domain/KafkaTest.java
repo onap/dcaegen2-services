@@ -23,6 +23,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
+import org.onap.datalake.feeder.dto.KafkaConfig;
+import org.onap.datalake.feeder.util.TestUtil;
 
 /**
  * Test TopicName
@@ -30,21 +32,22 @@ import org.junit.Test;
  * @author Guobiao Mo
  */
 
-public class TopicNameTest {
+public class KafkaTest {
 
 
 	@Test
 	public void test() {
-		TopicName topicName = new TopicName("test");
-		topicName.setDesigns(null);
-		topicName.getDesigns();
-		topicName.setTopics(null);
-		topicName.getTopics();
-		topicName.hashCode();
+		Kafka kafka = TestUtil.newKafka("test");
+		kafka.setName(null); 
+		kafka.setTopics(null);
+		kafka.getTopics();
+		kafka.hashCode();
 
-		assertEquals(topicName, topicName);
-		assertNotEquals(topicName, null);
-		assertNotEquals(topicName, "test");
+		KafkaConfig kc = kafka.getKafkaConfig(); 
+		
+		assertEquals(kafka, kafka);
+		assertNotEquals(kafka, null);
+		assertNotEquals(kafka, "test");
 
 	}
 

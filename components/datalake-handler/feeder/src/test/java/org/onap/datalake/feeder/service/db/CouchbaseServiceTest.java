@@ -150,8 +150,6 @@ public class CouchbaseServiceTest {
 		couchbaseService.bucket = bucket;
 		ApplicationConfiguration appConfig = new ApplicationConfiguration();
 		couchbaseService.config = appConfig;
-
-		couchbaseService.init();
 		couchbaseService.cleanUp();
 	}
 
