@@ -48,6 +48,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientOptions.Builder;
 import com.mongodb.MongoCredential;
+import com.mongodb.MongoTimeoutException;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -84,7 +85,8 @@ public class MongodbService implements DbStoreService {
 	}
 	
 	@PostConstruct
-	private void init() {
+	@Override
+	public void init() {
 		String host = mongodb.getHost();
 
 		Integer port = mongodb.getPort();
@@ -172,6 +174,8 @@ public class MongodbService implements DbStoreService {
 			for (BulkWriteError bulkWriteError : bulkWriteErrors) {
 				log.error("Failed record: {}", bulkWriteError);
 			}
+		} catch (MongoTimeoutException e) {
+			log.error("saveJsons()", e);			
 		}
 
 		log.debug("saved text to effectiveTopic = {}, batch count = {} ", effectiveTopic, jsons.size());

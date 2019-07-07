@@ -20,8 +20,7 @@
 
 package org.onap.datalake.feeder.service;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -29,8 +28,12 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -38,6 +41,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Kafka;
+import org.onap.datalake.feeder.util.TestUtil;
 
 /**
  * Test TopicConfigPollingService
@@ -56,28 +60,31 @@ public class TopicConfigPollingServiceTest {
 	@InjectMocks
 	private TopicConfigPollingService topicConfigPollingService = new TopicConfigPollingService();
 
-	@Test
-	public void testRun() {
-		
-	}
-	
-	/*
-	public void testInit() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+	static String KAFKA_NAME = "kafka1";
+
+	@Before
+	public void init() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
 		Method init = topicConfigPollingService.getClass().getDeclaredMethod("init");
 		init.setAccessible(true);
 		init.invoke(topicConfigPollingService);
 
-		List<String> activeTopics = Arrays.asList("test");
-		Field activeTopicsField = topicConfigPollingService.getClass().getDeclaredField("activeTopics");
+		Set<String> activeTopics = new HashSet<>(Arrays.asList("test"));
+		Map<String, Set<String>> activeTopicMap = new HashMap<>();
+		activeTopicMap.put(KAFKA_NAME, activeTopics);
+
+		Field activeTopicsField = TopicConfigPollingService.class.getDeclaredField("activeTopicMap");
 		activeTopicsField.setAccessible(true);
-		activeTopicsField.set(topicConfigPollingService, activeTopics);
+		activeTopicsField.set(topicConfigPollingService, activeTopicMap);
+
+		Method initMethod = TopicConfigPollingService.class.getDeclaredMethod("init");
+		initMethod.setAccessible(true);
+		initMethod.invoke(topicConfigPollingService);
 	}
 
 	@Test
-	public void testRun() throws InterruptedException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
-		testInit();
+	public void testRun() throws InterruptedException {
 
-		//when(config.getDmaapCheckNewTopicInterval()).thenReturn(1);
+		when(config.getCheckTopicInterval()).thenReturn(1L);
 
 		Thread thread = new Thread(topicConfigPollingService);
 		thread.start();
@@ -91,8 +98,8 @@ public class TopicConfigPollingServiceTest {
 
 	@Test
 	public void testRunNoChange() throws InterruptedException {
-	
-//		when(config.getDmaapCheckNewTopicInterval()).thenReturn(1);
+
+		when(config.getCheckTopicInterval()).thenReturn(1L);
 
 		Thread thread = new Thread(topicConfigPollingService);
 		thread.start();
@@ -101,15 +108,15 @@ public class TopicConfigPollingServiceTest {
 		topicConfigPollingService.shutdown();
 		thread.join();
 
-		assertFalse(topicConfigPollingService.isActiveTopicsChanged(new Kafka()));
+		assertTrue(topicConfigPollingService.isActiveTopicsChanged(new Kafka()));
 	}
 
 	@Test
 	public void testGet() {
-		Kafka kafka=null;
-		assertNull(topicConfigPollingService.getEffectiveTopic (new Kafka(), "test"));
-		assertNull(topicConfigPollingService.getActiveTopics(kafka));
+		Kafka kafka = TestUtil.newKafka(KAFKA_NAME);
+		//assertNull(topicConfigPollingService.getEffectiveTopic (kafka, "test"));
+		assertNotNull(topicConfigPollingService.getActiveTopics(kafka));
 
 	}
-	*/
+
 }

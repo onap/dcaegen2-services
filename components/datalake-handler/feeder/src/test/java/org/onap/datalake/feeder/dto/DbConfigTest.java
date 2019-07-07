@@ -24,12 +24,15 @@ import org.junit.Test;
 import org.onap.datalake.feeder.dto.DbConfig;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 public class DbConfigTest {
     @Test
     public void testDbConfig() {
         DbConfig dbConfig = new DbConfig();
+        dbConfig.setId(1);
+        assertEquals(1, dbConfig.getId());
         dbConfig.setName("elasticsearch");
         assertTrue("elasticsearch".equals(dbConfig.getName()));
         dbConfig.setHost("localhost");

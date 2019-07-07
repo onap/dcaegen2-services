@@ -32,7 +32,6 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;
@@ -45,13 +44,11 @@ import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Service to write data to HDFS
@@ -64,20 +61,18 @@ import lombok.Setter;
 public class HdfsService implements DbStoreService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
 	private Db hdfs;
 
 	@Autowired
 	ApplicationConfiguration config;
 
 	FileSystem fileSystem;
-	private boolean isReady = false;
 
 	private ThreadLocal<Map<String, Buffer>> bufferLocal = ThreadLocal.withInitial(HashMap::new);
 	private ThreadLocal<SimpleDateFormat> dayFormat = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
 	private ThreadLocal<SimpleDateFormat> timeFormat = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS"));
 
-	@Setter
 	@Getter
 	private class Buffer {
 		long lastFlush;
@@ -107,20 +102,21 @@ public class HdfsService implements DbStoreService {
 			}
 		}
 
-		public void addData(List<Pair<Long, String>> messages) {
-			if (data.isEmpty()) { //reset the last flush time stamp to current if no existing data in buffer
-				lastFlush = System.currentTimeMillis();
-			}
-
-			messages.stream().forEach(message -> data.add(message.getRight()));//note that message left is not used			
-		}
-
+		/*
+				public void addData(List<Pair<Long, String>> messages) {
+					if (data.isEmpty()) { //reset the last flush time stamp to current if no existing data in buffer
+						lastFlush = System.currentTimeMillis();
+					}
+		
+					messages.stream().forEach(message -> data.add(message.getRight()));//note that message left is not used			
+				}
+		*/
 		public void addData2(List<JSONObject> messages) {
 			if (data.isEmpty()) { //reset the last flush time stamp to current if no existing data in buffer
 				lastFlush = System.currentTimeMillis();
 			}
 
-			messages.stream().forEach(message -> data.add(message.toString()));	
+			messages.stream().forEach(message -> data.add(message.toString()));
 		}
 
 		private void saveMessages(String topic, List<String> bufferList) throws IOException {
@@ -157,9 +153,10 @@ public class HdfsService implements DbStoreService {
 	public HdfsService(Db db) {
 		hdfs = db;
 	}
-	
+
 	@PostConstruct
-	private void init() {
+	@Override
+	public void init() {
 		// Initialize HDFS Connection 
 		try {
 			//Get configuration of Hadoop system
@@ -179,10 +176,8 @@ public class HdfsService implements DbStoreService {
 			ShutdownHookManager hadoopShutdownHookManager = ShutdownHookManager.get();
 			hadoopShutdownHookManager.clearShutdownHooks();
 
-			isReady = true;
 		} catch (Exception ex) {
 			log.error("error connection to HDFS.", ex);
-			isReady = false;
 		}
 	}
 
@@ -212,22 +207,23 @@ public class HdfsService implements DbStoreService {
 		bufferLocal.get().forEach((topic, buffer) -> buffer.flushStall(topic));
 	}
 
-	//used if raw data should be saved
-	public void saveMessages(EffectiveTopic topic, List<Pair<Long, String>> messages) {
-		String topicStr = topic.getName();
-
-		Map<String, Buffer> bufferMap = bufferLocal.get();
-		final Buffer buffer = bufferMap.computeIfAbsent(topicStr, k -> new Buffer());
-
-		buffer.addData(messages);
-
-		if (!config.isAsync() || buffer.getData().size() >= config.getHdfsBatchSize()) {
-			buffer.flush(topicStr);
-		} else {
-			log.debug("buffer size too small to flush {}: bufferData.size() {} < config.getHdfsBatchSize() {}", topicStr, buffer.getData().size(), config.getHdfsBatchSize());
+	/*
+		//used if raw data should be saved
+		public void saveMessages(EffectiveTopic topic, List<Pair<Long, String>> messages) {
+			String topicStr = topic.getName();
+	
+			Map<String, Buffer> bufferMap = bufferLocal.get();
+			final Buffer buffer = bufferMap.computeIfAbsent(topicStr, k -> new Buffer());
+	
+			buffer.addData(messages);
+	
+			if (!config.isAsync() || buffer.getData().size() >= config.getHdfsBatchSize()) {
+				buffer.flush(topicStr);
+			} else {
+				log.debug("buffer size too small to flush {}: bufferData.size() {} < config.getHdfsBatchSize() {}", topicStr, buffer.getData().size(), config.getHdfsBatchSize());
+			}
 		}
-	}
-
+	*/
 	@Override
 	public void saveJsons(EffectiveTopic topic, List<JSONObject> jsons) {
 		String topicStr = topic.getName();
@@ -242,7 +238,7 @@ public class HdfsService implements DbStoreService {
 		} else {
 			log.debug("buffer size too small to flush {}: bufferData.size() {} < config.getHdfsBatchSize() {}", topicStr, buffer.getData().size(), config.getHdfsBatchSize());
 		}
-		
+
 	}
- 	
+
 }

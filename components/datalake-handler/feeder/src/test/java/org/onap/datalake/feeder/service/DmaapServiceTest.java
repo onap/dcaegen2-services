@@ -24,30 +24,48 @@ import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.Kafka;
+import org.onap.datalake.feeder.util.TestUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DmaapServiceTest {
 
     static String DMAPP_ZOOKEEPER_HOST_PORT = "test:2181";
 
-    @InjectMocks
     private DmaapService dmaapService;
 
     @Mock
     private ApplicationConfiguration config;
     @Mock
     private TopicService topicService;
-    
+
+	@Before
+	public void init() throws NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+		Kafka kafka = TestUtil.newKafka("kafka"); 
+		dmaapService = new DmaapService(kafka);
+
+		Field configField = DmaapService.class.getDeclaredField("config");
+		configField.setAccessible(true);
+		configField.set(dmaapService, config);
+
+		/*
+		Method initMethod = DmaapService.class.getDeclaredMethod("init");
+		initMethod.setAccessible(true);
+		initMethod.invoke(dmaapService); */
+	}
+	
     @Test
     public void testGetTopics() throws InterruptedException {
         List<String> list = new ArrayList<>();
@@ -60,8 +78,8 @@ public class DmaapServiceTest {
         //when(config.getDmaapZookeeperHostPort()).thenReturn(DMAPP_ZOOKEEPER_HOST_PORT);
         assertNotEquals(list, dmaapService.getTopics());
 
-		//when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
-    	//dmaapService.cleanUp();
+		when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
+    	dmaapService.cleanUp();
     }
 
     @Test

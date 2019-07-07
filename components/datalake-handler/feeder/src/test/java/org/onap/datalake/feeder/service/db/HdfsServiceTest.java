@@ -22,19 +22,18 @@ package org.onap.datalake.feeder.service.db;
 
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Field;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.apache.commons.lang3.tuple.Pair;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
-import org.onap.datalake.feeder.dto.TopicConfig;
-import org.onap.datalake.feeder.service.db.HdfsService;
+import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.util.TestUtil;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -45,8 +44,6 @@ import org.springframework.context.ApplicationContext;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class HdfsServiceTest {
-
-	@InjectMocks
 	private HdfsService hdfsService;
 
 	@Mock
@@ -58,20 +55,34 @@ public class HdfsServiceTest {
 	@Mock
 	private ExecutorService executorService;
 
-	@Test
-	public void saveMessages() {
-		TopicConfig topicConfig = new TopicConfig();
-		topicConfig.setName("test");
+	@Before
+	public void init() throws NoSuchFieldException, IllegalAccessException { 
+		Db db = TestUtil.newDb("HDFS");
+		db.setHost("host");
+		db.setLogin("login");
+		hdfsService = new HdfsService(db);
 
-		List<Pair<Long, String>> messages = new ArrayList<>();
-		messages.add(Pair.of(100L, "test message"));
+		Field configField = HdfsService.class.getDeclaredField("config");
+		configField.setAccessible(true);
+		configField.set(hdfsService, config);
+		
+		hdfsService.init();
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void saveJsons() { 
+		when(config.getHdfsBufferSize()).thenReturn(1000);	
 
-		//when(config.getHdfsBufferSize()).thenReturn(1000);
-		//hdfsService.saveMessages(topicConfig, messages);
+		when(config.isAsync()).thenReturn(true);
+		TestUtil.testSaveJsons(config , hdfsService);
+
+		when(config.isAsync()).thenReturn(false);	
+		TestUtil.testSaveJsons(config , hdfsService);
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void cleanUp() {
+		when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
 		hdfsService.flush();
 		hdfsService.flushStall();
 		hdfsService.cleanUp();

@@ -34,4 +34,6 @@ import org.onap.datalake.feeder.domain.EffectiveTopic;
 public interface DbStoreService {
 
 	void saveJsons(EffectiveTopic topic, List<JSONObject> jsons);
+
+	void init();
 }

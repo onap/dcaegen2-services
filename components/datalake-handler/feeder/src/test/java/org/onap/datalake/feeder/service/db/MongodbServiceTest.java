@@ -20,75 +20,70 @@
 
 package org.onap.datalake.feeder.service.db;
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import static org.mockito.Mockito.when;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import org.bson.Document;
-import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
-import org.onap.datalake.feeder.domain.Topic;
-import org.onap.datalake.feeder.domain.TopicName;
+import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.service.DbService;
-import org.onap.datalake.feeder.service.db.MongodbService;
+import org.onap.datalake.feeder.util.TestUtil;
 
-import static org.mockito.Mockito.when;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MongodbServiceTest {
 
-    @InjectMocks
-    private MongodbService mongodbService;
+	private MongodbService mongodbService;
 
-    @Mock
-    private ApplicationConfiguration config;
+	@Mock
+	private ApplicationConfiguration config;
 
-    @Mock
-    private DbService dbService;
+	@Mock
+	private DbService dbService;
 
-    @Mock
-    private MongoDatabase database;
+	@Mock
+	private MongoDatabase database;
 
-    @Mock
-    private MongoClient mongoClient;
+	@Mock
+	private MongoClient mongoClient;
 
-    @Mock
-    private Map<String, MongoCollection<Document>> mongoCollectionMap = new HashMap<>();
+	@Mock
+	private Map<String, MongoCollection<Document>> mongoCollectionMap = new HashMap<>();
 
+	@Before
+	public void init() throws NoSuchFieldException, IllegalAccessException {
+		Db db = TestUtil.newDb("Mongodb");
+		db.setDatabase("database");
+		db.setLogin("login");
+		mongodbService = new MongodbService(db);
 
-    @Test
-    public void cleanUp() {
-	//	when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
-//        mongodbService.cleanUp();
-    }
+		Field configField = MongodbService.class.getDeclaredField("config");
+		configField.setAccessible(true);
+		configField.set(mongodbService, config);
+ 
+		mongodbService.init();
+	}
 
-    @Test
-    public void saveJsons() {
+	@Test
+	public void cleanUp() {
+		when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
+		mongodbService.cleanUp();
+	}
 
-        Topic topic = new Topic();
-        topic.setTopicName(new TopicName("unauthenticated.SEC_FAULT_OUTPUT"));
-        topic.setCorrelateClearedMessage(true);
-        topic.setMessageIdPath("/event/commonEventHeader/eventName,/event/commonEventHeader/reportingEntityName,/event/faultFields/specificProblem");
-        String jsonString = "{\"event\":{\"commonEventHeader\":{\"sourceId\":\"vnf_test_999\",\"startEpochMicrosec\":2222222222222,\"eventId\":\"ab305d54-85b4-a31b-7db2-fb6b9e546016\",\"sequence\":1,\"domain\":\"fautt\",\"lastEpochMicrosec\":1234567890987,\"eventName\":\"Fault_MultiCloud_VMFailure\",\"sourceName\":\"vSBC00\",\"priority\":\"Low\",\"version\":3,\"reportingEntityName\":\"vnf_test_2_rname\"},\"faultFields\":{\"eventSeverity\":\"CRITILLL\",\"alarmCondition\":\"Guest_Os_FaiLLL\",\"faultFieldsVersion\":3,\"specificProblem\":\"Fault_MultiCloud_VMFailure\",\"alarmInterfaceA\":\"aaaa\",\"alarmAdditionalInformation\":[{\"name\":\"objectType3\",\"value\":\"VIN\"},{\"name\":\"objectType4\",\"value\":\"VIN\"}],\"eventSourceType\":\"single\",\"vfStatus\":\"Active\"}}}";
-        String jsonString2 = "{\"event\":{\"commonEventHeader\":{\"sourceId\":\"vnf_test_999\",\"startEpochMicrosec\":2222222222222,\"eventId\":\"ab305d54-85b4-a31b-7db2-fb6b9e546016\",\"sequence\":1,\"domain\":\"fautt\",\"lastEpochMicrosec\":1234567890987,\"eventName\":\"Fault_MultiCloud_VMFailureCleared\",\"sourceName\":\"vSBC00\",\"priority\":\"Low\",\"version\":3,\"reportingEntityName\":\"vnf_test_2_rname\"},\"faultFields\":{\"eventSeverity\":\"CRITILLL\",\"alarmCondition\":\"Guest_Os_FaiLLL\",\"faultFieldsVersion\":3,\"specificProblem\":\"Fault_MultiCloud_VMFailure\",\"alarmInterfaceA\":\"aaaa\",\"alarmAdditionalInformation\":[{\"name\":\"objectType3\",\"value\":\"VIN\"},{\"name\":\"objectType4\",\"value\":\"VIN\"}],\"eventSourceType\":\"single\",\"vfStatus\":\"Active\"}}}";
-
-        JSONObject jsonObject = new JSONObject(jsonString);
-        JSONObject jsonObject2 = new JSONObject(jsonString2);
-
-        List<JSONObject> jsons = new ArrayList<>();
-        jsons.add(jsonObject);
-        jsons.add(jsonObject2);
-
-        //mongodbService.saveJsons(topic.getTopicConfig(), jsons);
-    }
+	@Test
+	public void saveJsons() {
+		TestUtil.testSaveJsons(config, mongodbService);
+	}
 }

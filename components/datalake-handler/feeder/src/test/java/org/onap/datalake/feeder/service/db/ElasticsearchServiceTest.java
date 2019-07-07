@@ -20,79 +20,78 @@
 
 package org.onap.datalake.feeder.service.db;
 
+import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
-import org.onap.datalake.feeder.domain.Topic;
-import org.onap.datalake.feeder.domain.TopicName;
+import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.service.DbService;
-import org.onap.datalake.feeder.service.db.ElasticsearchService;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import static org.mockito.Mockito.when;
+import org.onap.datalake.feeder.util.TestUtil;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ElasticsearchServiceTest {
+	@Mock
+	private ApplicationConfiguration config;
 
-    static String DEFAULT_TOPIC_NAME = "_DL_DEFAULT_";
+	@Mock
+	private RestHighLevelClient client;
 
-    @InjectMocks
-    private ElasticsearchService elasticsearchService;
+	@Mock
+	ActionListener<BulkResponse> listener;
 
-    @Mock
-    private ApplicationConfiguration config;
+	@Mock
+	private DbService dbService;
 
-    @Mock
-    private RestHighLevelClient client;
+	private ElasticsearchService elasticsearchService;
 
-    @Mock
-    ActionListener<BulkResponse> listener;
+	@Before
+	public void init() throws NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+		//MockitoAnnotations.initMocks(this);
 
-    @Mock
-    private DbService dbService;
+		Db db = TestUtil.newDb("Elasticsearch");
+		db.setHost("host");
+		elasticsearchService = new ElasticsearchService(db);
 
-    @Test(expected = NullPointerException.class)
-    public void testCleanUp() throws IOException {
+		Field configField = ElasticsearchService.class.getDeclaredField("config");
+		configField.setAccessible(true);
+		configField.set(elasticsearchService, config);
+		
+		elasticsearchService.init();
+	}
 
-        elasticsearchService.cleanUp();
+	@Test
+	public void testCleanUp() throws IOException {
+		when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
+		elasticsearchService.cleanUp();
+	}
 
-    }
+	@Test(expected = IOException.class)
+	public void testEnsureTableExist() throws IOException {
+		elasticsearchService.ensureTableExist("test");
+	}
 
-    @Test(expected = NullPointerException.class)
-    public void testEnsureTableExist() throws IOException {
+	@Test
+	public void testSaveJsons() {
+		when(config.getElasticsearchType()).thenReturn("doc");
 
-        elasticsearchService.ensureTableExist(DEFAULT_TOPIC_NAME);
-    }
+		when(config.isAsync()).thenReturn(true);
+		TestUtil.testSaveJsons(config, elasticsearchService);
 
-    @Test
-    public void testSaveJsons() {
-
-        Topic topic = new Topic();
-        topic.setTopicName(new TopicName("unauthenticated.SEC_FAULT_OUTPUT"));
-        topic.setCorrelateClearedMessage(true);
-        topic.setMessageIdPath("/event/commonEventHeader/eventName,/event/commonEventHeader/reportingEntityName,/event/faultFields/specificProblem");
-        String jsonString = "{\"event\":{\"commonEventHeader\":{\"sourceId\":\"vnf_test_999\",\"startEpochMicrosec\":2222222222222,\"eventId\":\"ab305d54-85b4-a31b-7db2-fb6b9e546016\",\"sequence\":1,\"domain\":\"fautt\",\"lastEpochMicrosec\":1234567890987,\"eventName\":\"Fault_MultiCloud_VMFailure\",\"sourceName\":\"vSBC00\",\"priority\":\"Low\",\"version\":3,\"reportingEntityName\":\"vnf_test_2_rname\"},\"faultFields\":{\"eventSeverity\":\"CRITILLL\",\"alarmCondition\":\"Guest_Os_FaiLLL\",\"faultFieldsVersion\":3,\"specificProblem\":\"Fault_MultiCloud_VMFailure\",\"alarmInterfaceA\":\"aaaa\",\"alarmAdditionalInformation\":[{\"name\":\"objectType3\",\"value\":\"VIN\"},{\"name\":\"objectType4\",\"value\":\"VIN\"}],\"eventSourceType\":\"single\",\"vfStatus\":\"Active\"}}}";
-        String jsonString2 = "{\"event\":{\"commonEventHeader\":{\"sourceId\":\"vnf_test_999\",\"startEpochMicrosec\":2222222222222,\"eventId\":\"ab305d54-85b4-a31b-7db2-fb6b9e546016\",\"sequence\":1,\"domain\":\"fautt\",\"lastEpochMicrosec\":1234567890987,\"eventName\":\"Fault_MultiCloud_VMFailureCleared\",\"sourceName\":\"vSBC00\",\"priority\":\"Low\",\"version\":3,\"reportingEntityName\":\"vnf_test_2_rname\"},\"faultFields\":{\"eventSeverity\":\"CRITILLL\",\"alarmCondition\":\"Guest_Os_FaiLLL\",\"faultFieldsVersion\":3,\"specificProblem\":\"Fault_MultiCloud_VMFailure\",\"alarmInterfaceA\":\"aaaa\",\"alarmAdditionalInformation\":[{\"name\":\"objectType3\",\"value\":\"VIN\"},{\"name\":\"objectType4\",\"value\":\"VIN\"}],\"eventSourceType\":\"single\",\"vfStatus\":\"Active\"}}}";
-
-        JSONObject jsonObject = new JSONObject(jsonString);
-        JSONObject jsonObject2 = new JSONObject(jsonString2);
-
-        List<JSONObject> jsons = new ArrayList<>();
-        jsons.add(jsonObject);
-        jsons.add(jsonObject2);
-//        when(config.getElasticsearchType()).thenReturn("doc");
-  //      when(config.isAsync()).thenReturn(true);
-
-        //elasticsearchService.saveJsons(topic.getTopicConfig(), jsons);
-
-    }
+		when(config.isAsync()).thenReturn(false);
+		TestUtil.testSaveJsons(config, elasticsearchService);
+	}
 }

@@ -27,17 +27,23 @@ import static org.junit.Assert.*;
 public class DesignTypeTest {
 
     @Test
-    public void testIs(){
-
+    public void test(){
         DesignType designType = new DesignType();
         designType.setName("Kibana Dashboard");
         designType.setNote("test");
         Portal portal = new Portal();
         portal.setName("Kibana");
         designType.setPortal(portal);
-        assertTrue("Kibana Dashboard".equals(designType.getName()));
-        assertTrue("test".equals(designType.getNote()));
-        assertFalse("Kibana".equals(designType.getPortal()));
-    }
+        assertEquals("Kibana Dashboard", designType.getName());
+        assertEquals("test", designType.getNote());
+        assertNotEquals("Kibana", designType.getPortal());
 
+        designType.setDbType(null);
+        designType.getDbType();
+
+        designType.setDesigns(null);
+        designType.getDesigns();
+        
+        designType.getDesignTypeConfig();
+    }
 }

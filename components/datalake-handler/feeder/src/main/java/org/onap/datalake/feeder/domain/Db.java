@@ -142,11 +142,11 @@ public class Db {
 		if (this.getClass() != obj.getClass())
 			return false;
 
-		return name.equals(((Db) obj).getName());
+		return id==((Db) obj).getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return name.hashCode();
+		return id;
 	}
 }

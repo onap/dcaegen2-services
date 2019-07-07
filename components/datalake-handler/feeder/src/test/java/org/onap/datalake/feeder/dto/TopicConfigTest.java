@@ -19,19 +19,16 @@
  */
 package org.onap.datalake.feeder.dto;
 
-import org.json.JSONObject;
-import org.junit.Test;
-import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.domain.Topic;
-import org.onap.datalake.feeder.util.TestUtil;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.HashSet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.Kafka;
+import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.util.TestUtil;
 
 /**
  * Test Topic
@@ -40,91 +37,41 @@ import static org.junit.Assert.assertTrue;
  */
 
 public class TopicConfigTest {
+	@Test
+	public void testIs() {
+		Topic testTopic = TestUtil.newTopic("test");
 
-    @Test
-    public void getMessageId() {
-        String text = "{ data: { data2 : { value : 'hello'}}}";
+		TopicConfig testTopicConfig = testTopic.getTopicConfig();
+		testTopicConfig.setSinkdbs(null);
+		testTopicConfig.setEnabledSinkdbs(null);
 
-        JSONObject json = new JSONObject(text);
+		testTopic.setDbs(null);
+		testTopic.setKafkas(null);
+		testTopicConfig = testTopic.getTopicConfig();
 
-        Topic topic = TestUtil.newTopic("test getMessageId");
-        topic.setMessageIdPath("/data/data2/value");
-        
-        TopicConfig topicConfig = topic.getTopicConfig();
+		testTopic.setDbs(new HashSet<>());
+		Db esDb = TestUtil.newDb("Elasticsearch");
+		esDb.setEnabled(true);
+		testTopic.getDbs().add(esDb);
+		
+		esDb = TestUtil.newDb("MongoDB");
+		esDb.setEnabled(false);
+		testTopic.getDbs().add(esDb);
 
-//        String value = topicConfig.getMessageId(json);
 
-  //      assertEquals(value, "hello");
-    }
-
-    @Test
-    public void getMessageIdFromMultipleAttributes() {
-        String text = "{ data: { data2 : { value : 'hello'}, data3 : 'world'}}";
-
-        JSONObject json = new JSONObject(text);
-
-        Topic topic = TestUtil.newTopic("test getMessageId");
-        topic.setMessageIdPath("/data/data2/value,/data/data3");
-
-        TopicConfig topicConfig = topic.getTopicConfig();
-        
-//        String value = topicConfig.getMessageId(json);
- //       assertEquals(value, "hello^world");
-
-        topic.setMessageIdPath("");
-        topicConfig = topic.getTopicConfig();
- //       assertNull(topicConfig.getMessageId(json));
-
-    }
-
-    @Test
-    public void testArrayPath() {
-        Topic topic = TestUtil.newTopic("testArrayPath");
-        topic.setAggregateArrayPath("/data/data2/value,/data/data3");
-        topic.setFlattenArrayPath("/data/data2/value,/data/data3");
-
-        TopicConfig topicConfig = topic.getTopicConfig();
-/*
-        String[] value = topicConfig.getAggregateArrayPath2();
-        assertEquals(value[0], "/data/data2/value");
-        assertEquals(value[1], "/data/data3");
-
-        value = topicConfig.getFlattenArrayPath2();
-        assertEquals(value[0], "/data/data2/value");
-        assertEquals(value[1], "/data/data3");*/
-    }
-
-    @Test
-    public void testIs() {
-        Topic testTopic = TestUtil.newTopic("test");
-
-        TopicConfig testTopicConfig = testTopic.getTopicConfig();
-        testTopicConfig.setSinkdbs(null);
-        testTopicConfig.setEnabledSinkdbs(null);
-        //assertFalse(testTopicConfig.supportElasticsearch());
-        //assertNull(testTopicConfig.getDataFormat2());
-                
-        testTopic.setDbs(new HashSet<>());
-        Db esDb = TestUtil.newDb("Elasticsearch");
-        esDb.setEnabled(true);
-        testTopic.getDbs().add(esDb);
-        
-        testTopicConfig = testTopic.getTopicConfig();
-
-        //assertEquals(testTopicConfig, new Topic("test").getTopicConfig());
-        assertNotEquals(testTopicConfig, testTopic);
-        assertNotEquals(testTopicConfig, null);
-        //assertEquals(testTopicConfig.hashCode(), (new Topic("test").getTopicConfig()).hashCode());
-        /*
-        assertTrue(testTopicConfig.supportElasticsearch());
-        assertFalse(testTopicConfig.supportCouchbase());
-        assertFalse(testTopicConfig.supportDruid());
-        assertFalse(testTopicConfig.supportMongoDB());
-        assertFalse(testTopicConfig.supportHdfs());
-
-        testTopic.getDbs().remove(new Db("Elasticsearch"));
-        testTopicConfig = testTopic.getTopicConfig();
-        assertFalse(testTopicConfig.supportElasticsearch());
- */
-    }
+		testTopic.setKafkas(new HashSet<>());
+		Kafka kafka = TestUtil.newKafka("k1");
+		kafka.setEnabled(true);
+		testTopic.getKafkas().add(kafka);
+		testTopicConfig = testTopic.getTopicConfig();
+		
+		
+		
+		TopicConfig testTopicConfig2 = TestUtil.newTopic("test").getTopicConfig();
+		assertNotEquals(testTopicConfig, testTopicConfig2);
+		assertEquals(testTopicConfig, testTopicConfig);
+		assertNotEquals(testTopicConfig.hashCode(), testTopicConfig2.hashCode());
+		assertNotEquals(testTopicConfig, testTopic);
+		assertNotEquals(testTopicConfig, null);
+	}
 }

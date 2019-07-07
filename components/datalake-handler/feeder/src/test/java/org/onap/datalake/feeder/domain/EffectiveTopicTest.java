@@ -20,34 +20,29 @@
 package org.onap.datalake.feeder.domain;
 
 import org.junit.Test;
+import org.onap.datalake.feeder.util.TestUtil;
 
-import static org.junit.Assert.*;
+/**
+ * Test TopicName
+ *
+ */
 
-public class DbTypeTest {
+public class EffectiveTopicTest {
 
-    @Test
-    public void test(){
-        DbType dbType = new DbType("ES","Elasticsearch");
-        
 
-        DbType dbType2 = new DbType("MONGO", "MongoDB");
-        dbType.setTool(false); 
-        
+	@Test
+	public void test() {
 
-        assertNotNull(dbType.toString());
-        assertEquals(dbType, dbType);
-        assertNotEquals(dbType, null);
-        assertNotEquals(dbType, "ES");
-        assertNotEquals(dbType, dbType2);
-        assertNotNull(dbType.hashCode());
-
-        assertEquals("MongoDB", dbType2.getName());
-        dbType2.setName(null);
-        dbType2.setDefaultPort(1);
-        assertTrue(1==dbType2.getDefaultPort());
-
-        dbType2.setDbs(null);
-        assertNull(dbType2.getDbs());
-    }
+		Topic topic = TestUtil.newTopic("test Topic");
+		
+		EffectiveTopic effectiveTopic = new EffectiveTopic(topic, "test");
+		effectiveTopic = new EffectiveTopic(topic);
+		effectiveTopic.getName();
+		effectiveTopic.setName("");
+		effectiveTopic.getName();
+		effectiveTopic.setTopic(topic);
+		effectiveTopic.getTopic();
+		System.out.println(effectiveTopic);
+	}
 
 }

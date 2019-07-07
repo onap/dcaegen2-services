@@ -42,6 +42,7 @@ public class PortalDesignTest {
         designType.setName("Kibana");
         portalDesign.setDesignType(designType);
         portalDesign.setNote("test");
+        portalDesign.setDbs(null);
         assertFalse("1".equals(portalDesign.getId()));
         assertTrue("templateTest".equals(portalDesign.getName()));
         assertTrue("jsonString".equals(portalDesign.getBody()));
@@ -49,6 +50,7 @@ public class PortalDesignTest {
         assertTrue("test".equals(portalDesign.getNote()));
         assertFalse("Kibana".equals(portalDesign.getDesignType()));
         assertFalse("false".equals(portalDesign.getSubmitted()));
+        assertNull(portalDesign.getDbs());
     }
 
 }

@@ -31,10 +31,13 @@ import org.onap.datalake.feeder.controller.domain.PostReturnBody;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.domain.TopicName;
+import org.onap.datalake.feeder.repository.TopicNameRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.onap.datalake.feeder.service.DbService;
 import org.onap.datalake.feeder.service.DmaapService;
 import org.onap.datalake.feeder.service.TopicService;
+import org.onap.datalake.feeder.util.TestUtil;
 import org.springframework.validation.BindingResult;
 
 import javax.servlet.http.HttpServletResponse;
@@ -53,115 +56,123 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class TopicControllerTest {
 
-    static String DEFAULT_TOPIC_NAME = "_DL_DEFAULT_";
+	static String DEFAULT_TOPIC_NAME = "_DL_DEFAULT_";
 
-    @Mock
-    private HttpServletResponse httpServletResponse;
+	@Mock
+	private HttpServletResponse httpServletResponse;
 
-    @Mock
-    private BindingResult mockBindingResult;
+	@Mock
+	private BindingResult mockBindingResult;
 
-    @Mock
-    private TopicRepository topicRepository;
+	@Mock
+	private TopicRepository topicRepository;
 
-    @Mock
+	@Mock
+	private TopicService topicService;
 
-    private TopicService topicServiceMock;
+	@Mock
+	private TopicNameRepository topicNameRepository;
 
-    @InjectMocks
-    private TopicService topicService1;
+	@InjectMocks
+	TopicController topicController;
 
-    @Mock
-    private ApplicationConfiguration config;
+	@Mock
+	private ApplicationConfiguration config;
 
-    @Mock
-    private DbService dbService1;
+	@Mock
+	private DbService dbService;
 
-    @Mock
-    private DmaapService dmaapService1;
+	@Mock
+	private DmaapService dmaapService;
 
-    @Before
-    public void setupTest() {
-        MockitoAnnotations.initMocks(this);
-        // While the default boolean return value for a mock is 'false',
-        // it's good to be explicit anyway:
-        when(mockBindingResult.hasErrors()).thenReturn(false);
-    }
+	@Before
+	public void setupTest() throws NoSuchFieldException, IllegalAccessException {
+		// While the default boolean return value for a mock is 'false',
+		// it's good to be explicit anyway:
+		when(mockBindingResult.hasErrors()).thenReturn(false);
+	}
 
-    public void setAccessPrivateFields(TopicController topicController) throws NoSuchFieldException,
-            IllegalAccessException {
-        Field topicService = topicController.getClass().getDeclaredField("topicService");
-        topicService.setAccessible(true);
-        topicService.set(topicController, topicService1);
-        Field topicRepository1 = topicController.getClass().getDeclaredField("topicRepository");
-        topicRepository1.setAccessible(true);
-        topicRepository1.set(topicController, topicRepository);
-//        Field dbService = topicController.getClass().getDeclaredField("dbService");
-  //      dbService.setAccessible(true);
-    //    dbService.set(topicController, dbService1);
-    }
+	@Test
+	public void testListTopic() throws IOException, NoSuchFieldException, IllegalAccessException {
+	}
 
-    @Test
-    public void testListTopic() throws IOException, NoSuchFieldException, IllegalAccessException{
-        TopicController topicController = new TopicController();
-        setAccessPrivateFields(topicController);
-    }
+	@Test
+	public void testCreateTopic() throws IOException {
+		Topic a = TestUtil.newTopic("a");
+		a.setId(1);
+		a.setEnabled(true);
 
-    //@Test
-    public void testCreateTopic() throws IOException, NoSuchFieldException, IllegalAccessException {
-        TopicController topicController = new TopicController();
-        setAccessPrivateFields(topicController);
-        //when(topicRepository.findById("ab")).thenReturn(Optional.of(new Topic("ab")));
-       // when(config.getDefaultTopicName()).thenReturn(DEFAULT_TOPIC_NAME);
-        PostReturnBody<TopicConfig> postTopic = topicController.createTopic(new TopicConfig(), mockBindingResult, httpServletResponse);
-        assertEquals(postTopic.getStatusCode(), 200);
-        when(mockBindingResult.hasErrors()).thenReturn(true);
-        PostReturnBody<TopicConfig> topicConfig= topicController.createTopic(new TopicConfig(), mockBindingResult, httpServletResponse);
-        assertEquals(null, topicConfig);
-        when(mockBindingResult.hasErrors()).thenReturn(false);
-        TopicConfig a = new TopicConfig();
-        a.setName(DEFAULT_TOPIC_NAME);
-        //when(topicRepository.findById(DEFAULT_TOPIC_NAME)).thenReturn(Optional.of(new Topic(DEFAULT_TOPIC_NAME)));
-        PostReturnBody<TopicConfig> postTopic2= topicController.createTopic(a, mockBindingResult, httpServletResponse);
-        //assertEquals(null, postTopic2);
-    }
+		TopicConfig ac = a.getTopicConfig();
 
-    @Test
-    public void testUpdateTopic() throws IOException, NoSuchFieldException, IllegalAccessException {
-        TopicController topicController = new TopicController();
-        setAccessPrivateFields(topicController);
-        PostReturnBody<TopicConfig> postTopic = topicController.updateTopic(1, new TopicConfig(), mockBindingResult, httpServletResponse);
-        assertEquals(null, postTopic);
-        Topic a = new Topic();
-        a.setId(1);
-        //when(topicRepository.findById(1)).thenReturn(Optional.of(a));
-        TopicConfig ac = new TopicConfig();
-        ac.setName("a");
-        ac.setEnabled(true);
-        PostReturnBody<TopicConfig> postConfig1 = topicController.updateTopic(1, ac, mockBindingResult, httpServletResponse);
-        //assertEquals(200, postConfig1.getStatusCode());
-        assertNull(postConfig1);
-        //TopicConfig ret = postConfig1.getReturnBody();
-        //assertEquals("a", ret.getName());
-        //assertEquals(true, ret.isEnabled());
-        when(mockBindingResult.hasErrors()).thenReturn(true);
-        PostReturnBody<TopicConfig> postConfig2 = topicController.updateTopic(1, ac, mockBindingResult, httpServletResponse);
-        assertEquals(null, postConfig2);
+		when(topicService.fillTopicConfiguration(ac)).thenReturn(a);
+		PostReturnBody<TopicConfig> postTopic = topicController.createTopic(ac, mockBindingResult, httpServletResponse);
+		assertEquals(postTopic.getStatusCode(), 200);
 
-    }
+		when(mockBindingResult.hasErrors()).thenReturn(true);
+		PostReturnBody<TopicConfig> topicConfig = topicController.createTopic(ac, mockBindingResult, httpServletResponse);
+		assertEquals(null, topicConfig);
+	}
 
-    //@Test
-    public void testListDmaapTopics() throws NoSuchFieldException, IllegalAccessException, IOException {
-        TopicController topicController = new TopicController();
-        Field dmaapService = topicController.getClass().getDeclaredField("dmaapService");
-        dmaapService.setAccessible(true);
-        dmaapService.set(topicController, dmaapService1);
-        ArrayList<String> topics = new ArrayList<>();
-        topics.add("a");
-        when(dmaapService1.getTopics()).thenReturn(topics);
-        List<String> strings = topicController.listDmaapTopics("KAFKA");
-        for (String topic : strings) {
-            assertEquals("a", topic);
-        }
-    }
+	@Test
+	public void testUpdateTopic() throws IOException {
+		Topic a = TestUtil.newTopic("a");
+		a.setId(1);
+		a.setEnabled(true);
+
+		TopicConfig ac = a.getTopicConfig();
+
+		when(topicService.getTopic(1)).thenReturn(a);
+		PostReturnBody<TopicConfig> postConfig1 = topicController.updateTopic(1, ac, mockBindingResult, httpServletResponse);
+		assertEquals(200, postConfig1.getStatusCode());
+		TopicConfig ret = postConfig1.getReturnBody();
+		assertEquals("a", ret.getName());
+		assertEquals(true, ret.isEnabled());
+
+		topicController.updateTopic(0, ac, mockBindingResult, httpServletResponse);
+
+		when(topicService.getTopic(1)).thenReturn(null);
+		topicController.updateTopic(1, ac, mockBindingResult, httpServletResponse);
+
+		when(mockBindingResult.hasErrors()).thenReturn(true);
+		PostReturnBody<TopicConfig> postConfig2 = topicController.updateTopic(1, ac, mockBindingResult, httpServletResponse);
+		assertNull(postConfig2);
+
+	}
+
+	@Test
+	public void testGetTopic() throws IOException {
+		Topic a = TestUtil.newTopic("a");
+		a.setId(1);
+		a.setEnabled(true);
+
+		when(topicService.getTopic(1)).thenReturn(a);
+		TopicConfig ac = topicController.getTopic(1, httpServletResponse);
+		when(topicService.getTopic(1)).thenReturn(null);
+		ac = topicController.getTopic(1, httpServletResponse);
+	}
+
+	@Test
+	public void testDeleteTopic() throws IOException {
+		Topic a = TestUtil.newTopic("a");
+		a.setId(1);
+		a.setEnabled(true);
+
+		when(topicService.getTopic(1)).thenReturn(a);
+		topicController.deleteTopic(1, httpServletResponse);
+		when(topicService.getTopic(1)).thenReturn(null);
+		topicController.deleteTopic(1, httpServletResponse);
+	}
+
+	@Test
+	public void testList() {
+		ArrayList<Topic> topics = new ArrayList<>();
+		topics.add(TestUtil.newTopic("a"));
+		topics.add(TestUtil.newTopic(DEFAULT_TOPIC_NAME));
+		when(topicRepository.findAll()).thenReturn(topics);
+
+		List<String> strings = topicController.list();
+		for (String topic : strings) {
+			System.out.println(topic);
+		}
+	}
 }

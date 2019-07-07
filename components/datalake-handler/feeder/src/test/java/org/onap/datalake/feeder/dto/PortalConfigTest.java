@@ -47,5 +47,6 @@ public class PortalConfigTest {
         assertEquals(testPortalConfig.getEnabled(), null);
         assertEquals(testPortalConfig.getLogin(), null);
         assertEquals(testPortalConfig.getPass(), null);
+        assertEquals(testPortalConfig.getDb(), "Elasticsearch");
     }
 }

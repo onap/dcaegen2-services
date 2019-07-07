@@ -46,10 +46,24 @@ public class DbTest {
         Db mongoDB2 = TestUtil.newDb("MongoDB");
         assertNotEquals(couchbase.hashCode(), mongoDB.hashCode());
         assertNotEquals(couchbase, mongoDB);
-        assertEquals(mongoDB, mongoDB2);
-        assertFalse(mongoDB2.equals(null));
-        assertFalse(mongoDB2.equals(new Topic()));
+        assertNotEquals(mongoDB, mongoDB2);
+        assertEquals(mongoDB, mongoDB);
+        assertFalse(mongoDB2.equals(null)); 
+        
+        DbType dbType = new DbType("MONGO", "MongoDB");
+        dbType.setTool(false);
+        mongoDB.setDbType(dbType);
 
+        assertNotEquals(mongoDB2, dbType); 
+        assertFalse(mongoDB.isTool()); 
+        assertFalse(mongoDB.isHdfs()); 
+        assertFalse(mongoDB.isElasticsearch()); 
+        assertFalse(mongoDB.isCouchbase()); 
+        assertFalse(mongoDB.isDruid());    
+        assertTrue(mongoDB.isMongoDB());    
+        assertFalse(mongoDB.getDbType().isTool());      
+        System.out.println(mongoDB);
+        
         new Db();
         mongoDB2.setHost("localhost");
         mongoDB2.setPort(1234);

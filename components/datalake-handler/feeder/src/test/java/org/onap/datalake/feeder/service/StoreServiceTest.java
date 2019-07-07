@@ -20,24 +20,31 @@
 
 package org.onap.datalake.feeder.service;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.domain.Kafka;
-import org.onap.datalake.feeder.dto.TopicConfig;
-import org.onap.datalake.feeder.service.db.*;
+import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.domain.TopicName;
+import org.onap.datalake.feeder.service.db.CouchbaseService;
+import org.onap.datalake.feeder.service.db.ElasticsearchService;
+import org.onap.datalake.feeder.service.db.HdfsService;
+import org.onap.datalake.feeder.service.db.MongodbService;
+import org.onap.datalake.feeder.util.TestUtil;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -72,58 +79,61 @@ public class StoreServiceTest {
 
 	@Mock
 	private HdfsService hdfsService;
-	
+
 	@Mock
 	private Kafka kafka;
 
-	public void testInit() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+	@Before
+	public void init() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
 		Method init = storeService.getClass().getDeclaredMethod("init");
 		init.setAccessible(true);
 		init.invoke(storeService);
 	}
 
-	private TopicConfig createTopicConfig(String topicStr, String type) {
+	private EffectiveTopic createTopicConfig(String topicStr, String type) {
+		Topic topic = new Topic();
+		topic.setTopicName(new TopicName("unauthenticated.SEC_FAULT_OUTPUT"));
+		topic.setDataFormat(type);
+		topic.setSaveRaw(true);
+		topic.setEnabled(true);
+		
 
-		TopicConfig topicConfig = new TopicConfig();
-		topicConfig.setName(topicStr);
-		topicConfig.setDataFormat(type);
-		topicConfig.setSaveRaw(true);
+		EffectiveTopic effectiveTopic = new EffectiveTopic(topic, "test");
+		List<EffectiveTopic> effectiveTopics = new ArrayList<>();
+		effectiveTopics.add(effectiveTopic);
 
-//		when(configPollingService.getEffectiveTopicConfig(topicStr)).thenReturn(topicConfig);
+		when(configPollingService.getEffectiveTopic(kafka, topicStr)).thenReturn(effectiveTopics);
 
-		return topicConfig;
+		return effectiveTopic;
 	}
 
 	@Test
 	public void saveMessages() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
-		testInit();
+		EffectiveTopic effectiveTopic = createTopicConfig("test1", "JSON");
+		effectiveTopic.getTopic().setAggregateArrayPath("/test");
+		effectiveTopic.getTopic().setFlattenArrayPath("/test"); 
 
-		TopicConfig topicConfig = createTopicConfig("test1", "JSON");
-		topicConfig.setAggregateArrayPath("/test");
-		topicConfig.setFlattenArrayPath("/test");
+		effectiveTopic = createTopicConfig("test2", "XML");
+		effectiveTopic.getTopic().setSaveRaw(false); 
 
-		topicConfig = createTopicConfig("test2", "XML");
-		topicConfig.setSaveRaw(false);
-
-		topicConfig = createTopicConfig("test3", "YAML");
-
-		topicConfig.setSinkdbs(new ArrayList<>());
-		topicConfig.getSinkdbs().add("Elasticsearch");
-		topicConfig.getSinkdbs().add("Couchbase");
-		topicConfig.getSinkdbs().add("Druid");
-		topicConfig.getSinkdbs().add("MongoDB");
-		topicConfig.getSinkdbs().add("HDFS");
-
-
-		topicConfig.setEnabledSinkdbs(new ArrayList<>());
-		topicConfig.getEnabledSinkdbs().add("Elasticsearch");
+		effectiveTopic = createTopicConfig("test3", "YAML");
+		effectiveTopic.getTopic().setDbs(new HashSet<>());
+		effectiveTopic.getTopic().getDbs().add(TestUtil.newDb("ES"));
+		effectiveTopic.getTopic().getDbs().add(TestUtil.newDb("CB"));
+		effectiveTopic.getTopic().getDbs().add(TestUtil.newDb("DRUID"));
+		effectiveTopic.getTopic().getDbs().add(TestUtil.newDb("MONGO"));
+		effectiveTopic.getTopic().getDbs().add(TestUtil.newDb("HDFS")); 
+		//		effectiveTopic.getTopic().setEnabledSinkdbs(new ArrayList<>());
+		//	effectiveTopic.getTopic().getEnabledSinkdbs().add("Elasticsearch");
 		//assertTrue(topicConfig.supportElasticsearch());
-		
-		
-		createTopicConfig("test4", "TEXT");
 
-//		when(config.getTimestampLabel()).thenReturn("ts");
-//		when(config.getRawDataLabel()).thenReturn("raw");
+		createTopicConfig("test4", "TEXT");
+		
+		effectiveTopic = createTopicConfig("test5", "TEXT");
+		effectiveTopic.getTopic().setEnabled(false);
+
+		when(config.getTimestampLabel()).thenReturn("ts");
+		when(config.getRawDataLabel()).thenReturn("raw");
 
 		//JSON
 		List<Pair<Long, String>> messages = new ArrayList<>();
@@ -133,7 +143,7 @@ public class StoreServiceTest {
 
 		//XML
 		List<Pair<Long, String>> messagesXml = new ArrayList<>();
-		messagesXml.add(Pair.of(100L, "<test></test>")); 
+		messagesXml.add(Pair.of(100L, "<test></test>"));
 		messagesXml.add(Pair.of(100L, "<test></test"));//bad xml to trigger exception
 
 		storeService.saveMessages(kafka, "test2", messagesXml);
@@ -149,6 +159,8 @@ public class StoreServiceTest {
 		messagesText.add(Pair.of(100L, "test message"));
 
 		storeService.saveMessages(kafka, "test4", messagesText);
+		
+		storeService.saveMessages(kafka, "test5", messagesText);
 
 		//Null mesg
 		storeService.saveMessages(kafka, "test", null);

@@ -22,15 +22,18 @@ package org.onap.datalake.feeder.service;
 
 import static org.mockito.Mockito.when;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.Kafka;
+import org.onap.datalake.feeder.util.TestUtil;
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -44,8 +47,7 @@ import org.springframework.context.ApplicationContext;
 @RunWith(MockitoJUnitRunner.class)
 public class PullerTest {
 
-	@InjectMocks
-	private Puller puller = new Puller(null);
+	private Puller puller;
 
 	@Mock
 	private ApplicationContext context;
@@ -59,26 +61,34 @@ public class PullerTest {
 	@Mock
 	private TopicConfigPollingService topicConfigPollingService;
 
-	public void testInit() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-		when(config.isAsync()).thenReturn(true);
+	@Before
+	public void init() throws NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+		Kafka kafka = TestUtil.newKafka("kafka");
+		kafka.setBrokerList("brokerList:1,brokerList2:1");
+		kafka.setGroup("group");
+		kafka.setLogin("login");
+		kafka.setSecure(true);
+		kafka.setSecurityProtocol("securityProtocol");
+		puller = new Puller(kafka);
 
-		Method init = puller.getClass().getDeclaredMethod("init");
-		init.setAccessible(true);
-		init.invoke(puller);
+		Field configField = Puller.class.getDeclaredField("config");
+		configField.setAccessible(true);
+		configField.set(puller, config);
+
+		when(config.isAsync()).thenReturn(true);
+		Method initMethod = Puller.class.getDeclaredMethod("init");
+		initMethod.setAccessible(true);
+		initMethod.invoke(puller);
 	}
 
 	@Test
-	public void testRun() throws InterruptedException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
-		testInit();
- 
-
+	public void testRun() throws InterruptedException {
 		Thread thread = new Thread(puller);
 		thread.start();
 
 		Thread.sleep(50);
 		puller.shutdown();
 		thread.join();
-
 	}
 
 }

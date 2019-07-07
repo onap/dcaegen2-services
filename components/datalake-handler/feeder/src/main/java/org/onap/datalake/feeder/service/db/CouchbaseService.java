@@ -73,7 +73,8 @@ public class CouchbaseService implements DbStoreService {
 	}
 	
 	@PostConstruct
-	private void init() {
+	@Override
+	public void init() {
 		// Initialize Couchbase Connection
 		try {
 			//this tunes the SDK (to customize connection timeout)

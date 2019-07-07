@@ -83,7 +83,8 @@ public class ElasticsearchService implements DbStoreService {
 	//ES Encrypted communication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_encrypted_communication.html#_encrypted_communication
 	//Basic authentication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_basic_authentication.html
 	@PostConstruct
-	private void init() {
+	@Override
+	public void init() {
 		String elasticsearchHost = elasticsearch.getHost();
 
 		// Initialize the Connection

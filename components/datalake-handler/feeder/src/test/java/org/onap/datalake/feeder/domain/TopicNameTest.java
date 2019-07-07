@@ -19,35 +19,33 @@
  */
 package org.onap.datalake.feeder.domain;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+/**
+ * Test TopicName
+ *
+ * @author Guobiao Mo
+ */
 
-public class DbTypeTest {
+public class TopicNameTest {
 
-    @Test
-    public void test(){
-        DbType dbType = new DbType("ES","Elasticsearch");
-        
 
-        DbType dbType2 = new DbType("MONGO", "MongoDB");
-        dbType.setTool(false); 
-        
+	@Test
+	public void test() {
+		TopicName topicName = new TopicName("tes");
+		topicName.setDesigns(null);
+		topicName.getDesigns();
+		topicName.setTopics(null);
+		topicName.getTopics();
+		topicName.hashCode();
 
-        assertNotNull(dbType.toString());
-        assertEquals(dbType, dbType);
-        assertNotEquals(dbType, null);
-        assertNotEquals(dbType, "ES");
-        assertNotEquals(dbType, dbType2);
-        assertNotNull(dbType.hashCode());
+		assertEquals(topicName, topicName);
+		assertNotEquals(topicName, null);
+		assertNotEquals(topicName, "test");
 
-        assertEquals("MongoDB", dbType2.getName());
-        dbType2.setName(null);
-        dbType2.setDefaultPort(1);
-        assertTrue(1==dbType2.getDefaultPort());
-
-        dbType2.setDbs(null);
-        assertNull(dbType2.getDbs());
-    }
+	}
 
 }

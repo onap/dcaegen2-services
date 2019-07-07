@@ -56,6 +56,8 @@ public class PortalDesignConfigTest {
         assertEquals(testPortalDesignConfig.getNote(), null);
         assertEquals(testPortalDesignConfig.getName(), null);
         assertEquals(testPortalDesignConfig.getSubmitted(), null);
+        assertEquals(testPortalDesignConfig.getDesignType(), null);
+        assertEquals(testPortalDesignConfig.getDisplay(), "test");
     }
 
 }

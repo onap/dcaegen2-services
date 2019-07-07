@@ -38,12 +38,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.enumeration.DataFormat;
-import org.onap.datalake.feeder.enumeration.DbTypeEnum;
-import org.onap.datalake.feeder.service.db.CouchbaseService;
-import org.onap.datalake.feeder.service.db.DbStoreService;
-import org.onap.datalake.feeder.service.db.ElasticsearchService;
-import org.onap.datalake.feeder.service.db.HdfsService;
-import org.onap.datalake.feeder.service.db.MongodbService;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -129,13 +123,6 @@ public class Topic {
 	@Column(name = "`flatten_array_path`")
 	protected String flattenArrayPath;
 	
-	public Topic() {
-	}
-/*
-	public Topic(String name) {//TODO
-		//this.name = name;
-	}
-*/
 	public String getName() {
 		return topicName.getId();
 	}
@@ -147,33 +134,7 @@ public class Topic {
 			return 3650;//default to 10 years for safe
 		}
 	}
-/*
-	public boolean supportHdfs() {
-		return supportDb(DbTypeEnum.HDFS);
-	}
 
-	public boolean supportElasticsearch() {
-		return supportDb(DbTypeEnum.ES);
-	}
-
-	public boolean supportCouchbase() {
-		return supportDb(DbTypeEnum.CB);
-	}
-
-	public boolean supportDruid() {
-		return supportDb(DbTypeEnum.DRUID);
-	}
-
-	public boolean supportMongoDB() {
-		return supportDb(DbTypeEnum.MONGO);
-	}
-
-	private boolean supportDb(DbTypeEnum dbTypeEnum) {
-		for(Db db : dbs) {
-			
-		}
-	}
-*/
 	public DataFormat getDataFormat2() {
 		if (dataFormat != null) {
 			return DataFormat.fromString(dataFormat);
@@ -204,7 +165,7 @@ public class Topic {
 
 	//extract DB id from JSON attributes, support multiple attributes
 	public String getMessageId(JSONObject json) {
-		String id = null;
+		String ret = null;
 
 		if (StringUtils.isNotBlank(messageIdPath)) {
 			String[] paths = messageIdPath.split(",");
@@ -216,10 +177,10 @@ public class Topic {
 				}
 				sb.append(json.query(paths[i]).toString());
 			}
-			id = sb.toString();
+			ret = sb.toString();
 		}
 
-		return id;
+		return ret;
 	}
 
 	public TopicConfig getTopicConfig() {

@@ -19,7 +19,9 @@
  */
 package org.onap.datalake.feeder.domain;
 
+import org.json.JSONObject;
 import org.junit.Test;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.enumeration.DataFormat;
 import org.onap.datalake.feeder.util.TestUtil;
 
@@ -28,6 +30,7 @@ import java.util.HashSet;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -38,6 +41,41 @@ import static org.junit.Assert.assertTrue;
 
 public class TopicTest {
 
+
+	@Test
+	public void getMessageId() {
+		String text = "{ data: { data2 : { value : 'hello'}}}";
+
+		JSONObject json = new JSONObject(text);
+
+		Topic topic = TestUtil.newTopic("test getMessageId");
+		topic.setMessageIdPath("/data/data2/value");
+	}
+
+	@Test
+	public void getMessageIdFromMultipleAttributes() {
+		String text = "{ data: { data2 : { value : 'hello'}, data3 : 'world'}}";
+
+		JSONObject json = new JSONObject(text);
+
+		Topic topic = TestUtil.newTopic("test getMessageId");
+		topic.setMessageIdPath("/data/data2/value,/data/data3");
+
+		assertEquals("hello^world", topic.getMessageId(json));
+		
+		topic.setMessageIdPath("");
+		assertNull(topic.getMessageId(json));
+	}
+/*
+	@Test
+	public void testArrayPath() {
+		Topic topic = TestUtil.newTopic("testArrayPath");
+		topic.setAggregateArrayPath("/data/data2/value,/data/data3");
+		topic.setFlattenArrayPath("/data/data2/value,/data/data3");
+
+		TopicConfig topicConfig = topic.getTopicConfig();
+	}
+ 
     @Test
     public void getMessageIdFromMultipleAttributes() {
         Topic topic = TestUtil.newTopic("test getMessageId"); 
@@ -62,7 +100,29 @@ public class TopicTest {
         assertFalse(topic.equals(null));
         assertFalse(topic.equals(new Db()));
     }
+*/
+    @Test
+    public void testAggregate() {
+        Topic defaultTopic = TestUtil.newTopic("_DL_DEFAULT_");
+        Topic testTopic = TestUtil.newTopic("test");
+        testTopic.setId(1);
+        Topic testTopic2 = TestUtil.newTopic("test2");
+        testTopic2.setId(2);
+    	
+        //test null cases
+        testTopic.getAggregateArrayPath2() ;
+        testTopic.getFlattenArrayPath2() ;
 
+        //test not null cases
+        testTopic.setAggregateArrayPath("/data/data2/value,/data/data3");
+        testTopic.setFlattenArrayPath("/data/data2/value,/data/data3");
+
+        testTopic.getAggregateArrayPath2() ;
+        testTopic.getFlattenArrayPath2() ;
+        
+    }
+    
+    
     @Test
     public void testIs() {
         Topic defaultTopic = TestUtil.newTopic("_DL_DEFAULT_");
@@ -71,7 +131,9 @@ public class TopicTest {
         Topic testTopic2 = TestUtil.newTopic("test2");
         testTopic2.setId(1);
 
-        assertTrue(testTopic.equals(testTopic2));
+        assertEquals(testTopic, testTopic2);
+        assertNotEquals(testTopic, null);
+        assertNotEquals(testTopic, "test");
         assertEquals(testTopic.hashCode(), testTopic2.hashCode());
         assertNotEquals(testTopic.toString(), "test");
 
@@ -87,12 +149,22 @@ public class TopicTest {
         assertTrue(defaultTopic.isEnabled());
         assertTrue(defaultTopic.isSaveRaw());
 
-        //assertEquals(defaultTopic.getTopicConfig().getDataFormat2(), DataFormat.XML);
+        assertEquals(defaultTopic.getDataFormat2(), DataFormat.XML);
+        defaultTopic.setDataFormat(null);
+        assertNull(defaultTopic.getDataFormat2());
 
         defaultTopic.setDataFormat(null);
         assertEquals(testTopic.getDataFormat(), null);
 
         Topic testTopic1 = TestUtil.newTopic("test");
         assertFalse(testTopic1.isCorrelateClearedMessage());
+        
+
+        testTopic.setPass("root123");
+        assertTrue("root123".equals(testTopic.getPass()));
+        
+        assertEquals(3650, testTopic.getTtl());
+        defaultTopic.setTtl(20);
+        assertEquals(20, defaultTopic.getTtl());
     }
 }

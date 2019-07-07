@@ -70,12 +70,12 @@ public class TopicConfig {
 		if (this.getClass() != obj.getClass())
 			return false;
 
-		return name.equals(((TopicConfig) obj).getName());
+		return id==((TopicConfig) obj).getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return name.hashCode();
+		return id;
 	}
 
 }
