@@ -99,7 +99,7 @@ public class TopicServiceTest {
 		db.setDbType(dbType);
 
 		Kafka kafka = new Kafka();
-		kafka.setId("1234");
+		kafka.setName("1234");
 		kafkas.add(kafka);
 
 		TopicName topicName = new TopicName();

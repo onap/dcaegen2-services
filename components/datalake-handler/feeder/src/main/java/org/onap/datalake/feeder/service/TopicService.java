@@ -172,8 +172,8 @@ public class TopicService {
 		}
 
 		Set<Kafka> relateKafka = new HashSet<>();
-		if (tConfig.getSinkKafkas() != null) {
-			for (String item : tConfig.getSinkKafkas()) {
+		if (tConfig.getKafkas() != null) {
+			for (int item : tConfig.getKafkas()) {
 				Optional<Kafka> sinkKafka = kafkaRepository.findById(item);
 				if (sinkKafka.isPresent()) {
 					relateKafka.add(sinkKafka.get());

@@ -32,7 +32,7 @@ CREATE TABLE `db` (
   PRIMARY KEY (`id`),
   KEY `FK3njadtw43ieph7ftt4kxdhcko` (`db_type_id`),
   CONSTRAINT `FK3njadtw43ieph7ftt4kxdhcko` FOREIGN KEY (`db_type_id`) REFERENCES `db_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `portal` (
   `name` varchar(255) NOT NULL,
@@ -73,10 +73,10 @@ CREATE TABLE `design` (
   KEY `FKabb8e74230glxpaiai4aqsr34` (`topic_name_id`),
   CONSTRAINT `FKabb8e74230glxpaiai4aqsr34` FOREIGN KEY (`topic_name_id`) REFERENCES `topic_name` (`id`),
   CONSTRAINT `FKo43yi6aputq6kwqqu8eqbspm5` FOREIGN KEY (`design_type_id`) REFERENCES `design_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `kafka` (
-  `id` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `broker_list` varchar(255) NOT NULL,
   `consumer_count` int(11) DEFAULT 3,
   `enabled` bit(1) NOT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE `map_db_topic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `map_kafka_topic` (
-  `kafka_id` varchar(255) NOT NULL,
+  `kafka_id` int(11) NOT NULL,
   `topic_id` int(11) NOT NULL,
   PRIMARY KEY (`topic_id`,`kafka_id`),
   KEY `FKtdrme4h7rxfh04u2i2wqu23g5` (`kafka_id`),

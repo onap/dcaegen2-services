@@ -72,11 +72,9 @@ public class MongodbService implements DbStoreService {
 	private ApplicationConfiguration config;
 	private boolean dbReady = false;
 
-	//@Autowired
-//	private DbService dbService;
-
 	private MongoDatabase database;
 	private MongoClient mongoClient;
+	//MongoCollection is ThreadSafe
 	private Map<String, MongoCollection<Document>> mongoCollectionMap = new HashMap<>();
 	private InsertManyOptions insertManyOptions;
 

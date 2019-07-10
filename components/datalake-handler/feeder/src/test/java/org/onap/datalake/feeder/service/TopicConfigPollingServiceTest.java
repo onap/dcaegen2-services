@@ -69,8 +69,8 @@ public class TopicConfigPollingServiceTest {
 		init.invoke(topicConfigPollingService);
 
 		Set<String> activeTopics = new HashSet<>(Arrays.asList("test"));
-		Map<String, Set<String>> activeTopicMap = new HashMap<>();
-		activeTopicMap.put(KAFKA_NAME, activeTopics);
+		Map<Integer, Set<String>> activeTopicMap = new HashMap<>();
+		activeTopicMap.put(1, activeTopics);
 
 		Field activeTopicsField = TopicConfigPollingService.class.getDeclaredField("activeTopicMap");
 		activeTopicsField.setAccessible(true);
@@ -114,6 +114,7 @@ public class TopicConfigPollingServiceTest {
 	@Test
 	public void testGet() {
 		Kafka kafka = TestUtil.newKafka(KAFKA_NAME);
+		kafka.setId(1);
 		//assertNull(topicConfigPollingService.getEffectiveTopic (kafka, "test"));
 		assertNotNull(topicConfigPollingService.getActiveTopics(kafka));
 

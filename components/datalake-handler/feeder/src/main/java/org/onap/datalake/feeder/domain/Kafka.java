@@ -24,6 +24,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -47,8 +49,9 @@ import org.onap.datalake.feeder.dto.KafkaConfig;
 @Table(name = "kafka")
 public class Kafka {
 	@Id
-	@Column(name="`id`")
-	private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "`id`")
+    private int id;
 	
 	@Column(name="`name`", nullable = false)
 	private String name;
@@ -117,12 +120,12 @@ public class Kafka {
 		if (this.getClass() != obj.getClass())
 			return false;
 
-		return id.equals(((Kafka) obj).getId());
+		return id == ((Kafka) obj).getId();
 	}
 
 	@Override
 	public int hashCode() {
-		return id.hashCode();
+		return id;
 	}
 
 	public KafkaConfig getKafkaConfig() {

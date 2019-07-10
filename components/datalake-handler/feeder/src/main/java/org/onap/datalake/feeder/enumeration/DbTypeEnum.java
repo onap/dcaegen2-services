@@ -19,6 +19,12 @@
 */
 package org.onap.datalake.feeder.enumeration;
 
+import org.onap.datalake.feeder.service.db.CouchbaseService;
+import org.onap.datalake.feeder.service.db.DbStoreService;
+import org.onap.datalake.feeder.service.db.ElasticsearchService;
+import org.onap.datalake.feeder.service.db.HdfsService;
+import org.onap.datalake.feeder.service.db.MongodbService;
+
 /**
  * Database type
  * 
@@ -26,12 +32,23 @@ package org.onap.datalake.feeder.enumeration;
  *
  */
 public enum DbTypeEnum { 
-	CB("Couchbase"), DRUID("Druid"), ES("Elasticsearch"), HDFS("HDFS"), MONGO("MongoDB"), KIBANA("Kibana"), SUPERSET("Superset");
+	CB("Couchbase", CouchbaseService.class)
+	, DRUID("Druid", null)
+	, ES("Elasticsearch", ElasticsearchService.class)
+	, HDFS("HDFS", HdfsService.class)
+	, MONGO("MongoDB", MongodbService.class)
+	, KIBANA("Kibana", null)
+	, SUPERSET("Superset", null);
 
 	private final String name;
+	private final Class<? extends DbStoreService> serviceClass;
 
-	DbTypeEnum(String name) {
+	DbTypeEnum(String name, Class<? extends DbStoreService> serviceClass) {
 		this.name = name;
+		this.serviceClass = serviceClass;
 	}
 
+	public Class<? extends DbStoreService> getServiceClass(){
+		return serviceClass;
+	}
 }

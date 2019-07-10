@@ -45,7 +45,8 @@ public class TestUtil {
 
     public static Kafka newKafka(String name) {
     	Kafka kafka  = new Kafka(); 
-    	kafka.setId(name); 
+    	kafka.setId(i++);
+    	kafka.setName(name); 
     	return kafka ;
     }
 

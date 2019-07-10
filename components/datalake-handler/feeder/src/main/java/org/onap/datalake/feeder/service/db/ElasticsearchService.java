@@ -73,7 +73,7 @@ public class ElasticsearchService implements DbStoreService {
 	@Autowired
 	private ApplicationConfiguration config;
 
-	private RestHighLevelClient client;
+	private RestHighLevelClient client;//thread safe
 	ActionListener<BulkResponse> listener;
 	
 	public ElasticsearchService(Db db) {

@@ -39,7 +39,7 @@ public class KafkaService {
     @Autowired
     private KafkaRepository kafkaRepository;
 
-    public Kafka getKafkaById(String id) {
+    public Kafka getKafkaById(int id) {
 
         Optional<Kafka> ret = kafkaRepository.findById(id);
         return ret.isPresent() ? ret.get() : null;

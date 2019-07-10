@@ -66,6 +66,7 @@ public class CouchbaseService implements DbStoreService {
 	ApplicationConfiguration config;
 	
 	private Db couchbase;
+	//Bucket is thread-safe. https://docs.couchbase.com/java-sdk/current/managing-connections.html
 	Bucket bucket;
 	
 	public CouchbaseService(Db db) {
