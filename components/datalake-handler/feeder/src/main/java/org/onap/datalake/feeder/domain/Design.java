@@ -28,7 +28,7 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-import org.onap.datalake.feeder.dto.PortalDesignConfig;
+import org.onap.datalake.feeder.dto.DesignConfig;
 
 /**
  * Domain class representing design
@@ -40,7 +40,7 @@ import org.onap.datalake.feeder.dto.PortalDesignConfig;
 @Setter
 @Entity
 @Table(name = "design")
-public class PortalDesign {
+public class Design {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,19 +75,18 @@ public class PortalDesign {
 	@JoinTable(name = "map_db_design", joinColumns = { @JoinColumn(name = "design_id") }, inverseJoinColumns = { @JoinColumn(name = "db_id") })
 	protected Set<Db> dbs;
 
-    public PortalDesignConfig getPortalDesignConfig() {
+    public DesignConfig getDesignConfig() {
     	
-    	PortalDesignConfig portalDesignConfig = new PortalDesignConfig();
+    	DesignConfig designConfig = new DesignConfig();
 
-        portalDesignConfig.setId(getId());
-		portalDesignConfig.setBody(getBody());
-		portalDesignConfig.setName(getName());
-		portalDesignConfig.setNote(getNote());
-		portalDesignConfig.setSubmitted(getSubmitted());
-		portalDesignConfig.setTopic(getTopicName().getId());
-		portalDesignConfig.setDesignType(getDesignType().getId());
-        portalDesignConfig.setDisplay(getDesignType().getName());
-		
-		return portalDesignConfig;
+        designConfig.setId(getId());
+		designConfig.setBody(getBody());
+		designConfig.setName(getName());
+		designConfig.setNote(getNote());
+		designConfig.setSubmitted(getSubmitted());
+		designConfig.setTopicName(getTopicName().getId());
+        designConfig.setDesignType(getDesignType().getId());
+
+		return designConfig;
     }
 }

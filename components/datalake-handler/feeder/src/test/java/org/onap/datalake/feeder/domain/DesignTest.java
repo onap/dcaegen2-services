@@ -25,32 +25,32 @@ import org.onap.datalake.feeder.util.TestUtil;
 
 import static org.junit.Assert.*;
 
-public class PortalDesignTest {
+public class DesignTest {
 
     @Test
     public void testIs() {
 
-        PortalDesign portalDesign = new PortalDesign();
-        portalDesign.setId(1);
-        portalDesign.setSubmitted(false);
-        portalDesign.setBody("jsonString");
-        portalDesign.setName("templateTest");
-        portalDesign.setTopicName(new TopicName("x"));
+        Design design = new Design();
+        design.setId(1);
+        design.setSubmitted(false);
+        design.setBody("jsonString");
+        design.setName("templateTest");
+        design.setTopicName(new TopicName("x"));
         Topic topic = TestUtil.newTopic("_DL_DEFAULT_");
-        portalDesign.setTopicName(topic.getTopicName());
+        design.setTopicName(topic.getTopicName());
         DesignType designType = new DesignType();
         designType.setName("Kibana");
-        portalDesign.setDesignType(designType);
-        portalDesign.setNote("test");
-        portalDesign.setDbs(null);
-        assertFalse("1".equals(portalDesign.getId()));
-        assertTrue("templateTest".equals(portalDesign.getName()));
-        assertTrue("jsonString".equals(portalDesign.getBody()));
-        assertFalse("_DL_DEFAULT_".equals(portalDesign.getTopicName()));
-        assertTrue("test".equals(portalDesign.getNote()));
-        assertFalse("Kibana".equals(portalDesign.getDesignType()));
-        assertFalse("false".equals(portalDesign.getSubmitted()));
-        assertNull(portalDesign.getDbs());
+        design.setDesignType(designType);
+        design.setNote("test");
+        design.setDbs(null);
+        assertFalse("1".equals(design.getId()));
+        assertTrue("templateTest".equals(design.getName()));
+        assertTrue("jsonString".equals(design.getBody()));
+        assertFalse("_DL_DEFAULT_".equals(design.getTopicName()));
+        assertTrue("test".equals(design.getNote()));
+        assertFalse("Kibana".equals(design.getDesignType()));
+        assertFalse("false".equals(design.getSubmitted()));
+        assertNull(design.getDbs());
     }
 
 }

@@ -21,43 +21,41 @@
 package org.onap.datalake.feeder.dto;
 
 import org.junit.Test;
+import org.onap.datalake.feeder.domain.Design;
 import org.onap.datalake.feeder.domain.DesignType;
-import org.onap.datalake.feeder.domain.PortalDesign;
-import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.domain.TopicName;
 
 import static org.junit.Assert.*;
 
-public class PortalDesignConfigTest {
+public class DesignConfigTest {
 
     @Test
     public void testIs() {
 
-        PortalDesign testPortaldesign = new PortalDesign();
+        Design testPortaldesign = new Design();
         testPortaldesign.setId(1);
         testPortaldesign.setTopicName(new TopicName("test"));
         DesignType testDesignType = new DesignType();
         testDesignType.setName("test");
         testPortaldesign.setDesignType(testDesignType);
 
-        PortalDesign testPortaldesign2 = new PortalDesign();
+        Design testPortaldesign2 = new Design();
         testPortaldesign2.setId(1);
         testPortaldesign2.setTopicName(new TopicName("test"));
         DesignType testDesignType2 = new DesignType();
         testDesignType2.setName("test");
         testPortaldesign2.setDesignType(testDesignType2);
 
-        PortalDesignConfig testPortalDesignConfig = testPortaldesign.getPortalDesignConfig();
+        DesignConfig testDesignConfig = testPortaldesign.getDesignConfig();
 
-        assertNotEquals(testPortalDesignConfig, testPortaldesign2.getPortalDesignConfig());
-        assertNotEquals(testPortalDesignConfig, null);
-        assertNotEquals(testPortalDesignConfig.getId(), null);
-        assertEquals(testPortalDesignConfig.getBody(), null);
-        assertEquals(testPortalDesignConfig.getNote(), null);
-        assertEquals(testPortalDesignConfig.getName(), null);
-        assertEquals(testPortalDesignConfig.getSubmitted(), null);
-        assertEquals(testPortalDesignConfig.getDesignType(), null);
-        assertEquals(testPortalDesignConfig.getDisplay(), "test");
+        assertNotEquals(testDesignConfig, testPortaldesign2.getDesignConfig());
+        assertNotEquals(testDesignConfig, null);
+        assertNotEquals(testDesignConfig.getId(), null);
+        assertEquals(testDesignConfig.getBody(), null);
+        assertEquals(testDesignConfig.getNote(), null);
+        assertEquals(testDesignConfig.getName(), null);
+        assertEquals(testDesignConfig.getSubmitted(), null);
+        assertEquals(testDesignConfig.getDesignType(), null);
     }
 
 }

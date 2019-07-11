@@ -18,35 +18,19 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.datalake.feeder.dto;
+package org.onap.datalake.feeder.repository;
 
-import lombok.Getter;
-import lombok.Setter;
+import org.onap.datalake.feeder.domain.Design;
+import org.springframework.data.repository.CrudRepository;
 
 /**
- * JSON request body for portalDesign Config.
+ * Design Repository
  *
  * @author guochunmeng
  */
 
-@Getter
-@Setter
-public class PortalDesignConfig {
-
-    private Integer id;
-
-    private String name;
-
-    private Boolean submitted;
-
-    private String body;
-
-    private String note;
-
-    private String topic;
-
-    private String designType;
-
-    private String display;
-
+public interface DesignRepository extends CrudRepository<Design, Integer> {
+    
+    Design findByName(String name);
+    
 }

@@ -61,7 +61,7 @@ public class DesignType {
     private DbType dbType;    
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "designType")
-	protected Set<PortalDesign> designs = new HashSet<>();
+	protected Set<Design> designs = new HashSet<>();
 
     @Column(name = "`note`")
     private String note;
@@ -69,8 +69,10 @@ public class DesignType {
     public DesignTypeConfig getDesignTypeConfig() {
 
         DesignTypeConfig designTypeConfig = new DesignTypeConfig();
-        designTypeConfig.setDesignType(getName());
-        //designTypeConfig.setDisplay(getDisplay());
+
+        designTypeConfig.setId(getId());
+        designTypeConfig.setName(getName());
+
         return designTypeConfig;
     }
 
