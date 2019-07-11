@@ -60,6 +60,7 @@ public class KafkaControllerTest {
     private KafkaController kafkaController;
     @Test
     public void createKafka() throws IOException {
+
         int id = 123;
         KafkaConfig kafkaConfig = new KafkaConfig();
         kafkaConfig.setId(id);
