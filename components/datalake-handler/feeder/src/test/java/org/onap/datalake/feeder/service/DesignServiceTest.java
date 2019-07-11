@@ -26,14 +26,14 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.Design;
 import org.onap.datalake.feeder.domain.DesignType;
 import org.onap.datalake.feeder.domain.Portal;
-import org.onap.datalake.feeder.domain.PortalDesign;
-import static org.junit.Assert.*;
+
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PortalDesignServiceTest {
+public class DesignServiceTest {
 
     @Mock
     private DesignType designType;
@@ -42,14 +42,14 @@ public class PortalDesignServiceTest {
     private ApplicationConfiguration applicationConfiguration;
 
     @InjectMocks
-    private PortalDesignService designService;
+    private DesignService designService;
 
     @Test(expected = RuntimeException.class)
     public void testDeploy() {
         when(designType.getId()).thenReturn("KIBANA_DB","ES_MAPPING");
-        PortalDesign portalDesign = new PortalDesign();
-        portalDesign.setDesignType(designType);
-        portalDesign.setBody("jsonString");
+        Design design = new Design();
+        design.setDesignType(designType);
+        design.setBody("jsonString");
 
         Portal portal = new Portal();
         Db db = new Db();
@@ -58,7 +58,7 @@ public class PortalDesignServiceTest {
         when(designType.getPortal()).thenReturn(portal);
         when(applicationConfiguration.getKibanaDashboardImportApi()).thenReturn("/api/kibana/dashboards/import?exclude=index-pattern");
         when(applicationConfiguration.getKibanaPort()).thenReturn(5601);
-        designService.deploy(portalDesign);
+        designService.deploy(design);
         System.out.println();
     }
 }
