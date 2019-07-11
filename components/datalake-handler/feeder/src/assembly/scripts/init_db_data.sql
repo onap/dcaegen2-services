@@ -13,7 +13,7 @@ INSERT INTO datalake.kafka(
   ,timeout_sec
   ,zk
 ) VALUES (
-  'KAFKA_1'
+  1
   ,'main Kafka cluster' -- name - IN varchar(255)
   ,3   -- consumer_count - IN int(11)
   ,1   -- enabled - IN bit(1)

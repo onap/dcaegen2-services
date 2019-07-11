@@ -25,10 +25,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-import org.json.JSONObject;
-import org.onap.datalake.feeder.enumeration.DataFormat;
-
 /**
  * JSON request body for Topic manipulation.
  *
@@ -55,7 +51,7 @@ public class TopicConfig {
 	private String messageIdPath;
 	private String aggregateArrayPath;
 	private String flattenArrayPath;
-	private List<String> sinkKafkas;
+	private List<Integer> kafkas;
 	
 	@Override
 	public String toString() {

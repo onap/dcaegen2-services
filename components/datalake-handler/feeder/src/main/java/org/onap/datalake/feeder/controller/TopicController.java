@@ -90,7 +90,7 @@ public class TopicController {
 	@GetMapping("/dmaap/{kafkaId}")
 	@ResponseBody
 	@ApiOperation(value = "List all topic names in DMaaP.")
-	public List<String> listDmaapTopics(@PathVariable("kafkaId") String kafkaId ) {
+	public List<String> listDmaapTopics(@PathVariable("kafkaId") int kafkaId ) {
 		Kafka kafka = kafkaRepository.findById(kafkaId).get();
 		DmaapService dmaapService = context.getBean(DmaapService.class, kafka); 
 		return dmaapService.getTopics();

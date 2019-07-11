@@ -87,7 +87,7 @@ public class KafkaController {
     @PutMapping("/{id}")
     @ResponseBody
     @ApiOperation(value="Update a kafka.")
-    public PostReturnBody<KafkaConfig> updateKafka(@RequestBody KafkaConfig kafkaConfig, BindingResult result, @PathVariable String id, HttpServletResponse response) throws IOException {
+    public PostReturnBody<KafkaConfig> updateKafka(@RequestBody KafkaConfig kafkaConfig, BindingResult result, @PathVariable int id, HttpServletResponse response) throws IOException {
 
         if (result.hasErrors()) {
             sendError(response, 400, "Error parsing KafkaConfig : "+result.toString());
@@ -116,7 +116,7 @@ public class KafkaController {
     @DeleteMapping("/{id}")
     @ResponseBody
     @ApiOperation(value="delete a kafka.")
-    public void deleteKafka(@PathVariable("id") String id, HttpServletResponse response) throws IOException{
+    public void deleteKafka(@PathVariable("id") int id, HttpServletResponse response) throws IOException{
 
         Kafka oldKafka = kafkaService.getKafkaById(id);
         if (oldKafka == null) {

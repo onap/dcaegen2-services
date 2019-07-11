@@ -213,13 +213,13 @@ public class Topic {
 		tConfig.setEnabledSinkdbs(enabledDbList);
 
 		Set<Kafka> topicKafka = getKafkas();
-		List<String> kafkaList = new ArrayList<>();
+		List<Integer> kafkaList = new ArrayList<>();
 		if (topicKafka != null) {
 			for (Kafka kafka : topicKafka) {
 				kafkaList.add(kafka.getId());
 			}
 		}
-		tConfig.setSinkKafkas(kafkaList);
+		tConfig.setKafkas(kafkaList);
 		return tConfig;
 	}
 

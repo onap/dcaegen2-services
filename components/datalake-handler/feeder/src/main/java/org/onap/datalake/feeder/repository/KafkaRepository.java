@@ -30,6 +30,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  */ 
 
-public interface KafkaRepository extends CrudRepository<Kafka, String> {
+public interface KafkaRepository extends CrudRepository<Kafka, Integer> {
 
 }

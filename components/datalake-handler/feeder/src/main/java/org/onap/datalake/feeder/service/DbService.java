@@ -26,11 +26,7 @@ import java.util.Map;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.DbType;
 import org.onap.datalake.feeder.enumeration.DbTypeEnum;
-import org.onap.datalake.feeder.service.db.CouchbaseService;
 import org.onap.datalake.feeder.service.db.DbStoreService;
-import org.onap.datalake.feeder.service.db.ElasticsearchService;
-import org.onap.datalake.feeder.service.db.HdfsService;
-import org.onap.datalake.feeder.service.db.MongodbService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,34 +49,24 @@ public class DbService {
 	private Map<Integer, DbStoreService> dbStoreServiceMap = new HashMap<>();
 
 	public DbStoreService findDbStoreService(Db db) {
-		DbStoreService ret = dbStoreServiceMap.get(db.getId());
-		if (ret != null) {
-			return ret;
+		int dbId = db.getId();
+		if (dbStoreServiceMap.containsKey(dbId)) {
+			return dbStoreServiceMap.get(dbId);
 		}
 
 		DbType dbType = db.getDbType();
 		DbTypeEnum dbTypeEnum = DbTypeEnum.valueOf(dbType.getId());
-		switch (dbTypeEnum) {
-		case CB:
-			ret = context.getBean(CouchbaseService.class, db);
-			break;
-		case ES:
-			ret = context.getBean(ElasticsearchService.class, db);
-			break;
-		case HDFS:
-			ret = context.getBean(HdfsService.class, db);
-			break;
-		case MONGO:
-			ret = context.getBean(MongodbService.class, db);
-			break;
-		default:
+		Class<? extends DbStoreService> serviceClass = dbTypeEnum.getServiceClass();
+		
+		if (serviceClass == null) {
 			log.error("Should not have come here {}", db);
-			ret = null;
+			dbStoreServiceMap.put(dbId, null);
+			return null;
 		}
-
-		dbStoreServiceMap.put(db.getId(), ret);
+		
+		DbStoreService ret = context.getBean(serviceClass, db);
+		dbStoreServiceMap.put(dbId, ret);
 
 		return ret;
 	}
-
 }

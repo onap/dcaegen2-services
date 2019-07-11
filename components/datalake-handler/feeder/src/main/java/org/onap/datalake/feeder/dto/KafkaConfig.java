@@ -23,8 +23,6 @@ package org.onap.datalake.feeder.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 /**
  * JSON request body for Kafka Config.
  *
@@ -35,7 +33,7 @@ import java.util.List;
 @Setter
 public class KafkaConfig {
 
-    private String id;
+    private int id;
 
     private String name;
 

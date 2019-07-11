@@ -61,15 +61,15 @@ public class TopicConfigPollingService implements Runnable {
 	private KafkaRepository kafkaRepository;
 	
 	//effectiveTopic Map, 1st key is kafkaId, 2nd is topic name, the value is a list of EffectiveTopic.
-	private Map<String, Map<String, List<EffectiveTopic>>> effectiveTopicMap = new HashMap<>();
+	private Map<Integer, Map<String, List<EffectiveTopic>>> effectiveTopicMap = new HashMap<>();
 	//private Map<String, TopicConfig> effectiveTopicConfigMap;
 
-	//monitor Kafka topic list changes
-	private Map<String, Set<String>> activeTopicMap;
+	//monitor Kafka topic list changes, key is kafka id, value is active Topics
+	private Map<Integer, Set<String>> activeTopicMap;
 	
-	private ThreadLocal<Map<String, Integer>> activeTopicsVersionLocal =   ThreadLocal.withInitial(HashMap::new);//topic name:version
-	private Map<String, Integer> currentActiveTopicsVersionMap = new HashMap<>();//topic name:version
-	private Map<String, DmaapService> dmaapServiceMap = new HashMap<>();//kafka id:DmaapService
+	private ThreadLocal<Map<Integer, Integer>> activeTopicsVersionLocal =   ThreadLocal.withInitial(HashMap::new);//kafkaId:version - local 'old' version
+	private Map<Integer, Integer> currentActiveTopicsVersionMap = new HashMap<>();//kafkaId:version - current/latest version
+	private Map<Integer, DmaapService> dmaapServiceMap = new HashMap<>();//kafka id:DmaapService
 
 	private boolean active = false;
 
@@ -84,7 +84,7 @@ public class TopicConfigPollingService implements Runnable {
 	}
 
 	public boolean isActiveTopicsChanged(Kafka kafka) {//update=true means sync local version
-		String kafkaId = kafka.getId();
+		int kafkaId = kafka.getId();
 		int currentActiveTopicsVersion = currentActiveTopicsVersionMap.getOrDefault(kafkaId, 1);//init did one version
 		int localActiveTopicsVersion = activeTopicsVersionLocal.get().getOrDefault(kafkaId, 0);
 		
@@ -125,10 +125,10 @@ public class TopicConfigPollingService implements Runnable {
 			}
 
 			try {
-				Map<String, Set<String>> newTopicsMap = poll();
+				Map<Integer, Set<String>> newTopicsMap = poll();
 				
-				for(Map.Entry<String, Set<String>> entry:newTopicsMap.entrySet()) {
-					String kafkaId = entry.getKey();
+				for(Map.Entry<Integer, Set<String>> entry:newTopicsMap.entrySet()) {
+					Integer kafkaId = entry.getKey();
 					Set<String>  newTopics = entry.getValue();
 					
 					Set<String> activeTopics = activeTopicMap.get(kafkaId);
@@ -155,8 +155,8 @@ public class TopicConfigPollingService implements Runnable {
 		active = false;
 	}
 
-	private Map<String, Set<String>>  poll() throws IOException {
-		Map<String, Set<String>> ret = new HashMap<>();
+	private Map<Integer, Set<String>>  poll() throws IOException {
+		Map<Integer, Set<String>> ret = new HashMap<>();
 		Iterable<Kafka> kafkas = kafkaRepository.findAll();
 		for (Kafka kafka : kafkas) {
 			if (kafka.isEnabled()) {

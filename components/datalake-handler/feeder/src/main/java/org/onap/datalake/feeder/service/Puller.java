@@ -68,6 +68,7 @@ public class Puller implements Runnable {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+	//KafkaConsumer is not thread-safe.
 	private ThreadLocal<KafkaConsumer<String, String>> consumerLocal = new ThreadLocal<>(); //<String, String> is key-value type, in our case key is empty, value is JSON text 
 
 	private boolean active = false;
@@ -156,7 +157,7 @@ public class Puller implements Runnable {
 				storeService.saveMessages(kafka, partition.topic(), messages);
 				log.info("saved to topic={} count={}", partition.topic(), partitionRecords.size());//TODO we may record this number to DB
 
-				if (!async) {//for reliability, sync commit offset to Kafka, this slows down a bit
+				if (!async) {//for reliability, sync commit offset to Kafka right after saving the data to data store, this slows down a bit
 					long lastOffset = partitionRecords.get(partitionRecords.size() - 1).offset();
 					consumer.commitSync(Collections.singletonMap(partition, new OffsetAndMetadata(lastOffset + 1)));
 				}
