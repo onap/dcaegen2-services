@@ -29,15 +29,12 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
-import org.onap.datalake.feeder.domain.DesignType;
-import org.onap.datalake.feeder.domain.Portal;
-import org.onap.datalake.feeder.domain.PortalDesign;
-import org.onap.datalake.feeder.domain.Topic;
-import org.onap.datalake.feeder.domain.TopicName;
-import org.onap.datalake.feeder.dto.PortalDesignConfig;
+import org.onap.datalake.feeder.domain.*;
+import org.onap.datalake.feeder.domain.Design;
+import org.onap.datalake.feeder.dto.DesignConfig;
 import org.onap.datalake.feeder.repository.DesignTypeRepository;
-import org.onap.datalake.feeder.repository.PortalDesignRepository;
-import org.onap.datalake.feeder.service.PortalDesignService;
+import org.onap.datalake.feeder.repository.DesignRepository;
+import org.onap.datalake.feeder.service.DesignService;
 import org.onap.datalake.feeder.service.TopicService;
 import org.springframework.validation.BindingResult;
 
@@ -53,7 +50,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class PortalDesignControllerTest {
+public class DesignControllerTest {
   
     //static String Kibana_Dashboard_Import_Api = "/api/kibana/dashboards/import?exclude=index-pattern";
 
@@ -67,7 +64,7 @@ public class PortalDesignControllerTest {
     private ApplicationConfiguration applicationConfiguration;
 
     @Mock
-    private PortalDesignRepository portalDesignRepository;
+    private DesignRepository designRepository;
 
     @Mock
     private TopicService topicService;
@@ -76,7 +73,7 @@ public class PortalDesignControllerTest {
     private DesignTypeRepository designTypeRepository;
 
     @InjectMocks
-    private PortalDesignService portalDesignService;
+    private DesignService designService;
 
 
     @Before
@@ -88,12 +85,12 @@ public class PortalDesignControllerTest {
     @Test
     public void testCreatePortalDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
 
-        PortalDesignController testPortalDesignController = new PortalDesignController();
-        setAccessPrivateFields(testPortalDesignController);
-        PortalDesign testPortalDesign = fillDomain();
+        DesignController testDesignController = new DesignController();
+        setAccessPrivateFields(testDesignController);
+        Design testDesign = fillDomain();
         //when(topicService.getTopic(0)).thenReturn(new Topic("unauthenticated.SEC_FAULT_OUTPUT"));
-//        when(designTypeRepository.findById("Kibana Dashboard")).thenReturn(Optional.of(testPortalDesign.getDesignType()));
-        PostReturnBody<PortalDesignConfig> postPortal = testPortalDesignController.createPortalDesign(testPortalDesign.getPortalDesignConfig(), mockBindingResult, httpServletResponse);
+//        when(designTypeRepository.findById("Kibana Dashboard")).thenReturn(Optional.of(testDesign.getDesignType()));
+        PostReturnBody<DesignConfig> postPortal = testDesignController.createDesign(testDesign.getDesignConfig(), mockBindingResult, httpServletResponse);
         //assertEquals(postPortal.getStatusCode(), 200);
         assertNull(postPortal);
     }
@@ -101,14 +98,14 @@ public class PortalDesignControllerTest {
     @Test
     public void testUpdatePortalDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
 
-        PortalDesignController testPortalDesignController = new PortalDesignController();
-        setAccessPrivateFields(testPortalDesignController);
-        PortalDesign testPortalDesign = fillDomain();
+        DesignController testDesignController = new DesignController();
+        setAccessPrivateFields(testDesignController);
+        Design testDesign = fillDomain();
         Integer id = 1;
-        when(portalDesignRepository.findById(id)).thenReturn((Optional.of(testPortalDesign)));
+        when(designRepository.findById(id)).thenReturn((Optional.of(testDesign)));
         //when(topicService.getTopic(0)).thenReturn(new Topic("unauthenticated.SEC_FAULT_OUTPUT"));
- //       when(designTypeRepository.findById("Kibana Dashboard")).thenReturn(Optional.of(testPortalDesign.getDesignType()));
-        PostReturnBody<PortalDesignConfig> postPortal = testPortalDesignController.updatePortalDesign(testPortalDesign.getPortalDesignConfig(), mockBindingResult, id, httpServletResponse);
+ //       when(designTypeRepository.findById("Kibana Dashboard")).thenReturn(Optional.of(testDesign.getDesignType()));
+        PostReturnBody<DesignConfig> postPortal = testDesignController.updateDesign(testDesign.getDesignConfig(), mockBindingResult, id, httpServletResponse);
         //assertEquals(postPortal.getStatusCode(), 200);
         assertNull(postPortal);
     }
@@ -116,57 +113,57 @@ public class PortalDesignControllerTest {
     @Test
     public void testDeletePortalDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
 
-        PortalDesignController testPortalDesignController = new PortalDesignController();
-        setAccessPrivateFields(testPortalDesignController);
-        PortalDesign testPortalDesign = fillDomain();
+        DesignController testDesignController = new DesignController();
+        setAccessPrivateFields(testDesignController);
+        Design testDesign = fillDomain();
         Integer id = 1;
-        testPortalDesign.setId(1);
-        when(portalDesignRepository.findById(id)).thenReturn((Optional.of(testPortalDesign)));
-        testPortalDesignController.deletePortalDesign(id, httpServletResponse);
+        testDesign.setId(1);
+        when(designRepository.findById(id)).thenReturn((Optional.of(testDesign)));
+        testDesignController.deleteDesign(id, httpServletResponse);
     }
 
     @Test
     public void testQueryAllPortalDesign() throws NoSuchFieldException, IllegalAccessException {
 
-        PortalDesignController testPortalDesignController = new PortalDesignController();
-        setAccessPrivateFields(testPortalDesignController);
-        PortalDesign testPortalDesign = fillDomain();
-        List<PortalDesign> portalDesignList = new ArrayList<>();
-        portalDesignList.add(testPortalDesign);
-        when(portalDesignRepository.findAll()).thenReturn(portalDesignList);
-        assertEquals(1, testPortalDesignController.queryAllPortalDesign().size());
+        DesignController testDesignController = new DesignController();
+        setAccessPrivateFields(testDesignController);
+        Design testDesign = fillDomain();
+        List<Design> designList = new ArrayList<>();
+        designList.add(testDesign);
+        when(designRepository.findAll()).thenReturn(designList);
+        assertEquals(1, testDesignController.queryAllDesign().size());
     }
 
     @Test
     public void testDeployPortalDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
 
-        PortalDesignController testPortalDesignController = new PortalDesignController();
-        setAccessPrivateFields(testPortalDesignController);
-        PortalDesign testPortalDesign = fillDomain();
+        DesignController testDesignController = new DesignController();
+        setAccessPrivateFields(testDesignController);
+        Design testDesign = fillDomain();
         Integer id = 1;
-        testPortalDesign.setId(1);
+        testDesign.setId(1);
       	//when(applicationConfiguration.getKibanaDashboardImportApi()).thenReturn(Kibana_Dashboard_Import_Api);
-        when(portalDesignRepository.findById(id)).thenReturn((Optional.of(testPortalDesign)));
-        testPortalDesignController.deployPortalDesign(id, httpServletResponse);
+        when(designRepository.findById(id)).thenReturn((Optional.of(testDesign)));
+        testDesignController.deployDesign(id, httpServletResponse);
     }
 
-    public void setAccessPrivateFields(PortalDesignController portalDesignController) throws NoSuchFieldException, IllegalAccessException {
+    public void setAccessPrivateFields(DesignController designController) throws NoSuchFieldException, IllegalAccessException {
 
-        Field testPortalDesignService = portalDesignController.getClass().getDeclaredField("portalDesignService");
+        Field testPortalDesignService = designController.getClass().getDeclaredField("portalDesignService");
         testPortalDesignService.setAccessible(true);
-        testPortalDesignService.set(portalDesignController, portalDesignService);
-        Field testPortalDesignRepository = portalDesignController.getClass().getDeclaredField("portalDesignRepository");
+        testPortalDesignService.set(designController, designService);
+        Field testPortalDesignRepository = designController.getClass().getDeclaredField("portalDesignRepository");
         testPortalDesignRepository.setAccessible(true);
-        testPortalDesignRepository.set(portalDesignController, portalDesignRepository);
+        testPortalDesignRepository.set(designController, designRepository);
     }
 
 
-    public PortalDesign fillDomain(){
-        PortalDesign portalDesign = new PortalDesign();
-        portalDesign.setName("Kibana");
-        portalDesign.setBody("jsonString");
-        portalDesign.setSubmitted(false);
-        portalDesign.setNote("test");
+    public Design fillDomain(){
+        Design design = new Design();
+        design.setName("Kibana");
+        design.setBody("jsonString");
+        design.setSubmitted(false);
+        design.setNote("test");
         DesignType designType = new DesignType();
         designType.setName("Kibana Dashboard");
         Portal portal = new Portal();
@@ -174,8 +171,8 @@ public class PortalDesignControllerTest {
         portal.setHost("127.0.0.1");
         portal.setPort(5601);
         designType.setPortal(portal);
-        portalDesign.setDesignType(designType);
-        portalDesign.setTopicName(new TopicName("unauthenticated.SEC_FAULT_OUTPUT"));
-        return  portalDesign;
+        design.setDesignType(designType);
+        design.setTopicName(new TopicName("unauthenticated.SEC_FAULT_OUTPUT"));
+        return design;
     }
 }

@@ -49,7 +49,7 @@ public class TopicName {
 
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topicName")
-	protected Set<PortalDesign> designs;
+	protected Set<Design> designs;
 	
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "topicName")
