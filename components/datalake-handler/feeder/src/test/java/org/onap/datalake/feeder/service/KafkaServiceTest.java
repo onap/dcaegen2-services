@@ -50,7 +50,7 @@ public class KafkaServiceTest {
 
     @Test
     public void testKafkaServer(){
-        String kafkaId = "123";
+        int kafkaId = 123;
         Kafka kafka = new Kafka();
         kafka.setId(kafkaId);
 

@@ -33,8 +33,7 @@ import lombok.Setter;
 @Getter
 public class DesignTypeConfig {
 
-    private String designType;
-
-    private String display;
+    private String id;
+    private String name;
 
 }
