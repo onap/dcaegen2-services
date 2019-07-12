@@ -24,10 +24,11 @@ import {
 } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { DashboardApiService } from "src/app/core/services/dashboard-api.service";
-import { AdminService } from "src/app/core/services/admin.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import { Template,newTemplate} from "src/app/core/models/template.model";
-import {AlertComponent} from "../../../../core/alert/alert.component";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+// Loading spinner
+import { NgxSpinnerService } from "ngx-spinner";
+
+import { Template, newTemplate } from "src/app/core/models/template.model";
 
 @Component({
   selector: 'app-new-template-modal',
@@ -41,14 +42,13 @@ export class NewTemplateModalComponent implements OnInit {
   templatetypedata: Array<any> = [];
   topicname: Array<any> = [];
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
-  // @ViewChild("inputtemplateName") inputtemplateName: ElementRef;
-  // @ViewChild("templatebody") templatebody: ElementRef;
   @ViewChild("templatetype") templatetype: ElementRef;
   @ViewChild("topic") topic: ElementRef;
 
   constructor(
     public activeModal: NgbActiveModal,
     public dashboardApiService: DashboardApiService,
+    private spinner: NgxSpinnerService,
     private modalService: NgbModal,
 
   ) { }
@@ -66,51 +66,59 @@ export class NewTemplateModalComponent implements OnInit {
       submitted: this.template.submitted,
       body: this.template.body,
       note: this.template.note,
-      topic: this.template.topic,
-      designType:  this.template.designType,
-      display: this.template.display
+      topicName: this.template.topicName,
+      designType: this.template.designType,
+      designTypeName: this.template.designTypeName,
     };
     this.templateInput = feed;
   }
-  getTopicName(){
+  getTopicName() {
     this.dashboardApiService.getTopicName().subscribe(data => {
       this.topicname = data;
-      console.log(this.topicname,"this.topicname")
     });
   }
 
-  getTemplateTypeName(){
+  getTemplateTypeName() {
     this.dashboardApiService.getTemplateTypeName().subscribe(data => {
       this.templatetypedata = data;
-      console.log(this.templatetypedata,"this.templatetypedata")
     });
   }
 
-  jsReadFiles(){
-    var thiss =this;
-    var file =(<HTMLInputElement>document.querySelector("#f-file")).files[0];
+  jsReadFiles() {
+    var thiss = this;
+    var file = (<HTMLInputElement>document.querySelector("#f-file")).files[0];
     this.fileName = file.name;
     var reader = new FileReader();
-    reader.onload = function() {
-      console.log(this.result,"this.result");
+    reader.onload = function () {
+      // console.log(this.result, "this.result");
       thiss.templateInput.body = String(this.result);
     }
     reader.readAsText(file);
   }
   passBack() {
-    if(this.templateInput.name == '' || this.templateInput.name == undefined){
+    this.spinner.show();
+    if (this.templateInput.name == '' || this.templateInput.name == undefined) {
       return false;
     }
     this.template = this.templateInput;
-    console.log(this.templateInput);
-    this.template.display = this.templatetype.nativeElement.value;
-    this.template.designType = this.templatetypedata.find((item) => {
-        return item.display == this.template.display
-    }).designType;
-    this.template.topic = this.topic.nativeElement.value;
+
+    // this.templatetypedata.map(item => {
+    //   if (item.name === this.templatetype.nativeElement.value) {
+    //     return this.template.designType = item.id;
+    //   }
+    // })
+
+    this.template.designType = this.templatetypedata.filter(item => {
+      return item.name === this.templatetype.nativeElement.value;
+    })[0].id || "";
+
+    this.template.designTypeName = this.templatetype.nativeElement.value;
+    this.template.topicName = this.topic.nativeElement.value;
     this.template.submitted = false;
     this.template.note = "";
-    console.log(this.template);
     this.passEntry.emit(this.template);
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 500);
   }
 }

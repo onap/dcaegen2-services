@@ -13,13 +13,13 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, of} from "rxjs";
-import {map, catchError, tap, retry} from "rxjs/operators";
-import {throwError} from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable, of } from "rxjs";
+import { map, catchError, tap, retry } from "rxjs/operators";
+import { throwError } from "rxjs";
 
-import {Template,newTemplate} from "src/app/core/models/template.model";
+import { Template, newTemplate } from "src/app/core/models/template.model";
 import { Dashboard } from "src/app/core/models/dashboard.model";
 
 const prefix = "/datalake/v1/";
@@ -54,7 +54,7 @@ export class DashboardApiService {
   }
 
   private extractData2(res: Response) {
-    console.log(res,"detele/deploy template");
+    // console.log(res, "detele/deploy template");
     let body = res;
     return body || {};
   }
@@ -73,7 +73,6 @@ export class DashboardApiService {
   }
 
   createUpadteDashboard(d: Dashboard): Observable<any> {
-    console.log(d,"add or update dashboard body");
     // let url = prefix +"/dashboard-list/successCreteOrEditDemo.json"; //local
     let url = prefix + "portals";//onilne
     return this.http
@@ -86,10 +85,9 @@ export class DashboardApiService {
   }
 
   deleteDashboard(d: Dashboard): Observable<any> {
-    console.log(d,"add dashboard body");
     let url = prefix + "portals"; //onilne
     return this.http
-      .put(url,d)
+      .put(url, d)
       .pipe(
         retry(1),
         tap(_ => console.log(`deleted db name=${d.name}`)),
@@ -111,7 +109,7 @@ export class DashboardApiService {
     Template
   */
   getTemplateAll(): Observable<any> {
-      return this.http.get(prefix + "portalDesigns/").pipe( //onlin
+    return this.http.get(prefix + "designs/").pipe( //onlin
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -119,9 +117,8 @@ export class DashboardApiService {
   }
 
   createNewTemplate(t: newTemplate): Observable<any> {
-    console.log(t,"createNewTemplate");
     return this.http
-    .post(prefix + "portalDesigns", t)
+      .post(prefix + "designs", t)
       .pipe(
         retry(1),
         tap(_ => this.extractData),
@@ -131,9 +128,8 @@ export class DashboardApiService {
 
   updateNewTemplate(t: Template): Observable<any> {
     let id = t.id;
-    console.log(id,t,"updateNewTemplate");
     return this.http
-    .put(prefix + "portalDesigns/"+id, t)
+      .put(prefix + "designs/" + id, t)
       .pipe(
         retry(1),
         tap(_ => this.extractData),
@@ -142,7 +138,7 @@ export class DashboardApiService {
   }
 
   getTopicName(): Observable<any> {
-      return this.http.get(prefix + "topics").pipe( //onlin
+    return this.http.get(prefix + "topics").pipe( //onlin
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -150,7 +146,7 @@ export class DashboardApiService {
   }
 
   getTemplateTypeName(): Observable<any> {
-      return this.http.get(prefix + "designTypes").pipe( //onlin
+    return this.http.get(prefix + "designTypes").pipe( //onlin
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -158,7 +154,7 @@ export class DashboardApiService {
   }
 
   DeleteTemplate(id): Observable<any> {
-      return this.http.delete(prefix + "portalDesigns/" + id ).pipe( //online
+    return this.http.delete(prefix + "designs/" + id).pipe( //online
       retry(1),
       map(this.extractData2),
       catchError(this.handleError)
@@ -166,8 +162,7 @@ export class DashboardApiService {
   }
   deployTemplateKibana(id, body): Observable<any> {
     body.submitted = true;
-    console.log(id,body,'this.deployTemplateKibana()');
-    return this.http.post(prefix+"portalDesigns/deploy/" + id, body).pipe(   //online
+    return this.http.post(prefix + "designs/deploy/" + id, body).pipe(   //online
       retry(1),
       map(this.extractData2),
       catchError(this.handleError)

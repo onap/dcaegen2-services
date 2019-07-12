@@ -13,41 +13,24 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-// export class TemplateList {
-//   id:number;
-//   name:string;
-//   submitted:true;
-//   body: string;
-//   note:string;
-//   portalDesignConfig:{
-//     id:number;
-//     name:string;
-//     submitted:true;
-//     body: string;
-//     note:string;
-//     topic: string;
-//     designType: string;
-//   }
-//
-// }
 
 export class Template {
-    id:number;
-    name:string;
-    submitted:boolean;
-    body: string;
-    note:string;
-    topic: string;
-    designType: string;
-    display:string;
-  }
+  id: number;
+  name: string;
+  submitted: boolean;
+  body: string;
+  note: string;
+  topicName: string;
+  designType: string;
+  designTypeName: string;
+}
 
 export class newTemplate {
-  name:string;
-  submitted:boolean;
+  name: string;
+  submitted: boolean;
   body: string;
-  note:string;
-  topic: string;
+  note: string;
+  topicName: string;
   designType: string;
-  display:string;
+  designTypeName: string;
 }

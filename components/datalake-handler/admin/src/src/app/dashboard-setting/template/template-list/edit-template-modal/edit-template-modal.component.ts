@@ -24,10 +24,11 @@ import {
 } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import { DashboardApiService } from "src/app/core/services/dashboard-api.service";
-import { AdminService } from "src/app/core/services/admin.service";
 import { Template } from "src/app/core/models/template.model";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AlertComponent} from "../../../../core/alert/alert.component";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+
+// Loading spinner
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-edit-template-modal',
@@ -37,6 +38,8 @@ import {AlertComponent} from "../../../../core/alert/alert.component";
 export class EditTemplateModalComponent implements OnInit {
   @Input() edittemplate: Template;
   templateInput: Template;
+  defaultDesigntype: String;
+  defaultTopicname: String;
   templatetypedata: Array<any> = [];
   topicname: Array<any> = [];
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
@@ -47,6 +50,7 @@ export class EditTemplateModalComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     public dashboardApiService: DashboardApiService,
+    private spinner: NgxSpinnerService,
     private modalService: NgbModal,
   ) { }
 
@@ -55,59 +59,76 @@ export class EditTemplateModalComponent implements OnInit {
   fileName = null;
 
   ngOnInit() {
-    this.getTopicName();
-    this.getTemplateTypeName();
     // cache for display
     this.templateInput = new Template();
     const feed = {
-      id:this.edittemplate.id,
+      id: this.edittemplate.id,
       name: this.edittemplate.name,
       submitted: this.edittemplate.submitted,
       body: this.edittemplate.body,
       note: this.edittemplate.note,
-      topic: this.edittemplate.topic,
-      designType:  this.edittemplate.designType,
-      display: this.edittemplate.display
+      topicName: this.edittemplate.topicName,
+      designType: this.edittemplate.designType,
+      designTypeName: this.edittemplate.designTypeName,
     };
     this.templateInput = feed;
-    this.templateInputTitle = ""+this.edittemplate.name;
-    console.log(this.templateInput,"this.templateInput")
+    this.templateInputTitle = "" + this.edittemplate.name;
+    this.getTopicName();
+    this.getTemplateTypeName();
   }
-  getTopicName(){
+  getTopicName() {
     this.dashboardApiService.getTopicName().subscribe(data => {
       this.topicname = data;
     });
   }
 
-  getTemplateTypeName(){
+  getTemplateTypeName() {
     this.dashboardApiService.getTemplateTypeName().subscribe(data => {
       this.templatetypedata = data;
+      this.getDefaultOptions();
     });
   }
 
-  jsReadFiles(){
-    var thiss =this;
+  getDefaultOptions() {
+    this.templatetypedata.map(item => {
+      if (item.id === this.templateInput.designType) {
+        return this.defaultDesigntype = item.name;
+      }
+    });
+    this.defaultTopicname = this.templateInput.topicName;
+  }
+
+  jsReadFiles() {
+    var thiss = this;
     var file = (<HTMLInputElement>document.querySelector("#f-file")).files[0];
     this.fileName = file.name;
     var reader = new FileReader();
-    reader.onload = function() {
-      console.log(this.result);
+    reader.onload = function () {
       thiss.templateInput.body = String(this.result);
     }
     reader.readAsText(file);
   }
 
   passBack() {
-    if(this.templateInput.name == '' || this.templateInput.name == undefined){
+    this.spinner.show();
+    if (this.templateInput.name == '' || this.templateInput.name == undefined) {
       return false;
     }
-    console.log(this.templateInput);
     this.edittemplate = this.templateInput;
-    this.edittemplate.display = this.templatetype.nativeElement.value;
-    this.edittemplate.designType = this.templatetypedata.find((item) => {
-      return item.display == this.edittemplate.display
-    }).designType;
-    this.edittemplate.topic = this.topic.nativeElement.value;
+    // this.templatetypedata.map(item => {
+    //   if (item.name === this.templatetype.nativeElement.value) {
+    //     return this.edittemplate.designType = item.id;
+    //   }
+    // });
+    this.edittemplate.designType = this.templatetypedata.filter(item => {
+      return item.name === this.templatetype.nativeElement.value;
+    })[0].id || "";
+    
+    this.edittemplate.designTypeName = this.templatetype.nativeElement.value;
+    this.edittemplate.topicName = this.topic.nativeElement.value;
     this.passEntry.emit(this.edittemplate);
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 500);
   }
 }

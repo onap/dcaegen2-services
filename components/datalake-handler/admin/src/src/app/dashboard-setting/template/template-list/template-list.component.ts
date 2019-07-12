@@ -13,19 +13,19 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
-import {DashboardApiService} from "src/app/core/services/dashboard-api.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {Template,newTemplate} from "src/app/core/models/template.model";
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { DashboardApiService } from "src/app/core/services/dashboard-api.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { Template, newTemplate } from "src/app/core/models/template.model";
 // Loading spinner
-import {NgxSpinnerService} from "ngx-spinner";
+import { NgxSpinnerService } from "ngx-spinner";
 
 // modal
-import {NewTemplateModalComponent} from "./new-template-modal/new-template-modal.component";
-import {EditTemplateModalComponent} from "./edit-template-modal/edit-template-modal.component";
-import {AlertComponent} from "src/app/core/alert/alert.component";
+import { NewTemplateModalComponent } from "./new-template-modal/new-template-modal.component";
+import { EditTemplateModalComponent } from "./edit-template-modal/edit-template-modal.component";
+import { AlertComponent } from "src/app/core/alert/alert.component";
 // notify
-import {ToastrNotificationService} from "src/app/core/services/toastr-notification.service";
+import { ToastrNotificationService } from "src/app/core/services/toastr-notification.service";
 
 @Component({
   selector: 'app-template-list',
@@ -101,9 +101,9 @@ export class TemplateListComponent {
         submitted: data["submitted"],
         body: data["body"],
         note: data["note"],
-        topic: data["topic"],
+        topicName: data["topicName"],
         designType: data["designType"],
-        display: data["display"],
+        designTypeName: data["designTypeName"],
       };
       t.push(feed);
     }
@@ -111,7 +111,6 @@ export class TemplateListComponent {
   }
 
   newTemplateModal() {
-    let tips = "";
     const modalRef = this.modalService.open(NewTemplateModalComponent, {
       windowClass: "dl-md-modal templatess",
       centered: true
@@ -122,17 +121,14 @@ export class TemplateListComponent {
     modalRef.componentInstance.templatelist_length = this.template_list.length;
     modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
       this.Template_Newbody = receivedEntry;
-      let name = this.Template_Newbody.name;
       this.dashboardApiService
         .createNewTemplate(this.Template_Newbody)
         .subscribe(
           res => {
             if (res.statusCode == 200) {
               this.Template_New = res.returnBody;
-              console.log(this.Template_New,"this.Template_New add Success");
               this.template_list.push(this.Template_New);
               this.template_list = [...this.template_list];
-              console.log(this.template_list, "this.template_list,inserted");
               this.notificationService.success("SUCCESSFULLY_CREARED");
             } else {
               this.notificationService.error("FAILED_CREARED");
@@ -149,8 +145,7 @@ export class TemplateListComponent {
 
   onActivate(event) {
     const emitType = event.type;
-    if(emitType == "dblclick"){
-      console.log('Activate Event', event);
+    if (emitType == "dblclick") {
       let id = event.row.id;
       this.editTemplateModal(id);
     }
@@ -159,24 +154,20 @@ export class TemplateListComponent {
 
   editTemplateModal(id) {
     const index = this.template_list.findIndex(t => t.id === id);
-    // const name = this.template_list[index].name;
     const modalRef = this.modalService.open(EditTemplateModalComponent, {
       windowClass: "dl-md-modal templatess",
       centered: true
     });
     modalRef.componentInstance.edittemplate = this.template_list[index];
     modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      const name = receivedEntry.name;
       this.Template_New = receivedEntry;
       this.dashboardApiService
         .updateNewTemplate(this.Template_New)
         .subscribe(
           res => {
-
             if (res.statusCode == 200) {
               this.template_list[index] = this.Template_New;
               this.template_list = [...this.template_list];
-              console.log(this.template_list, "this.template_list,update");
               this.notificationService.success("SUCCESSFULLY_UPDATED");
             } else {
               this.notificationService.error("FAILED_UPDATED");
@@ -197,22 +188,17 @@ export class TemplateListComponent {
       size: "sm",
       centered: true
     });
-    const name = this.template_list[index].name;
     // modalRef.componentInstance.dashboardDeteleModelShow = this.dashboardDeteleModelShow;
     modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
     modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
       // Delete database
       this.dashboardApiService.DeleteTemplate(id).subscribe(
         res => {
-          console.log(res,"template detele res");
-          console.log(JSON.stringify(res).length,"JSON.stringify(res).length");
-          if (JSON.stringify(res).length<=2) {
-            console.log("Success deleted template");
+          if (JSON.stringify(res).length <= 2) {
             this.template_list.splice(index, 1);
             this.template_list = [...this.template_list];
             this.notificationService.success("SUCCESSFULLY_DELETED");
           } else {
-            console.log("Fail deleted template");
             this.notificationService.error("FAILED_DELETED");
           }
 
@@ -229,15 +215,12 @@ export class TemplateListComponent {
 
   deployTemplate(id: number) {
     const index = this.template_list.findIndex(t => t.id === id);
-    const name = this.template_list[index].name;
     const body = this.template_list[index];
     this.spinner.show();
     this.dashboardApiService.deployTemplateKibana(id, body).subscribe(
       res => {
         this.spinner.hide();
-        console.log(res,"template deploy res");
-        console.log(JSON.stringify(res).length,"JSON.stringify(res).length");
-        if (JSON.stringify(res).length<=2) {
+        if (JSON.stringify(res).length <= 2) {
           this.notificationService.success("Deploy_SUCCESSFULLY");
         } else {
           this.notificationService.error("Deploy_FAILED");

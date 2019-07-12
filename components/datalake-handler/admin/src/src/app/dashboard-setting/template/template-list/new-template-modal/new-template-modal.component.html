@@ -38,21 +38,23 @@
             <label class="dl-emphasis1" for="inputtemplateName">{{ 'TEMPLATE_NAME' | translate }}</label>
           </div>
           <div class="col-md-6">
-            <input #inputtemplateName [(ngModel)]="this.templateInput.name" class="form-control dl-input-text" type="text" name="inputtemplateName" placeholder="Username" required="required"/>
+            <input #inputtemplateName [(ngModel)]="this.templateInput.name" class="form-control dl-input-text"
+              type="text" name="inputtemplateName" placeholder="Username" required="required" />
           </div>
         </div>
       </div>
 
       <div class="form-group">
-          <div class="row">
-            <div class="col-md-2">
-              <label class="dl-emphasis1" for="templatebody">{{ 'TEMPLATE_BODY'| translate }}</label>
-            </div>
-            <div class="col-md-10">
-                <textarea #templatebody [(ngModel)]="this.templateInput.body" class="form-control dl-input-text" placeholder="Put the template design here..." rows="3" style="min-height: 300px!important;"></textarea>
-            </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label class="dl-emphasis1" for="templatebody">{{ 'TEMPLATE_BODY'| translate }}</label>
+          </div>
+          <div class="col-md-10">
+            <textarea #templatebody [(ngModel)]="this.templateInput.body" class="form-control dl-input-text"
+              placeholder="Put the template design here..." rows="3" style="min-height: 300px!important;"></textarea>
           </div>
         </div>
+      </div>
 
       <div class="form-group">
         <div class="row">
@@ -69,7 +71,7 @@
             </label>
           </div>
           <div class="col-md-2">
-           <span style="line-height: 2.25rem">{{this.fileName}}</span>
+            <span style="line-height: 2.25rem">{{this.fileName}}</span>
           </div>
         </div>
       </div>
@@ -81,24 +83,25 @@
           </div>
           <div class="col-md-8">
             <select #templatetype class="custom-select dl-input-text">
-              <option *ngFor="let item of templatetypedata" [selected]="item==templatetypedata[0]" [attr.designType]="[item.designType]">{{item.display}}</option>
+              <option *ngFor="let item of templatetypedata" [selected]="item==templatetypedata[0]"
+                [attr.designType]="[item.designType]">{{item.name}}</option>
             </select>
           </div>
         </div>
       </div>
 
       <div class="form-group">
-          <div class="row">
-            <div class="col-md-2">
-              <label class="dl-emphasis1">{{ 'TOPICS_NAME' | translate }}</label>
-            </div>
-            <div class="col-md-8">
-              <select #topic class="custom-select dl-input-text">
-                <option *ngFor="let item of topicname" [selected]="item==topicname[0]">{{item}}</option>
-              </select>
-            </div>
+        <div class="row">
+          <div class="col-md-2">
+            <label class="dl-emphasis1">{{ 'TOPICS_NAME' | translate }}</label>
+          </div>
+          <div class="col-md-8">
+            <select #topic class="custom-select dl-input-text">
+              <option *ngFor="let item of topicname" [selected]="item==topicname[0]">{{item}}</option>
+            </select>
           </div>
         </div>
+      </div>
 
     </div>
   </div>
