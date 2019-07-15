@@ -40,6 +40,8 @@ export class NewTemplateModalComponent implements OnInit {
   templateInput: Template
   templatetypedata: Array<any> = [];
   topicname: Array<any> = [];
+  dbList: Array<any> = [];
+  tempSeletedDbs: any = [];
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   @ViewChild("templatetype") templatetype: ElementRef;
   @ViewChild("topic") topic: ElementRef;
@@ -55,6 +57,7 @@ export class NewTemplateModalComponent implements OnInit {
 
   ngOnInit() {
     this.getTopicName();
+    this.getDbList();
     this.getTemplateTypeName();
     // cache for display
     this.templateInput = new Template();
@@ -67,6 +70,7 @@ export class NewTemplateModalComponent implements OnInit {
       topicName: this.template.topicName,
       designType: this.template.designType,
       designTypeName: this.template.designTypeName,
+      dbs: this.template.dbs || [],
     };
     this.templateInput = feed;
   }
@@ -76,10 +80,29 @@ export class NewTemplateModalComponent implements OnInit {
     });
   }
 
+  getDbList() {
+    this.dashboardApiService.getDbList().subscribe(data => {
+      this.dbList = data;
+    });
+  }
+
   getTemplateTypeName() {
     this.dashboardApiService.getTemplateTypeName().subscribe(data => {
       this.templatetypedata = data;
     });
+  }
+
+  updateSelectedDB(event: any, name: string) {
+    if (event.target.checked) {
+      if (!this.tempSeletedDbs.find(db => db === name)) {
+        this.tempSeletedDbs.push(name);
+      }
+    } else {
+      const index = this.tempSeletedDbs.indexOf(name, 0);
+      if (index > -1) {
+        this.tempSeletedDbs.splice(index, 1);
+      }
+    }
   }
 
   jsReadFiles() {
@@ -112,6 +135,7 @@ export class NewTemplateModalComponent implements OnInit {
 
     this.template.designTypeName = this.templatetype.nativeElement.value;
     this.template.topicName = this.topic.nativeElement.value;
+    this.template.dbs = this.tempSeletedDbs;
     this.template.submitted = false;
     this.template.note = "";
     this.passEntry.emit(this.template);

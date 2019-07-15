@@ -23,6 +23,7 @@ export class Template {
   topicName: string;
   designType: string;
   designTypeName: string;
+  dbs: any;
 }
 
 // export class newTemplate {
