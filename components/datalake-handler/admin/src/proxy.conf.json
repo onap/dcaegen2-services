@@ -1,6 +1,6 @@
 {
   "/datalake/v1": {
-    "target": "http://192.168.1.97:1680",
+    "target": "http://10.73.242.196:1680",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true

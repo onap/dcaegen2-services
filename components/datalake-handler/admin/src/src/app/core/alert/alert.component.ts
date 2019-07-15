@@ -38,10 +38,9 @@ export class AlertComponent {
   @Input() dashboardDeteleModelShow;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal) { }
 
   passBack() {
-    console.log(this.dashboardDeteleModelShow,"dashboardDeteleModelShow");
     this.passEntry.emit(true);
   }
 }

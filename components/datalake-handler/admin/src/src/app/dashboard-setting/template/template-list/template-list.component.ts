@@ -14,9 +14,9 @@
     limitations under the License.
 */
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { DashboardApiService } from "src/app/core/services/dashboard-api.service";
+import { RestApiService } from "src/app/core/services/rest-api.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { Template, newTemplate } from "src/app/core/models/template.model";
+import { Template } from "src/app/core/models/template.model";
 // Loading spinner
 import { NgxSpinnerService } from "ngx-spinner";
 
@@ -37,7 +37,7 @@ export class TemplateListComponent {
   templates: Template[] = [];
   temps: Template[] = [];
   Template_New: Template;
-  Template_Newbody: newTemplate;
+  Template_Newbody: Template;
   dashboardDeteleModelShow = true;
   loadingIndicator: boolean = true;
   mesgNoData = {
@@ -52,7 +52,7 @@ export class TemplateListComponent {
   @ViewChild("searchText") searchText: ElementRef;
   constructor(
     private modalService: NgbModal,
-    private dashboardApiService: DashboardApiService,
+    private dashboardApiService: RestApiService,
     private spinner: NgxSpinnerService,
     private notificationService: ToastrNotificationService,
   ) {
@@ -82,7 +82,7 @@ export class TemplateListComponent {
     this.template_list = [];
     this.template_list = await this.getTemplateList();
     this.Template_New = new Template();
-    this.Template_Newbody = new newTemplate();
+    this.Template_Newbody = new Template();
     return true;
   }
 
@@ -116,7 +116,7 @@ export class TemplateListComponent {
       centered: true
     });
     this.Template_New = new Template();
-    this.Template_Newbody = new newTemplate();
+    this.Template_Newbody = new Template();
     modalRef.componentInstance.template = this.Template_Newbody;
     modalRef.componentInstance.templatelist_length = this.template_list.length;
     modalRef.componentInstance.passEntry.subscribe(receivedEntry => {

@@ -33,6 +33,8 @@ import { throwError } from "rxjs";
 
 import { Topic } from "src/app/core/models/topic.model";
 import { Db } from "src/app/core/models/db.model";
+import { Template } from "src/app/core/models/template.model";
+import { Dashboard } from "src/app/core/models/dashboard.model";
 
 const prefix = "/datalake/v1/";
 const httpOptions = {
@@ -45,7 +47,7 @@ const httpOptions = {
   providedIn: "root"
 })
 export class RestApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
@@ -66,6 +68,11 @@ export class RestApiService {
       console.log(errorMessage);
     }
     return throwError(errorMessage);
+  }
+
+  private extractData2(res: Response) {
+    let body = res;
+    return body || {};
   }
 
   /*
@@ -172,7 +179,7 @@ export class RestApiService {
       catchError(this.handleError)
     );
   }
-  
+
   upadteDb(d: Db): Observable<any> {
     return this.http
       .put(prefix + "dbs", d)
@@ -209,4 +216,107 @@ export class RestApiService {
       catchError(this.handleError)
     );
   }
+
+
+  /*
+Dashboard
+*/
+  getDashboardList(): Observable<any> {
+    let url = prefix + "portals"; //onilne
+    return this.http.get(url).pipe(
+      retry(1),
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  createUpadteDashboard(d: Dashboard): Observable<any> {
+    // let url = prefix +"/dashboard-list/successCreteOrEditDemo.json"; //local
+    let url = prefix + "portals";//onilne
+    return this.http
+      .put(url, d)
+      .pipe(
+        retry(1),
+        tap(_ => this.extractData),
+        catchError(this.handleError)
+      );
+  }
+
+  deleteDashboard(d: Dashboard): Observable<any> {
+    let url = prefix + "portals"; //onilne
+    return this.http
+      .put(url, d)
+      .pipe(
+        retry(1),
+        tap(_ => console.log(`deleted db name=${d.name}`)),
+        catchError(this.handleError)
+      );
+  }
+
+
+  /*
+  Template
+*/
+  getTemplateAll(): Observable<any> {
+    return this.http.get(prefix + "designs/").pipe( //onlin
+      retry(1),
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  createNewTemplate(t: Template): Observable<any> {
+    return this.http
+      .post(prefix + "designs", t)
+      .pipe(
+        retry(1),
+        tap(_ => this.extractData),
+        catchError(this.handleError)
+      );
+  }
+
+  updateNewTemplate(t: Template): Observable<any> {
+    let id = t.id;
+    return this.http
+      .put(prefix + "designs/" + id, t)
+      .pipe(
+        retry(1),
+        tap(_ => this.extractData),
+        catchError(this.handleError)
+      );
+  }
+
+  // getTopicName(): Observable<any> {
+  //   return this.http.get(prefix + "topics").pipe( //onlin
+  //     retry(1),
+  //     map(this.extractData),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  getTemplateTypeName(): Observable<any> {
+    return this.http.get(prefix + "designTypes").pipe( //onlin
+      retry(1),
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  DeleteTemplate(id): Observable<any> {
+    return this.http.delete(prefix + "designs/" + id).pipe( //online
+      retry(1),
+      map(this.extractData2),
+      catchError(this.handleError)
+    );
+  }
+  deployTemplateKibana(id, body): Observable<any> {
+    body.submitted = true;
+    return this.http.post(prefix + "designs/deploy/" + id, body).pipe(   //online
+      retry(1),
+      map(this.extractData2),
+      catchError(this.handleError)
+    );
+  }
 }
+
+

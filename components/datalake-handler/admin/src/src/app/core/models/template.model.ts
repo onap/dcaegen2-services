@@ -25,12 +25,12 @@ export class Template {
   designTypeName: string;
 }
 
-export class newTemplate {
-  name: string;
-  submitted: boolean;
-  body: string;
-  note: string;
-  topicName: string;
-  designType: string;
-  designTypeName: string;
-}
+// export class newTemplate {
+//   name: string;
+//   submitted: boolean;
+//   body: string;
+//   note: string;
+//   topicName: string;
+//   designType: string;
+//   designTypeName: string;
+// }

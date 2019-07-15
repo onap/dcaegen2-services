@@ -23,9 +23,8 @@ import {
   ElementRef
 } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { DashboardApiService } from "src/app/core/services/dashboard-api.service";
+import { RestApiService } from "src/app/core/services/rest-api.service";
 import { Template } from "src/app/core/models/template.model";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
 // Loading spinner
 import { NgxSpinnerService } from "ngx-spinner";
@@ -49,9 +48,8 @@ export class EditTemplateModalComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    public dashboardApiService: DashboardApiService,
+    public dashboardApiService: RestApiService,
     private spinner: NgxSpinnerService,
-    private modalService: NgbModal,
   ) { }
 
   inputtemplateName = null;
@@ -77,7 +75,7 @@ export class EditTemplateModalComponent implements OnInit {
     this.getTemplateTypeName();
   }
   getTopicName() {
-    this.dashboardApiService.getTopicName().subscribe(data => {
+    this.dashboardApiService.getTopicsFromFeeder().subscribe(data => {
       this.topicname = data;
     });
   }
@@ -123,7 +121,7 @@ export class EditTemplateModalComponent implements OnInit {
     this.edittemplate.designType = this.templatetypedata.filter(item => {
       return item.name === this.templatetype.nativeElement.value;
     })[0].id || "";
-    
+
     this.edittemplate.designTypeName = this.templatetype.nativeElement.value;
     this.edittemplate.topicName = this.topic.nativeElement.value;
     this.passEntry.emit(this.edittemplate);
