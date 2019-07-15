@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a47ca691_77632896",
+        "filename": "components/datalake-handler/admin/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-07-15T07:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99452a91_cc13b73d",
+      "range": {
+        "startLine": 10,
+        "startChar": 11,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "b2fdc0e19fd73b67524c35f8b105e36fd02defa0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cfbc25c_503f1181",
         "filename": "components/datalake-handler/collector/pom.xml",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-07-11T20:39:07Z",
       "side": 1,
       "message": "no change needed",
+      "range": {
+        "startLine": 10,
+        "startChar": 11,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "b2fdc0e19fd73b67524c35f8b105e36fd02defa0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "979dcc00_f1a6d679",
+        "filename": "components/datalake-handler/collector/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-07-15T07:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cfbc25c_503f1181",
       "range": {
         "startLine": 10,
         "startChar": 11,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b7a5aed0_74d23ffa",
+        "filename": "components/datalake-handler/feeder/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-07-15T07:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34f647a5_bc6f926c",
+      "range": {
+        "startLine": 10,
+        "startChar": 11,
+        "endLine": 10,
+        "endChar": 16
+      },
+      "revId": "b2fdc0e19fd73b67524c35f8b105e36fd02defa0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0172ca0f_b2dfe5ad",
         "filename": "components/datalake-handler/pom.xml",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2019-07-11T20:39:07Z",
       "side": 1,
       "message": "1.0.0",
+      "range": {
+        "startLine": 15,
+        "startChar": 10,
+        "endLine": 15,
+        "endChar": 15
+      },
+      "revId": "b2fdc0e19fd73b67524c35f8b105e36fd02defa0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52b10977_69964ac3",
+        "filename": "components/datalake-handler/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-07-15T07:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0172ca0f_b2dfe5ad",
       "range": {
         "startLine": 15,
         "startChar": 10,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "3f92b08c_a56a1247",
+        "filename": "pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-07-15T07:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c48126ac_ca24d0c5",
+      "range": {
+        "startLine": 34,
+        "startChar": 11,
+        "endLine": 34,
+        "endChar": 25
+      },
+      "revId": "b2fdc0e19fd73b67524c35f8b105e36fd02defa0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb3d71cc_4cd7543c",
         "filename": "version.properties",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2019-07-11T20:39:07Z",
       "side": 1,
       "message": "1.0.0",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 7
+      },
+      "revId": "b2fdc0e19fd73b67524c35f8b105e36fd02defa0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2579db9b_46ad6b05",
+        "filename": "version.properties",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5064
+      },
+      "writtenOn": "2019-07-15T07:50:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb3d71cc_4cd7543c",
       "range": {
         "startLine": 1,
         "startChar": 0,
