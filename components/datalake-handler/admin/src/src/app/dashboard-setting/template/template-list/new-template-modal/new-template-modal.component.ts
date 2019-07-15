@@ -23,12 +23,11 @@ import {
   ElementRef
 } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { DashboardApiService } from "src/app/core/services/dashboard-api.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { RestApiService } from "src/app/core/services/rest-api.service";
 // Loading spinner
 import { NgxSpinnerService } from "ngx-spinner";
 
-import { Template, newTemplate } from "src/app/core/models/template.model";
+import { Template } from "src/app/core/models/template.model";
 
 @Component({
   selector: 'app-new-template-modal',
@@ -36,9 +35,9 @@ import { Template, newTemplate } from "src/app/core/models/template.model";
   styleUrls: ['./new-template-modal.component.css']
 })
 export class NewTemplateModalComponent implements OnInit {
-  @Input() template: newTemplate;
+  @Input() template: Template;
   @Input() templatelist_length;
-  templateInput: newTemplate
+  templateInput: Template
   templatetypedata: Array<any> = [];
   topicname: Array<any> = [];
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
@@ -47,10 +46,8 @@ export class NewTemplateModalComponent implements OnInit {
 
   constructor(
     public activeModal: NgbActiveModal,
-    public dashboardApiService: DashboardApiService,
+    public dashboardApiService: RestApiService,
     private spinner: NgxSpinnerService,
-    private modalService: NgbModal,
-
   ) { }
   inputtemplateName = null;
   templatebody = null;
@@ -62,6 +59,7 @@ export class NewTemplateModalComponent implements OnInit {
     // cache for display
     this.templateInput = new Template();
     const feed = {
+      id: null,
       name: this.template.name,
       submitted: this.template.submitted,
       body: this.template.body,
@@ -73,7 +71,7 @@ export class NewTemplateModalComponent implements OnInit {
     this.templateInput = feed;
   }
   getTopicName() {
-    this.dashboardApiService.getTopicName().subscribe(data => {
+    this.dashboardApiService.getTopicsFromFeeder().subscribe(data => {
       this.topicname = data;
     });
   }

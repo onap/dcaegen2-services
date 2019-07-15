@@ -13,22 +13,20 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Dashboard} from "../../core/models/dashboard.model";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {CreateDashboardComponent} from "./create-dashboard/create-dashboard.component";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Dashboard } from "../../core/models/dashboard.model";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { CreateDashboardComponent } from "./create-dashboard/create-dashboard.component";
 
-import {AdminService} from "../../core/services/admin.service";
+import { AdminService } from "../../core/services/admin.service";
 
 // DB modal components
-import {DashboardApiService} from "src/app/core/services/dashboard-api.service";
-
-import {AlertComponent} from "src/app/core/alert/alert.component";
+import { RestApiService } from "src/app/core/services/rest-api.service";
 
 // Notify
-import {ToastrNotificationService} from "src/app/core/services/toastr-notification.service";
+import { ToastrNotificationService } from "src/app/core/services/toastr-notification.service";
 // Loading spinner
-import {NgxSpinnerService} from "ngx-spinner";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-dashboard-list',
@@ -49,7 +47,7 @@ export class DashboardListComponent implements OnInit {
 
   constructor(
     private adminService: AdminService,
-    private dashboardApiService: DashboardApiService,
+    private dashboardApiService: RestApiService,
     private notificationService: ToastrNotificationService,
     private modalService: NgbModal,
     private spinner: NgxSpinnerService
@@ -63,7 +61,7 @@ export class DashboardListComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
   }
-  initList(){
+  initList() {
     this.initData().then(data => {
       this.initDbsList(this.dbList).then(data => {
         this.dbs = data;
