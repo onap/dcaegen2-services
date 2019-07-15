@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51fa4f41_765634ae",
+        "filename": "components/datalake-handler/admin/src/src/app/core/models/template.model.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-07-15T01:15:23Z",
+      "side": 1,
+      "message": "Duplicate definition",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 1
+      },
+      "revId": "c4c391b68ed1a30b3b398c56efadf28b2f33388d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c44ebdb_fef28977",
+        "filename": "components/datalake-handler/admin/src/src/app/core/services/dashboard-api.service.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-07-15T01:15:23Z",
+      "side": 1,
+      "message": "Duplicate function\nSame as \"getTopicsFromFeeder()\" on rest-api.service.ts\nRecommend merge the function dashboard-api.service.ts to rest-api.service.ts. We can discuss it.",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 3
+      },
+      "revId": "c4c391b68ed1a30b3b398c56efadf28b2f33388d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
