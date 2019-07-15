@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "042714a7_fca98847",
+        "filename": "components/datalake-handler/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2019-07-15T13:44:08Z",
+      "side": 1,
+      "message": "Should not be commented as these modules are under active dev; instead the specific failed testcases can be commented out - this can be worked separate by DL team.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 32
+      },
+      "revId": "a9c6dda10c74abbab9b9fe339af4354c18f60e63",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
