@@ -23,6 +23,8 @@ package org.onap.datalake.feeder.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * JSON request body for portalDesign Config.
  *
@@ -40,5 +42,7 @@ public class DesignConfig {
     private String note;
     private String topicName;
     private String designType;
+    private String designTypeName;//UI show name
+    private List<String> dbs;
 
 }

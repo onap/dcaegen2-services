@@ -49,12 +49,6 @@ public class DesignType {
     @Column(name = "`name`")
     private String name;
 
-    //To be removed
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="portal")
-    @JsonBackReference
-    private Portal portal;
-
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="db_type_id", nullable = false)
     @JsonBackReference

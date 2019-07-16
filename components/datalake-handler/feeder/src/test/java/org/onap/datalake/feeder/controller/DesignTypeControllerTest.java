@@ -27,7 +27,6 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.domain.DesignType;
-import org.onap.datalake.feeder.domain.Portal;
 import org.onap.datalake.feeder.service.DesignTypeService;
 
 import java.lang.reflect.Field;
@@ -69,11 +68,6 @@ public class DesignTypeControllerTest {
     public DesignType fillDomain(){
         DesignType designType = new DesignType();
         designType.setName("Kibana Dashboard");
-        Portal portal = new Portal();
-        portal.setName("Kibana");
-        portal.setHost("127.0.0.1");
-        portal.setPort(5601);
-        designType.setPortal(portal);
         return designType;
     }
 }
