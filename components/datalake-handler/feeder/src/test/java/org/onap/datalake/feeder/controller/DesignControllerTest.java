@@ -166,11 +166,6 @@ public class DesignControllerTest {
         design.setNote("test");
         DesignType designType = new DesignType();
         designType.setName("Kibana Dashboard");
-        Portal portal = new Portal();
-        portal.setName("Kibana");
-        portal.setHost("127.0.0.1");
-        portal.setPort(5601);
-        designType.setPortal(portal);
         design.setDesignType(designType);
         design.setTopicName(new TopicName("unauthenticated.SEC_FAULT_OUTPUT"));
         return design;

@@ -25,10 +25,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
-import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Design;
 import org.onap.datalake.feeder.domain.DesignType;
-import org.onap.datalake.feeder.domain.Portal;
 
 import static org.mockito.Mockito.when;
 
@@ -50,13 +48,7 @@ public class DesignServiceTest {
         Design design = new Design();
         design.setDesignType(designType);
         design.setBody("jsonString");
-
-        Portal portal = new Portal();
-        Db db = new Db();
-        db.setHost("localhost");
-        portal.setDb(db);
-        when(designType.getPortal()).thenReturn(portal);
-        when(applicationConfiguration.getKibanaDashboardImportApi()).thenReturn("/api/kibana/dashboards/import?exclude=index-pattern");
+        //when(applicationConfiguration.getKibanaDashboardImportApi()).thenReturn("/api/kibana/dashboards/import?exclude=index-pattern");
         when(applicationConfiguration.getKibanaPort()).thenReturn(5601);
         designService.deploy(design);
         System.out.println();

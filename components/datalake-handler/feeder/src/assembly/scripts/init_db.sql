@@ -34,30 +34,15 @@ CREATE TABLE `db` (
   CONSTRAINT `FK3njadtw43ieph7ftt4kxdhcko` FOREIGN KEY (`db_type_id`) REFERENCES `db_type` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `portal` (
-  `name` varchar(255) NOT NULL,
-  `enabled` bit(1) DEFAULT NULL,
-  `host` varchar(255) DEFAULT NULL,
-  `login` varchar(255) DEFAULT NULL,
-  `pass` varchar(255) DEFAULT NULL,
-  `port` int(11) DEFAULT NULL,
-  `related_db` int(11) DEFAULT NULL,
-  PRIMARY KEY (`name`),
-  KEY `FKtl6e8ydm1k7k9r5ukv9j0bd0n` (`related_db`),
-  CONSTRAINT `FKtl6e8ydm1k7k9r5ukv9j0bd0n` FOREIGN KEY (`related_db`) REFERENCES `db` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `design_type` (
   `id` varchar(255) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `note` varchar(255) DEFAULT NULL,
   `db_type_id` varchar(255) NOT NULL,
-  `portal` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKm8rkv2qkq01gsmeq1c3y4w02x` (`db_type_id`),
   KEY `FKs2nspbhf5wv5d152l4j69yjhi` (`portal`),
   CONSTRAINT `FKm8rkv2qkq01gsmeq1c3y4w02x` FOREIGN KEY (`db_type_id`) REFERENCES `db_type` (`id`),
-  CONSTRAINT `FKs2nspbhf5wv5d152l4j69yjhi` FOREIGN KEY (`portal`) REFERENCES `portal` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `design` (

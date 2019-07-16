@@ -31,19 +31,13 @@ public class DesignTypeTest {
         DesignType designType = new DesignType();
         designType.setName("Kibana Dashboard");
         designType.setNote("test");
-        Portal portal = new Portal();
-        portal.setName("Kibana");
-        designType.setPortal(portal);
         assertEquals("Kibana Dashboard", designType.getName());
         assertEquals("test", designType.getNote());
-        assertNotEquals("Kibana", designType.getPortal());
 
         designType.setDbType(null);
         designType.getDbType();
-
         designType.setDesigns(null);
         designType.getDesigns();
-        
         designType.getDesignTypeConfig();
     }
 }
