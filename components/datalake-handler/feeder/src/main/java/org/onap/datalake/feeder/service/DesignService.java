@@ -24,12 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.HashSet;
 
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.*;
 import org.onap.datalake.feeder.domain.Design;
 import org.onap.datalake.feeder.dto.DesignConfig;
 import org.onap.datalake.feeder.enumeration.DesignTypeEnum;
+import org.onap.datalake.feeder.repository.DbRepository;
 import org.onap.datalake.feeder.repository.DesignTypeRepository;
 import org.onap.datalake.feeder.repository.DesignRepository;
 import org.onap.datalake.feeder.repository.TopicNameRepository;
@@ -64,6 +66,9 @@ public class DesignService {
 	@Autowired
 	private ApplicationConfiguration applicationConfiguration;
 
+	@Autowired
+	private DbRepository dbRepository;
+
 	public Design fillDesignConfiguration(DesignConfig designConfig) {
 		Design design = new Design();
 		fillDesign(designConfig, design);
@@ -89,7 +94,6 @@ public class DesignService {
 			throw new IllegalArgumentException("topicName is null " + designConfig.getTopicName());
 		design.setTopicName(topicName.get());
 
-
 		if (designConfig.getDesignType() == null)
 			throw new IllegalArgumentException("Can not find designType in design_type, designType id " + designConfig.getDesignType());
 		Optional<DesignType> designType = designTypeRepository.findById(designConfig.getDesignType());
@@ -97,6 +101,23 @@ public class DesignService {
 			throw new IllegalArgumentException("designType is null");
 		design.setDesignType(designType.get());
 
+		Set<Db> dbs = new HashSet<>();
+		if (designConfig.getDbs() != null) {
+			for (String item : designConfig.getDbs()) {
+				Db db = dbRepository.findByName(item);
+				if (db != null) {
+					dbs.add(db);
+				}
+			}
+			if (dbs.size() > 0)
+				design.setDbs(dbs);
+			else {
+				design.getDbs().clear();
+				design.setDbs(dbs);
+			}
+		} else {
+			design.setDbs(dbs);
+		}
 	}
 
 	public Design getDesign(Integer id) {
@@ -111,7 +132,7 @@ public class DesignService {
 		List<DesignConfig> designConfigList = new ArrayList<>();
 		designList = (List<Design>) designRepository.findAll();
 		if (designList != null && designList.size() > 0) {
-			log.info("PortalDesignList is not null");
+			log.info("DesignList is not null");
 			for (Design design : designList) {
 				designConfigList.add(design.getDesignConfig());
 			}
@@ -137,18 +158,8 @@ public class DesignService {
 	private boolean deployKibanaImport(Design design) throws RuntimeException {
 		POST_FLAG = "KibanaDashboardImport";
 		String requestBody = design.getBody();
-		Portal portal = design.getDesignType().getPortal();
-		String portalHost = portal.getHost();
-		Integer portalPort = portal.getPort();
 		String url = "";
-
-		if (portalHost == null || portalPort == null) {
-			String dbHost = portal.getDb().getHost();
-			Integer dbPort = portal.getDb().getPort();
-			url = kibanaImportUrl(dbHost, dbPort);
-		} else {
-			url = kibanaImportUrl(portalHost, portalPort);
-		}
+		//TODO
 		return HttpClientUtil.sendPostHttpClient(url, requestBody, POST_FLAG);
 
 	}

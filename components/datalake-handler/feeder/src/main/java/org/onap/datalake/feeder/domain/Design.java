@@ -24,6 +24,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -86,6 +88,16 @@ public class Design {
 		designConfig.setSubmitted(getSubmitted());
 		designConfig.setTopicName(getTopicName().getId());
         designConfig.setDesignType(getDesignType().getId());
+        designConfig.setDesignTypeName(getDesignType().getName());
+
+        Set<Db> designDb = getDbs();
+        List<String> dbList = new ArrayList<>();
+        if (designDb != null) {
+            for (Db item : designDb) {
+                    dbList.add(item.getName());
+            }
+        }
+        designConfig.setDbs(dbList);
 
 		return designConfig;
     }
