@@ -19,9 +19,6 @@
 */
 package org.onap.datalake.feeder.repository;
 
-import java.util.List;
-
-import org.onap.datalake.feeder.domain.Portal;
 import org.onap.datalake.feeder.domain.Topic;
 
 import org.springframework.data.repository.CrudRepository;
