@@ -74,6 +74,20 @@ public class DbController {
 		return retString;
 	}
 
+	@GetMapping("/idAndName")
+	@ResponseBody
+	@ApiOperation(value="Gat all databases id and name")
+	public Map<Integer, String> listIdAndName() {
+		Iterable<Db> ret = dbRepository.findAll();
+		Map<Integer, String> map = new HashMap<>();
+		for(Db db : ret)
+		{
+			log.info(db.getId() + "\t"+ db.getName());
+			map.put(db.getId(), db.getName());
+		}
+		return map;
+	}
+
 	//Create a  DB
 	@PostMapping("")
 	@ResponseBody
