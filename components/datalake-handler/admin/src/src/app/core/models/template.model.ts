@@ -23,14 +23,5 @@ export class Template {
   topicName: string;
   designType: string;
   designTypeName: string;
+  dbs: any;
 }
-
-// export class newTemplate {
-//   name: string;
-//   submitted: boolean;
-//   body: string;
-//   note: string;
-//   topicName: string;
-//   designType: string;
-//   designTypeName: string;
-// }

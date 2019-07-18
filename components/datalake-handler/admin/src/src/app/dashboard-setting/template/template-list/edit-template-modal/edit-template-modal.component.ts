@@ -41,6 +41,8 @@ export class EditTemplateModalComponent implements OnInit {
   defaultTopicname: String;
   templatetypedata: Array<any> = [];
   topicname: Array<any> = [];
+  dbList: Array<any> = [];
+  tempSeletedDbs: any = [];
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
   @ViewChild("templatetype") templatetype: ElementRef;
@@ -59,6 +61,7 @@ export class EditTemplateModalComponent implements OnInit {
   ngOnInit() {
     // cache for display
     this.templateInput = new Template();
+    this.getDbList();
     const feed = {
       id: this.edittemplate.id,
       name: this.edittemplate.name,
@@ -68,9 +71,12 @@ export class EditTemplateModalComponent implements OnInit {
       topicName: this.edittemplate.topicName,
       designType: this.edittemplate.designType,
       designTypeName: this.edittemplate.designTypeName,
+      dbs: this.edittemplate.dbs,
     };
     this.templateInput = feed;
     this.templateInputTitle = "" + this.edittemplate.name;
+    this.tempSeletedDbs = this.templateInput.dbs.map(item => { return Number(item) });
+
     this.getTopicName();
     this.getTemplateTypeName();
   }
@@ -78,6 +84,27 @@ export class EditTemplateModalComponent implements OnInit {
     this.dashboardApiService.getTopicsFromFeeder().subscribe(data => {
       this.topicname = data;
     });
+  }
+
+  getDbList() {
+    this.dashboardApiService.getTempDbList().subscribe(data => {
+      Object.keys(data).map(item => {
+        this.dbList.push({ key: item, name: data[item] })
+      })
+    });
+  }
+
+  updateSelectedDB(event: any, name: any) {
+    if (event.target.checked) {
+      if (!this.tempSeletedDbs.find(db => db === name)) {
+        this.tempSeletedDbs.push(Number(name.key));
+      }
+    } else {
+      const index = this.tempSeletedDbs.indexOf(+name.key, 0);
+      if (index > -1) {
+        this.tempSeletedDbs.splice(index, 1);
+      }
+    }
   }
 
   getTemplateTypeName() {
@@ -124,6 +151,7 @@ export class EditTemplateModalComponent implements OnInit {
 
     this.edittemplate.designTypeName = this.templatetype.nativeElement.value;
     this.edittemplate.topicName = this.topic.nativeElement.value;
+    this.edittemplate.dbs = this.tempSeletedDbs;
     this.passEntry.emit(this.edittemplate);
     setTimeout(() => {
       this.spinner.hide();

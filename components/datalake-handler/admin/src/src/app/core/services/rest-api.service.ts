@@ -265,6 +265,14 @@ Dashboard
     );
   }
 
+  getTempDbList(): Observable<any> {
+    return this.http.get(prefix + "dbs/idAndName/").pipe(
+      retry(1),
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
   createNewTemplate(t: Template): Observable<any> {
     return this.http
       .post(prefix + "designs", t)
