@@ -104,6 +104,7 @@ export class TemplateListComponent {
         topicName: data["topicName"],
         designType: data["designType"],
         designTypeName: data["designTypeName"],
+        dbs: data["dbs"],
       };
       t.push(feed);
     }
