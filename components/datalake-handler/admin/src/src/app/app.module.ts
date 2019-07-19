@@ -32,18 +32,18 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
-import { HeaderComponent } from "./header/header.component";
-import { SidebarComponent } from "./sidebar/sidebar.component";
+import { HeaderComponent } from "./shared/layout/header/header.component";
+import { SidebarComponent } from "./shared/layout/sidebar/sidebar.component";
 
-import { FeederComponent } from "./feeder/feeder.component";
-import { TopicsComponent } from "./topics/topics.component";
-import { DatabaseComponent } from "./database/database.component";
-import { TopicListComponent } from "./topics/topic-list/topic-list.component";
+import { FeederComponent } from "./views/feeder/feeder.component";
+import { TopicsComponent } from "./views/topics/topics.component";
+import { DatabaseComponent } from "./views/database/database.component";
+import { TopicListComponent } from "./views/topics/topic-list/topic-list.component";
 
 // Service
 import { AdminService } from "./core/services/admin.service";
 import { RestApiService } from "./core/services/rest-api.service";
-import { ToastrNotificationService } from "src/app/core/services/toastr-notification.service";
+import { ToastrNotificationService } from "src/app/shared/components/toastr-notification/toastr-notification.service";
 
 // i18n
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
@@ -57,32 +57,37 @@ export function createLoader(http: HttpClient) {
 import { HttpClientModule } from "@angular/common/http";
 import { HttpClient } from "@angular/common/http";
 
-import { DatabaseListComponent } from "./database/database-list/database-list.component";
+import { DatabaseListComponent } from "./views/database/database-list/database-list.component";
 import { NgxDatatableModule } from "@swimlane/ngx-datatable";
-import { CouchbaseComponent } from "./database/database-list/dbs-modal/couchbase/couchbase.component";
-import { MongodbComponent } from "./database/database-list/dbs-modal/mongodb/mongodb.component";
-import { HdfsComponent } from "./database/database-list/dbs-modal/hdfs/hdfs.component";
-import { DatabaseAddModalComponent } from "./database/database-list/database-add-modal/database-add-modal.component";
-import { ElasticsearchComponent } from "./database/database-list/dbs-modal/elasticsearch/elasticsearch.component";
-import { DruidComponent } from "./database/database-list/dbs-modal/druid/druid.component";
+import { CouchbaseComponent } from "./views/database/database-list/dbs-modal/couchbase/couchbase.component";
+import { MongodbComponent } from "./views/database/database-list/dbs-modal/mongodb/mongodb.component";
+import { HdfsComponent } from "./views/database/database-list/dbs-modal/hdfs/hdfs.component";
+import { DatabaseAddModalComponent } from "./views/database/database-list/database-add-modal/database-add-modal.component";
+import { ElasticsearchComponent } from "./views/database/database-list/dbs-modal/elasticsearch/elasticsearch.component";
+import { DruidComponent } from "./views/database/database-list/dbs-modal/druid/druid.component";
 
 // Modals
-import { TopicDetailModalComponent } from "./topics/topic-list/topic-detail-modal/topic-detail-modal.component";
-import { TopicConfigModalComponent } from "./topics/topic-list/topic-config-modal/topic-config-modal.component";
-import { ToastrNotificationComponent } from "./core/toastr-notification/toastr-notification.component";
-import { AlertComponent } from "./core/alert/alert.component";
-import { AboutComponent } from "./about/about.component";
+import { TopicDetailModalComponent } from "./views/topics/topic-list/topic-detail-modal/topic-detail-modal.component";
+import { TopicConfigModalComponent } from "./views/topics/topic-list/topic-config-modal/topic-config-modal.component";
+import { ToastrNotificationComponent } from "./shared/components/toastr-notification/toastr-notification.component";
+import { AlertComponent } from "./shared/components/alert/alert.component";
+import { AboutComponent } from "./views/about/about.component";
 
 // Loading spinner
 import { NgxSpinnerModule } from "ngx-spinner";
-import { DashboardSettingComponent } from './dashboard-setting/dashboard-setting.component';
-import { DashboardListComponent } from './dashboard-setting/dashboard-list/dashboard-list.component';
-import { TemplateComponent } from './dashboard-setting/template/template.component';
-import { CreateDashboardComponent } from './dashboard-setting/dashboard-list/create-dashboard/create-dashboard.component';
-import { TemplateListComponent } from './dashboard-setting/template/template-list/template-list.component';
-import { NewTemplateModalComponent } from './dashboard-setting/template/template-list/new-template-modal/new-template-modal.component';
-import { EditTemplateModalComponent } from './dashboard-setting/template/template-list/edit-template-modal/edit-template-modal.component';
-import { NewTopicModelComponent } from './topics/topic-list/new-topic-model/new-topic-model.component';
+import { DashboardSettingComponent } from './views/dashboard-setting/dashboard-setting.component';
+import { DashboardListComponent } from './views/dashboard-setting/dashboard-list/dashboard-list.component';
+import { TemplateComponent } from './views/dashboard-setting/template/template.component';
+import { CreateDashboardComponent } from './views/dashboard-setting/dashboard-list/create-dashboard/create-dashboard.component';
+import { TemplateListComponent } from './views/dashboard-setting/template/template-list/template-list.component';
+import { NewTemplateModalComponent } from './views/dashboard-setting/template/template-list/new-template-modal/new-template-modal.component';
+import { EditTemplateModalComponent } from './views/dashboard-setting/template/template-list/edit-template-modal/edit-template-modal.component';
+import { NewTopicModelComponent } from './views/topics/topic-list/new-topic-model/new-topic-model.component';
+import { TestComponent } from './views/test/test.component';
+import { ModalComponent } from './shared/modules/modal/modal.component';
+import { TableComponent } from './shared/modules/table/table.component';
+import { SearchComponent } from './shared/modules/search/search.component';
+import { CardComponent } from './shared/modules/card/card.component';
 
 @NgModule({
   declarations: [
@@ -108,11 +113,16 @@ import { NewTopicModelComponent } from './topics/topic-list/new-topic-model/new-
     DashboardSettingComponent,
     DashboardListComponent,
     CreateDashboardComponent,
-    TemplateComponent, 
+    TemplateComponent,
     TemplateListComponent,
     NewTemplateModalComponent,
     EditTemplateModalComponent,
     NewTopicModelComponent,
+    TestComponent,
+    ModalComponent,
+    TableComponent,
+    SearchComponent,
+    CardComponent,
 
   ],
   imports: [
@@ -145,8 +155,8 @@ import { NewTopicModelComponent } from './topics/topic-list/new-topic-model/new-
     TopicConfigModalComponent,
     NewTopicModelComponent,
     CreateDashboardComponent,
- 	NewTemplateModalComponent,
+    NewTemplateModalComponent,
     EditTemplateModalComponent
   ]
 })
-export class AppModule {}
+export class AppModule { }

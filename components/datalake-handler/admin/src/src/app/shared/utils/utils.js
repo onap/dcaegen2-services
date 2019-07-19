@@ -1,0 +1,1 @@
+//put some general functions here. Enjoy
