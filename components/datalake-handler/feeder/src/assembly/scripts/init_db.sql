@@ -41,7 +41,6 @@ CREATE TABLE `design_type` (
   `db_type_id` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKm8rkv2qkq01gsmeq1c3y4w02x` (`db_type_id`),
-  KEY `FKs2nspbhf5wv5d152l4j69yjhi` (`portal`),
   CONSTRAINT `FKm8rkv2qkq01gsmeq1c3y4w02x` FOREIGN KEY (`db_type_id`) REFERENCES `db_type` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
