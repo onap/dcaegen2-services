@@ -60,6 +60,20 @@ public class KafkaConfigTest {
         assertNotEquals(testKafkaConfig, testKafkaConfig2);
         assertNotEquals(testKafkaConfig, null);
         assertNotEquals(testKafkaConfig.hashCode(), testKafkaConfig2.hashCode());
+        assertEquals(BROKER_KAFKA, testKafkaConfig.getBrokerList());
+        assertNotEquals("", testKafkaConfig.getExcludedTopic());
+        assertEquals(true, testKafkaConfig.isSecure());
+        assertEquals("testLogin", testKafkaConfig.getLogin());
+        assertEquals("test", testKafkaConfig.getName());
+        assertNotEquals("test", testKafkaConfig.getIncludedTopic());
+        assertEquals("testGroup", testKafkaConfig.getGroup());
+        assertEquals(true, testKafkaConfig.isEnabled());
+        assertNotEquals("", testKafkaConfig.getConsumerCount());
+        assertEquals(1, testKafkaConfig.getId());
+        assertNotEquals("", testKafkaConfig.getPass());
+        assertNotEquals("test", testKafkaConfig.getSecurityProtocol());
+        assertEquals(ZOO_KEEPER, testKafkaConfig.getZooKeeper());
+        assertNotEquals(null, testKafkaConfig.getTimeout());
     }
 
 }
