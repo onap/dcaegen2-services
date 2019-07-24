@@ -1,5 +1,5 @@
 <div>
-  <h3>Test module is used for some publice business modules sample</h3>
+  <h3>Test module is used for some public business modules sample</h3>
   <div>
     <p>Module 1 -----> card</p>
     <app-card></app-card>
@@ -7,7 +7,8 @@
   </div>
   <div>
     <p>Module 2 -----> modal</p>
-    <app-modal></app-modal>
+    <app-modal>
+    </app-modal>
   </div>
   <div>
     <p>Module 3 -----> search</p>
@@ -15,6 +16,25 @@
   </div>
   <div>
     <p>Module 4 -----> table</p>
-    <app-table></app-table>
+    <app-table [data]="mocktabledata" [columns]="mockcolumns"></app-table>
+  </div>
+  <div>
+    <p>components----button</p>
+    <pre>
+      Please set three properties to the button components:
+        text: string is ok for block and inline sytle. MAKE SURE that icon style button needs specific text. This property is used for defined the function of the button.
+             E.g. if you what a "cancel" button, please input a 'Cancel' string to this property and an 'add' string is for 'add' button
+        style: thress properties is available: block, inline, icon. This property is used for the style of the button. We support three button styles.
+        color: two properties is available: dark, light. This property is used for the color of the button. dark button is filled, light button is unfilled. 
+    </pre>
+    <app-button [text]="'Cancel'" [style]="'block'" [color]="'dark'" (click)="buttonAction('Cancel')"></app-button>
+
+    <app-button [text]="'Cancel'" [style]="'inline'" [color]="'light'" (click)="buttonAction('Cancel')"></app-button>
+    <app-button [text]="'Save'" [style]="'inline'" [color]="'dark'" (click)="buttonAction('Save')"></app-button>
+
+    <app-button [text]="'search'" [style]="'icon'" [color]="'dark'" (click)="buttonAction('search')"></app-button>
+    <app-button [text]="'plus'" [style]="'icon'" [color]="'light'" (click)="buttonAction('add')"></app-button>
+    <app-button [text]="'plus'" [style]="'inlineicon'" [color]="'dark'"></app-button>
+    <app-button [text]="'trash'" [style]="'icon'" [color]="'light'" (click)="buttonAction('trash')"></app-button>
   </div>
 </div>

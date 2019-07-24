@@ -1,3 +1,40 @@
-<p>
-  table works!
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <!-- <ngx-datatable #mytemlate class="bootstrap" [rows]="data" [columnMode]="'force'" [headerHeight]="40"
+      [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [loadingIndicator]="loadingIndicator"
+      [messages]="mesgNoData" [limit]="10" (activate)="onActivate($event)"> -->
+
+    <ngx-datatable #mytemlate class="bootstrap" [rows]="data" [columnMode]="'force'" [headerHeight]="40"
+      [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [loadingIndicator]="loadingIndicator"
+      [messages]="mesgNoData" [limit]="10">
+
+      <ngx-datatable-column sortable="column.sortable" *ngFor="let column of columns" [width]="column.width"
+        name="{{ column.name | translate }}" prop="column.name" headerClass="d-flex justify-content-center"
+        cellClass="d-flex justify-content-center">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <span *ngIf="column.dataIndex&&column.dataIndex.length!==0">{{row[column.dataIndex]}}</span>
+          <span *ngIf="column.renderText&&column.renderText.length!==0"></span>
+          <span *ngIf="column.icontext&&column.icontext.length!==0">
+            <app-button [text]="column.icontext" [style]="'inline'" [color]="'dark'">
+            </app-button>
+          </span>
+          <span *ngIf="column.icon&&column.icon.length!==0">
+            <app-button [text]="column.icon" [style]="'icon'" [color]="'dark'">
+            </app-button>
+          </span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- <ngx-datatable-column [width]="10" name="" sortable="true" cellClass="d-flex justify-content-center">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <span>
+            <button class="btn action-icon-setting" (click)="this.deleteTemplateModel(row.id);">
+              <i class="fas fa-trash-alt fa-xs"></i>
+            </button>
+          </span>
+        </ng-template>
+      </ngx-datatable-column> -->
+
+    </ngx-datatable>
+  </div>
+</div>

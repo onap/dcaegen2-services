@@ -88,6 +88,7 @@ import { ModalComponent } from './shared/modules/modal/modal.component';
 import { TableComponent } from './shared/modules/table/table.component';
 import { SearchComponent } from './shared/modules/search/search.component';
 import { CardComponent } from './shared/modules/card/card.component';
+import { ButtonComponent } from './shared/components/Button/button.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +124,7 @@ import { CardComponent } from './shared/modules/card/card.component';
     TableComponent,
     SearchComponent,
     CardComponent,
+    ButtonComponent,
 
   ],
   imports: [

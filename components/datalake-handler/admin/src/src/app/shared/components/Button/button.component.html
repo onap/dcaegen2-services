@@ -1,0 +1,26 @@
+<!-- block type buttons -->
+<button type="button" *ngIf="this.buttonstyle===1"
+  [class]="this.buttoncolor===1? 'btn dl-btn-light btn-block':'btn dl-btn-dark btn-block'">
+  <span> {{this.text | translate}}</span>
+</button>
+
+<!-- inline type buttons -->
+<button type="button" *ngIf="this.buttonstyle===2" [class]="this.buttoncolor===1? 'btn dl-btn-light':'btn dl-btn-dark'">
+  <span> {{this.text | translate}}</span>
+</button>
+
+<!-- inline icon buttons -->
+<button *ngIf="this.buttonstyle===4" [class]="this.buttoncolor===1? 'btn dl-btn-light':'btn dl-btn-dark'">
+  <span>
+    <i *ngIf="this.text==='search'" class="fa fa-search"></i>
+    <i *ngIf="this.text==='plus'" class="fa fa-plus fa-xs" aria-hidden="true"></i>
+    <i *ngIf="this.text==='trash'" class="fa fa-trash fa-xs" aria-hidden="true"></i>
+  </span>
+</button>
+
+<!-- icon type buttons -->
+<button type="button" *ngIf="this.buttonstyle===3" class="btn dl-icon-enable p-2">
+  <i *ngIf="this.text==='search'" class="fa fa-search"></i>
+  <i *ngIf="this.text==='plus'" class="fa fa-plus fa-xs" aria-hidden="true"></i>
+  <i *ngIf="this.text==='trash'" class="fa fa-trash fa-xs" aria-hidden="true"></i>
+</button>
