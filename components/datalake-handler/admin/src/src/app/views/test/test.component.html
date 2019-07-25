@@ -7,8 +7,9 @@
   </div>
   <div>
     <p>Module 2 -----> modal</p>
-    <app-modal>
-    </app-modal>
+    <button class="btn dl-btn-dark" (click)="openModalDemo()">
+      modal-demo
+    </button>
   </div>
   <div>
     <p>Module 3 -----> search</p>
@@ -25,7 +26,7 @@
         text: string is ok for block and inline sytle. MAKE SURE that icon style button needs specific text. This property is used for defined the function of the button.
              E.g. if you what a "cancel" button, please input a 'Cancel' string to this property and an 'add' string is for 'add' button
         style: thress properties is available: block, inline, icon. This property is used for the style of the button. We support three button styles.
-        color: two properties is available: dark, light. This property is used for the color of the button. dark button is filled, light button is unfilled. 
+        color: two properties is available: dark, light. This property is used for the color of the button. dark button is filled, light button is unfilled.
     </pre>
     <app-button [text]="'Cancel'" [style]="'block'" [color]="'dark'" (click)="buttonAction('Cancel')"></app-button>
 

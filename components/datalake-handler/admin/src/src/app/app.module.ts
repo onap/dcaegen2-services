@@ -75,20 +75,22 @@ import { AboutComponent } from "./views/about/about.component";
 
 // Loading spinner
 import { NgxSpinnerModule } from "ngx-spinner";
-import { DashboardSettingComponent } from './views/dashboard-setting/dashboard-setting.component';
-import { DashboardListComponent } from './views/dashboard-setting/dashboard-list/dashboard-list.component';
-import { TemplateComponent } from './views/dashboard-setting/template/template.component';
-import { CreateDashboardComponent } from './views/dashboard-setting/dashboard-list/create-dashboard/create-dashboard.component';
-import { TemplateListComponent } from './views/dashboard-setting/template/template-list/template-list.component';
-import { NewTemplateModalComponent } from './views/dashboard-setting/template/template-list/new-template-modal/new-template-modal.component';
-import { EditTemplateModalComponent } from './views/dashboard-setting/template/template-list/edit-template-modal/edit-template-modal.component';
-import { NewTopicModelComponent } from './views/topics/topic-list/new-topic-model/new-topic-model.component';
-import { TestComponent } from './views/test/test.component';
-import { ModalComponent } from './shared/modules/modal/modal.component';
-import { TableComponent } from './shared/modules/table/table.component';
-import { SearchComponent } from './shared/modules/search/search.component';
-import { CardComponent } from './shared/modules/card/card.component';
-import { ButtonComponent } from './shared/components/Button/button.component';
+import { DashboardSettingComponent } from "./views/dashboard-setting/dashboard-setting.component";
+import { DashboardListComponent } from "./views/dashboard-setting/dashboard-list/dashboard-list.component";
+import { TemplateComponent } from "./views/dashboard-setting/template/template.component";
+import { CreateDashboardComponent } from "./views/dashboard-setting/dashboard-list/create-dashboard/create-dashboard.component";
+import { TemplateListComponent } from "./views/dashboard-setting/template/template-list/template-list.component";
+import { NewTemplateModalComponent } from "./views/dashboard-setting/template/template-list/new-template-modal/new-template-modal.component";
+import { EditTemplateModalComponent } from "./views/dashboard-setting/template/template-list/edit-template-modal/edit-template-modal.component";
+import { NewTopicModelComponent } from "./views/topics/topic-list/new-topic-model/new-topic-model.component";
+import { TestComponent } from "./views/test/test.component";
+import { ModalComponent } from "./shared/modules/modal/modal.component";
+import { TableComponent } from "./shared/modules/table/table.component";
+import { SearchComponent } from "./shared/modules/search/search.component";
+import { CardComponent } from "./shared/modules/card/card.component";
+import { ButtonComponent } from "./shared/components/Button/button.component";
+import { ModalDirective } from "./shared/modules/modal/modal.directive";
+import { ModalDemoComponent } from "./views/test/modal-demo/modal-demo.component";
 
 @NgModule({
   declarations: [
@@ -125,7 +127,8 @@ import { ButtonComponent } from './shared/components/Button/button.component';
     SearchComponent,
     CardComponent,
     ButtonComponent,
-
+    ModalDirective,
+    ModalDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -158,7 +161,9 @@ import { ButtonComponent } from './shared/components/Button/button.component';
     NewTopicModelComponent,
     CreateDashboardComponent,
     NewTemplateModalComponent,
-    EditTemplateModalComponent
+    EditTemplateModalComponent,
+    ModalComponent,
+    ModalDemoComponent
   ]
 })
-export class AppModule { }
+export class AppModule {}

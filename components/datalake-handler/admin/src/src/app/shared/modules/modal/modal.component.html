@@ -1,3 +1,98 @@
-<p>
-  modal works!
-</p>
+<!--
+============LICENSE_START=======================================================
+ONAP : DataLake
+================================================================================
+Copyright 2019 QCT
+=================================================================================
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+============LICENSE_END=========================================================
+-->
+
+<div class="p-1">
+
+  <!-- Modal Header -->
+  <div class="modal-header pb-0 border-0 border-bottom">
+    <div class="container-fluid">
+
+      <!-- Page Title -->
+      <div class="row">
+        <div class="col-md-12">
+          <label *ngIf="this.contentComponent.data.state == 'edit'" class="dl-h3">Edit&nbsp;</label>
+          <label class="dl-h3">{{ this.contentComponent.data.title | translate }}</label>
+        </div>
+      </div>
+      <!-- Page Title End -->
+
+      <div class="row">
+        <div class="col-md-12">
+          <hr />
+        </div>
+
+        <!-- Notice -->
+        <div *ngIf="this.contentComponent.data.notice" class="col-md-12">
+          <div class="dl-notice">
+            {{ this.contentComponent.data.notice | translate}}
+          </div>
+        </div>
+        <!-- Notice End -->
+
+      </div>
+
+    </div>
+  </div>
+  <!-- Modal Header End -->
+
+  <!-- Modal Body -->
+  <div class="modal-body border-0">
+    <div class="container-fluid">
+
+      <!-- Modal Content -->
+      <div class="row">
+        <div class="col-md-12">
+          <ng-template modal-content></ng-template>
+        </div>
+      </div>
+      <!-- Modal Content End -->
+
+    </div>
+  </div>
+  <!-- Modal Body End -->
+
+  <!-- Modal Footer -->
+  <div class="modal-footer border-0 pt-0 pb-2">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="d-flex justify-content-end">
+            <div class="p-1">
+              <span>
+                <app-button *ngIf="this.contentComponent.data.state == 'new'" [text]="'Next'" [style]="'inline'"
+                  [color]="'dark'" (click)="this.nextPage()"></app-button>
+                <app-button *ngIf="this.contentComponent.data.state == 'edit'" [text]="'Save'" [style]="'inline'"
+                  [color]="'dark'" (click)="this.passBack()"></app-button>
+              </span>
+            </div>
+
+            <div class="p-1">
+              <span>
+                <app-button [text]="'Cancel'" [style]="'inline'" [color]="'light'"
+                  (click)="activeModal.close('Close click')"></app-button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Footer End -->
+</div>
