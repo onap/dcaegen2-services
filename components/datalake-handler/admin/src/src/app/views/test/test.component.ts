@@ -22,6 +22,14 @@ export class TestComponent implements OnInit {
   topic: Topic;
   // Modal example end
 
+  // Card example
+  cardTitle: string;
+  cardIconPath: string;
+  cardContent: string;
+  cardSubcontent: string;
+  cardModifiable: boolean;
+  // Card example end
+
   constructor(
     private notificationService: ToastrNotificationService,
     // Modal example
@@ -85,6 +93,16 @@ export class TestComponent implements OnInit {
     this.topic.messageIdPath = "";
     this.topic.type = false;
     // Modal example end
+
+    // Card example
+    this.cardTitle = "Topics";
+    // Display content as string
+    this.cardContent = "1234";
+    // or display content as svg-icons(path)
+    this.cardIconPath = "assets/icons/couchbase_able.svg";
+    this.cardSubcontent = "QCT-Kafka";
+    this.cardModifiable = true;
+    // Card example end
   }
 
   buttonAction(string: string = "") {

@@ -92,6 +92,9 @@ import { ButtonComponent } from "./shared/components/Button/button.component";
 import { ModalDirective } from "./shared/modules/modal/modal.directive";
 import { ModalDemoComponent } from "./views/test/modal-demo/modal-demo.component";
 
+// Angular SVG Icon
+import { AngularSvgIconModule } from "angular-svg-icon";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -144,7 +147,8 @@ import { ModalDemoComponent } from "./views/test/modal-demo/modal-demo.component
     }),
     FormsModule,
     NgxDatatableModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    AngularSvgIconModule
   ],
   providers: [AdminService, RestApiService, ToastrNotificationService],
   bootstrap: [AppComponent],

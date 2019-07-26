@@ -1,0 +1,38 @@
+/*
+* ============LICENSE_START=======================================================
+* ONAP : DataLake
+* ================================================================================
+* Copyright 2019 QCT
+*=================================================================================
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+* ============LICENSE_END=========================================================
+*/
+
+.card-panel {
+  background: #FFFFFF;
+  box-shadow: 3px 3px 11px 0 #D2D3D5;
+  border-radius: 20px;
+  max-height: 250px;
+}
+
+.card-panel .title {
+  color: #5DBEBB;
+  letter-spacing: 1.79px;
+}
+
+.card-panel .infoname {
+  color: #313032;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
