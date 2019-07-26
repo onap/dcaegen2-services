@@ -2,8 +2,8 @@
   <h3>Test module is used for some public business modules sample</h3>
   <div>
     <p>Module 1 -----> card</p>
-    <app-card></app-card>
-
+    <app-card [title]="this.cardTitle" [content1]="this.cardContent1" [content2]="this.cardContent2"
+      [modifiable]="this.cardModifiable"></app-card>
   </div>
   <div>
     <p>Module 2 -----> modal</p>

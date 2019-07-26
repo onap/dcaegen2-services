@@ -1,3 +1,49 @@
-<p>
-  card works!
-</p>
+<!--
+============LICENSE_START=======================================================
+ONAP : DataLake
+================================================================================
+Copyright 2019 QCT
+=================================================================================
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+============LICENSE_END=========================================================
+-->
+
+<div class="card-panel d-flex flex-column">
+
+  <div class="d-flex flex-row">
+    <div class="dl-h4 title mr-auto m-1 p-2">{{ this.title }}</div>
+
+    <div *ngIf="this.modifiable" class="ml-auto m-1 p-2 dropdown action-icon-dropdown" data-boundary="window">
+      <a class="badge badge-light action-icon-dropdown" data-toggle="dropdown" style="cursor: pointer">
+        <i class="fas fa-ellipsis-h fa-2x dl-icon-enable"></i>
+      </a>
+      <div class="dropdown-menu action-icon-btn">
+        <button class="dropdown-item" type="button">
+          {{ 'EDIT' | translate }}
+        </button>
+        <button class="dropdown-item" type="button">
+          {{ 'DELETE' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dl-h1 mb-auto align-self-center">
+    {{ this.content1 }}
+  </div>
+
+  <div class="infoname pb-3 align-self-center">
+    {{ this.content2 }}
+  </div>
+
+</div>

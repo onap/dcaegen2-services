@@ -22,6 +22,13 @@ export class TestComponent implements OnInit {
   topic: Topic;
   // Modal example end
 
+  // Card example
+  cardTitle: string;
+  cardContent1: string;
+  cardContent2: string;
+  cardModifiable: boolean;
+  // Card example end
+
   constructor(
     private notificationService: ToastrNotificationService,
     // Modal example
@@ -85,6 +92,13 @@ export class TestComponent implements OnInit {
     this.topic.messageIdPath = "";
     this.topic.type = false;
     // Modal example end
+
+    // Card example
+    this.cardTitle = "Topics";
+    this.cardContent1 = "112";
+    this.cardContent2 = "QCT-Kafka";
+    this.cardModifiable = true;
+    // Card example end
   }
 
   buttonAction(string: string = "") {
