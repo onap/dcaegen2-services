@@ -1,3 +1,63 @@
-<p>
-  card works!
-</p>
+<!--
+============LICENSE_START=======================================================
+ONAP : DataLake
+================================================================================
+Copyright 2019 QCT
+=================================================================================
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+============LICENSE_END=========================================================
+-->
+<div class="card-panel d-flex flex-column">
+  <div class="d-flex flex-row p-2">
+    <div class="dl-h4 title mr-auto ml-3 mt-2">{{ this.title }}</div>
+
+    <div *ngIf="this.modifiable" class="ml-auto dropdown action-icon-dropdown" data-boundary="window">
+      <a class="badge badge-light action-icon-dropdown" data-toggle="dropdown" style="cursor: pointer">
+        <i class="fas fa-ellipsis-h fa-2x dl-icon-enable"></i>
+      </a>
+      <div class="dropdown-menu action-icon-btn">
+        <button class="dropdown-item" type="button">
+          {{ 'EDIT' | translate }}
+        </button>
+        <button class="dropdown-item" type="button">
+          {{ 'DELETE' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-auto align-self-center p-2">
+    <!-- show icon -->
+    <div *ngIf="this.iconPath">
+      <span [ngSwitch]="this.iconSize">
+        <span *ngSwitchCase="'sm'">
+          <svg-icon [src]="this.iconPath" [svgStyle]="{ 'width.px':80 }"></svg-icon>
+        </span>
+        <span *ngSwitchCase="'lg'">
+          <svg-icon [src]="this.iconPath" [svgStyle]="{ 'width.px':180 }"></svg-icon>
+        </span>
+        <span *ngSwitchDefault>
+          <svg-icon [src]="this.iconPath" [svgStyle]="{ 'width.px':150 }"></svg-icon>
+        </span>
+      </span>
+    </div>
+    <!-- show string -->
+    <div *ngIf="this.content" class="dl-h1">
+      {{ this.content }}
+    </div>
+  </div>
+
+  <div class="infoname align-self-center mt-auto p-2">
+    {{ this.subcontent }}
+  </div>
+</div>
