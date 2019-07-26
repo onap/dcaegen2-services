@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c38074e6_9e5ec17f",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/util/HttpClientUtil.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-07-26T23:46:15Z",
+      "side": 1,
+      "message": "The method name sounds generic, but it is Kibana specific.",
+      "range": {
+        "startLine": 55,
+        "startChar": 26,
+        "endLine": 55,
+        "endChar": 44
+      },
+      "revId": "49b9223b834167bded8d333fee67a395ca230828",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
