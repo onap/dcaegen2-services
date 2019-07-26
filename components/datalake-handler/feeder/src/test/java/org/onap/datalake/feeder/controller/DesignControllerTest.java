@@ -134,7 +134,7 @@ public class DesignControllerTest {
         assertEquals(1, testDesignController.queryAllDesign().size());
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testDeployDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
 
         DesignController testDesignController = new DesignController();
