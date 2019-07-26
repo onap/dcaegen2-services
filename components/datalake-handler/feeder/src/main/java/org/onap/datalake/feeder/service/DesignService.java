@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.*;
@@ -52,7 +55,7 @@ public class DesignService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	static String POST_FLAG;
+	private static String POST_FLAG;
 
 	@Autowired
 	private DesignRepository designRepository;
@@ -131,7 +134,7 @@ public class DesignService {
 		List<Design> designList = null;
 		List<DesignConfig> designConfigList = new ArrayList<>();
 		designList = (List<Design>) designRepository.findAll();
-		if (designList != null && designList.size() > 0) {
+		if (!designList.isEmpty()) {
 			log.info("DesignList is not null");
 			for (Design design : designList) {
 				designConfigList.add(design.getDesignConfig());
@@ -140,28 +143,57 @@ public class DesignService {
 		return designConfigList;
 	}
 
-	public boolean deploy(Design design) {
+	public Map<Integer, Boolean> deploy(Design design) {
+		Map<Integer, Boolean> resultMap = null;
 		DesignType designType = design.getDesignType();
 		DesignTypeEnum designTypeEnum = DesignTypeEnum.valueOf(designType.getId());
 
 		switch (designTypeEnum) {
 		case KIBANA_DB:
-			return deployKibanaImport(design);
+			resultMap = deployKibanaImport(design);
+			if (!resultMap.isEmpty()) {
+				Iterator<Map.Entry<Integer, Boolean>> it = resultMap.entrySet().iterator();
+				while (it.hasNext()) {
+					Map.Entry<Integer, Boolean> entry = it.next();
+					if (entry.getValue()) {
+						design.setSubmitted(true);
+						designRepository.save(design);
+					}
+				}
+			}
 		case ES_MAPPING:
-			return postEsMappingTemplate(design, design.getTopicName().getId().toLowerCase());
+			//FIXME
+			//return postEsMappingTemplate(design, design.getTopicName().getId().toLowerCase());
 		default:
 			log.error("Not implemented {}", designTypeEnum);
-			return false;
 		}
+		return resultMap;
 	}
 
-	private boolean deployKibanaImport(Design design) throws RuntimeException {
+	private Map<Integer, Boolean> deployKibanaImport(Design design) {
 		POST_FLAG = "KibanaDashboardImport";
 		String requestBody = design.getBody();
-		String url = "";
-		//TODO
-		return HttpClientUtil.sendPostHttpClient(url, requestBody, POST_FLAG);
+		Set<Db> dbs =  design.getDbs();
+		Map<Integer, Boolean> deployMap = new HashMap<>();
 
+		if (!dbs.isEmpty()) {
+			Map<Integer, String> map = new HashMap<>();
+			for (Db item : dbs) {
+				if (item.isEnabled()) {
+					map.put(item.getId(), kibanaImportUrl(item.getHost(), item.getPort()));
+				}
+			}
+			if (!map.isEmpty()) {
+				Iterator<Map.Entry<Integer, String>> it = map.entrySet().iterator();
+				while (it.hasNext()) {
+					Map.Entry<Integer, String> entry = it.next();
+					deployMap.put(entry.getKey(), HttpClientUtil.sendPostKibana(entry.getValue(), requestBody, POST_FLAG));
+				}
+			}
+			return deployMap;
+		} else {
+			return deployMap;
+		}
 	}
 
 	private String kibanaImportUrl(String host, Integer port) {
@@ -178,7 +210,7 @@ public class DesignService {
 	 * @param templateName
 	 * @return flag
 	 */
-	public boolean postEsMappingTemplate(Design design, String templateName) throws RuntimeException {
+	public boolean postEsMappingTemplate(Design design, String templateName) {
 		POST_FLAG = "ElasticsearchMappingTemplate";
 		String requestBody = design.getBody();
 
