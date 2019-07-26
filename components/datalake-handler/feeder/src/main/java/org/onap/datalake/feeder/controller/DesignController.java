@@ -35,7 +35,10 @@ import org.springframework.web.bind.annotation.*;
 import io.swagger.annotations.ApiOperation;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -137,30 +140,16 @@ public class DesignController {
 	@PostMapping("/deploy/{id}")
 	@ResponseBody
 	@ApiOperation(value="Design deploy")
-	public void deployDesign(@PathVariable Integer id, HttpServletResponse response) throws IOException {
+	public Map<Integer, Boolean> deployDesign(@PathVariable Integer id, HttpServletResponse response) throws IOException {
 
-		Design design = null;
-		try {
-			design = designRepository.findById(id).get();
-			boolean flag;
-			try {
-				flag = designService.deploy(design);
-				if (flag) {
-					design.setSubmitted(true);
-					designRepository.save(design);
-					response.setStatus(204);
-				} else {
-					sendError(response, 400, "DeployDesign failed, id: "+id);
-				}
-			} catch (Exception e) {
-				log.debug("The request failed", e.getMessage());
-				sendError(response, 400, "The request failed : "+e.getMessage());
-			}
-		} catch (Exception e) {
-			log.debug("Design is null", e.getMessage());
-			sendError(response, 400, "Design not found, id: "+id);
+		Optional<Design> designOptional = designRepository.findById(id);
+		if (designOptional.isPresent()) {
+			Design design = designOptional.get();
+			return designService.deploy(design);
+		} else {
+			sendError(response, 400, "Design is null");
+			return new HashMap<>();
 		}
-
 	}
 
 
