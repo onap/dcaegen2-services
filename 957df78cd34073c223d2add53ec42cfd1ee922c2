@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2a43e94_d013efb5",
+        "filename": "components/datalake-handler/admin/src/src/app/views/test/test.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5495
+      },
+      "writtenOn": "2019-07-26T07:18:05Z",
+      "side": 1,
+      "message": "Please make sure that \u0027string\u0027 type is suitable for the svg.",
+      "range": {
+        "startLine": 27,
+        "startChar": 16,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "957df78cd34073c223d2add53ec42cfd1ee922c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7de7b0b3_7526356b",
+        "filename": "components/datalake-handler/admin/src/src/app/views/test/test.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 5495
+      },
+      "writtenOn": "2019-07-26T07:18:05Z",
+      "side": 1,
+      "message": "\u0027cardContent\u0027 and \u0027cardSubcontent\u0027 are better names for variable.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 23
+      },
+      "revId": "957df78cd34073c223d2add53ec42cfd1ee922c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
