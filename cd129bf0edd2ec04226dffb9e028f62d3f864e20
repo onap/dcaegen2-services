@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63067310_6130dd8e",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/util/HttpClientUtil.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-07-29T23:56:45Z",
+      "side": 1,
+      "message": "this is kibana specific request. The method name should reflect it.",
+      "range": {
+        "startLine": 59,
+        "startChar": 9,
+        "endLine": 59,
+        "endChar": 39
+      },
+      "revId": "cd129bf0edd2ec04226dffb9e028f62d3f864e20",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
