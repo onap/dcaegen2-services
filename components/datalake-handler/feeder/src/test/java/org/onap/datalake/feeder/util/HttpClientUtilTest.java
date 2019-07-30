@@ -20,14 +20,16 @@
 
 package org.onap.datalake.feeder.util;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import static org.mockito.Mockito.when;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
+import static org.mockito.Mockito.when;
 
 import static org.junit.Assert.*;
 
@@ -36,79 +38,54 @@ import static org.junit.Assert.*;
  *
  * @author guochunmeng
  */
-
 public class HttpClientUtilTest {
 
     @Mock
-    private HttpClient  httpClient;
+    private RestTemplate restTemplate;
 
     @Mock
-    private HttpPost httpPost;
+    private HttpEntity httpEntity;
 
     @Mock
-    private HttpResponse httpResponse;
+    private ResponseEntity responseEntity;
 
-    @Test(expected = RuntimeException.class)
-    public void testSendPostHttpClient() {
+//    @Before
+//    public void before() {
+//        responseEntity = restTemplate.postForEntity("", httpEntity, String.class);
+//    }
 
-        String testUrl = "http://localhost:5601/api/kibana/dashboards/import?exclude=index-pattern";
+    @Test
+    public void testSendPostKibana() {
+
+        String templateName = "unauthenticated.test";
+        String testUrl = "http://localhost:9200/_template/"+templateName;
         String testJson = "{\n" +
-                "  \"objects\": [\n" +
-                "    {\n" +
-                "      \"id\": \"80b956f0-b2cd-11e8-ad8e-85441f0c2e5c\",\n" +
-                "      \"type\": \"visualization\",\n" +
-                "      \"updated_at\": \"2018-09-07T18:40:33.247Z\",\n" +
-                "      \"version\": 1,\n" +
-                "      \"attributes\": {\n" +
-                "        \"title\": \"Count Example\",\n" +
-                "        \"visState\": \"{\\\"title\\\":\\\"Count Example\\\",\\\"type\\\":\\\"metric\\\",\\\"params\\\":{\\\"addTooltip\\\":true,\\\"addLegend\\\":false,\\\"type\\\":\\\"metric\\\",\\\"metric\\\":{\\\"percentageMode\\\":false,\\\"useRanges\\\":false,\\\"colorSchema\\\":\\\"Green to Red\\\",\\\"metricColorMode\\\":\\\"None\\\",\\\"colorsRange\\\":[{\\\"from\\\":0,\\\"to\\\":10000}],\\\"labels\\\":{\\\"show\\\":true},\\\"invertColors\\\":false,\\\"style\\\":{\\\"bgFill\\\":\\\"#000\\\",\\\"bgColor\\\":false,\\\"labelColor\\\":false,\\\"subText\\\":\\\"\\\",\\\"fontSize\\\":60}}},\\\"aggs\\\":[{\\\"id\\\":\\\"1\\\",\\\"enabled\\\":true,\\\"type\\\":\\\"count\\\",\\\"schema\\\":\\\"metric\\\",\\\"params\\\":{}}]}\",\n" +
-                "        \"uiStateJSON\": \"{}\",\n" +
-                "        \"description\": \"\",\n" +
-                "        \"version\": 1,\n" +
-                "        \"kibanaSavedObjectMeta\": {\n" +
-                "          \"searchSourceJSON\": \"{\\\"index\\\":\\\"90943e30-9a47-11e8-b64d-95841ca0b247\\\",\\\"query\\\":{\\\"query\\\":\\\"\\\",\\\"language\\\":\\\"lucene\\\"},\\\"filter\\\":[]}\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"id\": \"90943e30-9a47-11e8-b64d-95841ca0b247\",\n" +
-                "      \"type\": \"index-pattern\",\n" +
-                "      \"updated_at\": \"2018-09-07T18:39:47.683Z\",\n" +
-                "      \"version\": 1,\n" +
-                "      \"attributes\": {\n" +
-                "        \"title\": \"kibana_sample_data_logs\",\n" +
-                "        \"timeFieldName\": \"timestamp\",\n" +
-                "        \"fields\": \"<truncated for example>\",\n" +
-                "        \"fieldFormatMap\": \"{\\\"hour_of_day\\\":{}}\"\n" +
-                "      }\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"id\": \"942dcef0-b2cd-11e8-ad8e-85441f0c2e5c\",\n" +
-                "      \"type\": \"dashboard\",\n" +
-                "      \"updated_at\": \"2018-09-07T18:41:05.887Z\",\n" +
-                "      \"version\": 1,\n" +
-                "      \"attributes\": {\n" +
-                "        \"title\": \"Example Dashboard\",\n" +
-                "        \"hits\": 0,\n" +
-                "        \"description\": \"\",\n" +
-                "        \"panelsJSON\": \"[{\\\"gridData\\\":{\\\"w\\\":24,\\\"h\\\":15,\\\"x\\\":0,\\\"y\\\":0,\\\"i\\\":\\\"1\\\"},\\\"version\\\":\\\"7.0.0-alpha1\\\",\\\"panelIndex\\\":\\\"1\\\",\\\"type\\\":\\\"visualization\\\",\\\"id\\\":\\\"80b956f0-b2cd-11e8-ad8e-85441f0c2e5c\\\",\\\"embeddableConfig\\\":{}}]\",\n" +
-                "        \"optionsJSON\": \"{\\\"darkTheme\\\":false,\\\"useMargins\\\":true,\\\"hidePanelTitles\\\":false}\",\n" +
-                "        \"version\": 1,\n" +
-                "        \"timeRestore\": false,\n" +
-                "        \"kibanaSavedObjectMeta\": {\n" +
-                "          \"searchSourceJSON\": \"{\\\"query\\\":{\\\"query\\\":\\\"\\\",\\\"language\\\":\\\"lucene\\\"},\\\"filter\\\":[]}\"\n" +
-                "        }\n" +
-                "      }\n" +
-                "    }\n" +
-                "  ]\n" +
+                "\t\"template\":\"unauthenticated.test\",\n" +
+                "\t\"order\":1,\n" +
+                "\t\"mappings\":{\n" +
+                "\t\t\"_default_\":{\n" +
+                "\t\t\t\"properties\":{\n" +
+                "\t\t\t\t\"datalake_ts_\":{\n" +
+                "\t\t\t\t\t\"type\":\"date\",\n" +
+                "\t\t\t\t\t\"format\":\"epoch_millis\"\n" +
+                "\t\t\t\t},\n" +
+                "\t\t\t\t\"event.commonEventHeader.startEpochMicrosec\":{\n" +
+                "\t\t\t\t\t\"type\":\"date\",\n" +
+                "\t\t\t\t\t\"format\":\"epoch_millis\"\n" +
+                "\t\t\t\t},\n" +
+                "\t\t\t\t\"event.commonEventHeader.lastEpochMicrosec\":{\n" +
+                "\t\t\t\t\t\"type\":\"date\",\n" +
+                "\t\t\t\t\t\"format\":\"epoch_millis\"\n" +
+                "\t\t\t\t}\n" +
+                "\t\t\t}\n" +
+                "\t\t}\n" +
+                "\t}\n" +
                 "}";
-        String testFlag = "KibanaDashboardImport";
-        try {
-            when(httpClient.execute(httpPost)).thenReturn(httpResponse);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assertEquals(true, HttpClientUtil.sendPostHttpClient(testUrl, testJson, testFlag));
+        String testFlag = "ElasticsearchMappingTemplate";
+//        when(restTemplate.postForEntity(testUrl, httpEntity, String.class)).thenReturn(responseEntity);
+//        when(responseEntity.getStatusCodeValue()).thenReturn(200);
+//        when(responseEntity.getBody()).thenReturn("{ \"acknowledged\": true }");
 
+        assertEquals(false, HttpClientUtil.sendPostKibana(testUrl, testJson, testFlag));
     }
 }
