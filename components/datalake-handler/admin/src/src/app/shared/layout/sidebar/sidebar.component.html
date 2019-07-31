@@ -36,6 +36,13 @@ limitations under the License.
 
       <li class="nav-item ">
         <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+           routerLink="/kafka">
+          <i class="fas fa-cube">&nbsp;</i>
+          {{"SIDEBAR.KAFKA" | translate}}
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
           routerLink="/topics">
           <i class="fas fa-cube">&nbsp;</i>
           {{"SIDEBAR.TOPICS" | translate}}

@@ -91,9 +91,10 @@ import { CardComponent } from "./shared/modules/card/card.component";
 import { ButtonComponent } from "./shared/components/Button/button.component";
 import { ModalDirective } from "./shared/modules/modal/modal.directive";
 import { ModalDemoComponent } from "./views/test/modal-demo/modal-demo.component";
-
+import { KafkaComponent } from './views/kafka/kafka.component';
 // Angular SVG Icon
 import { AngularSvgIconModule } from "angular-svg-icon";
+
 
 @NgModule({
   declarations: [
@@ -131,7 +132,8 @@ import { AngularSvgIconModule } from "angular-svg-icon";
     CardComponent,
     ButtonComponent,
     ModalDirective,
-    ModalDemoComponent
+    ModalDemoComponent,
+    KafkaComponent
   ],
   imports: [
     BrowserModule,
@@ -167,7 +169,8 @@ import { AngularSvgIconModule } from "angular-svg-icon";
     NewTemplateModalComponent,
     EditTemplateModalComponent,
     ModalComponent,
-    ModalDemoComponent
+    ModalDemoComponent,
+    KafkaComponent
   ]
 })
 export class AppModule {}

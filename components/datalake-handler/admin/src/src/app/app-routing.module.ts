@@ -31,6 +31,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { TestComponent } from './views/test/test.component';
 
 import { FeederComponent } from "./views/feeder/feeder.component";
+import { KafkaComponent } from "./views/kafka/kafka.component";
 import { TopicsComponent } from "./views/topics/topics.component";
 import { DatabaseComponent } from "./views/database/database.component";
 import { AboutComponent } from "./views/about/about.component";
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: "", redirectTo: "/feeder", pathMatch: "full" },
   { path: "test", component: TestComponent },
   { path: "feeder", component: FeederComponent },
+  { path: "kafka", component: KafkaComponent },
   { path: "topics", component: TopicsComponent },
   { path: "database", component: DatabaseComponent },
   { path: "about", component: AboutComponent },
