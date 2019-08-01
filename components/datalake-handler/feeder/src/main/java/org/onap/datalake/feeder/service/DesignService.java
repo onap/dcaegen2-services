@@ -57,6 +57,8 @@ public class DesignService {
 
 	private static String POST_FLAG;
 
+	private static String URL_FlAG;
+
 	@Autowired
 	private DesignRepository designRepository;
 
@@ -150,57 +152,44 @@ public class DesignService {
 
 		switch (designTypeEnum) {
 		case KIBANA_DB:
-			resultMap = deployKibanaImport(design);
-			if (!resultMap.isEmpty()) {
-				Iterator<Map.Entry<Integer, Boolean>> it = resultMap.entrySet().iterator();
-				while (it.hasNext()) {
-					Map.Entry<Integer, Boolean> entry = it.next();
-					if (entry.getValue()) {
-						design.setSubmitted(true);
-						designRepository.save(design);
-					}
-				}
-			}
+			log.info("Deploy kibana dashboard");
+			resultMap = deployKibanaDashboardImport(design);
+			deploySave(resultMap, design);
+			break;
 		case ES_MAPPING:
-			//FIXME
-			//return postEsMappingTemplate(design, design.getTopicName().getId().toLowerCase());
+			log.info("Deploy elasticsearch mapping template");
+			resultMap = postEsMappingTemplate(design, design.getTopicName().getId().toLowerCase());
+			deploySave(resultMap, design);
+			break;
 		default:
 			log.error("Not implemented {}", designTypeEnum);
+			break;
 		}
+		log.info("Response resultMap: " + resultMap);
 		return resultMap;
 	}
 
-	private Map<Integer, Boolean> deployKibanaImport(Design design) {
+	private Map<Integer, Boolean> deployKibanaDashboardImport(Design design) {
+		URL_FlAG = "Kibana";
 		POST_FLAG = "KibanaDashboardImport";
 		String requestBody = design.getBody();
 		Set<Db> dbs =  design.getDbs();
-		Map<Integer, Boolean> deployMap = new HashMap<>();
+		Map<Integer, Boolean> deployKibanaMap = new HashMap<>();
 
 		if (!dbs.isEmpty()) {
-			Map<Integer, String> map = new HashMap<>();
-			for (Db item : dbs) {
-				if (item.isEnabled()) {
-					map.put(item.getId(), kibanaImportUrl(item.getHost(), item.getPort()));
-				}
-			}
+			Map<Integer, String> map = urlMap(dbs, URL_FlAG);
+			log.info("Deploy kibana dashboard url map: " + map);
 			if (!map.isEmpty()) {
 				Iterator<Map.Entry<Integer, String>> it = map.entrySet().iterator();
 				while (it.hasNext()) {
 					Map.Entry<Integer, String> entry = it.next();
-					deployMap.put(entry.getKey(), HttpClientUtil.sendPostKibana(entry.getValue(), requestBody, POST_FLAG));
+					deployKibanaMap.put(entry.getKey(), HttpClientUtil.sendHttpClientPost(entry.getValue(), requestBody, POST_FLAG, URL_FlAG));
 				}
 			}
-			return deployMap;
+			return deployKibanaMap;
 		} else {
-			return deployMap;
+			return deployKibanaMap;
 		}
-	}
-
-	private String kibanaImportUrl(String host, Integer port) {
-		if (port == null) {
-			port = applicationConfiguration.getKibanaPort();
-		}
-		return "http://" + host + ":" + port + applicationConfiguration.getKibanaDashboardImportApi();
 	}
 
 	/**
@@ -210,16 +199,74 @@ public class DesignService {
 	 * @param templateName
 	 * @return flag
 	 */
-	public boolean postEsMappingTemplate(Design design, String templateName) {
+	public Map<Integer, Boolean> postEsMappingTemplate(Design design, String templateName) {
+		URL_FlAG = "Elasticsearch";
 		POST_FLAG = "ElasticsearchMappingTemplate";
 		String requestBody = design.getBody();
-
-		//FIXME
 		Set<Db> dbs = design.getDbs();
-		//submit to each ES in dbs
+		Map<Integer, Boolean> deployEsMap = new HashMap<>();
 
-		//return HttpClientUtil.sendPostHttpClient("http://"+dbService.getElasticsearch().getHost()+":9200/_template/"+templateName, requestBody, POST_FLAG);
-		return false;
+		if (!dbs.isEmpty()) {
+			Map<Integer, String> map = urlMap(dbs, URL_FlAG);
+			log.info("Deploy elasticsearch url map: " + map);
+			if (!map.isEmpty()) {
+				Iterator<Map.Entry<Integer, String>> it = map.entrySet().iterator();
+				while (it.hasNext()) {
+					Map.Entry<Integer, String> entry = it.next();
+					deployEsMap.put(entry.getKey(), HttpClientUtil.sendHttpClientPost(entry.getValue()+templateName, requestBody, POST_FLAG, URL_FlAG));
+				}
+			}
+			return deployEsMap;
+		} else {
+			return deployEsMap;
+		}
+	}
+
+	private Map<Integer, String> urlMap (Set<Db> dbs, String flag) {
+		Map<Integer, String> map = new HashMap<>();
+		for (Db item : dbs) {
+			if (item.isEnabled()) {
+				map.put(item.getId(), httpRequestUrl(item.getHost(), item.getPort(), flag));
+			}
+		}
+		return map;
+	}
+
+	private String httpRequestUrl(String host, Integer port, String urlFlag) {
+		String url = "";
+		switch (urlFlag) {
+			case "Kibana":
+				if (port == null) {
+					port = applicationConfiguration.getKibanaPort();
+				}
+				url = "http://" + host + ":" + port + applicationConfiguration.getKibanaDashboardImportApi();
+				log.info("Kibana url: " + url);
+				break;
+			case "Elasticsearch":
+				if (port == null) {
+					port = applicationConfiguration.getEsPort();
+				}
+				url = "http://" + host + ":" + port + applicationConfiguration.getEsTemplateMappingApi();
+				log.info("Elasticsearch url: " + url);
+				break;
+			default:
+				break;
+		}
+		return url;
+	}
+
+	private void deploySave(Map<Integer, Boolean> map, Design design) {
+		if (!map.isEmpty()) {
+			Iterator<Map.Entry<Integer, Boolean>> it = map.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry<Integer, Boolean> entry = it.next();
+				if (entry.getValue()) {
+					design.setSubmitted(true);
+					designRepository.save(design);
+					log.info("Status was modified");
+				}
+			}
+		}
 	}
 
 }

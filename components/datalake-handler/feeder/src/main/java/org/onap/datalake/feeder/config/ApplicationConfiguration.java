@@ -69,4 +69,8 @@ public class ApplicationConfiguration {
   	//Kibana
 	private String kibanaDashboardImportApi;
 	private Integer kibanaPort;
+
+	//Elasticsearch
+	private String esTemplateMappingApi;
+	private Integer esPort;
 }

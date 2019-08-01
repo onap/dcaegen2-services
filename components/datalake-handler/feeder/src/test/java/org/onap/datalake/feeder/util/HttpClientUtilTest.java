@@ -55,7 +55,7 @@ public class HttpClientUtilTest {
 //    }
 
     @Test
-    public void testSendPostKibana() {
+    public void testSendHttpClientPost() {
 
         String templateName = "unauthenticated.test";
         String testUrl = "http://localhost:9200/_template/"+templateName;
@@ -82,10 +82,11 @@ public class HttpClientUtilTest {
                 "\t}\n" +
                 "}";
         String testFlag = "ElasticsearchMappingTemplate";
+        String testUrlFlag = "Elasticsearch";
 //        when(restTemplate.postForEntity(testUrl, httpEntity, String.class)).thenReturn(responseEntity);
 //        when(responseEntity.getStatusCodeValue()).thenReturn(200);
 //        when(responseEntity.getBody()).thenReturn("{ \"acknowledged\": true }");
 
-        assertEquals(false, HttpClientUtil.sendPostKibana(testUrl, testJson, testFlag));
+        assertEquals(false, HttpClientUtil.sendHttpClientPost(testUrl, testJson, testFlag, testUrlFlag));
     }
 }

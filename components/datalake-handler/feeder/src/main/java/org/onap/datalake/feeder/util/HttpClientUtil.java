@@ -44,6 +44,8 @@ public class HttpClientUtil {
 
     private static final Logger log = LoggerFactory.getLogger(HttpClientUtil.class);
 
+    private static final String KIBANA = "Kibana";
+
     private static final String KIBANA_DASHBOARD_IMPORT = "KibanaDashboardImport";
 
     private static final String ELASTICSEARCH_MAPPING_TEMPLATE = "ElasticsearchMappingTemplate";
@@ -52,11 +54,14 @@ public class HttpClientUtil {
         throw new IllegalStateException("Utility class");
     }
 
-    public static boolean sendPostKibana(String url, String json, String postFlag) {
+    public static boolean sendHttpClientPost(String url, String json, String postFlag, String urlFlag) {
         boolean flag = false;
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.add("kbn-xsrf","true");
+        if (urlFlag.equals(KIBANA)) {
+            log.info("urlFlag is Kibana, add header");
+            headers.add("kbn-xsrf","true");
+        }
         headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
         HttpEntity<String> request = new HttpEntity<>(json, headers);
         ResponseEntity<String> responseEntity = null;
@@ -78,7 +83,7 @@ public class HttpClientUtil {
                     break;
             }
         } catch (Exception e) {
-            log.debug(e.getMessage());
+            log.debug("Resquest failed: " + e.getMessage());
         }
         return flag;
     }
