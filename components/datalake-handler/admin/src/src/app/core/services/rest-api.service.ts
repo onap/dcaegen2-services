@@ -325,6 +325,24 @@ Dashboard
       catchError(this.handleError)
     );
   }
+
+  /*
+  Kafka
+*/
+  getAllKafkaList(){
+    return this.http.get(prefix + "kafkas").pipe( //onlin
+      retry(1),
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+  DeleteKafka(id): Observable<any> {
+    return this.http.delete(prefix + "kafkas/" + id).pipe( //online
+      retry(1),
+      map(this.extractData2),
+      catchError(this.handleError)
+    );
+  }
 }
 
 
