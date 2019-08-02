@@ -17,7 +17,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ============LICENSE_END=========================================================
 -->
-<div class="card-panel d-flex flex-column">
+<div class="card-panel d-flex flex-column" (click)="cardClick()">
   <div class="d-flex flex-row p-2">
     <div class="dl-h4 title mr-auto ml-3 mt-2">{{ this.title }}</div>
 
@@ -26,10 +26,10 @@ limitations under the License.
         <i class="fas fa-ellipsis-h fa-2x dl-icon-enable"></i>
       </a>
       <div class="dropdown-menu action-icon-btn">
-        <button class="dropdown-item" type="button">
+        <button class="dropdown-item" type="button" (click)="cardMoreAction('edit')">
           {{ 'EDIT' | translate }}
         </button>
-        <button class="dropdown-item" type="button">
+        <button class="dropdown-item" type="button" (click)="cardMoreAction('delete')">
           {{ 'DELETE' | translate }}
         </button>
       </div>

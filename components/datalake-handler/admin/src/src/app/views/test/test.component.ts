@@ -141,4 +141,16 @@ export class TestComponent implements OnInit {
       modalRef.close();
     });
   }
+
+  cardMoreAction($event) {
+    if($event == "edit"){
+      this.openModalDemo()
+    }else {
+      console.log($event,"$event")
+    }
+  }
+  cardClick(){
+    this.openModalDemo();
+  }
+
 }

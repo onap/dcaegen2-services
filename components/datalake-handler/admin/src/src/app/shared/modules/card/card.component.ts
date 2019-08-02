@@ -23,7 +23,7 @@
  * @author Ekko Chang
  *
  */
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter  } from "@angular/core";
 
 @Component({
   selector: "app-card",
@@ -38,7 +38,19 @@ export class CardComponent implements OnInit {
   @Input() modifiable: boolean;
   @Input() iconSize: string[] = ["sm", "md", "lg"];
 
+  @Output() cardAction = new EventEmitter<object>();
+  @Output() edit = new EventEmitter<object>();
+
   constructor() {}
 
   ngOnInit() {}
+
+  cardClick() {
+    this.cardAction.emit();
+  }
+
+  cardMoreAction(type) {
+    this.edit.emit(type);
+  }
+
 }
