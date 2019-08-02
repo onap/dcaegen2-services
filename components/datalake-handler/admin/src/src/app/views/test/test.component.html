@@ -3,13 +3,13 @@
   <div>
     <p>Module 1 -----> card</p>
     <app-card [iconPath]="this.cardIconPath" [iconSize]="'md'" [subcontent]="this.cardSubcontent"
-      [modifiable]="this.cardModifiable">
+      [modifiable]="this.cardModifiable" (edit)="cardMoreAction($event)">
     </app-card>
     <br>
     <app-card [title]="this.cardTitle" [content]="this.cardContent">
     </app-card>
     <br>
-    <app-card [iconPath]="this.cardAddicon" [iconSize]="'sm'">
+    <app-card [iconPath]="this.cardAddicon" [iconSize]="'sm'" (cardAction)="cardClick()">
     </app-card>
     <br>
   </div>
