@@ -1,6 +1,7 @@
 {
   "SIDEBAR": {
     "FEDDFER": "DataLake Feeder",
+    "KAFKA":"卡夫卡",
     "TOPICS": "Topics",
     "DATABASE": "Database",
     "DASHBOARD": "儀表板設置",

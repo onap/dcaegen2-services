@@ -50,7 +50,7 @@ export class KafkaComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.cardIconPath = "assets/icons/couchbase_able.svg";
+    this.cardIconPath = "assets/icons/kafka_able.svg";
     this.cardModifiable = true;
     this.cardAddicon = "assets/icons/add.svg";
   }

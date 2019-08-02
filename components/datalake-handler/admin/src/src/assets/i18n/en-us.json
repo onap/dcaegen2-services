@@ -1,6 +1,7 @@
 {
   "SIDEBAR": {
     "FEDDFER": "DataLake Feeder",
+    "KAFKA":"Kafka",
     "TOPICS": "Topics",
     "DATABASE": "Database",
     "DASHBOARD": "Portal Setting",
