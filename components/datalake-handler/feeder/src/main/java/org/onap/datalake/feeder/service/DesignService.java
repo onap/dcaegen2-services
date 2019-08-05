@@ -114,7 +114,7 @@ public class DesignService {
 					dbs.add(db.get());
 				}
 			}
-			if (dbs.size() > 0)
+			if (!dbs.isEmpty())
 				design.setDbs(dbs);
 			else {
 				design.getDbs().clear();

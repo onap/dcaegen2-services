@@ -49,7 +49,7 @@ public class DesignTypeService {
 		List<DesignType> designTypeList = null;
 		List<DesignTypeConfig> designTypeConfigList = new ArrayList<>();
 		designTypeList = (List<DesignType>)designTypeRepository.findAll();
-		if (designTypeList != null && designTypeList.size() > 0) {
+		if (designTypeList != null && !designTypeList.isEmpty()) {
 			log.info("DesignTypeList is not null");
 			for(DesignType designType : designTypeList) {
 				designTypeConfigList.add(designType.getDesignTypeConfig());

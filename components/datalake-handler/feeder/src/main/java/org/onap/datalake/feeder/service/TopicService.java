@@ -162,9 +162,9 @@ public class TopicService {
 					relateDb.add(sinkdb);
 				}
 			}
-			if (relateDb.size() > 0)
+			if (!relateDb.isEmpty())
 				topic.setDbs(relateDb);
-			else if (relateDb.size() == 0) {
+			else {
 				topic.getDbs().clear();
 			}
 		} else {
@@ -179,9 +179,9 @@ public class TopicService {
 					relateKafka.add(sinkKafka.get());
 				}
 			}
-			if (relateKafka.size() > 0) {
+			if (!relateKafka.isEmpty()) {
 				topic.setKafkas(relateKafka);
-			} else if (relateKafka.size() == 0) {
+			} else {
 				topic.getKafkas().clear();
 			}
 		} else {
