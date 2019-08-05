@@ -65,6 +65,12 @@ public class ApplicationConfigurationTest {
         assertTrue(config.getHdfsBatchSize()>0);
         assertTrue(config.getHdfsBufferSize()>0);
         assertTrue(config.getHdfsFlushInterval()>0);
+
+        assertNull(config.getKibanaDashboardImportApi());
+        assertNull(config.getKibanaPort());
+        assertNull(config.getEsTemplateMappingApi());
+        assertNull(config.getEsPort());
+        assertTrue(config.getCheckTopicInterval()==0);
     }
 
 }
