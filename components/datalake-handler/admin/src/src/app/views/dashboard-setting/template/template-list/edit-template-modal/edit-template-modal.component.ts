@@ -42,6 +42,7 @@ export class EditTemplateModalComponent implements OnInit {
   templatetypedata: Array<any> = [];
   topicname: Array<any> = [];
   dbList: Array<any> = [];
+  dbId: string = "";
   tempSeletedDbs: any = [];
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
@@ -61,7 +62,6 @@ export class EditTemplateModalComponent implements OnInit {
   ngOnInit() {
     // cache for display
     this.templateInput = new Template();
-    this.getDbList();
     const feed = {
       id: this.edittemplate.id,
       name: this.edittemplate.name,
@@ -87,7 +87,12 @@ export class EditTemplateModalComponent implements OnInit {
   }
 
   getDbList() {
-    this.dashboardApiService.getTempDbList().subscribe(data => {
+    this.templatetypedata.map(item => {
+      if (item.name === this.defaultDesigntype) {
+        this.dbId = item.id;
+      }
+    })
+    this.dashboardApiService.getTempDbList(this.dbId).subscribe(data => {
       Object.keys(data).map(item => {
         this.dbList.push({ key: item, name: data[item] })
       })
@@ -121,6 +126,7 @@ export class EditTemplateModalComponent implements OnInit {
       }
     });
     this.defaultTopicname = this.templateInput.topicName;
+    this.getDbList();
   }
 
   jsReadFiles() {
