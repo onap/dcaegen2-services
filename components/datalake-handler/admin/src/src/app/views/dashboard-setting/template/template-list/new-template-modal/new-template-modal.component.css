@@ -13,10 +13,33 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+.row-wrapper{
+  display: flex;
+}
+.row-quarter-item{
+  width: 20%;
+  margin-bottom: 15px;
+}
+.row-half-item{
+  width: 45%;
+}
+.usual-item{
+  margin-left: 2%;
+}
+.upload-item{
+  margin-left: 5%;
+}
+.upload-item-content-button{
+  width:35%;
+}
+.upload-item-content-body{
+  width: 95%;
+  min-height: 300px!important;
+}
 #f-file{
   position: absolute;
-  width: 100%;
-  height: 90%;
+  /* width: 100%; */
+  /* height: 90%; */
   opacity: 0;
   cursor: pointer;
 }
