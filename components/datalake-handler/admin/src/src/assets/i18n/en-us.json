@@ -1,7 +1,7 @@
 {
   "SIDEBAR": {
     "FEDDFER": "DataLake Feeder",
-    "KAFKA":"Kafka",
+    "KAFKA": "Kafka",
     "TOPICS": "Topics",
     "DATABASE": "Database",
     "DASHBOARD": "Portal Setting",
@@ -56,7 +56,7 @@
   "NODATA": "No Data",
   "NEW_TEMPLATE": "New design",
   "TEMPLATE_BODY": "Body",
-  "FIELUPLOAD": "Upload file",
+  "FIELUPLOAD": "Import",
   "SUCCESSFULLY_CREARED": "Successfully created.",
   "FAILED_CREARED": "Failed updated.",
   "SUCCESSFULLY_UPDATED": "Successfully updated.",

@@ -29,99 +29,64 @@
       </div>
     </div>
   </div>
+
   <div class="modal-body border-0">
     <div class="container-fluid">
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-2">
+      <div class="form-group row row-wrapper">
+        <div class="row-half-item usual-item">
+          <div>
             <label class="dl-emphasis1" for="inputtemplateName">{{ 'TEMPLATE_NAME' | translate }}</label>
           </div>
-          <div class="col-md-6">
+          <div>
             <input #inputtemplateName [(ngModel)]="this.templateInput.name" class="form-control dl-input-text"
               type="text" name="inputtemplateName" placeholder="Username" required="required" />
           </div>
         </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-2">
-            <label class="dl-emphasis1" for="templatebody">{{ 'TEMPLATE_BODY'| translate }}</label>
+        <div class="row-half-item upload-item">
+          <div>
+            <label class="dl-emphasis1">{{ 'FIELUPLOAD' | translate }}</label>
           </div>
-          <div class="col-md-10">
-            <textarea #templatebody [(ngModel)]="this.templateInput.body" class="form-control dl-input-text"
-              placeholder="Put the template design here..." rows="3" style="min-height: 300px!important;"></textarea>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-2">
-            <label class="dl-emphasis1" style="line-height: 2.25rem;">{{ 'FIELUPLOAD' | translate }}</label>
-          </div>
-          <div class="col-md-2 p-1" style="position: relative;
-    margin-left: 0.5rem;">
+          <div class="upload-item-button">
             <input type="file" id="f-file" (change)="this.jsReadFiles()" />
-            <label for="f-file" style="height: 100%;width: 100%;">
+            <label for="f-file" class="upload-item-content-button">
               <button type="button" class="btn dl-btn-dark btn-block" style="cursor: pointer">
                 {{ 'FIELUPLOAD' | translate }}
               </button>
             </label>
-          </div>
-          <div class="col-md-2">
-            <span style="line-height: 2.25rem">{{this.fileName}}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-2">
-            <label class="dl-emphasis1">{{ 'SINK' | translate }}</label>
-          </div>
-          <div class="col-md-8">
-            <div class="row d-flex flex-wrap">
-              <div *ngFor="let db of dbList" class="col-md-6 pb-1">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text dl-input-chk-label">
-                      <input id="chk_{{ db }}" type="checkbox" [checked]="templateInput.dbs.includes(db)"
-                        (change)="this.updateSelectedDB($event, db)" />
-                      <span class="dl-input-checkmark"></span>
-                    </label>
-                  </div>
-                  <label class="form-control dl-input-chk" for="chk_{{ db }}">
-                    {{ db.name }}
-                  </label>
-                </div>
-              </div>
-            </div>
+            <span style="margin-left: 15px;">
+              <i class="fa fa-file" style="margin-right: 5px" *ngIf="this.fileName"></i>{{this.fileName}}</span>
           </div>
         </div>
       </div>
 
       <div class="form-group">
-        <div class="row">
-          <div class="col-md-2">
+        <div>
+          <label class="dl-emphasis1" for="templatebody">{{ 'TEMPLATE_BODY'| translate }}</label>
+        </div>
+        <div>
+          <textarea #templatebody [(ngModel)]="this.templateInput.body"
+            class="form-control dl-input-text upload-item-content-body" placeholder="Put the design here..."
+            rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row row-wrapper">
+        <div class="row-half-item usual-item">
+          <div>
             <label class="dl-emphasis1">{{ 'TEMPLATE_TYPE' | translate }}</label>
           </div>
-          <div class="col-md-8">
-            <select #templatetype class="custom-select dl-input-text">
+          <div>
+            <select #templatetype class="custom-select dl-input-text" (change)="this.selectType($event)">
               <option *ngFor="let item of templatetypedata" [selected]="item==templatetypedata[0]"
                 [attr.designType]="[item.designType]">{{item.name}}</option>
             </select>
           </div>
         </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-2">
+        <div class="row-half-item usual-item">
+          <div>
             <label class="dl-emphasis1">{{ 'TOPICS_NAME' | translate }}</label>
           </div>
-          <div class="col-md-8">
+          <div>
             <select #topic class="custom-select dl-input-text">
               <option *ngFor="let item of topicname" [selected]="item==topicname[0]">{{item}}</option>
             </select>
@@ -129,21 +94,42 @@
         </div>
       </div>
 
+      <div class="form-group">
+        <div class="row-half-item">
+          <label class="dl-emphasis1">{{ 'SINK' | translate }}</label>
+        </div>
+
+        <div class="input-group row-quarter-item" *ngFor="let db of dbList">
+          <div class="input-group-prepend">
+            <label class="input-group-text dl-input-chk-label">
+              <input id="chk_{{ db }}" type="checkbox" [checked]="templateInput.dbs.includes(db)"
+                (change)="this.updateSelectedDB($event, db)" />
+              <span class="dl-input-checkmark"></span>
+            </label>
+          </div>
+          <label class="form-control dl-input-chk" for="chk_{{ db }}">
+            {{ db.name }}
+          </label>
+        </div>
+
+      </div>
+
     </div>
   </div>
+
   <div class="modal-footer border-0 pt-0 pb-2">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6 p-0">
+        <div class="col-md-7 p-0">
         </div>
-        <div class="col-md-3 p-1">
+        <div class="col-md-2 p-1">
           <span>
             <button type="button" class="btn dl-btn-dark btn-block" (click)="this.passBack()">
               Save
             </button>
           </span>
         </div>
-        <div class="col-md-3 p-1">
+        <div class="col-md-2 p-1">
           <span>
             <button type="button" class="btn dl-btn-light btn-block" (click)="activeModal.close('Close click')">
               Cancel
@@ -153,5 +139,4 @@
       </div>
     </div>
   </div>
-
 </div>
