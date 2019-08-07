@@ -39,6 +39,7 @@ export class NewTemplateModalComponent implements OnInit {
   @Input() templatelist_length;
   templateInput: Template
   templatetypedata: Array<any> = [];
+  dbId: string = "";
   topicname: Array<any> = [];
   dbList: Array<any> = [];
   tempSeletedDbs: any = [];
@@ -58,7 +59,7 @@ export class NewTemplateModalComponent implements OnInit {
   ngOnInit() {
     this.getTopicName();
     this.getTemplateTypeName();
-    this.getDbList();
+
     // cache for display
     this.templateInput = new Template();
     const feed = {
@@ -81,7 +82,10 @@ export class NewTemplateModalComponent implements OnInit {
   }
 
   getDbList() {
-    this.dashboardApiService.getTempDbList().subscribe(data => {
+    if (this.dbId === "") {
+      this.dbId = this.templatetypedata[0].id
+    }
+    this.dashboardApiService.getTempDbList(this.dbId).subscribe(data => {
       Object.keys(data).map(item => {
         this.dbList.push({ key: item, name: data[item] })
       })
@@ -91,6 +95,7 @@ export class NewTemplateModalComponent implements OnInit {
   getTemplateTypeName() {
     this.dashboardApiService.getTemplateTypeName().subscribe(data => {
       this.templatetypedata = data;
+      this.getDbList();
     });
   }
 
@@ -118,6 +123,17 @@ export class NewTemplateModalComponent implements OnInit {
     }
     reader.readAsText(file);
   }
+
+  selectType(e) {
+    this.dbList = [];
+    this.templatetypedata.map(item => {
+      if (item.name === e.target.value) {
+        this.dbId = item.id;
+        this.getDbList();
+      }
+    })
+  }
+
   passBack() {
     this.spinner.show();
     if (this.templateInput.name == '' || this.templateInput.name == undefined) {
