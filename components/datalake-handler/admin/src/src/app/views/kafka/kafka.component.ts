@@ -13,7 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-import { Component,EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { kafka } from "../../core/models/kafka.model";
 import { AdminService } from "../../core/services/admin.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
@@ -22,7 +22,7 @@ import { RestApiService } from "src/app/core/services/rest-api.service";
 
 // Loading spinner
 import { NgxSpinnerService } from "ngx-spinner";
-import {ToastrNotificationService} from "../../shared/components/toastr-notification/toastr-notification.service";
+import { ToastrNotificationService } from "../../shared/components/toastr-notification/toastr-notification.service";
 @Component({
   selector: 'app-kafka',
   templateUrl: './kafka.component.html',
@@ -72,16 +72,16 @@ export class KafkaComponent implements OnInit {
   }
 
   getKafkaList() {
-    var data: any;
+    let data: any;
     data = this.kafkaApiService.getAllKafkaList().toPromise();
     return data;
   }
 
   async initDbsList(kafkaList: []) {
-    var k: kafka[] = [];
+    let k: kafka[] = [];
 
     if (kafkaList.length > 0) {
-      for (var i = 0; i < kafkaList.length; i++) {
+      for (let i = 0; i < kafkaList.length; i++) {
         let data = kafkaList[i];
         let feed = {
           id: data["id"],
