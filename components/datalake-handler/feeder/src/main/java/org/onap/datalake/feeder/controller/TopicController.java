@@ -72,9 +72,6 @@ public class TopicController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	//@Autowired
-	//private DmaapService dmaapService;
-
 	@Autowired
 	private ApplicationContext context;
 
