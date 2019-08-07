@@ -265,8 +265,8 @@ Dashboard
     );
   }
 
-  getTempDbList(): Observable<any> {
-    return this.http.get(prefix + "dbs/idAndName/").pipe(
+  getTempDbList(id): Observable<any> {
+    return this.http.get(prefix + "dbs/idAndName/" + id).pipe(
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -329,8 +329,8 @@ Dashboard
   /*
   Kafka
 */
-  getAllKafkaList(){
-    return this.http.get(prefix + "kafkas").pipe( //onlin
+  getAllKafkaList() {
+    return this.http.get(prefix + "kafkas").pipe( //online
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
