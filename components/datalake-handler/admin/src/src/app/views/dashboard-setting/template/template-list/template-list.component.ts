@@ -221,8 +221,16 @@ export class TemplateListComponent {
     this.dashboardApiService.deployTemplateKibana(id, body).subscribe(
       res => {
         this.spinner.hide();
-        if (JSON.stringify(res).length <= 2) {
-          this.notificationService.success("Deploy_SUCCESSFULLY");
+        let processArr = []
+        Object.keys(res).map(item =>
+          processArr.push({ name: item, status: res[item] })
+        )
+
+        if (processArr.length !== 0) {
+          processArr.map(item =>
+            item.status ?
+              setTimeout(() => { this.notificationService.success("Deploy_SUCCESSFULLY") }, 1000) :
+              setTimeout(() => { this.notificationService.error("Deploy_FAILED") }, 2000))
         } else {
           this.notificationService.error("Deploy_FAILED");
         }
