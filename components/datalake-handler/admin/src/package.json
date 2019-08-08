@@ -1,5 +1,5 @@
 {
-  "name": "admin",
+  "name": "DataLake-AdminUI",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "mockup": "node ./src/app/mockup/index.js"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +34,10 @@
     "popper.js": "^1.15.0",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "body-parser": "^1.18.2",
+    "json-server": "^0.15.0",
+    "lowdb": "^1.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.9",

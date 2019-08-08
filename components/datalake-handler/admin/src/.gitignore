@@ -47,6 +47,3 @@ Thumbs.db
 
 # CSS vendor
 src/assets/vendor
-
-# Proxy config
-proxy.conf.json

@@ -1,0 +1,139 @@
+{
+  "dbs": [
+    {
+      "name": "Couchbase",
+      "enabled": true,
+      "host": "dl_couchbase1",
+      "port": 567,
+      "login": "admin",
+      "pass": null,
+      "database": "datalake",
+      "encrypt": false,
+      "property1": null,
+      "property2": null,
+      "property3": null
+    },
+    {
+      "name": "Druid",
+      "enabled": false,
+      "host": "dl_druid",
+      "port": null,
+      "login": null,
+      "pass": null,
+      "database": null,
+      "encrypt": null,
+      "property1": null,
+      "property2": null,
+      "property3": null
+    },
+    {
+      "name": "Elasticsearch",
+      "enabled": false,
+      "host": "dl_es",
+      "port": null,
+      "login": null,
+      "pass": null,
+      "database": null,
+      "encrypt": null,
+      "property1": null,
+      "property2": null,
+      "property3": null
+    },
+    {
+      "name": "HDFS",
+      "enabled": false,
+      "host": "dlhdfs",
+      "port": null,
+      "login": "dl",
+      "pass": null,
+      "database": null,
+      "encrypt": null,
+      "property1": null,
+      "property2": null,
+      "property3": null
+    },
+    {
+      "name": "MongoDB",
+      "enabled": false,
+      "host": "dl_mongodb",
+      "port": 27017,
+      "login": null,
+      "pass": null,
+      "database": "datalake",
+      "encrypt": null,
+      "property1": null,
+      "property2": null,
+      "property3": null
+    }
+  ],
+  "topics": [
+    {
+      "name": "unauthenticated.VES_MEASUREMENT_OUTPUT",
+      "login": null,
+      "password": null,
+      "sinkdbs": [
+        "Druid",
+        "Couchbase",
+        "Elasticsearch",
+        "HDFS",
+        "MongoDB"
+      ],
+      "enabled": true,
+      "saveRaw": false,
+      "dataFormat": "JSON",
+      "ttl": 3650,
+      "correlateClearedMessage": false,
+      "messageIdPath": null,
+      "aggregateArrayPath": "/event/measurementsForVfScalingFields/memoryUsageArray,/event/measurementsForVfScalingFields/diskUsageArray,/event/measurementsForVfScalingFields/cpuUsageArray,/event/measurementsForVfScalingFields/vNicPerformanceArray",
+      "flattenArrayPath": "/event/measurementsForVfScalingFields/astriMeasurement/astriDPMeasurementArray/astriInterface",
+      "dataFormat2": "JSON",
+      "aggregateArrayPath2": [
+        "/event/measurementsForVfScalingFields/memoryUsageArray",
+        "/event/measurementsForVfScalingFields/diskUsageArray",
+        "/event/measurementsForVfScalingFields/cpuUsageArray",
+        "/event/measurementsForVfScalingFields/vNicPerformanceArray"
+      ],
+      "flattenArrayPath2": [
+        "/event/measurementsForVfScalingFields/astriMeasurement/astriDPMeasurementArray/astriInterface"
+      ]
+    },
+    {
+      "name": "AAI-EVENT",
+      "login": null,
+      "password": null,
+      "sinkdbs": [
+        "Druid",
+        "Couchbase",
+        "Elasticsearch",
+        "HDFS",
+        "MongoDB"
+      ],
+      "enabled": true,
+      "saveRaw": false,
+      "dataFormat": "JSON",
+      "ttl": 3650,
+      "correlateClearedMessage": false,
+      "messageIdPath": null,
+      "aggregateArrayPath": "",
+      "flattenArrayPath": "",
+      "dataFormat2": "JSON",
+      "aggregateArrayPath2": [],
+      "flattenArrayPath2": []
+    },
+    {
+      "name": "AAI-EVENT2",
+      "login": null,
+      "password": null,
+      "sinkdbs": [
+        "Druid",
+        "Couchbase"
+      ],
+      "enabled": true,
+      "saveRaw": true,
+      "dataFormat": "JSON",
+      "ttl": 256,
+      "correlateClearedMessage": true,
+      "messageIdPath": "/event/commonEventHeader/eventName,/event/commonEventHeader/reportingEntityName"
+    }
+  ]
+}
