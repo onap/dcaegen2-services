@@ -95,10 +95,6 @@ public class Kafka {
 	@Column(name="`timeout_sec`", columnDefinition = "integer default 10")
 	private Integer timeout;
 
-	//don't show this field in admin UI 
-	//@Column(name="`check_topic_interval_sec`", columnDefinition = "integer default 10")
-//	private Integer checkTopicInterval;
-	
 	@JsonBackReference
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(	name 				= "map_kafka_topic",

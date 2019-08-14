@@ -92,7 +92,7 @@ public class FeederController {
 	@ApiOperation(value="Retrieve feeder status.")
     public String status() {    	
     	String status = "Feeder is running: "+pullService.isRunning();
-    	log.info("sending feeder status ...");//TODO we can send what topics are monitored, how many messages are sent, etc.
+        log.info("sending feeder status ..." + status);//TODO we can send what topics are monitored, how many messages are sent, etc.
 
         return "{\"version\": \""+config.getDatalakeVersion()+"\", \"running\": "+pullService.isRunning()+"}";
     }

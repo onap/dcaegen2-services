@@ -66,7 +66,6 @@ public class DbController {
 	@GetMapping("")
 	@ResponseBody
 	@ApiOperation(value="Gat all databases name")
-	//public Iterable<Db> list() throws IOException {
 	public List<String> list() throws IOException {
 		Iterable<Db> ret = dbRepository.findAll();
 		List<String> retString = new ArrayList<>();
@@ -118,7 +117,7 @@ public class DbController {
 			newdb.setPass(dbConfig.getPassword());
 			newdb.setEncrypt(dbConfig.isEncrypt());
 
-			if(!dbConfig.getName().equals("Elecsticsearch") || !dbConfig.getName().equals("Druid"))
+			if(!dbConfig.getName().equals("Elecsticsearch") || dbConfig.getName().equals("Druid"))
 			{
 				newdb.setDatabase(new String(dbConfig.getDatabase()));
 			}
@@ -140,10 +139,6 @@ public class DbController {
 	@ResponseBody
 	@ApiOperation(value="Get a database's details.")
 	public Db getDb(@PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
-		/*Db db = dbService.getDb(dbName);
-		if (db == null) {
-			sendError(response, 404, "Db not found: " + dbName);
-		}*/
 		Db db = dbRepository.findByName(dbName);
 		if (db == null) {
 			sendError(response, 404, "Db not found: " + dbName);
@@ -177,20 +172,17 @@ public class DbController {
 	@ResponseBody
 	@ApiOperation(value="Get a database's all topics.")
 	public Set<Topic> getDbTopics(@PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
-		//Db db = dbService.getDb(dbName);
 		Set<Topic> topics;
 		try {
 			Db db = dbRepository.findByName(dbName);
 			topics = db.getTopics();
-		}catch(Exception ex)
-		{
+		} catch(Exception ex) {
 			sendError(response, 404, "DB: " + dbName + " or Topics not found");
-			return null;
+			return Collections.emptySet();
 
 		}
 		return topics;
 	}
-
 
 	//Update Db
 	@PutMapping("")

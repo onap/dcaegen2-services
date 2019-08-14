@@ -45,6 +45,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -159,7 +160,7 @@ public class DbControllerTest {
         db1.setTopics(topics);
         setAccessPrivateFields(dbController);
         Set<Topic> elecsticsearch = dbController.getDbTopics(dbName, httpServletResponse);
-        assertEquals(null, elecsticsearch);
+        assertEquals(Collections.emptySet(), elecsticsearch);
         when(dbRepository.findByName(dbName)).thenReturn(db1);
         elecsticsearch = dbController.getDbTopics(dbName, httpServletResponse);
         for (Topic anElecsticsearch : elecsticsearch) {
