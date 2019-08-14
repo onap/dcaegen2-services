@@ -25,10 +25,12 @@ import java.util.*;
 import javax.servlet.http.HttpServletResponse;
 
 import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.DesignType;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.DbRepository;
 import org.onap.datalake.feeder.dto.DbConfig;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
+import org.onap.datalake.feeder.repository.DesignTypeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ import io.swagger.annotations.ApiOperation;
 /**
  * This controller manages the big data storage settings. All the settings are
  * saved in database.
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -57,7 +59,10 @@ public class DbController {
 	@Autowired
 	private DbRepository dbRepository;
 
-	//list all dbs 
+	@Autowired
+	private DesignTypeRepository designTypeRepository;
+
+	//list all dbs
 	@GetMapping("")
 	@ResponseBody
 	@ApiOperation(value="Gat all databases name")
@@ -74,16 +79,17 @@ public class DbController {
 		return retString;
 	}
 
-	@GetMapping("/idAndName")
+	@GetMapping("/idAndName/{id}")
 	@ResponseBody
-	@ApiOperation(value="Gat all databases id and name")
-	public Map<Integer, String> listIdAndName() {
-		Iterable<Db> ret = dbRepository.findAll();
+	@ApiOperation(value="Get all databases id and name by designTypeId")
+	public Map<Integer, String> listIdAndName(@PathVariable String id) {
+		Optional<DesignType> designType  = designTypeRepository.findById(id);
 		Map<Integer, String> map = new HashMap<>();
-		for(Db db : ret)
-		{
-			log.info(db.getId() + "\t"+ db.getName());
-			map.put(db.getId(), db.getName());
+		if (designType.isPresent()) {
+			Set<Db> dbs = designType.get().getDbType().getDbs();
+			for (Db item : dbs) {
+				map.put(item.getId(), item.getName());
+			}
 		}
 		return map;
 	}
