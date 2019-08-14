@@ -109,14 +109,14 @@ public class MongodbService implements DbStoreService {
 			builder.sslEnabled(Boolean.TRUE.equals(mongodb.getEncrypt()));// getEncrypt() can be null
 		}
 		MongoClientOptions options = builder.build();
-		List<ServerAddress> addrs = new ArrayList<ServerAddress>();
+		List<ServerAddress> addrs = new ArrayList<>();
 
 		addrs.add(new ServerAddress(host, port)); // FIXME should be a list of address
 
 		try {
 			if (StringUtils.isNoneBlank(userName) && StringUtils.isNoneBlank(password)) {
 				credential = MongoCredential.createCredential(userName, databaseName, password.toCharArray());
-				List<MongoCredential> credentialList = new ArrayList<MongoCredential>();
+				List<MongoCredential> credentialList = new ArrayList<>();
 				credentialList.add(credential);
 				mongoClient = new MongoClient(addrs, credentialList, options);
 			} else {
@@ -148,7 +148,7 @@ public class MongodbService implements DbStoreService {
 	}
 
 	public void saveJsons(EffectiveTopic effectiveTopic, List<JSONObject> jsons) {
-		if (dbReady == false)//TOD throw exception
+		if (!dbReady)//TOD throw exception
 			return;
 		List<Document> documents = new ArrayList<>(jsons.size());
 		for (JSONObject json : jsons) {

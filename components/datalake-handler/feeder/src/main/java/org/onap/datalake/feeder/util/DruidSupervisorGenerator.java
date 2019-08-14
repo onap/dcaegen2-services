@@ -28,6 +28,8 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -58,6 +60,8 @@ import java.util.Map.Entry;
 
 @Getter
 public class DruidSupervisorGenerator {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     Template template = null;
     VelocityContext context;
@@ -90,7 +94,6 @@ public class DruidSupervisorGenerator {
 
             while (fields.hasNext()) {
                 Entry<String, JsonNode> field = fields.next();
-                //				System.out.println("--------"+field.getKey()+"--------");
                 printNode(prefix + "." + field.getKey(), field.getValue());
             }
 
@@ -113,25 +116,13 @@ public class DruidSupervisorGenerator {
     private void printFlattenSpec(JsonNodeType type, String path) {
         String name = path.substring(2).replace('.', ':');
         // lets see what type the node is
-        System.out.println("{");
-        System.out.println("\"type\": \"path\",");
-        System.out.println("\"name\": \"" + name + "\",");
-        System.out.println("\"expr\": \"" + path + "\"");
-        System.out.println("},");
+        log.info("{");
+        log.info("\"type\": \"path\",");
+        log.info("\"name\": \"" + name + "\",");
+        log.info("\"expr\": \"" + path + "\"");
+        log.info("},");
 
         dimensions.add(new String[]{name, path});
-		/*
-		 //for  dimensionsSpec
-				if (JsonNodeType.NUMBER.equals(type)) {
-					System.out.println("{");
-					System.out.println("\"type\": \"long\",");
-					System.out.println("\"name\": \"" + name + "\","); 
-					System.out.println("},");
-				} else {
-					System.out.println("\"" + name + "\",");
-		
-				}
-		*/
     }
 
     public void doTopic(String topic) throws IOException {
