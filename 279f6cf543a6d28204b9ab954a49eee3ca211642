@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+2: Yan Yang <yangyanyj@chinamobile.com>
+Code-Review+2: Tony Hansen <tony@att.com>
+Submitted-by: Tony Hansen <tony@att.com>
+Submitted-at: Sun, 18 Aug 2019 22:31:21 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/services/+/92893
+Project: dcaegen2/services
+Branch: refs/heads/master
