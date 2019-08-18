@@ -27,11 +27,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.onap.datalake.feeder.dto.DbConfig;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
 import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
-import org.onap.datalake.feeder.domain.TopicName;
+import org.onap.datalake.feeder.dto.DbConfig;
 import org.onap.datalake.feeder.repository.DbRepository;
 import org.onap.datalake.feeder.service.DbService;
 import org.onap.datalake.feeder.util.TestUtil;
@@ -50,6 +49,7 @@ import java.util.Collections;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -81,9 +81,6 @@ public class DbControllerTest {
 
     public void setAccessPrivateFields(DbController dbController) throws NoSuchFieldException,
             IllegalAccessException {
-    //    Field dbService = dbController.getClass().getDeclaredField("dbService");
-  //      dbService.setAccessible(true);
-//        dbService.set(dbController, dbService1);
         Field dbRepository1 = dbController.getClass().getDeclaredField("dbRepository");
         dbRepository1.setAccessible(true);
         dbRepository1.set(dbController, dbRepository);
@@ -176,8 +173,6 @@ public class DbControllerTest {
         DbController dbController = new DbController();
         DbConfig dbConfig = getDbConfig();
         setAccessPrivateFields(dbController);
-        String name = "Elecsticsearch";
-        //when(dbRepository.findByName(name)).thenReturn(newDb(name));
         PostReturnBody<DbConfig> db = dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
         assertNotNull(db);
     }

@@ -24,14 +24,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
-import org.onap.datalake.feeder.dto.TopicConfig;
-import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.Topic;
-import org.onap.datalake.feeder.domain.TopicName;
+import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.repository.TopicNameRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.onap.datalake.feeder.service.DbService;
@@ -42,12 +39,8 @@ import org.springframework.validation.BindingResult;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
