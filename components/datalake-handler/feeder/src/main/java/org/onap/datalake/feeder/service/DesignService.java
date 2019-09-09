@@ -55,9 +55,8 @@ public class DesignService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	private static String POST_FLAG;
-
-	private static String URL_FlAG;
+	private static final String ELASTIC_SEARCH = "Elasticsearch";
+	private static final String KIBANA = "Kibana";
 
 	@Autowired
 	private DesignRepository designRepository;
@@ -170,8 +169,9 @@ public class DesignService {
 	}
 
 	private Map<Integer, Boolean> deployKibanaDashboardImport(Design design) {
-		URL_FlAG = "Kibana";
-		POST_FLAG = "KibanaDashboardImport";
+		String POST_FLAG = "KibanaDashboardImport";
+		String URL_FlAG = KIBANA;
+
 		String requestBody = design.getBody();
 		Set<Db> dbs =  design.getDbs();
 		Map<Integer, Boolean> deployKibanaMap = new HashMap<>();
@@ -180,9 +180,7 @@ public class DesignService {
 			Map<Integer, String> map = urlMap(dbs, URL_FlAG);
 			log.info("Deploy kibana dashboard url map: " + map);
 			if (!map.isEmpty()) {
-				Iterator<Map.Entry<Integer, String>> it = map.entrySet().iterator();
-				while (it.hasNext()) {
-					Map.Entry<Integer, String> entry = it.next();
+				for (Map.Entry<Integer, String> entry : map.entrySet()) {
 					deployKibanaMap.put(entry.getKey(), HttpClientUtil.sendHttpClientPost(entry.getValue(), requestBody, POST_FLAG, URL_FlAG));
 				}
 			}
@@ -199,9 +197,10 @@ public class DesignService {
 	 * @param templateName
 	 * @return flag
 	 */
-	public Map<Integer, Boolean> postEsMappingTemplate(Design design, String templateName) {
-		URL_FlAG = "Elasticsearch";
-		POST_FLAG = "ElasticsearchMappingTemplate";
+	private Map<Integer, Boolean> postEsMappingTemplate(Design design, String templateName) {
+		String URL_FlAG = ELASTIC_SEARCH;
+		String POST_FLAG = "ElasticsearchMappingTemplate";
+
 		String requestBody = design.getBody();
 		Set<Db> dbs = design.getDbs();
 		Map<Integer, Boolean> deployEsMap = new HashMap<>();
@@ -210,10 +209,8 @@ public class DesignService {
 			Map<Integer, String> map = urlMap(dbs, URL_FlAG);
 			log.info("Deploy elasticsearch url map: " + map);
 			if (!map.isEmpty()) {
-				Iterator<Map.Entry<Integer, String>> it = map.entrySet().iterator();
-				while (it.hasNext()) {
-					Map.Entry<Integer, String> entry = it.next();
-					deployEsMap.put(entry.getKey(), HttpClientUtil.sendHttpClientPost(entry.getValue()+templateName, requestBody, POST_FLAG, URL_FlAG));
+				for (Map.Entry<Integer, String> entry : map.entrySet()) {
+					deployEsMap.put(entry.getKey(), HttpClientUtil.sendHttpClientPost(entry.getValue() + templateName, requestBody, POST_FLAG, URL_FlAG));
 				}
 			}
 			return deployEsMap;
@@ -235,14 +232,14 @@ public class DesignService {
 	private String httpRequestUrl(String host, Integer port, String urlFlag) {
 		String url = "";
 		switch (urlFlag) {
-			case "Kibana":
+			case KIBANA:
 				if (port == null) {
 					port = applicationConfiguration.getKibanaPort();
 				}
 				url = "http://" + host + ":" + port + applicationConfiguration.getKibanaDashboardImportApi();
 				log.info("Kibana url: " + url);
 				break;
-			case "Elasticsearch":
+			case ELASTIC_SEARCH:
 				if (port == null) {
 					port = applicationConfiguration.getEsPort();
 				}
@@ -257,9 +254,7 @@ public class DesignService {
 
 	private void deploySave(Map<Integer, Boolean> map, Design design) {
 		if (!map.isEmpty()) {
-			Iterator<Map.Entry<Integer, Boolean>> it = map.entrySet().iterator();
-			while (it.hasNext()) {
-				Map.Entry<Integer, Boolean> entry = it.next();
+			for (Map.Entry<Integer, Boolean> entry : map.entrySet()) {
 				if (entry.getValue()) {
 					design.setSubmitted(true);
 					designRepository.save(design);
