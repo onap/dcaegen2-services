@@ -55,6 +55,7 @@ import io.swagger.annotations.ApiOperation;
 public class DbController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	private static final String DB_NOT_FOUND = "Db not found: ";
 
 	@Autowired
 	private DbRepository dbRepository;
@@ -66,7 +67,7 @@ public class DbController {
 	@GetMapping("")
 	@ResponseBody
 	@ApiOperation(value="Gat all databases name")
-	public List<String> list() throws IOException {
+	public List<String> list() {
 		Iterable<Db> ret = dbRepository.findAll();
 		List<String> retString = new ArrayList<>();
 		for(Db db : ret)
@@ -141,7 +142,7 @@ public class DbController {
 	public Db getDb(@PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
 		Db db = dbRepository.findByName(dbName);
 		if (db == null) {
-			sendError(response, 404, "Db not found: " + dbName);
+			sendError(response, 404, DB_NOT_FOUND + dbName);
 		}
 		return db;
 	}
@@ -157,7 +158,7 @@ public class DbController {
 
 		Db delDb = dbRepository.findByName(dbName);
 		if (delDb == null) {
-			sendError(response, 404, "Db not found: " + dbName);
+			sendError(response, 404, DB_NOT_FOUND + dbName);
 			return;
 		}
 		Set<Topic> topicRelation = delDb.getTopics();
@@ -197,7 +198,7 @@ public class DbController {
 
 		Db oldDb = dbRepository.findById(dbConfig.getId()).get();
 		if (oldDb == null) {
-			sendError(response, 404, "Db not found: " + dbConfig.getName());
+			sendError(response, 404, DB_NOT_FOUND + dbConfig.getName());
 			return null;
 		} else {
 			oldDb.setHost(dbConfig.getHost());
