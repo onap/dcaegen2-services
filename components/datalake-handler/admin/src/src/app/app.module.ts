@@ -94,6 +94,9 @@ import { ModalDemoComponent } from "./views/test/modal-demo/modal-demo.component
 import { KafkaComponent } from './views/kafka/kafka.component';
 // Angular SVG Icon
 import { AngularSvgIconModule } from "angular-svg-icon";
+import { KafkaListComponent } from './views/kafka/kafka-list/kafka-list.component';
+import { NewKafkaModalComponent } from './views/kafka/kafka-list/new-kafka-modal/new-kafka-modal.component';
+import { EditKafkaModalComponent } from './views/kafka/kafka-list/edit-kafka-modal/edit-kafka-modal.component';
 
 
 @NgModule({
@@ -133,7 +136,10 @@ import { AngularSvgIconModule } from "angular-svg-icon";
     ButtonComponent,
     ModalDirective,
     ModalDemoComponent,
-    KafkaComponent
+    KafkaComponent,
+    KafkaListComponent,
+    NewKafkaModalComponent,
+    EditKafkaModalComponent
   ],
   imports: [
     BrowserModule,
@@ -170,7 +176,9 @@ import { AngularSvgIconModule } from "angular-svg-icon";
     EditTemplateModalComponent,
     ModalComponent,
     ModalDemoComponent,
-    KafkaComponent
+    KafkaComponent,
+    NewKafkaModalComponent,
+    EditKafkaModalComponent
   ]
 })
 export class AppModule {}

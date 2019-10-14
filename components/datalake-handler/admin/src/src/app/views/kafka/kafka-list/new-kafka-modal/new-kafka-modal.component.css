@@ -13,4 +13,41 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-
+.row-wrapper{
+  display: flex;
+}
+.row-quarter-item{
+  width: 20%;
+  margin-bottom: 15px;
+}
+.row-half-item{
+  width: 45%;
+}
+.row-half-item2{
+  width: 50%;
+}
+.usual-item{
+  margin-left: 2%;
+}
+.usual-item2{
+  margin-left: 6.5%;
+}
+input::-webkit-input-placeholder {
+  font-size: 12px;
+  color: #999999 !important;
+}
+input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  font-size: 12px;
+  color: #999999 !important;
+}
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  font-size: 12px;
+  color: #999999 !important;
+}
+input::-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  font-size: 12px;
+  color: #999999 !important;
+}

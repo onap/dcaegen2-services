@@ -35,6 +35,7 @@ import { Topic } from "src/app/core/models/topic.model";
 import { Db } from "src/app/core/models/db.model";
 import { Template } from "src/app/core/models/template.model";
 import { Dashboard } from "src/app/core/models/dashboard.model";
+import {Kafka} from "../models/kafka.model";
 
 const prefix = "/datalake/v1/";
 const httpOptions = {
@@ -336,12 +337,33 @@ Dashboard
       catchError(this.handleError)
     );
   }
-  DeleteKafka(id): Observable<any> {
+  deleteKafka(id): Observable<any> {
     return this.http.delete(prefix + "kafkas/" + id).pipe( //online
       retry(1),
       map(this.extractData2),
       catchError(this.handleError)
     );
+  }
+
+  createNewKafka(k: Kafka): Observable<any> {
+    return this.http
+      .post(prefix + "kafkas", k)
+      .pipe(
+        retry(1),
+        tap(_ => this.extractData),
+        catchError(this.handleError)
+      );
+  }
+
+  updateKafka(k: Kafka): Observable<any> {
+    let id = k.id;
+    return this.http
+      .put(prefix + "kafkas/" + id, k)
+      .pipe(
+        retry(1),
+        tap(_ => this.extractData),
+        catchError(this.handleError)
+      );
   }
 }
 

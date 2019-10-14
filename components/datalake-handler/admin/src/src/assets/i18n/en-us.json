@@ -65,5 +65,13 @@
   "FAILED_DELETED": "Failed deleted.",
   "Deploy_SUCCESSFULLY": "Deploy successfully.",
   "Deploy_FAILED": "Deploy failed.",
-  "ARE_YOU_SURE_DELETE": "Are you sure you want to delete it?"
+  "ARE_YOU_SURE_DELETE": "Are you sure you want to delete it?",
+  "NEW_KAFKA": "New Kafka",
+  "BROKER_LIST": "Broker list",
+  "ZOOKEEPER": "Zookeeper",
+  "SECURITY_PROTOCOL": "Security Protocol",
+  "GROUP": "Group",
+  "EXCLUDED_TOPICS": "Excluded topics",
+  "TIME_OUT": "Time out(sec)",
+  "EDIT_KAFKA": "Edit Kafka"
 }

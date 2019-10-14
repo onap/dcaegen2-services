@@ -14,7 +14,7 @@
     limitations under the License.
 */
 
-export class kafka {
+export class Kafka {
   id: number;
   name: string;
   enabled: boolean;
@@ -28,5 +28,5 @@ export class kafka {
   includedTopic: string;
   excludedTopic: string;
   consumerCount: number;
-  timeout: number
+  timeout: number;
 }
