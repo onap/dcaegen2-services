@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "080a40e7_355ae612",
+        "filename": "components/datalake-handler/admin/src/src/app/views/kafka/kafka-list/kafka-list.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-10-17T01:10:39Z",
+      "side": 1,
+      "message": "Suggest using absolute paths and align the coding rules. e.g. blank space.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 86
+      },
+      "revId": "7be70cdd7417ca5470b7db522796db0c19703ed4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
