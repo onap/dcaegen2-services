@@ -22,6 +22,30 @@
       "revId": "7be70cdd7417ca5470b7db522796db0c19703ed4",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b79bf562_a8f551a9",
+        "filename": "components/datalake-handler/admin/src/src/app/views/kafka/kafka-list/kafka-list.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5350
+      },
+      "writtenOn": "2019-10-19T05:02:03Z",
+      "side": 1,
+      "message": "I accepted,  I hope to merge code and get your approval this time, I will modify it according to your suggestion next time, thank u!",
+      "parentUuid": "080a40e7_355ae612",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 86
+      },
+      "revId": "7be70cdd7417ca5470b7db522796db0c19703ed4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
