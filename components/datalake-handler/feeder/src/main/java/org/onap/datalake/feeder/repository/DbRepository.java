@@ -34,5 +34,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface DbRepository extends CrudRepository<Db, Integer> {
 
     Db findByName(String Name);
+    Iterable<Db> findByEncrypt(boolean encrypt);
 
 }
