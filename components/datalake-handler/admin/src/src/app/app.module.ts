@@ -97,6 +97,11 @@ import { AngularSvgIconModule } from "angular-svg-icon";
 import { KafkaListComponent } from './views/kafka/kafka-list/kafka-list.component';
 import { NewKafkaModalComponent } from './views/kafka/kafka-list/new-kafka-modal/new-kafka-modal.component';
 import { EditKafkaModalComponent } from './views/kafka/kafka-list/edit-kafka-modal/edit-kafka-modal.component';
+import { EditDruidComponent } from './views/database/database-list/dbs-modal/druid/edit-druid/edit-druid.component';
+import { EditCouchbaseComponent } from './views/database/database-list/dbs-modal/couchbase/edit-couchbase/edit-couchbase.component';
+import { EditElasticsearchComponent } from './views/database/database-list/dbs-modal/elasticsearch/edit-elasticsearch/edit-elasticsearch.component';
+import { EditHdfsComponent } from './views/database/database-list/dbs-modal/hdfs/edit-hdfs/edit-hdfs.component';
+import { EditMongodbComponent } from './views/database/database-list/dbs-modal/mongodb/edit-mongodb/edit-mongodb.component';
 
 
 @NgModule({
@@ -139,7 +144,12 @@ import { EditKafkaModalComponent } from './views/kafka/kafka-list/edit-kafka-mod
     KafkaComponent,
     KafkaListComponent,
     NewKafkaModalComponent,
-    EditKafkaModalComponent
+    EditKafkaModalComponent,
+    EditDruidComponent,
+    EditCouchbaseComponent,
+    EditElasticsearchComponent,
+    EditHdfsComponent,
+    EditMongodbComponent
   ],
   imports: [
     BrowserModule,
@@ -178,7 +188,12 @@ import { EditKafkaModalComponent } from './views/kafka/kafka-list/edit-kafka-mod
     ModalDemoComponent,
     KafkaComponent,
     NewKafkaModalComponent,
-    EditKafkaModalComponent
+    EditKafkaModalComponent,
+    EditDruidComponent,
+    EditCouchbaseComponent,
+    EditElasticsearchComponent,
+    EditHdfsComponent,
+    EditMongodbComponent
   ]
 })
 export class AppModule {}

@@ -73,5 +73,14 @@
   "GROUP": "Group",
   "EXCLUDED_TOPICS": "Excluded topics",
   "TIME_OUT": "Time out(sec)",
-  "EDIT_KAFKA": "Edit Kafka"
+  "EDIT_KAFKA": "Edit Kafka",
+  "NEW_DB": "New Database",
+  "DB_TYPE": "DbType",
+  "NEW_DRUID": "New Druid",
+  "NEW_ELASTICSEARCH": "New Elasticsearch",
+  "NEW_COUCHBASE": "New Couchbase",
+  "NEW_MONGODB": "New MongoDB",
+  "NEW_HDFS": "New Hdfs",
+  "SECURE_COMMUNICATION": "Secure Communication",
+  "DB_TYPE": "DbType"
 }

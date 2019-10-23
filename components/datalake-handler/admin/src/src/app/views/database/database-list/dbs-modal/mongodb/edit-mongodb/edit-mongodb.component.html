@@ -18,7 +18,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <label class="dl-h3">{{ 'NEW_ELASTICSEARCH' | translate }}</label>
+          <label class="dl-h3">{{ 'EDIT' | translate }}-{{ this.dbInputTitle }}</label>
         </div>
       </div>
       <div class="row">
@@ -117,7 +117,7 @@
           </div>
           <div>
             <select #d_dbTypeId class="custom-select dl-input-text input_style" >
-              <option *ngFor="let item of this.dbTypeIdList" [selected]="item == this.dbTypeIdList[0]">{{ item }}</option>
+              <option *ngFor="let item of this.dbTypeIdList" [selected]="item == this.defaultDbType">{{ item }}</option>
             </select>
           </div>
         </div>

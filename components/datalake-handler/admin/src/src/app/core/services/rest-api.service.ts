@@ -165,7 +165,15 @@ export class RestApiService {
   /*
     Database
   */
-  getDbList(): Observable<any> {
+  getDbList(flag): Observable<any> {
+    return this.http.get(prefix + "dbs/list/"+flag).pipe(
+      retry(1),
+      map(this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  getDbNameList(): Observable<any> {
     return this.http.get(prefix + "dbs").pipe(
       retry(1),
       map(this.extractData),
@@ -181,9 +189,27 @@ export class RestApiService {
     );
   }
 
-  upadteDb(d: Db): Observable<any> {
+  deleteDb(id): Observable<any> {
+    return this.http.delete(prefix + "dbs/" + id).pipe( //online
+      retry(1),
+      map(this.extractData2),
+      catchError(this.handleError)
+    );
+  }
+
+  updateDb(d: Db): Observable<any> {
     return this.http
       .put(prefix + "dbs", d)
+      .pipe(
+        retry(1),
+        tap(_ => this.extractData),
+        catchError(this.handleError)
+      );
+  }
+
+  createDb(d: Db): Observable<any> {
+    return this.http
+      .post(prefix + "dbs", d)
       .pipe(
         retry(1),
         tap(_ => this.extractData),
