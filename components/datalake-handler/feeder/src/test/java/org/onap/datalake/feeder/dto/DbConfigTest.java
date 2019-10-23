@@ -39,8 +39,8 @@ public class DbConfigTest {
         assertTrue("localhost".equals(dbConfig.getHost()));
         dbConfig.setLogin("root");
         assertTrue("root".equals(dbConfig.getLogin()));
-        dbConfig.setPassword("root123");
-        assertTrue("root123".equals(dbConfig.getPassword()));
+        dbConfig.setPass("root123");
+        assertTrue("root123".equals(dbConfig.getPass()));
         dbConfig.setDatabase("elasticsearch");
         assertTrue("elasticsearch".equals(dbConfig.getDatabase()));
         dbConfig.setPort(123);
