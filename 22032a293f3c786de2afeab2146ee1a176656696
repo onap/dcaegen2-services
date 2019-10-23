@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90d42e7a_0fb38cca",
+        "filename": "components/datalake-handler/admin/src/src/app/core/models/db.model.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-10-23T05:56:31Z",
+      "side": 1,
+      "message": "Is ID string or number?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "22032a293f3c786de2afeab2146ee1a176656696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07936856_645b2218",
+        "filename": "components/datalake-handler/admin/src/src/app/core/services/rest-api.service.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-10-23T05:56:31Z",
+      "side": 1,
+      "message": "Does the flag mean the ID of DB?",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 168,
+        "endChar": 16
+      },
+      "revId": "22032a293f3c786de2afeab2146ee1a176656696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df18d70d_4f8115ab",
+        "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/dbs-modal/couchbase/couchbase.component.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-10-23T05:56:31Z",
+      "side": 1,
+      "message": "Please have the check about similar modal components between \"couchbase.component\" and \"edit-couchbase.component\".\nI think they could be merge together, and also other modals can following.",
+      "revId": "22032a293f3c786de2afeab2146ee1a176656696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
