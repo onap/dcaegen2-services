@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "46b3e0ef_60cbcfdd",
+        "filename": "components/datalake-handler/admin/src/src/app/core/models/db.model.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-10-23T18:18:47Z",
+      "side": 1,
+      "message": "Then its type should be number?",
+      "parentUuid": "c4442b47_b61fa395",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 19
+      },
+      "revId": "22032a293f3c786de2afeab2146ee1a176656696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "07936856_645b2218",
         "filename": "components/datalake-handler/admin/src/src/app/core/services/rest-api.service.ts",
         "patchSetId": 1
@@ -93,6 +117,53 @@
       "revId": "22032a293f3c786de2afeab2146ee1a176656696",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b06ec1a_fb0bb57f",
+        "filename": "components/datalake-handler/admin/src/src/app/core/services/rest-api.service.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-10-23T18:18:47Z",
+      "side": 1,
+      "message": "Then the method name should be something like \u0027getEncryptedDbList\u0027.",
+      "parentUuid": "9032e90a_dca2db0d",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 168,
+        "endChar": 16
+      },
+      "revId": "22032a293f3c786de2afeab2146ee1a176656696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c0b286d_312910a1",
+        "filename": "components/datalake-handler/admin/src/src/app/core/services/rest-api.service.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-10-23T18:18:47Z",
+      "side": 1,
+      "message": "\"dbs/list/\"+flag\nshould be something like\n\"dbs/list/?encrypted\u003d\"+flag",
+      "range": {
+        "startLine": 169,
+        "startChar": 34,
+        "endLine": 169,
+        "endChar": 50
+      },
+      "revId": "22032a293f3c786de2afeab2146ee1a176656696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
