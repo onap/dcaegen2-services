@@ -96,6 +96,40 @@
     },
     {
       "key": {
+        "uuid": "a5dd5c8c_b75f854e",
+        "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/database-add-modal/database-add-modal.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5495
+      },
+      "writtenOn": "2019-10-23T09:45:47Z",
+      "side": 1,
+      "message": "Please use es6 grammer",
+      "revId": "22032a293f3c786de2afeab2146ee1a176656696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9f5e016_746e9d91",
+        "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/database-list.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 5495
+      },
+      "writtenOn": "2019-10-23T09:45:47Z",
+      "side": 1,
+      "message": "please delete useless codes",
+      "revId": "22032a293f3c786de2afeab2146ee1a176656696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "df18d70d_4f8115ab",
         "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/dbs-modal/couchbase/couchbase.component.html",
         "patchSetId": 1
