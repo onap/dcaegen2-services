@@ -1,33 +1,26 @@
 <!--
-============LICENSE_START=======================================================
-ONAP : DataLake
-================================================================================
-Copyright 2019 QCT
-=================================================================================
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+    Copyright (C) 2019 CMCC, Inc. and others. All rights reserved.
 
-     http://www.apache.org/licenses/LICENSE-2.0
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-============LICENSE_END=========================================================
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 -->
-
 <div class="p-1">
   <div class="modal-header pb-0 border-0">
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <label class="dl-h3">Hadoop | HDFS</label>
-          <i class="fas fa-plus fa-2x close-btn-icon" (click)="activeModal.close('Close click')"></i>
+          <label class="dl-h3">{{ this.dbInputTitle }}</label>
         </div>
       </div>
-
       <div class="row">
         <div class="col-md-12">
           <hr>
@@ -36,76 +29,79 @@ limitations under the License.
     </div>
   </div>
 
-  <div class="modal-body border-0 ml-4 mr-4">
+  <div class="modal-body border-0">
     <div class="container">
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-3"><label class="dl-emphasis1" for="inputHost">{{ "HOST" | translate}}</label></div>
-          <div class="col-md-4">
-            <input [(ngModel)]="this.tempDb.host" class="form-control dl-input-text" id="inputHost" type="text"
-              placeholder="">
+      <div class="form-group row row-wrapper">
+        <div class="row-half-item usual-item">
+          <div>
+            <label class="dl-emphasis1" >{{ 'NAME' | translate }}</label>
+          </div>
+          <div>
+            <input [(ngModel)]="this.dbInput.name" class="form-control dl-input-text input_style" placeholder="" type="text"/>
+          </div>
+        </div>
+
+        <div class="row-half-item usual-item">
+          <div>
+            <label class="dl-emphasis1" >{{ 'STATUS' | translate }}</label>
+          </div>
+          <div>
+            <label class="dl-switch">
+              <input [(ngModel)]="this.dbInput.enabled" id="switch" type="checkbox" />
+              <span class="dl-slider round"></span>
+            </label>
           </div>
         </div>
       </div>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-3"><label class="dl-emphasis1" for="inputPort">{{ "PORT" | translate}}</label></div>
-          <div class="col-md-2">
-            <input [(ngModel)]="this.tempDb.port" class="form-control dl-input-text" id="inputPort" type="text"
-              placeholder="Default" (input)="this.adminService.onKeyPressNumber($event)">
+      <div class="form-group row row-wrapper">
+        <div class="row-half-item usual-item">
+          <div>
+            <label class="dl-emphasis1" >{{ 'HOST' | translate }}</label>
+          </div>
+          <div>
+            <input [(ngModel)]="this.dbInput.host" class="form-control dl-input-text input_style" type="text" placeholder="0.0.0.0" required="required" />
+          </div>
+        </div>
+
+        <div class="row-half-item usual-item">
+          <div>
+            <label class="dl-emphasis1" >{{ 'PORT' | translate }}</label>
+          </div>
+          <div>
+            <input [(ngModel)]="this.dbInput.port" class="form-control dl-input-text input_style" type="text" placeholder="0.0.0.0" required="required" />
           </div>
         </div>
       </div>
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-3"><label class="dl-emphasis1"
-              for="inputUserName">{{ "AUTHENTICATION" | translate}}</label></div>
-          <div class="col-sm-4">
-            <input [(ngModel)]="this.tempDb.login" class="form-control dl-input-text" id="inputUserName" type="text"
-              placeholder="Username">
+      <div class="form-group row row-wrapper">
+        <div class="row-half-item usual-item">
+          <div>
+            <label class="dl-emphasis1">{{ 'SECURE_COMMUNICATION' | translate }}</label>
           </div>
-          <div class="col-sm-4">
-            <input [(ngModel)]="this.tempDb.pass" class="form-control dl-input-text" id="inputPass" type="password"
-              placeholder="Password">
+          <div class="input-group" style="width: 120px">
+            <label class="input-group-text dl-input-chk-label">
+              <input [(ngModel)]="this.dbInput.encrypt" id="chkSaveRaw" type="checkbox" />
+              <span class="dl-input-checkmark"></span>
+            </label>
+            <label class="form-control dl-input-chk" for="chkSaveRaw">
+              Secure
+            </label>
+          </div>
+        </div>
+
+        <div class="row-half-item usual-item">
+          <div>
+            <label class="dl-emphasis1" >{{ 'DB_TYPE' | translate }}</label>
+          </div>
+          <div>
+            <select #d_dbTypeId class="custom-select dl-input-text input_style" >
+              <option *ngFor="let item of this.dbTypeIdList" [selected]="item == this.defaultDbType">{{ item }}</option>
+            </select>
           </div>
         </div>
       </div>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-3"><label class="dl-emphasis1" for="switchs">{{ "ENABLE_SSL" | translate}}</label></div>
-          <div class="col-md-3">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label class="dl-switch">
-                  <input id="switchs" type="checkbox" [(ngModel)]="this.tempDb.encrypt" />
-                  <span class="dl-slider round"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-3"><label class="dl-emphasis1" for="switch">{{ "Enabled" | translate}}</label></div>
-          <div class="col-md-3">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label class="dl-switch">
-                  <input id="switch" type="checkbox" [(ngModel)]="this.tempDb.enabled" />
-                  <span class="dl-slider round"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -134,3 +130,4 @@ limitations under the License.
     </div>
   </div>
 </div>
+

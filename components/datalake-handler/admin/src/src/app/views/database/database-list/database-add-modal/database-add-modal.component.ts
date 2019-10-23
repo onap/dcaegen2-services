@@ -22,10 +22,21 @@
  *
  * @author Ekko Chang
  *
+ * @contributor Chunmeng Guo
+ *
  */
 
-import { Component, Output, EventEmitter } from "@angular/core";
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import {Component, Output, EventEmitter, ViewChild, ElementRef} from "@angular/core";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {CouchbaseComponent} from "src/app/views/database/database-list/dbs-modal/couchbase/couchbase.component";
+import {DruidComponent} from "src/app/views/database/database-list/dbs-modal/druid/druid.component";
+import {ElasticsearchComponent} from "src/app/views/database/database-list/dbs-modal/elasticsearch/elasticsearch.component";
+import {MongodbComponent} from "src/app/views/database/database-list/dbs-modal/mongodb/mongodb.component";
+import {HdfsComponent} from "src/app/views/database/database-list/dbs-modal/hdfs/hdfs.component";
+import {Db} from "src/app/core/models/db.model";
+import {RestApiService} from "src/app/core/services/rest-api.service";
+import {ToastrNotificationService} from "src/app/shared/components/toastr-notification/toastr-notification.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: "app-database-add-modal",
@@ -35,8 +46,18 @@ import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 export class DatabaseAddModalComponent {
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   seletedItem: string = "";
-
-  constructor(public activeModal: NgbActiveModal) {}
+  dbList: any = [];
+  dbs: Db[] = [];
+  loading: Boolean = true;
+  dbNew: Db;
+  db_NewBody: Db;
+  constructor(
+    public activeModal: NgbActiveModal,
+    private spinner: NgxSpinnerService,
+    private notificationService: ToastrNotificationService,
+    private modalService: NgbModal,
+    private dbApiService: RestApiService
+  ) {}
 
   ngOnInit() {}
 
@@ -45,6 +66,88 @@ export class DatabaseAddModalComponent {
   }
 
   passBack() {
-    this.passEntry.emit(this.seletedItem);
+    console.log(this.seletedItem, "next");
+    this.openNewModal(this.seletedItem);
+  }
+
+  newDb(modalRef) {
+    this.dbNew = new Db();
+    this.db_NewBody = new Db();
+    modalRef.componentInstance.db = this.db_NewBody;
+    modalRef.componentInstance.dbList_length = this.dbList.length;
+    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
+      this.db_NewBody = receivedEntry;
+      this.dbApiService
+        .createDb(this.db_NewBody)
+        .subscribe(
+          res => {
+            this.spinner.hide();
+            if (res.statusCode == 200) {
+              this.dbNew = res.returnBody;
+              this.dbList.push(this.dbNew);
+              this.dbList = [...this.dbList];
+              this.notificationService.success("SUCCESSFULLY_CREARED");
+            } else {
+              this.notificationService.error("FAILED_CREARED");
+            }
+            modalRef.close();
+          },
+          err => {
+            this.spinner.hide();
+            this.notificationService.error(err);
+            modalRef.close();
+          }
+        );
+    });
+  }
+
+  openNewModal(name: string) {
+    var modalRef;
+
+    switch (name) {
+      case "Couchbase": {
+        modalRef = this.modalService.open(CouchbaseComponent, {
+          size: "lg",
+          centered: true
+        });
+        this.newDb(modalRef);
+        break;
+      }
+      case "Druid": {
+        modalRef = this.modalService.open(DruidComponent, {
+          size: "lg",
+          centered: true
+        });
+        this.newDb(modalRef);
+        break;
+      }
+      case "Elasticsearch": {
+        modalRef = this.modalService.open(ElasticsearchComponent, {
+          size: "lg",
+          centered: true
+        });
+        this.newDb(modalRef);
+        break;
+      }
+      case "MongoDB": {
+        modalRef = this.modalService.open(MongodbComponent, {
+          size: "lg",
+          centered: true
+        });
+        this.newDb(modalRef);
+        break;
+      }
+      case "HDFS": {
+        modalRef = this.modalService.open(HdfsComponent, {
+          size: "lg",
+          centered: true
+        });
+        this.newDb(modalRef);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
 }

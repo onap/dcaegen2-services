@@ -25,6 +25,7 @@
  */
 
 export class Db {
+  id: number;
   name: string;
   enabled: boolean;
   host: string;
@@ -33,4 +34,5 @@ export class Db {
   encrypt: boolean;
   login: string;
   pass: string;
+  dbTypeId: string;
 }

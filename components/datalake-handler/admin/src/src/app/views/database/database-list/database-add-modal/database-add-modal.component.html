@@ -19,37 +19,23 @@ limitations under the License.
 -->
 
 <div class="p-0">
-  <div class="modal-title p-0 pb-4 w-25 border-right">
-
-  </div>
-
-  <div class="modal-body p-0">
-    <div class="d-flex">
-
-      <!-- Menu -->
-      <div class="flex-fill w-25 border-right">
-        <div class="nav flex-column nav-pills" id="menu-tab1" role="tablist" aria-orientation="vertical">
-
-          <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab"
-            aria-controls="v-pills-all" aria-selected="true">All</a>
-
-          <a class="nav-link" id="v-pills-olap-tab" data-toggle="pill" href="#v-pills-olap" role="tab"
-            aria-controls="v-pills-olap" aria-selected="false">OLAP</a>
-
-          <a class="nav-link" id="v-pills-doc-tab" data-toggle="pill" href="#v-pills-doc" role="tab"
-            aria-controls="v-pills-doc" aria-selected="false">Document</a>
-
-          <a class="nav-link" id="v-pills-search-tab" data-toggle="pill" href="#v-pills-search" role="tab"
-            aria-controls="v-pills-search" aria-selected="false">Search Engine</a>
-          <a class="nav-link" id="v-pills-hadoop-tab" data-toggle="pill" href="#v-pills-hadoop" role="tab"
-            aria-controls="v-pills-hadoop" aria-selected="false">Hadoop</a>
+  <div class="modal-header pb-0 border-0">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <label class="dl-h3">{{ 'NEW_DB' | translate }}</label>
         </div>
       </div>
-
-      <!-- Content -->
-      <div class="flex-fill w-75">
-
-        <div class="tab-content mb-auto" id="v-pills-tabContent" style="height: 320px;">
+      <div class="row">
+        <div class="col-md-12">
+          <hr/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-body p-0">
+    <div class="container-fluid">
+        <div class="tab-content mb-auto" id="v-pills-tabContent">
           <!-- All -->
           <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
             <div class="nav flex-column nav-pills" id="menu-tab2" role="tablist" aria-orientation="vertical">
@@ -61,44 +47,11 @@ limitations under the License.
                 aria-selected="true">Elasticsearch</a>
               <a class="nav-link" (click)="this.clickItem('MongoDB')" data-toggle="pill" role="tab"
                 aria-selected="true">MongoDB</a>
-            </div>
-          </div>
-
-          <!-- OLAP -->
-          <div class="tab-pane fade" id="v-pills-olap" role="tabpanel" aria-labelledby="v-pills-olap-tab">
-            <div class="nav flex-column nav-pills" id="menu-tab2" role="tablist" aria-orientation="vertical">
-              <a class="nav-link" (click)="this.clickItem('Druid')" data-toggle="pill" role="tab"
-                aria-selected="true">Druid</a>
-            </div>
-          </div>
-
-          <!-- Document -->
-          <div class="tab-pane fade" id="v-pills-doc" role="tabpanel" aria-labelledby="v-pills-doc-tab">
-            <div class="nav flex-column nav-pills" id="menu-tab2" role="tablist" aria-orientation="vertical">
-              <a class="nav-link" (click)="this.clickItem('Couchbase')" data-toggle="pill" role="tab"
-                aria-selected="true">Couchbase</a>
-              <a class="nav-link" (click)="this.clickItem('MongoDB')" data-toggle="pill" role="tab"
-                aria-selected="true">MongoDB</a>
-            </div>
-          </div>
-
-          <!-- Search engine -->
-          <div class="tab-pane fade" id="v-pills-search" role="tabpanel" aria-labelledby="v-pills-search-tab">
-            <div class="nav flex-column nav-pills" id="menu-tab2" role="tablist" aria-orientation="vertical">
-              <a class="nav-link" (click)="this.clickItem('Elasticsearch')" data-toggle="pill" role="tab"
-                aria-selected="true">Elasticsearch</a>
-            </div>
-          </div>
-
-          <!-- Hadoop -->
-          <div class="tab-pane fade" id="v-pills-hadoop" role="tabpanel" aria-labelledby="v-pills-hadoop-tab">
-            <div class="nav flex-column nav-pills" id="menu-tab2" role="tablist" aria-orientation="vertical">
               <a class="nav-link" (click)="this.clickItem('HDFS')" data-toggle="pill" role="tab"
-                aria-selected="true">HDFS</a>
+                 aria-selected="true">HDFS</a>
             </div>
           </div>
         </div>
-
         <div class="d-flex mt-auto justify-content-end p-3">
           <div class="p-1 col-sm-3">
             <span>
@@ -114,10 +67,7 @@ limitations under the License.
               </button>
             </span>
           </div>
-        </div>
-
       </div>
     </div>
-
   </div>
 </div>
