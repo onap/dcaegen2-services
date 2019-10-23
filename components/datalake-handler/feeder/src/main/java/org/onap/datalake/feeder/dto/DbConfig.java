@@ -38,9 +38,10 @@ public class DbConfig {
     private String host;
     private boolean enabled;
     private String login;
-    private String password;
+    private String pass;
     private boolean encrypt;
     private String database;
     private Integer port;
     private String poperties;
+    private String dbTypeId;
 }

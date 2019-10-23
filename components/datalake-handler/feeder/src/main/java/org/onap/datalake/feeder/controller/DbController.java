@@ -25,11 +25,13 @@ import java.util.*;
 import javax.servlet.http.HttpServletResponse;
 
 import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.DbType;
 import org.onap.datalake.feeder.domain.DesignType;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.repository.DbRepository;
 import org.onap.datalake.feeder.dto.DbConfig;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
+import org.onap.datalake.feeder.repository.DbTypeRepository;
 import org.onap.datalake.feeder.repository.DesignTypeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,13 +62,16 @@ public class DbController {
 	@Autowired
 	private DbRepository dbRepository;
 
+    @Autowired
+    private DbTypeRepository dbTypeRepository;
+
 	@Autowired
 	private DesignTypeRepository designTypeRepository;
 
 	//list all dbs
 	@GetMapping("")
 	@ResponseBody
-	@ApiOperation(value="Gat all databases name")
+	@ApiOperation(value="Get all databases name")
 	public List<String> list() {
 		Iterable<Db> ret = dbRepository.findAll();
 		List<String> retString = new ArrayList<>();
@@ -78,6 +83,18 @@ public class DbController {
 		}
 		return retString;
 	}
+
+    @GetMapping("/list/{encrypt}")
+    @ResponseBody
+    @ApiOperation(value="Get all databases")
+    public List<DbConfig> dblistByEncrypt(@PathVariable boolean encrypt) throws IOException {
+        Iterable<Db> ret = dbRepository.findByEncrypt(encrypt);
+        List<DbConfig> retDbConfig = new ArrayList<>();
+        for(Db db : ret) {
+            retDbConfig.add(db.getDbConfig());
+        }
+        return retDbConfig;
+    }
 
 	@GetMapping("/idAndName/{id}")
 	@ResponseBody
@@ -115,14 +132,23 @@ public class DbController {
 			newdb.setPort(dbConfig.getPort());
 			newdb.setEnabled(dbConfig.isEnabled());
 			newdb.setLogin(dbConfig.getLogin());
-			newdb.setPass(dbConfig.getPassword());
+			newdb.setPass(dbConfig.getPass());
 			newdb.setEncrypt(dbConfig.isEncrypt());
+			if (dbConfig.getDbTypeId().isEmpty()) {
+                sendError(response, 400, "Malformed format of Post body: " + result.toString());
+            } else {
+                Optional<DbType> dbType = dbTypeRepository.findById(dbConfig.getDbTypeId());
+                if (dbType.isPresent()) {
+                    newdb.setDbType(dbType.get());
+                }
+            }
 
 			if(!dbConfig.getName().equals("Elecsticsearch") || dbConfig.getName().equals("Druid"))
 			{
 				newdb.setDatabase(new String(dbConfig.getDatabase()));
 			}
 			dbRepository.save(newdb);
+            log.info("Db save ....... name: ", dbConfig.getName());
 			DbConfig retMsg;
 			PostReturnBody<DbConfig> retBody = new PostReturnBody<>();
 			retMsg = new DbConfig();
@@ -151,21 +177,21 @@ public class DbController {
 	//Delete a db
 	//the topics are missing in the return, since in we use @JsonBackReference on Db's topics
 	//need to the the following method to retrieve the topic list
-	@DeleteMapping("/{dbName}")
+	@DeleteMapping("/{id}")
 	@ResponseBody
 	@ApiOperation(value="Delete a database.")
-	public void deleteDb(@PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
+	public void deleteDb(@PathVariable("id") int id, HttpServletResponse response) throws IOException {
 
-		Db delDb = dbRepository.findByName(dbName);
-		if (delDb == null) {
-			sendError(response, 404, DB_NOT_FOUND + dbName);
+		Optional<Db> delDb = dbRepository.findById(id);
+		if (!delDb.isPresent()) {
+			sendError(response, 404, "Db not found: " + id);
 			return;
-		}
-		Set<Topic> topicRelation = delDb.getTopics();
-		topicRelation.clear();
-		dbRepository.save(delDb);
-		dbRepository.delete(delDb);
-		response.setStatus(204);
+		} else {
+            Set<Topic> topicRelation = delDb.get().getTopics();
+            topicRelation.clear();
+            dbRepository.delete(delDb.get());
+            response.setStatus(204);
+        }
 	}
 
 	//Read topics in a DB
@@ -201,12 +227,22 @@ public class DbController {
 			sendError(response, 404, DB_NOT_FOUND + dbConfig.getName());
 			return null;
 		} else {
-			oldDb.setHost(dbConfig.getHost());
-			oldDb.setPort(dbConfig.getPort());
+
 			oldDb.setEnabled(dbConfig.isEnabled());
-			oldDb.setLogin(dbConfig.getLogin());
-			oldDb.setPass(dbConfig.getPassword());
-			oldDb.setEncrypt(dbConfig.isEncrypt());
+            oldDb.setName(dbConfig.getName());
+            oldDb.setHost(dbConfig.getHost());
+            oldDb.setPort(dbConfig.getPort());
+            oldDb.setLogin(dbConfig.getLogin());
+            oldDb.setPass(dbConfig.getPass());
+            oldDb.setEncrypt(dbConfig.isEncrypt());
+            if (dbConfig.getDbTypeId().isEmpty()) {
+                sendError(response, 400, "Malformed format of Post body: " + result.toString());
+            } else {
+                Optional<DbType> dbType = dbTypeRepository.findById(dbConfig.getDbTypeId());
+                if (dbType.isPresent()) {
+                    oldDb.setDbType(dbType.get());
+                }
+            }
 			if (!oldDb.getName().equals("Elecsticsearch") || !oldDb.getName().equals("Druid")) {
 				oldDb.setDatabase(dbConfig.getDatabase());
 			}
@@ -239,13 +275,15 @@ public class DbController {
 
 	private void composeRetMessagefromDbConfig(Db db, DbConfig dbConfigMsg)
 	{
+        dbConfigMsg.setId(db.getId());
 		dbConfigMsg.setName(db.getName());
 		dbConfigMsg.setHost(db.getHost());
 		dbConfigMsg.setEnabled(db.isEnabled());
 		dbConfigMsg.setPort(db.getPort());
 		dbConfigMsg.setLogin(db.getLogin());
 		dbConfigMsg.setDatabase(db.getDatabase());
-
+        dbConfigMsg.setDbTypeId(db.getDbType().getId());
+        dbConfigMsg.setPass(db.getPass());
 
 	}
 

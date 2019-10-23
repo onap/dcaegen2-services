@@ -33,6 +33,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.onap.datalake.feeder.dto.DbConfig;
 import org.onap.datalake.feeder.enumeration.DbTypeEnum;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -89,6 +90,7 @@ public class Db {
 	@Column(name="`property3`")
 	private String property3;
 
+    @JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "db_type_id", nullable = false)
 	private DbType dbType;
@@ -149,4 +151,21 @@ public class Db {
 	public int hashCode() {
 		return id;
 	}
+
+    public DbConfig getDbConfig() {
+
+        DbConfig dbConfig = new DbConfig();
+
+        dbConfig.setId(getId());
+        dbConfig.setName(getName());
+        dbConfig.setHost(getHost());
+        dbConfig.setPort(getPort());
+        dbConfig.setPass(getPass());
+        dbConfig.setLogin(getLogin());
+        dbConfig.setEncrypt(getEncrypt());
+        dbConfig.setEnabled(isEnabled());
+        dbConfig.setDatabase(getDatabase());
+        dbConfig.setDbTypeId(getDbType().getId());
+        return dbConfig;
+    }
 }
