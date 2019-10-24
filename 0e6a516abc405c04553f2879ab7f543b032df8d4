@@ -22,6 +22,30 @@
       "revId": "0e6a516abc405c04553f2879ab7f543b032df8d4",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9ca7d2_e814cfff",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 5350
+      },
+      "writtenOn": "2019-10-24T07:14:33Z",
+      "side": 1,
+      "message": "I just want to record it，because there was no id of db when it was created",
+      "parentUuid": "08205a2e_403b054a",
+      "range": {
+        "startLine": 151,
+        "startChar": 29,
+        "endLine": 151,
+        "endChar": 38
+      },
+      "revId": "0e6a516abc405c04553f2879ab7f543b032df8d4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
