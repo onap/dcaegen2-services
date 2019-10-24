@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68ea122b_d68243a5",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/DbController.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-10-24T20:18:53Z",
+      "side": 1,
+      "message": "This block populates column \u0027database_name\u0027 in table \u0027db\u0027.\nWe should keep it.",
+      "range": {
+        "startLine": 246,
+        "startChar": 3,
+        "endLine": 248,
+        "endChar": 6
+      },
+      "revId": "e03dd69a24ca117035f97fc5bbf7131530321784",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
