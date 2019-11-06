@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dc107501_5a0972e6",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "474cf354_b578d175",
+      "range": {
+        "startLine": 23,
+        "startChar": 14,
+        "endLine": 23,
+        "endChar": 28
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9cdda3e4_661d6a75",
         "filename": "components/pm-subscription-handler/INFO.yaml",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2019-11-06T11:59:36Z",
       "side": 1,
       "message": "I think this file should be stored on a repository level, not each dir/component in a repo.\n\nIt makes it harder to update in the future.\n\nShould consult an actual committer if that is the correct approach or not though.",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e631026e_6b08f6f2",
+        "filename": "components/pm-subscription-handler/INFO.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Was thinking the same myself.\nDone",
+      "parentUuid": "9cdda3e4_661d6a75",
       "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "a898221e_d63d4073",
+        "filename": "components/pm-subscription-handler/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Just pushed this as a template/placeholder for future documentation. Can remove and push the complete one later??",
+      "parentUuid": "16fcbc9a_bf9932fe",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 2
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cb22f871_2607cee8",
         "filename": "components/pm-subscription-handler/mvn-phase-script.sh",
         "patchSetId": 1
@@ -76,6 +142,24 @@
       "writtenOn": "2019-11-06T14:34:24Z",
       "side": 1,
       "message": "If this file was modified the license should probably be updated.",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c810a2eb_c23f539f",
+        "filename": "components/pm-subscription-handler/mvn-phase-script.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb22f871_2607cee8",
       "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "63eb689c_9d227cdc",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/dmaap_client.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07c7e349_2e41dfb6",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "718f8e00_8967c20c",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_logging.py",
         "patchSetId": 1
@@ -110,6 +212,24 @@
       "writtenOn": "2019-11-06T11:59:36Z",
       "side": 1,
       "message": "Have you considered https://git.onap.org/logging-analytics/tree/pylog ?",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20731d07_3766e9c1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_logging.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Was unaware of it. I can add it as dependency and work towards using it.",
+      "parentUuid": "718f8e00_8967c20c",
       "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -133,6 +253,24 @@
     },
     {
       "key": {
+        "uuid": "31e9dd99_7278778e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32230c47_70742d44",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a00f3f03_b6f8bbd0",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
         "patchSetId": 1
@@ -150,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "fbf2eff9_2108802f",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Plan was to extend this in the same way as snmp, so we could run it on the fly.\n\nhttps://gerrit.onap.org/r/gitweb?p\u003ddcaegen2/collectors/snmptrap.git;a\u003dblob;f\u003dsnmptrap/snmptrapd.sh;h\u003dab70c915a48b06d30d0b7e084ff90ed6ae48d104;hb\u003d9034d01133d9a18b2ebb3e9fb8cd6068fad3759e",
+      "parentUuid": "a00f3f03_b6f8bbd0",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06a73ffd_421f8c2b",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
         "patchSetId": 1
@@ -161,6 +317,30 @@
       "writtenOn": "2019-11-06T12:06:12Z",
       "side": 1,
       "message": "Can this be replaced with an ENV in dockerfile?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 7
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9d54b9a_2a6ac557",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "See above comment",
+      "parentUuid": "06a73ffd_421f8c2b",
       "range": {
         "startLine": 25,
         "startChar": 0,
@@ -196,6 +376,30 @@
     },
     {
       "key": {
+        "uuid": "a8cd71a4_b3101358",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "See above comment",
+      "parentUuid": "0ac36b62_06b67d34",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 7
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d4942515_3a0653ec",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
         "patchSetId": 1
@@ -207,6 +411,30 @@
       "writtenOn": "2019-11-06T12:06:12Z",
       "side": 1,
       "message": "Can this be replaced with an ENV in dockerfile?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 7
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96669d53_5bb7d224",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "See above comment",
+      "parentUuid": "d4942515_3a0653ec",
       "range": {
         "startLine": 31,
         "startChar": 0,
@@ -236,6 +464,24 @@
     },
     {
       "key": {
+        "uuid": "c551fff8_037a2eb3",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "See above comment",
+      "parentUuid": "35a74b36_b5987461",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71b9c802_87f24b74",
         "filename": "components/pm-subscription-handler/pom.xml",
         "patchSetId": 1
@@ -253,6 +499,24 @@
     },
     {
       "key": {
+        "uuid": "14795c34_3d126866",
+        "filename": "components/pm-subscription-handler/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71b9c802_87f24b74",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35beafb3_3f9e03fa",
         "filename": "components/pm-subscription-handler/setup.py",
         "patchSetId": 1
@@ -264,6 +528,30 @@
       "writtenOn": "2019-11-06T11:59:36Z",
       "side": 1,
       "message": "These aren\u0027t in the requirements.txt, should they be?",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74f2b9ab_6a099ed4",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "They\u0027re pulled in during the install so you only need to manage dependencies in one place.\n\nhttps://caremad.io/posts/2013/07/setup-vs-requirement/",
+      "parentUuid": "35beafb3_3f9e03fa",
       "range": {
         "startLine": 31,
         "startChar": 8,
@@ -299,6 +587,30 @@
     },
     {
       "key": {
+        "uuid": "21b4c2d4_e9f5b781",
+        "filename": "components/pm-subscription-handler/tox.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Only an initial level to allow the tox suite to run successfully. Plan to in increase once coding starts.",
+      "parentUuid": "ffae6987_073e490f",
+      "range": {
+        "startLine": 31,
+        "startChar": 127,
+        "endLine": 31,
+        "endChar": 129
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1e90af44_848a0dda",
         "filename": "components/pm-subscription-handler/tox.ini",
         "patchSetId": 1
@@ -310,6 +622,30 @@
       "writtenOn": "2019-11-06T11:59:36Z",
       "side": 1,
       "message": "Why are you disabling this rule?\n\nits a valid guideline afaik.\n\nplease see\nhttps://lintlyci.github.io/Flake8Rules/rules/W605.html",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 18
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69f8a992_91e51a11",
+        "filename": "components/pm-subscription-handler/tox.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-06T15:46:19Z",
+      "side": 1,
+      "message": "Removed. Done",
+      "parentUuid": "1e90af44_848a0dda",
       "range": {
         "startLine": 40,
         "startChar": 14,
