@@ -116,6 +116,109 @@
     },
     {
       "key": {
+        "uuid": "a00f3f03_b6f8bbd0",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T12:06:12Z",
+      "side": 1,
+      "message": "Not sure if this file is needed since all of the actions its doing can be done in the Dockerfile",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06a73ffd_421f8c2b",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T12:06:12Z",
+      "side": 1,
+      "message": "Can this be replaced with an ENV in dockerfile?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 7
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ac36b62_06b67d34",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T12:06:12Z",
+      "side": 1,
+      "message": "Can this be replaced with an ENV in dockerfile?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 7
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4942515_3a0653ec",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T12:06:12Z",
+      "side": 1,
+      "message": "Can this be replaced with an ENV in dockerfile?",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 7
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35a74b36_b5987461",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T12:06:12Z",
+      "side": 1,
+      "message": "Can this be the entry point in the dockerfile rather than this shell script?",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71b9c802_87f24b74",
         "filename": "components/pm-subscription-handler/pom.xml",
         "patchSetId": 1
