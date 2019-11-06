@@ -1,0 +1,204 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "474cf354_b578d175",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T11:59:36Z",
+      "side": 1,
+      "message": "Think ONAP Logging spec prefers logs to be located in /var/log/ONAP/\u003ccomponent\u003e[/\u003csubcomponent\u003e]/*.log\n\nit doesnt make a difference since the sidecar is configured in the blueprint but better to conform.\n\nSee https://wiki.onap.org/pages/viewpage.action?pageId\u003d28378955#ONAPApplicationLoggingSpecificationv1.2(Casablanca)-OutputLocation",
+      "range": {
+        "startLine": 23,
+        "startChar": 14,
+        "endLine": 23,
+        "endChar": 28
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cdda3e4_661d6a75",
+        "filename": "components/pm-subscription-handler/INFO.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T11:59:36Z",
+      "side": 1,
+      "message": "I think this file should be stored on a repository level, not each dir/component in a repo.\n\nIt makes it harder to update in the future.\n\nShould consult an actual committer if that is the correct approach or not though.",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16fcbc9a_bf9932fe",
+        "filename": "components/pm-subscription-handler/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T11:59:36Z",
+      "side": 1,
+      "message": "did you miss an assumption or is this not needed?",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 2
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07c7e349_2e41dfb6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/dmaap_client.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T11:59:36Z",
+      "side": 1,
+      "message": "This file probably should not be staged and tracked until it is no longer a dummy.",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "718f8e00_8967c20c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_logging.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T11:59:36Z",
+      "side": 1,
+      "message": "Have you considered https://git.onap.org/logging-analytics/tree/pylog ?",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "32230c47_70742d44",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T11:59:36Z",
+      "side": 1,
+      "message": "This file probably should not be staged and tracked until it is doing something.",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71b9c802_87f24b74",
+        "filename": "components/pm-subscription-handler/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T11:59:36Z",
+      "side": 1,
+      "message": "Is it better co-located the versions of plugins \u0026 dependencies?",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35beafb3_3f9e03fa",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T11:59:36Z",
+      "side": 1,
+      "message": "These aren\u0027t in the requirements.txt, should they be?",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffae6987_073e490f",
+        "filename": "components/pm-subscription-handler/tox.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T11:59:36Z",
+      "side": 1,
+      "message": "You should be more optimistic here, \nthe expectation from an ONAP level is 55% for a passing grade, I personally recommend 80%",
+      "range": {
+        "startLine": 31,
+        "startChar": 127,
+        "endLine": 31,
+        "endChar": 129
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e90af44_848a0dda",
+        "filename": "components/pm-subscription-handler/tox.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-06T11:59:36Z",
+      "side": 1,
+      "message": "Why are you disabling this rule?\n\nits a valid guideline afaik.\n\nplease see\nhttps://lintlyci.github.io/Flake8Rules/rules/W605.html",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 18
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
