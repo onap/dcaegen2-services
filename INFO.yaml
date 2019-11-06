@@ -28,7 +28,7 @@ meetings:
       repeats: 'weekly'
       time: '13:00-14:00 UTC (DST), 15:30-16:30 UTC (post DST)'
 repositories:
-    - 'dcaegen2-services'
+    - 'dcaegen2/services'
 committers:
     - <<: *onap_dcaegen2_ptl
     - name: 'Lusheng Ji'
@@ -61,11 +61,6 @@ committers:
       company: 'ATT'
       id: 'jflucas'
       timezone: 'America/New_York'
-    - name: 'Piotr Jaszczyk'
-      email: 'piotr.jaszczyk@nokia.com'
-      company: 'Nokia'
-      id: 'jaszczur'
-      timezone: 'Europe/Warsaw'
     - name: 'Piotr Wielebski'
       email: 'piotr.wielebski@nokia.com'
       company: 'Nokia'
@@ -88,3 +83,6 @@ tsc:
         - type: 'Addition'
           name: 'Henrik Andersson'
           link: 'https://lists.onap.org/g/onap-tsc/message/4771'
+        - type: 'Removal'
+          name: 'Piotr Jaszczyk'
+          link: 'https://lists.onap.org/g/onap-tsc/message/5539'
