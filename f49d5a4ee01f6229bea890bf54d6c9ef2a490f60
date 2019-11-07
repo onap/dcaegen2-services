@@ -540,6 +540,30 @@
     },
     {
       "key": {
+        "uuid": "5ba2731f_60fe53f7",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-07T10:34:35Z",
+      "side": 1,
+      "message": "Seems to be linked to the gerrit repo by default in other projects.\nThe docs is something I forgot to ask Vijay about as it will be nested so not sure how it will get picked up.",
+      "parentUuid": "5bce0573_66347189",
+      "range": {
+        "startLine": 29,
+        "startChar": 9,
+        "endLine": 29,
+        "endChar": 69
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35beafb3_3f9e03fa",
         "filename": "components/pm-subscription-handler/setup.py",
         "patchSetId": 1
@@ -716,6 +740,30 @@
       "writtenOn": "2019-11-07T10:21:03Z",
       "side": 1,
       "message": "Since this disables the line length checks, you should probably define a max-line-length.",
+      "range": {
+        "startLine": 40,
+        "startChar": 9,
+        "endLine": 40,
+        "endChar": 13
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "352361a4_1ed176fc",
+        "filename": "components/pm-subscription-handler/tox.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-07T10:34:35Z",
+      "side": 1,
+      "message": "Just read the rule and it does make sense so will remove.",
+      "parentUuid": "85a116a4_b68dcf60",
       "range": {
         "startLine": 40,
         "startChar": 9,
