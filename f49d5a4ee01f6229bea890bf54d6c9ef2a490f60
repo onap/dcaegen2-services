@@ -517,6 +517,29 @@
     },
     {
       "key": {
+        "uuid": "5bce0573_66347189",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-07T10:21:03Z",
+      "side": 1,
+      "message": "I realise that you haven\u0027t made docs for this yet, but maybe this URL should link to the documentation (may be worth making a task to add docs and update this URL in the future.)",
+      "range": {
+        "startLine": 29,
+        "startChar": 9,
+        "endLine": 29,
+        "endChar": 69
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "35beafb3_3f9e03fa",
         "filename": "components/pm-subscription-handler/setup.py",
         "patchSetId": 1
@@ -552,6 +575,30 @@
       "side": 1,
       "message": "They\u0027re pulled in during the install so you only need to manage dependencies in one place.\n\nhttps://caremad.io/posts/2013/07/setup-vs-requirement/",
       "parentUuid": "35beafb3_3f9e03fa",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18f6324d_3e556f29",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-07T10:21:03Z",
+      "side": 1,
+      "message": "Thanks for the link, looks good.",
+      "parentUuid": "74f2b9ab_6a099ed4",
       "range": {
         "startLine": 31,
         "startChar": 8,
@@ -651,6 +698,29 @@
         "startChar": 14,
         "endLine": 40,
         "endChar": 18
+      },
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85a116a4_b68dcf60",
+        "filename": "components/pm-subscription-handler/tox.ini",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-07T10:21:03Z",
+      "side": 1,
+      "message": "Since this disables the line length checks, you should probably define a max-line-length.",
+      "range": {
+        "startLine": 40,
+        "startChar": 9,
+        "endLine": 40,
+        "endChar": 13
       },
       "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
