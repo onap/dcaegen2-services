@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "97ac96fa_f97b10e6",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-08T15:53:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ebd7eaf_a79b56bf",
+      "revId": "8958189d6277060e641a4ec96bf0460f5ef8722d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "37e0cae5_eda65875",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2019-11-08T13:31:58Z",
       "side": 1,
       "message": "I\u0027d be in favour of removing this file and just running the python script.",
+      "revId": "8958189d6277060e641a4ec96bf0460f5ef8722d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33744d76_c6bc6044",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-08T15:53:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37e0cae5_eda65875",
       "revId": "8958189d6277060e641a4ec96bf0460f5ef8722d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
