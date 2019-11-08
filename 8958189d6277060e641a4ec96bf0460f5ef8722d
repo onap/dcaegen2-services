@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ebd7eaf_a79b56bf",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2019-11-08T13:31:58Z",
+      "side": 1,
+      "message": "I don\u0027t like hiding the python script in a bash script, why not call the python script directly.",
+      "revId": "8958189d6277060e641a4ec96bf0460f5ef8722d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37e0cae5_eda65875",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2019-11-08T13:31:58Z",
+      "side": 1,
+      "message": "I\u0027d be in favour of removing this file and just running the python script.",
+      "revId": "8958189d6277060e641a4ec96bf0460f5ef8722d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
