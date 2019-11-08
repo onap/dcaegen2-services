@@ -306,6 +306,24 @@
     },
     {
       "key": {
+        "uuid": "1555508e_a3573391",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2019-11-08T11:24:10Z",
+      "side": 1,
+      "message": "hmm, it seems very much like an init script, I haven\u0027t really seen those used in a docker environment.\n\nBut making it easier to set up locally is worth considering, wondering is using this script to do that easier/better than having a compose file similar to how DR has at the moment?",
+      "parentUuid": "fbf2eff9_2108802f",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06a73ffd_421f8c2b",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
         "patchSetId": 1
