@@ -324,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "d2949bf4_ccb6a4b9",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-08T15:53:46Z",
+      "side": 1,
+      "message": "Removing for ENTRYPOINT in Dockerfile",
+      "parentUuid": "1555508e_a3573391",
+      "revId": "f49d5a4ee01f6229bea890bf54d6c9ef2a490f60",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06a73ffd_421f8c2b",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.sh",
         "patchSetId": 1
