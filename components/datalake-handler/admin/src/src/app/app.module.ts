@@ -65,6 +65,12 @@ import { HdfsComponent } from "./views/database/database-list/dbs-modal/hdfs/hdf
 import { DatabaseAddModalComponent } from "./views/database/database-list/database-add-modal/database-add-modal.component";
 import { ElasticsearchComponent } from "./views/database/database-list/dbs-modal/elasticsearch/elasticsearch.component";
 import { DruidComponent } from "./views/database/database-list/dbs-modal/druid/druid.component";
+import { KafkaListComponent } from './views/kafka/kafka-list/kafka-list.component';
+import { NewKafkaModalComponent } from './views/kafka/kafka-list/new-kafka-modal/new-kafka-modal.component';
+import { EditKafkaModalComponent } from './views/kafka/kafka-list/edit-kafka-modal/edit-kafka-modal.component';
+import { ToolsComponent } from './views/tools/tools.component';
+import { ModalToolsComponent } from './views/tools/modal-tools/modal-tools.component';
+import { ToolAddModalComponent } from './views/tools/tool-add-modal/tool-add-modal.component';
 
 // Modals
 import { TopicDetailModalComponent } from "./views/topics/topic-list/topic-detail-modal/topic-detail-modal.component";
@@ -94,10 +100,6 @@ import { ModalDemoComponent } from "./views/test/modal-demo/modal-demo.component
 import { KafkaComponent } from './views/kafka/kafka.component';
 // Angular SVG Icon
 import { AngularSvgIconModule } from "angular-svg-icon";
-import { KafkaListComponent } from './views/kafka/kafka-list/kafka-list.component';
-import { NewKafkaModalComponent } from './views/kafka/kafka-list/new-kafka-modal/new-kafka-modal.component';
-import { EditKafkaModalComponent } from './views/kafka/kafka-list/edit-kafka-modal/edit-kafka-modal.component';
-
 
 @NgModule({
   declarations: [
@@ -139,7 +141,10 @@ import { EditKafkaModalComponent } from './views/kafka/kafka-list/edit-kafka-mod
     KafkaComponent,
     KafkaListComponent,
     NewKafkaModalComponent,
-    EditKafkaModalComponent
+    EditKafkaModalComponent,
+    ToolsComponent,
+    ModalToolsComponent,
+    ToolAddModalComponent
   ],
   imports: [
     BrowserModule,
@@ -178,7 +183,9 @@ import { EditKafkaModalComponent } from './views/kafka/kafka-list/edit-kafka-mod
     ModalDemoComponent,
     KafkaComponent,
     NewKafkaModalComponent,
-    EditKafkaModalComponent
+    EditKafkaModalComponent,
+    ToolAddModalComponent,
+    ModalToolsComponent
   ]
 })
 export class AppModule {}

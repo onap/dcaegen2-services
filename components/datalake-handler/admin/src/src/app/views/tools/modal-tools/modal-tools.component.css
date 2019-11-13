@@ -1,0 +1,58 @@
+/*
+    Copyright (C) 2019 CMCC, Inc. and others. All rights reserved.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+
+.row-wrapper{
+  display: flex;
+}
+.row-quarter-item{
+  width: 20%;
+  margin-bottom: 15px;
+}
+.row-half-item{
+  width: 45%;
+}
+.row-half-item2{
+  width: 50%;
+}
+.usual-item{
+  margin-left: 2%;
+}
+.usual-item2{
+  margin-left: 6.5%;
+}
+input::-webkit-input-placeholder {
+  font-size: 12px;
+  color: #999999 !important;
+}
+input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  font-size: 12px;
+  color: #999999 !important;
+}
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  font-size: 12px;
+  color: #999999 !important;
+}
+input::-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  font-size: 12px;
+  color: #999999 !important;
+}
+
+.input_style {
+  width: 200px;
+}

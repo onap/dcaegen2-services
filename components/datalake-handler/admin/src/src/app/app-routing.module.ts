@@ -35,9 +35,8 @@ import { KafkaComponent } from "./views/kafka/kafka.component";
 import { TopicsComponent } from "./views/topics/topics.component";
 import { DatabaseComponent } from "./views/database/database.component";
 import { AboutComponent } from "./views/about/about.component";
-import { DashboardSettingComponent } from './views/dashboard-setting/dashboard-setting.component';
-import { DashboardListComponent } from './views/dashboard-setting/dashboard-list/dashboard-list.component';
 import { TemplateComponent } from './views/dashboard-setting/template/template.component';
+import {ToolsComponent} from "./views/tools/tools.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/feeder", pathMatch: "full" },
@@ -47,7 +46,7 @@ const routes: Routes = [
   { path: "topics", component: TopicsComponent },
   { path: "database", component: DatabaseComponent },
   { path: "about", component: AboutComponent },
-  { path: 'dashboard-setting/dashboard-list', component: DashboardListComponent },
+  { path: 'tools', component: ToolsComponent },
   { path: 'dashboard-setting/template', component: TemplateComponent },
 ];
 

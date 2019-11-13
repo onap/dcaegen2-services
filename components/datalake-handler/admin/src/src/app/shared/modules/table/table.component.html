@@ -19,7 +19,7 @@
             </app-button>
           </span>
           <span *ngIf="column.icon&&column.icon.length!==0">
-            <app-button [text]="column.icon" [style]="'icon'" [color]="'dark'">
+            <app-button [text]="column.icon" [style]="'icon'" [color]="'dark'" (btnAction)="tableAction($event, row.id)">
             </app-button>
           </span>
         </ng-template>

@@ -1,4 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+
+/**
+ * @contributor Chunmeng Guo
+ */
 
 @Component({
   selector: 'app-table',
@@ -8,7 +12,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TableComponent implements OnInit {
   @Input() columns: Array<any> = [];
   @Input() data: Array<any> = [];
-
+  @Output() btnTableAction = new EventEmitter<object>()
   loadingIndicator: boolean = false;
   template_list: Array<any> = [];
 
@@ -26,5 +30,12 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  tableAction($event, actionId: number) {
+    let passValueArr: Array<any> = [];
+    passValueArr.push($event);
+    passValueArr.push(actionId);
+    this.btnTableAction.emit(passValueArr);
   }
 }

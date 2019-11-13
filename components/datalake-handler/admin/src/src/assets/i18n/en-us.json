@@ -5,7 +5,7 @@
     "TOPICS": "Topics",
     "DATABASE": "Database",
     "DASHBOARD": "Portal Setting",
-    "DASHBOARDLIST": "Portal",
+    "DASHBOARDLIST": "Tools",
     "TEMPLATE": "Design",
     "ABOUT": "About"
   },
@@ -82,5 +82,7 @@
   "NEW_MONGODB": "New MongoDB",
   "NEW_HDFS": "New Hdfs",
   "SECURE_COMMUNICATION": "Secure Communication",
-  "DB_TYPE": "DbType"
+  "DB_TYPE": "DbType",
+  "NEW_TOOL": "New Tool",
+  "NEW_KIBANA": "New Kibana"
 }
