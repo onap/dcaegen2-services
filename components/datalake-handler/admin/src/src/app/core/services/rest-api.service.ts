@@ -116,8 +116,8 @@ export class RestApiService {
     );
   }
 
-  getTopicDetail(name: string): Observable<any> {
-    return this.http.get(prefix + "topics/" + name).pipe(
+  getTopicDetail(id): Observable<any> {
+    return this.http.get(prefix + "topics/" + id).pipe(
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -181,8 +181,8 @@ export class RestApiService {
     );
   }
 
-  getDbDetail(name: string): Observable<any> {
-    return this.http.get(prefix + "dbs/" + name).pipe(
+  getDbDetail(id): Observable<any> {
+    return this.http.get(prefix + "dbs/" + id).pipe(
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -215,6 +215,14 @@ export class RestApiService {
         tap(_ => this.extractData),
         catchError(this.handleError)
       );
+  }
+
+  getDbTypeList(): Observable<any> {
+    return this.http.get(prefix + "db_type").pipe(
+      retry(1),
+      map(this.extractData),
+      catchError(this.handleError)
+    );
   }
 
   /*
