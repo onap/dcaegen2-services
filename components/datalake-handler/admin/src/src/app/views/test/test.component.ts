@@ -45,7 +45,11 @@ export class TestComponent implements OnInit {
         dataIndex: "name",
         sortable: true
       },
-      { name: "TEMPLATE_TYPE", width: "180", dataIndex: "type" },
+      {
+        name: "TEMPLATE_TYPE",
+        width: "180",
+        dataIndex: "type"
+      },
       {
         name: "TOPICS_NAME",
         width: "220",
@@ -53,28 +57,52 @@ export class TestComponent implements OnInit {
         renderText: "3"
       },
       {
-        name: "DEPLOY_TO_DASHBOARD",
+        name: "",
+        src: "assets/icons/couchbase_able.svg",
         width: "220",
-        dataIndex: "",
-        icontext: "DEPLOY"
+        dataIndex: "cc",
       },
-      { name: "", width: "20", dataIndex: "", icon: "trash" }
+      {
+        name: "DEPLOY_TO_DASHBOARD",
+        width: "100",
+        dataIndex: "",
+        icontext: "DEPLOY",
+      },
+      {
+        name: "",
+        width: "20",
+        icon: "trash"
+      },
+      {
+        name: "Configured",
+        width: "100",
+        dataIndex: "configured",
+        svgicon: "assets/icons/add.svg"
+        // icontext: "DEPLOY",
+        //svg: "assets/icons/add.svg", // TODO: icon
+      },
     ];
     this.mocktabledata = [
       {
         name: "aaaa",
         type: "333",
-        topic: "尽快尽快"
+        topic: "尽快尽快",
+        cc: "123",
+        configured: true
       },
       {
         name: "ccccc",
         type: "666",
-        topic: "2222"
+        topic: "2222",
+        cc: "222",
+        configured: true
       },
       {
         name: "bbbbb",
         type: "77777",
-        topic: "555"
+        topic: "555",
+        cc: "5",
+        configured: false
       }
     ];
 

@@ -137,16 +137,17 @@ router.render = (req, res) => {
     switch (req.originalUrl) {
       case endpoint + "/dbs":
       case endpoint + "/topics":
-      case endpoint + "/topics/dmaap":
+      case endpoint + "/db_type":
         let obj = res.locals.data;
         let data = [];
         for (let i = 0; i < obj.length; i++) {
-          data.push(obj[i].name);
+          data.push(obj[i].id);
         }
         res.jsonp(data);
         break;
+
       default:
-        res.jsonp(res.locals.data);
+        res.jsonp(res.locals.data[0]);
     }
   }
 };
@@ -155,12 +156,12 @@ router.render = (req, res) => {
 // Add this before server.use(router)
 server.use(
   jsonServer.rewriter({
-    "/datalake/v1/dbs/:name": "/dbs?name=:name",
-    "/datalake/v1/topics/dmaap": "/topics",
-    "/datalake/v1/topics/:name": "/topics?name=:name"
+    "/datalake/v1/dbs/:id": "/dbs?id=:id",
+    "/datalake/v1/topics/_DL_DEFAULT_": "/topics?name=_DL_DEFAULT_",
+    "/datalake/v1/topics/:id": "/topics?id=:id",
+    "/datalake/v1/db_type": "/db_type"
   })
 );
-
 server.use(endpoint, router);
 server.use(router);
 

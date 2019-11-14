@@ -103,8 +103,6 @@ export class TopicListComponent {
   }
 
   async initData() {
-    this.topicListDmaap = [];
-    this.topicListDmaap = await this.getTopicList("dmaap");
 
     this.topicListFeeder = [];
     this.topicListFeeder = await this.getTopicList("feeder");
@@ -119,10 +117,6 @@ export class TopicListComponent {
     var data: any;
 
     switch (type) {
-      case "dmaap": {
-        data = this.restApiService.getTopicsFromDmaap().toPromise();
-        break;
-      }
       case "feeder": {
         data = this.restApiService.getTopicsFromFeeder().toPromise();
         break;
@@ -138,70 +132,36 @@ export class TopicListComponent {
   async initTopicList(dmaapList: [], feederList: []) {
     var t: Topic[] = [];
 
-    // dmaap has topics
-    if (dmaapList.length > 0) {
-      let listLength = dmaapList.length > feederList.length ? dmaapList.length : feederList.length;
-      for (var i = 0; i < listLength; i++) {
-        if (feederList.includes(dmaapList[i])) {
-          let data = await this.getTopicDetail(dmaapList[i]);
-          let feed = {
-            name: dmaapList[i],
-            login: data.login,
-            password: data.password,
-            sinkdbs: data.sinkdbs,
-            enabled: data.enabled,
-            saveRaw: data.saveRaw,
-            dataFormat: data.dataFormat,
-            ttl: data.ttl,
-            correlateClearedMessage: data.correlateClearedMessage,
-            messageIdPath: data.messageIdPath,
-            type: true
-          };
-          t.push(feed);
-        } else if (!feederList.includes(dmaapList[i]) && dmaapList[i] != undefined) {
-          let feed = {
-            name: dmaapList[i],
-            login: this.topicDefaultConfig.login,
-            password: this.topicDefaultConfig.password,
-            sinkdbs: this.topicDefaultConfig.sinkdbs,
-            enabled: this.topicDefaultConfig.enabled,
-            saveRaw: this.topicDefaultConfig.saveRaw,
-            dataFormat: this.topicDefaultConfig.dataFormat,
-            ttl: this.topicDefaultConfig.ttl,
-            correlateClearedMessage: this.topicDefaultConfig
-              .correlateClearedMessage,
-            messageIdPath: this.topicDefaultConfig.messageIdPath,
-            type: false
-          };
-          t.push(feed);
-        }
-        if (!dmaapList.includes(feederList[i]) && feederList[i] != undefined) {
-          let data = await this.getTopicDetail(feederList[i]);
-          let feed = {
-            name: feederList[i],
-            login: data.login,
-            password: data.password,
-            sinkdbs: data.sinkdbs,
-            enabled: data.enabled,
-            saveRaw: data.saveRaw,
-            dataFormat: data.dataFormat,
-            ttl: data.ttl,
-            correlateClearedMessage: data.correlateClearedMessage,
-            messageIdPath: data.messageIdPath,
-            type: true,
-            topicDb: true
-          };
-          t.push(feed);
-        }
-      }
-    } else {
       // dmaap has no topics, only show topic in db
       for (var i = 0; i < feederList.length; i++) {
         let data = await this.getTopicDetail(feederList[i]);
+        let dbinfo = [];
+        var totalCB = 0;
+        var totalDRUID = 0;
+        var totalES = 0;
+        var totalHDFS = 0;
+        var totalMONGO = 0;
+        for (var x = 0; x < data.enabledSinkdbs.length; x++) {
+          let dbdata = await this.getDbDetail(data.enabledSinkdbs[x]);
+          dbinfo.push(dbdata);
+          if (dbinfo!=undefined && dbinfo[x].type=="CB"){
+            totalCB = totalCB + 1;
+          }if (dbinfo!=undefined && dbinfo[x].type=="DRUID"){
+            totalDRUID = totalDRUID + 1;
+          }if (dbinfo!=undefined && dbinfo[x].type=="ES"){
+            totalES = totalES + 1;
+          }if (dbinfo!=undefined && dbinfo[x].type=="HDFS"){
+            totalHDFS = totalHDFS + 1;
+          }if (dbinfo!=undefined && dbinfo[x].type=="MONGO"){
+            totalMONGO = totalMONGO + 1;
+          }
+        }
+
         let feed = {
-          name: feederList[i],
+          name: data.name,
           login: data.login,
           password: data.password,
+          enabledSinkdbs: data.enabledSinkdbs,
           sinkdbs: data.sinkdbs,
           enabled: data.enabled,
           saveRaw: data.saveRaw,
@@ -209,11 +169,16 @@ export class TopicListComponent {
           ttl: data.ttl,
           correlateClearedMessage: data.correlateClearedMessage,
           messageIdPath: data.messageIdPath,
-          type: true
+          kafkas: data.kafkas.length,
+          type: data.type,
+          CB: totalCB,
+          DRUID: totalDRUID,
+          ES: totalES,
+          HDFS: totalHDFS,
+          MONGO: totalMONGO
         };
         t.push(feed);
       }
-    }
 
     return t;
   }
@@ -274,7 +239,8 @@ export class TopicListComponent {
                   // Unconfigure topics
                   t.login = this.topicDefaultConfig.login;
                   t.password = this.topicDefaultConfig.password;
-                  t.sinkdbs = this.topicDefaultConfig.sinkdbs;
+                  t.enabledSinkdbs = this.topicDefaultConfig.enabledSinkdbs;
+                  // t.sinkdbs = this.topicDefaultConfig.sinkdbs; //todo
                   t.enabled = this.topicDefaultConfig.enabled;
                   t.saveRaw = this.topicDefaultConfig.saveRaw;
                   t.dataFormat = this.topicDefaultConfig.dataFormat;
@@ -389,9 +355,20 @@ export class TopicListComponent {
     })
   }
 
-  getTopicDetail(name: string) {
-    return this.restApiService.getTopicDetail(name).toPromise();
+  getTopicDetail(id) {
+    return this.restApiService.getTopicDetail(id).toPromise();
   }
+
+  getDbDetail(id) {
+    return this.restApiService.getDbDetail(id).toPromise();
+  }
+
+  GroupByDbType = (array, key) => {
+    return array.reduce((result, currentValue) => {
+      (result[currentValue.type] = result[currentValue.type] || []).push(currentValue);
+      return result;
+    }, {});
+  };
 
   updateFilter(searchValue) {
     const val = searchValue.toLowerCase();

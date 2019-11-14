@@ -28,6 +28,7 @@ export class Topic {
   name: string;
   login: string;
   password: string;
+  enabledSinkdbs: any;
   sinkdbs: any;
   saveRaw: boolean;
   dataFormat: string;
@@ -36,5 +37,7 @@ export class Topic {
   messageIdPath: string;
   // for UI display
   type: boolean; // 1: Configure 0: Unconfiure
+  //id: number; //todo
+  //kafkas: any; //todo
 }
 
