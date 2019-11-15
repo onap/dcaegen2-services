@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66e4c668_3fb1d6ef",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db_data.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-11-15T15:18:55Z",
+      "side": 1,
+      "message": "there should be a copyright and license notice on this script?",
+      "revId": "afff9f35133adf97b3d36b0497b5a0cc518a3ca6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
