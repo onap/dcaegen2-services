@@ -84,17 +84,20 @@ public class DbController {
 		return retString;
 	}
 
-    @GetMapping("/list/")
-    @ResponseBody
-    @ApiOperation(value="Get all databases by encrypt")
-    public List<DbConfig> dblistByEncrypt(@RequestParam boolean encrypt) throws IOException {
-        Iterable<Db> ret = dbRepository.findByEncrypt(encrypt);
-        List<DbConfig> retDbConfig = new ArrayList<>();
-        for(Db db : ret) {
-            retDbConfig.add(db.getDbConfig());
-        }
-        return retDbConfig;
-    }
+	@GetMapping("/list")
+	@ResponseBody
+	@ApiOperation(value="Get all dbs by tool")
+	public List<DbConfig> dblistByTool(@RequestParam boolean tool) {
+		log.info("Search dbs by tool start......");
+		Iterable<DbType> dbType  = dbTypeRepository.findByTool(tool);
+		List<DbConfig> retDbConfig = new ArrayList<>();
+		for (DbType item : dbType) {
+			for (Db d : item.getDbs()) {
+				retDbConfig.add(d.getDbConfig());
+			}
+		}
+		return retDbConfig;
+	}
 
 	@GetMapping("/idAndName/{id}")
 	@ResponseBody
