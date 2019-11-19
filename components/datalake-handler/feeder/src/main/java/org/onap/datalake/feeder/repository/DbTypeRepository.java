@@ -30,6 +30,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 
 public interface DbTypeRepository extends CrudRepository<DbType, String> {
-    
-    
+
+    Iterable<DbType> findByTool(boolean tool);
 }
