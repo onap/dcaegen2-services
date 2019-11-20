@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9da25839_5c85a8d9",
+        "filename": "components/pm-subscription-handler/.coveragerc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-11-20T16:52:14Z",
+      "side": 1,
+      "message": "copyright? license?",
+      "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88e14476_dbd1d1b1",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-11-20T16:52:14Z",
+      "side": 1,
+      "message": "copyright? license?",
+      "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f55e16c_6fe551b5",
+        "filename": "components/pm-subscription-handler/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-11-20T16:52:14Z",
+      "side": 1,
+      "message": "I assume that these will be filled in on the next drop?",
+      "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d027ce06_f9ead550",
+        "filename": "components/pm-subscription-handler/tox.ini",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-11-20T16:52:14Z",
+      "side": 1,
+      "message": "add py37",
+      "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
