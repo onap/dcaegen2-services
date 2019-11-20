@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62127cd4_5813107d",
+        "filename": "components/datalake-handler/admin/src/src/app/mockup/index.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-11-20T14:30:46Z",
+      "side": 1,
+      "message": "license? copyright?",
+      "revId": "9f7f03213a48ee21ef4dde3462e0b025c959d966",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9aa4b035_1b8d1999",
+        "filename": "components/datalake-handler/admin/src/src/app/views/test/test.component.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-11-20T14:30:46Z",
+      "side": 1,
+      "message": "copyright? license?",
+      "revId": "9f7f03213a48ee21ef4dde3462e0b025c959d966",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
