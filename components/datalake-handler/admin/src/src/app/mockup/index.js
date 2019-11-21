@@ -1,3 +1,29 @@
+/*
+ * ============LICENSE_START=======================================================
+ * ONAP : DataLake
+ * ================================================================================
+ * Copyright 2019 QCT
+ *=================================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END=========================================================
+ */
+
+/**
+ *
+ * @author Ekko Chang
+ *
+ */
+
 // Database
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
@@ -92,11 +118,11 @@ server.post(endpoint + "/topics", async (req, res) => {
   postData("topics", req, res);
 });
 
-server.put(endpoint + "/topics/:name", async (req, res) => {
+server.put(endpoint + "/topics/:id", async (req, res) => {
   putData("topics", req, res);
 });
 
-server.delete(endpoint + "/topics/:name", async (req, res) => {
+server.delete(endpoint + "/topics/:id", async (req, res) => {
   deleteData("topics", req, res);
 });
 // End REST API: /topics
@@ -141,12 +167,12 @@ router.render = (req, res) => {
         let obj = res.locals.data;
         let data = [];
         for (let i = 0; i < obj.length; i++) {
-          data.push(obj[i].name);
+          data.push(obj[i].id);
         }
         res.jsonp(data);
         break;
       default:
-        res.jsonp(res.locals.data);
+        res.jsonp(res.locals.data[0]);
     }
   }
 };
@@ -155,9 +181,10 @@ router.render = (req, res) => {
 // Add this before server.use(router)
 server.use(
   jsonServer.rewriter({
-    "/datalake/v1/dbs/:name": "/dbs?name=:name",
-    "/datalake/v1/topics/dmaap": "/topics",
-    "/datalake/v1/topics/:name": "/topics?name=:name"
+    "/datalake/v1/dbs/:id": "/dbs?id=:id",
+    "/datalake/v1/topics/_DL_DEFAULT_": "/topics?name=_DL_DEFAULT_",
+    "/datalake/v1/topics/:id": "/topics?id=:id",
+    "/datalake/v1/db_type": "/db_type"
   })
 );
 

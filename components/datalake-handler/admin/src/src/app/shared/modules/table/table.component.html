@@ -1,8 +1,25 @@
+<!--
+============LICENSE_START=======================================================
+ONAP : DataLake
+================================================================================
+Copyright 2019 QCT
+=================================================================================
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+============LICENSE_END=========================================================
+-->
+
 <div class="row">
   <div class="col-md-12">
-    <!-- <ngx-datatable #mytemlate class="bootstrap" [rows]="data" [columnMode]="'force'" [headerHeight]="40"
-      [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [loadingIndicator]="loadingIndicator"
-      [messages]="mesgNoData" [limit]="10" (activate)="onActivate($event)"> -->
 
     <ngx-datatable #mytemlate class="bootstrap" [rows]="data" [columnMode]="'force'" [headerHeight]="40"
       [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [loadingIndicator]="loadingIndicator"
@@ -11,17 +28,34 @@
       <ngx-datatable-column sortable="column.sortable" *ngFor="let column of columns" [width]="column.width"
         name="{{ column.name | translate }}" prop="column.name" headerClass="d-flex justify-content-center"
         cellClass="d-flex justify-content-center">
+
+        <ng-template ngx-datatable-header-template>
+          <span *ngIf="column.name&&column.name.length!==0">{{ column.name | translate}}</span>
+          <span *ngIf="column.src&&column.src.length!==0">
+            <img [src]=column.src alt='Icon' style='height: 18px;' />
+          </span>
+        </ng-template>
+
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <span *ngIf="column.dataIndex&&column.dataIndex.length!==0">{{row[column.dataIndex]}}</span>
+          <span *ngIf="column.dataIndex&&column.dataIndex.length!==0&&!column.svgicon">{{row[column.dataIndex]}}</span>
           <span *ngIf="column.renderText&&column.renderText.length!==0"></span>
           <span *ngIf="column.icontext&&column.icontext.length!==0">
             <app-button [text]="column.icontext" [style]="'inline'" [color]="'dark'">
             </app-button>
           </span>
+
           <span *ngIf="column.icon&&column.icon.length!==0">
             <app-button [text]="column.icon" [style]="'icon'" [color]="'dark'" (btnAction)="tableAction($event, row.id)">
             </app-button>
           </span>
+
+          <span *ngIf="column.svgicon&&column.svgicon.length!==0">
+            <span *ngIf="row[column.dataIndex]">
+                <svg-icon [src]="column.svgicon" [svgStyle]="{ 'width.px':20 }">
+                </svg-icon>
+            </span>
+          </span>
+
         </ng-template>
       </ngx-datatable-column>
 
