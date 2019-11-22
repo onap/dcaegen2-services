@@ -86,10 +86,10 @@ public class DbController {
 
 	@GetMapping("/list")
 	@ResponseBody
-	@ApiOperation(value="Get all dbs by tool")
-	public List<DbConfig> dblistByTool(@RequestParam boolean tool) {
+	@ApiOperation(value="Get all tools or dbs")
+	public List<DbConfig> dblistByTool(@RequestParam boolean isDb) {
 		log.info("Search dbs by tool start......");
-		Iterable<DbType> dbType  = dbTypeRepository.findByTool(tool);
+		Iterable<DbType> dbType  = dbTypeRepository.findByTool(!isDb);
 		List<DbConfig> retDbConfig = new ArrayList<>();
 		for (DbType item : dbType) {
 			for (Db d : item.getDbs()) {
@@ -148,7 +148,7 @@ public class DbController {
 
 			if(!dbConfig.getName().equals("Elecsticsearch") || dbConfig.getName().equals("Druid"))
 			{
-				newdb.setDatabase(new String(dbConfig.getDatabase()));
+				newdb.setDatabase(dbConfig.getDatabase());
 			}
 			dbRepository.save(newdb);
             log.info("Db save ....... name: " + dbConfig.getName());

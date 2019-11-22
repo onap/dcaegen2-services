@@ -84,7 +84,7 @@ public class DbTest {
         assertTrue("root".equals(mongoDB2.getLogin()));
         assertTrue("root123".equals(mongoDB2.getPass()));
         assertTrue("mongoDB2".equals(mongoDB2.getDatabase()));
-        assertFalse("true".equals(mongoDB2.getEncrypt()));
+        assertFalse("true".equals(mongoDB2.isEncrypt()));
         assertTrue("property1".equals(mongoDB2.getProperty1()));
         assertTrue("property2".equals(mongoDB2.getProperty2()));
         assertTrue("property3".equals(mongoDB2.getProperty3()));

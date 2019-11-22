@@ -49,7 +49,7 @@ export class FeederComponent implements OnInit {
     private notificationService: ToastrNotificationService,
     private spinner: NgxSpinnerService
   ) {
-    this.adminService.setTitle("SIDEBAR.FEDDFER");
+    this.adminService.setTitle("SIDEBAR.FEEDER");
     this.restApiService.getTopicsFromFeeder().subscribe(
       res => {
         this.topicContent = res.length.toString();

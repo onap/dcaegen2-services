@@ -1,6 +1,6 @@
 {
   "SIDEBAR": {
-    "FEDDFER": "DataLake Feeder",
+    "FEEDER": "DataLake Feeder",
     "KAFKA": "Kafka",
     "TOPICS": "Topics",
     "DATABASE": "Database",
@@ -11,7 +11,7 @@
   },
   "NAME": "Name",
   "STATUS": "Status",
-  "SINK": "Sink",
+  "SINK": "Target",
   "AUTHENTICATION": "Authentication",
   "DATA_FORMAT": "Data format",
   "TTL": "TTL",
@@ -56,7 +56,7 @@
   "NODATA": "No Data",
   "NEW_TEMPLATE": "New design",
   "TEMPLATE_BODY": "Body",
-  "FIELUPLOAD": "Import",
+  "FIELUPLOAD": "Select File ...",
   "SUCCESSFULLY_CREARED": "Successfully created.",
   "FAILED_CREARED": "Failed updated.",
   "SUCCESSFULLY_UPDATED": "Successfully updated.",

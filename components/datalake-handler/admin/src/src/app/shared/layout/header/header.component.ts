@@ -64,7 +64,7 @@ export class HeaderComponent {
     });
     this.selectedLang = this.translateService.defaultLang;
 
-    if ((this.title = "SIDEBAR.FEDDFER")) {
+    if ((this.title = "SIDEBAR.FEEDER")) {
       this.restApiService.getFeederstatus().subscribe((data: {}) => {
         this.feeder = new Feeder();
         this.feeder = data;
