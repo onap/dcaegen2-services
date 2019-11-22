@@ -33,6 +33,24 @@
       "revId": "85dc599c19abef284933a7f72471d8f55fd73bbd",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e741956c_6ea40432",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-11-22T18:54:17Z",
+      "side": 1,
+      "message": "We use MariaDB, and this is the right data type to use for this field.",
+      "parentUuid": "6cd7575d_c5701ce3",
+      "revId": "85dc599c19abef284933a7f72471d8f55fd73bbd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
