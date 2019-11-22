@@ -79,7 +79,7 @@ public class Db {
 	private String database;
 
 	@Column(name="`encrypt`")
-	private Boolean encrypt;
+	private boolean encrypt;
 
 	@Column(name="`property1`")
 	private String property1;
@@ -162,7 +162,7 @@ public class Db {
         dbConfig.setPort(getPort());
         dbConfig.setPass(getPass());
         dbConfig.setLogin(getLogin());
-        dbConfig.setEncrypt(getEncrypt());
+        dbConfig.setEncrypt(isEncrypt());
         dbConfig.setEnabled(isEnabled());
         dbConfig.setDatabase(getDatabase());
         dbConfig.setDbTypeId(getDbType().getId());

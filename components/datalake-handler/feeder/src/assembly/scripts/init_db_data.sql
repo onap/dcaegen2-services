@@ -1,3 +1,23 @@
+/*
+* ============LICENSE_START=======================================================
+* ONAP : DATALAKE
+* ================================================================================
+* Copyright 2019 China Mobile
+*=================================================================================
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+* ============LICENSE_END=========================================================
+*/
+
 INSERT INTO datalake.kafka(
    id
   ,name
@@ -36,14 +56,13 @@ insert into db_type (`id`, `name`, tool) values ('HDFS', 'HDFS', false);
 insert into db_type (`id`, `name`, tool) values ('KIBANA', 'Kibana', true);
 insert into db_type (`id`, `name`, tool) values ('SUPERSET', 'Apache Superset', true);
 
-insert into db (id, db_type_id, enabled, `name`,`host`,`login`,`pass`,`database_name`) values (1, 'CB', true, 'Couchbase 1','dl-couchbase','dl','dl1234','datalake');
-insert into db (id, db_type_id, enabled, `name`,`host`) values (2, 'ES', true, 'Elasticsearch','dl-es');
-insert into db (id, db_type_id, enabled, `name`,`host`,`port`,`database_name`) values (3, 'MONGO', true, 'MongoDB 1','dl-mongodb',27017,'datalake');
-insert into db (id, db_type_id, enabled, `name`,`host`) values (4, 'DRUID', true, 'Druid','dl-druid');
-insert into db (id, db_type_id, enabled, `name`,`host`,`login`) values (5, 'HDFS', true, 'Hadoop Cluster','dl-hdfs','dl');
-insert into db (id, db_type_id, enabled, `name`,`host`) values (6, 'KIBANA', true, 'Kibana demo','dl-es');
-insert into db (id, db_type_id, enabled, `name`,`host`) values (7, 'SUPERSET', true, 'Superset demo','dl-druid');
-
+insert into db (id, db_type_id, enabled, encrypt, `name`,`host`,`login`,`pass`,`database_name`) values (1, 'CB', true, true, 'Couchbase 1','dl-couchbase','dl','dl1234','datalake');
+insert into db (id, db_type_id, enabled, encrypt, `name`,`host`) values (2, 'ES', true, true, 'Elasticsearch','dl-es');
+insert into db (id, db_type_id, enabled, encrypt, `name`,`host`,`port`,`database_name`) values (3, 'MONGO', true, true, 'MongoDB 1','dl-mongodb',27017,'datalake');
+insert into db (id, db_type_id, enabled, encrypt, `name`,`host`) values (4, 'DRUID', true, true, 'Druid','dl-druid');
+insert into db (id, db_type_id, enabled, encrypt, `name`,`host`,`login`) values (5, 'HDFS', true, true, 'Hadoop Cluster','dl-hdfs','dl');
+insert into db (id, db_type_id, enabled, encrypt, `name`,`host`) values (6, 'KIBANA', true, false, 'Kibana demo','dl-es');
+insert into db (id, db_type_id, enabled, encrypt, `name`,`host`) values (7, 'SUPERSET', true, false, 'Superset demo','dl-druid');
 
 insert into topic_name (id) values ('_DL_DEFAULT_');
 insert into topic_name (id) values ('unauthenticated.SEC_FAULT_OUTPUT');

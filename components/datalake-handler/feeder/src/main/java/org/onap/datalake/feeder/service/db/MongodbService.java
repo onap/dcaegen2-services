@@ -106,7 +106,7 @@ public class MongodbService implements DbStoreService {
 
 		//http://mongodb.github.io/mongo-java-driver/3.0/driver/reference/connecting/ssl/
 		if (config.isEnableSSL()) {
-			builder.sslEnabled(Boolean.TRUE.equals(mongodb.getEncrypt()));// getEncrypt() can be null
+			builder.sslEnabled(Boolean.TRUE.equals(mongodb.isEncrypt()));// getEncrypt() can be null
 		}
 		MongoClientOptions options = builder.build();
 		List<ServerAddress> addrs = new ArrayList<>();
@@ -162,7 +162,7 @@ public class MongodbService implements DbStoreService {
 			documents.add(doc);
 		}
 
-		String collectionName = effectiveTopic.getName().replaceAll("[^a-zA-Z0-9]", "");//remove - _ .
+		String collectionName = effectiveTopic.getName().replaceAll("[^a-zA-Z0-9]", "").toLowerCase();//remove - _ .
 		MongoCollection<Document> collection = mongoCollectionMap.computeIfAbsent(collectionName, k -> database.getCollection(k));
 
 		try {
