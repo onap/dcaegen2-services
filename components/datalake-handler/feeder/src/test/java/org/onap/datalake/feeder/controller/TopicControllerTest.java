@@ -163,8 +163,8 @@ public class TopicControllerTest {
 		topics.add(TestUtil.newTopic(DEFAULT_TOPIC_NAME));
 		when(topicRepository.findAll()).thenReturn(topics);
 
-		List<String> strings = topicController.list();
-		for (String topic : strings) {
+		List<Integer> ids = topicController.list();
+		for (Integer topic : ids) {
 			System.out.println(topic);
 		}
 	}

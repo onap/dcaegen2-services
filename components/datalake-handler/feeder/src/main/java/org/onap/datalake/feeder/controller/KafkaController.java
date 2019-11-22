@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This controller manages kafka settings
@@ -129,7 +130,17 @@ public class KafkaController {
 
     @GetMapping("")
     @ResponseBody
-    @ApiOperation(value="List all Kafkas")
+    @ApiOperation(value="List all Kafka id")
+    public List<Integer> list() {
+        Iterable<Kafka> ret = kafkaRepository.findAll();
+        List<Integer> retString = new ArrayList<>();
+        for (Kafka k : ret)
+        {
+            retString.add(k.getId());
+        }
+        return retString;
+    }
+
     public List<KafkaConfig> queryAllKafka(){
         return kafkaService.getAllKafka();
     }
