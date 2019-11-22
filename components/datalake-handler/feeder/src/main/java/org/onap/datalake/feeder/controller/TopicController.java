@@ -93,16 +93,28 @@ public class TopicController {
 		return dmaapService.getTopics();
 	}
 
+	@GetMapping("/default")
+	@ResponseBody
+	@ApiOperation(value = "Get default topic configuration.")
+	public TopicConfig getDefaultConfig(HttpServletResponse response) throws IOException {
+		Topic topic = topicService.getDefaultTopicFromFeeder();
+		if(topic == null) {
+			sendError(response, 404, "Topic not found");
+			return null;
+		}
+		return topic.getTopicConfig();
+	}
+
 	@GetMapping("")
 	@ResponseBody
-	@ApiOperation(value="List all topic names in database")
-	public List<String> list() {
+	@ApiOperation(value="List all topic id in database")
+	public List<Integer> list() {
 		Iterable<Topic> ret = topicRepository.findAll();
-		List<String> retString = new ArrayList<>();
+		List<Integer> retString = new ArrayList<>();
 		for(Topic item : ret)
 		{
 			if(!topicService.isDefaultTopic(item))
-				retString.add(item.getName());
+				retString.add(item.getId());
 		}
 		return retString;
 	}
