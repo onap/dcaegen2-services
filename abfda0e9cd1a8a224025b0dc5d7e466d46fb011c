@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c965303a_cf426a4a",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/TopicService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-11-25T08:34:42Z",
+      "side": 1,
+      "message": "should be \n\u003d null?\nin TopicController.java, null is checked.",
+      "range": {
+        "startLine": 123,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 26
+      },
+      "revId": "abfda0e9cd1a8a224025b0dc5d7e466d46fb011c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e575eb46_97c110d2",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/TopicService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2019-11-25T08:34:42Z",
+      "side": 1,
+      "message": "can use \ntopicRepository.findByName()\ntake a look at DbRepository.java",
+      "range": {
+        "startLine": 126,
+        "startChar": 3,
+        "endLine": 126,
+        "endChar": 73
+      },
+      "revId": "abfda0e9cd1a8a224025b0dc5d7e466d46fb011c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
