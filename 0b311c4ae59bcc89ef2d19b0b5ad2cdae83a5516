@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dcd0340b_ae08b305",
+        "filename": "components/pm-subscription-handler/.coveragerc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-25T10:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9da25839_5c85a8d9",
+      "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "88e14476_dbd1d1b1",
         "filename": "components/pm-subscription-handler/Dockerfile",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2019-11-20T16:52:14Z",
       "side": 1,
       "message": "copyright? license?",
+      "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6a43caf8_f3ad35ed",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-25T10:56:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88e14476_dbd1d1b1",
       "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6e8612d6_ab207e32",
+        "filename": "components/pm-subscription-handler/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-25T10:56:31Z",
+      "side": 1,
+      "message": "That\u0027s the plan yes.",
+      "parentUuid": "9f55e16c_6fe551b5",
+      "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d027ce06_f9ead550",
         "filename": "components/pm-subscription-handler/tox.ini",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2019-11-20T16:52:14Z",
       "side": 1,
       "message": "add py37",
+      "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d9332de_401ad85f",
+        "filename": "components/pm-subscription-handler/tox.ini",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-11-25T10:56:31Z",
+      "side": 1,
+      "message": "It seems that jenkins servers don\u0027t have 3.7 available so the verify job fails.\nShould we request 3.7 be added there?",
+      "parentUuid": "d027ce06_f9ead550",
       "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
