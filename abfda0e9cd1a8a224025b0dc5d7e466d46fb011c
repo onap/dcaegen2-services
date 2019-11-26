@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "a1be173e_5146b059",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/controller/KafkaController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 5350
+      },
+      "writtenOn": "2019-11-26T02:23:52Z",
+      "side": 1,
+      "message": "Currently the kafka uses the method of queryAllKafka() in the ui page，ui is need to modified, are u sure?   getDetailKafka() may be needed.",
+      "range": {
+        "startLine": 134,
+        "startChar": 25,
+        "endLine": 134,
+        "endChar": 29
+      },
+      "revId": "abfda0e9cd1a8a224025b0dc5d7e466d46fb011c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c965303a_cf426a4a",
         "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/service/TopicService.java",
         "patchSetId": 1
