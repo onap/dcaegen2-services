@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c976968b_efd12f8f",
+        "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/dbs-modal/couchbase/couchbase.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-11-26T05:47:01Z",
+      "side": 1,
+      "message": "Future work:\nget the list from the backend via REST API.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 39
+      },
+      "revId": "d618098cfddd45e368f52b48f40a39b4abb4a01f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e28ac841_16a8555d",
+        "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/dbs-modal/druid/druid.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-11-26T05:47:01Z",
+      "side": 1,
+      "message": "Future work:\nget the list from the backend via REST API.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 42
+      },
+      "revId": "d618098cfddd45e368f52b48f40a39b4abb4a01f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33abd1d2_898e76e2",
+        "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/dbs-modal/elasticsearch/elasticsearch.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-11-26T05:47:01Z",
+      "side": 1,
+      "message": "Future work:\nget the list from the backend via REST API.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 39
+      },
+      "revId": "d618098cfddd45e368f52b48f40a39b4abb4a01f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ad97d17_59cfbbd2",
+        "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/dbs-modal/hdfs/hdfs.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-11-26T05:47:01Z",
+      "side": 1,
+      "message": "Future work:\nget the list from the backend via REST API.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 41
+      },
+      "revId": "d618098cfddd45e368f52b48f40a39b4abb4a01f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd129c4d_80f0cd5e",
+        "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/dbs-modal/mongodb/mongodb.component.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2019-11-26T05:47:01Z",
+      "side": 1,
+      "message": "Future work:\nget the list from the backend via REST API.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 42
+      },
+      "revId": "d618098cfddd45e368f52b48f40a39b4abb4a01f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
