@@ -32,9 +32,7 @@
 
         <!-- button -->
         <div class="p-1">
-          <button class="btn dl-btn-dark" (click)="newDbModal();">
-            {{ "NEW_DB" | translate }}
-          </button>
+          <app-button [text]="'plus'" [style]="'inlineicon'" [color]="'dark'" (click)="newDbModal()"></app-button>
         </div>
       </div>
     </div>

@@ -82,7 +82,7 @@
   "NEW_MONGODB": "New MongoDB",
   "NEW_HDFS": "New Hdfs",
   "SECURE_COMMUNICATION": "Secure Communication",
-  "DB_TYPE": "DbType",
   "NEW_TOOL": "New Tool",
-  "NEW_KIBANA": "New Kibana"
+  "NEW_KIBANA": "New Kibana",
+  "DATABASE": "Database"
 }

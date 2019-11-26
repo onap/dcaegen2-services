@@ -20,7 +20,7 @@
  *
  */
 
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Db} from "src/app/core/models/db.model";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {AdminService} from "src/app/core/services/admin.service";
@@ -38,8 +38,8 @@ export class ModalToolsComponent implements OnInit {
   @Input() tool: Db;
   @Input() toolList_length;
   toolInput: Db;
-  d_dbTypeId: string = "";
-
+  @ViewChild("d_dbTypeId") d_dbTypeId: ElementRef;
+  dbTypeIdList: Array<string> = [];
   defaultDbType: string;
   toolInputTitle = "";
   data: string;
@@ -66,12 +66,14 @@ export class ModalToolsComponent implements OnInit {
       }
       this.toolInput = feed;
       this.toolInputTitle = this.data === "Kibana" ? "New Kibana" : "New Superset";
+      this.dbTypeIdList = this.data === "Kibana" ? ["KIBANA"] : ["SUPERSET"];
       console.log("create db");
 
     } else {
       this.toolInput = this.editTool;
-      this.toolInputTitle = "Edit " + this.editTool.name;
-      this.defaultDbType = this.toolInput.dbTypeId;
+      this.toolInputTitle = "Edit" + "-" + this.editTool.dbTypeId + "-" + this.editTool.name;
+      this.defaultDbType = this.editTool.dbTypeId;
+      this.dbTypeIdList = [this.editTool.dbTypeId];
       console.log("edit db");
     }
   }
@@ -82,11 +84,7 @@ export class ModalToolsComponent implements OnInit {
       return false;
     }
     this.editTool = this.toolInput;
-    if (this.data == '' || this.data == undefined) {
-      this.editTool.dbTypeId = this.toolInput.dbTypeId;
-    } else {
-      this.editTool.dbTypeId = this.data === "Kibana" ? "KIBANA" : "SUPERSET";
-    }
+    this.editTool.dbTypeId = this.d_dbTypeId.nativeElement.value;
     this.editTool.encrypt = false;
     console.log(this.editTool, "editTool");
     this.passEntry.emit(this.editTool);
