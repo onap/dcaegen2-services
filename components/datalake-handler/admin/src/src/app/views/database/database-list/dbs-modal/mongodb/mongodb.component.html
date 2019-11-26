@@ -61,7 +61,7 @@
             <label class="dl-emphasis1" >{{ 'HOST' | translate }}</label>
           </div>
           <div>
-            <input [(ngModel)]="this.dbInput.host" class="form-control dl-input-text input_style" type="text" placeholder="0.0.0.0" required="required" />
+            <input [(ngModel)]="this.dbInput.host" class="form-control dl-input-text input_style" type="text" placeholder="" required="required" />
           </div>
         </div>
 
@@ -70,7 +70,7 @@
             <label class="dl-emphasis1" >{{ 'PORT' | translate }}</label>
           </div>
           <div>
-            <input [(ngModel)]="this.dbInput.port" class="form-control dl-input-text input_style" type="text" placeholder="0.0.0.0" required="required" />
+            <input [(ngModel)]="this.dbInput.port" class="form-control dl-input-text input_style" type="text" placeholder="" required="required" />
           </div>
         </div>
       </div>
@@ -81,7 +81,7 @@
             <label class="dl-emphasis1" >{{ 'Username' | translate }}</label>
           </div>
           <div>
-            <input [(ngModel)]="this.dbInput.login" class="form-control dl-input-text input_style" type="text" placeholder="login" required="required" />
+            <input [(ngModel)]="this.dbInput.login" class="form-control dl-input-text input_style" type="text" placeholder="" required="required" />
           </div>
         </div>
 
@@ -90,7 +90,7 @@
             <label class="dl-emphasis1" >{{ 'Password' | translate }}</label>
           </div>
           <div>
-            <input [(ngModel)]="this.dbInput.pass" class="form-control dl-input-text input_style" type="text" placeholder="pass" required="required" />
+            <input [(ngModel)]="this.dbInput.pass" class="form-control dl-input-text input_style" type="text" placeholder="" required="required" />
           </div>
         </div>
       </div>
@@ -116,9 +116,20 @@
             <label class="dl-emphasis1" >{{ 'DB_TYPE' | translate }}</label>
           </div>
           <div>
-            <select #d_dbTypeId class="custom-select dl-input-text input_style" >
+            <select #d_dbTypeId class="custom-select dl-input-text input_style" disabled>
               <option *ngFor="let item of this.dbTypeIdList" [selected]="item == this.defaultDbType">{{ item }}</option>
             </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row row-wrapper">
+        <div class="row-half-item usual-item">
+          <div>
+            <label class="dl-emphasis1" >{{ 'DATABASE' | translate }}</label>
+          </div>
+          <div>
+            <input [(ngModel)]="this.dbInput.database" class="form-control dl-input-text input_style" type="text" required="required" />
           </div>
         </div>
       </div>
