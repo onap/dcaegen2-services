@@ -119,6 +119,10 @@ public class TopicService {
 		return ret.isPresent() ? ret.get() : null;
 	}
 
+	public Topic getDefaultTopicFromFeeder() {
+		return topicRepository.findByTopicName_Id(config.getDefaultTopicName());
+	}
+
 	public Topic getDefaultTopic(Kafka kafka) {
 		return findTopics(kafka, config.getDefaultTopicName()).get(0);
 	}
