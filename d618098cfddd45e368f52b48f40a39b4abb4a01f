@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "25d4ee24_990b148b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5350
+      },
+      "writtenOn": "2019-11-27T07:19:42Z",
+      "side": 1,
+      "message": "Solved the problem of create db or tool failure, pls merge.",
+      "parentUuid": "2165de19_c6f9ba61",
+      "revId": "d618098cfddd45e368f52b48f40a39b4abb4a01f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c976968b_efd12f8f",
         "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/dbs-modal/couchbase/couchbase.component.ts",
         "patchSetId": 1
