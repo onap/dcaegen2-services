@@ -139,6 +139,24 @@
       "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63f10a25_703792c7",
+        "filename": "components/pm-subscription-handler/tox.ini",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2019-11-28T16:37:42Z",
+      "side": 1,
+      "message": "Please try this again\n\nPer https://jira.linuxfoundation.org/servicedesk/customer/portal/2/IT-18355\npy37 should now be supported. Please let me know how it works",
+      "parentUuid": "d027ce06_f9ead550",
+      "revId": "0b311c4ae59bcc89ef2d19b0b5ad2cdae83a5516",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
