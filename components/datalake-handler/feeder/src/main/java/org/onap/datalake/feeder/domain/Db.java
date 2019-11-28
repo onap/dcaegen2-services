@@ -78,6 +78,9 @@ public class Db {
 	@Column(name="`database_name`")
 	private String database;
 
+	@Column(name="`presto_catalog`")
+	private String prestoCatalog;
+
 	@Column(name="`encrypt`")
 	private boolean encrypt;
 

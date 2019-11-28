@@ -58,7 +58,7 @@ insert into db_type (`id`, `name`, tool) values ('SUPERSET', 'Apache Superset', 
 
 insert into db (id, db_type_id, enabled, encrypt, `name`,`host`,`login`,`pass`,`database_name`) values (1, 'CB', true, true, 'Couchbase 1','dl-couchbase','dl','dl1234','datalake');
 insert into db (id, db_type_id, enabled, encrypt, `name`,`host`) values (2, 'ES', true, true, 'Elasticsearch','dl-es');
-insert into db (id, db_type_id, enabled, encrypt, `name`,`host`,`port`,`database_name`) values (3, 'MONGO', true, true, 'MongoDB 1','dl-mongodb',27017,'datalake');
+insert into db (id, db_type_id, enabled, encrypt, `name`,`host`,`port`,`database_name`,presto_catalog) values (3, 'MONGO', true, true, 'MongoDB 1','dl-mongodb',27017,'datalake','mongodb');
 insert into db (id, db_type_id, enabled, encrypt, `name`,`host`) values (4, 'DRUID', true, true, 'Druid','dl-druid');
 insert into db (id, db_type_id, enabled, encrypt, `name`,`host`,`login`) values (5, 'HDFS', true, true, 'Hadoop Cluster','dl-hdfs','dl');
 insert into db (id, db_type_id, enabled, encrypt, `name`,`host`) values (6, 'KIBANA', true, false, 'Kibana demo','dl-es');
@@ -105,3 +105,7 @@ insert into design_type (id, `name`, `db_type_id`) values ('DRUID_KAFKA_SPEC', '
 insert into design (id, `name`,topic_name_id, `submitted`,`body`, design_type_id) values (1, 'Kibana Dashboard on EPC test1', 'EPC',  0, 'body here', 'KIBANA_DB');
 
 insert into map_db_design (`design_id`,`db_id` ) values (1, 6);
+
+insert into `data_exposure`(`id`,`note`,`sql_template`,`db_id`) values ('totalBandwidth','KPI bandwidth history','select  from_unixtime(commonEventHeader.lastEpochMicrosec/1000) as timeStamp, sum(measurementFields.additionalFields."UPF.N3IncPkt._Dnn"+measurementFields.additionalFields."UPF.N3OgPkt._Dnn") as bandwidth from upf where commonEventHeader.sourceId = ''${id}'' and ( from_unixtime(commonEventHeader.lastEpochMicrosec/1000) between  from_iso8601_timestamp( ''${timeStamp}'') - interval ''${hour}'' hour  and from_iso8601_timestamp( ''${timeStamp}'') ) group by  commonEventHeader.lastEpochMicrosec order by commonEventHeader.lastEpochMicrosec desc ',3);
+insert into `data_exposure`(`id`,`note`,`sql_template`,`db_id`) values ('totalTraffic','KPI sum over history','select commonEventHeader.sourceId as id,  sum(measurementFields.additionalFields."UPF.N3IncPkt._Dnn"+measurementFields.additionalFields."UPF.N3OgPkt._Dnn") as totalTraffic from upf where commonEventHeader.sourceId = ''${id}''  and  from_unixtime(commonEventHeader.lastEpochMicrosec/1000) <= from_iso8601_timestamp( ''${timeStamp}'') ',3);
+insert into `data_exposure`(`id`,`note`,`sql_template`,`db_id`) values ('userNumber','KPI',' select  from_unixtime(commonEventHeader.lastEpochMicrosec/1000) as timeStamp, sum(measurementFields.additionalFields."AMF.RegSub._NS")  as userNumber from amf where commonEventHeader.sourceId = ''${id}'' and ( from_unixtime(commonEventHeader.lastEpochMicrosec/1000) between  from_iso8601_timestamp( ''${timeStamp}'') - interval ''${hour}'' hour  and from_iso8601_timestamp( ''${timeStamp}'') ) group by  commonEventHeader.lastEpochMicrosec, commonEventHeader.sourceId  order by commonEventHeader.lastEpochMicrosec   desc ',3);
