@@ -160,10 +160,10 @@ public class TopicService {
 		topic.setFlattenArrayPath(tConfig.getFlattenArrayPath());
 
 		if (tConfig.getSinkdbs() != null) {
-			for (String item : tConfig.getSinkdbs()) {
-				Db sinkdb = dbRepository.findByName(item);
-				if (sinkdb != null) {
-					relateDb.add(sinkdb);
+			for (int item : tConfig.getSinkdbs()) {
+				Optional<Db> sinkdb = dbRepository.findById(item);
+				if (sinkdb.isPresent()) {
+					relateDb.add(sinkdb.get());
 				}
 			}
 			if (!relateDb.isEmpty())
