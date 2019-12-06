@@ -145,18 +145,18 @@ public class TopicServiceTest {
 		tConfig.setMessageIdPath("1234");
 		tConfig.setAggregateArrayPath("1234");
 		tConfig.setFlattenArrayPath("1234");
-		List<String> sinkdbs = new ArrayList<>();
-		sinkdbs.add("Elasticsearch");
+		List<Integer> sinkdbs = new ArrayList<>();
+		sinkdbs.add(1234);
 		tConfig.setSinkdbs(sinkdbs);
 
 		Db db = new Db();
-		db.setName("Elasticsearch");
+		db.setId(1234);
 
 		TopicName topicName = new TopicName();
 		topicName.setId("1234");
 
 		Optional<TopicName> optional = Optional.of(topicName);
-		when(dbRepository.findByName("Elasticsearch")).thenReturn(db);
+		when(dbRepository.findById(1234)).thenReturn(db);
 		when(topicNameRepository.findById(tConfig.getName())).thenReturn(optional);
 
 		topicService.fillTopicConfiguration(tConfig);

@@ -119,25 +119,34 @@ public class DbControllerTest {
         //db = dbController.updateDb(dbConfig, mockBindingResult, httpServletResponse);
         assertEquals(null, db);
         //when(mockBindingResult.hasErrors()).thenReturn(false);
-        String name = "Elecsticsearch";
-        when(dbRepository.findByName(name)).thenReturn(TestUtil.newDb(name));
+        // String name = "Elecsticsearch";
+        int id = 1234;
+        //when(dbRepository.findByName(name)).thenReturn(TestUtil.newDb(name));
+        when(dbRepository.findById(id)).thenReturn(TestUtil.newDb(id));
         //db = dbController.updateDb(dbConfig, mockBindingResult, httpServletResponse);
         //assertEquals(200, db.getStatusCode());
         Db elecsticsearch = dbController.getDb("Elecsticsearch", httpServletResponse);
+        Db elecsticsearch = dbController.getDb(1234, httpServletResponse);
         assertNotNull(elecsticsearch);
     }
 
     @Test
     public void testGetAllDbs() throws IOException, IllegalAccessException, NoSuchFieldException {
         DbController dbController = new DbController();
-        String name = "Elecsticsearch";
+        // String name = "Elecsticsearch";
+        int id = 1234;
         List<Db> dbs = new ArrayList<>();
-        dbs.add(TestUtil.newDb(name));
+        // dbs.add(TestUtil.newDb(name));
+        dbs.add(TestUtil.newDb(id));
         setAccessPrivateFields(dbController);
         when(dbRepository.findAll()).thenReturn(dbs);
-        List<String> list = dbController.list();
-        for (String dbName : list) {
-            assertEquals("Elecsticsearch", dbName);
+        // List<String> list = dbController.list();
+        List<int> list = dbController.list();
+        // for (String dbName : list) {
+        //     assertEquals("Elecsticsearch", dbName);
+        // }
+        for (int dbId : list) {
+            assertEquals("1234", dbId);
         }
         //dbController.deleteDb("Elecsticsearch", httpServletResponse);
     }
