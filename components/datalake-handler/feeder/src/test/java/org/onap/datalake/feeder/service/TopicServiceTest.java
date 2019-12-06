@@ -145,8 +145,8 @@ public class TopicServiceTest {
 		tConfig.setMessageIdPath("1234");
 		tConfig.setAggregateArrayPath("1234");
 		tConfig.setFlattenArrayPath("1234");
-		List<String> sinkdbs = new ArrayList<>();
-		sinkdbs.add("Elasticsearch");
+		List<Integer> sinkdbs = new ArrayList<>();
+		sinkdbs.add("1234");
 		tConfig.setSinkdbs(sinkdbs);
 
 		Db db = new Db();
