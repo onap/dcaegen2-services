@@ -71,14 +71,13 @@ public class DbController {
 	//list all dbs
 	@GetMapping("")
 	@ResponseBody
-	@ApiOperation(value="Get all databases name")
-	public List<String> list() {
+	@ApiOperation(value="Get all database id")
+	public List<Integer> list() {
 		Iterable<Db> ret = dbRepository.findAll();
-		List<String> retString = new ArrayList<>();
+		List<Integer> retString = new ArrayList<>();
 		for(Db db : ret)
 		{
-			log.info(db.getName());
-			retString.add(db.getName());
+			retString.add(db.getId());
 
 		}
 		return retString;
@@ -165,15 +164,12 @@ public class DbController {
 	//Show a db
 	//the topics are missing in the return, since in we use @JsonBackReference on Db's topics 
 	//need to the the following method to retrieve the topic list 
-	@GetMapping("/{dbName}")
+	@GetMapping("/{dbId}")
 	@ResponseBody
 	@ApiOperation(value="Get a database's details.")
-	public Db getDb(@PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
-		Db db = dbRepository.findByName(dbName);
-		if (db == null) {
-			sendError(response, 404, DB_NOT_FOUND + dbName);
-		}
-		return db;
+	public Db getDb(@PathVariable("dbId") int dbId, HttpServletResponse response) throws IOException {
+		Optional<Db> db = dbRepository.findById(dbId);
+		return db.isPresent() ? db.get() : null;
 	}
 
 
