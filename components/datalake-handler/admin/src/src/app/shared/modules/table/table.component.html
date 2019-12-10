@@ -23,52 +23,46 @@ limitations under the License.
 
     <ngx-datatable #mytemlate class="bootstrap" [rows]="data" [columnMode]="'force'" [headerHeight]="40"
       [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true" [loadingIndicator]="loadingIndicator"
-      [messages]="mesgNoData" [limit]="10">
+      [messages]="mesgNoData" [limit]="10" (activate)="rowOnActivate($event)">
 
       <ngx-datatable-column sortable="column.sortable" *ngFor="let column of columns" [width]="column.width"
-        name="{{ column.name | translate }}" prop="column.name" headerClass="d-flex justify-content-center"
-        cellClass="d-flex justify-content-center">
-
+        headerClass="d-flex justify-content-center justify-content-start" cellClass="d-flex justify-content-center">
+        <!-- template of header -->
         <ng-template ngx-datatable-header-template>
-          <span *ngIf="column.name&&column.name.length!==0">{{ column.name | translate}}</span>
-          <span *ngIf="column.src&&column.src.length!==0">
-            <img [src]=column.src alt='Icon' style='height: 18px;' />
+
+          <!-- display string -->
+          <span *ngIf="column.headerName&&column.headerName.length!==0">{{ column.headerName | translate}}</span>
+
+          <!-- display icon -->
+          <span *ngIf="column.headerIcon&&column.headerIcon.length!==0">
+            <svg-icon [src]="column.headerIcon" [svgStyle]="{ 'height.px':20 }"></svg-icon>
           </span>
         </ng-template>
 
+        <!-- template of cell -->
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <span *ngIf="column.dataIndex&&column.dataIndex.length!==0&&!column.svgicon">{{row[column.dataIndex]}}</span>
-          <span *ngIf="column.renderText&&column.renderText.length!==0"></span>
-          <span *ngIf="column.icontext&&column.icontext.length!==0">
-            <app-button [text]="column.icontext" [style]="'inline'" [color]="'dark'">
-            </app-button>
+          <!-- display data -->
+          <span *ngIf="column.dataIndex&&column.dataIndex.length!==0&&!column.icon">{{row[column.dataIndex]}}</span>
+
+          <!-- display button with text -->
+          <span *ngIf="column.textButton&&column.textButton.length!==0">
+            <app-button [text]="column.textButton" [style]="'inline'" [color]="'dark'"></app-button>
           </span>
 
+          <!-- display button with icon -->
+          <span *ngIf="column.iconButton&&column.iconButton.length!==0">
+            <app-button [text]="column.iconButton" [style]="'icon'" [color]="'dark'"
+              (btnAction)="tableAction($event, row.id)"></app-button>
+          </span>
+
+          <!-- display pure icon -->
           <span *ngIf="column.icon&&column.icon.length!==0">
-            <app-button [text]="column.icon" [style]="'icon'" [color]="'dark'" (btnAction)="tableAction($event, row.id)">
-            </app-button>
-          </span>
-
-          <span *ngIf="column.svgicon&&column.svgicon.length!==0">
-            <span *ngIf="row[column.dataIndex]">
-                <svg-icon [src]="column.svgicon" [svgStyle]="{ 'width.px':20 }">
-                </svg-icon>
-            </span>
+            <app-icon [type]="column.icon" [enabled]="row[column.dataIndex]"></app-icon>
           </span>
 
         </ng-template>
+
       </ngx-datatable-column>
-
-      <!-- <ngx-datatable-column [width]="10" name="" sortable="true" cellClass="d-flex justify-content-center">
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <span>
-            <button class="btn action-icon-setting" (click)="this.deleteTemplateModel(row.id);">
-              <i class="fas fa-trash-alt fa-xs"></i>
-            </button>
-          </span>
-        </ng-template>
-      </ngx-datatable-column> -->
-
     </ngx-datatable>
   </div>
 </div>

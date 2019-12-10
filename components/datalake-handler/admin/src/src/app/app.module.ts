@@ -100,6 +100,7 @@ import { ModalDemoComponent } from "./views/test/modal-demo/modal-demo.component
 import { KafkaComponent } from './views/kafka/kafka.component';
 // Angular SVG Icon
 import { AngularSvgIconModule } from "angular-svg-icon";
+import { IconComponent } from './shared/components/icon/icon.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +145,8 @@ import { AngularSvgIconModule } from "angular-svg-icon";
     EditKafkaModalComponent,
     ToolsComponent,
     ModalToolsComponent,
-    ToolAddModalComponent
+    ToolAddModalComponent,
+    IconComponent
   ],
   imports: [
     BrowserModule,
