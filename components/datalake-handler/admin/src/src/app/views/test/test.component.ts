@@ -60,47 +60,52 @@ export class TestComponent implements OnInit {
   ngOnInit() {
     this.mockcolumns = [
       {
-        name: "TEMPLATE_NAME",
-        width: "100",
-        dataIndex: "name",
-        sortable: true
-      },
-      {
-        name: "TEMPLATE_TYPE",
-        width: "180",
-        dataIndex: "type"
-      },
-      {
-        name: "TOPICS_NAME",
-        width: "220",
-        dataIndex: "topic",
-        renderText: "3"
-      },
-      {
-        name: "",
-        src: "assets/icons/couchbase_able.svg",
-        width: "220",
-        dataIndex: "cc",
-      },
-      {
-        name: "DEPLOY_TO_DASHBOARD",
-        width: "100",
-        dataIndex: "",
-        icontext: "DEPLOY",
-      },
-      {
-        name: "",
+        headerName: "STATUS",
         width: "20",
-        icon: "trash"
+        dataIndex: "enabled",
+        sortable: true,
+        icon: "status"
       },
       {
-        name: "Configured",
+        headerName: "2",
+        width: "100",
+        dataIndex: "type",
+        icon: "status"
+      },
+      {
+        headerName: "3",
+        width: "200",
+        dataIndex: "topic",
+        renderText: "zzzz"
+      },
+      {
+        headerIcon: "assets/icons/couchbase_able.svg",
+        width: "200",
+        dataIndex: "cc",
+        renderText: "zzzzz"
+      },
+      {
+        headerName: "5",
+        width: "50",
+        dataIndex: "",
+        textButton: "DEPLOY1"
+      },
+      {
+        width: "20",
+        iconButton: "cog"
+      },
+      {
+        headerName: "Configured",
         width: "100",
         dataIndex: "configured",
-        svgicon: "assets/icons/add.svg"
-        // icontext: "DEPLOY",
-        //svg: "assets/icons/add.svg", // TODO: icon
+        icon: "check"
       },
+      {
+        headerName: "TTL",
+        width: "100",
+        dataIndex: "saveRaw",
+        icon: "check"
+      }
     ];
     this.mocktabledata = [
       {
@@ -108,39 +113,45 @@ export class TestComponent implements OnInit {
         type: "333",
         topic: "尽快尽快",
         cc: "123",
-        configured: true
+        configured: true,
+        saveRaw: true,
+        enabled: true
       },
       {
         name: "ccccc",
         type: "666",
         topic: "2222",
         cc: "222",
-        configured: true
+        configured: true,
+        saveRaw: true,
+        enabled: false
       },
       {
         name: "bbbbb",
         type: "77777",
         topic: "555",
         cc: "5",
-        configured: false
+        configured: false,
+        saveRaw: false,
+        enabled: false
       }
     ];
 
     // Modal example
     // Data for different components of modal body
     // Example for topic, not only topic but also db, design or tools
-    this.topic = new Topic();
-    this.topic.name = "topic.name (test)";
-    this.topic.login = "123";
-    this.topic.password = "123";
-    this.topic.sinkdbs = "";
-    this.topic.enabled = true;
-    this.topic.saveRaw = true;
-    this.topic.dataFormat = "";
-    this.topic.ttl = 123;
-    this.topic.correlateClearedMessage = true;
-    this.topic.messageIdPath = "";
-    this.topic.type = false;
+    // this.topic = new Topic();
+    // this.topic.name = "topic.name (test)";
+    // this.topic.login = "123";
+    // this.topic.password = "123";
+    // this.topic.sinkdbs = "";
+    // this.topic.enabled = true;
+    // this.topic.saveRaw = true;
+    // this.topic.dataFormat = "";
+    // this.topic.ttl = 123;
+    // this.topic.correlateClearedMessage = true;
+    // this.topic.messageIdPath = "";
+    // this.topic.type = false;
     // Modal example end
 
     // Card example
@@ -191,14 +202,13 @@ export class TestComponent implements OnInit {
   }
 
   cardMoreAction($event) {
-    if($event == "edit"){
-      this.openModalDemo()
-    }else {
-      console.log($event,"$event")
+    if ($event == "edit") {
+      this.openModalDemo();
+    } else {
+      console.log($event, "$event");
     }
   }
-  cardClick(){
+  cardClick() {
     this.openModalDemo();
   }
-
 }

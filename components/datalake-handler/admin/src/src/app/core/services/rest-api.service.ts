@@ -35,7 +35,7 @@ import { Topic } from "src/app/core/models/topic.model";
 import { Db } from "src/app/core/models/db.model";
 import { Template } from "src/app/core/models/template.model";
 import { Dashboard } from "src/app/core/models/dashboard.model";
-import {Kafka} from "../models/kafka.model";
+import { Kafka } from "../models/kafka.model";
 
 const prefix = "/datalake/v1/";
 const httpOptions = {
@@ -48,7 +48,7 @@ const httpOptions = {
   providedIn: "root"
 })
 export class RestApiService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
@@ -79,118 +79,106 @@ export class RestApiService {
   /*
     Topic default config
   */
-  getTopicDefaultConfig(): Observable<any> {
-    return this.http.get(prefix + "topics/_DL_DEFAULT_").pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
+  public getTopicDefault(): Observable<Topic> {
+    return this.http
+      .get<Topic>(prefix + "topics/default")
+      .pipe(retry(1), catchError(this.handleError));
   }
 
-  updateTopicDefaultConfig(t: Topic): Observable<any> {
-    return this.http
-      .put(prefix + "topics/_DL_DEFAULT_", JSON.stringify(t), httpOptions)
-      .pipe(
-        retry(1),
-        tap(_ => this.extractData),
-        catchError(this.handleError)
-      );
-  }
+  // updateTopicDefaultConfig(t: Topic): Observable<any> {
+  //   return this.http
+  //     .put(prefix + "topics/_DL_DEFAULT_", JSON.stringify(t), httpOptions)
+  //     .pipe(
+  //       retry(1),
+  //       tap(_ => this.extractData),
+  //       catchError(this.handleError)
+  //     );
+  // }
 
   /*
     Topics
   */
-  getTopicsFromDmaap(): Observable<any> {
-    return this.http.get(prefix + "topics/dmaap").pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
+  public getTopicList(): Observable<string[]> {
+    return this.http
+      .get<string[]>(prefix + "topics")
+      .pipe(retry(1), catchError(this.handleError));
   }
 
+  public getTopicListFromKafka(id: string | number): Observable<string[]> {
+    return this.http
+      .get<string[]>(prefix + "topics/dmaap/" + id)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  public getTopic(id: string): Observable<Topic> {
+    return this.http
+      .get<Topic>(prefix + "topics/" + id)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  // TODO
   getTopicsFromFeeder(): Observable<any> {
-    return this.http.get(prefix + "topics").pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
-  }
-
-  getTopicDetail(id): Observable<any> {
-    return this.http.get(prefix + "topics/" + id).pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
-  }
-
-  addNewTopic(t: Topic): Observable<any> {
     return this.http
-      .post<any>(prefix + "topics", t)
-      .pipe(
-        retry(1),
-        tap(_ => console.log(`add topic name=${t.name}`)),
-        catchError(this.handleError)
-      );
+      .get(prefix + "topics")
+      .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
 
-  addTopic(t: Topic): Observable<any> {
-    return this.http
-      .post<any>(prefix + "topics", t)
-      .pipe(
-        retry(1),
-        tap(_ => console.log(`add topic name=${t.name}`)),
-        catchError(this.handleError)
-      );
-  }
+  // addNewTopic(t: Topic): Observable<any> {
+  //   return this.http.post<any>(prefix + "topics", t).pipe(
+  //     retry(1),
+  //     tap(_ => console.log(`add topic name=${t.name}`)),
+  //     catchError(this.handleError)
+  //   );
+  // }
 
-  upadteTopic(t: Topic): Observable<any> {
-    return this.http
-      .put(prefix + "topics/" + t.name, t)
-      .pipe(
-        retry(1),
-        tap(_ => this.extractData),
-        catchError(this.handleError)
-      );
-  }
+  // addTopic(t: Topic): Observable<any> {
+  //   return this.http.post<any>(prefix + "topics", t).pipe(
+  //     retry(1),
+  //     tap(_ => console.log(`add topic name=${t.name}`)),
+  //     catchError(this.handleError)
+  //   );
+  // }
 
-  deleteTopic(name: string): Observable<any> {
-    return this.http.delete(prefix + "topics/" + name).pipe(
-      retry(1),
-      tap(_ => console.log(`deleted topic name=${name}`)),
-      catchError(this.handleError)
-    );
-  }
+  // upadteTopic(t: Topic): Observable<any> {
+  //   return this.http.put(prefix + "topics/" + t.name, t).pipe(
+  //     retry(1),
+  //     tap(_ => this.extractData),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  // deleteTopic(name: string): Observable<any> {
+  //   return this.http.delete(prefix + "topics/" + name).pipe(
+  //     retry(1),
+  //     tap(_ => console.log(`deleted topic name=${name}`)),
+  //     catchError(this.handleError)
+  //   );
+  // }
 
   /*
     Database
   */
   getDbEncryptList(flag): Observable<any> {
-    return this.http.get(prefix + "dbs/list?tool="+flag).pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(prefix + "dbs/list?tool=" + flag)
+      .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
 
   getDbList(): Observable<any> {
-    return this.http.get(prefix + "dbs").pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(prefix + "dbs")
+      .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
 
   getDbDetail(id): Observable<any> {
-    return this.http.get(prefix + "dbs/" + id).pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(prefix + "dbs/" + id)
+      .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
 
   deleteDb(id): Observable<any> {
-    return this.http.delete(prefix + "dbs/" + id).pipe( //online
+    return this.http.delete(prefix + "dbs/" + id).pipe(
+      //online
       retry(1),
       map(this.extractData2),
       catchError(this.handleError)
@@ -198,31 +186,25 @@ export class RestApiService {
   }
 
   updateDb(d: Db): Observable<any> {
-    return this.http
-      .put(prefix + "dbs", d)
-      .pipe(
-        retry(1),
-        tap(_ => this.extractData),
-        catchError(this.handleError)
-      );
+    return this.http.put(prefix + "dbs", d).pipe(
+      retry(1),
+      tap(_ => this.extractData),
+      catchError(this.handleError)
+    );
   }
 
   createDb(d: Db): Observable<any> {
-    return this.http
-      .post(prefix + "dbs", d)
-      .pipe(
-        retry(1),
-        tap(_ => this.extractData),
-        catchError(this.handleError)
-      );
+    return this.http.post(prefix + "dbs", d).pipe(
+      retry(1),
+      tap(_ => this.extractData),
+      catchError(this.handleError)
+    );
   }
 
   getDbTypeList(): Observable<any> {
-    return this.http.get(prefix + "db_type").pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(prefix + "db_type")
+      .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
 
   /*
@@ -245,55 +227,46 @@ export class RestApiService {
   }
 
   getFeederstatus() {
-    return this.http.get(prefix + "feeder/status").pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(prefix + "feeder/status")
+      .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
-
 
   /*
 Dashboard
 */
   getDashboardList(): Observable<any> {
     let url = prefix + "portals"; //onilne
-    return this.http.get(url).pipe(
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
+    return this.http
+      .get(url)
+      .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
 
   createUpadteDashboard(d: Dashboard): Observable<any> {
     // let url = prefix +"/dashboard-list/successCreteOrEditDemo.json"; //local
-    let url = prefix + "portals";//onilne
-    return this.http
-      .put(url, d)
-      .pipe(
-        retry(1),
-        tap(_ => this.extractData),
-        catchError(this.handleError)
-      );
+    let url = prefix + "portals"; //onilne
+    return this.http.put(url, d).pipe(
+      retry(1),
+      tap(_ => this.extractData),
+      catchError(this.handleError)
+    );
   }
 
   deleteDashboard(d: Dashboard): Observable<any> {
     let url = prefix + "portals"; //onilne
-    return this.http
-      .put(url, d)
-      .pipe(
-        retry(1),
-        tap(_ => console.log(`deleted db name=${d.name}`)),
-        catchError(this.handleError)
-      );
+    return this.http.put(url, d).pipe(
+      retry(1),
+      tap(_ => console.log(`deleted db name=${d.name}`)),
+      catchError(this.handleError)
+    );
   }
-
 
   /*
   Template
 */
   getTemplateAll(): Observable<any> {
-    return this.http.get(prefix + "designs/").pipe( //onlin
+    return this.http.get(prefix + "designs/").pipe(
+      //onlin
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -301,32 +274,26 @@ Dashboard
   }
 
   getTempDbList(id): Observable<any> {
-    return this.http.get(prefix + "dbs/idAndName/" + id).pipe(
+    return this.http
+      .get(prefix + "dbs/idAndName/" + id)
+      .pipe(retry(1), map(this.extractData), catchError(this.handleError));
+  }
+
+  createNewTemplate(t: Template): Observable<any> {
+    return this.http.post(prefix + "designs", t).pipe(
       retry(1),
-      map(this.extractData),
+      tap(_ => this.extractData),
       catchError(this.handleError)
     );
   }
 
-  createNewTemplate(t: Template): Observable<any> {
-    return this.http
-      .post(prefix + "designs", t)
-      .pipe(
-        retry(1),
-        tap(_ => this.extractData),
-        catchError(this.handleError)
-      );
-  }
-
   updateNewTemplate(t: Template): Observable<any> {
     let id = t.id;
-    return this.http
-      .put(prefix + "designs/" + id, t)
-      .pipe(
-        retry(1),
-        tap(_ => this.extractData),
-        catchError(this.handleError)
-      );
+    return this.http.put(prefix + "designs/" + id, t).pipe(
+      retry(1),
+      tap(_ => this.extractData),
+      catchError(this.handleError)
+    );
   }
 
   // getTopicName(): Observable<any> {
@@ -338,7 +305,8 @@ Dashboard
   // }
 
   getTemplateTypeName(): Observable<any> {
-    return this.http.get(prefix + "designTypes").pipe( //onlin
+    return this.http.get(prefix + "designTypes").pipe(
+      //onlin
       retry(1),
       map(this.extractData),
       catchError(this.handleError)
@@ -346,7 +314,8 @@ Dashboard
   }
 
   DeleteTemplate(id): Observable<any> {
-    return this.http.delete(prefix + "designs/" + id).pipe( //online
+    return this.http.delete(prefix + "designs/" + id).pipe(
+      //online
       retry(1),
       map(this.extractData2),
       catchError(this.handleError)
@@ -354,7 +323,8 @@ Dashboard
   }
   deployTemplateKibana(id, body): Observable<any> {
     body.submitted = true;
-    return this.http.post(prefix + "designs/deploy/" + id, body).pipe(   //online
+    return this.http.post(prefix + "designs/deploy/" + id, body).pipe(
+      //online
       retry(1),
       map(this.extractData2),
       catchError(this.handleError)
@@ -364,15 +334,21 @@ Dashboard
   /*
   Kafka
 */
-  getAllKafkaList() {
-    return this.http.get(prefix + "kafkas").pipe( //online
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
+  public getAllKafkaList(): Observable<string[]> {
+    return this.http
+      .get<string[]>(prefix + "kafkas")
+      .pipe(retry(1), catchError(this.handleError));
   }
+
+  public getKafka(id: string | number): Observable<Kafka> {
+    return this.http
+      .get<Kafka>(prefix + "kafkas/" + id)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
   deleteKafka(id): Observable<any> {
-    return this.http.delete(prefix + "kafkas/" + id).pipe( //online
+    return this.http.delete(prefix + "kafkas/" + id).pipe(
+      //online
       retry(1),
       map(this.extractData2),
       catchError(this.handleError)
@@ -380,25 +356,19 @@ Dashboard
   }
 
   createNewKafka(k: Kafka): Observable<any> {
-    return this.http
-      .post(prefix + "kafkas", k)
-      .pipe(
-        retry(1),
-        tap(_ => this.extractData),
-        catchError(this.handleError)
-      );
+    return this.http.post(prefix + "kafkas", k).pipe(
+      retry(1),
+      tap(_ => this.extractData),
+      catchError(this.handleError)
+    );
   }
 
   updateKafka(k: Kafka): Observable<any> {
     let id = k.id;
-    return this.http
-      .put(prefix + "kafkas/" + id, k)
-      .pipe(
-        retry(1),
-        tap(_ => this.extractData),
-        catchError(this.handleError)
-      );
+    return this.http.put(prefix + "kafkas/" + id, k).pipe(
+      retry(1),
+      tap(_ => this.extractData),
+      catchError(this.handleError)
+    );
   }
 }
-
-
