@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ee05e2fa_9cfa3c7e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/config_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2019-12-11T14:50:27Z",
+      "side": 1,
+      "message": "Google Python Style guidelines",
+      "parentUuid": "87c69c5e_eae5d0b0",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 18
+      },
+      "revId": "c0c358fa516d967c882324b10c2d1eba1ad1facb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d530ca28_28b565ce",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/config_handler.py",
         "patchSetId": 4
