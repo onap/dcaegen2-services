@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e477a327_21e38b8f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/config_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-12-11T13:45:31Z",
+      "side": 1,
+      "message": "Try to use f string (which I was unaware of and still using .format()) where possible instead of appending.",
+      "range": {
+        "startLine": 31,
+        "startChar": 22,
+        "endLine": 31,
+        "endChar": 25
+      },
+      "revId": "c0c358fa516d967c882324b10c2d1eba1ad1facb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21c0bee2_108422be",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/config_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-12-11T13:45:31Z",
+      "side": 1,
+      "message": "Probably need a docstring convention.\nMy preference is for reStructuredText format but can put it to the team.",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 18
+      },
+      "revId": "c0c358fa516d967c882324b10c2d1eba1ad1facb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d530ca28_28b565ce",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/config_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-12-11T13:45:31Z",
+      "side": 1,
+      "message": "double vs single quotes debate.\nhttps://www.geeksforgeeks.org/single-and-double-quotes-python/",
+      "range": {
+        "startLine": 53,
+        "startChar": 25,
+        "endLine": 53,
+        "endChar": 26
+      },
+      "revId": "c0c358fa516d967c882324b10c2d1eba1ad1facb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9462430_4eeaa6c4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/config_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-12-11T13:45:31Z",
+      "side": 1,
+      "message": "Should we invest in trying to use the pylog module?",
+      "range": {
+        "startLine": 66,
+        "startChar": 11,
+        "endLine": 66,
+        "endChar": 20
+      },
+      "revId": "c0c358fa516d967c882324b10c2d1eba1ad1facb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b1f14f96_276b80fe",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-12-11T13:45:31Z",
+      "side": 1,
+      "message": "can remove",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "c0c358fa516d967c882324b10c2d1eba1ad1facb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a17d1f2d_21e9c095",
+        "filename": "components/pm-subscription-handler/tests/config_handler_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-12-11T13:45:31Z",
+      "side": 1,
+      "message": "Minor, but ctrl + alt + o will optimise imports in pycharm",
+      "range": {
+        "startLine": 20,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "c0c358fa516d967c882324b10c2d1eba1ad1facb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
