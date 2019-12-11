@@ -1,0 +1,49 @@
+{
+  "config":{},
+  "policy": {
+    "subscription": {
+      "subscriptionName": "someExtraPM-AllKista-gNB-R2B",
+      "administrativeState": "UNLOCKED",
+      "fileBasedGP": 15,
+      "fileLocation": "\/pm\/pm.xml",
+      "nfTypeModelInvariantId": "2829292",
+      "nfFilter": {
+        "swVersions": [
+          "1.0.0",
+          "1.0.1"
+        ],
+        "nfNames": [
+          "ABC",
+          "DEF",
+          "foo.*"
+        ]
+      },
+      "measurementGroup": {
+        "measurementTypes": [
+          {
+            "measurementType": "EutranCell.*"
+          },
+          {
+            "measurementType": "EutranCellRelation.pmCounter1"
+          },
+          {
+            "measurementType": "EutranCellRelation.pmCounter2"
+          }
+        ],
+        "managedObjectDNsBasic": [
+          {
+            "DN": "ManagedElement=1,ENodeBFunction=1,EUtranCell=CityCenter1"
+          },
+          {
+            "DN": "ManagedElement=1,ENodeBFunction=1,EUtranCell=CityCenter1, EUtranCellRelation=CityCenter2"
+          },
+          {
+            "DN": "ManagedElement=1,ENodeBFunction=1,EUtranCell=CityCenter1, EUtranCellRelation=CityCenter3"
+          }
+        ]
+      }
+    }
+
+  }
+
+}
