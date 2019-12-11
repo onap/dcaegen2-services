@@ -15,20 +15,17 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
-import os
 import time
 
 import mod.pmsh_logging as logger
 
 
 def main():
-    """Entrypoint"""
-    if "PROD_LOGGING" in os.environ:
-        logger.create_loggers()
+    logger.create_loggers()
+
     while True:
         time.sleep(30)
-        logger.debug("Ni! Ni! Ni!")
+        logger.debug("He's not the messiah, he's a very naughty boy!")
 
 
 if __name__ == '__main__':

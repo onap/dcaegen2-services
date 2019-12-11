@@ -21,8 +21,6 @@ MAINTAINER lego@est.tech
 
 ENV PMSHUSER=pmsh \
     APPDIR="/opt/app/pmsh" \
-    # turn on file based EELF logging
-    PROD_LOGGING=1 \
     # set PATH & PYTHONPATH vars
     PATH=/usr/local/lib/python3.7/bin:$PATH:$APPDIR/bin \
     PYTHONPATH=/usr/local/lib/python3.7/site-packages:./mod:./:$PYTHONPATH:$APPDIR/bin \
