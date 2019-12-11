@@ -15,14 +15,28 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
-import unittest
-
-
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, True)
+import re
 
 
-if __name__ == '__main__':
-    unittest.main()
+class Subscription:
+    def __init__(self, **kwargs):
+        self.subscriptionName = kwargs.get('subscriptionName')
+        self.administrativeState = kwargs.get('administrativeState')
+        self.fileBasedGP = kwargs.get('fileBasedGP')
+        self.fileLocation = kwargs.get('fileLocation')
+        self.nfFilter = kwargs.get('nfFilter')
+        self.measurementGroups = kwargs.get('measurementGroups')
+
+    def is_xnf_in_filter(self, xnf_name):
+        """Match the xnf name against regex values in nfFilter.nfNames
+
+        Args:
+            xnf_name: the AAI xnf name.
+
+        Returns:
+            bool: True if matched, else False.
+        """
+        regex_list = []
+        for raw_regex in self.nfFilter['nfNames']:
+            regex_list.append(re.compile(raw_regex))
+        return any(regex.search(xnf_name) for regex in regex_list)

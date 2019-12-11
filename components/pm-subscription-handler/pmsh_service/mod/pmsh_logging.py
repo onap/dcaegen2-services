@@ -64,34 +64,34 @@ def get_module_logger(mod_name):
     return logger
 
 
-def create_loggers():
+def create_loggers(logs_path="/var/log/ONAP/pmsh/logs"):
     """
     Public method to set the global logger, launched from Run
     This is *not* launched during unit testing, so unit tests do not
     create/write log files
     """
-    makedirs("/var/log/ONAP/pmsh/logs", exist_ok=True)
+    makedirs(logs_path, exist_ok=True)
 
     # create the audit log
-    aud_file = "/var/log/ONAP/pmsh/logs/audit.log"
+    aud_file = logs_path + "/audit.log"
     open(aud_file, "a").close()  # this is like "touch"
     global _AUDIT_LOGGER
     _AUDIT_LOGGER = _create_logger("pmsh_service_audit", aud_file)
 
     # create the error log
-    err_file = "/var/log/ONAP/pmsh/logs/error.log"
+    err_file = logs_path + "/error.log"
     open(err_file, "a").close()  # this is like "touch"
     global _ERROR_LOGGER
     _ERROR_LOGGER = _create_logger("pmsh_service_error", err_file)
 
     # create the metrics log
-    met_file = "/var/log/ONAP/pmsh/logs/metrics.log"
+    met_file = logs_path + "/metrics.log"
     open(met_file, "a").close()  # this is like "touch"
     global _METRICS_LOGGER
     _METRICS_LOGGER = _create_logger("pmsh_service_metrics", met_file)
 
     # create the debug log
-    debug_file = "/var/log/ONAP/pmsh/logs/debug.log"
+    debug_file = logs_path + "/debug.log"
     open(debug_file, "a").close()  # this is like "touch"
     global _DEBUG_LOGGER
     _DEBUG_LOGGER = _create_logger("pmsh_service_debug", debug_file)

@@ -1,0 +1,211 @@
+{
+  "results": [
+    {
+      "id": "200904",
+      "node-type": "pnf",
+      "url": "/aai/v16/network/pnfs/pnf/asd",
+      "properties": {
+        "pnf-name": "nokia_123",
+        "pnf-id": "10cc1039-5098-4b77-9ae9-359d74d7bba6",
+        "equip-type": "val8",
+        "equip-vendor": "Nokia",
+        "equip-model": "val6",
+        "ipaddress-v4-oam": "10.10.10.25",
+         "orchestration-status": "Inventoried",
+        "sw-version": "val7",
+        "in-maint": false,
+        "serial-number": "6061ZW3",
+        "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
+        "resource-version": "1572609320819",
+        "nf-role": "gNB"
+      }
+    },
+    {
+      "id": "209096",
+      "node-type": "pnf",
+      "url": "/aai/v16/network/pnfs/pnf/pnf201",
+      "properties": {
+        "pnf-name": "pnf201",
+        "pnf-id": "99700432-df00-473d-8ff9-2fb14243417a",
+        "equip-type": "val8",
+        "equip-vendor": "Nokia",
+        "equip-model": "val6",
+        "ipaddress-v4-oam": "10.10.10.32",
+         "orchestration-status": "Inventoried",
+        "sw-version": "val7",
+        "in-maint": false,
+        "serial-number": "6061ZW3",
+        "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
+        "resource-version": "1573053304574",
+        "nf-role": "gNB"
+      }
+    },
+    {
+      "id": "217288",
+      "node-type": "pnf",
+      "url": "/aai/v16/network/pnfs/pnf/pnf202",
+      "properties": {
+        "pnf-name": "pnf_33_ericsson",
+        "pnf-id": "1a9dc493-402c-4d13-b5cc-d555c386860c",
+        "equip-type": "val8",
+        "equip-vendor": "Nokia",
+        "equip-model": "val6",
+        "ipaddress-v4-oam": "10.10.10.66",
+         "orchestration-status": "Inventoried",
+        "sw-version": "val7",
+        "in-maint": false,
+        "serial-number": "6061ZW3",
+        "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
+        "resource-version": "1573054784925",
+        "nf-role": "gNB"
+      }
+    },
+    {
+      "id": "262144",
+      "node-type": "pnf",
+      "url": "/aai/v16/network/pnfs/pnf/pnf5",
+      "properties": {
+        "pnf-name": "pnf5",
+        "pnf-id": "cd7ee211-2595-49b6-b85c-76eab621d4b4",
+        "equip-type": "val8",
+        "equip-vendor": "Nokia",
+        "equip-model": "val6",
+        "ipaddress-v4-oam": "10.10.13.26",
+         "orchestration-status": "Inventoried",
+        "sw-version": "val7",
+        "in-maint": false,
+        "serial-number": "6061ZW3",
+        "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
+        "resource-version": "1572543742093",
+        "nf-role": "gNB"
+      }
+    },
+    {
+      "id": "270472",
+      "node-type": "pnf",
+      "url": "/aai/v16/network/pnfs/pnf/pnf205",
+      "properties": {
+        "pnf-name": "eric_23",
+        "pnf-id": "d82ca5aa-cf05-407a-bc84-0ebf22cd83be",
+        "equip-type": "val8",
+        "equip-vendor": "Ericsson",
+        "equip-model": "val6",
+        "ipaddress-v4-oam": "10.40.10.26",
+         "orchestration-status": "Inventoried",
+        "sw-version": "val7",
+        "in-maint": false,
+        "serial-number": "6061ZW3",
+        "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
+        "resource-version": "1573064215776",
+        "nf-role": "gNB"
+      }
+    },
+    {
+      "id": "278664",
+      "node-type": "pnf",
+      "url": "/aai/v16/network/pnfs/pnf/pnf300",
+      "properties": {
+        "pnf-name": "huawei_22",
+        "pnf-id": "eabcfaf7-b7f3-45fb-94e7-e6112fb3e8b8",
+        "equip-type": "val8",
+        "equip-vendor": "Huawei",
+        "equip-model": "val6",
+        "ipaddress-v4-oam": "30.10.10.26",
+        "orchestration-status": "Inventoried",
+        "sw-version": "val7",
+        "in-maint": false,
+        "serial-number": "6061ZW3",
+        "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
+        "resource-version": "1573127626866",
+        "nf-role": "gNB"
+      }
+    },
+    {
+      "id": "667696",
+      "node-type": "pnf",
+      "url": "/aai/v16/network/pnfs/pnf/pnf303",
+      "properties": {
+        "pnf-name": "pnf_1111",
+        "pnf-id": "5cd35ce5-48a3-47c2-a5ab-787bfa5e3027",
+        "equip-type": "val8",
+        "equip-vendor": "Ericsson",
+        "equip-model": "val6",
+        "ipaddress-v4-oam": "10.60.10.26",
+        "sw-version": "val7",
+        "in-maint": false,
+        "serial-number": "6061ZW3",
+        "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
+        "resource-version": "1573138552022",
+        "nf-role": "gNB"
+      }
+    },
+    {
+      "id": "671792",
+      "node-type": "pnf",
+      "url": "/aai/v16/network/pnfs/pnf/my_pnf_is_good",
+      "properties": {
+        "pnf-name": "my_pnf_is_bad",
+        "pnf-id": "4f043f83-3ddf-49d0-a878-ae6b2f9bd7e5",
+        "in-maint": false,
+        "resource-version": "1574701401896"
+      }
+    },
+    {
+      "id": "241864",
+      "node-type": "generic-vnf",
+      "url": "/aai/v16/network/generic-vnfs/generic-vnf/1083ecbb-f3b3-49da-b5f5-b5962140ee99",
+      "properties": {
+        "vnf-id": "1083ecbb-f3b3-49da-b5f5-b5962140ee99",
+        "vnf-name": "vnf-eric-1",
+        "vnf-type": "demoVCPEvBNG/vCPE_vbng 5eb5661a-0cb6 0",
+        "service-id": "2db01c96-4baa-4393-8d79-af8d7bf4698e",
+        "prov-status": "PREPROV",
+        "orchestration-status": "Inventoried",
+        "in-maint": false,
+        "is-closed-loop-disabled": false,
+        "resource-version": "1575541662410",
+        "model-invariant-id": "7129e420-d396-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
+        "model-customization-id": "376dbe87-e9c5-4f2b-80e2-a420b373ee87"
+      }
+    },
+    {
+      "id": "241864",
+      "node-type": "generic-vnf",
+      "url": "/aai/v16/network/generic-vnfs/generic-vnf/1083ecbb-f3b3-49da-b5f5-b5962140ee99",
+      "properties": {
+        "vnf-id": "1083ecbb-f3b3-49da-b5f5-b5962140ee98",
+        "vnf-name": "vnf-nokia-22",
+        "vnf-type": "demoVCPEvBNG/vCPE_vbng 5eb5661a-0cb6 0",
+        "service-id": "2db01c96-4baa-4393-8d79-af8d7bf4698e",
+        "prov-status": "PREPROV",
+        "orchestration-status": "Inventoried",
+        "in-maint": false,
+        "is-closed-loop-disabled": false,
+        "resource-version": "1575541662410",
+        "model-invariant-id": "7129e420-d396-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
+        "model-customization-id": "376dbe87-e9c5-4f2b-80e2-a420b373ee87"
+      }
+    },
+    {
+      "id": "303240",
+      "node-type": "generic-vnf",
+      "url": "/aai/v16/network/generic-vnfs/generic-vnf/230f339c-3e75-4f6b-8c9c-da4759da8222",
+      "properties": {
+        "vnf-id": "230f339c-3e75-4f6b-8c9c-da4759da8222",
+        "vnf-name": "vcpe_1",
+        "vnf-type": "demoVCPEInfra/vCPE_infra 0d1234cf-100c 0",
+        "service-id": "2db01c96-4baa-4393-8d79-af8d7bf4698e",
+        "prov-status": "PREPROV",
+        "orchestration-status": "Inventoried",
+        "in-maint": false,
+        "is-closed-loop-disabled": false,
+        "resource-version": "1575542300539",
+        "model-invariant-id": "c6aef848-e119-4572-9643-0b68da217358",
+        "model-version-id": "77c1a3d9-422a-4f78-bd8f-f7a357685b25",
+        "model-customization-id": "1f6a305d-74b6-4b92-b407-cd03284b6432"
+      }
+    }
+  ]
+}

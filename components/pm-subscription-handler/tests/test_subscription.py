@@ -15,26 +15,28 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import json
 import os
-import shutil
-import time
+import unittest
 
-import mod.pmsh_logging as logger
-
-
-def main():
-    """Entrypoint"""
-    if 'PROD_LOGGING' in os.environ:
-        logger.create_loggers()
-    else:
-        tmp_logs_path = '../tmp_logs'
-        if os.path.exists(tmp_logs_path):
-            shutil.rmtree(tmp_logs_path)
-        logger.create_loggers(tmp_logs_path)
-    while True:
-        time.sleep(30)
-        logger.debug("Ni! Ni! Ni!")
+from subscription import Subscription
 
 
-if __name__ == '__main__':
-    main()
+class SubscriptionTestCase(unittest.TestCase):
+
+    def setUp(self):
+        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data.json'), 'r') as data:
+            self.cbs_data = json.load(data)
+        self.sub = Subscription(**self.cbs_data['policy']['subscription'])
+
+    def test_sub_filter_true(self):
+        self.assertTrue(self.sub.is_xnf_in_filter('pnf1'))
+
+    def test_sub_filter_false(self):
+        self.assertFalse(self.sub.is_xnf_in_filter('PNF-33'))
+
+    def test_sub_measurement_group(self):
+        self.assertEqual(len(self.sub.measurementGroups), 2)
+
+    def test_sub_file_location(self):
+        self.assertEqual(self.sub.fileLocation, '/pm/pm.xml')
