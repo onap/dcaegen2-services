@@ -30,6 +30,6 @@ setup(
     python_requires='>=3',
     install_requires=[
         "requests==2.22.0",
-        "aiohttp==3.6.2",
-        "onappylog==1.0.9"],
+        "tenacity==6.0.0",
+        "responses==0.10.6"],
 )
