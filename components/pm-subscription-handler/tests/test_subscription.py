@@ -15,14 +15,29 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
+import json
+import os
 import unittest
 
-
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, True)
+from mod.subscription import Subscription, XnfFilter
 
 
-if __name__ == '__main__':
-    unittest.main()
+class SubscriptionTestCase(unittest.TestCase):
+
+    def setUp(self):
+        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data.json'), 'r') as data:
+            self.cbs_data = json.load(data)
+        self.sub = Subscription(**self.cbs_data['policy']['subscription'])
+        self.xnf_filter = XnfFilter(**self.sub.nfFilter)
+
+    def test_xnf_filter_true(self):
+        self.assertTrue(self.xnf_filter.is_xnf_in_filter('pnf1'))
+
+    def test_xnf_filter_false(self):
+        self.assertFalse(self.xnf_filter.is_xnf_in_filter('PNF-33'))
+
+    def test_sub_measurement_group(self):
+        self.assertEqual(len(self.sub.measurementGroups), 2)
+
+    def test_sub_file_location(self):
+        self.assertEqual(self.sub.fileLocation, '/pm/pm.xml')
