@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c98af54c_0f97e72a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/config_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-12-11T15:06:17Z",
+      "side": 1,
+      "message": "A lot of differing opinion here too but maybe we should docstring as much as possible.",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 26
+      },
+      "revId": "32365004f382723eef490e551fb27d34f117b1e0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
