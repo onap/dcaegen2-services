@@ -15,26 +15,28 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-import os
-import shutil
-import time
-
-import mod.pmsh_logging as logger
+import re
 
 
-def main():
-    """Entrypoint"""
-    if 'PROD_LOGGING' in os.environ:
-        logger.create_loggers()
-    else:
-        tmp_logs_path = '../tmp_logs'
-        if os.path.exists(tmp_logs_path):
-            shutil.rmtree(tmp_logs_path)
-        logger.create_loggers(tmp_logs_path)
-    while True:
-        time.sleep(30)
-        logger.debug("Ni! Ni! Ni!")
+class Subscription:
+    def __init__(self, **kwargs):
+        self.subscriptionName = kwargs.get('subscriptionName')
+        self.administrativeState = kwargs.get('administrativeState')
+        self.fileBasedGP = kwargs.get('fileBasedGP')
+        self.fileLocation = kwargs.get('fileLocation')
+        self.nfFilter = kwargs.get('nfFilter')
+        self.measurementGroups = kwargs.get('measurementGroups')
 
+    def apply_filter_to_xnf(self, xnf_name):
+        """Match the xnf name against regex values in nfFilter.nfNames
 
-if __name__ == '__main__':
-    main()
+        Args:
+            xnf_name: the AAI xnf name.
+
+        Returns:
+            bool: True if matched, else False.
+        """
+        regex_list = []
+        for raw_regex in self.nfFilter['nfNames']:
+            regex_list.append(re.compile(raw_regex))
+        return any(regex.match(xnf_name) for regex in regex_list)
