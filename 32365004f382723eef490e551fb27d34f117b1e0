@@ -22,6 +22,30 @@
       "revId": "32365004f382723eef490e551fb27d34f117b1e0",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9059c290_c46d479f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/config_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2019-12-11T17:02:26Z",
+      "side": 1,
+      "message": "removed this method, get_config has this now",
+      "parentUuid": "c98af54c_0f97e72a",
+      "range": {
+        "startLine": 69,
+        "startChar": 8,
+        "endLine": 69,
+        "endChar": 26
+      },
+      "revId": "32365004f382723eef490e551fb27d34f117b1e0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
