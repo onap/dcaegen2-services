@@ -199,13 +199,13 @@ public class Topic {
 		tConfig.setTtl(getTtl());
 		
 		Set<Db> topicDb = getDbs();
-		List<String> dbList = new ArrayList<>();
-		List<String> enabledDbList = new ArrayList<>();
+		List<Integer> dbList = new ArrayList<>();
+		List<Integer> enabledDbList = new ArrayList<>();
 		if (topicDb != null) {
 			for (Db item : topicDb) {
-				dbList.add(item.getName());
+				dbList.add(item.getId());
 				if(item.isEnabled()) {
-					enabledDbList.add(item.getName());
+					enabledDbList.add(item.getId());
 				}
 			}
 		}

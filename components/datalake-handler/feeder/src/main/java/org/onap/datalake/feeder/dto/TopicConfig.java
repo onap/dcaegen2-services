@@ -41,8 +41,8 @@ public class TopicConfig {
 	private String name;
 	private String login;
 	private String password;
-	private List<String> sinkdbs;
-	private List<String> enabledSinkdbs;//only include enabled db
+	private List<Integer> sinkdbs;
+	private List<Integer> enabledSinkdbs;//only include enabled db
 	private boolean enabled;
 	private boolean saveRaw;
 	private String dataFormat;

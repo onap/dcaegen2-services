@@ -44,6 +44,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Collections;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -120,10 +121,11 @@ public class DbControllerTest {
         assertEquals(null, db);
         //when(mockBindingResult.hasErrors()).thenReturn(false);
         String name = "Elecsticsearch";
-        when(dbRepository.findByName(name)).thenReturn(TestUtil.newDb(name));
+        int testId = 1234;
+        when(dbRepository.findById(testId)).thenReturn(Optional.of(TestUtil.newDb(name)));
         //db = dbController.updateDb(dbConfig, mockBindingResult, httpServletResponse);
         //assertEquals(200, db.getStatusCode());
-        Db elecsticsearch = dbController.getDb("Elecsticsearch", httpServletResponse);
+        DbConfig elecsticsearch = dbController.getDb(testId, httpServletResponse);
         assertNotNull(elecsticsearch);
     }
 
@@ -131,13 +133,14 @@ public class DbControllerTest {
     public void testGetAllDbs() throws IOException, IllegalAccessException, NoSuchFieldException {
         DbController dbController = new DbController();
         String name = "Elecsticsearch";
+        int testId = 1234;
         List<Db> dbs = new ArrayList<>();
         dbs.add(TestUtil.newDb(name));
         setAccessPrivateFields(dbController);
         when(dbRepository.findAll()).thenReturn(dbs);
-        List<String> list = dbController.list();
-        for (String dbName : list) {
-            assertEquals("Elecsticsearch", dbName);
+        List<Integer> list = dbController.list();
+        for (int id : list) {
+            assertNotEquals(1234, id);
         }
         //dbController.deleteDb("Elecsticsearch", httpServletResponse);
     }
