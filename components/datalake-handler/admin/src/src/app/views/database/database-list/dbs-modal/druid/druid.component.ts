@@ -43,7 +43,7 @@ export class DruidComponent {
   @Input() db: Db;
   @Input() dbList_length;
   dbInput: Db;
-  dbTypeIdList: Array<string> = ["CB", "DRUID", "ES", "HDFS", "MONGO"];
+  dbTypeIdList: Array<string> = ["DRUID"];
   @ViewChild("d_dbTypeId") d_dbTypeId: ElementRef;
 
   defaultDbType: string;
@@ -75,7 +75,7 @@ export class DruidComponent {
 
     } else {
       this.dbInput = this.editDb;
-      this.dbInputTitle = "Edit " + this.editDb.name;
+      this.dbInputTitle = "Edit" + "-" + this.editDb.dbTypeId + "-" + this.editDb.name;
       this.defaultDbType = this.dbInput.dbTypeId;
       console.log("edit db");
     }

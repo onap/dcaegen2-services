@@ -112,10 +112,10 @@ export class ToolsComponent implements OnInit {
 
   dataAction($event) {
     if($event[0] == "trash"){
-      console.log($event, "tools 中触发执行删除操作");
+      console.log($event, "tools delete");
       this.deleteToolModel($event[1]);
     }else {
-      console.log($event, "tools 中触发执行修改操作");
+      console.log($event, "tools update");
       this.updateToolModel($event[1]);
     }
   }
@@ -137,7 +137,6 @@ export class ToolsComponent implements OnInit {
             this.initData();
           } else {
             this.notificationService.error("FAILED_DELETED");
-            this.initData();
           }
           modalRef.close();
         },
@@ -169,7 +168,6 @@ export class ToolsComponent implements OnInit {
               this.initData();
             } else {
               this.notificationService.error("FAILED_UPDATED");
-              this.initData();
             }
             modalRef.close();
           },
@@ -178,7 +176,6 @@ export class ToolsComponent implements OnInit {
             modalRef.close();
           }
         );
-    })
-
+    });
   }
 }
