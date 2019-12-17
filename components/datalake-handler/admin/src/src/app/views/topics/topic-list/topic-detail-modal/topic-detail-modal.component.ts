@@ -143,9 +143,9 @@ export class TopicDetailModalComponent implements OnInit {
 
     // Reset to default
     if (this.topic.sinkdbs.length == 0) {
-      this.topic.type = false;
+      this.topic.config = false;
     } else {
-      this.topic.type = true;
+      this.topic.config = true;
     }
     this.passEntry.emit(this.topic);
   }

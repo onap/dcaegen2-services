@@ -28,9 +28,9 @@ import { AdminService } from "src/app/core/services/admin.service";
 import { Topic } from "src/app/core/models/topic.model";
 
 @Component({
-  selector: 'app-new-topic-model',
-  templateUrl: './new-topic-model.component.html',
-  styleUrls: ['./new-topic-model.component.css']
+  selector: "app-new-topic-model",
+  templateUrl: "./new-topic-model.component.html",
+  styleUrls: ["./new-topic-model.component.css"]
 })
 export class NewTopicModelComponent implements OnInit {
   @Input() newTopic: Topic;
@@ -57,46 +57,46 @@ export class NewTopicModelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.newTopic = {
-      name: "",
-      login: "",
-      password: "",
-      sinkdbs: [],
-      enabledSinkdbs: [],
-      enabled: false,
-      saveRaw: false,
-      dataFormat: this.dataFormats[0],
-      ttl: null,
-      correlateClearedMessage: false,
-      messageIdPath: null,
-      type: null
-    };
-    this.TopicInput = new Topic();
-    const feeds = {
-      name: this.newTopic.name,
-      login: this.newTopic.login,
-      password: this.newTopic.password,
-      sinkdbs: this.newTopic.sinkdbs,
-      enabledSinkdbs: this.newTopic.sinkdbs,
-      enabled: this.newTopic.enabled,
-      saveRaw: this.newTopic.saveRaw,
-      dataFormat: this.newTopic.dataFormat,
-      ttl: this.newTopic.ttl,
-      correlateClearedMessage: this.newTopic.correlateClearedMessage,
-      messageIdPath: this.newTopic.messageIdPath,
-      type: null
-    };
-    this.TopicInput = feeds;
-    this.idExFields = [];
-    if (this.TopicInput.messageIdPath != null) {
-      var feed = this.TopicInput.messageIdPath.split(",");
-      for (var i = 0; i < feed.length; i++) {
-        var data = { item: feed[i] };
-        this.idExFields.push(data);
-      }
-    } else {
-      this.idExFields.push([]);
-    }
+    // this.newTopic = {
+    //   name: "",
+    //   login: "",
+    //   password: "",
+    //   sinkdbs: [],
+    //   enabledSinkdbs: [],
+    //   enabled: false,
+    //   saveRaw: false,
+    //   dataFormat: this.dataFormats[0],
+    //   ttl: null,
+    //   correlateClearedMessage: false,
+    //   messageIdPath: null,
+    //   type: null
+    // };
+    // this.TopicInput = new Topic();
+    // const feeds = {
+    //   name: this.newTopic.name,
+    //   login: this.newTopic.login,
+    //   password: this.newTopic.password,
+    //   sinkdbs: this.newTopic.sinkdbs,
+    //   enabledSinkdbs: this.newTopic.sinkdbs,
+    //   enabled: this.newTopic.enabled,
+    //   saveRaw: this.newTopic.saveRaw,
+    //   dataFormat: this.newTopic.dataFormat,
+    //   ttl: this.newTopic.ttl,
+    //   correlateClearedMessage: this.newTopic.correlateClearedMessage,
+    //   messageIdPath: this.newTopic.messageIdPath,
+    //   type: null
+    // };
+    // this.TopicInput = feeds;
+    // this.idExFields = [];
+    // if (this.TopicInput.messageIdPath != null) {
+    //   var feed = this.TopicInput.messageIdPath.split(",");
+    //   for (var i = 0; i < feed.length; i++) {
+    //     var data = { item: feed[i] };
+    //     this.idExFields.push(data);
+    //   }
+    // } else {
+    //   this.idExFields.push([]);
+    // }
   }
 
   getDbs() {
@@ -144,8 +144,7 @@ export class NewTopicModelComponent implements OnInit {
       if (i == 0) {
         this.newTopic.messageIdPath = item;
       } else {
-        this.newTopic.messageIdPath =
-          this.newTopic.messageIdPath + "," + item;
+        this.newTopic.messageIdPath = this.newTopic.messageIdPath + "," + item;
       }
     }
     // Reset to default
@@ -155,5 +154,4 @@ export class NewTopicModelComponent implements OnInit {
     console.log(this.newTopic);
     this.passEntry.emit(this.newTopic);
   }
-
 }

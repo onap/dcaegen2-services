@@ -27,150 +27,24 @@ limitations under the License.
           <div class="input-group">
             <input #searchText type="text" class="form-control dl-input-text-search" placeholder="Search..."
               (keyup)="this.updateFilter($event.target.value)" />
-            <div class="input-group-append">
-              <button type="button" class="btn dl-btn-dark">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
           </div>
         </div>
+
         <!-- button -->
         <div class="p-1">
-          <button style="margin-right: 0.5rem;" class="btn dl-btn-dark" (click)="openTopicModal('config')">
-            {{ "DEFAULT_CONFIGURATIONS" | translate }}
-          </button>
-          <button class="btn dl-btn-dark" (click)="openNewTopicModal()">
-            {{ "NEW_TOPIC" | translate }}
-          </button>
+          <app-button [text]="'DEFAULT_CONFIGURATIONS'" [style]="'inline'" [color]="'dark'" (click)="buttonAction('default')"></app-button>
+        </div>
+        <div class="p-1">
+          <app-button [text]="'plus'" [style]="'inlineicon'" [color]="'dark'" (click)="buttonAction('new')"></app-button>
         </div>
       </div>
     </div>
   </div>
+
   <!-- datatable -->
   <div class="row">
     <div class="col-md-12">
-      <ngx-datatable #mydatatable class="bootstrap" [rows]="topics" [columnMode]="'force'" [headerHeight]="40"
-                     [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-                     [loadingIndicator]="loadingIndicator" [messages]="mesgNoData" [limit]="10"
-                     (activate)="onActivate($event)">
-
-        <ngx-datatable-column [width]="20" name="{{ 'STATUS' | translate }}" prop="enabled"
-          headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-          <div>
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              <span *ngIf="row.enabled">
-                <i class="fas fa-circle dl-icon-enable" aria-hidden="true"></i>
-              </span>
-              <span *ngIf="!row.enabled">
-                <i class="fas fa-circle dl-icon-disable" aria-hidden="true"></i>
-              </span>
-            </ng-template>
-          </div>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="450" name="{{ 'NAME' | translate }}" prop="name">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>{{ row.name }}</span>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="25" name="{{ 'SETTING' | translate }}" prop="type"
-          headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-          <div>
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              <span *ngIf="row.type">
-                <i class="fas fa-check dl-icon-enable" aria-hidden="true"></i>
-              </span>
-              <!-- <span *ngIf="!row.type">
-                <i class="fas fa-check dl-icon-disable" aria-hidden="true"></i>
-              </span> -->
-            </ng-template>
-          </div>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="10" name="Ka" prop="kafkas" headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-          <ng-template let-column="column" ngx-datatable-header-template>
-            <img src="assets/icons/kafka_able.svg" alt="Icon" style=" height: 20px; "/>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="10" name="CB" prop="CB" headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-            <ng-template let-column="column" ngx-datatable-header-template>
-                <img src="assets/icons/couchbase_able.svg" alt="Icon" style=" height: 20px; "/>
-            </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="10" name="DR" prop="DRUID" headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-            <ng-template let-column="column" ngx-datatable-header-template>
-                <img src="assets/icons/druid_able.svg" alt="Icon" style=" height: 16px; "/>
-            </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="10" name="ES" prop="ES" headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-            <ng-template let-column="column" ngx-datatable-header-template>
-                <img src="assets/icons/elasticsearch_able.svg" alt="Icon" style=" height: 20px; "/>
-            </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="10" name="MG" prop="MONGO" headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-            <ng-template let-column="column" ngx-datatable-header-template>
-                <img src="assets/icons/mongoDB_able.svg" alt="Icon" style=" height: 23px; "/>
-            </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="10" name="HD" prop="HDFS" headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-            <ng-template let-column="column" ngx-datatable-header-template>
-                <img src="assets/icons/hadoop_able.svg" alt="Icon" style=" height: 20px; "/>
-            </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="20" name="{{ 'TTL' | translate }}" prop="ttl"
-          headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>{{ row.ttl }}</span>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="20" name="{{ 'SAVE_RAW_DATA' | translate }}" prop="saveRaw"
-          headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-          <div>
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              <span *ngIf="row.saveRaw">
-                <i class="fas fa-check dl-icon-enable" aria-hidden="true"></i>
-              </span>
-              <!-- <span *ngIf="!row.saveRaw"> -->
-                <!-- <i class="fas fa-check dl-icon-disable" aria-hidden="true"></i> -->
-              <!-- </span> -->
-            </ng-template>
-          </div>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="10" name="" sortable="false" cellClass="d-flex justify-content-center">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>
-             <button class="btn action-icon-setting" (click)="this.deleteTopicModal(row.name);">
-                <i class="fas fa-trash-alt fa-xs"></i>
-              </button>
-            </span>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-footer>
-          <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
-                       let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset"
-                       let-isVisible="isVisible">
-            <div class="page-count">
-              total: {{ rowCount.toLocaleString() }}
-            </div>
-            <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'" [pagerRightArrowIcon]="'datatable-icon-right'"
-                             [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'"
-                             [page]="curPage"
-                             [size]="pageSize" [count]="rowCount" [hidden]="!(rowCount / pageSize > 1)"
-                             (change)="topicTable.onFooterPage($event)">
-            </datatable-pager>
-          </ng-template>
-        </ngx-datatable-footer>
-      </ngx-datatable>
+      <app-table [data]="topics" [columns]="columns"></app-table>
     </div>
   </div>
 </div>

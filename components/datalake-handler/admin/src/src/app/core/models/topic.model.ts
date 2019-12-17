@@ -23,20 +23,68 @@
  * @author Ekko Chang
  *
  */
+
 export class Topic {
-  enabled: boolean;
-  name: string;
-  login: string;
-  password: string;
-  enabledSinkdbs: any;
-  sinkdbs: any;
-  saveRaw: boolean;
-  dataFormat: string;
-  ttl: number;
-  correlateClearedMessage: boolean;
-  messageIdPath: string;
-  // for UI display
-  type: boolean; // 1: Configure 0: Unconfiure
-  //id: number; //todo
-  //kafkas: any; //todo
+  public id: number;
+  public name: string;
+  public login: string;
+  public password: string;
+  public enabledSinkdbs: Array<string>; // related db which is enabled
+  public sinkdbs: Array<string>; // related db whatever enabled or disable
+  public enabled: boolean;
+  public saveRaw: boolean;
+  public dataFormat: string;
+  public ttl: number;
+  public correlateClearedMessage: boolean;
+  public messageIdPath: string;
+  public aggregateArrayPath: string;
+  public flattenArrayPath: string;
+  public enbabledKafkas: Array<string>;
+  public kafkas: Array<string>;
+  // properties only for UI
+  public config: boolean; //true: Configure, otherwise false: Unconfiure
+  public kafkaName: string;
+  public countCouchbase: number;
+  public countDruid: number;
+  public countEs: number;
+  public countMongo: number;
+  public countHadoop: number;
+
+  constructor(
+    id: number,
+    name: string,
+    login: string,
+    password: string,
+    enabledSinkdbs: Array<string>,
+    sinkdbs: Array<string>,
+    enabled: boolean,
+    saveRaw: boolean,
+    dataFormat: string,
+    ttl: number,
+    correlateClearedMessage: boolean,
+    messageIdPath: string,
+    aggregateArrayPath: string,
+    flattenArrayPath: string,
+    enbabledKafkas: Array<string>,
+    kafkas: Array<string>,
+    config: boolean
+  ) {
+    this.id = id;
+    this.name = name;
+    this.login = login;
+    this.password = password;
+    this.enabledSinkdbs = enabledSinkdbs;
+    this.sinkdbs = sinkdbs;
+    this.enabled = enabled;
+    this.saveRaw = saveRaw;
+    this.dataFormat = dataFormat;
+    this.ttl = ttl;
+    this.correlateClearedMessage = correlateClearedMessage;
+    this.messageIdPath = messageIdPath;
+    this.aggregateArrayPath = aggregateArrayPath;
+    this.flattenArrayPath = flattenArrayPath;
+    this.enbabledKafkas = enbabledKafkas;
+    this.kafkas = kafkas;
+    this.config = config;
+  }
 }
