@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ed4fd21_ee2cdec2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2019-12-17T16:51:06Z",
+      "side": 1,
+      "message": "MrPub",
+      "range": {
+        "startLine": 57,
+        "startChar": 20,
+        "endLine": 57,
+        "endChar": 25
+      },
+      "revId": "0bc8580390d9b0585fe6e840682b08a5d6bdd51e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5782da27_65366b78",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2019-12-17T16:51:06Z",
+      "side": 1,
+      "message": "is_xnf_in_filter, since this function returns a boolean and doesn\u0027t necessarily apply the filter",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "0bc8580390d9b0585fe6e840682b08a5d6bdd51e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6442f077_188e43cb",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2019-12-17T16:51:06Z",
+      "side": 1,
+      "message": "wondering should search() be used here so it will match anywhere in string, not just beginning: https://docs.python.org/2/library/re.html#search-vs-match",
+      "range": {
+        "startLine": 42,
+        "startChar": 25,
+        "endLine": 42,
+        "endChar": 30
+      },
+      "revId": "0bc8580390d9b0585fe6e840682b08a5d6bdd51e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
