@@ -16,6 +16,24 @@
       "revId": "2a0c2f460e61effd83ebbfcabaf8cd8e12f6dbcc",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96ad1e3c_1493b243",
+        "filename": "components/pm-subscription-handler/tests/expected_config.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2019-12-18T18:34:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5769558_07efdcaf",
+      "revId": "2a0c2f460e61effd83ebbfcabaf8cd8e12f6dbcc",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
