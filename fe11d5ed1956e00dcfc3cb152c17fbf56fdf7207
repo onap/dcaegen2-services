@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d712c8df_8a769d26",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2019-12-18T11:50:20Z",
+      "side": 1,
+      "message": "Should invariant ID be here? Or are we leaving that out for now?",
+      "revId": "fe11d5ed1956e00dcfc3cb152c17fbf56fdf7207",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
