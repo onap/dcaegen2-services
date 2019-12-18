@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef66200e_d7640013",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2019-12-18T23:10:04Z",
+      "side": 1,
+      "message": "Could you just use:\n            pnf_obj \u003d Xnf(xnf_name\u003dxnf[\u0027properties\u0027][\u0027pnf-name\u0027],\n\t                  orchestration_status\u003dxnf[\u0027properties\u0027].get(\u0027orchestration-status\u0027))\nthen you wouldn\u0027t care if \u0027orchestration-status\u0027 was present or not and hence wouldn\u0027t need this if/else.",
+      "revId": "7e6d71dd65c053312dfc42cebd6a2c562333819b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86d5c14d_1158c8d6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2019-12-18T23:10:04Z",
+      "side": 1,
+      "message": "The nfFilter regex should probably be combined and the pattern compilation should be moved up into the init() above so that it is only done once for the instance instead of each time this method is called.",
+      "revId": "7e6d71dd65c053312dfc42cebd6a2c562333819b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4eec3034_bb928e3b",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2019-12-18T23:10:04Z",
+      "side": 1,
+      "message": "Doesn\u0027t this add complexity to the production environment by requiring this variable? Would it be an idea for the the service to be production ready and the use of a variable such as \u0027TEST_LOGGING\u0027 to be used to govern logic in else statement just below.",
+      "revId": "7e6d71dd65c053312dfc42cebd6a2c562333819b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
