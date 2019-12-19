@@ -24,6 +24,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * JSON request body for Topic manipulation.
@@ -52,7 +53,9 @@ public class TopicConfig {
 	private String aggregateArrayPath;
 	private String flattenArrayPath;
 	private List<Integer> kafkas;
-	
+	private Map<String,Integer> countsDb;
+	private int countsKafka;
+
 	@Override
 	public String toString() {
 		return String.format("TopicConfig %s(enabled=%s, enabledSinkdbs=%s)", name, enabled, enabledSinkdbs);
