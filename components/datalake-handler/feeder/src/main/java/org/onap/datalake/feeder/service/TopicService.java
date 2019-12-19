@@ -2,7 +2,7 @@
 * ============LICENSE_START=======================================================
 * ONAP : DATALAKE
 * ================================================================================
-* Copyright 2019 China Mobile
+* Copyright 2020 China Mobile
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ import org.onap.datalake.feeder.domain.Db;
 import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.domain.Topic;
+import org.onap.datalake.feeder.domain.TopicName;
 import org.onap.datalake.feeder.repository.DbRepository;
 import org.onap.datalake.feeder.repository.KafkaRepository;
 import org.onap.datalake.feeder.repository.TopicNameRepository;
@@ -147,7 +148,10 @@ public class TopicService {
 	private void fillTopic(TopicConfig tConfig, Topic topic) {
 		Set<Db> relateDb = new HashSet<>();
 		topic.setId(tConfig.getId());
-		topic.setTopicName(topicNameRepository.findById(tConfig.getName()).get());
+		Optional<TopicName> t = topicNameRepository.findById(tConfig.getName());
+		if (!t.isPresent())
+			throw new IllegalArgumentException("Can not find topicName in TopicName, topic name " + tConfig.getName());
+		topic.setTopicName(t.get());
 		topic.setLogin(tConfig.getLogin());
 		topic.setPass(tConfig.getPassword());
 		topic.setEnabled(tConfig.isEnabled());
