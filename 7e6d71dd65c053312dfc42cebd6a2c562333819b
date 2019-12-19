@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e67524f2_e8331995",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-12-19T16:42:45Z",
+      "side": 1,
+      "message": "Done. \nRefactored to use .get() (which doesn\u0027t throw a KeyError)  for all subsequent keys.",
+      "parentUuid": "ef66200e_d7640013",
+      "revId": "7e6d71dd65c053312dfc42cebd6a2c562333819b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "86d5c14d_1158c8d6",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 7
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "05b9fac7_e1dc9702",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-12-19T16:42:45Z",
+      "side": 1,
+      "message": "Good call. I guess the filter may get more complex in the future so we can rethink the strategy later.",
+      "parentUuid": "86d5c14d_1158c8d6",
+      "revId": "7e6d71dd65c053312dfc42cebd6a2c562333819b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4eec3034_bb928e3b",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
         "patchSetId": 7
@@ -47,6 +83,24 @@
       "writtenOn": "2019-12-18T23:10:04Z",
       "side": 1,
       "message": "Doesn\u0027t this add complexity to the production environment by requiring this variable? Would it be an idea for the the service to be production ready and the use of a variable such as \u0027TEST_LOGGING\u0027 to be used to govern logic in else statement just below.",
+      "revId": "7e6d71dd65c053312dfc42cebd6a2c562333819b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee31515c_4defce9b",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2019-12-19T16:42:45Z",
+      "side": 1,
+      "message": "It\u0027s being set in the Dockerfile which means it\u0027s ok for Production.\nMay need to rethink the logging later as we need to ONAP compliant. MDC etc..",
+      "parentUuid": "4eec3034_bb928e3b",
       "revId": "7e6d71dd65c053312dfc42cebd6a2c562333819b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
