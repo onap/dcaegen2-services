@@ -50,7 +50,7 @@ export class ToolsComponent implements OnInit {
     private adminService: AdminService,
     private notificationService: ToastrNotificationService,
     private modalService: NgbModal,
-    private dbApiService: RestApiService,
+    private dbApiService: RestApiService
   ) {
     this.adminService.setTitle("SIDEBAR.DASHBOARDLIST");
     this.initData().then(data => { });

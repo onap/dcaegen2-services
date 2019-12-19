@@ -160,7 +160,7 @@ export class RestApiService {
   */
   getDbEncryptList(flag): Observable<any> {
     return this.http
-      .get(prefix + "dbs/list?tool=" + flag)
+      .get(prefix + "dbs/list?isDb=" + flag)
       .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
 

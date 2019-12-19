@@ -30,11 +30,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { ToastrNotificationService } from "src/app/shared/components/toastr-notification/toastr-notification.service";
 import {AlertComponent} from "../../../shared/components/alert/alert.component";
 import {NewKafkaModalComponent} from "./new-kafka-modal/new-kafka-modal.component";
-import {ModalContentData} from "../../../shared/modules/modal/modal.data";
-import {ModalDemoComponent} from "../../test/modal-demo/modal-demo.component";
-import {ModalComponent} from "../../../shared/modules/modal/modal.component";
 import {EditKafkaModalComponent} from "./edit-kafka-modal/edit-kafka-modal.component";
-import {el} from "@angular/platform-browser/testing/src/browser_util";
 
 @Component({
   selector: 'app-kafka-list',
@@ -51,6 +47,7 @@ export class KafkaListComponent implements OnInit {
   Kafka_New: Kafka;
   Kafka_Newbody: Kafka;
   cardIconPathList: any = [];
+  kafkaData: any = [];
 
   constructor(
     private kafkaApiService: RestApiService,
@@ -74,6 +71,7 @@ export class KafkaListComponent implements OnInit {
         if (this.kafkas.length > 0) {
           let a = "assets/icons/kafka_able.svg";
           let b = "assets/icons/kafka_disable.svg";
+          this.cardIconPathList.splice(0,this.cardIconPathList.length);
           for (let i = 0; i < this.kafkas.length; i++) {
             this.cardIconPath = (this.kafkas[i].enabled == true) ? a : b;
             this.cardIconPathList.push(this.cardIconPath);
@@ -96,6 +94,16 @@ export class KafkaListComponent implements OnInit {
     let data: any;
     data = this.kafkaApiService.getAllKafkaList().toPromise();
     return data;
+  }
+
+  async getKafkaDetailModal(id: number) {
+    this.kafkaData = [];
+    this.kafkaData = await this.getKafkaModal(id);
+    return this.kafkaData;
+  }
+
+  getKafkaModal(id: number) {
+    return this.kafkaApiService.getKafka(id).toPromise();
   }
 
   async initKafkasList(kafkaList: []) {
@@ -208,33 +216,38 @@ export class KafkaListComponent implements OnInit {
   }
 
   editKafkaModal(id: number) {
-    console.log("id", id)
-    const index = this.kafkaList.findIndex(t => t.id === id);
-    const modalRef = this.modalService.open(EditKafkaModalComponent, {
-      windowClass: "dl-md-modal kafkas",
-      centered: true
-    });
-    modalRef.componentInstance.editKafka = this.kafkaList[index];
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      this.Kafka_New = receivedEntry;
-      this.kafkaApiService
-        .updateKafka(this.Kafka_New)
-        .subscribe(
-          res => {
-            if (res.statusCode == 200) {
-              this.kafkaList[index] = this.Kafka_New;
-              this.kafkaList = [...this.kafkaList];
-              this.notificationService.success("SUCCESSFULLY_UPDATED");
-            } else {
-              this.notificationService.error("FAILED_UPDATED");
+    this.getKafkaDetailModal(id).then(data => {
+      console.log("id", id);
+      const index = this.kafkaList.findIndex(t => t.id === id);
+      const modalRef = this.modalService.open(EditKafkaModalComponent, {
+        windowClass: "dl-md-modal kafkas",
+        centered: true
+      });
+      modalRef.componentInstance.editKafka = data;
+      modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
+        this.Kafka_New = receivedEntry;
+        this.kafkaApiService
+          .updateKafka(this.Kafka_New)
+          .subscribe(
+            res => {
+              this.spinner.hide();
+              if (res.statusCode == 200) {
+                this.kafkaList[index] = this.Kafka_New;
+                this.kafkaList = [...this.kafkaList];
+                this.notificationService.success("SUCCESSFULLY_UPDATED");
+                this.initList();
+              } else {
+                this.notificationService.error("FAILED_UPDATED");
+              }
+              modalRef.close();
+            },
+            err => {
+              this.notificationService.error(err);
+              modalRef.close();
             }
-            modalRef.close();
-          },
-          err => {
-            this.notificationService.error(err);
-            modalRef.close();
-          }
-        );
-    })
+          );
+      });
+    });
+
   }
 }

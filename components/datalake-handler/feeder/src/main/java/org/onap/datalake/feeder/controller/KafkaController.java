@@ -121,14 +121,14 @@ public class KafkaController {
 
         Kafka oldKafka = kafkaService.getKafkaById(id);
         if (oldKafka == null) {
-            sendError(response, 400, "kafka not found "+id);
+            sendError(response, 400, "kafka not found, ID: "+id);
         } else {
             kafkaRepository.delete(oldKafka);
             response.setStatus(204);
         }
     }
 
-    @GetMapping("")
+    /*@GetMapping("")
     @ResponseBody
     @ApiOperation(value="List all Kafka id")
     public List<Integer> list() {
@@ -139,10 +139,28 @@ public class KafkaController {
             retString.add(k.getId());
         }
         return retString;
-    }
+    }*/
 
+    @GetMapping("")
+    @ResponseBody
+    @ApiOperation(value="List all Kafkas")
     public List<KafkaConfig> queryAllKafka(){
         return kafkaService.getAllKafka();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    @ApiOperation(value="Get detail of kafka by id")
+    public KafkaConfig getKafkaDetail(@PathVariable int id, HttpServletResponse response) throws IOException {
+        log.info("Get detail of kafka, ID: " + id);
+        Kafka oldKafka = kafkaService.getKafkaById(id);
+        if (oldKafka == null) {
+            sendError(response, 400, "kafka not found, ID: "+id);
+            return null;
+        } else {
+            log.info("ResponseBody......" + oldKafka.getKafkaConfig());
+            return oldKafka.getKafkaConfig();
+        }
     }
 
     private PostReturnBody<KafkaConfig> mkPostReturnBody(int statusCode, Kafka kafka) {
