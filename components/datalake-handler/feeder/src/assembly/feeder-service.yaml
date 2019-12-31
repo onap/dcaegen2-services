@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: datalake-feeder
+  namespace: onap
+spec:
+  selector:
+    app: datalake-feeder
+  ports:
+  - protocol: TCP
+    port: 1680
+    targetPort: 1680
+  type: NodePort
+ 
+    

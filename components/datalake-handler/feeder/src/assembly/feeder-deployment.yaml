@@ -1,0 +1,33 @@
+# sample yaml for k8s deployment. Change IPs with your env setup.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datalake-feeder
+  namespace: onap
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: datalake-feeder
+  template:
+    metadata:
+      labels:
+        app: datalake-feeder
+     
+    spec:    
+      containers:
+      - name: datalake-feeder
+        image: docker.io/moguobiao/datalake-feeder:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 1680
+ 
+      hostAliases:
+        - ip: "192.168.235.78"
+          hostnames:
+            - "dl-mongodb"
+            - "dl-presto"
+        - ip: "192.168.235.78"
+          hostnames:
+            - "dl-mariadb" 
+            - "dl-es"       
