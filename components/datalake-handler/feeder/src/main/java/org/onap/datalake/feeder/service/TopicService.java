@@ -101,6 +101,8 @@ public class TopicService {
 		return ret;
 	}
 
+	// for unique topic string, one can create multiple 'topic' in admin UI.
+	// for example, one 'topic' setting correlates events, and sends data to ES, another 'topic' sends data to HDFS without such setting
 	//TODO use query
 	public List<Topic> findTopics(Kafka kafka, String topicStr) {
 		List<Topic> ret = new ArrayList<>();
