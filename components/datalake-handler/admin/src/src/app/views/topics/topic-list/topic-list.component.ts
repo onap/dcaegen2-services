@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 QCT
+ * Copyright 2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,12 +29,7 @@ import { RestApiService } from "src/app/core/services/rest-api.service";
 import { Topic } from "src/app/core/models/topic.model";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 
-// modal
-import { TopicDetailModalComponent } from "./topic-detail-modal/topic-detail-modal.component";
-import { TopicConfigModalComponent } from "./topic-config-modal/topic-config-modal.component";
-import { NewTopicModelComponent } from "./new-topic-model/new-topic-model.component";
-
-// notify
+// Notify
 import { ToastrNotificationService } from "src/app/shared/components/toastr-notification/toastr-notification.service";
 
 // Loading spinner
@@ -43,7 +38,11 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { AlertComponent } from "src/app/shared/components/alert/alert.component";
 import { map, mergeMap } from "rxjs/operators";
 import { forkJoin, from } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+
+// Modal
+import { ModalComponent } from "src/app/shared/modules/modal/modal.component";
+import { ModalContentData } from "src/app/shared/modules/modal/modal.data";
+import { TopicModalComponent } from "src/app/views/topics/topic-list/topic-modal/topic-modal.component";
 
 @Component({
   selector: "app-topic-list",
@@ -52,8 +51,12 @@ import { HttpClient } from "@angular/common/http";
 })
 export class TopicListComponent {
   topics: Array<Topic> = []; // data of table
-  columns: Array<any> = []; // column of table
   t_temp: Array<Topic> = []; // cache for topics
+  t_default: Topic = new Topic();
+
+  columns: Array<any> = []; // column of table
+
+  @ViewChild("searchText") searchText: ElementRef;
 
   //TODO
   //tempTopicDetail: Topic; // temp for a topic
@@ -63,43 +66,44 @@ export class TopicListComponent {
     private restApiService: RestApiService,
     private modalService: NgbModal,
     private notificationService: ToastrNotificationService,
-    private spinner: NgxSpinnerService,
-    public http: HttpClient
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
-    //this.spinner.show();
+    this.spinner.show();
     let t_feeder: Array<Topic> = [];
-    let t_kafka: Object = {};
 
     const get_t_feeder = this.restApiService.getTopicList().pipe(
       mergeMap(ids => from(ids)),
       mergeMap(id => this.restApiService.getTopic(id)),
       map(t => {
         t.config = true;
+        t.countsDb.MONGO > 0
+          ? (t.countsMONGO = t.countsDb.MONGO)
+          : (t.countsMONGO = 0);
+        t.countsDb.DRUID > 0
+          ? (t.countsDRUID = t.countsDb.DRUID)
+          : (t.countsDRUID = 0);
+        t.countsDb.HDFS > 0
+          ? (t.countsHDFS = t.countsDb.HDFS)
+          : (t.countsHDFS = 0);
+        t.countsDb.ES > 0 ? (t.countsES = t.countsDb.ES) : (t.countsES = 0);
+        t.countsDb.CB > 0 ? (t.countsCB = t.countsDb.CB) : (t.countsCB = 0);
         t_feeder.push(t);
       })
     );
 
-    const get_t_kafka = this.restApiService.getAllKafkaList().pipe(
-      mergeMap(ids => from(ids)),
-      mergeMap(id =>
-        this.restApiService
-          .getTopicListFromKafka(id)
-          .pipe(map(t => (t_kafka[id] = t)))
-      )
-    );
-
     const get_t_default = this.restApiService.getTopicDefault();
 
-    forkJoin(get_t_feeder, get_t_kafka, get_t_default).subscribe(data => {
+    forkJoin(get_t_feeder, get_t_default).subscribe(data => {
       this.columns = this.initColumn();
-      this.topics = this.initRow(t_feeder, t_kafka, data[2]);
+      this.t_default = data[1];
+      this.topics = t_feeder;
       this.t_temp = [...this.topics];
-      // setTimeout(() => {
-      //   //this.spinner.hide();
-      //   this.loadingIndicator = false;
-      // }, 500);
+      this.updateFilter(this.searchText.nativeElement.value);
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 500);
     });
   }
 
@@ -115,53 +119,58 @@ export class TopicListComponent {
         icon: "status"
       },
       {
+        headerName: "ID",
+        width: "15",
+        sortable: true,
+        dataIndex: "id"
+      },
+      {
         headerName: "NAME",
         width: "420",
         sortable: true,
         dataIndex: "name"
       },
       {
-        headerName: "SETTING",
-        width: "30",
-        sortable: true,
-        dataIndex: "config",
-        icon: "check"
-      },
-      {
-        headerIcon: "assets/icons/kibana_able.svg",
+        headerIcon: "assets/icons/kafka_able.svg",
+        headerIconInfo: "Kafka",
         width: "10",
         sortable: true,
-        dataIndex: "kafkas"
+        dataIndex: "countsKafka"
       },
       {
         headerIcon: "assets/icons/couchbase_able.svg",
+        headerIconInfo: "Couchbase",
         width: "10",
         sortable: true,
-        dataIndex: "sinkdbs"
+        dataIndex: "countsCB"
       },
       {
         headerIcon: "assets/icons/druid_able.svg",
+        headerIconInfo: "Druid",
         width: "10",
         sortable: true,
-        dataIndex: "sinkdbs"
+        dataIndex: "countsDRUID"
       },
       {
         headerIcon: "assets/icons/elasticsearch_able.svg",
+        headerIconInfo: "Elasticsearch",
         width: "10",
         sortable: true,
-        dataIndex: "sinkdbs"
+        dataIndex: "countsES"
       },
       {
         headerIcon: "assets/icons/mongoDB_able.svg",
+        headerIconInfo: "MongoDB",
         width: "10",
         sortable: true,
-        dataIndex: "sinkdbs"
+        dataIndex: "countsMONGO"
       },
       {
         headerIcon: "assets/icons/hadoop_able.svg",
+        headerIconInfo: "Hadoop",
         width: "10",
         sortable: true,
-        dataIndex: "sinkdbs"
+        dataIndex: "countsHDFS"
       },
       {
         headerName: "TTL",
@@ -177,65 +186,150 @@ export class TopicListComponent {
         icon: "check"
       },
       {
-        width: "20",
-        iconButton: "cog"
+        width: "2",
+        iconButton: "cog",
+        action: "edit"
+      },
+      {
+        width: "2",
+        iconButton: "trash",
+        action: "delete"
       }
     ];
 
     return t_columns;
   }
 
-  initRow(t_feeder: Array<Topic>, t_kafka: Object, t_default: Topic) {
-    let t_topics: Array<Topic> = [];
+  btnTableAction(passValueArr: Array<any>) {
+    let action = passValueArr[0];
+    let id = passValueArr[1];
 
-    // Save topics which are already configured.
-    t_topics = t_feeder;
-
-    // Save the topic which is unconfigured yet.
-    Object.keys(t_kafka).forEach(k_id => {
-      Object.values(t_kafka[k_id]).forEach((k_t_name: string) => {
-        let found: Topic = t_feeder.find(
-          t =>
-            t.name == k_t_name &&
-            t.kafkas.map(ids => ids.toString()).includes(k_id)
-        );
-        if (!found) {
-          let seed: Topic;
-          seed = JSON.parse(JSON.stringify(t_default));
-          seed.id = null;
-          seed.name = k_t_name;
-          seed.kafkas = [];
-          seed.kafkas.push(k_id);
-          seed.config = false;
-          t_topics.push(seed);
-        }
-      });
-    });
-
-    return t_topics;
-  }
-
-  buttonAction(string: string = "") {
-    switch (string) {
-      case "new":
-        // Open new topic modal
-        console.log("new modal");
-        break;
+    switch (action) {
       case "edit":
-        // Open edit of topic modal
-        console.log("edit modal");
+        this.openModal("edit", id);
         break;
-      case "default":
-        // Open default config of topic modal
-        console.log("default modal");
-        break;
-      default:
-        this.notificationService.success(string + " action successful!");
+      case "delete":
+        const modalRef = this.modalService.open(AlertComponent, {
+          size: "sm",
+          centered: true,
+          backdrop: "static"
+        });
+        modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
+        modalRef.componentInstance.passEntry.subscribe(recevicedEntry => {
+          this.restApiService.deleteTopic(id).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_DELETED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
+          modalRef.close();
+        });
         break;
     }
   }
 
-  updateFilter(searchValue) {
+  openModal(mode: string = "", t_id: number | string) {
+    const modalRef = this.modalService.open(ModalComponent, {
+      size: "lg",
+      centered: true,
+      backdrop: "static"
+    });
+
+    switch (mode) {
+      case "new":
+        // Open new modal for topic
+        let newTopic: Topic;
+        newTopic = Object.assign({}, this.t_default);
+        newTopic.id = null;
+        newTopic.name = "";
+        let componentNew = new ModalContentData(TopicModalComponent, newTopic);
+
+        modalRef.componentInstance.title = "NEW_TOPIC";
+        modalRef.componentInstance.notice = "TOPIC_NEW_NOTICE";
+        modalRef.componentInstance.mode = "new";
+        modalRef.componentInstance.component = componentNew;
+
+        modalRef.componentInstance.passEntry.subscribe((data: Topic) => {
+          newTopic = Object.assign({}, data);
+          this.restApiService.addTopic(newTopic).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_CREARED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
+          modalRef.close();
+        });
+        break;
+      case "edit":
+        // Open edit modal for topic
+        let index: number = this.topics.findIndex(t => t.id === t_id);
+        let editTopic: Topic = this.topics[index];
+        let componentEdit = new ModalContentData(
+          TopicModalComponent,
+          editTopic
+        );
+
+        modalRef.componentInstance.title = editTopic.name;
+        modalRef.componentInstance.notice = "";
+        modalRef.componentInstance.mode = "edit";
+        modalRef.componentInstance.component = componentEdit;
+
+        modalRef.componentInstance.passEntry.subscribe((data: Topic) => {
+          editTopic = Object.assign({}, data);
+          this.restApiService.updateTopic(editTopic).subscribe(
+            res => {
+              // this.topics[index] = editTopic;
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_UPDATED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
+          modalRef.close();
+        });
+        break;
+      case "default":
+        // Open default config modal for topic
+        let componentDefault = new ModalContentData(
+          TopicModalComponent,
+          this.t_default
+        );
+
+        modalRef.componentInstance.title = "DEFAULT_CONFIGURATIONS";
+        modalRef.componentInstance.notice = "TOPIC_DEFAULT_CONF_NOTICE";
+        modalRef.componentInstance.mode = "edit";
+        modalRef.componentInstance.component = componentDefault;
+
+        modalRef.componentInstance.passEntry.subscribe((data: Topic) => {
+          this.t_default = Object.assign({}, data);
+          this.restApiService.updateTopic(this.t_default).subscribe(
+            res => {
+              this.notificationService.success("SUCCESSFULLY_UPDATED");
+            },
+            err => {
+              this.notificationService.error("FAILED_UPDATED");
+            }
+          );
+          modalRef.close();
+        });
+        break;
+    }
+  }
+
+  updateFilter(searchValue: string) {
     const val = searchValue.toLowerCase();
 
     // filter our data
@@ -246,266 +340,4 @@ export class TopicListComponent {
     // update the rows
     this.topics = temp;
   }
-
-  // async initData() {
-  //   this.topicListFeeder = [];
-  //   this.topicListFeeder = await this.getTopicList("feeder");
-
-  //   //this.topicDefaultConfig = new Topic();
-  //   this.topicDefaultConfig = await this.getTopicDefaultConfig();
-
-  //   return true;
-  // }
-
-  // getTopicList(type: string) {
-  //   var data: any;
-
-  //   switch (type) {
-  //     case "feeder": {
-  //       data = this.restApiService.getTopicsFromFeeder().toPromise();
-  //       break;
-  //     }
-  //   }
-  //   return data;
-  // }
-
-  // getTopicDefaultConfig() {
-  //   return this.restApiService.getTopicDefaultConfig().toPromise();
-  // }
-
-  // async initTopicList(dmaapList: [], feederList: []) {
-  //   // var t: Topic[] = [];
-  //   // // dmaap has no topics, only show topic in db
-  //   // for (var i = 0; i < feederList.length; i++) {
-  //   //   let data = await this.getTopicDetail(feederList[i]);
-  //   //   let dbinfo = [];
-  //   //   var totalCB = 0;
-  //   //   var totalDRUID = 0;
-  //   //   var totalES = 0;
-  //   //   var totalHDFS = 0;
-  //   //   var totalMONGO = 0;
-  //   //   for (var x = 0; x < data.enabledSinkdbs.length; x++) {
-  //   //     let dbdata = await this.getDbDetail(data.enabledSinkdbs[x]);
-  //   //     dbinfo.push(dbdata);
-  //   //     if (dbinfo != undefined && dbinfo[x].type == "CB") {
-  //   //       totalCB = totalCB + 1;
-  //   //     } if (dbinfo != undefined && dbinfo[x].type == "DRUID") {
-  //   //       totalDRUID = totalDRUID + 1;
-  //   //     } if (dbinfo != undefined && dbinfo[x].type == "ES") {
-  //   //       totalES = totalES + 1;
-  //   //     } if (dbinfo != undefined && dbinfo[x].type == "HDFS") {
-  //   //       totalHDFS = totalHDFS + 1;
-  //   //     } if (dbinfo != undefined && dbinfo[x].type == "MONGO") {
-  //   //       totalMONGO = totalMONGO + 1;
-  //   //     }
-  //   //   }
-  //   //   let feed = {
-  //   //     name: data.name,
-  //   //     login: data.login,
-  //   //     password: data.password,
-  //   //     enabledSinkdbs: data.enabledSinkdbs,
-  //   //     sinkdbs: data.sinkdbs,
-  //   //     enabled: data.enabled,
-  //   //     saveRaw: data.saveRaw,
-  //   //     dataFormat: data.dataFormat,
-  //   //     ttl: data.ttl,
-  //   //     correlateClearedMessage: data.correlateClearedMessage,
-  //   //     messageIdPath: data.messageIdPath,
-  //   //     kafkas: data.kafkas.length,
-  //   //     type: data.type,
-  //   //     CB: totalCB,
-  //   //     DRUID: totalDRUID,
-  //   //     ES: totalES,
-  //   //     HDFS: totalHDFS,
-  //   //     MONGO: totalMONGO
-  //   //   };
-  //   //   t.push(feed);
-  //   // }
-  //   // return t;
-  // }
-
-  // onActivate(event) {
-  //   const emitType = event.type;
-  //   if (emitType == "dblclick") {
-  //     console.log("Activate Event", event);
-  //     let name = event.row.name;
-  //     this.openTopicModal(name);
-  //   }
-  // }
-
-  // openNewTopicModal() {
-  //   const modalRef = this.modalService.open(NewTopicModelComponent, {
-  //     size: "lg",
-  //     centered: true
-  //   });
-  //   modalRef.componentInstance.newTopic = this.tempNewTopic;
-  //   modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-  //     console.log(receivedEntry, "newtopic receivedEntry");
-  //     this.tempNewTopic = receivedEntry;
-  //     this.restApiService.addNewTopic(this.tempNewTopic).subscribe(
-  //       res => {
-  //         this.init();
-  //         this.notificationService.success("SUCCESSFULLY_CREARED");
-  //         modalRef.close();
-  //         this.updateFilter(this.searchText.nativeElement.value);
-  //       },
-  //       err => {
-  //         this.notificationService.error(err);
-  //         modalRef.close();
-  //         this.updateFilter(this.searchText.nativeElement.value);
-  //       }
-  //     );
-  //   });
-  // }
-
-  // openTopicModal(name: string) {
-  //   if (name == "config") {
-  //     const modalRef = this.modalService.open(TopicConfigModalComponent, {
-  //       windowClass: "dl-md-modal",
-  //       centered: true
-  //     });
-  //     modalRef.componentInstance.title = "Topics Default Configurations";
-  //     modalRef.componentInstance.topic = this.topicDefaultConfig;
-  //     modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-  //       this.restApiService
-  //         .updateTopicDefaultConfig(this.topicDefaultConfig)
-  //         .subscribe(
-  //           res => {
-  //             this.topicDefaultConfig = receivedEntry;
-  //             this.topics.forEach(t => {
-  //               if (!t.type) {
-  //                 // Unconfigure topics
-  //                 t.login = this.topicDefaultConfig.login;
-  //                 t.password = this.topicDefaultConfig.password;
-  //                 t.enabledSinkdbs = this.topicDefaultConfig.enabledSinkdbs;
-  //                 // t.sinkdbs = this.topicDefaultConfig.sinkdbs; //todo
-  //                 t.enabled = this.topicDefaultConfig.enabled;
-  //                 t.saveRaw = this.topicDefaultConfig.saveRaw;
-  //                 t.dataFormat = this.topicDefaultConfig.dataFormat;
-  //                 t.ttl = this.topicDefaultConfig.ttl;
-  //                 t.correlateClearedMessage = this.topicDefaultConfig.correlateClearedMessage;
-  //                 t.messageIdPath = this.topicDefaultConfig.messageIdPath;
-  //               }
-  //             });
-  //             this.notificationService.success("Success updated.");
-  //             modalRef.close();
-  //           },
-  //           err => {
-  //             this.notificationService.error(err);
-  //             modalRef.close();
-  //           }
-  //         );
-  //     });
-  //   } else {
-  //     const index = this.temp.findIndex(t => t.name === name);
-  //     const modalRef = this.modalService.open(TopicDetailModalComponent, {
-  //       size: "lg",
-  //       centered: true
-  //     });
-  //     modalRef.componentInstance.topic = this.temp[index];
-  //     modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-  //       this.tempTopicDetail = receivedEntry;
-  //       // Configured topic
-  //       if (this.tempTopicDetail.type) {
-  //         this.restApiService.getTopicsFromFeeder().subscribe(
-  //           res => {
-  //             if (res.find(name => name === this.tempTopicDetail.name)) {
-  //               // Update topic from db
-  //               this.restApiService.upadteTopic(this.tempTopicDetail).subscribe(
-  //                 res => {
-  //                   this.temp[index] = this.tempTopicDetail;
-  //                   this.topics = this.temp;
-  //                   this.notificationService.success("SUCCESSFULLY_UPDATED");
-  //                   modalRef.close();
-  //                   this.updateFilter(this.searchText.nativeElement.value);
-  //                 },
-  //                 err => {
-  //                   this.notificationService.error(err);
-  //                   modalRef.close();
-  //                   this.updateFilter(this.searchText.nativeElement.value);
-  //                 }
-  //               );
-  //             } else {
-  //               // Insert topic from db
-  //               this.restApiService.addTopic(this.tempTopicDetail).subscribe(
-  //                 res => {
-  //                   this.init();
-  //                   this.notificationService.success("SUCCESSFULLY_CREARED");
-  //                   modalRef.close();
-  //                   this.updateFilter(this.searchText.nativeElement.value);
-  //                 },
-  //                 err => {
-  //                   this.notificationService.error(err);
-  //                   modalRef.close();
-  //                   this.updateFilter(this.searchText.nativeElement.value);
-  //                 }
-  //               );
-  //             }
-  //           },
-  //           err => {
-  //             this.notificationService.error(err);
-  //             modalRef.close();
-  //           }
-  //         );
-  //       } else {
-  //         // Reset to default and delete topic from db
-  //         this.restApiService.deleteTopic(this.tempTopicDetail.name).subscribe(
-  //           res => {
-  //             this.init();
-  //             this.notificationService.success("SUCCESSFULLY_DELETED");
-  //             modalRef.close();
-  //             this.updateFilter(this.searchText.nativeElement.value);
-  //           },
-  //           err => {
-  //             this.notificationService.error(err);
-  //             modalRef.close();
-  //             this.updateFilter(this.searchText.nativeElement.value);
-  //           }
-  //         );
-  //       }
-  //     });
-  //   }
-  // }
-
-  // deleteTopicModal(name: string) {
-  //   const index = this.temp.findIndex(t => t.name === name);
-  //   const modalRef = this.modalService.open(AlertComponent, {
-  //     size: "sm",
-  //     centered: true
-  //   });
-  //   modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
-  //   console.log(this.temp[index]);
-  //   modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-  //     this.restApiService.deleteTopic(this.temp[index].name).subscribe(
-  //       res => {
-  //         this.init();
-  //         this.notificationService.success("SUCCESSFULLY_DELETED");
-  //         modalRef.close();
-  //         this.updateFilter(this.searchText.nativeElement.value);
-  //       },
-  //       err => {
-  //         this.notificationService.error(err);
-  //         modalRef.close();
-  //         this.updateFilter(this.searchText.nativeElement.value);
-  //       }
-  //     );
-  //   });
-  // }
-
-  // getTopicDetail(id) {
-  //   return this.restApiService.getTopicDetail(id).toPromise();
-  // }
-
-  // getDbDetail(id) {
-  //   return this.restApiService.getDbDetail(id).toPromise();
-  // }
-
-  // GroupByDbType = (array, key) => {
-  //   return array.reduce((result, currentValue) => {
-  //     (result[currentValue.type] = result[currentValue.type] || []).push(
-  //       currentValue
-  //     );
-  //     return result;
-  //   }, {});
-  // };
 }

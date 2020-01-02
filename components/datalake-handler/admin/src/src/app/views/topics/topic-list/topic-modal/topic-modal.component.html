@@ -1,0 +1,213 @@
+<!--
+============LICENSE_START=======================================================
+ONAP : DataLake
+================================================================================
+Copyright 2020 QCT
+=================================================================================
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+============LICENSE_END=========================================================
+-->
+
+<mat-tab-group #tabRef [selectedIndex]="this.selectedIndex" (click)="this.onClickMatTab(tabRef.selectedIndex)"
+  mat-align-tabs="center">
+  <mat-tab label="Information">
+    <div class="container p-4">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="dl-emphasis1">{{ "NAME" | translate }}</label>
+          </div>
+          <div class="col-md-6">
+            <label class="dl-emphasis1">{{ "STATUS" | translate }}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <!-- For new topic -->
+            <div *ngIf="isAddingMode()">
+              <input id="tname" type="text" class="form-control dl-input-text" [(ngModel)]="this.data.name"
+                [ngbTypeahead]="search" (focus)="focus$.next($event.target.value)"
+                (click)="click$.next($event.target.value)" #instance="ngbTypeahead" />
+            </div>
+            <!-- For modified topic -->
+            <div *ngIf="!isAddingMode()">
+              <input [(ngModel)]="this.data.name" [disabled]="true" class="form-control dl-input-text" type="text" />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="dl-switch">
+              <input id="switch" type="checkbox" [(ngModel)]="this.data.enabled" />
+              <span class="dl-slider round"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="dl-emphasis1">{{ "DATA_FORMAT" | translate }}</label>
+          </div>
+          <div class="col-md-6">
+            <label class="dl-emphasis1">{{ "TTL" | translate }} (days)</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <select [(ngModel)]="this.data.dataFormat" class="custom-select dl-input-text">
+              <option *ngFor="let item of dataFormats" [selected]="item == this.data.dataFormat">
+                {{ item }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <input [(ngModel)]="this.data.ttl" class="form-control dl-input-text" type="text" placeholder="3650"
+              (input)="this.adminService.onKeyPressNumber($event)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="dl-emphasis1">{{
+              "SAVE_RAW_DATA" | translate
+            }}</label>
+          </div>
+          <div class="col-md-6">
+            <label class="dl-emphasis1">{{
+              "CORRELATE_CLEARED_MESSAGE" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text dl-input-chk-label">
+                  <input [(ngModel)]="this.data.saveRaw" id="chkSaveRaw" type="checkbox" />
+                  <span class="dl-input-checkmark"></span>
+                </label>
+              </div>
+              <label class="form-control dl-input-chk" for="chkSaveRaw">
+                Save
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <label class="input-group-text dl-input-chk-label">
+                  <input [(ngModel)]="this.data.correlateClearedMessage" id="chkMsg" type="checkbox" />
+                  <span class="dl-input-checkmark"></span>
+                </label>
+              </div>
+              <label class="form-control dl-input-chk" for="chkMsg">
+                Correlate
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="dl-emphasis1">{{
+              "ID_EXTRACTION" | translate
+            }}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-9">
+            <div class="d-flex row align-items-center" *ngFor="let field of idExFields; let i = index">
+              <div class="col-md-8 order-1">
+                <input [(ngModel)]="field.item" class="form-control dl-input-text" placeholder="/event-header/id"
+                  type="text" [value]="field.item" (change)="onChangeSaveIdField()" />
+              </div>
+              <div class="order-2">
+                <button type="button" class="btn dl-icon-enable p-2" (click)="onClickAddIdField(i)">
+                  <i class="fa fa-plus fa-xs" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="order-3">
+                <button type="button" class="btn dl-icon-enable p-2" (click)="onClickDelIdField(i)">
+                  <i class="fa fa-trash fa-xs" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Kafka">
+    <div class="container p-4">
+      <div class="form-group" *ngFor="let item of this.kafkas; let i = index">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="input-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text dl-input-chk-label">
+                    <input id="chkSaveRaw{{ i }}" [(ngModel)]="item.checkedToSave" type="checkbox" (change)="
+                        this.onChabgeSelKafka($event.target.checked, item.id)
+                      " />
+                    <span class="dl-input-checkmark"></span>
+                  </label>
+                </div>
+                <label class="form-control dl-input-chk" for="chkSaveRaw{{ i }}">
+                  {{ item.name }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Sink">
+    <div class="container p-4">
+      <div class="form-group" *ngFor="let dbType of this.dbTypeIds">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="dl-emphasis1">{{ dbType }}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngFor="let db of this.dbs; let i = index">
+          <div class="col-md-6 p-1" *ngIf="db.dbTypeId == dbType">
+            <div class="input-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <label class="input-group-text dl-input-chk-label">
+                    <input id="chkSaveRaw{{ i }}" [(ngModel)]="db.checkedToSave" type="checkbox" (change)="
+                        this.onChabgeSelDb($event.target.checked, db.id)
+                      " />
+                    <span class="dl-input-checkmark"></span>
+                  </label>
+                </div>
+                <label class="form-control dl-input-chk" for="chkSaveRaw{{ i }}">
+                  {{ db.name }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

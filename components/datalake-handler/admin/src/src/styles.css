@@ -2,7 +2,7 @@
 * ============LICENSE_START=======================================================
 * ONAP : DataLake
 * ================================================================================
-* Copyright 2019 QCT
+* Copyright 2020 QCT
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -24,6 +24,8 @@
  * @author Ekko Chang
  *
  */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html {
   height: 100%;
@@ -233,6 +235,16 @@ hr {
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager .datatable-icon-right,
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager .datatable-icon-prev {
   line-height: 27px;
+}
+
+/* override mat-tab active color*/
+.mat-tab-label-active {
+  color: #5dbebb;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background: #5dbebb;
 }
 
 .dl-icon-enable {
@@ -642,18 +654,30 @@ ngb-modal-window.templatess .modal-dialog-centered {
   color: #BDBEC0
 }
 
+/* placeholder */
 input::-webkit-input-placeholder {
-  color: #313032 !important;
+  color: #c1bdc5 !important;
+  opacity: 1;
 }
 
 :-moz-placeholder {
-  color: #313032 !important;
+  color: #c1bdc5 !important;
+  opacity: 1;
 }
 
 ::-moz-placeholder {
-  color: #313032 !important;
+  color: #c1bdc5 !important;
+  opacity: 1;
 }
 
 :-ms-input-placeholder {
-  color: #313032 !important;
+  color: #c1bdc5 !important;
+  opacity: 1;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #c1bdc5;
+  opacity: 1;
+  /* Firefox */
 }
