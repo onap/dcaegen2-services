@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 QCT
+ * Copyright 2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,4 +35,6 @@ export class Db {
   login: string;
   pass: string;
   dbTypeId: string;
+  // for UI display
+  checkedToSave: boolean;
 }
