@@ -29,4 +29,6 @@ export class Kafka {
   excludedTopic: string;
   consumerCount: number;
   timeout: number;
+  // for UI display
+  checkedToSave: boolean;
 }

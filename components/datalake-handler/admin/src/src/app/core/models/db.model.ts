@@ -35,4 +35,6 @@ export class Db {
   login: string;
   pass: string;
   dbTypeId: string;
+  // for UI display
+  checkedToSave: boolean;
 }

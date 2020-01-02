@@ -34,22 +34,28 @@ export class TableComponent implements OnInit {
     }, 500);
   }
 
-  tableAction(event: any, actionId: number) {
-    console.log("action id: " + actionId);
-    console.log("edit: " + event.row.id);
+  tableAction(action: string, id: number | string) {
     let passValueArr: Array<any> = [];
-    passValueArr.push(event);
-    passValueArr.push(actionId);
+    passValueArr.push(action);
+    passValueArr.push(id);
+
+    // array[0] for action
+    // array[1] for value
+    console.log("tableAction");
     this.btnTableAction.emit(passValueArr);
   }
 
   rowOnActivate(event: any) {
     const emitType = event.type;
+
     if (emitType == "dblclick") {
-      console.log("Activate Event", event);
-      let name = event.row.id;
-      // this.openTopicModal(name);
-      console.log("row name: " + name);
+      let passValueArr: Array<any> = [];
+      passValueArr.push("edit");
+      passValueArr.push(event.row.id);
+
+      // // array[0] for action
+      // // array[1] for value
+      this.btnTableAction.emit(passValueArr);
     }
   }
 }

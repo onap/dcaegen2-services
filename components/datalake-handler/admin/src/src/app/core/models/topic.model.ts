@@ -41,50 +41,21 @@ export class Topic {
   public flattenArrayPath: string;
   public enbabledKafkas: Array<string>;
   public kafkas: Array<string>;
+  public countsDb: CountsDb;
+  public countsKafka: number;
   // properties only for UI
   public config: boolean; //true: Configure, otherwise false: Unconfiure
-  public kafkaName: string;
-  public countCouchbase: number;
-  public countDruid: number;
-  public countEs: number;
-  public countMongo: number;
-  public countHadoop: number;
+  public countsMONGO: number;
+  public countsDRUID: number;
+  public countsHDFS: number;
+  public countsES: number;
+  public countsCB: number;
+}
 
-  constructor(
-    id: number,
-    name: string,
-    login: string,
-    password: string,
-    enabledSinkdbs: Array<string>,
-    sinkdbs: Array<string>,
-    enabled: boolean,
-    saveRaw: boolean,
-    dataFormat: string,
-    ttl: number,
-    correlateClearedMessage: boolean,
-    messageIdPath: string,
-    aggregateArrayPath: string,
-    flattenArrayPath: string,
-    enbabledKafkas: Array<string>,
-    kafkas: Array<string>,
-    config: boolean
-  ) {
-    this.id = id;
-    this.name = name;
-    this.login = login;
-    this.password = password;
-    this.enabledSinkdbs = enabledSinkdbs;
-    this.sinkdbs = sinkdbs;
-    this.enabled = enabled;
-    this.saveRaw = saveRaw;
-    this.dataFormat = dataFormat;
-    this.ttl = ttl;
-    this.correlateClearedMessage = correlateClearedMessage;
-    this.messageIdPath = messageIdPath;
-    this.aggregateArrayPath = aggregateArrayPath;
-    this.flattenArrayPath = flattenArrayPath;
-    this.enbabledKafkas = enbabledKafkas;
-    this.kafkas = kafkas;
-    this.config = config;
-  }
+class CountsDb {
+  MONGO: number;
+  DRUID: number;
+  HDFS: number;
+  ES: number;
+  CB: number;
 }

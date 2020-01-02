@@ -25,27 +25,20 @@ limitations under the License.
     <div class="container-fluid">
 
       <!-- Page Title -->
-      <div class="row">
-        <div class="col-md-12">
-          <label *ngIf="this.contentComponent.data.state == 'edit'" class="dl-h3">Edit&nbsp;</label>
-          <label class="dl-h3">{{ this.contentComponent.data.title | translate }}</label>
-        </div>
-      </div>
+      <label class="modal-title dl-h3">{{ this.title | translate }}</label>
       <!-- Page Title End -->
 
       <div class="row">
         <div class="col-md-12">
           <hr />
         </div>
-
         <!-- Notice -->
-        <div *ngIf="this.contentComponent.data.notice" class="col-md-12">
+        <div *ngIf="this.notice" class="col-md-12">
           <div class="dl-notice">
-            {{ this.contentComponent.data.notice | translate}}
+            {{ this.notice | translate }}
           </div>
         </div>
         <!-- Notice End -->
-
       </div>
 
     </div>
@@ -63,7 +56,6 @@ limitations under the License.
         </div>
       </div>
       <!-- Modal Content End -->
-
     </div>
   </div>
   <!-- Modal Body End -->
@@ -75,19 +67,15 @@ limitations under the License.
         <div class="col-md-12">
           <div class="d-flex justify-content-end">
             <div class="p-1">
-              <span>
-                <app-button *ngIf="this.contentComponent.data.state == 'new'" [text]="'Next'" [style]="'inline'"
-                  [color]="'dark'" (click)="this.nextPage()"></app-button>
-                <app-button *ngIf="this.contentComponent.data.state == 'edit'" [text]="'Save'" [style]="'inline'"
-                  [color]="'dark'" (click)="this.passBack()"></app-button>
-              </span>
+              <!-- <app-button *ngIf="this.mode == 'new'" [text]="'Next'" [style]="'inline'" [color]="'dark'"
+                (click)="this.nextPage()"></app-button> -->
+              <!-- <app-button *ngIf="this.mode == 'edit'" [text]="'Save'" [style]="'inline'" [color]="'dark'"
+                (click)="this.passBack()"></app-button> -->
+              <app-button [text]="'Save'" [style]="'inline'" [color]="'dark'" (click)="this.passBack()"></app-button>
             </div>
-
             <div class="p-1">
-              <span>
-                <app-button [text]="'Cancel'" [style]="'inline'" [color]="'light'"
-                  (click)="activeModal.close('Close click')"></app-button>
-              </span>
+              <app-button [text]="'Cancel'" [style]="'inline'" [color]="'light'"
+                (click)="activeModal.close('Close click')"></app-button>
             </div>
           </div>
         </div>
