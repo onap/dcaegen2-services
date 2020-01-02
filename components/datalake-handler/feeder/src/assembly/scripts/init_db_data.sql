@@ -18,6 +18,8 @@
 * ============LICENSE_END=========================================================
 */
 
+use datalake;
+
 INSERT INTO datalake.kafka(
    id
   ,name
