@@ -1,11 +1,11 @@
 {
   "SIDEBAR": {
-    "FEEDER": "DataLake Feeder",
-    "KAFKA":"Kafka",
+    "FEDDFER": "DataLake Feeder",
+    "KAFKA": "卡夫卡",
     "TOPICS": "Topics",
     "DATABASE": "Database",
-    "DASHBOARD": "工具設置",
-    "DASHBOARDLIST": "工具",
+    "DASHBOARD": "儀表板設置",
+    "DASHBOARDLIST": "儀表板",
     "TEMPLATE": "模板",
     "ABOUT": "About"
   },
@@ -35,6 +35,7 @@
   "ERROR_CODE": "錯誤代碼",
   "SUCCESS_UPDATED": "更新成功​",
   "TOPIC_DEFAULT_CONF_NOTICE": "注意：此Topic目前使用預設配置。​",
+  "TOPIC_NEW_NOTICE": "注意：一個新Topic將會被新增",
   "HOME": "首頁",
   "ConfigDashboard": "配置儀表板",
   "EDIT": "編輯",

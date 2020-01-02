@@ -27,5 +27,11 @@
 import { Type } from "@angular/core";
 
 export class ModalContentData {
-  constructor(public component: Type<any>, public data: any) {}
+  public modalComponent: Type<any>;
+  public data: any;
+
+  constructor(modalComponent: Type<any>, data: any) {
+    this.modalComponent = modalComponent;
+    this.data = data;
+  }
 }

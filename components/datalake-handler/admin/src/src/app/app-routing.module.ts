@@ -28,15 +28,15 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
 //test components for module testing
-import { TestComponent } from './views/test/test.component';
+import { TestComponent } from "./views/test/test.component";
 
 import { FeederComponent } from "./views/feeder/feeder.component";
 import { KafkaComponent } from "./views/kafka/kafka.component";
 import { TopicsComponent } from "./views/topics/topics.component";
 import { DatabaseComponent } from "./views/database/database.component";
 import { AboutComponent } from "./views/about/about.component";
-import { TemplateComponent } from './views/dashboard-setting/template/template.component';
-import {ToolsComponent} from "./views/tools/tools.component";
+import { TemplateComponent } from "./views/dashboard-setting/template/template.component";
+import { ToolsComponent } from "./views/tools/tools.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/feeder", pathMatch: "full" },
@@ -46,8 +46,8 @@ const routes: Routes = [
   { path: "topics", component: TopicsComponent },
   { path: "database", component: DatabaseComponent },
   { path: "about", component: AboutComponent },
-  { path: 'tools', component: ToolsComponent },
-  { path: 'dashboard-setting/template', component: TemplateComponent },
+  { path: "tools", component: ToolsComponent },
+  { path: "dashboard-setting/template", component: TemplateComponent }
 ];
 
 @NgModule({
@@ -58,4 +58,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
