@@ -1,0 +1,147 @@
+{
+  "self": {
+    "name": "docker.datalake",
+    "version": "1.0.0",
+    "description": "Datalake Docker",
+    "component_type": "docker"
+  },
+  "streams": {
+    "subscribes": [
+    
+    ],
+    "publishes": [
+      
+    ]
+  },
+  "services": {
+    "calls": [
+    ],
+    "provides": []
+  },
+  "auxilary": {
+    "healthcheck": {
+      "type": "http",
+      "interval": "30s",
+      "timeout": "10s",
+      "endpoint": "actuator/health"
+    }
+  },
+  "artifacts": [
+    {
+      "uri": "registry.hub.docker.com/mizunoami123/datalake-feeder",
+      "type": "docker image"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "spring.datasource.url",
+      "value": "jdbc:mariadb://dl-mariadb:3306/datalake?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8",
+      "description": "Maria DB URL",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "spring.datasource.username",
+      "value": "dl",
+      "description": "Maria DB User name",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "spring.datasource.password",
+      "value": "dl1234",
+      "description": "Maria DB User name",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "dmaapZookeeperHostPort",
+      "value": "message-router-zookeeper:2181",
+      "description": "DMaaP zookeeper URL fqdn:port",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "dmaapKafkaHostPort",
+      "value": "message-router-kafka:9092",
+      "description": "Kafka URL fqdn:9092",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "dmaapKafkaGroup",
+      "value": "dlgroup44",
+      "description": "Kafka group name",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "couchbaseURL",
+      "value": "172.30.1.74:8093",
+      "description": "Couchbase URL fqdn:port",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "mariadbURL",
+      "value": "172.30.1.74:3306",
+      "description": "MariaDB URL fqdn:port",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "mongoDBURL",
+      "value": "172.30.1.74:27017",
+      "description": "MongoDB URL fqdn:port",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "hdfsURL",
+      "value": "172.30.1.74:8020",
+      "description": "HDFS URL fqdn:port",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "esURL",
+      "value": "172.30.1.74:9200",
+      "description": "Elasticsearch URL fqdn:port",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    }
+  ]
+}
