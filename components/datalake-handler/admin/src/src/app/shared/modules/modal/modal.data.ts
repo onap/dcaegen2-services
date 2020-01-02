@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 QCT
+ * Copyright 2019 - 2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,5 +27,11 @@
 import { Type } from "@angular/core";
 
 export class ModalContentData {
-  constructor(public component: Type<any>, public data: any) {}
+  public modalComponent: Type<any>;
+  public data: any;
+
+  constructor(modalComponent: Type<any>, data: any) {
+    this.modalComponent = modalComponent;
+    this.data = data;
+  }
 }

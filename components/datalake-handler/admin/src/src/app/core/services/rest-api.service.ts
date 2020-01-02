@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 QCT
+ * Copyright 2019 - 2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,7 +77,7 @@ export class RestApiService {
   }
 
   /*
-    Topic default config
+    Topics
   */
   public getTopicDefault(): Observable<Topic> {
     return this.http
@@ -85,19 +85,6 @@ export class RestApiService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  // updateTopicDefaultConfig(t: Topic): Observable<any> {
-  //   return this.http
-  //     .put(prefix + "topics/_DL_DEFAULT_", JSON.stringify(t), httpOptions)
-  //     .pipe(
-  //       retry(1),
-  //       tap(_ => this.extractData),
-  //       catchError(this.handleError)
-  //     );
-  // }
-
-  /*
-    Topics
-  */
   public getTopicList(): Observable<string[]> {
     return this.http
       .get<string[]>(prefix + "topics")
@@ -110,10 +97,41 @@ export class RestApiService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  public getTopic(id: string): Observable<Topic> {
+  // Get topic names for adding
+  public getTopicNames(): Observable<string[]> {
+    return this.http
+      .get<string[]>(prefix + "topicNames")
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  public getTopic(id: string | number): Observable<Topic> {
     return this.http
       .get<Topic>(prefix + "topics/" + id)
       .pipe(retry(1), catchError(this.handleError));
+  }
+
+  public updateTopic(t: Topic): Observable<Topic> {
+    return this.http.put<Topic>(prefix + "topics/" + t.id, t).pipe(
+      retry(1),
+      tap(_ => this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  public addTopic(t: Topic): Observable<Topic> {
+    return this.http.post<Topic>(prefix + "topics", t).pipe(
+      retry(1),
+      tap(_ => console.log(`add topic name=${t.name}`)),
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteTopic(id: number | string): Observable<Topic> {
+    return this.http.delete<Topic>(prefix + "topics/" + id).pipe(
+      retry(1),
+      tap(_ => console.log(`deleted topic name=${name}`)),
+      catchError(this.handleError)
+    );
   }
 
   // TODO
@@ -123,41 +141,15 @@ export class RestApiService {
       .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
 
-  // addNewTopic(t: Topic): Observable<any> {
-  //   return this.http.post<any>(prefix + "topics", t).pipe(
-  //     retry(1),
-  //     tap(_ => console.log(`add topic name=${t.name}`)),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  // addTopic(t: Topic): Observable<any> {
-  //   return this.http.post<any>(prefix + "topics", t).pipe(
-  //     retry(1),
-  //     tap(_ => console.log(`add topic name=${t.name}`)),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  // upadteTopic(t: Topic): Observable<any> {
-  //   return this.http.put(prefix + "topics/" + t.name, t).pipe(
-  //     retry(1),
-  //     tap(_ => this.extractData),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  // deleteTopic(name: string): Observable<any> {
-  //   return this.http.delete(prefix + "topics/" + name).pipe(
-  //     retry(1),
-  //     tap(_ => console.log(`deleted topic name=${name}`)),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
   /*
     Database
   */
+  public getAllDbs(): Observable<Db[]> {
+    return this.http
+      .get<Db[]>(prefix + "dbs/list?isDb=true")
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
   getDbEncryptList(flag): Observable<any> {
     return this.http
       .get(prefix + "dbs/list?tool=" + flag)
@@ -201,6 +193,7 @@ export class RestApiService {
     );
   }
 
+  // Deprecated
   getDbTypeList(): Observable<any> {
     return this.http
       .get(prefix + "db_type")
@@ -233,8 +226,8 @@ export class RestApiService {
   }
 
   /*
-Dashboard
-*/
+  Dashboard
+  */
   getDashboardList(): Observable<any> {
     let url = prefix + "portals"; //onilne
     return this.http
@@ -263,7 +256,7 @@ Dashboard
 
   /*
   Template
-*/
+  */
   getTemplateAll(): Observable<any> {
     return this.http.get(prefix + "designs/").pipe(
       //onlin
@@ -332,17 +325,23 @@ Dashboard
   }
 
   /*
-  Kafka
-*/
-  public getAllKafkaList(): Observable<string[]> {
+    Kafka
+  */
+  public getAllKafka(): Observable<Kafka[]> {
     return this.http
-      .get<string[]>(prefix + "kafkas")
+      .get<Kafka[]>(prefix + "kafkas")
       .pipe(retry(1), catchError(this.handleError));
   }
 
   public getKafka(id: string | number): Observable<Kafka> {
     return this.http
       .get<Kafka>(prefix + "kafkas/" + id)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  getAllKafkaList(): Observable<any> {
+    return this.http
+      .get<any>(prefix + "kafkas")
       .pipe(retry(1), catchError(this.handleError));
   }
 

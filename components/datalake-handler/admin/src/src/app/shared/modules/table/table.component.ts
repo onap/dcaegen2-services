@@ -1,8 +1,30 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+/*
+ * ============LICENSE_START=======================================================
+ * ONAP : DataLake
+ * ================================================================================
+ * Copyright 2019 - 2020 QCT
+ *=================================================================================
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============LICENSE_END=========================================================
+ */
 
 /**
+ *
  * @contributor Chunmeng Guo
+ *
  */
+
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-table",
@@ -34,22 +56,28 @@ export class TableComponent implements OnInit {
     }, 500);
   }
 
-  tableAction(event: any, actionId: number) {
-    console.log("action id: " + actionId);
-    console.log("edit: " + event.row.id);
+  tableAction(action: string, id: number | string) {
     let passValueArr: Array<any> = [];
-    passValueArr.push(event);
-    passValueArr.push(actionId);
+    passValueArr.push(action);
+    passValueArr.push(id);
+
+    // array[0] for action
+    // array[1] for value
+    console.log("tableAction");
     this.btnTableAction.emit(passValueArr);
   }
 
   rowOnActivate(event: any) {
     const emitType = event.type;
+
     if (emitType == "dblclick") {
-      console.log("Activate Event", event);
-      let name = event.row.id;
-      // this.openTopicModal(name);
-      console.log("row name: " + name);
+      let passValueArr: Array<any> = [];
+      passValueArr.push("edit");
+      passValueArr.push(event.row.id);
+
+      // // array[0] for action
+      // // array[1] for value
+      this.btnTableAction.emit(passValueArr);
     }
   }
 }
