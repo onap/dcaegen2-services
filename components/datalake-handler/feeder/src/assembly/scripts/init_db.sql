@@ -18,7 +18,6 @@
 * ============LICENSE_END=========================================================
 */
 
-drop DATABASE datalake;
 create database datalake;
 use datalake;
 
