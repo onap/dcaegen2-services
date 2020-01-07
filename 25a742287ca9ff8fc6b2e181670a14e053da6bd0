@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "877637d0_a6ce1079",
+        "filename": "components/datalake-handler/feeder/src/main/java/org/onap/datalake/feeder/domain/Topic.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-01-07T15:11:30Z",
+      "side": 1,
+      "message": "Isn\u0027t kafkaList.size() 0 when kafkaList.isEmpty() is true? If so, the explicit test for isEmpty() is unnecessary. If not, I think there should be \"else\" statement added.",
+      "revId": "25a742287ca9ff8fc6b2e181670a14e053da6bd0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
