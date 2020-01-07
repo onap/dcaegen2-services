@@ -16,6 +16,52 @@
       "revId": "0b763cfa4cd15a70404d01b14ed596ef20787cdd",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97fe756e_284acd37",
+        "filename": "components/datalake-handler/admin/src/src/assets/i18n/zh-hans.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-07T16:02:30Z",
+      "side": 1,
+      "message": "Chinese char to be removed or replaced",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 36
+      },
+      "revId": "0b763cfa4cd15a70404d01b14ed596ef20787cdd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b01dfe1_6f45bee4",
+        "filename": "components/datalake-handler/admin/src/src/assets/i18n/zh-hant.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-07T16:02:30Z",
+      "side": 1,
+      "message": "same comment as earlier.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "0b763cfa4cd15a70404d01b14ed596ef20787cdd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
