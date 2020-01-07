@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed658e31_bb189c42",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2020-01-07T18:45:32Z",
+      "side": 1,
+      "message": "Please update this to 2019-2020. Do it for other files as well.",
+      "range": {
+        "startLine": 5,
+        "startChar": 2,
+        "endLine": 5,
+        "endChar": 16
+      },
+      "revId": "50768a752e4fc16cf66e9a83c4ac19edbc1dd16c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
