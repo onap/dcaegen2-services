@@ -22,34 +22,30 @@
  *
  * @author Ekko Chang
  *
+ *
  */
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
-@Component({
-  selector: "app-card",
-  templateUrl: "./card.component.html",
-  styleUrls: ["./card.component.css"]
-})
-export class CardComponent implements OnInit {
-  @Input() title: string;
-  @Input() iconPath: string;
-  @Input() content: string;
-  @Input() subcontent: string;
-  @Input() modifiable: boolean;
-  @Input() iconSize: string[] = ["sm", "md", "lg"];
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-  @Output() cardClick = new EventEmitter<object>();
-  @Output() cardMoreActionClick = new EventEmitter<object>();
+import { KafkaModalComponent } from "./kafka-modal.component";
 
-  constructor() {}
+describe("KafkaModalComponent", () => {
+  let component: KafkaModalComponent;
+  let fixture: ComponentFixture<KafkaModalComponent>;
 
-  ngOnInit() {}
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [KafkaModalComponent]
+    }).compileComponents();
+  }));
 
-  cardClickAction() {
-    this.cardClick.emit();
-  }
+  beforeEach(() => {
+    fixture = TestBed.createComponent(KafkaModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-  cardMoreClickAction(action: any) {
-    this.cardMoreActionClick.emit(action);
-  }
-}
+  it("should create", () => {
+    expect(component).toBeTruthy();
+  });
+});

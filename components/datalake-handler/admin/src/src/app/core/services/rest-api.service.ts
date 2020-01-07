@@ -339,34 +339,26 @@ export class RestApiService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  getAllKafkaList(): Observable<any> {
-    return this.http
-      .get<any>(prefix + "kafkas")
-      .pipe(retry(1), catchError(this.handleError));
-  }
-
-  deleteKafka(id): Observable<any> {
-    return this.http.delete(prefix + "kafkas/" + id).pipe(
-      //online
-      retry(1),
-      map(this.extractData2),
-      catchError(this.handleError)
-    );
-  }
-
-  createNewKafka(k: Kafka): Observable<any> {
-    return this.http.post(prefix + "kafkas", k).pipe(
+  public updateKafka(k: Kafka): Observable<Kafka> {
+    return this.http.put<Kafka>(prefix + "kafkas/" + k.id, k).pipe(
       retry(1),
       tap(_ => this.extractData),
       catchError(this.handleError)
     );
   }
 
-  updateKafka(k: Kafka): Observable<any> {
-    let id = k.id;
-    return this.http.put(prefix + "kafkas/" + id, k).pipe(
+  public addKafka(k: Kafka): Observable<Kafka> {
+    return this.http.post<Kafka>(prefix + "kafkas", k).pipe(
       retry(1),
       tap(_ => this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteKafka(id: string | number): Observable<Kafka> {
+    return this.http.delete<Kafka>(prefix + "kafkas/" + id).pipe(
+      retry(1),
+      tap(_ => console.log(`deleted kafka id=${id}`)),
       catchError(this.handleError)
     );
   }

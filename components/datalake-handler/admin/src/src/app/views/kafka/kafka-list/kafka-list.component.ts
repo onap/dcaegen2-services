@@ -16,225 +16,162 @@
 
 /**
  * @author Chunmeng Guo
+ * @contributor Ekko Chang
  */
 
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { RestApiService } from "src/app/core/services/rest-api.service";
+import { AdminService } from "src/app/core/services/admin.service";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { Kafka } from "../../../core/models/kafka.model";
+import { Kafka } from "src/app/core/models/kafka.model";
 
 // Loading spinner
 import { NgxSpinnerService } from "ngx-spinner";
 
-// notify
+import { map, mergeMap } from "rxjs/operators";
+import { from, forkJoin } from "rxjs";
+
+// Notify
 import { ToastrNotificationService } from "src/app/shared/components/toastr-notification/toastr-notification.service";
-import {AlertComponent} from "../../../shared/components/alert/alert.component";
-import {NewKafkaModalComponent} from "./new-kafka-modal/new-kafka-modal.component";
-import {ModalContentData} from "../../../shared/modules/modal/modal.data";
-import {ModalDemoComponent} from "../../test/modal-demo/modal-demo.component";
-import {ModalComponent} from "../../../shared/modules/modal/modal.component";
-import {EditKafkaModalComponent} from "./edit-kafka-modal/edit-kafka-modal.component";
-import {el} from "@angular/platform-browser/testing/src/browser_util";
+import { AlertComponent } from "src/app/shared/components/alert/alert.component";
+import { ModalContentData } from "src/app/shared/modules/modal/modal.data";
+import { ModalComponent } from "src/app/shared/modules/modal/modal.component";
+import { KafkaModalComponent } from "src/app/views/kafka/kafka-list/kafka-modal/kafka-modal.component";
 
 @Component({
-  selector: 'app-kafka-list',
-  templateUrl: './kafka-list.component.html',
-  styleUrls: ['./kafka-list.component.css']
+  selector: "app-kafka-list",
+  templateUrl: "./kafka-list.component.html",
+  styleUrls: ["./kafka-list.component.css"]
 })
 export class KafkaListComponent implements OnInit {
+  kafkas: Array<Kafka> = [];
 
-  kafkaList: any = [];
-  kafkas: Kafka[] = [];
-  cardIconPath: string;
-  cardModifiable: boolean;
-  cardAddicon: string;
-  Kafka_New: Kafka;
-  Kafka_Newbody: Kafka;
-  cardIconPathList: any = [];
+  // app-card parameters
+  cardModifiable: boolean = true;
+  cardAddiconPath: string = "assets/icons/add.svg";
 
   constructor(
-    private kafkaApiService: RestApiService,
+    private restApiService: RestApiService,
     private notificationService: ToastrNotificationService,
     private modalService: NgbModal,
     private spinner: NgxSpinnerService
-  ) {
-    this.initList();
-  }
+  ) {}
 
   ngOnInit() {
     this.spinner.show();
-    this.cardModifiable = true;
-    this.cardAddicon = "assets/icons/add.svg";
-  }
+    let t_kafkas: Array<Kafka> = [];
 
-  initList() {
-    this.initData().then(data => {
-      this.initKafkasList(this.kafkaList).then(data => {
-        this.kafkas = data;
-        if (this.kafkas.length > 0) {
-          let a = "assets/icons/kafka_able.svg";
-          let b = "assets/icons/kafka_disable.svg";
-          for (let i = 0; i < this.kafkas.length; i++) {
-            this.cardIconPath = (this.kafkas[i].enabled == true) ? a : b;
-            this.cardIconPathList.push(this.cardIconPath);
-          }
+    const get_kafkas = this.restApiService.getAllKafka().pipe(
+      mergeMap(ks => from(ks)),
+      map(k => {
+        if (k.enabled == true) {
+          k.iconPath = "assets/icons/kafka_able.svg";
+        } else {
+          k.iconPath = "assets/icons/kafka_disable.svg";
         }
-        console.log(this.cardIconPathList, "kafkas[]");
-      });
+        t_kafkas.push(k);
+      })
+    );
+
+    forkJoin(get_kafkas).subscribe(data => {
+      this.kafkas = t_kafkas;
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 500);
     });
   }
 
-  async initData() {
-    this.kafkaList = [];
-    this.kafkaList = await this.getKafkaList();
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 500);
-  }
-
-  getKafkaList() {
-    let data: any;
-    data = this.kafkaApiService.getAllKafkaList().toPromise();
-    return data;
-  }
-
-  async initKafkasList(kafkaList: []) {
-    let k: Kafka[] = [];
-    if (kafkaList.length > 0) {
-      for (let i = 0; i < kafkaList.length; i++) {
-        let data = kafkaList[i];
-        let feed = {
-          id: data["id"],
-          name: data["name"],
-          enabled: data["enabled"],
-          brokerList: data["brokerList"],
-          zooKeeper: data["zooKeeper"],
-          group: data["group"],
-          secure: data["secure"],
-          login: data["login"],
-          pass: data["pass"],
-          securityProtocol: data["securityProtocol"],
-          includedTopic: data["includedTopic"],
-          excludedTopic: data["excludedTopic"],
-          consumerCount: data["consumerCount"],
-          timeout: data["timeout"]
-        };
-        k.push(feed);
-      }
-    }
-    return k;
-  }
-
-  deleteKafkaModel(id: number) {
-    const index = this.kafkaList.findIndex(t => t.id === id);
-    const modalRef = this.modalService.open(AlertComponent, {
-      size: "sm",
-      centered: true
-    });
-    modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      // Delete kafka
-      this.kafkaApiService.deleteKafka(id).subscribe(
-        res => {
-          console.log(res);
-          if (JSON.stringify(res).length <= 2) {
-            this.kafkaList.splice(index, 1);
-            this.kafkaList = [...this.kafkaList];
-            this.initList();
-            this.notificationService.success("SUCCESSFULLY_DELETED");
-
-          } else {
-            this.initList();
-            this.notificationService.error("FAILED_DELETED");
-          }
-
-          modalRef.close();
-        },
-        err => {
-          this.notificationService.error(err);
-          modalRef.close();
-        }
-      );
-    });
-
-  }
-
-  newKafkaModal() {
-    const modalRef = this.modalService.open(NewKafkaModalComponent, {
-      windowClass: "dl-md-modal kafkas",
-      centered: true
-    });
-
-    this.Kafka_New = new Kafka();
-    this.Kafka_Newbody = new Kafka();
-    modalRef.componentInstance.kafka = this.Kafka_Newbody;
-    modalRef.componentInstance.kafkaList_length = this.kafkaList.length;
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      this.Kafka_Newbody = receivedEntry;
-      this.kafkaApiService
-        .createNewKafka(this.Kafka_Newbody)
-        .subscribe(
-          res => {
-            this.spinner.hide();
-            if (res.statusCode == 200) {
-              this.Kafka_New = res.returnBody;
-              this.kafkaList.push(this.Kafka_New);
-              this.kafkaList = [...this.kafkaList];
-              this.initList();
-              this.notificationService.success("SUCCESSFULLY_CREARED");
-            } else {
-              this.initList();
-              this.notificationService.error("FAILED_CREARED");
+  cardMoreClickAction(mode: string, k: Kafka) {
+    switch (mode) {
+      case "edit":
+        this.openModal("edit", k);
+        break;
+      case "delete":
+        const modalRef = this.modalService.open(AlertComponent, {
+          size: "sm",
+          centered: true,
+          backdrop: "static"
+        });
+        modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
+        modalRef.componentInstance.passEntry.subscribe(recevicedEntry => {
+          this.restApiService.deleteKafka(k.id).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_DELETED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
             }
-            modalRef.close();
-          },
-          err => {
-            this.spinner.hide();
-            this.notificationService.error(err);
-            modalRef.close();
-          }
-        );
-    });
-  }
-
-  cardMoreAction($event, id) {
-
-    if($event == "edit"){
-      this.editKafkaModal(id);
-    }else {
-      console.log($event,id);
-      this.deleteKafkaModel(id);
+          );
+          modalRef.close();
+        });
+        break;
     }
   }
 
-  editKafkaModal(id: number) {
-    console.log("id", id)
-    const index = this.kafkaList.findIndex(t => t.id === id);
-    const modalRef = this.modalService.open(EditKafkaModalComponent, {
-      windowClass: "dl-md-modal kafkas",
-      centered: true
+  openModal(mode: string, k: Kafka) {
+    const modalRef = this.modalService.open(ModalComponent, {
+      size: "lg",
+      centered: true,
+      backdrop: "static"
     });
-    modalRef.componentInstance.editKafka = this.kafkaList[index];
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      this.Kafka_New = receivedEntry;
-      this.kafkaApiService
-        .updateKafka(this.Kafka_New)
-        .subscribe(
-          res => {
-            if (res.statusCode == 200) {
-              this.kafkaList[index] = this.Kafka_New;
-              this.kafkaList = [...this.kafkaList];
-              this.notificationService.success("SUCCESSFULLY_UPDATED");
-            } else {
-              this.notificationService.error("FAILED_UPDATED");
+
+    switch (mode) {
+      case "new":
+        let newKafka: Kafka;
+        let componentNew = new ModalContentData(KafkaModalComponent, newKafka);
+
+        modalRef.componentInstance.title = "NEW_KAFKA";
+        modalRef.componentInstance.notice = "";
+        modalRef.componentInstance.mode = "new";
+        modalRef.componentInstance.component = componentNew;
+
+        modalRef.componentInstance.passEntry.subscribe((data: Kafka) => {
+          newKafka = Object.assign({}, data);
+          this.restApiService.addKafka(newKafka).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_CREARED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
             }
-            modalRef.close();
-          },
-          err => {
-            this.notificationService.error(err);
-            modalRef.close();
-          }
+          );
+          modalRef.close();
+        });
+        break;
+      case "edit":
+        let editKafka: Kafka = k;
+        let componentEdit = new ModalContentData(
+          KafkaModalComponent,
+          editKafka
         );
-    })
+
+        modalRef.componentInstance.title = editKafka.name;
+        modalRef.componentInstance.notice = "";
+        modalRef.componentInstance.mode = "edit";
+        modalRef.componentInstance.component = componentEdit;
+
+        modalRef.componentInstance.passEntry.subscribe((data: Kafka) => {
+          editKafka = Object.assign({}, data);
+          this.restApiService.updateKafka(editKafka).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_UPDATED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
+          modalRef.close();
+        });
+        break;
+    }
   }
 }
