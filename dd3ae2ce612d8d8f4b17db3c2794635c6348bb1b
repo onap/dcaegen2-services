@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27fa387c_84b8cd45",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2020-01-07T09:15:05Z",
+      "side": 1,
+      "message": "use OOM\u0027s shared DB?",
+      "range": {
+        "startLine": 28,
+        "startChar": 29,
+        "endLine": 28,
+        "endChar": 39
+      },
+      "revId": "dd3ae2ce612d8d8f4b17db3c2794635c6348bb1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c06bd288_437c9a5e",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2020-01-07T09:15:05Z",
+      "side": 1,
+      "message": "Where do we need these?",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 26
+      },
+      "revId": "dd3ae2ce612d8d8f4b17db3c2794635c6348bb1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8b9418c_89d2d996",
+        "filename": "components/datalake-handler/packages/init_db/dockerfiles/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2020-01-07T09:15:05Z",
+      "side": 1,
+      "message": "hard coded?",
+      "range": {
+        "startLine": 21,
+        "startChar": 14,
+        "endLine": 21,
+        "endChar": 28
+      },
+      "revId": "dd3ae2ce612d8d8f4b17db3c2794635c6348bb1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f73f4dfd_5c2b8f80",
+        "filename": "components/datalake-handler/packages/init_db/scripts/run.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 2349
+      },
+      "writtenOn": "2020-01-07T09:15:05Z",
+      "side": 1,
+      "message": "Necessary?",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 13
+      },
+      "revId": "dd3ae2ce612d8d8f4b17db3c2794635c6348bb1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
