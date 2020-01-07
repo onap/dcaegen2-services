@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "700b4ab6_d61f95f4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "If you end up making any of the changes below, you should add 2020.",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e6b5bd4_d25519c5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "Should this method be retrying, similar to how the external request here is \nhttps://gerrit.onap.org/r/c/dcaegen2/services/+/99482/13/components/pm-subscription-handler/pmsh_service/mod/config_handler.py#48\n\nA discussion is most likely needed for the application strategy for external requests.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 41
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e4e1e14_eeb7a3d6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "There is a fair bit of nesting going on within this method, a refactor might be worthwhile for the sake of readability.",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 20
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "022521e4_6f3a85df",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "You could identify the node-type and store the name beforehand, which should let you re-use the contents of the if and else and reduce some of the nestings.\n\nmaybe something like\n\nname_identifier \u003d \u0027pnf-name\u0027 if xnf[\u0027node-type\u0027] \u003d\u003d \u0027pnf\u0027 else \u0027vnf-name\u0027\nif xnf_filter.is_xnf_in_filter(xnf[\u0027properties\u0027].get(name_identifier)):\n    xnf_set.add(Xnf(xnf_name\u003dxnf[\u0027properties\u0027].get(\u0027name_identifier\u0027),\n        orchestration_status\u003dxnf[\u0027properties\u0027].get(\u0027orchestration-status\u0027)))",
+      "range": {
+        "startLine": 119,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 40
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04f9cc29_cf10183d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "Is the intent to instantiate a new MrSub object every time? if so the Docstring should reflect that.",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 18
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13f1be4c_2d6f70a0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "Is the intent to instantiate a new MrPub object every time? if so the Docstring should reflect that.",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 18
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43a00127_27f5072e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "It may be more pythonic to just call this cert_params given the presence of the property decorator.",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 23
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa8a906b_e7aa3ca8",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "Was this supposed to be used in the Filter somehow?",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 53
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "319c8550_7be72970",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "This seems like bad practice.\nI\u0027d say its generally accepted when doing TDD that you will end up refactoring production to a degree for testing, however, this sort of change seems like a smell.\nThe point of testing is to test the production code, this block makes it so production does something different in the test environment, which seems to defeat the purpose of testing in the first place.\n\nMaybe it would be better to design some sort of fallback mechanism in logging, to handle the situation when it cannot write to a file.",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 44
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10ca79a8_928f6718",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "Will this loop be replaced in the future?",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 22
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7ad384a_96300f60",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "Now go away! :)",
+      "range": {
+        "startLine": 36,
+        "startChar": 22,
+        "endLine": 36,
+        "endChar": 68
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5adb5184_75717cfc",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:14:00Z",
+      "side": 1,
+      "message": "Since this is only used in the testing, should this be in the test dependencies in the tox file?",
+      "range": {
+        "startLine": 33,
+        "startChar": 9,
+        "endLine": 33,
+        "endChar": 26
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
