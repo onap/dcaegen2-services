@@ -1,4 +1,4 @@
-FROM openjdk:8-jre
+FROM openjdk:8-jre-slim
 
 MAINTAINER Guobiao Mo <guobiaomo@chinamobile.com>
 
@@ -12,7 +12,7 @@ USER datalake
 WORKDIR /home/datalake
 
 #add the fat jar
-COPY target/feeder-1.0.0-SNAPSHOT.jar /home/datalake/
+COPY target/${JAR_FILE} /home/datalake/
 COPY src/assembly/run.sh /home/datalake/
 
 CMD ["sh", "run.sh"]
