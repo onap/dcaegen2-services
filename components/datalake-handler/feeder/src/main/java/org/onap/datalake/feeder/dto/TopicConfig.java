@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 QCT
+ * Copyright 2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class TopicConfig {
 
-	private int id;
+	private Integer id;
 	private String name;
 	private String login;
 	private String password;

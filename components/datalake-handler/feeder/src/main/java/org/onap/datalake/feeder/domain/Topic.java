@@ -2,7 +2,7 @@
 * ============LICENSE_START=======================================================
 * ONAP : DataLake
 * ================================================================================
-* Copyright 2019 China Mobile
+* Copyright 2020 China Mobile
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -35,6 +35,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
@@ -59,6 +61,7 @@ import lombok.Setter;
 public class Topic {
 	@Id
     @Column(name = "`id`")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
