@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d6c6d8f0_464a9359",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/config_handler.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-07T15:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "604876e8_4eb8d567",
+      "range": {
+        "startLine": 48,
+        "startChar": 16,
+        "endLine": 48,
+        "endChar": 29
+      },
+      "revId": "2bbbf1a9ceea30b66fe5c54b8f9425c66937570e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b45715b_63b5b545",
         "filename": "components/pm-subscription-handler/setup.py",
         "patchSetId": 13
@@ -45,6 +69,30 @@
       "revId": "2bbbf1a9ceea30b66fe5c54b8f9425c66937570e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42242b80_2b964fc3",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-07T15:30:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b45715b_63b5b545",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "2bbbf1a9ceea30b66fe5c54b8f9425c66937570e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
