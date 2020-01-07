@@ -2,7 +2,7 @@
 * ============LICENSE_START=======================================================
 * ONAP : DATALAKE
 * ================================================================================
-* Copyright 2019 China Mobile
+* Copyright 2020 China Mobile
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -98,7 +98,7 @@ CREATE TABLE `kafka` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `topic` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `aggregate_array_path` varchar(255) DEFAULT NULL,
   `correlate_cleared_message` bit(1) NOT NULL DEFAULT b'0',
   `data_format` varchar(255) DEFAULT NULL,
