@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7590d4ed_72a85b8c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_functions.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-07T15:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95d0caff_28d519a8",
+      "range": {
+        "startLine": 25,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 52
+      },
+      "revId": "34bff7b2ef7d3a8e73d5ff08e28e9d5299769b8c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "702e5216_30b0fe27",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/network_functions.py",
         "patchSetId": 6
@@ -45,6 +69,30 @@
       "revId": "34bff7b2ef7d3a8e73d5ff08e28e9d5299769b8c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3861cf53_69196c84",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_functions.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-07T15:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "702e5216_30b0fe27",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 52
+      },
+      "revId": "34bff7b2ef7d3a8e73d5ff08e28e9d5299769b8c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "677a8358_dee03bb8",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/nf_subscription.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-07T15:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11b49bcc_41e1caa7",
+      "range": {
+        "startLine": 27,
+        "startChar": 26,
+        "endLine": 27,
+        "endChar": 29
+      },
+      "revId": "34bff7b2ef7d3a8e73d5ff08e28e9d5299769b8c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "946943e0_c3f1794a",
         "filename": "components/pm-subscription-handler/setup.py",
         "patchSetId": 6
@@ -82,6 +154,30 @@
       "writtenOn": "2020-01-07T14:59:22Z",
       "side": 1,
       "message": "Since this is only used in the testing, should this be in the test dependencies in the tox file?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 28
+      },
+      "revId": "34bff7b2ef7d3a8e73d5ff08e28e9d5299769b8c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3822f336_4521ff6a",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-07T15:15:26Z",
+      "side": 1,
+      "message": "moved to tox file test section",
+      "parentUuid": "946943e0_c3f1794a",
       "range": {
         "startLine": 34,
         "startChar": 0,
