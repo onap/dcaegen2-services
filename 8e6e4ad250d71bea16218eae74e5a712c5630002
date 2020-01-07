@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0ebef31_decf2ac9",
+        "filename": "components/datalake-handler/admin/src/src/app/app.module.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-01-07T15:28:19Z",
+      "side": 1,
+      "message": "need to update the copyright notice in this an all other pages that have been changed",
+      "revId": "8e6e4ad250d71bea16218eae74e5a712c5630002",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9261266_5b5d3604",
+        "filename": "components/datalake-handler/admin/src/src/app/core/services/admin.service.ts",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-01-07T15:28:19Z",
+      "side": 1,
+      "message": "in onKeyPressNumber, the replace removes all characters that are not legitimate.\n\nin onKeyPressSymbol, the replace removes particular characters that are explicitly not considered legitimate, but lets all other symbol characters through, including some that might actually not be legitimate. Shouldn\u0027t this also be better done using a negation on the list of legitimate characters?\n\nThe \"*\" is implicit in the \"/g\". It is not needed in the pattern.",
+      "revId": "8e6e4ad250d71bea16218eae74e5a712c5630002",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
