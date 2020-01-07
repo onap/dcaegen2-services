@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "836ba54d_cd42f1d0",
+        "filename": "components/datalake-handler/admin/src/src/app/app-routing.module.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-01-07T15:31:24Z",
+      "side": 1,
+      "message": "the copyright needs to be updated in all changed files to add 2020",
+      "revId": "0b763cfa4cd15a70404d01b14ed596ef20787cdd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
