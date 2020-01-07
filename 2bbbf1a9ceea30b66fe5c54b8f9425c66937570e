@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "604876e8_4eb8d567",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/config_handler.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:28:16Z",
+      "side": 1,
+      "message": "Could you detail the retry information in the docstring? namely what the unit of this 2 is since it\u0027s not obvious what the default unit is without looking up the documentation of the library.",
+      "range": {
+        "startLine": 48,
+        "startChar": 16,
+        "endLine": 48,
+        "endChar": 29
+      },
+      "revId": "2bbbf1a9ceea30b66fe5c54b8f9425c66937570e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b45715b_63b5b545",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-07T13:28:16Z",
+      "side": 1,
+      "message": "Since this is only used in the testing, should this be in the test dependencies in the tox file?",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 26
+      },
+      "revId": "2bbbf1a9ceea30b66fe5c54b8f9425c66937570e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
