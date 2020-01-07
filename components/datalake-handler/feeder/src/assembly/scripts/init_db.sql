@@ -98,7 +98,7 @@ CREATE TABLE `kafka` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `topic` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `aggregate_array_path` varchar(255) DEFAULT NULL,
   `correlate_cleared_message` bit(1) NOT NULL DEFAULT b'0',
   `data_format` varchar(255) DEFAULT NULL,

@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class TopicConfig {
 
-	private int id;
+	private Integer id;
 	private String name;
 	private String login;
 	private String password;

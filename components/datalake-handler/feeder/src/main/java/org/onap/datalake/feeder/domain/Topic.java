@@ -35,6 +35,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
@@ -59,6 +61,7 @@ import lombok.Setter;
 public class Topic {
 	@Id
     @Column(name = "`id`")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
