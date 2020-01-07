@@ -23,6 +23,7 @@ package org.onap.datalake.feeder.service;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -59,6 +60,9 @@ public class TopicConfigPollingService implements Runnable {
 
 	@Autowired
 	private KafkaRepository kafkaRepository;
+	
+	@Autowired
+	private TopicNameService topicNameService;
 	
 	//effectiveTopic Map, 1st key is kafkaId, 2nd is topic name, the value is a list of EffectiveTopic.
 	private Map<Integer, Map<String, List<EffectiveTopic>>> effectiveTopicMap = new HashMap<>();
@@ -114,7 +118,7 @@ public class TopicConfigPollingService implements Runnable {
 		log.info("TopicConfigPollingService started.");
 
 		while (active) {
-			try { //sleep first since we already pool in init()
+			try { //sleep first since we already called poll() in init()
 				Thread.sleep(config.getCheckTopicInterval());
 				if(!active) {
 					break;
@@ -138,6 +142,7 @@ public class TopicConfigPollingService implements Runnable {
 						log.info("activeTopics list is updated, new={}", newTopics);
 
 						activeTopicMap.put(kafkaId, newTopics);
+						//update version
 						currentActiveTopicsVersionMap.put(kafkaId, currentActiveTopicsVersionMap.getOrDefault(kafkaId, 1)+1);
 					} else {
 						log.debug("activeTopics list is not updated.");
@@ -156,14 +161,20 @@ public class TopicConfigPollingService implements Runnable {
 	}
 
 	private Map<Integer, Set<String>>  poll() throws IOException {
+		Set<String> allTopicNames = new HashSet<>();
+		
 		Map<Integer, Set<String>> ret = new HashMap<>();
 		Iterable<Kafka> kafkas = kafkaRepository.findAll();
 		for (Kafka kafka : kafkas) {
 			if (kafka.isEnabled()) {
 				Set<String> topics = poll(kafka);
 				ret.put(kafka.getId(), topics);
+				allTopicNames.addAll(topics);
 			}
 		}
+		
+		topicNameService.update(allTopicNames);
+		
 		return ret;
 	}
 
