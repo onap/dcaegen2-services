@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "7291e292_d7a67f46",
+        "filename": "components/datalake-handler/admin/src/src/assets/i18n/zh-hans.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 5228
+      },
+      "writtenOn": "2020-01-08T02:42:19Z",
+      "side": 1,
+      "message": "This file is for language localization that has to translate into multiple languages for a specific country or region.",
+      "parentUuid": "9df7b0c2_4ffe1017",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 36
+      },
+      "revId": "0b763cfa4cd15a70404d01b14ed596ef20787cdd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b01dfe1_6f45bee4",
         "filename": "components/datalake-handler/admin/src/src/assets/i18n/zh-hant.json",
         "patchSetId": 2
