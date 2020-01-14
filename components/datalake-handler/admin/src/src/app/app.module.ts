@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 QCT
+ * Copyright 2019 - 2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,12 +65,12 @@ import { HdfsComponent } from "./views/database/database-list/dbs-modal/hdfs/hdf
 import { DatabaseAddModalComponent } from "./views/database/database-list/database-add-modal/database-add-modal.component";
 import { ElasticsearchComponent } from "./views/database/database-list/dbs-modal/elasticsearch/elasticsearch.component";
 import { DruidComponent } from "./views/database/database-list/dbs-modal/druid/druid.component";
-import { KafkaListComponent } from './views/kafka/kafka-list/kafka-list.component';
-import { NewKafkaModalComponent } from './views/kafka/kafka-list/new-kafka-modal/new-kafka-modal.component';
-import { EditKafkaModalComponent } from './views/kafka/kafka-list/edit-kafka-modal/edit-kafka-modal.component';
-import { ToolsComponent } from './views/tools/tools.component';
-import { ModalToolsComponent } from './views/tools/modal-tools/modal-tools.component';
-import { ToolAddModalComponent } from './views/tools/tool-add-modal/tool-add-modal.component';
+import { KafkaListComponent } from "./views/kafka/kafka-list/kafka-list.component";
+import { NewKafkaModalComponent } from "./views/kafka/kafka-list/new-kafka-modal/new-kafka-modal.component";
+import { EditKafkaModalComponent } from "./views/kafka/kafka-list/edit-kafka-modal/edit-kafka-modal.component";
+import { ToolsComponent } from "./views/tools/tools.component";
+import { ModalToolsComponent } from "./views/tools/modal-tools/modal-tools.component";
+import { ToolAddModalComponent } from "./views/tools/tool-add-modal/tool-add-modal.component";
 
 // Modals
 import { TopicDetailModalComponent } from "./views/topics/topic-list/topic-detail-modal/topic-detail-modal.component";
@@ -97,10 +97,14 @@ import { CardComponent } from "./shared/modules/card/card.component";
 import { ButtonComponent } from "./shared/components/Button/button.component";
 import { ModalDirective } from "./shared/modules/modal/modal.directive";
 import { ModalDemoComponent } from "./views/test/modal-demo/modal-demo.component";
-import { KafkaComponent } from './views/kafka/kafka.component';
+import { KafkaComponent } from "./views/kafka/kafka.component";
 // Angular SVG Icon
 import { AngularSvgIconModule } from "angular-svg-icon";
-import { IconComponent } from './shared/components/icon/icon.component';
+import { IconComponent } from "./shared/components/icon/icon.component";
+
+import { MatTabsModule } from "@angular/material";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { TopicModalComponent } from "./views/topics/topic-list/topic-modal/topic-modal.component";
 
 @NgModule({
   declarations: [
@@ -146,7 +150,8 @@ import { IconComponent } from './shared/components/icon/icon.component';
     ToolsComponent,
     ModalToolsComponent,
     ToolAddModalComponent,
-    IconComponent
+    IconComponent,
+    TopicModalComponent
   ],
   imports: [
     BrowserModule,
@@ -163,7 +168,9 @@ import { IconComponent } from './shared/components/icon/icon.component';
     FormsModule,
     NgxDatatableModule,
     NgxSpinnerModule,
-    AngularSvgIconModule
+    AngularSvgIconModule,
+    MatTabsModule,
+    BrowserAnimationsModule
   ],
   providers: [AdminService, RestApiService, ToastrNotificationService],
   bootstrap: [AppComponent],
@@ -187,7 +194,8 @@ import { IconComponent } from './shared/components/icon/icon.component';
     NewKafkaModalComponent,
     EditKafkaModalComponent,
     ToolAddModalComponent,
-    ModalToolsComponent
+    ModalToolsComponent,
+    TopicModalComponent
   ]
 })
 export class AppModule {}

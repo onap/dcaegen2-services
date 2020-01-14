@@ -2,7 +2,7 @@
 ============LICENSE_START=======================================================
 ONAP : DataLake
 ================================================================================
-Copyright 2019 QCT
+Copyright 2019 - 2020 QCT
 =================================================================================
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -32,10 +32,12 @@ limitations under the License.
 
         <!-- button -->
         <div class="p-1">
-          <app-button [text]="'DEFAULT_CONFIGURATIONS'" [style]="'inline'" [color]="'dark'" (click)="buttonAction('default')"></app-button>
+          <app-button [text]="'DEFAULT_CONFIGURATIONS'" [style]="'inline'" [color]="'dark'"
+            (click)="openModal('default')"></app-button>
         </div>
         <div class="p-1">
-          <app-button [text]="'plus'" [style]="'inlineicon'" [color]="'dark'" (click)="buttonAction('new')"></app-button>
+          <app-button [text]="'plus'" [style]="'inlineicon'" [color]="'dark'" (click)="openModal('new')">
+          </app-button>
         </div>
       </div>
     </div>
@@ -44,7 +46,7 @@ limitations under the License.
   <!-- datatable -->
   <div class="row">
     <div class="col-md-12">
-      <app-table [data]="topics" [columns]="columns"></app-table>
+      <app-table [data]="topics" [columns]="columns" (btnTableAction)="btnTableAction($event)"></app-table>
     </div>
   </div>
 </div>

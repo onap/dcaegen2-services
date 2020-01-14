@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 QCT
+ * Copyright 2019 - 2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,9 +45,18 @@ import { ModalInterface } from "src/app/shared/modules/modal/modal.interface";
   styleUrls: ["./modal.component.css"]
 })
 export class ModalComponent implements OnInit {
-  @Input() contentComponent: ModalContentData;
+  @Input() title: string;
+  @Input() notice: string;
+  @Input() mode: string;
+  @Input() component: ModalContentData;
   @Output() passEntry: EventEmitter<any> = new EventEmitter();
   @ViewChild(ModalDirective) modalContent: ModalDirective;
+
+  emitData: any; // temp data for two way binding
+  selectedIndex: number = 0; // number to switch tab
+  componentFactory: any;
+  viewContainerRef: any;
+  componentRef: any;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -59,26 +68,31 @@ export class ModalComponent implements OnInit {
   }
 
   loadComponent() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-      this.contentComponent.component
+    this.componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      this.component.modalComponent
     );
 
-    const viewContainerRef = this.modalContent.viewContainerRef;
-    viewContainerRef.clear();
+    this.viewContainerRef = this.modalContent.viewContainerRef;
+    this.viewContainerRef.clear();
 
-    const componentRef = viewContainerRef.createComponent(componentFactory);
-    (<ModalInterface>componentRef.instance).data = this.contentComponent.data;
+    this.componentRef = this.viewContainerRef.createComponent(
+      this.componentFactory
+    );
+
+    this.emitData = Object.assign({}, this.component.data);
+    (<ModalInterface>this.componentRef.instance).data = this.emitData;
+    (<ModalInterface>this.componentRef.instance).mode = this.mode;
+    (<ModalInterface>(
+      this.componentRef.instance
+    )).selectedIndex = this.selectedIndex;
   }
 
   nextPage() {
-    console.log("nextpage");
-    //TODO: Switch the pages
+    (<ModalInterface>this.componentRef.instance).selectedIndex++;
   }
 
   passBack() {
-    console.log("passback");
-    //TODO: Save the data
-
-    this.passEntry.emit("save....");
+    this.component.data = this.emitData;
+    this.passEntry.emit(this.component.data);
   }
 }
