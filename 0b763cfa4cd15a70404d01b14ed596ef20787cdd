@@ -108,6 +108,30 @@
     },
     {
       "key": {
+        "uuid": "2656e87a_bb8fcd94",
+        "filename": "components/datalake-handler/admin/src/src/assets/i18n/zh-hans.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-14T23:02:41Z",
+      "side": 1,
+      "message": "Yes, understood. Was checking if this file should be allowed in gerrit as only English language is required, although no rule to block other lang (based on Tony\u0027s from CII req)",
+      "parentUuid": "7291e292_d7a67f46",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 36
+      },
+      "revId": "0b763cfa4cd15a70404d01b14ed596ef20787cdd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b01dfe1_6f45bee4",
         "filename": "components/datalake-handler/admin/src/src/assets/i18n/zh-hant.json",
         "patchSetId": 2
