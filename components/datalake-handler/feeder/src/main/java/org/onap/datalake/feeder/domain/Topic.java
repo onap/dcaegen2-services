@@ -2,7 +2,7 @@
 * ============LICENSE_START=======================================================
 * ONAP : DataLake
 * ================================================================================
-* Copyright 2019 China Mobile
+* Copyright 2019-2020 China Mobile
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
+import java.util.HashMap;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +35,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
@@ -57,6 +61,7 @@ import lombok.Setter;
 public class Topic {
 	@Id
     @Column(name = "`id`")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -201,16 +206,27 @@ public class Topic {
 		Set<Db> topicDb = getDbs();
 		List<Integer> dbList = new ArrayList<>();
 		List<Integer> enabledDbList = new ArrayList<>();
+		List<String> enabledDbList2 = new ArrayList<>();
 		if (topicDb != null) {
 			for (Db item : topicDb) {
 				dbList.add(item.getId());
 				if(item.isEnabled()) {
 					enabledDbList.add(item.getId());
+					enabledDbList2.add(item.getDbType().getId());
 				}
 			}
 		}
 		tConfig.setSinkdbs(dbList);
 		tConfig.setEnabledSinkdbs(enabledDbList);
+		Map<String,Integer> map = new HashMap<>();
+		for (String string : enabledDbList2) {
+			if(map.containsKey(string)) {
+				map.put(string, map.get(string).intValue()+1);
+			}else {
+				map.put(string, new Integer(1));
+			}
+		}
+		tConfig.setCountsDb(map);
 
 		Set<Kafka> topicKafka = getKafkas();
 		List<Integer> kafkaList = new ArrayList<>();
@@ -220,6 +236,7 @@ public class Topic {
 			}
 		}
 		tConfig.setKafkas(kafkaList);
+		tConfig.setCountsKafka(kafkaList.size());
 		return tConfig;
 	}
 
