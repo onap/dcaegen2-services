@@ -211,17 +211,17 @@ public class DbController {
 	}
 
 	//Update Db
-	@PutMapping("")
+	@PutMapping("/{id}")
 	@ResponseBody
 	@ApiOperation(value="Update a database.")
-	public PostReturnBody<DbConfig> updateDb(@RequestBody DbConfig dbConfig, BindingResult result, HttpServletResponse response) throws IOException {
+	public PostReturnBody<DbConfig> updateDb(@PathVariable int id, @RequestBody DbConfig dbConfig, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
 			sendError(response, 400, "Error parsing DB: " + result.toString());
 			return null;
 		}
 
-		Db oldDb = dbRepository.findById(dbConfig.getId()).get();
+		Db oldDb = dbRepository.findById(id).get();
 		if (oldDb == null) {
 			sendError(response, 404, DB_NOT_FOUND + dbConfig.getName());
 			return null;
