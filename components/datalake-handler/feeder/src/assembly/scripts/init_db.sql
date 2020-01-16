@@ -141,3 +141,13 @@ CREATE TABLE `map_kafka_topic` (
   CONSTRAINT `FK5q7jdxy54au5rcrhwa4a5igqi` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id`),
   CONSTRAINT `FKtdrme4h7rxfh04u2i2wqu23g5` FOREIGN KEY (`kafka_id`) REFERENCES `kafka` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `data_exposure` (
+  `id` varchar(255) NOT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `sql_template` varchar(10000) NOT NULL,
+  `db_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKf5ps4jxauwawk4ac86t5t6xev` (`db_id`),
+  CONSTRAINT `FKf5ps4jxauwawk4ac86t5t6xev` FOREIGN KEY (`db_id`) REFERENCES `db` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
