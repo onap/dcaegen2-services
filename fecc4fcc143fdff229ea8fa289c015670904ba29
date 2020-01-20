@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "22c067f0_e5c8bad5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "700b4ab6_d61f95f4",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e6b5bd4_d25519c5",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
         "patchSetId": 9
@@ -36,6 +60,30 @@
       "writtenOn": "2020-01-07T13:14:00Z",
       "side": 1,
       "message": "Should this method be retrying, similar to how the external request here is \nhttps://gerrit.onap.org/r/c/dcaegen2/services/+/99482/13/components/pm-subscription-handler/pmsh_service/mod/config_handler.py#48\n\nA discussion is most likely needed for the application strategy for external requests.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 41
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73c95069_91159aa2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Plan to meet to discuss the overall flow of the main runner. ie. event loops, db setup etc.",
+      "parentUuid": "8e6b5bd4_d25519c5",
       "range": {
         "startLine": 29,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "02c89419_fa13a204",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e4e1e14_eeb7a3d6",
+      "range": {
+        "startLine": 102,
+        "startChar": 4,
+        "endLine": 102,
+        "endChar": 20
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "022521e4_6f3a85df",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
         "patchSetId": 9
@@ -82,6 +154,30 @@
       "writtenOn": "2020-01-07T13:14:00Z",
       "side": 1,
       "message": "You could identify the node-type and store the name beforehand, which should let you re-use the contents of the if and else and reduce some of the nestings.\n\nmaybe something like\n\nname_identifier \u003d \u0027pnf-name\u0027 if xnf[\u0027node-type\u0027] \u003d\u003d \u0027pnf\u0027 else \u0027vnf-name\u0027\nif xnf_filter.is_xnf_in_filter(xnf[\u0027properties\u0027].get(name_identifier)):\n    xnf_set.add(Xnf(xnf_name\u003dxnf[\u0027properties\u0027].get(\u0027name_identifier\u0027),\n        orchestration_status\u003dxnf[\u0027properties\u0027].get(\u0027orchestration-status\u0027)))",
+      "range": {
+        "startLine": 119,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 40
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1db5b3e_2f0d312b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "022521e4_6f3a85df",
       "range": {
         "startLine": 119,
         "startChar": 12,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "d97f1ed8_6fe89bae",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04f9cc29_cf10183d",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 18
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "13f1be4c_2d6f70a0",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 9
@@ -128,6 +248,30 @@
       "writtenOn": "2020-01-07T13:14:00Z",
       "side": 1,
       "message": "Is the intent to instantiate a new MrPub object every time? if so the Docstring should reflect that.",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 18
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64c8371d_ed95bd47",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f1be4c_2d6f70a0",
       "range": {
         "startLine": 54,
         "startChar": 8,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "b73ccd0c_e8f486a0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43a00127_27f5072e",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 23
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aa8a906b_e7aa3ca8",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 9
@@ -174,6 +342,30 @@
       "writtenOn": "2020-01-07T13:14:00Z",
       "side": 1,
       "message": "Was this supposed to be used in the Filter somehow?",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 53
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "154a36f7_f8a04d00",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Can be used in the future",
+      "parentUuid": "aa8a906b_e7aa3ca8",
       "range": {
         "startLine": 47,
         "startChar": 8,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "a3e61381_2c419c95",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "319c8550_7be72970",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 44
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "10ca79a8_928f6718",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
         "patchSetId": 9
@@ -220,6 +436,30 @@
       "writtenOn": "2020-01-07T13:14:00Z",
       "side": 1,
       "message": "Will this loop be replaced in the future?",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 22
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "076333bd_7b8b6c20",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Yup",
+      "parentUuid": "10ca79a8_928f6718",
       "range": {
         "startLine": 34,
         "startChar": 4,
@@ -266,6 +506,30 @@
       "writtenOn": "2020-01-07T13:14:00Z",
       "side": 1,
       "message": "Since this is only used in the testing, should this be in the test dependencies in the tox file?",
+      "range": {
+        "startLine": 33,
+        "startChar": 9,
+        "endLine": 33,
+        "endChar": 26
+      },
+      "revId": "fecc4fcc143fdff229ea8fa289c015670904ba29",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28fd5640_a5e3509a",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-01-20T12:39:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5adb5184_75717cfc",
       "range": {
         "startLine": 33,
         "startChar": 9,
