@@ -18,40 +18,28 @@
  * ============LICENSE_END=========================================================
  */
 
-/**
- * This service is to set the page title from different components.
- *
- * @author Ekko Chang
- *
- */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { KafkaModalComponent } from './kafka-modal.component';
 
-@Injectable()
-export class AdminService {
-  public title = new BehaviorSubject("Title");
+describe('KafkaModalComponent', () => {
+  let component: KafkaModalComponent;
+  let fixture: ComponentFixture<KafkaModalComponent>;
 
-  constructor() {}
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ KafkaModalComponent ]
+    })
+    .compileComponents();
+  }));
 
-  /*
-   *  Set header title
-   */
-  setTitle(title: string) {
-    this.title.next(title);
-  }
+  beforeEach(() => {
+    fixture = TestBed.createComponent(KafkaModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-  /*
-   *  Form validate
-   */
-  onKeyPressNumber(data: any) {
-    return (data.target.value = data.target.value.replace(/[^0-9.]/g, ""));
-  }
-
-  onKeyPressSymbol(data: any) {
-    return (data.target.value = data.target.value.replace(
-      /[~`!#$%\^&*+=\-\[\]\\';,/{}()|\\":<>\?@.]/g,
-      ""
-    ));
-  }
-}
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

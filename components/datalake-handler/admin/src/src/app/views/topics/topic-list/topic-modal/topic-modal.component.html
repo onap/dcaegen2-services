@@ -134,7 +134,7 @@ limitations under the License.
             <div class="d-flex row align-items-center" *ngFor="let field of idExFields; let i = index">
               <div class="col-md-8 order-1">
                 <input [(ngModel)]="field.item" class="form-control dl-input-text" placeholder="/event-header/id"
-                  type="text" [value]="field.item" (change)="onChangeSaveIdField()" />
+                  type="text" (change)="onChangeSaveIdField()" (input)="this.adminService.onKeyPressSymbol($event)" />
               </div>
               <div class="order-2">
                 <button type="button" class="btn dl-icon-enable p-2" (click)="onClickAddIdField(i)">

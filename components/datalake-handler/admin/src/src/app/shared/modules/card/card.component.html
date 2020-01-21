@@ -2,7 +2,7 @@
 ============LICENSE_START=======================================================
 ONAP : DataLake
 ================================================================================
-Copyright 2019 QCT
+Copyright 2019 - 2020 QCT
 =================================================================================
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,47 +17,51 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ============LICENSE_END=========================================================
 -->
-<div class="card-panel d-flex flex-column" (click)="cardClick()">
-  <div class="d-flex flex-row p-2">
+<div class="card-panel d-flex flex-column">
+  <div class="d-flex flex-row">
     <div class="dl-h4 title mr-auto ml-3 mt-2">{{ this.title }}</div>
 
-    <div *ngIf="this.modifiable" class="ml-auto dropdown action-icon-dropdown" data-boundary="window">
+    <div *ngIf="this.modifiable" class="ml-auto dropdown action-icon-dropdown mr-1 mt-1" data-boundary="window">
+
       <a class="badge badge-light action-icon-dropdown" data-toggle="dropdown" style="cursor: pointer">
-        <i class="fas fa-ellipsis-h fa-2x dl-icon-enable"></i>
+        <i class="m-2 fas fa-ellipsis-h fa-2x dl-icon-enable"></i>
       </a>
+
+
       <div class="dropdown-menu action-icon-btn">
-        <button class="dropdown-item" type="button" (click)="cardMoreAction('edit')">
-          {{ 'EDIT' | translate }}
+        <button class="dropdown-item" type="button" (click)="cardMoreClickAction('edit')">
+          {{ "EDIT" | translate }}
         </button>
-        <button class="dropdown-item" type="button" (click)="cardMoreAction('delete')">
-          {{ 'DELETE' | translate }}
+        <button class="dropdown-item" type="button" (click)="cardMoreClickAction('delete')">
+          {{ "DELETE" | translate }}
         </button>
       </div>
     </div>
   </div>
 
-  <div class="mt-auto align-self-center p-2">
+  <div class="mt-auto align-self-center">
     <!-- show icon -->
-    <div *ngIf="this.iconPath">
-      <span [ngSwitch]="this.iconSize">
-        <span *ngSwitchCase="'sm'">
-          <svg-icon [src]="this.iconPath" [svgStyle]="{ 'width.px':80 }"></svg-icon>
-        </span>
-        <span *ngSwitchCase="'lg'">
-          <svg-icon [src]="this.iconPath" [svgStyle]="{ 'width.px':180 }"></svg-icon>
-        </span>
-        <span *ngSwitchDefault>
-          <svg-icon [src]="this.iconPath" [svgStyle]="{ 'width.px':150 }"></svg-icon>
-        </span>
-      </span>
+    <div *ngIf="this.iconPath" class="add-style" (click)="cardClickAction()">
+      <div [ngSwitch]=" this.iconSize">
+        <div *ngSwitchCase="'sm'">
+          <img src="{{ this.iconPath }}" style="width: 60px; height:60px;">
+        </div>
+        <div *ngSwitchCase="'md'">
+          <img src="{{ this.iconPath }}" style="width: 100px; height:100px;">
+        </div>
+        <div *ngSwitchCase="'lg'">
+          <img src="{{ this.iconPath }}" style="width: 140px; height:140px;">
+        </div>
+      </div>
     </div>
+
     <!-- show string -->
     <div *ngIf="this.content" class="dl-h1">
       {{ this.content }}
     </div>
   </div>
 
-  <div class="infoname align-self-center mt-auto p-2">
+  <div class="infoname align-self-center mt-auto pb-2">
     {{ this.subcontent }}
   </div>
 </div>
