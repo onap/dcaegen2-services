@@ -229,21 +229,26 @@ export class TopicModalComponent implements OnInit {
   onClickAddIdField() {
     this.idExFields.push(this.idExNewField);
     this.idExNewField = {};
+    this.onChangeSaveIdField();
   }
 
   onClickDelIdField(index: number) {
     if (this.idExFields.length > 1) {
       this.idExFields.splice(index, 1);
+      this.onChangeSaveIdField();
     }
   }
 
   onChangeSaveIdField() {
     this.data.messageIdPath = "";
+
     for (let i = 0; i < this.idExFields.length; i++) {
-      if (i == 0) {
-        this.data.messageIdPath = this.idExFields[i].item;
-      } else {
-        this.data.messageIdPath += "," + this.idExFields[i].item;
+      if (this.idExFields[i].item) {
+        if (this.data.messageIdPath == "") {
+          this.data.messageIdPath = this.idExFields[i].item;
+        } else {
+          this.data.messageIdPath += "," + this.idExFields[i].item;
+        }
       }
     }
   }

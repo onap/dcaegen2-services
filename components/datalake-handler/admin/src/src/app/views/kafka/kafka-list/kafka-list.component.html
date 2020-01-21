@@ -1,5 +1,5 @@
 <!--
-    Copyright (C) 2019 CMCC, Inc. and others. All rights reserved.
+    Copyright (C) 2019 - 2020 CMCC, Inc. and others. All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -13,18 +13,17 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-  <div class="col-md-12 dashboard-kafka">
-      <ul class="kafka-list clearfix">
-        <li class="add-style" *ngFor="let kafka of this.kafkas; let thisIndex=index;" class="col-md-3 kafka-li">
-          <app-card [iconPath]="cardIconPathList[thisIndex]" [iconSize]="'sm'" [subcontent]="kafka.name"
-                    [modifiable]="this.cardModifiable" (edit)="cardMoreAction($event, kafka.id)">
-          </app-card>
-        </li>
 
-
-        <li class="col-md-3 kafka-li add-kafka">
-          <app-card [iconPath]="this.cardAddicon" [iconSize]="'sm'" (click)="newKafkaModal()">
-          </app-card>
-        </li>
-      </ul>
+<div class="d-flex flex-row flex-nowrap">
+  <div class="col-md-3" *ngFor="let kafka of this.kafkas; let thisIndex = index">
+    <app-card [iconPath]="kafka.iconPath" [iconSize]="'md'" [subcontent]="kafka.name" [modifiable]="this.cardModifiable"
+      (cardClick)="openModal('edit', kafka)" (cardMoreActionClick)="cardMoreClickAction($event, kafka)">
+    </app-card>
   </div>
+
+  <div class="col-md-3">
+    <app-card [iconPath]="this.cardAddiconPath" [iconSize]="'sm'" (click)="openModal('new')">
+    </app-card>
+  </div>
+
+</div>

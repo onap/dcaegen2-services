@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 - 2020 QCT
+ * Copyright 2019 -2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,38 +18,28 @@
  * ============LICENSE_END=========================================================
  */
 
-/**
- *
- * @author Ekko Chang
- *
- */
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-@Component({
-  selector: "app-card",
-  templateUrl: "./card.component.html",
-  styleUrls: ["./card.component.css"]
-})
-export class CardComponent implements OnInit {
-  @Input() title: string;
-  @Input() iconPath: string;
-  @Input() content: string;
-  @Input() subcontent: string;
-  @Input() modifiable: boolean;
-  @Input() iconSize: string[] = ["sm", "md", "lg"];
+import { KafkaModalComponent } from './kafka-modal.component';
 
-  @Output() cardClick = new EventEmitter<object>();
-  @Output() cardMoreActionClick = new EventEmitter<object>();
+describe('KafkaModalComponent', () => {
+  let component: KafkaModalComponent;
+  let fixture: ComponentFixture<KafkaModalComponent>;
 
-  constructor() { }
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ KafkaModalComponent ]
+    })
+    .compileComponents();
+  }));
 
-  ngOnInit() { }
+  beforeEach(() => {
+    fixture = TestBed.createComponent(KafkaModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-  cardClickAction() {
-    this.cardClick.emit();
-  }
-
-  cardMoreClickAction(action: any) {
-    this.cardMoreActionClick.emit(action);
-  }
-}
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

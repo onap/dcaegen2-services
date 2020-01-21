@@ -1,6 +1,6 @@
 {
   "SIDEBAR": {
-    "FEEDFER": "DataLake Feeder",
+    "FEEDER": "DataLake Feeder",
     "KAFKA": "Kafka",
     "TOPICS": "Topics",
     "DATABASE": "Database",

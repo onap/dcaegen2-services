@@ -47,4 +47,11 @@ export class AdminService {
   onKeyPressNumber(data: any) {
     return (data.target.value = data.target.value.replace(/[^0-9.]/g, ""));
   }
+
+  onKeyPressSymbol(data: any) {
+    return (data.target.value = data.target.value.replace(
+      /[~`!#$%\^&*+=\-\[\]\\';,/{}()|\\":<>\?@.]/g,
+      ""
+    ));
+  }
 }

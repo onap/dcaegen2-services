@@ -2,7 +2,7 @@
 * ============LICENSE_START=======================================================
 * ONAP : DataLake
 * ================================================================================
-* Copyright 2019 QCT
+* Copyright 2019 - 2020 QCT
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -35,4 +35,8 @@
   font-family: "Open Sans", sans-serif;
   font-weight: 600;
   font-size: 16px;
+}
+
+.card-panel .add-style {
+  cursor: pointer;
 }
