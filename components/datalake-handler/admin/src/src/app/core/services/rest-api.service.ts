@@ -32,7 +32,7 @@ import { map, catchError, tap, retry } from "rxjs/operators";
 import { throwError } from "rxjs";
 
 import { Topic } from "src/app/core/models/topic.model";
-import { Db } from "src/app/core/models/db.model";
+import { Db, DbType } from "src/app/core/models/db.model";
 import { Template } from "src/app/core/models/template.model";
 import { Dashboard } from "src/app/core/models/dashboard.model";
 import { Kafka } from "../models/kafka.model";
@@ -150,6 +150,37 @@ export class RestApiService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  public getDbTypes(): Observable<DbType[]> {
+    return this.http
+      .get<DbType[]>(prefix + "dbs/dbtypes")
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  public deleteDb(id: string | number): Observable<Db> {
+    return this.http.delete<Db>(prefix + "dbs/" + id).pipe(
+      //online
+      retry(1),
+      tap(_ => console.log(`deleted db id=${id}`)),
+      catchError(this.handleError)
+    );
+  }
+
+  public updateDb(db: Db): Observable<Db> {
+    return this.http.put<Db>(prefix + "dbs/" + db.id, db).pipe(
+      retry(1),
+      tap(_ => this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  public addDb(db: Db): Observable<Db> {
+    return this.http.post<Db>(prefix + "dbs", db).pipe(
+      retry(1),
+      tap(_ => console.log(`add db name=${db.name}`)),
+      catchError(this.handleError)
+    );
+  }
+
   getDbEncryptList(flag): Observable<any> {
     return this.http
       .get(prefix + "dbs/list?isDb=" + flag)
@@ -166,23 +197,6 @@ export class RestApiService {
     return this.http
       .get(prefix + "dbs/" + id)
       .pipe(retry(1), map(this.extractData), catchError(this.handleError));
-  }
-
-  deleteDb(id): Observable<any> {
-    return this.http.delete(prefix + "dbs/" + id).pipe(
-      //online
-      retry(1),
-      map(this.extractData2),
-      catchError(this.handleError)
-    );
-  }
-
-  updateDb(d: Db): Observable<any> {
-    return this.http.put(prefix + "dbs", d).pipe(
-      retry(1),
-      tap(_ => this.extractData),
-      catchError(this.handleError)
-    );
   }
 
   createDb(d: Db): Observable<any> {

@@ -1,5 +1,5 @@
 <!--
-    Copyright (C) 2019 CMCC, Inc. and others. All rights reserved.
+    Copyright (C) 2019 - 2020 CMCC, Inc. and others. All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
+
 <div class="topic-list-panel">
   <div class="row">
     <div class="col-md-12">
@@ -21,69 +22,22 @@
         <div class="p-1">
           <div class="input-group">
             <input #searchText type="text" class="form-control dl-input-text-search" placeholder="Search..."
-                   (keyup)="this.updateFilter($event.target.value)" />
-            <div class="input-group-append">
-              <button type="button" class="btn dl-btn-dark">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
+              (keyup)="this.updateFilter($event.target.value)" />
           </div>
         </div>
-
         <!-- button -->
         <div class="p-1">
-          <app-button [text]="'plus'" [style]="'inlineicon'" [color]="'dark'" (click)="newDbModal()"></app-button>
+          <app-button [text]="'plus'" [style]="'inlineicon'" [color]="'dark'" (click)="openModal('new')">
+          </app-button>
         </div>
       </div>
     </div>
   </div>
+
   <!-- datatable -->
   <div class="row">
     <div class="col-md-12">
-      <ngx-datatable #mytemlate class="bootstrap" [rows]="dbList" [columnMode]="'force'" [headerHeight]="40"
-                     [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-                     [loadingIndicator]="loadingIndicator" [messages]="mesgNoData" [limit]="10" (activate)="onActivate($event)">
-        <ngx-datatable-column [width]="100" name="{{ 'STATUS' | translate }}" prop="enabled"
-                              headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span *ngIf="row.enabled">
-              <i class="fas fa-circle dl-icon-enable fa-xs" aria-hidden="true"></i>
-            </span>
-            <span *ngIf="!row.enabled">
-              <i class="fas fa-circle dl-icon-disable fa-xs" aria-hidden="true"></i>
-            </span>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column name="{{ 'TEMPLATE_NAME' | translate }}" prop="name"
-                              headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>{{ row.name }}</span>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column name="{{ 'DB_TYPE' | translate }}" prop="topic">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>{{ row.dbTypeId }}</span>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column name="" sortable="false" cellClass="d-flex justify-content-center">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>
-              <button class="btn action-icon-setting" (click)="this.deleteDbModel(row.id);">
-                <i class="fas fa-trash-alt fa-xs"></i>
-              </button>
-            </span>
-            <span>
-              <button class="btn action-icon-setting" (click)="this.updateDbModel(row.id, row.dbTypeId);">
-                <i class="fas fa-cog fa-xs"></i>
-              </button>
-            </span>
-          </ng-template>
-        </ngx-datatable-column>
-
-      </ngx-datatable>
+      <app-table [data]="dbs" [columns]="columns" (btnTableAction)="btnTableAction($event)"></app-table>
     </div>
   </div>
 </div>

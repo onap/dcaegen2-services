@@ -76,7 +76,7 @@
   "TIME_OUT": "Time out(sec)",
   "EDIT_KAFKA": "Edit Kafka",
   "NEW_DB": "New Database",
-  "DB_TYPE": "DbType",
+  "DB_TYPE": "Db Type",
   "NEW_DRUID": "New Druid",
   "NEW_ELASTICSEARCH": "New Elasticsearch",
   "NEW_COUCHBASE": "New Couchbase",
@@ -84,5 +84,11 @@
   "NEW_HDFS": "New Hdfs",
   "SECURE_COMMUNICATION": "Secure Communication",
   "NEW_TOOL": "New Tool",
-  "NEW_KIBANA": "New Kibana"
+  "NEW_KIBANA": "New Kibana",
+  "COUCHBASE": "Couchbase",
+  "DRUID": "Druid",
+  "ELASTICSEARCH": "Elasticsearch",
+  "MONGODB": "MongoDB",
+  "HDFS": "Hdfs",
+  "DATABASE_NAME": "Database Name"
 }
