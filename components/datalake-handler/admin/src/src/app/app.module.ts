@@ -105,7 +105,8 @@ import { IconComponent } from "./shared/components/icon/icon.component";
 import { MatTabsModule } from "@angular/material";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TopicModalComponent } from "./views/topics/topic-list/topic-modal/topic-modal.component";
-import { KafkaModalComponent } from './views/kafka/kafka-list/kafka-modal/kafka-modal.component';
+import { KafkaModalComponent } from "./views/kafka/kafka-list/kafka-modal/kafka-modal.component";
+import { DbModalComponent } from "./views/database/database-list/db-modal/db-modal.component";
 
 @NgModule({
   declarations: [
@@ -153,7 +154,8 @@ import { KafkaModalComponent } from './views/kafka/kafka-list/kafka-modal/kafka-
     ToolAddModalComponent,
     IconComponent,
     TopicModalComponent,
-    KafkaModalComponent
+    KafkaModalComponent,
+    DbModalComponent
   ],
   imports: [
     BrowserModule,
@@ -198,7 +200,8 @@ import { KafkaModalComponent } from './views/kafka/kafka-list/kafka-modal/kafka-
     ToolAddModalComponent,
     ModalToolsComponent,
     TopicModalComponent,
-    KafkaModalComponent
+    KafkaModalComponent,
+    DbModalComponent
   ]
 })
 export class AppModule {}
