@@ -258,6 +258,15 @@ public class DbController {
 
 	}
 
+	//get db type list
+	@GetMapping("/dbtypes")
+	@ResponseBody
+	@ApiOperation(value="Get a list of all db types.")
+	public Iterable<DbType> getDbTypes(HttpServletResponse response) throws IOException {
+		log.info("Get a list of all db types ......");
+		Iterable<DbType> dbTypes = dbTypeRepository.findAll(); 
+		return dbTypes;
+ 	}
 
 	@PostMapping("/verify")
 	@ResponseBody

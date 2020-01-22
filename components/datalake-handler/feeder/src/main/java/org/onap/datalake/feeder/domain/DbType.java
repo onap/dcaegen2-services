@@ -29,6 +29,9 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -56,7 +59,8 @@ public class DbType {
 
 	@Column(name="`tool`", nullable = false)
 	private boolean tool;
- 
+
+	@JsonBackReference
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "dbType")
 	protected Set<Db> dbs = new HashSet<>();
 
