@@ -1,0 +1,11 @@
+{
+  "self": {
+    "name": "PMSH_CL_INPUT",
+    "version": "1.0.0",
+    "description": "Unstructured PMSH CL INPUT"
+  },
+  "dataformatversion": "1.0.0",
+  "unstructured": {
+    "encoding": "UTF-8"
+  }
+}
