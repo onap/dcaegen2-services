@@ -1,0 +1,11 @@
+{
+  "self": {
+    "name": "AAI_EVENT_FORMAT",
+    "version": "1.0.0",
+    "description": "AAI EVENT output format"
+  },
+  "dataformatversion": "1.0.0",
+  "unstructured": {
+    "encoding": "UTF-8"
+  }
+}
