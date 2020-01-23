@@ -1,0 +1,123 @@
+{
+  "self": {
+    "name": "PMSH_CL_OUTPUT",
+    "version": "1.0.0",
+    "description": "The output format of PM Subscription CL event to Policy"
+  },
+  "dataformatversion": "1.0.0",
+  "jsonSchema": {
+    "name": "PM Subscription CL event",
+    "version": "1.0.0",
+    "properties": {
+      "closedLoopControlName": {
+        "type": "string",
+        "description" : "This is the unique ID for the Control Loop. It is created by the CLAMP platform during Control Loop design"
+      },
+      "policyName": {
+        "type": "string",
+        "description" : "The name of the Operational Policy driving the DCAE micro service."
+      },
+      "changeType": {
+        "type": "string",
+        "description": "This is the change indicator that determines whether to apply/remove a PM subscription",
+        "enum": [
+          "CREATE",
+          "DELETE"
+        ]
+      },
+      "subscription": {
+        "type": "object",
+        "description": "This is the PM subscription to be applied/removed to/from an xNF",
+        "properties": {
+          "subscriptionName": {
+            "type": "string"
+          },
+          "nfName": {
+            "type": "string"
+          },
+          "administrativeState": {
+            "type": "string",
+            "enum": [
+              "UNLOCKED",
+              "LOCKED"
+            ]
+          },
+          "fileBasedGP": {
+            "type": "integer"
+          },
+          "fileLocation": {
+            "type": "string"
+          },
+          "measurementGroups": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "properties": {
+                  "measurementGroup": {
+                    "type": "object",
+                    "properties": {
+                      "measurementTypes": {
+                        "type": "array",
+                        "items": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "measurementType": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "measurementType"
+                            ]
+                          }
+                        ]
+                      },
+                      "managedObjectDNsBasic": {
+                        "type": "array",
+                        "items": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "DN": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "DN"
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "measurementTypes",
+                      "managedObjectDNsBasic"
+                    ]
+                  }
+                },
+                "required": [
+                  "measurementGroup"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "subscriptionName",
+          "nfName",
+          "administrativeState",
+          "fileBasedGP",
+          "fileLocation",
+          "measurementGroups"
+        ]
+      }
+    },
+    "required": [
+      "closedLoopControlName",
+      "policyName",
+      "changeType",
+      "subscription"
+    ]
+  }
+}
