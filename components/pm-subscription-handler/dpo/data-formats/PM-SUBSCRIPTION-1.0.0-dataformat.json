@@ -1,0 +1,11 @@
+{
+  "self": {
+    "name": "pm_subscription",
+    "version": "1.0.0",
+    "description": "Unstructured PM Subscription"
+  },
+  "dataformatversion": "1.0.0",
+  "unstructured": {
+    "encoding": "UTF-8"
+  }
+}
