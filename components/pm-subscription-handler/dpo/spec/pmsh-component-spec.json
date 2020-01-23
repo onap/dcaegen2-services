@@ -1,0 +1,73 @@
+{
+  "self": {
+    "name": "dcae-pmsh",
+    "version": "1.1.0",
+    "description": "Docker application that handles XNF's PM Subscriptions",
+    "component_type": "docker"
+  },
+  "streams": {
+    "subscribes": [],
+    "publishes": [
+      {
+        "type": "message_router",
+        "config_key": "pm-topic",
+        "format": "pm_subscription",
+        "version": "1.0.0"
+      }
+    ]
+  },
+  "services": {
+    "calls": [],
+    "provides": []
+  },
+  "auxilary": {
+    "ports": [
+      "8443:0",
+      "8081:0"
+    ]
+  },
+  "artifacts": [
+    {
+      "uri": "nexus3.onap.org:10001/onap/org.onap.dcaegen2.services.pmsh:latest",
+      "type": "docker image"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "service_name",
+      "value": "dcae-pmsh",
+      "description": "Name of the service",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "topic_name",
+      "value": "PM_SUBSCRIPTIONS",
+      "description": "Name of the topic PMSH publishes to",
+      "designer_editable": true,
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "cert_path",
+      "value": "/opt/app/pmsh/etc/certs/cert.pem",
+      "description": "Path to certificate file",
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "designer_editable": false
+    },
+    {
+      "name": "key_path",
+      "value": "/opt/app/pmsh/etc/certs/key.pem",
+      "description": "Path to the key for the certificate",
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "designer_editable": false
+    }
+  ]
+}
