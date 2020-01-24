@@ -64,7 +64,7 @@ def get_module_logger(mod_name):
     return logger
 
 
-def create_loggers(logs_path="/var/log/ONAP/pmsh/logs"):
+def create_loggers(logs_path=''):
     """
     Public method to set the global logger, launched from Run
     This is *not* launched during unit testing, so unit tests do not

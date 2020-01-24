@@ -16,14 +16,15 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 import json
-import os
 import uuid
+from os import environ
 
 import requests
 from requests.auth import HTTPBasicAuth
 
 import mod.pmsh_logging as logger
-from mod.subscription import Subscription, XnfFilter
+from mod.network_function import NetworkFunction
+from mod.subscription import Subscription, NetworkFunctionFilter
 
 
 def get_pmsh_subscription_data(cbs_data):
@@ -34,28 +35,29 @@ def get_pmsh_subscription_data(cbs_data):
         cbs_data: json app config from the Config Binding Service.
 
     Returns:
-        Subscription, set(Xnf): `Subscription` <Subscription> object, set of XNFs to be added.
+        Subscription, set(NetworkFunctions): `Subscription` <Subscription> object,
+        set of NetworkFunctions to be added.
 
     Raises:
         RuntimeError: if AAI data cannot be retrieved.
     """
-    aai_xnf_data = _get_all_aai_xnf_data()
-    if aai_xnf_data:
+    aai_nf_data = _get_all_aai_nf_data()
+    if aai_nf_data:
         sub = Subscription(**cbs_data['policy']['subscription'])
-        xnfs = _filter_xnf_data(aai_xnf_data, XnfFilter(**sub.nfFilter))
+        nfs = _filter_nf_data(aai_nf_data, NetworkFunctionFilter(**sub.nfFilter))
     else:
         raise RuntimeError('Failed to get data from AAI')
-    return sub, xnfs
+    return sub, nfs
 
 
-def _get_all_aai_xnf_data():
+def _get_all_aai_nf_data():
     """
-    Return queried xnf data from the AAI service.
+    Return queried nf data from the AAI service.
 
     Returns:
         json: the json response from AAI query, else None.
     """
-    xnf_data = None
+    nf_data = None
     try:
         session = requests.Session()
         aai_endpoint = f'{_get_aai_service_url()}{"/aai/v16/query"}'
@@ -74,10 +76,10 @@ def _get_all_aai_xnf_data():
                                data=json_data, params=params, verify=False)
         response.raise_for_status()
         if response.ok:
-            xnf_data = json.loads(response.text)
+            nf_data = json.loads(response.text)
     except Exception as e:
         logger.debug(e)
-    return xnf_data
+    return nf_data
 
 
 def _get_aai_service_url():
@@ -91,52 +93,37 @@ def _get_aai_service_url():
         KeyError: if AAI env vars not found.
     """
     try:
-        aai_service = os.environ['AAI_SERVICE_HOST']
-        aai_ssl_port = os.environ['AAI_SERVICE_PORT_AAI_SSL']
+        aai_service = environ['AAI_SERVICE_HOST']
+        aai_ssl_port = environ['AAI_SERVICE_PORT_AAI_SSL']
         return f'https://{aai_service}:{aai_ssl_port}'
     except KeyError as e:
         logger.debug(f'Failed to get AAI env vars: {e}')
         raise
 
 
-def _filter_xnf_data(xnf_data, xnf_filter):
+def _filter_nf_data(nf_data, nf_filter):
     """
-    Returns a list of filtered xnfs using the xnf_filter .
+    Returns a list of filtered NetworkFunctions using the nf_filter.
 
     Args:
-        xnf_data: the xnf json data from AAI.
-        xnf_filter: the `XnfFilter <XnfFilter>` to be applied.
+        nf_data : the nf json data from AAI.
+        nf_filter: the `NetworkFunctionFilter <NetworkFunctionFilter>` to be applied.
 
     Returns:
-        set: a set of filtered xnfs.
+        set: a set of filtered NetworkFunctions.
 
     Raises:
         KeyError: if AAI data cannot be parsed.
     """
-    xnf_set = set()
+    nf_set = set()
     try:
-        for xnf in xnf_data['results']:
-            name_identifier = 'pnf-name' if xnf['node-type'] == 'pnf' else 'vnf-name'
-            if xnf_filter.is_xnf_in_filter(xnf['properties'].get(name_identifier)):
-                xnf_set.add(Xnf(xnf_name=xnf['properties'].get('name_identifier'),
-                                orchestration_status=xnf['properties'].get('orchestration-status')))
+        for nf in nf_data['results']:
+            name_identifier = 'pnf-name' if nf['node-type'] == 'pnf' else 'vnf-name'
+            if nf_filter.is_nf_in_filter(nf['properties'].get(name_identifier)):
+                nf_set.add(NetworkFunction(
+                    nf_name=nf['properties'].get(name_identifier),
+                    orchestration_status=nf['properties'].get('orchestration-status')))
     except KeyError as e:
         logger.debug(f'Failed to parse AAI data: {e}')
         raise
-    return xnf_set
-
-
-class Xnf:
-    def __init__(self, **kwargs):
-        """
-        Object representation of the XNF.
-        """
-        self.xnf_name = kwargs.get('xnf_name')
-        self.orchestration_status = kwargs.get('orchestration_status')
-
-    @classmethod
-    def xnf_def(cls):
-        return cls(xnf_name=None, orchestration_status=None)
-
-    def __str__(self):
-        return f'xnf-name: {self.xnf_name}, orchestration-status: {self.orchestration_status}'
+    return nf_set

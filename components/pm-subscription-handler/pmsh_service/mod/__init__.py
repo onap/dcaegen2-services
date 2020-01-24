@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019 Nordix Foundation.
+#  Copyright (C) 2019-2020 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,49 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import os
+from urllib.parse import quote
+
+from connexion import App
+from flask_sqlalchemy import SQLAlchemy
+
+import mod.pmsh_logging as logger
+
+db = SQLAlchemy()
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-# empty __init__.py so that pytest can add correct path to coverage report,
-# -- per pytest best practice guideline
+def create_prod_app():
+    logger.create_loggers(os.getenv('LOGS_PATH'))
+    connex_app = App(__name__, specification_dir=basedir)
+    app = connex_app.app
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_RECORD_QUERIES'] = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = get_db_connection_url()
+    db.init_app(app)
+    return app
+
+
+def create_test_app():
+    logger.create_loggers('./unit_test_logs')
+    connex_app = App(__name__, specification_dir=basedir)
+    app = connex_app.app
+    app.config['TESTING'] = True
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_RECORD_QUERIES'] = True
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('TEST_DB_URL', 'sqlite://')
+    db.init_app(app)
+    return app
+
+
+def get_db_connection_url():
+    pg_host = os.getenv('PMSH_PG_URL')
+    pg_user = os.getenv('PMSH_PG_USERNAME')
+    pg_user_pass = os.getenv('PMSH_PG_PASSWORD')
+    pmsh_db_name = os.getenv('PMSH_DB_NAME', 'pmsh')
+    pmsh_db_port = os.getenv('PMSH_PG_PORT', '5432')
+    db_url = f'postgres+psycopg2://{quote(str(pg_user), safe="")}:' \
+        f'{quote(str(pg_user_pass), safe="")}@{pg_host}:{pmsh_db_port}/{pmsh_db_name}'
+    if 'None' in db_url:
+        raise Exception(f'Invalid DB connection URL: {db_url} .. exiting app!')
+    return db_url
