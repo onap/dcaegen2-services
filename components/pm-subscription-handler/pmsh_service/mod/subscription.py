@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019 Nordix Foundation.
+#  Copyright (C) 2019-2020 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 import re
+
+import mod.pmsh_logging as logger
+from mod import db
+from mod.db_models import SubscriptionModel, NfSubRelationalModel
 
 
 class Subscription:
@@ -41,21 +45,100 @@ class Subscription:
         clean_sub.update({'nfName': xnf_name, 'policyName': f'OP-{self.subscriptionName}'})
         return clean_sub
 
+    def create(self):
+        """ Creates a subscription database entry
 
-class XnfFilter:
+        Returns:
+            Subscription object
+        """
+        existing_subscription = (SubscriptionModel.query.filter(
+            SubscriptionModel.subscription_name == self.subscriptionName).one_or_none())
+
+        if existing_subscription is None:
+            new_subscription = SubscriptionModel(subscription_name=self.subscriptionName,
+                                                 status=self.administrativeState)
+
+            db.session.add(new_subscription)
+            db.session.commit()
+
+            return new_subscription
+
+        else:
+            logger.debug(f'Subscription {self.subscriptionName} already exists,'
+                         f' returning this subscription..')
+            return existing_subscription
+
+    def add_network_functions_to_subscription(self, nf_list):
+        """ Associates network functions to a Subscription
+
+        Args:
+            nf_list : A list of NetworkFunction objects.
+        """
+        current_sub = self.create()
+        logger.debug(f'Adding network functions to subscription {current_sub.subscription_name}')
+
+        for nf in nf_list:
+            current_nf = nf.create()
+
+            existing_entry = NfSubRelationalModel.query.filter(
+                NfSubRelationalModel.subscription_name == current_sub.subscription_name,
+                NfSubRelationalModel.nf_name == current_nf.nf_name).one_or_none()
+            if existing_entry is None:
+                new_nf_sub = NfSubRelationalModel(current_sub.subscription_name, nf.nf_name)
+                new_nf_sub.nf = current_nf
+                logger.debug(current_nf)
+                current_sub.nfs.append(new_nf_sub)
+
+        db.session.add(current_sub)
+        db.session.commit()
+
+    @staticmethod
+    def get(subscription_name):
+        """ Retrieves a subscription
+
+        Args:
+            subscription_name (str): The subscription name
+
+        Returns:
+            Subscription object else None
+        """
+        return SubscriptionModel.query.filter(
+            SubscriptionModel.subscription_name == subscription_name).one_or_none()
+
+    @staticmethod
+    def get_all():
+        """ Retrieves a list of subscriptions
+
+        Returns:
+            list: Subscription list else empty
+        """
+        return SubscriptionModel.query.all()
+
+    @staticmethod
+    def get_all_nfs_subscription_relations():
+        """ Retrieves all network function to subscription relations
+
+        Returns:
+            list: NetworkFunctions per Subscription list else empty
+        """
+        nf_per_subscriptions = NfSubRelationalModel.query.all()
+
+        return nf_per_subscriptions
+
+
+class NetworkFunctionFilter:
     def __init__(self, **kwargs):
         self.nf_sw_version = kwargs.get('swVersions')
         self.nf_names = kwargs.get('nfNames')
         self.regex_matcher = re.compile('|'.join(raw_regex for raw_regex in self.nf_names))
 
-    def is_xnf_in_filter(self, xnf_name):
-        """Match the xnf name against regex values in Subscription.nfFilter.nfNames
+    def is_nf_in_filter(self, nf_name):
+        """Match the nf name against regex values in Subscription.nfFilter.nfNames
 
         Args:
-            xnf_name: the AAI xnf name.
+            nf_name: the AAI nf name.
 
         Returns:
             bool: True if matched, else False.
         """
-
-        return self.regex_matcher.search(xnf_name)
+        return self.regex_matcher.search(nf_name)
