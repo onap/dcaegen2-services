@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d3662b7_d2b3bd1f",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-01-24T11:05:34Z",
+      "side": 1,
+      "message": "Maybe keep the imports the same format, in quotes",
+      "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c582850_f6e9b167",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-01-24T11:05:34Z",
+      "side": 1,
+      "message": "Remove this 300",
+      "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac6a3e0f_b5b4bfe1",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-01-24T11:05:34Z",
+      "side": 1,
+      "message": "Maybe don\u0027t hardcode password",
+      "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7505254e_d7d0b672",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-01-24T11:05:34Z",
+      "side": 1,
+      "message": "We should only have https port I think",
+      "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23fe3b35_1212b106",
+        "filename": "components/pm-subscription-handler/dpo/spec/pmsh-component-spec.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-01-24T11:05:34Z",
+      "side": 1,
+      "message": "Same as blueprint comment",
+      "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
