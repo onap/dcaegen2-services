@@ -25,6 +25,7 @@ ENV PMSHUSER=pmsh \
     PATH=/usr/local/lib/python3.7/bin:$PATH:$APPDIR/bin \
     PYTHONPATH=/usr/local/lib/python3.7/site-packages:./mod:./:$PYTHONPATH:$APPDIR/bin \
     REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+    FLASK_CONFIG="production"
 
 WORKDIR $APPDIR
 
