@@ -31,7 +31,7 @@ from mod.subscription import Subscription
 class PmshUtilsTestCase(unittest.TestCase):
 
     def setUp(self):
-        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data.json'), 'r') as data:
+        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data = json.load(data)
         self.app_conf = AppConfig(**self.cbs_data['config'])
         self.sub = Subscription(**self.cbs_data['policy']['subscription'])
