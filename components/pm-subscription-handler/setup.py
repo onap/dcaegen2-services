@@ -1,5 +1,5 @@
 # ============LICENSE_START=======================================================
-#  Copyright (C) 2019 Nordix Foundation.
+#  Copyright (C) 2019-2020 Nordix Foundation.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,5 +30,9 @@ setup(
     python_requires='>=3',
     install_requires=[
         "requests==2.22.0",
-        "tenacity==6.0.0"],
+        "tenacity==6.0.0",
+        "connexion==2.5.0",
+        "flask_sqlalchemy==2.4.1",
+        "Flask==1.1.1",
+        "psycopg2-binary==2.8.4"]
 )

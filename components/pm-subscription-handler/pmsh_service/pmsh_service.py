@@ -15,17 +15,34 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import sys
 import time
 
+import mod.aai_client as aai_client
 import mod.pmsh_logging as logger
+from mod import db, create_prod_app
+from mod.config_handler import ConfigHandler
+from mod.subscription import Subscription
 
 
 def main():
-    logger.create_loggers()
+
+    try:
+        app = create_prod_app()
+        app.app_context().push()
+        db.create_all(app=app)
+
+        config_handler = ConfigHandler()
+        cbs_data = config_handler.get_config()
+        subscription, xnfs = aai_client.get_pmsh_subscription_data(cbs_data)
+        subscription.add_network_functions_to_subscription(xnfs)
+    except Exception as e:
+        logger.debug(f'Failed to Init PMSH: {e}')
+        sys.exit(e)
 
     while True:
-        time.sleep(30)
-        logger.debug("He's not the messiah, he's a very naughty boy!")
+        logger.debug(Subscription.get_all_nfs_subscription_relations())
+        time.sleep(5)
 
 
 if __name__ == '__main__':

@@ -22,7 +22,7 @@ from os import environ
 import requests
 from tenacity import retry, wait_fixed, stop_after_attempt
 
-from pmsh_service.mod import pmsh_logging as logger
+import mod.pmsh_logging as logger
 
 
 class ConfigHandler:

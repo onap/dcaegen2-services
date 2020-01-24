@@ -18,12 +18,14 @@
 import json
 import os
 import unittest
+from test.support import EnvironmentVarGuard
 from unittest import mock
 from unittest.mock import patch
 
 import responses
 from requests import Session
 
+from mod import get_db_connection_url
 from mod.pmsh_utils import AppConfig
 from mod.subscription import Subscription
 
@@ -31,7 +33,7 @@ from mod.subscription import Subscription
 class PmshUtilsTestCase(unittest.TestCase):
 
     def setUp(self):
-        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data.json'), 'r') as data:
+        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data = json.load(data)
         self.app_conf = AppConfig(**self.cbs_data['config'])
         self.sub = Subscription(**self.cbs_data['policy']['subscription'])
@@ -98,3 +100,18 @@ class PmshUtilsTestCase(unittest.TestCase):
         mr_policy_sub = self.app_conf.get_mr_sub('policy_pm_subscriber')
         mr_topic_data = mr_policy_sub.get_from_topic(1)
         self.assertIsNone(mr_topic_data)
+
+    def test_get_db_connection_url_success(self):
+        self.env = EnvironmentVarGuard()
+        self.env.set('PMSH_PG_URL', '1.2.3.4')
+        self.env.set('PMSH_PG_USERNAME', 'pmsh')
+        self.env.set('PMSH_PG_PASSWORD', 'pass')
+        db_url = get_db_connection_url()
+        self.assertEqual(db_url, 'postgres+psycopg2://pmsh:pass@1.2.3.4:5432/pmsh')
+
+    def test_get_db_connection_url_fail(self):
+        self.env = EnvironmentVarGuard()
+        self.env.set('PMSH_PG_USERNAME', 'pmsh')
+        self.env.set('PMSH_PG_PASSWORD', 'pass')
+        with self.assertRaises(Exception):
+            get_db_connection_url()
