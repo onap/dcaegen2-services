@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019 Nordix Foundation.
+#  Copyright (C) 2019-2020 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,21 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+from os import path
+
+from connexion import App
+from flask_sqlalchemy import SQLAlchemy
+
+from mod.env_config import run_config
+
+db = SQLAlchemy()
 
 
-# empty __init__.py so that pytest can add correct path to coverage report,
-# -- per pytest best practice guideline
+def create_app(config_name):
+    basedir = path.abspath(path.dirname(__file__))
+    connex_app = App(__name__, specification_dir=basedir)
+    app = connex_app.app
+    app.config.from_object(run_config[config_name])
+    run_config[config_name].init_app(app)
+    db.init_app(app)
+    return app

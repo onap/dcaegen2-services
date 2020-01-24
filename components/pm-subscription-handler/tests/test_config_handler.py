@@ -20,16 +20,14 @@ import json
 import unittest
 from os import environ
 from os import path
-from unittest.mock import patch
 
-import requests
 import responses
 from tenacity import wait_none
 
 from pmsh_service.mod.config_handler import ConfigHandler
 
 
-class ConfigHandlerTest(unittest.TestCase):
+class ConfigHandlerTestCase(unittest.TestCase):
 
     def setUp(self):
         self.env_vars = {'CONFIG_BINDING_SERVICE_SERVICE_HOST': 'cbs_hostname',
@@ -38,7 +36,8 @@ class ConfigHandlerTest(unittest.TestCase):
         for key, value in self.env_vars.items():
             environ[key] = value
         self.cbs_url = 'http://cbs_hostname:10000/service_component_all/hostname'
-        self.expected_config = self._get_expected_config()
+        with open(path.join(path.dirname(__file__), 'data/cbs_data_2.json'))as json_file:
+            self.expected_config = json.load(json_file)
 
     def test_missing_environment_variable(self):
         for key, value in self.env_vars.items():
@@ -57,17 +56,6 @@ class ConfigHandlerTest(unittest.TestCase):
         config_handler.get_config.retry.wait = wait_none()
 
         self.assertEqual(self.expected_config, config_handler.get_config())
-
-    def test_get_config_already_exists(self):
-        config_handler = ConfigHandler()
-        expected_config = self._get_expected_config()
-        config_handler._config = expected_config
-
-        with patch.object(requests, 'get') as mock_get_request:
-            actual_config = config_handler.get_config()
-
-        self.assertEqual(0, mock_get_request.call_count)
-        self.assertEqual(expected_config, actual_config)
 
     @responses.activate
     def test_get_config_error(self):
@@ -105,8 +93,3 @@ class ConfigHandlerTest(unittest.TestCase):
         config_handler.get_config()
 
         self.assertEqual(retry_attempts, len(responses.calls))
-
-    @staticmethod
-    def _get_expected_config():
-        with open(path.join(path.dirname(__file__), 'expected_config.json'))as json_file:
-            return json.load(json_file)
