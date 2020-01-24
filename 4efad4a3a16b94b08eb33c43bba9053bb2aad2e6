@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d562c37_565f0d98",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-01-24T14:41:19Z",
+      "side": 1,
+      "message": "Put a \\ at the end of this line, might be the reason the build is failing",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 57
+      },
+      "revId": "4efad4a3a16b94b08eb33c43bba9053bb2aad2e6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
