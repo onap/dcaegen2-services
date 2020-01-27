@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "914378a3_23761b96",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-27T23:07:33Z",
+      "side": 1,
+      "message": "These reflects El-Alto version; need to updated for R6. Check the blueprint repo for current plugin/version",
+      "range": {
+        "startLine": 23,
+        "startChar": 101,
+        "endLine": 23,
+        "endChar": 120
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d983f84_cca5ed37",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-27T23:07:33Z",
+      "side": 1,
+      "message": "how this DB setup for DL?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 19
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "387bcef1_57455a98",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-27T23:07:33Z",
+      "side": 1,
+      "message": "are these external or internal to ONAP?",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d4e3275_b0689a54",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-27T23:07:33Z",
+      "side": 1,
+      "message": "image url must be from onap/nexus3",
+      "range": {
+        "startLine": 100,
+        "startChar": 13,
+        "endLine": 100,
+        "endChar": 65
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4dd10aa3_75d5e48b",
+        "filename": "components/datalake-handler/dpo/helm_chart/dcae-datalake/Chart.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-27T23:07:33Z",
+      "side": 1,
+      "message": "Invalid description.. Chart appears specific for DL-UI component setup and not represent collector/analyzer",
+      "range": {
+        "startLine": 3,
+        "startChar": 13,
+        "endLine": 3,
+        "endChar": 58
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d40dd4e5_6f744118",
+        "filename": "components/datalake-handler/dpo/helm_chart/dcae-datalake/Chart.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-27T23:07:33Z",
+      "side": 1,
+      "message": "1.0.0",
+      "range": {
+        "startLine": 5,
+        "startChar": 9,
+        "endLine": 5,
+        "endChar": 14
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "edf0d6f5_4a2f6a6d",
+        "filename": "components/datalake-handler/dpo/helm_chart/dcae-datalake/charts/dcae-datalake-admin-ui/Chart.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-27T23:07:33Z",
+      "side": 1,
+      "message": "1.0.0",
+      "range": {
+        "startLine": 5,
+        "startChar": 9,
+        "endLine": 5,
+        "endChar": 14
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a72e1d1_b9afbb05",
+        "filename": "components/datalake-handler/dpo/helm_chart/dcae-datalake/charts/dcae-datalake-admin-ui/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-27T23:07:33Z",
+      "side": 1,
+      "message": "nexus3",
+      "range": {
+        "startLine": 8,
+        "startChar": 14,
+        "endLine": 8,
+        "endChar": 54
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12360287_cc632558",
+        "filename": "components/datalake-handler/dpo/helm_chart/dcae-datalake/templates/service.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-27T23:07:33Z",
+      "side": 1,
+      "message": "This is not in nodeport range for ONAP which allows 302x or 304x.  If nodeport is required, you can choose any unused DCAE port listed https://wiki.onap.org/display/DW/OOM+NodePort+List (and update the wiki accordingly)",
+      "range": {
+        "startLine": 12,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 21
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
