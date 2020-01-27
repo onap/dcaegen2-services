@@ -48,6 +48,23 @@
     },
     {
       "key": {
+        "uuid": "5d62c2c3_01124580",
+        "filename": "components/datalake-handler/packages/.DS_Store",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-01-27T23:07:33Z",
+      "side": 1,
+      "message": "binary file to be removed",
+      "revId": "dd3ae2ce612d8d8f4b17db3c2794635c6348bb1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a8b9418c_89d2d996",
         "filename": "components/datalake-handler/packages/init_db/dockerfiles/Dockerfile",
         "patchSetId": 1
