@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cad5c017_910390e8",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-27T10:01:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d3662b7_d2b3bd1f",
+      "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c582850_f6e9b167",
         "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-01-24T11:05:34Z",
       "side": 1,
       "message": "Remove this 300",
+      "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4cdd9540_7e839cfd",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-27T10:01:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c582850_f6e9b167",
       "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "20d953c1_61789157",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-27T10:01:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac6a3e0f_b5b4bfe1",
+      "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7505254e_d7d0b672",
         "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "c79d0d57_e1097a79",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-27T10:01:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7505254e_d7d0b672",
+      "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23fe3b35_1212b106",
         "filename": "components/pm-subscription-handler/dpo/spec/pmsh-component-spec.json",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2020-01-24T11:05:34Z",
       "side": 1,
       "message": "Same as blueprint comment",
+      "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5a8b311_cf2ff540",
+        "filename": "components/pm-subscription-handler/dpo/spec/pmsh-component-spec.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-01-27T10:01:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23fe3b35_1212b106",
       "revId": "a0becebc4abf698109fbc87e6ea122ef650dcd90",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
