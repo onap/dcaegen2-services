@@ -25,6 +25,52 @@
     },
     {
       "key": {
+        "uuid": "b02b059c_31387cf2",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-01-29T11:52:49Z",
+      "side": 1,
+      "message": "We also need a subscriber, to listen to a response from policy, in order to update the DB\nShould probably use policy_pm_subscriber if the name below is changed as well",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 16
+      },
+      "revId": "169e36a909277df81eb16a6cb2c05aa648dcfcd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aeb91117_bda7ebbe",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-01-29T11:52:49Z",
+      "side": 1,
+      "message": "would prefer a name policy_pm_publisher",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 27
+      },
+      "revId": "169e36a909277df81eb16a6cb2c05aa648dcfcd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0d10429c_81832e5d",
         "filename": "components/pm-subscription-handler/dpo/spec/pmsh-component-spec.json",
         "patchSetId": 4
@@ -45,6 +91,29 @@
       "revId": "169e36a909277df81eb16a6cb2c05aa648dcfcd4",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42e5a248_c93938d0",
+        "filename": "components/pm-subscription-handler/dpo/spec/pmsh-component-spec.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-01-29T11:52:49Z",
+      "side": 1,
+      "message": "We need a subscriber as well",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "169e36a909277df81eb16a6cb2c05aa648dcfcd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     },
     {
       "key": {
