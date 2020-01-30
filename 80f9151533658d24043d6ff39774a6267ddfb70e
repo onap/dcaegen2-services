@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d04f943_18fed477",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-01-30T17:37:31Z",
+      "side": 1,
+      "message": "Vijay mentioned to use R6/k8splugin/1.7.2 not R5",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 142
+      },
+      "revId": "80f9151533658d24043d6ff39774a6267ddfb70e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72c78901_fd8a2d70",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-01-30T17:37:31Z",
+      "side": 1,
+      "message": "pm_subscribe_topic , better to keep consistent, use _ instead of - . (Also amend other places where it or the other version of this is used)",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "80f9151533658d24043d6ff39774a6267ddfb70e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc48136a_7e3f961b",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-01-30T17:37:31Z",
+      "side": 1,
+      "message": "needs more indent, or maybe just looks wrong in gerrit, + fix the variable name",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 32
+      },
+      "revId": "80f9151533658d24043d6ff39774a6267ddfb70e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abb75600_8adb0770",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-01-30T17:37:31Z",
+      "side": 1,
+      "message": "pm_subscribe_topic",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 46
+      },
+      "revId": "80f9151533658d24043d6ff39774a6267ddfb70e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "457e5f6a_b02e526b",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-01-30T17:37:31Z",
+      "side": 1,
+      "message": "pm_subscribe_topic",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 34
+      },
+      "revId": "80f9151533658d24043d6ff39774a6267ddfb70e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
