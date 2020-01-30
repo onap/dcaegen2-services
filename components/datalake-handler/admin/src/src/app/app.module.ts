@@ -107,6 +107,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TopicModalComponent } from "./views/topics/topic-list/topic-modal/topic-modal.component";
 import { KafkaModalComponent } from "./views/kafka/kafka-list/kafka-modal/kafka-modal.component";
 import { DbModalComponent } from "./views/database/database-list/db-modal/db-modal.component";
+import { ToolModalComponent } from "./views/tools/tool-modal/tool-modal.component";
 
 @NgModule({
   declarations: [
@@ -155,7 +156,8 @@ import { DbModalComponent } from "./views/database/database-list/db-modal/db-mod
     IconComponent,
     TopicModalComponent,
     KafkaModalComponent,
-    DbModalComponent
+    DbModalComponent,
+    ToolModalComponent
   ],
   imports: [
     BrowserModule,
@@ -201,7 +203,8 @@ import { DbModalComponent } from "./views/database/database-list/db-modal/db-mod
     ModalToolsComponent,
     TopicModalComponent,
     KafkaModalComponent,
-    DbModalComponent
+    DbModalComponent,
+    ToolModalComponent
   ]
 })
 export class AppModule {}

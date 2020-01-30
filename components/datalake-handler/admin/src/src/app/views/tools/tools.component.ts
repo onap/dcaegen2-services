@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2019 CMCC, Inc. and others. All rights reserved.
+    Copyright (C) 2019 - 2020 CMCC, Inc. and others. All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -18,31 +18,35 @@
  *
  * @author Chunmeng Guo
  *
+ * @constructor Ekko Chang
  */
 
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {AdminService} from "src/app/core/services/admin.service";
-import {Db} from "src/app/core/models/db.model";
-import {RestApiService} from "src/app/core/services/rest-api.service";
-import {AlertComponent} from "src/app/shared/components/alert/alert.component";
-import {ToastrNotificationService} from "src/app/shared/components/toastr-notification/toastr-notification.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ToolAddModalComponent} from "src/app/views/tools/tool-add-modal/tool-add-modal.component";
-import {ModalToolsComponent} from "src/app/views/tools/modal-tools/modal-tools.component";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { AdminService } from "src/app/core/services/admin.service";
+import { Db } from "src/app/core/models/db.model";
+import { RestApiService } from "src/app/core/services/rest-api.service";
+
+// Modal
+import { AlertComponent } from "src/app/shared/components/alert/alert.component";
+import { ModalComponent } from "src/app/shared/modules/modal/modal.component";
+import { ModalContentData } from "src/app/shared/modules/modal/modal.data";
+import { ToolModalComponent } from "src/app/views/tools/tool-modal/tool-modal.component";
+import { ToastrNotificationService } from "src/app/shared/components/toastr-notification/toastr-notification.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+
+import { NgxSpinnerService } from "ngx-spinner";
+import { map, mergeMap } from "rxjs/operators";
+import { forkJoin, from } from "rxjs";
 
 @Component({
-  selector: 'app-tools',
-  templateUrl: './tools.component.html',
-  styleUrls: ['./tools.component.css']
+  selector: "app-tools",
+  templateUrl: "./tools.component.html",
+  styleUrls: ["./tools.component.css"]
 })
 export class ToolsComponent implements OnInit {
-
-  toolsColumns: Array<any> = [];
-  toolsList: Array<any> = [];
-  dbs: Db[] = [];
-  toolNew: Db;
-  loading: Boolean = true;
-  flag: Boolean = false;
+  columns: Array<any> = [];
+  tools: Array<any> = [];
+  t_temp: Array<any> = []; // cache for tools
 
   @ViewChild("searchText") searchText: ElementRef;
 
@@ -50,132 +54,186 @@ export class ToolsComponent implements OnInit {
     private adminService: AdminService,
     private notificationService: ToastrNotificationService,
     private modalService: NgbModal,
-    private dbApiService: RestApiService
+    private restApiService: RestApiService,
+    private spinner: NgxSpinnerService
   ) {
     this.adminService.setTitle("SIDEBAR.DASHBOARDLIST");
-    this.initData().then(data => { });
+    // this.initData().then(data => {});
   }
 
   ngOnInit() {
-    this.toolsColumns = [
+    this.spinner.show();
+
+    let t_tools: Array<Db> = [];
+
+    const get_tools = this.restApiService.getAllTools().pipe(
+      mergeMap(tools => from(tools)),
+      map(tool => {
+        t_tools.push(tool);
+      })
+    );
+
+    forkJoin(get_tools).subscribe(data => {
+      this.columns = this.initColumn();
+      this.tools = t_tools;
+      this.t_temp = [...this.tools];
+      this.updateFilter(this.searchText.nativeElement.value);
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 500);
+    });
+  }
+
+  initColumn() {
+    let t_columns: Array<any> = [];
+
+    t_columns = [
       {
-        name: "STATUS",
-        width: "50",
-        dataIndex: "enabled"
+        headerName: "STATUS",
+        width: "15",
+        sortable: true,
+        dataIndex: "enabled",
+        icon: "status"
       },
       {
-        name: "NAME",
-        width: "220",
+        headerName: "NAME",
+        width: "420",
+        sortable: true,
         dataIndex: "name"
       },
       {
-        name: "DB_TYPE",
-        width: "220",
+        headerName: "Type",
+        width: "50",
+        sortable: true,
         dataIndex: "dbTypeId"
       },
       {
-        name: "",
-        width: "5",
-        dataIndex: "",
-        icon: "trash"
+        headerName: "Host",
+        width: "100",
+        sortable: true,
+        dataIndex: "host"
       },
       {
-        name: "",
-        width: "5",
-        dataIndex: "",
-        icon: "cog"
+        width: "2",
+        iconButton: "cog",
+        action: "edit"
+      },
+      {
+        width: "2",
+        iconButton: "trash",
+        action: "delete"
       }
     ];
+
+    return t_columns;
   }
 
-  async initData() {
-    this.toolsList = await this.dbApiService.getDbEncryptList(this.flag).toPromise();
-  }
-
-  updateFilter(searchValue) {
+  updateFilter(searchValue: string) {
     const val = searchValue.toLowerCase();
+
     // filter our data
-    const temps = this.toolsList.filter(function (d) {
-      return d.name.toLowerCase().indexOf(val) != -1 || !val;
+    const temp = this.t_temp.filter(t => {
+      return t.name.toLowerCase().indexOf(val) !== -1 || !val;
     });
+
     // update the rows
-    this.toolsList = temps;
+    this.tools = temp;
   }
 
-  openModalDemo() {
-    this.modalService.open(ToolAddModalComponent, {
-      windowClass: "dl-md-modal dbs",
-      size: "sm",
-      centered: true
-    });
-  }
+  btnTableAction(passValueArr: Array<any>) {
+    let action = passValueArr[0];
+    let id = passValueArr[1];
 
-  dataAction($event) {
-    if($event[0] == "trash"){
-      console.log($event, "tools delete");
-      this.deleteToolModel($event[1]);
-    }else {
-      console.log($event, "tools update");
-      this.updateToolModel($event[1]);
+    switch (action) {
+      case "edit":
+        this.openModal("edit", id);
+        break;
+      case "delete":
+        const modalRef = this.modalService.open(AlertComponent, {
+          size: "sm",
+          centered: true,
+          backdrop: "static"
+        });
+        modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
+        modalRef.componentInstance.passEntry.subscribe(recevicedEntry => {
+          this.restApiService.deleteDb(id).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_DELETED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
+          modalRef.close();
+        });
+        break;
     }
   }
 
-  deleteToolModel(id: number) {
-
-    const modalRef = this.modalService.open(AlertComponent, {
-      size: "sm",
-      centered: true
-    });
-    modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      // Delete tool
-      this.dbApiService.deleteDb(id).subscribe(
-        res => {
-          if (JSON.stringify(res).length <= 2) {
-            this.toolsList = [...this.toolsList];
-            this.notificationService.success("SUCCESSFULLY_DELETED");
-            this.initData();
-          } else {
-            this.notificationService.error("FAILED_DELETED");
-          }
-          modalRef.close();
-        },
-        err => {
-          this.notificationService.error(err);
-          modalRef.close();
-        }
-      );
-    });
-  }
-
-  updateToolModel(id: number) {
-    const modalRef = this.modalService.open(ModalToolsComponent, {
+  openModal(mode: string = "", id: number | string) {
+    const modalRef = this.modalService.open(ModalComponent, {
       size: "lg",
-      centered: true
+      centered: true,
+      backdrop: "static"
     });
-    const index = this.toolsList.findIndex(t => t.id === id);
-    modalRef.componentInstance.editTool = this.toolsList[index];
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      this.toolNew = receivedEntry;
-      this.dbApiService
-        .updateDb(this.toolNew)
-        .subscribe(
-          res => {
-            if (res.statusCode == 200) {
-              this.toolsList[index] = this.toolNew;
-              this.toolsList = [...this.toolsList];
-              this.notificationService.success("SUCCESSFULLY_UPDATED");
-              this.initData();
-            } else {
-              this.notificationService.error("FAILED_UPDATED");
+
+    switch (mode) {
+      case "new":
+        let newTool: Db = new Db();
+        let componentNew = new ModalContentData(ToolModalComponent, newTool);
+
+        modalRef.componentInstance.title = "NEW_TOOL";
+        modalRef.componentInstance.notice = "";
+        modalRef.componentInstance.mode = "new";
+        modalRef.componentInstance.component = componentNew;
+
+        modalRef.componentInstance.passEntry.subscribe((data: Db) => {
+          newTool = Object.assign({}, data);
+          console.log(newTool.dbTypeId);
+          console.log(newTool);
+          this.restApiService.addDb(newTool).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_CREARED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
             }
-            modalRef.close();
-          },
-          err => {
-            this.notificationService.error(err);
-            modalRef.close();
-          }
-        );
-    });
+          );
+          modalRef.close();
+        });
+        break;
+      case "edit":
+        let index: number = this.tools.findIndex(db => db.id === id);
+        let editTool: Db = this.tools[index];
+        let componentEdit = new ModalContentData(ToolModalComponent, editTool);
+
+        modalRef.componentInstance.title = editTool.name;
+        modalRef.componentInstance.notice = "";
+        modalRef.componentInstance.mode = "edit";
+        modalRef.componentInstance.component = componentEdit;
+
+        modalRef.componentInstance.passEntry.subscribe((data: Db) => {
+          editTool = Object.assign({}, data);
+          this.restApiService.updateDb(editTool).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_UPDATED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
+          modalRef.close();
+        });
+        break;
+    }
   }
 }
