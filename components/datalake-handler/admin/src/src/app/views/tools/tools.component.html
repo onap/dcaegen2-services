@@ -1,5 +1,5 @@
 <!--
-    Copyright (C) 2019 CMCC, Inc. and others. All rights reserved.
+    Copyright (C) 2019 - 2020 CMCC, Inc. and others. All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
     Home > Tools
   </div>
   <div class="col-md-12">
-    <div class="topic-list-panel">
+    <div class="table-panel">
       <div class="row">
         <div class="col-md-12">
           <div class="d-flex justify-content-end p-2">
@@ -27,32 +27,24 @@
             <div class="p-1">
               <div class="input-group">
                 <input #searchText type="text" class="form-control dl-input-text-search" placeholder="Search..."
-                       (keyup)="this.updateFilter($event.target.value)" />
-                <div class="input-group-append">
-                  <button type="button" class="btn dl-btn-dark">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
+                  (keyup)="this.updateFilter($event.target.value)" />
               </div>
             </div>
-
             <!-- button -->
             <div class="p-1">
-              <app-button [text]="'plus'" [style]="'inlineicon'" [color]="'dark'" (click)="openModalDemo()"></app-button>
+              <app-button [text]="'plus'" [style]="'inlineicon'" [color]="'dark'" (click)="openModal('new')">
+              </app-button>
             </div>
           </div>
         </div>
       </div>
+
       <!-- datatable -->
       <div class="row">
         <div class="col-md-12">
-          <app-table [data]="toolsList" [columns]="toolsColumns" (btnTableAction)="dataAction($event)">
-          </app-table>
+          <app-table [data]="tools" [columns]="columns" (btnTableAction)="btnTableAction($event)"></app-table>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-

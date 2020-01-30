@@ -142,11 +142,17 @@ export class RestApiService {
   }
 
   /*
-    Database
+    Database and tools
   */
   public getAllDbs(): Observable<Db[]> {
     return this.http
       .get<Db[]>(prefix + "dbs/list?isDb=true")
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  public getAllTools(): Observable<Db[]> {
+    return this.http
+      .get<Db[]>(prefix + "dbs/list?isDb=false")
       .pipe(retry(1), catchError(this.handleError));
   }
 
