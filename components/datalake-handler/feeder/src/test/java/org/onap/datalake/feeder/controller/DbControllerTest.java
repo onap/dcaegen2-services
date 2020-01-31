@@ -69,6 +69,7 @@ public class DbControllerTest {
     
     public DbConfig getDbConfig() {
         DbConfig dbConfig = new DbConfig();
+        dbConfig.setId(1);
         dbConfig.setName("Elecsticsearch");
         dbConfig.setHost("localhost");
         dbConfig.setLogin("root");
@@ -112,7 +113,7 @@ public class DbControllerTest {
         DbController dbController = new DbController();
         DbConfig dbConfig = getDbConfig();
         when(mockBindingResult.hasErrors()).thenReturn(true);
-        PostReturnBody<DbConfig> db = dbController.updateDb(dbConfig, mockBindingResult,
+        PostReturnBody<DbConfig> db = dbController.updateDb(dbConfig.getId(), dbConfig, mockBindingResult,
                                                             httpServletResponse);
         assertEquals(null, db);
         //when(mockBindingResult.hasErrors()).thenReturn(false);

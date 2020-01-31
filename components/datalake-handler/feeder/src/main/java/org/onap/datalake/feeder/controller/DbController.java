@@ -211,17 +211,17 @@ public class DbController {
 	}
 
 	//Update Db
-	@PutMapping("")
+	@PutMapping("/{id}")
 	@ResponseBody
 	@ApiOperation(value="Update a database.")
-	public PostReturnBody<DbConfig> updateDb(@RequestBody DbConfig dbConfig, BindingResult result, HttpServletResponse response) throws IOException {
+	public PostReturnBody<DbConfig> updateDb(@PathVariable int id, @RequestBody DbConfig dbConfig, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
 			sendError(response, 400, "Error parsing DB: " + result.toString());
 			return null;
 		}
 
-		Db oldDb = dbRepository.findById(dbConfig.getId()).get();
+		Db oldDb = dbRepository.findById(id).get();
 		if (oldDb == null) {
 			sendError(response, 404, DB_NOT_FOUND + dbConfig.getName());
 			return null;
@@ -258,6 +258,15 @@ public class DbController {
 
 	}
 
+	//get db type list
+	@GetMapping("/dbtypes")
+	@ResponseBody
+	@ApiOperation(value="Get a list of all db types.")
+	public Iterable<DbType> getDbTypes(HttpServletResponse response) throws IOException {
+		log.info("Get a list of all db types ......");
+		Iterable<DbType> dbTypes = dbTypeRepository.findAll(); 
+		return dbTypes;
+ 	}
 
 	@PostMapping("/verify")
 	@ResponseBody
