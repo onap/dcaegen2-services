@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 QCT
+ * Copyright 2019 - 2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
  * @author Ekko Chang
  *
  */
-import { Component, OnInit, Input, Output, EventEmitter  } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-card",
@@ -38,19 +38,18 @@ export class CardComponent implements OnInit {
   @Input() modifiable: boolean;
   @Input() iconSize: string[] = ["sm", "md", "lg"];
 
-  @Output() cardAction = new EventEmitter<object>();
-  @Output() edit = new EventEmitter<object>();
+  @Output() cardClick = new EventEmitter<object>();
+  @Output() cardMoreActionClick = new EventEmitter<object>();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  cardClick() {
-    this.cardAction.emit();
+  cardClickAction() {
+    this.cardClick.emit();
   }
 
-  cardMoreAction(type) {
-    this.edit.emit(type);
+  cardMoreClickAction(action: any) {
+    this.cardMoreActionClick.emit(action);
   }
-
 }

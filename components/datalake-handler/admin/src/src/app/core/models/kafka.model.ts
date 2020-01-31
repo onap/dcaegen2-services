@@ -15,20 +15,21 @@
 */
 
 export class Kafka {
-  id: number;
-  name: string;
-  enabled: boolean;
-  brokerList: string;
-  zooKeeper: string;
-  group: string;
-  secure: boolean;
-  login: string;
-  pass: string;
-  securityProtocol: string;
-  includedTopic: string;
-  excludedTopic: string;
-  consumerCount: number;
-  timeout: number;
+  public id: number;
+  public name: string;
+  public enabled: boolean;
+  public brokerList: string;
+  public zooKeeper: string;
+  public group: string;
+  public secure: boolean;
+  public login: string;
+  public pass: string;
+  public securityProtocol: string;
+  public includedTopic: string;
+  public excludedTopic: string;
+  public consumerCount: number;
+  public timeout: number;
   // for UI display
-  checkedToSave: boolean;
+  public checkedToSave: boolean;
+  public iconPath: string;
 }
