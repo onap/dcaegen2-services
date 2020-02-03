@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "81a9ebfd_c635528d",
+        "filename": "components/datalake-handler/admin/src/src/app/views/tools/tool-modal/tool-modal.component.css",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:27:49Z",
+      "side": 1,
+      "message": "empty file?\nif it\u0027s really needed, at least have a comment in it",
+      "revId": "d5b36945d1e1b53ca4597b7e10fd035bcd22f50c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
