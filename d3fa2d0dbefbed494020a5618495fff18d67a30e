@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9621aa04_f98bba4e",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-datalake-helm-input.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:24:27Z",
+      "side": 1,
+      "message": "2020",
+      "revId": "d3fa2d0dbefbed494020a5618495fff18d67a30e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e4db676_74a245ec",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-datalake-helm.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:24:27Z",
+      "side": 1,
+      "message": "2020",
+      "revId": "d3fa2d0dbefbed494020a5618495fff18d67a30e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7bfd6af9_6ceb3ac9",
+        "filename": "components/datalake-handler/dpo/helm_chart/dcae-datalake/values.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:24:27Z",
+      "side": 1,
+      "message": "add LICENSE_START and LICENSE_END comments\nused by automated LICENSE checkers",
+      "revId": "d3fa2d0dbefbed494020a5618495fff18d67a30e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd88d8c9_65da820e",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 8
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:24:27Z",
+      "side": 1,
+      "message": "2020",
+      "revId": "d3fa2d0dbefbed494020a5618495fff18d67a30e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00c974a7_ebeeab24",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:24:27Z",
+      "side": 1,
+      "message": "how about \"create database if not exists\" ??",
+      "revId": "d3fa2d0dbefbed494020a5618495fff18d67a30e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6d040bc_0cc86cad",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db_data.sql",
+        "patchSetId": 8
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:24:27Z",
+      "side": 1,
+      "message": "2020",
+      "revId": "d3fa2d0dbefbed494020a5618495fff18d67a30e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "782d5eb6_67626df9",
+        "filename": "components/datalake-handler/packages/init_db/dockerfiles/Dockerfile",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:24:27Z",
+      "side": 1,
+      "message": "license block?",
+      "revId": "d3fa2d0dbefbed494020a5618495fff18d67a30e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "55425fe2_6a9cd47b",
+        "filename": "components/datalake-handler/packages/init_db/scripts/db_init/15_db-adduser",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:24:27Z",
+      "side": 1,
+      "message": "why not use \"create user if not exists\"??",
+      "revId": "d3fa2d0dbefbed494020a5618495fff18d67a30e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32c61d5d_d7713cdc",
+        "filename": "components/datalake-handler/packages/init_db/scripts/run.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:24:27Z",
+      "side": 1,
+      "message": "license block?",
+      "revId": "d3fa2d0dbefbed494020a5618495fff18d67a30e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
