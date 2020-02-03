@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "171e56f3_ebf1bd83",
+        "filename": "components/datalake-handler/admin/src/src/app/views/database/database-list/db-modal/db-modal.component.css",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-03T15:30:01Z",
+      "side": 1,
+      "message": "at least put a comment into the file if it is required",
+      "revId": "69f02fc29f700d852c04a199f4acba77a44fda5c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
