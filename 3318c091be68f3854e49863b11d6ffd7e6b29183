@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54fb0116_33bc8962",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-03T16:48:11Z",
+      "side": 1,
+      "message": "DCAE_CL_OUTPUT?",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 28
+      },
+      "revId": "3318c091be68f3854e49863b11d6ffd7e6b29183",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aac2de19_3d9fc791",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/pmsh-cl-output.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-03T16:48:11Z",
+      "side": 1,
+      "message": "These fields are not among current CL o/p definition - https://git.onap.org/dcaegen2/analytics/tca/tree/dpo/dcaeCLOutput.json",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 8
+      },
+      "revId": "3318c091be68f3854e49863b11d6ffd7e6b29183",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3eb84710_b90896de",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/pmsh-cl-output.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-03T16:48:11Z",
+      "side": 1,
+      "message": "This CL format is different from what other DCAE MS o/p into Policy. Has this been verified with Policy team?",
+      "range": {
+        "startLine": 28,
+        "startChar": 6,
+        "endLine": 115,
+        "endChar": 6
+      },
+      "revId": "3318c091be68f3854e49863b11d6ffd7e6b29183",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
