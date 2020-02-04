@@ -108,6 +108,7 @@ import { TopicModalComponent } from "./views/topics/topic-list/topic-modal/topic
 import { KafkaModalComponent } from "./views/kafka/kafka-list/kafka-modal/kafka-modal.component";
 import { DbModalComponent } from "./views/database/database-list/db-modal/db-modal.component";
 import { ToolModalComponent } from "./views/tools/tool-modal/tool-modal.component";
+import { TemplateModalComponent } from "./views/dashboard-setting/template/template-list/template-modal/template-modal.component";
 
 @NgModule({
   declarations: [
@@ -157,7 +158,8 @@ import { ToolModalComponent } from "./views/tools/tool-modal/tool-modal.componen
     TopicModalComponent,
     KafkaModalComponent,
     DbModalComponent,
-    ToolModalComponent
+    ToolModalComponent,
+    TemplateModalComponent
   ],
   imports: [
     BrowserModule,
@@ -204,7 +206,8 @@ import { ToolModalComponent } from "./views/tools/tool-modal/tool-modal.componen
     TopicModalComponent,
     KafkaModalComponent,
     DbModalComponent,
-    ToolModalComponent
+    ToolModalComponent,
+    TemplateModalComponent
   ]
 })
 export class AppModule {}

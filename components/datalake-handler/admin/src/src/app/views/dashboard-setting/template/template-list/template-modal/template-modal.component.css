@@ -13,15 +13,40 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+.row-wrapper {
+  display: flex;
+}
 
-export class Template {
-  public id: number;
-  public name: string;
-  public submitted: boolean;
-  public body: string;
-  public note: string;
-  public topicName: string;
-  public designType: string;
-  public designTypeName: string;
-  public dbs: Array<string>;
+.row-quarter-item {
+  width: 20%;
+  margin-bottom: 15px;
+}
+
+.row-half-item {
+  width: 45%;
+}
+
+.usual-item {
+  margin-left: 2%;
+}
+
+.upload-item {
+  margin-left: 5%;
+}
+
+.upload-item-content-button {
+  width: 35%;
+}
+
+.upload-item-content-body {
+  width: 95%;
+  min-height: 300px !important;
+}
+
+#f-file {
+  position: absolute;
+  /* width: 100%; */
+  /* height: 90%; */
+  opacity: 0;
+  cursor: pointer;
 }
