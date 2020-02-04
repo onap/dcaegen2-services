@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2f36d9fd_fe91d6eb",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-04T12:26:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cec9d4b1_86d70356",
+      "revId": "c46c9ce6657b8a99c3108160f6545f21d090f4d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5bb16b1_002bf30f",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/env_config.py",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2020-02-03T20:51:32Z",
       "side": 1,
       "message": "the username and password MUST be percent encoded before they can be used within a URL to prevent embedded characters such as :, @, +, and / from being mis-interpreted",
+      "revId": "c46c9ce6657b8a99c3108160f6545f21d090f4d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c70a7ff_7c708116",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/env_config.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-04T12:26:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5bb16b1_002bf30f",
       "revId": "c46c9ce6657b8a99c3108160f6545f21d090f4d7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
