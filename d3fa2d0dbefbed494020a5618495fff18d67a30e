@@ -87,6 +87,24 @@
     },
     {
       "key": {
+        "uuid": "d1be67a4_1be5b1c4",
+        "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db.sql",
+        "patchSetId": 8
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2020-02-04T08:30:10Z",
+      "side": 1,
+      "message": "We have a script to check the DB existence. If the DB exists, the database init process will be ignored. (10_check-db-exist)",
+      "parentUuid": "00c974a7_ebeeab24",
+      "revId": "d3fa2d0dbefbed494020a5618495fff18d67a30e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6d040bc_0cc86cad",
         "filename": "components/datalake-handler/feeder/src/assembly/scripts/init_db_data.sql",
         "patchSetId": 8
