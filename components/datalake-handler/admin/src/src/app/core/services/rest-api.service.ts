@@ -275,13 +275,34 @@ export class RestApiService {
   }
 
   /*
-  Template
+    Template
   */
-  getTemplateAll(): Observable<any> {
-    return this.http.get(prefix + "designs/").pipe(
-      //onlin
+  public getAllTemplate(): Observable<Template[]> {
+    return this.http
+      .get<Template[]>(prefix + "designs/")
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  public addTemplate(t: Template): Observable<Template> {
+    return this.http.post<Template>(prefix + "designs", t).pipe(
       retry(1),
-      map(this.extractData),
+      tap(_ => console.log(`add template name=${t.name}`)),
+      catchError(this.handleError)
+    );
+  }
+
+  public updateTemplate(t: Template): Observable<Template> {
+    return this.http.put<Template>(prefix + "designs/" + t.id, t).pipe(
+      retry(1),
+      tap(_ => this.extractData),
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteTemplate(id: number): Observable<Template> {
+    return this.http.delete<Template>(prefix + "designs/" + id).pipe(
+      retry(1),
+      tap(_ => console.log(`deleted template id=${id}`)),
       catchError(this.handleError)
     );
   }
@@ -292,54 +313,17 @@ export class RestApiService {
       .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
 
-  createNewTemplate(t: Template): Observable<any> {
-    return this.http.post(prefix + "designs", t).pipe(
-      retry(1),
-      tap(_ => this.extractData),
-      catchError(this.handleError)
-    );
+  public getTemplateDesignType(): Observable<any> {
+    return this.http
+      .get(prefix + "designTypes")
+      .pipe(retry(1), map(this.extractData), catchError(this.handleError));
   }
 
-  updateNewTemplate(t: Template): Observable<any> {
-    let id = t.id;
-    return this.http.put(prefix + "designs/" + id, t).pipe(
+  public deployTemplateKibana(id: number, data: Template): Observable<any> {
+    data.submitted = true;
+    return this.http.post(prefix + "designs/deploy/" + id, data).pipe(
       retry(1),
-      tap(_ => this.extractData),
-      catchError(this.handleError)
-    );
-  }
-
-  // getTopicName(): Observable<any> {
-  //   return this.http.get(prefix + "topics").pipe( //onlin
-  //     retry(1),
-  //     map(this.extractData),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-  getTemplateTypeName(): Observable<any> {
-    return this.http.get(prefix + "designTypes").pipe(
-      //onlin
-      retry(1),
-      map(this.extractData),
-      catchError(this.handleError)
-    );
-  }
-
-  DeleteTemplate(id): Observable<any> {
-    return this.http.delete(prefix + "designs/" + id).pipe(
-      //online
-      retry(1),
-      map(this.extractData2),
-      catchError(this.handleError)
-    );
-  }
-  deployTemplateKibana(id, body): Observable<any> {
-    body.submitted = true;
-    return this.http.post(prefix + "designs/deploy/" + id, body).pipe(
-      //online
-      retry(1),
-      map(this.extractData2),
+      tap(_ => console.log(`deploy template id=${data.id}`)),
       catchError(this.handleError)
     );
   }

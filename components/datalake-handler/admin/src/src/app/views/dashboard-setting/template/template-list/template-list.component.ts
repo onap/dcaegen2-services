@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2019 CMCC, Inc. and others. All rights reserved.
+    Copyright (C) 2019 - 2020 CMCC, Inc. and others. All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -13,244 +13,265 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { RestApiService } from "src/app/core/services/rest-api.service";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { Template } from "src/app/core/models/template.model";
-// Loading spinner
-import { NgxSpinnerService } from "ngx-spinner";
 
-// modal
-import { NewTemplateModalComponent } from "./new-template-modal/new-template-modal.component";
-import { EditTemplateModalComponent } from "./edit-template-modal/edit-template-modal.component";
+/**
+ *
+ * @constructor Ekko Chang
+ */
+
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { RestApiService } from "src/app/core/services/rest-api.service";
+import { Template } from "src/app/core/models/template.model";
+
 import { AlertComponent } from "src/app/shared/components/alert/alert.component";
-// notify
+import { ModalComponent } from "src/app/shared/modules/modal/modal.component";
+import { ModalContentData } from "src/app/shared/modules/modal/modal.data";
+import { TemplateModalComponent } from "src/app/views/dashboard-setting/template/template-list/template-modal/template-modal.component";
 import { ToastrNotificationService } from "src/app/shared/components/toastr-notification/toastr-notification.service";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+
+import { NgxSpinnerService } from "ngx-spinner";
+import { map, mergeMap } from "rxjs/operators";
+import { forkJoin, from } from "rxjs";
 
 @Component({
-  selector: 'app-template-list',
-  templateUrl: './template-list.component.html',
-  styleUrls: ['./template-list.component.css']
+  selector: "app-template-list",
+  templateUrl: "./template-list.component.html",
+  styleUrls: ["./template-list.component.css"]
 })
 export class TemplateListComponent {
-  template_list: any = [];
-  templates: Template[] = [];
-  temps: Template[] = [];
-  Template_New: Template;
-  Template_Newbody: Template;
-  dashboardDeteleModelShow = true;
-  loadingIndicator: boolean = true;
-  mesgNoData = {
-    emptyMessage: `
-      <div class="d-flex justify-content-center">
-        <div class="p-2">
-          <label class="dl-nodata">No Data</label>
-        </div>
-      </div>
-    `
-  };
-  @ViewChild("searchText") searchText: ElementRef;
-  constructor(
-    private modalService: NgbModal,
-    private dashboardApiService: RestApiService,
-    private spinner: NgxSpinnerService,
-    private notificationService: ToastrNotificationService,
-  ) {
-    setTimeout(() => {
-      this.loadingIndicator = false;
-    }, 5000);
+  columns: Array<any> = [];
+  templates: Array<Template> = [];
+  t_temp: Array<any> = []; // cache for templates
 
-    this.initData().then(data => {
-      this.initTemplateList(this.template_list).then(
-        data => {
-          // for cache of datatable
-          this.temps = [...data];
-          this.templates = data;
-          setTimeout(() => {
-            this.spinner.hide();
-          }, 500);
-        }
-      );
-    });
-  }
+  @ViewChild("searchText") searchText: ElementRef;
+
+  constructor(
+    private notificationService: ToastrNotificationService,
+    private modalService: NgbModal,
+    private restApiService: RestApiService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     this.spinner.show();
-  }
 
-  async initData() {
-    this.template_list = [];
-    this.template_list = await this.getTemplateList();
-    this.Template_New = new Template();
-    this.Template_Newbody = new Template();
-    return true;
-  }
+    let t_templates: Array<Template> = [];
 
-
-  getTemplateList() {
-    return this.dashboardApiService.getTemplateAll().toPromise();
-  }
-
-  async initTemplateList(template_list: []) {
-    var t: Template[] = [];
-    for (var i = 0; i < template_list.length; i++) {
-      let data = template_list[i];
-      let feed = {
-        id: data["id"],
-        name: data["name"],
-        submitted: data["submitted"],
-        body: data["body"],
-        note: data["note"],
-        topicName: data["topicName"],
-        designType: data["designType"],
-        designTypeName: data["designTypeName"],
-        dbs: data["dbs"],
-      };
-      t.push(feed);
-    }
-    return t;
-  }
-
-  newTemplateModal() {
-    const modalRef = this.modalService.open(NewTemplateModalComponent, {
-      windowClass: "dl-md-modal templatess",
-      centered: true
-    });
-    this.Template_New = new Template();
-    this.Template_Newbody = new Template();
-    modalRef.componentInstance.template = this.Template_Newbody;
-    modalRef.componentInstance.templatelist_length = this.template_list.length;
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      this.Template_Newbody = receivedEntry;
-      this.dashboardApiService
-        .createNewTemplate(this.Template_Newbody)
-        .subscribe(
-          res => {
-            if (res.statusCode == 200) {
-              this.Template_New = res.returnBody;
-              this.template_list.push(this.Template_New);
-              this.template_list = [...this.template_list];
-              this.notificationService.success("SUCCESSFULLY_CREARED");
-            } else {
-              this.notificationService.error("FAILED_CREARED");
-            }
-            modalRef.close();
-          },
-          err => {
-            this.notificationService.error(err);
-            modalRef.close();
-          }
-        );
-    });
-  }
-
-  onActivate(event) {
-    const emitType = event.type;
-    if (emitType == "dblclick") {
-      let id = event.row.id;
-      this.editTemplateModal(id);
-    }
-
-  }
-
-  editTemplateModal(id) {
-    const index = this.template_list.findIndex(t => t.id === id);
-    const modalRef = this.modalService.open(EditTemplateModalComponent, {
-      windowClass: "dl-md-modal templatess",
-      centered: true
-    });
-    modalRef.componentInstance.edittemplate = this.template_list[index];
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      this.Template_New = receivedEntry;
-      this.dashboardApiService
-        .updateNewTemplate(this.Template_New)
-        .subscribe(
-          res => {
-            if (res.statusCode == 200) {
-              this.template_list[index] = this.Template_New;
-              this.template_list = [...this.template_list];
-              this.notificationService.success("SUCCESSFULLY_UPDATED");
-            } else {
-              this.notificationService.error("FAILED_UPDATED");
-            }
-            modalRef.close();
-          },
-          err => {
-            this.notificationService.error(err);
-            modalRef.close();
-          }
-        );
-    })
-  }
-
-  deleteTemplateModel(id: number) {
-    const index = this.template_list.findIndex(t => t.id === id);
-    const modalRef = this.modalService.open(AlertComponent, {
-      size: "sm",
-      centered: true
-    });
-    // modalRef.componentInstance.dashboardDeteleModelShow = this.dashboardDeteleModelShow;
-    modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      // Delete database
-      this.dashboardApiService.DeleteTemplate(id).subscribe(
-        res => {
-          if (JSON.stringify(res).length <= 2) {
-            this.template_list.splice(index, 1);
-            this.template_list = [...this.template_list];
-            this.notificationService.success("SUCCESSFULLY_DELETED");
-          } else {
-            this.notificationService.error("FAILED_DELETED");
-          }
-
-          modalRef.close();
-        },
-        err => {
-          this.notificationService.error(err);
-          modalRef.close();
-        }
-      );
-    });
-
-  }
-
-  deployTemplate(id: number) {
-    const index = this.template_list.findIndex(t => t.id === id);
-    const body = this.template_list[index];
-    this.spinner.show();
-    this.dashboardApiService.deployTemplateKibana(id, body).subscribe(
-      res => {
-        this.spinner.hide();
-        let processArr = []
-        Object.keys(res).map(item =>
-          processArr.push({ name: item, status: res[item] })
-        )
-
-        if (processArr.length !== 0) {
-          processArr.map(item =>
-            item.status ?
-              setTimeout(() => { this.notificationService.success("Deploy_SUCCESSFULLY") }, 1000) :
-              setTimeout(() => { this.notificationService.error("Deploy_FAILED") }, 2000))
-        } else {
-          this.notificationService.error("Deploy_FAILED");
-        }
-      },
-      err => {
-        this.spinner.hide();
-        this.notificationService.error(err);
-      }
+    const get_templates = this.restApiService.getAllTemplate().pipe(
+      mergeMap(templates => from(templates)),
+      map(template => {
+        t_templates.push(template);
+      })
     );
-  }
 
-  updateFilter(searchValue) {
-    const val = searchValue.toLowerCase();
-    // filter our data
-    const temps = this.temps.filter(function (d) {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+    forkJoin(get_templates).subscribe(data => {
+      this.columns = this.initColumn();
+      this.templates = t_templates;
+      this.t_temp = [...this.templates];
+      this.updateFilter(this.searchText.nativeElement.value);
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 500);
     });
-    // update the rows
-    this.template_list = temps;
   }
 
+  initColumn() {
+    let t_columns: Array<any> = [];
 
+    t_columns = [
+      {
+        headerName: "NAME",
+        width: "420",
+        sortable: true,
+        dataIndex: "name"
+      },
+      {
+        headerName: "Type",
+        width: "100",
+        sortable: true,
+        dataIndex: "designTypeName"
+      },
+      {
+        headerName: "Topics name",
+        width: "200",
+        sortable: true,
+        dataIndex: "topicName"
+      },
+      {
+        headerName: "Deploy to dashboard",
+        width: "80",
+        textButton: "DEPLOY",
+        action: "deploy"
+      },
+      {
+        width: "2",
+        iconButton: "cog",
+        action: "edit"
+      },
+      {
+        width: "2",
+        iconButton: "trash",
+        action: "delete"
+      }
+    ];
+
+    return t_columns;
+  }
+
+  updateFilter(searchValue: string) {
+    const val = searchValue.toLowerCase();
+
+    // filter our data
+    const temp = this.t_temp.filter(t => {
+      return t.name.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    // update the rows
+    this.templates = temp;
+  }
+
+  btnTableAction(passValueArr: Array<any>) {
+    let action = passValueArr[0];
+    let id = passValueArr[1];
+
+    switch (action) {
+      case "edit":
+        this.openModal("edit", id);
+        break;
+      case "delete":
+        const modalRef = this.modalService.open(AlertComponent, {
+          size: "sm",
+          centered: true,
+          backdrop: "static"
+        });
+        modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
+        modalRef.componentInstance.passEntry.subscribe(recevicedEntry => {
+          this.restApiService.deleteTemplate(id).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_DELETED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
+          modalRef.close();
+        });
+        break;
+      case "deploy":
+        this.spinner.show();
+        let index: number = this.templates.findIndex(d => d.id === id);
+        let data: Template = this.templates[index];
+
+        this.restApiService.deployTemplateKibana(id, data).subscribe(
+          res => {
+            setTimeout(() => {
+              this.spinner.hide();
+            }, 500);
+
+            let processArr = [];
+            Object.keys(res).map(item =>
+              processArr.push({ name: item, status: res[item] })
+            );
+
+            if (processArr.length > 0) {
+              processArr.map(item =>
+                item.status
+                  ? setTimeout(() => {
+                      this.notificationService.success("Deploy_SUCCESSFULLY");
+                    }, 600)
+                  : setTimeout(() => {
+                      this.notificationService.error("Deploy_FAILED");
+                    }, 600)
+              );
+            } else {
+              this.notificationService.error("Deploy_FAILED");
+            }
+          },
+          err => {
+            setTimeout(() => {
+              this.spinner.hide();
+            }, 500);
+            this.notificationService.error(err);
+          }
+        );
+        break;
+    }
+  }
+
+  openModal(mode: string = "", id: number | string) {
+    const modalRef = this.modalService.open(ModalComponent, {
+      size: "lg",
+      centered: true,
+      backdrop: "static"
+    });
+
+    switch (mode) {
+      case "new":
+        let newTemplate: Template = new Template();
+        newTemplate.submitted = false;
+        let componentNew = new ModalContentData(
+          TemplateModalComponent,
+          newTemplate
+        );
+
+        modalRef.componentInstance.title = "NEW_TEMPLATE";
+        modalRef.componentInstance.notice = "";
+        modalRef.componentInstance.mode = "new";
+        modalRef.componentInstance.component = componentNew;
+
+        modalRef.componentInstance.passEntry.subscribe((data: Template) => {
+          newTemplate = Object.assign({}, data);
+          newTemplate.dbs = new Array();
+          newTemplate.dbs.push(data.dbs[0]);
+          this.restApiService.addTemplate(newTemplate).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_CREARED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
+          modalRef.close();
+        });
+        break;
+      case "edit":
+        let index: number = this.templates.findIndex(db => db.id === id);
+        let editTemplate: Template = this.templates[index];
+        let componentEdit = new ModalContentData(
+          TemplateModalComponent,
+          editTemplate
+        );
+
+        modalRef.componentInstance.title = editTemplate.name;
+        modalRef.componentInstance.notice = "";
+        modalRef.componentInstance.mode = "edit";
+        modalRef.componentInstance.component = componentEdit;
+
+        modalRef.componentInstance.passEntry.subscribe((data: Template) => {
+          editTemplate = Object.assign({}, data);
+          editTemplate.dbs = new Array();
+          editTemplate.dbs.push(data.dbs[0]);
+          this.restApiService.updateTemplate(editTemplate).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_UPDATED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
+          modalRef.close();
+        });
+        break;
+    }
+  }
 }
