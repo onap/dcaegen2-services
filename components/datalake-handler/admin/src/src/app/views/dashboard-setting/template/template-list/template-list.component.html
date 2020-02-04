@@ -1,5 +1,5 @@
 <!--
-    Copyright (C) 2019 CMCC, Inc. and others. All rights reserved.
+    Copyright (C) 2019 - 2020 CMCC, Inc. and others. All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -13,7 +13,8 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<div class="topic-list-panel">
+
+<div class="table-panel">
   <div class="row">
     <div class="col-md-12">
       <div class="d-flex justify-content-end p-2">
@@ -22,91 +23,21 @@
           <div class="input-group">
             <input #searchText type="text" class="form-control dl-input-text-search" placeholder="Search..."
               (keyup)="this.updateFilter($event.target.value)" />
-            <div class="input-group-append">
-              <button type="button" class="btn dl-btn-dark">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
           </div>
         </div>
-
         <!-- button -->
         <div class="p-1">
-          <button class="btn dl-btn-dark" (click)="newTemplateModal();">
-            {{ "NEW_TEMPLATE" | translate }}
-          </button>
+          <app-button [text]="'plus'" [style]="'inlineicon'" [color]="'dark'" (click)="openModal('new')">
+          </app-button>
         </div>
       </div>
     </div>
   </div>
+
   <!-- datatable -->
   <div class="row">
     <div class="col-md-12">
-      <ngx-datatable #mytemlate class="bootstrap" [rows]="template_list" [columnMode]="'force'" [headerHeight]="40"
-        [footerHeight]="40" [rowHeight]="50" [scrollbarV]="true" [scrollbarH]="true"
-        [loadingIndicator]="loadingIndicator" [messages]="mesgNoData" [limit]="10" (activate)="onActivate($event)">
-
-        <!--<ngx-datatable-column [width]="40" name="{{ 'No' | translate }}" prop="id"-->
-        <!--headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">-->
-        <!--<div>-->
-        <!--<ng-template let-row="row">-->
-        <!--<span>{{ row.id }}</span>-->
-        <!--</ng-template>-->
-        <!--</div>-->
-        <!--</ngx-datatable-column>-->
-
-        <ngx-datatable-column [width]="100" name="{{ 'TEMPLATE_NAME' | translate }}" prop="name"
-          headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>{{ row.name }}</span>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="180" name="{{ 'TEMPLATE_TYPE' | translate }}" prop="type">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>{{ row.designTypeName }}</span>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="220" name="{{ 'TOPICS_NAME' | translate }}" prop="topic">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>{{ row.topicName }}</span>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <ngx-datatable-column [width]="20" name="{{ 'DEPLOY_TO_DASHBOARD' | translate }}"
-          headerClass="d-flex justify-content-center" cellClass="d-flex justify-content-center">
-          <div>
-            <ng-template let-row="row" ngx-datatable-cell-template>
-              <span (click)="this.deployTemplate(row.id);" class="dl-btn-dark"
-                style="cursor: pointer">&nbsp;&nbsp;{{ 'DEPLOY' | translate }}&nbsp;&nbsp;</span>
-            </ng-template>
-          </div>
-        </ngx-datatable-column>
-        <ngx-datatable-column [width]="10" name="" sortable="false" cellClass="d-flex justify-content-center">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <span>
-              <button class="btn action-icon-setting" (click)="this.deleteTemplateModel(row.id);">
-                <i class="fas fa-trash-alt fa-xs"></i>
-              </button>
-            </span>
-          </ng-template>
-        </ngx-datatable-column>
-
-        <!-- <ngx-datatable-footer>
-            <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize"
-              let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset" let-isVisible="isVisible">
-              <div class="page-count">
-                total: {{ rowCount.toLocaleString() }}
-              </div>
-              <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'" [pagerRightArrowIcon]="'datatable-icon-right'"
-                [pagerPreviousIcon]="'datatable-icon-prev'" [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage"
-                [size]="pageSize" [count]="rowCount" [hidden]="!(rowCount / pageSize > 1)"
-                (change)="topicTable.onFooterPage($event)">
-              </datatable-pager>
-            </ng-template>
-          </ngx-datatable-footer> -->
-      </ngx-datatable>
+      <app-table [data]="templates" [columns]="columns" (btnTableAction)="btnTableAction($event)"></app-table>
     </div>
   </div>
 </div>
