@@ -13,8 +13,31 @@
 	<groupId>org.onap.dcaegen2.services.components.datalake-handler</groupId>
 	<artifactId>admin</artifactId>
 	<packaging>pom</packaging>
+	<properties>
+		<swagger.version>2.9.2</swagger.version>
+		<dockerfile-maven.version>1.4.5</dockerfile-maven.version>
+		<docker.image.path>onap/org.onap.dcaegen2.services.datalakeadminui</docker.image.path>
+	</properties>
 	<name>DataLake Admin</name>
-
-
-
+	<build>
+                <plugins>
+                        <plugin>
+                                <groupId>com.spotify</groupId>
+                                <artifactId>dockerfile-maven-plugin</artifactId>
+                                <version>${dockerfile-maven.version}</version>
+                                <configuration>
+                                    <repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
+                                    <tag>${project.version}</tag>
+                                    <dockerfile>Dockerfile</dockerfile>
+                                </configuration>
+                                <dependencies>
+                                        <dependency>
+                                                <groupId>javax.activation</groupId>
+                                                <artifactId>javax.activation-api</artifactId>
+                                                <version>1.2.0</version>
+                                        </dependency>
+                                </dependencies>
+                        </plugin>
+                </plugins>
+        </build>
 </project>
