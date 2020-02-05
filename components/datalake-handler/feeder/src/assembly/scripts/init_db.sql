@@ -18,8 +18,7 @@
 * ============LICENSE_END=========================================================
 */
 
-drop DATABASE datalake;
-create database datalake;
+create database datalake if not exists;
 use datalake;
 
 CREATE TABLE `topic_name` (
