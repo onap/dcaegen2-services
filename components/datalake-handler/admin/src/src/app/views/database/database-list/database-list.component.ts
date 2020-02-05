@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 QCT
+ * Copyright 2019 - 2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,24 +29,22 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Db } from "src/app/core/models/db.model";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { DatabaseAddModalComponent } from "src/app/views/database/database-list/database-add-modal/database-add-modal.component";
 
-// DB modal components
 import { RestApiService } from "src/app/core/services/rest-api.service";
 
 // Modal
 import { AlertComponent } from "src/app/shared/components/alert/alert.component";
+import { ModalComponent } from "src/app/shared/modules/modal/modal.component";
+import { ModalContentData } from "src/app/shared/modules/modal/modal.data";
+import { DbModalComponent } from "src/app/views/database/database-list/db-modal/db-modal.component";
 
 // Notify
 import { ToastrNotificationService } from "src/app/shared/components/toastr-notification/toastr-notification.service";
 
 // Loading spinner
 import { NgxSpinnerService } from "ngx-spinner";
-import {CouchbaseComponent} from "src/app/views/database/database-list/dbs-modal/couchbase/couchbase.component";
-import {DruidComponent} from "src/app/views/database/database-list/dbs-modal/druid/druid.component";
-import {ElasticsearchComponent} from "src/app/views/database/database-list/dbs-modal/elasticsearch/elasticsearch.component";
-import {MongodbComponent} from "src/app/views/database/database-list/dbs-modal/mongodb/mongodb.component";
-import {HdfsComponent} from "src/app/views/database/database-list/dbs-modal/hdfs/hdfs.component";
+import { map, mergeMap } from "rxjs/operators";
+import { forkJoin, from } from "rxjs";
 
 @Component({
   selector: "app-database-list",
@@ -54,230 +52,192 @@ import {HdfsComponent} from "src/app/views/database/database-list/dbs-modal/hdfs
   styleUrls: ["./database-list.component.css"]
 })
 export class DatabaseListComponent implements OnInit {
-  pageFinished: Boolean = false;
-
-  dbList: any = [];
-  dbs: Db[] = [];
-  dbNew: Db;
-  db_NewBody: Db;
-  loading: Boolean = true;
-  flag: Boolean = true;
-  loadingIndicator: boolean = true;
-
-  mesgNoData = {
-    emptyMessage: `
-      <div class="d-flex justify-content-center">
-        <div class="p-2">
-          <label class="dl-nodata">No Data</label>
-        </div>
-      </div>
-    `
-  };
+  dbs: Array<Db> = []; // data of table
+  t_temp: Array<Db> = []; // cache for dbs
+  columns: Array<any> = []; // column of table
 
   @ViewChild("searchText") searchText: ElementRef;
 
   constructor(
-      private dbApiService: RestApiService,
-      private notificationService: ToastrNotificationService,
-      private modalService: NgbModal,
-      private spinner: NgxSpinnerService
-  ) {
-    this.initData().then(data => {
-      this.initDbsList(this.dbList).then(data => {
-        this.dbs = data;
-      });
-    });
-  }
+    private restApiService: RestApiService,
+    private notificationService: ToastrNotificationService,
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit() {
     this.spinner.show();
-  }
 
-  async initData() {
-      this.dbList = [];
-      this.dbList = await this.getDbList(this.flag);
+    let t_dbs: Array<Db> = [];
+
+    const get_dbs = this.restApiService.getAllDbs().pipe(
+      mergeMap(dbs => from(dbs)),
+      map(db => {
+        t_dbs.push(db);
+      })
+    );
+
+    forkJoin(get_dbs).subscribe(data => {
+      this.columns = this.initColumn();
+      this.dbs = t_dbs;
+      this.t_temp = [...this.dbs];
+      this.updateFilter(this.searchText.nativeElement.value);
       setTimeout(() => {
-          this.spinner.hide();
+        this.spinner.hide();
       }, 500);
-  }
-
-  getDbList(flag) {
-    return this.dbApiService.getDbEncryptList(flag).toPromise();
-
-  }
-
-  async initDbsList(dbList: []) {
-    var d: Db[] = [];
-
-    for (var i = 0; i < dbList.length; i++) {
-      let data = dbList[i];
-      let feed = {
-        id: data["id"],
-        name: data["name"],
-        enabled: data["enabled"],
-        host: data["host"],
-        port: data["port"],
-        database: data["database"],
-        encrypt: data["encrypt"],
-        login: data["login"],
-        pass: data["pass"],
-        dbTypeId: data["dbTypeId"],
-      };
-      d.push(feed);
-    }
-    return d;
-  }
-
-  // getDbDetail(name: string) {
-  //   return this.restApiService.getDbDetail(name).toPromise();
-  // }
-
-  openAddModal() {
-    const modalRef = this.modalService.open(DatabaseAddModalComponent, {
-      windowClass: "dl-md-modal",
-      centered: true
-    });
-
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      if (receivedEntry) {
-        modalRef.close();
-        //this.openDetailModal(receivedEntry);
-      }
     });
   }
 
-  updateFilter(searchValue) {
+  updateFilter(searchValue: string) {
     const val = searchValue.toLowerCase();
+
     // filter our data
-    const temps = this.dbList.filter(function (d) {
-      return d.name.toLowerCase().indexOf(val) != -1 || !val;
+    const temp = this.t_temp.filter(t => {
+      return t.name.toLowerCase().indexOf(val) !== -1 || !val;
     });
+
     // update the rows
-    this.dbList = temps;
+    this.dbs = temp;
   }
 
-  newDbModal() {
-    const modalRef = this.modalService.open(DatabaseAddModalComponent, {
-      windowClass: "dl-md-modal dbs",
-      centered: true
-    });
+  initColumn() {
+    let t_columns: Array<any> = [];
+
+    t_columns = [
+      {
+        headerName: "STATUS",
+        width: "15",
+        sortable: true,
+        dataIndex: "enabled",
+        icon: "status"
+      },
+      {
+        headerName: "NAME",
+        width: "420",
+        sortable: true,
+        dataIndex: "name"
+      },
+      {
+        headerName: "Type",
+        width: "50",
+        sortable: true,
+        dataIndex: "dbTypeId"
+      },
+      {
+        headerName: "Host",
+        width: "100",
+        sortable: true,
+        dataIndex: "host"
+      },
+      {
+        width: "2",
+        iconButton: "cog",
+        action: "edit"
+      },
+      {
+        width: "2",
+        iconButton: "trash",
+        action: "delete"
+      }
+    ];
+
+    return t_columns;
   }
 
-  deleteDbModel(id: number) {
+  btnTableAction(passValueArr: Array<any>) {
+    let action = passValueArr[0];
+    let id = passValueArr[1];
 
-    console.log("delete id", id);
-    const index = this.dbList.findIndex(t => t.id === id);
-    const modalRef = this.modalService.open(AlertComponent, {
-      size: "sm",
-      centered: true
-    });
-    modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      // Delete db
-      this.dbApiService.deleteDb(id).subscribe(
-        res => {
-          console.log(res);
-          if (JSON.stringify(res).length <= 2) {
-            this.dbList.splice(index, 1);
-            this.dbList = [...this.dbList];
-            this.initData();
-            this.notificationService.success("SUCCESSFULLY_DELETED");
-
-          } else {
-            this.initData();
-            this.notificationService.error("FAILED_DELETED");
-          }
-
+    switch (action) {
+      case "edit":
+        this.openModal("edit", id);
+        break;
+      case "delete":
+        const modalRef = this.modalService.open(AlertComponent, {
+          size: "sm",
+          centered: true,
+          backdrop: "static"
+        });
+        modalRef.componentInstance.message = "ARE_YOU_SURE_DELETE";
+        modalRef.componentInstance.passEntry.subscribe(recevicedEntry => {
+          this.restApiService.deleteDb(id).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_DELETED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
           modalRef.close();
-        },
-        err => {
-          this.notificationService.error(err);
-          modalRef.close();
-        }
-      );
-    });
-  }
-
-  updateDbModel(id: number, dbType: string) {
-    var modalRef;
-    console.log(dbType, "dbType");
-    switch (dbType) {
-      case "CB": {
-        modalRef = this.modalService.open(CouchbaseComponent, {
-          size: "lg",
-          centered: true
         });
-        this.editDbModal(id, modalRef);
         break;
-      }
-      case "DRUID": {
-        modalRef = this.modalService.open(DruidComponent, {
-          size: "lg",
-          centered: true
-        });
-        this.editDbModal(id, modalRef);
-        break;
-      }
-      case "ES": {
-        modalRef = this.modalService.open(ElasticsearchComponent, {
-          size: "lg",
-          centered: true
-        });
-        this.editDbModal(id, modalRef);
-        break;
-      }
-      case "MONGO": {
-        modalRef = this.modalService.open(MongodbComponent, {
-          size: "lg",
-          centered: true
-        });
-        this.editDbModal(id, modalRef);
-        break;
-      }
-      case "HDFS": {
-        modalRef = this.modalService.open(HdfsComponent, {
-          size: "lg",
-          centered: true
-        });
-        this.editDbModal(id, modalRef);
-        break;
-      }
-      default: {
-        break;
-      }
     }
   }
 
-  editDbModal(id: number, modalRef) {
-    console.log("id", id);
-    const index = this.dbList.findIndex(t => t.id === id);
-    modalRef.componentInstance.editDb = this.dbList[index];
-    modalRef.componentInstance.passEntry.subscribe(receivedEntry => {
-      this.dbNew = receivedEntry;
-      this.dbApiService
-        .updateDb(this.dbNew)
-        .subscribe(
-          res => {
-            if (res.statusCode == 200) {
-              this.dbList[index] = this.dbNew;
-              this.dbList = [...this.dbList];
-              this.notificationService.success("SUCCESSFULLY_UPDATED");
-              this.initData();
-            } else {
-              this.notificationService.error("FAILED_UPDATED");
-              this.initData();
+  openModal(mode: string = "", id: number | string) {
+    const modalRef = this.modalService.open(ModalComponent, {
+      size: "lg",
+      centered: true,
+      backdrop: "static"
+    });
+
+    switch (mode) {
+      case "new":
+        let newDB: Db = new Db();
+        let componentNew = new ModalContentData(DbModalComponent, newDB);
+
+        modalRef.componentInstance.title = "NEW_DB";
+        modalRef.componentInstance.notice = "";
+        modalRef.componentInstance.mode = "new";
+        modalRef.componentInstance.component = componentNew;
+
+        modalRef.componentInstance.passEntry.subscribe((data: Db) => {
+          newDB = Object.assign({}, data);
+          console.log(newDB.dbTypeId);
+          console.log(newDB);
+          this.restApiService.addDb(newDB).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_CREARED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
             }
-            modalRef.close();
-          },
-          err => {
-            this.notificationService.error(err);
-            modalRef.close();
-          }
-        );
-    })
-  }
+          );
+          modalRef.close();
+        });
+        break;
+      case "edit":
+        let index: number = this.dbs.findIndex(db => db.id === id);
+        let editDb: Db = this.dbs[index];
+        let componentEdit = new ModalContentData(DbModalComponent, editDb);
 
-  onActivate(event) {
+        modalRef.componentInstance.title = editDb.name;
+        modalRef.componentInstance.notice = "";
+        modalRef.componentInstance.mode = "edit";
+        modalRef.componentInstance.component = componentEdit;
 
+        modalRef.componentInstance.passEntry.subscribe((data: Db) => {
+          editDb = Object.assign({}, data);
+          this.restApiService.updateDb(editDb).subscribe(
+            res => {
+              this.ngOnInit();
+              setTimeout(() => {
+                this.notificationService.success("SUCCESSFULLY_UPDATED");
+              }, 500);
+            },
+            err => {
+              this.notificationService.error(err);
+            }
+          );
+          modalRef.close();
+        });
+        break;
+    }
   }
 }

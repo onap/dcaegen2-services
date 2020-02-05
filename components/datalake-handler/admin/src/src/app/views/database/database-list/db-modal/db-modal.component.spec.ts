@@ -18,30 +18,27 @@
  * ============LICENSE_END=========================================================
  */
 
-/**
- *
- * @author Ekko Chang
- *
- */
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-export class Db {
-  public id: number;
-  public name: string;
-  public enabled: boolean;
-  public host: string;
-  public port: number;
-  public database: string;
-  public encrypt: boolean;
-  public login: string;
-  public pass: string;
-  public dbTypeId: string;
-  // for UI display
-  public checkedToSave: boolean;
-}
+import { DbModalComponent } from "./db-modal.component";
 
-export class DbType {
-  public id: string;
-  public name: string;
-  public defaultPort: number;
-  public tool: boolean;
-}
+describe("DbModalComponent", () => {
+  let component: DbModalComponent;
+  let fixture: ComponentFixture<DbModalComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [DbModalComponent]
+    }).compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(DbModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it("should create", () => {
+    expect(component).toBeTruthy();
+  });
+});
