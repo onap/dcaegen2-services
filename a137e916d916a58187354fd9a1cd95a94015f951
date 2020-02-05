@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "337002e6_9b218140",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2020-02-05T05:57:12Z",
+      "side": 1,
+      "message": "Removed, using helm plug instead.",
+      "parentUuid": "3d983f84_cca5ed37",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 19
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "387bcef1_57455a98",
         "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
         "patchSetId": 7
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "e94a39e0_5c562ed0",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2020-02-05T05:57:12Z",
+      "side": 1,
+      "message": "Removed, using helm plugin instead.",
+      "parentUuid": "387bcef1_57455a98",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 29
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d4e3275_b0689a54",
         "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
         "patchSetId": 7
@@ -82,6 +130,30 @@
       "writtenOn": "2020-01-27T23:07:33Z",
       "side": 1,
       "message": "image url must be from onap/nexus3",
+      "range": {
+        "startLine": 100,
+        "startChar": 13,
+        "endLine": 100,
+        "endChar": 65
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73ff1512_408074bf",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-dalalake.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2020-02-05T05:57:12Z",
+      "side": 1,
+      "message": "The image repository will be moved to nexus3.",
+      "parentUuid": "2d4e3275_b0689a54",
       "range": {
         "startLine": 100,
         "startChar": 13,
@@ -197,6 +269,30 @@
       "writtenOn": "2020-01-27T23:07:33Z",
       "side": 1,
       "message": "This is not in nodeport range for ONAP which allows 302x or 304x.  If nodeport is required, you can choose any unused DCAE port listed https://wiki.onap.org/display/DW/OOM+NodePort+List (and update the wiki accordingly)",
+      "range": {
+        "startLine": 12,
+        "startChar": 16,
+        "endLine": 12,
+        "endChar": 21
+      },
+      "revId": "a137e916d916a58187354fd9a1cd95a94015f951",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a17eb2a_34372433",
+        "filename": "components/datalake-handler/dpo/helm_chart/dcae-datalake/templates/service.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2020-02-05T05:57:12Z",
+      "side": 1,
+      "message": "We have updated the wiki and use ports 30479 and 30408.",
+      "parentUuid": "12360287_cc632558",
       "range": {
         "startLine": 12,
         "startChar": 16,
