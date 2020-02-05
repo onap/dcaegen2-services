@@ -51,7 +51,8 @@ limitations under the License.
 
           <!-- display button with text -->
           <span *ngIf="column.textButton && column.textButton.length !== 0">
-            <app-button [text]="column.textButton" [style]="'inline'" [color]="'dark'"></app-button>
+            <app-button [text]="column.textButton" [style]="'inline'" [color]="'dark'"
+              (click)="tableAction(column.action, row.id)"></app-button>
           </span>
 
           <!-- display button with icon -->

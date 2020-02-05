@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * ONAP : DataLake
  * ================================================================================
- * Copyright 2019 QCT
+ * Copyright 2019 - 2020 QCT
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,20 +20,20 @@
 
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ElasticsearchComponent } from "./elasticsearch.component";
+import { TemplateModalComponent } from "./template-modal.component";
 
-describe("ElasticsearchComponent", () => {
-  let component: ElasticsearchComponent;
-  let fixture: ComponentFixture<ElasticsearchComponent>;
+describe("TemplateModalComponent", () => {
+  let component: TemplateModalComponent;
+  let fixture: ComponentFixture<TemplateModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ElasticsearchComponent]
+      declarations: [TemplateModalComponent]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ElasticsearchComponent);
+    fixture = TestBed.createComponent(TemplateModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
