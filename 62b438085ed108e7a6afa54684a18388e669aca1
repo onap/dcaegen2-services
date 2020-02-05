@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e6075b3_970bcd01",
+        "filename": "components/datalake-handler/admin/src/src/app/app.module.ts",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-02-05T15:00:08Z",
+      "side": 1,
+      "message": "there should be a license here",
+      "revId": "62b438085ed108e7a6afa54684a18388e669aca1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
