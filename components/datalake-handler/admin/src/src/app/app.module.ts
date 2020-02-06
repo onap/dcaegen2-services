@@ -86,6 +86,8 @@ import { ModalComponent } from "./shared/modules/modal/modal.component";
 import { ModalDirective } from "./shared/modules/modal/modal.directive";
 import { ToastrNotificationComponent } from "./shared/components/toastr-notification/toastr-notification.component";
 import { AlertComponent } from "./shared/components/alert/alert.component";
+import { DataExposureComponent } from "./views/data-exposure/data-exposure.component";
+import { DeModalComponent } from "./views/data-exposure/de-modal/de-modal.component";
 
 // Others
 
@@ -123,7 +125,9 @@ import { AlertComponent } from "./shared/components/alert/alert.component";
     KafkaModalComponent,
     DbModalComponent,
     ToolModalComponent,
-    TemplateModalComponent
+    TemplateModalComponent,
+    DataExposureComponent,
+    DeModalComponent
   ],
   imports: [
     BrowserModule,
@@ -156,7 +160,8 @@ import { AlertComponent } from "./shared/components/alert/alert.component";
     KafkaModalComponent,
     DbModalComponent,
     ToolModalComponent,
-    TemplateModalComponent
+    TemplateModalComponent,
+    DeModalComponent
   ]
 })
 export class AppModule {}

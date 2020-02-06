@@ -1,0 +1,84 @@
+<!--
+============LICENSE_START=======================================================
+ONAP : DataLake
+================================================================================
+Copyright 2020 QCT
+=================================================================================
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+============LICENSE_END=========================================================
+-->
+
+
+<div class="container p-4">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-12">
+        <label class="dl-emphasis1">{{ "NAME" | translate }}</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <input [(ngModel)]="this.data.id" [disabled]="!isAddingMode()" class="form-control dl-input-text" type="text"
+          placeholder="totalBandwidth" />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-12">
+        <label class="dl-emphasis1">{{ "DESCRIPTION" | translate }}</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <input [(ngModel)]="this.data.note" class="form-control dl-input-text" type="text" />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-12">
+        <label class="dl-emphasis1">{{ "SINK" | translate }}</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <select [(ngModel)]="this.data.dbId" class="custom-select dl-input-text">
+          <option *ngFor="let db of dbs" [value]="db.id" [text]="db.name">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-12">
+        <label class="dl-emphasis1">{{ "SQL_TEMPLATE" | translate }}</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <textarea [(ngModel)]="this.data.sqlTemplate" class="form-control dl-input-text" rows="8" type="text"
+          length="10000">
+        </textarea>
+      </div>
+    </div>
+
+  </div>
+
+</div>

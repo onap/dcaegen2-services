@@ -37,6 +37,7 @@ import { DatabaseComponent } from "./views/database/database.component";
 import { AboutComponent } from "./views/about/about.component";
 import { TemplateComponent } from "./views/dashboard-setting/template/template.component";
 import { ToolsComponent } from "./views/tools/tools.component";
+import { DataExposureComponent } from "./views/data-exposure/data-exposure.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/feeder", pathMatch: "full" },
@@ -47,7 +48,8 @@ const routes: Routes = [
   { path: "database", component: DatabaseComponent },
   { path: "about", component: AboutComponent },
   { path: "tools", component: ToolsComponent },
-  { path: "dashboard-setting/template", component: TemplateComponent }
+  { path: "dashboard-setting/template", component: TemplateComponent },
+  { path: "data-exposure", component: DataExposureComponent }
 ];
 
 @NgModule({

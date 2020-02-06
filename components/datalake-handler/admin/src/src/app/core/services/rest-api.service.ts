@@ -36,6 +36,7 @@ import { Db, DbType } from "src/app/core/models/db.model";
 import { Template } from "src/app/core/models/template.model";
 import { Dashboard } from "src/app/core/models/dashboard.model";
 import { Kafka } from "../models/kafka.model";
+import { DataService } from "src/app/core/models/data-service.model";
 
 const prefix = "/datalake/v1/";
 const httpOptions = {
@@ -363,6 +364,47 @@ export class RestApiService {
     return this.http.delete<Kafka>(prefix + "kafkas/" + id).pipe(
       retry(1),
       tap(_ => console.log(`deleted kafka id=${id}`)),
+      catchError(this.handleError)
+    );
+  }
+
+  /*
+    Dataexposure service
+  */
+  public getAllDataService(): Observable<DataService[]> {
+    return this.http
+      .get<DataService[]>(prefix + "exposure")
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  public getDataService(id: string): Observable<DataService> {
+    return this.http
+      .get<DataService>(prefix + "exposure/" + id)
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  public updateDataService(ds: DataService): Observable<DataService> {
+    return this.http
+      .put<DataService>(prefix + "exposure/" + ds.id, ds)
+      .pipe(
+        retry(1),
+        tap(_ => this.extractData),
+        catchError(this.handleError)
+      );
+  }
+
+  public addDataService(ds: DataService): Observable<DataService> {
+    return this.http.post<DataService>(prefix + "exposure", ds).pipe(
+      retry(1),
+      tap(_ => console.log(`add service =${ds.id}`)),
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteDataService(id: string): Observable<DataService> {
+    return this.http.delete<DataService>(prefix + "exposure/" + id).pipe(
+      retry(1),
+      tap(_ => console.log(`deleted service=${id}`)),
       catchError(this.handleError)
     );
   }
