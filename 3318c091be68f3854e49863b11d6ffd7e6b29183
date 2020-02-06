@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "118bcf0e_653a0202",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-06T18:07:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54fb0116_33bc8962",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 28
+      },
+      "revId": "3318c091be68f3854e49863b11d6ffd7e6b29183",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9462848_a0b33105",
         "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
         "patchSetId": 8
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d8a18a48_2eaafc23",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-06T18:07:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9462848_a0b33105",
+      "range": {
+        "startLine": 142,
+        "startChar": 24,
+        "endLine": 142,
+        "endChar": 50
+      },
+      "revId": "3318c091be68f3854e49863b11d6ffd7e6b29183",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "672cf136_7117ca0d",
         "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
         "patchSetId": 8
@@ -59,6 +107,30 @@
       "writtenOn": "2020-02-05T17:02:23Z",
       "side": 1,
       "message": "Do we need to add an entry for AAI_EVENT topic?",
+      "range": {
+        "startLine": 153,
+        "startChar": 10,
+        "endLine": 153,
+        "endChar": 30
+      },
+      "revId": "3318c091be68f3854e49863b11d6ffd7e6b29183",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad326fb4_0ca32283",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-06T18:07:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "672cf136_7117ca0d",
       "range": {
         "startLine": 153,
         "startChar": 10,
@@ -105,6 +177,30 @@
       "writtenOn": "2020-02-03T16:48:11Z",
       "side": 1,
       "message": "This CL format is different from what other DCAE MS o/p into Policy. Has this been verified with Policy team?",
+      "range": {
+        "startLine": 28,
+        "startChar": 6,
+        "endLine": 115,
+        "endChar": 6
+      },
+      "revId": "3318c091be68f3854e49863b11d6ffd7e6b29183",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3383e88c_51079488",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/pmsh-cl-output.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-06T18:07:27Z",
+      "side": 1,
+      "message": "I have added the fields from the CL o/p definition. We still need to have our domain specific fields to exist here for our use case. We have also asked some people working in policy about this.",
+      "parentUuid": "3eb84710_b90896de",
       "range": {
         "startLine": 28,
         "startChar": 6,
