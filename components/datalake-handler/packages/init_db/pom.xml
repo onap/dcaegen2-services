@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.onap.dcaegen2.services.components</groupId>
+		<artifactId>datalake-handler</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.onap.dcaegen2.services.components.datalake-handler</groupId>
+	<artifactId>admin</artifactId>
+	<packaging>pom</packaging>
+	<properties>
+		<swagger.version>2.9.2</swagger.version>
+		<dockerfile-maven.version>1.4.5</dockerfile-maven.version>
+		<docker.image.path>onap/org.onap.dcaegen2.services.datalakedbinit</docker.image.path>
+	</properties>
+	<name>DataLake db init</name>
+	<build>
+		<plugins>
+
+                        <plugin>
+                                <groupId>com.spotify</groupId>
+                                <artifactId>dockerfile-maven-plugin</artifactId>
+                                <version>${dockerfile-maven.version}</version>
+                                <configuration>
+				    <repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
+                                    <tag>${project.version}</tag>
+				    <dockerfile>Dockerfile</dockerfile>
+				    <noCache>true</noCache>
+                                </configuration>
+                                <dependencies>
+                                        <dependency>
+                                                <groupId>javax.activation</groupId>
+                                                <artifactId>javax.activation-api</artifactId>
+                                                <version>1.2.0</version>
+                                        </dependency>
+                                </dependencies>
+                        </plugin>
+                </plugins>
+        </build>
+</project>
