@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11868f3f_dbd4c7e5",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-10T12:43:58Z",
+      "side": 1,
+      "message": "had to use the R5 version on the existing ONAP. Will this change?",
+      "range": {
+        "startLine": 25,
+        "startChar": 102,
+        "endLine": 25,
+        "endChar": 120
+      },
+      "revId": "d000683d711fca1be71ec0a007a739ec577951ed",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81c931e8_fe363f98",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-10T12:43:58Z",
+      "side": 1,
+      "message": "/opt/app/pmsh/etc/certs",
+      "range": {
+        "startLine": 195,
+        "startChar": 25,
+        "endLine": 195,
+        "endChar": 48
+      },
+      "revId": "d000683d711fca1be71ec0a007a739ec577951ed",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
