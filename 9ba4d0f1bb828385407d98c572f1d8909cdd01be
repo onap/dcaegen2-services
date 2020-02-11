@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99b3dad0_dedb71ec",
+        "filename": "components/datalake-handler/packages/init_db/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-11T18:27:05Z",
+      "side": 1,
+      "message": "should this be init_db?",
+      "range": {
+        "startLine": 14,
+        "startChar": 13,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "9ba4d0f1bb828385407d98c572f1d8909cdd01be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "529a7b9a_6272dae8",
+        "filename": "components/datalake-handler/packages/init_db/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-11T18:27:05Z",
+      "side": 1,
+      "message": "onap/org.onap.dcaegen2.services.datalake.dbinit",
+      "range": {
+        "startLine": 19,
+        "startChar": 21,
+        "endLine": 19,
+        "endChar": 67
+      },
+      "revId": "9ba4d0f1bb828385407d98c572f1d8909cdd01be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
