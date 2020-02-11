@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "ffec681f_7c7ca849",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-11T10:23:46Z",
+      "side": 1,
+      "message": "this is the recommended version of the plugin",
+      "revId": "d000683d711fca1be71ec0a007a739ec577951ed",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "81c931e8_fe363f98",
         "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
         "patchSetId": 9
@@ -36,6 +53,30 @@
       "writtenOn": "2020-02-10T12:43:58Z",
       "side": 1,
       "message": "/opt/app/pmsh/etc/certs",
+      "range": {
+        "startLine": 195,
+        "startChar": 25,
+        "endLine": 195,
+        "endChar": 48
+      },
+      "revId": "d000683d711fca1be71ec0a007a739ec577951ed",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f2d5ed0_25230192",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-11T10:23:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81c931e8_fe363f98",
       "range": {
         "startLine": 195,
         "startChar": 25,
