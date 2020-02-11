@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef3f2039_87e7527c",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-02-11T13:03:15Z",
+      "side": 1,
+      "message": "Won\u0027t we always be https? Maybe don\u0027t have this configurable",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 66,
+        "endChar": 24
+      },
+      "revId": "3c2805c4a67857a12752b41e6ad048bb70e5d357",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
