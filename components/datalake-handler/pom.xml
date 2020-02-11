@@ -36,6 +36,9 @@
 		<elasticsearchjava.version>7.1.1</elasticsearchjava.version>
 		<hadoop.version>3.2.0</hadoop.version>
 
+		<sonar.coverage.jacoco.xmlReportPaths>
+		  ${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
+		</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 
 	<dependencyManagement>

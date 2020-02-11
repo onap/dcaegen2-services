@@ -42,6 +42,9 @@
         <dependency.dir.location>${project.build.directory}/${dependency.dir.name}</dependency.dir.location>
         <docker.image.name>onap/${project.groupId}.${project.artifactId}</docker.image.name>
         <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+	<sonar.coverage.jacoco.xmlReportPaths>
+	  ${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
+	</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <dependencyManagement>
