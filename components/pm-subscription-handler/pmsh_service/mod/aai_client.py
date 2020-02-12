@@ -119,10 +119,12 @@ def _filter_nf_data(nf_data, nf_filter):
     try:
         for nf in nf_data['results']:
             name_identifier = 'pnf-name' if nf['node-type'] == 'pnf' else 'vnf-name'
-            if nf_filter.is_nf_in_filter(nf['properties'].get(name_identifier)):
+            orchestration_status = nf['properties'].get('orchestration-status')
+            if nf_filter.is_nf_in_filter(nf['properties'].get(name_identifier)) \
+                    and orchestration_status == 'Active':
                 nf_set.add(NetworkFunction(
                     nf_name=nf['properties'].get(name_identifier),
-                    orchestration_status=nf['properties'].get('orchestration-status')))
+                    orchestration_status=orchestration_status))
     except KeyError as e:
         logger.debug(f'Failed to parse AAI data: {e}')
         raise

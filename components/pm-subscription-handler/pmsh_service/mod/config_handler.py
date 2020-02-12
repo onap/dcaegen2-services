@@ -15,12 +15,10 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
-import json
 from os import environ
 
 import requests
-from tenacity import retry, wait_fixed, stop_after_attempt
+from tenacity import retry, wait_fixed, stop_after_attempt, retry_if_exception_type
 
 import mod.pmsh_logging as logger
 
@@ -45,7 +43,7 @@ class ConfigHandler:
     def hostname(self):
         return _get_environment_variable('HOSTNAME')
 
-    @retry(wait=wait_fixed(2), stop=stop_after_attempt(5))
+    @retry(wait=wait_fixed(2), stop=stop_after_attempt(5), retry=retry_if_exception_type(Exception))
     def get_config(self):
         """ Retrieves PMSH's configuration from Configbinding service. If a non-2xx response
         is received, it retries after 2 seconds for 5 times before raising an exception.
@@ -56,18 +54,15 @@ class ConfigHandler:
         Raises:
             Exception: If any error occurred pulling configuration from Configbinding service.
         """
-        if self._config is None:
-            logger.debug('No configuration found, pulling from Configbinding Service.')
-            try:
-                response = requests.get(self.cbs_url)
-                response.raise_for_status()
-                self._config = response.json()
-                logger.debug(f'PMSH Configuration from Configbinding Service: {self._config}')
-                return json.loads(self._config)
-            except Exception as err:
-                raise Exception(f'Error retrieving configuration from CBS: {err}')
-        else:
+
+        try:
+            response = requests.get(self.cbs_url)
+            response.raise_for_status()
+            self._config = response.json()
+            logger.debug(f'PMSH Configuration from Configbinding Service: {self._config}')
             return self._config
+        except Exception as err:
+            raise Exception(f'Error retrieving configuration from CBS: {err}')
 
 
 def _get_environment_variable(env_var_key):
