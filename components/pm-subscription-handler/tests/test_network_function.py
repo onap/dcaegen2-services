@@ -16,17 +16,23 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 import unittest
+from test.support import EnvironmentVarGuard
+from unittest import mock
 
-from mod import db, create_test_app
+from mod import db, create_app
 from mod.network_function import NetworkFunction
 
 
 class NetworkFunctionTests(unittest.TestCase):
 
-    def setUp(self):
+    @mock.patch('mod.get_db_connection_url')
+    def setUp(self, mock_get_db_url):
+        mock_get_db_url.return_value = 'sqlite://'
         self.nf_1 = NetworkFunction(nf_name='pnf_1', orchestration_status='Inventoried')
         self.nf_2 = NetworkFunction(nf_name='pnf_2', orchestration_status='Active')
-        self.app = create_test_app()
+        self.env = EnvironmentVarGuard()
+        self.env.set('LOGS_PATH', './unit_test_logs')
+        self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()

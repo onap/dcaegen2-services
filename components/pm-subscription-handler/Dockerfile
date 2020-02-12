@@ -30,7 +30,10 @@ ENV PMSHUSER=pmsh \
 WORKDIR $APPDIR
 
     # add non root user & group
-RUN addgroup --system $PMSHUSER && adduser --ingroup $PMSHUSER --system $PMSHUSER
+RUN addgroup --system $PMSHUSER && adduser --ingroup $PMSHUSER --system $PMSHUSER && \
+    # create and chown the LOGS_PATH
+    mkdir -p $LOGS_PATH && \
+    chown -R $PMSHUSER:$PMSHUSER $LOGS_PATH
 
 COPY setup.py ./
 COPY requirements.txt ./
