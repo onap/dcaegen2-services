@@ -16,10 +16,20 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 import re
+from enum import Enum
 
 import mod.pmsh_logging as logger
 from mod import db
 from mod.db_models import SubscriptionModel, NfSubRelationalModel
+from tenacity import retry, retry_if_exception_type, wait_exponential, stop_after_attempt
+
+
+class SubNfState(Enum):
+    PENDING_CREATE = 'PENDING_CREATE'
+    CREATE_FAILED = 'CREATE_FAILED'
+    CREATED = 'CREATED'
+    PENDING_DELETE = 'PENDING_DELETE'
+    DELETE_FAILED = 'DELETE_FAILED'
 
 
 class Subscription:
@@ -42,7 +52,9 @@ class Subscription:
             dict: the Subscription event to be published.
         """
         clean_sub = {k: v for k, v in self.__dict__.items() if k != 'nfFilter'}
-        clean_sub.update({'nfName': xnf_name, 'policyName': f'OP-{self.subscriptionName}'})
+        clean_sub.update({'nfName': xnf_name, 'policyName': f'OP-{self.subscriptionName}',
+                          'changeType': 'DELETE' if self.administrativeState == 'LOCKED'
+                          else 'CREATE'})
         return clean_sub
 
     def create(self):
@@ -69,7 +81,8 @@ class Subscription:
             return existing_subscription
 
     def add_network_functions_to_subscription(self, nf_list):
-        """ Associates network functions to a Subscription
+        """ Associates network functions to a Subscription, with a Pending status, as this step
+        occurs before any activation/deactivation action has been taken for these network functions
 
         Args:
             nf_list : A list of NetworkFunction objects.
@@ -78,13 +91,15 @@ class Subscription:
         logger.debug(f'Adding network functions to subscription {current_sub.subscription_name}')
 
         for nf in nf_list:
+            initial_sub_nf_status = 'Pending'
             current_nf = nf.create()
 
             existing_entry = NfSubRelationalModel.query.filter(
                 NfSubRelationalModel.subscription_name == current_sub.subscription_name,
                 NfSubRelationalModel.nf_name == current_nf.nf_name).one_or_none()
             if existing_entry is None:
-                new_nf_sub = NfSubRelationalModel(current_sub.subscription_name, nf.nf_name)
+                new_nf_sub = NfSubRelationalModel(current_sub.subscription_name,
+                                                  nf.nf_name, initial_sub_nf_status)
                 new_nf_sub.nf = current_nf
                 logger.debug(current_nf)
                 current_sub.nfs.append(new_nf_sub)
@@ -114,6 +129,44 @@ class Subscription:
         """
         return SubscriptionModel.query.all()
 
+    def update_subscription_status(self):
+        """ Updates the status of subscription in subscription table """
+        SubscriptionModel.query.filter(
+            SubscriptionModel.subscription_name == self.subscriptionName). \
+            update({SubscriptionModel.status: self.administrativeState},
+                   synchronize_session='evaluate')
+
+        db.session.commit()
+
+    def delete_subscription(self):
+        """ Deletes a subscription from the database """
+        SubscriptionModel.query.filter(
+            SubscriptionModel.subscription_name == self.subscriptionName). \
+            delete(synchronize_session='evaluate')
+
+        db.session.commit()
+
+    @retry(wait=wait_exponential(multiplier=1, min=30, max=120), stop=stop_after_attempt(3),
+           retry=retry_if_exception_type(Exception))
+    def process_subscription(self, nfs, mr_pub):
+        action = 'Deactivate'
+        sub_nf_state = SubNfState.PENDING_DELETE.value
+        self.update_subscription_status()
+
+        if self.administrativeState == 'UNLOCKED':
+            action = 'Activate'
+            sub_nf_state = SubNfState.PENDING_CREATE.value
+
+        try:
+            for nf in nfs:
+                mr_pub.publish_subscription_event_data(self, nf.nf_name)
+                logger.debug(f'Publishing Event to {action} '
+                             f'Sub: {self.subscriptionName} for the nf: {nf.nf_name}')
+                self.add_network_functions_to_subscription(nfs)
+                self.update_sub_nf_status(self.subscriptionName, sub_nf_state, nf.nf_name)
+        except Exception as err:
+            raise Exception(f'Error publishing activation event to MR: {err}')
+
     @staticmethod
     def get_all_nfs_subscription_relations():
         """ Retrieves all network function to subscription relations
@@ -124,6 +177,22 @@ class Subscription:
         nf_per_subscriptions = NfSubRelationalModel.query.all()
 
         return nf_per_subscriptions
+
+    @staticmethod
+    def update_sub_nf_status(subscription_name, status, nf_name):
+        """ Updates the status of the subscription for a particular nf
+
+        Args:
+            subscription_name (str): The subscription name
+            nf_name (str): The network function name
+            status (str): Status of the subscription
+        """
+        NfSubRelationalModel.query.filter(
+            NfSubRelationalModel.subscription_name == subscription_name,
+            NfSubRelationalModel.nf_name == nf_name). \
+            update({NfSubRelationalModel.nf_sub_status: status}, synchronize_session='evaluate')
+
+        db.session.commit()
 
 
 class NetworkFunctionFilter:

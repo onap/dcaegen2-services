@@ -1,31 +1,31 @@
 # ============LICENSE_START===================================================
 #  Copyright (C) 2019-2020 Nordix Foundation.
 # ============================================================================
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an 'AS IS' BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-import unittest
 from test.support import EnvironmentVarGuard
-from unittest import mock
+from unittest import TestCase
+from unittest.mock import patch
 
 from mod import db, create_app
 from mod.network_function import NetworkFunction
 
 
-class NetworkFunctionTests(unittest.TestCase):
+class NetworkFunctionTests(TestCase):
 
-    @mock.patch('mod.get_db_connection_url')
+    @patch('mod.get_db_connection_url')
     def setUp(self, mock_get_db_url):
         mock_get_db_url.return_value = 'sqlite://'
         self.nf_1 = NetworkFunction(nf_name='pnf_1', orchestration_status='Inventoried')
@@ -65,3 +65,11 @@ class NetworkFunctionTests(unittest.TestCase):
         same_nf = self.nf_1.create()
 
         self.assertEqual(nf, same_nf)
+
+    def test_delete_network_function(self):
+        self.nf_1.create()
+        self.nf_2.create()
+        self.nf_1.delete(nf_name='pnf_1')
+        nfs = NetworkFunction.get_all()
+
+        self.assertEqual(1, len(nfs))

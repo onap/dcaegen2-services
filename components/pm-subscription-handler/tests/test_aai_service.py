@@ -17,9 +17,9 @@
 # ============LICENSE_END=====================================================
 import json
 import os
-import unittest
 from test.support import EnvironmentVarGuard
-from unittest import mock
+from unittest import mock, TestCase
+from unittest.mock import patch
 
 import responses
 from requests import Session
@@ -27,7 +27,7 @@ from requests import Session
 import mod.aai_client as aai_client
 
 
-class AaiClientTestCase(unittest.TestCase):
+class AaiClientTestCase(TestCase):
 
     def setUp(self):
         self.env = EnvironmentVarGuard()
@@ -38,16 +38,16 @@ class AaiClientTestCase(unittest.TestCase):
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
             self.aai_response_data = data.read()
 
-    @mock.patch.object(Session, 'put')
+    @patch.object(Session, 'put')
     def test_aai_client_get_pm_sub_data_success(self, mock_session):
         mock_session.return_value.status_code = 200
         mock_session.return_value.text = self.aai_response_data
         sub, xnfs = aai_client.get_pmsh_subscription_data(self.cbs_data)
         self.assertEqual(sub.subscriptionName, 'ExtraPM-All-gNB-R2B')
         self.assertEqual(sub.administrativeState, 'UNLOCKED')
-        self.assertEqual(len(xnfs), 6)
+        self.assertEqual(len(xnfs), 3)
 
-    @mock.patch.object(Session, 'put')
+    @patch.object(Session, 'put')
     def test_aai_client_get_pm_sub_data_fail(self, mock_session):
         mock_session.return_value.status_code = 404
         with mock.patch('mod.aai_client._get_all_aai_nf_data', return_value=None):
@@ -73,5 +73,5 @@ class AaiClientTestCase(unittest.TestCase):
         with self.assertRaises(KeyError):
             aai_client._get_aai_service_url()
 
-    def test_aai_client_get_aai_service_url_succses(self):
+    def test_aai_client_get_aai_service_url_success(self):
         self.assertEqual('https://1.2.3.4:8443', aai_client._get_aai_service_url())
