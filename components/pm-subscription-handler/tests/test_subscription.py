@@ -24,15 +24,17 @@ from unittest import mock
 from requests import Session
 
 import mod.aai_client as aai_client
-from mod import db, create_test_app
+from mod import db, create_app
 from mod.network_function import NetworkFunction
 from mod.subscription import Subscription, NetworkFunctionFilter
 
 
 class SubscriptionTest(unittest.TestCase):
 
+    @mock.patch('mod.get_db_connection_url')
     @mock.patch.object(Session, 'put')
-    def setUp(self, mock_session):
+    def setUp(self, mock_session, mock_get_db_url):
+        mock_get_db_url.return_value = 'sqlite://'
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
             self.aai_response_data = data.read()
         mock_session.return_value.status_code = 200
@@ -40,6 +42,8 @@ class SubscriptionTest(unittest.TestCase):
         self.env = EnvironmentVarGuard()
         self.env.set('AAI_SERVICE_HOST', '1.2.3.4')
         self.env.set('AAI_SERVICE_PORT_AAI_SSL', '8443')
+        self.env.set('TESTING', 'True')
+        self.env.set('LOGS_PATH', './unit_test_logs')
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data_1 = json.load(data)
         with open(os.path.join(os.path.dirname(__file__),
@@ -50,7 +54,7 @@ class SubscriptionTest(unittest.TestCase):
         self.nf_1 = NetworkFunction(nf_name='pnf_1', orchestration_status='Inventoried')
         self.nf_2 = NetworkFunction(nf_name='pnf_2', orchestration_status='Active')
         self.xnf_filter = NetworkFunctionFilter(**self.sub_1.nfFilter)
-        self.app = create_test_app()
+        self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()

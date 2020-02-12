@@ -20,7 +20,7 @@ import time
 
 import mod.aai_client as aai_client
 import mod.pmsh_logging as logger
-from mod import db, create_prod_app
+from mod import db, create_app
 from mod.config_handler import ConfigHandler
 from mod.subscription import Subscription
 
@@ -28,7 +28,7 @@ from mod.subscription import Subscription
 def main():
 
     try:
-        app = create_prod_app()
+        app = create_app()
         app.app_context().push()
         db.create_all(app=app)
 

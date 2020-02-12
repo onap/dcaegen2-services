@@ -27,25 +27,13 @@ db = SQLAlchemy()
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-def create_prod_app():
+def create_app():
     logger.create_loggers(os.getenv('LOGS_PATH'))
     connex_app = App(__name__, specification_dir=basedir)
     app = connex_app.app
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_RECORD_QUERIES'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = get_db_connection_url()
-    db.init_app(app)
-    return app
-
-
-def create_test_app():
-    logger.create_loggers('./unit_test_logs')
-    connex_app = App(__name__, specification_dir=basedir)
-    app = connex_app.app
-    app.config['TESTING'] = True
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SQLALCHEMY_RECORD_QUERIES'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('TEST_DB_URL', 'sqlite://')
     db.init_app(app)
     return app
 
