@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9d80da2_c76469ba",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-12T13:06:00Z",
+      "side": 1,
+      "message": "Can we add the ca_cert_path here?\n\u0027ca_cert_path\u0027:\u0027/opt/app/pmsh/etc/certs/cacert.pem\u0027\n\nAlso need to add it in the component_spec",
+      "range": {
+        "startLine": 145,
+        "startChar": 6,
+        "endLine": 145,
+        "endChar": 25
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21bc2edb_6c864277",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-12T13:06:00Z",
+      "side": 1,
+      "message": "certs",
+      "range": {
+        "startLine": 187,
+        "startChar": 43,
+        "endLine": 187,
+        "endChar": 47
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afd3d2de_81f8e508",
+        "filename": "components/pm-subscription-handler/dpo/spec/pmsh-component-spec.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-12T13:06:00Z",
+      "side": 1,
+      "message": "Do we need an AAI entry here?",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 15
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2335034b_0b54521c",
+        "filename": "components/pm-subscription-handler/dpo/spec/pmsh-component-spec.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-12T13:06:00Z",
+      "side": 1,
+      "message": "Do these need to match what\u0027s in the blueprint?",
+      "range": {
+        "startLine": 49,
+        "startChar": 15,
+        "endLine": 49,
+        "endChar": 33
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
