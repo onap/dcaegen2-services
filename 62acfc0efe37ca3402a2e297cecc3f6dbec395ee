@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "876e657a_83de4364",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 3763
+      },
+      "writtenOn": "2020-02-13T07:26:10Z",
+      "side": 1,
+      "message": "Maybe you can look here and use the same solution? https://gerrit.onap.org/r/gitweb?p\u003ddcaegen2/collectors/datafile.git;a\u003dblob;f\u003ddatafile-app-server/dpo/blueprints/k8s-datafile.yaml;h\u003d5a0b0bb6182fb2427501a6638a01d90adf4aa44b;hb\u003dHEAD\nDFC also requests config from CBS.",
+      "parentUuid": "01f72ee7_8fdc895b",
+      "range": {
+        "startLine": 148,
+        "startChar": 8,
+        "endLine": 149,
+        "endChar": 51
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21bc2edb_6c864277",
         "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
         "patchSetId": 13
