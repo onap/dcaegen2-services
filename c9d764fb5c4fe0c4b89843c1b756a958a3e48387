@@ -86,6 +86,30 @@
       "revId": "c9d764fb5c4fe0c4b89843c1b756a958a3e48387",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "338010f6_43c30871",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/pmsh-cl-output.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 2787
+      },
+      "writtenOn": "2020-02-13T17:28:14Z",
+      "side": 1,
+      "message": "Yes, that\u0027s OK. The team here is going to use an Avro schema to deserialise the event as part of their policy in Apex.",
+      "parentUuid": "00220d8e_a21c685a",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 5
+      },
+      "revId": "c9d764fb5c4fe0c4b89843c1b756a958a3e48387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
