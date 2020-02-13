@@ -15,36 +15,24 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-import sys
-import time
-
-import mod.aai_client as aai_client
-import mod.pmsh_logging as logger
-from mod import db, create_prod_app, launch_api_handler
-from mod.config_handler import ConfigHandler
-from mod.subscription import Subscription
 
 
-def main():
-
-    try:
-        launch_api_handler()
-        app = create_prod_app()
-        app.app_context().push()
-        db.create_all(app=app)
-
-        config_handler = ConfigHandler()
-        cbs_data = config_handler.get_config()
-        subscription, xnfs = aai_client.get_pmsh_subscription_data(cbs_data)
-        subscription.add_network_functions_to_subscription(xnfs)
-    except Exception as e:
-        logger.debug(f'Failed to Init PMSH: {e}')
-        sys.exit(e)
-
-    while True:
-        logger.debug(Subscription.get_all_nfs_subscription_relations())
-        time.sleep(5)
-
-
-if __name__ == '__main__':
-    main()
+def status(details=False):
+    """
+    Returns the PMSH subscription data
+    Args:
+        details: boolean to denote if response is to contain details of health of PMSH connections
+                 to other systems
+    Returns:
+        Dictionary detailing 'status' of either 'healthy' or 'unhealthy'.
+        If argument 'details' is set to true also includes in dictionary
+        status of sub-systems pmsh is dependent on.
+    Raises:
+        NA
+    """
+    response = {"status": "healthy"}
+    if details:
+        response['db-connect'] = 'true'
+        response["cbs-connect"] = "true"
+        response["aai-connect"] = "true"
+    return response

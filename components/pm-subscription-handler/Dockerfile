@@ -25,7 +25,8 @@ ENV PMSHUSER=pmsh \
     PATH=/usr/local/lib/python3.7/bin:$PATH:$APPDIR/bin \
     PYTHONPATH=/usr/local/lib/python3.7/site-packages:./mod:./:$PYTHONPATH:$APPDIR/bin \
     REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
-    LOGS_PATH="/var/log/ONAP/dcaegen2/services/pmsh"
+    LOGS_PATH="/var/log/ONAP/dcaegen2/services/pmsh" \
+    PMSH_API_PORT=8080
 
 WORKDIR $APPDIR
 
@@ -42,7 +43,10 @@ RUN pip install --upgrade pip && \
     pip install -e . && \
     # change own & perms on entrypoint
     chown -R $PMSHUSER:$PMSHUSER $APPDIR && \
-    chmod 500 $APPDIR/bin/*.py
+    chmod 500 $APPDIR/bin/*.py && \
+    mkdir -p $LOGS_PATH && \
+    chown -R $PMSHUSER:$PMSHUSER $LOGS_PATH
+
 
 # set to non root user
 USER $PMSHUSER
