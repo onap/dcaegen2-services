@@ -62,6 +62,30 @@
       "revId": "c9d764fb5c4fe0c4b89843c1b756a958a3e48387",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00220d8e_a21c685a",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/pmsh-cl-output.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 57
+      },
+      "writtenOn": "2020-02-13T17:16:06Z",
+      "side": 1,
+      "message": "Is this a change to the Policy Type or the Control Loop Event message? The Policy Type you can make it however you want as long as it derives from onap.Monitoring. If its the event message being published on Dmaap, then I will assume this is for Apex PDP. In which Liam will have to confirm they are willing to receive a custom event. They will have to add code to do de-serialization.",
+      "parentUuid": "e8f50bbe_28844615",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 5
+      },
+      "revId": "c9d764fb5c4fe0c4b89843c1b756a958a3e48387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
