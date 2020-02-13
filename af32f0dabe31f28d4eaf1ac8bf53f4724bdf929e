@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae840592_8b9faf78",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 16
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-02-13T15:01:21Z",
+      "side": 1,
+      "message": "These need to be passed into application config",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 16
+      },
+      "revId": "af32f0dabe31f28d4eaf1ac8bf53f4724bdf929e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
