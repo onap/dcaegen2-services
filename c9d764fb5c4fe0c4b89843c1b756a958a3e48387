@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "818de20f_733afeb3",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 17
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-13T15:21:24Z",
+      "side": 1,
+      "message": "At somepoint before M4, PMSH image should be released and blueprint should be moved under \"blueprint\" repo - see DCAEGEN2-2041.",
+      "revId": "c9d764fb5c4fe0c4b89843c1b756a958a3e48387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e2d5d941_af2b1182",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/pmsh-cl-output.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-13T15:21:24Z",
+      "side": 1,
+      "message": "As this structure is different from standard CL o/p (includes subscription object), name version should be unique",
+      "range": {
+        "startLine": 3,
+        "startChar": 13,
+        "endLine": 3,
+        "endChar": 27
+      },
+      "revId": "c9d764fb5c4fe0c4b89843c1b756a958a3e48387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8f50bbe_28844615",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/pmsh-cl-output.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-13T15:21:24Z",
+      "side": 1,
+      "message": "Looping Pam/Liam to confirm if this is okay from Policy/Team perspective",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 5
+      },
+      "revId": "c9d764fb5c4fe0c4b89843c1b756a958a3e48387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
