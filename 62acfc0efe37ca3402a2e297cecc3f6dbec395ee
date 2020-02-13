@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "24750635_efa24fb0",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-13T11:30:52Z",
+      "side": 1,
+      "message": "Yep. Was thinking along the same lines.\nVijay seems to be working on an alternative though.\nhttps://wiki.onap.org/pages/viewpage.action?pageId\u003d64007209",
+      "parentUuid": "876e657a_83de4364",
+      "range": {
+        "startLine": 148,
+        "startChar": 8,
+        "endLine": 149,
+        "endChar": 51
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21bc2edb_6c864277",
         "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
         "patchSetId": 13
