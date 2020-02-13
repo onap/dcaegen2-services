@@ -16,12 +16,11 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 import sys
-import time
 import threading
 
 import mod.aai_client as aai
 import mod.pmsh_logging as logger
-from mod import db, create_app
+from mod import db, create_app, launch_api_server
 from mod.config_handler import ConfigHandler
 from mod.pmsh_utils import AppConfig
 from mod.subscription import Subscription, AdministrativeState
@@ -81,13 +80,11 @@ def main():
 
         threading.Timer(20.0, mr_sub.poll_policy_topic, [sub.subscriptionName, app]).start()
 
+        launch_api_server(app_conf)
+
     except Exception as e:
         logger.debug(f'Failed to Init PMSH: {e}')
         sys.exit(e)
-
-    while True:
-        logger.debug(Subscription.get_all_nfs_subscription_relations())
-        time.sleep(5)
 
 
 if __name__ == '__main__':

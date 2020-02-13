@@ -51,4 +51,4 @@ RUN pip install --upgrade pip && \
 USER $PMSHUSER
 
 # run the app
-ENTRYPOINT ["python", "./bin/pmsh_service.py"]
+ENTRYPOINT ["python", "./bin/pmsh_service_main.py"]
