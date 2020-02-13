@@ -16,6 +16,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 import os
+from threading import Thread
 from urllib.parse import quote
 
 from connexion import App
@@ -25,11 +26,28 @@ import mod.pmsh_logging as logger
 
 db = SQLAlchemy()
 basedir = os.path.abspath(os.path.dirname(__file__))
+_connexion_app = None
+
+
+def _get_app():
+    global _connexion_app
+    if not _connexion_app:
+        _connexion_app = App(__name__, specification_dir=basedir)
+    return _connexion_app
+
+
+def launch_api_handler():
+    connex_app = _get_app()
+    connex_app.add_api('pmsh_swagger.yml')
+    health_thread = Thread(target=connex_app.run, name='pmsh-healthcheck',
+                           kwargs=dict(port=os.environ.get('PMSH_API_PORT', '8080')))
+    health_thread.daemon = True
+    health_thread.start()
 
 
 def create_app():
     logger.create_loggers(os.getenv('LOGS_PATH'))
-    connex_app = App(__name__, specification_dir=basedir)
+    connex_app = _get_app()
     app = connex_app.app
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_RECORD_QUERIES'] = True
