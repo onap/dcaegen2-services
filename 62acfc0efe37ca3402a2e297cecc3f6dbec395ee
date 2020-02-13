@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c741a128_11c86d2c",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-13T14:52:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9d80da2_c76469ba",
+      "range": {
+        "startLine": 145,
+        "startChar": 6,
+        "endLine": 145,
+        "endChar": 25
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01f72ee7_8fdc895b",
         "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
         "patchSetId": 13
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "02d2d30c_3469e3bf",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-13T14:52:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24750635_efa24fb0",
+      "range": {
+        "startLine": 148,
+        "startChar": 8,
+        "endLine": 149,
+        "endChar": 51
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "21bc2edb_6c864277",
         "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
         "patchSetId": 13
@@ -107,6 +155,30 @@
       "writtenOn": "2020-02-12T13:06:00Z",
       "side": 1,
       "message": "certs",
+      "range": {
+        "startLine": 187,
+        "startChar": 43,
+        "endLine": 187,
+        "endChar": 47
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b4bb4bf_9900e8e0",
+        "filename": "components/pm-subscription-handler/dpo/blueprints/k8s-pmsh.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-13T14:52:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21bc2edb_6c864277",
       "range": {
         "startLine": 187,
         "startChar": 43,
@@ -142,6 +214,30 @@
     },
     {
       "key": {
+        "uuid": "831f4d01_85a540aa",
+        "filename": "components/pm-subscription-handler/dpo/spec/pmsh-component-spec.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-13T14:52:26Z",
+      "side": 1,
+      "message": "yes we do, thanks for catching this",
+      "parentUuid": "afd3d2de_81f8e508",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 15
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2335034b_0b54521c",
         "filename": "components/pm-subscription-handler/dpo/spec/pmsh-component-spec.json",
         "patchSetId": 13
@@ -153,6 +249,30 @@
       "writtenOn": "2020-02-12T13:06:00Z",
       "side": 1,
       "message": "Do these need to match what\u0027s in the blueprint?",
+      "range": {
+        "startLine": 49,
+        "startChar": 15,
+        "endLine": 49,
+        "endChar": 33
+      },
+      "revId": "62acfc0efe37ca3402a2e297cecc3f6dbec395ee",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c308d70f_31f89952",
+        "filename": "components/pm-subscription-handler/dpo/spec/pmsh-component-spec.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-13T14:52:26Z",
+      "side": 1,
+      "message": "yes, updated now",
+      "parentUuid": "2335034b_0b54521c",
       "range": {
         "startLine": 49,
         "startChar": 15,
