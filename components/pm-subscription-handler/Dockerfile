@@ -25,7 +25,8 @@ ENV PMSHUSER=pmsh \
     PATH=/usr/local/lib/python3.7/bin:$PATH:$APPDIR/bin \
     PYTHONPATH=/usr/local/lib/python3.7/site-packages:./mod:./:$PYTHONPATH:$APPDIR/bin \
     REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
-    LOGS_PATH="/var/log/ONAP/dcaegen2/services/pmsh"
+    LOGS_PATH="/var/log/ONAP/dcaegen2/services/pmsh" \
+    PMSH_API_PORT=8080
 
 WORKDIR $APPDIR
 
