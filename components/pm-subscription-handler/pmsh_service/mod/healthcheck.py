@@ -15,31 +15,16 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-import sys
-
-import mod.aai_client as aai_client
-import mod.pmsh_logging as logger
-from mod import db, create_app, launch_api_server
-from mod.config_handler import ConfigHandler
 
 
-def main():
-
-    try:
-        app = create_app()
-        app.app_context().push()
-        db.create_all(app=app)
-
-        config_handler = ConfigHandler()
-        cbs_data = config_handler.get_config()
-        subscription, xnfs = aai_client.get_pmsh_subscription_data(cbs_data)
-        subscription.add_network_functions_to_subscription(xnfs)
-
-        launch_api_server(cbs_data)
-    except Exception as e:
-        logger.debug(f'Failed to Init PMSH: {e}')
-        sys.exit(e)
-
-
-if __name__ == '__main__':
-    main()
+def status():
+    """
+    Returns the health of the PMSH service
+    Args:
+        NA
+    Returns:
+        Dictionary detailing 'status' of either 'healthy' or 'unhealthy'.
+    Raises:
+        NA
+    """
+    return {'status': 'healthy'}

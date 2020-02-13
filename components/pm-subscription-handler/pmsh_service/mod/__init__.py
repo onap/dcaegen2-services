@@ -25,11 +25,27 @@ import mod.pmsh_logging as logger
 
 db = SQLAlchemy()
 basedir = os.path.abspath(os.path.dirname(__file__))
+_connexion_app = None
+
+
+def _get_app():
+    global _connexion_app
+    if not _connexion_app:
+        _connexion_app = App(__name__, specification_dir=basedir)
+    return _connexion_app
+
+
+def launch_api_server(cbs_data):
+    connex_app = _get_app()
+    connex_app.add_api('pmsh_swagger.yml')
+    connex_app.run(port=os.environ.get('PMSH_API_PORT', '8443'),
+                   ssl_context=(cbs_data['config']['cert_path'],
+                                cbs_data['config']['key_path']))
 
 
 def create_app():
     logger.create_loggers(os.getenv('LOGS_PATH'))
-    connex_app = App(__name__, specification_dir=basedir)
+    connex_app = _get_app()
     app = connex_app.app
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_RECORD_QUERIES'] = True
