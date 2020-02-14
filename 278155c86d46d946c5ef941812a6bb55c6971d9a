@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f84f1176_b9bdacb4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-14T14:52:49Z",
+      "side": 1,
+      "message": "Healthcheck is not only to support CSITs, also there for platform integration and is defined as part of the API for production too.",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "278155c86d46d946c5ef941812a6bb55c6971d9a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8a1b8eb_6e1d37f9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/healthcheck.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-14T14:52:49Z",
+      "side": 1,
+      "message": "Code doesn\u0027t appear to be tested...",
+      "revId": "278155c86d46d946c5ef941812a6bb55c6971d9a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ef8cd58_a7579842",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/healthcheck.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-14T14:52:49Z",
+      "side": 1,
+      "message": "Would it return the status of the external dependencies health, or just indicate if it can communicate with those?",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "278155c86d46d946c5ef941812a6bb55c6971d9a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3784ddaf_49cd96f7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/healthcheck.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-14T14:52:49Z",
+      "side": 1,
+      "message": "Should these values be blindly set without verifying them?\nEven if there are plans to change this it doesn\u0027t make sense to have them in here until there is actual checking.",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "278155c86d46d946c5ef941812a6bb55c6971d9a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
