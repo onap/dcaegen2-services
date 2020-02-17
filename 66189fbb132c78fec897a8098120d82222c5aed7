@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09f0392e_c7acb938",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-17T10:30:10Z",
+      "side": 1,
+      "message": "Maybe go with something more generic like \u0027launch_server_thread\u0027",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 22
+      },
+      "revId": "66189fbb132c78fec897a8098120d82222c5aed7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "368a2026_c2384920",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-17T10:30:10Z",
+      "side": 1,
+      "message": "Same as previous comments. Maybe just \u0027pmsh-api\u0027.",
+      "range": {
+        "startLine": 42,
+        "startChar": 61,
+        "endLine": 42,
+        "endChar": 72
+      },
+      "revId": "66189fbb132c78fec897a8098120d82222c5aed7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea1fa9f5_094fcb73",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-17T10:30:10Z",
+      "side": 1,
+      "message": "Again, this will potentially serve more than just \u0027healthcheck\u0027 endpoint.",
+      "range": {
+        "startLine": 42,
+        "startChar": 3,
+        "endLine": 42,
+        "endChar": 9
+      },
+      "revId": "66189fbb132c78fec897a8098120d82222c5aed7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "25b2787d_56f6da2f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-17T10:30:10Z",
+      "side": 1,
+      "message": "Should we default to https?",
+      "range": {
+        "startLine": 43,
+        "startChar": 76,
+        "endLine": 43,
+        "endChar": 82
+      },
+      "revId": "66189fbb132c78fec897a8098120d82222c5aed7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "508a1fe9_6274c987",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/healthcheck.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-17T10:30:10Z",
+      "side": 1,
+      "message": "Could live in pmsh_utils module.",
+      "range": {
+        "startLine": 20,
+        "startChar": 4,
+        "endLine": 20,
+        "endChar": 10
+      },
+      "revId": "66189fbb132c78fec897a8098120d82222c5aed7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ac823ab_7a392ae5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-17T10:30:10Z",
+      "side": 1,
+      "message": "Are the quotes needed here?",
+      "range": {
+        "startLine": 30,
+        "startChar": 8,
+        "endLine": 30,
+        "endChar": 9
+      },
+      "revId": "66189fbb132c78fec897a8098120d82222c5aed7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3b60f94e_487895d3",
+        "filename": "components/pm-subscription-handler/tests/test_healthcheck.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-17T10:30:10Z",
+      "side": 1,
+      "message": "Could live in the test_pmsh_utils module instead.",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 35
+      },
+      "revId": "66189fbb132c78fec897a8098120d82222c5aed7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
