@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "df757a81_a672778f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2020-02-19T15:23:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c24cb91d_0689c7a2",
+      "range": {
+        "startLine": 42,
+        "startChar": 32,
+        "endLine": 42,
+        "endChar": 63
+      },
+      "revId": "a96707618a22bec24cf6c627b40617f6b7dd93b9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf7e0413_dc8ad4f6",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/healthcheck.py",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "beabed29_9ba4f963",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/healthcheck.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2020-02-19T15:23:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bf7e0413_dc8ad4f6",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "a96707618a22bec24cf6c627b40617f6b7dd93b9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b098cb83_d693d191",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
         "patchSetId": 5
@@ -59,6 +107,30 @@
       "writtenOn": "2020-02-19T09:43:51Z",
       "side": 1,
       "message": "We should be able to pass an AppConfig object here.\n\n        config_handler \u003d ConfigHandler()\n        config \u003d config_handler.get_config()\n        app_conf \u003d AppConfig(**config[\u0027config\u0027])",
+      "range": {
+        "startLine": 38,
+        "startChar": 26,
+        "endLine": 38,
+        "endChar": 34
+      },
+      "revId": "a96707618a22bec24cf6c627b40617f6b7dd93b9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "899658ed_fe414a66",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2020-02-19T15:23:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b098cb83_d693d191",
       "range": {
         "startLine": 38,
         "startChar": 26,
