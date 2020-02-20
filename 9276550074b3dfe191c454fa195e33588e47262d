@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "23aaef6a_f3837ad7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-20T12:59:58Z",
+      "side": 1,
+      "message": "Nice message, this is the level we should all strive for, the only thing to note here is the services repo has many other services, so it might be a good idea to include the component the commit is targetting too in the title line?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 70
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6690ccfe_7ce777c3",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/db_models.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-20T12:59:58Z",
+      "side": 1,
+      "message": "Why remove the new line between the license and the start of the code?",
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "291b5854_283b09a6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_logging.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-20T12:59:58Z",
+      "side": 1,
+      "message": "2019-2020?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 40
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4a3de76d_db83c33e",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 1
@@ -62,6 +125,52 @@
       "revId": "9276550074b3dfe191c454fa195e33588e47262d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b887ec23_06010489",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-20T12:59:58Z",
+      "side": 1,
+      "message": "Is this appropriate for a docstring?\nIt seems to be more why you are doing something, while the majority of the other docstrings in this application focus more on what they are doing.",
+      "range": {
+        "startLine": 84,
+        "startChar": 83,
+        "endLine": 85,
+        "endChar": 99
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cff3189_f2d7346c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-20T12:59:58Z",
+      "side": 1,
+      "message": "Similar to other comments, I think these states/statuses that are getting stored should probably stored elsewhere and referenced throughout.",
+      "range": {
+        "startLine": 94,
+        "startChar": 36,
+        "endLine": 94,
+        "endChar": 45
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     },
     {
       "key": {
@@ -131,6 +240,75 @@
       "revId": "9276550074b3dfe191c454fa195e33588e47262d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78629e93_4969159d",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-20T12:59:58Z",
+      "side": 1,
+      "message": "Is it better to store locked and unlocked in constants, there appears to be a number of locations that this same string is created?",
+      "range": {
+        "startLine": 74,
+        "startChar": 31,
+        "endLine": 74,
+        "endChar": 39
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80935837_447b06fc",
+        "filename": "components/pm-subscription-handler/tests/data/aai_xnfs.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-20T12:59:58Z",
+      "side": 1,
+      "message": "I know this isnt part of your commit, but can you remove this character?",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22941acc_bdf3c689",
+        "filename": "components/pm-subscription-handler/tests/data/aai_xnfs.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-20T12:59:58Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 9
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     },
     {
       "key": {
