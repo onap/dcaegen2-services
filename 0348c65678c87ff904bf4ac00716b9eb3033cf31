@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ed9d4664_579a3e34",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-20T15:52:35Z",
+      "side": 1,
+      "message": "we do filter them below before _process_event is called",
+      "parentUuid": "9977d320_0832f524",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "159f39e2_a3b9a678",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2020-02-20T14:29:31Z",
       "side": 1,
       "message": "Are we looking for name or value here?",
+      "range": {
+        "startLine": 73,
+        "startChar": 32,
+        "endLine": 73,
+        "endChar": 37
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee313612_f383ea97",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-20T15:52:35Z",
+      "side": 1,
+      "message": "the way it is both are the same, but I will change to value to avoid confusion",
+      "parentUuid": "159f39e2_a3b9a678",
       "range": {
         "startLine": 73,
         "startChar": 32,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "fb8d678a_1cb28ed2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-20T15:52:35Z",
+      "side": 1,
+      "message": "this will never be the case as the filters were applied in the previous method",
+      "parentUuid": "c288442d_c1141f9f",
+      "range": {
+        "startLine": 83,
+        "startChar": 63,
+        "endLine": 83,
+        "endChar": 83
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e57ca121_b468ce44",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2020-02-20T14:29:31Z",
       "side": 1,
       "message": "Don\u0027t think we need a separate function for this",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5846075_fde13c15",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-20T15:52:35Z",
+      "side": 1,
+      "message": "I think it reads better this way",
+      "parentUuid": "e57ca121_b468ce44",
       "range": {
         "startLine": 86,
         "startChar": 4,
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "e8368426_80cc2b7c",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-20T15:52:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b003b333_64b74227",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 24
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84d61ef0_994c7e9a",
         "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
         "patchSetId": 1
@@ -186,6 +306,30 @@
     },
     {
       "key": {
+        "uuid": "88f00c2c_088fd134",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-20T15:52:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1052d896_c26e5df4",
+      "range": {
+        "startLine": 28,
+        "startChar": 43,
+        "endLine": 28,
+        "endChar": 49
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43917e70_c1ef5663",
         "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
         "patchSetId": 1
@@ -209,6 +353,30 @@
     },
     {
       "key": {
+        "uuid": "89c32144_553f8360",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-20T15:52:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43917e70_c1ef5663",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 19
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc027ab8_cd1aebce",
         "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
         "patchSetId": 1
@@ -220,6 +388,30 @@
       "writtenOn": "2020-02-20T14:29:31Z",
       "side": 1,
       "message": "Remove and import directly",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 26
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85c89106_0607d55d",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-20T15:52:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc027ab8_cd1aebce",
       "range": {
         "startLine": 75,
         "startChar": 8,
