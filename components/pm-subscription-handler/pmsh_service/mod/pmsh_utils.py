@@ -18,6 +18,7 @@
 import json
 import threading
 import uuid
+from threading import Timer
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -185,6 +186,7 @@ class _MrSub(_DmaapMrClient):
         try:
             session = requests.Session()
             headers = {'accept': 'application/json', 'content-type': 'application/json'}
+            logger.debug(f'Request sent to MR topic: {self.topic_url}')
             response = session.get(f'{self.topic_url}/{consumer_group}/{consumer_id}'
                                    f'?timeout={timeout}',
                                    auth=HTTPBasicAuth(self.aaf_id, self.aaf_pass), headers=headers,
@@ -240,3 +242,12 @@ class _MrSub(_DmaapMrClient):
             threading.Timer(5, self.poll_policy_topic, [subscription_name, app]).start()
         except Exception as err:
             raise Exception(f'Error trying to poll MR: {err}')
+
+
+class PeriodicTask(Timer):
+    """
+    See :class:`Timer`.
+    """
+    def run(self):
+        while not self.finished.wait(self.interval):
+            self.function(*self.args, **self.kwargs)

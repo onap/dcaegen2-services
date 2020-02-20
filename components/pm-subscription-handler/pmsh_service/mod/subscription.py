@@ -32,6 +32,11 @@ class SubNfState(Enum):
     DELETE_FAILED = 'DELETE_FAILED'
 
 
+class AdministrativeState(Enum):
+    LOCKED = 'LOCKED'
+    UNLOCKED = 'UNLOCKED'
+
+
 class Subscription:
     def __init__(self, **kwargs):
         self.subscriptionName = kwargs.get('subscriptionName')

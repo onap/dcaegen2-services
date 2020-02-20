@@ -72,8 +72,10 @@ class NetworkFunction:
     def delete(**kwargs):
         """ Deletes a network function from the database """
         nf_name = kwargs['nf_name']
-        NetworkFunctionModel.query.filter(
-            NetworkFunctionModel.nf_name == nf_name). \
-            delete(synchronize_session='evaluate')
+        nf = NetworkFunctionModel.query.filter(
+            NetworkFunctionModel.nf_name == nf_name).one_or_none()
+
+        if nf is not None:
+            db.session.delete(nf)
 
         db.session.commit()
