@@ -46,7 +46,7 @@
   ],
   "parameters": [
     {
-      "name": "pm_publish_topic_name",
+      "name": "pmsh_publish_topic_name",
       "value": "DCAE_CL_OUTPUT",
       "description": "Name of the topic PMSH publishes to for policy consumption",
       "designer_editable": true,
@@ -56,7 +56,7 @@
       "required": true
     },
     {
-      "name": "pm_subscribe_topic_name",
+      "name": "policy_feedback_topic_name",
       "value": "PMSH_CL_INPUT",
       "description": "Name of the topic PMSH subscribes to for policy outputs",
       "designer_editable": true,
@@ -66,8 +66,8 @@
       "required": true
     },
     {
-      "name": "aai_subscribe_topic_name",
-      "value": "AAI_EVENT",
+      "name": "aai_notification_topic_name",
+      "value": "AAI-EVENT",
       "description": "Name of the topic PMSH subscribes to for AAI Events",
       "designer_editable": true,
       "sourced_at_deployment": false,
