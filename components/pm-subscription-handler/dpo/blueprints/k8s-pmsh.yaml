@@ -47,15 +47,15 @@ inputs:
     default: 'pmsh-operational-policy'
   control_loop_name:
     type: string
-  pm_publish_topic_name:
+  pmsh_publish_topic_name:
     type: string
-    default: 'DCAE_CL_OUTPUT'
-  pm_subscribe_topic_name:
+    default: 'unauthenticated.DCAE_CL_OUTPUT'
+  policy_feedback_topic_name:
     type: string
     default: 'PMSH_CL_INPUT'
-  aai_subscribe_topic_name:
+  aai_notification_topic_name:
     type: string
-    default: 'AAI_EVENT'
+    default: 'AAI-EVENT'
   publisher_client_role:
     type: string
     description: Client role to request secure access to topic
@@ -75,22 +75,6 @@ inputs:
     type: string
     description: DCAE location for the subscriber, used to set up routing
     default: 'san-francisco'
-  pmsh_service_port:
-    type: string
-    description: PMSH host port
-    default: '8443'
-  dmaap_mr_service_protocol:
-    type: string
-    description: DMAAP Message Router protocol
-    default: 'https'
-  dmaap_mr_service_host:
-    type: string
-    description: DMAAP Message Router host address
-    default: 'message-router'
-  dmaap_mr_service_port:
-    type: string
-    description: DMAAP Message Router host port
-    default: '3905'
   cpu_limit:
     type: string
     default: '1000m'
@@ -112,18 +96,10 @@ node_templates:
     properties:
       writerfqdn: { get_input: pgaas_cluster_name }
       name: 'pmsh'
-  pm_publish_topic:
-    type: ccsdk.nodes.Topic
-    properties:
-      topic_name: { get_input: pm_publish_topic_name }
   pm_subscribe_topic:
     type: ccsdk.nodes.Topic
     properties:
-      topic_name: { get_input: pm_subscribe_topic_name }
-  aai_subscribe_topic:
-    type: ccsdk.nodes.Topic
-    properties:
-      topic_name: { get_input: aai_subscribe_topic_name }
+      topic_name: { get_input: policy_feedback_topic_name }
   pmsh:
     type: dcae.nodes.ContainerizedServiceComponentUsingDmaap
     interfaces:
@@ -143,12 +119,8 @@ node_templates:
                   { get_attribute: [ pgaasvm, admin, database ] }
 
     relationships:
-      - type: ccsdk.relationships.publish_events
-        target: pm_publish_topic
       - type: ccsdk.relationships.subscribe_to_events
         target: pm_subscribe_topic
-      - type: ccsdk.relationships.subscribe_to_events
-        target: aai_subscribe_topic
       - type: cloudify.relationships.depends_on
         target: pgaasvm
       - type: cloudify.relationships.depends_on
@@ -168,14 +140,16 @@ node_templates:
         streams_publishes:
           policy_pm_publisher:
             type: message_router
-            dmaap_info: <<pm_publish_topic>>
+            dmaap_info:
+              topic_url: {concat: ["https://message-router:3905/events/", { get_input: pmsh_publish_topic_name }]}
         streams_subscribes:
           policy_pm_subscriber:
             type: message_router
             dmaap_info: <<pm_subscribe_topic>>
           aai_subscriber:
             type: message_router
-            dmaap_info: <<aai_subscribe_topic>>
+            dmaap_info:
+              topic_url: {concat: ["https://message-router:3905/events/", { get_input: aai_notification_topic_name }]}
       resource_config:
         limits:
           cpu: { get_input: cpu_limit }
@@ -183,17 +157,8 @@ node_templates:
         requests:
           cpu: { get_input: cpu_request }
           memory: { get_input: memory_request }
-      streams_publishes:
-        - name: pm_publish_topic
-          location: { get_input: dcae_location }
-          client_role: { get_input: publisher_client_role }
-          type: message-router
       streams_subscribes:
         - name: pm_subscribe_topic
-          location: { get_input: dcae_location }
-          client_role: { get_input: subscriber_client_role }
-          type: message-router
-        - name: aai_subscribe_topic
           location: { get_input: dcae_location }
           client_role: { get_input: subscriber_client_role }
           type: message-router
