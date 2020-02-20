@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9977d320_0832f524",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-20T14:29:31Z",
+      "side": 1,
+      "message": "How likely is it that this may be a large set of data?\nShould we filter the events based on nf_name before processing them?",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 14
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "159f39e2_a3b9a678",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-20T14:29:31Z",
+      "side": 1,
+      "message": "Are we looking for name or value here?",
+      "range": {
+        "startLine": 73,
+        "startChar": 32,
+        "endLine": 73,
+        "endChar": 37
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c288442d_c1141f9f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-20T14:29:31Z",
+      "side": 1,
+      "message": "If this is not \"Active\" how should we react?",
+      "range": {
+        "startLine": 83,
+        "startChar": 63,
+        "endLine": 83,
+        "endChar": 83
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e57ca121_b468ce44",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-20T14:29:31Z",
+      "side": 1,
+      "message": "Don\u0027t think we need a separate function for this",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99f8250b_65bd1f35",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-20T14:29:31Z",
+      "side": 1,
+      "message": "mod.aai_event_...",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 24,
+        "endChar": 7
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b003b333_64b74227",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-20T14:29:31Z",
+      "side": 1,
+      "message": "Can be removed",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 24
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84d61ef0_994c7e9a",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-20T14:29:31Z",
+      "side": 1,
+      "message": "mod.aai_event...",
+      "range": {
+        "startLine": 28,
+        "startChar": 5,
+        "endLine": 28,
+        "endChar": 6
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1052d896_c26e5df4",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-20T14:29:31Z",
+      "side": 1,
+      "message": "...Status, process_aai_events",
+      "range": {
+        "startLine": 28,
+        "startChar": 43,
+        "endLine": 28,
+        "endChar": 49
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43917e70_c1ef5663",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-20T14:29:31Z",
+      "side": 1,
+      "message": "Good practice to use the IDE shortcut CTRL + ALT + o to organise imports",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 19
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dc027ab8_cd1aebce",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-20T14:29:31Z",
+      "side": 1,
+      "message": "Remove and import directly",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 26
+      },
+      "revId": "0348c65678c87ff904bf4ac00716b9eb3033cf31",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
