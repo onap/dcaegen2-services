@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dc267d4b_3df8b4bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Thank you. It sounds like a good idea, although I believe this should be discussed with the team in order to introduce it as a convention instead of having sparse commits including the component name",
+      "parentUuid": "23aaef6a_f3837ad7",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 70
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6690ccfe_7ce777c3",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/db_models.py",
         "patchSetId": 1
@@ -39,6 +63,24 @@
       "revId": "9276550074b3dfe191c454fa195e33588e47262d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9501f25b_bcb87b26",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/db_models.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done. My mistake, was adding and removing lines from different places",
+      "parentUuid": "6690ccfe_7ce777c3",
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "73815631_c74c8ea8",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_logging.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291b5854_283b09a6",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 40
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a3de76d_db83c33e",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 1
@@ -82,6 +148,24 @@
     },
     {
       "key": {
+        "uuid": "64977f56_6d98e3be",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "It is a valid state, yet if this was removed it would cause an exception, which is not wanted. Could change to pass instead of setting the state",
+      "parentUuid": "4a3de76d_db83c33e",
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fee9c655_2c5e57c4",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 1
@@ -93,6 +177,30 @@
       "writtenOn": "2020-02-20T12:52:29Z",
       "side": 1,
       "message": "Maybe move these to the end of the class as they are only relevant to policy topic polling.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 1
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f719600_4595960e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fee9c655_2c5e57c4",
       "range": {
         "startLine": 30,
         "startChar": 0,
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "c9b763f9_73c93710",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "The unit tests already have a small sample json that it is operating on",
+      "parentUuid": "a41ebeef_e6a1c9c3",
+      "range": {
+        "startLine": 220,
+        "startChar": 8,
+        "endLine": 220,
+        "endChar": 25
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b887ec23_06010489",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 1
@@ -148,6 +280,30 @@
       "revId": "9276550074b3dfe191c454fa195e33588e47262d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d88c783c_631618e1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b887ec23_06010489",
+      "range": {
+        "startLine": 84,
+        "startChar": 83,
+        "endLine": 85,
+        "endChar": 99
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -174,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "56610edc_019a5262",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cff3189_f2d7346c",
+      "range": {
+        "startLine": 94,
+        "startChar": 36,
+        "endLine": 94,
+        "endChar": 45
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d765ac58_a2835a47",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 1
@@ -185,6 +365,30 @@
       "writtenOn": "2020-02-20T12:52:29Z",
       "side": 1,
       "message": "Should this not use the PENDING_CREATE Enum above. Or at least keep the casing the same. ie. PENDING",
+      "range": {
+        "startLine": 102,
+        "startChar": 62,
+        "endLine": 102,
+        "endChar": 83
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "222de547_6767647e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d765ac58_a2835a47",
       "range": {
         "startLine": 102,
         "startChar": 62,
@@ -220,6 +424,30 @@
     },
     {
       "key": {
+        "uuid": "f453221f_6887dee0",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73c971d0_fcf169ae",
+      "range": {
+        "startLine": 33,
+        "startChar": 17,
+        "endLine": 33,
+        "endChar": 36
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a840b67e_49745861",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 1
@@ -231,6 +459,30 @@
       "writtenOn": "2020-02-20T12:52:29Z",
       "side": 1,
       "message": "This should be the first thing to run. Move to top.",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 68,
+        "endChar": 48
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69c396fc_f59dc044",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a840b67e_49745861",
       "range": {
         "startLine": 66,
         "startChar": 8,
@@ -266,6 +518,30 @@
     },
     {
       "key": {
+        "uuid": "9d10a5cf_784a044f",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78629e93_4969159d",
+      "range": {
+        "startLine": 74,
+        "startChar": 31,
+        "endLine": 74,
+        "endChar": 39
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80935837_447b06fc",
         "filename": "components/pm-subscription-handler/tests/data/aai_xnfs.json",
         "patchSetId": 1
@@ -286,6 +562,30 @@
       "revId": "9276550074b3dfe191c454fa195e33588e47262d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2477092_4e98d134",
+        "filename": "components/pm-subscription-handler/tests/data/aai_xnfs.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80935837_447b06fc",
+      "range": {
+        "startLine": 54,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -312,6 +612,30 @@
     },
     {
       "key": {
+        "uuid": "473574e7_dd564c4d",
+        "filename": "components/pm-subscription-handler/tests/data/aai_xnfs.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22941acc_bdf3c689",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 9
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eab06aef_5e303946",
         "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
         "patchSetId": 1
@@ -335,6 +659,30 @@
     },
     {
       "key": {
+        "uuid": "b14b3fd5_f0fb1d38",
+        "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eab06aef_5e303946",
+      "range": {
+        "startLine": 30,
+        "startChar": 72,
+        "endLine": 30,
+        "endChar": 88
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7a26de0_082066ef",
         "filename": "components/pm-subscription-handler/tests/test_subscription.py",
         "patchSetId": 1
@@ -346,6 +694,30 @@
       "writtenOn": "2020-02-20T12:52:29Z",
       "side": 1,
       "message": "Inconsistent on these imports.\n\nStick with one convention.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 31
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "500ab2b8_87c6be76",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-20T16:09:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7a26de0_082066ef",
       "range": {
         "startLine": 22,
         "startChar": 0,
