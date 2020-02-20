@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a3de76d_db83c33e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-02-20T12:00:48Z",
+      "side": 1,
+      "message": "I think remove this if it\u0027s not going to be used.",
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73c971d0_fcf169ae",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-02-20T12:00:48Z",
+      "side": 1,
+      "message": "if a change has occured",
+      "range": {
+        "startLine": 33,
+        "startChar": 17,
+        "endLine": 33,
+        "endChar": 36
+      },
+      "revId": "9276550074b3dfe191c454fa195e33588e47262d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
