@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "183e8de7_cf7d0093",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-datalake-helm.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-21T21:33:11Z",
+      "side": 1,
+      "message": "This blueprint is not required as this is already under https://git.onap.org/dcaegen2/platform/blueprints/tree/blueprints/k8s-helm.yaml",
+      "revId": "796b62efa55ed85f8cd612da10a45fe16bb6e6f1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d2db405_72e831b6",
+        "filename": "components/datalake-handler/dpo/helm_chart/dcae-datalake/charts/dcae-datalake-feeder/templates/job.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-02-21T21:33:11Z",
+      "side": 1,
+      "message": "version tag missing",
+      "range": {
+        "startLine": 45,
+        "startChar": 78,
+        "endLine": 45,
+        "endChar": 84
+      },
+      "revId": "796b62efa55ed85f8cd612da10a45fe16bb6e6f1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
