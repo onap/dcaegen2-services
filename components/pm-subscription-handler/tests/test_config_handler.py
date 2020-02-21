@@ -24,7 +24,7 @@ from os import path
 import responses
 from tenacity import wait_none
 
-from pmsh_service.mod.config_handler import ConfigHandler
+from mod.config_handler import ConfigHandler
 
 
 class ConfigHandlerTestCase(unittest.TestCase):
@@ -49,7 +49,7 @@ class ConfigHandlerTestCase(unittest.TestCase):
 
     @responses.activate
     def test_get_config_success(self):
-        responses.add(responses.GET, self.cbs_url, json=json.dumps(self.expected_config),
+        responses.add(responses.GET, self.cbs_url, json=self.expected_config,
                       status=200)
 
         config_handler = ConfigHandler()

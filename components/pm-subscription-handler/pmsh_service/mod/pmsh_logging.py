@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019 Nordix Foundation.
+#  Copyright (C) 2019-2020 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,11 +15,10 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
+import datetime
 import logging as log
 from logging.handlers import RotatingFileHandler
 from os import makedirs
-import datetime
 
 # These loggers will be overwritten with EELF logging when running in Docker
 _AUDIT_LOGGER = log.getLogger("defaultlogger")

@@ -15,16 +15,13 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
 from mod import pmsh_logging as logger, db
 from mod.db_models import NetworkFunctionModel
 
 
 class NetworkFunction:
     def __init__(self, **kwargs):
-        """
-        Object representation of the NetworkFunction.
-        """
+        """ Object representation of the NetworkFunction. """
         self.nf_name = kwargs.get('nf_name')
         self.orchestration_status = kwargs.get('orchestration_status')
 
@@ -36,8 +33,7 @@ class NetworkFunction:
         return f'nf-name: {self.nf_name}, orchestration-status: {self.orchestration_status}'
 
     def create(self):
-        """ Creates a NetworkFunction database entry
-        """
+        """ Creates a NetworkFunction database entry """
         existing_nf = NetworkFunctionModel.query.filter(
             NetworkFunctionModel.nf_name == self.nf_name).one_or_none()
 
@@ -71,3 +67,13 @@ class NetworkFunction:
             list: NetworkFunctionModel objects else empty
         """
         return NetworkFunctionModel.query.all()
+
+    @staticmethod
+    def delete(**kwargs):
+        """ Deletes a network function from the database """
+        nf_name = kwargs['nf_name']
+        NetworkFunctionModel.query.filter(
+            NetworkFunctionModel.nf_name == nf_name). \
+            delete(synchronize_session='evaluate')
+
+        db.session.commit()

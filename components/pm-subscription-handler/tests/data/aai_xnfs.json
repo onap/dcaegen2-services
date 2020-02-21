@@ -36,7 +36,8 @@
         "serial-number": "6061ZW3",
         "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
         "resource-version": "1573053304574",
-        "nf-role": "gNB"
+        "nf-role": "gNB",
+        "orchestration-status": "Active"
       }
     },
     {
@@ -50,7 +51,7 @@
         "equip-vendor": "Nokia",
         "equip-model": "val6",
         "ipaddress-v4-oam": "10.10.10.66",
-         "orchestration-status": "Inventoried",
+        "orchestration-status": "Active",
         "sw-version": "val7",
         "in-maint": false,
         "serial-number": "6061ZW3",
@@ -70,6 +71,7 @@
         "equip-vendor": "Nokia",
         "equip-model": "val6",
         "ipaddress-v4-oam": "10.10.13.26",
+        "orchestration-status": "Active",
         "sw-version": "val7",
         "in-maint": false,
         "serial-number": "6061ZW3",
@@ -89,7 +91,7 @@
         "equip-vendor": "Ericsson",
         "equip-model": "val6",
         "ipaddress-v4-oam": "10.40.10.26",
-         "orchestration-status": "Inventoried",
+        "orchestration-status": "Inventoried",
         "sw-version": "val7",
         "in-maint": false,
         "serial-number": "6061ZW3",
