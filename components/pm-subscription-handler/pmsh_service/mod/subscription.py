@@ -143,12 +143,19 @@ class Subscription:
         db.session.commit()
 
     def delete_subscription(self):
-        """ Deletes a subscription from the database """
-        SubscriptionModel.query.filter(
-            SubscriptionModel.subscription_name == self.subscriptionName). \
-            delete(synchronize_session='evaluate')
-
-        db.session.commit()
+        """ Deletes a subscription and all its association from the database. A network function
+        that is only associated with the subscription being removed will also be deleted."""
+        subscription = SubscriptionModel.query.filter(
+            SubscriptionModel.subscription_name == self.subscriptionName).one_or_none()
+        if subscription is not None:
+            for current_nfs in subscription.nfs:
+                other_nfs = NfSubRelationalModel.query.filter(
+                    NfSubRelationalModel.subscription_name != self.subscriptionName,
+                    NfSubRelationalModel.nf_name == current_nfs.nf_name).one_or_none()
+                if other_nfs is None:
+                    db.session.delete(current_nfs.nf)
+            db.session.delete(subscription)
+            db.session.commit()
 
     @retry(wait=wait_exponential(multiplier=1, min=30, max=120), stop=stop_after_attempt(3),
            retry=retry_if_exception_type(Exception))
