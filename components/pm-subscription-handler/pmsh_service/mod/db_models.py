@@ -67,6 +67,9 @@ class NetworkFunctionModel(db.Model):
 
 class NfSubRelationalModel(db.Model):
     __tablename__ = 'nf_to_sub_rel'
+    __mapper_args__ = {
+        'confirm_deleted_rows': False
+    }
     id = Column(Integer, primary_key=True, autoincrement=True)
     subscription_name = Column(
         String,
