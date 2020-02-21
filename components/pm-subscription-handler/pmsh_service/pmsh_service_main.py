@@ -16,18 +16,20 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 import sys
-import time
 import threading
+import time
 
 import mod.aai_client as aai
 import mod.pmsh_logging as logger
+from aai_event_handler import process_aai_events
 from mod import db, create_app
 from mod.config_handler import ConfigHandler
-from mod.pmsh_utils import AppConfig
+from mod.pmsh_utils import AppConfig, PeriodicTask
 from mod.subscription import Subscription, AdministrativeState
 
 
-def subscription_processor(config_handler, administrative_state, mr_pub, app):
+def subscription_processor(config_handler, administrative_state, mr_pub, app,
+                           mr_aai_event_subscriber):
     """
     Checks for changes of administrative state in config and proceeds to process
     the Subscription if a change has occurred
@@ -37,10 +39,10 @@ def subscription_processor(config_handler, administrative_state, mr_pub, app):
         administrative_state (str): The administrative state
         mr_pub (_MrPub): MR publisher
         app (db): DB application
+        mr_aai_event_subscriber (_MrSub): AAI events MR subscriber
     """
     app.app_context().push()
     config = config_handler.get_config()
-    sub, nfs = aai.get_pmsh_subscription_data(config)
     new_administrative_state = config['policy']['subscription']['administrativeState']
     polling_period = 30.0
 
@@ -48,17 +50,29 @@ def subscription_processor(config_handler, administrative_state, mr_pub, app):
         if administrative_state == new_administrative_state:
             logger.debug('Administrative State did not change in the Config')
         else:
+            logger.debug(f'Administrative State changed from "{administrative_state}" "to '
+                         f'"{new_administrative_state}".')
+            sub, nfs = aai.get_pmsh_subscription_data(config)
             sub.process_subscription(nfs, mr_pub)
+            aai_event_thread = PeriodicTask(10, process_aai_events, args=(mr_aai_event_subscriber,
+                                                                          sub, mr_pub, app))
+
+            if new_administrative_state == AdministrativeState.UNLOCKED.value:
+                logger.debug('Listening to AAI-EVENT topic in MR.')
+                aai_event_thread.start()
+            else:
+                logger.debug('Stopping to listen to AAI-EVENT topic in MR.')
+                aai_event_thread.cancel()
 
     except Exception as err:
         logger.debug(f'Error occurred during the activation/deactivation process {err}')
 
     threading.Timer(polling_period, subscription_processor,
-                    [config_handler, new_administrative_state, mr_pub, app]).start()
+                    [config_handler, new_administrative_state, mr_pub, app,
+                     mr_aai_event_subscriber]).start()
 
 
 def main():
-
     try:
         config_handler = ConfigHandler()
         config = config_handler.get_config()
@@ -69,6 +83,7 @@ def main():
         sub, nfs = aai.get_pmsh_subscription_data(config)
         mr_pub = app_conf.get_mr_pub('policy_pm_publisher')
         mr_sub = app_conf.get_mr_sub('policy_pm_subscriber')
+        mr_aai_event_subscriber = app_conf.get_mr_sub('aai_subscriber')
         initial_start_delay = 5.0
 
         administrative_state = AdministrativeState.LOCKED.value
@@ -77,7 +92,8 @@ def main():
             administrative_state = subscription_in_db.status
 
         threading.Timer(initial_start_delay, subscription_processor,
-                        [config_handler, administrative_state, mr_pub, app]).start()
+                        [config_handler, administrative_state, mr_pub,
+                         app, mr_aai_event_subscriber]).start()
 
         threading.Timer(20.0, mr_sub.poll_policy_topic, [sub.subscriptionName, app]).start()
 
