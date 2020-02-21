@@ -15,34 +15,22 @@
 # limitations under the License.
 #============LICENSE_END============================================
 
-FROM ubuntu:16.04 AS builder
-MAINTAINER Kate Hsuan <kate.hsuan@qct.io>
 
-LABEL org.label-schema.docker.build="docker build -t dl-db-init . --no-cache" \
-      org.label-schema.docker.run="docker run dl-init"
+apiVersion: v1
+kind: Service
+metadata:
+  name: dl-feeder
+  labels:
+{{ include "dcae-datalake-feeder.labels" . | indent 4 }}
+spec:
+  clusterIP: None
+  type: ClusterIP
+  ports:
+  - name: datalake-api-cluster
+    port: 1680
+    protocol: TCP
+    targetPort: 1680
+  selector:
+    app.kubernetes.io/name: {{ include "dcae-datalake-feeder.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
 
-WORKDIR /app
-WORKDIR /app/db_init
-ADD scripts/db_init/ .
-RUN chmod 0755 ./*
-WORKDIR /app
-COPY scripts/run.sh .
-COPY db_scripts/init_db.sql .
-COPY db_scripts/init_db_data.sql .
-
-RUN chmod 0755 /app/run.sh
-
-ARG mysqlpasswd="0000"
-ENV MYSQL_ROOT_PASSWORD=$mysqlpasswd
-
-ARG mysqlhost="mariadb-galera"
-ENV MYSQL_HOST=$mysqlhost
-
-ARG mysqlport="3306"
-ENV MYSQL_PORT=${mysqlport}
-
-RUN apt update && \
-    apt install -y mariadb-client-core-10.0 && \
-    apt install -y curl
-
-CMD ["sh", "run.sh"]

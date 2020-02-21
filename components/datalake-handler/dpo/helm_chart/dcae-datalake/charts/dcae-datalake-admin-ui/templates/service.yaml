@@ -1,4 +1,3 @@
-#!/bin/bash
 # ============LICENSE_START==========================================
 # ===================================================================
 #  Copyright (c) 2020 QCT
@@ -16,13 +15,20 @@
 # limitations under the License.
 #============LICENSE_END============================================
 
-
-echo "start init db ..."
-
-/bin/run-parts /app/db_init
-
-echo "finish init db"
-
-
-curl -X PUT -H "contain-type:application/json" http://consul:8500/v1/kv/k8s-datalake -d "{\"mysql_host\": \"$MYSQL_HOST\", \"mysql_password\": \"$MYSQL_ROOT_PASSWORD\", \"mysql_port\": \"$MYSQL_PORT\", \"presto_host\": \"$PRESTO_HOST\"}"
-
+apiVersion: v1
+kind: Service
+metadata:
+  name: dl-feeder-admin-ui
+  labels:
+{{ include "dcae-datalake-admin-ui.labels" . | indent 4 }}
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: http
+      nodePort: {{ .Values.global.nodePortPrefixExt }}{{ .Values.service.nodePort }}
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "dcae-datalake-admin-ui.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
