@@ -2,6 +2,69 @@
   "comments": [
     {
       "key": {
+        "uuid": "8a5244b1_b0006283",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-02-24T11:12:04Z",
+      "side": 1,
+      "message": "the order of these does not match the order of the args in the docs",
+      "range": {
+        "startLine": 42,
+        "startChar": 23,
+        "endLine": 42,
+        "endChar": 56
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e72cb9ad_d8af18e7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-02-24T11:12:04Z",
+      "side": 1,
+      "message": "think this line should be removed",
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da1aa79e_0fe243fa",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-02-24T11:12:04Z",
+      "side": 1,
+      "message": "MrPub",
+      "range": {
+        "startLine": 50,
+        "startChar": 17,
+        "endLine": 50,
+        "endChar": 22
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d90364aa_3ce90759",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 5
@@ -341,6 +404,57 @@
         "endLine": 64,
         "endChar": 28
       },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6adcad83_e4e4cc1d",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-02-24T11:12:04Z",
+      "side": 1,
+      "message": "why is this needed? it looks like you are testing for when new pnf is discovered, so why do you need one that is already active?",
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a3bc71f_073867db",
+        "filename": "components/pm-subscription-handler/tests/test_network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-02-24T11:12:04Z",
+      "side": 1,
+      "message": "should you be checking that length is 2 before deleting?",
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbce337b_8ddf0325",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-02-24T11:12:04Z",
+      "side": 1,
+      "message": "should you be asserting that there are 2 subscriptions at this stage?",
       "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
