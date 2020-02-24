@@ -18,14 +18,15 @@
 import json
 import threading
 import uuid
+from threading import Timer
 
 import requests
 from requests.auth import HTTPBasicAuth
 from tenacity import retry, wait_fixed, retry_if_exception_type
 
 import mod.pmsh_logging as logger
-from mod.subscription import Subscription, SubNfState, AdministrativeState
 from mod.network_function import NetworkFunction
+from mod.subscription import Subscription, SubNfState, AdministrativeState
 
 
 class AppConfig:
@@ -163,6 +164,7 @@ class _MrSub(_DmaapMrClient):
         try:
             session = requests.Session()
             headers = {'accept': 'application/json', 'content-type': 'application/json'}
+            logger.debug(f'Request sent to MR topic: {self.topic_url}')
             response = session.get(f'{self.topic_url}/{consumer_group}/{consumer_id}'
                                    f'?timeout={timeout}',
                                    auth=HTTPBasicAuth(self.aaf_id, self.aaf_pass), headers=headers,
@@ -241,3 +243,12 @@ policy_response_handle_functions = {
         'failed': Subscription.update_sub_nf_status
     }
 }
+
+
+class PeriodicTask(Timer):
+    """
+    See :class:`Timer`.
+    """
+    def run(self):
+        while not self.finished.wait(self.interval):
+            self.function(*self.args, **self.kwargs)
