@@ -32,6 +32,13 @@ class NetworkFunction:
     def __str__(self):
         return f'nf-name: {self.nf_name}, orchestration-status: {self.orchestration_status}'
 
+    def __eq__(self, other):
+        return self.nf_name == other.nf_name and \
+            self.orchestration_status == other.orchestration_status
+
+    def __hash__(self):
+        return hash((self.nf_name, self.orchestration_status))
+
     def create(self):
         """ Creates a NetworkFunction database entry """
         existing_nf = NetworkFunctionModel.query.filter(
@@ -72,8 +79,7 @@ class NetworkFunction:
     def delete(**kwargs):
         """ Deletes a network function from the database """
         nf_name = kwargs['nf_name']
-        NetworkFunctionModel.query.filter(
-            NetworkFunctionModel.nf_name == nf_name). \
-            delete(synchronize_session='evaluate')
+        nf = NetworkFunctionModel.query.filter(
+            NetworkFunctionModel.nf_name == nf_name).one_or_none()
 
-        db.session.commit()
+        db.session.delete(nf) if nf else None
