@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4d4bb06_7f81a11e",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-24T18:14:01Z",
+      "side": 1,
+      "message": "could just add to line 22 to also import TestCase and delete this",
+      "revId": "e670755be64b96e6f8d002ffed55390591eac81d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e895895_1d185aae",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-24T18:14:01Z",
+      "side": 1,
+      "message": "There is an import for patch from unittest.mock at line 23, so no need to call with mock.patch",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 38
+      },
+      "revId": "e670755be64b96e6f8d002ffed55390591eac81d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be7cfd78_42a93cad",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-24T18:14:01Z",
+      "side": 1,
+      "message": "I believe there are many redundant things here. It seems like you\u0027re setting up most of the application just to test your unit. Reminds me more of integration testing. I think it could be changed to: mocking the create_app() and aai_client, and since you\u0027re not really checking the db, just calling a method which interacts with it, it can be mocked and you would not need to set up the db at all.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 51
+      },
+      "revId": "e670755be64b96e6f8d002ffed55390591eac81d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e05fc21_239cbe9a",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-24T18:14:01Z",
+      "side": 1,
+      "message": "You are mocking some stuff using @patch , and some mock.Mock. Feel like it could be neater using one of the options",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 35
+      },
+      "revId": "e670755be64b96e6f8d002ffed55390591eac81d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7cef40d0_7414ec63",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-24T18:14:01Z",
+      "side": 1,
+      "message": "Confusing test. Seems like you could mock the returns of the methods/functions that you are using in process_aai_events, call the function and see if it calls subscription.process_subscription() with correct args. Now you seem to be going even into that method as well and seeing if it does what it should do. I believe that should\u0027ve been tested in its own unit and should not be in scope of this test.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 45
+      },
+      "revId": "e670755be64b96e6f8d002ffed55390591eac81d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd8b6eb8_878c5ad4",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-24T18:14:01Z",
+      "side": 1,
+      "message": "Similar to the above. I think the assertion here is good, but method: mr_sub.get_from_topic(\u0027AAI-EVENT\u0027) , used in aai_event_handler could be mocked to return your data (mr_response) and then just call process_aai_events.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 75
+      },
+      "revId": "e670755be64b96e6f8d002ffed55390591eac81d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
