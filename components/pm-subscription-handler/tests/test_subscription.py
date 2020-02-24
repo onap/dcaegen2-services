@@ -134,13 +134,16 @@ class SubscriptionTest(TestCase):
         self.assertEqual('new_status', sub.status)
 
     def test_delete_subscription(self):
-        self.sub_1.create()
-        subs = self.sub_1.get_all()
-        self.assertEqual(1, len(subs))
+        self.sub_1.add_network_functions_to_subscription([self.nf_1, self.nf_2])
+        self.sub_2.add_network_functions_to_subscription([self.nf_2])
 
         self.sub_1.delete_subscription()
-        new_subs = self.sub_1.get_all()
-        self.assertEqual(0, len(new_subs))
+
+        self.assertEqual(1, len(Subscription.get_all()))
+        self.assertEqual(None, Subscription.get(self.sub_1.subscriptionName))
+        self.assertEqual(1, len(Subscription.get_all_nfs_subscription_relations()))
+        self.assertEqual(1, len(NetworkFunction.get_all()))
+        self.assertEqual(None, NetworkFunction.get(nf_name=self.nf_1.nf_name))
 
     def test_update_sub_nf_status(self):
         sub_name = 'ExtraPM-All-gNB-R2B'

@@ -21,6 +21,7 @@ from unittest.mock import patch
 
 from mod import db, create_app
 from mod.network_function import NetworkFunction
+from mod.subscription import Subscription
 
 
 class NetworkFunctionTests(TestCase):
@@ -69,7 +70,13 @@ class NetworkFunctionTests(TestCase):
     def test_delete_network_function(self):
         self.nf_1.create()
         self.nf_2.create()
-        self.nf_1.delete(nf_name='pnf_1')
-        nfs = NetworkFunction.get_all()
+        sub = Subscription(**{"subscriptionName": "sub"})
+        sub.add_network_functions_to_subscription([self.nf_1, self.nf_2])
 
+        NetworkFunction.delete(nf_name=self.nf_1.nf_name)
+
+        nfs = NetworkFunction.get_all()
         self.assertEqual(1, len(nfs))
+        self.assertEqual(1, len(Subscription.get_all_nfs_subscription_relations()))
+        pnf_1_deleted = [nf for nf in nfs if nf.nf_name != self.nf_1.nf_name]
+        self.assertTrue(pnf_1_deleted)
