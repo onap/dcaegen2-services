@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "45b15599_b730014c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e72cb9ad_d8af18e7",
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da1aa79e_0fe243fa",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 5
@@ -53,6 +71,30 @@
       "writtenOn": "2020-02-24T11:12:04Z",
       "side": 1,
       "message": "MrPub",
+      "range": {
+        "startLine": 50,
+        "startChar": 17,
+        "endLine": 50,
+        "endChar": 22
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd446c64_ca7b0d9f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "good catch, thanks",
+      "parentUuid": "da1aa79e_0fe243fa",
       "range": {
         "startLine": 50,
         "startChar": 17,
@@ -88,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "b5254f17_93de70b3",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "will be done in a separate commit, debug logs in info level atm, we will fix logging and add MDCs in this ticket: DCAEGEN2-2092",
+      "parentUuid": "d90364aa_3ce90759",
+      "range": {
+        "startLine": 58,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 24
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ad53a12f_a2cad4d0",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 5
@@ -99,6 +165,30 @@
       "writtenOn": "2020-02-24T10:36:33Z",
       "side": 1,
       "message": "Probably should be an info log to signify that an NF is selected for the application of a subscription.\n\nIf there are concerns over the amount of load on the AAI topic, then forgo my previous comment on line 58 but still make this one an info log.",
+      "range": {
+        "startLine": 74,
+        "startChar": 15,
+        "endLine": 74,
+        "endChar": 20
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81ea04de_4fb58597",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Ditto",
+      "parentUuid": "ad53a12f_a2cad4d0",
       "range": {
         "startLine": 74,
         "startChar": 15,
@@ -134,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "9d780a56_31eda53e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0bab2a4_4ae71b25",
+      "range": {
+        "startLine": 75,
+        "startChar": 7,
+        "endLine": 77,
+        "endChar": 29
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10b6c82f_51ee4863",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 5
@@ -145,6 +259,30 @@
       "writtenOn": "2020-02-24T10:36:33Z",
       "side": 1,
       "message": "I think this should be Info also, most of these are meaningful logs and at the moment one of the only ways to have insight on what\u0027s actually happening within the service.",
+      "range": {
+        "startLine": 78,
+        "startChar": 19,
+        "endLine": 78,
+        "endChar": 24
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e9ec8d6_a858dcbf",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "will be done in a separate commit, where we add in \u0027info\u0027 logging with MDCs",
+      "parentUuid": "10b6c82f_51ee4863",
       "range": {
         "startLine": 78,
         "startChar": 19,
@@ -180,6 +318,30 @@
     },
     {
       "key": {
+        "uuid": "53ad43dc_1caace7f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Ditto",
+      "parentUuid": "aa456bc3_54e041eb",
+      "range": {
+        "startLine": 82,
+        "startChar": 19,
+        "endLine": 82,
+        "endChar": 24
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d5210bd_d3a9504d",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 5
@@ -200,6 +362,30 @@
       "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc2ed6f1_b44cae65",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d5210bd_d3a9504d",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 41
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -226,6 +412,30 @@
     },
     {
       "key": {
+        "uuid": "cd8f1b3a_a69143a9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "661a7f18_d88eb94d",
+      "range": {
+        "startLine": 85,
+        "startChar": 15,
+        "endLine": 85,
+        "endChar": 20
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56e78d30_4b8b8dd6",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
         "patchSetId": 5
@@ -237,6 +447,30 @@
       "writtenOn": "2020-02-24T10:36:33Z",
       "side": 1,
       "message": "Is this needed?\nif the function is returning none, then the evaluation should determine it is falsey,\nhere\u0027s a nice post (just to highlight some of the good and bad of that decision)\nhttps://opensourcehacker.com/2012/10/17/true-lies-and-falsy-values-in-python-and-javascript/\n\n\n\n\nif you wanted this as a one-liner you could do something like\ndb.session.delete(nf) if nf else None\n\nBut that\u0027s up to you, I don\u0027t really have an issue with the conventional if statement.",
+      "range": {
+        "startLine": 78,
+        "startChar": 13,
+        "endLine": 78,
+        "endChar": 25
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00d9ac51_d7d2c60d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "thanks, changed  this to a one-liner",
+      "parentUuid": "56e78d30_4b8b8dd6",
       "range": {
         "startLine": 78,
         "startChar": 13,
@@ -272,6 +506,30 @@
     },
     {
       "key": {
+        "uuid": "f5aac9c2_c0d157ef",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "289881c0_b3b678a8",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 36
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8fe8ea17_272e904d",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 5
@@ -292,6 +550,30 @@
       "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd1e8018_158114ad",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fe8ea17_272e904d",
+      "range": {
+        "startLine": 151,
+        "startChar": 16,
+        "endLine": 151,
+        "endChar": 27
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -318,6 +600,30 @@
     },
     {
       "key": {
+        "uuid": "a4934c7a_108ddc02",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd290c69_bdf7f361",
+      "range": {
+        "startLine": 152,
+        "startChar": 16,
+        "endLine": 152,
+        "endChar": 25
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0087cd3_0a99f5a5",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 5
@@ -338,6 +644,30 @@
       "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f80628c4_91ef9df1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0087cd3_0a99f5a5",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 37
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -364,6 +694,30 @@
     },
     {
       "key": {
+        "uuid": "ca574f27_94f4e1e2",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ad3a66a9_23a36bb6",
+      "range": {
+        "startLine": 53,
+        "startChar": 19,
+        "endLine": 53,
+        "endChar": 24
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d67dd8e_978cd2a2",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 5
@@ -384,6 +738,30 @@
       "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dee1ee10_492b28c1",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5d67dd8e_978cd2a2",
+      "range": {
+        "startLine": 61,
+        "startChar": 23,
+        "endLine": 61,
+        "endChar": 28
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -410,6 +788,30 @@
     },
     {
       "key": {
+        "uuid": "a8fcfad9_15f7b453",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5d914f20_6f5ae59f",
+      "range": {
+        "startLine": 64,
+        "startChar": 23,
+        "endLine": 64,
+        "endChar": 28
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6adcad83_e4e4cc1d",
         "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
         "patchSetId": 5
@@ -421,6 +823,24 @@
       "writtenOn": "2020-02-24T11:12:04Z",
       "side": 1,
       "message": "why is this needed? it looks like you are testing for when new pnf is discovered, so why do you need one that is already active?",
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "309b1e20_c40370e8",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "this is the negative case, where we don\u0027t want to \u0027Activate\u0027 an already active xNF. I guess I could have explicitly asserted that process event was not invoked for this already active xnf.",
+      "parentUuid": "6adcad83_e4e4cc1d",
       "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -444,6 +864,24 @@
     },
     {
       "key": {
+        "uuid": "8b45599c_555c3507",
+        "filename": "components/pm-subscription-handler/tests/test_network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "it is a given, no need to test this",
+      "parentUuid": "5a3bc71f_073867db",
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dbce337b_8ddf0325",
         "filename": "components/pm-subscription-handler/tests/test_subscription.py",
         "patchSetId": 5
@@ -455,6 +893,24 @@
       "writtenOn": "2020-02-24T11:12:04Z",
       "side": 1,
       "message": "should you be asserting that there are 2 subscriptions at this stage?",
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97404576_2fb5dd2d",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-02-24T11:38:44Z",
+      "side": 1,
+      "message": "you could, but that is more of a given/prerequisite at this point. It could catch bugs for the \u0027add network function\u0027 cases, but that is not the intent of this test",
+      "parentUuid": "dbce337b_8ddf0325",
       "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
