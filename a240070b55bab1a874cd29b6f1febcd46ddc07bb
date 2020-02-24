@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d90364aa_3ce90759",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "Probably should be an Info log for each one of these events.",
+      "range": {
+        "startLine": 58,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 24
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad53a12f_a2cad4d0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "Probably should be an info log to signify that an NF is selected for the application of a subscription.\n\nIf there are concerns over the amount of load on the AAI topic, then forgo my previous comment on line 58 but still make this one an info log.",
+      "range": {
+        "startLine": 74,
+        "startChar": 15,
+        "endLine": 74,
+        "endChar": 20
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0bab2a4_4ae71b25",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "This variable is only used in the condition on the if as far as I can see, wondering is it tidier to just have the function call, won\u0027t mean much with regards to collection just might look neater.",
+      "range": {
+        "startLine": 75,
+        "startChar": 7,
+        "endLine": 77,
+        "endChar": 29
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10b6c82f_51ee4863",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "I think this should be Info also, most of these are meaningful logs and at the moment one of the only ways to have insight on what\u0027s actually happening within the service.",
+      "range": {
+        "startLine": 78,
+        "startChar": 19,
+        "endLine": 78,
+        "endChar": 24
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa456bc3_54e041eb",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 82,
+        "startChar": 19,
+        "endLine": 82,
+        "endChar": 24
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d5210bd_d3a9504d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "There doesn\u0027t appear to be any indication if the delete was successful over logs.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 41
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "661a7f18_d88eb94d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 85,
+        "startChar": 15,
+        "endLine": 85,
+        "endChar": 20
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56e78d30_4b8b8dd6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "Is this needed?\nif the function is returning none, then the evaluation should determine it is falsey,\nhere\u0027s a nice post (just to highlight some of the good and bad of that decision)\nhttps://opensourcehacker.com/2012/10/17/true-lies-and-falsy-values-in-python-and-javascript/\n\n\n\n\nif you wanted this as a one-liner you could do something like\ndb.session.delete(nf) if nf else None\n\nBut that\u0027s up to you, I don\u0027t really have an issue with the conventional if statement.",
+      "range": {
+        "startLine": 78,
+        "startChar": 13,
+        "endLine": 78,
+        "endChar": 25
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "289881c0_b3b678a8",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "See comment on line 78 of network_function.py",
+      "range": {
+        "startLine": 150,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 36
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fe8ea17_272e904d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "nf_relationship seems more apt to me",
+      "range": {
+        "startLine": 151,
+        "startChar": 16,
+        "endLine": 151,
+        "endChar": 27
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd290c69_bdf7f361",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "other_relationship",
+      "range": {
+        "startLine": 152,
+        "startChar": 16,
+        "endLine": 152,
+        "endChar": 25
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0087cd3_0a99f5a5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "Could do if not other_nfs:",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 37
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad3a66a9_23a36bb6",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "This might make more sense as an Info level log",
+      "range": {
+        "startLine": 53,
+        "startChar": 19,
+        "endLine": 53,
+        "endChar": 24
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d67dd8e_978cd2a2",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 61,
+        "startChar": 23,
+        "endLine": 61,
+        "endChar": 28
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d914f20_6f5ae59f",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-24T10:36:33Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 64,
+        "startChar": 23,
+        "endLine": 64,
+        "endChar": 28
+      },
+      "revId": "a240070b55bab1a874cd29b6f1febcd46ddc07bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
