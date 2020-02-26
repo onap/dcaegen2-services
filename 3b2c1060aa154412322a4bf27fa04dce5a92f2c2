@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd12a96c_fab4331f",
+        "filename": "components/pm-subscription-handler/tests/data/mr_aai_events.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4719
+      },
+      "writtenOn": "2020-02-26T11:17:30Z",
+      "side": 1,
+      "message": "format this json file .. remove all \\",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 1
+      },
+      "revId": "3b2c1060aa154412322a4bf27fa04dce5a92f2c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
