@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ece28b88_4efe267f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-27T14:21:28Z",
+      "side": 1,
+      "message": "This module appears to be using the property decorator for getters (like cert_params), why not carry that tradition on with the new fields you have added?",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 91,
+        "endChar": 35
+      },
+      "revId": "731b2faad31850b27e3a99de93d54889d67d0ba1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4762f5bb_94937889",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-02-27T14:21:28Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 94,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 29
+      },
+      "revId": "731b2faad31850b27e3a99de93d54889d67d0ba1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
