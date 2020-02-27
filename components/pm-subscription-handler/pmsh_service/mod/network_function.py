@@ -15,6 +15,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+
+import re
 from mod import pmsh_logging as logger, db
 from mod.db_models import NetworkFunctionModel
 
@@ -83,3 +85,21 @@ class NetworkFunction:
             NetworkFunctionModel.nf_name == nf_name).one_or_none()
 
         db.session.delete(nf) if nf else None
+
+
+class NetworkFunctionFilter:
+    def __init__(self, **kwargs):
+        self.nf_sw_version = kwargs.get('swVersions')
+        self.nf_names = kwargs.get('nfNames')
+        self.regex_matcher = re.compile('|'.join(raw_regex for raw_regex in self.nf_names))
+
+    def is_nf_in_filter(self, nf_name):
+        """Match the nf name against regex values in Subscription.nfFilter.nfNames
+
+        Args:
+            nf_name: the AAI nf name.
+
+        Returns:
+            bool: True if matched, else False.
+        """
+        return self.regex_matcher.search(nf_name)
