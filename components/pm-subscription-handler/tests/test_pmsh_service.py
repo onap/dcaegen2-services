@@ -46,7 +46,9 @@ class PMSHServiceTest(TestCase):
     @patch('threading.Timer')
     @patch('mod.aai_client.get_pmsh_subscription_data')
     @patch('pmsh_service_main.PeriodicTask')
-    def test_subscription_processor_changed_state(self, periodic_task, mock_get_aai, mock_thread):
+    @patch('pmsh_service_main.AppConfig')
+    def test_subscription_processor_changed_state(self, mock_app_conf, periodic_task, mock_get_aai,
+                                                  mock_thread):
         self.mock_config_handler.get_config.return_value = self.cbs_data_1
         mock_get_aai.return_value = self.mock_sub, self.nfs
         mock_thread.start.return_value = 1
@@ -55,7 +57,8 @@ class PMSHServiceTest(TestCase):
         pmsh_service.subscription_processor(self.mock_config_handler, 'LOCKED',
                                             self.mock_mr_pub, self.mock_app, self.mock_aai_sub)
 
-        self.mock_sub.process_subscription.assert_called_with(self.nfs, self.mock_mr_pub)
+        self.mock_sub.process_subscription.assert_called_with(self.nfs, self.mock_mr_pub,
+                                                              mock_app_conf.return_value)
 
     @patch('threading.Timer')
     @patch('mod.pmsh_logging.debug')

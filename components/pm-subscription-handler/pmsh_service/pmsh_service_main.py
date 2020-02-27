@@ -42,6 +42,7 @@ def subscription_processor(config_handler, administrative_state, mr_pub, app,
     """
     app.app_context().push()
     config = config_handler.get_config()
+    app_conf = AppConfig(**config['config'])
     new_administrative_state = config['policy']['subscription']['administrativeState']
     polling_period = 30.0
 
@@ -52,9 +53,9 @@ def subscription_processor(config_handler, administrative_state, mr_pub, app,
             logger.debug(f'Administrative State changed from "{administrative_state}" "to '
                          f'"{new_administrative_state}".')
             sub, nfs = aai.get_pmsh_subscription_data(config)
-            sub.process_subscription(nfs, mr_pub)
-            aai_event_thread = PeriodicTask(10, process_aai_events, args=(mr_aai_event_subscriber,
-                                                                          sub, mr_pub, app))
+            sub.process_subscription(nfs, mr_pub, app_conf)
+            aai_event_thread = PeriodicTask(10, process_aai_events, args=(
+                mr_aai_event_subscriber, sub, mr_pub, app, app_conf))
 
             if new_administrative_state == AdministrativeState.UNLOCKED.value:
                 logger.debug('Listening to AAI-EVENT topic in MR.')
