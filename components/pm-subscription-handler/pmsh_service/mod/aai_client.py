@@ -23,8 +23,8 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 import mod.pmsh_logging as logger
-from mod.network_function import NetworkFunction
-from mod.subscription import Subscription, NetworkFunctionFilter
+from mod.network_function import NetworkFunction, NetworkFunctionFilter
+from mod.subscription import Subscription
 
 
 def get_pmsh_subscription_data(cbs_data):
