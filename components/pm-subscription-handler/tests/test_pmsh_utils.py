@@ -23,13 +23,10 @@ from unittest.mock import patch
 
 import responses
 from requests import Session
-from tenacity import stop_after_attempt
 
 from mod import db, get_db_connection_url, create_app
-from mod.db_models import SubscriptionModel
-from mod.pmsh_utils import AppConfig, policy_response_handle_functions
+from mod.pmsh_utils import AppConfig
 from mod.subscription import Subscription
-from mod.network_function import NetworkFunction
 
 
 class PmshUtilsTestCase(TestCase):
@@ -126,93 +123,3 @@ class PmshUtilsTestCase(TestCase):
         self.env.set('PMSH_PG_PASSWORD', 'pass')
         with self.assertRaises(Exception):
             get_db_connection_url()
-
-    @patch('mod.pmsh_utils.NetworkFunction.delete')
-    def test_handle_response_locked_success(self, mock_delete):
-        with patch.dict(policy_response_handle_functions, {'LOCKED': {'success': mock_delete}}):
-            administrative_state = 'LOCKED'
-            nf = NetworkFunction(nf_name='nf1')
-            self.policy_mr_sub._handle_response(self.sub.subscriptionName, administrative_state,
-                                                nf.nf_name, 'success')
-
-            mock_delete.assert_called()
-
-    @patch('mod.subscription.Subscription.update_sub_nf_status')
-    def test_handle_response_locked_failed(self, mock_update_sub_nf):
-        with patch.dict(policy_response_handle_functions,
-                        {'LOCKED': {'failed': mock_update_sub_nf}}):
-            administrative_state = 'LOCKED'
-            nf = NetworkFunction(nf_name='nf1')
-            self.policy_mr_sub._handle_response(self.sub.subscriptionName, administrative_state,
-                                                nf.nf_name, 'failed')
-            mock_update_sub_nf.assert_called()
-
-    @patch('mod.subscription.Subscription.update_sub_nf_status')
-    def test_handle_response_unlocked_success(self, mock_update_sub_nf):
-        with patch.dict(policy_response_handle_functions,
-                        {'UNLOCKED': {'success': mock_update_sub_nf}}):
-            nf = NetworkFunction(nf_name='nf1')
-            self.policy_mr_sub._handle_response(self.sub.subscriptionName,
-                                                self.sub.administrativeState,
-                                                nf.nf_name, 'success')
-            mock_update_sub_nf.assert_called()
-
-    @patch('mod.subscription.Subscription.update_sub_nf_status')
-    def test_handle_response_unlocked_failed(self, mock_update_sub_nf):
-        with patch.dict(policy_response_handle_functions,
-                        {'UNLOCKED': {'failed': mock_update_sub_nf}}):
-            nf = NetworkFunction(nf_name='nf1')
-            self.policy_mr_sub._handle_response(self.sub.subscriptionName,
-                                                self.sub.administrativeState,
-                                                nf.nf_name, 'failed')
-            mock_update_sub_nf.assert_called()
-
-    def test_handle_response_exception(self):
-        self.assertRaises(Exception, self.policy_mr_sub._handle_response, 'sub1', 'wrong_state',
-                          'nf1', 'wrong_message')
-
-    @patch('mod.pmsh_utils._MrSub.get_from_topic')
-    @patch('mod.pmsh_utils._MrSub._handle_response')
-    @patch('mod.subscription.Subscription.get')
-    @patch('threading.Timer')
-    def test_poll_policy_topic_calls_methods_correct_sub(self, mock_thread, mock_get_sub,
-                                                         mock_handle_response, mock_get_from_topic):
-        result_data = ['{"name": "ResponseEvent","status": { "subscriptionName": '
-                       '"ExtraPM-All-gNB-R2B", "nfName": "pnf300", "message": "success" } }']
-        mock_get_from_topic.return_value = result_data
-        mock_thread.start.return_value = 1
-        mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
-                                                      status='UNLOCKED')
-        self.policy_mr_sub.poll_policy_topic(self.sub.subscriptionName, self.mock_app)
-
-        mock_get_from_topic.assert_called()
-        mock_handle_response.assert_called_with(self.sub.subscriptionName,
-                                                'UNLOCKED', 'pnf300', 'success')
-
-    @patch('mod.pmsh_utils._MrSub.get_from_topic')
-    @patch('mod.pmsh_utils._MrSub._handle_response')
-    @patch('mod.subscription.Subscription.get')
-    @patch('threading.Timer')
-    def test_poll_policy_topic_no_method_calls_incorrect_sub(self, mock_thread, mock_get_sub,
-                                                             mock_handle_response,
-                                                             mock_get_from_topic):
-        result_data = ['{"name": "ResponseEvent","status": { "subscriptionName": '
-                       '"demo-subscription", "nfName": "pnf300", "message": "success" } }']
-        mock_get_from_topic.return_value = result_data
-        mock_thread.start.return_value = 1
-        mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
-                                                      status='UNLOCKED')
-        self.policy_mr_sub.poll_policy_topic(self.sub, self.mock_app)
-
-        mock_get_from_topic.assert_called()
-        mock_handle_response.assert_not_called()
-
-    @patch('mod.subscription.Subscription.get')
-    @patch('mod.pmsh_utils._MrSub.get_from_topic')
-    def test_poll_policy_topic_exception(self, mock_get_from_topic, mock_get_sub):
-        mock_get_from_topic.return_value = 'wrong_return'
-        mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
-                                                      status='UNLOCKED')
-        self.policy_mr_sub.poll_policy_topic.retry.stop = stop_after_attempt(1)
-
-        self.assertRaises(Exception, self.policy_mr_sub.poll_policy_topic, 'sub1', self.mock_app)
