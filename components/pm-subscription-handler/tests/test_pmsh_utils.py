@@ -91,7 +91,7 @@ class PmshUtilsTestCase(TestCase):
     def test_mr_pub_publish_sub_event_data_success(self):
         mr_policy_pub = self.app_conf.get_mr_pub('policy_pm_publisher')
         with patch('mod.pmsh_utils._MrPub.publish_to_topic') as pub_to_topic_call:
-            mr_policy_pub.publish_subscription_event_data(self.sub, 'pnf201')
+            mr_policy_pub.publish_subscription_event_data(self.sub, 'pnf201', self.app_conf)
             pub_to_topic_call.assert_called_once()
 
     @responses.activate

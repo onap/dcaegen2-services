@@ -27,6 +27,7 @@ from tenacity import stop_after_attempt
 import mod.aai_client as aai_client
 from mod import db, create_app
 from mod.network_function import NetworkFunction
+from mod.pmsh_utils import AppConfig
 from mod.subscription import Subscription, NetworkFunctionFilter
 
 
@@ -35,7 +36,8 @@ class SubscriptionTest(TestCase):
     @patch('mod.pmsh_utils._MrSub')
     @patch('mod.get_db_connection_url')
     @patch.object(Session, 'put')
-    def setUp(self, mock_session, mock_get_db_url, mock_mr_sub, mock_mr_pub):
+    @patch('pmsh_service_main.AppConfig')
+    def setUp(self, mock_app_config, mock_session, mock_get_db_url, mock_mr_sub, mock_mr_pub):
         mock_get_db_url.return_value = 'sqlite://'
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
             self.aai_response_data = data.read()
@@ -61,6 +63,7 @@ class SubscriptionTest(TestCase):
         self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
+        self.mock_app_config = mock_app_config
         db.create_all()
 
     def tearDown(self):
@@ -163,7 +166,7 @@ class SubscriptionTest(TestCase):
     def test_process_activate_subscription(self, mock_update_sub_status,
                                            mock_update_sub_nf, mock_add_nfs):
         self.sub_1.process_subscription.retry.stop = stop_after_attempt(1)
-        self.sub_1.process_subscription([self.nf_1], self.mock_mr_pub)
+        self.sub_1.process_subscription([self.nf_1], self.mock_mr_pub, self.mock_app_config)
 
         mock_update_sub_status.assert_called()
         mock_add_nfs.assert_called()
@@ -177,7 +180,7 @@ class SubscriptionTest(TestCase):
                                              mock_update_sub_nf):
         self.sub_1.administrativeState = 'LOCKED'
         self.sub_1.process_subscription.retry.stop = stop_after_attempt(1)
-        self.sub_1.process_subscription([self.nf_1], self.mock_mr_pub)
+        self.sub_1.process_subscription([self.nf_1], self.mock_mr_pub, self.mock_app_config)
 
         self.assertTrue(self.mock_mr_pub.publish_subscription_event_data.called)
         mock_update_sub_nf.assert_called_with(self.sub_1.subscriptionName,
@@ -187,4 +190,13 @@ class SubscriptionTest(TestCase):
     def test_process_subscription_exception(self):
         self.sub_1.process_subscription.retry.stop = stop_after_attempt(1)
         self.assertRaises(Exception, self.sub_1.process_subscription,
-                          [self.nf_1], 'not_mr_pub')
+                          [self.nf_1], 'not_mr_pub', 'app_config')
+
+    def test_prepare_subscription_event(self):
+        with open(os.path.join(os.path.dirname(__file__),
+                               'data/pm_subscription_event.json'), 'r') as data:
+            expected_sub_event = json.load(data)
+        app_conf = AppConfig(**self.cbs_data_1['config'])
+        actual_sub_event = self.sub_1.prepare_subscription_event(self.nf_1.nf_name, app_conf)
+        print(actual_sub_event)
+        self.assertEqual(expected_sub_event, actual_sub_event)

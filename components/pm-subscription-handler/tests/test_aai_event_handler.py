@@ -39,15 +39,17 @@ class AAIEventHandlerTest(TestCase):
 
     @patch('mod.aai_event_handler.NetworkFunction.delete')
     @patch('mod.aai_event_handler.NetworkFunction.get')
-    def test_process_aai_update_and_delete_events(self, mock_nf_get, mock_nf_delete):
+    @patch('pmsh_service_main.AppConfig')
+    def test_process_aai_update_and_delete_events(self, mock_app_conf, mock_nf_get, mock_nf_delete):
         pnf_already_active = NetworkFunction(nf_name='pnf_already_active',
                                              orchestration_status=OrchestrationStatus.ACTIVE.value)
         mock_nf_get.side_effect = [None, pnf_already_active]
         expected_nf_for_processing = NetworkFunction(
             nf_name='pnf_newly_discovered', orchestration_status=OrchestrationStatus.ACTIVE.value)
 
-        process_aai_events(self.mock_mr_sub, self.mock_sub, self.mock_mr_pub, self.mock_app)
+        process_aai_events(self.mock_mr_sub, self.mock_sub,
+                           self.mock_mr_pub, self.mock_app, mock_app_conf)
 
         self.mock_sub.process_subscription.assert_called_once_with([expected_nf_for_processing],
-                                                                   self.mock_mr_pub)
+                                                                   self.mock_mr_pub, mock_app_conf)
         mock_nf_delete.assert_called_once_with(nf_name='pnf_to_be_deleted')
