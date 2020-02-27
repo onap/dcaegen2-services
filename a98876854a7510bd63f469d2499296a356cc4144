@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc8ef003_e740a534",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2020-02-27T17:49:18Z",
+      "side": 1,
+      "message": "Accidentally left in?",
+      "revId": "a98876854a7510bd63f469d2499296a356cc4144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4515bd17_0b1b682e",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2020-02-27T17:49:18Z",
+      "side": 1,
+      "message": "I think you should refactor this also as the \u0027nfs\u0027 is not used so no need to hit AAI at this stage. The subscription handler will take care of retrieving the NFs from AAI. Might need new function in aai_client.py.",
+      "revId": "a98876854a7510bd63f469d2499296a356cc4144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
