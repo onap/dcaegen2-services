@@ -15,13 +15,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-import re
+
 from enum import Enum
+
+from tenacity import retry, retry_if_exception_type, wait_exponential, stop_after_attempt
 
 import mod.pmsh_logging as logger
 from mod import db
 from mod.db_models import SubscriptionModel, NfSubRelationalModel
-from tenacity import retry, retry_if_exception_type, wait_exponential, stop_after_attempt
 
 
 class SubNfState(Enum):
@@ -35,6 +36,18 @@ class SubNfState(Enum):
 class AdministrativeState(Enum):
     UNLOCKED = 'UNLOCKED'
     LOCKED = 'LOCKED'
+
+
+subscription_nf_states = {
+    AdministrativeState.LOCKED.value: {
+        'success': SubNfState.CREATED,
+        'failed': SubNfState.DELETE_FAILED
+    },
+    AdministrativeState.UNLOCKED.value: {
+        'success': SubNfState.CREATED,
+        'failed': SubNfState.CREATE_FAILED
+    }
+}
 
 
 class Subscription:
@@ -204,21 +217,3 @@ class Subscription:
             update({NfSubRelationalModel.nf_sub_status: status}, synchronize_session='evaluate')
 
         db.session.commit()
-
-
-class NetworkFunctionFilter:
-    def __init__(self, **kwargs):
-        self.nf_sw_version = kwargs.get('swVersions')
-        self.nf_names = kwargs.get('nfNames')
-        self.regex_matcher = re.compile('|'.join(raw_regex for raw_regex in self.nf_names))
-
-    def is_nf_in_filter(self, nf_name):
-        """Match the nf name against regex values in Subscription.nfFilter.nfNames
-
-        Args:
-            nf_name: the AAI nf name.
-
-        Returns:
-            bool: True if matched, else False.
-        """
-        return self.regex_matcher.search(nf_name)

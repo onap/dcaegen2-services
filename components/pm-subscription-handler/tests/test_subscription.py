@@ -26,8 +26,8 @@ from tenacity import stop_after_attempt
 
 import mod.aai_client as aai_client
 from mod import db, create_app
-from mod.network_function import NetworkFunction
-from mod.subscription import Subscription, NetworkFunctionFilter
+from mod.network_function import NetworkFunction, NetworkFunctionFilter
+from mod.subscription import Subscription
 
 
 class SubscriptionTest(TestCase):

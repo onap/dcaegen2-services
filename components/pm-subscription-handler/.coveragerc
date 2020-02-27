@@ -21,6 +21,7 @@
 branch = True
 cover_pylib = False
 include = */pmsh_service/*.py
+omit = pmsh_service/pmsh_service_main.py
 
 [report]
 # Regexes for lines to exclude from consideration

@@ -20,8 +20,7 @@ import json
 from enum import Enum
 
 from mod import pmsh_logging as logger
-from mod.network_function import NetworkFunction
-from mod.subscription import NetworkFunctionFilter
+from mod.network_function import NetworkFunction, NetworkFunctionFilter
 
 
 class XNFType(Enum):

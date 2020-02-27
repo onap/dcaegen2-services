@@ -18,7 +18,7 @@
 
 import unittest
 
-from pmsh_service.mod.healthcheck import status
+from mod.healthcheck import status
 
 
 class HealthcheckTestCase(unittest.TestCase):
