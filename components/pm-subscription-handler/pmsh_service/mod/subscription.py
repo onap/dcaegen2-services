@@ -15,7 +15,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-import re
+
 from enum import Enum
 
 import mod.pmsh_logging as logger
@@ -35,6 +35,18 @@ class SubNfState(Enum):
 class AdministrativeState(Enum):
     UNLOCKED = 'UNLOCKED'
     LOCKED = 'LOCKED'
+
+
+subscription_nf_states = {
+    AdministrativeState.LOCKED.value: {
+        'success': SubNfState.CREATED,
+        'failed': SubNfState.DELETE_FAILED
+    },
+    AdministrativeState.UNLOCKED.value: {
+        'success': SubNfState.CREATED,
+        'failed': SubNfState.CREATE_FAILED
+    }
+}
 
 
 class Subscription:
@@ -187,6 +199,8 @@ class Subscription:
         """
         nf_per_subscriptions = NfSubRelationalModel.query.all()
 
+        print(nf_per_subscriptions)
+
         return nf_per_subscriptions
 
     @staticmethod
@@ -204,21 +218,3 @@ class Subscription:
             update({NfSubRelationalModel.nf_sub_status: status}, synchronize_session='evaluate')
 
         db.session.commit()
-
-
-class NetworkFunctionFilter:
-    def __init__(self, **kwargs):
-        self.nf_sw_version = kwargs.get('swVersions')
-        self.nf_names = kwargs.get('nfNames')
-        self.regex_matcher = re.compile('|'.join(raw_regex for raw_regex in self.nf_names))
-
-    def is_nf_in_filter(self, nf_name):
-        """Match the nf name against regex values in Subscription.nfFilter.nfNames
-
-        Args:
-            nf_name: the AAI nf name.
-
-        Returns:
-            bool: True if matched, else False.
-        """
-        return self.regex_matcher.search(nf_name)
