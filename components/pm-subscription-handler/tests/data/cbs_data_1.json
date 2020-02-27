@@ -5,7 +5,6 @@
          "administrativeState":"UNLOCKED",
          "fileBasedGP":15,
          "fileLocation":"\/pm\/pm.xml",
-         "nfTypeModelInvariantId":"2829292",
          "nfFilter":{
             "swVersions":[
                "1.0.0",
@@ -61,6 +60,8 @@
       }
    },
    "config":{
+      "control_loop_name": "pmsh-control-loop",
+      "operational_policy_name": "pmsh-operational-policy",
       "aaf_password":"demo123456!",
       "aaf_identity":"dcae@dcae.onap.org",
       "cert_path":"/opt/app/pm-mapper/etc/certs/cert.pem",

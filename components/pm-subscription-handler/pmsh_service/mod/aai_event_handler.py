@@ -39,7 +39,7 @@ class OrchestrationStatus(Enum):
     INVENTORIED = 'Inventoried'
 
 
-def process_aai_events(mr_sub, subscription, mr_pub, app):
+def process_aai_events(mr_sub, subscription, mr_pub, app, app_conf):
     """
     Processes AAI UPDATE events for each filtered xNFs where orchestration status is set to Active.
 
@@ -48,6 +48,7 @@ def process_aai_events(mr_sub, subscription, mr_pub, app):
         subscription (Subscription): The current subscription object
         mr_pub (_MrPub): MR publisher
         app (db): DB application
+        app_conf: the application configuration.
     """
     app.app_context().push()
     aai_events = mr_sub.get_from_topic('AAI-EVENT')
@@ -65,10 +66,10 @@ def process_aai_events(mr_sub, subscription, mr_pub, app):
             new_status = aai_xnf['orchestration-status']
 
             if NetworkFunctionFilter(**subscription.nfFilter).is_nf_in_filter(xnf_name):
-                _process_event(action, new_status, xnf_name, subscription, mr_pub)
+                _process_event(action, new_status, xnf_name, subscription, mr_pub, app_conf)
 
 
-def _process_event(action, new_status, xnf_name, subscription, mr_pub):
+def _process_event(action, new_status, xnf_name, subscription, mr_pub, app_conf):
     if action == AAIEvent.UPDATE.value:
         logger.debug(f'Update event found for network function {xnf_name}')
         local_xnf = NetworkFunction.get(xnf_name)
@@ -76,7 +77,7 @@ def _process_event(action, new_status, xnf_name, subscription, mr_pub):
         if local_xnf is None:
             logger.debug(f'Activating subscription for network function {xnf_name}')
             subscription.process_subscription([NetworkFunction(
-                nf_name=xnf_name, orchestration_status=new_status)], mr_pub)
+                nf_name=xnf_name, orchestration_status=new_status)], mr_pub, app_conf)
         else:
             logger.debug(f"Update Event for network function {xnf_name} will not be processed "
                          f" as it's state is set to {local_xnf.orchestration_status}.")
