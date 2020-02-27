@@ -43,25 +43,29 @@ class Subscription:
         self.administrativeState = kwargs.get('administrativeState')
         self.fileBasedGP = kwargs.get('fileBasedGP')
         self.fileLocation = kwargs.get('fileLocation')
-        self.nfTypeModelInvariantId = kwargs.get('nfTypeModelInvariantId')
         self.nfFilter = kwargs.get('nfFilter')
         self.measurementGroups = kwargs.get('measurementGroups')
 
-    def prepare_subscription_event(self, xnf_name):
+    def prepare_subscription_event(self, xnf_name, app_conf):
         """Prepare the sub event for publishing
 
         Args:
             xnf_name: the AAI xnf name.
+            app_conf: the application configuration.
 
         Returns:
             dict: the Subscription event to be published.
         """
         clean_sub = {k: v for k, v in self.__dict__.items() if k != 'nfFilter'}
-        clean_sub.update({'nfName': xnf_name, 'policyName': f'OP-{self.subscriptionName}',
-                          'changeType': 'DELETE'
-                          if self.administrativeState == AdministrativeState.LOCKED.value
-                          else 'CREATE'})
-        return clean_sub
+        operational_policy_name = app_conf.get_operational_policy_name()
+        closed_loop_control_name = app_conf.get_control_loop_name()
+
+        sub_event = {'nfName': xnf_name, 'policyName': operational_policy_name,
+                     'changeType': 'DELETE '
+                     if self.administrativeState == AdministrativeState.LOCKED.value
+                     else 'CREATE', 'closedLoopControlName': closed_loop_control_name,
+                     'subscription': clean_sub}
+        return sub_event
 
     def create(self):
         """ Creates a subscription database entry
@@ -159,7 +163,7 @@ class Subscription:
 
     @retry(wait=wait_exponential(multiplier=1, min=30, max=120), stop=stop_after_attempt(3),
            retry=retry_if_exception_type(Exception))
-    def process_subscription(self, nfs, mr_pub):
+    def process_subscription(self, nfs, mr_pub, app_conf):
         action = 'Deactivate'
         sub_nf_state = SubNfState.PENDING_DELETE.value
         self.update_subscription_status()
@@ -170,7 +174,7 @@ class Subscription:
 
         try:
             for nf in nfs:
-                mr_pub.publish_subscription_event_data(self, nf.nf_name)
+                mr_pub.publish_subscription_event_data(self, nf.nf_name, app_conf)
                 logger.debug(f'Publishing Event to {action} '
                              f'Sub: {self.subscriptionName} for the nf: {nf.nf_name}')
                 self.add_network_functions_to_subscription(nfs)

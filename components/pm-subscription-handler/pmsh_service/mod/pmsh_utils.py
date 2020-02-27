@@ -37,6 +37,8 @@ class AppConfig:
         self.key_path = kwargs.get('key_path')
         self.streams_subscribes = kwargs.get('streams_subscribes')
         self.streams_publishes = kwargs.get('streams_publishes')
+        self.operational_policy_name = kwargs.get('operational_policy_name')
+        self.control_loop_name = kwargs.get('control_loop_name')
 
     def get_mr_sub(self, sub_name):
         """
@@ -86,6 +88,12 @@ class AppConfig:
         """
         return self.cert_path, self.key_path
 
+    def get_operational_policy_name(self):
+        return self.operational_policy_name
+
+    def get_control_loop_name(self):
+        return self.control_loop_name
+
 
 class _DmaapMrClient:
     def __init__(self, aaf_creds, **kwargs):
@@ -127,16 +135,17 @@ class _MrPub(_DmaapMrClient):
             logger.debug(e)
             raise
 
-    def publish_subscription_event_data(self, subscription, xnf_name):
+    def publish_subscription_event_data(self, subscription, xnf_name, app_conf):
         """
         Update the Subscription dict with xnf and policy name then publish to DMaaP MR topic.
 
         Args:
             subscription: the `Subscription` <Subscription> object.
             xnf_name: the xnf to include in the event.
+            app_conf: the application configuration.
         """
         try:
-            subscription_event = subscription.prepare_subscription_event(xnf_name)
+            subscription_event = subscription.prepare_subscription_event(xnf_name, app_conf)
             self.publish_to_topic(subscription_event)
         except Exception as e:
             logger.debug(f'pmsh_utils.publish_subscription_event_data : {e}')
