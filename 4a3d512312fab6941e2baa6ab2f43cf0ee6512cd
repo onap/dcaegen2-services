@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "896e15a2_d8dd94a0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-02-28T11:07:00Z",
+      "side": 1,
+      "message": "Should prob try stick to convention of identifying the Object being passed.\napp_conf (AppConfig)\n\nThis would also apply to legacy code that doesn\u0027t follow this convention, but can be done in separate commit.",
+      "range": {
+        "startLine": 51,
+        "startChar": 16,
+        "endLine": 51,
+        "endChar": 18
+      },
+      "revId": "4a3d512312fab6941e2baa6ab2f43cf0ee6512cd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
