@@ -21,7 +21,6 @@
 package org.onap.bbs.event.processor.tasks;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -30,55 +29,52 @@ import static org.mockito.Mockito.when;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Optional;
-
-import javax.net.ssl.SSLException;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.onap.bbs.event.processor.config.ApplicationConfiguration;
+import org.onap.bbs.event.processor.config.DmaapProducerProperties;
 import org.onap.bbs.event.processor.exceptions.DmaapException;
 import org.onap.bbs.event.processor.model.ControlLoopPublisherDmaapModel;
 import org.onap.bbs.event.processor.model.ImmutableControlLoopPublisherDmaapModel;
-import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.DmaapPublisherConfiguration;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.ImmutableDmaapPublisherConfiguration;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.producer.DMaaPPublisherReactiveHttpClient;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.producer.PublisherReactiveHttpClientFactory;
-import org.springframework.http.HttpStatus;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.config.MessageRouterPublisherConfig;
 
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 class DmaapPublisherTaskImplTest {
 
+    private static final String DMAAP_PROTOCOL = "http";
+    private static final String DMAAP_HOST = "message-router.onap.svc.cluster.local";
+    private static final int DMAAP_PORT = 3904;
+    private static final String DMAAP_TOPIC = "unauthenticated.DCAE_CL_OUTPUT";
+
     private static ControlLoopPublisherDmaapModel controlLoopPublisherDmaapModel;
     private static DmaapPublisherTaskImpl task;
-    private static DMaaPPublisherReactiveHttpClient reactiveHttpClient;
     private static ApplicationConfiguration configuration;
-    private static DmaapPublisherConfiguration dmaapPublisherConfiguration;
 
     @BeforeAll
     static void setUp() {
-        dmaapPublisherConfiguration = testVersionOfDmaapPublisherConfiguration();
         configuration = mock(ApplicationConfiguration.class);
 
-        final String closedLoopEventClient = "DCAE.BBS_mSInstance";
-        final String policyVersion = "1.0.0.5";
-        final String policyName = "CPE_Authentication";
-        final String policyScope =
+        final var closedLoopEventClient = "DCAE.BBS_mSInstance";
+        final var policyVersion = "1.0.0.5";
+        final var policyName = "CPE_Authentication";
+        final var policyScope =
                 "service=HSIAService,type=SampleType,"
                         + "closedLoopControlName=CL-CPE_A-d925ed73-8231-4d02-9545-db4e101f88f8";
-        final String targetType = "VM";
-        final long closedLoopAlarmStart = 1484677482204798L;
-        final String closedLoopEventStatus = "ONSET";
-        final String closedLoopControlName = "ControlLoop-CPE_A-2179b738-fd36-4843-a71a-a8c24c70c88b";
-        final String version = "1.0.2";
-        final String target = "vserver.vserver-name";
-        final String requestId = "97964e10-686e-4790-8c45-bdfa61df770f";
-        final String from = "DCAE";
+        final var targetType = "VM";
+        final var closedLoopAlarmStart = 1484677482204798L;
+        final var closedLoopEventStatus = "ONSET";
+        final var closedLoopControlName = "ControlLoop-CPE_A-2179b738-fd36-4843-a71a-a8c24c70c88b";
+        final var version = "1.0.2";
+        final var target = "vserver.vserver-name";
+        final var requestId = "97964e10-686e-4790-8c45-bdfa61df770f";
+        final var from = "DCAE";
 
         final Map<String, String> aaiEnrichmentData = new LinkedHashMap<>();
         aaiEnrichmentData.put("service-information.service-instance-id", "service-instance-id-example");
@@ -100,14 +96,21 @@ class DmaapPublisherTaskImplTest {
                 .requestId(requestId)
                 .originator(from)
                 .build();
+        var props = mock(DmaapProducerProperties.class);
+        when(props.getDmaapProtocol()).thenReturn(DMAAP_PROTOCOL);
+        when(props.getDmaapHostName()).thenReturn(DMAAP_HOST);
+        when(props.getDmaapPortNumber()).thenReturn(DMAAP_PORT);
+        when(props.getDmaapTopicName()).thenReturn(DMAAP_TOPIC);
+        when(configuration.getDmaapProducerProperties()).thenReturn(props);
 
-        when(configuration.getDmaapPublisherConfiguration()).thenReturn(dmaapPublisherConfiguration);
+        var publisherConfig = mock(MessageRouterPublisherConfig.class);
+        when(configuration.getDmaapPublisherConfiguration()).thenReturn(publisherConfig);
+
+
     }
 
     @Test
     void passingNullMessage_ExceptionIsRaised() {
-
-        task = new DmaapPublisherTaskImpl(configuration);
 
         Executable executableFunction = () -> task.execute(null);
 
@@ -115,62 +118,42 @@ class DmaapPublisherTaskImplTest {
     }
 
     @Test
-    void passingNormalMessage_ReactiveClientProcessesIt() throws DmaapException, SSLException {
-        HttpResponse response = setupMocks(HttpStatus.OK.value());
+    void passingNormalMessage_ReactiveClientProcessesIt() throws DmaapException {
+        var publisher = mock(MessageRouterPublisher.class);
+        task = new DmaapPublisherTaskImpl(configuration, publisher);
 
-        StepVerifier.create(task.execute(controlLoopPublisherDmaapModel)).expectSubscription()
-                .expectNext(response).verifyComplete();
+        var response = mockResponse(true);
+        when(publisher.put(any(),any())).thenReturn(Flux.just(response));
 
-        verify(reactiveHttpClient, times(1))
-                .getDMaaPProducerResponse(controlLoopPublisherDmaapModel, Optional.empty());
-        verifyNoMoreInteractions(reactiveHttpClient);
+        StepVerifier.create(task.execute(controlLoopPublisherDmaapModel))
+                .expectSubscription()
+                .assertNext(r -> Assertions.assertTrue(r.successful()))
+                .verifyComplete();
+
+        verify(publisher, times(1)).put(any(),any());
+        verifyNoMoreInteractions(publisher);
     }
 
     @Test
-    void passingNormalMessage_IncorrectResponseIsHandled() throws DmaapException, SSLException {
-        HttpResponse response = setupMocks(HttpStatus.UNAUTHORIZED.value());
+    void passingNormalMessage_IncorrectResponseIsHandled() throws DmaapException {
+        var publisher = mock(MessageRouterPublisher.class);
+        task = new DmaapPublisherTaskImpl(configuration, publisher);
 
-        StepVerifier.create(task.execute(controlLoopPublisherDmaapModel)).expectSubscription()
-                .expectNext(response).verifyComplete();
+        var response = mockResponse(false);
+        when(publisher.put(any(),any())).thenReturn(Flux.just(response));
 
-        verify(reactiveHttpClient, times(1))
-                .getDMaaPProducerResponse(controlLoopPublisherDmaapModel, Optional.empty());
-        verifyNoMoreInteractions(reactiveHttpClient);
+        StepVerifier.create(task.execute(controlLoopPublisherDmaapModel))
+                .expectSubscription()
+                .assertNext(r -> Assertions.assertFalse(r.successful()))
+                .verifyComplete();
+
+        verify(publisher, times(1)).put(any(),any());
+        verifyNoMoreInteractions(publisher);
     }
 
-    // We can safely suppress unchecked assignment warning here since it is a mock class
-    @SuppressWarnings("unchecked")
-    private HttpResponse setupMocks(Integer httpResponseCode) throws SSLException {
-
-        HttpResponse response = mock(HttpResponse.class);
-        when(response.statusCode()).thenReturn(httpResponseCode);
-
-        reactiveHttpClient = mock(DMaaPPublisherReactiveHttpClient.class);
-        when(reactiveHttpClient.getDMaaPProducerResponse(any(), any(Optional.class)))
-                .thenReturn(Mono.just(response));
-
-        PublisherReactiveHttpClientFactory httpClientFactory = mock(PublisherReactiveHttpClientFactory.class);
-        doReturn(reactiveHttpClient).when(httpClientFactory).create(dmaapPublisherConfiguration);
-
-        task = new DmaapPublisherTaskImpl(configuration, httpClientFactory);
-
+    private MessageRouterPublishResponse mockResponse(boolean isSuccess) {
+        var response = mock(MessageRouterPublishResponse.class);
+        when(response.successful()).thenReturn(isSuccess);
         return response;
-    }
-
-    private static DmaapPublisherConfiguration testVersionOfDmaapPublisherConfiguration() {
-        return new ImmutableDmaapPublisherConfiguration.Builder()
-                .dmaapContentType("application/json")
-                .dmaapHostName("message-router.onap.svc.cluster.local")
-                .dmaapPortNumber(3904)
-                .dmaapProtocol("http")
-                .dmaapUserName("admin")
-                .dmaapUserPassword("admin")
-                .trustStorePath("/opt/app/bbs/local/org.onap.bbs.trust.jks")
-                .trustStorePasswordPath("change_it")
-                .keyStorePath("/opt/app/bbs/local/org.onap.bbs.p12")
-                .keyStorePasswordPath("change_it")
-                .enableDmaapCertAuth(false)
-                .dmaapTopicName("/events/unauthenticated.DCAE_CL_OUTPUT")
-                .build();
     }
 }

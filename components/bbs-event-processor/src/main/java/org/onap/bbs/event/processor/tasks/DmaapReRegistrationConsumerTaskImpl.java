@@ -20,25 +20,23 @@
 
 package org.onap.bbs.event.processor.tasks;
 
-import com.google.gson.JsonElement;
-
-import java.util.Optional;
+import static org.onap.bbs.event.processor.config.ApplicationConstants.SUBSCRIBE_URL_TEMPLATE;
+import static org.onap.bbs.event.processor.utilities.GenericUtils.createSubscribeRequest;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.net.ssl.SSLException;
 
 import org.onap.bbs.event.processor.config.ApplicationConfiguration;
 import org.onap.bbs.event.processor.config.ConfigurationChangeObserver;
 import org.onap.bbs.event.processor.exceptions.EmptyDmaapResponseException;
 import org.onap.bbs.event.processor.model.ReRegistrationConsumerDmaapModel;
 import org.onap.bbs.event.processor.utilities.ReRegistrationDmaapConsumerJsonParser;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.consumer.ConsumerReactiveHttpClientFactory;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.consumer.DMaaPConsumerReactiveHttpClient;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.consumer.DMaaPReactiveWebClientFactory;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import reactor.core.publisher.Flux;
@@ -49,30 +47,33 @@ public class DmaapReRegistrationConsumerTaskImpl implements DmaapReRegistrationC
         ConfigurationChangeObserver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DmaapReRegistrationConsumerTaskImpl.class);
-    private ApplicationConfiguration configuration;
+
     private final ReRegistrationDmaapConsumerJsonParser reRegistrationDmaapConsumerJsonParser;
-    private final ConsumerReactiveHttpClientFactory httpClientFactory;
+    private ApplicationConfiguration configuration;
+    private MessageRouterSubscriber subscriber;
+    private String subscribeUrl;
+    private MessageRouterSubscribeRequest subscribeRequest;
 
     private static final EmptyDmaapResponseException EMPTY_DMAAP_EXCEPTION =
             new EmptyDmaapResponseException("PNF Re-Registration: Got an empty response from DMaaP");
 
-    private DMaaPConsumerReactiveHttpClient httpClient;
-
     @Autowired
-    public DmaapReRegistrationConsumerTaskImpl(ApplicationConfiguration configuration) throws SSLException {
-        this(configuration, new ReRegistrationDmaapConsumerJsonParser(),
-                new ConsumerReactiveHttpClientFactory(new DMaaPReactiveWebClientFactory()));
-    }
-
     DmaapReRegistrationConsumerTaskImpl(ApplicationConfiguration configuration,
-                                                ReRegistrationDmaapConsumerJsonParser reRegDmaapConsumerJsonParser,
-                                                ConsumerReactiveHttpClientFactory httpClientFactory)
-            throws SSLException {
+                                        @Qualifier("ReRegMessageRouterSubscriber") MessageRouterSubscriber subscriber,
+                                                ReRegistrationDmaapConsumerJsonParser parser) {
+        this.reRegistrationDmaapConsumerJsonParser = parser;
         this.configuration = configuration;
-        this.reRegistrationDmaapConsumerJsonParser = reRegDmaapConsumerJsonParser;
-        this.httpClientFactory = httpClientFactory;
+        this.subscriber = subscriber;
+        subscribeUrl = String.format(SUBSCRIBE_URL_TEMPLATE,
+                this.configuration.getDmaapReRegistrationConsumerProperties().getDmaapProtocol(),
+                this.configuration.getDmaapReRegistrationConsumerProperties().getDmaapHostName(),
+                this.configuration.getDmaapReRegistrationConsumerProperties().getDmaapPortNumber(),
+                this.configuration.getDmaapReRegistrationConsumerProperties().getDmaapTopicName());
 
-        httpClient = httpClientFactory.create(this.configuration.getDmaapReRegistrationConsumerConfiguration());
+        subscribeRequest = createSubscribeRequest(
+                subscribeUrl,
+                this.configuration.getDmaapReRegistrationConsumerProperties().getConsumerGroup(),
+                this.configuration.getDmaapReRegistrationConsumerProperties().getConsumerId());
     }
 
     @PostConstruct
@@ -87,33 +88,30 @@ public class DmaapReRegistrationConsumerTaskImpl implements DmaapReRegistrationC
 
     @Override
     public synchronized void updateConfiguration() {
-        try {
-            LOGGER.info("DMaaP PNF reregistration consumer update due to new application configuration");
-            LOGGER.info("Creating secure context with:\n {}",
-                    this.configuration.getDmaapReRegistrationConsumerConfiguration());
-            httpClient = httpClientFactory.create(this.configuration.getDmaapReRegistrationConsumerConfiguration());
-        } catch (SSLException e) {
-            LOGGER.error("SSL error while updating HTTP Client after a config update");
-            LOGGER.debug("SSL exception\n", e);
-        }
+        LOGGER.info("DMaaP PNF reregistration consumer update due to new application configuration");
+        subscribeUrl = String.format(SUBSCRIBE_URL_TEMPLATE,
+                configuration.getDmaapReRegistrationConsumerProperties().getDmaapProtocol(),
+                configuration.getDmaapReRegistrationConsumerProperties().getDmaapHostName(),
+                configuration.getDmaapReRegistrationConsumerProperties().getDmaapPortNumber(),
+                configuration.getDmaapReRegistrationConsumerProperties().getDmaapTopicName());
+        subscribeRequest = createSubscribeRequest(
+                subscribeUrl,
+                this.configuration.getDmaapReRegistrationConsumerProperties().getConsumerGroup(),
+                this.configuration.getDmaapReRegistrationConsumerProperties().getConsumerId());
     }
 
     @Override
     public Flux<ReRegistrationConsumerDmaapModel> execute(String taskName) {
         LOGGER.debug("Executing task for Re-Registration with name \"{}\"", taskName);
-        DMaaPConsumerReactiveHttpClient httpClient = getHttpClient();
-        Mono<JsonElement> response = httpClient.getDMaaPConsumerResponse(Optional.empty());
-        return reRegistrationDmaapConsumerJsonParser.extractModelFromDmaap(response)
-                .switchIfEmpty(Flux.error(EMPTY_DMAAP_EXCEPTION))
+        return subscriber.getElements(subscribeRequest)
+                .flatMap(jsonElement ->
+                        reRegistrationDmaapConsumerJsonParser.extractModelFromDmaap(Mono.just(jsonElement)))
+                .switchIfEmpty(Mono.error(EMPTY_DMAAP_EXCEPTION))
                 .doOnError(e -> {
                     if (!(e instanceof EmptyDmaapResponseException)) {
                         LOGGER.error("DMaaP Consumption Exception: {}", e.getMessage());
                         LOGGER.debug("Exception\n", e);
                     }
                 });
-    }
-
-    private synchronized DMaaPConsumerReactiveHttpClient getHttpClient() {
-        return httpClient;
     }
 }

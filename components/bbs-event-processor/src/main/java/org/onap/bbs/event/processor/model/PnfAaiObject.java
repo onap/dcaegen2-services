@@ -26,11 +26,10 @@ import java.util.Optional;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
-import org.onap.dcaegen2.services.sdk.rest.services.model.ClientModel;
 
 @Value.Immutable
 @Gson.TypeAdapters(fieldNamingStrategy = true, emptyAsNulls = true)
-public interface PnfAaiObject extends ClientModel {
+public interface PnfAaiObject {
 
     @SerializedName(value = "pnf-name", alternate = "pnf-name")
     String getPnfName();

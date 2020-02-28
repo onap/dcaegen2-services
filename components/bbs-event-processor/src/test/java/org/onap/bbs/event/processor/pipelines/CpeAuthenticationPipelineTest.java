@@ -20,7 +20,7 @@
 
 package org.onap.bbs.event.processor.pipelines;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
@@ -64,8 +64,7 @@ import org.onap.bbs.event.processor.model.ServiceInstanceAaiObject;
 import org.onap.bbs.event.processor.tasks.AaiClientTask;
 import org.onap.bbs.event.processor.tasks.DmaapCpeAuthenticationConsumerTask;
 import org.onap.bbs.event.processor.tasks.DmaapPublisherTask;
-import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
-import org.springframework.http.HttpStatus;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -80,12 +79,12 @@ class CpeAuthenticationPipelineTest {
     private DmaapPublisherTask publisherTask;
     private AaiClientTask aaiClientTask;
 
-    private HttpResponse httpResponse;
+    private MessageRouterPublishResponse publishResponse;
 
     @BeforeEach
     void setup() {
 
-        httpResponse = Mockito.mock(HttpResponse.class);
+        publishResponse = Mockito.mock(MessageRouterPublishResponse.class);
 
         configuration = Mockito.mock(ApplicationConfiguration.class);
         consumerTask = Mockito.mock(DmaapCpeAuthenticationConsumerTask.class);
@@ -148,12 +147,12 @@ class CpeAuthenticationPipelineTest {
     @Test
     void noResponseFromAai_PipelineTimesOut() throws SSLException {
 
-        String pnfName = "olt1";
-        final String oldAuthenticationState = "outOfService";
-        final String newAuthenticationState = "inService";
-        final String stateInterface = "stateInterface";
-        final String rgwMacAddress = "00:0a:95:8d:78:16";
-        final String swVersion = "1.2";
+        var pnfName = "olt1";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
 
         // Prepare stubbed replies
         CpeAuthenticationConsumerDmaapModel event = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
@@ -181,13 +180,13 @@ class CpeAuthenticationPipelineTest {
     @Test
     void noResponseWhilePublishing_PipelineTimesOut() throws SSLException {
 
-        String pnfName = "olt1";
-        final String oldAuthenticationState = "outOfService";
-        final String newAuthenticationState = "inService";
-        final String stateInterface = "stateInterface";
-        final String rgwMacAddress = "00:0a:95:8d:78:16";
-        final String swVersion = "1.2";
-        String hsiCfsServiceInstanceId = UUID.randomUUID().toString();
+        var pnfName = "olt1";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
+        var hsiCfsServiceInstanceId = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         CpeAuthenticationConsumerDmaapModel event = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
@@ -199,12 +198,12 @@ class CpeAuthenticationPipelineTest {
                 .swVersion(swVersion)
                 .build();
 
-        PnfAaiObject pnfAaiObject = constructPnfObject(pnfName, hsiCfsServiceInstanceId);
-        ServiceInstanceAaiObject hsiCfsServiceInstance =
+        var pnfAaiObject = constructPnfObject(pnfName, hsiCfsServiceInstanceId);
+        var hsiCfsServiceInstance =
                 constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName, rgwMacAddress);
 
         // Prepare Mocks
-        String cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(1);
@@ -217,7 +216,7 @@ class CpeAuthenticationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.never());
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.never());
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
@@ -230,13 +229,13 @@ class CpeAuthenticationPipelineTest {
     @Test
     void singleCorrectEvent_handleSuccessfully() throws SSLException {
 
-        String pnfName = "olt1";
-        final String oldAuthenticationState = "outOfService";
-        final String newAuthenticationState = "inService";
-        final String stateInterface = "stateInterface";
-        final String rgwMacAddress = "00:0a:95:8d:78:16";
-        final String swVersion = "1.2";
-        String hsiCfsServiceInstanceId = UUID.randomUUID().toString();
+        var pnfName = "olt1";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
+        var hsiCfsServiceInstanceId = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         CpeAuthenticationConsumerDmaapModel event = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
@@ -248,12 +247,12 @@ class CpeAuthenticationPipelineTest {
                 .swVersion(swVersion)
                 .build();
 
-        PnfAaiObject pnfAaiObject = constructPnfObject(pnfName, hsiCfsServiceInstanceId);
-        ServiceInstanceAaiObject hsiCfsServiceInstance =
+        var pnfAaiObject = constructPnfObject(pnfName, hsiCfsServiceInstanceId);
+        var hsiCfsServiceInstance =
                 constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName, rgwMacAddress);
 
         // Prepare Mocks
-        String cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
@@ -266,13 +265,13 @@ class CpeAuthenticationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
+        when(publishResponse.successful()).thenReturn(true);
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.just(publishResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
+                .assertNext(r -> assertTrue(r.successful()))
                 .verifyComplete();
 
         verify(publisherTask).execute(any(ControlLoopPublisherDmaapModel.class));
@@ -281,16 +280,16 @@ class CpeAuthenticationPipelineTest {
     @Test
     void twoCorrectEvents_handleSuccessfully() throws SSLException {
 
-        String pnfName1 = "olt1";
-        String pnfName2 = "olt2";
-        final String oldAuthenticationState = "outOfService";
-        final String newAuthenticationState = "inService";
-        final String stateInterface = "stateInterface";
-        final String rgwMacAddress1 = "00:0a:95:8d:78:16";
-        final String rgwMacAddress2 = "00:0a:95:8d:78:17";
-        final String swVersion = "1.2";
-        String hsiCfsServiceInstanceId1 = UUID.randomUUID().toString();
-        String hsiCfsServiceInstanceId2 = UUID.randomUUID().toString();
+        var pnfName1 = "olt1";
+        var pnfName2 = "olt2";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress1 = "00:0a:95:8d:78:16";
+        var rgwMacAddress2 = "00:0a:95:8d:78:17";
+        var swVersion = "1.2";
+        var hsiCfsServiceInstanceId1 = UUID.randomUUID().toString();
+        var hsiCfsServiceInstanceId2 = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         CpeAuthenticationConsumerDmaapModel firstEvent = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
@@ -310,19 +309,19 @@ class CpeAuthenticationPipelineTest {
                 .swVersion(swVersion)
                 .build();
 
-        PnfAaiObject pnfAaiObject1 = constructPnfObject(pnfName1, hsiCfsServiceInstanceId1);
-        PnfAaiObject pnfAaiObject2 = constructPnfObject(pnfName2, hsiCfsServiceInstanceId2);
-        ServiceInstanceAaiObject hsiCfsServiceInstance1 =
+        var pnfAaiObject1 = constructPnfObject(pnfName1, hsiCfsServiceInstanceId1);
+        var pnfAaiObject2 = constructPnfObject(pnfName2, hsiCfsServiceInstanceId2);
+        var hsiCfsServiceInstance1 =
                 constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId1, pnfName1, rgwMacAddress1);
-        ServiceInstanceAaiObject hsiCfsServiceInstance2 =
+        var hsiCfsServiceInstance2 =
                 constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId2, pnfName2, rgwMacAddress2);
 
         // Prepare Mocks
-        String pnfUrl1 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName1);
-        String pnfUrl2 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName2);
-        String cfsUrl1 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var pnfUrl1 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName1);
+        var pnfUrl2 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName2);
+        var cfsUrl1 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance1.getServiceInstanceId());
-        String cfsUrl2 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl2 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance2.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
@@ -339,14 +338,14 @@ class CpeAuthenticationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl2))
                 .thenReturn(Mono.just(hsiCfsServiceInstance2));
 
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
+        when(publishResponse.successful()).thenReturn(true);
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.just(publishResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
+                .assertNext(r -> assertTrue(r.successful()))
+                .assertNext(r -> assertTrue(r.successful()))
                 .verifyComplete();
 
         verify(publisherTask, times(2)).execute(any(ControlLoopPublisherDmaapModel.class));
@@ -355,12 +354,12 @@ class CpeAuthenticationPipelineTest {
     @Test
     void singleEvent_withPnfErrorReply_handleGracefully() throws SSLException {
 
-        String pnfName = "olt1";
-        final String oldAuthenticationState = "outOfService";
-        final String newAuthenticationState = "inService";
-        final String stateInterface = "stateInterface";
-        final String rgwMacAddress = "00:0a:95:8d:78:16";
-        final String swVersion = "1.2";
+        var pnfName = "olt1";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
 
         // Prepare stubbed replies
         CpeAuthenticationConsumerDmaapModel event = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
@@ -389,90 +388,16 @@ class CpeAuthenticationPipelineTest {
     }
 
     @Test
-    void twoEvents_FirstOk_SecondUnmatchedMac_handleCorrectOnly() throws SSLException {
-
-        String pnfName1 = "olt1";
-        String pnfName2 = "olt2";
-        final String oldAuthenticationState = "outOfService";
-        final String newAuthenticationState = "inService";
-        final String stateInterface = "stateInterface";
-        final String rgwMacAddress1 = "00:0a:95:8d:78:16";
-        final String rgwMacAddress2 = "00:0a:95:8d:78:17";
-        final String swVersion = "1.2";
-        String hsiCfsServiceInstanceId1 = UUID.randomUUID().toString();
-        String hsiCfsServiceInstanceId2 = UUID.randomUUID().toString();
-
-        // Prepare stubbed replies
-        CpeAuthenticationConsumerDmaapModel firstEvent = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
-                .correlationId(pnfName1)
-                .oldAuthenticationState(oldAuthenticationState)
-                .newAuthenticationState(newAuthenticationState)
-                .stateInterface(stateInterface)
-                .rgwMacAddress(rgwMacAddress1)
-                .swVersion(swVersion)
-                .build();
-        CpeAuthenticationConsumerDmaapModel secondEvent = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
-                .correlationId(pnfName2)
-                .oldAuthenticationState(oldAuthenticationState)
-                .newAuthenticationState(newAuthenticationState)
-                .stateInterface(stateInterface)
-                .rgwMacAddress(rgwMacAddress2)
-                .swVersion(swVersion)
-                .build();
-
-        PnfAaiObject pnfAaiObject1 = constructPnfObject(pnfName1, hsiCfsServiceInstanceId1);
-        PnfAaiObject pnfAaiObject2 = constructPnfObject(pnfName2, hsiCfsServiceInstanceId2);
-        ServiceInstanceAaiObject hsiCfsServiceInstance1 =
-                constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId1, pnfName1, rgwMacAddress1);
-        ServiceInstanceAaiObject hsiCfsServiceInstance2 =
-                constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId2, pnfName2,
-                        "Having unmatched RGW MAC address");
-
-        // Prepare Mocks
-        String pnfUrl1 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName1);
-        String pnfUrl2 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName2);
-        String cfsUrl1 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
-                hsiCfsServiceInstance1.getServiceInstanceId());
-        String cfsUrl2 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
-                hsiCfsServiceInstance2.getServiceInstanceId());
-
-        when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
-        when(consumerTask.execute(CONSUME_CPE_AUTHENTICATION_TASK_NAME))
-                .thenReturn(Flux.fromIterable(Arrays.asList(firstEvent, secondEvent)));
-
-        when(aaiClientTask.executePnfRetrieval(RETRIEVE_PNF_TASK_NAME, pnfUrl1)).thenReturn(Mono.just(pnfAaiObject1));
-        when(aaiClientTask.executePnfRetrieval(RETRIEVE_PNF_TASK_NAME, pnfUrl2)).thenReturn(Mono.just(pnfAaiObject2));
-
-        when(aaiClientTask
-                .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl1))
-                .thenReturn(Mono.just(hsiCfsServiceInstance1));
-        when(aaiClientTask
-                .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl2))
-                .thenReturn(Mono.just(hsiCfsServiceInstance2));
-
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
-
-        // Execute the pipeline
-        StepVerifier.create(pipeline.executePipeline())
-                .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
-                .verifyComplete();
-
-        verify(publisherTask).execute(any(ControlLoopPublisherDmaapModel.class));
-    }
-
-    @Test
     void twoEvents_firstOk_secondWithPnfErrorReply_handleCorrectOnly() throws SSLException {
 
-        String pnfName1 = "olt1";
-        String pnfName2 = "olt2";
-        final String oldAuthenticationState = "outOfService";
-        final String newAuthenticationState = "inService";
-        final String stateInterface = "stateInterface";
-        final String rgwMacAddress = "00:0a:95:8d:78:16";
-        final String swVersion = "1.2";
-        String hsiCfsServiceInstanceId = UUID.randomUUID().toString();
+        var pnfName1 = "olt1";
+        var pnfName2 = "olt2";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
+        var hsiCfsServiceInstanceId = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         CpeAuthenticationConsumerDmaapModel firstEvent = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
@@ -492,12 +417,12 @@ class CpeAuthenticationPipelineTest {
                 .swVersion(swVersion)
                 .build();
 
-        PnfAaiObject pnfAaiObject = constructPnfObject(pnfName1, hsiCfsServiceInstanceId);
-        ServiceInstanceAaiObject hsiCfsServiceInstance =
+        var pnfAaiObject = constructPnfObject(pnfName1, hsiCfsServiceInstanceId);
+        var hsiCfsServiceInstance =
                 constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName1, rgwMacAddress);
 
         // Prepare Mocks
-        String cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
@@ -510,13 +435,13 @@ class CpeAuthenticationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
+        when(publishResponse.successful()).thenReturn(true);
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.just(publishResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
+                .assertNext(r -> assertTrue(r.successful()))
                 .verifyComplete();
 
         verify(aaiClientTask, times(2)).executePnfRetrieval(anyString(), anyString());
@@ -527,14 +452,14 @@ class CpeAuthenticationPipelineTest {
     @Test
     void twoEvents_firstWithPnfErrorReply_secondOk_handleCorrectOnly() throws SSLException {
 
-        String pnfName1 = "olt1";
-        String pnfName2 = "olt2";
-        final String oldAuthenticationState = "outOfService";
-        final String newAuthenticationState = "inService";
-        final String stateInterface = "stateInterface";
-        final String rgwMacAddress = "00:0a:95:8d:78:16";
-        final String swVersion = "1.2";
-        String hsiCfsServiceInstanceId = UUID.randomUUID().toString();
+        var pnfName1 = "olt1";
+        var pnfName2 = "olt2";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
+        var hsiCfsServiceInstanceId = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         CpeAuthenticationConsumerDmaapModel firstEvent = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
@@ -554,12 +479,12 @@ class CpeAuthenticationPipelineTest {
                 .swVersion(swVersion)
                 .build();
 
-        PnfAaiObject pnfAaiObject = constructPnfObject(pnfName2, hsiCfsServiceInstanceId);
-        ServiceInstanceAaiObject hsiCfsServiceInstance =
+        var pnfAaiObject = constructPnfObject(pnfName2, hsiCfsServiceInstanceId);
+        var hsiCfsServiceInstance =
                 constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName2, rgwMacAddress);
 
         // Prepare Mocks
-        String cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
@@ -572,13 +497,13 @@ class CpeAuthenticationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
+        when(publishResponse.successful()).thenReturn(true);
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.just(publishResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
+                .assertNext(r -> assertTrue(r.successful()))
                 .verifyComplete();
 
         verify(aaiClientTask, times(2))
@@ -630,7 +555,7 @@ class CpeAuthenticationPipelineTest {
     private ServiceInstanceAaiObject constructHsiCfsServiceInstanceObject(String hsiCfsServiceInstanceId,
                                                                           String pnfName,
                                                                           String rgwMacAddress) {
-        String orchestrationStatus = "active";
+        var orchestrationStatus = "active";
 
         RelationshipListAaiObject.RelationshipEntryAaiObject relationshipEntry =
                 ImmutableRelationshipEntryAaiObject.builder()

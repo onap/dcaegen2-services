@@ -22,10 +22,6 @@ package org.onap.bbs.event.processor.exceptions;
 
 public class EmptyDmaapResponseException extends RuntimeException {
 
-    public EmptyDmaapResponseException() {
-        super();
-    }
-
     public EmptyDmaapResponseException(String message) {
         super(message);
     }

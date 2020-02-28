@@ -48,13 +48,13 @@ class ConsulConfigurationGatewayTest {
     }
 
     ConsulConfigurationGatewayTest() {
-        ApplicationConfiguration configuration = Mockito.mock(ApplicationConfiguration.class);
+        var configuration = Mockito.mock(ApplicationConfiguration.class);
         this.configurationGateway = new ConsulConfigurationGateway(configuration);
     }
 
     @Test
     void passingValidJson_constructsGeneratedAppConfigObject() {
-        final String validJson = "{"
+        final var validJson = "{"
                 + "\"dmaap.protocol\": \"http\","
                 + "\"dmaap.contentType\": \"application/json\","
                 + "\"dmaap.consumer.consumerId\": \"c12\","
@@ -219,7 +219,7 @@ class ConsulConfigurationGatewayTest {
                 .streamPublishesMap(Collections.singletonMap("config_key_3", streamsObject3))
                 .build();
 
-        ConsulConfigurationGateway spiedGateway = Mockito.spy(configurationGateway);
+        var spiedGateway = Mockito.spy(configurationGateway);
         doReturn(false).when(spiedGateway).environmentNotReady();
         assertEquals(expectedConfiguration,
                 spiedGateway.generateAppConfigObject(jsonParser.parse(validJson).getAsJsonObject()));

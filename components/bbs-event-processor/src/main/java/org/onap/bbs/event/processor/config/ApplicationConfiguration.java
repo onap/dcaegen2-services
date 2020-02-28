@@ -21,7 +21,10 @@
 package org.onap.bbs.event.processor.config;
 
 import static org.onap.bbs.event.processor.config.ApplicationConstants.STREAMS_TYPE;
+import static org.onap.bbs.event.processor.utilities.GenericUtils.keyStoreFromResource;
+import static org.onap.dcaegen2.services.sdk.security.ssl.Passwords.fromPath;
 
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -31,10 +34,12 @@ import org.onap.bbs.event.processor.exceptions.ApplicationEnvironmentException;
 import org.onap.bbs.event.processor.exceptions.ConfigurationParsingException;
 import org.onap.bbs.event.processor.model.GeneratedAppConfigObject;
 import org.onap.bbs.event.processor.utilities.LoggingUtil;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.DmaapConsumerConfiguration;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.DmaapPublisherConfiguration;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.ImmutableDmaapConsumerConfiguration;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.ImmutableDmaapPublisherConfiguration;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.config.ImmutableMessageRouterPublisherConfig;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.config.ImmutableMessageRouterSubscriberConfig;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.config.MessageRouterPublisherConfig;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.config.MessageRouterSubscriberConfig;
+import org.onap.dcaegen2.services.sdk.security.ssl.ImmutableSecurityKeys;
+import org.onap.dcaegen2.services.sdk.security.ssl.SecurityKeys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
@@ -48,9 +53,9 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
     private final SecurityProperties securityProperties;
     private final GenericProperties genericProperties;
 
-    private DmaapConsumerConfiguration dmaapReRegistrationConsumerConfiguration;
-    private DmaapConsumerConfiguration dmaapCpeAuthenticationConsumerConfiguration;
-    private DmaapPublisherConfiguration dmaapPublisherConfiguration;
+    private MessageRouterSubscriberConfig dmaapReRegistrationConsumerConfiguration;
+    private MessageRouterSubscriberConfig dmaapCpeAuthenticationConsumerConfiguration;
+    private MessageRouterPublisherConfig dmaapPublisherConfiguration;
     private AaiClientConfiguration aaiClientConfiguration;
     private Set<ConfigurationChangeObserver> observers;
 
@@ -97,15 +102,15 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
         observers.forEach(ConfigurationChangeObserver::updateConfiguration);
     }
 
-    public synchronized DmaapConsumerConfiguration getDmaapReRegistrationConsumerConfiguration() {
+    public synchronized MessageRouterSubscriberConfig getDmaapReRegistrationConsumerConfiguration() {
         return dmaapReRegistrationConsumerConfiguration;
     }
 
-    public synchronized DmaapConsumerConfiguration getDmaapCpeAuthenticationConsumerConfiguration() {
+    public synchronized MessageRouterSubscriberConfig getDmaapCpeAuthenticationConsumerConfiguration() {
         return dmaapCpeAuthenticationConsumerConfiguration;
     }
 
-    public synchronized DmaapPublisherConfiguration getDmaapPublisherConfiguration() {
+    public synchronized MessageRouterPublisherConfig getDmaapPublisherConfiguration() {
         return dmaapPublisherConfiguration;
     }
 
@@ -115,6 +120,18 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
 
     public synchronized int getPipelinesPollingIntervalInSeconds() {
         return genericProperties.getPipelinesPollingIntervalSec();
+    }
+
+    public synchronized DmaapProducerProperties getDmaapProducerProperties() {
+        return dmaapProducerProperties;
+    }
+
+    public synchronized DmaapReRegistrationConsumerProperties getDmaapReRegistrationConsumerProperties() {
+        return dmaapReRegistrationConsumerProperties;
+    }
+
+    public synchronized DmaapCpeAuthenticationConsumerProperties getDmaapCpeAuthenticationConsumerProperties() {
+        return dmaapCpeAuthenticationConsumerProperties;
     }
 
     public synchronized int getPipelinesTimeoutInSeconds() {
@@ -180,11 +197,17 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
             securityProperties.setKeyStorePasswordPath(newConfiguration.keyStorePasswordPath());
             securityProperties.setTrustStorePath(newConfiguration.trustStorePath());
             securityProperties.setTrustStorePasswordPath(newConfiguration.trustStorePasswordPath());
+            final SecurityKeys securityKeys = ImmutableSecurityKeys.builder()
+                    .keyStore(keyStoreFromResource(securityProperties.getKeyStorePath()))
+                    .keyStorePassword(fromPath(Paths.get(securityProperties.getKeyStorePasswordPath())))
+                    .trustStore(keyStoreFromResource(securityProperties.getTrustStorePath()))
+                    .trustStorePassword(fromPath(Paths.get(securityProperties.getTrustStorePasswordPath())))
+                    .build();
 
-            GeneratedAppConfigObject.StreamsObject reRegObject =
+            var reRegObject =
                     getStreamsObject(newConfiguration.streamSubscribesMap(), newConfiguration.reRegConfigKey(),
                             "PNF Re-Registration");
-            TopicUrlInfo topicUrlInfo = parseTopicUrl(reRegObject.dmaapInfo().topicUrl());
+            var topicUrlInfo = parseTopicUrl(reRegObject.dmaapInfo().topicUrl());
             dmaapReRegistrationConsumerProperties.setDmaapHostName(topicUrlInfo.getHost());
             dmaapReRegistrationConsumerProperties.setDmaapPortNumber(topicUrlInfo.getPort());
             dmaapReRegistrationConsumerProperties.setDmaapProtocol(newConfiguration.dmaapProtocol());
@@ -196,9 +219,9 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
             dmaapReRegistrationConsumerProperties.setConsumerGroup(newConfiguration.dmaapConsumerConsumerGroup());
             dmaapReRegistrationConsumerProperties.setMessageLimit(newConfiguration.dmaapMessageLimit());
             dmaapReRegistrationConsumerProperties.setTimeoutMs(newConfiguration.dmaapTimeoutMs());
-            constructDmaapReRegistrationConfiguration();
+            constructDmaapReRegistrationConfiguration(securityKeys);
 
-            GeneratedAppConfigObject.StreamsObject cpeAuthObject =
+            var cpeAuthObject =
                     getStreamsObject(newConfiguration.streamSubscribesMap(), newConfiguration.cpeAuthConfigKey(),
                             "CPE Authentication");
             topicUrlInfo = parseTopicUrl(cpeAuthObject.dmaapInfo().topicUrl());
@@ -213,9 +236,9 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
             dmaapCpeAuthenticationConsumerProperties.setConsumerGroup(newConfiguration.dmaapConsumerConsumerGroup());
             dmaapCpeAuthenticationConsumerProperties.setMessageLimit(newConfiguration.dmaapMessageLimit());
             dmaapCpeAuthenticationConsumerProperties.setTimeoutMs(newConfiguration.dmaapTimeoutMs());
-            constructDmaapCpeAuthenticationConfiguration();
+            constructDmaapCpeAuthenticationConfiguration(securityKeys);
 
-            GeneratedAppConfigObject.StreamsObject closeLoopObject =
+            var closeLoopObject =
                     getStreamsObject(newConfiguration.streamPublishesMap(), newConfiguration.closeLoopConfigKey(),
                             "Close Loop");
             topicUrlInfo = parseTopicUrl(closeLoopObject.dmaapInfo().topicUrl());
@@ -226,7 +249,7 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
             dmaapProducerProperties.setDmaapUserPassword(closeLoopObject.aafPassword());
             dmaapProducerProperties.setDmaapContentType(newConfiguration.dmaapContentType());
             dmaapProducerProperties.setDmaapTopicName(topicUrlInfo.getTopicName());
-            constructDmaapProducerConfiguration();
+            constructDmaapProducerConfiguration(securityKeys);
 
             aaiClientProperties.setAaiHost(newConfiguration.aaiHost());
             aaiClientProperties.setAaiPort(newConfiguration.aaiPort());
@@ -258,7 +281,7 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
     @NotNull
     private GeneratedAppConfigObject.StreamsObject getStreamsObject(
             Map<String, GeneratedAppConfigObject.StreamsObject> map, String configKey, String messageName) {
-        GeneratedAppConfigObject.StreamsObject streamsObject = map.get(configKey);
+        var streamsObject = map.get(configKey);
         if (!STREAMS_TYPE.equals(streamsObject.type())) {
             throw new ApplicationEnvironmentException(String.format("%s requires information about"
                     + " message-router topic in ONAP", messageName));
@@ -267,80 +290,45 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
     }
 
     private void constructConfigurationObjects() {
-        constructDmaapReRegistrationConfiguration();
-        constructDmaapCpeAuthenticationConfiguration();
-        constructDmaapProducerConfiguration();
+        final SecurityKeys securityKeysForReRegistration = ImmutableSecurityKeys.builder()
+                .keyStore(keyStoreFromResource(securityProperties.getKeyStorePath()))
+                .keyStorePassword(fromPath(Paths.get(securityProperties.getKeyStorePasswordPath())))
+                .trustStore(keyStoreFromResource(securityProperties.getTrustStorePath()))
+                .trustStorePassword(fromPath(Paths.get(securityProperties.getTrustStorePasswordPath())))
+                .build();
+        constructDmaapReRegistrationConfiguration(securityKeysForReRegistration);
+        final SecurityKeys securityKeysForCpeAuthentication = ImmutableSecurityKeys.builder()
+                .keyStore(keyStoreFromResource(securityProperties.getKeyStorePath()))
+                .keyStorePassword(fromPath(Paths.get(securityProperties.getKeyStorePasswordPath())))
+                .trustStore(keyStoreFromResource(securityProperties.getTrustStorePath()))
+                .trustStorePassword(fromPath(Paths.get(securityProperties.getTrustStorePasswordPath())))
+                .build();
+        constructDmaapCpeAuthenticationConfiguration(securityKeysForCpeAuthentication);
+        final SecurityKeys securityKeysForProducer = ImmutableSecurityKeys.builder()
+                .keyStore(keyStoreFromResource(securityProperties.getKeyStorePath()))
+                .keyStorePassword(fromPath(Paths.get(securityProperties.getKeyStorePasswordPath())))
+                .trustStore(keyStoreFromResource(securityProperties.getTrustStorePath()))
+                .trustStorePassword(fromPath(Paths.get(securityProperties.getTrustStorePasswordPath())))
+                .build();
+        constructDmaapProducerConfiguration(securityKeysForProducer);
         constructAaiConfiguration();
     }
 
-    private void constructDmaapReRegistrationConfiguration() {
-        dmaapReRegistrationConsumerConfiguration = new ImmutableDmaapConsumerConfiguration.Builder()
-                .dmaapHostName(dmaapReRegistrationConsumerProperties.getDmaapHostName())
-                .dmaapPortNumber(dmaapReRegistrationConsumerProperties.getDmaapPortNumber())
-                .dmaapProtocol(dmaapReRegistrationConsumerProperties.getDmaapProtocol())
-                .dmaapTopicName(dmaapReRegistrationConsumerProperties.getDmaapTopicName())
-                .dmaapUserName(
-                        dmaapReRegistrationConsumerProperties.getDmaapUserName() == null ? "" :
-                                dmaapReRegistrationConsumerProperties.getDmaapUserName())
-                .dmaapUserPassword(
-                        dmaapReRegistrationConsumerProperties.getDmaapUserPassword() == null ? "" :
-                                dmaapReRegistrationConsumerProperties.getDmaapUserPassword())
-                .dmaapContentType(dmaapReRegistrationConsumerProperties.getDmaapContentType())
-                .consumerId(dmaapReRegistrationConsumerProperties.getConsumerId())
-                .consumerGroup(dmaapReRegistrationConsumerProperties.getConsumerGroup())
-                .timeoutMs(dmaapReRegistrationConsumerProperties.getTimeoutMs())
-                .messageLimit(dmaapReRegistrationConsumerProperties.getMessageLimit())
-                .enableDmaapCertAuth(securityProperties.isEnableDmaapCertAuth())
-                .keyStorePath(securityProperties.getKeyStorePath())
-                .keyStorePasswordPath(securityProperties.getKeyStorePasswordPath())
-                .trustStorePath(securityProperties.getTrustStorePath())
-                .trustStorePasswordPath(securityProperties.getTrustStorePasswordPath())
+    private void constructDmaapReRegistrationConfiguration(final SecurityKeys securityKeys) {
+        dmaapReRegistrationConsumerConfiguration = ImmutableMessageRouterSubscriberConfig.builder()
+                .securityKeys(securityKeys)
                 .build();
     }
 
-    private void constructDmaapCpeAuthenticationConfiguration() {
-        dmaapCpeAuthenticationConsumerConfiguration = new ImmutableDmaapConsumerConfiguration.Builder()
-                .dmaapHostName(dmaapCpeAuthenticationConsumerProperties.getDmaapHostName())
-                .dmaapPortNumber(dmaapCpeAuthenticationConsumerProperties.getDmaapPortNumber())
-                .dmaapProtocol(dmaapCpeAuthenticationConsumerProperties.getDmaapProtocol())
-                .dmaapTopicName(dmaapCpeAuthenticationConsumerProperties.getDmaapTopicName())
-                .dmaapUserName(
-                        dmaapCpeAuthenticationConsumerProperties.getDmaapUserName() == null ? "" :
-                                dmaapCpeAuthenticationConsumerProperties.getDmaapUserName())
-                .dmaapUserPassword(
-                        dmaapCpeAuthenticationConsumerProperties.getDmaapUserPassword() == null ? "" :
-                                dmaapCpeAuthenticationConsumerProperties.getDmaapUserPassword())
-                .dmaapContentType(dmaapCpeAuthenticationConsumerProperties.getDmaapContentType())
-                .consumerId(dmaapCpeAuthenticationConsumerProperties.getConsumerId())
-                .consumerGroup(dmaapCpeAuthenticationConsumerProperties.getConsumerGroup())
-                .timeoutMs(dmaapCpeAuthenticationConsumerProperties.getTimeoutMs())
-                .messageLimit(dmaapCpeAuthenticationConsumerProperties.getMessageLimit())
-                .enableDmaapCertAuth(securityProperties.isEnableDmaapCertAuth())
-                .keyStorePath(securityProperties.getKeyStorePath())
-                .keyStorePasswordPath(securityProperties.getKeyStorePasswordPath())
-                .trustStorePath(securityProperties.getTrustStorePath())
-                .trustStorePasswordPath(securityProperties.getTrustStorePasswordPath())
+    private void constructDmaapCpeAuthenticationConfiguration(final SecurityKeys securityKeys) {
+        dmaapCpeAuthenticationConsumerConfiguration = ImmutableMessageRouterSubscriberConfig.builder()
+                .securityKeys(securityKeys)
                 .build();
     }
 
-    private void constructDmaapProducerConfiguration() {
-        dmaapPublisherConfiguration = new ImmutableDmaapPublisherConfiguration.Builder()
-                .dmaapHostName(dmaapProducerProperties.getDmaapHostName())
-                .dmaapPortNumber(dmaapProducerProperties.getDmaapPortNumber())
-                .dmaapProtocol(dmaapProducerProperties.getDmaapProtocol())
-                .dmaapTopicName(dmaapProducerProperties.getDmaapTopicName())
-                .dmaapUserName(
-                        dmaapProducerProperties.getDmaapUserName() == null ? "" :
-                                dmaapProducerProperties.getDmaapUserName())
-                .dmaapUserPassword(
-                        dmaapProducerProperties.getDmaapUserPassword() == null ? "" :
-                                dmaapProducerProperties.getDmaapUserPassword())
-                .dmaapContentType(dmaapProducerProperties.getDmaapContentType())
-                .enableDmaapCertAuth(securityProperties.isEnableDmaapCertAuth())
-                .keyStorePath(securityProperties.getKeyStorePath())
-                .keyStorePasswordPath(securityProperties.getKeyStorePasswordPath())
-                .trustStorePath(securityProperties.getTrustStorePath())
-                .trustStorePasswordPath(securityProperties.getTrustStorePasswordPath())
+    private void constructDmaapProducerConfiguration(final SecurityKeys securityKeys) {
+        dmaapPublisherConfiguration = ImmutableMessageRouterPublisherConfig.builder()
+                .securityKeys(securityKeys)
                 .build();
     }
 
@@ -362,19 +350,19 @@ public class ApplicationConfiguration implements ConfigurationChangeObservable {
     }
 
     private TopicUrlInfo parseTopicUrl(String topicUrl) {
-        String[] urlTokens = topicUrl.split(":");
+        var urlTokens = topicUrl.split(":");
         if (urlTokens.length != 3) {
             throw new ConfigurationParsingException("Wrong topic URL format");
         }
-        TopicUrlInfo topicUrlInfo = new TopicUrlInfo();
+        var topicUrlInfo = new TopicUrlInfo();
         topicUrlInfo.setHost(urlTokens[1].replace("/", ""));
 
-        String[] tokensAfterHost = urlTokens[2].split("/events/");
+        var tokensAfterHost = urlTokens[2].split("/events/");
         if (tokensAfterHost.length != 2) {
             throw new ConfigurationParsingException("Wrong topic name structure");
         }
         topicUrlInfo.setPort(Integer.valueOf(tokensAfterHost[0]));
-        topicUrlInfo.setTopicName("events/" + tokensAfterHost[1]);
+        topicUrlInfo.setTopicName(tokensAfterHost[1]);
 
         return topicUrlInfo;
     }

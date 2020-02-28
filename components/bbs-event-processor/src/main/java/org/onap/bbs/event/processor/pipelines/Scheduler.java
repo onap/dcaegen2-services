@@ -96,7 +96,7 @@ public class Scheduler implements ConfigurationChangeObserver {
         LOGGER.info("BBS event processing pipelines will start in {} seconds "
                 + "and will run periodically every {} seconds", PIPELINES_INITIAL_DELAY_IN_SECONDS,
                 currentPipelinesPollingInterval);
-        Instant desiredStartTime = Instant.now().plusSeconds(PIPELINES_INITIAL_DELAY_IN_SECONDS);
+        var desiredStartTime = Instant.now().plusSeconds(PIPELINES_INITIAL_DELAY_IN_SECONDS);
         scheduleProcessingTasks(desiredStartTime, currentPipelinesPollingInterval);
 
         // Register for configuration changes
@@ -118,7 +118,7 @@ public class Scheduler implements ConfigurationChangeObserver {
             cancelScheduledProcessingTasks();
             reScheduleProcessingTasks();
         }
-        int newCbsPollingInterval = configuration.getCbsPollingInterval();
+        var newCbsPollingInterval = configuration.getCbsPollingInterval();
         if (newCbsPollingInterval != currentCbsPollingInterval) {
             if (newCbsPollingInterval < DEFAULT_CBS_POLLING_INTERVAL) {
                 LOGGER.warn("CBS Polling interval is too small ({}). Will not re-schedule CBS job",
@@ -222,9 +222,9 @@ public class Scheduler implements ConfigurationChangeObserver {
     }
 
     private int validatePipelinesPollingInterval() {
-        int pipelinesPollingInterval = configuration.getPipelinesPollingIntervalInSeconds();
-        boolean isSmallInterval = pipelinesPollingInterval < DEFAULT_PIPELINES_POLLING_INTERVAL;
-        int verifiedInterval = isSmallInterval ? DEFAULT_PIPELINES_POLLING_INTERVAL : pipelinesPollingInterval;
+        var pipelinesPollingInterval = configuration.getPipelinesPollingIntervalInSeconds();
+        var isSmallInterval = pipelinesPollingInterval < DEFAULT_PIPELINES_POLLING_INTERVAL;
+        var verifiedInterval = isSmallInterval ? DEFAULT_PIPELINES_POLLING_INTERVAL : pipelinesPollingInterval;
         if (isSmallInterval) {
             LOGGER.warn("Pipelines Polling interval is too small ({}). Defaulting to {}", pipelinesPollingInterval,
                     DEFAULT_PIPELINES_POLLING_INTERVAL);
@@ -233,9 +233,9 @@ public class Scheduler implements ConfigurationChangeObserver {
     }
 
     private int verifyCbsPollingInterval() {
-        int cbsPollingInterval = configuration.getCbsPollingInterval();
-        boolean isSmallInterval = cbsPollingInterval < DEFAULT_CBS_POLLING_INTERVAL;
-        int verifiedInterval = isSmallInterval ? DEFAULT_CBS_POLLING_INTERVAL : cbsPollingInterval;
+        var cbsPollingInterval = configuration.getCbsPollingInterval();
+        var isSmallInterval = cbsPollingInterval < DEFAULT_CBS_POLLING_INTERVAL;
+        var verifiedInterval = isSmallInterval ? DEFAULT_CBS_POLLING_INTERVAL : cbsPollingInterval;
         if (isSmallInterval) {
             LOGGER.warn("CBS Polling interval is too small ({}). Defaulting to {}", cbsPollingInterval,
                     DEFAULT_CBS_POLLING_INTERVAL);

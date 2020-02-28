@@ -37,8 +37,6 @@ import org.onap.bbs.event.processor.model.GeneratedAppConfigObject;
 import org.onap.bbs.event.processor.model.ImmutableDmaapInfo;
 import org.onap.bbs.event.processor.model.ImmutableGeneratedAppConfigObject;
 import org.onap.bbs.event.processor.model.ImmutableStreamsObject;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.DmaapConsumerConfiguration;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.DmaapPublisherConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -66,6 +64,8 @@ import org.springframework.test.context.TestPropertySource;
         "configs.aai.client.aaiHeaders.Content-Type=application/merge-patch+json",
         "configs.dmaap.consumer.re-registration.dmaapHostName=test localhost",
         "configs.dmaap.consumer.re-registration.dmaapPortNumber=1234",
+        "configs.dmaap.consumer.re-registration.dmaapUserName=",
+        "configs.dmaap.consumer.re-registration.dmaapUserPassword=",
         "configs.dmaap.consumer.re-registration.dmaapTopicName=/events/unauthenticated.PNF_REREGISTRATION",
         "configs.dmaap.consumer.re-registration.dmaapProtocol=http",
         "configs.dmaap.consumer.re-registration.dmaapContentType=application/json",
@@ -75,6 +75,8 @@ import org.springframework.test.context.TestPropertySource;
         "configs.dmaap.consumer.re-registration.messageLimit=1",
         "configs.dmaap.consumer.cpe-authentication.dmaapHostName=test localhost",
         "configs.dmaap.consumer.cpe-authentication.dmaapPortNumber=1234",
+        "configs.dmaap.consumer.cpe-authentication.dmaapUserName=",
+        "configs.dmaap.consumer.cpe-authentication.dmaapUserPassword=",
         "configs.dmaap.consumer.cpe-authentication.dmaapTopicName=/events/unauthenticated.CPE_AUTHENTICATION",
         "configs.dmaap.consumer.cpe-authentication.dmaapProtocol=http",
         "configs.dmaap.consumer.cpe-authentication.dmaapContentType=application/json",
@@ -84,13 +86,15 @@ import org.springframework.test.context.TestPropertySource;
         "configs.dmaap.consumer.cpe-authentication.messageLimit=1",
         "configs.dmaap.producer.dmaapHostName=test localhost",
         "configs.dmaap.producer.dmaapPortNumber=1234",
+        "configs.dmaap.producer.dmaapUserName=",
+        "configs.dmaap.producer.dmaapUserPassword=",
         "configs.dmaap.producer.dmaapTopicName=/events/unauthenticated.DCAE_CL_OUTPUT",
         "configs.dmaap.producer.dmaapProtocol=http",
         "configs.dmaap.producer.dmaapContentType=application/json",
-        "configs.security.trustStorePath=test trust store path",
-        "configs.security.trustStorePasswordPath=test trust store password path",
-        "configs.security.keyStorePath=test key store path",
-        "configs.security.keyStorePasswordPath=test key store password path",
+        "configs.security.trustStorePath=KeyStore.jks",
+        "configs.security.trustStorePasswordPath=KeyStorePass.txt",
+        "configs.security.keyStorePath=KeyStore.jks",
+        "configs.security.keyStorePasswordPath=KeyStorePass.txt",
         "configs.security.enableDmaapCertAuth=false",
         "configs.security.enableAaiCertAuth=false",
         "configs.application.pipelinesPollingIntervalSec=30",
@@ -132,7 +136,7 @@ class ApplicationConfigurationTest {
     @Test
     void testA_configurationObjectSuccessfullyPopulated() {
 
-        AaiClientConfiguration aaiClientConfiguration = configuration.getAaiClientConfiguration();
+        var aaiClientConfiguration = configuration.getAaiClientConfiguration();
         assertAll("AAI Client Configuration Properties",
             () -> assertEquals("test localhost", aaiClientConfiguration.aaiHost()),
             () -> assertEquals(Integer.valueOf(1234), aaiClientConfiguration.aaiPort()),
@@ -148,50 +152,64 @@ class ApplicationConfigurationTest {
                         aaiClientConfiguration.aaiHeaders().get("Content-Type"))
         );
 
-        DmaapConsumerConfiguration dmaapConsumerReRegistrationConfig =
-                configuration.getDmaapReRegistrationConsumerConfiguration();
         assertAll("DMaaP Consumer Re-Registration Configuration Properties",
-            () -> assertEquals("test localhost", dmaapConsumerReRegistrationConfig.dmaapHostName()),
-            () -> assertEquals(Integer.valueOf(1234), dmaapConsumerReRegistrationConfig.dmaapPortNumber()),
+            () -> assertEquals("test localhost",
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapHostName()),
+            () -> assertEquals(1234,
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapPortNumber()),
             () -> assertEquals("/events/unauthenticated.PNF_REREGISTRATION",
-                    dmaapConsumerReRegistrationConfig.dmaapTopicName()),
-            () -> assertEquals("http", dmaapConsumerReRegistrationConfig.dmaapProtocol()),
-            () -> assertEquals("", dmaapConsumerReRegistrationConfig.dmaapUserName()),
-            () -> assertEquals("", dmaapConsumerReRegistrationConfig.dmaapUserPassword()),
-            () -> assertEquals("application/json", dmaapConsumerReRegistrationConfig.dmaapContentType()),
-            () -> assertEquals("c12", dmaapConsumerReRegistrationConfig.consumerId()),
-            () -> assertEquals("OpenDcae-c12", dmaapConsumerReRegistrationConfig.consumerGroup()),
-            () -> assertEquals(Integer.valueOf(-1), dmaapConsumerReRegistrationConfig.timeoutMs()),
-            () -> assertEquals(Integer.valueOf(1), dmaapConsumerReRegistrationConfig.messageLimit())
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapTopicName()),
+            () -> assertEquals("http",
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapProtocol()),
+            () -> assertEquals("",
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapUserName()),
+            () -> assertEquals("",
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapUserPassword()),
+            () -> assertEquals("application/json",
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapContentType()),
+            () -> assertEquals("c12",
+                    configuration.getDmaapReRegistrationConsumerProperties().getConsumerId()),
+            () -> assertEquals("OpenDcae-c12",
+                    configuration.getDmaapReRegistrationConsumerProperties().getConsumerGroup()),
+            () -> assertEquals(-1, configuration.getDmaapReRegistrationConsumerProperties().getTimeoutMs()),
+            () -> assertEquals(1, configuration.getDmaapReRegistrationConsumerProperties().getMessageLimit())
         );
 
-        DmaapConsumerConfiguration dmaapConsumerCpeAuthenticationConfig =
-                configuration.getDmaapCpeAuthenticationConsumerConfiguration();
         assertAll("DMaaP Consumer CPE Authentication Configuration Properties",
-            () -> assertEquals("test localhost", dmaapConsumerCpeAuthenticationConfig.dmaapHostName()),
-            () -> assertEquals(Integer.valueOf(1234), dmaapConsumerCpeAuthenticationConfig.dmaapPortNumber()),
+            () -> assertEquals("test localhost",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapHostName()),
+            () -> assertEquals(1234,
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapPortNumber()),
             () -> assertEquals("/events/unauthenticated.CPE_AUTHENTICATION",
-                    dmaapConsumerCpeAuthenticationConfig.dmaapTopicName()),
-            () -> assertEquals("http", dmaapConsumerCpeAuthenticationConfig.dmaapProtocol()),
-            () -> assertEquals("", dmaapConsumerCpeAuthenticationConfig.dmaapUserName()),
-            () -> assertEquals("", dmaapConsumerCpeAuthenticationConfig.dmaapUserPassword()),
-            () -> assertEquals("application/json", dmaapConsumerCpeAuthenticationConfig.dmaapContentType()),
-            () -> assertEquals("c12", dmaapConsumerCpeAuthenticationConfig.consumerId()),
-            () -> assertEquals("OpenDcae-c12", dmaapConsumerCpeAuthenticationConfig.consumerGroup()),
-            () -> assertEquals(Integer.valueOf(-1), dmaapConsumerCpeAuthenticationConfig.timeoutMs()),
-            () -> assertEquals(Integer.valueOf(1), dmaapConsumerCpeAuthenticationConfig.messageLimit())
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapTopicName()),
+            () -> assertEquals("http",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapProtocol()),
+            () -> assertEquals("",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapUserName()),
+            () -> assertEquals("",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapUserPassword()),
+            () -> assertEquals("application/json",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapContentType()),
+            () -> assertEquals("c12",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getConsumerId()),
+            () -> assertEquals("OpenDcae-c12",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getConsumerGroup()),
+            () -> assertEquals(-1, configuration.getDmaapCpeAuthenticationConsumerProperties().getTimeoutMs()),
+            () -> assertEquals(1,
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getMessageLimit())
         );
 
-        DmaapPublisherConfiguration dmaapPublisherConfiguration = configuration.getDmaapPublisherConfiguration();
         assertAll("DMaaP Publisher Configuration Properties",
-            () -> assertEquals("test localhost", dmaapPublisherConfiguration.dmaapHostName()),
-            () -> assertEquals(Integer.valueOf(1234), dmaapPublisherConfiguration.dmaapPortNumber()),
+            () -> assertEquals("test localhost",
+                    configuration.getDmaapProducerProperties().getDmaapHostName()),
+            () -> assertEquals(1234, configuration.getDmaapProducerProperties().getDmaapPortNumber()),
             () -> assertEquals("/events/unauthenticated.DCAE_CL_OUTPUT",
-                    dmaapPublisherConfiguration.dmaapTopicName()),
-            () -> assertEquals("http", dmaapPublisherConfiguration.dmaapProtocol()),
-            () -> assertEquals("", dmaapPublisherConfiguration.dmaapUserName()),
-            () -> assertEquals("", dmaapPublisherConfiguration.dmaapUserPassword()),
-            () -> assertEquals("application/json", dmaapPublisherConfiguration.dmaapContentType())
+                    configuration.getDmaapProducerProperties().getDmaapTopicName()),
+            () -> assertEquals("http", configuration.getDmaapProducerProperties().getDmaapProtocol()),
+            () -> assertEquals("", configuration.getDmaapProducerProperties().getDmaapUserName()),
+            () -> assertEquals("", configuration.getDmaapProducerProperties().getDmaapUserPassword()),
+            () -> assertEquals("application/json",
+                    configuration.getDmaapProducerProperties().getDmaapContentType())
         );
 
         assertAll("Generic Application Properties",
@@ -211,12 +229,11 @@ class ApplicationConfigurationTest {
 
         assertAll("Security Application Properties",
             () -> assertFalse(aaiClientConfiguration.enableAaiCertAuth()),
-            () -> assertFalse(dmaapConsumerReRegistrationConfig.enableDmaapCertAuth()),
-            () -> assertEquals("test key store path", aaiClientConfiguration.keyStorePath()),
-            () -> assertEquals("test key store password path",
+            () -> assertEquals("KeyStore.jks", aaiClientConfiguration.keyStorePath()),
+            () -> assertEquals("KeyStorePass.txt",
                         aaiClientConfiguration.keyStorePasswordPath()),
-            () -> assertEquals("test trust store path", aaiClientConfiguration.trustStorePath()),
-            () -> assertEquals("test trust store password path",
+            () -> assertEquals("KeyStore.jks", aaiClientConfiguration.trustStorePath()),
+            () -> assertEquals("KeyStorePass.txt",
                         aaiClientConfiguration.trustStorePasswordPath())
         );
     }
@@ -298,10 +315,10 @@ class ApplicationConfigurationTest {
                 .cpeAuthConfigKey("config_key_2")
                 .closeLoopConfigKey("config_key_3")
                 .loggingLevel("TRACE")
-                .keyStorePath("test key store path - update")
-                .keyStorePasswordPath("test key store password path - update")
-                .trustStorePath("test trust store path - update")
-                .trustStorePasswordPath("test trust store password path - update")
+                .keyStorePath("KeyStore-update.jks")
+                .keyStorePasswordPath("KeyStorePass-update.txt")
+                .trustStorePath("KeyStore-update.jks")
+                .trustStorePasswordPath("KeyStorePass-update.txt")
                 .enableAaiCertAuth(true)
                 .enableDmaapCertAuth(true)
                 .streamSubscribesMap(subscribes)
@@ -311,7 +328,7 @@ class ApplicationConfigurationTest {
         // Update the configuration
         configuration.updateCurrentConfiguration(updatedConfiguration);
 
-        AaiClientConfiguration aaiClientConfiguration = configuration.getAaiClientConfiguration();
+        var aaiClientConfiguration = configuration.getAaiClientConfiguration();
         assertAll("AAI Client Configuration Properties",
             () -> assertEquals("aai.onap.svc.cluster.local", aaiClientConfiguration.aaiHost()),
             () -> assertEquals(Integer.valueOf(8443), aaiClientConfiguration.aaiPort()),
@@ -327,50 +344,65 @@ class ApplicationConfigurationTest {
                         aaiClientConfiguration.aaiHeaders().get("Content-Type"))
         );
 
-        DmaapConsumerConfiguration dmaapConsumerReRegistrationConfig =
-                configuration.getDmaapReRegistrationConsumerConfiguration();
         assertAll("DMaaP Consumer Re-Registration Configuration Properties",
-            () -> assertEquals("we-are-message-router1.us", dmaapConsumerReRegistrationConfig.dmaapHostName()),
-            () -> assertEquals(Integer.valueOf(3901), dmaapConsumerReRegistrationConfig.dmaapPortNumber()),
-            () -> assertEquals("events/unauthenticated.PNF_UPDATE",
-                    dmaapConsumerReRegistrationConfig.dmaapTopicName()),
-            () -> assertEquals("https", dmaapConsumerReRegistrationConfig.dmaapProtocol()),
-            () -> assertEquals("some-user", dmaapConsumerReRegistrationConfig.dmaapUserName()),
-            () -> assertEquals("some-password", dmaapConsumerReRegistrationConfig.dmaapUserPassword()),
-            () -> assertEquals("application/json", dmaapConsumerReRegistrationConfig.dmaapContentType()),
-            () -> assertEquals("c13", dmaapConsumerReRegistrationConfig.consumerId()),
-            () -> assertEquals("OpenDcae-c13", dmaapConsumerReRegistrationConfig.consumerGroup()),
-            () -> assertEquals(Integer.valueOf(5), dmaapConsumerReRegistrationConfig.timeoutMs()),
-            () -> assertEquals(Integer.valueOf(10), dmaapConsumerReRegistrationConfig.messageLimit())
+            () -> assertEquals("we-are-message-router1.us",
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapHostName()),
+            () -> assertEquals(3901,
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapPortNumber()),
+            () -> assertEquals("unauthenticated.PNF_UPDATE",
+                        configuration.getDmaapReRegistrationConsumerProperties().getDmaapTopicName()),
+            () -> assertEquals("https",
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapProtocol()),
+            () -> assertEquals("some-user",
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapUserName()),
+            () -> assertEquals("some-password",
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapUserPassword()),
+            () -> assertEquals("application/json",
+                    configuration.getDmaapReRegistrationConsumerProperties().getDmaapContentType()),
+            () -> assertEquals("c13",
+                    configuration.getDmaapReRegistrationConsumerProperties().getConsumerId()),
+            () -> assertEquals("OpenDcae-c13",
+                    configuration.getDmaapReRegistrationConsumerProperties().getConsumerGroup()),
+            () -> assertEquals(5, configuration.getDmaapReRegistrationConsumerProperties().getTimeoutMs()),
+            () -> assertEquals(10, configuration.getDmaapReRegistrationConsumerProperties().getMessageLimit())
         );
 
-        DmaapConsumerConfiguration dmaapConsumerCpeAuthenticationConfig =
-                configuration.getDmaapCpeAuthenticationConsumerConfiguration();
         assertAll("DMaaP Consumer CPE Authentication Configuration Properties",
-            () -> assertEquals("we-are-message-router2.us", dmaapConsumerCpeAuthenticationConfig.dmaapHostName()),
-            () -> assertEquals(Integer.valueOf(3902), dmaapConsumerCpeAuthenticationConfig.dmaapPortNumber()),
-            () -> assertEquals("events/unauthenticated.CPE_AUTHENTICATION",
-                    dmaapConsumerCpeAuthenticationConfig.dmaapTopicName()),
-            () -> assertEquals("https", dmaapConsumerCpeAuthenticationConfig.dmaapProtocol()),
-            () -> assertEquals("some-user", dmaapConsumerCpeAuthenticationConfig.dmaapUserName()),
-            () -> assertEquals("some-password", dmaapConsumerCpeAuthenticationConfig.dmaapUserPassword()),
-            () -> assertEquals("application/json", dmaapConsumerCpeAuthenticationConfig.dmaapContentType()),
-            () -> assertEquals("c13", dmaapConsumerCpeAuthenticationConfig.consumerId()),
-            () -> assertEquals("OpenDcae-c13", dmaapConsumerCpeAuthenticationConfig.consumerGroup()),
-            () -> assertEquals(Integer.valueOf(5), dmaapConsumerCpeAuthenticationConfig.timeoutMs()),
-            () -> assertEquals(Integer.valueOf(10), dmaapConsumerCpeAuthenticationConfig.messageLimit())
+            () -> assertEquals("we-are-message-router2.us",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapHostName()),
+            () -> assertEquals(3902,
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapPortNumber()),
+            () -> assertEquals("unauthenticated.CPE_AUTHENTICATION",
+                        configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapTopicName()),
+            () -> assertEquals("https",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapProtocol()),
+            () -> assertEquals("some-user",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapUserName()),
+            () -> assertEquals("some-password",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapUserPassword()),
+            () -> assertEquals("application/json",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getDmaapContentType()),
+            () -> assertEquals("c13",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getConsumerId()),
+            () -> assertEquals("OpenDcae-c13",
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getConsumerGroup()),
+            () -> assertEquals(5, configuration.getDmaapCpeAuthenticationConsumerProperties().getTimeoutMs()),
+            () -> assertEquals(10,
+                    configuration.getDmaapCpeAuthenticationConsumerProperties().getMessageLimit())
         );
 
-        DmaapPublisherConfiguration dmaapPublisherConfiguration = configuration.getDmaapPublisherConfiguration();
         assertAll("DMaaP Publisher Configuration Properties",
-            () -> assertEquals("we-are-message-router3.us", dmaapPublisherConfiguration.dmaapHostName()),
-            () -> assertEquals(Integer.valueOf(3903), dmaapPublisherConfiguration.dmaapPortNumber()),
-            () -> assertEquals("events/unauthenticated.DCAE_CL_OUTPUT",
-                    dmaapPublisherConfiguration.dmaapTopicName()),
-            () -> assertEquals("https", dmaapPublisherConfiguration.dmaapProtocol()),
-            () -> assertEquals("some-user", dmaapPublisherConfiguration.dmaapUserName()),
-            () -> assertEquals("some-password", dmaapPublisherConfiguration.dmaapUserPassword()),
-            () -> assertEquals("application/json", dmaapPublisherConfiguration.dmaapContentType())
+            () -> assertEquals("we-are-message-router3.us",
+                    configuration.getDmaapProducerProperties().getDmaapHostName()),
+            () -> assertEquals(3903, configuration.getDmaapProducerProperties().getDmaapPortNumber()),
+            () -> assertEquals("unauthenticated.DCAE_CL_OUTPUT",
+                        configuration.getDmaapProducerProperties().getDmaapTopicName()),
+            () -> assertEquals("https", configuration.getDmaapProducerProperties().getDmaapProtocol()),
+            () -> assertEquals("some-user", configuration.getDmaapProducerProperties().getDmaapUserName()),
+            () -> assertEquals("some-password",
+                    configuration.getDmaapProducerProperties().getDmaapUserPassword()),
+            () -> assertEquals("application/json",
+                    configuration.getDmaapProducerProperties().getDmaapContentType())
         );
 
         assertAll("Generic Application Properties",
@@ -391,12 +423,11 @@ class ApplicationConfigurationTest {
 
         assertAll("Security Application Properties",
             () -> assertTrue(aaiClientConfiguration.enableAaiCertAuth()),
-            () -> assertTrue(dmaapConsumerReRegistrationConfig.enableDmaapCertAuth()),
-            () -> assertEquals("test key store path - update", aaiClientConfiguration.keyStorePath()),
-            () -> assertEquals("test key store password path - update",
+            () -> assertEquals("KeyStore-update.jks", aaiClientConfiguration.keyStorePath()),
+            () -> assertEquals("KeyStorePass-update.txt",
                         aaiClientConfiguration.keyStorePasswordPath()),
-            () -> assertEquals("test trust store path - update", aaiClientConfiguration.trustStorePath()),
-            () -> assertEquals("test trust store password path - update",
+            () -> assertEquals("KeyStore-update.jks", aaiClientConfiguration.trustStorePath()),
+            () -> assertEquals("KeyStorePass-update.txt",
                         aaiClientConfiguration.trustStorePasswordPath())
         );
     }

@@ -20,37 +20,38 @@
 
 package org.onap.bbs.event.processor.tasks;
 
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-
-import java.util.Optional;
-
-import javax.net.ssl.SSLException;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.onap.bbs.event.processor.config.ApplicationConfiguration;
+import org.onap.bbs.event.processor.config.DmaapCpeAuthenticationConsumerProperties;
 import org.onap.bbs.event.processor.exceptions.EmptyDmaapResponseException;
 import org.onap.bbs.event.processor.model.CpeAuthenticationConsumerDmaapModel;
 import org.onap.bbs.event.processor.model.ImmutableCpeAuthenticationConsumerDmaapModel;
 import org.onap.bbs.event.processor.utilities.CpeAuthenticationDmaapConsumerJsonParser;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.DmaapConsumerConfiguration;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.ImmutableDmaapConsumerConfiguration;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.consumer.ConsumerReactiveHttpClientFactory;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.consumer.DMaaPConsumerReactiveHttpClient;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.config.MessageRouterSubscriberConfig;
 
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 class DmaapCpeAuthenticationConsumerTaskImplTest {
+
+    private static final String DMAAP_PROTOCOL = "http";
+    private static final String DMAAP_HOST = "message-router.onap.svc.cluster.local";
+    private static final int DMAAP_PORT = 3904;
+    private static final String DMAAP_TOPIC = "unauthenticated.CPE_AUTHENTICATION";
+    private static final String SUBSCRIBER_ID = "subscriberID";
+    private static final String SUBSCRIBER_GROUP = "subscriberGroup";
 
     private static final String CPE_AUTHENTICATION_EVENT_TEMPLATE = "{\"event\": {"
             + "\"commonEventHeader\": { \"sourceName\":\"%s\"},"
@@ -65,32 +66,34 @@ class DmaapCpeAuthenticationConsumerTaskImplTest {
 
     private static DmaapCpeAuthenticationConsumerTask dmaapConsumerTask;
     private static CpeAuthenticationConsumerDmaapModel cpeAuthenticationConsumerDmaapModel;
-    private static DMaaPConsumerReactiveHttpClient dMaaPConsumerReactiveHttpClient;
     private static String eventsArray;
+    private static MessageRouterSubscriber subscriber;
     private static Gson gson = new Gson();
+    private static ApplicationConfiguration configuration;
 
     @BeforeAll
-    static void setUp() throws SSLException {
-
-        final String sourceName = "PNF-CorrelationId";
-        final String oldAuthenticationState = "outOfService";
-        final String newAuthenticationState = "inService";
-        final String stateInterface = "stateInterface";
-        final String rgwMacAddress = "00:0a:95:8d:78:16";
-        final String swVersion = "1.2";
+    static void setUp() {
 
         // Mock Re-registration configuration
-        DmaapConsumerConfiguration dmaapConsumerConfiguration = testVersionOfDmaapConsumerConfiguration();
-        ApplicationConfiguration configuration = mock(ApplicationConfiguration.class);
-        when(configuration.getDmaapCpeAuthenticationConsumerConfiguration()).thenReturn(dmaapConsumerConfiguration);
+        configuration = mock(ApplicationConfiguration.class);
+        var props = mock(DmaapCpeAuthenticationConsumerProperties.class);
+        when(props.getDmaapProtocol()).thenReturn(DMAAP_PROTOCOL);
+        when(props.getDmaapHostName()).thenReturn(DMAAP_HOST);
+        when(props.getDmaapPortNumber()).thenReturn(DMAAP_PORT);
+        when(props.getDmaapTopicName()).thenReturn(DMAAP_TOPIC);
+        when(props.getConsumerId()).thenReturn(SUBSCRIBER_ID);
+        when(props.getConsumerGroup()).thenReturn(SUBSCRIBER_GROUP);
+        when(configuration.getDmaapCpeAuthenticationConsumerProperties()).thenReturn(props);
 
-        // Mock reactive DMaaP client
-        ConsumerReactiveHttpClientFactory httpClientFactory = mock(ConsumerReactiveHttpClientFactory.class);
-        dMaaPConsumerReactiveHttpClient = mock(DMaaPConsumerReactiveHttpClient.class);
-        doReturn(dMaaPConsumerReactiveHttpClient).when(httpClientFactory).create(dmaapConsumerConfiguration);
+        var subscriberConfig = mock(MessageRouterSubscriberConfig.class);
+        when(configuration.getDmaapCpeAuthenticationConsumerConfiguration()).thenReturn(subscriberConfig);
 
-        dmaapConsumerTask = new DmaapCpeAuthenticationConsumerTaskImpl(configuration,
-                new CpeAuthenticationDmaapConsumerJsonParser(), httpClientFactory);
+        var sourceName = "PNF-CorrelationId";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
 
         cpeAuthenticationConsumerDmaapModel = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
                 .correlationId(sourceName)
@@ -101,58 +104,42 @@ class DmaapCpeAuthenticationConsumerTaskImplTest {
                 .swVersion(swVersion)
                 .build();
 
-        String event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE, sourceName, oldAuthenticationState,
+        var event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE, sourceName, oldAuthenticationState,
                 newAuthenticationState, stateInterface, rgwMacAddress, swVersion);
 
         eventsArray = "[" + event + "]";
     }
 
-    @AfterEach
-    void resetMock() {
-        reset(dMaaPConsumerReactiveHttpClient);
-    }
-
     @Test
     void passingEmptyMessage_NothingHappens() throws Exception {
-        JsonElement empty = gson.toJsonTree("");
-        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse(Optional.empty())).thenReturn(Mono.just(empty));
+        var empty = gson.toJsonTree("");
+        subscriber = mock(MessageRouterSubscriber.class);
+        when(subscriber.getElements(any())).thenReturn(Flux.just(empty));
+
+        dmaapConsumerTask = new DmaapCpeAuthenticationConsumerTaskImpl(configuration, subscriber,
+                new CpeAuthenticationDmaapConsumerJsonParser());
 
         StepVerifier.create(dmaapConsumerTask.execute("Sample input"))
                 .expectSubscription()
                 .expectError(EmptyDmaapResponseException.class);
-        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse(Optional.empty());
+
+        verify(subscriber, times(1)).getElements(any());
+        verifyNoMoreInteractions(subscriber);
     }
 
     @Test
     void passingNormalMessage_ResponseSucceeds() throws Exception {
-        JsonElement normalEventsArray = gson.toJsonTree(eventsArray);
-        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse(Optional.empty()))
-                .thenReturn(Mono.just(normalEventsArray));
+        var normalEventsArray = gson.toJsonTree(eventsArray);
+        subscriber = mock(MessageRouterSubscriber.class);
+        when(subscriber.getElements(any())).thenReturn(Flux.just(normalEventsArray));
+
+        dmaapConsumerTask = new DmaapCpeAuthenticationConsumerTaskImpl(configuration, subscriber,
+                new CpeAuthenticationDmaapConsumerJsonParser());
 
         StepVerifier.create(dmaapConsumerTask.execute("Sample input"))
                 .expectSubscription()
                 .consumeNextWith(e -> Assert.assertEquals(e, cpeAuthenticationConsumerDmaapModel));
-        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse(Optional.empty());
-    }
-
-    private static DmaapConsumerConfiguration testVersionOfDmaapConsumerConfiguration() {
-        return new ImmutableDmaapConsumerConfiguration.Builder()
-                .consumerGroup("consumer-group")
-                .consumerId("consumer-id")
-                .dmaapContentType("application/json")
-                .dmaapHostName("message-router.onap.svc.cluster.local")
-                .dmaapPortNumber(3904)
-                .dmaapProtocol("http")
-                .dmaapUserName("admin")
-                .dmaapUserPassword("admin")
-                .trustStorePath("change it")
-                .trustStorePasswordPath("change_it")
-                .keyStorePath("change it")
-                .keyStorePasswordPath("change_it")
-                .enableDmaapCertAuth(false)
-                .dmaapTopicName("/events/unauthenticated.CPE_AUTHENTICATION")
-                .timeoutMs(-1)
-                .messageLimit(-1)
-                .build();
+        verify(subscriber, times(1)).getElements(any());
+        verifyNoMoreInteractions(subscriber);
     }
 }

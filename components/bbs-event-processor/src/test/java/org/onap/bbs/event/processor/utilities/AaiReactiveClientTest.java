@@ -37,8 +37,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.ServiceLoader;
 
-import javax.net.ssl.SSLException;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -74,13 +72,13 @@ class AaiReactiveClientTest {
     private static WireMockServer wireMockServer;
 
     @BeforeAll
-    static void init() throws SSLException {
-        GsonBuilder gsonBuilder = new GsonBuilder();
+    static void init() {
+        var gsonBuilder = new GsonBuilder();
         ServiceLoader.load(TypeAdapterFactory.class).forEach(gsonBuilder::registerTypeAdapterFactory);
         gson = gsonBuilder.create();
 
-        ApplicationConfiguration configuration = Mockito.mock(ApplicationConfiguration.class);
-        AaiClientConfiguration aaiClientConfiguration = Mockito.mock(AaiClientConfiguration.class);
+        var configuration = Mockito.mock(ApplicationConfiguration.class);
+        var aaiClientConfiguration = Mockito.mock(AaiClientConfiguration.class);
         when(configuration.getAaiClientConfiguration()).thenReturn(aaiClientConfiguration);
         when(aaiClientConfiguration.aaiUserName()).thenReturn("AAI");
         when(aaiClientConfiguration.aaiUserPassword()).thenReturn("AAI");
@@ -106,10 +104,10 @@ class AaiReactiveClientTest {
     @Test
     void sendingReactiveRequestForPnf_Succeeds() {
 
-        String pnfName = "pnf-1";
-        String attachmentPoint = "olt1-1-1";
+        var pnfName = "pnf-1";
+        var attachmentPoint = "olt1-1-1";
 
-        String pnfUrl = String.format("/aai/v14/network/pnfs/pnf/%s?depth=1", pnfName);
+        var pnfUrl = String.format("/aai/v14/network/pnfs/pnf/%s?depth=1", pnfName);
 
         // Build Relationship Data
         RelationshipListAaiObject.RelationshipEntryAaiObject firstRelationshipEntry =
@@ -166,7 +164,7 @@ class AaiReactiveClientTest {
                 .expectSubscription()
                 .consumeNextWith(pnf -> {
                     Assertions.assertEquals(pnfName, pnf.getPnfName(), "PNF Name in response does not match");
-                    String extractedAttachmentPoint = pnf.getRelationshipListAaiObject().getRelationshipEntries()
+                    var extractedAttachmentPoint = pnf.getRelationshipListAaiObject().getRelationshipEntries()
                             .stream()
                             .filter(e -> e.getRelatedTo().equals("logical-link"))
                             .flatMap(e -> e.getRelationshipData().stream())
@@ -182,10 +180,10 @@ class AaiReactiveClientTest {
     @Test
     void sendingReactiveRequestForServiceInstance_Succeeds() {
 
-        String serviceInstanceId = "84003b26-6b76-4c75-b805-7b14ab4ffaef";
-        String orchestrationStatus = "active";
+        var serviceInstanceId = "84003b26-6b76-4c75-b805-7b14ab4ffaef";
+        var orchestrationStatus = "active";
 
-        String serviceInstanceUrl =
+        var serviceInstanceUrl =
                 String.format("/aai/v14/nodes/service-instances/service-instance/%s?format=resource_and_url",
                 serviceInstanceId);
 
@@ -237,10 +235,10 @@ class AaiReactiveClientTest {
                     Assertions.assertEquals(serviceInstanceId, serviceInstance.getServiceInstanceId(),
                             "Service Instance ID in response does not match");
 
-                    MetadataListAaiObject extractedMetadataListObject =
+                    var extractedMetadataListObject =
                             serviceInstance.getMetadataListAaiObject().orElseThrow(AaiReactiveClientTestException::new);
 
-                    MetadataListAaiObject.MetadataEntryAaiObject extractedMetadataEntry =
+                    var extractedMetadataEntry =
                             extractedMetadataListObject.getMetadataEntries()
                             .stream()
                             .filter(m -> m.getMetaname().equals("cvlan"))

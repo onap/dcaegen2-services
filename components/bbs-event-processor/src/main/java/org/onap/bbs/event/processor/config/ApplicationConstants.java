@@ -35,5 +35,9 @@ public class ApplicationConstants {
     // Close Loop Constants
     public static final String DCAE_BBS_EVENT_PROCESSOR_MS_INSTANCE = "DCAE.BBS_event_processor_mSInstance";
 
+    // Subscribe for DMaaP
+    public static final String SUBSCRIBE_URL_TEMPLATE = "%s://%s:%d/events/%s";
+    public static final String PUBLISH_URL_TEMPLATE = "%s://%s:%d/events/%s";
+
     private ApplicationConstants() {}
 }
