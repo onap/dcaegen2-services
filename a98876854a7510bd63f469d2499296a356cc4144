@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a283d1e2_140ee6f4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-28T13:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc8ef003_e740a534",
+      "revId": "a98876854a7510bd63f469d2499296a356cc4144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4515bd17_0b1b682e",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 1
@@ -59,6 +77,48 @@
     },
     {
       "key": {
+        "uuid": "20ff1ec1_53280e10",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-28T13:28:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "00d0e9df_2fc42ce9",
+      "range": {
+        "startLine": 39,
+        "startChar": 13,
+        "endLine": 39,
+        "endChar": 30
+      },
+      "revId": "a98876854a7510bd63f469d2499296a356cc4144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8bc65885_6e56d867",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-28T13:28:29Z",
+      "side": 1,
+      "message": "Ack, Refering to Fiachra\u0027s comment below, going to postpone this change",
+      "parentUuid": "4515bd17_0b1b682e",
+      "revId": "a98876854a7510bd63f469d2499296a356cc4144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "163e42c7_1005afce",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 1
@@ -70,6 +130,30 @@
       "writtenOn": "2020-02-27T23:05:24Z",
       "side": 1,
       "message": "Rename to be specific to policy pub and sub",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 60
+      },
+      "revId": "a98876854a7510bd63f469d2499296a356cc4144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5dcf44ad_c97039b1",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-28T13:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "163e42c7_1005afce",
       "range": {
         "startLine": 40,
         "startChar": 8,
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "908bd987_0a70868c",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-28T13:28:29Z",
+      "side": 1,
+      "message": "We only need the subscription name here as we get the administrative state from the db. I don\u0027t think there is any purpose to pass in the subscription object.",
+      "parentUuid": "b3571eaa_cfd14dad",
+      "range": {
+        "startLine": 51,
+        "startChar": 64,
+        "endLine": 51,
+        "endChar": 84
+      },
+      "revId": "a98876854a7510bd63f469d2499296a356cc4144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9faf5ba7_abb7aa7a",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 1
@@ -116,6 +224,30 @@
       "writtenOn": "2020-02-27T23:05:24Z",
       "side": 1,
       "message": "Wrong method call. \"poll_policy_topic\"",
+      "range": {
+        "startLine": 54,
+        "startChar": 81,
+        "endLine": 54,
+        "endChar": 88
+      },
+      "revId": "a98876854a7510bd63f469d2499296a356cc4144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75f803c9_d0da7fc7",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-02-28T13:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9faf5ba7_abb7aa7a",
       "range": {
         "startLine": 54,
         "startChar": 81,
