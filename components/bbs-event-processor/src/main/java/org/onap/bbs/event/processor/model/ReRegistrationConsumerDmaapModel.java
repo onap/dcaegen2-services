@@ -24,12 +24,10 @@ import com.google.gson.annotations.SerializedName;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
-import org.onap.dcaegen2.services.sdk.rest.services.model.AaiModel;
-import org.onap.dcaegen2.services.sdk.rest.services.model.DmaapModel;
 
 @Value.Immutable
 @Gson.TypeAdapters(fieldNamingStrategy = true)
-public interface ReRegistrationConsumerDmaapModel extends AaiModel, DmaapModel {
+public interface ReRegistrationConsumerDmaapModel {
 
     @SerializedName(value = "correlationId", alternate = "correlationId")
     String getCorrelationId();

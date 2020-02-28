@@ -21,24 +21,23 @@
 package org.onap.bbs.event.processor.utilities;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.TypeAdapterFactory;
 
 import java.util.ServiceLoader;
 
 import org.onap.bbs.event.processor.model.ControlLoopPublisherDmaapModel;
 import org.onap.bbs.event.processor.model.ImmutableControlLoopPublisherDmaapModel;
-import org.onap.dcaegen2.services.sdk.rest.services.model.JsonBodyBuilder;
 
-public class ControlLoopJsonBodyBuilder implements JsonBodyBuilder<ControlLoopPublisherDmaapModel> {
+public class ControlLoopJsonBodyBuilder {
 
     /**
      * Serialize the Control Loop DMaaP model with GSON.
      * @param publisherDmaapModel object to be serialized
      * @return String output of serialization
      */
-    @Override
     public String createJsonBody(ControlLoopPublisherDmaapModel publisherDmaapModel) {
-        GsonBuilder gsonBuilder = new GsonBuilder().disableHtmlEscaping();
+        var gsonBuilder = new GsonBuilder().disableHtmlEscaping();
         ServiceLoader.load(TypeAdapterFactory.class).forEach(gsonBuilder::registerTypeAdapterFactory);
         return gsonBuilder.create().toJson(ImmutableControlLoopPublisherDmaapModel.builder()
                 .closedLoopEventClient(publisherDmaapModel.getClosedLoopEventClient())
@@ -56,4 +55,30 @@ public class ControlLoopJsonBodyBuilder implements JsonBodyBuilder<ControlLoopPu
                 .originator(publisherDmaapModel.getOriginator())
                 .build());
     }
+
+    /**
+     * Serialize the Control Loop DMaaP model with GSON.
+     * @param publisherDmaapModel object to be serialized
+     * @return String output of serialization
+     */
+    public static JsonElement createAsJsonElement(ControlLoopPublisherDmaapModel publisherDmaapModel) {
+        var gsonBuilder = new GsonBuilder().disableHtmlEscaping();
+        ServiceLoader.load(TypeAdapterFactory.class).forEach(gsonBuilder::registerTypeAdapterFactory);
+        return gsonBuilder.create().toJsonTree(ImmutableControlLoopPublisherDmaapModel.builder()
+                .closedLoopEventClient(publisherDmaapModel.getClosedLoopEventClient())
+                .policyVersion(publisherDmaapModel.getPolicyVersion())
+                .policyName(publisherDmaapModel.getPolicyName())
+                .policyScope(publisherDmaapModel.getPolicyScope())
+                .targetType(publisherDmaapModel.getTargetType())
+                .aaiEnrichmentData(publisherDmaapModel.getAaiEnrichmentData())
+                .closedLoopAlarmStart(publisherDmaapModel.getClosedLoopAlarmStart())
+                .closedLoopEventStatus(publisherDmaapModel.getClosedLoopEventStatus())
+                .closedLoopControlName(publisherDmaapModel.getClosedLoopControlName())
+                .version(publisherDmaapModel.getVersion())
+                .target(publisherDmaapModel.getTarget())
+                .requestId(publisherDmaapModel.getRequestId())
+                .originator(publisherDmaapModel.getOriginator())
+                .build());
+    }
+
 }

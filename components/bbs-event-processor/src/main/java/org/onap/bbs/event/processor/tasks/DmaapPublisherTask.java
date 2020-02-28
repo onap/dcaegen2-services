@@ -21,11 +21,11 @@
 package org.onap.bbs.event.processor.tasks;
 
 import org.onap.bbs.event.processor.model.ControlLoopPublisherDmaapModel;
-import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
 
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 public interface DmaapPublisherTask {
 
-    Mono<HttpResponse> execute(ControlLoopPublisherDmaapModel controlLoopPublisherDmaapModel);
+    Flux<MessageRouterPublishResponse> execute(ControlLoopPublisherDmaapModel controlLoopPublisherDmaapModel);
 }

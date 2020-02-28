@@ -20,7 +20,7 @@
 
 package org.onap.bbs.event.processor.utilities;
 
-public class CommonEventFields {
+class CommonEventFields {
 
     static final String COMMON_FORMAT = "\": \"%s\"";
     static final String EVENT = "event";

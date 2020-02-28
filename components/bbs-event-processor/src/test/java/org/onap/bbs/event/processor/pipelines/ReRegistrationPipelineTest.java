@@ -20,7 +20,7 @@
 
 package org.onap.bbs.event.processor.pipelines;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
@@ -64,8 +64,7 @@ import org.onap.bbs.event.processor.model.ServiceInstanceAaiObject;
 import org.onap.bbs.event.processor.tasks.AaiClientTask;
 import org.onap.bbs.event.processor.tasks.DmaapPublisherTask;
 import org.onap.bbs.event.processor.tasks.DmaapReRegistrationConsumerTask;
-import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
-import org.springframework.http.HttpStatus;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -80,12 +79,12 @@ class ReRegistrationPipelineTest {
     private DmaapPublisherTask publisherTask;
     private AaiClientTask aaiClientTask;
 
-    private HttpResponse httpResponse;
+    private MessageRouterPublishResponse publishResponse;
 
     @BeforeEach
     void setup() {
 
-        httpResponse = Mockito.mock(HttpResponse.class);
+        publishResponse = Mockito.mock(MessageRouterPublishResponse.class);
 
         configuration = Mockito.mock(ApplicationConfiguration.class);
         consumerTask = Mockito.mock(DmaapReRegistrationConsumerTask.class);
@@ -148,11 +147,11 @@ class ReRegistrationPipelineTest {
     @Test
     void noResponseFromAai_PipelineTimesOut() throws SSLException {
 
-        String pnfName = "olt1";
-        String attachmentPoint = "olt2-2-2";
-        String remoteId = "newRemoteId";
-        String cvlan = "1005";
-        String svlan = "100";
+        var pnfName = "olt1";
+        var attachmentPoint = "olt2-2-2";
+        var remoteId = "newRemoteId";
+        var cvlan = "1005";
+        var svlan = "100";
 
         // Prepare stubbed replies
         ReRegistrationConsumerDmaapModel event = ImmutableReRegistrationConsumerDmaapModel.builder()
@@ -179,12 +178,12 @@ class ReRegistrationPipelineTest {
     @Test
     void noResponseWhilePublishing_PipelineTimesOut() throws SSLException {
 
-        String pnfName = "olt1";
-        String attachmentPoint = "olt2-2-2";
-        String remoteId = "newRemoteId";
-        String cvlan = "1005";
-        String svlan = "100";
-        String hsiCfsServiceInstanceId = UUID.randomUUID().toString();
+        var pnfName = "olt1";
+        var attachmentPoint = "olt2-2-2";
+        var remoteId = "newRemoteId";
+        var cvlan = "1005";
+        var svlan = "100";
+        var hsiCfsServiceInstanceId = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         ReRegistrationConsumerDmaapModel event = ImmutableReRegistrationConsumerDmaapModel.builder()
@@ -195,12 +194,11 @@ class ReRegistrationPipelineTest {
                 .sVlan(svlan)
                 .build();
 
-        PnfAaiObject pnfAaiObject = constructPnfObject(pnfName, "olt1-1-1", hsiCfsServiceInstanceId);
-        ServiceInstanceAaiObject hsiCfsServiceInstance =
-                constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName, cvlan);
+        var pnfAaiObject = constructPnfObject(pnfName, "olt1-1-1", hsiCfsServiceInstanceId);
+        var hsiCfsServiceInstance = constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName, cvlan);
 
         // Prepare Mocks
-        String cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(1);
@@ -213,7 +211,7 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.never());
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.never());
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
@@ -226,12 +224,12 @@ class ReRegistrationPipelineTest {
     @Test
     void singleCorrectEvent_PnfHavingNoLogicalLink_handleGracefully() throws SSLException {
 
-        String pnfName = "olt1";
-        String attachmentPoint = "olt2-2-2";
-        String remoteId = "newRemoteId";
-        String cvlan = "1005";
-        String svlan = "100";
-        String hsiCfsServiceInstanceId = UUID.randomUUID().toString();
+        var pnfName = "olt1";
+        var attachmentPoint = "olt2-2-2";
+        var remoteId = "newRemoteId";
+        var cvlan = "1005";
+        var svlan = "100";
+        var hsiCfsServiceInstanceId = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         ReRegistrationConsumerDmaapModel event = ImmutableReRegistrationConsumerDmaapModel.builder()
@@ -242,12 +240,12 @@ class ReRegistrationPipelineTest {
                 .sVlan(svlan)
                 .build();
 
-        PnfAaiObject pnfAaiObject = constructPnfObjectWithoutLogicalLink(pnfName, hsiCfsServiceInstanceId);
-        ServiceInstanceAaiObject hsiCfsServiceInstance =
+        var pnfAaiObject = constructPnfObjectWithoutLogicalLink(pnfName, hsiCfsServiceInstanceId);
+        var hsiCfsServiceInstance =
                 constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName, cvlan);
 
         // Prepare Mocks
-        String cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
@@ -260,8 +258,8 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
+        when(publishResponse.successful()).thenReturn(true);
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.just(publishResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
@@ -276,12 +274,12 @@ class ReRegistrationPipelineTest {
     @Test
     void singleCorrectEvent_handleSuccessfully() throws SSLException {
 
-        String pnfName = "olt1";
-        String attachmentPoint = "olt2-2-2";
-        String remoteId = "newRemoteId";
-        String cvlan = "1005";
-        String svlan = "100";
-        String hsiCfsServiceInstanceId = UUID.randomUUID().toString();
+        var pnfName = "olt1";
+        var attachmentPoint = "olt2-2-2";
+        var remoteId = "newRemoteId";
+        var cvlan = "1005";
+        var svlan = "100";
+        var hsiCfsServiceInstanceId = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         ReRegistrationConsumerDmaapModel event = ImmutableReRegistrationConsumerDmaapModel.builder()
@@ -292,12 +290,11 @@ class ReRegistrationPipelineTest {
                 .sVlan(svlan)
                 .build();
 
-        PnfAaiObject pnfAaiObject = constructPnfObject(pnfName, "old-attachment-point", hsiCfsServiceInstanceId);
-        ServiceInstanceAaiObject hsiCfsServiceInstance =
-                constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName, cvlan);
+        var pnfAaiObject = constructPnfObject(pnfName, "old-attachment-point", hsiCfsServiceInstanceId);
+        var hsiCfsServiceInstance = constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName, cvlan);
 
         // Prepare Mocks
-        String cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
@@ -310,13 +307,13 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
+        when(publishResponse.successful()).thenReturn(true);
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.just(publishResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
+                .assertNext(r -> assertTrue(r.successful()))
                 .verifyComplete();
 
         verify(publisherTask).execute(any(ControlLoopPublisherDmaapModel.class));
@@ -325,17 +322,17 @@ class ReRegistrationPipelineTest {
     @Test
     void twoCorrectEvents_handleSuccessfully() throws SSLException {
 
-        String pnfName1 = "olt1";
-        String pnfName2 = "olt2";
-        String attachmentPoint1 = "olt1-1-1";
-        String attachmentPoint2 = "olt2-2-2";
-        String remoteId1 = "newRemoteId1";
-        String remoteId2 = "newRemoteId2";
-        String cvlan1 = "1005";
-        String cvlan2 = "1006";
-        String svlan = "100";
-        String hsiCfsServiceInstanceId1 = UUID.randomUUID().toString();
-        String hsiCfsServiceInstanceId2 = UUID.randomUUID().toString();
+        var pnfName1 = "olt1";
+        var pnfName2 = "olt2";
+        var attachmentPoint1 = "olt1-1-1";
+        var attachmentPoint2 = "olt2-2-2";
+        var remoteId1 = "newRemoteId1";
+        var remoteId2 = "newRemoteId2";
+        var cvlan1 = "1005";
+        var cvlan2 = "1006";
+        var svlan = "100";
+        var hsiCfsServiceInstanceId1 = UUID.randomUUID().toString();
+        var hsiCfsServiceInstanceId2 = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         ReRegistrationConsumerDmaapModel firstEvent = ImmutableReRegistrationConsumerDmaapModel.builder()
@@ -353,19 +350,17 @@ class ReRegistrationPipelineTest {
                 .sVlan(svlan)
                 .build();
 
-        PnfAaiObject pnfAaiObject1 = constructPnfObject(pnfName1, "olt1-1-0", hsiCfsServiceInstanceId1);
-        PnfAaiObject pnfAaiObject2 = constructPnfObject(pnfName2, "olt2-2-0", hsiCfsServiceInstanceId2);
-        ServiceInstanceAaiObject hsiCfsServiceInstance1 =
-                constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId1, pnfName1, cvlan1);
-        ServiceInstanceAaiObject hsiCfsServiceInstance2 =
-                constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId2, pnfName2, cvlan2);
+        var pnfAaiObject1 = constructPnfObject(pnfName1, "olt1-1-0", hsiCfsServiceInstanceId1);
+        var pnfAaiObject2 = constructPnfObject(pnfName2, "olt2-2-0", hsiCfsServiceInstanceId2);
+        var hsiCfsServiceInstance1 = constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId1, pnfName1, cvlan1);
+        var hsiCfsServiceInstance2 = constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId2, pnfName2, cvlan2);
 
         // Prepare Mocks
-        String pnfUrl1 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName1);
-        String pnfUrl2 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName2);
-        String cfsUrl1 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var pnfUrl1 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName1);
+        var pnfUrl2 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName2);
+        var cfsUrl1 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance1.getServiceInstanceId());
-        String cfsUrl2 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl2 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance2.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
@@ -382,14 +377,14 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl2))
                 .thenReturn(Mono.just(hsiCfsServiceInstance2));
 
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
+        when(publishResponse.successful()).thenReturn(true);
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.just(publishResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
+                .assertNext(r -> assertTrue(r.successful()))
+                .assertNext(r -> assertTrue(r.successful()))
                 .verifyComplete();
 
         verify(publisherTask, times(2)).execute(any(ControlLoopPublisherDmaapModel.class));
@@ -398,11 +393,11 @@ class ReRegistrationPipelineTest {
     @Test
     void singleEvent_withPnfErrorReply_handleGracefully() throws SSLException {
 
-        String pnfName = "olt1";
-        String attachmentPoint = "olt2-2-2";
-        String remoteId = "newRemoteId";
-        String cvlan = "1005";
-        String svlan = "100";
+        var pnfName = "olt1";
+        var attachmentPoint = "olt2-2-2";
+        var remoteId = "newRemoteId";
+        var cvlan = "1005";
+        var svlan = "100";
 
         // Prepare stubbed replies
         ReRegistrationConsumerDmaapModel event = ImmutableReRegistrationConsumerDmaapModel.builder()
@@ -432,17 +427,17 @@ class ReRegistrationPipelineTest {
     @Test
     void twoEvents_FirstOk_SecondNotRelocation_handleCorrectOnly() throws SSLException {
 
-        String pnfName1 = "olt1";
-        String pnfName2 = "olt2";
-        String attachmentPoint1 = "olt1-1-1";
-        String attachmentPoint2 = "olt2-2-2";
-        String remoteId1 = "newRemoteId1";
-        String remoteId2 = "newRemoteId2";
-        String cvlan1 = "1005";
-        String cvlan2 = "1006";
-        String svlan = "100";
-        String hsiCfsServiceInstanceId1 = UUID.randomUUID().toString();
-        String hsiCfsServiceInstanceId2 = UUID.randomUUID().toString();
+        var pnfName1 = "olt1";
+        var pnfName2 = "olt2";
+        var attachmentPoint1 = "olt1-1-1";
+        var attachmentPoint2 = "olt2-2-2";
+        var remoteId1 = "newRemoteId1";
+        var remoteId2 = "newRemoteId2";
+        var cvlan1 = "1005";
+        var cvlan2 = "1006";
+        var svlan = "100";
+        var hsiCfsServiceInstanceId1 = UUID.randomUUID().toString();
+        var hsiCfsServiceInstanceId2 = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         ReRegistrationConsumerDmaapModel firstEvent = ImmutableReRegistrationConsumerDmaapModel.builder()
@@ -460,19 +455,17 @@ class ReRegistrationPipelineTest {
                 .sVlan(svlan)
                 .build();
 
-        PnfAaiObject pnfAaiObject1 = constructPnfObject(pnfName1, "olt1-1-0", hsiCfsServiceInstanceId1);
-        PnfAaiObject pnfAaiObject2 = constructPnfObject(pnfName2, attachmentPoint2, hsiCfsServiceInstanceId2);
-        ServiceInstanceAaiObject hsiCfsServiceInstance1 =
-                constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId1, pnfName1, cvlan1);
-        ServiceInstanceAaiObject hsiCfsServiceInstance2 =
-                constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId2, pnfName2, cvlan2);
+        var pnfAaiObject1 = constructPnfObject(pnfName1, "olt1-1-0", hsiCfsServiceInstanceId1);
+        var pnfAaiObject2 = constructPnfObject(pnfName2, attachmentPoint2, hsiCfsServiceInstanceId2);
+        var hsiCfsServiceInstance1 = constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId1, pnfName1, cvlan1);
+        var hsiCfsServiceInstance2 = constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId2, pnfName2, cvlan2);
 
         // Prepare Mocks
-        String pnfUrl1 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName1);
-        String pnfUrl2 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName2);
-        String cfsUrl1 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var pnfUrl1 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName1);
+        var pnfUrl2 = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName2);
+        var cfsUrl1 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance1.getServiceInstanceId());
-        String cfsUrl2 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl2 = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance2.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
@@ -489,13 +482,13 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl2))
                 .thenReturn(Mono.just(hsiCfsServiceInstance2));
 
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
+        when(publishResponse.successful()).thenReturn(true);
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.just(publishResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
+                .assertNext(r -> assertTrue(r.successful()))
                 .verifyComplete();
 
         verify(publisherTask).execute(any(ControlLoopPublisherDmaapModel.class));
@@ -504,16 +497,16 @@ class ReRegistrationPipelineTest {
     @Test
     void twoEvents_firstOk_secondWithPnfErrorReply_handleCorrectOnly() throws SSLException {
 
-        String pnfName1 = "olt1";
-        String pnfName2 = "olt2";
-        String attachmentPoint1 = "olt1-1-1";
-        String attachmentPoint2 = "olt2-2-2";
-        String remoteId1 = "newRemoteId1";
-        String remoteId2 = "newRemoteId2";
-        String cvlan1 = "1005";
-        String cvlan2 = "1006";
-        String svlan = "100";
-        String hsiCfsServiceInstanceId = UUID.randomUUID().toString();
+        var pnfName1 = "olt1";
+        var pnfName2 = "olt2";
+        var attachmentPoint1 = "olt1-1-1";
+        var attachmentPoint2 = "olt2-2-2";
+        var remoteId1 = "newRemoteId1";
+        var remoteId2 = "newRemoteId2";
+        var cvlan1 = "1005";
+        var cvlan2 = "1006";
+        var svlan = "100";
+        var hsiCfsServiceInstanceId = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         ReRegistrationConsumerDmaapModel firstEvent = ImmutableReRegistrationConsumerDmaapModel.builder()
@@ -531,12 +524,11 @@ class ReRegistrationPipelineTest {
                 .sVlan(svlan)
                 .build();
 
-        PnfAaiObject pnfAaiObject = constructPnfObject(pnfName1, "old-attachment-point", hsiCfsServiceInstanceId);
-        ServiceInstanceAaiObject hsiCfsServiceInstance =
-                constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName1, cvlan1);
+        var pnfAaiObject = constructPnfObject(pnfName1, "old-attachment-point", hsiCfsServiceInstanceId);
+        var hsiCfsServiceInstance = constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName1, cvlan1);
 
         // Prepare Mocks
-        String cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
@@ -549,13 +541,13 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
+        when(publishResponse.successful()).thenReturn(true);
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.just(publishResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
+                .assertNext(r -> assertTrue(r.successful()))
                 .verifyComplete();
 
         verify(aaiClientTask, times(2)).executePnfRetrieval(anyString(), anyString());
@@ -566,16 +558,16 @@ class ReRegistrationPipelineTest {
     @Test
     void twoEvents_firstWithPnfErrorReply_secondOk_handleCorrectOnly() throws SSLException {
 
-        String pnfName1 = "olt1";
-        String pnfName2 = "olt2";
-        String attachmentPoint1 = "olt1-1-1";
-        String attachmentPoint2 = "olt2-2-2";
-        String remoteId1 = "newRemoteId1";
-        String remoteId2 = "newRemoteId2";
-        String cvlan1 = "1005";
-        String cvlan2 = "1006";
-        String svlan = "100";
-        String hsiCfsServiceInstanceId = UUID.randomUUID().toString();
+        var pnfName1 = "olt1";
+        var pnfName2 = "olt2";
+        var attachmentPoint1 = "olt1-1-1";
+        var attachmentPoint2 = "olt2-2-2";
+        var remoteId1 = "newRemoteId1";
+        var remoteId2 = "newRemoteId2";
+        var cvlan1 = "1005";
+        var cvlan2 = "1006";
+        var svlan = "100";
+        var hsiCfsServiceInstanceId = UUID.randomUUID().toString();
 
         // Prepare stubbed replies
         ReRegistrationConsumerDmaapModel firstEvent = ImmutableReRegistrationConsumerDmaapModel.builder()
@@ -593,12 +585,11 @@ class ReRegistrationPipelineTest {
                 .sVlan(svlan)
                 .build();
 
-        PnfAaiObject pnfAaiObject = constructPnfObject(pnfName2, "old-attachment-point", hsiCfsServiceInstanceId);
-        ServiceInstanceAaiObject hsiCfsServiceInstance =
-                constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName2, cvlan2);
+        var pnfAaiObject = constructPnfObject(pnfName2, "old-attachment-point", hsiCfsServiceInstanceId);
+        var hsiCfsServiceInstance = constructHsiCfsServiceInstanceObject(hsiCfsServiceInstanceId, pnfName2, cvlan2);
 
         // Prepare Mocks
-        String cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var cfsUrl = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 hsiCfsServiceInstance.getServiceInstanceId());
 
         when(configuration.getPipelinesTimeoutInSeconds()).thenReturn(10);
@@ -611,13 +602,13 @@ class ReRegistrationPipelineTest {
                 .executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, cfsUrl))
                 .thenReturn(Mono.just(hsiCfsServiceInstance));
 
-        when(httpResponse.statusCode()).thenReturn(HttpStatus.OK.value());
-        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Mono.just(httpResponse));
+        when(publishResponse.successful()).thenReturn(true);
+        when(publisherTask.execute(any(ControlLoopPublisherDmaapModel.class))).thenReturn(Flux.just(publishResponse));
 
         // Execute the pipeline
         StepVerifier.create(pipeline.executePipeline())
                 .expectSubscription()
-                .assertNext(r -> assertEquals(HttpStatus.OK.value(), r.statusCode()))
+                .assertNext(r -> assertTrue(r.successful()))
                 .verifyComplete();
 
         verify(aaiClientTask, times(2))
@@ -719,7 +710,7 @@ class ReRegistrationPipelineTest {
     private ServiceInstanceAaiObject constructHsiCfsServiceInstanceObject(String hsiCfsServiceInstanceId,
                                                                              String pnfName,
                                                                              String cvlan) {
-        String orchestrationStatus = "active";
+        var orchestrationStatus = "active";
 
         RelationshipListAaiObject.RelationshipEntryAaiObject relationshipEntry =
                 ImmutableRelationshipEntryAaiObject.builder()

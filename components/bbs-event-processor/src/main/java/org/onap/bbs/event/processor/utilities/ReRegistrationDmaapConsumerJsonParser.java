@@ -41,11 +41,13 @@ import org.onap.bbs.event.processor.model.ImmutableReRegistrationConsumerDmaapMo
 import org.onap.bbs.event.processor.model.ReRegistrationConsumerDmaapModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Component
 public class ReRegistrationDmaapConsumerJsonParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ReRegistrationDmaapConsumerJsonParser.class);
@@ -101,7 +103,7 @@ public class ReRegistrationDmaapConsumerJsonParser {
             return Mono.empty();
         }
 
-        JsonObject pnfReRegistrationFields =
+        var pnfReRegistrationFields =
                 dmaapResponseJsonObject.getAsJsonObject(ADDITIONAL_FIELDS);
 
         pnfCorrelationId = getValueFromJson(dmaapResponseJsonObject, CORRELATION_ID);
@@ -112,7 +114,7 @@ public class ReRegistrationDmaapConsumerJsonParser {
         svlan = getValueFromJson(pnfReRegistrationFields, SVLAN);
 
         if (StringUtils.isEmpty(pnfCorrelationId) || anyImportantPropertyMissing()) {
-            String incorrectEvent = dumpJsonData();
+            var incorrectEvent = dumpJsonData();
             LOGGER.warn("Incorrect Re-Registration JSON event: {}", incorrectEvent);
             return Mono.empty();
         }
@@ -148,7 +150,7 @@ public class ReRegistrationDmaapConsumerJsonParser {
     }
 
     Optional<JsonObject> getJsonObjectFromAnArray(JsonElement element) {
-        JsonParser jsonParser = new JsonParser();
+        var jsonParser = new JsonParser();
         return element.isJsonPrimitive() ? Optional.of(jsonParser.parse(element.getAsString()).getAsJsonObject())
                 : Optional.of(jsonParser.parse(element.toString()).getAsJsonObject());
     }

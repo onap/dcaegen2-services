@@ -50,9 +50,9 @@ class SchedulerTest {
     SchedulerTest() {
         configuration = Mockito.mock(ApplicationConfiguration.class);
         taskScheduler = Mockito.mock(TaskScheduler.class);
-        ReRegistrationPipeline reRegistrationPipeline = Mockito.mock(ReRegistrationPipeline.class);
-        CpeAuthenticationPipeline cpeAuthenticationPipeline = Mockito.mock(CpeAuthenticationPipeline.class);
-        ConsulConfigurationGateway configurationGateway = Mockito.mock(ConsulConfigurationGateway.class);
+        var reRegistrationPipeline = Mockito.mock(ReRegistrationPipeline.class);
+        var cpeAuthenticationPipeline = Mockito.mock(CpeAuthenticationPipeline.class);
+        var configurationGateway = Mockito.mock(ConsulConfigurationGateway.class);
         this.applicationScheduler = new Scheduler(configuration, configurationGateway, taskScheduler,
                 reRegistrationPipeline, cpeAuthenticationPipeline);
     }
@@ -60,7 +60,7 @@ class SchedulerTest {
     @Test
     void scheduleTasksWithValidSchedulingPeriod_Succeeds() {
         when(configuration.getPipelinesPollingIntervalInSeconds()).thenReturn(20);
-        ScheduledFuture scheduledFuture = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture = Mockito.mock(ScheduledFuture.class);
         when(taskScheduler.scheduleAtFixedRate(any(Runnable.class), any(Instant.class), any(Duration.class)))
                .thenReturn(scheduledFuture);
 
@@ -75,8 +75,8 @@ class SchedulerTest {
     @Test
     void cancellingRunningTasksSucceeds_tasksAreDeleted() {
         when(configuration.getPipelinesPollingIntervalInSeconds()).thenReturn(20);
-        ScheduledFuture scheduledFuture1 = Mockito.mock(ScheduledFuture.class);
-        ScheduledFuture scheduledFuture2 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture1 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture2 = Mockito.mock(ScheduledFuture.class);
         when(scheduledFuture1.cancel(false)).thenReturn(true);
         when(scheduledFuture2.cancel(false)).thenReturn(true);
         when(scheduledFuture1.isCancelled()).thenReturn(true);
@@ -85,7 +85,7 @@ class SchedulerTest {
                 .thenReturn(scheduledFuture1).thenReturn(scheduledFuture2);
 
         applicationScheduler.setupScheduler();
-        boolean result = applicationScheduler.cancelScheduledProcessingTasks();
+        var result = applicationScheduler.cancelScheduledProcessingTasks();
         assertAll("Successfully cancelling tasks",
             () -> assertTrue(result, "Result of cancellation task"),
             () -> assertEquals(0, applicationScheduler.numberOfTotalTasks(), "Total tasks"),
@@ -97,8 +97,8 @@ class SchedulerTest {
     @Test
     void cancellingRunningTasksPartiallyFailing_tasksAreNotDeleted() {
         when(configuration.getPipelinesPollingIntervalInSeconds()).thenReturn(20);
-        ScheduledFuture scheduledFuture1 = Mockito.mock(ScheduledFuture.class);
-        ScheduledFuture scheduledFuture2 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture1 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture2 = Mockito.mock(ScheduledFuture.class);
         when(scheduledFuture1.cancel(false)).thenReturn(true);
         when(scheduledFuture2.cancel(false)).thenReturn(false);
         when(scheduledFuture1.isCancelled()).thenReturn(true);
@@ -107,7 +107,7 @@ class SchedulerTest {
                 .thenReturn(scheduledFuture1).thenReturn(scheduledFuture2);
 
         applicationScheduler.setupScheduler();
-        boolean result = applicationScheduler.cancelScheduledProcessingTasks();
+        var result = applicationScheduler.cancelScheduledProcessingTasks();
         assertAll("Partially cancelling tasks",
             () -> assertFalse(result, "Result of cancellation task"),
             () -> assertEquals(1, applicationScheduler.numberOfTotalTasks(), "Total tasks"),
@@ -119,8 +119,8 @@ class SchedulerTest {
     @Test
     void cancellingRunningTasksFailingForAllOfThem_noTasksAreDeleted() {
         when(configuration.getPipelinesPollingIntervalInSeconds()).thenReturn(20);
-        ScheduledFuture scheduledFuture1 = Mockito.mock(ScheduledFuture.class);
-        ScheduledFuture scheduledFuture2 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture1 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture2 = Mockito.mock(ScheduledFuture.class);
         when(scheduledFuture1.cancel(false)).thenReturn(false);
         when(scheduledFuture2.cancel(false)).thenReturn(false);
         when(scheduledFuture1.isCancelled()).thenReturn(false);
@@ -129,7 +129,7 @@ class SchedulerTest {
                 .thenReturn(scheduledFuture1).thenReturn(scheduledFuture2);
 
         applicationScheduler.setupScheduler();
-        boolean result = applicationScheduler.cancelScheduledProcessingTasks();
+        var result = applicationScheduler.cancelScheduledProcessingTasks();
         assertAll("Failing in cancelling tasks",
             () -> assertFalse(result, "Result of cancellation task"),
             () -> assertEquals(2, applicationScheduler.numberOfTotalTasks(), "Total tasks"),
@@ -141,15 +141,15 @@ class SchedulerTest {
     @Test
     void reSchedulingWithExistingActiveTasks_Fails() {
         when(configuration.getPipelinesPollingIntervalInSeconds()).thenReturn(20);
-        ScheduledFuture scheduledFuture1 = Mockito.mock(ScheduledFuture.class);
-        ScheduledFuture scheduledFuture2 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture1 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture2 = Mockito.mock(ScheduledFuture.class);
         when(scheduledFuture1.isCancelled()).thenReturn(false);
         when(scheduledFuture2.isCancelled()).thenReturn(false);
         when(taskScheduler.scheduleAtFixedRate(any(Runnable.class), any(Instant.class), any(Duration.class)))
                 .thenReturn(scheduledFuture1).thenReturn(scheduledFuture2);
 
         applicationScheduler.setupScheduler();
-        boolean result = applicationScheduler.reScheduleProcessingTasks();
+        var result = applicationScheduler.reScheduleProcessingTasks();
         assertAll("Rescheduling with active tasks",
             () -> assertFalse(result, "Result of re-scheduling"),
             () -> assertEquals(2, applicationScheduler.numberOfTotalTasks(), "Total tasks"),
@@ -162,11 +162,11 @@ class SchedulerTest {
     void reSchedulingWithExistingCancelledTasks_Succeeds() {
         when(configuration.getPipelinesPollingIntervalInSeconds()).thenReturn(20);
         // Initial tasks
-        ScheduledFuture scheduledFuture1 = Mockito.mock(ScheduledFuture.class);
-        ScheduledFuture scheduledFuture2 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture1 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture2 = Mockito.mock(ScheduledFuture.class);
         // Re-scheduled tasks
-        ScheduledFuture scheduledFuture3 = Mockito.mock(ScheduledFuture.class);
-        ScheduledFuture scheduledFuture4 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture3 = Mockito.mock(ScheduledFuture.class);
+        var scheduledFuture4 = Mockito.mock(ScheduledFuture.class);
         when(scheduledFuture1.isCancelled()).thenReturn(true);
         when(scheduledFuture2.isCancelled()).thenReturn(true);
         when(scheduledFuture3.isCancelled()).thenReturn(false);
@@ -178,7 +178,7 @@ class SchedulerTest {
                 .thenReturn(scheduledFuture4);
 
         applicationScheduler.setupScheduler();
-        boolean result = applicationScheduler.reScheduleProcessingTasks();
+        var result = applicationScheduler.reScheduleProcessingTasks();
         assertAll("Rescheduling with cancelled tasks",
             () -> assertTrue(result, "Result of re-scheduling"),
             () -> assertEquals(2, applicationScheduler.numberOfTotalTasks(), "Total tasks"),

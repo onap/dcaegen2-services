@@ -12,7 +12,7 @@
 
     <groupId>org.onap.dcaegen2.services.components</groupId>
     <artifactId>bbs-event-processor</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
 
     <name>dcaegen2-services-bbs-event-processor</name>
     <description>BBS Re-Registration and CPE Authentication Handler</description>
@@ -26,25 +26,21 @@
     </licenses>
 
     <properties>
-        <java.version>8</java.version>
-        <immutables.version>2.7.5</immutables.version>
-        <spring-boot.version>2.1.3.RELEASE</spring-boot.version>
-        <tomcat.version>8.5.32</tomcat.version>
-        <slf4j.version>1.7.25</slf4j.version>
+        <java.version>11</java.version>
+        <immutables.version>2.8.3</immutables.version>
+        <spring-boot.version>2.1.12.RELEASE</spring-boot.version>
         <junit-platform.version>1.1.0</junit-platform.version>
         <jacoco.version>0.8.2</jacoco.version>
-        <dcae.sdk.version>1.1.4</dcae.sdk.version>
-        <wiremock.version>2.21.0</wiremock.version>
-        <springfox-swagger.version>2.8.0</springfox-swagger.version>
+        <dcae.sdk.version>1.3.4</dcae.sdk.version>
+        <wiremock.version>2.24.0</wiremock.version>
+        <jaxb.api.version>2.3.0</jaxb.api.version>
+        <springfox-swagger.version>2.9.2</springfox-swagger.version>
         <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
         <bbs-event-processor.main.class>org.onap.bbs.event.processor.Application</bbs-event-processor.main.class>
         <dependency.dir.name>libs</dependency.dir.name>
         <dependency.dir.location>${project.build.directory}/${dependency.dir.name}</dependency.dir.location>
         <docker.image.name>onap/${project.groupId}.${project.artifactId}</docker.image.name>
         <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
-	<sonar.coverage.jacoco.xmlReportPaths>
-	  ${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
-	</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <dependencyManagement>
@@ -61,7 +57,7 @@
             </dependency>
             <dependency>
                 <groupId>org.onap.dcaegen2.services.sdk.rest.services</groupId>
-                <artifactId>common-dependency</artifactId>
+                <artifactId>http-client</artifactId>
                 <version>${dcae.sdk.version}</version>
             </dependency>
             <dependency>
@@ -96,6 +92,11 @@
                 <artifactId>wiremock-jre8</artifactId>
                 <version>${wiremock.version}</version>
             </dependency>
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>${jaxb.api.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -110,7 +111,7 @@
         </dependency>
         <dependency>
             <groupId>org.onap.dcaegen2.services.sdk.rest.services</groupId>
-            <artifactId>common-dependency</artifactId>
+            <artifactId>http-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -168,6 +169,10 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.tomakehurst</groupId>
@@ -337,14 +342,14 @@
                 <executions>
                     <execution>
                         <id>build-bbs-event-processor-image</id>
-                        <phase>deploy</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>tag-and-push-image-latest</id>
-                        <phase>deploy</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>tag</goal>
                             <goal>push</goal>
@@ -357,7 +362,7 @@
                     </execution>
                     <execution>
                         <id>tag-and-push-image-with-version</id>
-                        <phase>deploy</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>tag</goal>
                             <goal>push</goal>
@@ -370,7 +375,7 @@
                     </execution>
                     <execution>
                         <id>tag-and-push-image-with-version-and-date</id>
-                        <phase>deploy</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>tag</goal>
                             <goal>push</goal>

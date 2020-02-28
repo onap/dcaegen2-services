@@ -25,12 +25,10 @@ import static org.onap.bbs.event.processor.config.ApplicationConstants.DCAE_BBS_
 import static org.onap.bbs.event.processor.config.ApplicationConstants.RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME;
 import static org.onap.bbs.event.processor.config.ApplicationConstants.RETRIEVE_PNF_TASK_NAME;
 import static org.onap.dcaegen2.services.sdk.rest.services.model.logging.MdcVariables.INSTANCE_UUID;
-import static org.onap.dcaegen2.services.sdk.rest.services.model.logging.MdcVariables.RESPONSE_CODE;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
@@ -48,7 +46,7 @@ import org.onap.bbs.event.processor.model.ServiceInstanceAaiObject;
 import org.onap.bbs.event.processor.tasks.AaiClientTask;
 import org.onap.bbs.event.processor.tasks.DmaapPublisherTask;
 import org.onap.bbs.event.processor.tasks.DmaapReRegistrationConsumerTask;
-import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -98,7 +96,7 @@ public class ReRegistrationPipeline {
         LOGGER.trace("Reactive PNF Re-registration pipeline subscribed - Execution started");
     }
 
-    Flux<HttpResponse> executePipeline() {
+    Flux<MessageRouterPublishResponse> executePipeline() {
         return
             // Consume Re-Registration from DMaaP
             consumeReRegistrationsFromDmaap()
@@ -110,12 +108,12 @@ public class ReRegistrationPipeline {
             .flatMap(this::triggerPolicy);
     }
 
-    private void onSuccess(HttpResponse responseCode) {
-        MDC.put(RESPONSE_CODE, String.valueOf(responseCode.statusCode()));
-        LOGGER.info("PNF Re-Registration event successfully handled. "
-                        + "Publishing to DMaaP for Policy returned a status code of ({} {})",
-                responseCode.statusCode(), responseCode.statusReason());
-        MDC.remove(RESPONSE_CODE);
+    private void onSuccess(MessageRouterPublishResponse response) {
+        if (response.successful()) {
+            LOGGER.info("PNF Re-Registration event successfully handled. Published Policy event to DMaaP");
+        } else {
+            LOGGER.error("PNF Re-Registration event handling error [{}]", response.failReason());
+        }
     }
 
     private void onError(Throwable throwable) {
@@ -148,7 +146,7 @@ public class ReRegistrationPipeline {
                         .map(event -> {
                             // For each message, we have to keep separate state. This state will be enhanced
                             // in each step and handed off to the next processing step
-                            PipelineState state = new PipelineState();
+                            var state = new PipelineState();
                             state.setReRegistrationEvent(event);
                             return state;
                         });
@@ -160,9 +158,9 @@ public class ReRegistrationPipeline {
 
     private Mono<PipelineState> fetchPnfFromAai(PipelineState state) {
 
-        ReRegistrationConsumerDmaapModel vesEvent = state.getReRegistrationEvent();
-        String pnfName = vesEvent.getCorrelationId();
-        String url = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName);
+        var vesEvent = state.getReRegistrationEvent();
+        var pnfName = vesEvent.getCorrelationId();
+        var url = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName);
         LOGGER.debug("Processing Step: Retrieve PNF. Url: ({})", url);
 
         return aaiClientTask.executePnfRetrieval(RETRIEVE_PNF_TASK_NAME, url)
@@ -196,10 +194,10 @@ public class ReRegistrationPipeline {
             return Mono.empty();
         }
 
-        PnfAaiObject pnf = state.getPnfAaiObject();
+        var pnf = state.getPnfAaiObject();
         // Assuming that the PNF will only have a single service-instance relationship pointing
         // towards the HSI CFS service
-        String serviceInstanceId = pnf.getRelationshipListAaiObject().getRelationshipEntries()
+        var serviceInstanceId = pnf.getRelationshipListAaiObject().getRelationshipEntries()
                 .stream()
                 .filter(e -> "service-instance".equals(e.getRelatedTo()))
                 .flatMap(e -> e.getRelationshipData().stream())
@@ -213,7 +211,7 @@ public class ReRegistrationPipeline {
             return Mono.empty();
         }
 
-        String url = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var url = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 serviceInstanceId);
         LOGGER.debug("Processing Step: Retrieve HSI CFS Service. Url: ({})", url);
         return aaiClientTask.executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, url)
@@ -236,8 +234,7 @@ public class ReRegistrationPipeline {
     }
 
     private boolean isNotReallyAnOntRelocation(PipelineState state) {
-        List<RelationshipListAaiObject.RelationshipEntryAaiObject> relationshipEntries =
-                state.getPnfAaiObject().getRelationshipListAaiObject().getRelationshipEntries();
+        var relationshipEntries = state.getPnfAaiObject().getRelationshipListAaiObject().getRelationshipEntries();
 
         // If no logical-link, fail further processing
         if (relationshipEntries.stream().noneMatch(e -> "logical-link".equals(e.getRelatedTo()))) {
@@ -247,7 +244,7 @@ public class ReRegistrationPipeline {
         }
 
         // Assuming PNF will only have one logical-link per BBS use case design
-        boolean isNotRelocation = relationshipEntries
+        var isNotRelocation = relationshipEntries
                 .stream()
                 .filter(e -> "logical-link".equals(e.getRelatedTo()))
                 .flatMap(e -> e.getRelationshipData().stream())
@@ -263,13 +260,13 @@ public class ReRegistrationPipeline {
         return isNotRelocation;
     }
 
-    private Mono<HttpResponse> triggerPolicy(PipelineState state) {
+    private Flux<MessageRouterPublishResponse> triggerPolicy(PipelineState state) {
 
         if (state == null || state.getHsiCfsServiceInstance() == null) {
-            return Mono.empty();
+            return Flux.empty();
         }
 
-        ControlLoopPublisherDmaapModel event = buildTriggeringPolicyEvent(state);
+        var event = buildTriggeringPolicyEvent(state);
         return publisherTask.execute(event)
                 .timeout(Duration.ofSeconds(configuration.getPipelinesTimeoutInSeconds()))
                 .doOnError(TimeoutException.class,
@@ -283,12 +280,12 @@ public class ReRegistrationPipeline {
 
     private ControlLoopPublisherDmaapModel buildTriggeringPolicyEvent(PipelineState state) {
 
-        String cfsServiceInstanceId = state.getHsiCfsServiceInstance().getServiceInstanceId();
+        var cfsServiceInstanceId = state.getHsiCfsServiceInstance().getServiceInstanceId();
 
-        String attachmentPoint = state.getReRegistrationEvent().getAttachmentPoint();
-        String remoteId = state.getReRegistrationEvent().getRemoteId();
-        String cvlan = state.getReRegistrationEvent().getCVlan();
-        String svlan = state.getReRegistrationEvent().getSVlan();
+        var attachmentPoint = state.getReRegistrationEvent().getAttachmentPoint();
+        var remoteId = state.getReRegistrationEvent().getRemoteId();
+        var cvlan = state.getReRegistrationEvent().getCVlan();
+        var svlan = state.getReRegistrationEvent().getSVlan();
 
         Map<String, String> enrichmentData = new HashMap<>();
         enrichmentData.put("service-information.hsia-cfs-service-instance-id", cfsServiceInstanceId);

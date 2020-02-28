@@ -64,7 +64,7 @@ class AaiClientTaskImplTest {
 
     @BeforeEach
     void init() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
+        var gsonBuilder = new GsonBuilder();
         ServiceLoader.load(TypeAdapterFactory.class).forEach(gsonBuilder::registerTypeAdapterFactory);
         reactiveClient = Mockito.mock(AaiReactiveClient.class);
         task = new AaiClientTaskImpl(reactiveClient);
@@ -73,7 +73,7 @@ class AaiClientTaskImplTest {
     @Test
     void passingEmptyPnfObject_NothingHappens() throws AaiTaskException {
         when(reactiveClient.getPnfObjectDataFor(any(String.class))).thenReturn(Mono.empty());
-        Mono<PnfAaiObject> pnf = task.executePnfRetrieval("Empty PNF task", "some-url");
+        var pnf = task.executePnfRetrieval("Empty PNF task", "some-url");
 
         verify(reactiveClient).getPnfObjectDataFor("some-url");
         assertNull(pnf.block(Duration.ofSeconds(5)));
@@ -82,7 +82,7 @@ class AaiClientTaskImplTest {
     @Test
     void passingEmptyServiceInstanceObject_NothingHappens() throws AaiTaskException {
         when(reactiveClient.getServiceInstanceObjectDataFor(any(String.class))).thenReturn(Mono.empty());
-        Mono<ServiceInstanceAaiObject> serviceInstance =
+        var serviceInstance =
                 task.executeServiceInstanceRetrieval("Empty Service Instance task", "some-url");
 
         verify(reactiveClient).getServiceInstanceObjectDataFor("some-url");
@@ -92,8 +92,8 @@ class AaiClientTaskImplTest {
     @Test
     void passingPnfObject_taskSucceeds() throws AaiTaskException {
 
-        String pnfName = "pnf-1";
-        String attachmentPoint = "olt1-1-1";
+        var pnfName = "pnf-1";
+        var attachmentPoint = "olt1-1-1";
 
         // Build Relationship Data
         RelationshipListAaiObject.RelationshipEntryAaiObject firstRelationshipEntry =
@@ -142,7 +142,7 @@ class AaiClientTaskImplTest {
                 .build();
 
         when(reactiveClient.getPnfObjectDataFor(any(String.class))).thenReturn(Mono.just(pnfAaiObject));
-        Mono<PnfAaiObject> pnf = task.executePnfRetrieval("Normal PNF retrieval task", "some-url");
+        var pnf = task.executePnfRetrieval("Normal PNF retrieval task", "some-url");
 
         verify(reactiveClient).getPnfObjectDataFor("some-url");
         assertNotNull(pnf.block(Duration.ofSeconds(5)));
@@ -151,7 +151,7 @@ class AaiClientTaskImplTest {
                 .expectSubscription()
                 .consumeNextWith(aPnf -> {
                     Assertions.assertEquals(pnfName, aPnf.getPnfName(), "PNF Name in response does not match");
-                    String extractedAttachmentPoint = aPnf.getRelationshipListAaiObject().getRelationshipEntries()
+                    var extractedAttachmentPoint = aPnf.getRelationshipListAaiObject().getRelationshipEntries()
                             .stream()
                             .filter(e -> e.getRelatedTo().equals("logical-link"))
                             .flatMap(e -> e.getRelationshipData().stream())
@@ -167,8 +167,8 @@ class AaiClientTaskImplTest {
     @Test
     void passingServiceInstanceObject_taskSucceeds() throws AaiTaskException {
 
-        String serviceInstanceId = "84003b26-6b76-4c75-b805-7b14ab4ffaef";
-        String orchestrationStatus = "active";
+        var serviceInstanceId = "84003b26-6b76-4c75-b805-7b14ab4ffaef";
+        var orchestrationStatus = "active";
 
         // Build Relationship Data
         RelationshipListAaiObject.RelationshipEntryAaiObject relationshipEntry =
@@ -207,7 +207,7 @@ class AaiClientTaskImplTest {
 
         when(reactiveClient.getServiceInstanceObjectDataFor(any(String.class)))
                 .thenReturn(Mono.just(serviceInstanceAaiObject));
-        Mono<ServiceInstanceAaiObject> serviceInstance =
+        var serviceInstance =
                 task.executeServiceInstanceRetrieval("Normal Service Instance retrieval task",
                         "some-url");
 
@@ -220,10 +220,10 @@ class AaiClientTaskImplTest {
                     Assertions.assertEquals(serviceInstanceId, instance.getServiceInstanceId(),
                             "Service Instance ID in response does not match");
 
-                    MetadataListAaiObject extractedMetadataListObject =
+                    var extractedMetadataListObject =
                             instance.getMetadataListAaiObject().orElseThrow(AaiClientTaskTestException::new);
 
-                    MetadataListAaiObject.MetadataEntryAaiObject extractedMetadataEntry =
+                    var extractedMetadataEntry =
                             extractedMetadataListObject.getMetadataEntries()
                                     .stream()
                                     .filter(m -> m.getMetaname().equals("cvlan"))

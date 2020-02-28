@@ -26,11 +26,10 @@ import java.util.Map;
 
 import org.immutables.gson.Gson;
 import org.immutables.value.Value;
-import org.onap.dcaegen2.services.sdk.rest.services.model.DmaapModel;
 
 @Value.Immutable
 @Gson.TypeAdapters(fieldNamingStrategy = true)
-public interface ControlLoopPublisherDmaapModel extends DmaapModel {
+public interface ControlLoopPublisherDmaapModel {
 
     @SerializedName(value = "closedLoopEventClient", alternate = "closedLoopEventClient")
     String getClosedLoopEventClient();
