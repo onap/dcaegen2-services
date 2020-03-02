@@ -43,7 +43,7 @@ INSERT INTO kafka(
   ,'message-router-kafka:9092'  -- host_port - IN varchar(255)
   ,''  -- included_topic - IN varchar(255)
   ,'admin'  -- login - IN varchar(255)
-  ,'admin-secret'  -- pass - IN varchar(255)
+  ,'admin_secret'  -- pass - IN varchar(255)
   ,0   -- secure - IN bit(1)
   ,'SASL_PLAINTEXT'  -- security_protocol - IN varchar(255)
   ,10   -- timeout_sec - IN int(11)
