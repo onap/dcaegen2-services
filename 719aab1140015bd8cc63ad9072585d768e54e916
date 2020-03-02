@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "906a40cd_5c778e91",
+        "filename": "releases/pmsh-1.0.0-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-02T15:47:38Z",
+      "side": 1,
+      "message": "Not familiar with this, but is there any reason for this being 13?",
+      "range": {
+        "startLine": 4,
+        "startChar": 53,
+        "endLine": 4,
+        "endChar": 55
+      },
+      "revId": "719aab1140015bd8cc63ad9072585d768e54e916",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
