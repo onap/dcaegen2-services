@@ -22,7 +22,7 @@
 replicaCount: 1
 
 image:
-  repository: nexus3.onap.org:10001/v2/onap/org.onap.dcaegen2.services.datalakeadminui
+  repository: nexus3.onap.org:10001/onap/org.onap.dcaegen2.services.datalakeadminui 
   tag: 1.0.0
   pullPolicy: IfNotPresent
 
