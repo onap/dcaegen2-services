@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11e63d76_b2d513e0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-03-03T17:03:35Z",
+      "side": 1,
+      "message": "is this being used anywhere?",
+      "revId": "3755e47b323dcee43ca85c61c9937201434d0e8c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60af3ff0_27f8ac18",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-03-03T17:03:35Z",
+      "side": 1,
+      "message": "Stop listening to",
+      "range": {
+        "startLine": 61,
+        "startChar": 34,
+        "endLine": 61,
+        "endChar": 55
+      },
+      "revId": "3755e47b323dcee43ca85c61c9937201434d0e8c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
