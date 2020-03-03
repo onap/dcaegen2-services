@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e5f20275_2bc5dacb",
+        "filename": "components/bbs-event-processor/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 6323
+      },
+      "writtenOn": "2020-03-03T08:13:48Z",
+      "side": 1,
+      "message": "This file is used just for testing purposes. The test keystores are included in the docer container to enable CSIT test execution.",
+      "parentUuid": "27aeeef1_bebd6fc9",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 22
+      },
+      "revId": "1669595d37eae5e436bc0bf9a8ac260baee2c05c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ba6f622_b921f698",
         "filename": "components/bbs-event-processor/KeyStore.jks",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2020-03-03T05:09:27Z",
       "side": 1,
       "message": "same comments are before..",
+      "revId": "1669595d37eae5e436bc0bf9a8ac260baee2c05c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7627792d_aab34aeb",
+        "filename": "components/bbs-event-processor/KeyStore.jks",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6323
+      },
+      "writtenOn": "2020-03-03T08:13:48Z",
+      "side": 1,
+      "message": "This file is used just for testing purposes. The keystores are currently loaded during application startup, thus a test (empty) keystore is provided to enable junit tests execution.",
+      "parentUuid": "7ba6f622_b921f698",
       "revId": "1669595d37eae5e436bc0bf9a8ac260baee2c05c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dc730788_c587a400",
+        "filename": "components/bbs-event-processor/KeyStore-update.jks",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6323
+      },
+      "writtenOn": "2020-03-03T08:13:48Z",
+      "side": 0,
+      "message": "This file is used just for testing purposes. The keystores are currently loaded during application startup, thus a test (empty) keystore is provided to enable junit tests execution. The \"-update\" file is in this case used in a unit test that verifies correct configuration update from \"Keystore\" to \"Keystore-update\".",
+      "parentUuid": "6e8daac7_4ae5746f",
+      "revId": "82a39f7da3177a9b9b700c7291ed5ea47c90e478",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "32443f84_a097f5cd",
         "filename": "components/bbs-event-processor/dpo/data-formats/aai-interaction.json",
         "patchSetId": 1
