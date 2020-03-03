@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49ec53da_9881e348",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-datalake-admin-ui.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T19:51:58Z",
+      "side": 1,
+      "message": "blueprints are not required here; they should go under blueprint repo",
+      "revId": "1ffb6f0ef9a0abeacdb633467889d23c561ec569",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "062bb8b4_7d215ce0",
+        "filename": "components/datalake-handler/dpo/blueprint/k8s-datalake-feeder.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T19:51:58Z",
+      "side": 1,
+      "message": "same comment as earlier",
+      "revId": "1ffb6f0ef9a0abeacdb633467889d23c561ec569",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5918914_92d89bb3",
+        "filename": "components/datalake-handler/dpo/helm_chart/dcae-datalake/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T19:51:58Z",
+      "side": 1,
+      "message": "If the helm charts for feeder and admin has been validated, they can be left under this repo as reference or deployment choice",
+      "revId": "1ffb6f0ef9a0abeacdb633467889d23c561ec569",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae6eb8d7_3e3a0a38",
+        "filename": "components/datalake-handler/init_db/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T19:51:58Z",
+      "side": 1,
+      "message": "Is DL DB init combined with Feeder container? so this image is onap/org.onap.dcaegen2.services.datalake.dbinit:1.0.0 is no longer required?",
+      "revId": "1ffb6f0ef9a0abeacdb633467889d23c561ec569",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
