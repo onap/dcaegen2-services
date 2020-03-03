@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27aeeef1_bebd6fc9",
+        "filename": "components/bbs-event-processor/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T05:09:27Z",
+      "side": 1,
+      "message": "we should be using AAF keystore distributed via DCAE TLS initcontainer. If you have the property of use_tls flag set to true, this will enable cert distribution. You can check hv-ves blueprint",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 22
+      },
+      "revId": "1669595d37eae5e436bc0bf9a8ac260baee2c05c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ba6f622_b921f698",
+        "filename": "components/bbs-event-processor/KeyStore.jks",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T05:09:27Z",
+      "side": 1,
+      "message": "same comments are before..",
+      "revId": "1669595d37eae5e436bc0bf9a8ac260baee2c05c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}

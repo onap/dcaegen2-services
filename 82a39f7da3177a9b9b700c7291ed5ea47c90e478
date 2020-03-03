@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e8daac7_4ae5746f",
+        "filename": "components/bbs-event-processor/KeyStore-update.jks",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T05:09:27Z",
+      "side": 0,
+      "message": "pls clarify why this file is required? self-signed cert should not be used for deployments",
+      "revId": "82a39f7da3177a9b9b700c7291ed5ea47c90e478",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32443f84_a097f5cd",
+        "filename": "components/bbs-event-processor/dpo/data-formats/aai-interaction.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T05:09:27Z",
+      "side": 0,
+      "message": "why is this dataformat removed?",
+      "revId": "82a39f7da3177a9b9b700c7291ed5ea47c90e478",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28041041_ffd4bc80",
+        "filename": "components/bbs-event-processor/dpo/data-formats/pnf-reregistration.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T05:09:27Z",
+      "side": 0,
+      "message": "removed?",
+      "revId": "82a39f7da3177a9b9b700c7291ed5ea47c90e478",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83f63787_4db52cd7",
+        "filename": "components/bbs-event-processor/dpo/spec/bbs-event-processor-spec.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-03T05:09:27Z",
+      "side": 0,
+      "message": "spec file also be retained. Any updates specific to Frankfurt should be added rather than being removed.",
+      "revId": "82a39f7da3177a9b9b700c7291ed5ea47c90e478",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
