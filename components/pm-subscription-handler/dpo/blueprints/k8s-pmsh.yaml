@@ -23,7 +23,6 @@ tosca_definitions_version: cloudify_dsl_1_3
 imports:
   - 'http://www.getcloudify.org/spec/cloudify/4.5.5/types.yaml'
   - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/R6/k8splugin/1.7.2/k8splugin_types.yaml'
-  - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/type_files/dmaap/dmaap.yaml'
   - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.ccsdk.platform.plugins/type_files/pgaas/1.1.0/pgaas_types.yaml'
   - 'https://nexus.onap.org/service/local/repositories/raw/content/org.onap.dcaegen2.platform.plugins/R6/clamppolicyplugin/1.1.0/clamppolicyplugin_types.yaml'
 
@@ -52,7 +51,7 @@ inputs:
     default: 'unauthenticated.DCAE_CL_OUTPUT'
   policy_feedback_topic_name:
     type: string
-    default: 'PMSH_CL_INPUT'
+    default: 'unauthenticated.PMSH_CL_INPUT'
   aai_notification_topic_name:
     type: string
     default: 'AAI-EVENT'
@@ -96,10 +95,6 @@ node_templates:
     properties:
       writerfqdn: { get_input: pgaas_cluster_name }
       name: 'pmsh'
-  pm_subscribe_topic:
-    type: ccsdk.nodes.Topic
-    properties:
-      topic_name: { get_input: policy_feedback_topic_name }
   pmsh:
     type: dcae.nodes.ContainerizedServiceComponentUsingDmaap
     interfaces:
@@ -119,8 +114,6 @@ node_templates:
                   { get_attribute: [ pgaasvm, admin, database ] }
 
     relationships:
-      - type: ccsdk.relationships.subscribe_to_events
-        target: pm_subscribe_topic
       - type: cloudify.relationships.depends_on
         target: pgaasvm
       - type: cloudify.relationships.depends_on
@@ -145,7 +138,8 @@ node_templates:
         streams_subscribes:
           policy_pm_subscriber:
             type: message_router
-            dmaap_info: <<pm_subscribe_topic>>
+            dmaap_info:
+              topic_url: {concat: ["https://message-router:3905/events/", { get_input: policy_feedback_topic_name }]}
           aai_subscriber:
             type: message_router
             dmaap_info:
@@ -163,11 +157,6 @@ node_templates:
           interval: 15s
           timeout: 1s
           type: https
-      streams_subscribes:
-        - name: pm_subscribe_topic
-          location: { get_input: dcae_location }
-          client_role: { get_input: subscriber_client_role }
-          type: message-router
       image: { get_input: tag_version }
       replicas: { get_input: replicas }
       log_info:

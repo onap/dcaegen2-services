@@ -47,7 +47,7 @@
   "parameters": [
     {
       "name": "pmsh_publish_topic_name",
-      "value": "DCAE_CL_OUTPUT",
+      "value": "unauthenticated.DCAE_CL_OUTPUT",
       "description": "Name of the topic PMSH publishes to for policy consumption",
       "designer_editable": true,
       "sourced_at_deployment": false,
@@ -57,7 +57,7 @@
     },
     {
       "name": "policy_feedback_topic_name",
-      "value": "PMSH_CL_INPUT",
+      "value": "unauthenticated.PMSH_CL_INPUT",
       "description": "Name of the topic PMSH subscribes to for policy outputs",
       "designer_editable": true,
       "sourced_at_deployment": false,
