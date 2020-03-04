@@ -46,11 +46,13 @@ import org.onap.bbs.event.processor.model.CpeAuthenticationConsumerDmaapModel;
 import org.onap.bbs.event.processor.model.ImmutableCpeAuthenticationConsumerDmaapModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+@Component
 public class CpeAuthenticationDmaapConsumerJsonParser {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CpeAuthenticationDmaapConsumerJsonParser.class);
@@ -108,9 +110,9 @@ public class CpeAuthenticationDmaapConsumerJsonParser {
             return Mono.empty();
         }
 
-        JsonObject commonEventHeader = dmaapResponseJsonObject.getAsJsonObject(EVENT)
+        var commonEventHeader = dmaapResponseJsonObject.getAsJsonObject(EVENT)
                 .getAsJsonObject(COMMON_EVENT_HEADER);
-        JsonObject stateChangeFields = dmaapResponseJsonObject.getAsJsonObject(EVENT)
+        var stateChangeFields = dmaapResponseJsonObject.getAsJsonObject(EVENT)
                 .getAsJsonObject(STATE_CHANGE_FIELDS);
 
         pnfSourceName = getValueFromJson(commonEventHeader, SOURCE_NAME);
@@ -120,7 +122,7 @@ public class CpeAuthenticationDmaapConsumerJsonParser {
         stateInterface = getValueFromJson(stateChangeFields, STATE_INTERFACE);
 
         if (stateChangeFields.has(ADDITIONAL_FIELDS)) {
-            JsonObject additionalFields = stateChangeFields.getAsJsonObject(ADDITIONAL_FIELDS);
+            var additionalFields = stateChangeFields.getAsJsonObject(ADDITIONAL_FIELDS);
             rgwMacAddress = getValueFromJson(additionalFields, RGW_MAC_ADDRESS);
             swVersion = getValueFromJson(additionalFields, SW_VERSION);
         }
@@ -128,7 +130,7 @@ public class CpeAuthenticationDmaapConsumerJsonParser {
         if (StringUtils.isEmpty(pnfSourceName)
                 || authenticationStatusMissing(oldAuthenticationStatus)
                 || authenticationStatusMissing(newAuthenticationStatus)) {
-            String incorrectEvent = dumpJsonData();
+            var incorrectEvent = dumpJsonData();
             LOGGER.warn("Incorrect CPE Authentication JSON event: {}", incorrectEvent);
             return Mono.empty();
         }
@@ -164,7 +166,7 @@ public class CpeAuthenticationDmaapConsumerJsonParser {
     }
 
     Optional<JsonObject> getJsonObjectFromAnArray(JsonElement element) {
-        JsonParser jsonParser = new JsonParser();
+        var jsonParser = new JsonParser();
         return element.isJsonPrimitive() ? Optional.of(jsonParser.parse(element.getAsString()).getAsJsonObject())
                 : Optional.of(jsonParser.parse(element.toString()).getAsJsonObject());
     }

@@ -104,9 +104,8 @@ class CpeAuthenticationDmaapConsumerJsonParserTest {
     @Test
     void passingNonJson_getIllegalStateException() {
 
-        CpeAuthenticationDmaapConsumerJsonParser consumerJsonParser =
-                new CpeAuthenticationDmaapConsumerJsonParser();
-        JsonReader jsonReader = new JsonReader(new StringReader("not JSON"));
+        var consumerJsonParser = new CpeAuthenticationDmaapConsumerJsonParser();
+        var jsonReader = new JsonReader(new StringReader("not JSON"));
         jsonReader.setLenient(true);
         JsonElement notJson = jsonParser.parse(jsonReader).getAsJsonPrimitive();
 
@@ -118,8 +117,7 @@ class CpeAuthenticationDmaapConsumerJsonParserTest {
     @Test
     void passingNoEvents_EmptyFluxIsReturned() {
 
-        CpeAuthenticationDmaapConsumerJsonParser consumerJsonParser =
-                new CpeAuthenticationDmaapConsumerJsonParser();
+        var consumerJsonParser = new CpeAuthenticationDmaapConsumerJsonParser();
 
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse("[]"))))
                 .expectSubscription()
@@ -129,23 +127,22 @@ class CpeAuthenticationDmaapConsumerJsonParserTest {
     @Test
     void passingOneCorrectEvent_validationSucceeds() {
 
-        String sourceName = "PNF-CorrelationId";
-        String oldAuthenticationState = "outOfService";
-        String newAuthenticationState = "inService";
-        String stateInterface = "stateInterface";
-        String rgwMacAddress = "00:0a:95:8d:78:16";
-        String swVersion = "1.2";
+        var sourceName = "PNF-CorrelationId";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
 
-        String event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE, sourceName, oldAuthenticationState,
+        var event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE, sourceName, oldAuthenticationState,
                 newAuthenticationState, stateInterface, rgwMacAddress, swVersion);
 
-        CpeAuthenticationDmaapConsumerJsonParser consumerJsonParser =
-                spy(new CpeAuthenticationDmaapConsumerJsonParser());
-        JsonElement jsonElement = jsonParser.parse(event);
+        var consumerJsonParser = spy(new CpeAuthenticationDmaapConsumerJsonParser());
+        var jsonElement = jsonParser.parse(event);
         Mockito.doReturn(Optional.of(jsonElement.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement);
 
-        String eventsArray = "[" + event + "]";
+        var eventsArray = "[" + event + "]";
 
         CpeAuthenticationConsumerDmaapModel expectedEventObject = ImmutableCpeAuthenticationConsumerDmaapModel.builder()
                 .correlationId(sourceName)
@@ -164,30 +161,29 @@ class CpeAuthenticationDmaapConsumerJsonParserTest {
     @Test
     void passingTwoCorrectEvents_validationSucceeds() {
 
-        String sourceName1 = "PNF-CorrelationId";
-        String sourceName2 = "PNF-CorrelationId";
-        String oldAuthenticationState = "outOfService";
-        String newAuthenticationState = "inService";
-        String stateInterface = "stateInterface";
-        String rgwMacAddress1 = "00:0a:95:8d:78:16";
-        String rgwMacAddress2 = "00:0a:95:8d:78:17";
-        String swVersion = "1.2";
+        var sourceName1 = "PNF-CorrelationId";
+        var sourceName2 = "PNF-CorrelationId";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress1 = "00:0a:95:8d:78:16";
+        var rgwMacAddress2 = "00:0a:95:8d:78:17";
+        var swVersion = "1.2";
 
-        String firstEvent = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE, sourceName1, oldAuthenticationState,
+        var firstEvent = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE, sourceName1, oldAuthenticationState,
                 newAuthenticationState, stateInterface, rgwMacAddress1, swVersion);
-        String secondEvent = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE, sourceName2, oldAuthenticationState,
+        var secondEvent = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE, sourceName2, oldAuthenticationState,
                 newAuthenticationState, stateInterface, rgwMacAddress2, swVersion);
 
-        CpeAuthenticationDmaapConsumerJsonParser consumerJsonParser =
-                spy(new CpeAuthenticationDmaapConsumerJsonParser());
-        JsonElement jsonElement1 = jsonParser.parse(firstEvent);
+        var consumerJsonParser = spy(new CpeAuthenticationDmaapConsumerJsonParser());
+        var jsonElement1 = jsonParser.parse(firstEvent);
         Mockito.doReturn(Optional.of(jsonElement1.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement1);
-        JsonElement jsonElement2 = jsonParser.parse(secondEvent);
+        var jsonElement2 = jsonParser.parse(secondEvent);
         Mockito.doReturn(Optional.of(jsonElement2.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement2);
 
-        String eventsArray = "[" + firstEvent + "," + secondEvent + "]";
+        var eventsArray = "[" + firstEvent + "," + secondEvent + "]";
 
         CpeAuthenticationConsumerDmaapModel expectedFirstEventObject =
                 ImmutableCpeAuthenticationConsumerDmaapModel.builder()
@@ -217,22 +213,21 @@ class CpeAuthenticationDmaapConsumerJsonParserTest {
     @Test
     void passingJsonWithMissingAuthenticationState_validationFails() {
 
-        String sourceName = "PNF-CorrelationId";
-        String oldAuthenticationState = "outOfService";
-        String stateInterface = "stateInterface";
-        String rgwMacAddress = "00:0a:95:8d:78:16";
-        String swVersion = "1.2";
+        var sourceName = "PNF-CorrelationId";
+        var oldAuthenticationState = "outOfService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
 
-        String event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE_WITH_MISSING_AUTHENTICATION_STATE, sourceName,
+        var event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE_WITH_MISSING_AUTHENTICATION_STATE, sourceName,
                 oldAuthenticationState, stateInterface, rgwMacAddress, swVersion);
 
-        CpeAuthenticationDmaapConsumerJsonParser consumerJsonParser =
-                spy(new CpeAuthenticationDmaapConsumerJsonParser());
-        JsonElement jsonElement = jsonParser.parse(event);
+        var consumerJsonParser = spy(new CpeAuthenticationDmaapConsumerJsonParser());
+        var jsonElement = jsonParser.parse(event);
         Mockito.doReturn(Optional.of(jsonElement.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement);
 
-        String eventsArray = "[" + event + "]";
+        var eventsArray = "[" + event + "]";
 
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
@@ -242,22 +237,21 @@ class CpeAuthenticationDmaapConsumerJsonParserTest {
     @Test
     void passingJsonWithMissingSourceName_validationFails() {
 
-        String oldAuthenticationState = "outOfService";
-        String newAuthenticationState = "inService";
-        String stateInterface = "stateInterface";
-        String rgwMacAddress = "00:0a:95:8d:78:16";
-        String swVersion = "1.2";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
 
-        String event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE_WITH_MISSING_SOURCE_NAME,
+        var event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE_WITH_MISSING_SOURCE_NAME,
                 oldAuthenticationState, newAuthenticationState, stateInterface, rgwMacAddress, swVersion);
 
-        CpeAuthenticationDmaapConsumerJsonParser consumerJsonParser =
-                spy(new CpeAuthenticationDmaapConsumerJsonParser());
-        JsonElement jsonElement = jsonParser.parse(event);
+        var consumerJsonParser = spy(new CpeAuthenticationDmaapConsumerJsonParser());
+        var jsonElement = jsonParser.parse(event);
         Mockito.doReturn(Optional.of(jsonElement.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement);
 
-        String eventsArray = "[" + event + "]";
+        var eventsArray = "[" + event + "]";
 
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
@@ -267,22 +261,21 @@ class CpeAuthenticationDmaapConsumerJsonParserTest {
     @Test
     void passingJsonWithMissingSourceNameValue_validationFails() {
 
-        String oldAuthenticationState = "outOfService";
-        String newAuthenticationState = "inService";
-        String stateInterface = "stateInterface";
-        String rgwMacAddress = "00:0a:95:8d:78:16";
-        String swVersion = "1.2";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
 
-        String event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE_WITH_MISSING_SOURCE_NAME_VALUE,
+        var event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE_WITH_MISSING_SOURCE_NAME_VALUE,
                 oldAuthenticationState, newAuthenticationState, stateInterface, rgwMacAddress, swVersion);
 
-        CpeAuthenticationDmaapConsumerJsonParser consumerJsonParser =
-                spy(new CpeAuthenticationDmaapConsumerJsonParser());
-        JsonElement jsonElement = jsonParser.parse(event);
+        var consumerJsonParser = spy(new CpeAuthenticationDmaapConsumerJsonParser());
+        var jsonElement = jsonParser.parse(event);
         Mockito.doReturn(Optional.of(jsonElement.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement);
 
-        String eventsArray = "[" + event + "]";
+        var eventsArray = "[" + event + "]";
 
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
@@ -292,22 +285,21 @@ class CpeAuthenticationDmaapConsumerJsonParserTest {
     @Test
     void passingJsonWithMissingStateChangeFieldsHeader_validationFails() {
 
-        String oldAuthenticationState = "outOfService";
-        String newAuthenticationState = "inService";
-        String stateInterface = "stateInterface";
-        String rgwMacAddress = "00:0a:95:8d:78:16";
-        String swVersion = "1.2";
+        var oldAuthenticationState = "outOfService";
+        var newAuthenticationState = "inService";
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
 
-        String event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE_WITH_MISSING_STATE_CHANGE_FIELDS,
+        var event = String.format(CPE_AUTHENTICATION_EVENT_TEMPLATE_WITH_MISSING_STATE_CHANGE_FIELDS,
                 oldAuthenticationState, newAuthenticationState, stateInterface, rgwMacAddress, swVersion);
 
-        CpeAuthenticationDmaapConsumerJsonParser consumerJsonParser =
-                spy(new CpeAuthenticationDmaapConsumerJsonParser());
-        JsonElement jsonElement = jsonParser.parse(event);
+        var consumerJsonParser = spy(new CpeAuthenticationDmaapConsumerJsonParser());
+        var jsonElement = jsonParser.parse(event);
         Mockito.doReturn(Optional.of(jsonElement.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement);
 
-        String eventsArray = "[" + event + "]";
+        var eventsArray = "[" + event + "]";
 
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()

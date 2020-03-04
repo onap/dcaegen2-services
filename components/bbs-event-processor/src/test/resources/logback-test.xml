@@ -20,5 +20,5 @@
     <include resource="org/springframework/boot/logging/logback/base.xml" />
     <root level="ERROR"/>
     <logger name="org.springframework" level="ERROR"/>
-    <logger name="org.onap" level="WARN"/>
+    <logger name="org.onap.bbs" level="WARN"/>
 </configuration>

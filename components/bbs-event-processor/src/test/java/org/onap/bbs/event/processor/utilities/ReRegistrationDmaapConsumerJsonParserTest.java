@@ -93,8 +93,8 @@ class ReRegistrationDmaapConsumerJsonParserTest {
     @Test
     void passingNonJson_getIllegalStateException() {
 
-        ReRegistrationDmaapConsumerJsonParser consumerJsonParser = new ReRegistrationDmaapConsumerJsonParser();
-        JsonReader jsonReader = new JsonReader(new StringReader("not JSON"));
+        var consumerJsonParser = new ReRegistrationDmaapConsumerJsonParser();
+        var jsonReader = new JsonReader(new StringReader("not JSON"));
         jsonReader.setLenient(true);
         JsonElement notJson = jsonParser.parse(jsonReader).getAsJsonPrimitive();
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(notJson)))
@@ -105,7 +105,7 @@ class ReRegistrationDmaapConsumerJsonParserTest {
     @Test
     void passingNoEvents_EmptyFluxIsReturned() {
 
-        ReRegistrationDmaapConsumerJsonParser consumerJsonParser = new ReRegistrationDmaapConsumerJsonParser();
+        var consumerJsonParser = new ReRegistrationDmaapConsumerJsonParser();
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse("[]"))))
                 .expectSubscription()
                 .verifyComplete();
@@ -114,21 +114,21 @@ class ReRegistrationDmaapConsumerJsonParserTest {
     @Test
     void passingOneCorrectEvent_validationSucceeds() {
 
-        String correlationId = "PNF-CorrelationId";
-        String attachmentPoint = "olt1/1/1";
-        String remoteId = "remoteId";
-        String cvlan = "1005";
-        String svlan = "100";
+        var correlationId = "PNF-CorrelationId";
+        var attachmentPoint = "olt1/1/1";
+        var remoteId = "remoteId";
+        var cvlan = "1005";
+        var svlan = "100";
 
-        String event = String.format(RE_REGISTRATION_EVENT_TEMPLATE, correlationId, attachmentPoint,
+        var event = String.format(RE_REGISTRATION_EVENT_TEMPLATE, correlationId, attachmentPoint,
                 remoteId, cvlan, svlan);
 
-        ReRegistrationDmaapConsumerJsonParser consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
-        JsonElement jsonElement = jsonParser.parse(event);
+        var consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
+        var jsonElement = jsonParser.parse(event);
         Mockito.doReturn(Optional.of(jsonElement.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement);
 
-        String eventsArray = "[" + event + "]";
+        var eventsArray = "[" + event + "]";
 
         ReRegistrationConsumerDmaapModel expectedEventObject = ImmutableReRegistrationConsumerDmaapModel.builder()
                 .correlationId(correlationId)
@@ -146,29 +146,29 @@ class ReRegistrationDmaapConsumerJsonParserTest {
     @Test
     void passingTwoCorrectEvents_validationSucceeds() {
 
-        String correlationId1 = "PNF-CorrelationId1";
-        String correlationId2 = "PNF-CorrelationId2";
-        String attachmentPoint1 = "olt1/1/1";
-        String attachmentPoint2 = "olt2/2/2";
-        String remoteId1 = "remoteId1";
-        String remoteId2 = "remoteId2";
-        String cvlan = "1005";
-        String svlan = "100";
+        var correlationId1 = "PNF-CorrelationId1";
+        var correlationId2 = "PNF-CorrelationId2";
+        var attachmentPoint1 = "olt1/1/1";
+        var attachmentPoint2 = "olt2/2/2";
+        var remoteId1 = "remoteId1";
+        var remoteId2 = "remoteId2";
+        var cvlan = "1005";
+        var svlan = "100";
 
-        String firstEvent = String.format(RE_REGISTRATION_EVENT_TEMPLATE, correlationId1, attachmentPoint1,
+        var firstEvent = String.format(RE_REGISTRATION_EVENT_TEMPLATE, correlationId1, attachmentPoint1,
                 remoteId1, cvlan, svlan);
-        String secondEvent = String.format(RE_REGISTRATION_EVENT_TEMPLATE, correlationId1, attachmentPoint1,
+        var secondEvent = String.format(RE_REGISTRATION_EVENT_TEMPLATE, correlationId1, attachmentPoint1,
                 remoteId1, cvlan, svlan);
 
-        ReRegistrationDmaapConsumerJsonParser consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
-        JsonElement jsonElement1 = jsonParser.parse(firstEvent);
+        var consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
+        var jsonElement1 = jsonParser.parse(firstEvent);
         Mockito.doReturn(Optional.of(jsonElement1.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement1);
-        JsonElement jsonElement2 = jsonParser.parse(secondEvent);
+        var jsonElement2 = jsonParser.parse(secondEvent);
         Mockito.doReturn(Optional.of(jsonElement2.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement2);
 
-        String eventsArray = "[" + firstEvent + "," + secondEvent + "]";
+        var eventsArray = "[" + firstEvent + "," + secondEvent + "]";
 
         ReRegistrationConsumerDmaapModel expectedFirstEventObject = ImmutableReRegistrationConsumerDmaapModel.builder()
                 .correlationId(correlationId1)
@@ -194,23 +194,23 @@ class ReRegistrationDmaapConsumerJsonParserTest {
     @Test
     void passingJsonWithMissingAttachmentPoint_validationFails() {
 
-        String correlationId = "PNF-CorrelationId";
-        String remoteId = "remoteId";
-        String cvlan = "1005";
-        String svlan = "100";
+        var correlationId = "PNF-CorrelationId";
+        var remoteId = "remoteId";
+        var cvlan = "1005";
+        var svlan = "100";
 
-        String event = String.format(RE_REGISTRATION_EVENT_TEMPLATE_MISSING_ATTACHMENT_POINT,
+        var event = String.format(RE_REGISTRATION_EVENT_TEMPLATE_MISSING_ATTACHMENT_POINT,
                 correlationId,
                 remoteId,
                 cvlan,
                 svlan);
 
-        ReRegistrationDmaapConsumerJsonParser consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
-        JsonElement jsonElement = jsonParser.parse(event);
+        var consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
+        var jsonElement = jsonParser.parse(event);
         Mockito.doReturn(Optional.of(jsonElement.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement);
 
-        String eventsArray = "[" + event + "]";
+        var eventsArray = "[" + event + "]";
 
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
@@ -220,23 +220,23 @@ class ReRegistrationDmaapConsumerJsonParserTest {
     @Test
     void passingJsonWithMissingCorrelationId_validationFails() {
 
-        String attachmentPoint = "olt1/1/1";
-        String remoteId = "remoteId";
-        String cvlan = "1005";
-        String svlan = "100";
+        var attachmentPoint = "olt1/1/1";
+        var remoteId = "remoteId";
+        var cvlan = "1005";
+        var svlan = "100";
 
-        String event = String.format(RE_REGISTRATION_EVENT_TEMPLATE_MISSING_CORRELATION_ID,
+        var event = String.format(RE_REGISTRATION_EVENT_TEMPLATE_MISSING_CORRELATION_ID,
                 attachmentPoint,
                 remoteId,
                 cvlan,
                 svlan);
 
-        ReRegistrationDmaapConsumerJsonParser consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
-        JsonElement jsonElement = jsonParser.parse(event);
+        var consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
+        var jsonElement = jsonParser.parse(event);
         Mockito.doReturn(Optional.of(jsonElement.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement);
 
-        String eventsArray = "[" + event + "]";
+        var eventsArray = "[" + event + "]";
 
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
@@ -246,23 +246,23 @@ class ReRegistrationDmaapConsumerJsonParserTest {
     @Test
     void passingJsonWithMissingCorrelationIdValue_validationFails() {
 
-        String attachmentPoint = "olt1/1/1";
-        String remoteId = "remoteId";
-        String cvlan = "1005";
-        String svlan = "100";
+        var attachmentPoint = "olt1/1/1";
+        var remoteId = "remoteId";
+        var cvlan = "1005";
+        var svlan = "100";
 
-        String event = String.format(RE_REGISTRATION_EVENT_TEMPLATE_MISSING_CORRELATION_ID_VALUE,
+        var event = String.format(RE_REGISTRATION_EVENT_TEMPLATE_MISSING_CORRELATION_ID_VALUE,
                 attachmentPoint,
                 remoteId,
                 cvlan,
                 svlan);
 
-        ReRegistrationDmaapConsumerJsonParser consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
-        JsonElement jsonElement = jsonParser.parse(event);
+        var consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
+        var jsonElement = jsonParser.parse(event);
         Mockito.doReturn(Optional.of(jsonElement.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement);
 
-        String eventsArray = "[" + event + "]";
+        var eventsArray = "[" + event + "]";
 
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()
@@ -272,25 +272,25 @@ class ReRegistrationDmaapConsumerJsonParserTest {
     @Test
     void passingJsonWithMissingAdditionalFields_validationFails() {
 
-        String correlationId = "PNF-CorrelationId";
-        String attachmentPoint = "olt1/1/1";
-        String remoteId = "remoteId";
-        String cvlan = "1005";
-        String svlan = "100";
+        var correlationId = "PNF-CorrelationId";
+        var attachmentPoint = "olt1/1/1";
+        var remoteId = "remoteId";
+        var cvlan = "1005";
+        var svlan = "100";
 
-        String event = String.format(RE_REGISTRATION_EVENT_TEMPLATE_MISSING_ADDITIONAL_FIELDS,
+        var event = String.format(RE_REGISTRATION_EVENT_TEMPLATE_MISSING_ADDITIONAL_FIELDS,
                 correlationId,
                 attachmentPoint,
                 remoteId,
                 cvlan,
                 svlan);
 
-        ReRegistrationDmaapConsumerJsonParser consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
-        JsonElement jsonElement = jsonParser.parse(event);
+        var consumerJsonParser = spy(new ReRegistrationDmaapConsumerJsonParser());
+        var jsonElement = jsonParser.parse(event);
         Mockito.doReturn(Optional.of(jsonElement.getAsJsonObject()))
                 .when(consumerJsonParser).getJsonObjectFromAnArray(jsonElement);
 
-        String eventsArray = "[" + event + "]";
+        var eventsArray = "[" + event + "]";
 
         StepVerifier.create(consumerJsonParser.extractModelFromDmaap(Mono.just(jsonParser.parse(eventsArray))))
                 .expectSubscription()

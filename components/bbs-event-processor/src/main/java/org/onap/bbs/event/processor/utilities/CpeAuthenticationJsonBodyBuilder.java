@@ -27,18 +27,16 @@ import java.util.ServiceLoader;
 
 import org.onap.bbs.event.processor.model.CpeAuthenticationConsumerDmaapModel;
 import org.onap.bbs.event.processor.model.ImmutableCpeAuthenticationConsumerDmaapModel;
-import org.onap.dcaegen2.services.sdk.rest.services.model.JsonBodyBuilder;
 
-public class CpeAuthenticationJsonBodyBuilder implements JsonBodyBuilder<CpeAuthenticationConsumerDmaapModel> {
+public class CpeAuthenticationJsonBodyBuilder {
 
     /**
      * Serialize the CPE authentication DMaaP model with GSON.
      * @param cpeAuthenticationConsumerDmaapModel object to be serialized
      * @return String output of serialization
      */
-    @Override
     public String createJsonBody(CpeAuthenticationConsumerDmaapModel cpeAuthenticationConsumerDmaapModel) {
-        GsonBuilder gsonBuilder = new GsonBuilder();
+        var gsonBuilder = new GsonBuilder();
         ServiceLoader.load(TypeAdapterFactory.class).forEach(gsonBuilder::registerTypeAdapterFactory);
         return gsonBuilder.create().toJson(ImmutableCpeAuthenticationConsumerDmaapModel.builder()
                 .correlationId(cpeAuthenticationConsumerDmaapModel.getCorrelationId())

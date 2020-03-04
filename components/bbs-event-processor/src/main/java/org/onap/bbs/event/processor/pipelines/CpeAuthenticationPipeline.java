@@ -25,13 +25,11 @@ import static org.onap.bbs.event.processor.config.ApplicationConstants.DCAE_BBS_
 import static org.onap.bbs.event.processor.config.ApplicationConstants.RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME;
 import static org.onap.bbs.event.processor.config.ApplicationConstants.RETRIEVE_PNF_TASK_NAME;
 import static org.onap.dcaegen2.services.sdk.rest.services.model.logging.MdcVariables.INSTANCE_UUID;
-import static org.onap.dcaegen2.services.sdk.rest.services.model.logging.MdcVariables.RESPONSE_CODE;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.TimeoutException;
 
@@ -42,14 +40,13 @@ import org.onap.bbs.event.processor.exceptions.EmptyDmaapResponseException;
 import org.onap.bbs.event.processor.model.ControlLoopPublisherDmaapModel;
 import org.onap.bbs.event.processor.model.CpeAuthenticationConsumerDmaapModel;
 import org.onap.bbs.event.processor.model.ImmutableControlLoopPublisherDmaapModel;
-import org.onap.bbs.event.processor.model.MetadataListAaiObject;
 import org.onap.bbs.event.processor.model.PnfAaiObject;
 import org.onap.bbs.event.processor.model.RelationshipListAaiObject;
 import org.onap.bbs.event.processor.model.ServiceInstanceAaiObject;
 import org.onap.bbs.event.processor.tasks.AaiClientTask;
 import org.onap.bbs.event.processor.tasks.DmaapCpeAuthenticationConsumerTask;
 import org.onap.bbs.event.processor.tasks.DmaapPublisherTask;
-import org.onap.dcaegen2.services.sdk.rest.services.adapters.http.HttpResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -99,7 +96,7 @@ public class CpeAuthenticationPipeline {
         LOGGER.trace("Reactive CPE Authentication pipeline subscribed - Execution started");
     }
 
-    Flux<HttpResponse> executePipeline() {
+    Flux<MessageRouterPublishResponse> executePipeline() {
         return
             // Consume CPE Authentication from DMaaP
             consumeCpeAuthenticationFromDmaap()
@@ -111,12 +108,12 @@ public class CpeAuthenticationPipeline {
             .flatMap(this::triggerPolicy);
     }
 
-    private void onSuccess(HttpResponse responseCode) {
-        MDC.put(RESPONSE_CODE, String.valueOf(responseCode.statusCode()));
-        LOGGER.info("CPE Authentication event successfully handled. "
-                        + "Publishing to DMaaP for Policy returned a status code of ({} {})",
-                responseCode.statusCode(), responseCode.statusReason());
-        MDC.remove(RESPONSE_CODE);
+    private void onSuccess(MessageRouterPublishResponse response) {
+        if (response.successful()) {
+            LOGGER.info("CPE Authentication event successfully handled. Published Policy event to DMaaP");
+        } else {
+            LOGGER.error("CPE Authentication event handling error [{}]", response.failReason());
+        }
     }
 
     private void onError(Throwable throwable) {
@@ -149,7 +146,7 @@ public class CpeAuthenticationPipeline {
                         .map(event -> {
                             // For each message, we have to keep separate state. This state will be enhanced
                             // in each step and handed off to the next processing step
-                            PipelineState state = new PipelineState();
+                            var state = new PipelineState();
                             state.setCpeAuthenticationEvent(event);
                             return state;
                         });
@@ -161,9 +158,9 @@ public class CpeAuthenticationPipeline {
 
     private Mono<PipelineState> fetchPnfFromAai(PipelineState state) {
 
-        CpeAuthenticationConsumerDmaapModel vesEvent = state.getCpeAuthenticationEvent();
-        String pnfName = vesEvent.getCorrelationId();
-        String url = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName);
+        var vesEvent = state.getCpeAuthenticationEvent();
+        var pnfName = vesEvent.getCorrelationId();
+        var url = String.format("/aai/v14/network/pnfs/pnf/%s?depth=all", pnfName);
         LOGGER.debug("Processing Step: Retrieve PNF. Url: ({})", url);
 
         return aaiClientTask.executePnfRetrieval(RETRIEVE_PNF_TASK_NAME, url)
@@ -191,10 +188,10 @@ public class CpeAuthenticationPipeline {
             return Mono.empty();
         }
 
-        PnfAaiObject pnf = state.getPnfAaiObject();
+        var pnf = state.getPnfAaiObject();
         // Assuming that the PNF will only have a single service-instance relationship pointing
         // towards the HSI CFS service
-        String serviceInstanceId = pnf.getRelationshipListAaiObject().getRelationshipEntries()
+        var serviceInstanceId = pnf.getRelationshipListAaiObject().getRelationshipEntries()
                 .stream()
                 .filter(e -> "service-instance".equals(e.getRelatedTo()))
                 .flatMap(e -> e.getRelationshipData().stream())
@@ -208,7 +205,7 @@ public class CpeAuthenticationPipeline {
             return Mono.empty();
         }
 
-        String url = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
+        var url = String.format("/aai/v14/nodes/service-instances/service-instance/%s?depth=all",
                 serviceInstanceId);
         LOGGER.debug("Processing Step: Retrieve HSI CFS Service. Url: ({})", url);
         return aaiClientTask.executeServiceInstanceRetrieval(RETRIEVE_HSI_CFS_SERVICE_INSTANCE_TASK_NAME, url)
@@ -230,21 +227,13 @@ public class CpeAuthenticationPipeline {
                 });
     }
 
-    private Mono<HttpResponse> triggerPolicy(PipelineState state) {
+    private Flux<MessageRouterPublishResponse> triggerPolicy(PipelineState state) {
 
         if (state == null || state.getHsiCfsServiceInstance() == null) {
-            return Mono.empty();
+            return Flux.empty();
         }
 
-        // At this point, we must check if the PNF RGW MAC address matches the value extracted from VES event
-        if (!isCorrectMacAddress(state)) {
-            LOGGER.warn("Processing stopped. RGW MAC address taken from event ({}) "
-                            + "does not match with A&AI metadata corresponding value",
-                    state.getCpeAuthenticationEvent().getRgwMacAddress());
-            return Mono.empty();
-        }
-
-        ControlLoopPublisherDmaapModel event = buildTriggeringPolicyEvent(state);
+        var event = buildTriggeringPolicyEvent(state);
         return publisherTask.execute(event)
                 .timeout(Duration.ofSeconds(configuration.getPipelinesTimeoutInSeconds()))
                 .doOnError(TimeoutException.class,
@@ -256,30 +245,15 @@ public class CpeAuthenticationPipeline {
                     e -> Mono.empty());
     }
 
-
-    private boolean isCorrectMacAddress(PipelineState state) {
-        // We need to check if the RGW MAC address received in VES event matches the one found in
-        // HSIA CFS service (in its metadata section)
-        Optional<MetadataListAaiObject> optionalMetadata = state.getHsiCfsServiceInstance()
-                .getMetadataListAaiObject();
-        String eventRgwMacAddress = state.getCpeAuthenticationEvent().getRgwMacAddress().orElse("");
-        return optionalMetadata
-                .map(list -> list.getMetadataEntries()
-                .stream()
-                .anyMatch(m -> "rgw-mac-address".equals(m.getMetaname())
-                        && m.getMetavalue().equals(eventRgwMacAddress)))
-                .orElse(false);
-    }
-
     private ControlLoopPublisherDmaapModel buildTriggeringPolicyEvent(PipelineState state) {
 
-        String cfsServiceInstanceId = state.getHsiCfsServiceInstance().getServiceInstanceId();
+        var cfsServiceInstanceId = state.getHsiCfsServiceInstance().getServiceInstanceId();
 
         Map<String, String> enrichmentData = new HashMap<>();
         enrichmentData.put("service-information.hsia-cfs-service-instance-id", cfsServiceInstanceId);
         enrichmentData.put("cpe.old-authentication-state", state.cpeAuthenticationEvent.getOldAuthenticationState());
         enrichmentData.put("cpe.new-authentication-state", state.cpeAuthenticationEvent.getNewAuthenticationState());
-        String swVersion = state.getCpeAuthenticationEvent().getSwVersion().orElse("");
+        var swVersion = state.getCpeAuthenticationEvent().getSwVersion().orElse("");
         if (!StringUtils.isEmpty(swVersion)) {
             enrichmentData.put("cpe.swVersion", swVersion);
         }

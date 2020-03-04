@@ -42,7 +42,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 
 @WebMvcTest(BbsEventProcessorController.class)
 @DisplayName("BBS Event Processor Controllers MVC Unit-Tests")
@@ -67,7 +66,7 @@ class BbsEventProcessorControllerTest {
 
     @Test
     void sendingHeartBeatRestCall_RespondsWithAlive() throws Exception {
-        MvcResult heartBeatResult = mockMvc.perform(get("/heartbeat")).andReturn();
+        var heartBeatResult = mockMvc.perform(get("/heartbeat")).andReturn();
 
         mockMvc.perform(asyncDispatch(heartBeatResult))
                 .andExpect(status().isOk())
@@ -76,7 +75,7 @@ class BbsEventProcessorControllerTest {
 
     @Test
     void sendingReRegistrationSubmissionRestCall_RespondsWithOk() throws Exception {
-        MvcResult reregistrationSubmissionResult = mockMvc.perform(post("/poll-reregistration-events")).andReturn();
+        var reregistrationSubmissionResult = mockMvc.perform(post("/poll-reregistration-events")).andReturn();
 
         mockMvc.perform(asyncDispatch(reregistrationSubmissionResult))
                 .andExpect(status().isOk())
@@ -86,7 +85,7 @@ class BbsEventProcessorControllerTest {
 
     @Test
     void sendingCpeAuthenticationSubmissionRestCall_RespondsWithOk() throws Exception {
-        MvcResult reregistrationSubmissionResult = mockMvc.perform(post("/poll-cpe-authentication-events")).andReturn();
+        var reregistrationSubmissionResult = mockMvc.perform(post("/poll-cpe-authentication-events")).andReturn();
 
         mockMvc.perform(asyncDispatch(reregistrationSubmissionResult))
                 .andExpect(status().isOk())
@@ -97,7 +96,7 @@ class BbsEventProcessorControllerTest {
     @Test
     void sendingStartTasksRestCall_ifItSucceeds_RespondsWithOk() throws Exception {
         when(scheduler.reScheduleProcessingTasks()).thenReturn(true);
-        MvcResult startTasksResult = mockMvc.perform(post("/start-tasks")).andReturn();
+        var startTasksResult = mockMvc.perform(post("/start-tasks")).andReturn();
 
         mockMvc.perform(asyncDispatch(startTasksResult))
                 .andExpect(status().isOk())
@@ -108,7 +107,7 @@ class BbsEventProcessorControllerTest {
     @Test
     void sendingStartTasksRestCall_ifItFails_RespondsWithNotAcceptable() throws Exception {
         when(scheduler.reScheduleProcessingTasks()).thenReturn(false);
-        MvcResult startTasksResult = mockMvc.perform(post("/start-tasks")).andReturn();
+        var startTasksResult = mockMvc.perform(post("/start-tasks")).andReturn();
 
         mockMvc.perform(asyncDispatch(startTasksResult))
                 .andExpect(status().isNotAcceptable())
@@ -119,7 +118,7 @@ class BbsEventProcessorControllerTest {
     @Test
     void sendingCancelTasksRestCall_ifItSucceeds_RespondsWithOk() throws Exception {
         when(scheduler.cancelScheduledProcessingTasks()).thenReturn(true);
-        MvcResult cancellationResult = mockMvc.perform(post("/cancel-tasks")).andReturn();
+        var cancellationResult = mockMvc.perform(post("/cancel-tasks")).andReturn();
 
         mockMvc.perform(asyncDispatch(cancellationResult))
                 .andExpect(status().isOk())
@@ -130,7 +129,7 @@ class BbsEventProcessorControllerTest {
     @Test
     void sendingCancelTasksRestCall_ifItFails_RespondsWithNotAcceptable() throws Exception {
         when(scheduler.cancelScheduledProcessingTasks()).thenReturn(false);
-        MvcResult cancellationResult = mockMvc.perform(post("/cancel-tasks")).andReturn();
+        var cancellationResult = mockMvc.perform(post("/cancel-tasks")).andReturn();
 
         mockMvc.perform(asyncDispatch(cancellationResult))
                 .andExpect(status().isNotAcceptable())

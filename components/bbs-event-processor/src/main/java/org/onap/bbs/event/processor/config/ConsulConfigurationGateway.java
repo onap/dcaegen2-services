@@ -40,8 +40,7 @@ import org.onap.bbs.event.processor.model.ImmutableGeneratedAppConfigObject;
 import org.onap.bbs.event.processor.model.ImmutableStreamsObject;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsClientFactory;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsRequests;
-import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.CbsRequest;
-import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.EnvProperties;
+import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.CbsClientConfiguration;
 import org.onap.dcaegen2.services.sdk.rest.services.model.logging.RequestDiagnosticContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,9 +84,9 @@ public class ConsulConfigurationGateway {
     }
 
     boolean environmentNotReady() {
-        String consulHost = System.getenv().get(CONSUL_HOST);
-        String cbs = System.getenv().get(CONFIG_BINDING_SERVICE);
-        String hostname = System.getenv().get(HOSTNAME);
+        var consulHost = System.getenv().get(CONSUL_HOST);
+        var cbs = System.getenv().get(CONFIG_BINDING_SERVICE);
+        var hostname = System.getenv().get(HOSTNAME);
         return consulHost == null || cbs == null || hostname == null;
     }
 
@@ -106,7 +105,7 @@ public class ConsulConfigurationGateway {
 
     private void parseConsulRetrievedConfiguration(JsonObject jsonObject) {
 
-        GeneratedAppConfigObject generatedAppConfigObject = generateAppConfigObject(jsonObject);
+        var generatedAppConfigObject = generateAppConfigObject(jsonObject);
         LOGGER.trace("Consul-Retrieved Application Generated Object:\n{}", generatedAppConfigObject);
         configuration.updateCurrentConfiguration(generatedAppConfigObject);
     }
@@ -124,10 +123,10 @@ public class ConsulConfigurationGateway {
         RequestDiagnosticContext diagnosticContext = RequestDiagnosticContext.create();
 
         // Necessary properties from the environment (Consul host:port, service-name (hostname), CBS name)
-        EnvProperties env = EnvProperties.fromEnvironment();
-        CbsRequest cbsRequest = CbsRequests.getConfiguration(diagnosticContext);
+        var cbsClientConfig = CbsClientConfiguration.fromEnvironment();
+        var cbsRequest = CbsRequests.getConfiguration(diagnosticContext);
         // Create the client and use it to get the configuration
-        cbsFetchPipeline = CbsClientFactory.createCbsClient(env)
+        cbsFetchPipeline = CbsClientFactory.createCbsClient(cbsClientConfig)
                 .doOnError(e -> LOGGER.warn("CBS Configuration fetch failed with error: {}", e))
                 .retry(e -> true)
                 .flatMapMany(cbsClient -> cbsClient.updates(cbsRequest, initialDelay, period))
@@ -138,57 +137,57 @@ public class ConsulConfigurationGateway {
     GeneratedAppConfigObject generateAppConfigObject(JsonObject configObject) {
 
         if (LOGGER.isInfoEnabled()) {
-            String configAsString = gson.toJson(configObject);
+            var configAsString = gson.toJson(configObject);
             LOGGER.info("Received App Config object\n{}", configAsString);
         }
 
-        final String dmaapProtocol = configObject.get("dmaap.protocol").getAsString();
-        final String dmaapContentType  = configObject.get("dmaap.contentType").getAsString();
-        final String dmaapConsumerId  = configObject.get("dmaap.consumer.consumerId").getAsString();
-        final String dmaapConsumerGroup = configObject.get("dmaap.consumer.consumerGroup").getAsString();
-        final int dmaapMessageLimit  = configObject.get("dmaap.messageLimit").getAsInt();
-        final int dmaapTimeoutMs  = configObject.get("dmaap.timeoutMs").getAsInt();
+        final var dmaapProtocol = configObject.get("dmaap.protocol").getAsString();
+        final var dmaapContentType  = configObject.get("dmaap.contentType").getAsString();
+        final var dmaapConsumerId  = configObject.get("dmaap.consumer.consumerId").getAsString();
+        final var dmaapConsumerGroup = configObject.get("dmaap.consumer.consumerGroup").getAsString();
+        final var dmaapMessageLimit  = configObject.get("dmaap.messageLimit").getAsInt();
+        final var dmaapTimeoutMs  = configObject.get("dmaap.timeoutMs").getAsInt();
 
-        final String aaiHost = configObject.get("aai.host").getAsString();
-        final int aaiPort = configObject.get("aai.port").getAsInt();
-        final String aaiProtocol = configObject.get("aai.protocol").getAsString();
-        final String aaiUsername = configObject.get("aai.username").getAsString();
-        final String aaiPassword = configObject.get("aai.password").getAsString();
-        final boolean aaiIgnoreSslCertificateErrors =
+        final var aaiHost = configObject.get("aai.host").getAsString();
+        final var aaiPort = configObject.get("aai.port").getAsInt();
+        final var aaiProtocol = configObject.get("aai.protocol").getAsString();
+        final var aaiUsername = configObject.get("aai.username").getAsString();
+        final var aaiPassword = configObject.get("aai.password").getAsString();
+        final var aaiIgnoreSslCertificateErrors =
                 configObject.get("aai.aaiIgnoreSslCertificateErrors").getAsBoolean();
 
-        final int pipelinesPollingIntervalSec = configObject.get("application.pipelinesPollingIntervalSec").getAsInt();
-        final int pipelinesTimeoutSec = configObject.get("application.pipelinesTimeoutSec").getAsInt();
-        final int cbsPollingIntervalSec = configObject.get("application.cbsPollingIntervalSec").getAsInt();
+        final var pipelinesPollingIntervalSec = configObject.get("application.pipelinesPollingIntervalSec").getAsInt();
+        final var pipelinesTimeoutSec = configObject.get("application.pipelinesTimeoutSec").getAsInt();
+        final var cbsPollingIntervalSec = configObject.get("application.cbsPollingIntervalSec").getAsInt();
 
-        final String reRegPolicyScope = configObject.get("application.reregistration.policyScope").getAsString();
-        final String reRegClControlName = configObject.get("application.reregistration.clControlName").getAsString();
-        final String cpeAuthPolicyScope = configObject.get("application.cpe.authentication.policyScope").getAsString();
-        final String cpeAuthClControlName =
+        final var reRegPolicyScope = configObject.get("application.reregistration.policyScope").getAsString();
+        final var reRegClControlName = configObject.get("application.reregistration.clControlName").getAsString();
+        final var cpeAuthPolicyScope = configObject.get("application.cpe.authentication.policyScope").getAsString();
+        final var cpeAuthClControlName =
                 configObject.get("application.cpe.authentication.clControlName").getAsString();
 
-        final String policyVersion = configObject.get("application.policyVersion").getAsString();
-        final String closeLoopTargetType = configObject.get("application.clTargetType").getAsString();
-        final String closeLoopEventStatus = configObject.get("application.clEventStatus").getAsString();
-        final String closeLoopVersion = configObject.get("application.clVersion").getAsString();
-        final String closeLoopTarget = configObject.get("application.clTarget").getAsString();
-        final String closeLoopOriginator = configObject.get("application.clOriginator").getAsString();
+        final var policyVersion = configObject.get("application.policyVersion").getAsString();
+        final var closeLoopTargetType = configObject.get("application.clTargetType").getAsString();
+        final var closeLoopEventStatus = configObject.get("application.clEventStatus").getAsString();
+        final var closeLoopVersion = configObject.get("application.clVersion").getAsString();
+        final var closeLoopTarget = configObject.get("application.clTarget").getAsString();
+        final var closeLoopOriginator = configObject.get("application.clOriginator").getAsString();
 
-        final String reRegConfigKey = configObject.get("application.reregistration.configKey").getAsString();
-        final String cpeAuthConfigKey = configObject.get("application.cpeAuth.configKey").getAsString();
-        final String closeLoopConfigKey = configObject.get("application.closeLoop.configKey").getAsString();
+        final var reRegConfigKey = configObject.get("application.reregistration.configKey").getAsString();
+        final var cpeAuthConfigKey = configObject.get("application.cpeAuth.configKey").getAsString();
+        final var closeLoopConfigKey = configObject.get("application.closeLoop.configKey").getAsString();
 
-        final String loggingLevel = configObject.get("application.loggingLevel").getAsString();
+        final var loggingLevel = configObject.get("application.loggingLevel").getAsString();
 
-        final String keyStorePath = configObject.get("application.ssl.keyStorePath").getAsString();
-        final String keyStorePasswordPath = configObject.get("application.ssl.keyStorePasswordPath").getAsString();
-        final String trustStorePath = configObject.get("application.ssl.trustStorePath").getAsString();
-        final String trustStorePasswordPath = configObject.get("application.ssl.trustStorePasswordPath").getAsString();
-        final boolean aaiEnableCertAuth = configObject.get("application.ssl.enableAaiCertAuth").getAsBoolean();
-        final boolean dmaapEnableCertAuth = configObject.get("application.ssl.enableDmaapCertAuth").getAsBoolean();
+        final var keyStorePath = configObject.get("application.ssl.keyStorePath").getAsString();
+        final var keyStorePasswordPath = configObject.get("application.ssl.keyStorePasswordPath").getAsString();
+        final var trustStorePath = configObject.get("application.ssl.trustStorePath").getAsString();
+        final var trustStorePasswordPath = configObject.get("application.ssl.trustStorePasswordPath").getAsString();
+        final var aaiEnableCertAuth = configObject.get("application.ssl.enableAaiCertAuth").getAsBoolean();
+        final var dmaapEnableCertAuth = configObject.get("application.ssl.enableDmaapCertAuth").getAsBoolean();
 
-        final JsonObject streamsPublishes = configObject.getAsJsonObject("streams_publishes");
-        final JsonObject streamsSubscribes = configObject.getAsJsonObject("streams_subscribes");
+        final var streamsPublishes = configObject.getAsJsonObject("streams_publishes");
+        final var streamsSubscribes = configObject.getAsJsonObject("streams_subscribes");
 
         return ImmutableGeneratedAppConfigObject.builder()
                 .dmaapProtocol(dmaapProtocol)
@@ -259,22 +258,22 @@ public class ConsulConfigurationGateway {
     private Map.Entry<String, GeneratedAppConfigObject.StreamsObject> parseStreamsSingleObject(
             Map.Entry<String, JsonElement> jsonEntry) {
 
-        JsonObject closeLoopOutput = (JsonObject) jsonEntry.getValue();
+        var closeLoopOutput = (JsonObject) jsonEntry.getValue();
 
-        String type = closeLoopOutput.get("type").getAsString();
-        String aafUsername = closeLoopOutput.get("aaf_username") != null
+        var type = closeLoopOutput.get("type").getAsString();
+        var aafUsername = closeLoopOutput.get("aaf_username") != null
                 ? closeLoopOutput.get("aaf_username").getAsString() : "";
-        String aafPassword = closeLoopOutput.get("aaf_password") != null
+        var aafPassword = closeLoopOutput.get("aaf_password") != null
                 ? closeLoopOutput.get("aaf_password").getAsString() : "";
 
-        JsonObject dmaapInfo = closeLoopOutput.getAsJsonObject("dmaap_info");
-        String clientId = dmaapInfo.get("client_id") != null
+        var dmaapInfo = closeLoopOutput.getAsJsonObject("dmaap_info");
+        var clientId = dmaapInfo.get("client_id") != null
                 ? dmaapInfo.get("client_id").getAsString() : "";
-        String clientRole = dmaapInfo.get("client_role") != null
+        var clientRole = dmaapInfo.get("client_role") != null
                 ? dmaapInfo.get("client_role").getAsString() : "";
-        String location = dmaapInfo.get("location") != null
+        var location = dmaapInfo.get("location") != null
                 ? dmaapInfo.get("location").getAsString() : "";
-        String topicUrl = dmaapInfo.get("topic_url").getAsString();
+        var topicUrl = dmaapInfo.get("topic_url").getAsString();
 
         GeneratedAppConfigObject.DmaapInfo dmaapInfoObject = ImmutableDmaapInfo.builder()
                 .clientId(clientId)

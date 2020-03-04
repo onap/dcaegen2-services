@@ -71,7 +71,7 @@ public class Application {
 
     @Bean
     TaskScheduler threadPoolTaskScheduler() {
-        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        var scheduler = new ThreadPoolTaskScheduler();
         scheduler.setPoolSize(THREADS_IN_POOL);
         scheduler.setThreadNamePrefix("pipeline-thrd-");
         return scheduler;

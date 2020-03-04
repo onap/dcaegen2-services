@@ -9,7 +9,7 @@ configs:
       re-registration:
         dmaapHostName: localhost
         dmaapPortNumber: 2222
-        dmaapTopicName: /events/unauthenticated.PNF_Update
+        dmaapTopicName: unauthenticated.PNF_Update
         dmaapProtocol: http
         dmaapContentType: application/json
         consumerId: c12
@@ -19,7 +19,7 @@ configs:
       cpe-authentication:
         dmaapHostName: localhost
         dmaapPortNumber: 2222
-        dmaapTopicName: /events/unauthenticated.CPE_Authentication
+        dmaapTopicName: unauthenticated.CPE_Authentication
         dmaapProtocol: http
         dmaapContentType: application/json
         consumerId: c12
@@ -29,7 +29,7 @@ configs:
     producer:
       dmaapHostName: localhost
       dmaapPortNumber: 2223
-      dmaapTopicName: /events/unauthenticated.DCAE_CL_OUTPUT
+      dmaapTopicName: unauthenticated.DCAE_CL_OUTPUT
       dmaapProtocol: http
       dmaapContentType: application/json
   aai:
@@ -47,14 +47,14 @@ configs:
         Real-Time: true
         Content-Type: application/json
   security:
-    trustStorePath: change it
-    trustStorePasswordPath: change it
-    keyStorePath: change it
-    keyStorePasswordPath: change it
+    trustStorePath: /opt/app/bbs-event-processor/etc/cert/trust.jks
+    trustStorePasswordPath: /opt/app/bbs-event-processor/etc/cert/trust.pass
+    keyStorePath: /opt/app/bbs-event-processor/etc/cert/cert.jks
+    keyStorePasswordPath: /opt/app/bbs-event-processor/etc/cert/jks.pass
     enableAaiCertAuth: false
     enableDmaapCertAuth: false
   application:
-    pipelinesPollingIntervalSec: 30
+    pipelinesPollingIntervalSec: 25
     pipelinesTimeoutSec: 15
     policyVersion: 1.0.0.5
     clTargetType: VM

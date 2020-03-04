@@ -20,6 +20,8 @@
 
 package org.onap.bbs.event.processor.utilities;
 
+import static org.onap.bbs.event.processor.utilities.GenericUtils.keyStoreFromResource;
+import static org.onap.dcaegen2.services.sdk.security.ssl.Passwords.fromPath;
 import static org.springframework.web.reactive.function.client.ExchangeFilterFunctions.basicAuthentication;
 
 import com.google.gson.Gson;
@@ -27,9 +29,10 @@ import com.google.gson.JsonSyntaxException;
 
 import io.netty.handler.ssl.SslContext;
 
+import java.nio.file.Paths;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.net.ssl.SSLException;
 
 import org.onap.bbs.event.processor.config.AaiClientConfiguration;
 import org.onap.bbs.event.processor.config.ApplicationConfiguration;
@@ -37,7 +40,9 @@ import org.onap.bbs.event.processor.config.ConfigurationChangeObserver;
 import org.onap.bbs.event.processor.exceptions.AaiTaskException;
 import org.onap.bbs.event.processor.model.PnfAaiObject;
 import org.onap.bbs.event.processor.model.ServiceInstanceAaiObject;
-import org.onap.dcaegen2.services.sdk.rest.services.ssl.SslFactory;
+import org.onap.dcaegen2.services.sdk.security.ssl.ImmutableSecurityKeys;
+import org.onap.dcaegen2.services.sdk.security.ssl.SecurityKeys;
+import org.onap.dcaegen2.services.sdk.security.ssl.SslFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +69,7 @@ public class AaiReactiveClient implements ConfigurationChangeObserver {
     private AaiClientConfiguration aaiClientConfiguration;
 
     @Autowired
-    AaiReactiveClient(ApplicationConfiguration configuration, Gson gson) throws SSLException {
+    AaiReactiveClient(ApplicationConfiguration configuration, Gson gson) {
         this.configuration = configuration;
         this.gson = gson;
         this.sslFactory = new SslFactory();
@@ -85,25 +90,20 @@ public class AaiReactiveClient implements ConfigurationChangeObserver {
 
     @Override
     public void updateConfiguration() {
-        AaiClientConfiguration newConfiguration = configuration.getAaiClientConfiguration();
+        var newConfiguration = configuration.getAaiClientConfiguration();
         if (aaiClientConfiguration.equals(newConfiguration)) {
             LOGGER.info("No Configuration changes necessary for AAI Reactive client");
         } else {
             synchronized (this) {
                 LOGGER.info("AAI Reactive client must be re-configured");
                 aaiClientConfiguration = newConfiguration;
-                try {
-                    setupWebClient();
-                } catch (SSLException e) {
-                    LOGGER.error("AAI Reactive client SSL error while re-configuring WebClient");
-                    LOGGER.debug("SSL Exception\n", e);
-                }
+                setupWebClient();
             }
         }
     }
 
-    private void setupWebClient() throws SSLException {
-        SslContext sslContext = createSslContext();
+    private void setupWebClient() {
+        var sslContext = createSslContext();
 
         ClientHttpConnector reactorClientHttpConnector = new ReactorClientHttpConnector(
                 HttpClient.create().secure(sslContextSpec -> sslContextSpec.sslContext(sslContext)));
@@ -132,7 +132,7 @@ public class AaiReactiveClient implements ConfigurationChangeObserver {
 
     private <T> Mono<T> performReactiveHttpGet(String url, Class<T> responseType) {
         LOGGER.debug("Will issue Reactive GET request to URL ({}) for object ({})", url, responseType.getName());
-        WebClient webClient = getWebClient();
+        var webClient = getWebClient();
         return webClient
                 .get()
                 .uri(url)
@@ -179,17 +179,18 @@ public class AaiReactiveClient implements ConfigurationChangeObserver {
         });
     }
 
-    private SslContext createSslContext() throws SSLException {
+    private SslContext createSslContext() {
         if (aaiClientConfiguration.enableAaiCertAuth()) {
             LOGGER.info("Creating secure context with:\n {}", aaiClientConfiguration);
-            return sslFactory.createSecureContext(
-                    aaiClientConfiguration.keyStorePath(),
-                    aaiClientConfiguration.keyStorePasswordPath(),
-                    aaiClientConfiguration.trustStorePath(),
-                    aaiClientConfiguration.trustStorePasswordPath()
-            );
+            final SecurityKeys securityKeys = ImmutableSecurityKeys.builder()
+                    .keyStore(keyStoreFromResource(aaiClientConfiguration.keyStorePath()))
+                    .keyStorePassword(fromPath(Paths.get(aaiClientConfiguration.keyStorePasswordPath())))
+                    .trustStore(keyStoreFromResource(aaiClientConfiguration.trustStorePath()))
+                    .trustStorePassword(fromPath(Paths.get(aaiClientConfiguration.trustStorePasswordPath())))
+                    .build();
+            return sslFactory.createSecureClientContext(securityKeys);
         }
-        return sslFactory.createInsecureContext();
+        return sslFactory.createInsecureClientContext();
     }
 
     private synchronized WebClient getWebClient() {

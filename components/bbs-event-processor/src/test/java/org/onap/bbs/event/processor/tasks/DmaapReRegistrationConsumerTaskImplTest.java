@@ -20,37 +20,38 @@
 
 package org.onap.bbs.event.processor.tasks;
 
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-
-import java.util.Optional;
-
-import javax.net.ssl.SSLException;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.onap.bbs.event.processor.config.ApplicationConfiguration;
+import org.onap.bbs.event.processor.config.DmaapReRegistrationConsumerProperties;
 import org.onap.bbs.event.processor.exceptions.EmptyDmaapResponseException;
 import org.onap.bbs.event.processor.model.ImmutableReRegistrationConsumerDmaapModel;
 import org.onap.bbs.event.processor.model.ReRegistrationConsumerDmaapModel;
 import org.onap.bbs.event.processor.utilities.ReRegistrationDmaapConsumerJsonParser;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.DmaapConsumerConfiguration;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.config.ImmutableDmaapConsumerConfiguration;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.consumer.ConsumerReactiveHttpClientFactory;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.service.consumer.DMaaPConsumerReactiveHttpClient;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.config.MessageRouterSubscriberConfig;
 
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
 class DmaapReRegistrationConsumerTaskImplTest {
+
+    private static final String DMAAP_PROTOCOL = "http";
+    private static final String DMAAP_HOST = "message-router.onap.svc.cluster.local";
+    private static final int DMAAP_PORT = 3904;
+    private static final String DMAAP_TOPIC = "unauthenticated.PNF_REREGISTRATION";
+    private static final String SUBSCRIBER_ID = "subscriberID";
+    private static final String SUBSCRIBER_GROUP = "subscriberGroup";
 
     private static final String RE_REGISTRATION_EVENT_TEMPLATE = "{\"event\": {"
             + "\"commonEventHeader\": { \"sourceName\":\"%s\"},"
@@ -63,31 +64,33 @@ class DmaapReRegistrationConsumerTaskImplTest {
 
     private static DmaapReRegistrationConsumerTaskImpl dmaapConsumerTask;
     private static ReRegistrationConsumerDmaapModel reRegistrationConsumerDmaapModel;
-    private static DMaaPConsumerReactiveHttpClient dMaaPConsumerReactiveHttpClient;
     private static String eventsArray;
+    private static MessageRouterSubscriber subscriber;
     private static Gson gson = new Gson();
+    private static ApplicationConfiguration configuration;
 
     @BeforeAll
-    static void setUp() throws SSLException {
-
-        final String sourceName = "PNF-CorrelationId";
-        final String attachmentPoint = "olt2/2/2";
-        final String remoteId = "remoteId";
-        final String cvlan = "1005";
-        final String svlan = "100";
+    static void setUp() {
 
         // Mock Re-registration configuration
-        DmaapConsumerConfiguration dmaapConsumerConfiguration = testVersionOfDmaapConsumerConfiguration();
-        ApplicationConfiguration configuration = mock(ApplicationConfiguration.class);
-        when(configuration.getDmaapReRegistrationConsumerConfiguration()).thenReturn(dmaapConsumerConfiguration);
+        configuration = mock(ApplicationConfiguration.class);
+        var props = mock(DmaapReRegistrationConsumerProperties.class);
+        when(props.getDmaapProtocol()).thenReturn(DMAAP_PROTOCOL);
+        when(props.getDmaapHostName()).thenReturn(DMAAP_HOST);
+        when(props.getDmaapPortNumber()).thenReturn(DMAAP_PORT);
+        when(props.getDmaapTopicName()).thenReturn(DMAAP_TOPIC);
+        when(props.getConsumerId()).thenReturn(SUBSCRIBER_ID);
+        when(props.getConsumerGroup()).thenReturn(SUBSCRIBER_GROUP);
+        when(configuration.getDmaapReRegistrationConsumerProperties()).thenReturn(props);
 
-        // Mock reactive DMaaP client
-        ConsumerReactiveHttpClientFactory httpClientFactory = mock(ConsumerReactiveHttpClientFactory.class);
-        dMaaPConsumerReactiveHttpClient = mock(DMaaPConsumerReactiveHttpClient.class);
-        doReturn(dMaaPConsumerReactiveHttpClient).when(httpClientFactory).create(dmaapConsumerConfiguration);
+        var subscriberConfig = mock(MessageRouterSubscriberConfig.class);
+        when(configuration.getDmaapReRegistrationConsumerConfiguration()).thenReturn(subscriberConfig);
 
-        dmaapConsumerTask = new DmaapReRegistrationConsumerTaskImpl(configuration,
-                new ReRegistrationDmaapConsumerJsonParser(), httpClientFactory);
+        var sourceName = "PNF-CorrelationId";
+        var attachmentPoint = "olt2/2/2";
+        var remoteId = "remoteId";
+        var cvlan = "1005";
+        var svlan = "100";
 
         reRegistrationConsumerDmaapModel = ImmutableReRegistrationConsumerDmaapModel.builder()
                 .correlationId(sourceName)
@@ -97,58 +100,43 @@ class DmaapReRegistrationConsumerTaskImplTest {
                 .sVlan(svlan)
                 .build();
 
-        String event = String.format(RE_REGISTRATION_EVENT_TEMPLATE, sourceName, attachmentPoint, remoteId,
+        var event = String.format(RE_REGISTRATION_EVENT_TEMPLATE, sourceName, attachmentPoint, remoteId,
                 cvlan, svlan);
 
         eventsArray = "[" + event + "]";
     }
 
-    @AfterEach
-    void resetMock() {
-        reset(dMaaPConsumerReactiveHttpClient);
-    }
-
     @Test
     void passingEmptyMessage_NothingHappens() {
-        JsonElement empty = gson.toJsonTree("");
-        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse(Optional.empty())).thenReturn(Mono.just(empty));
+        var empty = gson.toJsonTree("");
+        subscriber = mock(MessageRouterSubscriber.class);
+        when(subscriber.getElements(any())).thenReturn(Flux.just(empty));
+
+        dmaapConsumerTask = new DmaapReRegistrationConsumerTaskImpl(configuration, subscriber,
+                new ReRegistrationDmaapConsumerJsonParser());
 
         StepVerifier.create(dmaapConsumerTask.execute("Sample input"))
                 .expectSubscription()
                 .expectError(EmptyDmaapResponseException.class);
-        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse(Optional.empty());
+
+        verify(subscriber, times(1)).getElements(any());
+        verifyNoMoreInteractions(subscriber);
     }
 
     @Test
     void passingNormalMessage_ResponseSucceeds() {
-        JsonElement normalEventsArray = gson.toJsonTree(eventsArray);
-        when(dMaaPConsumerReactiveHttpClient.getDMaaPConsumerResponse(Optional.empty()))
-                .thenReturn(Mono.just(normalEventsArray));
+        System.out.println("Events sent : " + eventsArray);
+        var normalEventsArray = gson.toJsonTree(eventsArray);
+        subscriber = mock(MessageRouterSubscriber.class);
+        when(subscriber.getElements(any())).thenReturn(Flux.just(normalEventsArray));
+
+        dmaapConsumerTask = new DmaapReRegistrationConsumerTaskImpl(configuration, subscriber,
+                new ReRegistrationDmaapConsumerJsonParser());
 
         StepVerifier.create(dmaapConsumerTask.execute("Sample input"))
                 .expectSubscription()
                 .consumeNextWith(e -> Assert.assertEquals(e, reRegistrationConsumerDmaapModel));
-        verify(dMaaPConsumerReactiveHttpClient).getDMaaPConsumerResponse(Optional.empty());
-    }
-
-    private static DmaapConsumerConfiguration testVersionOfDmaapConsumerConfiguration() {
-        return new ImmutableDmaapConsumerConfiguration.Builder()
-                .consumerGroup("OpenDCAE-c12")
-                .consumerId("c12")
-                .dmaapContentType("application/json")
-                .dmaapHostName("message-router.onap.svc.cluster.local")
-                .dmaapPortNumber(3904)
-                .dmaapProtocol("http")
-                .dmaapUserName("admin")
-                .dmaapUserPassword("admin")
-                .trustStorePath("/opt/app/bbs/local/org.onap.bbs.trust.jks")
-                .trustStorePasswordPath("change_it")
-                .keyStorePath("/opt/app/bbs/local/org.onap.bbs.p12")
-                .keyStorePasswordPath("change_it")
-                .enableDmaapCertAuth(false)
-                .dmaapTopicName("/events/unauthenticated.PNF_REREGISTRATION")
-                .timeoutMs(-1)
-                .messageLimit(-1)
-                .build();
+        verify(subscriber, times(1)).getElements(any());
+        verifyNoMoreInteractions(subscriber);
     }
 }

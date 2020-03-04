@@ -22,7 +22,6 @@ package org.onap.bbs.event.processor.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapterFactory;
 
@@ -42,13 +41,13 @@ class GsonSerializationsTest {
     @Test
     void creatingReRegistrationJsonBody_returnsJsonInString() {
 
-        String correlationId = "NokiaCorrelationId";
-        String attachmentPoint = "olt2/1/1";
-        String remoteId = "RemoteId";
-        String cvlan = "1005";
-        String svlan = "100";
+        var correlationId = "NokiaCorrelationId";
+        var attachmentPoint = "olt2/1/1";
+        var remoteId = "RemoteId";
+        var cvlan = "1005";
+        var svlan = "100";
 
-        String template = "{"
+        var template = "{"
                 + "\"correlationId\":\"%s\","
                 + "\"attachment-point\":\"%s\","
                 + "\"remote-id\":\"%s\","
@@ -65,7 +64,7 @@ class GsonSerializationsTest {
                 .build();
 
 
-        String expectedResult = String.format(template, correlationId, attachmentPoint, remoteId, cvlan, svlan);
+        var expectedResult = String.format(template, correlationId, attachmentPoint, remoteId, cvlan, svlan);
 
         assertEquals(expectedResult, new ReRegistrationJsonBodyBuilder().createJsonBody(model));
     }
@@ -73,14 +72,14 @@ class GsonSerializationsTest {
     @Test
     void creatingCpeAuthenticationJsonBody_returnsJsonInString() {
 
-        String correlationId = "NokiaCorrelationID";
-        AuthenticationState oldAuthenticationState = AuthenticationState.IN_SERVICE;
-        AuthenticationState newAuthenticationState = AuthenticationState.OUT_OF_SERVICE;
-        String stateInterface = "stateInterface";
-        String rgwMacAddress = "00:0a:95:8d:78:16";
-        String swVersion = "1.2";
+        var correlationId = "NokiaCorrelationID";
+        var oldAuthenticationState = AuthenticationState.IN_SERVICE;
+        var newAuthenticationState = AuthenticationState.OUT_OF_SERVICE;
+        var stateInterface = "stateInterface";
+        var rgwMacAddress = "00:0a:95:8d:78:16";
+        var swVersion = "1.2";
 
-        String template = "{"
+        var template = "{"
                 + "\"correlationId\":\"%s\","
                 + "\"old-authentication-state\":\"%s\","
                 + "\"new-authentication-state\":\"%s\","
@@ -99,7 +98,7 @@ class GsonSerializationsTest {
                 .build();
 
 
-        String expectedResult = String.format(template, correlationId, oldAuthenticationState.getNameInOnap(),
+        var expectedResult = String.format(template, correlationId, oldAuthenticationState.getNameInOnap(),
                 newAuthenticationState.getNameInOnap(), stateInterface, rgwMacAddress, swVersion);
 
         assertEquals(expectedResult, new CpeAuthenticationJsonBodyBuilder().createJsonBody(model));
@@ -108,27 +107,27 @@ class GsonSerializationsTest {
     @Test
     void creatingDcaeControlLoopJsonBody_returnsJsonInString() {
 
-        String closedLoopEventClient = "DCAE.BBS_mSInstance";
-        String policyVersion = "1.0.0.5";
-        String policyName = "CPE_Authentication";
-        String policyScope =
+        var closedLoopEventClient = "DCAE.BBS_mSInstance";
+        var policyVersion = "1.0.0.5";
+        var policyName = "CPE_Authentication";
+        var policyScope =
                 "service=HSIAService,type=SampleType,"
                         + "closedLoopControlName=CL-CPE_A-d925ed73-8231-4d02-9545-db4e101f88f8";
-        String targetType = "VM";
-        long closedLoopAlarmStart = 1484677482204798L;
-        String closedLoopEventStatus = "ONSET";
-        String closedLoopControlName = "ControlLoop-CPE_A-2179b738-fd36-4843-a71a-a8c24c70c88b";
-        String version = "1.0.2";
-        String target = "vserver.vserver-name";
-        String requestId = "97964e10-686e-4790-8c45-bdfa61df770f";
-        String from = "DCAE";
+        var targetType = "VM";
+        var closedLoopAlarmStart = 1484677482204798L;
+        var closedLoopEventStatus = "ONSET";
+        var closedLoopControlName = "ControlLoop-CPE_A-2179b738-fd36-4843-a71a-a8c24c70c88b";
+        var version = "1.0.2";
+        var target = "vserver.vserver-name";
+        var requestId = "97964e10-686e-4790-8c45-bdfa61df770f";
+        var from = "DCAE";
 
         Map<String, String> aaiEnrichmentData = new LinkedHashMap<>();
         aaiEnrichmentData.put("service-information.service-instance-id", "service-instance-id-example");
         aaiEnrichmentData.put("cvlan-id", "example cvlan-id");
         aaiEnrichmentData.put("svlan-id", "example svlan-id");
 
-        String template = "{"
+        var template = "{"
                 + "\"closedLoopEventClient\":\"%s\","
                 + "\"policyVersion\":\"%s\","
                 + "\"policyName\":\"%s\","
@@ -165,7 +164,7 @@ class GsonSerializationsTest {
                 .originator(from)
                 .build();
 
-        String expectedResult = String.format(template,
+        var expectedResult = String.format(template,
                 closedLoopEventClient,
                 policyVersion,
                 policyName,
@@ -185,14 +184,14 @@ class GsonSerializationsTest {
     @Test
     void pnfAaiObject_IsSerializedSuccessfully() {
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
+        var gsonBuilder = new GsonBuilder();
         ServiceLoader.load(TypeAdapterFactory.class).forEach(gsonBuilder::registerTypeAdapterFactory);
-        Gson gson = gsonBuilder.create();
+        var gson = gsonBuilder.create();
 
-        String pnfName = "NokiaCorrelationID";
-        String swVersion = "1.2";
+        var pnfName = "NokiaCorrelationID";
+        var swVersion = "1.2";
 
-        String template = "{"
+        var template = "{"
                 + "\"pnf-name\":\"%s\","
                 + "\"in-maint\":true,"
                 + "\"sw-version\":\"%s\","
@@ -288,7 +287,7 @@ class GsonSerializationsTest {
                 .build();
 
 
-        String jsonPnfObject = String.format(template, pnfName, swVersion);
+        var jsonPnfObject = String.format(template, pnfName, swVersion);
 
         assertEquals(jsonPnfObject, gson.toJson(pnfAaiObject));
         assertEquals(pnfAaiObject, gson.fromJson(jsonPnfObject, ImmutablePnfAaiObject.class));
@@ -297,14 +296,14 @@ class GsonSerializationsTest {
     @Test
     void serviceInstanceAaiObject_IsSerializedSuccessfully() {
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
+        var gsonBuilder = new GsonBuilder();
         ServiceLoader.load(TypeAdapterFactory.class).forEach(gsonBuilder::registerTypeAdapterFactory);
-        Gson gson = gsonBuilder.create();
+        var gson = gsonBuilder.create();
 
-        String serviceInstanceId = "84003b26-6b76-4c75-b805-7b14ab4ffaef";
-        String orchestrationStatus = "active";
+        var serviceInstanceId = "84003b26-6b76-4c75-b805-7b14ab4ffaef";
+        var orchestrationStatus = "active";
 
-        String template = "{"
+        var template = "{"
                 + "\"service-instance-id\":\"%s\","
                 + "\"orchestration-status\":\"%s\","
                 + "\"relationship-list\":{"
@@ -370,7 +369,7 @@ class GsonSerializationsTest {
                 .build();
 
 
-        String jsonServiceInstanceObject = String.format(template, serviceInstanceId, orchestrationStatus);
+        var jsonServiceInstanceObject = String.format(template, serviceInstanceId, orchestrationStatus);
 
         assertEquals(jsonServiceInstanceObject, gson.toJson(serviceInstanceAaiObject));
         assertEquals(serviceInstanceAaiObject, gson.fromJson(jsonServiceInstanceObject,

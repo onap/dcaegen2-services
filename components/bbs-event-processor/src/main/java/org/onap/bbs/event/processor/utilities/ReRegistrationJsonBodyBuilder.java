@@ -27,18 +27,16 @@ import java.util.ServiceLoader;
 
 import org.onap.bbs.event.processor.model.ImmutableReRegistrationConsumerDmaapModel;
 import org.onap.bbs.event.processor.model.ReRegistrationConsumerDmaapModel;
-import org.onap.dcaegen2.services.sdk.rest.services.model.JsonBodyBuilder;
 
-public class ReRegistrationJsonBodyBuilder implements JsonBodyBuilder<ReRegistrationConsumerDmaapModel> {
+public class ReRegistrationJsonBodyBuilder {
 
     /**
      * Serialize the Re-Registration DMaaP model with GSON.
      * @param reRegistrationConsumerDmaapModel object to be serialized
      * @return String output of serialization
      */
-    @Override
     public String createJsonBody(ReRegistrationConsumerDmaapModel reRegistrationConsumerDmaapModel) {
-        GsonBuilder gsonBuilder = new GsonBuilder();
+        var gsonBuilder = new GsonBuilder();
         ServiceLoader.load(TypeAdapterFactory.class).forEach(gsonBuilder::registerTypeAdapterFactory);
         return gsonBuilder.create().toJson(ImmutableReRegistrationConsumerDmaapModel.builder()
                 .correlationId(reRegistrationConsumerDmaapModel.getCorrelationId())
