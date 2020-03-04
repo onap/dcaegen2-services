@@ -1,0 +1,9 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Stavros Kanarakis <stavros.kanarakis@nokia.com>
+Code-Review+1: Jack Lucas <jflucas@research.att.com>
+Code-Review+2: Lusheng Ji <lji@research.att.com>
+Submitted-by: Lusheng Ji <lji@research.att.com>
+Submitted-at: Wed, 04 Mar 2020 20:59:07 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/services/+/103062
+Project: dcaegen2/services
+Branch: refs/heads/master
