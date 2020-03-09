@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a6b093c6_dae1b54d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-09T15:56:01Z",
+      "side": 1,
+      "message": "No it is not used anywhere. Although this class was just moved from subscription module to here to better reflect its place, should I amend it?",
+      "parentUuid": "11e63d76_b2d513e0",
+      "revId": "3755e47b323dcee43ca85c61c9937201434d0e8c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "458ef4b0_838f2fc6",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "3755e47b323dcee43ca85c61c9937201434d0e8c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3d7994c_76898aad",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-09T15:56:01Z",
+      "side": 1,
+      "message": "Ack. Just moving the implementation, not changing it from what was merged. Although it does become its own periodic task. We do not need this running all the time, so I believe it is fine the way it is",
+      "parentUuid": "458ef4b0_838f2fc6",
+      "revId": "3755e47b323dcee43ca85c61c9937201434d0e8c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -56,6 +92,30 @@
       "revId": "3755e47b323dcee43ca85c61c9937201434d0e8c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22f47881_e558e809",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-09T15:56:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60af3ff0_27f8ac18",
+      "range": {
+        "startLine": 61,
+        "startChar": 34,
+        "endLine": 61,
+        "endChar": 55
+      },
+      "revId": "3755e47b323dcee43ca85c61c9937201434d0e8c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
