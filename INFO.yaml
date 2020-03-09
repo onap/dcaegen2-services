@@ -76,6 +76,17 @@ committers:
       company: 'EST'
       id: 'JoeOLeary'
       timezone: 'Ireland/UTC'
+    - name: 'Kate Hsuan'
+      email: 'kate.hsuan@qct.io'
+      company: 'QCT'
+      id: 'mizunoami123'
+      timezone: 'Asia/Taipei'
+    - name: 'Ekko Chang'
+      email: 'ekko.changn@qct.io'
+      company: 'QCT'
+      id: 'ekko.chang'
+      timezone: 'Asia/Taipei'
+
 tsc:
     approval: 'https://lists.onap.org/pipermail/onap-tsc'
     changes:
