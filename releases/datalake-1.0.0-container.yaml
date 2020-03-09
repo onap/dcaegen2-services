@@ -1,0 +1,11 @@
+distribution_type: 'container'
+version: '1.0.0'
+project: 'dcaegen2-services-datalake'
+log_dir: 'dcaegen2-services-datalake-docker-merge-master/13/'
+containers:
+  - name: 'datalakefeeder'
+    version: '1.0.0-SNAPSHOT-20200308T125753Z'
+  - name: 'datalakeadminui'
+    version: '1.0.0-SNAPSHOT-20200308T125753Z'
+container_release_tag: '1.0.0'
+ref: '3034e7cd569faea033c9a309b3318c7e51c1ba9e'
