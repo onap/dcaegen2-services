@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c41b3a24_15c5b8b9",
+        "filename": "releases/bbs-event-processor-2.0.0-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-09T16:18:58Z",
+      "side": 1,
+      "message": "I don\u0027t think this is required; can this be removed?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 47
+      },
+      "revId": "3d577345f5b68740fca933921be471d22c09b339",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
