@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5b37f35_35999f7c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-03-10T12:11:43Z",
+      "side": 1,
+      "message": "You could write this using list comprehension, which would look something like\n\ndata \u003d json.loads(self.mr_sub.get_from_topic(\u0027policy_response_consumer\u0027))\n\nfor apt_datum in [datum for datum in data if datum[\u0027status\u0027][\u0027subscriptionName\u0027] \u003d\u003d self.subscription_name]:\n    nf_name \u003d data[\u0027status\u0027][\u0027nfName\u0027]\n    response_message \u003d data[\u0027status\u0027][\u0027message\u0027]\n    self._handle_response(self.subscriptio_name, administrative_state, nf_name, response_message)\n\n\n\nhowever, it\u0027s mostly a style change, and won\u0027t lead to any real difference in performance, so I leave the decision on whether you would use that here or not down to you.\n\nIt is good to know how they work though.",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 62,
+        "endChar": 68
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df21a465_a09ea695",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-03-10T12:11:43Z",
+      "side": 1,
+      "message": "Given multiple parts of the application polls MR, might be a good idea to indicate that it\u0027s for policy, also wonder should we do some trace/debugging logging here too.",
+      "range": {
+        "startLine": 64,
+        "startChar": 29,
+        "endLine": 64,
+        "endChar": 60
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8941409b_a966d1ba",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-03-10T12:11:43Z",
+      "side": 1,
+      "message": "This is a neat declarative way to handle this, hiding away the fact that there would be an awkward decision if you had written this differently. Nice!",
+      "range": {
+        "startLine": 80,
+        "startChar": 28,
+        "endLine": 82,
+        "endChar": 91
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9372c6e_332363b7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-03-10T12:11:43Z",
+      "side": 1,
+      "message": "network_functions would be better, nfs can mean a lot of things.",
+      "range": {
+        "startLine": 49,
+        "startChar": 21,
+        "endLine": 49,
+        "endChar": 24
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bf7dd38_f8183b8a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-03-10T12:11:43Z",
+      "side": 1,
+      "message": "I\u0027ll have a conversation with you about this offline. tl;dr probably should be handling threads centrally.",
+      "range": {
+        "startLine": 53,
+        "startChar": 15,
+        "endLine": 62,
+        "endChar": 45
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "221611bf_9881ec9f",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-03-10T12:11:43Z",
+      "side": 1,
+      "message": "I know there was some intent to consider an event loop, as far as I know, that won\u0027t be done soon, so, for now, would it be easier to handle thread management if these were stored in some sort of a collection?",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 99
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
