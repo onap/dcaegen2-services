@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "becbaae2_a6f3b29d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-03-10T13:48:13Z",
+      "side": 1,
+      "message": "Didn\u0027t the policy handler get changed too?",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b5b37f35_35999f7c",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
         "patchSetId": 4
@@ -110,6 +133,29 @@
         "startChar": 15,
         "endLine": 62,
         "endChar": 45
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06296f5c_ba777d81",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-03-10T13:48:13Z",
+      "side": 1,
+      "message": "sub_in_db \u003d Subscription.get(sub.subscriptionName)\nadmin_state \u003d sub_in_db.status if sub_in_db.status else AdministrativeState.LOCKED.value",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 60
       },
       "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
