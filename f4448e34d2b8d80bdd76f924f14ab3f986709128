@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "37de0976_2b6c54ca",
+        "filename": "INFO.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2020-03-10T10:27:48Z",
+      "side": 1,
+      "message": "removed.",
+      "parentUuid": "afb6ec55_2abc8cbc",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 29
+      },
+      "revId": "f4448e34d2b8d80bdd76f924f14ab3f986709128",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0993d10_0028007f",
         "filename": "releases/datalake-1.0.0-container.yaml",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7078b859_ee25e765",
+        "filename": "releases/datalake-1.0.0-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2020-03-10T10:27:48Z",
+      "side": 1,
+      "message": "fixed.",
+      "parentUuid": "f0993d10_0028007f",
+      "range": {
+        "startLine": 4,
+        "startChar": 11,
+        "endLine": 4,
+        "endChar": 56
+      },
+      "revId": "f4448e34d2b8d80bdd76f924f14ab3f986709128",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d3d544e_6058c03d",
         "filename": "releases/datalake-1.0.0-container.yaml",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2020-03-09T17:06:03Z",
       "side": 1,
       "message": "As both adminui and feeder container are built via separate jobs, release yaml must be separate (as they are bound based on the job).\n\nAlternatively it will be good to align the build jobs for DL such that docker build/push for both components can be triggered from same job (by using top level pom https://git.onap.org/dcaegen2/services/tree/components/datalake-handler/pom.xml)",
+      "range": {
+        "startLine": 6,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "f4448e34d2b8d80bdd76f924f14ab3f986709128",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ea92955_79b1e45d",
+        "filename": "releases/datalake-1.0.0-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 5267
+      },
+      "writtenOn": "2020-03-10T10:27:48Z",
+      "side": 1,
+      "message": "I try to use separate files to implement that!",
+      "parentUuid": "4d3d544e_6058c03d",
       "range": {
         "startLine": 6,
         "startChar": 1,
