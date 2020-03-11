@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "9cedc0e6_ec1c8ea9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-11T10:32:24Z",
+      "side": 1,
+      "message": "Ack. Thanks for the suggestion, although I prefer the current approach.",
+      "parentUuid": "b5b37f35_35999f7c",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 62,
+        "endChar": 68
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df21a465_a09ea695",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
         "patchSetId": 4
@@ -68,6 +92,30 @@
       "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62b0bf11_1de7bfcd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-11T10:32:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df21a465_a09ea695",
+      "range": {
+        "startLine": 64,
+        "startChar": 29,
+        "endLine": 64,
+        "endChar": 60
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "7c112294_2a5dbdbe",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-11T10:32:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8941409b_a966d1ba",
+      "range": {
+        "startLine": 80,
+        "startChar": 28,
+        "endLine": 82,
+        "endChar": 91
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9372c6e_332363b7",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
         "patchSetId": 4
@@ -114,6 +186,30 @@
       "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c90ae94e_610dee3a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-11T10:32:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9372c6e_332363b7",
+      "range": {
+        "startLine": 49,
+        "startChar": 21,
+        "endLine": 49,
+        "endChar": 24
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "19e626a4_ddae5e3a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-11T10:32:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bf7dd38_f8183b8a",
+      "range": {
+        "startLine": 53,
+        "startChar": 15,
+        "endLine": 62,
+        "endChar": 45
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06296f5c_ba777d81",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 4
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "3cc34d14_c40ddd19",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-11T10:32:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06296f5c_ba777d81",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 60
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "221611bf_9881ec9f",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 4
@@ -183,6 +327,30 @@
       "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1161615_d8511215",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-11T10:32:24Z",
+      "side": 1,
+      "message": "Ack. I think so too, but at will leave that at the discretion of person implementing shutdown.",
+      "parentUuid": "221611bf_9881ec9f",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 99
+      },
+      "revId": "c9ad7ff4afa88cd63d31c03971b2a0664e580f03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
