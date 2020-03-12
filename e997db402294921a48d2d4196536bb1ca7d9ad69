@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3654fca8_d9fc03bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-03-12T08:14:45Z",
+      "side": 1,
+      "message": "Should we align this blueprint with https://git.onap.org/dcaegen2/platform/blueprints/tree/blueprints/k8s-pmsh.yaml",
+      "revId": "e997db402294921a48d2d4196536bb1ca7d9ad69",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
