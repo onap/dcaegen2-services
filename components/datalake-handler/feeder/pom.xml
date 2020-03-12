@@ -18,6 +18,8 @@
 		<swagger.version>2.9.2</swagger.version>
 		<dockerfile-maven.version>1.4.5</dockerfile-maven.version>
 		<docker.image.path>onap/org.onap.dcaegen2.services.datalakefeeder</docker.image.path>
+		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+
 	</properties>
 
 	<dependencies>
@@ -224,6 +226,54 @@
 						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
 					</buildArgs>
 				</configuration>
+				<executions>
+					<execution>
+						<id>build-sl-feeder-image</id>
+						<phase>package</phase>
+						<goals>
+						    <goal>build</goal>
+		                                </goals>
+					</execution>
+					<execution>
+						<id>tag-and-push-image-latest</id>
+						<phase>package</phase>
+						<goals>
+						    <goal>tag</goal>
+						    <goal>push</goal>
+					        </goals>
+						<configuration>
+							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
+						        <tag>latest</tag>
+						        <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+						</configuration>	
+					</execution>
+					<execution>
+						<id>tag-and-push-image-with-version</id>
+						<phase>package</phase>
+						<goals>
+						    <goal>tag</goal>
+						    <goal>push</goal>
+					        </goals>
+						<configuration>
+							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
+							<tag>${project.version}</tag>
+						        <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+						</configuration>	
+					</execution>
+					<execution>
+						<id>tag-and-push-image-with-version-and-date</id>
+						<phase>package</phase>
+						<goals>
+						    <goal>tag</goal>
+						    <goal>push</goal>
+					        </goals>
+						<configuration>
+							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
+							<tag>${project.version}-${maven.build.timestamp}Z</tag>
+							<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+					        </configuration>
+				        </execution>
+			        </executions>
 				<dependencies>
 					<!-- To make this work on JDK 9+ -->
 					<dependency>
