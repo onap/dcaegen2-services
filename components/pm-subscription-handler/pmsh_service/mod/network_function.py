@@ -82,4 +82,6 @@ class NetworkFunction:
         nf = NetworkFunctionModel.query.filter(
             NetworkFunctionModel.nf_name == nf_name).one_or_none()
 
-        db.session.delete(nf) if nf else None
+        if nf:
+            db.session.delete(nf)
+            db.session.commit()
