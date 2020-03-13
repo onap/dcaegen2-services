@@ -44,12 +44,18 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-          - name: HOSTNAME
-            value: k8s-datalake
-          - name: CONSUL_HOST
-            value: consul
-          - name: CONFIG_BINDING_SERVICE
-            value: config-binding-service      
+            - name: HOSTNAME
+              value: k8s-datalake
+            - name: CONSUL_HOST
+              value: consul
+            - name: CONFIG_BINDING_SERVICE
+              value: config-binding-service
+            - name: MYSQL_HOST
+              value: mariadb-galera
+            - name: MYSQL_PORT
+              value: "3306"
+            - name: MYSQL_ROOT_PASSWORD
+              value: secretpassword
           ports:
             - name: http
               containerPort: 1680
