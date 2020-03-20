@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fc537ed_bd216197",
+        "filename": "releases/datalake-adminui-1.0.1-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-20T17:38:02Z",
+      "side": 1,
+      "message": "This is wrong commit - https://gerrit.onap.org/r/gitweb?p\u003ddcaegen2/services.git;a\u003dcommit;h\u003d4a9318d693e3331253fb4f319738a282bfa15214",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "b2b7f2aca1d08167c431b6e61199f1d94923ad62",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
