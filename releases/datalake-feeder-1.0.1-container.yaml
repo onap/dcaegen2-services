@@ -1,0 +1,9 @@
+distribution_type: 'container'
+version: '1.0.1'
+project: 'dcaegen2-services-datalake'
+log_dir: 'dcaegen2-services-datalake-handler-maven-docker-stage-master/71/'
+containers:
+  - name: 'org.onap.dcaegen2.services.datalakefeeder'
+    version: '1.0.1-20200320T081800Z'
+container_release_tag: '1.0.1'
+ref: '4a9318d693e3331253fb4f319738a282bfa15214'
