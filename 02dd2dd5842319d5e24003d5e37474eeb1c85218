@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55a808fc_4f9e0c41",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5038
+      },
+      "writtenOn": "2020-03-23T12:34:50Z",
+      "side": 1,
+      "message": "Should add a new change here for 1.0.1 as 1.0.0 was already released",
+      "range": {
+        "startLine": 8,
+        "startChar": 3,
+        "endLine": 8,
+        "endChar": 10
+      },
+      "revId": "02dd2dd5842319d5e24003d5e37474eeb1c85218",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
