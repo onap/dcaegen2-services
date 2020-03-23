@@ -22,6 +22,30 @@
       "revId": "02dd2dd5842319d5e24003d5e37474eeb1c85218",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8bd66b7_4f04fbe4",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-23T14:20:13Z",
+      "side": 1,
+      "message": "Done and added the new version that this commit would create",
+      "parentUuid": "55a808fc_4f9e0c41",
+      "range": {
+        "startLine": 8,
+        "startChar": 3,
+        "endLine": 8,
+        "endChar": 10
+      },
+      "revId": "02dd2dd5842319d5e24003d5e37474eeb1c85218",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
