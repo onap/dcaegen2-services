@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a007ba9_5cf24a67",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5169
+      },
+      "writtenOn": "2020-03-23T11:27:31Z",
+      "side": 1,
+      "message": "I realise now we forgot to update this file for release 1.0.1 of PMSH. Could correct it here also if you wanted or we can do it separately afterwards.",
+      "revId": "025509e2b39028bde7538c31de9a60af13eb029c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
