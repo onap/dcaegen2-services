@@ -34,6 +34,24 @@
       "revId": "025509e2b39028bde7538c31de9a60af13eb029c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09137d6d_30d079c2",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-23T12:15:27Z",
+      "side": 1,
+      "message": "Changed to 1.0.1\nThe filename: Didn\u0027t really have any reason to change it for my commit, but I think Ephraim was having problems regarding this file, and there was two of them . So I deleted the other one and kept this one as per request by Joe",
+      "parentUuid": "f87a16ee_42142948",
+      "revId": "025509e2b39028bde7538c31de9a60af13eb029c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
