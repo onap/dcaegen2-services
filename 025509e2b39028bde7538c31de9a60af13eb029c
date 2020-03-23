@@ -16,6 +16,24 @@
       "revId": "025509e2b39028bde7538c31de9a60af13eb029c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f87a16ee_42142948",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-03-23T11:46:57Z",
+      "side": 1,
+      "message": "Seems resonable to patch it here.\nps. @Rob: No real need to change the filename",
+      "parentUuid": "3a007ba9_5cf24a67",
+      "revId": "025509e2b39028bde7538c31de9a60af13eb029c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
