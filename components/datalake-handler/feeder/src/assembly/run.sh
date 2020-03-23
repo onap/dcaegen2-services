@@ -6,10 +6,13 @@ echo "start init db ..."
 
 echo "finish init db"
 
-cmd=`ls feeder-*.jar`
-if [ -z "$cmd" ]; then
-    echo "STRING is empty"
-    sleep 10000
-else
+cmd=`find . -regex  '\./feeder-[0-9]+\.[0-9]+\.[0-9]+[-SNAPSHOT]+\.jar'`
+cmd1= `find . -regex '\./feeder-[0-9]+\.[0-9]+\.[0-9]+\.jar'`
+if [ -n "$cmd" ]; then
     java -jar $cmd
+elif [ -n "$cmd1" ]; then
+    java -jar $cmd
+else
+    echo"STRING is empty"
+    sleep 10000
 fi
