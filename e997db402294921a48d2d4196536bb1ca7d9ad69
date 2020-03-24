@@ -16,6 +16,24 @@
       "revId": "e997db402294921a48d2d4196536bb1ca7d9ad69",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dea5bb50_4b3f76e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-03-24T14:27:06Z",
+      "side": 1,
+      "message": "Yes, would prefer not having multiple version of blueprints\n\nBtw, is this generated from component_spec or done manually?",
+      "parentUuid": "3654fca8_d9fc03bb",
+      "revId": "e997db402294921a48d2d4196536bb1ca7d9ad69",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
