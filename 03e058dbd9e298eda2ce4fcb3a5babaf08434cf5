@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "051fac37_f6f722e9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/exit_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-03-25T14:35:36Z",
+      "side": 1,
+      "message": "this would force the users of ExitHandler to pass in these keyword arguments",
+      "parentUuid": "645a23fe_cd26eda0",
+      "range": {
+        "startLine": 33,
+        "startChar": 23,
+        "endLine": 33,
+        "endChar": 25
+      },
+      "revId": "03e058dbd9e298eda2ce4fcb3a5babaf08434cf5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "236a5199_7868f94c",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/exit_handler.py",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-03-25T12:20:52Z",
       "side": 1,
       "message": "Are we always assuming this is a shutdown signal?",
+      "range": {
+        "startLine": 38,
+        "startChar": 67,
+        "endLine": 38,
+        "endChar": 74
+      },
+      "revId": "03e058dbd9e298eda2ce4fcb3a5babaf08434cf5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ffcaa36_0c7a83bc",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/exit_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-03-25T14:35:36Z",
+      "side": 1,
+      "message": "this will always be sigterm in our case. we do not handle any other signals",
+      "parentUuid": "236a5199_7868f94c",
       "range": {
         "startLine": 38,
         "startChar": 67,
@@ -83,6 +131,30 @@
       "side": 1,
       "message": "Not entirely sure, but I presume, since PeriodicTask is implementing Timer, this line ensures we run the function instantly instead of waiting for the interval period to pass before running the function for the first time",
       "parentUuid": "47f28358_0ebc4c1a",
+      "range": {
+        "startLine": 185,
+        "startChar": 8,
+        "endLine": 185,
+        "endChar": 21
+      },
+      "revId": "03e058dbd9e298eda2ce4fcb3a5babaf08434cf5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d969859e_8edb25d9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-03-25T14:35:36Z",
+      "side": 1,
+      "message": "yes this is what this line is for",
+      "parentUuid": "68f2e0d2_50c8bfd0",
       "range": {
         "startLine": 185,
         "startChar": 8,
