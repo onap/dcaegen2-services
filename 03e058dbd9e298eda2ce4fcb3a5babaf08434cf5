@@ -68,6 +68,30 @@
       "revId": "03e058dbd9e298eda2ce4fcb3a5babaf08434cf5",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f2e0d2_50c8bfd0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-03-25T14:17:31Z",
+      "side": 1,
+      "message": "Not entirely sure, but I presume, since PeriodicTask is implementing Timer, this line ensures we run the function instantly instead of waiting for the interval period to pass before running the function for the first time",
+      "parentUuid": "47f28358_0ebc4c1a",
+      "range": {
+        "startLine": 185,
+        "startChar": 8,
+        "endLine": 185,
+        "endChar": 21
+      },
+      "revId": "03e058dbd9e298eda2ce4fcb3a5babaf08434cf5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
