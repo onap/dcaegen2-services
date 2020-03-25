@@ -34,6 +34,24 @@
       "revId": "e997db402294921a48d2d4196536bb1ca7d9ad69",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a39eeb78_b28130d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4599
+      },
+      "writtenOn": "2020-03-25T14:34:32Z",
+      "side": 1,
+      "message": "Yes this needs to be aligned with https://git.onap.org/dcaegen2/platform/blueprints/tree/blueprints/k8s-pmsh.yaml\n\nThis bp is done manually, so is the one in the bp repo.",
+      "parentUuid": "dea5bb50_4b3f76e0",
+      "revId": "e997db402294921a48d2d4196536bb1ca7d9ad69",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
