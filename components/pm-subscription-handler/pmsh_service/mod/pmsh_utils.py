@@ -17,10 +17,12 @@
 # ============LICENSE_END=====================================================
 
 import uuid
-import requests
-import mod.pmsh_logging as logger
-from requests.auth import HTTPBasicAuth
 from threading import Timer
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+import mod.pmsh_logging as logger
 
 
 class AppConfig:
@@ -180,5 +182,6 @@ class PeriodicTask(Timer):
     """
 
     def run(self):
+        self.function(*self.args, **self.kwargs)
         while not self.finished.wait(self.interval):
             self.function(*self.args, **self.kwargs)
