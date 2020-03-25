@@ -15,14 +15,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-import os
 import json
+import os
 from unittest import TestCase
 from unittest.mock import patch
 
-from mod.subscription_handler import SubscriptionHandler
-from mod.subscription import AdministrativeState
 from mod.network_function import NetworkFunction
+from mod.subscription import AdministrativeState
+from mod.subscription_handler import SubscriptionHandler
 
 
 class SubscriptionHandlerTest(TestCase):
@@ -30,19 +30,19 @@ class SubscriptionHandlerTest(TestCase):
     @patch('mod.create_app')
     @patch('mod.subscription.Subscription')
     @patch('mod.pmsh_utils._MrPub')
-    @patch('mod.pmsh_utils.PeriodicTask')
     @patch('mod.config_handler.ConfigHandler')
     @patch('mod.pmsh_utils.AppConfig')
-    def setUp(self, mock_app_conf, mock_config_handler, mock_aai_thread, mock_mr_pub,
+    @patch('mod.pmsh_utils.PeriodicTask')
+    def setUp(self, mock_aai_event_thread, mock_app_conf, mock_config_handler, mock_mr_pub,
               mock_sub, mock_app):
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data_1 = json.load(data)
         self.mock_app = mock_app
         self.mock_sub = mock_sub
         self.mock_mr_pub = mock_mr_pub
-        self.mock_aai_thread = mock_aai_thread
         self.mock_config_handler = mock_config_handler
         self.mock_app_conf = mock_app_conf
+        self.mock_aai_event_thread = mock_aai_event_thread
         self.nf_1 = NetworkFunction(nf_name='pnf_1')
         self.nf_2 = NetworkFunction(nf_name='pnf_2')
         self.nfs = [self.nf_1, self.nf_2]
@@ -54,7 +54,8 @@ class SubscriptionHandlerTest(TestCase):
         self.mock_config_handler.get_config.return_value = self.cbs_data_1
         sub_handler = SubscriptionHandler(self.mock_config_handler,
                                           AdministrativeState.UNLOCKED.value, self.mock_mr_pub,
-                                          self.mock_aai_thread, self.mock_app, self.mock_app_conf)
+                                          self.mock_app, self.mock_app_conf,
+                                          self.mock_aai_event_thread)
         sub_handler.execute()
 
         mock_logger.assert_called_with('Administrative State did not change in the Config')
@@ -62,34 +63,36 @@ class SubscriptionHandlerTest(TestCase):
     @patch('mod.aai_client.get_pmsh_subscription_data')
     def test_execute_change_of_state_unlocked(self, mock_get_aai):
         mock_get_aai.return_value = self.mock_sub, self.nfs
-        self.mock_aai_thread.return_value.start.return_value = 'start_method'
+        self.mock_aai_event_thread.return_value.start.return_value = 'start_method'
         self.mock_config_handler.get_config.return_value = self.cbs_data_1
         sub_handler = SubscriptionHandler(self.mock_config_handler,
                                           AdministrativeState.LOCKED.value, self.mock_mr_pub,
-                                          self.mock_aai_thread, self.mock_app, self.mock_app_conf)
+                                          self.mock_app, self.mock_app_conf,
+                                          self.mock_aai_event_thread.return_value)
         sub_handler.execute()
 
         self.assertEqual(AdministrativeState.UNLOCKED.value, sub_handler.administrative_state)
         self.mock_sub.process_subscription.assert_called_with(self.nfs, self.mock_mr_pub,
                                                               self.mock_app_conf)
-        self.mock_aai_thread.start.assert_called()
+        self.mock_aai_event_thread.return_value.start.assert_called()
 
     @patch('mod.aai_client.get_pmsh_subscription_data')
     def test_execute_change_of_state_locked(self, mock_get_aai):
         mock_get_aai.return_value = self.mock_sub, self.nfs
-        self.mock_aai_thread.return_value.cancel.return_value = 'cancel_method'
+        self.mock_aai_event_thread.return_value.cancel.return_value = 'cancel_method'
         self.cbs_data_1['policy']['subscription']['administrativeState'] = \
             AdministrativeState.LOCKED.value
         self.mock_config_handler.get_config.return_value = self.cbs_data_1
         sub_handler = SubscriptionHandler(self.mock_config_handler,
                                           AdministrativeState.UNLOCKED.value, self.mock_mr_pub,
-                                          self.mock_aai_thread, self.mock_app, self.mock_app_conf)
+                                          self.mock_app, self.mock_app_conf,
+                                          self.mock_aai_event_thread.return_value)
         sub_handler.execute()
 
         self.assertEqual(AdministrativeState.LOCKED.value, sub_handler.administrative_state)
         self.mock_sub.process_subscription.assert_called_with(self.nfs, self.mock_mr_pub,
                                                               self.mock_app_conf)
-        self.mock_aai_thread.cancel.assert_called()
+        self.mock_aai_event_thread.return_value.cancel.assert_called()
 
     @patch('mod.pmsh_logging.debug')
     @patch('mod.aai_client.get_pmsh_subscription_data')
@@ -99,7 +102,8 @@ class SubscriptionHandlerTest(TestCase):
         self.mock_sub.process_subscription.side_effect = Exception
         sub_handler = SubscriptionHandler(self.mock_config_handler,
                                           AdministrativeState.LOCKED.value, self.mock_mr_pub,
-                                          self.mock_aai_thread, self.mock_app, self.mock_app_conf)
+                                          self.mock_app, self.mock_app_conf,
+                                          self.mock_aai_event_thread)
         sub_handler.execute()
 
         mock_logger.assert_called_with('Error occurred during the activation/deactivation process ')

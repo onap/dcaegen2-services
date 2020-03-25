@@ -22,14 +22,16 @@ from mod.subscription import AdministrativeState
 
 
 class SubscriptionHandler:
-    def __init__(self, config_handler, administrative_state, mr_pub,
-                 aai_event_thread, app, app_conf):
+    def __init__(self, config_handler, administrative_state, mr_pub, app, app_conf,
+                 aai_event_thread):
+        self.current_nfs = None
+        self.current_sub = None
         self.config_handler = config_handler
         self.administrative_state = administrative_state
         self.mr_pub = mr_pub
-        self.aai_event_thread = aai_event_thread
         self.app = app
         self.app_conf = app_conf
+        self.aai_event_thread = aai_event_thread
 
     def execute(self):
         """
@@ -44,9 +46,9 @@ class SubscriptionHandler:
             if self.administrative_state == new_administrative_state:
                 logger.debug('Administrative State did not change in the Config')
             else:
-                sub, network_functions = aai.get_pmsh_subscription_data(config)
+                self.current_sub, self.current_nfs = aai.get_pmsh_subscription_data(config)
                 self.administrative_state = new_administrative_state
-                sub.process_subscription(network_functions, self.mr_pub, self.app_conf)
+                self.current_sub.process_subscription(self.current_nfs, self.mr_pub, self.app_conf)
 
                 if new_administrative_state == AdministrativeState.UNLOCKED.value:
                     logger.debug('Listening to AAI-EVENT topic in MR.')

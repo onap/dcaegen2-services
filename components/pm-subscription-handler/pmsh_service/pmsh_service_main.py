@@ -17,16 +17,18 @@
 # ============LICENSE_END=====================================================
 
 import sys
+from signal import signal, SIGTERM
 
 import mod.aai_client as aai
 import mod.pmsh_logging as logger
 from mod import db, create_app, launch_api_server
+from mod.aai_event_handler import process_aai_events
 from mod.config_handler import ConfigHandler
+from mod.exit_handler import ExitHandler
 from mod.pmsh_utils import AppConfig, PeriodicTask
 from mod.policy_response_handler import PolicyResponseHandler
 from mod.subscription import Subscription, AdministrativeState
 from mod.subscription_handler import SubscriptionHandler
-from mod.aai_event_handler import process_aai_events
 
 
 def main():
@@ -46,17 +48,21 @@ def main():
             else AdministrativeState.LOCKED.value
 
         aai_event_thread = PeriodicTask(10, process_aai_events,
-                                        args=(mr_aai_event_sub, sub, policy_mr_pub, app, app_conf))
+                                        args=(mr_aai_event_sub,
+                                              sub, policy_mr_pub, app, app_conf))
         subscription_handler = SubscriptionHandler(config_handler, administrative_state,
-                                                   policy_mr_pub, aai_event_thread, app, app_conf)
+                                                   policy_mr_pub, app, app_conf, aai_event_thread)
         policy_response_handler = PolicyResponseHandler(policy_mr_sub, sub.subscriptionName, app)
 
         subscription_handler_thread = PeriodicTask(30, subscription_handler.execute)
         policy_response_handler_thread = PeriodicTask(5, policy_response_handler.poll_policy_topic)
-
         subscription_handler_thread.start()
         policy_response_handler_thread.start()
+        periodic_tasks = [aai_event_thread, subscription_handler_thread,
+                          policy_response_handler_thread]
 
+        signal(SIGTERM, ExitHandler(periodic_tasks=periodic_tasks,
+                                    subscription_handler=subscription_handler))
         launch_api_server(app_conf)
 
     except Exception as e:

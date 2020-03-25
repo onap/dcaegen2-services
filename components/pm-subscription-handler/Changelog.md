@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Moved subscription processing from main into its own subscription_handler module
 * Removed policy response handling functions from pmsh_utils and introduced policy_response_handler
 * Network function filter now resides in network_function instead of subscription
+* Added graceful handling upon receiving SIGTERM signal
 
 ## [1.0.1]
 ### Fixed
