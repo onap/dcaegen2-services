@@ -17,6 +17,8 @@
 # ============LICENSE_END=====================================================
 
 import re
+from enum import Enum
+
 from mod import pmsh_logging as logger, db
 from mod.db_models import NetworkFunctionModel
 
@@ -95,13 +97,20 @@ class NetworkFunctionFilter:
         self.nf_names = kwargs.get('nfNames')
         self.regex_matcher = re.compile('|'.join(raw_regex for raw_regex in self.nf_names))
 
-    def is_nf_in_filter(self, nf_name):
+    def is_nf_in_filter(self, nf_name, orchestration_status):
         """Match the nf name against regex values in Subscription.nfFilter.nfNames
 
         Args:
             nf_name: the AAI nf name.
+            orchestration_status: orchestration status of the nf
 
         Returns:
             bool: True if matched, else False.
         """
-        return self.regex_matcher.search(nf_name)
+        return self.regex_matcher.search(nf_name) and \
+            orchestration_status == OrchestrationStatus.ACTIVE.value
+
+
+class OrchestrationStatus(Enum):
+    ACTIVE = 'Active'
+    INVENTORIED = 'Inventoried'
