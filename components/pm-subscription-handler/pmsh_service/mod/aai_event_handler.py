@@ -33,11 +33,6 @@ class AAIEvent(Enum):
     UPDATE = 'UPDATE'
 
 
-class OrchestrationStatus(Enum):
-    ACTIVE = 'Active'
-    INVENTORIED = 'Inventoried'
-
-
 def process_aai_events(mr_sub, subscription, mr_pub, app, app_conf):
     """
     Processes AAI UPDATE events for each filtered xNFs where orchestration status is set to Active.
@@ -64,7 +59,7 @@ def process_aai_events(mr_sub, subscription, mr_pub, app, app_conf):
                 'vnf-name']
             new_status = aai_xnf['orchestration-status']
 
-            if NetworkFunctionFilter(**subscription.nfFilter).is_nf_in_filter(xnf_name):
+            if NetworkFunctionFilter(**subscription.nfFilter).is_nf_in_filter(xnf_name, new_status):
                 _process_event(action, new_status, xnf_name, subscription, mr_pub, app_conf)
 
 
