@@ -31,7 +31,7 @@
   <groupId>org.onap.dcaegen2.services</groupId>
   <artifactId>pmsh</artifactId>
   <name>dcaegen2-services-pm-subscription-handler</name>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.3-SNAPSHOT</version>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <sonar.sources>.</sonar.sources>
