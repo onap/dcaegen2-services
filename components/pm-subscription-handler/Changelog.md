@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.3]
 ### Fixed
 * Fixed bug where PMSH pushes subscription to xnf regardless of it's orchestration status (DCAEGEN2-2173)
+* Bug fix to prevent aai_event handler from incorrectly LOCKING the subscription (DCAEGEN2-2181)
 
 ## [1.0.2]
 ### Changed
