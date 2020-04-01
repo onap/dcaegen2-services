@@ -30,6 +30,8 @@ from mod.subscription import AdministrativeState
 
 class ExitHandlerTests(TestCase):
 
+    @patch('mod.exit_handler.NetworkFunction.get_nf_model_objects_from_relationship')
+    @patch('mod.exit_handler.NetworkFunction.get_nf_objects_from_nf_model_objects')
     @patch('pmsh_service_main.ConfigHandler')
     @patch('pmsh_service_main.create_app')
     @patch('pmsh_service_main.db')
@@ -42,7 +44,7 @@ class ExitHandlerTests(TestCase):
     @patch.object(PeriodicTask, 'cancel')
     def test_terminate_signal_success(self, mock_task_cancel, mock_task_start, mock_sub_handler,
                                       mock_launch_api_server, mock_sub, mock_app_conf, mock_aai,
-                                      mock_db, mock_app, mock_config_handler):
+                                      mock_db, mock_app, mock_config_handler, mock_f1, mock_f2):
         pid = os.getpid()
         mock_aai.return_value = [Mock(), Mock()]
         mock_db.get_app.return_value = Mock()

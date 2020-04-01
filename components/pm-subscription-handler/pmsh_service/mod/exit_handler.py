@@ -18,6 +18,7 @@
 
 from mod.pmsh_utils import logger
 from mod.subscription import AdministrativeState
+from mod.network_function import NetworkFunction
 
 
 class ExitHandler:
@@ -42,7 +43,10 @@ class ExitHandler:
                 logger.debug(f'Cancelling periodic task with thread name: {thread.name}.')
                 thread.cancel()
             current_sub.administrativeState = AdministrativeState.LOCKED.value
-            current_sub.process_subscription(self.subscription_handler.current_nfs,
+            nf_model_object_list = NetworkFunction.get_nf_model_objects_from_relationship(
+                current_sub.subscriptionName)
+            nfs = NetworkFunction.get_nf_objects_from_nf_model_objects(nf_model_object_list)
+            current_sub.process_subscription(nfs,
                                              self.subscription_handler.mr_pub,
                                              self.subscription_handler.app_conf)
         ExitHandler.shutdown_signal_received = True

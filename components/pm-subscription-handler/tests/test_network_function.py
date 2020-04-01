@@ -15,11 +15,16 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import json
+import os
 from test.support import EnvironmentVarGuard
 from unittest import TestCase
 from unittest.mock import patch
+from requests import Session
 
+import mod.aai_client as aai_client
 from mod import db, create_app
+from mod.db_models import NetworkFunctionModel
 from mod.network_function import NetworkFunction
 from mod.subscription import Subscription
 
@@ -27,15 +32,32 @@ from mod.subscription import Subscription
 class NetworkFunctionTests(TestCase):
 
     @patch('mod.get_db_connection_url')
-    def setUp(self, mock_get_db_url):
+    @patch.object(Session, 'put')
+    @patch('pmsh_service_main.AppConfig')
+    def setUp(self, mock_app_config, mock_session, mock_get_db_url):
         mock_get_db_url.return_value = 'sqlite://'
+        with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
+            self.aai_response_data = data.read()
+        mock_session.return_value.status_code = 200
+        mock_session.return_value.text = self.aai_response_data
+        self.env = EnvironmentVarGuard()
+        self.env.set('AAI_SERVICE_HOST', '1.2.3.4')
+        self.env.set('AAI_SERVICE_PORT_AAI_SSL', '8443')
+        self.env.set('TESTING', 'True')
+        self.env.set('LOGS_PATH', './unit_test_logs')
+        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
+            self.cbs_data_1 = json.load(data)
+        with open(os.path.join(os.path.dirname(__file__),
+                               'data/cbs_data_2.json'), 'r') as data:
+            self.cbs_data_2 = json.load(data)
+        self.sub_1, self.xnfs = aai_client.get_pmsh_subscription_data(self.cbs_data_1)
+        self.sub_2, self.xnfs = aai_client.get_pmsh_subscription_data(self.cbs_data_2)
         self.nf_1 = NetworkFunction(nf_name='pnf_1', orchestration_status='Inventoried')
         self.nf_2 = NetworkFunction(nf_name='pnf_2', orchestration_status='Active')
-        self.env = EnvironmentVarGuard()
-        self.env.set('LOGS_PATH', './unit_test_logs')
         self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
+        self.mock_app_config = mock_app_config
         db.create_all()
 
     def tearDown(self):
@@ -80,3 +102,22 @@ class NetworkFunctionTests(TestCase):
         self.assertEqual(1, len(Subscription.get_all_nfs_subscription_relations()))
         pnf_1_deleted = [nf for nf in nfs if nf.nf_name != self.nf_1.nf_name]
         self.assertTrue(pnf_1_deleted)
+
+    def test_get_nf_model_objects_from_relationship(self):
+        nf_array = [self.nf_1, self.nf_2]
+        self.sub_1.add_network_functions_to_subscription(nf_array)
+        nf_model_objects = NetworkFunction.get_nf_model_objects_from_relationship(
+            self.sub_1.subscriptionName)
+
+        self.assertEqual(2, len(nf_model_objects))
+        self.assertIsInstance(nf_model_objects[0], NetworkFunctionModel)
+
+    def test_get_nf_objects_from_nf_model_objects(self):
+        nf_array = [self.nf_1, self.nf_2]
+        self.sub_1.add_network_functions_to_subscription(nf_array)
+        nf_model_obects = NetworkFunction.get_nf_model_objects_from_relationship(
+            self.sub_1.subscriptionName)
+        nfs = NetworkFunction.get_nf_objects_from_nf_model_objects(nf_model_obects)
+
+        self.assertEqual(2, len(nfs))
+        self.assertIsInstance(nfs[0], NetworkFunction)

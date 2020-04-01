@@ -18,7 +18,7 @@
 
 import re
 from mod import pmsh_logging as logger, db
-from mod.db_models import NetworkFunctionModel
+from mod.db_models import NetworkFunctionModel, NfSubRelationalModel
 
 
 class NetworkFunction:
@@ -87,6 +87,30 @@ class NetworkFunction:
         if nf:
             db.session.delete(nf)
             db.session.commit()
+
+    @staticmethod
+    def get_nf_model_objects_from_relationship(subscription_name):
+        nf_sub_relationships = NfSubRelationalModel.query.filter(
+            NfSubRelationalModel.subscription_name == subscription_name)
+        nf_model_objects = []
+        for nf_sub_entry in nf_sub_relationships:
+            nf_model_object = NetworkFunctionModel.query.filter(
+                NetworkFunctionModel.nf_name == nf_sub_entry.nf_name).one_or_none()
+            nf_model_objects.append(nf_model_object)
+
+        return nf_model_objects
+
+    @staticmethod
+    def get_nf_objects_from_nf_model_objects(nf_model_object_list):
+        nfs = []
+        for nf_model_object in nf_model_object_list:
+            nf = NetworkFunction(
+                nf_name=nf_model_object.nf_name,
+                orchestration_status=nf_model_object.orchestration_status
+            )
+            nfs.append(nf)
+
+        return nfs
 
 
 class NetworkFunctionFilter:
