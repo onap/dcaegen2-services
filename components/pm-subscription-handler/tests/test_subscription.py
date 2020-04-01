@@ -26,6 +26,7 @@ from tenacity import stop_after_attempt
 
 import mod.aai_client as aai_client
 from mod import db, create_app
+from mod.db_models import NetworkFunctionModel
 from mod.network_function import NetworkFunction, NetworkFunctionFilter, OrchestrationStatus
 from mod.pmsh_utils import AppConfig
 from mod.subscription import Subscription
@@ -201,3 +202,19 @@ class SubscriptionTest(TestCase):
         actual_sub_event = self.sub_1.prepare_subscription_event(self.nf_1.nf_name, app_conf)
         print(actual_sub_event)
         self.assertEqual(expected_sub_event, actual_sub_event)
+
+    def test_get_nf_models(self):
+        nf_array = [self.nf_1, self.nf_2]
+        self.sub_1.add_network_functions_to_subscription(nf_array)
+        nf_models = self.sub_1._get_nf_models()
+
+        self.assertEqual(2, len(nf_models))
+        self.assertIsInstance(nf_models[0], NetworkFunctionModel)
+
+    def test_get_network_functions(self):
+        nf_array = [self.nf_1, self.nf_2]
+        self.sub_1.add_network_functions_to_subscription(nf_array)
+        nfs = self.sub_1.get_network_functions()
+
+        self.assertEqual(2, len(nfs))
+        self.assertIsInstance(nfs[0], NetworkFunction)

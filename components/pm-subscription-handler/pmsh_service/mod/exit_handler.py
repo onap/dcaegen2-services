@@ -42,7 +42,7 @@ class ExitHandler:
                 logger.debug(f'Cancelling periodic task with thread name: {thread.name}.')
                 thread.cancel()
             current_sub.administrativeState = AdministrativeState.LOCKED.value
-            current_sub.process_subscription(self.subscription_handler.current_nfs,
+            current_sub.process_subscription(current_sub.get_network_functions(),
                                              self.subscription_handler.mr_pub,
                                              self.subscription_handler.app_conf)
         ExitHandler.shutdown_signal_received = True

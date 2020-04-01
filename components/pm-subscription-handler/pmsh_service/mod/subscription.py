@@ -22,7 +22,8 @@ from tenacity import retry, retry_if_exception_type, wait_exponential, stop_afte
 
 import mod.pmsh_logging as logger
 from mod import db
-from mod.db_models import SubscriptionModel, NfSubRelationalModel
+from mod.db_models import SubscriptionModel, NfSubRelationalModel, NetworkFunctionModel
+from mod.network_function import NetworkFunction
 
 
 class SubNfState(Enum):
@@ -218,3 +219,26 @@ class Subscription:
             update({NfSubRelationalModel.nf_sub_status: status}, synchronize_session='evaluate')
 
         db.session.commit()
+
+    def _get_nf_models(self):
+        nf_sub_relationships = NfSubRelationalModel.query.filter(
+            NfSubRelationalModel.subscription_name == self.subscriptionName)
+        nf_models = []
+        for nf_sub_entry in nf_sub_relationships:
+            nf_model_object = NetworkFunctionModel.query.filter(
+                NetworkFunctionModel.nf_name == nf_sub_entry.nf_name).one_or_none()
+            nf_models.append(nf_model_object)
+
+        return nf_models
+
+    def get_network_functions(self):
+        nfs = []
+        nf_models = self._get_nf_models()
+        for nf_model in nf_models:
+            nf = NetworkFunction(
+                nf_name=nf_model.nf_name,
+                orchestration_status=nf_model.orchestration_status
+            )
+            nfs.append(nf)
+
+        return nfs
