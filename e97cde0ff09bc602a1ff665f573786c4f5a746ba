@@ -1,0 +1,9 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Ephraim Martin <ephraim.martin@est.tech>
+Code-Review+1: David Farrelly <david.farrelly@est.tech>
+Code-Review+2: Joseph O'Leary <joseph.o.leary@est.tech>
+Submitted-by: Joseph O'Leary <joseph.o.leary@est.tech>
+Submitted-at: Thu, 02 Apr 2020 15:36:22 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/services/+/104901
+Project: dcaegen2/services
+Branch: refs/heads/master
