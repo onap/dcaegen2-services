@@ -26,7 +26,7 @@ from tenacity import stop_after_attempt
 
 import mod.aai_client as aai_client
 from mod import db, create_app
-from mod.network_function import NetworkFunction, NetworkFunctionFilter
+from mod.network_function import NetworkFunction, NetworkFunctionFilter, OrchestrationStatus
 from mod.pmsh_utils import AppConfig
 from mod.subscription import Subscription
 
@@ -72,10 +72,11 @@ class SubscriptionTest(TestCase):
         self.app_context.pop()
 
     def test_xnf_filter_true(self):
-        self.assertTrue(self.xnf_filter.is_nf_in_filter('pnf1'))
+        self.assertTrue(self.xnf_filter.is_nf_in_filter('pnf1', OrchestrationStatus.ACTIVE.value))
 
     def test_xnf_filter_false(self):
-        self.assertFalse(self.xnf_filter.is_nf_in_filter('PNF-33'))
+        self.assertFalse(self.xnf_filter.is_nf_in_filter('PNF-33',
+                                                         OrchestrationStatus.ACTIVE.value))
 
     def test_sub_measurement_group(self):
         self.assertEqual(len(self.sub_1.measurementGroups), 2)

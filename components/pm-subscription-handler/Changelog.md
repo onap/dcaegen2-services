@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.3]
+### Fixed
+* Fixed bug where PMSH pushes subscription to xnf regardless of it's orchestration status (DCAEGEN2-2173)
+
 ## [1.0.2]
 ### Changed
 * Moved subscription processing from main into its own subscription_handler module

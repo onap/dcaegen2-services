@@ -20,8 +20,8 @@ from os import path
 from unittest import TestCase
 from unittest.mock import patch, Mock
 
-from mod.aai_event_handler import OrchestrationStatus, process_aai_events
-from mod.network_function import NetworkFunction
+from mod.aai_event_handler import process_aai_events
+from mod.network_function import NetworkFunction, OrchestrationStatus
 
 
 class AAIEventHandlerTest(TestCase):
