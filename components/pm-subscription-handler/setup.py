@@ -34,5 +34,6 @@ setup(
         "connexion==2.5.0",
         "flask_sqlalchemy==2.4.1",
         "Flask==1.1.1",
-        "psycopg2-binary==2.8.4"]
+        "psycopg2-binary==2.8.4",
+        "onap_dcae_cbs_docker_client==2.1.0"]
 )

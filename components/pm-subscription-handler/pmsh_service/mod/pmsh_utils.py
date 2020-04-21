@@ -20,9 +20,34 @@ import uuid
 from threading import Timer
 
 import requests
+from onap_dcae_cbs_docker_client.client import get_all
 from requests.auth import HTTPBasicAuth
+from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type
 
 import mod.pmsh_logging as logger
+
+
+class ConfigHandler:
+    """ Handles retrieval of PMSH's configuration from Configbinding service."""
+    @staticmethod
+    @retry(wait=wait_fixed(2), stop=stop_after_attempt(5), retry=retry_if_exception_type(Exception))
+    def get_pmsh_config():
+        """ Retrieves PMSH's configuration from Config binding service. If a non-2xx response
+        is received, it retries after 2 seconds for 5 times before raising an exception.
+
+        Returns:
+            dict: Dictionary representation of the the service configuration
+
+        Raises:
+            Exception: If any error occurred pulling configuration from Config binding service.
+        """
+        try:
+            config = get_all()
+            logger.debug(f'PMSH config from CBS: {config}')
+            return config
+        except Exception as err:
+            logger.debug(f'Failed to get config from CBS: {err}')
+            raise Exception
 
 
 class AppConfig:

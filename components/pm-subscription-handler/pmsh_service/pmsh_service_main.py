@@ -23,9 +23,8 @@ import mod.aai_client as aai
 import mod.pmsh_logging as logger
 from mod import db, create_app, launch_api_server
 from mod.aai_event_handler import process_aai_events
-from mod.config_handler import ConfigHandler
 from mod.exit_handler import ExitHandler
-from mod.pmsh_utils import AppConfig, PeriodicTask
+from mod.pmsh_utils import AppConfig, PeriodicTask, ConfigHandler
 from mod.policy_response_handler import PolicyResponseHandler
 from mod.subscription import Subscription, AdministrativeState
 from mod.subscription_handler import SubscriptionHandler
@@ -33,12 +32,13 @@ from mod.subscription_handler import SubscriptionHandler
 
 def main():
     try:
-        config_handler = ConfigHandler()
-        config = config_handler.get_config()
-        app_conf = AppConfig(**config['config'])
         app = create_app()
         app.app_context().push()
         db.create_all(app=app)
+
+        config = ConfigHandler.get_pmsh_config()
+        app_conf = AppConfig(**config['config'])
+
         sub, nfs = aai.get_pmsh_subscription_data(config)
         policy_mr_pub = app_conf.get_mr_pub('policy_pm_publisher')
         policy_mr_sub = app_conf.get_mr_sub('policy_pm_subscriber')
@@ -50,7 +50,7 @@ def main():
         aai_event_thread = PeriodicTask(10, process_aai_events,
                                         args=(mr_aai_event_sub,
                                               sub, policy_mr_pub, app, app_conf))
-        subscription_handler = SubscriptionHandler(config_handler, administrative_state,
+        subscription_handler = SubscriptionHandler(administrative_state,
                                                    policy_mr_pub, app, app_conf, aai_event_thread)
         policy_response_handler = PolicyResponseHandler(policy_mr_sub, sub.subscriptionName, app)
 

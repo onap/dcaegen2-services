@@ -55,7 +55,7 @@ def _get_all_aai_nf_data():
     Return queried nf data from the AAI service.
 
     Returns:
-        json: the json response from AAI query, else None.
+        dict: the json response from AAI query, else None.
     """
     nf_data = None
     try:
@@ -94,7 +94,7 @@ def _get_aai_service_url():
     """
     try:
         aai_service = environ['AAI_SERVICE_HOST']
-        aai_ssl_port = environ['AAI_SERVICE_PORT_AAI_SSL']
+        aai_ssl_port = environ['AAI_SERVICE_PORT']
         return f'https://{aai_service}:{aai_ssl_port}'
     except KeyError as e:
         logger.debug(f'Failed to get AAI env vars: {e}')
