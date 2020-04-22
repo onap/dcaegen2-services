@@ -16,27 +16,26 @@ use case architecture. Through RestConf-Collector or VES-Collector, these events
 (in **unauthenticated.CPE_AUTHENTICATION** DMaaP topic) and they are forwarded towards **unauthenticated.DCAE_CL_OUTPUT** 
 DMaaP topic to trigger further Policy actions related to BBS use case.
 
-BBE-ep periodically polls for the two events. Polling interval is configurable and can be changed dynamically from Consul. I
+BBE-ep periodically polls for the two events. Polling interval is configurable and can be changed dynamically from Consul.
 Its implementation is based on Reactive Streams (Reactor library), so it is fully asynchronous and non-blocking.
 
 ## Installation and Removal
 
 BBS-ep is delivered as a Spring-Boot application ready to be deployed in Docker (via docker-compose). 
 
-For Dublin release, it will be a DCAE component that can dynamically be deployed via Cloudify blueprint installation.
+BBS-ep can be dynamically deployed in DCAE’s Cloudify environment via its blueprint deployment artifact.
+
 Steps to deploy are shown below
 
 - Transfer blueprint component file in DCAE bootstrap POD under /blueprints directory. Blueprint can be found in
-  <https://gerrit.onap.org/r/gitweb?p=dcaegen2/services.git;a=blob_plain;f=components/bbs-event-processor/dpo/blueprints/k8s-bbs-event-processor.yaml-template;hb=refs/heads/master>
-- Transfer blueprint component inputs file in DCAE bootstrap POD under / directory. Blueprint inputs file can be found in
-  <https://gerrit.onap.org/r/gitweb?p=dcaegen2/services.git;a=blob_plain;f=components/bbs-event-processor/dpo/blueprints/bbs-event-processor-input.yaml;h=36e69cf64bee3b46ee2e1b95f1a16380b7046482;hb=refs/heads/master>
+  <https://gerrit.onap.org/r/gitweb?p=dcaegen2/platform/blueprints.git;a=blob_plain;f=blueprints/k8s-bbs-event-processor.yaml;hb=refs/heads/master>
 - Enter the Bootstrap POD
 - Validate blueprint
-    cfy blueprints validate /blueprints/k8s-bbs-event-processor.yaml-template
+    cfy blueprints validate /blueprints/k8s-bbs-event-processor.yaml
 - Upload validated blueprint
-    cfy blueprints upload -b bbs-ep /blueprints/k8s-bbs-event-processor.yaml-template
+    cfy blueprints upload -b bbs-ep /blueprints/k8s-bbs-event-processor.yaml
 - Create deployment
-    cfy deployments create -b bbs-ep -i /bbs-event-processor-input.yaml bbs-ep
+    cfy deployments create -b bbs-ep -i /blueprints/k8s-bbs-event-processor.yaml bbs-ep
 - Deploy blueprint
     cfy executions start -d bbs-ep install
 
