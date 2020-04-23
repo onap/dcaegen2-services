@@ -25,10 +25,16 @@ BBS-ep is delivered as a Spring-Boot application ready to be deployed in Docker 
 
 BBS-ep can be dynamically deployed in DCAE’s Cloudify environment via its blueprint deployment artifact.
 
+- Blueprint can be found in
+
+    https://gerrit.onap.org/r/gitweb?p=dcaegen2/platform/blueprints.git;a=blob_plain;f=blueprints/k8s-bbs-event-processor.yaml;hb=refs/heads/master
+
+- Blueprint can also be retrieved from
+
+    https://git.onap.org/dcaegen2/platform/blueprints/tree/blueprints/k8s-bbs-event-processor.yaml
+    
 Steps to deploy are shown below
 
-- Transfer blueprint component file in DCAE bootstrap POD under /blueprints directory. Blueprint can be found in
-  <https://gerrit.onap.org/r/gitweb?p=dcaegen2/platform/blueprints.git;a=blob_plain;f=blueprints/k8s-bbs-event-processor.yaml;hb=refs/heads/master>
 - Enter the Bootstrap POD
 - Validate blueprint
     cfy blueprints validate /blueprints/k8s-bbs-event-processor.yaml
