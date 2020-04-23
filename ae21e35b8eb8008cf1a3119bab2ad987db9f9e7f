@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "41495430_a140016b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_logging.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-04-23T09:46:54Z",
+      "side": 1,
+      "message": "Not sure to be honest. I guess Ephraim\u0027s commit will remove this module anyway but we do need stuff being logged to console for debugging.",
+      "parentUuid": "0c4c969e_1cff279e",
+      "revId": "ae21e35b8eb8008cf1a3119bab2ad987db9f9e7f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43a70ce6_17f78f10",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-04-23T09:38:52Z",
       "side": 1,
       "message": "Would this be a good time to print the exception to stdout using traceback, e.g. format_exc?",
+      "revId": "ae21e35b8eb8008cf1a3119bab2ad987db9f9e7f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5818d1a_06caedd4",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-04-23T09:46:54Z",
+      "side": 1,
+      "message": "Possibly. The logging patch Ephraim has pushed could take care of this. Does the the logging of the exception not handle it no? Or do we have to call exception on the logger?\n\nexcept requests.exceptions.ConnectionError as e:\n    logger.exception()",
+      "parentUuid": "43a70ce6_17f78f10",
       "revId": "ae21e35b8eb8008cf1a3119bab2ad987db9f9e7f",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
