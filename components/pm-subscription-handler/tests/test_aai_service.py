@@ -32,7 +32,7 @@ class AaiClientTestCase(TestCase):
     def setUp(self):
         self.env = EnvironmentVarGuard()
         self.env.set('AAI_SERVICE_HOST', '1.2.3.4')
-        self.env.set('AAI_SERVICE_PORT_AAI_SSL', '8443')
+        self.env.set('AAI_SERVICE_PORT', '8443')
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data = json.load(data)
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:

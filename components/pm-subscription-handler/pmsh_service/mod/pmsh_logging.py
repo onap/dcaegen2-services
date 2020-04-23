@@ -17,6 +17,7 @@
 # ============LICENSE_END=====================================================
 import datetime
 import logging as log
+import sys
 from logging.handlers import RotatingFileHandler
 from os import makedirs
 
@@ -41,7 +42,9 @@ def _create_logger(name, logfile):
     formatter = log.Formatter("%(message)s")
     file_handler.setFormatter(formatter)
     logger.setLevel(log.DEBUG)
+    stdout_handler = log.StreamHandler(sys.stdout)
     logger.addHandler(file_handler)
+    logger.addHandler(stdout_handler)
     return logger
 
 
@@ -107,7 +110,7 @@ def debug(msg="n/a"):
     """
     ets = utc()
 
-    _DEBUG_LOGGER.info(
+    _DEBUG_LOGGER.debug(
         "{ets}|{msg}".format(
             ets=ets.isoformat(),
             msg=msg,

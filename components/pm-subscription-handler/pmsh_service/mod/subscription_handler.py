@@ -18,15 +18,14 @@
 
 import mod.aai_client as aai
 import mod.pmsh_logging as logger
+from mod.pmsh_utils import ConfigHandler
 from mod.subscription import AdministrativeState
 
 
 class SubscriptionHandler:
-    def __init__(self, config_handler, administrative_state, mr_pub, app, app_conf,
-                 aai_event_thread):
+    def __init__(self, administrative_state, mr_pub, app, app_conf, aai_event_thread):
         self.current_nfs = None
         self.current_sub = None
-        self.config_handler = config_handler
         self.administrative_state = administrative_state
         self.mr_pub = mr_pub
         self.app = app
@@ -39,7 +38,7 @@ class SubscriptionHandler:
         the Subscription if a change has occurred
         """
         self.app.app_context().push()
-        config = self.config_handler.get_config()
+        config = ConfigHandler.get_pmsh_config()
         new_administrative_state = config['policy']['subscription']['administrativeState']
 
         try:
