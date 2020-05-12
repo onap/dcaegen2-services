@@ -15,6 +15,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import os
 from test.support import EnvironmentVarGuard
 from unittest import TestCase
 from unittest.mock import patch
@@ -32,7 +33,8 @@ class NetworkFunctionTests(TestCase):
         self.nf_1 = NetworkFunction(nf_name='pnf_1', orchestration_status='Inventoried')
         self.nf_2 = NetworkFunction(nf_name='pnf_2', orchestration_status='Active')
         self.env = EnvironmentVarGuard()
-        self.env.set('LOGS_PATH', './unit_test_logs')
+        self.env.set('TESTING', 'True')
+        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
         self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()

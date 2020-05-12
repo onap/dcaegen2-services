@@ -40,7 +40,8 @@ class PmshUtilsTestCase(TestCase):
         self.app_conf = AppConfig(**self.cbs_data['config'])
         self.sub = Subscription(**self.cbs_data['policy']['subscription'])
         self.env = EnvironmentVarGuard()
-        self.env.set('LOGS_PATH', './unit_test_logs')
+        self.env.set('TESTING', 'True')
+        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
         self.policy_mr_sub = self.app_conf.get_mr_sub('policy_pm_subscriber')
         self.mock_app = mock_app
         self.app = create_app()
