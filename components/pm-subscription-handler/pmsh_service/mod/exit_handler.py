@@ -16,7 +16,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-from mod.pmsh_utils import logger
+from mod import logger
 from mod.subscription import AdministrativeState
 
 
@@ -35,6 +35,7 @@ class ExitHandler:
         self.subscription_handler = subscription_handler
 
     def __call__(self, sig_num, frame):
+        logger.info('Graceful shutdown of PMSH initiated.')
         logger.debug(f'ExitHandler was called with signal number: {sig_num}.')
         current_sub = self.subscription_handler.current_sub
         if current_sub and current_sub.administrativeState == AdministrativeState.UNLOCKED.value:
