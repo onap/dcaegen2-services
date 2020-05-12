@@ -25,7 +25,8 @@ ENV PMSHUSER=pmsh \
     PATH=/usr/local/lib/python3.7/bin:$PATH:$APPDIR/bin \
     PYTHONPATH=/usr/local/lib/python3.7/site-packages:./mod:./:$PYTHONPATH:$APPDIR/bin \
     REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
-    LOGS_PATH="/var/log/ONAP/dcaegen2/services/pmsh"
+    LOGS_PATH="/var/log/ONAP/dcaegen2/services/pmsh" \
+    LOGGER_CONFIG=/opt/app/pmsh/log_config.yaml
 
 WORKDIR $APPDIR
 
@@ -38,6 +39,7 @@ RUN addgroup --system $PMSHUSER && adduser --ingroup $PMSHUSER --system $PMSHUSE
 COPY setup.py ./
 COPY requirements.txt ./
 COPY ./pmsh_service ./bin/
+COPY log_config.yaml /opt/app/pmsh/
 
     # run the pip install
 RUN pip install --upgrade pip && \
