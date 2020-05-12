@@ -15,17 +15,19 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import logging as logging
 import os
 from urllib.parse import quote
 
 from connexion import App
 from flask_sqlalchemy import SQLAlchemy
-
-import mod.pmsh_logging as logger
+from onaplogging import monkey
+from onaplogging.mdcContext import MDC
 
 db = SQLAlchemy()
 basedir = os.path.abspath(os.path.dirname(__file__))
 _connexion_app = None
+logger = logging.getLogger('onap_logger')
 
 
 def _get_app():
@@ -43,7 +45,17 @@ def launch_api_server(app_config):
 
 
 def create_app():
-    logger.create_loggers(os.getenv('LOGS_PATH'))
+    monkey.patch_loggingYaml()
+    logging.config.yamlConfig(filepath=os.getenv('LOGGER_CONFIG'),
+                              watchDog=os.getenv('DYNAMIC_LOGGER_CONFIG', True))
+    old_record = logging.getLogRecordFactory()
+
+    def augment_record(*args, **kwargs):
+        new_record = old_record(*args, **kwargs)
+        new_record.mdc = MDC.result()
+        return new_record
+
+    logging.setLogRecordFactory(augment_record)
     connex_app = _get_app()
     app = connex_app.app
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

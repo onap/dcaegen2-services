@@ -15,13 +15,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
 from enum import Enum
 
 from tenacity import retry, retry_if_exception_type, wait_exponential, stop_after_attempt
 
-import mod.pmsh_logging as logger
-from mod import db
+from mod import db, logger
 from mod.db_models import SubscriptionModel, NfSubRelationalModel, NetworkFunctionModel
 from mod.network_function import NetworkFunction
 
@@ -90,15 +88,15 @@ class Subscription:
         if existing_subscription is None:
             new_subscription = SubscriptionModel(subscription_name=self.subscriptionName,
                                                  status=self.administrativeState)
-
             db.session.add(new_subscription)
             db.session.commit()
+            logger.info(f'Subscription {new_subscription.subscription_name} successfully created.')
 
             return new_subscription
 
         else:
-            logger.debug(f'Subscription {self.subscriptionName} already exists,'
-                         f' returning this subscription..')
+            logger.info(f'Subscription {self.subscriptionName} already exists, '
+                        f'returning this subscription..')
             return existing_subscription
 
     def add_network_functions_to_subscription(self, nf_list):
@@ -108,8 +106,6 @@ class Subscription:
             nf_list : A list of NetworkFunction objects.
         """
         current_sub = self.create()
-        logger.debug(f'Adding network functions to subscription {current_sub.subscription_name}')
-
         for nf in nf_list:
             current_nf = nf.create()
 
@@ -120,9 +116,11 @@ class Subscription:
                 new_nf_sub = NfSubRelationalModel(current_sub.subscription_name,
                                                   nf.nf_name, SubNfState.PENDING_CREATE.value)
                 new_nf_sub.nf = current_nf
-                logger.debug(current_nf)
+                logger.info(f'Adding network function {current_nf} '
+                            f'to subscription {current_sub.subscription_name}')
                 current_sub.nfs.append(new_nf_sub)
-
+        logger.debug(f'Subscription {current_sub.subscription_name} '
+                     f'now contains these XNFs: {NetworkFunction.get_all()}')
         db.session.add(current_sub)
         db.session.commit()
 
@@ -180,14 +178,15 @@ class Subscription:
         self.update_subscription_status()
 
         if self.administrativeState == AdministrativeState.UNLOCKED.value:
+            logger.info(f'{action} subscription initiated for {self.subscriptionName}.')
             action = 'Activate'
             sub_nf_state = SubNfState.PENDING_CREATE.value
 
         try:
             for nf in nfs:
                 mr_pub.publish_subscription_event_data(self, nf.nf_name, app_conf)
-                logger.debug(f'Publishing Event to {action} '
-                             f'Sub: {self.subscriptionName} for the nf: {nf.nf_name}')
+                logger.info(f'Publishing event to {action.lower()} '
+                            f'subscription "{self.subscriptionName}" for the nf "{nf.nf_name}"')
                 self.add_network_functions_to_subscription(nfs)
                 self.update_sub_nf_status(self.subscriptionName, sub_nf_state, nf.nf_name)
         except Exception as err:

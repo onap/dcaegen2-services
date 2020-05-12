@@ -20,7 +20,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pm_subscription_handler",
-    version="1.0.0",
+    version="1.1.1",
     packages=find_packages(),
     author="lego@est.tech",
     author_email="lego@est.tech",
@@ -35,5 +35,6 @@ setup(
         "flask_sqlalchemy==2.4.1",
         "Flask==1.1.1",
         "psycopg2-binary==2.8.4",
-        "onap_dcae_cbs_docker_client==2.1.0"]
+        "onap_dcae_cbs_docker_client==2.1.0",
+        "onappylog==1.0.9"]
 )

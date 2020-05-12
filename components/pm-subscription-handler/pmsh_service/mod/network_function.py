@@ -19,7 +19,7 @@
 import re
 from enum import Enum
 
-from mod import pmsh_logging as logger, db
+from mod import logger, db
 from mod.db_models import NetworkFunctionModel
 
 
