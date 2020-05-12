@@ -25,18 +25,24 @@ import responses
 from requests import Session
 
 import mod.aai_client as aai_client
+from mod import create_app
 
 
 class AaiClientTestCase(TestCase):
 
-    def setUp(self):
+    @patch('mod.update_config')
+    @patch('mod.get_db_connection_url')
+    def setUp(self, mock_get_db_url, mock_update_config):
+        mock_get_db_url.return_value = 'sqlite://'
         self.env = EnvironmentVarGuard()
         self.env.set('AAI_SERVICE_HOST', '1.2.3.4')
         self.env.set('AAI_SERVICE_PORT', '8443')
+        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data = json.load(data)
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
             self.aai_response_data = data.read()
+        self.app = create_app()
 
     @patch.object(Session, 'put')
     def test_aai_client_get_pm_sub_data_success(self, mock_session):

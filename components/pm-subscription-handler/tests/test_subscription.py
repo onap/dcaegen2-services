@@ -33,12 +33,14 @@ from mod.subscription import Subscription
 
 
 class SubscriptionTest(TestCase):
+    @patch('mod.update_config')
     @patch('mod.pmsh_utils._MrPub')
     @patch('mod.pmsh_utils._MrSub')
     @patch('mod.get_db_connection_url')
     @patch.object(Session, 'put')
     @patch('pmsh_service_main.AppConfig')
-    def setUp(self, mock_app_config, mock_session, mock_get_db_url, mock_mr_sub, mock_mr_pub):
+    def setUp(self, mock_app_config, mock_session, mock_get_db_url,
+              mock_mr_sub, mock_mr_pub, mock_update_config):
         mock_get_db_url.return_value = 'sqlite://'
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
             self.aai_response_data = data.read()
@@ -47,8 +49,7 @@ class SubscriptionTest(TestCase):
         self.env = EnvironmentVarGuard()
         self.env.set('AAI_SERVICE_HOST', '1.2.3.4')
         self.env.set('AAI_SERVICE_PORT', '8443')
-        self.env.set('TESTING', 'True')
-        self.env.set('LOGS_PATH', './unit_test_logs')
+        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data_1 = json.load(data)
         with open(os.path.join(os.path.dirname(__file__),
@@ -103,6 +104,13 @@ class SubscriptionTest(TestCase):
 
         self.assertEqual(2, len(subs))
 
+    def test_get_nf_names_per_sub(self):
+        self.sub_1.create()
+        self.sub_1.add_network_function_to_subscription(self.nf_1)
+        self.sub_1.add_network_function_to_subscription(self.nf_2)
+        nfs = Subscription.get_nf_names_per_sub(self.sub_1.subscriptionName)
+        self.assertEqual(2, len(nfs))
+
     def test_create_existing_subscription(self):
         sub1 = self.sub_1.create()
         same_sub1 = self.sub_1.create()
@@ -117,7 +125,6 @@ class SubscriptionTest(TestCase):
         new_nf = NetworkFunction(nf_name='vnf_3', orchestration_status='Inventoried')
         self.sub_1.add_network_function_to_subscription(new_nf)
         nf_subs = Subscription.get_all_nfs_subscription_relations()
-        print(nf_subs)
         self.assertEqual(3, len(nf_subs))
 
     def test_add_duplicate_network_functions_per_subscription(self):
@@ -201,7 +208,6 @@ class SubscriptionTest(TestCase):
             expected_sub_event = json.load(data)
         app_conf = AppConfig(**self.cbs_data_1['config'])
         actual_sub_event = self.sub_1.prepare_subscription_event(self.nf_1.nf_name, app_conf)
-        print(actual_sub_event)
         self.assertEqual(expected_sub_event, actual_sub_event)
 
     def test_get_nf_models(self):

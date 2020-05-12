@@ -20,10 +20,9 @@ import json
 
 from tenacity import retry, wait_fixed, retry_if_exception_type
 
-import mod.pmsh_logging as logger
+from mod import logger
 from mod.network_function import NetworkFunction
 from mod.subscription import Subscription, AdministrativeState, subscription_nf_states
-
 
 policy_response_handle_functions = {
     AdministrativeState.LOCKED.value: {
@@ -49,6 +48,7 @@ class PolicyResponseHandler:
         This method polls MR for response from policy. It checks whether the message is for the
         relevant subscription and then handles the response
         """
+        logger.info('Polling MR started for XNF activation/deactivation policy response events.')
         self.app.app_context().push()
         administrative_state = Subscription.get(self.subscription_name).status
         try:
@@ -74,8 +74,8 @@ class PolicyResponseHandler:
             nf_name (str): The network function name
             response_message (str): The message in the response regarding the state (success|failed)
         """
-        logger.debug(f'Response from MR: Sub: {subscription_name} for '
-                     f'NF: {nf_name} received, updating the DB')
+        logger.info(f'Response from MR: Sub: {subscription_name} for '
+                    f'NF: {nf_name} received, updating the DB')
         try:
             sub_nf_status = subscription_nf_states[administrative_state][response_message].value
             policy_response_handle_functions[administrative_state][response_message](

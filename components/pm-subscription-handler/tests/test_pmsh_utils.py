@@ -31,16 +31,18 @@ from mod.subscription import Subscription
 
 class PmshUtilsTestCase(TestCase):
 
+    @patch('mod.update_config')
     @patch('mod.create_app')
     @patch('mod.get_db_connection_url')
-    def setUp(self, mock_get_db_url, mock_app):
+    def setUp(self, mock_get_db_url, mock_app, mock_update_config):
         mock_get_db_url.return_value = 'sqlite://'
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data = json.load(data)
         self.app_conf = AppConfig(**self.cbs_data['config'])
         self.sub = Subscription(**self.cbs_data['policy']['subscription'])
         self.env = EnvironmentVarGuard()
-        self.env.set('LOGS_PATH', './unit_test_logs')
+        self.env.set('TESTING', 'True')
+        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
         self.policy_mr_sub = self.app_conf.get_mr_sub('policy_pm_subscriber')
         self.mock_app = mock_app
         self.app = create_app()

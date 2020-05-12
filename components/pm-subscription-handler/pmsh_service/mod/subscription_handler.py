@@ -17,8 +17,8 @@
 # ============LICENSE_END=====================================================
 
 import mod.aai_client as aai
-import mod.pmsh_logging as logger
 from mod.pmsh_utils import ConfigHandler
+from mod import logger
 from mod.subscription import AdministrativeState
 
 
@@ -40,21 +40,22 @@ class SubscriptionHandler:
         self.app.app_context().push()
         config = ConfigHandler.get_pmsh_config()
         new_administrative_state = config['policy']['subscription']['administrativeState']
-
         try:
             if self.administrative_state == new_administrative_state:
-                logger.debug('Administrative State did not change in the Config')
+                logger.info('Administrative State did not change in the Config')
             else:
+                logger.info(f'Administrative State has changed from {self.administrative_state} '
+                            f'to {new_administrative_state}.')
                 self.current_sub, self.current_nfs = aai.get_pmsh_subscription_data(config)
                 self.administrative_state = new_administrative_state
                 self.current_sub.process_subscription(self.current_nfs, self.mr_pub, self.app_conf)
 
                 if new_administrative_state == AdministrativeState.UNLOCKED.value:
-                    logger.debug('Listening to AAI-EVENT topic in MR.')
+                    logger.info('Listening to AAI-EVENT topic in MR.')
                     self.aai_event_thread.start()
                 else:
-                    logger.debug('Stop listening to AAI-EVENT topic in MR.')
+                    logger.info('Stop listening to AAI-EVENT topic in MR.')
                     self.aai_event_thread.cancel()
 
         except Exception as err:
-            logger.debug(f'Error occurred during the activation/deactivation process {err}')
+            logger.error(f'Error occurred during the activation/deactivation process {err}')

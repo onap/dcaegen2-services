@@ -29,9 +29,10 @@ from mod.network_function import NetworkFunction
 
 
 class ControllerTestCase(unittest.TestCase):
+    @patch('mod.update_config')
     @patch('mod.get_db_connection_url')
     @patch.object(Session, 'put')
-    def setUp(self, mock_session, mock_get_db_url):
+    def setUp(self, mock_session, mock_get_db_url, mock_update_config):
         mock_get_db_url.return_value = 'sqlite://'
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
             self.aai_response_data = data.read()
@@ -40,8 +41,7 @@ class ControllerTestCase(unittest.TestCase):
         self.env = EnvironmentVarGuard()
         self.env.set('AAI_SERVICE_HOST', '1.2.3.4')
         self.env.set('AAI_SERVICE_PORT', '8443')
-        self.env.set('TESTING', 'True')
-        self.env.set('LOGS_PATH', './unit_test_logs')
+        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data_1 = json.load(data)
         self.sub_1, self.xnfs = aai_client.get_pmsh_subscription_data(self.cbs_data_1)
