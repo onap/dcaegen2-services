@@ -19,7 +19,7 @@
 import json
 from enum import Enum
 
-from mod import pmsh_logging as logger
+from mod import logger
 from mod.network_function import NetworkFunction, NetworkFunctionFilter
 from mod.subscription import AdministrativeState
 
@@ -66,11 +66,11 @@ def process_aai_events(mr_sub, subscription, mr_pub, app, app_conf):
 
 def _process_event(action, new_status, xnf_name, subscription, mr_pub, app_conf):
     if action == AAIEvent.UPDATE.value:
-        logger.debug(f'Update event found for network function {xnf_name}')
+        logger.info(f'Update event found for network function {xnf_name}')
         local_xnf = NetworkFunction.get(xnf_name)
 
         if local_xnf is None:
-            logger.debug(f'Activating subscription for network function {xnf_name}')
+            logger.info(f'Activating subscription for network function {xnf_name}')
             subscription.administrativeState = AdministrativeState.UNLOCKED.value
             subscription.process_subscription([NetworkFunction(
                 nf_name=xnf_name, orchestration_status=new_status)], mr_pub, app_conf)
@@ -78,9 +78,9 @@ def _process_event(action, new_status, xnf_name, subscription, mr_pub, app_conf)
             logger.debug(f"Update Event for network function {xnf_name} will not be processed "
                          f" as it's state is set to {local_xnf.orchestration_status}.")
     elif action == AAIEvent.DELETE.value:
-        logger.debug(f'Delete event found for network function {xnf_name}')
+        logger.info(f'Delete event found for network function {xnf_name}')
         NetworkFunction.delete(nf_name=xnf_name)
-        logger.debug(f'{xnf_name} successfully deleted.')
+        logger.info(f'{xnf_name} successfully deleted.')
 
 
 def _aai_event_exists(aai_events):

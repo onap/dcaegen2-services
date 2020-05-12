@@ -15,16 +15,18 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
 import uuid
+from enum import Enum
+from os import getenv
 from threading import Timer
 
 import requests
 from onap_dcae_cbs_docker_client.client import get_all
+from onaplogging.mdcContext import MDC
 from requests.auth import HTTPBasicAuth
 from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type
 
-import mod.pmsh_logging as logger
+from mod import logger
 
 
 class ConfigHandler:
@@ -42,11 +44,15 @@ class ConfigHandler:
             Exception: If any error occurred pulling configuration from Config binding service.
         """
         try:
+            MDC.put(MDCKeys.SERVICE_NAME.value, getenv('HOSTNAME'))
+            MDC.put(MDCKeys.INVOCATION_ID.value, str(uuid.uuid1()))
+            MDC.put(MDCKeys.REQUEST_ID.value, str(uuid.uuid1()))
+            logger.info('Fetching PMSH Configuration from CBS.')
             config = get_all()
-            logger.debug(f'PMSH config from CBS: {config}')
+            logger.info(f'Successfully fetched PMSH config from CBS: {config}')
             return config
         except Exception as err:
-            logger.debug(f'Failed to get config from CBS: {err}')
+            logger.error(f'Failed to get config from CBS: {err}')
             raise Exception
 
 
@@ -139,9 +145,16 @@ class _MrPub(_DmaapMrClient):
         Raises:
             Exception: if post request fails.
         """
+        request_id = str(uuid.uuid1())
+        invocation_id = str(uuid.uuid1())
+        MDC.put(MDCKeys.SERVICE_NAME.value, getenv('HOSTNAME'))
+        MDC.put(MDCKeys.INVOCATION_ID.value, invocation_id)
+        MDC.put(MDCKeys.REQUEST_ID.value, request_id)
         try:
             session = requests.Session()
-            headers = {'content-type': 'application/json', 'x-transactionId': str(uuid.uuid1())}
+            headers = {'content-type': 'application/json', 'x-transactionId': request_id,
+                       MDCKeys.INVOCATION_ID.value: invocation_id,
+                       MDCKeys.REQUEST_ID.value: request_id}
             response = session.post(self.topic_url, headers=headers,
                                     auth=HTTPBasicAuth(self.aaf_id, self.aaf_pass), json=event_json,
                                     verify=False)
@@ -186,9 +199,16 @@ class _MrSub(_DmaapMrClient):
         """
         topic_data = None
         try:
+            request_id = str(uuid.uuid1())
+            invocation_id = str(uuid.uuid1())
+            MDC.put(MDCKeys.SERVICE_NAME.value, getenv('HOSTNAME'))
+            MDC.put(MDCKeys.INVOCATION_ID.value, invocation_id)
+            MDC.put(MDCKeys.REQUEST_ID.value, request_id)
             session = requests.Session()
-            headers = {'accept': 'application/json', 'content-type': 'application/json'}
-            logger.debug(f'Request sent to MR topic: {self.topic_url}')
+            headers = {'accept': 'application/json', 'content-type': 'application/json',
+                       MDCKeys.INVOCATION_ID.value: invocation_id,
+                       MDCKeys.REQUEST_ID.value: request_id}
+            logger.debug(f'Fetching messages from MR topic: {self.topic_url}')
             response = session.get(f'{self.topic_url}/{consumer_group}/{consumer_id}'
                                    f'?timeout={timeout}',
                                    auth=HTTPBasicAuth(self.aaf_id, self.aaf_pass), headers=headers,
@@ -197,7 +217,7 @@ class _MrSub(_DmaapMrClient):
             if response.ok:
                 topic_data = response.json()
         except Exception as e:
-            logger.debug(e)
+            logger.error(f'Failed to fetch message from MR: {e}')
         return topic_data
 
 
@@ -210,3 +230,9 @@ class PeriodicTask(Timer):
         self.function(*self.args, **self.kwargs)
         while not self.finished.wait(self.interval):
             self.function(*self.args, **self.kwargs)
+
+
+class MDCKeys(Enum):
+    SERVICE_NAME = 'ServiceName'
+    REQUEST_ID = 'RequestID'
+    INVOCATION_ID = 'InvocationID'

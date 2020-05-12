@@ -36,5 +36,6 @@ setup(
         "Flask==1.1.1",
         "swagger-ui-bundle==0.0.6",
         "psycopg2-binary==2.8.4",
-        "onap_dcae_cbs_docker_client==2.1.0"]
+        "onap_dcae_cbs_docker_client==2.1.0",
+        "onappylog==1.0.9"]
 )
