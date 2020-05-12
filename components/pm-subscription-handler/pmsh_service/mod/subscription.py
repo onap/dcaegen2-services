@@ -19,8 +19,7 @@ from enum import Enum
 
 from tenacity import retry, retry_if_exception_type, wait_exponential, stop_after_attempt
 
-import mod.pmsh_logging as logger
-from mod import db
+from mod import db, logger
 from mod.api.db_models import SubscriptionModel, NfSubRelationalModel, NetworkFunctionModel
 from mod.network_function import NetworkFunction
 
@@ -125,6 +124,8 @@ class Subscription:
         except Exception as e:
             logger.debug(f'Failed to add nf {nf.nf_name} to subscription '
                          f'{current_sub.subscription_name}: {e}')
+            logger.debug(f'Subscription {current_sub.subscription_name} now contains these XNFs:'
+                         f'{Subscription.get_nfs_per_subscription(current_sub.subscription_name)}')
 
     @staticmethod
     def get(subscription_name):
@@ -147,6 +148,24 @@ class Subscription:
             list: Subscription list else empty
         """
         return SubscriptionModel.query.all()
+
+    @staticmethod
+    def get_nf_names_per_sub(subscription_name):
+        """ Retrieves a list of network function names related to the subscription
+
+        Args:
+            subscription_name (str): The subscription name
+
+        Returns:
+            list: List of network function names
+        """
+        nf_sub_rel = NfSubRelationalModel.query.filter(
+            NfSubRelationalModel.subscription_name == subscription_name).all()
+        list_of_nfs = []
+        for nf in nf_sub_rel:
+            list_of_nfs.append(nf.nf_name)
+
+        return list_of_nfs
 
     def update_subscription_status(self):
         """ Updates the status of subscription in subscription table """
@@ -187,6 +206,7 @@ class Subscription:
         self.update_subscription_status()
 
         if self.administrativeState == AdministrativeState.UNLOCKED.value:
+            logger.info(f'{action} subscription initiated for {self.subscriptionName}.')
             action = 'Activate'
             sub_nf_state = SubNfState.PENDING_CREATE.value
 
