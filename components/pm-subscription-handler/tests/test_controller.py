@@ -40,8 +40,7 @@ class ControllerTestCase(unittest.TestCase):
         self.env = EnvironmentVarGuard()
         self.env.set('AAI_SERVICE_HOST', '1.2.3.4')
         self.env.set('AAI_SERVICE_PORT', '8443')
-        self.env.set('TESTING', 'True')
-        self.env.set('LOGS_PATH', './unit_test_logs')
+        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data_1 = json.load(data)
         self.sub_1, self.xnfs = aai_client.get_pmsh_subscription_data(self.cbs_data_1)

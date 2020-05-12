@@ -15,17 +15,21 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import logging as logging
 import os
+import pathlib
 from urllib.parse import quote
 
 from connexion import App
 from flask_sqlalchemy import SQLAlchemy
-
-import mod.pmsh_logging as logger
+from onaplogging import monkey
+from onaplogging.mdcContext import MDC
+from ruamel.yaml import YAML
 
 db = SQLAlchemy()
 basedir = os.path.abspath(os.path.dirname(__file__))
 _connexion_app = None
+logger = logging.getLogger('onap_logger')
 
 
 def _get_app():
@@ -43,7 +47,7 @@ def launch_api_server(app_config):
 
 
 def create_app():
-    logger.create_loggers(os.getenv('LOGS_PATH'))
+    create_logger()
     connex_app = _get_app()
     app = connex_app.app
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -51,6 +55,27 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = get_db_connection_url()
     db.init_app(app)
     return app
+
+
+def create_logger():
+    config_file_path = os.getenv('LOGGER_CONFIG')
+    config_yaml = YAML()
+    config_file = pathlib.Path(config_file_path)
+    data = config_yaml.load(config_file)
+    data['handlers']['onap_log_handler']['filename'] = \
+        f'{os.getenv("LOGS_PATH")}/application.log '
+    config_yaml.dump(data, config_file)
+    monkey.patch_loggingYaml()
+    logging.config.yamlConfig(filepath=config_file_path,
+                              watchDog=os.getenv('DYNAMIC_LOGGER_CONFIG', True))
+    old_record = logging.getLogRecordFactory()
+
+    def augment_record(*args, **kwargs):
+        new_record = old_record(*args, **kwargs)
+        new_record.mdc = MDC.result()
+        return new_record
+
+    logging.setLogRecordFactory(augment_record)
 
 
 def get_db_connection_url():

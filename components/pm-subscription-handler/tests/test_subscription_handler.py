@@ -45,7 +45,7 @@ class SubscriptionHandlerTest(TestCase):
         self.nf_2 = NetworkFunction(nf_name='pnf_2')
         self.nfs = [self.nf_1, self.nf_2]
 
-    @patch('mod.pmsh_logging.debug')
+    @patch('mod.logger.info')
     @patch('mod.aai_client.get_pmsh_subscription_data')
     def test_execute_no_change_of_state(self, mock_get_aai, mock_logger):
         mock_get_aai.return_value = self.mock_sub, self.nfs
@@ -88,7 +88,7 @@ class SubscriptionHandlerTest(TestCase):
                                                               self.mock_app_conf)
         self.mock_aai_event_thread.return_value.cancel.assert_called()
 
-    @patch('mod.pmsh_logging.debug')
+    @patch('mod.logger.error')
     @patch('mod.aai_client.get_pmsh_subscription_data')
     def test_execute_exception(self, mock_get_aai, mock_logger):
         mock_get_aai.return_value = self.mock_sub, self.nfs
