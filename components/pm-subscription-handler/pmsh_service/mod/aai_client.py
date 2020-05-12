@@ -17,13 +17,15 @@
 # ============LICENSE_END=====================================================
 import json
 import uuid
-from os import environ
+from os import environ, getenv
 
 import requests
+from onaplogging.mdcContext import MDC
 from requests.auth import HTTPBasicAuth
 
-import mod.pmsh_logging as logger
+from mod import logger
 from mod.network_function import NetworkFunction, NetworkFunctionFilter
+from mod.pmsh_utils import MDCKeys
 from mod.subscription import Subscription
 
 
@@ -57,14 +59,23 @@ def _get_all_aai_nf_data():
     Returns:
         dict: the json response from AAI query, else None.
     """
+    request_id = str(uuid.uuid1())
+    invocation_id = str(uuid.uuid1())
+    MDC.put(MDCKeys.SERVICE_NAME.value, getenv('HOSTNAME'))
+    MDC.put(MDCKeys.INVOCATION_ID.value, invocation_id)
+    MDC.put(MDCKeys.REQUEST_ID.value, request_id)
     nf_data = None
     try:
         session = requests.Session()
         aai_endpoint = f'{_get_aai_service_url()}{"/aai/v16/query"}'
+        logger.info('Fetching XNFs from AAI.')
         headers = {'accept': 'application/json',
                    'content-type': 'application/json',
                    'x-fromappid': 'dcae-pmsh',
-                   'x-transactionid': str(uuid.uuid1())}
+                   'x-transactionid': request_id,
+                   MDCKeys.INVOCATION_ID.value: invocation_id,
+                   MDCKeys.REQUEST_ID.value: request_id
+                   }
         json_data = """
                     {'start':
                         ['network/pnfs',
@@ -77,8 +88,10 @@ def _get_all_aai_nf_data():
         response.raise_for_status()
         if response.ok:
             nf_data = json.loads(response.text)
+            logger.info('Successfully fetched XNFs from AAI')
+            logger.debug(f'XNFs from AAI: {nf_data}')
     except Exception as e:
-        logger.debug(e)
+        logger.error(f'Failed to get XNFs from AAI: {e}')
     return nf_data
 
 
@@ -97,7 +110,7 @@ def _get_aai_service_url():
         aai_ssl_port = environ['AAI_SERVICE_PORT']
         return f'https://{aai_service}:{aai_ssl_port}'
     except KeyError as e:
-        logger.debug(f'Failed to get AAI env vars: {e}')
+        logger.error(f'Failed to get AAI env vars: {e}')
         raise
 
 
@@ -126,6 +139,6 @@ def _filter_nf_data(nf_data, nf_filter):
                     nf_name=nf['properties'].get(name_identifier),
                     orchestration_status=orchestration_status))
     except KeyError as e:
-        logger.debug(f'Failed to parse AAI data: {e}')
+        logger.error(f'Failed to parse AAI data: {e}')
         raise
     return nf_set

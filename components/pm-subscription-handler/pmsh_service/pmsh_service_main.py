@@ -15,13 +15,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
 import sys
 from signal import signal, SIGTERM
 
 import mod.aai_client as aai
-import mod.pmsh_logging as logger
-from mod import db, create_app, launch_api_server
+from mod import db, create_app, launch_api_server, logger
 from mod.aai_event_handler import process_aai_events
 from mod.exit_handler import ExitHandler
 from mod.pmsh_utils import AppConfig, PeriodicTask, ConfigHandler
@@ -35,7 +33,6 @@ def main():
         app = create_app()
         app.app_context().push()
         db.create_all(app=app)
-
         config = ConfigHandler.get_pmsh_config()
         app_conf = AppConfig(**config['config'])
 
@@ -66,7 +63,7 @@ def main():
         launch_api_server(app_conf)
 
     except Exception as e:
-        logger.debug(f'Failed to Init PMSH: {e}')
+        logger.error(f'Failed to initialise PMSH: {e}')
         sys.exit(e)
 
 

@@ -46,9 +46,9 @@ class SubscriptionTest(TestCase):
         mock_session.return_value.text = self.aai_response_data
         self.env = EnvironmentVarGuard()
         self.env.set('AAI_SERVICE_HOST', '1.2.3.4')
-        self.env.set('AAI_SERVICE_PORT_AAI_SSL', '8443')
+        self.env.set('AAI_SERVICE_PORT', '8443')
         self.env.set('TESTING', 'True')
-        self.env.set('LOGS_PATH', './unit_test_logs')
+        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data_1 = json.load(data)
         with open(os.path.join(os.path.dirname(__file__),
@@ -103,6 +103,13 @@ class SubscriptionTest(TestCase):
 
         self.assertEqual(2, len(subs))
 
+    def test_get_nfs_per_subscription(self):
+        self.sub_1.create()
+        nf_array = [self.nf_1, self.nf_2]
+        self.sub_1.add_network_functions_to_subscription(nf_array)
+        nfs = Subscription.get_nfs_per_subscription(self.sub_1.subscriptionName)
+        self.assertEqual(2, len(nfs))
+
     def test_create_existing_subscription(self):
         sub1 = self.sub_1.create()
         same_sub1 = self.sub_1.create()
@@ -117,7 +124,6 @@ class SubscriptionTest(TestCase):
         new_nf_array = [NetworkFunction(nf_name='vnf_3', orchestration_status='Inventoried')]
         self.sub_1.add_network_functions_to_subscription(new_nf_array)
         nf_subs = Subscription.get_all_nfs_subscription_relations()
-        print(nf_subs)
         self.assertEqual(3, len(nf_subs))
 
     def test_add_duplicate_network_functions_per_subscription(self):

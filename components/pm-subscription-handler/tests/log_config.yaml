@@ -1,0 +1,27 @@
+version: 1
+
+disable_existing_loggers: True
+
+loggers:
+  onap_logger:
+    level: INFO
+    handlers: [onap_log_handler, stdout_handler]
+    propagate: False
+handlers:
+  onap_log_handler:
+    level: INFO
+    class: logging.handlers.RotatingFileHandler
+    filename: ./unit_test_logs/info.log
+    mode: a
+    maxBytes: 10000000
+    backupCount: 10
+    formatter: mdcFormatter
+  stdout_handler:
+    class: logging.StreamHandler
+    formatter: mdcFormatter
+formatters:
+  mdcFormatter:
+    format: "%(asctime)s | %(threadName)s | %(thread)d | %(levelname)s | %(module)s | %(funcName)s | %(mdc)s | %(message)s"
+    mdcfmt: "{ServiceName} | {RequestID} | {InvocationID}"
+    datefmt: "%Y-%m-%dT%H:%M:%S%z"
+    (): onaplogging.mdcformatter.MDCFormatter
