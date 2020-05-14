@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ad9cf20_1ea8bf8d",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": "onappylog module",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 9,
+        "endChar": 44
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b4b2aee_f06843e0",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": "Should this not be True?",
+      "range": {
+        "startLine": 30,
+        "startChar": 26,
+        "endLine": 30,
+        "endChar": 31
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6be2d0a_f76fd705",
+        "filename": "components/pm-subscription-handler/log_config.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": "Default to INFO",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1af5278c_1734a24a",
+        "filename": "components/pm-subscription-handler/log_config.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": "These should be pipe seperated. \"|\"",
+      "range": {
+        "startLine": 24,
+        "startChar": 13,
+        "endLine": 24,
+        "endChar": 124
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c38db711_3c4a4a7d",
+        "filename": "components/pm-subscription-handler/log_config.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": "Pretty sure this format doesn\u0027t match ONAP logging convention.",
+      "range": {
+        "startLine": 26,
+        "startChar": 13,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d292441_3329d43d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": "Abstract to it\u0027s own function.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 47
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86275973_f2694d95",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": "Could prob do with some INFO logging in this module",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 57,
+        "endChar": 25
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "484bae38_c2e2b699",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": ".nf_name",
+      "range": {
+        "startLine": 119,
+        "startChar": 64,
+        "endLine": 119,
+        "endChar": 65
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "186504aa_d6e623f1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": "This could get very loud. Also this will return a list of NF Objects",
+      "range": {
+        "startLine": 123,
+        "startChar": 65,
+        "endLine": 123,
+        "endChar": 73
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bad4448a_64c8d20b",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": "s. I cannot abide american english!!!",
+      "range": {
+        "startLine": 66,
+        "startChar": 41,
+        "endLine": 66,
+        "endChar": 42
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6019239d_d23d62db",
+        "filename": "components/pm-subscription-handler/tests/log_config.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-05-14T10:42:27Z",
+      "side": 1,
+      "message": "Same comments as for main config file",
+      "range": {
+        "startLine": 23,
+        "startChar": 12,
+        "endLine": 26,
+        "endChar": 35
+      },
+      "revId": "6e81074654c4378b0a1afca9fa84d882b0ad8950",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
