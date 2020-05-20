@@ -20,7 +20,7 @@ import re
 from enum import Enum
 
 from mod import pmsh_logging as logger, db
-from mod.db_models import NetworkFunctionModel
+from mod.api.db_models import NetworkFunctionModel
 
 
 class NetworkFunction:
@@ -53,10 +53,9 @@ class NetworkFunction:
                                           orchestration_status=self.orchestration_status)
             db.session.add(new_nf)
             db.session.commit()
-
             return new_nf
         else:
-            logger.debug(f'Network function {existing_nf} already exists,'
+            logger.debug(f'Network function {existing_nf.nf_name} already exists,'
                          f' returning this network function..')
             return existing_nf
 

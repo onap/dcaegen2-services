@@ -22,7 +22,7 @@ from unittest.mock import patch
 
 from tenacity import stop_after_attempt
 
-from mod.db_models import SubscriptionModel
+from mod.api.db_models import SubscriptionModel
 from mod.network_function import NetworkFunction
 from mod.subscription import AdministrativeState, SubNfState
 from mod.policy_response_handler import PolicyResponseHandler, policy_response_handle_functions
