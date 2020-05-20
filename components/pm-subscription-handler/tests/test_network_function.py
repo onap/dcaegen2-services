@@ -71,7 +71,8 @@ class NetworkFunctionTests(TestCase):
         self.nf_1.create()
         self.nf_2.create()
         sub = Subscription(**{"subscriptionName": "sub"})
-        sub.add_network_functions_to_subscription([self.nf_1, self.nf_2])
+        for nf in [self.nf_1, self.nf_2]:
+            sub.add_network_function_to_subscription(nf)
 
         NetworkFunction.delete(nf_name=self.nf_1.nf_name)
 

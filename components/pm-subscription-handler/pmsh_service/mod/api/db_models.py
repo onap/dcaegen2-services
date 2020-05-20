@@ -38,12 +38,18 @@ class SubscriptionModel(db.Model):
         self.status = status
 
     def __repr__(self):
-        return f'Subscription: {self.subscription_name}  {self.status}'
+        return f'subscription_name: {self.subscription_name}, status: {self.status}'
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
             return self.subscription_name == other.subscription_name
         return False
+
+    def serialize(self):
+        sub_nfs = NfSubRelationalModel.query.filter(
+            NfSubRelationalModel.subscription_name == self.subscription_name).all()
+        return {'subscription_name': self.subscription_name, 'subscription_status': self.status,
+                'network_functions': [sub_nf.serialize_nf() for sub_nf in sub_nfs]}
 
 
 class NetworkFunctionModel(db.Model):
@@ -62,7 +68,7 @@ class NetworkFunctionModel(db.Model):
         self.orchestration_status = orchestration_status
 
     def __repr__(self):
-        return f'NetworkFunctionModel: {self.nf_name}, {self.orchestration_status}'
+        return f'nf_name: {self.nf_name}, orchestration_status: {self.orchestration_status}'
 
 
 class NfSubRelationalModel(db.Model):
@@ -87,5 +93,15 @@ class NfSubRelationalModel(db.Model):
         self.nf_sub_status = nf_sub_status
 
     def __repr__(self):
-        return f'NetworkFunctionSubscriptions: {self.subscription_name}, ' \
-            f'{self.nf_name}, {self.nf_sub_status}'
+        return f'subscription_name: {self.subscription_name}, ' \
+            f'nf_name: {self.nf_name}, nf_sub_status: {self.nf_sub_status}'
+
+    def serialize(self):
+        return {'subscription_name': self.subscription_name, 'nf_name': self.nf_name,
+                'nf_sub_status': self.nf_sub_status}
+
+    def serialize_nf(self):
+        nf_orch_status = NetworkFunctionModel.query.filter(
+            NetworkFunctionModel.nf_name == self.nf_name).one_or_none().orchestration_status
+        return {'nf_name': self.nf_name, 'orchestration_status': nf_orch_status,
+                'nf_sub_status': self.nf_sub_status}

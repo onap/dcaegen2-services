@@ -26,7 +26,7 @@ from tenacity import stop_after_attempt
 
 import mod.aai_client as aai_client
 from mod import db, create_app
-from mod.db_models import NetworkFunctionModel
+from mod.api.db_models import NetworkFunctionModel
 from mod.network_function import NetworkFunction, NetworkFunctionFilter, OrchestrationStatus
 from mod.pmsh_utils import AppConfig
 from mod.subscription import Subscription
@@ -46,7 +46,7 @@ class SubscriptionTest(TestCase):
         mock_session.return_value.text = self.aai_response_data
         self.env = EnvironmentVarGuard()
         self.env.set('AAI_SERVICE_HOST', '1.2.3.4')
-        self.env.set('AAI_SERVICE_PORT_AAI_SSL', '8443')
+        self.env.set('AAI_SERVICE_PORT', '8443')
         self.env.set('TESTING', 'True')
         self.env.set('LOGS_PATH', './unit_test_logs')
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
@@ -110,22 +110,21 @@ class SubscriptionTest(TestCase):
         self.assertEqual(1, len(self.sub_1.get_all()))
 
     def test_add_network_functions_per_subscription(self):
-        nf_array = [self.nf_1, self.nf_2]
-        self.sub_1.add_network_functions_to_subscription(nf_array)
+        for nf in [self.nf_1, self.nf_2]:
+            self.sub_1.add_network_function_to_subscription(nf)
         nfs_for_sub_1 = Subscription.get_all_nfs_subscription_relations()
         self.assertEqual(2, len(nfs_for_sub_1))
-        new_nf_array = [NetworkFunction(nf_name='vnf_3', orchestration_status='Inventoried')]
-        self.sub_1.add_network_functions_to_subscription(new_nf_array)
+        new_nf = NetworkFunction(nf_name='vnf_3', orchestration_status='Inventoried')
+        self.sub_1.add_network_function_to_subscription(new_nf)
         nf_subs = Subscription.get_all_nfs_subscription_relations()
         print(nf_subs)
         self.assertEqual(3, len(nf_subs))
 
     def test_add_duplicate_network_functions_per_subscription(self):
-        nf_array = [self.nf_1]
-        self.sub_1.add_network_functions_to_subscription(nf_array)
+        self.sub_1.add_network_function_to_subscription(self.nf_1)
         nf_subs = Subscription.get_all_nfs_subscription_relations()
         self.assertEqual(1, len(nf_subs))
-        self.sub_1.add_network_functions_to_subscription(nf_array)
+        self.sub_1.add_network_function_to_subscription(self.nf_1)
         nf_subs = Subscription.get_all_nfs_subscription_relations()
         self.assertEqual(1, len(nf_subs))
 
@@ -139,8 +138,10 @@ class SubscriptionTest(TestCase):
         self.assertEqual('new_status', sub.status)
 
     def test_delete_subscription(self):
-        self.sub_1.add_network_functions_to_subscription([self.nf_1, self.nf_2])
-        self.sub_2.add_network_functions_to_subscription([self.nf_2])
+        for nf in [self.nf_1, self.nf_2]:
+            self.sub_1.add_network_function_to_subscription(nf)
+        for nf in [self.nf_2]:
+            self.sub_2.add_network_function_to_subscription(nf)
 
         self.sub_1.delete_subscription()
 
@@ -152,8 +153,8 @@ class SubscriptionTest(TestCase):
 
     def test_update_sub_nf_status(self):
         sub_name = 'ExtraPM-All-gNB-R2B'
-        nf_array = [self.nf_1, self.nf_2]
-        self.sub_1.add_network_functions_to_subscription(nf_array)
+        for nf in [self.nf_1, self.nf_2]:
+            self.sub_1.add_network_function_to_subscription(nf)
         sub_nfs = Subscription.get_all_nfs_subscription_relations()
         self.assertEqual('PENDING_CREATE', sub_nfs[0].nf_sub_status)
 
@@ -162,7 +163,7 @@ class SubscriptionTest(TestCase):
         self.assertEqual('Active', sub_nfs[0].nf_sub_status)
         self.assertEqual('PENDING_CREATE', sub_nfs[1].nf_sub_status)
 
-    @patch('mod.subscription.Subscription.add_network_functions_to_subscription')
+    @patch('mod.subscription.Subscription.add_network_function_to_subscription')
     @patch('mod.subscription.Subscription.update_sub_nf_status')
     @patch('mod.subscription.Subscription.update_subscription_status')
     def test_process_activate_subscription(self, mock_update_sub_status,
@@ -204,16 +205,16 @@ class SubscriptionTest(TestCase):
         self.assertEqual(expected_sub_event, actual_sub_event)
 
     def test_get_nf_models(self):
-        nf_array = [self.nf_1, self.nf_2]
-        self.sub_1.add_network_functions_to_subscription(nf_array)
+        for nf in [self.nf_1, self.nf_2]:
+            self.sub_1.add_network_function_to_subscription(nf)
         nf_models = self.sub_1._get_nf_models()
 
         self.assertEqual(2, len(nf_models))
         self.assertIsInstance(nf_models[0], NetworkFunctionModel)
 
     def test_get_network_functions(self):
-        nf_array = [self.nf_1, self.nf_2]
-        self.sub_1.add_network_functions_to_subscription(nf_array)
+        for nf in [self.nf_1, self.nf_2]:
+            self.sub_1.add_network_function_to_subscription(nf)
         nfs = self.sub_1.get_network_functions()
 
         self.assertEqual(2, len(nfs))
