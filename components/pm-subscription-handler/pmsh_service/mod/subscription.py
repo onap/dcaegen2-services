@@ -15,14 +15,13 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
 from enum import Enum
 
 from tenacity import retry, retry_if_exception_type, wait_exponential, stop_after_attempt
 
 import mod.pmsh_logging as logger
 from mod import db
-from mod.db_models import SubscriptionModel, NfSubRelationalModel, NetworkFunctionModel
+from mod.api.db_models import SubscriptionModel, NfSubRelationalModel, NetworkFunctionModel
 from mod.network_function import NetworkFunction
 
 
@@ -84,35 +83,33 @@ class Subscription:
         Returns:
             Subscription object
         """
-        existing_subscription = (SubscriptionModel.query.filter(
-            SubscriptionModel.subscription_name == self.subscriptionName).one_or_none())
+        try:
+            existing_subscription = (SubscriptionModel.query.filter(
+                SubscriptionModel.subscription_name == self.subscriptionName).one_or_none())
+            if existing_subscription is None:
+                new_subscription = SubscriptionModel(subscription_name=self.subscriptionName,
+                                                     status=self.administrativeState)
+                db.session.add(new_subscription)
+                db.session.commit()
+                return new_subscription
+            else:
+                logger.debug(f'Subscription {self.subscriptionName} already exists,'
+                             f' returning this subscription..')
+                return existing_subscription
+        except Exception as e:
+            logger.debug(e)
 
-        if existing_subscription is None:
-            new_subscription = SubscriptionModel(subscription_name=self.subscriptionName,
-                                                 status=self.administrativeState)
-
-            db.session.add(new_subscription)
-            db.session.commit()
-
-            return new_subscription
-
-        else:
-            logger.debug(f'Subscription {self.subscriptionName} already exists,'
-                         f' returning this subscription..')
-            return existing_subscription
-
-    def add_network_functions_to_subscription(self, nf_list):
-        """ Associates network functions to a Subscription
+    def add_network_function_to_subscription(self, nf):
+        """ Associates a network function to a Subscription
 
         Args:
-            nf_list : A list of NetworkFunction objects.
+            nf : A NetworkFunction object.
         """
         current_sub = self.create()
-        logger.debug(f'Adding network functions to subscription {current_sub.subscription_name}')
-
-        for nf in nf_list:
+        try:
             current_nf = nf.create()
-
+            logger.debug(f'Adding network function {nf.nf_name} to Subscription '
+                         f'{current_sub.subscription_name}')
             existing_entry = NfSubRelationalModel.query.filter(
                 NfSubRelationalModel.subscription_name == current_sub.subscription_name,
                 NfSubRelationalModel.nf_name == current_nf.nf_name).one_or_none()
@@ -120,11 +117,14 @@ class Subscription:
                 new_nf_sub = NfSubRelationalModel(current_sub.subscription_name,
                                                   nf.nf_name, SubNfState.PENDING_CREATE.value)
                 new_nf_sub.nf = current_nf
-                logger.debug(current_nf)
                 current_sub.nfs.append(new_nf_sub)
-
-        db.session.add(current_sub)
-        db.session.commit()
+                logger.debug(f'Network function {current_nf.nf_name} added to Subscription '
+                             f'{current_sub.subscription_name}')
+                db.session.add(current_sub)
+                db.session.commit()
+        except Exception as e:
+            logger.debug(f'Failed to add nf {nf.nf_name} to subscription '
+                         f'{current_sub.subscription_name}: {e}')
 
     @staticmethod
     def get(subscription_name):
@@ -150,27 +150,34 @@ class Subscription:
 
     def update_subscription_status(self):
         """ Updates the status of subscription in subscription table """
-        SubscriptionModel.query.filter(
-            SubscriptionModel.subscription_name == self.subscriptionName). \
-            update({SubscriptionModel.status: self.administrativeState},
-                   synchronize_session='evaluate')
+        try:
+            SubscriptionModel.query.filter(
+                SubscriptionModel.subscription_name == self.subscriptionName)\
+                .update({SubscriptionModel.status: self.administrativeState},
+                        synchronize_session='evaluate')
 
-        db.session.commit()
+            db.session.commit()
+        except Exception as e:
+            logger.debug(f'Failed to update status of subscription: {self.subscriptionName}: {e}')
 
     def delete_subscription(self):
         """ Deletes a subscription and all its association from the database. A network function
         that is only associated with the subscription being removed will also be deleted."""
-        subscription = SubscriptionModel.query.filter(
-            SubscriptionModel.subscription_name == self.subscriptionName).one_or_none()
-        if subscription:
-            for nf_relationship in subscription.nfs:
-                other_nf_relationship = NfSubRelationalModel.query.filter(
-                    NfSubRelationalModel.subscription_name != self.subscriptionName,
-                    NfSubRelationalModel.nf_name == nf_relationship.nf_name).one_or_none()
-                if not other_nf_relationship:
-                    db.session.delete(nf_relationship.nf)
-            db.session.delete(subscription)
-            db.session.commit()
+        try:
+            subscription = SubscriptionModel.query.filter(
+                SubscriptionModel.subscription_name == self.subscriptionName).one_or_none()
+            if subscription:
+                for nf_relationship in subscription.nfs:
+                    other_nf_relationship = NfSubRelationalModel.query.filter(
+                        NfSubRelationalModel.subscription_name != self.subscriptionName,
+                        NfSubRelationalModel.nf_name == nf_relationship.nf_name).one_or_none()
+                    if not other_nf_relationship:
+                        db.session.delete(nf_relationship.nf)
+                db.session.delete(subscription)
+                db.session.commit()
+        except Exception as e:
+            logger.debug(f'Failed to delete subscription: {self.subscriptionName} '
+                         f'and it\'s relations from the DB: {e}')
 
     @retry(wait=wait_exponential(multiplier=1, min=30, max=120), stop=stop_after_attempt(3),
            retry=retry_if_exception_type(Exception))
@@ -188,7 +195,7 @@ class Subscription:
                 mr_pub.publish_subscription_event_data(self, nf.nf_name, app_conf)
                 logger.debug(f'Publishing Event to {action} '
                              f'Sub: {self.subscriptionName} for the nf: {nf.nf_name}')
-                self.add_network_functions_to_subscription(nfs)
+                self.add_network_function_to_subscription(nf)
                 self.update_sub_nf_status(self.subscriptionName, sub_nf_state, nf.nf_name)
         except Exception as err:
             raise Exception(f'Error publishing activation event to MR: {err}')
@@ -213,12 +220,15 @@ class Subscription:
             nf_name (str): The network function name
             status (str): Status of the subscription
         """
-        NfSubRelationalModel.query.filter(
-            NfSubRelationalModel.subscription_name == subscription_name,
-            NfSubRelationalModel.nf_name == nf_name). \
-            update({NfSubRelationalModel.nf_sub_status: status}, synchronize_session='evaluate')
-
-        db.session.commit()
+        try:
+            NfSubRelationalModel.query.filter(
+                NfSubRelationalModel.subscription_name == subscription_name,
+                NfSubRelationalModel.nf_name == nf_name). \
+                update({NfSubRelationalModel.nf_sub_status: status}, synchronize_session='evaluate')
+            db.session.commit()
+        except Exception as e:
+            logger.debug(f'Failed to update status of nf: {nf_name} for subscription: '
+                         f'{subscription_name}: {e}')
 
     def _get_nf_models(self):
         nf_sub_relationships = NfSubRelationalModel.query.filter(
