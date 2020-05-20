@@ -16,12 +16,27 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-import unittest
-
-from mod.healthcheck import status
+from mod.subscription import Subscription
 
 
-class HealthcheckTestCase(unittest.TestCase):
+def status():
+    """
+    Returns the health of the PMSH service
+    Args:
+        NA
+    Returns:
+        Dictionary detailing 'status' of either 'healthy' or 'unhealthy'.
+    Raises:
+        NA
+    """
+    return {'status': 'healthy'}
 
-    def test_status_response_healthy(self):
-        self.assertEqual(status()['status'], 'healthy')
+
+def get_all_sub_to_nf_relations():
+    """ Retrieves all subscription to nf relations
+
+    Returns:
+        list: of Subscriptions and it's related Network Functions, else empty
+    """
+    subs_dict = [s.serialize() for s in Subscription.get_all()]
+    return subs_dict
