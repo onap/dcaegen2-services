@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e7544ca_787e5fcc",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-05-21T16:45:54Z",
+      "side": 1,
+      "message": "management?",
+      "range": {
+        "startLine": 23,
+        "startChar": 70,
+        "endLine": 23,
+        "endChar": 78
+      },
+      "revId": "47eff4a5543f4f242ad60f901b9fe4d32633da14",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "396b5637_c689cf95",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-05-21T16:45:54Z",
+      "side": 1,
+      "message": "Subscriptions are returned as array of objects?",
+      "range": {
+        "startLine": 38,
+        "startChar": 27,
+        "endLine": 38,
+        "endChar": 75
+      },
+      "revId": "47eff4a5543f4f242ad60f901b9fe4d32633da14",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "feb6f00d_90af5038",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2020-05-21T16:45:54Z",
+      "side": 1,
+      "message": "should empty array be returned in this case?",
+      "revId": "47eff4a5543f4f242ad60f901b9fe4d32633da14",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
