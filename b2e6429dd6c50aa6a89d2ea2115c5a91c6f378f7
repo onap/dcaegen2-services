@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3a3809eb_d19d94b9",
+        "filename": "components/pm-subscription-handler/log_config.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-03T13:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71d60518_af1a3013",
+      "range": {
+        "startLine": 3,
+        "startChar": 26,
+        "endLine": 3,
+        "endChar": 31
+      },
+      "revId": "b2e6429dd6c50aa6a89d2ea2115c5a91c6f378f7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b899bd8_accb89dd",
         "filename": "components/pm-subscription-handler/log_config.yaml",
         "patchSetId": 6
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "20b20651_eeac6b6c",
+        "filename": "components/pm-subscription-handler/log_config.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-03T13:32:40Z",
+      "side": 1,
+      "message": "Yes it does. Seems like the one below is not needed",
+      "parentUuid": "0b899bd8_accb89dd",
+      "range": {
+        "startLine": 7,
+        "startChar": 11,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "b2e6429dd6c50aa6a89d2ea2115c5a91c6f378f7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e88ad0a_1ebc6064",
         "filename": "components/pm-subscription-handler/tests/log_config.yaml",
         "patchSetId": 6
@@ -59,6 +107,30 @@
       "writtenOn": "2020-06-02T15:24:34Z",
       "side": 1,
       "message": "Don\u0027t think this will get created automatically.",
+      "range": {
+        "startLine": 14,
+        "startChar": 15,
+        "endLine": 14,
+        "endChar": 29
+      },
+      "revId": "b2e6429dd6c50aa6a89d2ea2115c5a91c6f378f7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb21a185_73705304",
+        "filename": "components/pm-subscription-handler/tests/log_config.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-03T13:32:40Z",
+      "side": 1,
+      "message": "It doesn\u0027t, I had it created manually. There is no need to have log files created in unit tests. Will take that handler out completely",
+      "parentUuid": "7e88ad0a_1ebc6064",
       "range": {
         "startLine": 14,
         "startChar": 15,
@@ -91,6 +163,30 @@
       "revId": "b2e6429dd6c50aa6a89d2ea2115c5a91c6f378f7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba28fe92_582576a9",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-03T13:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48c0b0f6_10ddf3f3",
+      "range": {
+        "startLine": 51,
+        "startChar": 35,
+        "endLine": 51,
+        "endChar": 49
+      },
+      "revId": "b2e6429dd6c50aa6a89d2ea2115c5a91c6f378f7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
