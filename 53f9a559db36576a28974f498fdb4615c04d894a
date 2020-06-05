@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9e44c8a4_7f59d9fb",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-06-05T08:46:22Z",
+      "side": 1,
+      "message": "Ye this should be changed!",
+      "parentUuid": "26cd9f2c_af130241",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 32
+      },
+      "revId": "53f9a559db36576a28974f498fdb4615c04d894a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2ed0c126_686d49a0",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 8
@@ -60,6 +84,30 @@
       "side": 1,
       "message": "I see its getting injected into the log entry anyway though..",
       "parentUuid": "2ed0c126_686d49a0",
+      "range": {
+        "startLine": 50,
+        "startChar": 23,
+        "endLine": 50,
+        "endChar": 25
+      },
+      "revId": "53f9a559db36576a28974f498fdb4615c04d894a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd38cb47_9df84a81",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-06-05T08:46:22Z",
+      "side": 1,
+      "message": "Does the SDK config library not respect the MDC\u0027s that were set and use those values in the request header to CBS?\n\nIf not, does the config library modify the MDC\u0027s themselves with the request ID etc.  ?\nFor the client who of the library to log with the same request ID that the library used to make its request to CBS.\n\nIf not, might mean it needs to be updated to support it, cause it sounds like its not really offering any way to access the request ID it uses to talk to CBS (assuming its using one)",
+      "parentUuid": "af2185d8_35862e18",
       "range": {
         "startLine": 50,
         "startChar": 23,
