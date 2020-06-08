@@ -33,6 +33,9 @@ WORKDIR $APPDIR
     # add non root user & group
 RUN addgroup --system $PMSHUSER && adduser --ingroup $PMSHUSER --system $PMSHUSER && \
     # create and chown the LOGS_PATH
+    apt-get update && \
+    apt-get install -y --no-install-recommends vim-tiny && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* && \
     mkdir -p $LOGS_PATH && \
     chown -R $PMSHUSER:$PMSHUSER $LOGS_PATH
 
