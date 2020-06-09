@@ -22,38 +22,38 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 from mod import logger
+from mod.network_function import NetworkFunction
 from mod.pmsh_utils import mdc_handler
-from mod.network_function import NetworkFunction, NetworkFunctionFilter
-from mod.subscription import Subscription
 
 
-def get_pmsh_subscription_data(cbs_data):
+def get_pmsh_nfs_from_aai(app_conf):
     """
-    Returns the PMSH subscription data
+    Returns the Network Functions from AAI related to the Subscription.
 
     Args:
-        cbs_data: json app config from the Config Binding Service.
+        app_conf (AppConfig): the AppConfig object.
 
     Returns:
-        Subscription, set(NetworkFunctions): `Subscription` <Subscription> object,
-        set of NetworkFunctions to be added.
+        set(NetworkFunctions): set of NetworkFunctions.
 
     Raises:
-        RuntimeError: if AAI data cannot be retrieved.
+        RuntimeError: if AAI Network Function data cannot be retrieved.
     """
-    aai_nf_data = _get_all_aai_nf_data()
+    aai_nf_data = _get_all_aai_nf_data(app_conf)
     if aai_nf_data:
-        sub = Subscription(**cbs_data['policy']['subscription'])
-        nfs = _filter_nf_data(aai_nf_data, NetworkFunctionFilter(**sub.nfFilter))
+        nfs = _filter_nf_data(aai_nf_data, app_conf.nf_filter)
     else:
         raise RuntimeError('Failed to get data from AAI')
-    return sub, nfs
+    return nfs
 
 
 @mdc_handler
-def _get_all_aai_nf_data(**kwargs):
+def _get_all_aai_nf_data(app_conf, **kwargs):
     """
     Return queried nf data from the AAI service.
+
+    Args:
+        app_conf (AppConfig): the AppConfig object.
 
     Returns:
         dict: the json response from AAI query, else None.
@@ -77,7 +77,8 @@ def _get_all_aai_nf_data(**kwargs):
                     }"""
         params = {'format': 'simple', 'nodesOnly': 'true'}
         response = session.put(aai_endpoint, headers=headers,
-                               auth=HTTPBasicAuth('AAI', 'AAI'),
+                               auth=HTTPBasicAuth(app_conf.aaf_creds.get('aaf_id'),
+                                                  app_conf.aaf_creds.get('aaf_pass')),
                                data=json_data, params=params, verify=False)
         response.raise_for_status()
         if response.ok:

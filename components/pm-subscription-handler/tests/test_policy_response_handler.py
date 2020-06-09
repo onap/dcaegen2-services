@@ -24,34 +24,38 @@ from tenacity import stop_after_attempt
 
 from mod.api.db_models import SubscriptionModel
 from mod.network_function import NetworkFunction
-from mod.subscription import AdministrativeState, SubNfState
+from mod.pmsh_utils import AppConfig
 from mod.policy_response_handler import PolicyResponseHandler, policy_response_handle_functions
+from mod.subscription import AdministrativeState, SubNfState
 
 
 class PolicyResponseHandlerTest(TestCase):
 
+    @patch('mod.pmsh_utils.AppConfig._get_pmsh_config')
     @patch('mod.create_app')
     @patch('mod.subscription.Subscription')
     @patch('mod.pmsh_utils._MrSub')
-    def setUp(self, mock_mr_sub, mock_sub, mock_app):
+    def setUp(self, mock_mr_sub, mock_sub, mock_app, mock_get_app_conf):
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data = json.load(data)
         self.mock_policy_mr_sub = mock_mr_sub
-        self.mock_sub = mock_sub
-        self.mock_sub.subscriptionName = 'ExtraPM-All-gNB-R2B'
+        mock_get_app_conf.return_value = self.cbs_data
+        self.app_conf = AppConfig()
+        self.sub = self.app_conf.subscription
         self.mock_app = mock_app
         self.nf = NetworkFunction(nf_name='nf1')
         self.policy_response_handler = PolicyResponseHandler(self.mock_policy_mr_sub,
-                                                             self.mock_sub.subscriptionName,
+                                                             self.app_conf,
                                                              self.mock_app)
 
     @patch('mod.network_function.NetworkFunction.delete')
     def test_handle_response_locked_success(self, mock_delete):
         with patch.dict(policy_response_handle_functions,
                         {AdministrativeState.LOCKED.value: {'success': mock_delete}}):
-            self.policy_response_handler._handle_response(self.mock_sub.subscriptionName,
-                                                          AdministrativeState.LOCKED.value,
-                                                          self.nf.nf_name, 'success')
+            self.policy_response_handler._handle_response(
+                self.app_conf.subscription.subscriptionName,
+                AdministrativeState.LOCKED.value,
+                self.nf.nf_name, 'success')
 
             mock_delete.assert_called()
 
@@ -59,34 +63,37 @@ class PolicyResponseHandlerTest(TestCase):
     def test_handle_response_locked_failed(self, mock_update_sub_nf):
         with patch.dict(policy_response_handle_functions,
                         {AdministrativeState.LOCKED.value: {'failed': mock_update_sub_nf}}):
-            self.policy_response_handler._handle_response(self.mock_sub.subscriptionName,
-                                                          AdministrativeState.LOCKED.value,
-                                                          self.nf.nf_name, 'failed')
-            mock_update_sub_nf.assert_called_with(subscription_name=self.mock_sub.subscriptionName,
-                                                  status=SubNfState.DELETE_FAILED.value,
-                                                  nf_name=self.nf.nf_name)
+            self.policy_response_handler._handle_response(
+                self.app_conf.subscription.subscriptionName,
+                AdministrativeState.LOCKED.value,
+                self.nf.nf_name, 'failed')
+            mock_update_sub_nf.assert_called_with(
+                subscription_name=self.app_conf.subscription.subscriptionName,
+                status=SubNfState.DELETE_FAILED.value, nf_name=self.nf.nf_name)
 
     @patch('mod.subscription.Subscription.update_sub_nf_status')
     def test_handle_response_unlocked_success(self, mock_update_sub_nf):
         with patch.dict(policy_response_handle_functions,
                         {AdministrativeState.UNLOCKED.value: {'success': mock_update_sub_nf}}):
-            self.policy_response_handler._handle_response(self.mock_sub.subscriptionName,
-                                                          AdministrativeState.UNLOCKED.value,
-                                                          self.nf.nf_name, 'success')
-            mock_update_sub_nf.assert_called_with(subscription_name=self.mock_sub.subscriptionName,
-                                                  status=SubNfState.CREATED.value,
-                                                  nf_name=self.nf.nf_name)
+            self.policy_response_handler._handle_response(
+                self.app_conf.subscription.subscriptionName,
+                AdministrativeState.UNLOCKED.value,
+                self.nf.nf_name, 'success')
+            mock_update_sub_nf.assert_called_with(
+                subscription_name=self.app_conf.subscription.subscriptionName,
+                status=SubNfState.CREATED.value, nf_name=self.nf.nf_name)
 
     @patch('mod.subscription.Subscription.update_sub_nf_status')
     def test_handle_response_unlocked_failed(self, mock_update_sub_nf):
         with patch.dict(policy_response_handle_functions,
                         {AdministrativeState.UNLOCKED.value: {'failed': mock_update_sub_nf}}):
-            self.policy_response_handler._handle_response(self.mock_sub.subscriptionName,
-                                                          AdministrativeState.UNLOCKED.value,
-                                                          self.nf.nf_name, 'failed')
-            mock_update_sub_nf.assert_called_with(subscription_name=self.mock_sub.subscriptionName,
-                                                  status=SubNfState.CREATE_FAILED.value,
-                                                  nf_name=self.nf.nf_name)
+            self.policy_response_handler._handle_response(
+                self.app_conf.subscription.subscriptionName,
+                AdministrativeState.UNLOCKED.value,
+                self.nf.nf_name, 'failed')
+            mock_update_sub_nf.assert_called_with(
+                subscription_name=self.app_conf.subscription.subscriptionName,
+                status=SubNfState.CREATE_FAILED.value, nf_name=self.nf.nf_name)
 
     def test_handle_response_exception(self):
         self.assertRaises(Exception, self.policy_response_handler._handle_response, 'sub1',
@@ -101,10 +108,8 @@ class PolicyResponseHandlerTest(TestCase):
         mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
                                                       status=AdministrativeState.UNLOCKED.value)
         self.policy_response_handler.poll_policy_topic()
-
         self.mock_policy_mr_sub.get_from_topic.assert_called()
-
-        mock_handle_response.assert_called_with(self.mock_sub.subscriptionName,
+        mock_handle_response.assert_called_with(self.app_conf.subscription.subscriptionName,
                                                 AdministrativeState.UNLOCKED.value, 'pnf300',
                                                 'success')
 

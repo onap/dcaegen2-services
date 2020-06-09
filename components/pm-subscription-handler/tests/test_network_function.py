@@ -27,7 +27,7 @@ from mod.subscription import Subscription
 
 class NetworkFunctionTests(TestCase):
 
-    @patch('mod.update_config')
+    @patch('mod.update_logging_config')
     @patch('mod.get_db_connection_url')
     def setUp(self, mock_get_db_url, mock_update_config):
         mock_get_db_url.return_value = 'sqlite://'

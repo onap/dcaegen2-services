@@ -125,7 +125,7 @@ class Subscription:
             logger.debug(f'Failed to add nf {nf.nf_name} to subscription '
                          f'{current_sub.subscription_name}: {e}')
             logger.debug(f'Subscription {current_sub.subscription_name} now contains these XNFs:'
-                         f'{Subscription.get_nfs_per_subscription(current_sub.subscription_name)}')
+                         f'{Subscription.get_nf_names_per_sub(current_sub.subscription_name)}')
 
     @staticmethod
     def get(subscription_name):
@@ -206,9 +206,9 @@ class Subscription:
         self.update_subscription_status()
 
         if self.administrativeState == AdministrativeState.UNLOCKED.value:
-            logger.info(f'{action} subscription initiated for {self.subscriptionName}.')
             action = 'Activate'
             sub_nf_state = SubNfState.PENDING_CREATE.value
+            logger.info(f'{action} subscription initiated for {self.subscriptionName}.')
 
         try:
             for nf in nfs:
@@ -228,7 +228,6 @@ class Subscription:
             list: NetworkFunctions per Subscription list else empty
         """
         nf_per_subscriptions = NfSubRelationalModel.query.all()
-
         return nf_per_subscriptions
 
     @staticmethod
