@@ -37,9 +37,9 @@ policy_response_handle_functions = {
 
 
 class PolicyResponseHandler:
-    def __init__(self, mr_sub, subscription_name, app):
+    def __init__(self, mr_sub, app_conf, app):
         self.mr_sub = mr_sub
-        self.subscription_name = subscription_name
+        self.app_conf = app_conf
         self.app = app
 
     @retry(wait=wait_fixed(5), retry=retry_if_exception_type(Exception))
@@ -48,18 +48,19 @@ class PolicyResponseHandler:
         This method polls MR for response from policy. It checks whether the message is for the
         relevant subscription and then handles the response
         """
-        logger.info('Polling MR started for XNF activation/deactivation policy response events.')
         self.app.app_context().push()
-        administrative_state = Subscription.get(self.subscription_name).status
+        administrative_state = self.app_conf.subscription.administrativeState
+        logger.info('Polling MR started for XNF activation/deactivation policy response events.')
         try:
             response_data = self.mr_sub.get_from_topic('policy_response_consumer')
             for data in response_data:
                 data = json.loads(data)
-                if data['status']['subscriptionName'] == self.subscription_name:
+                if data['status']['subscriptionName'] \
+                        == self.app_conf.subscription.subscriptionName:
                     nf_name = data['status']['nfName']
                     response_message = data['status']['message']
-                    self._handle_response(self.subscription_name, administrative_state,
-                                          nf_name, response_message)
+                    self._handle_response(self.app_conf.subscription.subscriptionName,
+                                          administrative_state, nf_name, response_message)
         except Exception as err:
             raise Exception(f'Error trying to poll policy response topic on MR: {err}')
 

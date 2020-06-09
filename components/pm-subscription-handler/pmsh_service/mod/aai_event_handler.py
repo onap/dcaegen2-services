@@ -20,8 +20,7 @@ import json
 from enum import Enum
 
 from mod import logger
-from mod.network_function import NetworkFunction, NetworkFunctionFilter
-from mod.subscription import AdministrativeState
+from mod.network_function import NetworkFunction
 
 
 class XNFType(Enum):
@@ -34,13 +33,12 @@ class AAIEvent(Enum):
     UPDATE = 'UPDATE'
 
 
-def process_aai_events(mr_sub, subscription, mr_pub, app, app_conf):
+def process_aai_events(mr_sub, mr_pub, app, app_conf):
     """
     Processes AAI UPDATE events for each filtered xNFs where orchestration status is set to Active.
 
     Args:
         mr_sub (_MrSub): MR subscriber
-        subscription (Subscription): The current subscription object
         mr_pub (_MrPub): MR publisher
         app (db): DB application
         app_conf (AppConfig): the application configuration.
@@ -48,7 +46,7 @@ def process_aai_events(mr_sub, subscription, mr_pub, app, app_conf):
     app.app_context().push()
     aai_events = mr_sub.get_from_topic('AAI-EVENT')
 
-    if _aai_event_exists(aai_events):
+    if aai_events is not None and len(aai_events) != 0:
         for entry in aai_events:
             logger.debug(f'AAI-EVENT entry: {entry}')
             entry = json.loads(entry)
@@ -60,19 +58,18 @@ def process_aai_events(mr_sub, subscription, mr_pub, app, app_conf):
                 'vnf-name']
             new_status = aai_xnf['orchestration-status']
 
-            if NetworkFunctionFilter(**subscription.nfFilter).is_nf_in_filter(xnf_name, new_status):
-                _process_event(action, new_status, xnf_name, subscription, mr_pub, app_conf)
+            if app_conf.nf_filter.is_nf_in_filter(xnf_name, new_status):
+                _process_event(action, new_status, xnf_name, mr_pub, app_conf)
 
 
-def _process_event(action, new_status, xnf_name, subscription, mr_pub, app_conf):
+def _process_event(action, new_status, xnf_name, mr_pub, app_conf):
     if action == AAIEvent.UPDATE.value:
         logger.info(f'Update event found for network function {xnf_name}')
         local_xnf = NetworkFunction.get(xnf_name)
 
         if local_xnf is None:
             logger.info(f'Activating subscription for network function {xnf_name}')
-            subscription.administrativeState = AdministrativeState.UNLOCKED.value
-            subscription.process_subscription([NetworkFunction(
+            app_conf.subscription.process_subscription([NetworkFunction(
                 nf_name=xnf_name, orchestration_status=new_status)], mr_pub, app_conf)
         else:
             logger.debug(f"Update Event for network function {xnf_name} will not be processed "
@@ -81,7 +78,3 @@ def _process_event(action, new_status, xnf_name, subscription, mr_pub, app_conf)
         logger.info(f'Delete event found for network function {xnf_name}')
         NetworkFunction.delete(nf_name=xnf_name)
         logger.info(f'{xnf_name} successfully deleted.')
-
-
-def _aai_event_exists(aai_events):
-    return aai_events is not None and len(aai_events) != 0

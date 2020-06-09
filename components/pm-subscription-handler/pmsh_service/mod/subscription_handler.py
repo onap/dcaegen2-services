@@ -17,7 +17,6 @@
 # ============LICENSE_END=====================================================
 
 import mod.aai_client as aai
-from mod.pmsh_utils import ConfigHandler
 from mod import logger
 from mod.subscription import AdministrativeState
 
@@ -38,15 +37,15 @@ class SubscriptionHandler:
         the Subscription if a change has occurred
         """
         self.app.app_context().push()
-        config = ConfigHandler.get_pmsh_config()
-        new_administrative_state = config['policy']['subscription']['administrativeState']
+        new_administrative_state = self.app_conf.subscription.administrativeState
         try:
             if self.administrative_state == new_administrative_state:
                 logger.info('Administrative State did not change in the Config')
             else:
                 logger.info(f'Administrative State has changed from {self.administrative_state} '
                             f'to {new_administrative_state}.')
-                self.current_sub, self.current_nfs = aai.get_pmsh_subscription_data(config)
+                self.current_nfs = aai.get_pmsh_nfs_from_aai(self.app_conf)
+                self.current_sub = self.app_conf.subscription
                 self.administrative_state = new_administrative_state
                 self.current_sub.process_subscription(self.current_nfs, self.mr_pub, self.app_conf)
 

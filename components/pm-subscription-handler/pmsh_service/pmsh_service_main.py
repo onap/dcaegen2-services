@@ -18,11 +18,10 @@
 import sys
 from signal import signal, SIGTERM
 
-import mod.aai_client as aai
 from mod import db, create_app, launch_api_server, logger
 from mod.aai_event_handler import process_aai_events
 from mod.exit_handler import ExitHandler
-from mod.pmsh_utils import AppConfig, PeriodicTask, ConfigHandler
+from mod.pmsh_utils import AppConfig, PeriodicTask
 from mod.policy_response_handler import PolicyResponseHandler
 from mod.subscription import Subscription, AdministrativeState
 from mod.subscription_handler import SubscriptionHandler
@@ -33,29 +32,27 @@ def main():
         app = create_app()
         app.app_context().push()
         db.create_all(app=app)
-        config = ConfigHandler.get_pmsh_config()
-        app_conf = AppConfig(**config['config'])
-
-        sub, nfs = aai.get_pmsh_subscription_data(config)
+        app_conf = AppConfig()
         policy_mr_pub = app_conf.get_mr_pub('policy_pm_publisher')
         policy_mr_sub = app_conf.get_mr_sub('policy_pm_subscriber')
         mr_aai_event_sub = app_conf.get_mr_sub('aai_subscriber')
-        subscription_in_db = Subscription.get(sub.subscriptionName)
+        subscription_in_db = Subscription.get(app_conf.subscription.subscriptionName)
         administrative_state = subscription_in_db.status if subscription_in_db \
             else AdministrativeState.LOCKED.value
 
+        app_conf_thread = PeriodicTask(10, app_conf.refresh_config)
+        app_conf_thread.start()
         aai_event_thread = PeriodicTask(10, process_aai_events,
-                                        args=(mr_aai_event_sub,
-                                              sub, policy_mr_pub, app, app_conf))
+                                        args=(mr_aai_event_sub, policy_mr_pub, app, app_conf))
         subscription_handler = SubscriptionHandler(administrative_state,
                                                    policy_mr_pub, app, app_conf, aai_event_thread)
-        policy_response_handler = PolicyResponseHandler(policy_mr_sub, sub.subscriptionName, app)
+        policy_response_handler = PolicyResponseHandler(policy_mr_sub, app_conf, app)
 
         subscription_handler_thread = PeriodicTask(30, subscription_handler.execute)
         policy_response_handler_thread = PeriodicTask(5, policy_response_handler.poll_policy_topic)
         subscription_handler_thread.start()
         policy_response_handler_thread.start()
-        periodic_tasks = [aai_event_thread, subscription_handler_thread,
+        periodic_tasks = [app_conf_thread, aai_event_thread, subscription_handler_thread,
                           policy_response_handler_thread]
 
         signal(SIGTERM, ExitHandler(periodic_tasks=periodic_tasks,

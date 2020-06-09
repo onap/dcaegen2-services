@@ -15,6 +15,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import threading
 import uuid
 from os import getenv
 from threading import Timer
@@ -26,6 +27,8 @@ from requests.auth import HTTPBasicAuth
 from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type
 
 from mod import logger
+from mod.network_function import NetworkFunctionFilter
+from mod.subscription import Subscription
 
 
 def mdc_handler(function):
@@ -42,12 +45,40 @@ def mdc_handler(function):
     return decorator
 
 
-class ConfigHandler:
-    """ Handles retrieval of PMSH's configuration from Configbinding service."""
-    @staticmethod
+class ThreadSafeSingleton(type):
+    _instances = {}
+    _singleton_lock = threading.Lock()
+
+    def __call__(cls, *args, **kwargs):
+        # double-checked locking pattern (https://en.wikipedia.org/wiki/Double-checked_locking)
+        if cls not in cls._instances:
+            with cls._singleton_lock:
+                if cls not in cls._instances:
+                    cls._instances[cls] = super(ThreadSafeSingleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+
+class AppConfig(metaclass=ThreadSafeSingleton):
+
+    def __init__(self):
+        try:
+            conf = self._get_pmsh_config()
+        except Exception:
+            raise
+        self.aaf_creds = {'aaf_id': conf['config'].get('aaf_identity'),
+                          'aaf_pass': conf['config'].get('aaf_password')}
+        self.cert_path = conf['config'].get('cert_path')
+        self.key_path = conf['config'].get('key_path')
+        self.streams_subscribes = conf['config'].get('streams_subscribes')
+        self.streams_publishes = conf['config'].get('streams_publishes')
+        self.operational_policy_name = conf['config'].get('operational_policy_name')
+        self.control_loop_name = conf['config'].get('control_loop_name')
+        self.subscription = Subscription(**conf['policy']['subscription'])
+        self.nf_filter = NetworkFunctionFilter(**self.subscription.nfFilter)
+
     @mdc_handler
     @retry(wait=wait_fixed(2), stop=stop_after_attempt(5), retry=retry_if_exception_type(Exception))
-    def get_pmsh_config(**kwargs):
+    def _get_pmsh_config(self, **kwargs):
         """ Retrieves PMSH's configuration from Config binding service. If a non-2xx response
         is received, it retries after 2 seconds for 5 times before raising an exception.
 
@@ -66,17 +97,23 @@ class ConfigHandler:
             logger.error(f'Failed to get config from CBS: {err}')
             raise Exception
 
+    def refresh_config(self):
+        """
+        Update the relevant attributes of the AppConfig object.
 
-class AppConfig:
-    def __init__(self, **kwargs):
-        self.aaf_creds = {'aaf_id': kwargs.get('aaf_identity'),
-                          'aaf_pass': kwargs.get('aaf_password')}
-        self.cert_path = kwargs.get('cert_path')
-        self.key_path = kwargs.get('key_path')
-        self.streams_subscribes = kwargs.get('streams_subscribes')
-        self.streams_publishes = kwargs.get('streams_publishes')
-        self.operational_policy_name = kwargs.get('operational_policy_name')
-        self.control_loop_name = kwargs.get('control_loop_name')
+        Raises:
+            Exception: if cbs request fails.
+        """
+        try:
+            app_conf = self._get_pmsh_config()
+        except Exception:
+            logger.debug("Failed to refresh AppConfig data")
+            raise
+        self.subscription.administrativeState = \
+            app_conf['policy']['subscription']['administrativeState']
+        self.nf_filter.nf_names = app_conf['policy']['subscription']['nfFilter']['nfNames']
+        self.nf_filter.nf_sw_version = app_conf['policy']['subscription']['nfFilter']['swVersions']
+        logger.info("AppConfig data has been refreshed")
 
     def get_mr_sub(self, sub_name):
         """

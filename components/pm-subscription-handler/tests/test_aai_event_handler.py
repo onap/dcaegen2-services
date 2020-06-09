@@ -22,34 +22,36 @@ from unittest.mock import patch, Mock
 
 from mod.aai_event_handler import process_aai_events
 from mod.network_function import NetworkFunction, OrchestrationStatus
+from mod.pmsh_utils import AppConfig
 
 
 class AAIEventHandlerTest(TestCase):
 
-    def setUp(self):
+    @patch('mod.pmsh_utils.AppConfig._get_pmsh_config')
+    def setUp(self, mock_get_pmsh_config):
         with open(path.join(path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
-            self.cbs_data_1 = json.load(data)
+            self.cbs_data = json.load(data)
+        mock_get_pmsh_config.return_value = self.cbs_data
+        self.app_conf = AppConfig()
         with open(path.join(path.dirname(__file__), 'data/mr_aai_events.json'), 'r') as data:
             self.mr_aai_events = json.load(data)["mr_response"]
-        self.mock_sub = Mock(nfFilter={'swVersions': ['1.0.0', '1.0.1'],
-                                       'nfNames': ['^pnf.*', '^vnf.*']})
         self.mock_mr_sub = Mock(get_from_topic=Mock(return_value=self.mr_aai_events))
         self.mock_mr_pub = Mock()
         self.mock_app = Mock()
 
+    @patch('mod.subscription.Subscription.process_subscription')
     @patch('mod.aai_event_handler.NetworkFunction.delete')
     @patch('mod.aai_event_handler.NetworkFunction.get')
-    @patch('pmsh_service_main.AppConfig')
-    def test_process_aai_update_and_delete_events(self, mock_app_conf, mock_nf_get, mock_nf_delete):
+    def test_process_aai_update_and_delete_events(self, mock_nf_get, mock_nf_delete,
+                                                  mock_process_sub):
         pnf_already_active = NetworkFunction(nf_name='pnf_already_active',
                                              orchestration_status=OrchestrationStatus.ACTIVE.value)
         mock_nf_get.side_effect = [None, pnf_already_active]
         expected_nf_for_processing = NetworkFunction(
             nf_name='pnf_newly_discovered', orchestration_status=OrchestrationStatus.ACTIVE.value)
 
-        process_aai_events(self.mock_mr_sub, self.mock_sub,
-                           self.mock_mr_pub, self.mock_app, mock_app_conf)
+        process_aai_events(self.mock_mr_sub, self.mock_mr_pub, self.mock_app, self.app_conf)
 
-        self.mock_sub.process_subscription.assert_called_once_with([expected_nf_for_processing],
-                                                                   self.mock_mr_pub, mock_app_conf)
+        mock_process_sub.assert_called_once_with([expected_nf_for_processing],
+                                                 self.mock_mr_pub, self.app_conf)
         mock_nf_delete.assert_called_once_with(nf_name='pnf_to_be_deleted')

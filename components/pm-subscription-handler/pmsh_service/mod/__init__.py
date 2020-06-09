@@ -59,7 +59,7 @@ def create_app():
 
 def create_logger():
     config_file_path = os.getenv('LOGGER_CONFIG')
-    update_config(config_file_path)
+    update_logging_config(config_file_path)
     monkey.patch_loggingYaml()
     logging.config.yamlConfig(filepath=config_file_path,
                               watchDog=os.getenv('DYNAMIC_LOGGER_CONFIG', True))
@@ -73,7 +73,7 @@ def create_logger():
     logging.setLogRecordFactory(augment_record)
 
 
-def update_config(config_file_path):
+def update_logging_config(config_file_path):
     config_yaml = YAML()
     config_file = pathlib.Path(config_file_path)
     data = config_yaml.load(config_file)
