@@ -102,8 +102,8 @@ class NetworkFunctionFilter:
         """Match the nf name against regex values in Subscription.nfFilter.nfNames
 
         Args:
-            nf_name: the AAI nf name.
-            orchestration_status: orchestration status of the nf
+            nf_name (str): the AAI nf name.
+            orchestration_status (str): orchestration status of the nf
 
         Returns:
             bool: True if matched, else False.

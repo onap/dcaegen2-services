@@ -30,10 +30,8 @@ from mod.subscription import AdministrativeState
 
 class ExitHandlerTests(TestCase):
 
-    @patch('pmsh_service_main.ConfigHandler')
     @patch('pmsh_service_main.create_app')
     @patch('pmsh_service_main.db')
-    @patch('pmsh_service_main.aai.get_pmsh_subscription_data')
     @patch('pmsh_service_main.AppConfig')
     @patch('pmsh_service_main.Subscription')
     @patch('pmsh_service_main.launch_api_server')
@@ -41,10 +39,9 @@ class ExitHandlerTests(TestCase):
     @patch.object(PeriodicTask, 'start')
     @patch.object(PeriodicTask, 'cancel')
     def test_terminate_signal_success(self, mock_task_cancel, mock_task_start, mock_sub_handler,
-                                      mock_launch_api_server, mock_sub, mock_app_conf, mock_aai,
-                                      mock_db, mock_app, mock_config_handler):
+                                      mock_launch_api_server, mock_sub, mock_app_conf,
+                                      mock_db, mock_app):
         pid = os.getpid()
-        mock_aai.return_value = [Mock(), Mock()]
         mock_db.get_app.return_value = Mock()
 
         mock_sub.administrativeState = AdministrativeState.UNLOCKED.value
@@ -67,7 +64,7 @@ class ExitHandlerTests(TestCase):
 
         pmsh_service_main.main()
 
-        self.assertEqual(3, mock_task_cancel.call_count)
+        self.assertEqual(4, mock_task_cancel.call_count)
         self.assertTrue(ExitHandler.shutdown_signal_received)
         self.assertEqual(1, mock_sub.process_subscription.call_count)
         self.assertEqual(mock_sub.administrativeState, AdministrativeState.LOCKED.value)
