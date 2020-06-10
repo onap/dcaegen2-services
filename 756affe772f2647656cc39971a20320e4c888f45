@@ -46,6 +46,30 @@
       "revId": "756affe772f2647656cc39971a20320e4c888f45",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "655b0f67_447a88ae",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-10T11:44:48Z",
+      "side": 1,
+      "message": "RUN apt-get update \u0026\u0026 apt-get install --no-install-recommends -y \\   \n vim-tiny \\  \n \u0026\u0026 apt-get clean \u0026\u0026 rm -rf /var/lib/apt/lists/*",
+      "parentUuid": "7c1ec01a_28570308",
+      "range": {
+        "startLine": 37,
+        "startChar": 47,
+        "endLine": 37,
+        "endChar": 51
+      },
+      "revId": "756affe772f2647656cc39971a20320e4c888f45",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
