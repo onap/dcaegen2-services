@@ -22,6 +22,30 @@
       "revId": "756affe772f2647656cc39971a20320e4c888f45",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c1ec01a_28570308",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-10T09:07:36Z",
+      "side": 1,
+      "message": "nano is around 770kbs too, I think vi is around 200kbs, but I couldn\u0027t get vi on apt repo, so think nano should be fine",
+      "parentUuid": "4cb898b9_eaec00c0",
+      "range": {
+        "startLine": 37,
+        "startChar": 47,
+        "endLine": 37,
+        "endChar": 51
+      },
+      "revId": "756affe772f2647656cc39971a20320e4c888f45",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
