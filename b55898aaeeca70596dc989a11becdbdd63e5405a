@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1d5c7fd5_15873246",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-16T11:07:37Z",
+      "side": 1,
+      "message": "None is returned if an HTTP Exception is thrown from MR query. Prob needs to be handled in policy_handler also. If you can suggest a better way to handle it??",
+      "parentUuid": "f4bf614f_be60e407",
+      "range": {
+        "startLine": 49,
+        "startChar": 3,
+        "endLine": 49,
+        "endChar": 55
+      },
+      "revId": "b55898aaeeca70596dc989a11becdbdd63e5405a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1f8cda67_25884213",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "b55898aaeeca70596dc989a11becdbdd63e5405a",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5eeb38f5_f238014a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-16T11:07:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1f8cda67_25884213",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 22
+      },
+      "revId": "b55898aaeeca70596dc989a11becdbdd63e5405a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
