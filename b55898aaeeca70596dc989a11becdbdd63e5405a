@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "84259d78_b82626aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-17T10:19:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff07c7f1_ba2dd14e",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "b55898aaeeca70596dc989a11becdbdd63e5405a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4bf614f_be60e407",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "hmm, I suppose when we start to implement the retrying for MR, that issue would be non existent, as by the time it would get to here communication with MR would be successful, meaning we could change this when doing the MR error handling.\n\nSince that will be done relatively soon, We can do that change in that commit, for now this is needed then.",
       "parentUuid": "1d5c7fd5_15873246",
+      "range": {
+        "startLine": 49,
+        "startChar": 3,
+        "endLine": 49,
+        "endChar": 55
+      },
+      "revId": "b55898aaeeca70596dc989a11becdbdd63e5405a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bd08e29_b21d905b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-17T10:19:31Z",
+      "side": 1,
+      "message": "Agreed.",
+      "parentUuid": "e293fa0d_f5c8f240",
       "range": {
         "startLine": 49,
         "startChar": 3,
