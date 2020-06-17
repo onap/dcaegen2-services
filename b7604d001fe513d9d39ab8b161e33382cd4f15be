@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b8b35c9_6b83c1f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-06-17T12:58:00Z",
+      "side": 1,
+      "message": "Improve\n\n\nPeople tend to stick to the imperative mood in their commit message titles\n\nhttps://en.wikipedia.org/wiki/Imperative_mood",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "b7604d001fe513d9d39ab8b161e33382cd4f15be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
