@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "ff07c7f1_ba2dd14e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-06-17T09:56:14Z",
+      "side": 1,
+      "message": "Probably gonna end up with a lot of commits with this message, wonder can we do something more specific here?",
+      "range": {
+        "startLine": 7,
+        "startChar": 6,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "b55898aaeeca70596dc989a11becdbdd63e5405a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f4bf614f_be60e407",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 1
@@ -37,6 +60,30 @@
       "side": 1,
       "message": "None is returned if an HTTP Exception is thrown from MR query. Prob needs to be handled in policy_handler also. If you can suggest a better way to handle it??",
       "parentUuid": "f4bf614f_be60e407",
+      "range": {
+        "startLine": 49,
+        "startChar": 3,
+        "endLine": 49,
+        "endChar": 55
+      },
+      "revId": "b55898aaeeca70596dc989a11becdbdd63e5405a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e293fa0d_f5c8f240",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-06-17T09:56:14Z",
+      "side": 1,
+      "message": "hmm, I suppose when we start to implement the retrying for MR, that issue would be non existent, as by the time it would get to here communication with MR would be successful, meaning we could change this when doing the MR error handling.\n\nSince that will be done relatively soon, We can do that change in that commit, for now this is needed then.",
+      "parentUuid": "1d5c7fd5_15873246",
       "range": {
         "startLine": 49,
         "startChar": 3,
