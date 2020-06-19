@@ -24,7 +24,8 @@ import requests
 from onap_dcae_cbs_docker_client.client import get_all
 from onaplogging.mdcContext import MDC
 from requests.auth import HTTPBasicAuth
-from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type
+from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type, \
+    wait_exponential
 
 from mod import logger
 from mod.network_function import NetworkFunctionFilter
@@ -184,6 +185,8 @@ class _MrPub(_DmaapMrClient):
         super().__init__(aaf_creds, **kwargs)
 
     @mdc_handler
+    @retry(wait=wait_exponential(multiplier=1, min=30, max=120),
+           retry=retry_if_exception_type(Exception))
     def publish_to_topic(self, event_json, **kwargs):
         """
         Publish the event to the DMaaP Message Router topic.
@@ -205,7 +208,7 @@ class _MrPub(_DmaapMrClient):
                                     verify=False)
             response.raise_for_status()
         except Exception as e:
-            logger.debug(e)
+            logger.error(f'Failed to publish message to MR topic: {e}')
             raise
 
     def publish_subscription_event_data(self, subscription, xnf_name, app_conf):
@@ -230,6 +233,8 @@ class _MrSub(_DmaapMrClient):
         super().__init__(aaf_creds, **kwargs)
 
     @mdc_handler
+    @retry(wait=wait_exponential(multiplier=1, min=30, max=120),
+           retry=retry_if_exception_type(Exception))
     def get_from_topic(self, consumer_id, consumer_group='dcae_pmsh_cg', timeout=1000, **kwargs):
         """
         Returns the json data from the MrTopic.
@@ -259,6 +264,7 @@ class _MrSub(_DmaapMrClient):
                 topic_data = response.json()
         except Exception as e:
             logger.error(f'Failed to fetch message from MR: {e}')
+            raise
         return topic_data
 
 

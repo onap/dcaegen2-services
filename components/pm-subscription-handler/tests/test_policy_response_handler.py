@@ -20,8 +20,6 @@ import os
 from unittest import TestCase
 from unittest.mock import patch
 
-from tenacity import stop_after_attempt
-
 from mod.api.db_models import SubscriptionModel
 from mod.network_function import NetworkFunction
 from mod.pmsh_utils import AppConfig
@@ -133,6 +131,5 @@ class PolicyResponseHandlerTest(TestCase):
         self.mock_policy_mr_sub.get_from_topic.return_value = 'wrong_return'
         mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
                                                       status=AdministrativeState.UNLOCKED.value)
-        self.policy_response_handler.poll_policy_topic.retry.stop = stop_after_attempt(1)
 
         self.assertRaises(Exception, self.policy_response_handler.poll_policy_topic)

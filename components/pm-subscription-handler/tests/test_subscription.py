@@ -22,7 +22,6 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from requests import Session
-from tenacity import stop_after_attempt
 
 import mod.aai_client as aai_client
 from mod import db, create_app
@@ -159,7 +158,6 @@ class SubscriptionTest(TestCase):
     @patch('mod.subscription.Subscription.update_subscription_status')
     def test_process_activate_subscription(self, mock_update_sub_status,
                                            mock_update_sub_nf, mock_add_nfs):
-        self.app_conf.subscription.process_subscription.retry.stop = stop_after_attempt(1)
         self.app_conf.subscription.process_subscription([list(self.xnfs)[0]], self.mock_mr_pub,
                                                         self.app_conf)
 
@@ -174,7 +172,6 @@ class SubscriptionTest(TestCase):
     def test_process_deactivate_subscription(self, mock_update_sub_status,
                                              mock_update_sub_nf):
         self.app_conf.subscription.administrativeState = 'LOCKED'
-        self.app_conf.subscription.process_subscription.retry.stop = stop_after_attempt(1)
         self.app_conf.subscription.process_subscription([list(self.xnfs)[0]], self.mock_mr_pub,
                                                         self.app_conf)
 
@@ -184,7 +181,6 @@ class SubscriptionTest(TestCase):
         mock_update_sub_status.assert_called()
 
     def test_process_subscription_exception(self):
-        self.app_conf.subscription.process_subscription.retry.stop = stop_after_attempt(1)
         self.assertRaises(Exception, self.app_conf.subscription.process_subscription,
                           [list(self.xnfs)[0]], 'not_mr_pub', 'app_config')
 
