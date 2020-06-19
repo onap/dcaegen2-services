@@ -23,7 +23,7 @@ from unittest.mock import patch
 
 import responses
 from requests import Session
-from tenacity import RetryError
+from tenacity import RetryError, stop_after_attempt
 
 from mod import db, get_db_connection_url, create_app
 from mod.pmsh_utils import AppConfig
@@ -102,6 +102,7 @@ class PmshUtilsTestCase(TestCase):
                       json={'error': 'Client Error'}, status=400)
         mr_policy_pub = self.app_conf.get_mr_pub('policy_pm_publisher')
         with self.assertRaises(Exception):
+            mr_policy_pub.publish_to_topic.retry.stop = stop_after_attempt(1)
             mr_policy_pub.publish_to_topic({"dummy_val": "43c4ee19-6b8d-4279-a80f-c507850aae47"})
 
     @patch('mod.pmsh_utils.AppConfig._get_pmsh_config')
@@ -137,8 +138,9 @@ class PmshUtilsTestCase(TestCase):
                       'https://node:30226/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS/'
                       'dcae_pmsh_cg/1?timeout=1000',
                       json={"dummy_val": "43c4ee19-6b8d-4279-a80f-c507850aae47"}, status=400)
-        mr_topic_data = policy_mr_sub.get_from_topic(1)
-        self.assertIsNone(mr_topic_data)
+        with self.assertRaises(Exception):
+            policy_mr_sub.get_from_topic.retry.stop = stop_after_attempt(1)
+            policy_mr_sub.get_from_topic(1)
 
     def test_get_db_connection_url_success(self):
         self.env = EnvironmentVarGuard()

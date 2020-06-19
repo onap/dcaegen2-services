@@ -42,10 +42,10 @@ class SubscriptionHandler:
             if self.administrative_state == new_administrative_state:
                 logger.info('Administrative State did not change in the Config')
             else:
-                logger.info(f'Administrative State has changed from {self.administrative_state} '
-                            f'to {new_administrative_state}.')
                 self.current_nfs = aai.get_pmsh_nfs_from_aai(self.app_conf)
                 self.current_sub = self.app_conf.subscription
+                logger.info(f'Administrative State has changed from {self.administrative_state} '
+                            f'to {new_administrative_state}.')
                 self.administrative_state = new_administrative_state
                 self.current_sub.process_subscription(self.current_nfs, self.mr_pub, self.app_conf)
 

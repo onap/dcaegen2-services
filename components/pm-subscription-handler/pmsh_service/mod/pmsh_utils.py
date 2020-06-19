@@ -200,12 +200,13 @@ class _MrPub(_DmaapMrClient):
                        'InvocationID': kwargs['invocation_id'],
                        'RequestID': kwargs['request_id']
                        }
+            logger.info(f'Attempting to publish event to {self.topic_url}')
             response = session.post(self.topic_url, headers=headers,
                                     auth=HTTPBasicAuth(self.aaf_id, self.aaf_pass), json=event_json,
                                     verify=False)
             response.raise_for_status()
         except Exception as e:
-            logger.debug(e)
+            logger.error(f'Failed to publish message to MR topic: {e}')
             raise
 
     def publish_subscription_event_data(self, subscription, xnf_name, app_conf):
@@ -222,6 +223,7 @@ class _MrPub(_DmaapMrClient):
             self.publish_to_topic(subscription_event)
         except Exception as e:
             logger.debug(f'pmsh_utils.publish_subscription_event_data : {e}')
+            raise
 
 
 class _MrSub(_DmaapMrClient):
@@ -243,7 +245,6 @@ class _MrSub(_DmaapMrClient):
         Returns:
             list[str]: the json response from DMaaP Message Router topic, else None.
         """
-        topic_data = None
         try:
             session = requests.Session()
             headers = {'accept': 'application/json', 'content-type': 'application/json',
@@ -256,10 +257,10 @@ class _MrSub(_DmaapMrClient):
                                    verify=False)
             response.raise_for_status()
             if response.ok:
-                topic_data = response.json()
+                return response.json()
         except Exception as e:
             logger.error(f'Failed to fetch message from MR: {e}')
-        return topic_data
+            raise
 
 
 class PeriodicTask(Timer):
