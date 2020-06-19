@@ -137,8 +137,8 @@ class PmshUtilsTestCase(TestCase):
                       'https://node:30226/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS/'
                       'dcae_pmsh_cg/1?timeout=1000',
                       json={"dummy_val": "43c4ee19-6b8d-4279-a80f-c507850aae47"}, status=400)
-        mr_topic_data = policy_mr_sub.get_from_topic(1)
-        self.assertIsNone(mr_topic_data)
+        with self.assertRaises(Exception):
+            policy_mr_sub.get_from_topic(1)
 
     def test_get_db_connection_url_success(self):
         self.env = EnvironmentVarGuard()

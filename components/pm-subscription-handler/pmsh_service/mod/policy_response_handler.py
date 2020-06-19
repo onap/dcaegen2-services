@@ -18,8 +18,6 @@
 
 import json
 
-from tenacity import retry, wait_fixed, retry_if_exception_type
-
 from mod import logger
 from mod.network_function import NetworkFunction
 from mod.subscription import Subscription, AdministrativeState, subscription_nf_states
@@ -42,7 +40,6 @@ class PolicyResponseHandler:
         self.app_conf = app_conf
         self.app = app
 
-    @retry(wait=wait_fixed(5), retry=retry_if_exception_type(Exception))
     def poll_policy_topic(self):
         """
         This method polls MR for response from policy. It checks whether the message is for the
@@ -62,7 +59,7 @@ class PolicyResponseHandler:
                     self._handle_response(self.app_conf.subscription.subscriptionName,
                                           administrative_state, nf_name, response_message)
         except Exception as err:
-            raise Exception(f'Error trying to poll policy response topic on MR: {err}')
+            logger.error(f'Error trying to poll policy response topic on MR: {err}')
 
     @staticmethod
     def _handle_response(subscription_name, administrative_state, nf_name, response_message):
@@ -82,4 +79,5 @@ class PolicyResponseHandler:
             policy_response_handle_functions[administrative_state][response_message](
                 subscription_name=subscription_name, status=sub_nf_status, nf_name=nf_name)
         except Exception as err:
-            raise Exception(f'Error changing nf_sub status in the DB: {err}')
+            logger.error(f'Error changing nf_sub status in the DB: {err}')
+            raise

@@ -17,8 +17,6 @@
 # ============LICENSE_END=====================================================
 from enum import Enum
 
-from tenacity import retry, retry_if_exception_type, wait_exponential, stop_after_attempt
-
 from mod import db, logger
 from mod.api.db_models import SubscriptionModel, NfSubRelationalModel, NetworkFunctionModel
 from mod.network_function import NetworkFunction
@@ -198,8 +196,6 @@ class Subscription:
             logger.debug(f'Failed to delete subscription: {self.subscriptionName} '
                          f'and it\'s relations from the DB: {e}')
 
-    @retry(wait=wait_exponential(multiplier=1, min=30, max=120), stop=stop_after_attempt(3),
-           retry=retry_if_exception_type(Exception))
     def process_subscription(self, nfs, mr_pub, app_conf):
         action = 'Deactivate'
         sub_nf_state = SubNfState.PENDING_DELETE.value
