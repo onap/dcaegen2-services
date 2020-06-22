@@ -79,7 +79,8 @@ def _get_all_aai_nf_data(app_conf, **kwargs):
         response = session.put(aai_endpoint, headers=headers,
                                auth=HTTPBasicAuth(app_conf.aaf_creds.get('aaf_id'),
                                                   app_conf.aaf_creds.get('aaf_pass')),
-                               data=json_data, params=params, verify=False)
+                               data=json_data, params=params,
+                               verify=(app_conf.ca_cert_path if app_conf.enable_tls else False))
         response.raise_for_status()
         if response.ok:
             nf_data = json.loads(response.text)

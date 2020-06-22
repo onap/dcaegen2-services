@@ -35,7 +35,7 @@ def main():
         app_conf = AppConfig()
         policy_mr_pub = app_conf.get_mr_pub('policy_pm_publisher')
         policy_mr_sub = app_conf.get_mr_sub('policy_pm_subscriber')
-        mr_aai_event_sub = app_conf.get_mr_sub('aai_subscriber')
+        aai_event_mr_sub = app_conf.get_mr_sub('aai_subscriber')
         subscription_in_db = Subscription.get(app_conf.subscription.subscriptionName)
         administrative_state = subscription_in_db.status if subscription_in_db \
             else AdministrativeState.LOCKED.value
@@ -43,7 +43,7 @@ def main():
         app_conf_thread = PeriodicTask(10, app_conf.refresh_config)
         app_conf_thread.start()
         aai_event_thread = PeriodicTask(10, process_aai_events,
-                                        args=(mr_aai_event_sub, policy_mr_pub, app, app_conf))
+                                        args=(aai_event_mr_sub, policy_mr_pub, app, app_conf))
         subscription_handler = SubscriptionHandler(administrative_state,
                                                    policy_mr_pub, app, app_conf, aai_event_thread)
         policy_response_handler = PolicyResponseHandler(policy_mr_sub, app_conf, app)

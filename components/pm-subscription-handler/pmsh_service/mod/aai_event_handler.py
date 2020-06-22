@@ -44,7 +44,7 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
         app_conf (AppConfig): the application configuration.
     """
     app.app_context().push()
-    aai_events = mr_sub.get_from_topic('AAI-EVENT')
+    aai_events = mr_sub.get_from_topic('dcae_pmsh_aai_event')
 
     if aai_events is not None and len(aai_events) != 0:
         for entry in aai_events:

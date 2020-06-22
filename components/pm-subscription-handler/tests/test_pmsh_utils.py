@@ -78,8 +78,8 @@ class PmshUtilsTestCase(TestCase):
     def test_utils_get_cert_data(self, mock_get_pmsh_config):
         mock_get_pmsh_config.return_value = self.cbs_data
         self.app_conf = AppConfig()
-        self.assertTrue(self.app_conf.cert_params, ('/opt/app/pm-mapper/etc/certs/cert.pem',
-                                                    '/opt/app/pm-mapper/etc/certs/key.pem'))
+        self.assertEquals(self.app_conf.cert_params, ('/opt/app/pmsh/etc/certs/cert.pem',
+                                                      '/opt/app/pmsh/etc/certs/key.pem'))
 
     @patch('mod.pmsh_utils.AppConfig._get_pmsh_config')
     @patch.object(Session, 'post')
@@ -98,7 +98,7 @@ class PmshUtilsTestCase(TestCase):
         mock_get_pmsh_config.return_value = self.cbs_data
         self.app_conf = AppConfig()
         responses.add(responses.POST,
-                      'https://node:30226/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS',
+                      'https://message-router:3905/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS',
                       json={'error': 'Client Error'}, status=400)
         mr_policy_pub = self.app_conf.get_mr_pub('policy_pm_publisher')
         with self.assertRaises(Exception):
@@ -121,7 +121,7 @@ class PmshUtilsTestCase(TestCase):
         self.app_conf = AppConfig()
         policy_mr_sub = self.app_conf.get_mr_sub('policy_pm_subscriber')
         responses.add(responses.GET,
-                      'https://node:30226/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS/'
+                      'https://message-router:3905/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS/'
                       'dcae_pmsh_cg/1?timeout=1000',
                       json={"dummy_val": "43c4ee19-6b8d-4279-a80f-c507850aae47"}, status=200)
         mr_topic_data = policy_mr_sub.get_from_topic(1)
@@ -134,7 +134,7 @@ class PmshUtilsTestCase(TestCase):
         self.app_conf = AppConfig()
         policy_mr_sub = self.app_conf.get_mr_sub('policy_pm_subscriber')
         responses.add(responses.GET,
-                      'https://node:30226/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS/'
+                      'https://message-router:3905/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS/'
                       'dcae_pmsh_cg/1?timeout=1000',
                       json={"dummy_val": "43c4ee19-6b8d-4279-a80f-c507850aae47"}, status=400)
         mr_topic_data = policy_mr_sub.get_from_topic(1)

@@ -215,7 +215,8 @@ class Subscription:
                 mr_pub.publish_subscription_event_data(self, nf.nf_name, app_conf)
                 logger.debug(f'Publishing Event to {action} '
                              f'Sub: {self.subscriptionName} for the nf: {nf.nf_name}')
-                self.add_network_function_to_subscription(nf)
+                if action == 'Activate':
+                    self.add_network_function_to_subscription(nf)
                 self.update_sub_nf_status(self.subscriptionName, sub_nf_state, nf.nf_name)
         except Exception as err:
             raise Exception(f'Error publishing activation event to MR: {err}')
