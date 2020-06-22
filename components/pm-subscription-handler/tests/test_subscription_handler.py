@@ -95,4 +95,5 @@ class SubscriptionHandlerTest(TestCase):
                                           self.mock_app, self.app_conf,
                                           self.mock_aai_event_thread)
         sub_handler.execute()
-        mock_logger.assert_called_with('Error occurred during the activation/deactivation process ')
+        mock_logger.assert_called_with('Error occurred during the activation/deactivation process ',
+                                       exc_info=True)

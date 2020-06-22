@@ -57,4 +57,5 @@ class SubscriptionHandler:
                     self.aai_event_thread.cancel()
 
         except Exception as err:
-            logger.error(f'Error occurred during the activation/deactivation process {err}')
+            logger.error(f'Error occurred during the activation/deactivation process {err}',
+                         exc_info=True)

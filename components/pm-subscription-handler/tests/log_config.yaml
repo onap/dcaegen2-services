@@ -4,7 +4,7 @@ disable_existing_loggers: true
 
 loggers:
   onap_logger:
-    level: INFO
+    level: DEBUG
     handlers: [stdout_handler]
     propagate: false
 handlers:

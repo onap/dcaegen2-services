@@ -37,7 +37,6 @@ class AaiClientTestCase(TestCase):
     def setUp(self, mock_get_db_url, mock_update_config, mock_get_pmsh_config):
         mock_get_db_url.return_value = 'sqlite://'
         self.env = EnvironmentVarGuard()
-        self.env.set('AAI_SERVICE_HOST', '1.2.3.4')
         self.env.set('AAI_SERVICE_PORT', '8443')
         self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
@@ -67,14 +66,14 @@ class AaiClientTestCase(TestCase):
     @responses.activate
     def test_aai_client_get_all_aai_xnf_data_not_found(self):
         responses.add(responses.PUT,
-                      'https://1.2.3.4:8443/aai/v16/query?format=simple&nodesOnly=true',
+                      'https://1.2.3.4:8443/aai/v19/query?format=simple&nodesOnly=true',
                       json={'error': 'not found'}, status=404)
         self.assertIsNone(aai_client._get_all_aai_nf_data(self.app_conf))
 
     @responses.activate
     def test_aai_client_get_all_aai_xnf_data_success(self):
         responses.add(responses.PUT,
-                      'https://1.2.3.4:8443/aai/v16/query?format=simple&nodesOnly=true',
+                      'https://aai:8443/aai/v19/query?format=simple&nodesOnly=true',
                       json={'dummy_data': 'blah_blah'}, status=200)
         self.assertIsNotNone(aai_client._get_all_aai_nf_data(self.app_conf))
 
@@ -84,4 +83,4 @@ class AaiClientTestCase(TestCase):
             aai_client._get_aai_service_url()
 
     def test_aai_client_get_aai_service_url_success(self):
-        self.assertEqual('https://1.2.3.4:8443', aai_client._get_aai_service_url())
+        self.assertEqual('https://aai:8443', aai_client._get_aai_service_url())

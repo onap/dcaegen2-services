@@ -66,13 +66,17 @@ class Subscription:
         Returns:
             dict: the Subscription event to be published.
         """
-        clean_sub = {k: v for k, v in self.__dict__.items() if k != 'nfFilter'}
-        sub_event = {'nfName': xnf_name, 'policyName': app_conf.operational_policy_name,
-                     'changeType': 'DELETE'
-                     if self.administrativeState == AdministrativeState.LOCKED.value
-                     else 'CREATE', 'closedLoopControlName': app_conf.control_loop_name,
-                     'subscription': clean_sub}
-        return sub_event
+        try:
+            clean_sub = {k: v for k, v in self.__dict__.items() if k != 'nfFilter'}
+            sub_event = {'nfName': xnf_name, 'policyName': app_conf.operational_policy_name,
+                         'changeType': 'DELETE'
+                         if self.administrativeState == AdministrativeState.LOCKED.value
+                         else 'CREATE', 'closedLoopControlName': app_conf.control_loop_name,
+                         'subscription': clean_sub}
+            return sub_event
+        except Exception as e:
+            logger.error(f'Failed to prep Sub event for xNF {xnf_name}: {e}', exc_info=True)
+            raise
 
     def create(self):
         """ Creates a subscription database entry
@@ -94,7 +98,8 @@ class Subscription:
                              f' returning this subscription..')
                 return existing_subscription
         except Exception as e:
-            logger.debug(f'Failed to create subscription {self.subscriptionName} in the DB: {e}')
+            logger.error(f'Failed to create subscription {self.subscriptionName} in the DB: {e}',
+                         exc_info=True)
 
     def add_network_function_to_subscription(self, nf):
         """ Associates a network function to a Subscription
@@ -120,8 +125,8 @@ class Subscription:
                 db.session.add(current_sub)
                 db.session.commit()
         except Exception as e:
-            logger.debug(f'Failed to add nf {nf.nf_name} to subscription '
-                         f'{current_sub.subscription_name}: {e}')
+            logger.error(f'Failed to add nf {nf.nf_name} to subscription '
+                         f'{current_sub.subscription_name}: {e}', exc_info=True)
             logger.debug(f'Subscription {current_sub.subscription_name} now contains these XNFs:'
                          f'{Subscription.get_nf_names_per_sub(current_sub.subscription_name)}')
 
@@ -175,7 +180,8 @@ class Subscription:
 
             db.session.commit()
         except Exception as e:
-            logger.debug(f'Failed to update status of subscription: {self.subscriptionName}: {e}')
+            logger.error(f'Failed to update status of subscription: {self.subscriptionName}: {e}',
+                         exc_info=True)
 
     def delete_subscription(self):
         """ Deletes a subscription and all its association from the database. A network function
@@ -193,8 +199,8 @@ class Subscription:
                 db.session.delete(subscription)
                 db.session.commit()
         except Exception as e:
-            logger.debug(f'Failed to delete subscription: {self.subscriptionName} '
-                         f'and it\'s relations from the DB: {e}')
+            logger.error(f'Failed to delete subscription: {self.subscriptionName} '
+                         f'and it\'s relations from the DB: {e}', exc_info=True)
 
     def process_subscription(self, nfs, mr_pub, app_conf):
         action = 'Deactivate'
@@ -211,7 +217,8 @@ class Subscription:
                 mr_pub.publish_subscription_event_data(self, nf.nf_name, app_conf)
                 logger.debug(f'Publishing Event to {action} '
                              f'Sub: {self.subscriptionName} for the nf: {nf.nf_name}')
-                self.add_network_function_to_subscription(nf)
+                if action == 'Activate':
+                    self.add_network_function_to_subscription(nf)
                 self.update_sub_nf_status(self.subscriptionName, sub_nf_state, nf.nf_name)
         except Exception as err:
             raise Exception(f'Error publishing activation event to MR: {err}')
@@ -242,8 +249,8 @@ class Subscription:
                 update({NfSubRelationalModel.nf_sub_status: status}, synchronize_session='evaluate')
             db.session.commit()
         except Exception as e:
-            logger.debug(f'Failed to update status of nf: {nf_name} for subscription: '
-                         f'{subscription_name}: {e}')
+            logger.error(f'Failed to update status of nf: {nf_name} for subscription: '
+                         f'{subscription_name}: {e}', exc_info=True)
 
     def _get_nf_models(self):
         nf_sub_relationships = NfSubRelationalModel.query.filter(

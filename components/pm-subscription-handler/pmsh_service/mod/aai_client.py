@@ -61,15 +61,14 @@ def _get_all_aai_nf_data(app_conf, **kwargs):
     nf_data = None
     try:
         session = requests.Session()
-        aai_endpoint = f'{_get_aai_service_url()}{"/aai/v16/query"}'
+        aai_endpoint = f'{_get_aai_service_url()}{"/aai/v19/query"}'
         logger.info('Fetching XNFs from AAI.')
         headers = {'accept': 'application/json',
                    'content-type': 'application/json',
                    'x-fromappid': 'dcae-pmsh',
                    'x-transactionid': kwargs['request_id'],
                    'InvocationID': kwargs['invocation_id'],
-                   'RequestID': kwargs['request_id']
-                   }
+                   'RequestID': kwargs['request_id']}
         json_data = """
                     {'start':
                         ['network/pnfs',
@@ -79,14 +78,16 @@ def _get_all_aai_nf_data(app_conf, **kwargs):
         response = session.put(aai_endpoint, headers=headers,
                                auth=HTTPBasicAuth(app_conf.aaf_creds.get('aaf_id'),
                                                   app_conf.aaf_creds.get('aaf_pass')),
-                               data=json_data, params=params, verify=False)
+                               data=json_data, params=params,
+                               verify=(app_conf.ca_cert_path if app_conf.enable_tls else False),
+                               cert=(app_conf.cert_params if app_conf.enable_tls else None))
         response.raise_for_status()
         if response.ok:
             nf_data = json.loads(response.text)
             logger.info('Successfully fetched XNFs from AAI')
             logger.debug(f'XNFs from AAI: {nf_data}')
     except Exception as e:
-        logger.error(f'Failed to get XNFs from AAI: {e}')
+        logger.error(f'Failed to get XNFs from AAI: {e}', exc_info=True)
     return nf_data
 
 
@@ -98,14 +99,13 @@ def _get_aai_service_url():
         str: the AAI k8s service URL.
 
     Raises:
-        KeyError: if AAI env vars not found.
+        KeyError: if AAI env var not found.
     """
     try:
-        aai_service = environ['AAI_SERVICE_HOST']
         aai_ssl_port = environ['AAI_SERVICE_PORT']
-        return f'https://{aai_service}:{aai_ssl_port}'
+        return f'https://aai:{aai_ssl_port}'
     except KeyError as e:
-        logger.error(f'Failed to get AAI env vars: {e}')
+        logger.error(f'Failed to get AAI env var: {e}', exc_info=True)
         raise
 
 
@@ -134,6 +134,6 @@ def _filter_nf_data(nf_data, nf_filter):
                     nf_name=nf['properties'].get(name_identifier),
                     orchestration_status=orchestration_status))
     except KeyError as e:
-        logger.error(f'Failed to parse AAI data: {e}')
+        logger.error(f'Failed to parse AAI data: {e}', exc_info=True)
         raise
     return nf_set

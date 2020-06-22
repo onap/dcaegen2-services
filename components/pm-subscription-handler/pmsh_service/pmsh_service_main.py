@@ -29,13 +29,17 @@ from mod.subscription_handler import SubscriptionHandler
 
 def main():
     try:
-        app = create_app()
-        app.app_context().push()
-        db.create_all(app=app)
-        app_conf = AppConfig()
-        policy_mr_pub = app_conf.get_mr_pub('policy_pm_publisher')
-        policy_mr_sub = app_conf.get_mr_sub('policy_pm_subscriber')
-        mr_aai_event_sub = app_conf.get_mr_sub('aai_subscriber')
+        try:
+            app = create_app()
+            app.app_context().push()
+            db.create_all(app=app)
+            app_conf = AppConfig()
+            policy_mr_pub = app_conf.get_mr_pub('policy_pm_publisher')
+            policy_mr_sub = app_conf.get_mr_sub('policy_pm_subscriber')
+            aai_event_mr_sub = app_conf.get_mr_sub('aai_subscriber')
+        except Exception as e:
+            logger.error(f'Failed to get config and create application: {e}', exc_info=True)
+            sys.exit(e)
         subscription_in_db = Subscription.get(app_conf.subscription.subscriptionName)
         administrative_state = subscription_in_db.status if subscription_in_db \
             else AdministrativeState.LOCKED.value
@@ -43,13 +47,13 @@ def main():
         app_conf_thread = PeriodicTask(10, app_conf.refresh_config)
         app_conf_thread.start()
         aai_event_thread = PeriodicTask(10, process_aai_events,
-                                        args=(mr_aai_event_sub, policy_mr_pub, app, app_conf))
+                                        args=(aai_event_mr_sub, policy_mr_pub, app, app_conf))
         subscription_handler = SubscriptionHandler(administrative_state,
                                                    policy_mr_pub, app, app_conf, aai_event_thread)
         policy_response_handler = PolicyResponseHandler(policy_mr_sub, app_conf, app)
 
         subscription_handler_thread = PeriodicTask(30, subscription_handler.execute)
-        policy_response_handler_thread = PeriodicTask(5, policy_response_handler.poll_policy_topic)
+        policy_response_handler_thread = PeriodicTask(10, policy_response_handler.poll_policy_topic)
         subscription_handler_thread.start()
         policy_response_handler_thread.start()
         periodic_tasks = [app_conf_thread, aai_event_thread, subscription_handler_thread,
@@ -60,7 +64,7 @@ def main():
         launch_api_server(app_conf)
 
     except Exception as e:
-        logger.error(f'Failed to initialise PMSH: {e}')
+        logger.error(f'Failed to initialise PMSH: {e}', exc_info=True)
         sys.exit(e)
 
 

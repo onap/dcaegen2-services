@@ -39,11 +39,14 @@ class ExitHandler:
         logger.debug(f'ExitHandler was called with signal number: {sig_num}.')
         current_sub = self.subscription_handler.current_sub
         if current_sub and current_sub.administrativeState == AdministrativeState.UNLOCKED.value:
-            for thread in self.periodic_tasks:
-                logger.debug(f'Cancelling periodic task with thread name: {thread.name}.')
-                thread.cancel()
-            current_sub.administrativeState = AdministrativeState.LOCKED.value
-            current_sub.process_subscription(current_sub.get_network_functions(),
-                                             self.subscription_handler.mr_pub,
-                                             self.subscription_handler.app_conf)
+            try:
+                for thread in self.periodic_tasks:
+                    logger.debug(f'Cancelling periodic task with thread name: {thread.name}.')
+                    thread.cancel()
+                current_sub.administrativeState = AdministrativeState.LOCKED.value
+                current_sub.process_subscription(current_sub.get_network_functions(),
+                                                 self.subscription_handler.mr_pub,
+                                                 self.subscription_handler.app_conf)
+            except Exception as e:
+                logger.error(f'Failed to shut down PMSH application: {e}', exc_info=True)
         ExitHandler.shutdown_signal_received = True

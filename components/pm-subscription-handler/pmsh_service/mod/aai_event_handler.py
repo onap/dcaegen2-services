@@ -19,8 +19,6 @@
 import json
 from enum import Enum
 
-from requests import HTTPError
-
 from mod import logger
 from mod.network_function import NetworkFunction
 
@@ -46,26 +44,26 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
         app_conf (AppConfig): the application configuration.
     """
     app.app_context().push()
+    logger.info('Polling MR for XNF AAI events.')
     try:
-        aai_events = mr_sub.get_from_topic('AAI-EVENT')
-        if len(aai_events) != 0:
-            for entry in aai_events:
+        aai_events = mr_sub.get_from_topic('dcae_pmsh_aai_event')
+        if aai_events is not None and len(aai_events) != 0:
+            aai_events = [json.loads(e) for e in aai_events]
+            xnf_events = [e for e in aai_events if e['event-header']['entity-type'] == (
+                XNFType.PNF.value or XNFType.VNF.value)]
+            for entry in xnf_events:
                 logger.debug(f'AAI-EVENT entry: {entry}')
-                entry = json.loads(entry)
-                event_header = entry['event-header']
-                aai_xnf = entry['entity']
-                action = event_header['action']
-                entity_type = event_header['entity-type']
-                xnf_name = aai_xnf['pnf-name'] if entity_type == XNFType.PNF.value else aai_xnf[
-                    'vnf-name']
-                new_status = aai_xnf['orchestration-status']
+                aai_entity = entry['entity']
+                action = entry['event-header']['action']
+                entity_type = entry['event-header']['entity-type']
+                xnf_name = aai_entity['pnf-name'] if entity_type == XNFType.PNF.value \
+                    else aai_entity['vnf-name']
+                new_status = aai_entity['orchestration-status']
 
                 if app_conf.nf_filter.is_nf_in_filter(xnf_name, new_status):
                     _process_event(action, new_status, xnf_name, mr_pub, app_conf)
-    except HTTPError as e:
-        logger.debug(f'Failed to fetch AAI-EVENT messages from MR {e}')
     except Exception as e:
-        logger.debug(f'Exception trying to process AAI events {e}')
+        logger.error(f'Failed to process AAI event: {e}', exc_info=True)
 
 
 def _process_event(action, new_status, xnf_name, mr_pub, app_conf):
