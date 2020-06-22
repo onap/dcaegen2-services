@@ -67,6 +67,8 @@ class AppConfig(metaclass=ThreadSafeSingleton):
             raise
         self.aaf_creds = {'aaf_id': conf['config'].get('aaf_identity'),
                           'aaf_pass': conf['config'].get('aaf_password')}
+        self.enable_tls = conf['config'].get('enable_tls')
+        self.ca_cert_path = conf['config'].get('ca_cert_path')
         self.cert_path = conf['config'].get('cert_path')
         self.key_path = conf['config'].get('key_path')
         self.streams_subscribes = conf['config'].get('streams_subscribes')
@@ -129,7 +131,8 @@ class AppConfig(metaclass=ThreadSafeSingleton):
             KeyError: if the sub_name is not found.
         """
         try:
-            return _MrSub(sub_name, self.aaf_creds, **self.streams_subscribes[sub_name])
+            return _MrSub(sub_name, self.aaf_creds, self.ca_cert_path, self.enable_tls,
+                          **self.streams_subscribes[sub_name])
         except KeyError as e:
             logger.debug(e)
             raise
@@ -148,7 +151,8 @@ class AppConfig(metaclass=ThreadSafeSingleton):
             KeyError: if the sub_name is not found.
         """
         try:
-            return _MrPub(pub_name, self.aaf_creds, **self.streams_publishes[pub_name])
+            return _MrPub(pub_name, self.aaf_creds, self.ca_cert_path, self.enable_tls,
+                          **self.streams_publishes[pub_name])
         except KeyError as e:
             logger.debug(e)
             raise
@@ -159,29 +163,33 @@ class AppConfig(metaclass=ThreadSafeSingleton):
         Returns the tls artifact paths.
 
         Returns:
-            cert_path, key_path: the path to tls cert and key.
+            cert_path, key_path (tuple): the path to tls cert and key.
         """
-        return self.cert_path, self.key_path
+        return str(self.cert_path), str(self.key_path)
 
 
 class _DmaapMrClient:
-    def __init__(self, aaf_creds, **kwargs):
+    def __init__(self, aaf_creds, ca_cert_path, enable_tls, **kwargs):
         """
         A DMaaP Message Router utility class.
         Sub classes should be invoked via the AppConfig.get_mr_{pub|sub} only.
         Args:
-            aaf_creds: a dict of aaf secure credentials.
+            aaf_creds (dict): a dict of aaf secure credentials.
+            ca_cert_path (str): path to the ca certificate.
+            enable_tls (bool): TLS if True, else False
             **kwargs: a dict of streams_{subscribes|publishes} data.
         """
         self.topic_url = kwargs.get('dmaap_info').get('topic_url')
         self.aaf_id = aaf_creds.get('aaf_id')
         self.aaf_pass = aaf_creds.get('aaf_pass')
+        self.ca_cert_path = ca_cert_path
+        self.enable_tls = enable_tls
 
 
 class _MrPub(_DmaapMrClient):
-    def __init__(self, pub_name, aaf_creds, **kwargs):
+    def __init__(self, pub_name, aaf_creds, ca_cert_path, enable_tls, **kwargs):
         self.pub_name = pub_name
-        super().__init__(aaf_creds, **kwargs)
+        super().__init__(aaf_creds, ca_cert_path, enable_tls, **kwargs)
 
     @mdc_handler
     def publish_to_topic(self, event_json, **kwargs):
@@ -189,7 +197,7 @@ class _MrPub(_DmaapMrClient):
         Publish the event to the DMaaP Message Router topic.
 
         Args:
-            event_json: the json data to be published.
+            event_json (dict): the json data to be published.
 
         Raises:
             Exception: if post request fails.
@@ -202,7 +210,7 @@ class _MrPub(_DmaapMrClient):
                        }
             response = session.post(self.topic_url, headers=headers,
                                     auth=HTTPBasicAuth(self.aaf_id, self.aaf_pass), json=event_json,
-                                    verify=False)
+                                    verify=(str(self.ca_cert_path) if self.enable_tls else False))
             response.raise_for_status()
         except Exception as e:
             logger.debug(e)
@@ -213,8 +221,8 @@ class _MrPub(_DmaapMrClient):
         Update the Subscription dict with xnf and policy name then publish to DMaaP MR topic.
 
         Args:
-            subscription: the `Subscription` <Subscription> object.
-            xnf_name: the xnf to include in the event.
+            subscription (Subscription): the `Subscription` <Subscription> object.
+            xnf_name (str): the xnf to include in the event.
             app_conf (AppConfig): the application configuration.
         """
         try:
@@ -225,9 +233,9 @@ class _MrPub(_DmaapMrClient):
 
 
 class _MrSub(_DmaapMrClient):
-    def __init__(self, sub_name, aaf_creds, **kwargs):
+    def __init__(self, sub_name, aaf_creds, ca_cert_path, enable_tls, **kwargs):
         self.sub_name = sub_name
-        super().__init__(aaf_creds, **kwargs)
+        super().__init__(aaf_creds, ca_cert_path, enable_tls, **kwargs)
 
     @mdc_handler
     def get_from_topic(self, consumer_id, consumer_group='dcae_pmsh_cg', timeout=1000, **kwargs):
@@ -235,10 +243,10 @@ class _MrSub(_DmaapMrClient):
         Returns the json data from the MrTopic.
 
         Args:
-            consumer_id: Within your subscribers group, a name that uniquely
+            consumer_id (str): Within your subscribers group, a name that uniquely
             identifies your subscribers process.
-            consumer_group: A name that uniquely identifies your subscribers.
-            timeout: The request timeout value in mSec.
+            consumer_group (str): A name that uniquely identifies your subscribers.
+            timeout (int): The request timeout value in mSec.
 
         Returns:
             list[str]: the json response from DMaaP Message Router topic, else None.
@@ -253,7 +261,7 @@ class _MrSub(_DmaapMrClient):
             response = session.get(f'{self.topic_url}/{consumer_group}/{consumer_id}'
                                    f'?timeout={timeout}',
                                    auth=HTTPBasicAuth(self.aaf_id, self.aaf_pass), headers=headers,
-                                   verify=False)
+                                   verify=(str(self.ca_cert_path) if self.enable_tls else False))
             response.raise_for_status()
             if response.ok:
                 topic_data = response.json()

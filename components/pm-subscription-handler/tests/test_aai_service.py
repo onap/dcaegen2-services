@@ -67,14 +67,14 @@ class AaiClientTestCase(TestCase):
     @responses.activate
     def test_aai_client_get_all_aai_xnf_data_not_found(self):
         responses.add(responses.PUT,
-                      'https://1.2.3.4:8443/aai/v16/query?format=simple&nodesOnly=true',
+                      'https://1.2.3.4:8443/aai/v19/query?format=simple&nodesOnly=true',
                       json={'error': 'not found'}, status=404)
         self.assertIsNone(aai_client._get_all_aai_nf_data(self.app_conf))
 
     @responses.activate
     def test_aai_client_get_all_aai_xnf_data_success(self):
         responses.add(responses.PUT,
-                      'https://1.2.3.4:8443/aai/v16/query?format=simple&nodesOnly=true',
+                      'https://1.2.3.4:8443/aai/v19/query?format=simple&nodesOnly=true',
                       json={'dummy_data': 'blah_blah'}, status=200)
         self.assertIsNotNone(aai_client._get_all_aai_nf_data(self.app_conf))
 

@@ -50,9 +50,9 @@ class PolicyResponseHandler:
         """
         self.app.app_context().push()
         administrative_state = self.app_conf.subscription.administrativeState
-        logger.info('Polling MR started for XNF activation/deactivation policy response events.')
+        logger.info('Polling MR for XNF activation/deactivation policy response events.')
         try:
-            response_data = self.mr_sub.get_from_topic('policy_response_consumer')
+            response_data = self.mr_sub.get_from_topic('dcae_pmsh_policy_cl_input')
             for data in response_data:
                 data = json.loads(data)
                 if data['status']['subscriptionName'] \

@@ -64,13 +64,15 @@
       "operational_policy_name": "pmsh-operational-policy",
       "aaf_password":"demo123456!",
       "aaf_identity":"dcae@dcae.onap.org",
-      "cert_path":"/opt/app/pm-mapper/etc/certs/cert.pem",
-      "key_path":"/opt/app/pm-mapper/etc/certs/key.pem",
+      "cert_path":"/opt/app/pmsh/etc/certs/cert.pem",
+      "key_path":"/opt/app/pmsh/etc/certs/key.pem",
+      "ca_cert_path":"/opt/app/pmsh/etc/certs/cacert.pem",
+      "enable_tls":"true",
       "streams_subscribes":{
          "aai_subscriber":{
             "type":"message_router",
             "dmaap_info":{
-               "topic_url":"https://node:30226/events/AAI_EVENT",
+               "topic_url":"https://message-router:3905/events/AAI_EVENT",
                "client_role":"org.onap.dcae.aaiSub",
                "location":"san-francisco",
                "client_id":"1575976809466"
@@ -79,7 +81,7 @@
          "policy_pm_subscriber":{
             "type":"message_router",
             "dmaap_info":{
-               "topic_url":"https://node:30226/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS",
+               "topic_url":"https://message-router:3905/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS",
                "client_role":"org.onap.dcae.pmSubscriber",
                "location":"san-francisco",
                "client_id":"1575876809456"
@@ -90,7 +92,7 @@
          "policy_pm_publisher":{
             "type":"message_router",
             "dmaap_info":{
-               "topic_url":"https://node:30226/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS",
+               "topic_url":"https://message-router:3905/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS",
                "client_role":"org.onap.dcae.pmPublisher",
                "location":"san-francisco",
                "client_id":"1475976809466"
@@ -99,7 +101,7 @@
          "other_publisher":{
             "type":"message_router",
             "dmaap_info":{
-               "topic_url":"https://node:30226/events/org.onap.dmaap.mr.SOME_OTHER_TOPIC",
+               "topic_url":"https://message-router:3905/events/org.onap.dmaap.mr.SOME_OTHER_TOPIC",
                "client_role":"org.onap.dcae.pmControlPub",
                "location":"san-francisco",
                "client_id":"1875976809466"
