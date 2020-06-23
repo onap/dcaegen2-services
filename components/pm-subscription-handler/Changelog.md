@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Added new API endpoint to fetch all Subscription data (DCAEGEN2-2154)
 * Added support for config-binding-docker module in PMSH config fetch (DCAEGEN2-2156)
 * Replaced logging implementation with onappylog module (DCAEGEN2-2155)
+* Added support for TLS enable/disable switch via blueprint inputs (DCEAGEN2-2146)
 
 ## [1.0.3]
 ### Fixed
