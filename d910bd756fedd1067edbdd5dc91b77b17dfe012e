@@ -22,6 +22,30 @@
       "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02125264_674eb337",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-25T12:12:42Z",
+      "side": 1,
+      "message": "No, because this function runs as a PeriodicTask. If we raise the exception here it is going to terminate the whole application. Thus we log the error, and this function will rerun anyhow, at its PeriodicTask interval.",
+      "parentUuid": "67f4b2f0_556c5585",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 1
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
