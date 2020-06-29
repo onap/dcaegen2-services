@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "d0f19245_8e175d8b",
+        "filename": "components/pm-subscription-handler/log_config.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-29T19:43:09Z",
+      "side": 1,
+      "message": "Not sure why but this file gets picked up by git even if you revert it manually. Best to rollback. Can be done via the IDE.",
+      "range": {
+        "startLine": 6,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 22
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e7a1cbc_f3a23ae1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-29T19:43:09Z",
+      "side": 1,
+      "message": "None check can removed as we aren\u0027t returning None anymore",
+      "range": {
+        "startLine": 51,
+        "startChar": 25,
+        "endLine": 51,
+        "endChar": 33
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "67f4b2f0_556c5585",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 3
@@ -46,6 +92,98 @@
       "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1a02180_5d8d33c6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-29T19:43:09Z",
+      "side": 1,
+      "message": "Can be removed",
+      "range": {
+        "startLine": 246,
+        "startChar": 72,
+        "endLine": 246,
+        "endChar": 83
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45c86dc9_8894e959",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-29T19:43:09Z",
+      "side": 1,
+      "message": "Minor, but best to move this to after the assignment of admin_state",
+      "range": {
+        "startLine": 47,
+        "startChar": 16,
+        "endLine": 47,
+        "endChar": 29
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53312322_4193a5ab",
+        "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-29T19:43:09Z",
+      "side": 1,
+      "message": "Is this still needed?",
+      "range": {
+        "startLine": 105,
+        "startChar": 41,
+        "endLine": 105,
+        "endChar": 76
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f9a23d2_47d648fb",
+        "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-06-29T19:43:09Z",
+      "side": 1,
+      "message": "Same as above",
+      "range": {
+        "startLine": 142,
+        "startChar": 48,
+        "endLine": 142,
+        "endChar": 69
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
