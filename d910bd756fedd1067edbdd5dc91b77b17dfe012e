@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ca37613d_233979ac",
+        "filename": "components/pm-subscription-handler/log_config.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-30T01:19:12Z",
+      "side": 1,
+      "message": "Think I fixed it in the following patch",
+      "parentUuid": "d0f19245_8e175d8b",
+      "range": {
+        "startLine": 6,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 22
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e7a1cbc_f3a23ae1",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9589c043_17704cf1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_event_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-30T01:19:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e7a1cbc_f3a23ae1",
+      "range": {
+        "startLine": 51,
+        "startChar": 25,
+        "endLine": 51,
+        "endChar": 33
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -118,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "9324eac5_477db732",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-30T01:19:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1a02180_5d8d33c6",
+      "range": {
+        "startLine": 246,
+        "startChar": 72,
+        "endLine": 246,
+        "endChar": 83
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45c86dc9_8894e959",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
         "patchSetId": 3
@@ -138,6 +210,30 @@
       "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b42c5d7c_b51e98e0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-30T01:19:12Z",
+      "side": 1,
+      "message": "I don\u0027t think so. It will not serve its purpose then, doubt anything could occur in the next line to change the behaviour, but in terms of its use, it could not be used as is now, as both self.administrative_state and new_administrative_state would be the same. So I think its fine to leave it here, as the next line should run in pretty much any case",
+      "parentUuid": "45c86dc9_8894e959",
+      "range": {
+        "startLine": 47,
+        "startChar": 16,
+        "endLine": 47,
+        "endChar": 29
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -164,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "c8b46d3d_35557062",
+        "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-30T01:19:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53312322_4193a5ab",
+      "range": {
+        "startLine": 105,
+        "startChar": 41,
+        "endLine": 105,
+        "endChar": 76
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f9a23d2_47d648fb",
         "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
         "patchSetId": 3
@@ -184,6 +304,30 @@
       "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2aa53343_6b7e1e9e",
+        "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-06-30T01:19:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f9a23d2_47d648fb",
+      "range": {
+        "startLine": 142,
+        "startChar": 48,
+        "endLine": 142,
+        "endChar": 69
+      },
+      "revId": "d910bd756fedd1067edbdd5dc91b77b17dfe012e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
