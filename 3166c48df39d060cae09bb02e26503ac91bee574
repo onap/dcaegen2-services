@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85bbc7ba_0cd060ec",
+        "filename": "components/datalake-handler/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-07-29T22:54:51Z",
+      "side": 1,
+      "message": "1.0.2 is already released for Frankfurt.. version must be revised with this change; you can set to 1.1.0",
+      "range": {
+        "startLine": 15,
+        "startChar": 10,
+        "endLine": 15,
+        "endChar": 23
+      },
+      "revId": "3166c48df39d060cae09bb02e26503ac91bee574",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
