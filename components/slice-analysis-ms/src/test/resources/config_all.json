@@ -1,0 +1,59 @@
+{
+  "config": {
+    "streams_subscribes": {
+      "performance_management_topic": {
+        "aaf_password": null,
+        "type": "message-router",
+        "dmaap_info": {
+          "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/unauthenticated.VES_MEASUREMENT_OUTPUT",
+          "client_role": "sliceanalysis-subscriber",
+          "location": "onap",
+          "client_id": "sdnr-sliceanalysis-1"
+        },
+        "aaf_username": null
+      },
+      "dcae_cl_response_topic": {
+        "aaf_password": null,
+        "type": "message-router",
+        "dmaap_info": {
+          "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/DCAE_CL_RSP",
+          "client_role": "sliceanalysis-subscriber",
+          "location": "onap",
+          "client_id": "sdnr-sliceanalysis-1"
+        },
+        "aaf_username": null
+      }
+    },
+    "streams_publishes": {
+      "CL_topic": {
+        "aaf_password": null,
+        "type": "message-router",
+        "dmaap_info": {
+          "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/unauthenticated.DCAE_CL_OUTPUT",
+          "client_role": "sliceanalysis-subscriber",
+          "location": "onap",
+          "client_id": "sdnr-sliceanalysis-1"
+        },
+        "aaf_username": null
+      }
+    },
+    "postgres.password": "postgres",
+    "postgres.username": "sliceanalysisms_admin",
+    "postgres.host": "postgres",
+    "postgres.port": "5432",
+    "sliceanalysisms.dmaap.server": [
+      "dmaap"
+    ],
+    "cbsPollingInterval": 60,
+    "sliceanalysisms.cg": "sliceanalysisms-cg",
+    "sliceanalysisms.pollingInterval": 20,
+    "sliceanalysisms.cid": "sliceanalysisms-cid",
+    "sliceanalysisms.configDb.service": "http://sdnc.onap:8181",
+    "service_calls": {
+      "policy-req": []
+    }
+  },
+  "policies": {
+    
+  }
+}
