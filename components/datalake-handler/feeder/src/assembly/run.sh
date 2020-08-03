@@ -12,7 +12,4 @@ if [ -n "$cmd" ]; then
     java -jar $cmd
 elif [ -n "$cmd1" ]; then
     java -jar $cmd1
-else
-    echo "STRING is empty"
-    sleep 10000
 fi
