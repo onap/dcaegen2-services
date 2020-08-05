@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * BBS-RELOCATION-CPE-AUTHENTICATION-HANDLER
  * ================================================================================
- * Copyright (C) 2019 NOKIA Intellectual Property. All rights reserved.
+ * Copyright (C) 2019-2020 NOKIA Intellectual Property. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@EnableSwagger2
 @Configuration
 @Profile("production")
 public class SwaggerConfiguration extends WebMvcConfigurationSupport {
