@@ -100,6 +100,24 @@
       "designer_editable": false
     },
     {
+      "name": "enable_tls",
+      "value": true,
+      "description": "Boolean to (en|dis)able TLS",
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "designer_editable": true,
+      "type": "boolean"
+    },
+    {
+      "name": "protocol",
+      "value": "https",
+      "type": "string",
+      "description": "Protocol PMSH api will use. If enable_tls is disabled, set protocol to http",
+      "sourced_at_deployment": false,
+      "policy_editable": false,
+      "designer_editable": true
+    },
+    {
       "name": "policy_model_id",
       "value": "onap.policies.monitoring.dcae-pm-initiation-handler",
       "description": "PMSH monitoring policy model id",
