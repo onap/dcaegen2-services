@@ -43,9 +43,11 @@ def launch_api_server(app_config):
     connex_app = _get_app()
     connex_app.add_api('api/pmsh_swagger.yml')
     if app_config.enable_tls:
+        logger.info('Launching secure http API server')
         connex_app.run(port=os.environ.get('PMSH_API_PORT', '8443'),
                        ssl_context=app_config.cert_params)
     else:
+        logger.info('Launching unsecure http API server')
         connex_app.run(port=os.environ.get('PMSH_API_PORT', '8443'))
 
 

@@ -15,56 +15,43 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import json
 import os
-import signal
-import threading
-import time
+from signal import SIGTERM, signal
+from test.support import EnvironmentVarGuard
 from unittest import TestCase
-from unittest.mock import patch, Mock, MagicMock
+from unittest.mock import patch, Mock
 
-import pmsh_service_main
+from mod.api.db_models import NetworkFunctionModel
 from mod.exit_handler import ExitHandler
-from mod.pmsh_utils import PeriodicTask
-from mod.subscription import AdministrativeState
+from mod.pmsh_utils import AppConfig
+from mod.subscription import Subscription
 
 
 class ExitHandlerTests(TestCase):
+    @patch('mod.subscription.Subscription.create')
+    @patch('mod.pmsh_utils.AppConfig._get_pmsh_config')
+    @patch('mod.pmsh_utils.PeriodicTask')
+    def setUp(self, mock_periodic_task, mock_get_pmsh_config, mock_sub_create):
+        self.env = EnvironmentVarGuard()
+        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
+        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
+            self.cbs_data = json.load(data)
+        mock_get_pmsh_config.return_value = self.cbs_data
+        self.mock_aai_event_thread = mock_periodic_task
+        self.app_conf = AppConfig()
+        self.sub = self.app_conf.subscription
 
-    @patch('pmsh_service_main.create_app')
-    @patch('pmsh_service_main.db')
-    @patch('pmsh_service_main.AppConfig')
-    @patch('pmsh_service_main.Subscription')
-    @patch('pmsh_service_main.launch_api_server')
-    @patch('pmsh_service_main.SubscriptionHandler')
-    @patch.object(PeriodicTask, 'start')
-    @patch.object(PeriodicTask, 'cancel')
-    def test_terminate_signal_success(self, mock_task_cancel, mock_task_start, mock_sub_handler,
-                                      mock_launch_api_server, mock_sub, mock_app_conf,
-                                      mock_db, mock_app):
-        pid = os.getpid()
-        mock_db.get_app.return_value = Mock()
-
-        mock_sub.administrativeState = AdministrativeState.UNLOCKED.value
-        mock_sub.process_subscription = Mock()
-        mock_sub_handler_instance = MagicMock(execute=Mock(), current_sub=mock_sub)
-        mock_sub_handler.side_effect = [mock_sub_handler_instance]
-
-        def mock_api_server_run(param):
-            while mock_sub.administrativeState == AdministrativeState.UNLOCKED.value:
-                time.sleep(1)
-
-        mock_launch_api_server.side_effect = mock_api_server_run
-
-        def trigger_signal():
-            time.sleep(1)
-            os.kill(pid, signal.SIGTERM)
-
-        thread = threading.Thread(target=trigger_signal)
-        thread.start()
-
-        pmsh_service_main.main()
-
-        self.assertEqual(4, mock_task_cancel.call_count)
+    @patch('mod.logger.debug')
+    @patch.object(Subscription, 'update_sub_nf_status')
+    @patch.object(Subscription, 'update_subscription_status')
+    @patch.object(Subscription, '_get_nf_models',
+                  return_value=[NetworkFunctionModel('pnf1', 'ACTIVE')])
+    def test_terminate_signal_successful(self, mock_sub_get_nf_models, mock_upd_sub_status,
+                                         mock_upd_subnf_status, mock_logger):
+        handler = ExitHandler(periodic_tasks=[self.mock_aai_event_thread],
+                              app_conf=self.app_conf,
+                              subscription_handler=Mock())
+        signal(SIGTERM, handler)
+        os.kill(os.getpid(), SIGTERM)
         self.assertTrue(ExitHandler.shutdown_signal_received)
-        self.assertEqual(1, mock_sub.process_subscription.call_count)
-        self.assertEqual(mock_sub.administrativeState, AdministrativeState.LOCKED.value)

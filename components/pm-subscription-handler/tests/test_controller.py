@@ -47,27 +47,26 @@ class ControllerTestCase(unittest.TestCase):
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data = json.load(data)
         mock_get_pmsh_config.return_value = self.cbs_data
-        self.app_conf = AppConfig()
-        self.xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf)
         self.nf_1 = NetworkFunction(nf_name='pnf_1', orchestration_status='Inventoried')
         self.nf_2 = NetworkFunction(nf_name='pnf_2', orchestration_status='Active')
         self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
+        self.app_conf = AppConfig()
+        self.xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf)
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
-        self.app_context.pop()
 
     def test_status_response_healthy(self):
         self.assertEqual(status()['status'], 'healthy')
 
     def test_get_all_sub_to_nf_relations(self):
-        self.app_conf.subscription.create()
+        sub_model = self.app_conf.subscription.get()
         for nf in [self.nf_1, self.nf_2]:
-            self.app_conf.subscription.add_network_function_to_subscription(nf)
+            self.app_conf.subscription.add_network_function_to_subscription(nf, sub_model)
         all_subs = get_all_sub_to_nf_relations()
         self.assertEqual(len(all_subs[0]['network_functions']), 2)
         self.assertEqual(all_subs[0]['subscription_name'], 'ExtraPM-All-gNB-R2B')

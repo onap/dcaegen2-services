@@ -26,7 +26,7 @@ from requests import Session
 import mod.aai_client as aai_client
 from mod import db, create_app
 from mod.api.db_models import NetworkFunctionModel
-from mod.network_function import NetworkFunction, OrchestrationStatus
+from mod.network_function import NetworkFunction
 from mod.pmsh_utils import AppConfig
 from mod.subscription import Subscription
 
@@ -51,27 +51,28 @@ class SubscriptionTest(TestCase):
         with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
             self.cbs_data = json.load(data)
         mock_get_pmsh_config.return_value = self.cbs_data
-        self.app_conf = AppConfig()
-        self.xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf)
         self.mock_mr_sub = mock_mr_sub
         self.mock_mr_pub = mock_mr_pub
         self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
+        self.app_conf = AppConfig()
+        self.xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf)
+        self.sub_model = self.app_conf.subscription.get()
 
     def tearDown(self):
-        db.session.remove()
         db.drop_all()
+        db.session.remove()
         self.app_context.pop()
 
     def test_xnf_filter_true(self):
         self.assertTrue(self.app_conf.nf_filter.is_nf_in_filter('pnf1',
-                                                                OrchestrationStatus.ACTIVE.value))
+                                                                'Active'))
 
     def test_xnf_filter_false(self):
         self.assertFalse(self.app_conf.nf_filter.is_nf_in_filter('PNF-33',
-                                                                 OrchestrationStatus.ACTIVE.value))
+                                                                 'Active'))
 
     def test_sub_measurement_group(self):
         self.assertEqual(len(self.app_conf.subscription.measurementGroups), 2)
@@ -82,18 +83,15 @@ class SubscriptionTest(TestCase):
     def test_get_subscription(self):
         sub_name = 'ExtraPM-All-gNB-R2B'
         self.app_conf.subscription.create()
-        new_sub = Subscription.get(sub_name)
+        new_sub = self.app_conf.subscription.get()
         self.assertEqual(sub_name, new_sub.subscription_name)
-
-    def test_get_subscription_no_match(self):
-        sub_name = 'sub2_does_not_exist'
-        sub = Subscription.get(sub_name)
-        self.assertEqual(sub, None)
 
     def test_get_nf_names_per_sub(self):
         self.app_conf.subscription.create()
-        self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[0])
-        self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[1])
+        self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[0],
+                                                                        self.sub_model)
+        self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[1],
+                                                                        self.sub_model)
         nfs = Subscription.get_nf_names_per_sub(self.app_conf.subscription.subscriptionName)
         self.assertEqual(2, len(nfs))
 
@@ -105,37 +103,38 @@ class SubscriptionTest(TestCase):
 
     def test_add_network_functions_per_subscription(self):
         for nf in self.xnfs:
-            self.app_conf.subscription.add_network_function_to_subscription(nf)
+            self.app_conf.subscription.add_network_function_to_subscription(nf, self.sub_model)
         nfs_for_sub_1 = Subscription.get_all_nfs_subscription_relations()
         self.assertEqual(3, len(nfs_for_sub_1))
         new_nf = NetworkFunction(nf_name='vnf_3', orchestration_status='Active')
-        self.app_conf.subscription.add_network_function_to_subscription(new_nf)
+        self.app_conf.subscription.add_network_function_to_subscription(new_nf, self.sub_model)
         nf_subs = Subscription.get_all_nfs_subscription_relations()
         self.assertEqual(4, len(nf_subs))
 
     def test_add_duplicate_network_functions_per_subscription(self):
-        self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[0])
+        self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[0],
+                                                                        self.sub_model)
         nf_subs = Subscription.get_all_nfs_subscription_relations()
         self.assertEqual(1, len(nf_subs))
-        self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[0])
+        self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[0],
+                                                                        self.sub_model)
         nf_subs = Subscription.get_all_nfs_subscription_relations()
         self.assertEqual(1, len(nf_subs))
 
     def test_update_subscription_status(self):
-        sub_name = 'ExtraPM-All-gNB-R2B'
         self.app_conf.subscription.create()
         self.app_conf.subscription.administrativeState = 'new_status'
         self.app_conf.subscription.update_subscription_status()
-        sub = Subscription.get(sub_name)
+        sub = self.app_conf.subscription.get()
 
         self.assertEqual('new_status', sub.status)
 
     def test_delete_subscription(self):
         for nf in self.xnfs:
-            self.app_conf.subscription.add_network_function_to_subscription(nf)
+            self.app_conf.subscription.add_network_function_to_subscription(nf, self.sub_model)
         self.app_conf.subscription.delete_subscription()
         self.assertEqual(0, len(Subscription.get_all()))
-        self.assertEqual(None, Subscription.get(self.app_conf.subscription.subscriptionName))
+        self.assertEqual(None, self.app_conf.subscription.get())
         self.assertEqual(0, len(Subscription.get_all_nfs_subscription_relations()))
         self.assertEqual(0, len(NetworkFunction.get_all()))
         self.assertEqual(None, NetworkFunction.get(nf_name=list(self.xnfs)[0].nf_name))
@@ -143,7 +142,7 @@ class SubscriptionTest(TestCase):
     def test_update_sub_nf_status(self):
         sub_name = 'ExtraPM-All-gNB-R2B'
         for nf in self.xnfs:
-            self.app_conf.subscription.add_network_function_to_subscription(nf)
+            self.app_conf.subscription.add_network_function_to_subscription(nf, self.sub_model)
         sub_nfs = Subscription.get_all_nfs_subscription_relations()
         self.assertEqual('PENDING_CREATE', sub_nfs[0].nf_sub_status)
 
@@ -154,33 +153,27 @@ class SubscriptionTest(TestCase):
 
     @patch('mod.subscription.Subscription.add_network_function_to_subscription')
     @patch('mod.subscription.Subscription.update_sub_nf_status')
-    @patch('mod.subscription.Subscription.update_subscription_status')
-    def test_process_activate_subscription(self, mock_update_sub_status,
-                                           mock_update_sub_nf, mock_add_nfs):
-        self.app_conf.subscription.process_subscription([list(self.xnfs)[0]], self.mock_mr_pub,
-                                                        self.app_conf)
+    def test_process_activate_subscription(self, mock_update_sub_nf, mock_add_nfs):
+        self.app_conf.subscription.activate_subscription([list(self.xnfs)[0]], self.mock_mr_pub,
+                                                         self.app_conf)
 
-        mock_update_sub_status.assert_called()
         mock_add_nfs.assert_called()
         self.assertTrue(self.mock_mr_pub.publish_subscription_event_data.called)
         mock_update_sub_nf.assert_called_with(self.app_conf.subscription.subscriptionName,
                                               'PENDING_CREATE', list(self.xnfs)[0].nf_name)
 
+    @patch('mod.subscription.Subscription.get_network_functions')
     @patch('mod.subscription.Subscription.update_sub_nf_status')
-    @patch('mod.subscription.Subscription.update_subscription_status')
-    def test_process_deactivate_subscription(self, mock_update_sub_status,
-                                             mock_update_sub_nf):
+    def test_process_deactivate_subscription(self, mock_update_sub_nf, mock_get_nfs):
         self.app_conf.subscription.administrativeState = 'LOCKED'
-        self.app_conf.subscription.process_subscription([list(self.xnfs)[0]], self.mock_mr_pub,
-                                                        self.app_conf)
-
+        mock_get_nfs.return_value = [list(self.xnfs)[0]]
+        self.app_conf.subscription.deactivate_subscription(self.mock_mr_pub, self.app_conf)
         self.assertTrue(self.mock_mr_pub.publish_subscription_event_data.called)
         mock_update_sub_nf.assert_called_with(self.app_conf.subscription.subscriptionName,
                                               'PENDING_DELETE', list(self.xnfs)[0].nf_name)
-        mock_update_sub_status.assert_called()
 
-    def test_process_subscription_exception(self):
-        self.assertRaises(Exception, self.app_conf.subscription.process_subscription,
+    def test_activate_subscription_exception(self):
+        self.assertRaises(Exception, self.app_conf.subscription.activate_subscription,
                           [list(self.xnfs)[0]], 'not_mr_pub', 'app_config')
 
     def test_prepare_subscription_event(self):
@@ -193,7 +186,7 @@ class SubscriptionTest(TestCase):
 
     def test_get_nf_models(self):
         for nf in self.xnfs:
-            self.app_conf.subscription.add_network_function_to_subscription(nf)
+            self.app_conf.subscription.add_network_function_to_subscription(nf, self.sub_model)
         nf_models = self.app_conf.subscription._get_nf_models()
 
         self.assertEqual(3, len(nf_models))
@@ -201,7 +194,7 @@ class SubscriptionTest(TestCase):
 
     def test_get_network_functions(self):
         for nf in self.xnfs:
-            self.app_conf.subscription.add_network_function_to_subscription(nf)
+            self.app_conf.subscription.add_network_function_to_subscription(nf, self.sub_model)
         nfs = self.app_conf.subscription.get_network_functions()
 
         self.assertEqual(3, len(nfs))

@@ -68,6 +68,7 @@
       "key_path":"/opt/app/pmsh/etc/certs/key.pem",
       "ca_cert_path":"/opt/app/pmsh/etc/certs/cacert.pem",
       "enable_tls":"true",
+      "protocol": "https",
       "streams_subscribes":{
          "aai_subscriber":{
             "type":"message_router",

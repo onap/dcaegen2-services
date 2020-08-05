@@ -23,7 +23,6 @@ from mod.aai_event_handler import process_aai_events
 from mod.exit_handler import ExitHandler
 from mod.pmsh_utils import AppConfig, PeriodicTask
 from mod.policy_response_handler import PolicyResponseHandler
-from mod.subscription import Subscription, AdministrativeState
 from mod.subscription_handler import SubscriptionHandler
 
 
@@ -40,27 +39,27 @@ def main():
         except Exception as e:
             logger.error(f'Failed to get config and create application: {e}', exc_info=True)
             sys.exit(e)
-        subscription_in_db = Subscription.get(app_conf.subscription.subscriptionName)
-        administrative_state = subscription_in_db.status if subscription_in_db \
-            else AdministrativeState.LOCKED.value
 
         app_conf_thread = PeriodicTask(10, app_conf.refresh_config)
         app_conf_thread.start()
-        aai_event_thread = PeriodicTask(10, process_aai_events,
-                                        args=(aai_event_mr_sub, policy_mr_pub, app, app_conf))
-        subscription_handler = SubscriptionHandler(administrative_state,
-                                                   policy_mr_pub, app, app_conf, aai_event_thread)
+
         policy_response_handler = PolicyResponseHandler(policy_mr_sub, app_conf, app)
+        policy_response_handler_thread = PeriodicTask(25, policy_response_handler.poll_policy_topic)
+
+        aai_event_thread = PeriodicTask(20, process_aai_events,
+                                        args=(aai_event_mr_sub, policy_mr_pub, app, app_conf))
+
+        subscription_handler = SubscriptionHandler(policy_mr_pub, app, app_conf, aai_event_thread,
+                                                   policy_response_handler_thread)
 
         subscription_handler_thread = PeriodicTask(30, subscription_handler.execute)
-        policy_response_handler_thread = PeriodicTask(10, policy_response_handler.poll_policy_topic)
         subscription_handler_thread.start()
-        policy_response_handler_thread.start()
+
         periodic_tasks = [app_conf_thread, aai_event_thread, subscription_handler_thread,
                           policy_response_handler_thread]
 
         signal(SIGTERM, ExitHandler(periodic_tasks=periodic_tasks,
-                                    subscription_handler=subscription_handler))
+                                    app_conf=app_conf, subscription_handler=subscription_handler))
         launch_api_server(app_conf)
 
     except Exception as e:

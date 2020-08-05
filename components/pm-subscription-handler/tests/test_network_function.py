@@ -15,6 +15,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import json
 import os
 from test.support import EnvironmentVarGuard
 from unittest import TestCase
@@ -22,23 +23,29 @@ from unittest.mock import patch
 
 from mod import db, create_app
 from mod.network_function import NetworkFunction
+from mod.pmsh_utils import AppConfig
 from mod.subscription import Subscription
 
 
 class NetworkFunctionTests(TestCase):
 
+    @patch('mod.pmsh_utils.AppConfig._get_pmsh_config')
     @patch('mod.update_logging_config')
     @patch('mod.get_db_connection_url')
-    def setUp(self, mock_get_db_url, mock_update_config):
+    def setUp(self, mock_get_db_url, mock_update_config, mock_get_pmsh_config):
         mock_get_db_url.return_value = 'sqlite://'
         self.nf_1 = NetworkFunction(nf_name='pnf_1', orchestration_status='Inventoried')
         self.nf_2 = NetworkFunction(nf_name='pnf_2', orchestration_status='Active')
+        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
+            self.cbs_data = json.load(data)
+        mock_get_pmsh_config.return_value = self.cbs_data
         self.env = EnvironmentVarGuard()
         self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
         self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
+        self.app_conf = AppConfig()
 
     def tearDown(self):
         db.session.remove()
@@ -74,7 +81,7 @@ class NetworkFunctionTests(TestCase):
         self.nf_2.create()
         sub = Subscription(**{"subscriptionName": "sub"})
         for nf in [self.nf_1, self.nf_2]:
-            sub.add_network_function_to_subscription(nf)
+            sub.add_network_function_to_subscription(nf, self.app_conf.subscription.get())
 
         NetworkFunction.delete(nf_name=self.nf_1.nf_name)
 

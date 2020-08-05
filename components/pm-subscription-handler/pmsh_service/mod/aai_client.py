@@ -114,11 +114,11 @@ def _filter_nf_data(nf_data, nf_filter):
     Returns a list of filtered NetworkFunctions using the nf_filter.
 
     Args:
-        nf_data : the nf json data from AAI.
-        nf_filter: the `NetworkFunctionFilter <NetworkFunctionFilter>` to be applied.
+        nf_data(dict): the nf json data from AAI.
+        nf_filter(NetworkFunctionFilter): the NetworkFunctionFilter to be applied.
 
     Returns:
-        set: a set of filtered NetworkFunctions.
+        set(NetworkFunctions): a set of filtered NetworkFunctions.
 
     Raises:
         KeyError: if AAI data cannot be parsed.
