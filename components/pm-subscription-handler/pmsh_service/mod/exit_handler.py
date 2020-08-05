@@ -25,28 +25,28 @@ class ExitHandler:
 
     Args:
         periodic_tasks (List[PeriodicTask]): PeriodicTasks that needs to be cancelled.
+        app_conf (AppConfig): The PMSH Application Configuration.
         subscription_handler (SubscriptionHandler): The subscription handler instance.
     """
 
     shutdown_signal_received = False
 
-    def __init__(self, *, periodic_tasks, subscription_handler):
+    def __init__(self, *, periodic_tasks, app_conf, subscription_handler):
         self.periodic_tasks = periodic_tasks
+        self.app_conf = app_conf
         self.subscription_handler = subscription_handler
 
     def __call__(self, sig_num, frame):
         logger.info('Graceful shutdown of PMSH initiated.')
         logger.debug(f'ExitHandler was called with signal number: {sig_num}.')
-        current_sub = self.subscription_handler.current_sub
-        if current_sub and current_sub.administrativeState == AdministrativeState.UNLOCKED.value:
+        current_sub = self.app_conf.subscription
+        if current_sub.administrativeState == AdministrativeState.UNLOCKED.value:
             try:
+                current_sub.deactivate_subscription(self.subscription_handler.mr_pub, self.app_conf)
+                current_sub.update_subscription_status()
                 for thread in self.periodic_tasks:
                     logger.debug(f'Cancelling periodic task with thread name: {thread.name}.')
                     thread.cancel()
-                current_sub.administrativeState = AdministrativeState.LOCKED.value
-                current_sub.process_subscription(current_sub.get_network_functions(),
-                                                 self.subscription_handler.mr_pub,
-                                                 self.subscription_handler.app_conf)
             except Exception as e:
                 logger.error(f'Failed to shut down PMSH application: {e}', exc_info=True)
         ExitHandler.shutdown_signal_received = True

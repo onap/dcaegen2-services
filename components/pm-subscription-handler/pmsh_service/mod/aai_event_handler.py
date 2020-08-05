@@ -46,7 +46,7 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
     app.app_context().push()
     logger.info('Polling MR for XNF AAI events.')
     try:
-        aai_events = mr_sub.get_from_topic('dcae_pmsh_aai_event')
+        aai_events = mr_sub.get_from_topic('dcae_pmsh_aai_event', timeout=10000)
         if aai_events is not None and len(aai_events) != 0:
             aai_events = [json.loads(e) for e in aai_events]
             xnf_events = [e for e in aai_events if e['event-header']['entity-type'] == (
@@ -72,8 +72,7 @@ def _process_event(action, new_status, xnf_name, mr_pub, app_conf):
         local_xnf = NetworkFunction.get(xnf_name)
 
         if local_xnf is None:
-            logger.info(f'Activating subscription for network function {xnf_name}')
-            app_conf.subscription.process_subscription([NetworkFunction(
+            app_conf.subscription.activate_subscription([NetworkFunction(
                 nf_name=xnf_name, orchestration_status=new_status)], mr_pub, app_conf)
         else:
             logger.debug(f"Update Event for network function {xnf_name} will not be processed "
