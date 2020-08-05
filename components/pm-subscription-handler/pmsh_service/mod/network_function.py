@@ -17,7 +17,6 @@
 # ============LICENSE_END=====================================================
 
 import re
-from enum import Enum
 
 from mod import logger, db
 from mod.api.db_models import NetworkFunctionModel
@@ -55,7 +54,6 @@ class NetworkFunction:
             db.session.commit()
             logger.info(f'Network Function {new_nf.nf_name} successfully created.')
             return new_nf
-
         else:
             logger.debug(f'Network function {existing_nf.nf_name} already exists,'
                          f' returning this network function..')
@@ -109,9 +107,4 @@ class NetworkFunctionFilter:
             bool: True if matched, else False.
         """
         return self.regex_matcher.search(nf_name) and \
-            orchestration_status == OrchestrationStatus.ACTIVE.value
-
-
-class OrchestrationStatus(Enum):
-    ACTIVE = 'Active'
-    INVENTORIED = 'Inventoried'
+            orchestration_status == 'Active'

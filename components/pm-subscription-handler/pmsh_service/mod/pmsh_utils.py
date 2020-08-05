@@ -15,7 +15,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-import threading
 import uuid
 from os import getenv
 from threading import Timer
@@ -45,20 +44,22 @@ def mdc_handler(function):
     return decorator
 
 
-class ThreadSafeSingleton(type):
-    _instances = {}
-    _singleton_lock = threading.Lock()
+class MySingleton(object):
+    instances = {}
 
-    def __call__(cls, *args, **kwargs):
-        # double-checked locking pattern (https://en.wikipedia.org/wiki/Double-checked_locking)
-        if cls not in cls._instances:
-            with cls._singleton_lock:
-                if cls not in cls._instances:
-                    cls._instances[cls] = super(ThreadSafeSingleton, cls).__call__(*args, **kwargs)
-        return cls._instances[cls]
+    def __new__(cls, clz=None):
+        if clz is None:
+            if cls.__name__ not in MySingleton.instances:
+                MySingleton.instances[cls.__name__] = \
+                    object.__new__(cls)
+            return MySingleton.instances[cls.__name__]
+        MySingleton.instances[clz.__name__] = clz()
+        MySingleton.first = clz
+        return type(clz.__name__, (MySingleton,), dict(clz.__dict__))
 
 
-class AppConfig(metaclass=ThreadSafeSingleton):
+class AppConfig:
+    INSTANCE = None
 
     def __init__(self):
         try:
@@ -77,6 +78,11 @@ class AppConfig(metaclass=ThreadSafeSingleton):
         self.control_loop_name = conf['config'].get('control_loop_name')
         self.subscription = Subscription(**conf['policy']['subscription'])
         self.nf_filter = NetworkFunctionFilter(**self.subscription.nfFilter)
+
+    def __new__(cls, *args, **kwargs):
+        if AppConfig.INSTANCE is None:
+            AppConfig.INSTANCE = super().__new__(cls, *args, **kwargs)
+        return AppConfig.INSTANCE
 
     @mdc_handler
     @retry(wait=wait_fixed(5), stop=stop_after_attempt(5), retry=retry_if_exception_type(Exception))
@@ -272,7 +278,7 @@ class _MrSub(_DmaapMrClient):
             if response.ok:
                 return response.json()
         except Exception as e:
-            logger.error(f'Failed to fetch message from MR: {e}')
+            logger.error(f'Failed to fetch message from MR: {e}', exc_info=True)
             raise
 
 

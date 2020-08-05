@@ -72,8 +72,7 @@ def _process_event(action, new_status, xnf_name, mr_pub, app_conf):
         local_xnf = NetworkFunction.get(xnf_name)
 
         if local_xnf is None:
-            logger.info(f'Activating subscription for network function {xnf_name}')
-            app_conf.subscription.process_subscription([NetworkFunction(
+            app_conf.subscription.activate_subscription([NetworkFunction(
                 nf_name=xnf_name, orchestration_status=new_status)], mr_pub, app_conf)
         else:
             logger.debug(f"Update Event for network function {xnf_name} will not be processed "
