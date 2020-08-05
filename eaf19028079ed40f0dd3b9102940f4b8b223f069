@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63e2de50_18b76c98",
+        "filename": "components/slice-analysis-ms/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "the default protocol should always be https",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb347575_41d6db6c",
+        "filename": "components/slice-analysis-ms/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "the default protocol should always be https",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "179bd6c3_fea806d0",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/Application.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba8ef9d3_512e7e80",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/beans/ConfigPolicy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8df49d2e_4dbe6634",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/beans/Configuration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f6516a2_e24f9674",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/controller/ConfigFetchFromCbs.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef03ee37_8d25cc53",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/data/beans/PerformanceNotifications.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "044cf201_75dea763",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/DmaapClient.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8996df52_3a8d63c5",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/NewPmNotification.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b00e90d4_3a10d454",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/NotificationConsumer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57cc95ad_2a94c5f7",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/NotificationProducer.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ee9cfea_505c2666",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/PmNotificationCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17e106ec_0d22f8ca",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/PolicyDmaapClient.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c8a9a68_7a24dc8a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/utils/DmaapUtils.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T15:16:37Z",
+      "side": 1,
+      "message": "new code should have javadocs for classes and public methods",
+      "revId": "eaf19028079ed40f0dd3b9102940f4b8b223f069",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
