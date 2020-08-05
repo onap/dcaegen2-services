@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0fb4eda3_a63dd868",
+        "filename": "components/datalake-handler/des/src/assembly/run.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "221f4858_8e58d344",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ed5c4b3_875aaebf",
         "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/DesApplication.java",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b8a3a1f_26e8c006",
+        "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/DesApplication.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ed5c4b3_875aaebf",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "58b40a55_745bbc8a",
+        "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/SwaggerConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47e4b03e_a32ed08b",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10fc6c46_58ccdfbd",
         "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/controller/DataExposureController.java",
         "patchSetId": 7
@@ -67,6 +121,24 @@
       "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b84bd093_678456a0",
+        "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/controller/DataExposureController.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10fc6c46_58ccdfbd",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "86949c1c_60b9fe5e",
+        "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/controller/DataExposureController.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00d1d74b_cbeb43c3",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "01f72fb0_d238c1fe",
         "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/controller/DataExposureController.java",
         "patchSetId": 7
@@ -101,6 +191,24 @@
       "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df179a47_57311f67",
+        "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/controller/DataExposureController.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01f72fb0_d238c1fe",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "c97765a8_babb6d70",
+        "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/domain/DataExposure.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b8d6fa1_6ff758bb",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab7e78c7_b16f4b6d",
         "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/dto/DataExposureConfig.java",
         "patchSetId": 7
@@ -135,6 +261,24 @@
       "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92f61fb4_2d643ed6",
+        "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/dto/DataExposureConfig.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab7e78c7_b16f4b6d",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "39a5154f_955d1ac9",
+        "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/repository/DataExposureRepository.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a24a5383_d20cb3a4",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26c08d57_9f3d6d1e",
         "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/service/DataExposureService.java",
         "patchSetId": 7
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "95423d3d_634b1cd0",
+        "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/service/DataExposureService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26c08d57_9f3d6d1e",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4cc8f61b_7a754642",
         "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/service/DataExposureService.java",
         "patchSetId": 7
@@ -186,6 +366,24 @@
       "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a15dadc_ef64a077",
+        "filename": "components/datalake-handler/des/src/main/java/org/onap/datalake/des/service/DataExposureService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-05T13:01:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cc8f61b_7a754642",
+      "revId": "59fdb1fba3d7596c0f89ce13365d652357eed03c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
