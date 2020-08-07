@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f01c8d55_a6e83685",
+        "filename": "components/datalake-handler/admin/nginx/run.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-08-07T14:29:44Z",
+      "side": 1,
+      "message": "Why is this named \"run.sh\" instead of \"run\"? (script names do not require an extension reflecting their implementation language)",
+      "revId": "a872012c50202dc782fa0fc444c125c2c879464f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
