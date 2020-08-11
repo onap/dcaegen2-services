@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c5e891a2_11c30ef0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-11T14:34:01Z",
+      "side": 1,
+      "message": "Should be as two separate lines as below to ensure jira linkage\n\nIssue-ID: DCAEGEN2-2371\nIssue-ID: DCAEGEN2-2379",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "5224929b29554e0600d3332697872b3dac8aeac3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
