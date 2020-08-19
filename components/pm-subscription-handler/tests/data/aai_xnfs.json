@@ -17,6 +17,8 @@
         "serial-number": "6061ZW3",
         "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
         "resource-version": "1572609320819",
+        "model-invariant-id": "7129e420-d396-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
         "nf-role": "gNB"
       }
     },
@@ -36,6 +38,8 @@
         "serial-number": "6061ZW3",
         "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
         "resource-version": "1573053304574",
+        "model-invariant-id": "687kj45-d396-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
         "nf-role": "gNB",
         "orchestration-status": "Active"
       }
@@ -57,6 +61,8 @@
         "serial-number": "6061ZW3",
         "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
         "resource-version": "1573054784925",
+        "model-invariant-id": "8lk4578-d396-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
         "nf-role": "gNB"
       }
     },
@@ -77,6 +83,8 @@
         "serial-number": "6061ZW3",
         "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
         "resource-version": "1572543742093",
+        "model-invariant-id": "356l489-d396-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
         "nf-role": "gNB"
       }
     },
@@ -97,6 +105,8 @@
         "serial-number": "6061ZW3",
         "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
         "resource-version": "1573064215776",
+        "model-invariant-id": "597b524-d396-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
         "nf-role": "gNB"
       }
     },
@@ -117,6 +127,8 @@
         "serial-number": "6061ZW3",
         "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
         "resource-version": "1573127626866",
+        "model-invariant-id": "4658489-j465-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
         "nf-role": "gNB"
       }
     },
@@ -136,6 +148,8 @@
         "serial-number": "6061ZW3",
         "ipaddress-v6-oam": "2001:0db8:0:0:0:0:1428:57ab",
         "resource-version": "1573138552022",
+        "model-invariant-id": "158955jk-4lp8-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
         "nf-role": "gNB"
       }
     },
@@ -147,7 +161,9 @@
         "pnf-name": "my_pnf_is_bad",
         "pnf-id": "4f043f83-3ddf-49d0-a878-ae6b2f9bd7e5",
         "in-maint": false,
-        "resource-version": "1574701401896"
+        "resource-version": "1574701401896",
+        "model-invariant-id": "j547l65-d396-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9"
       }
     },
     {
@@ -164,7 +180,7 @@
         "in-maint": false,
         "is-closed-loop-disabled": false,
         "resource-version": "1575541662410",
-        "model-invariant-id": "7129e420-d396-4efb-af02-6b83499b12f8",
+        "model-invariant-id": "4kh7568-d396-4efb-af02-6b83499b12f8",
         "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
         "model-customization-id": "376dbe87-e9c5-4f2b-80e2-a420b373ee87"
       }
@@ -183,7 +199,7 @@
         "in-maint": false,
         "is-closed-loop-disabled": false,
         "resource-version": "1575541662410",
-        "model-invariant-id": "7129e420-d396-4efb-af02-6b83499b12f8",
+        "model-invariant-id": "2566646-d396-4efb-af02-lk45879b12f8",
         "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
         "model-customization-id": "376dbe87-e9c5-4f2b-80e2-a420b373ee87"
       }
@@ -202,8 +218,8 @@
         "in-maint": false,
         "is-closed-loop-disabled": false,
         "resource-version": "1575542300539",
-        "model-invariant-id": "c6aef848-e119-4572-9643-0b68da217358",
-        "model-version-id": "77c1a3d9-422a-4f78-bd8f-f7a357685b25",
+        "model-invariant-id": "76254klj-d396-4efb-af02-6b83499b12f8",
+        "model-version-id": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
         "model-customization-id": "1f6a305d-74b6-4b92-b407-cd03284b6432"
       }
     }
