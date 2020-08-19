@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.1]
 ### Changed
 * Moved to alpine base image (DCAEGEN2-2292)
+* Added model-invariant-id and model-version-id to filter (DCAEGEN2-2151)
 
 ## [1.1.0]
 ### Changed
