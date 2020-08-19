@@ -59,8 +59,10 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
                 xnf_name = aai_entity['pnf-name'] if entity_type == XNFType.PNF.value \
                     else aai_entity['vnf-name']
                 new_status = aai_entity['orchestration-status']
+                invariant_uuid = aai_entity['model-invariant-id']
+                uuid = aai_entity['model-version-id']
 
-                if app_conf.nf_filter.is_nf_in_filter(xnf_name, new_status):
+                if app_conf.nf_filter.is_nf_in_filter(xnf_name, invariant_uuid, uuid, new_status):
                     _process_event(action, new_status, xnf_name, mr_pub, app_conf)
     except Exception as e:
         logger.error(f'Failed to process AAI event: {e}', exc_info=True)
