@@ -66,14 +66,6 @@ class SubscriptionTest(TestCase):
         db.session.remove()
         self.app_context.pop()
 
-    def test_xnf_filter_true(self):
-        self.assertTrue(self.app_conf.nf_filter.is_nf_in_filter('pnf1',
-                                                                'Active'))
-
-    def test_xnf_filter_false(self):
-        self.assertFalse(self.app_conf.nf_filter.is_nf_in_filter('PNF-33',
-                                                                 'Active'))
-
     def test_sub_measurement_group(self):
         self.assertEqual(len(self.app_conf.subscription.measurementGroups), 2)
 
