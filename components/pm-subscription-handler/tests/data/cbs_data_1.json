@@ -6,13 +6,15 @@
          "fileBasedGP":15,
          "fileLocation":"\/pm\/pm.xml",
          "nfFilter":{
-            "swVersions":[
-               "1.0.0",
-               "1.0.1"
-            ],
             "nfNames":[
                "^pnf.*",
                "^vnf.*"
+            ],
+            "modelInvariantUUIDs": [
+
+            ],
+            "modelVersionIDs": [
+
             ]
          },
          "measurementGroups":[

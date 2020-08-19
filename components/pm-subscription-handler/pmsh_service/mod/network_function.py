@@ -92,19 +92,30 @@ class NetworkFunction:
 
 class NetworkFunctionFilter:
     def __init__(self, **kwargs):
-        self.nf_sw_version = kwargs.get('swVersions')
         self.nf_names = kwargs.get('nfNames')
+        self.model_invariant_ids = kwargs.get('modelInvariantUUIDs')
+        self.model_version_ids = kwargs.get('modelVersionIDs')
         self.regex_matcher = re.compile('|'.join(raw_regex for raw_regex in self.nf_names))
 
-    def is_nf_in_filter(self, nf_name, orchestration_status):
+    def is_nf_in_filter(self, nf_name, model_invariant_id, model_version_id, orchestration_status):
         """Match the nf name against regex values in Subscription.nfFilter.nfNames
 
         Args:
             nf_name (str): the AAI nf name.
+            invariant_uuid (str): the AAI model-invariant-id
+            uuid (str): the AAI model-version-id
             orchestration_status (str): orchestration status of the nf
 
         Returns:
             bool: True if matched, else False.
         """
-        return self.regex_matcher.search(nf_name) and \
-            orchestration_status == 'Active'
+        match = True
+        if orchestration_status != 'Active':
+            match = False
+        if self.nf_names and self.regex_matcher.search(nf_name) is None:
+            match = False
+        if self.model_invariant_ids and not model_invariant_id in self.model_invariant_ids:
+            match = False
+        if self.model_version_ids and not model_version_id in self.model_version_ids:
+            match = False
+        return match
