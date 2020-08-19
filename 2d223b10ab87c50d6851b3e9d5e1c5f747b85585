@@ -22,6 +22,30 @@
       "revId": "2d223b10ab87c50d6851b3e9d5e1c5f747b85585",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86682d1b_abcf960a",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 6079
+      },
+      "writtenOn": "2020-08-19T14:03:32Z",
+      "side": 1,
+      "message": "I have response from integration team (which selected this as a base Python image for ONAP services): integration gurarantes only that the baseline image is GPLv3 free and follow SECCOM version recommendations",
+      "parentUuid": "301bab8a_2e965f7f",
+      "range": {
+        "startLine": 20,
+        "startChar": 18,
+        "endLine": 20,
+        "endChar": 25
+      },
+      "revId": "2d223b10ab87c50d6851b3e9d5e1c5f747b85585",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
