@@ -1,0 +1,8 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Damian Nowak <damian.nowak@nokia.com>
+Code-Review+2: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-by: Vijay Venkatesh Kumar <vv770d@att.com>
+Submitted-at: Wed, 19 Aug 2020 18:38:02 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/services/+/111370
+Project: dcaegen2/services
+Branch: refs/heads/master
