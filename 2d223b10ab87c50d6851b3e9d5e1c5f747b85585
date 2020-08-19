@@ -46,6 +46,30 @@
       "revId": "2d223b10ab87c50d6851b3e9d5e1c5f747b85585",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9815025e_45761afa",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-08-19T14:33:39Z",
+      "side": 1,
+      "message": "I suggest using a multi stage build to reduce the image size from 367MB to 154MB. Something along the lines of:\n\nFROM python:3.8.2-alpine3.11 as build\n\nMAINTAINER lego@est.tech\n\nRUN set -eux; \\\n    apk add \\\n    build-base \\\n    python3-dev \\\n    postgresql-dev\n\nCOPY setup.py ./\nCOPY requirements.txt ./\nRUN pip install --prefix /opt -r requirements.txt --no-cache-dir\n\n# Second stage\nFROM python:3.8.2-alpine3.11\n\nCOPY --from\u003dbuild /opt /opt\n\nENV APPDIR\u003d\"/opt/app/pmsh\" \\\n    LD_LIBRARY_PATH\u003d/opt/lib:/opt/lib64 \\\n    PYTHONPATH\u003d${APPDIR}/mod:/opt/lib/python3.8/site-packages \\\n    PATH\u003d$PATH:${APPDIR}/bin \\\n    LOGS_PATH\u003d\"/var/log/ONAP/dcaegen2/services/pmsh\" \\\n    LOGGER_CONFIG\u003d\"/opt/app/pmsh/log_config.yaml\"\n\nWORKDIR $APPDIR\nRUN mkdir -p $APPDIR\n\nRUN set -eux; \\\n    apk add --no-cache postgresql-libs nano\n\nARG user\u003donap\nARG group\u003donap\n\nCOPY ./pmsh_service ./bin\nCOPY log_config.yaml ./\n\n# Create a group and user\nRUN addgroup -S $group \u0026\u0026 adduser -S -D -h /home/$user $user $group \u0026\u0026 \\\n    mkdir -p ${LOGS_PATH} \u0026\u0026 \\\n    chown -R $user:$group ${LOGS_PATH} \u0026\u0026 \\\n    chown -R $user:$group ${APPDIR}\n\n# Tell docker that all future commands should be run as the onap user\nUSER $user\n\nENTRYPOINT [\"python\", \"/opt/app/pmsh/bin/pmsh_service_main.py\"]",
+      "parentUuid": "86682d1b_abcf960a",
+      "range": {
+        "startLine": 20,
+        "startChar": 18,
+        "endLine": 20,
+        "endChar": 25
+      },
+      "revId": "2d223b10ab87c50d6851b3e9d5e1c5f747b85585",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
