@@ -118,9 +118,6 @@ class AppConfig:
                 raise ValueError('Failed to refresh AppConfig: INVALID JSON')
             self.subscription.administrativeState = app_conf['policy']['subscription'][
                 'administrativeState']
-            self.nf_filter.nf_names = app_conf['policy']['subscription']['nfFilter']['nfNames']
-            self.nf_filter.nf_sw_version = app_conf['policy']['subscription']['nfFilter'][
-                'swVersions']
             logger.info("AppConfig data has been refreshed")
         except ValueError or Exception as e:
             logger.error(e)
