@@ -128,8 +128,10 @@ def _filter_nf_data(nf_data, nf_filter):
         for nf in nf_data['results']:
             name_identifier = 'pnf-name' if nf['node-type'] == 'pnf' else 'vnf-name'
             orchestration_status = nf['properties'].get('orchestration-status')
+            invariant_uuid = nf['properties'].get('model-invariant-id')
+            uuid = nf['properties'].get('model-version-id')
             if nf_filter.is_nf_in_filter(nf['properties'].get(name_identifier),
-                                         orchestration_status):
+                                         invariant_uuid, uuid, orchestration_status):
                 nf_set.add(NetworkFunction(
                     nf_name=nf['properties'].get(name_identifier),
                     orchestration_status=orchestration_status))
