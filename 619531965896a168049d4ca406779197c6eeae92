@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4b7a3e4_43c68563",
+        "filename": "components/datalake-handler/version.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-24T17:54:23Z",
+      "side": 1,
+      "message": "should match 1.1.0 as set in https://git.onap.org/dcaegen2/services/tree/components/datalake-handler/pom.xml",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 7
+      },
+      "revId": "619531965896a168049d4ca406779197c6eeae92",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27f91f7d_c1ada5b3",
+        "filename": "releases/datalake-adminui-1.0.3-container.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-24T17:54:23Z",
+      "side": 1,
+      "message": "release file must not be included with other changes",
+      "revId": "619531965896a168049d4ca406779197c6eeae92",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d78a8551_d1e2b7ca",
+        "filename": "releases/datalake-adminui-1.0.3-container.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-24T17:54:23Z",
+      "side": 1,
+      "message": "should be 1.1.0 or higher",
+      "range": {
+        "startLine": 2,
+        "startChar": 10,
+        "endLine": 2,
+        "endChar": 15
+      },
+      "revId": "619531965896a168049d4ca406779197c6eeae92",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38ac885b_ecd82414",
+        "filename": "releases/datalake-adminui-1.0.3-container.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-24T17:54:23Z",
+      "side": 1,
+      "message": "should be 1.1.0 or higher",
+      "range": {
+        "startLine": 8,
+        "startChar": 24,
+        "endLine": 8,
+        "endChar": 29
+      },
+      "revId": "619531965896a168049d4ca406779197c6eeae92",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
