@@ -1,0 +1,9 @@
+distribution_type: 'container'
+version: '1.0.3'
+project: 'dcaegen2-services-datalake'
+log_dir: 'dcaegen2-services-datalake-handler-admin-ui-maven-docker-stage-master//'
+containers:
+  - name: 'org.onap.dcaegen2.services.datalakeadminui'
+    version: '1.0.3-'
+container_release_tag: '1.0.3'
+ref: ''
