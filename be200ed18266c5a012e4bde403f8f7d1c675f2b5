@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da5acdad_d3e6c1b8",
+        "filename": "releases/datalake-adminui-1.0.3-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-26T22:05:59Z",
+      "side": 1,
+      "message": "should match to latest version in master (which is 1.1.0)",
+      "range": {
+        "startLine": 2,
+        "startChar": 10,
+        "endLine": 2,
+        "endChar": 15
+      },
+      "revId": "be200ed18266c5a012e4bde403f8f7d1c675f2b5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3151dfdd_6b95c2b5",
+        "filename": "releases/datalake-adminui-1.0.3-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-26T22:05:59Z",
+      "side": 1,
+      "message": "need to indicate the specific job# under which snapshot version and ref should match",
+      "revId": "be200ed18266c5a012e4bde403f8f7d1c675f2b5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39d82f6c_ddedf0c6",
+        "filename": "releases/datalake-adminui-1.0.3-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-26T22:05:59Z",
+      "side": 1,
+      "message": "This version should reflect the snapshot container pushed from docker stage job. For job #195 it is 1.1.0-20200826T023741Z",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 20
+      },
+      "revId": "be200ed18266c5a012e4bde403f8f7d1c675f2b5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ed94fbd_e8a3951a",
+        "filename": "releases/datalake-adminui-1.0.3-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-26T22:05:59Z",
+      "side": 1,
+      "message": "should match to latest version in master (1.1.0)",
+      "range": {
+        "startLine": 8,
+        "startChar": 24,
+        "endLine": 8,
+        "endChar": 29
+      },
+      "revId": "be200ed18266c5a012e4bde403f8f7d1c675f2b5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9586fec6_fc523360",
+        "filename": "releases/datalake-adminui-1.0.3-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-26T22:05:59Z",
+      "side": 1,
+      "message": "This should identify the gerrit commit to which repo tag will be applied. You can pick the latest commit merged and validated (or look for git checkout -f  line on build logs and use that commit)",
+      "revId": "be200ed18266c5a012e4bde403f8f7d1c675f2b5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
