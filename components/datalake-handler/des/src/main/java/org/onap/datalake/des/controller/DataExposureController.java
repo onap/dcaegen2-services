@@ -102,7 +102,7 @@ public class DataExposureController {
 		String query = sub.replace(sqlTemplate);
 		log.info("Going to start Datalake Data Exposure Service ... query=" + query);
 		// https://prestodb.io/docs/current/installation/jdbc.html
-		String url = String.format("jdbc:presto://dl-presto:8080/%s/%s", dataExposure.getDb().getPrestoCatalog(),
+		String url = String.format("jdbc:presto://dl-presto:8080/%s/%s", dataExposure.getDb().getHost(),
 				dataExposure.getDb().getDatabase());
 		Properties properties = new Properties();
 		properties.setProperty("user", "test");
