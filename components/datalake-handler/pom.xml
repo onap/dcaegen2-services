@@ -21,6 +21,7 @@
 		<module>feeder</module>
 		<module>admin</module>
 		<module>collector</module>
+		<module>des</module>
 	</modules>
 
 	<properties>
