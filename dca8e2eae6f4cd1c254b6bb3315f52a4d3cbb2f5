@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "425abeba_09e9045d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-08-27T14:16:49Z",
+      "side": 1,
+      "message": "This can be removed",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 53
+      },
+      "revId": "dca8e2eae6f4cd1c254b6bb3315f52a4d3cbb2f5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "986e2fff_677b88ed",
+        "filename": "components/pm-subscription-handler/tests/test_aai_filter.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-08-27T14:16:49Z",
+      "side": 1,
+      "message": "For convention, best to rename this file and class to reflect the object under test. NetworkFunctionFilter.",
+      "range": {
+        "startLine": 6,
+        "startChar": 6,
+        "endLine": 6,
+        "endChar": 16
+      },
+      "revId": "dca8e2eae6f4cd1c254b6bb3315f52a4d3cbb2f5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
