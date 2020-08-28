@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bae4986d_b794ef73",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-08-28T12:17:38Z",
+      "side": 1,
+      "message": "Not sure if if statements are the way to go, probably simpler, but I guess another way to go about it without them would be to introduce something along the lines, but this is just purely an idea (probably need some name refactoring in the code):\n\n        match \u003d True\n        if orchestration_status !\u003d \u0027Active\u0027:\n            return False\n\n        check_for_name \u003d self.nf_names and self.regex_matcher.search(nf_name) is None\n        check_for_invariant_id \u003d self.invariant_uuids and not len([entityid for entityid in self.invariant_uuids\n                                             if entityid \u003d\u003d invariant_uuid]) \u003e 0\n        check_for_uuids \u003d self.uuids and not len([entityid for entityid in self.uuids if entityid \u003d\u003d uuid]) \u003e 0\n\n        checks \u003d [check_for_name or check_for_invariant_id or check_for_uuids]\n\n        if any(checks):\n            match \u003d False\n\n        return match\n\nAlso a bit confused about this maybe its just hard for me alone to follow this, but as long as it works as intended I\u0027ve no issues -  \u0027and not len([entityid for entityid in self.invariant_uuids if entityid \u003d\u003d invariant_uuid]) \u003e 0\u0027",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 20
+      },
+      "revId": "fc43592a1f25a20c7aea7a8af8bb63d99fec40b3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5217088d_34fd651b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-08-28T12:17:38Z",
+      "side": 1,
+      "message": "If we\u0027re allowing for update of the name, should we not add the invariant and the uuid here?",
+      "revId": "fc43592a1f25a20c7aea7a8af8bb63d99fec40b3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
