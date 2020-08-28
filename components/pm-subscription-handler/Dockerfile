@@ -17,40 +17,51 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-FROM python:3.8.2-alpine3.11
+FROM python:3.8.2-alpine3.11 as build
 MAINTAINER lego@est.tech
+
+RUN set -eux; \
+    apk add \
+    build-base \
+    python3-dev \
+    postgresql-dev
+
+COPY setup.py ./
+COPY requirements.txt ./
+RUN pip install --prefix /opt -r requirements.txt --no-cache-dir
+
+# Second stage
+FROM python:3.8.2-alpine3.11
+
+COPY --from=build /opt /opt
 
 ARG user=onap
 ARG group=onap
 
-WORKDIR /app
-
 # set PATH & PYTHONPATH vars
-ENV PATH=/usr/local/lib/python3.8/bin:$PATH:./bin \
-    PYTHONPATH=/usr/local/lib/python3.8/site-packages:./mod:./:$PYTHONPATH:./bin \
-    REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+ENV APPDIR="/opt/app/pmsh" \
+    LD_LIBRARY_PATH=/opt/lib:/opt/lib64 \
+    PYTHONPATH=${APPDIR}/mod:/opt/lib/python3.8/site-packages \
+    PATH=$PATH:${APPDIR}/bin \
     LOGS_PATH="/var/log/ONAP/dcaegen2/services/pmsh" \
-    LOGGER_CONFIG=/opt/app/pmsh/log_config.yaml
+    LOGGER_CONFIG="/opt/app/pmsh/log_config.yaml"
 
-    # add non root user & group
-RUN addgroup --system $user && adduser --ingroup $user --system $user && \
-    # create and chown the LOGS_PATH
-    apk add build-base libffi-dev postgresql-dev && \
-    mkdir -p $LOGS_PATH && \
-    chown -R $user:$group $LOGS_PATH
+WORKDIR $APPDIR
+RUN mkdir -p $APPDIR
 
-COPY setup.py ./
-COPY requirements.txt ./
-COPY ./pmsh_service ./bin/
-COPY log_config.yaml /opt/app/pmsh/
+RUN set -eux; \
+    apk add --no-cache postgresql-libs nano
 
-    # run the pip install
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt && \
-    pip install -e . && \
-    # change own & perms on entrypoint
-    chown -R $user:$group . && \
-    chmod 500 ./bin/*.py
+COPY ./pmsh_service ./bin
+COPY log_config.yaml ./
 
-# run the app
-ENTRYPOINT ["python", "./bin/pmsh_service_main.py"]
+# Create a group and user
+RUN addgroup -S $group && adduser -S -D -h /home/$user $user $group && \
+    mkdir -p ${LOGS_PATH} && \
+    chown -R $user:$group ${LOGS_PATH} && \
+    chown -R $user:$group ${APPDIR}
+
+# Tell docker that all future commands should be run as the onap user
+USER $user
+
+ENTRYPOINT ["python", "/opt/app/pmsh/bin/pmsh_service_main.py"]
