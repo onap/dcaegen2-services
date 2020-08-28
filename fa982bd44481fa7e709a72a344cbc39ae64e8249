@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2dde0625_a4994f3d",
+        "filename": "releases/datalake-adminui-1.1.0-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-28T00:45:31Z",
+      "side": 1,
+      "message": "pls confirm if this version was validated",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "fa982bd44481fa7e709a72a344cbc39ae64e8249",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "082e14ae_9e7db1b8",
+        "filename": "releases/datalake-adminui-1.1.0-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-08-28T00:45:31Z",
+      "side": 1,
+      "message": "not pointing to latest commit (36916e410fe28a233c7850e41ae837af7659de6e referred on the job)",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "fa982bd44481fa7e709a72a344cbc39ae64e8249",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
