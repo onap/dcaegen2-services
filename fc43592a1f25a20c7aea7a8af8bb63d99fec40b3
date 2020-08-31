@@ -131,6 +131,24 @@
     },
     {
       "key": {
+        "uuid": "c4c58a8b_2311aa6c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-08-31T11:27:12Z",
+      "side": 1,
+      "message": "Prob better to drop nf_names until we tackle the update a sub user story",
+      "parentUuid": "1c9afd20_7efb4d5f",
+      "revId": "fc43592a1f25a20c7aea7a8af8bb63d99fec40b3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8157885_4f5e2599",
         "filename": "components/pm-subscription-handler/tests/test_network_function_filter.py",
         "patchSetId": 4
