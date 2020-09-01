@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "7f7cb2d3_b7c4f905",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-09-01T07:11:36Z",
+      "side": 1,
+      "message": "At the moment I think its good as is! But if the conditions were to increase, the if approach should be changed. That\u0027s why I just left it as a mere idea. Happy enough to keep it like this",
+      "parentUuid": "a12a0890_9d996367",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 20
+      },
+      "revId": "fc43592a1f25a20c7aea7a8af8bb63d99fec40b3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5217088d_34fd651b",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 4
