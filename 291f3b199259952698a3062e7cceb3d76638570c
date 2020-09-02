@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4deda76_162636aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-09-02T13:52:02Z",
+      "side": 1,
+      "message": "We try to keep the service the change relates to in the commit message, as this repo has multiple services in it.\nAlso majority of the time we use the imperative mood in commits,\nSomething like Enhance Filtering Mechanism or Add Support for Enhanced Filtering.\nhttps://en.wikipedia.org/wiki/Imperative_mood",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 18
+      },
+      "revId": "291f3b199259952698a3062e7cceb3d76638570c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b861fb1_51f5e5d2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-09-02T13:52:02Z",
+      "side": 1,
+      "message": "We really are extracting a lot here, is it just neater at this point to use the NF model and pass in the instance of an NF object?",
+      "range": {
+        "startLine": 129,
+        "startChar": 11,
+        "endLine": 134,
+        "endChar": 100
+      },
+      "revId": "291f3b199259952698a3062e7cceb3d76638570c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b0976ab_e8ba0f56",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-09-02T13:52:02Z",
+      "side": 1,
+      "message": "I love a list comprehension as much as the next engineer, but this might be just over complicating things (or maybe I\u0027m missing something).\nCould you not just use the in keyword here like \u0027invariant_uuid in self.invariant_uuids\u0027 ?",
+      "range": {
+        "startLine": 117,
+        "startChar": 43,
+        "endLine": 118,
+        "endChar": 85
+      },
+      "revId": "291f3b199259952698a3062e7cceb3d76638570c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70cac537_e2c1590a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-09-02T13:52:02Z",
+      "side": 1,
+      "message": "Similar to above",
+      "range": {
+        "startLine": 120,
+        "startChar": 42,
+        "endLine": 120,
+        "endChar": 133
+      },
+      "revId": "291f3b199259952698a3062e7cceb3d76638570c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eeeec22_a21a4d63",
+        "filename": "components/pm-subscription-handler/tests/test_network_function_filter.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-09-02T13:52:02Z",
+      "side": 1,
+      "message": "I think the majority if not all the tests in this class be converted in a single data driven test.\nThere is a decent article on it here\n\nhttps://medium.com/ranorex-webtestit/data-driven-testing-using-python-and-the-parameterized-module-37e2cb863915\n\n\nI\u0027d say its worth it for the maintainability alone, never mind the simplicity in adding new scenarios in the future.",
+      "revId": "291f3b199259952698a3062e7cceb3d76638570c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
