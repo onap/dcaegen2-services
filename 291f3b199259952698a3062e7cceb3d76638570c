@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "4d70aadb_18444242",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-09-02T14:10:01Z",
+      "side": 1,
+      "message": "Currently what I\u0027m doing in my patch",
+      "parentUuid": "7b861fb1_51f5e5d2",
+      "range": {
+        "startLine": 129,
+        "startChar": 11,
+        "endLine": 134,
+        "endChar": 100
+      },
+      "revId": "291f3b199259952698a3062e7cceb3d76638570c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2b0976ab_e8ba0f56",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
         "patchSetId": 6
