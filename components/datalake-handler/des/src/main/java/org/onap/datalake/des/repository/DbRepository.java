@@ -1,6 +1,6 @@
 /*
 * ============LICENSE_START=======================================================
-* ONAP : Data Extraction Service
+* ONAP : DataLake
 * ================================================================================
 * Copyright 2020 China Mobile
 *=================================================================================
@@ -18,26 +18,22 @@
 * ============LICENSE_END=========================================================
 */
 
-package org.onap.datalake.des;
+package org.onap.datalake.des.repository;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.onap.datalake.des.domain.Db;
+import org.springframework.data.repository.CrudRepository;
 
 /**
- * Entry point of the Data Extraction Service application.
- * 
- * @author Kai Lu
+ * Db Repository.
+ *
+ * @author Guobiao Mo
  *
  */
 
-@SpringBootApplication(scanBasePackages = { "org.onap.datalake.*" })
-@EnableSwagger2
-public class DesApplication {
+public interface DbRepository extends CrudRepository<Db, Integer> {
 
-    public static void main(String[] args) {
-        SpringApplication.run(DesApplication.class, args);
-    }
+    Db findByName(String name);
+
+    Iterable<Db> findByEncrypt(boolean encrypt);
 
 }
