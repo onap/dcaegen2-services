@@ -24,12 +24,11 @@ import org.onap.datalake.des.domain.DataExposure;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * 
- * DataExposure Repository 
- * 
+ * DataExposure Repository.
+ *
  * @author Kai Lu
  *
- */ 
+ */
 
 public interface DataExposureRepository extends CrudRepository<DataExposure, String> {
 
