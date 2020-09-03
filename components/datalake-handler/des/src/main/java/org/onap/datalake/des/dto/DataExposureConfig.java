@@ -19,18 +19,20 @@
 */
 
 package org.onap.datalake.des.dto;
+
 import lombok.Getter;
 import lombok.Setter;
+
 /**
- * SON request body for DataExposure manipulation.
+ * Data Exposure Config.
  *
  * @author Kai Lu
  */
 @Getter
 @Setter
 public class DataExposureConfig {
-    private String id;
-    private String note;
-    private String sqlTemplate;
-    private Integer dbId;
+	private String id;
+	private String note;
+	private String sqlTemplate;
+	private Integer dbId;
 }

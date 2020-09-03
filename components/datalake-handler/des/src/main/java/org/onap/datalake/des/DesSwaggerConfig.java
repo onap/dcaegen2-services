@@ -40,27 +40,27 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+public class DesSwaggerConfig {
 
-    /**
-     * produceApi.
-     *
-     * @return Docket Docket
-     *
-     */
+	/**
+	 * des produceApi.
+	 *
+	 * @return Docket Docket
+	 *
+	 */
 	@Bean
-	public Docket produceApi() {
-		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
+	public Docket desProduceApi() {
+		return new Docket(DocumentationType.SWAGGER_2).apiInfo(desApiInfo()).select()
 				.apis(RequestHandlerSelectors.basePackage("org.onap.datalake.des")).paths(PathSelectors.any()).build();
 	}
 
-    /**
-     * Api description.
-     *
-     * @return ApiInfo api Info
-     *
-     */
-	private ApiInfo apiInfo() {
+	/**
+	 * des Api description.
+	 *
+	 * @return ApiInfo des api Info
+	 *
+	 */
+	private ApiInfo desApiInfo() {
 		return new ApiInfoBuilder().title("DataLake Rest APIs")
 				.description("This page lists all the rest apis for DataLake.").version("1.0.0-SNAPSHOT").build();
 	}

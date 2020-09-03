@@ -40,13 +40,11 @@ import org.onap.datalake.des.domain.DataExposure;
 import org.onap.datalake.des.dto.DataExposureConfig;
 import org.onap.datalake.des.repository.DataExposureRepository;
 import org.onap.datalake.des.service.DataExposureService;
-import org.onap.datalake.feeder.controller.domain.PostReturnBody;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,7 +58,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * Data Exposure WS.
+ * Data Extraction WS.
  *
  * @author Kai Lu
  *
@@ -76,23 +74,29 @@ public class DataExposureController {
 	@Autowired
 	private DataExposureRepository dataExposureRepository;
 
-    /**
-     * serve API.
-     *
-     * @param serviceId serviceId
-     * @param requestMap requestMap
-     * @param bindingResult bindingResult
-     * @param response response
+	private final static String PRESTO_URL = "jdbc:presto://dl-presto:9000/%s/%s";
+
+	private final static String PRESTO_DRIVER = "com.facebook.presto.jdbc.PrestoDriver";
+
+	/**
+	 * serve API.
+	 *
+	 * @param serviceId     serviceId
+	 * @param requestMap    requestMap
+	 * @param bindingResult bindingResult
+	 * @param response      response
 	 * @return message that application is started
 	 * @throws IOException
 	 * @throws SQLException
-     *
-     */
+	 * @throws ClassNotFoundException
+	 *
+	 */
 	@PostMapping("/{serviceId}")
 	@ResponseBody
 	@ApiOperation(value = "Datalake Data Exposure Service.")
 	public HashMap<String, Object> serve(@PathVariable String serviceId, @RequestBody Map<String, String> requestMap,
-			BindingResult bindingResult, HttpServletResponse response) throws IOException, SQLException {
+			BindingResult bindingResult, HttpServletResponse response)
+			throws IOException, SQLException, ClassNotFoundException {
 		log.info("Going to start Datalake Data Exposure Service ... requestMap=" + requestMap);
 		HashMap<String, Object> ret = new HashMap<>();
 		ret.put("request", requestMap);
@@ -102,8 +106,11 @@ public class DataExposureController {
 		String query = sub.replace(sqlTemplate);
 		log.info("Going to start Datalake Data Exposure Service ... query=" + query);
 		// https://prestodb.io/docs/current/installation/jdbc.html
-		String url = String.format("jdbc:presto://dl-presto:8080/%s/%s", dataExposure.getDb().getHost(),
-				dataExposure.getDb().getDatabase());
+
+		Class.forName(PRESTO_DRIVER);
+		String url = String.format(PRESTO_URL, dataExposure.getDb().getDbType().getName().toLowerCase(),
+				dataExposure.getDb().getDatabase().toLowerCase());
+
 		Properties properties = new Properties();
 		properties.setProperty("user", "test");
 		// properties.setProperty("password", "secret");
@@ -131,12 +138,12 @@ public class DataExposureController {
 		return ret;
 	}
 
-    /**
-     * queryAllDataExposure API.
-     *
+	/**
+	 * queryAllDataExposure API.
+	 *
 	 * @return data exposure config list
-     *
-     */
+	 *
+	 */
 	@GetMapping("")
 	@ResponseBody
 	@ApiOperation(value = "Datalake Data Exposure list")
@@ -144,15 +151,15 @@ public class DataExposureController {
 		return dataExposureService.queryAllDataExposure();
 	}
 
-    /**
-     * query API.
-     *
-     * @param id id
-     * @param response HttpServletResponse
+	/**
+	 * query API.
+	 *
+	 * @param id       id
+	 * @param response HttpServletResponse
 	 * @return DataExposureConfig
 	 * @throws IOException
-     *
-     */
+	 *
+	 */
 	@GetMapping("/{id}")
 	@ResponseBody
 	@ApiOperation(value = "Get Detail of DataExposure")
@@ -169,37 +176,16 @@ public class DataExposureController {
 		}
 	}
 
-    /**
-     * delete Kfaka API.
-     *
-     * @param id id
-     * @param response HttpServletResponse
-	 * @throws IOException
-     *
-     */
-	@DeleteMapping("/{id}")
-	@ResponseBody
-	@ApiOperation(value = "delete a dataExposure.")
-	public void deleteKafka(@PathVariable String id, HttpServletResponse response) throws IOException {
-		DataExposure oldDataExposure = dataExposureService.getDataExposureById(id);
-		if (oldDataExposure == null) {
-			sendError(response, 400, "DataExposure not found, ID: " + id);
-		} else {
-			dataExposureRepository.delete(oldDataExposure);
-			response.setStatus(204);
-		}
-	}
-
-    /**
-     * Create a DataExposure.
-     *
-     * @param dataExposureConfig dataExposureConfig
-     * @param result BindingResult
-     * @param response HttpServletResponse
+	/**
+	 * Create a DataExposure.
+	 *
+	 * @param dataExposureConfig dataExposureConfig
+	 * @param result             BindingResult
+	 * @param response           HttpServletResponse
 	 * @return DataExposureConfig
 	 * @throws IOException
-     *
-     */
+	 *
+	 */
 	@PostMapping("")
 	@ResponseBody
 	@ApiOperation(value = "Create a DataExposure.")
@@ -228,17 +214,17 @@ public class DataExposureController {
 		}
 	}
 
-    /**
-     * Update a DataExposure.
-     *
-     * @param dataExposureConfig dataExposureConfig
-     * @param result BindingResult
-     * @param id id
-     * @param response HttpServletResponse
+	/**
+	 * Update a DataExposure.
+	 *
+	 * @param dataExposureConfig dataExposureConfig
+	 * @param result             BindingResult
+	 * @param id                 id
+	 * @param response           HttpServletResponse
 	 * @return DataExposureConfig
 	 * @throws IOException
-     *
-     */
+	 *
+	 */
 	@PutMapping("/{id}")
 	@ResponseBody
 	@ApiOperation(value = "Update a DataExposure.")

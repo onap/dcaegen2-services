@@ -1,6 +1,6 @@
 /*
 * ============LICENSE_START=======================================================
-* ONAP : Data Extraction Service
+* ONAP : DATALAKE
 * ================================================================================
 * Copyright 2020 China Mobile
 *=================================================================================
@@ -20,24 +20,28 @@
 
 package org.onap.datalake.des;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import static org.junit.Assert.fail;
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import org.junit.Test;
+import org.onap.datalake.des.DesSwaggerConfig;
 
 /**
- * Entry point of the Data Extraction Service application
+ * Test Swagger integration
  * 
  * @author Kai Lu
  *
  */
+ 
+public class DesSwaggerConfigTest {
 
-@SpringBootApplication(scanBasePackages = { "org.onap.datalake.*" })
-@EnableSwagger2
-public class DesApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(DesApplication.class, args);
+    @Test
+	public void test() {
+        try {
+        	DesSwaggerConfig config = new DesSwaggerConfig();
+        	config.desProduceApi();
+        } catch (Exception e) {
+            fail("failed to read configure Des Swagger.");
+        }
 	}
 
 }

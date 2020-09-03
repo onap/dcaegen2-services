@@ -20,16 +20,15 @@
 
 package org.onap.datalake.des.service;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 import org.onap.datalake.des.domain.DataExposure;
+import org.onap.datalake.des.domain.Db;
 import org.onap.datalake.des.dto.DataExposureConfig;
 import org.onap.datalake.des.repository.DataExposureRepository;
-import org.onap.datalake.feeder.domain.Db;
-import org.onap.datalake.feeder.repository.DbRepository;
+import org.onap.datalake.des.repository.DbRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,14 +49,14 @@ public class DataExposureService {
 	@Autowired
 	private DbRepository dbRepository;
 
-    /**
-     * getDataExposure.
-     *
-     * @param serviceId serviceId
-     *
+	/**
+	 * getDataExposure.
+	 *
+	 * @param serviceId serviceId
+	 *
 	 * @return DataExposure
-     *
-     */
+	 *
+	 */
 	public DataExposure getDataExposure(String serviceId) {
 		Optional<DataExposure> ret = dataExposureRepository.findById(serviceId);
 		return ret.isPresent() ? ret.get() : null;
@@ -76,42 +75,42 @@ public class DataExposureService {
 		return dataExposureConfigList;
 	}
 
-    /**
-     * getDataExposureById.
-     *
-     * @param id id
-     *
+	/**
+	 * getDataExposureById.
+	 *
+	 * @param id id
+	 *
 	 * @return data exposure
-     *
-     */
+	 *
+	 */
 	public DataExposure getDataExposureById(String id) {
 		Optional<DataExposure> ret = dataExposureRepository.findById(id);
 		return ret.isPresent() ? ret.get() : null;
 	}
 
-    /**
-     * fillDataExposureConfiguration.
-     *
-     * @param dataExposureConfig DataExposureConfig
-     *
+	/**
+	 * fillDataExposureConfiguration.
+	 *
+	 * @param dataExposureConfig DataExposureConfig
+	 *
 	 * @return data exposure
-     *
-     */
+	 *
+	 */
 	public DataExposure fillDataExposureConfiguration(DataExposureConfig dataExposureConfig) {
 		DataExposure dataExposure = new DataExposure();
 		fillDataExposure(dataExposureConfig, dataExposure);
 		return dataExposure;
 	}
 
-    /**
-     * fillDataExposureConfiguration.
-     *
-     * @param dataExposureConfig DataExposureConfig
-     * @param dataExposure DataExposure
-     *
+	/**
+	 * fillDataExposureConfiguration.
+	 *
+	 * @param dataExposureConfig DataExposureConfig
+	 * @param dataExposure       DataExposure
+	 *
 	 * @return data exposure
-     *
-     */
+	 *
+	 */
 	public void fillDataExposureConfiguration(DataExposureConfig dataExposureConfig, DataExposure dataExposure) {
 		fillDataExposure(dataExposureConfig, dataExposure);
 	}

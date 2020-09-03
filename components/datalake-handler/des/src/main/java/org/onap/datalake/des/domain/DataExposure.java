@@ -26,7 +26,6 @@ import lombok.Setter;
 import javax.persistence.*;
 
 import org.onap.datalake.des.dto.DataExposureConfig;
-import org.onap.datalake.feeder.domain.Db;
 
 /**
  * Domain class representing DataExposure
@@ -59,12 +58,12 @@ public class DataExposure {
 		this.sqlTemplate = sqlTemplate;
 	}
 
-    /**
-     * getDataExposureConfig.
-     *
+	/**
+	 * getDataExposureConfig.
+	 *
 	 * @return data exposure config
-     *
-     */
+	 *
+	 */
 	public DataExposureConfig getDataExposureConfig() {
 		DataExposureConfig dataExposureConfig = new DataExposureConfig();
 		dataExposureConfig.setId(getId());
