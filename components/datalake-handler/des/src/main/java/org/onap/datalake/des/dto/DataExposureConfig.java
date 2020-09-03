@@ -19,10 +19,12 @@
 */
 
 package org.onap.datalake.des.dto;
+
 import lombok.Getter;
 import lombok.Setter;
+
 /**
- * SON request body for DataExposure manipulation.
+ * Data Exposure Config.
  *
  * @author Kai Lu
  */
