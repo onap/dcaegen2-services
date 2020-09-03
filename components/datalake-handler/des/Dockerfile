@@ -17,7 +17,7 @@
 # ============LICENSE_END=====================================================
 FROM openjdk:11-jre-slim
 
-MAINTAINER Guobiao Mo <guobiaomo@chinamobile.com>
+MAINTAINER Kai Lu <lukai@chinamobile.com>
 
 EXPOSE 1681
 

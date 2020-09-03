@@ -26,18 +26,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * Entry point of the Data Extraction Service application
+ * Entry point of the Data Extraction Service application.
  * 
  * @author Kai Lu
  *
  */
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = { "org.onap.datalake.*" })
 @EnableSwagger2
 public class DesApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DesApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DesApplication.class, args);
+    }
 
 }

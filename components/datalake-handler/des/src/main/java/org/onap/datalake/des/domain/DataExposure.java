@@ -23,13 +23,19 @@ package org.onap.datalake.des.domain;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
 
 import org.onap.datalake.des.dto.DataExposureConfig;
-import org.onap.datalake.feeder.domain.Db;
 
 /**
- * Domain class representing DataExposure
+ * Domain class representing DataExposure.
  *
  * @author Kai Lu
  */
@@ -39,38 +45,38 @@ import org.onap.datalake.feeder.domain.Db;
 @Table(name = "data_exposure")
 public class DataExposure {
 
-	@Id
-	@Column(name = "`id`")
-	private String id;
-	@Column(name = "`sql_template`", nullable = false)
-	private String sqlTemplate;
-	@Column(name = "`note`")
-	private String note;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "db_id", nullable = false)
-	@JsonBackReference
-	private Db db;
+    @Id
+    @Column(name = "`id`")
+    private String id;
+    @Column(name = "`sql_template`", nullable = false)
+    private String sqlTemplate;
+    @Column(name = "`note`")
+    private String note;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "db_id", nullable = false)
+    @JsonBackReference
+    private Db db;
 
-	public DataExposure() {
-	}
+    public DataExposure() {
+    }
 
-	public DataExposure(String id, String sqlTemplate) {
-		this.id = id;
-		this.sqlTemplate = sqlTemplate;
-	}
+    public DataExposure(String id, String sqlTemplate) {
+        this.id = id;
+        this.sqlTemplate = sqlTemplate;
+    }
 
     /**
      * getDataExposureConfig.
      *
-	 * @return data exposure config
+     * @return data exposure config
      *
      */
-	public DataExposureConfig getDataExposureConfig() {
-		DataExposureConfig dataExposureConfig = new DataExposureConfig();
-		dataExposureConfig.setId(getId());
-		dataExposureConfig.setSqlTemplate(getSqlTemplate());
-		dataExposureConfig.setNote(getNote());
-		dataExposureConfig.setDbId(getDb().getId());
-		return dataExposureConfig;
-	}
+    public DataExposureConfig getDataExposureConfig() {
+        DataExposureConfig dataExposureConfig = new DataExposureConfig();
+        dataExposureConfig.setId(getId());
+        dataExposureConfig.setSqlTemplate(getSqlTemplate());
+        dataExposureConfig.setNote(getNote());
+        dataExposureConfig.setDbId(getDb().getId());
+        return dataExposureConfig;
+    }
 }

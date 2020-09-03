@@ -1,6 +1,6 @@
 /*
 * ============LICENSE_START=======================================================
-* ONAP : Data Extraction Service
+* ONAP : DataLake
 * ================================================================================
 * Copyright 2020 China Mobile
 *=================================================================================
@@ -20,17 +20,21 @@
 
 package org.onap.datalake.des.repository;
 
-import org.onap.datalake.des.domain.DataExposure;
+import org.onap.datalake.des.domain.Db;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * 
- * DataExposure Repository.
- * 
- * @author Kai Lu
+ *
+ * Db Repository.
+ *
+ * @author Guobiao Mo
  *
  */
 
-public interface DataExposureRepository extends CrudRepository<DataExposure, String> {
+public interface DbRepository extends CrudRepository<Db, Integer> {
+
+    Db findByName(String name);
+
+    Iterable<Db> findByEncrypt(boolean encrypt);
 
 }

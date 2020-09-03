@@ -1,6 +1,6 @@
 /*
 * ============LICENSE_START=======================================================
-* ONAP : Data Extraction Service
+* ONAP : DATALAKE
 * ================================================================================
 * Copyright 2020 China Mobile
 *=================================================================================
@@ -18,19 +18,30 @@
 * ============LICENSE_END=========================================================
 */
 
-package org.onap.datalake.des.repository;
+package org.onap.datalake.des;
 
-import org.onap.datalake.des.domain.DataExposure;
-import org.springframework.data.repository.CrudRepository;
+import static org.junit.Assert.fail;
+
+import org.junit.Test;
+import org.onap.datalake.des.DesSwaggerConfig;
 
 /**
- * 
- * DataExposure Repository.
+ * Test Swagger integration
  * 
  * @author Kai Lu
  *
  */
+ 
+public class DesSwaggerConfigTest {
 
-public interface DataExposureRepository extends CrudRepository<DataExposure, String> {
+    @Test
+    public void test() {
+        try {
+            DesSwaggerConfig config = new DesSwaggerConfig();
+            config.desProduceApi();
+        } catch (Exception e) {
+            fail("failed to read configure Des Swagger.");
+        }
+    }
 
 }
