@@ -132,6 +132,24 @@
       "revId": "291f3b199259952698a3062e7cceb3d76638570c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ecfaccda_f9e9b656",
+        "filename": "components/pm-subscription-handler/tests/test_network_function_filter.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2020-09-03T11:29:45Z",
+      "side": 1,
+      "message": "Not quite sure how to go about this. Would we need filter information and test criteria in a csv/json",
+      "parentUuid": "2eeeec22_a21a4d63",
+      "revId": "291f3b199259952698a3062e7cceb3d76638570c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
