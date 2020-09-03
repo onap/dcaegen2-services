@@ -1,6 +1,6 @@
 /*
 * ============LICENSE_START=======================================================
-* ONAP : Data Extraction Service
+* ONAP : DataLake
 * ================================================================================
 * Copyright 2020 China Mobile
 *=================================================================================
@@ -22,62 +22,77 @@ package org.onap.datalake.des.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import org.onap.datalake.des.dto.DataExposureConfig;
-
 /**
- * Domain class representing DataExposure.
+ * Domain class representing bid data storage type.
+ * 
+ * @author Guobiao Mo
  *
- * @author Kai Lu
  */
-@Getter
 @Setter
+@Getter
 @Entity
-@Table(name = "data_exposure")
-public class DataExposure {
-
+@Table(name = "db_type")
+public class DbType {
     @Id
     @Column(name = "`id`")
     private String id;
-    @Column(name = "`sql_template`", nullable = false)
-    private String sqlTemplate;
-    @Column(name = "`note`")
-    private String note;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "db_id", nullable = false)
+
+    @Column(name = "`name`", nullable = false)
+    private String name;
+
+    @Column(name = "`default_port`")
+    private Integer defaultPort;
+
+    @Column(name = "`tool`", nullable = false)
+    private boolean tool;
+
     @JsonBackReference
-    private Db db;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "dbType")
+    protected Set<Db> dbs = new HashSet<>();
 
-    public DataExposure() {
+    public DbType() {
     }
 
-    public DataExposure(String id, String sqlTemplate) {
+    public DbType(String id, String name) {
         this.id = id;
-        this.sqlTemplate = sqlTemplate;
+        this.name = name;
     }
 
-    /**
-     * getDataExposureConfig.
-     *
-     * @return data exposure config
-     *
-     */
-    public DataExposureConfig getDataExposureConfig() {
-        DataExposureConfig dataExposureConfig = new DataExposureConfig();
-        dataExposureConfig.setId(getId());
-        dataExposureConfig.setSqlTemplate(getSqlTemplate());
-        dataExposureConfig.setNote(getNote());
-        dataExposureConfig.setDbId(getDb().getId());
-        return dataExposureConfig;
+    @Override
+    public String toString() {
+        return String.format("DbType %s (name=%s)", id, name);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
+
+        return id.equals(((DbType) obj).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
 }
