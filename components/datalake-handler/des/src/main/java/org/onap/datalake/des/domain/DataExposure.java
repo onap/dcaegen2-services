@@ -26,7 +26,6 @@ import lombok.Setter;
 import javax.persistence.*;
 
 import org.onap.datalake.des.dto.DataExposureConfig;
-import org.onap.datalake.feeder.domain.Db;
 
 /**
  * Domain class representing DataExposure
@@ -39,38 +38,38 @@ import org.onap.datalake.feeder.domain.Db;
 @Table(name = "data_exposure")
 public class DataExposure {
 
-	@Id
-	@Column(name = "`id`")
-	private String id;
-	@Column(name = "`sql_template`", nullable = false)
-	private String sqlTemplate;
-	@Column(name = "`note`")
-	private String note;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "db_id", nullable = false)
-	@JsonBackReference
-	private Db db;
+    @Id
+    @Column(name = "`id`")
+    private String id;
+    @Column(name = "`sql_template`", nullable = false)
+    private String sqlTemplate;
+    @Column(name = "`note`")
+    private String note;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "db_id", nullable = false)
+    @JsonBackReference
+    private Db db;
 
-	public DataExposure() {
-	}
+    public DataExposure() {
+    }
 
-	public DataExposure(String id, String sqlTemplate) {
-		this.id = id;
-		this.sqlTemplate = sqlTemplate;
-	}
+    public DataExposure(String id, String sqlTemplate) {
+        this.id = id;
+        this.sqlTemplate = sqlTemplate;
+    }
 
     /**
      * getDataExposureConfig.
      *
-	 * @return data exposure config
+     * @return data exposure config
      *
      */
-	public DataExposureConfig getDataExposureConfig() {
-		DataExposureConfig dataExposureConfig = new DataExposureConfig();
-		dataExposureConfig.setId(getId());
-		dataExposureConfig.setSqlTemplate(getSqlTemplate());
-		dataExposureConfig.setNote(getNote());
-		dataExposureConfig.setDbId(getDb().getId());
-		return dataExposureConfig;
-	}
+    public DataExposureConfig getDataExposureConfig() {
+        DataExposureConfig dataExposureConfig = new DataExposureConfig();
+        dataExposureConfig.setId(getId());
+        dataExposureConfig.setSqlTemplate(getSqlTemplate());
+        dataExposureConfig.setNote(getNote());
+        dataExposureConfig.setDbId(getDb().getId());
+        return dataExposureConfig;
+    }
 }
