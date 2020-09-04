@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "28a930b5_c0be7eb9",
+        "filename": "components/pm-subscription-handler/tests/test_network_function_filter.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-09-04T12:17:39Z",
+      "side": 1,
+      "message": "I\u0027d recommend using parameterized for this, \nhttps://pypi.org/project/parameterized/\nit\u0027ll give you individual tests, rather than having a single test which is what this is doing.\nThe docs even give you an easy example on how you can have each test identify with a custom name.\nadditionally you can store the test data either as lists in the code base or external like it is now, up to yourself, but it\u0027s much better to have each test identify as a separate one.",
+      "revId": "93b4b1afdc596100ad1d5a0f2af35a94065691aa",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
