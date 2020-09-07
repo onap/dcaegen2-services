@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea064f52_28e3f3fb",
+        "filename": "components/pm-subscription-handler/tests/test_network_function_filter.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-09-07T13:52:37Z",
+      "side": 1,
+      "message": "If you change the filter_test_data.json to just be an array rather than an object containing an array,\nthen you can use a custom function to read the contents, and generate parameters for the tests.\n\n\nsome food for thought:\n\n   def load_test_cases():\n        test_parameters \u003d []\n        with open(os.path.join(os.path.dirname(__file__), \u0027data/filter_test_data.json\u0027), r) as test_data:\n            loaded_test_data \u003d json.load(data)\n        for test in loaded_test_data:\n            params \u003d [value for key, value in test.items()]\n            test_parameters.append(params)\n        return test_parameters\n\n    @parameterized.expand(load_test_cases)\n    def test(self, test_name, nf_filter, nf_name, model_invariant_uuid, model_version_id, orchestration_status,\n             expected_result):\n            pass\n\n\n\n\nStrip out the base object and make the \"data\" array in the filter_test_data.json file be the root element.",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 33,
+        "endChar": 10
+      },
+      "revId": "630f1599437361019dba847e342f3ba01eb3837b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35f38431_f33620dc",
+        "filename": "components/pm-subscription-handler/tests/test_network_function_filter.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4023
+      },
+      "writtenOn": "2020-09-07T13:52:37Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 56
+      },
+      "revId": "630f1599437361019dba847e342f3ba01eb3837b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
