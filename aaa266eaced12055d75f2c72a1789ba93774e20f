@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5caf3190_090707ee",
+        "filename": "components/pm-subscription-handler/tests/test_network_function_filter.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-09-07T15:41:10Z",
+      "side": 1,
+      "message": "Should this now be \"loaded_test_data[\u0027data\u0027]\"",
+      "range": {
+        "startLine": 19,
+        "startChar": 16,
+        "endLine": 19,
+        "endChar": 32
+      },
+      "revId": "aaa266eaced12055d75f2c72a1789ba93774e20f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
