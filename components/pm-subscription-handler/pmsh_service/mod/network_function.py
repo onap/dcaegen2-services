@@ -18,6 +18,7 @@
 
 import re
 
+import mod.aai_client
 from mod import logger, db
 from mod.api.db_models import NetworkFunctionModel
 
@@ -26,21 +27,34 @@ class NetworkFunction:
     def __init__(self, **kwargs):
         """ Object representation of the NetworkFunction. """
         self.nf_name = kwargs.get('nf_name')
-        self.orchestration_status = kwargs.get('orchestration_status')
+        self.model_invariant_id = kwargs.get('model_invariant_id')
+        self.model_version_id = kwargs.get('model_version_id')
+        self.sdnc_model_name = None
+        self.sdnc_model_version = None
 
     @classmethod
     def nf_def(cls):
-        return cls(nf_name=None, orchestration_status=None)
+        return cls(nf_name=None, model_invariant_id=None, model_version_id=None,
+                   sdnc_model_name=None, sdnc_model_version=None)
 
     def __str__(self):
-        return f'nf-name: {self.nf_name}, orchestration-status: {self.orchestration_status}'
+        return f'nf-name: {self.nf_name}, ' \
+               f'model-invariant-id: {self.model_invariant_id}, ' \
+               f'model-version-id: {self.model_version_id}, ' \
+               f'sdnc-model-name: {self.sdnc_model_name}, ' \
+               f'sdnc-model-version: {self.sdnc_model_version}'
 
     def __eq__(self, other):
-        return self.nf_name == other.nf_name and \
-            self.orchestration_status == other.orchestration_status
+        return \
+            self.nf_name == other.nf_name and \
+            self.model_invariant_id == other.model_invariant_id and \
+            self.model_version_id == other.model_version_id and \
+            self.sdnc_model_name == other.sdnc_model_name and \
+            self.sdnc_model_version == other.sdnc_model_version
 
     def __hash__(self):
-        return hash((self.nf_name, self.orchestration_status))
+        return hash((self.nf_name, self.model_invariant_id,
+                     self.model_version_id, self.sdnc_model_name, self.sdnc_model_version))
 
     def create(self):
         """ Creates a NetworkFunction database entry """
@@ -49,7 +63,10 @@ class NetworkFunction:
 
         if existing_nf is None:
             new_nf = NetworkFunctionModel(nf_name=self.nf_name,
-                                          orchestration_status=self.orchestration_status)
+                                          model_invariant_id=self.model_invariant_id,
+                                          model_version_id=self.model_version_id,
+                                          sdnc_model_name=self.sdnc_model_name,
+                                          sdnc_model_version=self.sdnc_model_version)
             db.session.add(new_nf)
             db.session.commit()
             logger.info(f'Network Function {new_nf.nf_name} successfully created.')
@@ -58,6 +75,23 @@ class NetworkFunction:
             logger.debug(f'Network function {existing_nf.nf_name} already exists,'
                          f' returning this network function..')
             return existing_nf
+
+    def set_sdnc_params(self, app_conf):
+        params_set = True
+        try:
+            sdnc_model_data = mod.aai_client.get_aai_model_data(app_conf, self.model_invariant_id,
+                                                                self.model_version_id, self.nf_name)
+            try:
+                self.sdnc_model_name = sdnc_model_data['sdnc-model-name']
+                self.sdnc_model_version = sdnc_model_data['sdnc-model-version']
+                return params_set
+            except KeyError as e:
+                logger.info(f'Skipping NF {self.nf_name} as there is no '
+                            f'sdnc-model data associated in AAI: {e}', exc_info=True)
+                return not params_set
+        except Exception as e:
+            logger.error(f'Failed to get sdnc-model info for XNFs from AAI: {e}', exc_info=True)
+            return not params_set
 
     @staticmethod
     def get(nf_name):
@@ -90,33 +124,27 @@ class NetworkFunction:
             db.session.commit()
 
 
-
 class NetworkFunctionFilter:
     def __init__(self, **kwargs):
         self.nf_names = kwargs.get('nfNames')
-        self.model_invariant_ids = kwargs.get('modelInvariantUUIDs')
+        self.model_invariant_ids = kwargs.get('modelInvariantIDs')
         self.model_version_ids = kwargs.get('modelVersionIDs')
         self.regex_matcher = re.compile('|'.join(raw_regex for raw_regex in self.nf_names))
 
-    def is_nf_in_filter(self, nf_name, model_invariant_id, model_version_id, orchestration_status):
-        """Match the nf name against regex values in Subscription.nfFilter.nfNames
+    def is_nf_in_filter(self, nf):
+        """Match the nf fields against values in Subscription.nfFilter
 
         Args:
-            nf_name (str): the AAI nf name.
-            invariant_uuid (str): the AAI model-invariant-id
-            uuid (str): the AAI model-version-id
-            orchestration_status (str): orchestration status of the nf
+            nf (NetworkFunction): The NF to be filtered.
 
         Returns:
             bool: True if matched, else False.
         """
         match = True
-        if orchestration_status != 'Active':
+        if self.nf_names and self.regex_matcher.search(nf.nf_name) is None:
             match = False
-        if self.nf_names and self.regex_matcher.search(nf_name) is None:
+        if self.model_invariant_ids and nf.model_invariant_id not in self.model_invariant_ids:
             match = False
-        if self.model_invariant_ids and not model_invariant_id in self.model_invariant_ids:
-            match = False
-        if self.model_version_ids and not model_version_id in self.model_version_ids:
+        if self.model_version_ids and nf.model_version_id not in self.model_version_ids:
             match = False
         return match

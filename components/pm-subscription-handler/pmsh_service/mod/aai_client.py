@@ -21,9 +21,9 @@ from os import environ
 import requests
 from requests.auth import HTTPBasicAuth
 
+import mod.network_function
+import pmsh_service.mod.pmsh_utils
 from mod import logger
-from mod.network_function import NetworkFunction
-from mod.pmsh_utils import mdc_handler
 
 
 def get_pmsh_nfs_from_aai(app_conf):
@@ -34,21 +34,20 @@ def get_pmsh_nfs_from_aai(app_conf):
         app_conf (AppConfig): the AppConfig object.
 
     Returns:
-        set(NetworkFunctions): set of NetworkFunctions.
+        NetworkFunctions (list): list of NetworkFunctions.
 
     Raises:
         RuntimeError: if AAI Network Function data cannot be retrieved.
     """
     aai_nf_data = _get_all_aai_nf_data(app_conf)
     if aai_nf_data:
-        nfs = _filter_nf_data(aai_nf_data, app_conf.nf_filter)
+        nfs = _filter_nf_data(aai_nf_data, app_conf)
     else:
         raise RuntimeError('Failed to get data from AAI')
     return nfs
 
 
-@mdc_handler
-def _get_all_aai_nf_data(app_conf, **kwargs):
+def _get_all_aai_nf_data(app_conf):
     """
     Return queried nf data from the AAI service.
 
@@ -61,24 +60,19 @@ def _get_all_aai_nf_data(app_conf, **kwargs):
     nf_data = None
     try:
         session = requests.Session()
-        aai_endpoint = f'{_get_aai_service_url()}{"/aai/v19/query"}'
+        aai_named_query_endpoint = f'{_get_aai_service_url()}{"/query"}'
         logger.info('Fetching XNFs from AAI.')
-        headers = {'accept': 'application/json',
-                   'content-type': 'application/json',
-                   'x-fromappid': 'dcae-pmsh',
-                   'x-transactionid': kwargs['request_id'],
-                   'InvocationID': kwargs['invocation_id'],
-                   'RequestID': kwargs['request_id']}
-        json_data = """
-                    {'start':
-                        ['network/pnfs',
-                        'network/generic-vnfs']
-                    }"""
+        headers = _get_aai_request_headers()
+        data = """
+                {'start':
+                    ['network/pnfs',
+                    'network/generic-vnfs']
+                }"""
         params = {'format': 'simple', 'nodesOnly': 'true'}
-        response = session.put(aai_endpoint, headers=headers,
+        response = session.put(aai_named_query_endpoint, headers=headers,
                                auth=HTTPBasicAuth(app_conf.aaf_creds.get('aaf_id'),
                                                   app_conf.aaf_creds.get('aaf_pass')),
-                               data=json_data, params=params,
+                               data=data, params=params,
                                verify=(app_conf.ca_cert_path if app_conf.enable_tls else False),
                                cert=(app_conf.cert_params if app_conf.enable_tls else None))
         response.raise_for_status()
@@ -103,39 +97,89 @@ def _get_aai_service_url():
     """
     try:
         aai_ssl_port = environ['AAI_SERVICE_PORT']
-        return f'https://aai:{aai_ssl_port}'
+        return f'https://aai:{aai_ssl_port}/aai/v20'
     except KeyError as e:
         logger.error(f'Failed to get AAI env var: {e}', exc_info=True)
         raise
 
 
-def _filter_nf_data(nf_data, nf_filter):
+@pmsh_service.mod.pmsh_utils.mdc_handler
+def _get_aai_request_headers(**kwargs):
+    return {'accept': 'application/json',
+            'content-type': 'application/json',
+            'x-fromappid': 'dcae-pmsh',
+            'x-transactionid': kwargs['request_id'],
+            'InvocationID': kwargs['invocation_id'],
+            'RequestID': kwargs['request_id']}
+
+
+def _filter_nf_data(nf_data, app_conf):
     """
     Returns a list of filtered NetworkFunctions using the nf_filter.
 
     Args:
-        nf_data(dict): the nf json data from AAI.
-        nf_filter(NetworkFunctionFilter): the NetworkFunctionFilter to be applied.
+        nf_data (dict): the nf json data from AAI.
+        app_conf (AppConfig): the AppConfig object.
 
     Returns:
-        set(NetworkFunctions): a set of filtered NetworkFunctions.
+        NetworkFunction (list): a list of filtered NetworkFunction Objects.
 
     Raises:
         KeyError: if AAI data cannot be parsed.
     """
-    nf_set = set()
+    nf_list = []
     try:
         for nf in nf_data['results']:
+            if nf['properties'].get('orchestration-status') != 'Active':
+                continue
             name_identifier = 'pnf-name' if nf['node-type'] == 'pnf' else 'vnf-name'
-            orchestration_status = nf['properties'].get('orchestration-status')
-            model_invariant_id = nf['properties'].get('model-invariant-id')
-            model_version_id = nf['properties'].get('model-version-id')
-            if nf_filter.is_nf_in_filter(nf['properties'].get(name_identifier),
-                                         model_invariant_id, model_version_id, orchestration_status):
-                nf_set.add(NetworkFunction(
-                    nf_name=nf['properties'].get(name_identifier),
-                    orchestration_status=orchestration_status))
+            new_nf = mod.network_function.NetworkFunction(
+                nf_name=nf['properties'].get(name_identifier),
+                model_invariant_id=nf['properties'].get('model-invariant-id'),
+                model_version_id=nf['properties'].get('model-version-id'))
+            if not new_nf.set_sdnc_params(app_conf):
+                continue
+            if app_conf.nf_filter.is_nf_in_filter(new_nf):
+                nf_list.append(new_nf)
     except KeyError as e:
         logger.error(f'Failed to parse AAI data: {e}', exc_info=True)
         raise
-    return nf_set
+    return nf_list
+
+
+def get_aai_model_data(app_conf, model_invariant_id, model_version_id, nf_name):
+    """
+    Get the sdnc_model info for the xNF from AAI.
+
+    Args:
+        model_invariant_id (str): the AAI model-invariant-id
+        model_version_id (str): the AAI model-version-id
+        app_conf (AppConfig): the AppConfig object.
+        nf_name (str): The xNF name.
+
+    Returns:
+        json (dict): the sdnc_model json object.
+
+    Raises:
+        Exception: if AAI model data cannot be retrieved.
+    """
+    try:
+        session = requests.Session()
+        aai_model_ver_endpoint = \
+            f'{_get_aai_service_url()}/service-design-and-creation/models/model/' \
+            f'{model_invariant_id}/model-vers/model-ver/{model_version_id}'
+
+        logger.info(f'Fetching sdnc-model info for xNF: {nf_name} from AAI.')
+        headers = _get_aai_request_headers()
+        response = session.get(aai_model_ver_endpoint, headers=headers,
+                               auth=HTTPBasicAuth(app_conf.aaf_creds.get('aaf_id'),
+                                                  app_conf.aaf_creds.get('aaf_pass')),
+                               verify=(app_conf.ca_cert_path if app_conf.enable_tls else False),
+                               cert=(app_conf.cert_params if app_conf.enable_tls else None))
+        response.raise_for_status()
+        if response.ok:
+            data = json.loads(response.text)
+            logger.debug(f'Successfully fetched sdnc-model info from AAI: {data}')
+            return data
+    except Exception:
+        raise
