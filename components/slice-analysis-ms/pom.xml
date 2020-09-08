@@ -192,6 +192,11 @@
 			<version>2.21.0</version>
 			<scope>test</scope>
 		</dependency>
+	    <dependency>
+	        <groupId>com.openpojo</groupId>
+	        <artifactId>openpojo</artifactId>
+	        <version>0.8.10</version>
+	    </dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

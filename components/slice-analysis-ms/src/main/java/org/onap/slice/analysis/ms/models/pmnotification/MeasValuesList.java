@@ -19,31 +19,37 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.models.pmnotification;
 
-import org.slf4j.Logger;
+import java.util.List;
 
-/**
- * Handles Notification on dmaap for Policy events
- */
-public class PolicyNotificationCallback implements NotificationCallback {
+public class MeasValuesList {
 
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(PolicyNotificationCallback.class);
+    private String measObjInstId;
+    private String suspectFlag;
+    private List<MeasResult> measResults = null;
 
-	/**
-	 * Trigger on Notification from policy component
-	 */
-	@Override
-	public void activateCallBack(String msg) {
-		handlePolicyNotification(msg);
-	}
+    public String getMeasObjInstId() {
+        return measObjInstId;
+    }
 
-	/**
-	 * Parse and take actions on reception of Notification from Policy
-	 * @param msg
-	 */
-	private void handlePolicyNotification(String msg) {
-        log.info("Message received from policy: " +msg);
-        //TBD - actions to perform on reception of notification from policy
-	}
+    public void setMeasObjInstId(String measObjInstId) {
+        this.measObjInstId = measObjInstId;
+    }
+
+    public String getSuspectFlag() {
+        return suspectFlag;
+    }
+
+    public void setSuspectFlag(String suspectFlag) {
+        this.suspectFlag = suspectFlag;
+    }
+
+    public List<MeasResult> getMeasResults() {
+        return measResults;
+    }
+
+    public void setMeasResults(List<MeasResult> measResults) {
+        this.measResults = measResults;
+    }
 }
