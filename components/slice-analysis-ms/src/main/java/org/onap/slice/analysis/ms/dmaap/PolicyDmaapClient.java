@@ -25,7 +25,7 @@ import com.att.nsa.cambria.client.CambriaBatchingPublisher;
 import java.io.IOException;
 import java.util.Map;
 
-import org.onap.slice.analysis.ms.beans.Configuration;
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.utils.DmaapUtils;
 
 /**

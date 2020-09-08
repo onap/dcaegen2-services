@@ -19,25 +19,17 @@
  *
  *******************************************************************************/
 
+package org.onap.slice.analysis.ms.service;
 
-package org.onap.slice.analysis.ms.beans;
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import org.onap.slice.analysis.ms.models.MeasurementObject;
+import org.onap.slice.analysis.ms.models.pmnotification.Event;
 
-
-public class ConfigPolicyTest {
-
-    @Test
-    public void configPolicyTest() {
-        ConfigPolicy configPolicy = ConfigPolicy.getInstance();
-        Map<String, Object> config = new HashMap<String, Object>();
-        config.put("policyName", "pcims_policy");
-        configPolicy.setConfig(config);
-        assertEquals(config, configPolicy.getConfig());
-    }
+/** 
+ * Interface for pm event processor
+ */
+public interface IPmEventProcessor {
+	public Map<String, List<MeasurementObject>> processEvent(Event event);
 }

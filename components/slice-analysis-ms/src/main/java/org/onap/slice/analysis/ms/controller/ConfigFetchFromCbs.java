@@ -34,8 +34,8 @@ import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsRequests;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.CbsRequest;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.EnvProperties;
 import org.onap.dcaegen2.services.sdk.rest.services.model.logging.RequestDiagnosticContext;
-import org.onap.slice.analysis.ms.beans.ConfigPolicy;
-import org.onap.slice.analysis.ms.beans.Configuration;
+import org.onap.slice.analysis.ms.models.ConfigPolicy;
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
-import org.onap.slice.analysis.ms.beans.Configuration;
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.utils.DmaapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,7 +69,7 @@ public class DmaapClient {
     @SuppressWarnings("unchecked")
     public synchronized void startClient() {
 
-        Map<String, Object> streamSubscribes = Configuration.getInstance().getStreamsSubscribes();
+        Map<String, Object> streamSubscribes = configuration.getStreamsSubscribes();
        
         String pmTopicUrl = ((Map<String, String>) ((Map<String, Object>) streamSubscribes
                 .get("performance_management_topic")).get("dmaap_info")).get("topic_url");
@@ -97,15 +97,13 @@ public class DmaapClient {
         executorPool.scheduleAtFixedRate(pmNotificationConsumer, 0, configuration.getPollingInterval(),
                 TimeUnit.SECONDS);
         
-     // create notification consumers for Policy
-     		NotificationConsumer policyNotificationConsumer = new NotificationConsumer(policyResponseCambriaConsumer,
-     				new PolicyNotificationCallback());
-     		// start policy notification consumer threads
-     		executorPool = Executors.newScheduledThreadPool(10);
-     		executorPool.scheduleAtFixedRate(policyNotificationConsumer, 0, configuration.getPollingInterval(),
-     				TimeUnit.SECONDS);
-
-
+        // create notification consumers for Policy
+ 		NotificationConsumer policyNotificationConsumer = new NotificationConsumer(policyResponseCambriaConsumer,
+ 				new PolicyNotificationCallback());
+ 		// start policy notification consumer threads
+ 		executorPool = Executors.newScheduledThreadPool(10);
+ 		executorPool.scheduleAtFixedRate(policyNotificationConsumer, 0, configuration.getPollingInterval(),
+ 				TimeUnit.SECONDS);
 
     }
 

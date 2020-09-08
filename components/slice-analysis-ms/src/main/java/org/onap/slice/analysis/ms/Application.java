@@ -37,9 +37,9 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.onap.slice.analysis.ms.beans.ConfigPolicy;
-import org.onap.slice.analysis.ms.beans.Configuration;
 import org.onap.slice.analysis.ms.controller.ConfigFetchFromCbs;
+import org.onap.slice.analysis.ms.models.ConfigPolicy;
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.jdbc.DataSourceBuilder;

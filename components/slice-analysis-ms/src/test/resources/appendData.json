@@ -1,0 +1,63 @@
+[
+[
+	{"measurementObjectId":"cell1",
+	 "pmData":{
+		"PrbUsedDl":"30",
+		"PrbUsedUl":"40"
+		}
+	},
+	{"measurementObjectId":"cell2",
+	 "pmData":{
+		"PrbUsedDl":"20",
+		"PrbUsedUl":"30"
+		}
+	},
+	{"measurementObjectId":"cell3",
+	 "pmData":{
+		"PrbUsedDl":"30",
+		"PrbUsedUl":"40"
+		}
+	}
+	],
+[
+	{"measurementObjectId":"cell1",
+	 "pmData":{
+		"PrbUsedDl":"40",
+		"PrbUsedUl":"35"
+		}
+	},
+	{"measurementObjectId":"cell2",
+	 "pmData":{
+		"PrbUsedDl":"25",
+		"PrbUsedUl":"30"
+		}
+	},
+	{"measurementObjectId":"cell3",
+	 "pmData":{
+		"PrbUsedDl":"30",
+		"PrbUsedUl":"40"
+		}
+	}
+	],
+[
+	{"measurementObjectId":"cell1",
+	 "pmData":{
+		"PrbUsedDl":"35",
+		"PrbUsedUl":"37"
+		}
+	},
+	{"measurementObjectId":"cell2",
+	 "pmData":{
+		"PrbUsedDl":"22",
+		"PrbUsedUl":"30"
+		}
+	},
+	{"measurementObjectId":"cell3",
+	 "pmData":{
+		"PrbUsedDl":"25",
+		"PrbUsedUl":"40"
+		}
+	}
+]
+
+]
