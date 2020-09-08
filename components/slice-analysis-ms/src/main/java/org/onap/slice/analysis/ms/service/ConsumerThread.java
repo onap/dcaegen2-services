@@ -19,31 +19,39 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.service;
 
+import org.onap.slice.analysis.ms.utils.BeanUtil;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- * Handles Notification on dmaap for Policy events
- */
-public class PolicyNotificationCallback implements NotificationCallback {
-
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(PolicyNotificationCallback.class);
-
-	/**
-	 * Trigger on Notification from policy component
-	 */
-	@Override
-	public void activateCallBack(String msg) {
-		handlePolicyNotification(msg);
-	}
-
-	/**
-	 * Parse and take actions on reception of Notification from Policy
-	 * @param msg
-	 */
-	private void handlePolicyNotification(String msg) {
-        log.info("Message received from policy: " +msg);
-        //TBD - actions to perform on reception of notification from policy
-	}
+public class ConsumerThread extends Thread {
+	private static Logger log = LoggerFactory.getLogger(PmThread.class);
+    private PmDataQueue pmDataQueue;
+    
+    /**
+     * parameterized constructor.
+     */
+    public ConsumerThread() {
+        super();
+        this.pmDataQueue = BeanUtil.getBean(PmDataQueue.class);
+    }
+    
+    /**
+     * check for new PM notification. Fetch notification from the database, process and put it in the pm data queue
+     */
+    @Override
+    public void run() {
+        log.info("Consumer thread starting ...");        
+        boolean done = false;
+        while (!done) {
+            try {
+                Thread.sleep(1000);
+                
+            } catch (Exception e) {
+                log.error("Exception in Consumer Thread ", e);
+                done = true;
+            }
+        }
+    }
 }
