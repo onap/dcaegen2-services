@@ -56,19 +56,34 @@ class NetworkFunctionModel(db.Model):
     __tablename__ = 'network_functions'
     id = Column(Integer, primary_key=True, autoincrement=True)
     nf_name = Column(String(100), unique=True)
-    orchestration_status = Column(String(100))
+    model_invariant_id = Column(String(100))
+    model_version_id = Column(String(100))
+    sdnc_model_name = Column(String(100))
+    sdnc_model_version = Column(String(100))
 
     subscriptions = relationship(
         'NfSubRelationalModel',
         cascade='all, delete-orphan',
         backref='nf')
 
-    def __init__(self, nf_name, orchestration_status):
+    def __init__(self, nf_name, model_invariant_id, model_version_id, sdnc_model_name=None,
+                 sdnc_model_version=None):
         self.nf_name = nf_name
-        self.orchestration_status = orchestration_status
+        self.model_invariant_id = model_invariant_id
+        self.model_version_id = model_version_id
+        self.sdnc_model_name = sdnc_model_name
+        self.sdnc_model_version = sdnc_model_version
 
     def __repr__(self):
-        return f'nf_name: {self.nf_name}, orchestration_status: {self.orchestration_status}'
+        return str(self.to_nf())
+
+    def to_nf(self):
+        from mod.network_function import NetworkFunction
+        return NetworkFunction(**{'nf_name': self.nf_name,
+                                  'model_invariant_id': self.model_invariant_id,
+                                  'model_version_id': self.model_version_id,
+                                  'sdnc_model_name': self.sdnc_model_name,
+                                  'sdnc_model_version': self.sdnc_model_version})
 
 
 class NfSubRelationalModel(db.Model):
@@ -101,7 +116,11 @@ class NfSubRelationalModel(db.Model):
                 'nf_sub_status': self.nf_sub_status}
 
     def serialize_nf(self):
-        nf_orch_status = NetworkFunctionModel.query.filter(
-            NetworkFunctionModel.nf_name == self.nf_name).one_or_none().orchestration_status
-        return {'nf_name': self.nf_name, 'orchestration_status': nf_orch_status,
-                'nf_sub_status': self.nf_sub_status}
+        nf = NetworkFunctionModel.query.filter(
+            NetworkFunctionModel.nf_name == self.nf_name).one_or_none()
+        return {'nf_name': self.nf_name,
+                'nf_sub_status': self.nf_sub_status,
+                'model_invariant_id': nf.model_invariant_id,
+                'model_version_id': nf.model_version_id,
+                'sdnc_model_name': nf.sdnc_model_name,
+                'sdnc_model_version': nf.sdnc_model_version}

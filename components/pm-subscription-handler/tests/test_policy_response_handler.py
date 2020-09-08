@@ -15,36 +15,37 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-import json
-import os
-from unittest import TestCase
 from unittest.mock import patch
 
 from mod.api.db_models import SubscriptionModel
 from mod.network_function import NetworkFunction
-from mod.pmsh_utils import AppConfig
 from mod.policy_response_handler import PolicyResponseHandler, policy_response_handle_functions
 from mod.subscription import AdministrativeState, SubNfState
+from tests.base_setup import BaseClassSetup
 
 
-class PolicyResponseHandlerTest(TestCase):
+class PolicyResponseHandlerTest(BaseClassSetup):
 
-    @patch('mod.pmsh_utils.AppConfig._get_pmsh_config')
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
     @patch('mod.create_app')
-    @patch('mod.subscription.Subscription')
     @patch('mod.pmsh_utils._MrSub')
-    def setUp(self, mock_mr_sub, mock_sub, mock_app, mock_get_app_conf):
-        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
-            self.cbs_data = json.load(data)
+    def setUp(self, mock_mr_sub, mock_app):
+        super().setUp()
         self.mock_policy_mr_sub = mock_mr_sub
-        mock_get_app_conf.return_value = self.cbs_data
-        self.app_conf = AppConfig()
-        self.sub = self.app_conf.subscription
-        self.mock_app = mock_app
         self.nf = NetworkFunction(nf_name='nf1')
         self.policy_response_handler = PolicyResponseHandler(self.mock_policy_mr_sub,
                                                              self.app_conf,
-                                                             self.mock_app)
+                                                             mock_app)
+
+    def tearDown(self):
+        super().tearDown()
+
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
 
     @patch('mod.network_function.NetworkFunction.delete')
     def test_handle_response_locked_success(self, mock_delete):

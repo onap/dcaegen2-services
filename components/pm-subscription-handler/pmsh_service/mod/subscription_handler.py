@@ -54,8 +54,8 @@ class SubscriptionHandler:
     def _activate(self, local_admin_state, new_administrative_state):
         logger.info(f'Administrative State has changed from {local_admin_state} '
                     f'to {new_administrative_state}.')
-        existing_nfs_in_aai = aai.get_pmsh_nfs_from_aai(self.app_conf)
-        self.app_conf.subscription.activate_subscription(existing_nfs_in_aai, self.mr_pub,
+        nfs_in_aai = aai.get_pmsh_nfs_from_aai(self.app_conf)
+        self.app_conf.subscription.activate_subscription(nfs_in_aai, self.mr_pub,
                                                          self.app_conf)
         self.app_conf.subscription.update_subscription_status()
         logger.info('Start listening for new NFs on AAI-EVENT topic in MR.')
