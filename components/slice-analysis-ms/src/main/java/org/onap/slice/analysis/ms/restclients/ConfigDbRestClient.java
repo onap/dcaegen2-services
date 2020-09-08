@@ -19,47 +19,43 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.restclients;
 
-import javax.annotation.PostConstruct;
+import java.util.Collections;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-/**
- * This class indicates whether new pm notification
- * is set for the slice-analysis-ms
- */
 @Component
-public class NewPmNotification {
+public class ConfigDbRestClient extends RestClient {
 
-    private boolean newNotif;
+	public ConfigDbRestClient() {
+		super();
+	}
 
-    /**
-     * Initialize new pm Notification flag
+	/**
+     * Send Post Request to Config DB.
      */
-    @PostConstruct
-    public void init() {
-        newNotif = false;
-    }
-
-    public boolean getNewNotif() {
-        return newNotif;
-    }
-
-    public void setNewNotif(boolean newNotif) {
-        this.newNotif = newNotif;
-    }
-
-    public NewPmNotification(boolean newNotif) {
-        super();
-        this.newNotif = newNotif;
-    }
-
-    /**
-     * Default constructor
+	
+	public <T> ResponseEntity<T> sendPostRequest(String requestUrl, String requestBody,
+            ParameterizedTypeReference<T> responseType) {
+		HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+		return super.sendPostRequest(headers, requestUrl, requestBody, responseType);
+	}
+	
+	/**
+     * Send Get Request to Config DB.
      */
-    public NewPmNotification() {
-
-    }
-
+	
+	public <T> ResponseEntity<T> sendGetRequest(String requestUrl, ParameterizedTypeReference<T> responseType) {
+		HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+		return super.sendGetRequest(headers, requestUrl, responseType);
+	}
 }

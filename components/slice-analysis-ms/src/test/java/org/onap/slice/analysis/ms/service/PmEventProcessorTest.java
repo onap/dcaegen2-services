@@ -19,48 +19,47 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.service;
 
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.onap.slice.analysis.ms.models.MeasurementObject;
+import org.onap.slice.analysis.ms.models.pmnotification.Event;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.att.nsa.cambria.client.CambriaConsumer;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = NotificationConsumerTest.class)
-public class NotificationConsumerTest {
+@SpringBootTest(classes = PmEventProcessorTest.class)
+public class PmEventProcessorTest {
 	
-	@Mock
-	CambriaConsumer cambriaConsumer;
-	
-	@Mock
-	NotificationCallback notificationCallback;
-
 	@InjectMocks
-	NotificationConsumer notificationConsumer;
-
+	PmEventProcessor pmEventProcessor;
+	
 	@Test
-	public void testNotificationConsumer() {
-		try {
-			List<String> notifications = new ArrayList<>();
-			notifications.add("notification1");
-			when(cambriaConsumer.fetch()).thenReturn(notifications);
-			Mockito.doNothing().when(notificationCallback).activateCallBack(Mockito.anyString());
-			notificationConsumer.run();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+	public void processEventTest() {
+		ObjectMapper obj = new ObjectMapper();
+		Event input = null;
+		Map<String, List<MeasurementObject>> output = null;
+        try { 
+              input = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/event.json"))), Event.class);
+              output = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/eventProcessorOutput.json"))), new TypeReference<Map<String, List<MeasurementObject>>>(){});
+        } 
+        catch (IOException e) { 
+            e.printStackTrace(); 
+        } 
+        
+        assertEquals(output, pmEventProcessor.processEvent(input));
 	}
-
 }

@@ -20,7 +20,7 @@
  *******************************************************************************/
 
 
-package org.onap.slice.analysis.ms.beans;
+package org.onap.slice.analysis.ms.models;
 
 import static org.junit.Assert.assertEquals;
 

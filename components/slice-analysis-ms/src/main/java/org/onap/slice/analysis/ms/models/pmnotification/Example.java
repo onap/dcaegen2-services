@@ -19,31 +19,30 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.models.pmnotification;
 
-import org.slf4j.Logger;
+import java.util.HashMap;
+import java.util.Map;
 
-/**
- * Handles Notification on dmaap for Policy events
- */
-public class PolicyNotificationCallback implements NotificationCallback {
+public class Example {
 
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(PolicyNotificationCallback.class);
+    private Event event;
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-	/**
-	 * Trigger on Notification from policy component
-	 */
-	@Override
-	public void activateCallBack(String msg) {
-		handlePolicyNotification(msg);
-	}
+    public Event getEvent() {
+        return event;
+    }
 
-	/**
-	 * Parse and take actions on reception of Notification from Policy
-	 * @param msg
-	 */
-	private void handlePolicyNotification(String msg) {
-        log.info("Message received from policy: " +msg);
-        //TBD - actions to perform on reception of notification from policy
-	}
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
 }

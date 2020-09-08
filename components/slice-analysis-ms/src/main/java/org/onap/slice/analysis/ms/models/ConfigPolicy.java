@@ -19,31 +19,54 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.models;
 
-import org.slf4j.Logger;
+import java.util.Map;
 
 /**
- * Handles Notification on dmaap for Policy events
+ * 
+ * Model class for configuration policy
+ *
  */
-public class PolicyNotificationCallback implements NotificationCallback {
 
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(PolicyNotificationCallback.class);
+public class ConfigPolicy {
 
-	/**
-	 * Trigger on Notification from policy component
-	 */
-	@Override
-	public void activateCallBack(String msg) {
-		handlePolicyNotification(msg);
-	}
+    private static ConfigPolicy instance = null;
+    private Map<String, Object> config;
 
-	/**
-	 * Parse and take actions on reception of Notification from Policy
-	 * @param msg
-	 */
-	private void handlePolicyNotification(String msg) {
-        log.info("Message received from policy: " +msg);
-        //TBD - actions to perform on reception of notification from policy
-	}
+    protected ConfigPolicy() {
+
+    }
+
+    /**
+     * Get instance of class.
+     */
+    public static ConfigPolicy getInstance() {
+        if (instance == null) {
+            instance = new ConfigPolicy();
+        }
+        return instance;
+    }
+
+    /**
+     * Get config param of ConfigPolicy
+     */
+    public Map<String, Object> getConfig() {
+        return config;
+    }
+
+    /**
+     * set config param of ConfigPolicy
+     */
+    public void setConfig(Map<String, Object> config) {
+        this.config = config;
+    }
+
+    /**
+     * Return ConfigPolicy instance as String
+     */
+    @Override
+    public String toString() {
+        return "ConfigPolicy [config=" + config + "]";
+    }
 }
