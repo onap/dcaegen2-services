@@ -19,31 +19,20 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.models.pmnotification;
 
-import org.slf4j.Logger;
+import java.util.List;
 
-/**
- * Handles Notification on dmaap for Policy events
- */
-public class PolicyNotificationCallback implements NotificationCallback {
+public class MeasTypes {
 
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(PolicyNotificationCallback.class);
+    private List<String> sMeasTypesList;
 
-	/**
-	 * Trigger on Notification from policy component
-	 */
-	@Override
-	public void activateCallBack(String msg) {
-		handlePolicyNotification(msg);
-	}
+    public List<String> getsMeasTypesList() {
+        return sMeasTypesList;
+    }
 
-	/**
-	 * Parse and take actions on reception of Notification from Policy
-	 * @param msg
-	 */
-	private void handlePolicyNotification(String msg) {
-        log.info("Message received from policy: " +msg);
-        //TBD - actions to perform on reception of notification from policy
-	}
+    public void setsMeasTypesList(List<String> sMeasTypesList) {
+        this.sMeasTypesList = sMeasTypesList;
+    }
+
 }

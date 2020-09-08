@@ -19,31 +19,26 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.models.pmnotification;
 
-import org.slf4j.Logger;
+public class Event {
 
-/**
- * Handles Notification on dmaap for Policy events
- */
-public class PolicyNotificationCallback implements NotificationCallback {
+    private CommonEventHeader commonEventHeader;
+    private Perf3gppFields perf3gppFields;
 
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(PolicyNotificationCallback.class);
+    public CommonEventHeader getCommonEventHeader() {
+        return commonEventHeader;
+    }
 
-	/**
-	 * Trigger on Notification from policy component
-	 */
-	@Override
-	public void activateCallBack(String msg) {
-		handlePolicyNotification(msg);
-	}
+    public void setCommonEventHeader(CommonEventHeader commonEventHeader) {
+        this.commonEventHeader = commonEventHeader;
+    }
 
-	/**
-	 * Parse and take actions on reception of Notification from Policy
-	 * @param msg
-	 */
-	private void handlePolicyNotification(String msg) {
-        log.info("Message received from policy: " +msg);
-        //TBD - actions to perform on reception of notification from policy
-	}
+    public Perf3gppFields getPerf3gppFields() {
+        return perf3gppFields;
+    }
+
+    public void setPerf3gppFields(Perf3gppFields perf3gppFields) {
+        this.perf3gppFields = perf3gppFields;
+    }
 }

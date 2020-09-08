@@ -19,31 +19,16 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.configdb;
 
-import org.slf4j.Logger;
+import java.util.List;
+import java.util.Map;
 
-/**
- * Handles Notification on dmaap for Policy events
- */
-public class PolicyNotificationCallback implements NotificationCallback {
+public interface IConfigDbService {
 
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(PolicyNotificationCallback.class);
-
-	/**
-	 * Trigger on Notification from policy component
-	 */
-	@Override
-	public void activateCallBack(String msg) {
-		handlePolicyNotification(msg);
-	}
-
-	/**
-	 * Parse and take actions on reception of Notification from Policy
-	 * @param msg
-	 */
-	private void handlePolicyNotification(String msg) {
-        log.info("Message received from policy: " +msg);
-        //TBD - actions to perform on reception of notification from policy
-	}
+	public Map<String, List<String>> fetchRICsOfSnssai(String snssai);
+	public List<String> fetchNetworkFunctionsOfSnssai(String snssai);
+	public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+	public Map<String, Map<String,Integer>> fetchCurrentConfigurationOfRIC(String snssai);
+	public Map<String ,String> fetchServiceDetails(String snssai);
 }

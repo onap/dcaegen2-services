@@ -18,32 +18,32 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+package org.onap.slice.analysis.ms.models.configdb;
 
-package org.onap.slice.analysis.ms.dmaap;
 
-import org.slf4j.Logger;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/**
- * Handles Notification on dmaap for Policy events
- */
-public class PolicyNotificationCallback implements NotificationCallback {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class NetworkFunctionModel {
+	
+	private String gNBDUId;
+	
 
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(PolicyNotificationCallback.class);
+	public String getgNBDUId() {
+		return gNBDUId;
+	}
 
-	/**
-	 * Trigger on Notification from policy component
-	 */
+	public void setgNBDUId(String gNBDUId) {
+		this.gNBDUId = gNBDUId;
+	}
+
 	@Override
-	public void activateCallBack(String msg) {
-		handlePolicyNotification(msg);
+	public String toString() {
+		return "NetworkFunctionModel [gNBDUId=" + gNBDUId + "]";
 	}
 
-	/**
-	 * Parse and take actions on reception of Notification from Policy
-	 * @param msg
-	 */
-	private void handlePolicyNotification(String msg) {
-        log.info("Message received from policy: " +msg);
-        //TBD - actions to perform on reception of notification from policy
-	}
+	
+	
+	
+
 }

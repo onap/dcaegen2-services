@@ -19,31 +19,40 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.models.policy;
 
-import org.slf4j.Logger;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * Handles Notification on dmaap for Policy events
- */
-public class PolicyNotificationCallback implements NotificationCallback {
+public class AAI {
+	@JsonProperty("vserver.is-closed-loop-disabled")
+    private String vserverIsClosedLoopDisabled;
+	@JsonProperty("vserver.prov-status")
+    private String vserverProvStatus;
+	@JsonProperty("vserver.vserver-name")
+    private String vserverVserverName;
 
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(PolicyNotificationCallback.class);
+    public String getVserverIsClosedLoopDisabled() {
+        return vserverIsClosedLoopDisabled;
+    }
 
-	/**
-	 * Trigger on Notification from policy component
-	 */
-	@Override
-	public void activateCallBack(String msg) {
-		handlePolicyNotification(msg);
-	}
+    public void setVserverIsClosedLoopDisabled(String vserverIsClosedLoopDisabled) {
+        this.vserverIsClosedLoopDisabled = vserverIsClosedLoopDisabled;
+    }
 
-	/**
-	 * Parse and take actions on reception of Notification from Policy
-	 * @param msg
-	 */
-	private void handlePolicyNotification(String msg) {
-        log.info("Message received from policy: " +msg);
-        //TBD - actions to perform on reception of notification from policy
-	}
+    public String getVserverProvStatus() {
+        return vserverProvStatus;
+    }
+
+    public void setVserverProvStatus(String vserverProvStatus) {
+        this.vserverProvStatus = vserverProvStatus;
+    }
+
+    public String getVserverVserverName() {
+        return vserverVserverName;
+    }
+
+    public void setVserverVserverName(String vserverVserverName) {
+        this.vserverVserverName = vserverVserverName;
+    }
+
 }

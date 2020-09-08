@@ -19,12 +19,7 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.beans;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
+package org.onap.slice.analysis.ms.models;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -32,6 +27,11 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 /** 
  * Model class for the application Configuration
@@ -54,7 +54,8 @@ public class Configuration {
     private String aafPassword;
     private Map<String, Object> streamsSubscribes;
     private Map<String, Object> streamsPublishes;
-
+    private int samples;
+    private int minPercentageChange;
     /**
      * Check if topic is secure.
      */
@@ -189,9 +190,23 @@ public class Configuration {
         this.configDbService = configDbService;
     }
 
-	
+	public int getSamples() {
+		return samples;
+	}
 
-    @Override
+	public void setSamples(int samples) {
+		this.samples = samples;
+	}
+
+	public int getMinPercentageChange() {
+		return minPercentageChange;
+	}
+
+	public void setMinPercentageChange(int minPercentageChange) {
+		this.minPercentageChange = minPercentageChange;
+	}
+
+	@Override
 	public String toString() {
 		return "Configuration [pgHost=" + pgHost + ", pgPort=" + pgPort + ", pgUsername=" + pgUsername + ", pgPassword="
 				+ pgPassword + ", dmaapServers=" + dmaapServers + ", configDbService=" + configDbService + ", cg=" + cg
@@ -223,15 +238,16 @@ public class Configuration {
         pgHost = jsonObject.get("postgres.host").getAsString();
 
         JsonArray servers = jsonObject.getAsJsonArray("sliceanalysisms.dmaap.server");
-        Type listType = new TypeToken<List<String>>() {
-        }.getType();
+        Type listType = new TypeToken<List<String>>() {}.getType();
         dmaapServers = new Gson().fromJson(servers, listType);
 
         cg = jsonObject.get("sliceanalysisms.cg").getAsString();
         cid = jsonObject.get("sliceanalysisms.cid").getAsString();
         configDbService = jsonObject.get("sliceanalysisms.configDb.service").getAsString();
 
-        pollingTimeout = jsonObject.get("sliceanalysisms.pollingInterval").getAsInt();
+        pollingTimeout = jsonObject.get("sliceanalysisms.pollingTimeout").getAsInt();
+        samples = jsonObject.get("sliceanalysisms.samples").getAsInt();
+        minPercentageChange = jsonObject.get("sliceanalysisms.minPercentageChange").getAsInt();
 
         log.info("configuration from CBS {}", this);
 
