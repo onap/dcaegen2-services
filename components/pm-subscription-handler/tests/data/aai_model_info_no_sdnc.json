@@ -1,0 +1,34 @@
+{
+    "model-version-id": "b7469cc5-be51-41cc-b37f-361537656771",
+    "model-name": "PNF104",
+    "model-version": "1.0",
+    "model-description": "aervaer",
+    "resource-version": "1599053901976",
+    "relationship-list": {
+        "relationship": [
+            {
+                "related-to": "model-element",
+                "relationship-label": "org.onap.relationships.inventory.IsA",
+                "related-link": "/aai/v20/service-design-and-creation/models/model/9f751399-59f7-46e4-aaf4-f78b7bf8af84/model-vers/model-ver/135b8bab-b24c-4c6d-b042-dcd7fcd937ba/model-elements/model-element/3c323039-c6ab-47bb-b8e0-d1e57a78fbea/model-elements/model-element/8a424916-020f-4c83-b785-7c04ac06567a",
+                "relationship-data": [
+                    {
+                        "relationship-key": "model.model-invariant-id",
+                        "relationship-value": "9f751399-59f7-46e4-aaf4-f78b7bf8af84"
+                    },
+                    {
+                        "relationship-key": "model-ver.model-version-id",
+                        "relationship-value": "135b8bab-b24c-4c6d-b042-dcd7fcd937ba"
+                    },
+                    {
+                        "relationship-key": "model-element.model-element-uuid",
+                        "relationship-value": "3c323039-c6ab-47bb-b8e0-d1e57a78fbea"
+                    },
+                    {
+                        "relationship-key": "model-element.model-element-uuid",
+                        "relationship-value": "8a424916-020f-4c83-b785-7c04ac06567a"
+                    }
+                ]
+            }
+        ]
+    }
+}

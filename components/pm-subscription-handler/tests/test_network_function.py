@@ -17,40 +17,38 @@
 # ============LICENSE_END=====================================================
 import json
 import os
-from test.support import EnvironmentVarGuard
-from unittest import TestCase
 from unittest.mock import patch
 
-from mod import db, create_app
 from mod.network_function import NetworkFunction
-from mod.pmsh_utils import AppConfig
-from mod.subscription import Subscription
+from tests.base_setup import BaseClassSetup
 
 
-class NetworkFunctionTests(TestCase):
+class NetworkFunctionTests(BaseClassSetup):
 
-    @patch('mod.pmsh_utils.AppConfig._get_pmsh_config')
-    @patch('mod.update_logging_config')
-    @patch('mod.get_db_connection_url')
-    def setUp(self, mock_get_db_url, mock_update_config, mock_get_pmsh_config):
-        mock_get_db_url.return_value = 'sqlite://'
-        self.nf_1 = NetworkFunction(nf_name='pnf_1', orchestration_status='Inventoried')
-        self.nf_2 = NetworkFunction(nf_name='pnf_2', orchestration_status='Active')
-        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
-            self.cbs_data = json.load(data)
-        mock_get_pmsh_config.return_value = self.cbs_data
-        self.env = EnvironmentVarGuard()
-        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
-        self.app = create_app()
-        self.app_context = self.app.app_context()
-        self.app_context.push()
-        db.create_all()
-        self.app_conf = AppConfig()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
+    def setUp(self):
+        super().setUp()
+        self.nf_1 = NetworkFunction(nf_name='pnf_1',
+                                    model_invariant_id='some-id',
+                                    model_version_id='some-id')
+        self.nf_2 = NetworkFunction(nf_name='pnf_2',
+                                    model_invariant_id='some-id',
+                                    model_version_id='some-id')
+        with open(os.path.join(os.path.dirname(__file__), 'data/aai_model_info.json'), 'r') as data:
+            self.good_model_info = json.loads(data.read())
+        with open(os.path.join(os.path.dirname(__file__),
+                               'data/aai_model_info_no_sdnc.json'), 'r') as data:
+            self.bad_model_info = json.loads(data.read())
 
     def tearDown(self):
-        db.session.remove()
-        db.drop_all()
-        self.app_context.pop()
+        super().tearDown()
+
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
 
     def test_get_network_function(self):
         self.nf_1.create()
@@ -77,16 +75,21 @@ class NetworkFunctionTests(TestCase):
         self.assertEqual(nf, same_nf)
 
     def test_delete_network_function(self):
-        self.nf_1.create()
-        self.nf_2.create()
-        sub = Subscription(**{"subscriptionName": "sub"})
+        sub = self.app_conf.subscription
         for nf in [self.nf_1, self.nf_2]:
             sub.add_network_function_to_subscription(nf, self.app_conf.subscription.get())
-
+        nfs = NetworkFunction.get_all()
+        self.assertEqual(2, len(nfs))
         NetworkFunction.delete(nf_name=self.nf_1.nf_name)
-
         nfs = NetworkFunction.get_all()
         self.assertEqual(1, len(nfs))
-        self.assertEqual(1, len(Subscription.get_all_nfs_subscription_relations()))
-        pnf_1_deleted = [nf for nf in nfs if nf.nf_name != self.nf_1.nf_name]
-        self.assertTrue(pnf_1_deleted)
+
+    @patch('mod.aai_client.get_aai_model_data')
+    def test_set_sdnc_params_true(self, mock_get_aai_model):
+        mock_get_aai_model.return_value = self.good_model_info
+        self.assertTrue(self.nf_1.set_sdnc_params(self.app_conf))
+
+    @patch('mod.aai_client.get_aai_model_data')
+    def test_set_sdnc_params_false(self, mock_get_aai_model):
+        mock_get_aai_model.return_value = self.bad_model_info
+        self.assertFalse(self.nf_1.set_sdnc_params(self.app_conf))
