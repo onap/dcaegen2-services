@@ -5,9 +5,16 @@ disable_existing_loggers: true
 loggers:
   onap_logger:
     level: DEBUG
-    handlers: [stdout_handler]
+    handlers: [onap_log_handler, stdout_handler]
     propagate: false
 handlers:
+  onap_log_handler:
+    class: logging.handlers.RotatingFileHandler
+    filename: ./application.log
+    mode: a
+    maxBytes: 10000000
+    backupCount: 10
+    formatter: mdcFormatter
   stdout_handler:
     class: logging.StreamHandler
     formatter: mdcFormatter

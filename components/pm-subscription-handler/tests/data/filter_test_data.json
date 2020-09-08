@@ -6,7 +6,7 @@
                "^pnf.*",
                "^vnf.*"
             ],
-            "modelInvariantUUIDs": [
+            "modelInvariantIDs": [
 
             ],
             "modelVersionIDs": [
@@ -16,7 +16,6 @@
       "nfName": "pnf1",
       "modelInvariantUUID": "7129e420-d396-4efb-af02-6b83499b12f8",
       "modelVersionID": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
-      "orchestration_status": "Active",
       "expectedResult": true
     },
     {
@@ -26,7 +25,7 @@
                "^pnf.*",
                "^vnf.*"
             ],
-            "modelInvariantUUIDs": [
+            "modelInvariantIDs": [
 
             ],
             "modelVersionIDs": [
@@ -36,15 +35,14 @@
       "nfName": "PNF-33",
       "modelInvariantUUID": "7129e420-d396-4efb-af02-6b83499b12f8",
       "modelVersionID": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
-      "orchestration_status": "Active",
       "expectedResult": false
     },
     {
-      "testName": "test_filter_true_on_modelInvariantUUIDs",
+      "testName": "test_filter_true_on_modelInvariantIDs",
       "nfFilter":{
             "nfNames":[
             ],
-            "modelInvariantUUIDs": [
+            "modelInvariantIDs": [
                 "5845y423-g654-6fju-po78-8n53154532k6",
                 "7129e420-d396-4efb-af02-6b83499b12f8"
             ],
@@ -55,15 +53,14 @@
       "nfName": "pnf1",
       "modelInvariantUUID": "7129e420-d396-4efb-af02-6b83499b12f8",
       "modelVersionID": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
-      "orchestration_status": "Active",
       "expectedResult": true
     },
     {
-      "testName": "test_filter_false_on_modelInvariantUUIDs",
+      "testName": "test_filter_false_on_modelInvariantIDs",
       "nfFilter":{
             "nfNames":[
             ],
-            "modelInvariantUUIDs": [
+            "modelInvariantIDs": [
                 "5845y423-g654-6fju-po78-8n53154532k6",
                 "7129e420-d396-4efb-af02-6b83499b12f8"
             ],
@@ -74,17 +71,16 @@
       "nfName": "pnf1",
       "modelInvariantUUID": "WrongModelInvariantUUID",
       "modelVersionID": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
-      "orchestration_status": "Active",
       "expectedResult": false
     },
     {
-      "testName": "test_filter_false_on_modelInvariantUUIDs_being_false_and_pnfname_being_true",
+      "testName": "test_filter_false_on_modelInvariantIDs_being_false_and_pnfname_being_true",
       "nfFilter":{
             "nfNames":[
                "^pnf.*",
                "^vnf.*"
             ],
-            "modelInvariantUUIDs": [
+            "modelInvariantIDs": [
                 "7129e420-d396-4efb-af02-6b83499b12f8"
             ],
             "modelVersionIDs": [
@@ -94,7 +90,6 @@
       "nfName": "pnf1",
       "modelInvariantUUID": "WrongModelInvariantUUID",
       "modelVersionID": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
-      "orchestration_status": "Active",
       "expectedResult": false
     },
     {
@@ -102,7 +97,7 @@
       "nfFilter":{
             "nfNames":[
             ],
-            "modelInvariantUUIDs": [
+            "modelInvariantIDs": [
             ],
             "modelVersionIDs": [
                 "e80a6ae3-cafd-4d24-850d-e14c084a5ca9"
@@ -111,7 +106,6 @@
       "nfName": "pnf1",
       "modelInvariantUUID": "7129e420-d396-4efb-af02-6b83499b12f8",
       "modelVersionID": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
-      "orchestration_status": "Active",
       "expectedResult": true
     },
     {
@@ -119,7 +113,7 @@
       "nfFilter":{
             "nfNames":[
             ],
-            "modelInvariantUUIDs": [
+            "modelInvariantIDs": [
             ],
             "modelVersionIDs": [
                 "e80a6ae3-cafd-4d24-850d-e14c084a5ca9"
@@ -128,7 +122,6 @@
       "nfName": "pnf1",
       "modelInvariantUUID": "7129e420-d396-4efb-af02-6b83499b12f8",
       "modelVersionID": "WrongModelVersionID",
-      "orchestration_status": "Active",
       "expectedResult": false
     },
     {
@@ -138,7 +131,7 @@
                  "^pnf.*",
                  "^vnf.*"
             ],
-            "modelInvariantUUIDs": [
+            "modelInvariantIDs": [
             ],
             "modelVersionIDs": [
                 "e80a6ae3-cafd-4d24-850d-e14c084a5ca9"
@@ -147,25 +140,6 @@
       "nfName": "pnf1",
       "modelInvariantUUID": "7129e420-d396-4efb-af02-6b83499b12f8",
       "modelVersionID": "WrongModelVersionID",
-      "orchestration_status": "Active",
-      "expectedResult": false
-    },
-    {
-      "testName": "test_filter_false_on_OrchestrationStatus",
-      "nfFilter":{
-            "nfNames":[
-                 "^pnf.*",
-                 "^vnf.*"
-            ],
-            "modelInvariantUUIDs": [
-            ],
-            "modelVersionIDs": [
-            ]
-         },
-      "nfName": "pnf1",
-      "modelInvariantUUID": "7129e420-d396-4efb-af02-6b83499b12f8",
-      "modelVersionID": "e80a6ae3-cafd-4d24-850d-e14c084a5ca9",
-      "orchestration_status": "Inventoried",
       "expectedResult": false
     }
-  ]
+]

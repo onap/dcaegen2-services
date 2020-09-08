@@ -58,28 +58,26 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
                 entity_type = entry['event-header']['entity-type']
                 xnf_name = aai_entity['pnf-name'] if entity_type == XNFType.PNF.value \
                     else aai_entity['vnf-name']
-                new_status = aai_entity['orchestration-status']
-                model_invariant_id = aai_entity['model-invariant-id']
-                model_version_id = aai_entity['model-version-id']
-
-                if app_conf.nf_filter.is_nf_in_filter(xnf_name, model_invariant_id, model_version_id, new_status):
-                    _process_event(action, new_status, xnf_name, mr_pub, app_conf)
+                if aai_entity['orchestration-status'] != 'Active':
+                    logger.info(f'Skipping XNF {xnf_name} as its orchestration-status '
+                                f'is not "Active"')
+                    continue
+                nf = NetworkFunction(nf_name=xnf_name,
+                                     model_invariant_id=aai_entity['model-invariant-id'],
+                                     model_version_id=aai_entity['model-version-id'])
+                if not nf.set_sdnc_params(app_conf):
+                    continue
+                if app_conf.nf_filter.is_nf_in_filter(nf):
+                    _process_event(action, nf, mr_pub, app_conf)
     except Exception as e:
         logger.error(f'Failed to process AAI event: {e}', exc_info=True)
 
 
-def _process_event(action, new_status, xnf_name, mr_pub, app_conf):
+def _process_event(action, nf, mr_pub, app_conf):
     if action == AAIEvent.UPDATE.value:
-        logger.info(f'Update event found for network function {xnf_name}')
-        local_xnf = NetworkFunction.get(xnf_name)
-
-        if local_xnf is None:
-            app_conf.subscription.activate_subscription([NetworkFunction(
-                nf_name=xnf_name, orchestration_status=new_status)], mr_pub, app_conf)
-        else:
-            logger.debug(f"Update Event for network function {xnf_name} will not be processed "
-                         f" as it's state is set to {local_xnf.orchestration_status}.")
+        logger.info(f'Update event found for network function {nf.nf_name}')
+        app_conf.subscription.activate_subscription([nf], mr_pub, app_conf)
     elif action == AAIEvent.DELETE.value:
-        logger.info(f'Delete event found for network function {xnf_name}')
-        NetworkFunction.delete(nf_name=xnf_name)
-        logger.info(f'{xnf_name} successfully deleted.')
+        logger.info(f'Delete event found for network function {nf.nf_name}')
+        NetworkFunction.delete(nf_name=nf.nf_name)
+        logger.info(f'{nf.nf_name} successfully deleted.')

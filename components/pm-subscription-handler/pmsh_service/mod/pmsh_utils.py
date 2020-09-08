@@ -25,8 +25,8 @@ from onaplogging.mdcContext import MDC
 from requests.auth import HTTPBasicAuth
 from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type
 
+import mod.network_function
 from mod import logger
-from mod.network_function import NetworkFunctionFilter
 from mod.subscription import Subscription
 
 
@@ -77,7 +77,7 @@ class AppConfig:
         self.operational_policy_name = conf['config'].get('operational_policy_name')
         self.control_loop_name = conf['config'].get('control_loop_name')
         self.subscription = Subscription(**conf['policy']['subscription'])
-        self.nf_filter = NetworkFunctionFilter(**self.subscription.nfFilter)
+        self.nf_filter = mod.network_function.NetworkFunctionFilter(**self.subscription.nfFilter)
 
     def __new__(cls, *args, **kwargs):
         if AppConfig.INSTANCE is None:
@@ -223,17 +223,17 @@ class _MrPub(_DmaapMrClient):
         except Exception as e:
             raise e
 
-    def publish_subscription_event_data(self, subscription, xnf_name, app_conf):
+    def publish_subscription_event_data(self, subscription, nf, app_conf):
         """
         Update the Subscription dict with xnf and policy name then publish to DMaaP MR topic.
 
         Args:
             subscription (Subscription): the `Subscription` <Subscription> object.
-            xnf_name (str): the xnf to include in the event.
+            nf (NetworkFunction): the NetworkFunction to include in the event.
             app_conf (AppConfig): the application configuration.
         """
         try:
-            subscription_event = subscription.prepare_subscription_event(xnf_name, app_conf)
+            subscription_event = subscription.prepare_subscription_event(nf, app_conf)
             self.publish_to_topic(subscription_event)
         except Exception as e:
             logger.error(f'Failed to publish to topic {self.topic_url}: {e}', exc_info=True)
