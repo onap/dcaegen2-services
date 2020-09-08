@@ -1,0 +1,46 @@
+{
+  "closedLoopControlName": "ControlLoop-Slicing-116d7b00-dbeb-4d03-8719-d0a658fa735b",
+  "closedLoopAlarmStart": 1463679805324,
+  "closedLoopEventClient": "microservice.sliceAnalysisMS",
+  "closedLoopEventStatus": "ONSET",
+  "requestID": "c7c6a4aa-bb61-4a15-b831-ba1472dd4a65",
+  "target_type": "VNF",
+  "target": "vserver.vserver-name",
+  "AAI": {
+    "vserver.is-closed-loop-disabled": "false",
+    "vserver.prov-status": "ACTIVE",
+    "vserver.vserver-name": "e51a9b12-f313-11ea-adc1-0242ac120003"
+  },
+  "payload": {
+   "name":"e51a9b12-f313-11ea-adc1-0242ac120003",
+   "globalSubscriberId":"5GCustomer",
+   "subscriptionServiceType":"5G",
+   "networkType":"AN",
+   "serviceInstanceID":"e51a9b12-f313-11ea-adc1-0242ac120003",
+   "additionalProperties":{
+      "modifyAction":"reconfigure",
+      "snssaiList":[
+         "001-100001"
+      ],
+      "sliceProfileId":"e51a9b12-f313-11ea-adc1-0242ac120002",
+      "resourceConfig":{
+         "1":{
+            "dLThptPerSlice":50,
+            "uLThptPerSlice":40
+         },
+         "2":{
+            "dLThptPerSlice":50,
+            "uLThptPerSlice":30
+          }
+         },
+       "nsiInfo":{
+             "nsiId":"UUID",  
+             "nsiName":""
+        },
+       "scriptName": "AN"
+     }
+
+},
+  "from": "DCAE",
+  "version": "1.0.2"
+}

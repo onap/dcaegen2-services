@@ -49,6 +49,10 @@
     "sliceanalysisms.pollingInterval": 20,
     "sliceanalysisms.cid": "sliceanalysisms-cid",
     "sliceanalysisms.configDb.service": "http://sdnc.onap:8181",
+    "sliceanalysisms.pollingTimeout":4,
+    "sliceanalysisms.samples": 5,
+    "sliceanalysisms.minPercentageChange":4,
+    "sliceanalysisms.initialDelaySeconds": 60000,
     "service_calls": {
       "policy-req": []
     }

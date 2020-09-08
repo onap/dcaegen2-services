@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 /**
  * Handles Notification on dmaap for Policy events
  */
-public class PolicyNotificationCallback extends NotificationCallback {
+public class PolicyNotificationCallback implements NotificationCallback {
 
 	private static final Logger log = org.slf4j.LoggerFactory.getLogger(PolicyNotificationCallback.class);
 
@@ -43,7 +43,7 @@ public class PolicyNotificationCallback extends NotificationCallback {
 	 * @param msg
 	 */
 	private void handlePolicyNotification(String msg) {
-                log.info("Message received from policy: " +msg);
-                //TBD - actions to perform on reception of notification from policy
+        log.info("Message received from policy: " +msg);
+        //TBD - actions to perform on reception of notification from policy
 	}
 }

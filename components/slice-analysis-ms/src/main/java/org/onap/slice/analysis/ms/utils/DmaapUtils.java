@@ -33,7 +33,7 @@ import com.att.nsa.cambria.client.CambriaTopicManager;
 import java.net.MalformedURLException;
 import java.security.GeneralSecurityException;
 
-import org.onap.slice.analysis.ms.beans.Configuration;
+import org.onap.slice.analysis.ms.models.Configuration;
 
 /**
  * Utility class to perform actions related to Dmaap

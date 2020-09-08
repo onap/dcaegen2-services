@@ -1,0 +1,20 @@
+[
+	{"measurementObjectId":"cell1",
+	 "pmData":{
+		"PrbUsedDl":"35",
+		"PrbUsedUl":"37"
+		}
+	},
+	{"measurementObjectId":"cell2",
+	 "pmData":{
+		"PrbUsedDl":"22",
+		"PrbUsedUl":"30"
+		}
+	},
+	{"measurementObjectId":"cell3",
+	 "pmData":{
+		"PrbUsedDl":"25",
+		"PrbUsedUl":"40"
+		}
+	}
+]

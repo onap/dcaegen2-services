@@ -1,0 +1,41 @@
+{"001-100001":[
+	{"measurementObjectId":"chn001",
+	 "pmData":{
+		"PrbUsedDl":"55",
+		"PrbUsedUl":"53"
+		}
+	},
+	{"measurementObjectId":"chn002",
+	 "pmData":{
+		"PrbUsedDl":"22",
+		"PrbUsedUl":"30"
+		}
+	},
+	{"measurementObjectId":"chn003",
+	 "pmData":{
+		"PrbUsedDl":"25",
+		"PrbUsedUl":"56"
+		}
+	}
+],
+"001-100011":[
+	{"measurementObjectId":"chn001",
+	 "pmData":{
+		"PrbUsedDl":"40",
+		"PrbUsedUl":"33"
+		}
+	},
+	{"measurementObjectId":"chn002",
+	 "pmData":{
+		"PrbUsedDl":"22",
+		"PrbUsedUl":"30"
+		}
+	},
+	{"measurementObjectId":"chn003",
+	 "pmData":{
+		"PrbUsedDl":"50",
+		"PrbUsedUl":"40"
+		}
+	}
+]
+}

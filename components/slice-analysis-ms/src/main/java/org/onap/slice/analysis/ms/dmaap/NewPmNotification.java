@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class NewPmNotification {
 
-    private Boolean newNotif;
+    private boolean newNotif;
 
     /**
      * Initialize new pm Notification flag
@@ -42,15 +42,15 @@ public class NewPmNotification {
         newNotif = false;
     }
 
-    public Boolean getNewNotif() {
+    public boolean getNewNotif() {
         return newNotif;
     }
 
-    public void setNewNotif(Boolean newNotif) {
+    public void setNewNotif(boolean newNotif) {
         this.newNotif = newNotif;
     }
 
-    public NewPmNotification(Boolean newNotif) {
+    public NewPmNotification(boolean newNotif) {
         super();
         this.newNotif = newNotif;
     }

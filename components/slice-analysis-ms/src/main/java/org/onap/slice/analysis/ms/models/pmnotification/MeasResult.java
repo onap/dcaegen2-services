@@ -19,54 +19,30 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.beans;
+package org.onap.slice.analysis.ms.models.pmnotification;
 
-import java.util.Map;
-
-/**
- * 
- * Model class for configuration policy
- *
+/** 
+ * Model class for the MeasResult Object 
  */
+public class MeasResult {
 
-public class ConfigPolicy {
+	private int p;
+	private String sValue;
 
-    private static ConfigPolicy instance = null;
-    private Map<String, Object> config;
+	public int getP() {
+		return p;
+	}
 
-    protected ConfigPolicy() {
+	public void setP(int p) {
+		this.p = p;
+	}
 
-    }
+	public String getsValue() {
+		return sValue;
+	}
 
-    /**
-     * Get instance of class.
-     */
-    public static ConfigPolicy getInstance() {
-        if (instance == null) {
-            instance = new ConfigPolicy();
-        }
-        return instance;
-    }
+	public void setsValue(String sValue) {
+		this.sValue = sValue;
+	}
 
-    /**
-     * Get config param of ConfigPolicy
-     */
-    public Map<String, Object> getConfig() {
-        return config;
-    }
-
-    /**
-     * set config param of ConfigPolicy
-     */
-    public void setConfig(Map<String, Object> config) {
-        this.config = config;
-    }
-
-    /**
-     * Return ConfigPolicy instance as String
-     */
-    @Override
-    public String toString() {
-        return "ConfigPolicy [config=" + config + "]";
-    }
 }

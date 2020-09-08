@@ -43,7 +43,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.onap.slice.analysis.ms.beans.Configuration;
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -54,10 +54,9 @@ public class DmaapClientTest {
 	@Mock
 	private CambriaTopicManager topicManager;
 
-	
 	@InjectMocks
 	DmaapClient client;
-	
+
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
@@ -77,53 +76,53 @@ public class DmaapClientTest {
 		configuration.setPollingInterval(30);
 		configuration.setPollingTimeout(100);
 		configuration.setConfigDbService("sdnrService");
-		
+
 		try {
 			when(topicManager.getTopics()).thenReturn(topics);
-			
+
 			client=Mockito.mock(DmaapClient.class);
 			client.initClient();
 			Mockito.verify(client).initClient();      
-	       // Mockito.verifycreateAndConfigureTopics();
+			// Mockito.verifycreateAndConfigureTopics();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void startClientTest() {		
 		try {
 			Configuration configuration = Configuration.getInstance();
 			String configAllJson = readFromFile("src/test/resources/config_all.json");
 
-            JsonObject configAll = new Gson().fromJson(configAllJson, JsonObject.class);
+			JsonObject configAll = new Gson().fromJson(configAllJson, JsonObject.class);
 
-            JsonObject config = configAll.getAsJsonObject("config");
-
-            configuration.updateConfigurationFromJsonObject(config);
+			JsonObject config = configAll.getAsJsonObject("config");
+			System.out.println(configuration);
+			configuration.updateConfigurationFromJsonObject(config);
 			DmaapClient client= new DmaapClient();
 			client.initClient();
 			//Mockito.verify(client).startClient();      
-	       // Mockito.verifycreateAndConfigureTopics();
+			// Mockito.verifycreateAndConfigureTopics();
 
 		} catch ( Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-    private static String readFromFile(String file) {
-        String content = "";
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            content = bufferedReader.readLine();
-            String temp;
-            while ((temp = bufferedReader.readLine()) != null) {
-                content = content.concat(temp);
-            }
-            content = content.trim();
-        } catch (Exception e) {
-            content = null;
-        }
-        return content;
-    }
+	private static String readFromFile(String file) {
+		String content = "";
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			content = bufferedReader.readLine();
+			String temp;
+			while ((temp = bufferedReader.readLine()) != null) {
+				content = content.concat(temp);
+			}
+			content = content.trim();
+		} catch (Exception e) {
+			content = null;
+		}
+		return content;
+	}
 }

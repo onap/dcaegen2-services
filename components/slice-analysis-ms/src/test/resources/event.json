@@ -1,0 +1,209 @@
+{
+
+        "commonEventHeader":{
+
+            "domain":"perf3gpp",
+
+            "eventId":"f576d0bf-ef92-45e9-a8a3-96fe7ea1d0fb",
+
+            "sequence":0,
+
+            "eventName":"perf3gpp_AcmeNode-Acme_pmMeasResult",
+
+            "sourceName":"oteNB5309",
+
+            "reportingEntityName":"",
+
+            "priority":"Normal",
+
+            "startEpochMicrosec":1597402800000,
+
+            "lastEpochMicrosec":1597403700000,
+
+            "version":"4.0",
+
+            "vesEventListenerVersion":"7.1",
+
+            "timeZoneOffset":"UTC+05:00"
+
+        },
+
+        "perf3gppFields":{
+
+            "perf3gppFieldsVersion":"1.0",
+
+            "measDataCollection":{
+
+                "granularityPeriod":1597407300000,
+
+                "measuredEntityUserName":"",
+
+                "measuredEntityDn":"ncserver1",
+
+                "measuredEntitySoftwareVersion":"r0.1",
+
+                "measInfoList":[
+
+                    {
+
+                        "measInfoId":{
+
+                            "sMeasInfoId":"some measInfoId"
+
+                        },
+
+                        "measTypes":{
+
+                            "sMeasTypesList":[
+
+                                "SM.PrbUsedDl.001-100001",
+
+                                "SM.PrbUsedUl.001-100001",
+
+                                "SM.PrbUsedDl.001-100011",
+
+                                "SM.PrbUsedUl.001-100011"
+
+                            ]
+
+                        },
+
+                        "measValuesList":[
+
+                            {
+
+                                "measObjInstId":"chn001",
+
+                                "suspectFlag":"false",
+
+                                "measResults":[
+
+                                    {
+
+                                        "p":1,
+
+                                        "sValue":"55"
+
+                                    },
+
+                                    {
+
+                                        "p":2,
+
+                                        "sValue":"53"
+
+                                    },
+                                    {
+
+                                        "p":3,
+
+                                        "sValue":"40"
+
+                                    },
+                                    {
+
+                                        "p":4,
+
+                                        "sValue":"33"
+
+                                    }
+
+                                ]
+
+                            },
+
+                            {
+
+                                "measObjInstId":"chn002",
+
+                                "suspectFlag":"false",
+
+                                "measResults":[
+
+                                    {
+
+                                        "p":1,
+
+                                        "sValue":"22"
+
+                                    },
+
+                                    {
+
+                                        "p":2,
+
+                                        "sValue":"30"
+
+                                    },
+                                    {
+
+                                        "p":3,
+
+                                        "sValue":"22"
+
+                                    },
+                                    {
+
+                                        "p":4,
+
+                                        "sValue":"30"
+
+                                    }
+
+                                ]
+
+                            },
+                            {
+
+                                "measObjInstId":"chn003",
+
+                                "suspectFlag":"false",
+
+                                "measResults":[
+
+                                    {
+
+                                        "p":1,
+
+                                        "sValue":"25"
+
+                                    },
+
+                                    {
+
+                                        "p":2,
+
+                                        "sValue":"56"
+
+                                    },
+                                    {
+
+                                        "p":3,
+
+                                        "sValue":"50"
+
+                                    },
+                                    {
+
+                                        "p":4,
+
+                                        "sValue":"40"
+
+                                    }
+
+                                ]
+
+                            }
+
+                        ]
+
+                    }
+
+                ]
+
+            }
+
+        }
+
+    }
+
