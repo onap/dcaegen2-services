@@ -1,5 +1,7 @@
 {
    "nfName":"pnf_1",
+   "blueprintName": "some-name",
+   "blueprintVersion": "some-version",
    "policyName":"pmsh-operational-policy",
    "changeType":"CREATE",
    "closedLoopControlName":"pmsh-control-loop",

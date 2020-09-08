@@ -17,54 +17,45 @@
 # ============LICENSE_END=====================================================
 import json
 import os
-from test.support import EnvironmentVarGuard
-from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 from requests import Session
 
 import mod.aai_client as aai_client
-from mod import db, create_app
-from mod.api.db_models import NetworkFunctionModel
 from mod.network_function import NetworkFunction
-from mod.pmsh_utils import AppConfig
 from mod.subscription import Subscription
+from tests.base_setup import BaseClassSetup
 
 
-class SubscriptionTest(TestCase):
-    @patch('mod.update_logging_config')
-    @patch('mod.pmsh_utils._MrPub')
-    @patch('mod.pmsh_utils._MrSub')
-    @patch('mod.get_db_connection_url')
+class SubscriptionTest(BaseClassSetup):
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
+    @patch.object(Session, 'get')
     @patch.object(Session, 'put')
-    @patch('mod.pmsh_utils.AppConfig._get_pmsh_config')
-    def setUp(self, mock_get_pmsh_config, mock_session, mock_get_db_url,
-              mock_mr_sub, mock_mr_pub, mock_update_config):
-        mock_get_db_url.return_value = 'sqlite://'
+    def setUp(self, mock_session_put, mock_session_get):
+        super().setUp()
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
             self.aai_response_data = data.read()
-        mock_session.return_value.status_code = 200
-        mock_session.return_value.text = self.aai_response_data
-        self.env = EnvironmentVarGuard()
-        self.env.set('AAI_SERVICE_PORT', '8443')
-        self.env.set('LOGGER_CONFIG', os.path.join(os.path.dirname(__file__), 'log_config.yaml'))
-        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
-            self.cbs_data = json.load(data)
-        mock_get_pmsh_config.return_value = self.cbs_data
-        self.mock_mr_sub = mock_mr_sub
-        self.mock_mr_pub = mock_mr_pub
-        self.app = create_app()
-        self.app_context = self.app.app_context()
-        self.app_context.push()
-        db.create_all()
-        self.app_conf = AppConfig()
+        mock_session_put.return_value.status_code = 200
+        mock_session_put.return_value.text = self.aai_response_data
+        with open(os.path.join(os.path.dirname(__file__), 'data/aai_model_info.json'), 'r') as data:
+            self.aai_model_data = data.read()
+        mock_session_get.return_value.status_code = 200
+        mock_session_get.return_value.text = self.aai_model_data
+        self.mock_mr_sub = Mock()
+        self.mock_mr_pub = Mock()
         self.xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf)
         self.sub_model = self.app_conf.subscription.get()
 
     def tearDown(self):
-        db.drop_all()
-        db.session.remove()
-        self.app_context.pop()
+        super().tearDown()
+
+    @classmethod
+    def tearDownClass(cls):
+        super().tearDownClass()
 
     def test_sub_measurement_group(self):
         self.assertEqual(len(self.app_conf.subscription.measurementGroups), 2)
@@ -84,8 +75,6 @@ class SubscriptionTest(TestCase):
                                                                         self.sub_model)
         self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[1],
                                                                         self.sub_model)
-        nfs = Subscription.get_nf_names_per_sub(self.app_conf.subscription.subscriptionName)
-        self.assertEqual(2, len(nfs))
 
     def test_create_existing_subscription(self):
         sub1 = self.app_conf.subscription.create()
@@ -120,16 +109,6 @@ class SubscriptionTest(TestCase):
         sub = self.app_conf.subscription.get()
 
         self.assertEqual('new_status', sub.status)
-
-    def test_delete_subscription(self):
-        for nf in self.xnfs:
-            self.app_conf.subscription.add_network_function_to_subscription(nf, self.sub_model)
-        self.app_conf.subscription.delete_subscription()
-        self.assertEqual(0, len(Subscription.get_all()))
-        self.assertEqual(None, self.app_conf.subscription.get())
-        self.assertEqual(0, len(Subscription.get_all_nfs_subscription_relations()))
-        self.assertEqual(0, len(NetworkFunction.get_all()))
-        self.assertEqual(None, NetworkFunction.get(nf_name=list(self.xnfs)[0].nf_name))
 
     def test_update_sub_nf_status(self):
         sub_name = 'ExtraPM-All-gNB-R2B'
@@ -172,17 +151,14 @@ class SubscriptionTest(TestCase):
         with open(os.path.join(os.path.dirname(__file__),
                                'data/pm_subscription_event.json'), 'r') as data:
             expected_sub_event = json.load(data)
-        actual_sub_event = self.app_conf.subscription.prepare_subscription_event('pnf_1',
-                                                                                 self.app_conf)
+        nf = NetworkFunction(nf_name='pnf_1',
+                             model_invariant_id='some-id',
+                             model_version_id='some-id')
+        nf.sdnc_model_name = 'some-name'
+        nf.sdnc_model_version = 'some-version'
+        actual_sub_event = self.app_conf.subscription.prepare_subscription_event(nf, self.app_conf)
+        print(actual_sub_event)
         self.assertEqual(expected_sub_event, actual_sub_event)
-
-    def test_get_nf_models(self):
-        for nf in self.xnfs:
-            self.app_conf.subscription.add_network_function_to_subscription(nf, self.sub_model)
-        nf_models = self.app_conf.subscription._get_nf_models()
-
-        self.assertEqual(3, len(nf_models))
-        self.assertIsInstance(nf_models[0], NetworkFunctionModel)
 
     def test_get_network_functions(self):
         for nf in self.xnfs:
