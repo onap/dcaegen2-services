@@ -1,0 +1,36 @@
+{
+    "model-version-id": "6d25b637-8bca-47e2-af1a-61258424183d",
+    "model-name": "PNF102",
+    "model-version": "1.0",
+    "model-description": "sartgserg",
+    "sdnc-model-name": "pm_control",
+    "sdnc-model-version": "1.0.0",
+    "resource-version": "1598626661947",
+    "relationship-list": {
+        "relationship": [
+            {
+                "related-to": "model-element",
+                "relationship-label": "org.onap.relationships.inventory.IsA",
+                "related-link": "/aai/v20/service-design-and-creation/models/model/c1a44771-3aa8-4888-a4f4-be89d1caa0cb/model-vers/model-ver/7256a992-10a7-4ac8-8c2c-63c67e5c48c8/model-elements/model-element/fddc70fe-8343-48c1-af2e-b54f551a32ee/model-elements/model-element/7bff45b7-8254-44e5-b7ad-6e10dee6dfc3",
+                "relationship-data": [
+                    {
+                        "relationship-key": "model.model-invariant-id",
+                        "relationship-value": "c1a44771-3aa8-4888-a4f4-be89d1caa0cb"
+                    },
+                    {
+                        "relationship-key": "model-ver.model-version-id",
+                        "relationship-value": "7256a992-10a7-4ac8-8c2c-63c67e5c48c8"
+                    },
+                    {
+                        "relationship-key": "model-element.model-element-uuid",
+                        "relationship-value": "fddc70fe-8343-48c1-af2e-b54f551a32ee"
+                    },
+                    {
+                        "relationship-key": "model-element.model-element-uuid",
+                        "relationship-value": "7bff45b7-8254-44e5-b7ad-6e10dee6dfc3"
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -20,7 +20,7 @@ import json
 import os
 from unittest import TestCase
 from parameterized import parameterized
-from mod.network_function import NetworkFunctionFilter
+from mod.network_function import NetworkFunctionFilter, NetworkFunction
 
 
 def custom_name_func(testcase_func, param_num, param):
@@ -32,7 +32,8 @@ def custom_name_func(testcase_func, param_num, param):
 
 def load_test_cases():
     test_parameters = []
-    with open(os.path.join(os.path.dirname(__file__), 'data/filter_test_data.json'), 'r') as test_data:
+    with open(os.path.join(os.path.dirname(__file__),
+                           'data/filter_test_data.json'), 'r') as test_data:
         loaded_test_data = json.load(test_data)
     for test in loaded_test_data:
         params = [value for key, value in test.items()]
@@ -43,44 +44,44 @@ def load_test_cases():
 class NetworkFunctionFilterTest(TestCase):
 
     @parameterized.expand(load_test_cases, name_func=custom_name_func)
-    def test(self, test_name, nf_filter, nf_name, model_invariant_uuid, model_version_id, orchestration_status,
+    def test(self, test_name, nf_filter, nf_name, model_invariant_uuid, model_version_id,
              expected_result):
         nf_filter = NetworkFunctionFilter(**nf_filter)
-        self.assertEqual(nf_filter.is_nf_in_filter(nf_name,
-                                                   model_invariant_uuid,
-                                                   model_version_id,
-                                                   orchestration_status), expected_result)
+        self.assertEqual(nf_filter.is_nf_in_filter(NetworkFunction(nf_name=nf_name,
+                                                   model_invariant_id=model_invariant_uuid,
+                                                   model_version_id=model_version_id)),
+                         expected_result)
 
-    def test_filter_true_on_multiple_modelInvariantUUIDs(self):
+    def test_filter_true_on_multiple_modelInvariantIDs(self):
         nf_filter = NetworkFunctionFilter(**{
             "nfNames": [
             ],
-            "modelInvariantUUIDs": [
+            "modelInvariantIDs": [
                 '5845y423-g654-6fju-po78-8n53154532k6',
                 '7129e420-d396-4efb-af02-6b83499b12f8'
             ],
             "modelVersionIDs": [
             ]
         })
-        self.assertTrue(nf_filter.is_nf_in_filter('pnf1',
-                                                  '7129e420-d396-4efb-af02-6b83499b12f8',
-                                                  'e80a6ae3-cafd-4d24-850d-e14c084a5ca9',
-                                                  'Active'))
+        self.assertTrue(nf_filter.is_nf_in_filter(
+            NetworkFunction(nf_name='pnf1',
+                            model_invariant_id='7129e420-d396-4efb-af02-6b83499b12f8',
+                            model_version_id='e80a6ae3-cafd-4d24-850d-e14c084a5ca9')))
 
-    def test_filter_false_on_modelInvariantUUIDs_being_false_and_pnfname_being_true(self):
+    def test_filter_false_on_modelInvariantIDs_being_false_and_pnfname_being_true(self):
         nf_filter = NetworkFunctionFilter(**{
             "nfNames": [
                 "^pnf.*",
                 "^vnf.*"
             ],
-            "modelInvariantUUIDs": [
+            "modelInvariantIDs": [
                 '5845y423-g654-6fju-po78-8n53154532k6',
                 '7129e420-d396-4efb-af02-6b83499b12f8'
             ],
             "modelVersionIDs": [
             ]
         })
-        self.assertFalse(nf_filter.is_nf_in_filter('pnf1',
-                                                   'WrongModelInvariantUUID',
-                                                   'e80a6ae3-cafd-4d24-850d-e14c084a5ca9',
-                                                   'Active'))
+        self.assertFalse(nf_filter.is_nf_in_filter(
+            NetworkFunction(nf_name='pnf1',
+                            model_invariant_id='WrongModelInvariantUUID',
+                            model_version_id='e80a6ae3-cafd-4d24-850d-e14c084a5ca9')))
