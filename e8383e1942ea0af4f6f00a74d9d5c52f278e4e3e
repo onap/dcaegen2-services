@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9bbedb42_cfb91505",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-09-10T11:39:02Z",
+      "side": 1,
+      "message": "We have a network function class and refer to its variable as nf... Wondering if all references should be to nf instead of having nf and xnf mixed in.",
+      "revId": "e8383e1942ea0af4f6f00a74d9d5c52f278e4e3e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbcdaa1b_c7530aa6",
+        "filename": "components/pm-subscription-handler/tests/base_setup.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 5569
+      },
+      "writtenOn": "2020-09-10T11:39:02Z",
+      "side": 1,
+      "message": "Great shout with this class, having the set up in each class was quite repetitive and a hassle",
+      "revId": "e8383e1942ea0af4f6f00a74d9d5c52f278e4e3e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
