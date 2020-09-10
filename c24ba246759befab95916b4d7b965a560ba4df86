@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c562fb4c_21f735b8",
+        "filename": "releases/datalake-adminui-1.1.0-container.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-09-10T02:47:38Z",
+      "side": 1,
+      "message": "Sorry, this is not the right commit hash. \n\nYour original commit ref was indeed correct - 5ae68c251200a093254c926bb35fa953ae3b5697 - kindly revert it back.",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "c24ba246759befab95916b4d7b965a560ba4df86",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "006cb3d0_4112ec8c",
+        "filename": "releases/datalake-adminui-1.1.0-container.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-09-10T02:47:38Z",
+      "side": 1,
+      "message": "Checked with Jess and she confirmed release process/tagging already have support for custom tagging. As dcaegen2/service repo host multiple components (and version could overlap), pls include below setting on release yamls file also\n\ngit_tag: \u00271.1.0-datalake-handler-admin-ui\u0027",
+      "revId": "c24ba246759befab95916b4d7b965a560ba4df86",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
