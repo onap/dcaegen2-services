@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78dc0bfc_b3f2b3b5",
+        "filename": "components/datalake-handler/des/src/assembly/run.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-11T15:49:43Z",
+      "side": 1,
+      "message": "where are cmd2 and cmd3 set?",
+      "revId": "4a6e54b5fdb87384cc0f2e2ff5be3c5e6a48d708",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
