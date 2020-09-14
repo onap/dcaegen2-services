@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b5e9357f_d5ddab6f",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceService.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3df8f008_9ca6cf4e",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d185baa_847b9157",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/MeasurementObject.java",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34d91229_e7315d01",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/MeasurementObject.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d185baa_847b9157",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "eb29aa4e_b4540d11",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/SubCounter.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23feef0a_a46a60cc",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9ff5999_863fd85e",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/CommonEventHeader.java",
         "patchSetId": 4
@@ -67,6 +121,24 @@
       "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b7e062f_077839d7",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/CommonEventHeader.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9ff5999_863fd85e",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "3b9cd735_955d027b",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/Event.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d90584a_7ad479df",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23f7e205_ce952d51",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/Example.java",
         "patchSetId": 4
@@ -101,6 +191,24 @@
       "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca26aba2_2b59b59d",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/Example.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23f7e205_ce952d51",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "b660440b_9ffdd0cd",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/MeasDataCollection.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1802f0b5_dcdca055",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3a53212_1adf0896",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/MeasInfoList.java",
         "patchSetId": 4
@@ -135,6 +261,24 @@
       "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68ab85ed_21f738f9",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/MeasInfoList.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3a53212_1adf0896",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "85497463_d8fded53",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/AAI.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f26a9ad0_2b4c0a81",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e68937b_40e609c7",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/AdditionalProperties.java",
         "patchSetId": 4
@@ -169,6 +331,24 @@
       "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf705e95_624fbd95",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/AdditionalProperties.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e68937b_40e609c7",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "961a580e_224bc2f9",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/OnsetMessage.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "857e11d1_101aacdb",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7cefb8da_aa53d02b",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/Payload.java",
         "patchSetId": 4
@@ -203,6 +401,24 @@
       "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4149353_6d9ff754",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/Payload.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cefb8da_aa53d02b",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "26c92654_06893680",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/restclients/ConfigDbRestClient.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aed02770_a8e03de3",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a3505d1_1ebaba08",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/restclients/RestClient.java",
         "patchSetId": 4
@@ -237,6 +471,24 @@
       "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03a413f9_aaeeae5f",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/restclients/RestClient.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a3505d1_1ebaba08",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "c529fee8_ce07b0e4",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/AverageCalculator.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e09deca_9da10218",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91535105_1e55623c",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConsumerThread.java",
         "patchSetId": 4
@@ -271,6 +541,24 @@
       "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78218c5e_cf44107d",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConsumerThread.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91535105_1e55623c",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "7b7f1946_c11d484e",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PmDataQueue.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bced7f1_395327d4",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86769cd5_57406808",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PmEventProcessor.java",
         "patchSetId": 4
@@ -305,6 +611,24 @@
       "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "290a813a_4c3a6681",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PmEventProcessor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86769cd5_57406808",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "81bb2067_822a206c",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PmThread.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc7eaa46_baeb5a35",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e93ff925_936ef13f",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessor.java",
         "patchSetId": 4
@@ -339,6 +681,24 @@
       "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "836ded7d_813232bb",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessor.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:51:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e93ff925_936ef13f",
+      "revId": "60016b5f2c5374d21459c68d413238dc75694feb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
