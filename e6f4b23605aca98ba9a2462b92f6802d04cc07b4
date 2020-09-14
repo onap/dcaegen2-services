@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2b4b90e_ea109891",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-09-14T18:29:07Z",
+      "side": 1,
+      "message": "Is this valid or should configDbBaseUrl be used here instead?",
+      "range": {
+        "startLine": 60,
+        "startChar": 17,
+        "endLine": 60,
+        "endChar": 38
+      },
+      "revId": "e6f4b23605aca98ba9a2462b92f6802d04cc07b4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
