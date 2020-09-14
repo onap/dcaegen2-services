@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62ed4cb3_2d5f98fb",
+        "filename": "components/datalake-handler/des/src/assembly/run.sh",
+        "patchSetId": 18
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:00:04Z",
+      "side": 1,
+      "message": "??? -execute ???\nYou may also wish to please run shellcheck on the script\n(apt install -y shellcheck)",
+      "revId": "95d7d3925d7347712a469d1895ecf79dd4f82a3b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc587fdd_ff990775",
+        "filename": "components/datalake-handler/des/src/assembly/run.sh",
+        "patchSetId": 18
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:00:04Z",
+      "side": 1,
+      "message": "\"$cmd\"",
+      "revId": "95d7d3925d7347712a469d1895ecf79dd4f82a3b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0689f613_d5fa4a7f",
+        "filename": "components/datalake-handler/des/src/assembly/run.sh",
+        "patchSetId": 18
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:00:04Z",
+      "side": 1,
+      "message": "\"$cmd1\"",
+      "revId": "95d7d3925d7347712a469d1895ecf79dd4f82a3b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad135883_186f0c8c",
+        "filename": "components/datalake-handler/des/src/assembly/run.sh",
+        "patchSetId": 18
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:00:04Z",
+      "side": 1,
+      "message": "\"$cmd2\"",
+      "revId": "95d7d3925d7347712a469d1895ecf79dd4f82a3b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99358aa7_503f5bf0",
+        "filename": "components/datalake-handler/des/src/assembly/run.sh",
+        "patchSetId": 18
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-14T14:00:04Z",
+      "side": 1,
+      "message": "\"$cmd3\"",
+      "revId": "95d7d3925d7347712a469d1895ecf79dd4f82a3b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
