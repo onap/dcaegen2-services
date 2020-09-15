@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c920b075_80340ba1",
+        "filename": "components/datalake-handler/des/src/assembly/run.sh",
+        "patchSetId": 19
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-15T01:26:13Z",
+      "side": 1,
+      "message": "add quotes around $cmd, as in\n\njava -jar \"$cmd\"\n\nditto for the subsequent java commands as well",
+      "revId": "fb0a62abfed3ecc998c362527488abdb7660f663",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
