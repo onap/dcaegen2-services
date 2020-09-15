@@ -1,0 +1,49 @@
+{
+   "snssai":"0001-0111",
+   "data":[
+      {
+         "gNBCUName":"cucpName",
+         "nearRTRICId": "12",
+         "cellCUList":[
+            {
+               "cellLocalId":111,
+               "configData":{
+                  "maxNumberofConns":"20",
+                  "predictedMaxNumberofConns":"25",
+                  "lastUpdatedTS":"yyyy/MM/dd HH:mm:ss"
+               }
+            },
+            {
+               "cellLocalId":112,
+               "configData":{
+                  "maxNumberofConns":"20",
+                  "predictedMaxNumberofConns":"25",
+                  "lastUpdatedTS":"yyyy/MM/dd HH:mm:ss"
+               }
+            }
+         ]
+      },
+      {
+         "gNBCUName":"cucpName2",
+         "nearRTRICId": "13",
+         "cellCUList":[
+            {
+               "cellLocalId":113,
+               "configData":{
+                  "maxNumberofConns":"20",
+                  "predictedMaxNumberofConns":"25",
+                  "lastUpdatedTS":"yyyy/MM/dd HH:mm:ss"
+               }
+            },
+            {
+               "cellLocalId":114,
+               "configData":{
+                  "maxNumberofConns":"20",
+                  "predictedMaxNumberofConns":"25",
+                  "lastUpdatedTS":"yyyy/MM/dd HH:mm:ss"
+               }
+            }
+         ]
+      }
+   ]
+}

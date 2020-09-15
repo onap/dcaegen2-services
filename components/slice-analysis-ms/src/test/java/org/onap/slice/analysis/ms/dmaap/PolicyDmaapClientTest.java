@@ -22,10 +22,7 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
-import static org.junit.Assert.*;
-
-import com.att.nsa.cambria.client.CambriaBatchingPublisher;
-import com.att.nsa.cambria.client.CambriaConsumer;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -38,9 +35,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.onap.slice.analysis.ms.beans.Configuration;
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.utils.DmaapUtils;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.att.nsa.cambria.client.CambriaBatchingPublisher;
+import com.att.nsa.cambria.client.CambriaConsumer;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest(classes = PolicyDmaapClient.class)

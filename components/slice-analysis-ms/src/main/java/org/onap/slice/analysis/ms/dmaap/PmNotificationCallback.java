@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Handles Notification on dmaap for Performance events
  */
-public class PmNotificationCallback extends NotificationCallback {
+public class PmNotificationCallback implements NotificationCallback {
 
     private static Logger log = LoggerFactory.getLogger(PmNotificationCallback.class);
 
