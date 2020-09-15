@@ -23,12 +23,19 @@ echo "start init db ..."
 
 echo "finish init db"
 
-cmd=`find . -regex  '\./feeder-[0-9]+\.[0-9]+\.[0-9]+[-SNAPSHOT]+\.jar'`
-cmd1=`find . -regex '\./feeder-[0-9]+\.[0-9]+\.[0-9]+\.jar'`
+cmd=`find . -regex  '\./des-[0-9]+\.[0-9]+\.[0-9]+[-SNAPSHOT]+\.jar'`
+cmd1=`find . -regex '\./des-[0-9]+\.[0-9]+\.[0-9]+\.jar'`
+cmd2=`find . -regex '\./des-[0-9]+\.[0-9]+\.[0-9]+[-execute]+\.jar'`
+cmd3=`find . -regex  '\./des-[0-9]+\.[0-9]+\.[0-9]+[-SNAPSHOT]+[-execute]+\.jar'`
+
 if [ -n "$cmd" ]; then
-    java -jar $cmd
+    java -jar "$cmd"
 elif [ -n "$cmd1" ]; then
-    java -jar $cmd1
+    java -jar "$cmd1"
+elif [ -n "$cmd2" ]; then
+    java -jar "$cmd2"
+elif [ -n "$cmd3" ]; then
+    java -jar "$cmd3"
 else
     echo "STRING is empty"
     sleep 10000
