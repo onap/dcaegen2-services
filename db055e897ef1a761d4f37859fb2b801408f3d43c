@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c459a7e7_19840ce9",
+        "filename": "components/datalake-handler/des/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-09-17T18:14:53Z",
+      "side": 1,
+      "message": "Fix header formatting",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 96
+      },
+      "revId": "db055e897ef1a761d4f37859fb2b801408f3d43c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da6ebc8a_4d8dccaa",
+        "filename": "components/datalake-handler/des/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-09-17T18:14:53Z",
+      "side": 1,
+      "message": "should point to nexus",
+      "range": {
+        "startLine": 33,
+        "startChar": 1,
+        "endLine": 33,
+        "endChar": 62
+      },
+      "revId": "db055e897ef1a761d4f37859fb2b801408f3d43c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
