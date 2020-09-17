@@ -33,7 +33,7 @@ COPY target/${JAR_FILE} /home/datalake/
 COPY src/assembly/run.sh /home/datalake/
 
 WORKDIR /home/datalake/db_init
-ADD src/assembly/init_db/scripts/db_init .
+ADD src/assembly/init_db/scripts .
 USER root
 RUN chmod 0755 ./*
 WORKDIR /home/datalake
