@@ -65,6 +65,7 @@ public class Application {
 		getConfig();
         log.info("Starting spring boot application");
 		SpringApplication.run(Application.class, args);
+		MainThread.initiateThreads();
 	}
 	
     private static void getConfig() {

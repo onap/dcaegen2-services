@@ -48,9 +48,9 @@ public class PmThread extends Thread {
 	/**
 	 * parameterized constructor.
 	 */
-	public PmThread(NewPmNotification newPmNotification) {
+	public PmThread() {
 		super();
-		this.newPmNotification = newPmNotification;
+		this.newPmNotification = BeanUtil.getBean(NewPmNotification.class);
 		this.performanceNotificationsRepository = BeanUtil.getBean(PerformanceNotificationsRepository.class);
 		this.pmEventProcessor = BeanUtil.getBean(IPmEventProcessor.class);
 		this.pmDataQueue = BeanUtil.getBean(PmDataQueue.class);

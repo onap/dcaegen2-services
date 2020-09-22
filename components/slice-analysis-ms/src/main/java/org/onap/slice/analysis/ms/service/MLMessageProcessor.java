@@ -24,15 +24,13 @@ package org.onap.slice.analysis.ms.service;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.onap.slice.analysis.ms.configdb.IConfigDbService;
 import org.onap.slice.analysis.ms.models.CUModel;
 import org.onap.slice.analysis.ms.models.MLOutputModel;
 import org.onap.slice.analysis.ms.models.policy.AdditionalProperties;
-import org.onap.slice.analysis.ms.utils.BeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -43,15 +41,12 @@ import org.springframework.stereotype.Component;
 @Scope("Prototype")
 public class MLMessageProcessor {
 	private static Logger log = LoggerFactory.getLogger(MLMessageProcessor.class);
-
+	
+	@Autowired
 	private IConfigDbService configDbService;
+	
+	@Autowired
 	private PolicyService policyService;
-
-
-	@PostConstruct
-	public void init() {
-		configDbService = BeanUtil.getBean(IConfigDbService.class);
-	}
 	
 	public void processMLMsg(MLOutputModel mlOutputMsg) {
 		String snssai = mlOutputMsg.getSnssai();

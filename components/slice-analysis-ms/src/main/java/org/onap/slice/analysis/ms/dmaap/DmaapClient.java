@@ -21,8 +21,6 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
-import com.att.nsa.cambria.client.CambriaConsumer;
-
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -34,7 +32,10 @@ import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.utils.DmaapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.att.nsa.cambria.client.CambriaConsumer;
 
 /**
  * This class initializes and starts the dmaap client 
@@ -47,6 +48,9 @@ public class DmaapClient {
     private static Logger log = LoggerFactory.getLogger(DmaapClient.class);
 
     private DmaapUtils dmaapUtils;
+    
+    @Autowired
+    private IntelligentSlicingCallback intelligentSlicingCallback;
 
     /**
      * init dmaap client.
@@ -113,7 +117,7 @@ public class DmaapClient {
  		
 		// create notification consumers for ML MS
  		NotificationConsumer intelligentSlicingConsumer = new NotificationConsumer(intelligentSlicingCambriaConsumer,
- 				new IntelligentSlicingCallback());
+ 				intelligentSlicingCallback);
  		// start intelligent Slicing notification consumer threads
  		executorPool = Executors.newScheduledThreadPool(10);
  		executorPool.scheduleAtFixedRate(intelligentSlicingConsumer, 0, configuration.getPollingInterval(),
