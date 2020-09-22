@@ -25,13 +25,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.models.configdb.CellsModel;
 import org.onap.slice.analysis.ms.models.configdb.NetworkFunctionModel;
 import org.onap.slice.analysis.ms.restclients.ConfigDbRestClient;
-import org.onap.slice.analysis.ms.utils.BeanUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -43,15 +41,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ConfigDbInterfaceService implements IConfigDbService {
-	
+
+	@Autowired
 	private ConfigDbRestClient restclient;
 	private String configDbBaseUrl = Configuration.getInstance().getConfigDbService();
-	
-	@PostConstruct
-	public void init() {
-		this.restclient = BeanUtil.getBean(ConfigDbRestClient.class);
-	}
-	
+
 	/**
 	 *  Fetches the current configuration of an S-NSSAI from config DB
 	 */
@@ -64,7 +58,7 @@ public class ConfigDbInterfaceService implements IConfigDbService {
 		responseMap=response.getBody();
 		return responseMap;			
 	}
-	
+
 	/**
 	 *  Fetches the current configuration of RIC from config DB
 	 */
@@ -74,7 +68,7 @@ public class ConfigDbInterfaceService implements IConfigDbService {
 		});
 		return response.getBody();
 	}
-	
+
 	/**
 	 *  Fetches all the network functions of an S-NSSAI from config DB
 	 */
@@ -88,32 +82,32 @@ public class ConfigDbInterfaceService implements IConfigDbService {
 		}
 		return responseList;
 	}
-	
+
 	/**
 	 *  Fetches the RICS of an S-NSSAI from config DB
 	 */
 	public Map<String, List<String>> fetchRICsOfSnssai(String snssai){
-		
+
 		Map<String,List<String>> responseMap=new HashMap<>();
-		
+
 		String reqUrl=configDbBaseUrl+"/api/sdnc-config-db/v4/du-cell-list/"+snssai;
-		
+
 		ResponseEntity<Map<String,List<CellsModel>>> response=restclient.sendGetRequest(reqUrl, new ParameterizedTypeReference<Map<String,List<CellsModel>>>() {
 		});
 
-		
+
 		for (Map.Entry<String, List<CellsModel>> entry : response.getBody().entrySet()) {
 			List<String> cellslist=new ArrayList<>();
 			for(CellsModel cellmodel:entry.getValue()) {
-				
+
 				cellslist.add(cellmodel.getCellLocalId());
 			}
 			responseMap.put(entry.getKey(), cellslist);
 		}
-		
+
 		return responseMap;
 	}
-	
+
 	/**
 	 *  Fetches the details of a service 
 	 */
@@ -123,5 +117,5 @@ public class ConfigDbInterfaceService implements IConfigDbService {
 		});
 		return response.getBody();
 	}	
-	
+
 }

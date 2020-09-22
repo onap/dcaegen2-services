@@ -21,35 +21,28 @@
 
 package org.onap.slice.analysis.ms;
 
-import javax.annotation.PostConstruct;
-
-import org.onap.slice.analysis.ms.dmaap.NewPmNotification;
 import org.onap.slice.analysis.ms.service.ConsumerThread;
 import org.onap.slice.analysis.ms.service.PmThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /** 
  * This class starts the pm thread and consumer thread
  */
-@Component
 public class MainThread {
 
 	private static Logger log = LoggerFactory.getLogger(MainThread.class);
-
-	@Autowired
-	private NewPmNotification newPmNotification;
-
-
+	
+	private MainThread() {
+		
+	}
+	
 	/**
 	 * main thread initialization.
 	 */
-	@PostConstruct
-	public void init() {
-		log.debug("initializing main thread");
-		Thread pmThread = new Thread(new PmThread(newPmNotification));
+	public static void initiateThreads() {
+		log.debug("initializing Pm thread & Consumer thread");
+		Thread pmThread = new Thread(new PmThread());
 		pmThread.start();
 		Thread consumerThread = new Thread(new ConsumerThread());
 		consumerThread.start();
