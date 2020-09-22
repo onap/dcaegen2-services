@@ -33,9 +33,9 @@ import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.models.MeasurementObject;
 import org.onap.slice.analysis.ms.models.SubCounter;
 import org.onap.slice.analysis.ms.models.policy.AdditionalProperties;
-import org.onap.slice.analysis.ms.utils.BeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -43,14 +43,22 @@ import org.springframework.stereotype.Component;
  * This class process the measurement data of an S-NSSAI
  */
 @Component
-@Scope("Prototype")
+@Scope("prototype")
 public class SnssaiSamplesProcessor {
 	private static Logger log = LoggerFactory.getLogger(SnssaiSamplesProcessor.class);
 
+	@Autowired
 	private PolicyService policyService;
+	
+	@Autowired
 	private IConfigDbService configDbService;
+	
+	@Autowired
 	private PmDataQueue pmDataQueue;
+	
+	@Autowired
 	private AverageCalculator averageCalculator;
+	
 	private List<MeasurementObject> snssaiMeasurementList = new ArrayList<>();
 	private Map<String, List<String>> ricToCellMapping = new HashMap<>();
 	private Map<String, Map<String, Integer>> ricToPrbsMapping = new HashMap<>();
@@ -71,10 +79,6 @@ public class SnssaiSamplesProcessor {
 		prbThroughputMapping.put("PrbUsedDl", "dLThptPerSlice");
 		prbThroughputMapping.put("PrbUsedUl", "uLThptPerSlice");
 		minPercentageChange = configuration.getMinPercentageChange();
-		policyService = BeanUtil.getBean(PolicyService.class);
-		configDbService = BeanUtil.getBean(IConfigDbService.class);
-		pmDataQueue = BeanUtil.getBean(PmDataQueue.class);
-		averageCalculator = BeanUtil.getBean(AverageCalculator.class);
 	}
 
 	/**
