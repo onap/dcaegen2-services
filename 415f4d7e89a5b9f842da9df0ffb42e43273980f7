@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "688cc014_8ad9c885",
+        "filename": "components/datalake-handler/des/dpo/blueprints/k8s-datalake-des.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-09-24T14:51:24Z",
+      "side": 1,
+      "message": "remove this file from repo; this should go under dcaegen2/platform/blueprint",
+      "revId": "415f4d7e89a5b9f842da9df0ffb42e43273980f7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "383d0a8e_8557f982",
+        "filename": "components/datalake-handler/des/dpo/blueprints/k8s-datalake-des.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-09-24T14:51:24Z",
+      "side": 1,
+      "message": "update plugins list to be consistent with new import (check ves or pm-mapper blueprints under blueprint repo",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 153
+      },
+      "revId": "415f4d7e89a5b9f842da9df0ffb42e43273980f7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd912f02_8e19e1ad",
+        "filename": "components/datalake-handler/des/dpo/blueprints/k8s-datalake-des.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-09-24T14:51:24Z",
+      "side": 1,
+      "message": "This is no longer supported under new plugins for guilin; should be switched to ContainerizedServiceComponent (with/without dmaap)  - pls refer current blueprints in that repo",
+      "range": {
+        "startLine": 84,
+        "startChar": 10,
+        "endLine": 84,
+        "endChar": 51
+      },
+      "revId": "415f4d7e89a5b9f842da9df0ffb42e43273980f7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
