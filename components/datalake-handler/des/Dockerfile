@@ -33,12 +33,12 @@ COPY target/${JAR_FILE} /home/datalake/
 COPY src/assembly/run.sh /home/datalake/
 
 WORKDIR /home/datalake/db_init
-ADD src/assembly/init_db/scripts .
+ADD src/assembly/init_db/scripts/db_init .
 USER root
 RUN chmod 0755 ./*
 WORKDIR /home/datalake
-COPY src/assembly/init_db/scripts/init_db.sql .
-COPY src/assembly/init_db/scripts/init_db_data.sql .
+COPY src/assembly/init_db/db_scripts/init_db.sql .
+COPY src/assembly/init_db/db_scripts/init_db_data.sql .
 
 RUN apt update && \
     apt install -y mariadb-client && \
@@ -47,4 +47,5 @@ RUN apt update && \
 USER datalake
 
 CMD ["sh", "run.sh"]
+
 
