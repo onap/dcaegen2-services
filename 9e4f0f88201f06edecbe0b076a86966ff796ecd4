@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdb64017_158d4229",
+        "filename": "components/datalake-handler/des/src/assembly/init_db/scripts/db_init/10_check-db-exist",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-25T18:19:13Z",
+      "side": 1,
+      "message": "add \"\" around the variables, as in\n\n-p\"$MYSQL_ROOT_PASSWORD\" -h \"$MYSQL_HOST\" -P \"$MYSQL_PORT\"",
+      "revId": "9e4f0f88201f06edecbe0b076a86966ff796ecd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f283348_10404852",
+        "filename": "components/datalake-handler/des/src/assembly/init_db/scripts/db_init/11_create-database",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-25T18:19:13Z",
+      "side": 1,
+      "message": "add \"\" around the variables, as in\n\n-p\"$MYSQL_ROOT_PASSWORD\" -h \"$MYSQL_HOST\" -P \"$MYSQL_PORT\"",
+      "revId": "9e4f0f88201f06edecbe0b076a86966ff796ecd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60391e48_fd16cdb0",
+        "filename": "components/datalake-handler/des/src/assembly/init_db/scripts/db_init/15_db-adduser",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-25T18:19:13Z",
+      "side": 1,
+      "message": "add \"\" around the variables, as in\n\n-p\"$MYSQL_ROOT_PASSWORD\" -h \"$MYSQL_HOST\" -P \"$MYSQL_PORT\"",
+      "revId": "9e4f0f88201f06edecbe0b076a86966ff796ecd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa227ea8_6c75d790",
+        "filename": "components/datalake-handler/des/src/assembly/init_db/scripts/db_init/20_db-initdb",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-25T18:19:13Z",
+      "side": 1,
+      "message": "add \"\" around the variables, as in\n\n-p\"$MYSQL_ROOT_PASSWORD\" -h \"$MYSQL_HOST\" -P \"$MYSQL_PORT\"",
+      "revId": "9e4f0f88201f06edecbe0b076a86966ff796ecd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}

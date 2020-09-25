@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ca1f12a5_fb7e4de8",
+        "filename": "components/datalake-handler/des/dpo/blueprints/k8s-datalake-des.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-25T18:19:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "688cc014_8ad9c885",
+      "revId": "415f4d7e89a5b9f842da9df0ffb42e43273980f7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "383d0a8e_8557f982",
         "filename": "components/datalake-handler/des/dpo/blueprints/k8s-datalake-des.yaml",
         "patchSetId": 2
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "081ac85b_a20a31d6",
+        "filename": "components/datalake-handler/des/dpo/blueprints/k8s-datalake-des.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-25T18:19:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "383d0a8e_8557f982",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 153
+      },
+      "revId": "415f4d7e89a5b9f842da9df0ffb42e43273980f7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd912f02_8e19e1ad",
         "filename": "components/datalake-handler/des/dpo/blueprints/k8s-datalake-des.yaml",
         "patchSetId": 2
@@ -62,6 +104,30 @@
       "revId": "415f4d7e89a5b9f842da9df0ffb42e43273980f7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78d622b1_fb03348d",
+        "filename": "components/datalake-handler/des/dpo/blueprints/k8s-datalake-des.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-25T18:19:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd912f02_8e19e1ad",
+      "range": {
+        "startLine": 84,
+        "startChar": 10,
+        "endLine": 84,
+        "endChar": 51
+      },
+      "revId": "415f4d7e89a5b9f842da9df0ffb42e43273980f7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
