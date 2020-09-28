@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "74f714ae_99511420",
+        "filename": "components/datalake-handler/des/src/assembly/init_db/scripts/db_init/10_check-db-exist",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-28T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdb64017_158d4229",
+      "revId": "9e4f0f88201f06edecbe0b076a86966ff796ecd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f283348_10404852",
         "filename": "components/datalake-handler/des/src/assembly/init_db/scripts/db_init/11_create-database",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "9e4f0f88201f06edecbe0b076a86966ff796ecd4",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c01f6ca_773a2ea3",
+        "filename": "components/datalake-handler/des/src/assembly/init_db/scripts/db_init/11_create-database",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-28T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f283348_10404852",
+      "revId": "9e4f0f88201f06edecbe0b076a86966ff796ecd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "21b27a7f_bef32689",
+        "filename": "components/datalake-handler/des/src/assembly/init_db/scripts/db_init/15_db-adduser",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-28T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60391e48_fd16cdb0",
+      "revId": "9e4f0f88201f06edecbe0b076a86966ff796ecd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa227ea8_6c75d790",
         "filename": "components/datalake-handler/des/src/assembly/init_db/scripts/db_init/20_db-initdb",
         "patchSetId": 4
@@ -67,6 +121,24 @@
       "revId": "9e4f0f88201f06edecbe0b076a86966ff796ecd4",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea69d95b_04a8a725",
+        "filename": "components/datalake-handler/des/src/assembly/init_db/scripts/db_init/20_db-initdb",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-09-28T15:27:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa227ea8_6c75d790",
+      "revId": "9e4f0f88201f06edecbe0b076a86966ff796ecd4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
