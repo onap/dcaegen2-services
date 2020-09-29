@@ -24,7 +24,7 @@ fi
 
 echo "Creating datalake user" 1>/tmp/mariadb-datalake-user.log 2>&1
 
-mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -p"$MYSQL_ROOT_PASSWORD" -h "$MYSQL_HOST" -P "$MYSQL_PORT" << 'EOF' || exit 1
+mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -h "$MYSQL_HOST" -P "$MYSQL_PORT" << 'EOF' || exit 1
 CREATE USER IF NOT EXISTS 'dl';
 GRANT USAGE ON *.* TO 'dl'@'%' IDENTIFIED BY 'dl1234';
 GRANT SELECT, INSERT, UPDATE, DELETE, EXECUTE, SHOW VIEW ON `datalake`.* TO 'dl'@'%';
