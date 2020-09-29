@@ -22,6 +22,23 @@
       "revId": "5a14553ed857f5096c52d6c06ea5f25f5a4f6a10",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "425bffc3_5261eb93",
+        "filename": "releases/slice-analysis-ms-1.0.0-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-09-29T17:08:53Z",
+      "side": 1,
+      "message": "include also \"git_tag\" property as this repo contains multiple subcomponent; something like below\n\ngit_tag: \u00271.0.0-slice-analysis\u0027\n\nsee https://git.onap.org/dcaegen2/services/tree/releases/pmsh-1.1.1-container.yaml",
+      "revId": "5a14553ed857f5096c52d6c06ea5f25f5a4f6a10",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
