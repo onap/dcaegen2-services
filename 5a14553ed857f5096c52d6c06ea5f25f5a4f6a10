@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ac439ba6_28ef6005",
+        "filename": "releases/slice-analysis-ms-1.0.0-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-09-29T16:26:12Z",
+      "side": 1,
+      "message": "1.0.0",
+      "range": {
+        "startLine": 8,
+        "startChar": 24,
+        "endLine": 8,
+        "endChar": 29
+      },
+      "revId": "5a14553ed857f5096c52d6c06ea5f25f5a4f6a10",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
