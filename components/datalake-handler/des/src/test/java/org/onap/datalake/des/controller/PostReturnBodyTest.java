@@ -1,8 +1,8 @@
 /*-
  * ============LICENSE_START=======================================================
- * ONAP : DATALAKE DES
+ * ONAP : DATALAKE
  * ================================================================================
- * Copyright (C) 2020 China Mobile. All rights reserved.
+ * Copyright (C) 2018-2019 Huawei. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,22 +18,26 @@
  * ============LICENSE_END=========================================================
  */
 
-package org.onap.datalake.des;
+package org.onap.datalake.des.controller;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.onap.datalake.des.DesApplication;
 
 /**
- * Test Application.
- * 
- * @author Kai Lu
+ * Test PostReturnBody.
  *
+ * @author Kai Lu
  */
- 
-public class ApplicationTest {
+public class PostReturnBodyTest {
 
     @Test
-    public void testRunner() {
-        DesApplication application = new DesApplication();
+    public void testPostReturnBody() {
+        PostReturnBody postReturnBody = new PostReturnBody();
+        postReturnBody.setStatusCode(200);
+        assertEquals(200, postReturnBody.getStatusCode());
+        postReturnBody.setReturnBody("abc");
+        assertTrue("abc".equals(postReturnBody.getReturnBody()));
     }
 }
