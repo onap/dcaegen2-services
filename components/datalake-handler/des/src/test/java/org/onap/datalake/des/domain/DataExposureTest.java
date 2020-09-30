@@ -1,8 +1,8 @@
 /*
  * ============LICENSE_START=======================================================
- * ONAP : DataLake
+ * ONAP : DataLake DES
  * ================================================================================
- * Copyright 2020 China Mobile
+ * Copyright 2020 China Mobile. All rights reserved.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
