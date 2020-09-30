@@ -1,8 +1,8 @@
 /*
  * ============LICENSE_START=======================================================
- * ONAP : DataLake
+ * ONAP : DataLake DES
  * ================================================================================
- * Copyright 2020 China Mobile
+ * Copyright 2020 China Mobile. All rights reserved.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ package org.onap.datalake.des.domain;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.onap.datalake.des.util.TestUtil;
@@ -53,5 +54,25 @@ public class DbTest {
 
         assertNotEquals(mongoDb2, dbType);
         assertFalse(mongoDb1.getDbType().isTool());
+
+        mongoDb2.setHost("localhost");
+        mongoDb2.setPort(1234);
+        mongoDb2.setLogin("root");
+        mongoDb2.setPass("root123");
+        mongoDb2.setDatabase("mongoDB2");
+        mongoDb2.setEncrypt(true);
+        mongoDb2.setProperty1("property1");
+        mongoDb2.setProperty2("property2");
+        mongoDb2.setProperty3("property3");
+        assertTrue("localhost".equals(mongoDb2.getHost()));
+        assertFalse("1234".equals(mongoDb2.getPort()));
+        assertTrue("root".equals(mongoDb2.getLogin()));
+        assertTrue("root123".equals(mongoDb2.getPass()));
+        assertTrue("mongoDB2".equals(mongoDb2.getDatabase()));
+        assertFalse("true".equals(mongoDb2.isEncrypt()));
+        assertTrue("property1".equals(mongoDb2.getProperty1()));
+        assertTrue("property2".equals(mongoDb2.getProperty2()));
+        assertTrue("property3".equals(mongoDb2.getProperty3()));
+        assertEquals(mongoDb2.getDbConfig().getHost(), mongoDb2.getHost());
     }
 }
