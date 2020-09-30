@@ -1,6 +1,6 @@
 /*-
  * ============LICENSE_START=======================================================
- * ONAP : DATALAKE
+ * ONAP : DATALAKE DES
  * ================================================================================
  * Copyright (C) 2020 China Mobile. All rights reserved.
  * ================================================================================
@@ -32,13 +32,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.des.repository.DataExposureRepository;
-import org.onap.datalake.des.service.DataExposureService;
 import org.springframework.validation.BindingResult;
-
 
 /**
  * Test Data Exposure Controller.
@@ -57,18 +54,15 @@ public class DataExposureControllerTest {
     @Mock
     private BindingResult mockBindingResult;
 
-    @InjectMocks
-    private DataExposureService dataExposureService;
-
     @Test(expected = NullPointerException.class)
-    public void testServe() throws IOException, NoSuchFieldException,
-                                   IllegalAccessException, ClassNotFoundException, SQLException {
+    public void testServe()
+            throws IOException, NoSuchFieldException, IllegalAccessException, ClassNotFoundException, SQLException {
         DataExposureController dataExposureController = new DataExposureController();
         String serviceId = "test";
-        Map<String, String> requestMap = new HashMap<String,String>();
+        Map<String, String> requestMap = new HashMap<String, String>();
         requestMap.put("name", "oteNB5309");
-        HashMap<String, Object> result = dataExposureController
-            .serve(serviceId, requestMap, mockBindingResult, httpServletResponse);
+        HashMap<String, Object> result = dataExposureController.serve(serviceId, requestMap, mockBindingResult,
+                httpServletResponse);
         assertEquals(null, result);
         when(mockBindingResult.hasErrors()).thenReturn(true);
     }
