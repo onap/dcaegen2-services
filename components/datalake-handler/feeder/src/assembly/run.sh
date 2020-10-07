@@ -7,7 +7,7 @@ echo "start init db ..."
 echo "finish init db"
 
 cmd=`find . -regex  '\./feeder-[0-9]+\.[0-9]+\.[0-9]+[-SNAPSHOT]+\.jar'`
-cmd1=`find . -regex '\./feeder-[0-9]+\.[0-9]+\.[0-9]+\.jar'`
+cmd1=`find . -regex '\./feeder-[0-9]+\.[0-9]+\.[0-9]+\-exec.jar'`
 if [ -n "$cmd" ]; then
     java -jar $cmd
 elif [ -n "$cmd1" ]; then
