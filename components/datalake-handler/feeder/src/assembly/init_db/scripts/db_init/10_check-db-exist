@@ -17,9 +17,10 @@
 # limitations under the License.
 # ============LICENSE_END============================================
 #
-result=`mysql -qfsB -uroot -p$MYSQL_ROOT_PASSWORD -h $MYSQL_HOST -P $MYSQL_PORT -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='datalake'" 2>&1`
 
-if [[ ! -z $result ]];
+result=`mysql -uroot -p$MYSQL_ROOT_PASSWORD -h $MYSQL_HOST -P $MYSQL_PORT -e "USE 'datalake'"`
+
+if [ $? == 0 ] ;
 then
   echo "DATABASE ALREADY EXISTS"
   touch /tmp/db_exist
