@@ -16,6 +16,24 @@
       "revId": "8734989ab848561040e58be9c436eee394202394",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3fff042_caaf1c1f",
+        "filename": "releases/datalake-des-1.1.0-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2020-10-10T05:57:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "995cccb3_1e969ab9",
+      "revId": "8734989ab848561040e58be9c436eee394202394",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
