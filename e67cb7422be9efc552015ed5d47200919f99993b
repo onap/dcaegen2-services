@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fd80eb1_88479218",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-10-12T00:21:12Z",
+      "side": 1,
+      "message": "More descriptive commit message required - need to indicate following\n1) which component is being self-release\n2) Brief description of feature/enhancement/bugfix introduced",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "e67cb7422be9efc552015ed5d47200919f99993b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6186a12b_3e1a8d6a",
+        "filename": "releases/datalake-des-1.1.0-container.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-10-12T00:21:12Z",
+      "side": 1,
+      "message": "job is currently failing and docker build is not successful",
+      "range": {
+        "startLine": 4,
+        "startChar": 10,
+        "endLine": 4,
+        "endChar": 67
+      },
+      "revId": "e67cb7422be9efc552015ed5d47200919f99993b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f838dfe_f5c781f9",
+        "filename": "releases/datalake-des-1.1.0-container.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-10-12T00:21:12Z",
+      "side": 1,
+      "message": "image tag not generated from the job#47",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "e67cb7422be9efc552015ed5d47200919f99993b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
