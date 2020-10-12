@@ -1,0 +1,10 @@
+distribution_type: 'container'
+version: '1.1.0'
+project: 'dcaegen2-services-datalake'
+log_dir: 'dcaegen2-services-datalake-handler-des-maven-docker-stage-master/47/'
+containers:
+  - name: 'org.onap.dcaegen2.services.datalake.exposure.service'
+    version: '1.1.0-20201009T105040Z'
+container_release_tag: '1.1.0'
+ref: '52d24b3225dd1d8543337634146274feba70a1c9'
+git_tag: '1.1.0-datalake-des'
