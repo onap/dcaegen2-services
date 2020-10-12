@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3d976e4d_bed57574",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2020-10-12T03:26:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fd80eb1_88479218",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "e67cb7422be9efc552015ed5d47200919f99993b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6186a12b_3e1a8d6a",
         "filename": "releases/datalake-des-1.1.0-container.yaml",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "2ed5ac79_d3cd2d14",
+        "filename": "releases/datalake-des-1.1.0-container.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2020-10-12T03:26:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6186a12b_3e1a8d6a",
+      "range": {
+        "startLine": 4,
+        "startChar": 10,
+        "endLine": 4,
+        "endChar": 67
+      },
+      "revId": "e67cb7422be9efc552015ed5d47200919f99993b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f838dfe_f5c781f9",
         "filename": "releases/datalake-des-1.1.0-container.yaml",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "e67cb7422be9efc552015ed5d47200919f99993b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a518517_2757f277",
+        "filename": "releases/datalake-des-1.1.0-container.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2020-10-12T03:26:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f838dfe_f5c781f9",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "e67cb7422be9efc552015ed5d47200919f99993b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
