@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "244e8dd1_697c691c",
+        "filename": "components/slice-analysis-ms/aaf_root_ca.cer",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-10-13T22:43:34Z",
+      "side": 1,
+      "message": "if this is used in test, move it under test resource\n\nFor ONAP instantiation through cloudify blueprint, cert will be generated/distributed based use_tls flag (refer here for more info https://docs.onap.org/projects/onap-dcaegen2/en/latest/sections/tls_enablement.html)",
+      "revId": "1a8b3315ddfd2aee9ba56114e02169f7b475d3c5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6b48df6_569774b0",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-10-13T22:43:34Z",
+      "side": 1,
+      "message": "as 1.0.0 is already released, version should be bumped to 1.0.1",
+      "range": {
+        "startLine": 35,
+        "startChar": 10,
+        "endLine": 35,
+        "endChar": 24
+      },
+      "revId": "1a8b3315ddfd2aee9ba56114e02169f7b475d3c5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ef9f6d6_f681fa7b",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2020-10-13T22:43:34Z",
+      "side": 1,
+      "message": "remove this from pom and do this part of docker init script (cert will be available/mounted before app container is started)",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 170
+      },
+      "revId": "1a8b3315ddfd2aee9ba56114e02169f7b475d3c5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
