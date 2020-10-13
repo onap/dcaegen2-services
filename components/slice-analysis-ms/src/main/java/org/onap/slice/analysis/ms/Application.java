@@ -22,13 +22,6 @@
 
 package org.onap.slice.analysis.ms;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Type;
@@ -42,9 +35,16 @@ import org.onap.slice.analysis.ms.models.ConfigPolicy;
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.client.RestTemplate;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * 
@@ -120,6 +120,11 @@ public class Application {
 
         return DataSourceBuilder.create().url(url).username(configuration.getPgUsername())
                 .password(configuration.getPgPassword()).build();
+    }
+    
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
     private static String readFromFile(String file) {

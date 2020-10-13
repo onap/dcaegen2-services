@@ -1,0 +1,14 @@
+[
+	{"measurementObjectId":"103593989",
+	 "pmData":{
+		"PrbUsedDl":"33",
+		"PrbUsedUl":"42"
+		}
+	},
+	{"measurementObjectId":"103593999",
+	 "pmData":{
+		"PrbUsedDl":"53",
+		"PrbUsedUl":"53"
+		}
+	}
+]

@@ -130,7 +130,7 @@ public class SnssaiSamplesProcessorTest {
 	
 	@Test
 	public void calculatePercentageChangeTest() {
-		Map<String, Map<String, Integer>> ricConfiguration =  null;
+		Map<String, Map<String, Object>> ricConfiguration =  null;
 		Map<String, Map<String, Integer>> exp = new HashMap<>();
 		Map<String, Integer> ric1 = new HashMap<>();
 		Map<String, Integer> ric2 = new HashMap<>();
@@ -140,7 +140,7 @@ public class SnssaiSamplesProcessorTest {
 		exp.put("1", ric1);
 		exp.put("2", ric2);	
 		try { 
-			ricConfiguration = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/ricConfiguration.json"))), new TypeReference<Map<String, Map<String, Integer>>>(){});
+			ricConfiguration = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/ricConfiguration.json"))), new TypeReference<Map<String, Map<String, Object>>>(){});
        } 
        catch (IOException e) { 
             e.printStackTrace(); 

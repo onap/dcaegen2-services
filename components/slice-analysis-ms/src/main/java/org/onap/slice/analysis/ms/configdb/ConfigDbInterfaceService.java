@@ -62,9 +62,9 @@ public class ConfigDbInterfaceService implements IConfigDbService {
 	/**
 	 *  Fetches the current configuration of RIC from config DB
 	 */
-	public Map<String,Map<String,Integer>> fetchCurrentConfigurationOfRIC(String snssai){
+	public Map<String,Map<String,Object>> fetchCurrentConfigurationOfRIC(String snssai){
 		String reqUrl=configDbBaseUrl+"/api/sdnc-config-db/v4/slice-config/"+snssai;
-		ResponseEntity<Map<String,Map<String,Integer>>> response=restclient.sendGetRequest(reqUrl, new ParameterizedTypeReference<Map<String,Map<String,Integer>>>() {
+		ResponseEntity<Map<String,Map<String,Object>>> response=restclient.sendGetRequest(reqUrl, new ParameterizedTypeReference<Map<String,Map<String,Object>>>() {
 		});
 		return response.getBody();
 	}
@@ -87,24 +87,18 @@ public class ConfigDbInterfaceService implements IConfigDbService {
 	 *  Fetches the RICS of an S-NSSAI from config DB
 	 */
 	public Map<String, List<String>> fetchRICsOfSnssai(String snssai){
-
 		Map<String,List<String>> responseMap=new HashMap<>();
-
 		String reqUrl=configDbBaseUrl+"/api/sdnc-config-db/v4/du-cell-list/"+snssai;
-
-		ResponseEntity<Map<String,List<CellsModel>>> response=restclient.sendGetRequest(reqUrl, new ParameterizedTypeReference<Map<String,List<CellsModel>>>() {
+		ResponseEntity<Map<String,List<CellsModel>>> response = restclient.sendGetRequest(reqUrl, new ParameterizedTypeReference<Map<String,List<CellsModel>>>() {
 		});
-
 
 		for (Map.Entry<String, List<CellsModel>> entry : response.getBody().entrySet()) {
 			List<String> cellslist=new ArrayList<>();
 			for(CellsModel cellmodel:entry.getValue()) {
-
 				cellslist.add(cellmodel.getCellLocalId());
 			}
 			responseMap.put(entry.getKey(), cellslist);
 		}
-
 		return responseMap;
 	}
 
