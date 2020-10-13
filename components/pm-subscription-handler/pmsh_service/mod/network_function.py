@@ -24,13 +24,13 @@ from mod.api.db_models import NetworkFunctionModel
 
 
 class NetworkFunction:
-    def __init__(self, **kwargs):
+    def __init__(self, sdnc_model_name=None, sdnc_model_version=None, **kwargs):
         """ Object representation of the NetworkFunction. """
         self.nf_name = kwargs.get('nf_name')
         self.model_invariant_id = kwargs.get('model_invariant_id')
         self.model_version_id = kwargs.get('model_version_id')
-        self.sdnc_model_name = None
-        self.sdnc_model_version = None
+        self.sdnc_model_name = sdnc_model_name
+        self.sdnc_model_version = sdnc_model_version
 
     @classmethod
     def nf_def(cls):
