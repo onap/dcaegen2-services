@@ -34,6 +34,6 @@ public interface IConfigDbService {
 	public Map<String, List<String>> fetchRICsOfSnssai(String snssai);
 	public List<String> fetchNetworkFunctionsOfSnssai(String snssai);
 	public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
-	public Map<String, Map<String,Integer>> fetchCurrentConfigurationOfRIC(String snssai);
+	public Map<String, Map<String,Object>> fetchCurrentConfigurationOfRIC(String snssai);
 	public Map<String ,String> fetchServiceDetails(String snssai);
 }

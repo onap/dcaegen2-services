@@ -21,8 +21,8 @@
 
 package org.onap.slice.analysis.ms.restclients;
 
-import org.onap.slice.analysis.ms.utils.BeanUtil;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -40,7 +40,9 @@ public class RestClient {
 
 	private static final String EXCEPTION_MSG = "Exception caught during request {}";
 	private static final Logger log = org.slf4j.LoggerFactory.getLogger(RestClient.class);
-
+	
+	@Autowired
+	private RestTemplate restTemplate;
 	protected RestClient() {
 
 	}
@@ -53,7 +55,6 @@ public class RestClient {
 			ParameterizedTypeReference<T> responseType) {
 		HttpEntity<Object> requestEntity = new HttpEntity<>(requestBody, headers);
 		try {
-			RestTemplate restTemplate = BeanUtil.getBean(RestTemplate.class);
 			return restTemplate.exchange(requestUrl, HttpMethod.POST, requestEntity, responseType);
 		} catch (Exception e) {
 			log.debug(EXCEPTION_MSG, e.getMessage());
@@ -68,7 +69,6 @@ public class RestClient {
 	public <T> ResponseEntity<T> sendGetRequest(HttpHeaders headers, String requestUrl, ParameterizedTypeReference<T> responseType) {
 		HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
 		try {
-			RestTemplate restTemplate = BeanUtil.getBean(RestTemplate.class);
 			return restTemplate.exchange(requestUrl, HttpMethod.GET, requestEntity, responseType);
 		} catch (Exception e) {
 			log.debug(EXCEPTION_MSG, e.getMessage());

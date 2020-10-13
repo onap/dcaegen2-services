@@ -21,6 +21,8 @@
 
 package org.onap.slice.analysis.ms.service;
 
+import java.util.List;
+
 import org.onap.slice.analysis.ms.configdb.IConfigDbService;
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.utils.BeanUtil;
@@ -31,7 +33,7 @@ import org.slf4j.LoggerFactory;
  * This Thread class consumes message from pm data queue and sends onset message to policy
  */
 public class ConsumerThread extends Thread {
-	private static Logger log = LoggerFactory.getLogger(PmThread.class);
+	private static Logger log = LoggerFactory.getLogger(ConsumerThread.class);
 	private PmDataQueue pmDataQueue;
 	private IConfigDbService configDbService;
 	private SnssaiSamplesProcessor snssaiSamplesProcessor;
@@ -55,16 +57,30 @@ public class ConsumerThread extends Thread {
 	public void run() {    
 		boolean done = false;
 		String snssai = "";
+		boolean result = false;
+		List<String> nfs = null;
 		while (!done) {
 			try {
 				Thread.sleep(initialDelaySec);
 				snssai = pmDataQueue.getSnnsaiFromQueue();
 				if (!snssai.equals("")) {
-					log.info("Consumer thread started for s-nssai {}",snssai);    
-					snssaiSamplesProcessor.processSamplesOfSnnsai(snssai, configDbService.fetchNetworkFunctionsOfSnssai(snssai));
+					log.info("Consumer thread processing data for s-nssai {}",snssai);    
+					try {
+						nfs = configDbService.fetchNetworkFunctionsOfSnssai(snssai);
+					}
+					catch(Exception e) {
+						log.error("Exception caught while fetching nfs of snssai {}, {}", snssai, e.getMessage());
+					}
+					if(nfs != null) {
+						result = snssaiSamplesProcessor.processSamplesOfSnnsai(snssai, nfs);
+						if(!result) {
+							log.info("Not enough samples to process for {}",snssai);
+							pmDataQueue.putSnssaiToQueue(snssai);
+						}
+					}
 				}
 			} catch (Exception e) {
-				log.error("Exception in Consumer Thread ", e);
+				log.error("Exception in Consumer Thread, {}", e.getMessage());
 				done = true;
 			}
 		}

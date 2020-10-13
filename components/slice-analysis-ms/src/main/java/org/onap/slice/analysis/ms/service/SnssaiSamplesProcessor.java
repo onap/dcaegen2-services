@@ -63,7 +63,7 @@ public class SnssaiSamplesProcessor {
 	private Map<String, List<String>> ricToCellMapping = new HashMap<>();
 	private Map<String, Map<String, Integer>> ricToPrbsMapping = new HashMap<>();
 	private Map<String, Map<String, Integer>> ricToThroughputMapping = new HashMap<>();
-	private int samples;
+	private int noOfSamples;
 	private List<String> pmsToCompute;	
 	private Map<String, String> prbThroughputMapping = new HashMap<>(); 
 	private int minPercentageChange;
@@ -71,7 +71,7 @@ public class SnssaiSamplesProcessor {
 	@PostConstruct
 	public void init() {
 		Configuration configuration = Configuration.getInstance();
-		samples = configuration.getSamples();
+		noOfSamples = configuration.getSamples();
 		pmsToCompute = new ArrayList<>();
 		pmsToCompute.add("PrbUsedDl");
 		pmsToCompute.add("PrbUsedUl");
@@ -84,22 +84,34 @@ public class SnssaiSamplesProcessor {
 	/**
 	 * process the measurement data of an S-NSSAI
 	 */
-	public void processSamplesOfSnnsai(String snssai, List<String> networkFunctions) {
-		networkFunctions.forEach(nf -> {
+	public boolean processSamplesOfSnnsai(String snssai, List<String> networkFunctions) { 
+		List<MeasurementObject> sample = null;
+		List<List<MeasurementObject>> samples = null;
+		log.info("Network Functions {} of snssai {}", networkFunctions, snssai);
+		for(String nf : networkFunctions) {
 			log.debug("Average of samples for {}:", snssai);
-			addToMeasurementList(averageCalculator.findAverageOfSamples(pmDataQueue.getSamplesFromQueue(new SubCounter(nf, snssai), samples)));
-		});		
+			samples = pmDataQueue.getSamplesFromQueue(new SubCounter(nf, snssai), noOfSamples);
+			if(samples != null) {
+				sample = averageCalculator.findAverageOfSamples(samples);
+				addToMeasurementList(sample);
+			}
+			else {
+				log.info("Not enough samples present for nf {}", nf);
+				return false;
+			}
+		}		
+		log.info("snssai measurement list {}", snssaiMeasurementList);
 		ricToCellMapping = configDbService.fetchRICsOfSnssai(snssai);	
-		log.debug("RIC to Cell Mapping for {} S-NSSAI: {}", snssai, ricToCellMapping);
-		Map<String, Map<String, Integer>> ricConfiguration = configDbService.fetchCurrentConfigurationOfRIC(snssai);
+		log.info("RIC to Cell Mapping for {} S-NSSAI: {}", snssai, ricToCellMapping);
+		Map<String, Map<String, Object>> ricConfiguration = configDbService.fetchCurrentConfigurationOfRIC(snssai);
 		Map<String, Integer> sliceConfiguration = configDbService.fetchCurrentConfigurationOfSlice(snssai);
-		log.debug("RIC Configuration: {}", ricConfiguration);
-		log.debug("Slice Configuration: {}", sliceConfiguration);
+		log.info("RIC Configuration {} and Slice Configuration {}", ricConfiguration, sliceConfiguration);
 		pmsToCompute.forEach(pm -> {
+			log.debug("processing for pm {}", pm);
 			sumOfPrbsAcrossCells(pm);
 			int sum = computeSum(pm);
 			computeThroughput(sliceConfiguration, sum, pm);
-			calculatePercentageChange(ricConfiguration, pm);
+			calculatePercentageChange(ricConfiguration, prbThroughputMapping.get(pm));
 		});
 		updateConfiguration();	
 		if(ricToThroughputMapping.size() > 0) {
@@ -107,7 +119,7 @@ public class SnssaiSamplesProcessor {
 			addProps.setResourceConfig(ricToThroughputMapping);
 			policyService.sendOnsetMessageToPolicy(snssai, addProps, configDbService.fetchServiceDetails(snssai));
 		}
-
+		return true;
 	}
 
 	/**
@@ -132,17 +144,18 @@ public class SnssaiSamplesProcessor {
 	 * Calculate the change in the configuration value and keep the configuration only if it is greater than a
 	 * specific limit 
 	 */
-	protected void calculatePercentageChange(Map<String, Map<String, Integer>> ricConfiguration, String pm) {
+	protected void calculatePercentageChange(Map<String, Map<String, Object>> ricConfiguration, String pm) {
 		Iterator<Map.Entry<String, Map<String,Integer>>> it = ricToThroughputMapping.entrySet().iterator();
 		Map.Entry<String, Map<String,Integer>> entry = null;
 		float existing = 0;
 		float change = 0;
 		while(it.hasNext()) {
 			entry = it.next();
-			existing = ricConfiguration.get(entry.getKey()).get(pm);
+			existing = (float)((int)ricConfiguration.get(entry.getKey()).get(pm));
 			change = ((Math.abs(entry.getValue().get(pm) - existing))/existing)*100;
 			if (change <= minPercentageChange) {
 				ricToThroughputMapping.get(entry.getKey()).remove(pm);
+				log.info("Removing pm data {} for RIC {}", pm, entry.getKey());
 			}
 		}
 	}
@@ -151,7 +164,7 @@ public class SnssaiSamplesProcessor {
 		ricToCellMapping.forEach((ric,cells) -> {
 			int sumOfPrbs = 0;
 			for(String cell : cells) {
-				int index = snssaiMeasurementList.indexOf(new MeasurementObject(cell));
+				int index = MeasurementObject.findIndex(cell, snssaiMeasurementList);
 				sumOfPrbs += snssaiMeasurementList.get(index).getPmData().get(pmName);
 			}
 			if(ricToPrbsMapping.containsKey(ric)) {
@@ -163,6 +176,7 @@ public class SnssaiSamplesProcessor {
 				ricToPrbsMapping.put(ric, pmToPrbMapping);
 			}
 		});
+		log.info("PRBs sum computed for RIC {}", ricToPrbsMapping);
 	}
 
 	protected Integer computeSum(String pm) {
@@ -188,7 +202,6 @@ public class SnssaiSamplesProcessor {
 				ricToThroughputMapping.put(ric, throughtputMap);
 			}
 		}
-
+		log.info("Throughput computed for RIC {}", ricToThroughputMapping);
 	}
-
 }

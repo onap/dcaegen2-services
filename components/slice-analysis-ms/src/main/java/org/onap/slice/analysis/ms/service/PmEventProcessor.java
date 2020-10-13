@@ -31,6 +31,8 @@ import org.onap.slice.analysis.ms.models.pmnotification.Event;
 import org.onap.slice.analysis.ms.models.pmnotification.MeasInfoList;
 import org.onap.slice.analysis.ms.models.pmnotification.MeasResult;
 import org.onap.slice.analysis.ms.models.pmnotification.MeasValuesList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +43,7 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class PmEventProcessor implements IPmEventProcessor{
 	protected Map<String, List<MeasurementObject>> instanceMap = new HashMap<>();
-
+	private static Logger log = LoggerFactory.getLogger(PmEventProcessor.class);
 
 	/**
 	 * Process the PM event
@@ -53,6 +55,7 @@ public class PmEventProcessor implements IPmEventProcessor{
 			List<MeasValuesList> subCounterMeasurements = measurement.getMeasValuesList();	
 			subCounterMeasurements.forEach(subCounterMeasurement -> processMeasurementObjectData(collectedSubCounters, subCounterMeasurement));
 		});
+		log.info("Processed Event: {}", instanceMap);
 		return instanceMap;
 	}
 
@@ -65,26 +68,28 @@ public class PmEventProcessor implements IPmEventProcessor{
 		measResultList.forEach(measResult -> {
 			String pmName = collectedSubCounters.get(measResult.getP()-1);
 			Integer pmValue = Integer.valueOf(measResult.getsValue());
-			Map<String,String> pmMapping = getMapKey(pmName);
-			String snssai = pmMapping.get("snssai");
-			String pm = pmMapping.get("pm"); 
-			Map<String, Integer> pmData = new HashMap<>();
-			pmData.put(pm, pmValue);
-			if (instanceMap.containsKey(snssai)) {
-				int index = instanceMap.get(snssai).indexOf(new MeasurementObject(measObjId));
-				if (index == -1) {
-					instanceMap.get(snssai).add(new MeasurementObject(measObjId,pmData));
+			if(pmName.contains("PrbUsedUl") || pmName.contains("PrbUsedDl")) {
+				Map<String,String> pmMapping = getMapKey(pmName);
+				String snssai = pmMapping.get("snssai");
+				String pm = pmMapping.get("pm"); 
+				Map<String, Integer> pmData = new HashMap<>();
+				pmData.put(pm, pmValue);
+				if (instanceMap.containsKey(snssai)) {
+					int index = MeasurementObject.findIndex(measObjId, instanceMap.get(snssai));
+					if (index == -1) {
+						instanceMap.get(snssai).add(new MeasurementObject(measObjId,pmData));
+					}
+					else {
+						instanceMap.get(snssai).get(index).getPmData().put(pm, pmValue);
+					}		    	
 				}
 				else {
-					instanceMap.get(snssai).get(index).getPmData().put(pmName, pmValue);
-				}		    	
+					List<MeasurementObject> l = new LinkedList<>();
+					l.add(new MeasurementObject(measObjId,pmData));
+					instanceMap.put(snssai, l);
+				}
 			}
-			else {
-				List<MeasurementObject> l = new LinkedList<>();
-				l.add(new MeasurementObject(measObjId,pmData));
-				instanceMap.put(snssai, l);
-			}
-		});
+		});	
 	}
 
 	/**
@@ -92,14 +97,10 @@ public class PmEventProcessor implements IPmEventProcessor{
 	 */
 	public Map<String, String> getMapKey(String pmName) {
 		String [] pmNameArr = pmName.split("\\.");
-		String snssai = "";
 		String pm = pmNameArr[1];
 		Map<String, String> result = new HashMap<>();
 		result.put("pm", pm);
-		if ((pm.equalsIgnoreCase("PrbUsedDl")) || (pm.equalsIgnoreCase("PrbUsedUl"))){
-			snssai = pmNameArr[2];
-		}
-		result.put("snssai", snssai);
+		result.put("snssai", pmNameArr[2]);
 		return result;
 	}
 }
