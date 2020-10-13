@@ -66,8 +66,8 @@ class NetworkFunctionModel(db.Model):
         cascade='all, delete-orphan',
         backref='nf')
 
-    def __init__(self, nf_name, model_invariant_id, model_version_id, sdnc_model_name=None,
-                 sdnc_model_version=None):
+    def __init__(self, nf_name, model_invariant_id, model_version_id, sdnc_model_name,
+                 sdnc_model_version):
         self.nf_name = nf_name
         self.model_invariant_id = model_invariant_id
         self.model_version_id = model_version_id
@@ -79,11 +79,11 @@ class NetworkFunctionModel(db.Model):
 
     def to_nf(self):
         from mod.network_function import NetworkFunction
-        return NetworkFunction(**{'nf_name': self.nf_name,
+        return NetworkFunction(sdnc_model_name=self.sdnc_model_name,
+                               sdnc_model_version=self.sdnc_model_version,
+                               **{'nf_name': self.nf_name,
                                   'model_invariant_id': self.model_invariant_id,
-                                  'model_version_id': self.model_version_id,
-                                  'sdnc_model_name': self.sdnc_model_name,
-                                  'sdnc_model_version': self.sdnc_model_version})
+                                  'model_version_id': self.model_version_id})
 
 
 class NfSubRelationalModel(db.Model):
