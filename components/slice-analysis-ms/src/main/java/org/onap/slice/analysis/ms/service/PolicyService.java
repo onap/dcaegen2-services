@@ -99,8 +99,8 @@ public class PolicyService {
 		ObjectMapper obj = new ObjectMapper();
 		String msg =  "";
 		try { 
-			log.debug("Policy onset message for S-NSSAI: {} is {}", snssai, msg);
 			msg = obj.writeValueAsString(onsetMessage);
+			log.info("Policy onset message for S-NSSAI: {} is {}", snssai, msg);
 			policyDmaapClient.sendNotificationToPolicy(msg);
 		} 
 		catch (Exception e) { 

@@ -68,10 +68,10 @@ public class PmThread extends Thread {
 		while (!done) {
 			try {
 				Thread.sleep(1000);
-				if (newPmNotification.getNewNotif()) {
-					log.info("New PM notification from Dmaap");
+				if (newPmNotification.getNewNotif()) {				
 					String pmNotificationString = performanceNotificationsRepository.getPerformanceNotificationFromQueue();
 					if(pmNotificationString != null) {
+						log.info("New PM notification");
 						ObjectMapper mapper = new ObjectMapper();
 						pmNotification = mapper.readValue(pmNotificationString, PmNotification.class);
 						processedData = pmEventProcessor.processEvent(pmNotification.getEvent());

@@ -31,6 +31,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.onap.slice.analysis.ms.models.MeasurementObject;
 import org.onap.slice.analysis.ms.models.SubCounter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /** 
@@ -38,6 +40,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class PmDataQueue {
+    private static Logger log = LoggerFactory.getLogger(PmDataQueue.class);
+
 	private Map<SubCounter, Queue<List<MeasurementObject>>> subCounterMap = Collections.synchronizedMap(new LinkedHashMap<SubCounter, Queue<List<MeasurementObject>>>());
 	private Queue<String> snssaiList = new LinkedBlockingQueue<>();
 
@@ -54,6 +58,7 @@ public class PmDataQueue {
 			measQueue.add(measurementObjectData);
 			subCounterMap.put(subCounter, measQueue);
 		}
+		log.debug("Queue: {}", subCounterMap);
 	}
 
 	/**
@@ -64,9 +69,11 @@ public class PmDataQueue {
 		List<List<MeasurementObject>> sampleList = new LinkedList<>();
 		if (subCounterMap.containsKey(subCounter)){
 			Queue<List<MeasurementObject>> measQueue = subCounterMap.get(subCounter);
-			while(samples > 0) {
-				sampleList.add(measQueue.remove());
-				samples --;
+			if(measQueue.size() >= samples) {
+				while(samples > 0) {
+					sampleList.add(measQueue.remove());
+					samples --;
+				}
 			}
 		}
 		return sampleList;
@@ -86,10 +93,12 @@ public class PmDataQueue {
 	public String getSnnsaiFromQueue() {
 		String snssai = "";
 		try {
-			snssai = snssaiList.remove();
+			if(!snssaiList.isEmpty()){
+				snssai = snssaiList.remove();
+			}
 		}
 		catch(Exception e) {
-
+			log.error("Problem fetching from the Queue, {}", e.getMessage());
 		}
 		return snssai;
 	}

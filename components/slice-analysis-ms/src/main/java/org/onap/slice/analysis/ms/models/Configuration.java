@@ -260,6 +260,9 @@ public class Configuration {
 		 minPercentageChange = jsonObject.get("sliceanalysisms.minPercentageChange").getAsInt();
 		 initialDelaySeconds = jsonObject.get("sliceanalysisms.initialDelaySeconds").getAsLong();
 
+		 aafUsername = jsonObject.get("aafUsername").getAsString();
+		 aafPassword = jsonObject.get("aafPassword").getAsString();
+		 
 		 log.info("configuration from CBS {}", this);
 	 }
 }

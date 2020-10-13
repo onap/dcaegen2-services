@@ -313,9 +313,15 @@
 							<directory>${project.build.directory}</directory>
 							<include>${project.artifactId}-${project.version}.jar</include>
 						</resource>
+						<resource>
+							<targetPath>/bin</targetPath>
+							<directory>${project.basedir}</directory>
+							<include>aaf_root_ca.cer</include>
+						</resource>
 					</resources>
 					<runs>
 						<!-- Maven is loosing file permissions during artifacts copy -->
+						<run>echo yes | keytool -importcert -alias "aafrootca" -trustcacerts -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit -file /bin/aaf_root_ca.cer </run>
 				 		<run>adduser --disabled-password sliceanalysis </run>
 						<run>mv /bin/*.jar /bin/application.jar</run>
 						<run>chmod -R 777 /bin</run>

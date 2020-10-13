@@ -84,17 +84,25 @@ public class SnssaiSamplesProcessor {
 	/**
 	 * process the measurement data of an S-NSSAI
 	 */
-	public void processSamplesOfSnnsai(String snssai, List<String> networkFunctions) {
-		networkFunctions.forEach(nf -> {
+	public boolean processSamplesOfSnnsai(String snssai, List<String> networkFunctions) { 
+		List<MeasurementObject> sample = null;
+		for(String nf : networkFunctions) {
 			log.debug("Average of samples for {}:", snssai);
-			addToMeasurementList(averageCalculator.findAverageOfSamples(pmDataQueue.getSamplesFromQueue(new SubCounter(nf, snssai), samples)));
-		});		
+			sample = averageCalculator.findAverageOfSamples(pmDataQueue.getSamplesFromQueue(new SubCounter(nf, snssai), samples));
+			if(!sample.isEmpty()) {
+				addToMeasurementList(sample);
+			}
+			else {
+				return false;
+			}
+		}		
+		log.info("snssai measurement list {}", snssaiMeasurementList);
 		ricToCellMapping = configDbService.fetchRICsOfSnssai(snssai);	
 		log.debug("RIC to Cell Mapping for {} S-NSSAI: {}", snssai, ricToCellMapping);
 		Map<String, Map<String, Integer>> ricConfiguration = configDbService.fetchCurrentConfigurationOfRIC(snssai);
 		Map<String, Integer> sliceConfiguration = configDbService.fetchCurrentConfigurationOfSlice(snssai);
-		log.debug("RIC Configuration: {}", ricConfiguration);
-		log.debug("Slice Configuration: {}", sliceConfiguration);
+		log.info("RIC Configuration: {}", ricConfiguration);
+		log.info("Slice Configuration: {}", sliceConfiguration);
 		pmsToCompute.forEach(pm -> {
 			sumOfPrbsAcrossCells(pm);
 			int sum = computeSum(pm);
@@ -107,7 +115,7 @@ public class SnssaiSamplesProcessor {
 			addProps.setResourceConfig(ricToThroughputMapping);
 			policyService.sendOnsetMessageToPolicy(snssai, addProps, configDbService.fetchServiceDetails(snssai));
 		}
-
+		return true;
 	}
 
 	/**
@@ -188,7 +196,6 @@ public class SnssaiSamplesProcessor {
 				ricToThroughputMapping.put(ric, throughtputMap);
 			}
 		}
-
 	}
 
 }
