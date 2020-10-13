@@ -22,6 +22,7 @@
 
 package org.onap.slice.analysis.ms.models;
 
+import java.util.List;
 import java.util.Map;
 
 /** 
@@ -30,6 +31,17 @@ import java.util.Map;
 public class MeasurementObject {
 	private String measurementObjectId;
 	private Map<String, Integer> pmData;
+
+	public static int findIndex(String measurementObjectId, List<MeasurementObject> list) {
+		int index = -1;
+		int len = list.size();
+		for(int i=0; i<len ; i++) {
+			if(measurementObjectId.equals(list.get(i).getMeasurementObjectId())) {
+				index = i;
+			}
+		}
+		return index;
+	}
 
 	public String getMeasurementObjectId() {
 		return measurementObjectId;
@@ -67,9 +79,10 @@ public class MeasurementObject {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((measurementObjectId == null) ? 0 : measurementObjectId.hashCode());
+		result = prime * result + ((pmData == null) ? 0 : pmData.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -83,6 +96,11 @@ public class MeasurementObject {
 			if (other.measurementObjectId != null)
 				return false;
 		} else if (!measurementObjectId.equals(other.measurementObjectId))
+			return false;
+		if (pmData == null) {
+			if (other.pmData != null)
+				return false;
+		} else if (!pmData.equals(other.pmData))
 			return false;
 		return true;
 	}

@@ -50,19 +50,22 @@ public class AverageCalculator {
 	 * Find average of samples
 	 */
 	public List<MeasurementObject> findAverageOfSamples(List<List<MeasurementObject>> samples) {
+		log.debug("find average for samples {}", samples);
 		int numOfSamples = samples.size();
 		List<MeasurementObject> result = new ArrayList<>();
-		samples.forEach(sample -> 
-		sample.forEach(cellMeasObj -> {
-			int index = result.indexOf(cellMeasObj);
-			if(index != -1) {
-				result.set(index, findSum(result.get(index), cellMeasObj));
+		if(!samples.isEmpty()) {
+			for(List<MeasurementObject> sample : samples) {
+				for(MeasurementObject cellMeasObj : sample) {
+					int index = MeasurementObject.findIndex(cellMeasObj.getMeasurementObjectId(), result);
+					if(index != -1) {
+						result.set(index, findSum(result.get(index), cellMeasObj));
+					}
+					else { 
+						result.add(cellMeasObj);
+					}
+				}
 			}
-			else { 
-				result.add(cellMeasObj);
-			}
-		})
-				);
+		}
 		return findAvg(result, numOfSamples);
 	}
 
@@ -81,13 +84,15 @@ public class AverageCalculator {
 	 * Calculate the average
 	 */
 	public List<MeasurementObject> findAvg(List<MeasurementObject> result, int numOfSamples) {
-		result.forEach(cellMeasObj ->
-		pmNames.forEach(pmName -> {
-			int value = (cellMeasObj.getPmData().get(pmName))/numOfSamples;
-			cellMeasObj.getPmData().put(pmName, value);
-		})
-				);
-		log.debug("Average of measurement data samples {}",result);
+		if(!result.isEmpty()) {
+			result.forEach(cellMeasObj ->
+			pmNames.forEach(pmName -> {
+				int value = (cellMeasObj.getPmData().get(pmName))/numOfSamples;
+				cellMeasObj.getPmData().put(pmName, value);
+			})
+			);
+			log.debug("Average of measurement data samples {}",result);
+		}
 		return result;
 	}
 }
