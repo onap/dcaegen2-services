@@ -32,7 +32,7 @@
 
 	<groupId>org.onap.dcaegen2.services.components</groupId>
 	<artifactId>slice-analysis-ms</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>dcaegen2-services-slice-analysis-ms</name>
 	<description>Network slice PM analyser</description>
         <packaging>jar</packaging>
@@ -313,17 +313,23 @@
 							<directory>${project.build.directory}</directory>
 							<include>${project.artifactId}-${project.version}.jar</include>
 						</resource>
+						<resource>
+							<targetPath>/bin</targetPath>
+							<directory>${project.basedir}</directory>
+							<include>entry.sh</include>
+						</resource>
 					</resources>
 					<runs>
 						<!-- Maven is loosing file permissions during artifacts copy -->
 				 		<run>adduser --disabled-password sliceanalysis </run>
 						<run>mv /bin/*.jar /bin/application.jar</run>
 						<run>chmod -R 777 /bin</run>
+						<run>chmod +x /bin/entry.sh</run>
 					</runs>
 					<exposes>
 						<expose>8080</expose>
 					</exposes>
-					<entryPoint>java -jar /bin/application.jar</entryPoint>
+					<entryPoint>./bin/entry.sh</entryPoint>
 				</configuration>
 			</plugin>
 		</plugins>
