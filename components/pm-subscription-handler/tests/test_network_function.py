@@ -17,7 +17,7 @@
 # ============LICENSE_END=====================================================
 import json
 import os
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 from mod.network_function import NetworkFunction
 from tests.base_setup import BaseClassSetup
@@ -31,12 +31,16 @@ class NetworkFunctionTests(BaseClassSetup):
 
     def setUp(self):
         super().setUp()
-        self.nf_1 = NetworkFunction(nf_name='pnf_1',
-                                    model_invariant_id='some-id',
-                                    model_version_id='some-id')
-        self.nf_2 = NetworkFunction(nf_name='pnf_2',
-                                    model_invariant_id='some-id',
-                                    model_version_id='some-id')
+        self.nf_1 = NetworkFunction(sdnc_model_name='blah', sdnc_model_version=1.0,
+                                    **{'nf_name': 'pnf_1',
+                                       'model_invariant_id': 'some_id',
+                                       'model_version_id': 'some_other_id',
+                                       'model_name': 'some_model'})
+        self.nf_2 = NetworkFunction(sdnc_model_name='blah', sdnc_model_version=2.0,
+                                    **{'nf_name': 'pnf_2',
+                                       'model_invariant_id': 'some_id',
+                                       'model_version_id': 'some_other_id',
+                                       'model_name': 'some_model'})
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_model_info.json'), 'r') as data:
             self.good_model_info = json.loads(data.read())
         with open(os.path.join(os.path.dirname(__file__),
@@ -77,7 +81,7 @@ class NetworkFunctionTests(BaseClassSetup):
     def test_delete_network_function(self):
         sub = self.app_conf.subscription
         for nf in [self.nf_1, self.nf_2]:
-            sub.add_network_function_to_subscription(nf, self.app_conf.subscription.get())
+            self.app_conf.subscription.add_network_function_to_subscription(nf, Mock())
         nfs = NetworkFunction.get_all()
         self.assertEqual(2, len(nfs))
         NetworkFunction.delete(nf_name=self.nf_1.nf_name)
@@ -87,9 +91,9 @@ class NetworkFunctionTests(BaseClassSetup):
     @patch('mod.aai_client.get_aai_model_data')
     def test_set_sdnc_params_true(self, mock_get_aai_model):
         mock_get_aai_model.return_value = self.good_model_info
-        self.assertTrue(self.nf_1.set_sdnc_params(self.app_conf))
+        self.assertTrue(self.nf_1.set_sdnc_params(self.app_conf, mock_get_aai_model.return_value))
 
     @patch('mod.aai_client.get_aai_model_data')
     def test_set_sdnc_params_false(self, mock_get_aai_model):
         mock_get_aai_model.return_value = self.bad_model_info
-        self.assertFalse(self.nf_1.set_sdnc_params(self.app_conf))
+        self.assertFalse(self.nf_1.set_sdnc_params(self.app_conf, mock_get_aai_model.return_value))
