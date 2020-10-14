@@ -105,7 +105,9 @@ class Subscription:
         """
         try:
             clean_sub = {k: v for k, v in self.__dict__.items() if k != 'nfFilter'}
-            sub_event = {'nfName': nf.nf_name, 'blueprintName': nf.sdnc_model_name,
+            sub_event = {'nfName': nf.nf_name,
+                         'ipv4Address': nf.ip_address,
+                         'blueprintName': nf.sdnc_model_name,
                          'blueprintVersion': nf.sdnc_model_version,
                          'policyName': app_conf.operational_policy_name,
                          'changeType': 'DELETE'
