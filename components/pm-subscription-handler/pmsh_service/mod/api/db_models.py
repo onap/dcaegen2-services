@@ -58,6 +58,7 @@ class NetworkFunctionModel(db.Model):
     nf_name = Column(String(100), unique=True)
     model_invariant_id = Column(String(100))
     model_version_id = Column(String(100))
+    model_name = Column(String(100))
     sdnc_model_name = Column(String(100))
     sdnc_model_version = Column(String(100))
 
@@ -66,11 +67,12 @@ class NetworkFunctionModel(db.Model):
         cascade='all, delete-orphan',
         backref='nf')
 
-    def __init__(self, nf_name, model_invariant_id, model_version_id, sdnc_model_name,
+    def __init__(self, nf_name, model_invariant_id, model_version_id, model_name, sdnc_model_name,
                  sdnc_model_version):
         self.nf_name = nf_name
         self.model_invariant_id = model_invariant_id
         self.model_version_id = model_version_id
+        self.model_name = model_name
         self.sdnc_model_name = sdnc_model_name
         self.sdnc_model_version = sdnc_model_version
 
@@ -83,7 +85,8 @@ class NetworkFunctionModel(db.Model):
                                sdnc_model_version=self.sdnc_model_version,
                                **{'nf_name': self.nf_name,
                                   'model_invariant_id': self.model_invariant_id,
-                                  'model_version_id': self.model_version_id})
+                                  'model_version_id': self.model_version_id,
+                                  'model_name': self.model_name})
 
 
 class NfSubRelationalModel(db.Model):
@@ -122,5 +125,6 @@ class NfSubRelationalModel(db.Model):
                 'nf_sub_status': self.nf_sub_status,
                 'model_invariant_id': nf.model_invariant_id,
                 'model_version_id': nf.model_version_id,
+                'model_name': nf.model_name,
                 'sdnc_model_name': nf.sdnc_model_name,
                 'sdnc_model_version': nf.sdnc_model_version}
