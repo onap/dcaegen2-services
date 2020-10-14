@@ -133,12 +133,20 @@ def _filter_nf_data(nf_data, app_conf):
             if nf['properties'].get('orchestration-status') != 'Active':
                 continue
             name_identifier = 'pnf-name' if nf['node-type'] == 'pnf' else 'vnf-name'
+            try:
+                sdnc_model_data = get_aai_model_data(app_conf,
+                                                     nf['properties'].get('model-invariant-id'),
+                                                     nf['properties'].get('model-version-id'),
+                                                     nf['properties'].get(name_identifier))
+            except Exception as e:
+                logger.error(f'Failed to get model info for XNFs from AAI: {e}', exc_info=True)
             new_nf = mod.network_function.NetworkFunction(
                 nf_name=nf['properties'].get(name_identifier),
                 ip_address=nf['properties'].get('ipaddress-v4-oam'),
                 model_invariant_id=nf['properties'].get('model-invariant-id'),
-                model_version_id=nf['properties'].get('model-version-id'))
-            if not new_nf.set_sdnc_params(app_conf):
+                model_version_id=nf['properties'].get('model-version-id'),
+                model_name=sdnc_model_data['model-name'] or None)
+            if not new_nf.set_sdnc_params(app_conf, sdnc_model_data):
                 continue
             if app_conf.nf_filter.is_nf_in_filter(new_nf):
                 nf_list.append(new_nf)

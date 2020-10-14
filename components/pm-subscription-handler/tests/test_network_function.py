@@ -35,12 +35,14 @@ class NetworkFunctionTests(BaseClassSetup):
                                     **{'nf_name': 'pnf_1',
                                        'ip_address': '1.2.3.4',
                                        'model_invariant_id': 'some_id',
-                                       'model_version_id': 'some_other_id'})
+                                       'model_version_id': 'some_other_id',
+                                       'model_name': 'some_model'})
         self.nf_2 = NetworkFunction(sdnc_model_name='blah', sdnc_model_version=2.0,
                                     **{'nf_name': 'pnf_2',
                                        'ip_address': '1.2.3.4',
                                        'model_invariant_id': 'some_id',
-                                       'model_version_id': 'some_other_id'})
+                                       'model_version_id': 'some_other_id',
+                                       'model_name': 'some_model'})
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_model_info.json'), 'r') as data:
             self.good_model_info = json.loads(data.read())
         with open(os.path.join(os.path.dirname(__file__),
@@ -90,9 +92,9 @@ class NetworkFunctionTests(BaseClassSetup):
     @patch('mod.aai_client.get_aai_model_data')
     def test_set_sdnc_params_true(self, mock_get_aai_model):
         mock_get_aai_model.return_value = self.good_model_info
-        self.assertTrue(self.nf_1.set_sdnc_params(self.app_conf))
+        self.assertTrue(self.nf_1.set_sdnc_params(self.app_conf, mock_get_aai_model.return_value))
 
     @patch('mod.aai_client.get_aai_model_data')
     def test_set_sdnc_params_false(self, mock_get_aai_model):
         mock_get_aai_model.return_value = self.bad_model_info
-        self.assertFalse(self.nf_1.set_sdnc_params(self.app_conf))
+        self.assertFalse(self.nf_1.set_sdnc_params(self.app_conf, mock_get_aai_model.return_value))
