@@ -44,12 +44,13 @@ def load_test_cases():
 class NetworkFunctionFilterTest(TestCase):
 
     @parameterized.expand(load_test_cases, name_func=custom_name_func)
-    def test(self, test_name, nf_filter, nf_name, model_invariant_uuid, model_version_id,
+    def test(self, test_name, nf_filter, nf_name, model_invariant_uuid, model_version_id, model_name,
              expected_result):
         nf_filter = NetworkFunctionFilter(**nf_filter)
         self.assertEqual(nf_filter.is_nf_in_filter(NetworkFunction(nf_name=nf_name,
                                                    model_invariant_id=model_invariant_uuid,
-                                                   model_version_id=model_version_id)),
+                                                   model_version_id=model_version_id,
+                                                    model_name=model_name)),
                          expected_result)
 
     def test_filter_true_on_multiple_modelInvariantIDs(self):
@@ -61,12 +62,16 @@ class NetworkFunctionFilterTest(TestCase):
                 '7129e420-d396-4efb-af02-6b83499b12f8'
             ],
             "modelVersionIDs": [
+            ],
+            "modelNames": [
+
             ]
         })
         self.assertTrue(nf_filter.is_nf_in_filter(
             NetworkFunction(nf_name='pnf1',
                             model_invariant_id='7129e420-d396-4efb-af02-6b83499b12f8',
-                            model_version_id='e80a6ae3-cafd-4d24-850d-e14c084a5ca9')))
+                            model_version_id='e80a6ae3-cafd-4d24-850d-e14c084a5ca9',
+                            model_name='pnf_102')))
 
     def test_filter_false_on_modelInvariantIDs_being_false_and_pnfname_being_true(self):
         nf_filter = NetworkFunctionFilter(**{
@@ -79,9 +84,13 @@ class NetworkFunctionFilterTest(TestCase):
                 '7129e420-d396-4efb-af02-6b83499b12f8'
             ],
             "modelVersionIDs": [
+            ],
+            "modelNames": [
+
             ]
         })
         self.assertFalse(nf_filter.is_nf_in_filter(
             NetworkFunction(nf_name='pnf1',
                             model_invariant_id='WrongModelInvariantUUID',
-                            model_version_id='e80a6ae3-cafd-4d24-850d-e14c084a5ca9')))
+                            model_version_id='e80a6ae3-cafd-4d24-850d-e14c084a5ca9',
+                            model_name='pnf_102')))

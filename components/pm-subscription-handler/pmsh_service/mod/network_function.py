@@ -30,12 +30,13 @@ class NetworkFunction:
         self.ip_address = kwargs.get('ip_address')
         self.model_invariant_id = kwargs.get('model_invariant_id')
         self.model_version_id = kwargs.get('model_version_id')
+        self.model_name = kwargs.get('model_name')
         self.sdnc_model_name = sdnc_model_name
         self.sdnc_model_version = sdnc_model_version
 
     @classmethod
     def nf_def(cls):
-        return cls(nf_name=None, ip_address=None, model_invariant_id=None, model_version_id=None,
+        return cls(nf_name=None, ip_address=None, model_invariant_id=None, model_version_id=None, model_name=None,
                    sdnc_model_name=None, sdnc_model_version=None)
 
     def __str__(self):
@@ -43,6 +44,7 @@ class NetworkFunction:
                f'ipaddress-v4-oam: {self.ip_address}, ' \
                f'model-invariant-id: {self.model_invariant_id}, ' \
                f'model-version-id: {self.model_version_id}, ' \
+               f'model-name: {self.model_name}, ' \
                f'sdnc-model-name: {self.sdnc_model_name}, ' \
                f'sdnc-model-version: {self.sdnc_model_version}'
 
@@ -52,12 +54,13 @@ class NetworkFunction:
             self.ip_address == other.ip_address and \
             self.model_invariant_id == other.model_invariant_id and \
             self.model_version_id == other.model_version_id and \
+            self.model_name == other.model_name and \
             self.sdnc_model_name == other.sdnc_model_name and \
             self.sdnc_model_version == other.sdnc_model_version
 
     def __hash__(self):
-        return hash((self.nf_name, self.ip_address, self.model_invariant_id,
-                     self.model_version_id, self.sdnc_model_name, self.sdnc_model_version))
+        return hash((self.nf_name,  self.ip_address,self.model_invariant_id,
+                     self.model_version_id, self.model_name, self.sdnc_model_name, self.sdnc_model_version))
 
     def create(self):
         """ Creates a NetworkFunction database entry """
@@ -69,6 +72,7 @@ class NetworkFunction:
                                           ip_address=self.ip_address,
                                           model_invariant_id=self.model_invariant_id,
                                           model_version_id=self.model_version_id,
+                                          model_name=self.model_name,
                                           sdnc_model_name=self.sdnc_model_name,
                                           sdnc_model_version=self.sdnc_model_version)
             db.session.add(new_nf)
@@ -80,22 +84,15 @@ class NetworkFunction:
                          f' returning this network function..')
             return existing_nf
 
-    def set_sdnc_params(self, app_conf):
+    def set_sdnc_params(self, app_conf,sdnc_model_data):
         params_set = True
         try:
-            sdnc_model_data = mod.aai_client.get_aai_model_data(app_conf, self.model_invariant_id,
-                                                                self.model_version_id, self.nf_name)
-            try:
-                self.sdnc_model_name = sdnc_model_data['sdnc-model-name']
-                self.sdnc_model_version = sdnc_model_data['sdnc-model-version']
-                return params_set
-            except KeyError as e:
-                logger.info(f'Skipping NF {self.nf_name} as there is no '
-                            f'sdnc-model data associated in AAI: {e}', exc_info=True)
-                return not params_set
-        except Exception as e:
-            logger.error(f'Failed to get sdnc-model info for XNF {self.nf_name} from AAI: {e}',
-                         exc_info=True)
+            self.sdnc_model_name = sdnc_model_data['sdnc-model-name']
+            self.sdnc_model_version = sdnc_model_data['sdnc-model-version']
+            return params_set
+        except KeyError as e:
+            logger.info(f'Skipping NF {self.nf_name} as there is no '
+                        f'sdnc-model data associated in AAI: {e}', exc_info=True)
             return not params_set
 
     @staticmethod
@@ -140,6 +137,7 @@ class NetworkFunctionFilter:
         self.nf_names = kwargs.get('nfNames')
         self.model_invariant_ids = kwargs.get('modelInvariantIDs')
         self.model_version_ids = kwargs.get('modelVersionIDs')
+        self.model_names = kwargs.get('modelNames')
         self.regex_matcher = re.compile('|'.join(raw_regex for raw_regex in self.nf_names))
 
     def is_nf_in_filter(self, nf):
@@ -157,5 +155,7 @@ class NetworkFunctionFilter:
         if self.model_invariant_ids and nf.model_invariant_id not in self.model_invariant_ids:
             match = False
         if self.model_version_ids and nf.model_version_id not in self.model_version_ids:
+            match = False
+        if self.model_names and nf.model_name not in self.model_names:
             match = False
         return match
