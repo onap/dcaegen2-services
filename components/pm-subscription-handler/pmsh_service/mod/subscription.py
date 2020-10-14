@@ -79,6 +79,8 @@ class Subscription:
         except Exception as e:
             logger.error(f'Failed to create subscription {self.subscriptionName} in the DB: {e}',
                          exc_info=True)
+        finally:
+            db.session.remove()
 
     def update_subscription_status(self):
         """ Updates the status of subscription in subscription table """
@@ -92,6 +94,8 @@ class Subscription:
         except Exception as e:
             logger.error(f'Failed to update status of subscription: {self.subscriptionName}: {e}',
                          exc_info=True)
+        finally:
+            db.session.remove()
 
     def prepare_subscription_event(self, nf, app_conf):
         """Prepare the sub event for publishing
@@ -105,7 +109,9 @@ class Subscription:
         """
         try:
             clean_sub = {k: v for k, v in self.__dict__.items() if k != 'nfFilter'}
-            sub_event = {'nfName': nf.nf_name, 'blueprintName': nf.sdnc_model_name,
+            sub_event = {'nfName': nf.nf_name,
+                         'ipv4Address': nf.ip_address,
+                         'blueprintName': nf.sdnc_model_name,
                          'blueprintVersion': nf.sdnc_model_version,
                          'policyName': app_conf.operational_policy_name,
                          'changeType': 'DELETE'
@@ -149,8 +155,9 @@ class Subscription:
         Returns:
             SubscriptionModel object else None
         """
-        return SubscriptionModel.query.filter(
+        sub_model = SubscriptionModel.query.filter(
             SubscriptionModel.subscription_name == self.subscriptionName).one_or_none()
+        return sub_model
 
     def get_local_sub_admin_state(self):
         """ Retrieves the subscription admin state
@@ -160,6 +167,7 @@ class Subscription:
         """
         sub_model = SubscriptionModel.query.filter(
             SubscriptionModel.subscription_name == self.subscriptionName).one_or_none()
+        db.session.remove()
         return sub_model.status
 
     @staticmethod
@@ -169,14 +177,17 @@ class Subscription:
         Returns:
             list(SubscriptionModel): Subscriptions list else empty
         """
-        return SubscriptionModel.query.all()
+
+        sub_models = SubscriptionModel.query.all()
+        db.session.remove()
+        return sub_models
 
     def activate_subscription(self, nfs, mr_pub, app_conf):
         logger.info(f'Activate subscription initiated for {self.subscriptionName}.')
         try:
             existing_nfs = self.get_network_functions()
             sub_model = self.get()
-            for nf in set(nfs + existing_nfs):
+            for nf in [new_nf for new_nf in nfs if new_nf not in existing_nfs]:
                 logger.info(f'Publishing event to activate '
                             f'Sub: {self.subscriptionName} for the nf: {nf.nf_name}')
                 mr_pub.publish_subscription_event_data(self, nf, app_conf)
@@ -209,6 +220,7 @@ class Subscription:
             list(NfSubRelationalModel): NetworkFunctions per Subscription list else empty
         """
         nf_per_subscriptions = NfSubRelationalModel.query.all()
+        db.session.remove()
         return nf_per_subscriptions
 
     @staticmethod
@@ -238,5 +250,5 @@ class Subscription:
             nf_model_object = NetworkFunctionModel.query.filter(
                 NetworkFunctionModel.nf_name == nf_sub_entry.nf_name).one_or_none()
             nfs.append(nf_model_object.to_nf())
-
+        db.session.remove()
         return nfs

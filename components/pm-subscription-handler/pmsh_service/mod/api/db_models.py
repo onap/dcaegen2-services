@@ -48,6 +48,7 @@ class SubscriptionModel(db.Model):
     def serialize(self):
         sub_nfs = NfSubRelationalModel.query.filter(
             NfSubRelationalModel.subscription_name == self.subscription_name).all()
+        db.session.remove()
         return {'subscription_name': self.subscription_name, 'subscription_status': self.status,
                 'network_functions': [sub_nf.serialize_nf() for sub_nf in sub_nfs]}
 
@@ -56,6 +57,7 @@ class NetworkFunctionModel(db.Model):
     __tablename__ = 'network_functions'
     id = Column(Integer, primary_key=True, autoincrement=True)
     nf_name = Column(String(100), unique=True)
+    ip_address = Column(String(50))
     model_invariant_id = Column(String(100))
     model_version_id = Column(String(100))
     sdnc_model_name = Column(String(100))
@@ -66,9 +68,10 @@ class NetworkFunctionModel(db.Model):
         cascade='all, delete-orphan',
         backref='nf')
 
-    def __init__(self, nf_name, model_invariant_id, model_version_id, sdnc_model_name,
+    def __init__(self, nf_name, ip_address, model_invariant_id, model_version_id, sdnc_model_name,
                  sdnc_model_version):
         self.nf_name = nf_name
+        self.ip_address = ip_address
         self.model_invariant_id = model_invariant_id
         self.model_version_id = model_version_id
         self.sdnc_model_name = sdnc_model_name
@@ -82,6 +85,7 @@ class NetworkFunctionModel(db.Model):
         return NetworkFunction(sdnc_model_name=self.sdnc_model_name,
                                sdnc_model_version=self.sdnc_model_version,
                                **{'nf_name': self.nf_name,
+                                  'ip_address': self.ip_address,
                                   'model_invariant_id': self.model_invariant_id,
                                   'model_version_id': self.model_version_id})
 
@@ -118,7 +122,9 @@ class NfSubRelationalModel(db.Model):
     def serialize_nf(self):
         nf = NetworkFunctionModel.query.filter(
             NetworkFunctionModel.nf_name == self.nf_name).one_or_none()
+        db.session.remove()
         return {'nf_name': self.nf_name,
+                'ip_address': nf.ip_address,
                 'nf_sub_status': self.nf_sub_status,
                 'model_invariant_id': nf.model_invariant_id,
                 'model_version_id': nf.model_version_id,

@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.2]
 ### Changed
 * Bug fix for missing sdnc params in DELETE event (DCAEGEN2-2483)
+* Fix to add IP to event sent to Policy framework (DCAEGEN2-2486)
 
 ## [1.1.1]
 ### Changed

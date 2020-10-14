@@ -16,7 +16,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-from mod import logger
+from mod import logger, db
 from mod.subscription import AdministrativeState
 
 
@@ -39,14 +39,21 @@ class ExitHandler:
     def __call__(self, sig_num, frame):
         logger.info('Graceful shutdown of PMSH initiated.')
         logger.debug(f'ExitHandler was called with signal number: {sig_num}.')
+        for thread in self.periodic_tasks:
+            if thread.name == 'app_conf_thread':
+                logger.info(f'Cancelling thread {thread.name}')
+                thread.cancel()
         current_sub = self.app_conf.subscription
         if current_sub.administrativeState == AdministrativeState.UNLOCKED.value:
             try:
                 current_sub.deactivate_subscription(self.subscription_handler.mr_pub, self.app_conf)
-                current_sub.update_subscription_status()
-                for thread in self.periodic_tasks:
-                    logger.debug(f'Cancelling periodic task with thread name: {thread.name}.')
-                    thread.cancel()
             except Exception as e:
                 logger.error(f'Failed to shut down PMSH application: {e}', exc_info=True)
+        for thread in self.periodic_tasks:
+            logger.info(f'Cancelling thread {thread.name}')
+            thread.cancel()
+        logger.info('Closing all DB connections')
+        db.session.bind.dispose()
+        db.session.close()
+        db.engine.dispose()
         ExitHandler.shutdown_signal_received = True
