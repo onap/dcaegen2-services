@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.2.0]
 ### Changed
 * Bug fix prevent sub threads from crashing permanently (DCAEGEN2-2501)
+* Added Resource Name (model-name) to filter (DCAEGEN2-2402)
 
 ## [1.1.2]
 ### Changed

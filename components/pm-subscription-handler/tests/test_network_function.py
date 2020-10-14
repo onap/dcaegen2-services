@@ -90,9 +90,9 @@ class NetworkFunctionTests(BaseClassSetup):
     @patch('mod.aai_client.get_aai_model_data')
     def test_set_sdnc_params_true(self, mock_get_aai_model):
         mock_get_aai_model.return_value = self.good_model_info
-        self.assertTrue(self.nf_1.set_sdnc_params(self.app_conf))
+        self.assertTrue(self.nf_1.set_nf_model_params(self.app_conf))
 
     @patch('mod.aai_client.get_aai_model_data')
     def test_set_sdnc_params_false(self, mock_get_aai_model):
         mock_get_aai_model.return_value = self.bad_model_info
-        self.assertFalse(self.nf_1.set_sdnc_params(self.app_conf))
+        self.assertFalse(self.nf_1.set_nf_model_params(self.app_conf))
