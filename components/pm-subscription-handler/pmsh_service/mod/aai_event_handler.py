@@ -63,6 +63,7 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
                                 f'is not "Active"')
                     continue
                 nf = NetworkFunction(nf_name=xnf_name,
+                                     ip_address=aai_entity['ipaddress-v4-oam'],
                                      model_invariant_id=aai_entity['model-invariant-id'],
                                      model_version_id=aai_entity['model-version-id'])
                 if not nf.set_sdnc_params(app_conf):

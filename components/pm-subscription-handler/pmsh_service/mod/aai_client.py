@@ -97,7 +97,7 @@ def _get_aai_service_url():
     """
     try:
         aai_ssl_port = environ['AAI_SERVICE_PORT']
-        return f'https://aai:{aai_ssl_port}/aai/v20'
+        return f'https://aai:{aai_ssl_port}/aai/v21'
     except KeyError as e:
         logger.error(f'Failed to get AAI env var: {e}', exc_info=True)
         raise
@@ -135,6 +135,7 @@ def _filter_nf_data(nf_data, app_conf):
             name_identifier = 'pnf-name' if nf['node-type'] == 'pnf' else 'vnf-name'
             new_nf = mod.network_function.NetworkFunction(
                 nf_name=nf['properties'].get(name_identifier),
+                ip_address=nf['properties'].get('ipaddress-v4-oam'),
                 model_invariant_id=nf['properties'].get('model-invariant-id'),
                 model_version_id=nf['properties'].get('model-version-id'))
             if not new_nf.set_sdnc_params(app_conf):

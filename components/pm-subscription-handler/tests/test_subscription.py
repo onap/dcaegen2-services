@@ -47,6 +47,7 @@ class SubscriptionTest(BaseClassSetup):
         mock_session_get.return_value.text = self.aai_model_data
         self.mock_mr_sub = Mock()
         self.mock_mr_pub = Mock()
+        self.app_conf.subscription.create()
         self.xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf)
         self.sub_model = self.app_conf.subscription.get()
 
@@ -65,12 +66,10 @@ class SubscriptionTest(BaseClassSetup):
 
     def test_get_subscription(self):
         sub_name = 'ExtraPM-All-gNB-R2B'
-        self.app_conf.subscription.create()
         new_sub = self.app_conf.subscription.get()
         self.assertEqual(sub_name, new_sub.subscription_name)
 
     def test_get_nf_names_per_sub(self):
-        self.app_conf.subscription.create()
         self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[0],
                                                                         self.sub_model)
         self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[1],
@@ -81,16 +80,6 @@ class SubscriptionTest(BaseClassSetup):
         same_sub1 = self.app_conf.subscription.create()
         self.assertEqual(sub1, same_sub1)
         self.assertEqual(1, len(self.app_conf.subscription.get_all()))
-
-    def test_add_network_functions_per_subscription(self):
-        for nf in self.xnfs:
-            self.app_conf.subscription.add_network_function_to_subscription(nf, self.sub_model)
-        nfs_for_sub_1 = Subscription.get_all_nfs_subscription_relations()
-        self.assertEqual(3, len(nfs_for_sub_1))
-        new_nf = NetworkFunction(nf_name='vnf_3', orchestration_status='Active')
-        self.app_conf.subscription.add_network_function_to_subscription(new_nf, self.sub_model)
-        nf_subs = Subscription.get_all_nfs_subscription_relations()
-        self.assertEqual(4, len(nf_subs))
 
     def test_add_duplicate_network_functions_per_subscription(self):
         self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[0],
@@ -103,7 +92,6 @@ class SubscriptionTest(BaseClassSetup):
         self.assertEqual(1, len(nf_subs))
 
     def test_update_subscription_status(self):
-        self.app_conf.subscription.create()
         self.app_conf.subscription.administrativeState = 'new_status'
         self.app_conf.subscription.update_subscription_status()
         sub = self.app_conf.subscription.get()
@@ -152,6 +140,7 @@ class SubscriptionTest(BaseClassSetup):
                                'data/pm_subscription_event.json'), 'r') as data:
             expected_sub_event = json.load(data)
         nf = NetworkFunction(nf_name='pnf_1',
+                             ip_address='1.2.3.4',
                              model_invariant_id='some-id',
                              model_version_id='some-id')
         nf.sdnc_model_name = 'some-name'

@@ -72,21 +72,21 @@ class AaiClientTestCase(BaseClassSetup):
     @responses.activate
     def test_aai_client_get_all_aai_xnf_data_not_found(self):
         responses.add(responses.PUT,
-                      'https://1.2.3.4:8443/aai/v20/query?format=simple&nodesOnly=true',
+                      'https://1.2.3.4:8443/aai/v21/query?format=simple&nodesOnly=true',
                       json={'error': 'not found'}, status=404)
         self.assertIsNone(aai_client._get_all_aai_nf_data(self.app_conf))
 
     @responses.activate
     def test_aai_client_get_all_aai_xnf_data_success(self):
         responses.add(responses.PUT,
-                      'https://aai:8443/aai/v20/query?format=simple&nodesOnly=true',
+                      'https://aai:8443/aai/v21/query?format=simple&nodesOnly=true',
                       json={'dummy_data': 'blah_blah'}, status=200)
         self.assertIsNotNone(aai_client._get_all_aai_nf_data(self.app_conf))
 
     @responses.activate
     def test_aai_client_get_sdnc_params_success(self):
         responses.add(responses.GET,
-                      'https://aai:8443/aai/v20/service-design-and-creation/models/model/'
+                      'https://aai:8443/aai/v21/service-design-and-creation/models/model/'
                       '6fb9f466-7a79-4109-a2a3-72b340aca53d/model-vers/model-ver/'
                       '6d25b637-8bca-47e2-af1a-61258424183d',
                       json=json.loads(self.good_model_info), status=200)
@@ -98,7 +98,7 @@ class AaiClientTestCase(BaseClassSetup):
     @responses.activate
     def test_aai_client_get_sdnc_params_fail(self):
         responses.add(responses.GET,
-                      'https://aai:8443/aai/v20/service-design-and-creation/models/model/'
+                      'https://aai:8443/aai/v21/service-design-and-creation/models/model/'
                       '9fb9f466-7a79-4109-a2a3-72b340aca53d/model-vers/model-ver/'
                       'b7469cc5-be51-41cc-b37f-361537656771', status=404)
         with self.assertRaises(HTTPError):
@@ -111,4 +111,4 @@ class AaiClientTestCase(BaseClassSetup):
             aai_client._get_aai_service_url()
 
     def test_aai_client_get_aai_service_url_success(self):
-        self.assertEqual('https://aai:8443/aai/v20', aai_client._get_aai_service_url())
+        self.assertEqual('https://aai:8443/aai/v21', aai_client._get_aai_service_url())
