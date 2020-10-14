@@ -20,6 +20,7 @@ import json
 from enum import Enum
 
 from mod import logger
+from mod.aai_client import get_aai_model_data
 from mod.network_function import NetworkFunction
 
 
@@ -62,14 +63,22 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
                     logger.info(f'Skipping XNF {xnf_name} as its orchestration-status '
                                 f'is not "Active"')
                     continue
-                nf = NetworkFunction(nf_name=xnf_name,
-                                     ip_address=aai_entity['ipaddress-v4-oam'],
-                                     model_invariant_id=aai_entity['model-invariant-id'],
-                                     model_version_id=aai_entity['model-version-id'])
-                if not nf.set_sdnc_params(app_conf):
-                    continue
-                if app_conf.nf_filter.is_nf_in_filter(nf):
-                    _process_event(action, nf, mr_pub, app_conf)
+                try:
+                    sdnc_model_data = get_aai_model_data(app_conf,
+                                                         aai_entity['model-invariant-id'],
+                                                         aai_entity['model-version-id'], xnf_name
+                                                         )
+                    nf = NetworkFunction(nf_name=xnf_name,
+                                         ip_address=aai_entity['ipaddress-v4-oam'],
+                                         model_invariant_id=aai_entity['model-invariant-id'],
+                                         model_version_id=aai_entity['model-version-id'],
+                                         model_name=sdnc_model_data['model-name'])
+                    if not nf.set_sdnc_params(app_conf, sdnc_model_data):
+                        continue
+                    if app_conf.nf_filter.is_nf_in_filter(nf):
+                        _process_event(action, nf, mr_pub, app_conf)
+                except Exception as e:
+                    logger.error(f'Failed to get model info for XNFs from AAI: {e}', exc_info=True)
     except Exception as e:
         logger.error(f'Failed to process AAI event: {e}', exc_info=True)
 
