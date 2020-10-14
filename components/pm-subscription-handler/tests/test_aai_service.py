@@ -47,7 +47,7 @@ class AaiClientTestCase(BaseClassSetup):
     def tearDownClass(cls):
         super().tearDownClass()
 
-    @patch('mod.network_function.NetworkFunction.set_sdnc_params')
+    @patch('mod.network_function.NetworkFunction.set_nf_model_params')
     @patch.object(Session, 'get')
     @patch.object(Session, 'put')
     def test_aai_client_get_pm_sub_data_success(self, mock_put_session, mock_get_session,
