@@ -138,7 +138,7 @@ def _filter_nf_data(nf_data, app_conf):
                 ip_address=nf['properties'].get('ipaddress-v4-oam'),
                 model_invariant_id=nf['properties'].get('model-invariant-id'),
                 model_version_id=nf['properties'].get('model-version-id'))
-            if not new_nf.set_sdnc_params(app_conf):
+            if not new_nf.set_nf_model_params(app_conf):
                 continue
             if app_conf.nf_filter.is_nf_in_filter(new_nf):
                 nf_list.append(new_nf)

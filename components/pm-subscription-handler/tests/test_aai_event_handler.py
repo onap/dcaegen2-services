@@ -16,6 +16,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 import json
+import unittest
 from os import path
 from unittest.mock import patch, Mock
 
@@ -44,7 +45,7 @@ class AAIEventHandlerTest(BaseClassSetup):
     def tearDownClass(cls):
         super().tearDownClass()
 
-    @patch('mod.network_function.NetworkFunction.set_sdnc_params')
+    @patch('mod.network_function.NetworkFunction.set_nf_model_params')
     @patch('mod.subscription.Subscription.activate_subscription')
     @patch('mod.aai_event_handler.NetworkFunction.delete')
     def test_process_aai_update_and_delete_events(self, mock_nf_delete, mock_activate_sub,

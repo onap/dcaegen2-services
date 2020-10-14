@@ -20,6 +20,7 @@ import json
 from enum import Enum
 
 from mod import logger
+from mod.aai_client import get_aai_model_data
 from mod.network_function import NetworkFunction
 
 
@@ -66,7 +67,7 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
                                      ip_address=aai_entity['ipaddress-v4-oam'],
                                      model_invariant_id=aai_entity['model-invariant-id'],
                                      model_version_id=aai_entity['model-version-id'])
-                if not nf.set_sdnc_params(app_conf):
+                if not nf.set_nf_model_params(app_conf):
                     continue
                 if app_conf.nf_filter.is_nf_in_filter(nf):
                     _process_event(action, nf, mr_pub, app_conf)
