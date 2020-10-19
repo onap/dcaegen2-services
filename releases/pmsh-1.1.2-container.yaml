@@ -1,0 +1,10 @@
+distribution_type: 'container'
+version: '1.1.2'
+project: 'dcaegen2-services-pmsh'
+log_dir: 'dcaegen2-services-pmsh-docker-merge-master/66/'
+containers:
+  - name: 'org.onap.dcaegen2.services.pmsh'
+    version: '1.1.2-SNAPSHOT-20201019T124146Z'
+container_release_tag: '1.1.2'
+ref: '27ec381034605d03285140cff8c21098e13808fe'
+git_tag: '1.1.2-pmsh'
