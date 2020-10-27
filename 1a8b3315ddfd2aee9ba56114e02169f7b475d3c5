@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7c0ba045_82dff74b",
+        "filename": "components/slice-analysis-ms/aaf_root_ca.cer",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 2705
+      },
+      "writtenOn": "2020-10-27T17:23:29Z",
+      "side": 1,
+      "message": "Can I do this certificate fix as a separate bug?",
+      "parentUuid": "244e8dd1_697c691c",
+      "revId": "1a8b3315ddfd2aee9ba56114e02169f7b475d3c5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b6b48df6_569774b0",
         "filename": "components/slice-analysis-ms/pom.xml",
         "patchSetId": 1
@@ -77,6 +95,30 @@
       "writtenOn": "2020-10-13T22:43:34Z",
       "side": 1,
       "message": "remove this from pom and do this part of docker init script (cert will be available/mounted before app container is started)",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 170
+      },
+      "revId": "1a8b3315ddfd2aee9ba56114e02169f7b475d3c5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c6e4dad_ca03bda7",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 2705
+      },
+      "writtenOn": "2020-10-27T17:23:29Z",
+      "side": 1,
+      "message": "Can I do this certificate fix as a separate bug?",
+      "parentUuid": "4ef9f6d6_f681fa7b",
       "range": {
         "startLine": 316,
         "startChar": 0,
