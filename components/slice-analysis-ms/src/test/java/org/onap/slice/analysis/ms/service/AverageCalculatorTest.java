@@ -70,7 +70,6 @@ public class AverageCalculatorTest {
         catch (IOException e) { 
             e.printStackTrace(); 
         } 
-        
         assertEquals(output, averageCalculator.findAverageOfSamples(input));
 	}
 	
@@ -114,4 +113,3 @@ public class AverageCalculatorTest {
 				averageCalculator.findSum(new MeasurementObject("cell1", existingMap), new MeasurementObject("cell1", currentMap)));
 	}
 }
-	

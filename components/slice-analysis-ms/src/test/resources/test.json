@@ -1,0 +1,44 @@
+[
+[
+	{"measurementObjectId":"103593989",
+	 "pmData":{
+		"PrbUsedDl":"30",
+		"PrbUsedUl":"40"
+		}
+	},
+	{"measurementObjectId":"103593999",
+	 "pmData":{
+		"PrbUsedDl":"60",
+		"PrbUsedUl":"80"
+		}
+	}
+	],
+[
+	{"measurementObjectId":"103593989",
+	 "pmData":{
+		"PrbUsedDl":"35",
+		"PrbUsedUl":"44"
+		}
+	},
+	{"measurementObjectId":"103593999",
+	 "pmData":{
+		"PrbUsedDl":"50",
+		"PrbUsedUl":"40"
+		}
+	}
+	],
+[
+	{"measurementObjectId":"103593989",
+	 "pmData":{
+		"PrbUsedDl":"35",
+		"PrbUsedUl":"44"
+		}
+	},
+	{"measurementObjectId":"103593999",
+	 "pmData":{
+		"PrbUsedDl":"50",
+		"PrbUsedUl":"40"
+		}
+	}
+	]
+]

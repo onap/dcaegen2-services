@@ -52,7 +52,6 @@ public class PmThread extends Thread {
 		super();
 		this.newPmNotification = BeanUtil.getBean(NewPmNotification.class);
 		this.performanceNotificationsRepository = BeanUtil.getBean(PerformanceNotificationsRepository.class);
-		this.pmEventProcessor = BeanUtil.getBean(IPmEventProcessor.class);
 		this.pmDataQueue = BeanUtil.getBean(PmDataQueue.class);
 	}
 
@@ -68,12 +67,13 @@ public class PmThread extends Thread {
 		while (!done) {
 			try {
 				Thread.sleep(1000);
-				if (newPmNotification.getNewNotif()) {
-					log.info("New PM notification from Dmaap");
+				if (newPmNotification.getNewNotif()) {				
 					String pmNotificationString = performanceNotificationsRepository.getPerformanceNotificationFromQueue();
 					if(pmNotificationString != null) {
+						log.info("New PM notification");
 						ObjectMapper mapper = new ObjectMapper();
 						pmNotification = mapper.readValue(pmNotificationString, PmNotification.class);
+						this.pmEventProcessor = BeanUtil.getBean(IPmEventProcessor.class);
 						processedData = pmEventProcessor.processEvent(pmNotification.getEvent());
 						String networkFunction = pmNotification.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasuredEntityDn();
 						processedData.forEach((key,value) -> {
