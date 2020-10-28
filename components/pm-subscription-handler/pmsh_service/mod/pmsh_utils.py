@@ -114,13 +114,11 @@ class AppConfig:
         """
         try:
             app_conf = self._get_pmsh_config()
-            if "INVALID JSON" in app_conf.values():
-                raise ValueError('Failed to refresh AppConfig: INVALID JSON')
             self.subscription.administrativeState = app_conf['policy']['subscription'][
                 'administrativeState']
             logger.info("AppConfig data has been refreshed")
         except ValueError or Exception as e:
-            logger.error(e)
+            logger.error(f'Failed to refresh AppConfig: {e}', exc_info=True)
 
     def get_mr_sub(self, sub_name):
         """
@@ -287,4 +285,7 @@ class PeriodicTask(Timer):
     def run(self):
         self.function(*self.args, **self.kwargs)
         while not self.finished.wait(self.interval):
-            self.function(*self.args, **self.kwargs)
+            try:
+                self.function(*self.args, **self.kwargs)
+            except Exception as e:
+                logger.error(f'Exception in thread: {self.name}: {e}', exc_info=True)
