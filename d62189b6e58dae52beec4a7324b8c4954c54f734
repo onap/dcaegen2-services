@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8dd9e16a_10986a08",
+        "filename": "components/slice-analysis-ms/entry.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-10-29T20:22:18Z",
+      "side": 1,
+      "message": "add quote marks around $trustpass:\n\n-Djavax.net.ssl.trustStorePassword\u003d\"$trustpass\"",
+      "revId": "d62189b6e58dae52beec4a7324b8c4954c54f734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b63eb2f8_ee7ea143",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/MeasurementObject.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-10-29T20:22:18Z",
+      "side": 1,
+      "message": "please add javadocs for all new public methods\n\nalso check the coding standards:\nhttps://wiki.onap.org/display/DW/Java+code+style\n\nhere and below",
+      "revId": "d62189b6e58dae52beec4a7324b8c4954c54f734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "639267fc_65b8c17e",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/AverageCalculator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-10-29T20:22:18Z",
+      "side": 1,
+      "message": "this if is superfluous",
+      "revId": "d62189b6e58dae52beec4a7324b8c4954c54f734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
