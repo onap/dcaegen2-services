@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1abc0c22_016ab703",
+        "filename": "components/slice-analysis-ms/entry.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-10-29T20:59:04Z",
+      "side": 1,
+      "message": "DCAEGEN2-2504",
+      "parentUuid": "8dd9e16a_10986a08",
+      "revId": "d62189b6e58dae52beec4a7324b8c4954c54f734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b63eb2f8_ee7ea143",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/MeasurementObject.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7a34090f_23799a70",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/MeasurementObject.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-10-29T20:59:04Z",
+      "side": 1,
+      "message": "DCAEGEN2-2504",
+      "parentUuid": "b63eb2f8_ee7ea143",
+      "revId": "d62189b6e58dae52beec4a7324b8c4954c54f734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "639267fc_65b8c17e",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/AverageCalculator.java",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "d62189b6e58dae52beec4a7324b8c4954c54f734",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9464572_3171d2c0",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/AverageCalculator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-10-29T20:59:04Z",
+      "side": 1,
+      "message": "DCAEGEN2-2504",
+      "parentUuid": "639267fc_65b8c17e",
+      "revId": "d62189b6e58dae52beec4a7324b8c4954c54f734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
