@@ -1,0 +1,10 @@
+distribution_type: 'container'
+version: '1.0.1'
+project: 'dcaegen2-services-slice-analysis-ms'
+log_dir: 'dcaegen2-services-slice-analysis-ms-maven-docker-stage-master/93/'
+containers:
+  - name: 'org.onap.dcaegen2.services.components.slice-analysis-ms'
+    version: '1.0.1-20201029T015040Z'
+container_release_tag: '1.0.1'
+ref: '87c39719735c0175da4ef09320733675dc184902'
+git_tag: '1.0.1-slice-analysis-ms'
