@@ -79,6 +79,19 @@ public class PmDataQueue {
 		}
 		return sampleList;
 	}
+	
+	/**
+	 * check whether the queue has enough number of samples for that subcounter
+	 */
+	public boolean checkSamplesInQueue(SubCounter subCounter, int samples) {
+		if (subCounterMap.containsKey(subCounter)){
+			Queue<List<MeasurementObject>> measQueue = subCounterMap.get(subCounter);
+			if(measQueue.size() >= samples) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * put S-NSSAI to the queue
