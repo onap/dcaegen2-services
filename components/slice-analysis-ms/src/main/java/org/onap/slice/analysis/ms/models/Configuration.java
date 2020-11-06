@@ -260,9 +260,18 @@ public class Configuration {
 		 minPercentageChange = jsonObject.get("sliceanalysisms.minPercentageChange").getAsInt();
 		 initialDelaySeconds = jsonObject.get("sliceanalysisms.initialDelaySeconds").getAsLong();
 
-		 aafUsername = jsonObject.get("aafUsername").getAsString();
-		 aafPassword = jsonObject.get("aafPassword").getAsString();
-		 
+		 if(jsonObject.get("aafUsername") == null) {
+			 aafUsername = null;
+		 }
+		 else {
+			 aafUsername = jsonObject.get("aafUsername").getAsString();
+		 }
+		 if(jsonObject.get("aafPassword") == null) {
+			 aafPassword = null;
+		 }
+		 else {
+			 aafPassword = jsonObject.get("aafPassword").getAsString();
+		 }		 
 		 log.info("configuration from CBS {}", this);
 	 }
 }
