@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6207e94c_d3ef3ed9",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConsumerThread.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-11-10T15:47:28Z",
+      "side": 1,
+      "message": "indent",
+      "revId": "c9c28c72ddf3db94b4fd0910a582a0b5202b803e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "485ebc8a_1bf52773",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConsumerThread.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2020-11-10T15:47:28Z",
+      "side": 1,
+      "message": "javadocs on new public methods",
+      "revId": "c9c28c72ddf3db94b4fd0910a582a0b5202b803e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
