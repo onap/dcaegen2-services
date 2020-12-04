@@ -46,6 +46,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class PolicyService {
 	private PolicyDmaapClient policyDmaapClient;
 	private static Logger log = LoggerFactory.getLogger(PolicyService.class);
+	private ObjectMapper objectMapper = new ObjectMapper();
 
 	@PostConstruct
 	public void init() {
@@ -75,31 +76,34 @@ public class PolicyService {
 		addProps.setSnssaiList(snssaiList);
 
 		payload.setAdditionalProperties(addProps);
-		onsetmsg.setPayload(payload);
+		try {
+			onsetmsg.setPayload(objectMapper.writeValueAsString(payload));
+		} catch (Exception e) {
+			log.error("Error while mapping payload as string , {}",e.getMessage());
+		}
 
 		onsetmsg.setClosedLoopControlName("ControlLoop-Slicing-116d7b00-dbeb-4d03-8719-d0a658fa735b");
 		onsetmsg.setClosedLoopAlarmStart(System.currentTimeMillis());
 		onsetmsg.setClosedLoopEventClient("microservice.sliceAnalysisMS");
 		onsetmsg.setClosedLoopEventStatus("ONSET");
 		onsetmsg.setRequestID(UUID.randomUUID().toString());
-		onsetmsg.setTarget("vserver.vserver-name");
+		onsetmsg.setTarget("generic-vnf.vnf-id");
 		onsetmsg.setTargetType("VNF");
 		onsetmsg.setFrom("DCAE");
 		onsetmsg.setVersion("1.0.2");
 		AAI aai = new AAI();
 		aai.setVserverIsClosedLoopDisabled("false");
 		aai.setVserverProvStatus("ACTIVE");
-		aai.setVserverVserverName(serviceDetails.get("ranNFNSSIId"));
+		aai.setvServerVNFId(serviceDetails.get("ranNFNSSIId"));
 		onsetmsg.setAai(aai); 
 		return onsetmsg;
 	}
 
 	protected <T> void sendOnsetMessageToPolicy(String snssai, AdditionalProperties<T> addProps, Map<String, String> serviceDetails) {
 		OnsetMessage onsetMessage = formPolicyOnsetMessage(snssai, addProps, serviceDetails);
-		ObjectMapper obj = new ObjectMapper();
 		String msg =  "";
 		try { 
-			msg = obj.writeValueAsString(onsetMessage);
+			msg = objectMapper.writeValueAsString(onsetMessage);
 			log.info("Policy onset message for S-NSSAI: {} is {}", snssai, msg);
 			policyDmaapClient.sendNotificationToPolicy(msg);
 		} 
