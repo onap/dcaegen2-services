@@ -41,7 +41,7 @@ public class OnsetMessage {
 	private AAI aai;
 
 	private String target;
-	private Payload payload;
+	private String payload;
 	private String from;
 	private String version;
 
@@ -109,11 +109,11 @@ public class OnsetMessage {
 		this.aai = aAI;
 	}
 
-	public Payload getPayload() {
+	public String getPayload() {
 		return payload;
 	}
 
-	public void setPayload(Payload payload) {
+	public void setPayload(String payload) {
 		this.payload = payload;
 	}
 

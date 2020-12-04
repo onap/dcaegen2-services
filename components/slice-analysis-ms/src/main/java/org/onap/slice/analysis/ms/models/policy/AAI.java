@@ -31,8 +31,8 @@ public class AAI {
 	private String vserverIsClosedLoopDisabled;
 	@JsonProperty("vserver.prov-status")
 	private String vserverProvStatus;
-	@JsonProperty("vserver.vserver-name")
-	private String vserverVserverName;
+	@JsonProperty("generic-vnf.vnf-id")
+	private String vServerVNFId;
 
 	public String getVserverIsClosedLoopDisabled() {
 		return vserverIsClosedLoopDisabled;
@@ -50,12 +50,12 @@ public class AAI {
 		this.vserverProvStatus = vserverProvStatus;
 	}
 
-	public String getVserverVserverName() {
-		return vserverVserverName;
+	public String getvServerVNFId() {
+		return vServerVNFId;
 	}
 
-	public void setVserverVserverName(String vserverVserverName) {
-		this.vserverVserverName = vserverVserverName;
+	public void setvServerVNFId(String vServerVNFId) {
+		this.vServerVNFId = vServerVNFId;
 	}
-
+	
 }

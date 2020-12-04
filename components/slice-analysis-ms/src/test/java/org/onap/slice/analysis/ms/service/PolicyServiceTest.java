@@ -78,7 +78,7 @@ public class PolicyServiceTest {
         actual = new Gson().toJson(policyService.formPolicyOnsetMessage(snssai,addProps,input));
            
         assertThatJson(actual)
-        .whenIgnoringPaths("requestID","payload.additionalProperties.nsiInfo.nsiId","closedLoopAlarmStart", "AAI", "target_type", "aai", "targetType")
+        .whenIgnoringPaths("requestID","payload","closedLoopAlarmStart", "AAI", "target_type", "aai", "targetType")
         .isEqualTo(expected);
 	}
 }
