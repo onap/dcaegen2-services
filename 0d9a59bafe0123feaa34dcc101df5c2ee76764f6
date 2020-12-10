@@ -22,6 +22,30 @@
       "revId": "0d9a59bafe0123feaa34dcc101df5c2ee76764f6",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45fc2c5a_362680cf",
+        "filename": "components/bbs-event-processor/src/main/java/org/onap/bbs/event/processor/config/ConsulConfigurationGateway.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 6931
+      },
+      "writtenOn": "2020-12-10T11:19:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01a43a31_885051f1",
+      "range": {
+        "startLine": 5,
+        "startChar": 17,
+        "endLine": 5,
+        "endChar": 21
+      },
+      "revId": "0d9a59bafe0123feaa34dcc101df5c2ee76764f6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
