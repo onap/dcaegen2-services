@@ -12,7 +12,7 @@
 
     <groupId>org.onap.dcaegen2.services.components</groupId>
     <artifactId>bbs-event-processor</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.1.0-SNAPSHOT</version>
 
     <name>dcaegen2-services-bbs-event-processor</name>
     <description>BBS Re-Registration and CPE Authentication Handler</description>
@@ -28,10 +28,10 @@
     <properties>
         <java.version>11</java.version>
         <immutables.version>2.8.3</immutables.version>
-        <spring-boot.version>2.2.9.RELEASE</spring-boot.version>
+        <spring-boot.version>2.4.0</spring-boot.version>
         <junit-platform.version>1.1.0</junit-platform.version>
         <jacoco.version>0.8.2</jacoco.version>
-        <dcae.sdk.version>1.4.1</dcae.sdk.version>
+        <dcae.sdk.version>1.5.0</dcae.sdk.version>
         <wiremock.version>2.24.0</wiremock.version>
         <jaxb.api.version>2.3.0</jaxb.api.version>
         <springfox-swagger.version>3.0.0</springfox-swagger.version>
@@ -123,6 +123,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
