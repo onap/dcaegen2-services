@@ -2,7 +2,7 @@
  * ============LICENSE_START=======================================================
  * BBS-RELOCATION-CPE-AUTHENTICATION-HANDLER
  * ================================================================================
- * Copyright (C) 2019 NOKIA Intellectual Property. All rights reserved.
+ * Copyright (C) 2019-2020 NOKIA Intellectual Property. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 import org.jetbrains.annotations.NotNull;
 import org.onap.bbs.event.processor.exceptions.ApplicationEnvironmentException;
@@ -48,6 +49,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import reactor.core.Disposable;
+import reactor.util.retry.Retry;
 
 @Component
 public class ConsulConfigurationGateway {
@@ -128,7 +130,7 @@ public class ConsulConfigurationGateway {
         // Create the client and use it to get the configuration
         cbsFetchPipeline = CbsClientFactory.createCbsClient(cbsClientConfig)
                 .doOnError(e -> LOGGER.warn("CBS Configuration fetch failed with error: {}", e))
-                .retry(e -> true)
+                .retryWhen(Retry.from(Function.identity()))
                 .flatMapMany(cbsClient -> cbsClient.updates(cbsRequest, initialDelay, period))
                 .subscribe(this::parseConsulRetrievedConfiguration, this::handleErrors);
     }
