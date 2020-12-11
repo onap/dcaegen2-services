@@ -1,0 +1,9 @@
+Code-Review+1: Damian Nowak <damian.nowak@nokia.com>
+Code-Review+1: Pawel Kasperkiewicz <pawel.kasperkiewicz@nokia.com>
+Code-Review+2: Remigiusz Janeczek <remigiusz.janeczek@nokia.com>
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Submitted-by: Remigiusz Janeczek <remigiusz.janeczek@nokia.com>
+Submitted-at: Fri, 11 Dec 2020 08:33:04 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/services/+/116281
+Project: dcaegen2/services
+Branch: refs/heads/master
