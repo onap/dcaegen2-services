@@ -113,8 +113,8 @@ class SubscriptionTest(BaseClassSetup):
     @patch('mod.subscription.Subscription.add_network_function_to_subscription')
     @patch('mod.subscription.Subscription.update_sub_nf_status')
     def test_process_activate_subscription(self, mock_update_sub_nf, mock_add_nfs):
-        self.app_conf.subscription.activate_subscription([list(self.xnfs)[0]], self.mock_mr_pub,
-                                                         self.app_conf)
+        self.app_conf.subscription.create_subscription_on_nfs([list(self.xnfs)[0]],
+                                                              self.mock_mr_pub, self.app_conf)
 
         mock_add_nfs.assert_called()
         self.assertTrue(self.mock_mr_pub.publish_subscription_event_data.called)
@@ -126,13 +126,13 @@ class SubscriptionTest(BaseClassSetup):
     def test_process_deactivate_subscription(self, mock_update_sub_nf, mock_get_nfs):
         self.app_conf.subscription.administrativeState = 'LOCKED'
         mock_get_nfs.return_value = [list(self.xnfs)[0]]
-        self.app_conf.subscription.deactivate_subscription(self.mock_mr_pub, self.app_conf)
+        self.app_conf.subscription.delete_subscription_from_nfs(self.xnfs, self.mock_mr_pub,
+                                                                self.app_conf)
         self.assertTrue(self.mock_mr_pub.publish_subscription_event_data.called)
-        mock_update_sub_nf.assert_called_with(self.app_conf.subscription.subscriptionName,
-                                              'PENDING_DELETE', list(self.xnfs)[0].nf_name)
+        self.assertEqual(mock_update_sub_nf.call_count, 3)
 
     def test_activate_subscription_exception(self):
-        self.assertRaises(Exception, self.app_conf.subscription.activate_subscription,
+        self.assertRaises(Exception, self.app_conf.subscription.create_subscription_on_nfs,
                           [list(self.xnfs)[0]], 'not_mr_pub', 'app_config')
 
     def test_prepare_subscription_event(self):

@@ -105,6 +105,19 @@ class NetworkFunction:
                          exc_info=True)
         return not params_set
 
+    def increment_retry_count(self):
+        try:
+            NetworkFunctionModel.query.filter(
+                NetworkFunctionModel.nf_name == self.nf_name)\
+                .update({'retry_count': NetworkFunctionModel.retry_count + 1},
+                        synchronize_session='evaluate')
+            db.session.commit()
+        except Exception as e:
+            logger.error(f'Failed to update retry_count of NetworkFunction: {self.nf_name}: {e}',
+                         exc_info=True)
+        finally:
+            db.session.remove()
+
     @staticmethod
     def get(nf_name):
         """ Retrieves a network function
