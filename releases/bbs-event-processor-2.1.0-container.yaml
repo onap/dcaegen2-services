@@ -1,0 +1,8 @@
+distribution_type: 'container'
+container_release_tag: '2.1.0'
+project: 'dcaegen2-services-bbs-event-processor'
+log_dir: 'dcaegen2-services-bbs-event-processor-maven-docker-stage-master/523/'
+ref: 1e6f4d9c7ea75302f4b902dbbe13642b6d20d716
+containers:
+    - name: 'org.onap.dcaegen2.services.components.bbs-event-processor'
+      version: '2.1.0-20201211T112043Z'
