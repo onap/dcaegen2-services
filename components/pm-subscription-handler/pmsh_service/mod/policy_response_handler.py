@@ -30,6 +30,10 @@ policy_response_handle_functions = {
     AdministrativeState.UNLOCKED.value: {
         'success': Subscription.update_sub_nf_status,
         'failed': Subscription.update_sub_nf_status
+    },
+    AdministrativeState.LOCKING.value: {
+        'success': NetworkFunction.delete,
+        'failed': Subscription.update_sub_nf_status
     }
 }
 

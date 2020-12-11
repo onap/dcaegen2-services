@@ -40,26 +40,25 @@ def main():
             logger.error(f'Failed to get config and create application: {e}', exc_info=True)
             sys.exit(e)
 
-        app_conf_thread = PeriodicTask(10, app_conf.refresh_config)
-        app_conf_thread.name = 'app_conf_thread'
-        app_conf_thread.start()
-
         policy_response_handler = PolicyResponseHandler(policy_mr_sub, app_conf, app)
         policy_response_handler_thread = PeriodicTask(25, policy_response_handler.poll_policy_topic)
         policy_response_handler_thread.name = 'policy_event_thread'
+        logger.info('Start polling PMSH_CL_INPUT topic on DMaaP MR.')
+        policy_response_handler_thread.start()
 
         aai_event_thread = PeriodicTask(20, process_aai_events,
                                         args=(aai_event_mr_sub, policy_mr_pub, app, app_conf))
         aai_event_thread.name = 'aai_event_thread'
+        logger.info('Start polling for NF info on AAI-EVENT topic on DMaaP MR.')
+        aai_event_thread.start()
 
-        subscription_handler = SubscriptionHandler(policy_mr_pub, app, app_conf, aai_event_thread,
-                                                   policy_response_handler_thread)
+        subscription_handler = SubscriptionHandler(policy_mr_pub, app, app_conf, aai_event_thread)
 
-        subscription_handler_thread = PeriodicTask(30, subscription_handler.execute)
+        subscription_handler_thread = PeriodicTask(20, subscription_handler.execute)
         subscription_handler_thread.name = 'sub_handler_thread'
         subscription_handler_thread.start()
 
-        periodic_tasks = [app_conf_thread, aai_event_thread, subscription_handler_thread,
+        periodic_tasks = [aai_event_thread, subscription_handler_thread,
                           policy_response_handler_thread]
 
         signal(SIGTERM, ExitHandler(periodic_tasks=periodic_tasks,
