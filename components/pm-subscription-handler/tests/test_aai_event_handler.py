@@ -45,7 +45,7 @@ class AAIEventHandlerTest(BaseClassSetup):
         super().tearDownClass()
 
     @patch('mod.network_function.NetworkFunction.set_nf_model_params')
-    @patch('mod.subscription.Subscription.activate_subscription')
+    @patch('mod.subscription.Subscription.create_subscription_on_nfs')
     @patch('mod.aai_event_handler.NetworkFunction.delete')
     def test_process_aai_update_and_delete_events(self, mock_nf_delete, mock_activate_sub,
                                                   mock_set_sdnc_params):
