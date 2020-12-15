@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8384e535_ad3c0bb8",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2020-12-15T10:47:12Z",
+      "side": 0,
+      "message": "Is this not where the changes to the CBS are checked?",
+      "revId": "4b2b1445bef3b760ed29efa1c7c78977dde73452",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
