@@ -16,6 +16,24 @@
       "revId": "4b2b1445bef3b760ed29efa1c7c78977dde73452",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "909c5f62_ba56af63",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2020-12-17T10:00:19Z",
+      "side": 0,
+      "message": "Moved it to when SubHandler.execute is called. No real need for a separate thread",
+      "parentUuid": "8384e535_ad3c0bb8",
+      "revId": "4b2b1445bef3b760ed29efa1c7c78977dde73452",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
