@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c99f448_384e10db",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-11T20:42:57Z",
+      "side": 1,
+      "message": "changes on this file have slipped into 2021 now, so update the copyright on this file, plus any others that have been modified since the beginning of 2021",
+      "revId": "383ce167e9f655d20f74b21b7ff19c20a760c87f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68d5c44e_b931cc65",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-11T20:42:57Z",
+      "side": 1,
+      "message": "please split the line after \u0027CREATE\u0027, to make it clearer that this is the end of the \u0027changeType\u0027 value",
+      "revId": "383ce167e9f655d20f74b21b7ff19c20a760c87f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
