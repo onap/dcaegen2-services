@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -114,8 +114,7 @@ class AppConfig:
         """
         try:
             app_conf = self._get_pmsh_config()
-            self.subscription.administrativeState = app_conf['policy']['subscription'][
-                'administrativeState']
+            self.subscription = Subscription(**app_conf['policy']['subscription'])
             logger.info("AppConfig data has been refreshed")
         except ValueError or Exception as e:
             logger.error(f'Failed to refresh AppConfig: {e}', exc_info=True)
