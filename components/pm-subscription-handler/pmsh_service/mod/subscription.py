@@ -71,6 +71,12 @@ class Subscription:
         self.measurementGroups = kwargs.get('measurementGroups')
         self.create()
 
+    def update_sub_params(self, admin_state, file_based_gp, file_location, meas_groups):
+        self.administrativeState = admin_state
+        self.fileBasedGP = file_based_gp
+        self.fileLocation = file_location
+        self.measurementGroups = meas_groups
+
     def create(self):
         """ Creates a subscription database entry
 

@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -62,10 +62,7 @@ class AppConfig:
     INSTANCE = None
 
     def __init__(self):
-        try:
-            conf = self._get_pmsh_config()
-        except Exception:
-            raise
+        conf = self._get_pmsh_config()
         self.aaf_creds = {'aaf_id': conf['config'].get('aaf_identity'),
                           'aaf_pass': conf['config'].get('aaf_password')}
         self.enable_tls = conf['config'].get('enable_tls')
@@ -85,7 +82,8 @@ class AppConfig:
         return AppConfig.INSTANCE
 
     @mdc_handler
-    @retry(wait=wait_fixed(5), stop=stop_after_attempt(5), retry=retry_if_exception_type(Exception))
+    @retry(wait=wait_fixed(5), stop=stop_after_attempt(5),
+           retry=retry_if_exception_type(ValueError))
     def _get_pmsh_config(self, **kwargs):
         """ Retrieves PMSH's configuration from Config binding service. If a non-2xx response
         is received, it retries after 2 seconds for 5 times before raising an exception.
@@ -97,13 +95,13 @@ class AppConfig:
             Exception: If any error occurred pulling configuration from Config binding service.
         """
         try:
-            logger.info('Fetching PMSH Configuration from CBS.')
+            logger.info('Attempting to fetch PMSH Configuration from CBS.')
             config = get_all()
             logger.info(f'Successfully fetched PMSH config from CBS: {config}')
             return config
-        except Exception as err:
-            logger.error(f'Failed to get config from CBS: {err}', exc_info=True)
-            raise Exception
+        except Exception as e:
+            logger.error(f'Failed to get config from CBS: {e}', exc_info=True)
+            raise ValueError(e)
 
     def refresh_config(self):
         """
@@ -114,11 +112,11 @@ class AppConfig:
         """
         try:
             app_conf = self._get_pmsh_config()
-            self.subscription.administrativeState = app_conf['policy']['subscription'][
-                'administrativeState']
+            self.subscription = Subscription(**app_conf['policy']['subscription'])
             logger.info("AppConfig data has been refreshed")
-        except ValueError or Exception as e:
-            logger.error(f'Failed to refresh AppConfig: {e}', exc_info=True)
+        except (ValueError, Exception):
+            logger.error('Failed to refresh PMSH AppConfig')
+            raise
 
     def get_mr_sub(self, sub_name):
         """
@@ -235,6 +233,7 @@ class _MrPub(_DmaapMrClient):
             self.publish_to_topic(subscription_event)
         except Exception as e:
             logger.error(f'Failed to publish to topic {self.topic_url}: {e}', exc_info=True)
+            raise e
 
 
 class _MrSub(_DmaapMrClient):
