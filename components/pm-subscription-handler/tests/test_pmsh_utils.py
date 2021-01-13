@@ -24,7 +24,6 @@ from tenacity import RetryError
 
 from mod import get_db_connection_url
 from mod.network_function import NetworkFunction
-from mod.pmsh_utils import AppConfig
 from tests.base_setup import BaseClassSetup
 from tests.base_setup import get_pmsh_config
 
@@ -139,9 +138,7 @@ class PmshUtilsTestCase(BaseClassSetup):
     @patch('mod.logger.error')
     @patch('mod.pmsh_utils.get_all')
     def test_refresh_config_fail(self, mock_cbs_client_get_all, mock_logger):
-        mock_cbs_client_get_all.return_value = get_pmsh_config()
-        self.app_conf = AppConfig()
-        mock_cbs_client_get_all.side_effect = Exception
+        mock_cbs_client_get_all.side_effect = ValueError
         with self.assertRaises(RetryError):
             self.app_conf.refresh_config()
-        mock_logger.assert_called_with('Failed to get config from CBS: ', exc_info=True)
+        mock_logger.assert_called_with('Failed to refresh PMSH AppConfig')
