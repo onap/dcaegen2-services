@@ -63,6 +63,7 @@ class NetworkFunctionModel(db.Model):
     model_name = Column(String(100))
     sdnc_model_name = Column(String(100))
     sdnc_model_version = Column(String(100))
+    retry_count = Column(Integer)
 
     subscriptions = relationship(
         'NfSubRelationalModel',
@@ -71,7 +72,7 @@ class NetworkFunctionModel(db.Model):
 
     def __init__(self, nf_name, ip_address, model_invariant_id,
                  model_version_id, model_name, sdnc_model_name,
-                 sdnc_model_version):
+                 sdnc_model_version, retry_count=0):
         self.nf_name = nf_name
         self.ip_address = ip_address
         self.model_invariant_id = model_invariant_id
@@ -79,6 +80,7 @@ class NetworkFunctionModel(db.Model):
         self.model_name = model_name
         self.sdnc_model_name = sdnc_model_name
         self.sdnc_model_version = sdnc_model_version
+        self.retry_count = retry_count
 
     def __repr__(self):
         return str(self.to_nf())

@@ -40,13 +40,15 @@ class ExitHandler:
         logger.info('Graceful shutdown of PMSH initiated.')
         logger.debug(f'ExitHandler was called with signal number: {sig_num}.')
         for thread in self.periodic_tasks:
-            if thread.name == 'app_conf_thread':
+            if thread.name == 'aai_event_thread':
                 logger.info(f'Cancelling thread {thread.name}')
                 thread.cancel()
         current_sub = self.app_conf.subscription
         if current_sub.administrativeState == AdministrativeState.UNLOCKED.value:
             try:
-                current_sub.deactivate_subscription(self.subscription_handler.mr_pub, self.app_conf)
+                nfs = self.app_conf.subscription.get_network_functions()
+                current_sub.delete_subscription_from_nfs(nfs, self.subscription_handler.mr_pub,
+                                                         self.app_conf)
             except Exception as e:
                 logger.error(f'Failed to shut down PMSH application: {e}', exc_info=True)
         for thread in self.periodic_tasks:

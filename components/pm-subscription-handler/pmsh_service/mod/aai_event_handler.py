@@ -77,7 +77,7 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
 def _process_event(action, nf, mr_pub, app_conf):
     if action == AAIEvent.UPDATE.value:
         logger.info(f'Update event found for network function {nf.nf_name}')
-        app_conf.subscription.activate_subscription([nf], mr_pub, app_conf)
+        app_conf.subscription.create_subscription_on_nfs([nf], mr_pub, app_conf)
     elif action == AAIEvent.DELETE.value:
         logger.info(f'Delete event found for network function {nf.nf_name}')
         NetworkFunction.delete(nf_name=nf.nf_name)

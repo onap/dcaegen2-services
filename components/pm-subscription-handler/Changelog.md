@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 * Bug fix prevent sub threads from crashing permanently (DCAEGEN2-2501)
 * Added Resource Name (model-name) to filter (DCAEGEN2-2402)
+* Added retry mechanism for DELETE_FAILED subscriptions on given NFs (DCAEGEN2-2152)
 
 ## [1.1.2]
 ### Changed
