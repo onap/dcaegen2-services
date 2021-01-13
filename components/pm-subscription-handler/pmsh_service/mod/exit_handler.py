@@ -39,10 +39,7 @@ class ExitHandler:
     def __call__(self, sig_num, frame):
         logger.info('Graceful shutdown of PMSH initiated.')
         logger.debug(f'ExitHandler was called with signal number: {sig_num}.')
-        for thread in self.periodic_tasks:
-            if thread.name == 'aai_event_thread':
-                logger.info(f'Cancelling thread {thread.name}')
-                thread.cancel()
+        self.subscription_handler.stop_aai_event_thread()
         current_sub = self.app_conf.subscription
         if current_sub.administrativeState == AdministrativeState.UNLOCKED.value:
             try:

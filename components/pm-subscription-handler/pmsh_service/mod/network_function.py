@@ -18,7 +18,6 @@
 
 import re
 
-import mod.aai_client
 from mod import logger, db
 from mod.api.db_models import NetworkFunctionModel
 
@@ -89,8 +88,9 @@ class NetworkFunction:
     def set_nf_model_params(self, app_conf):
         params_set = True
         try:
-            sdnc_model_data = mod.aai_client.get_aai_model_data(app_conf, self.model_invariant_id,
-                                                                self.model_version_id, self.nf_name)
+            from mod.aai_client import get_aai_model_data
+            sdnc_model_data = get_aai_model_data(app_conf, self.model_invariant_id,
+                                                 self.model_version_id, self.nf_name)
 
             try:
                 self.sdnc_model_name = sdnc_model_data['sdnc-model-name']

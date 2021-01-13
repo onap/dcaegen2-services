@@ -19,7 +19,6 @@ import sys
 from signal import signal, SIGTERM
 
 from mod import db, create_app, launch_api_server, logger
-from mod.aai_event_handler import process_aai_events
 from mod.exit_handler import ExitHandler
 from mod.pmsh_utils import AppConfig, PeriodicTask
 from mod.policy_response_handler import PolicyResponseHandler
@@ -46,20 +45,12 @@ def main():
         logger.info('Start polling PMSH_CL_INPUT topic on DMaaP MR.')
         policy_response_handler_thread.start()
 
-        aai_event_thread = PeriodicTask(20, process_aai_events,
-                                        args=(aai_event_mr_sub, policy_mr_pub, app, app_conf))
-        aai_event_thread.name = 'aai_event_thread'
-        logger.info('Start polling for NF info on AAI-EVENT topic on DMaaP MR.')
-        aai_event_thread.start()
-
-        subscription_handler = SubscriptionHandler(policy_mr_pub, app, app_conf, aai_event_thread)
-
+        subscription_handler = SubscriptionHandler(policy_mr_pub, aai_event_mr_sub, app, app_conf)
         subscription_handler_thread = PeriodicTask(20, subscription_handler.execute)
         subscription_handler_thread.name = 'sub_handler_thread'
         subscription_handler_thread.start()
 
-        periodic_tasks = [aai_event_thread, subscription_handler_thread,
-                          policy_response_handler_thread]
+        periodic_tasks = [subscription_handler_thread, policy_response_handler_thread]
 
         signal(SIGTERM, ExitHandler(periodic_tasks=periodic_tasks,
                                     app_conf=app_conf, subscription_handler=subscription_handler))

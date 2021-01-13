@@ -114,8 +114,7 @@ class AppConfig:
         """
         try:
             app_conf = self._get_pmsh_config()
-            self.subscription.administrativeState = app_conf['policy']['subscription'][
-                'administrativeState']
+            self.subscription = Subscription(**app_conf['policy']['subscription'])
             logger.info("AppConfig data has been refreshed")
         except ValueError or Exception as e:
             logger.error(f'Failed to refresh AppConfig: {e}', exc_info=True)
