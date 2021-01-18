@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Added Resource Name (model-name) to filter (DCAEGEN2-2402)
 * Added retry mechanism for DELETE_FAILED subscriptions on given NFs (DCAEGEN2-2152)
 * Added func to update the subscription object on ACTIVATE/UNLOCK (DCAEGEN2-2152)
+* Added validation for schema of PMSH monitoring policy (DCAEGEN2-2152)
 
 ## [1.1.2]
 ### Changed

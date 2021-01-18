@@ -7,8 +7,7 @@
          "fileLocation":"\/pm\/pm.xml",
          "nfFilter":{
             "nfNames":[
-               "^pnf.*",
-               "^vnf.*"
+
             ],
             "modelInvariantIDs": [
 
