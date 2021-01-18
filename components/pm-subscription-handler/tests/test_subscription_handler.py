@@ -162,3 +162,21 @@ class SubscriptionHandlerTest(BaseClassSetup):
                                           self.app_conf)
         sub_handler.execute()
         mock_nf_del.assert_called_once()
+
+    @patch('mod.pmsh_utils.AppConfig._get_pmsh_config',
+           MagicMock(return_value=get_pmsh_config('data/cbs_invalid_data.json')))
+    @patch('mod.subscription_handler.SubscriptionHandler._check_state_change')
+    def test_execute_invalid_schema(self, mock_change_state_check):
+        sub_handler = SubscriptionHandler(self.mock_mr_pub, self.mock_mr_sub, self.app,
+                                          self.app_conf)
+        sub_handler.execute()
+        mock_change_state_check.assert_not_called()
+
+    @patch('mod.pmsh_utils.AppConfig._get_pmsh_config',
+           MagicMock(return_value=get_pmsh_config()))
+    @patch('mod.subscription_handler.SubscriptionHandler._check_state_change')
+    def test_execute_valid_schema(self, mock_change_state_check):
+        sub_handler = SubscriptionHandler(self.mock_mr_pub, self.mock_mr_sub, self.app,
+                                          self.app_conf)
+        sub_handler.execute()
+        mock_change_state_check.assert_called_once()

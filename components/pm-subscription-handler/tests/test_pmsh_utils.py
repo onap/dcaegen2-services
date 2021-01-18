@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ from test.support import EnvironmentVarGuard
 from unittest.mock import patch, Mock
 
 import responses
+from jsonschema import ValidationError
 from requests import Session
 from tenacity import RetryError
 
@@ -142,3 +143,66 @@ class PmshUtilsTestCase(BaseClassSetup):
         with self.assertRaises(RetryError):
             self.app_conf.refresh_config()
         mock_logger.assert_called_with('Failed to refresh PMSH AppConfig')
+
+    @patch('mod.logger.debug')
+    def test_utils_validate_config_subscription(self, mock_logger):
+        self.app_conf.validate_sub_schema()
+        mock_logger.assert_called_with("Subscription schema is valid.")
+
+    @patch('mod.logger.debug')
+    def test_utils_validate_config_subscription_administrativeState_locked(self, mock_logger):
+        self.app_conf.subscription.administrativeState = "LOCKED"
+        self.app_conf.validate_sub_schema()
+        mock_logger.assert_called_with("Subscription schema is valid.")
+
+    def test_utils_validate_config_subscription_administrativeState_invalid_value(self):
+        self.app_conf.subscription.administrativeState = "FAILED"
+        with self.assertRaises(ValidationError):
+            self.app_conf.validate_sub_schema()
+
+    def test_utils_validate_config_subscription_nfFilter_failed(self):
+        self.app_conf.subscription.nfFilter = {}
+        with self.assertRaises(ValidationError):
+            self.app_conf.validate_sub_schema()
+
+    def test_utils_validate_config_subscription_where_measurementTypes_is_empty(self):
+        self.app_conf.subscription.measurementGroups = [{
+            "measurementGroup": {
+                "measurementTypes": [
+                ],
+                "managedObjectDNsBasic": [
+                    {
+                        "DN": "dna"
+                    },
+                    {
+                        "DN": "dnb"
+                    }
+                ]
+            }
+        }]
+        with self.assertRaises(ValidationError):
+            self.app_conf.validate_sub_schema()
+
+    def test_utils_validate_config_subscription_where_managedObjectDNsBasic_is_empty(self):
+        self.app_conf.subscription.measurementGroups = [{
+            "measurementGroup": {
+                "measurementTypes": [
+                    {
+                        "measurementType": "countera"
+                    },
+                    {
+                        "measurementType": "counterb"
+                    }
+                ],
+                "managedObjectDNsBasic": [
+
+                ]
+            }
+        }]
+        with self.assertRaises(ValidationError):
+            self.app_conf.validate_sub_schema()
+
+    def test_utils_validate_config_subscription_where_measurementGroups_is_empty(self):
+        self.app_conf.subscription.measurementGroups = []
+        with self.assertRaises(ValidationError):
+            self.app_conf.validate_sub_schema()

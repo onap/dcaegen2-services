@@ -15,7 +15,10 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import json
+import os
 import uuid
+from json import JSONDecodeError
 from os import getenv
 from threading import Timer
 
@@ -24,8 +27,8 @@ from onap_dcae_cbs_docker_client.client import get_all
 from onaplogging.mdcContext import MDC
 from requests.auth import HTTPBasicAuth
 from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type
+from jsonschema import validate, ValidationError
 
-import mod.network_function
 from mod import logger
 from mod.subscription import Subscription
 
@@ -41,6 +44,7 @@ def mdc_handler(function):
         kwargs['request_id'] = request_id
         kwargs['invocation_id'] = invocation_id
         return function(*args, **kwargs)
+
     return decorator
 
 
@@ -58,6 +62,16 @@ class MySingleton(object):
         return type(clz.__name__, (MySingleton,), dict(clz.__dict__))
 
 
+def _load_sub_schema_from_file():
+    try:
+        with open(os.path.join(os.path.dirname(__file__), 'sub_schema.json')) as sub:
+            return json.load(sub)
+    except OSError as err:
+        logger.error(f'Failed to read sub schema file: {err}', exc_info=True)
+    except JSONDecodeError as json_err:
+        logger.error(f'sub schema file is not a valid JSON file: {json_err}', exc_info=True)
+
+
 class AppConfig:
     INSTANCE = None
 
@@ -73,8 +87,9 @@ class AppConfig:
         self.streams_publishes = conf['config'].get('streams_publishes')
         self.operational_policy_name = conf['config'].get('operational_policy_name')
         self.control_loop_name = conf['config'].get('control_loop_name')
+        self.sub_schema = _load_sub_schema_from_file()
         self.subscription = Subscription(**conf['policy']['subscription'])
-        self.nf_filter = mod.network_function.NetworkFunctionFilter(**self.subscription.nfFilter)
+        self.nf_filter = None
 
     def __new__(cls, *args, **kwargs):
         if AppConfig.INSTANCE is None:
@@ -102,6 +117,23 @@ class AppConfig:
         except Exception as e:
             logger.error(f'Failed to get config from CBS: {e}', exc_info=True)
             raise ValueError(e)
+
+    def validate_sub_schema(self):
+        """
+        Validates schema of PMSH subscription
+
+        Raises:
+            ValidationError: If the PMSH subscription schema is invalid
+        """
+        sub_data = self.subscription.__dict__
+        validate(instance=sub_data, schema=self.sub_schema)
+        nf_filter = sub_data["nfFilter"]
+        for filter_name in nf_filter:
+            if len(nf_filter[filter_name]) > 0:
+                break
+        else:
+            raise ValidationError("At least one filter within nfFilter must not be empty")
+        logger.debug("Subscription schema is valid.")
 
     def refresh_config(self):
         """

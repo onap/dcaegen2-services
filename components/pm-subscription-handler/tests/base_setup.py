@@ -21,11 +21,12 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock
 
 from mod import create_app, db
+from mod.network_function import NetworkFunctionFilter
 from mod.pmsh_utils import AppConfig
 
 
-def get_pmsh_config():
-    with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
+def get_pmsh_config(file_path='data/cbs_data_1.json'):
+    with open(os.path.join(os.path.dirname(__file__), file_path), 'r') as data:
         return json.load(data)
 
 
@@ -48,6 +49,7 @@ class BaseClassSetup(TestCase):
         os.environ['AAI_SERVICE_PORT'] = '8443'
         db.create_all()
         self.app_conf = AppConfig()
+        self.app_conf.nf_filter = NetworkFunctionFilter(**self.app_conf.subscription.nfFilter)
 
     def tearDown(self):
         db.drop_all()
