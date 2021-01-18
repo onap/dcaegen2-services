@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import requests
 from onap_dcae_cbs_docker_client.client import get_all
 from onaplogging.mdcContext import MDC
 from requests.auth import HTTPBasicAuth
+from schema import Schema, And, Or, SchemaError
 from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type
 
 import mod.network_function
@@ -100,6 +101,7 @@ class AppConfig:
             logger.info('Fetching PMSH Configuration from CBS.')
             config = get_all()
             logger.info(f'Successfully fetched PMSH config from CBS: {config}')
+            self.validate_config_subscription(config)
             return config
         except Exception as err:
             logger.error(f'Failed to get config from CBS: {err}', exc_info=True)
@@ -169,6 +171,68 @@ class AppConfig:
             cert_path, key_path (tuple): the path to tls cert and key.
         """
         return self.cert_path, self.key_path
+
+    def validate_config_subscription(self, config):
+        """
+        Returns true if valid config is provided, false otherwise
+
+        Args:
+            config (dict): Dictionary representation of the the service configuration
+
+        Returns:
+            valid (bool): true if config subscription is valid, false otherwise
+
+        Raises:
+            SchemaError: if the config subscription is invalid
+        """
+        schema = Schema({
+            'subscriptionName': str,
+            'administrativeState': And(str, Or('UNLOCKED', "LOCKED")),
+            'fileBasedGP': int,
+            'fileLocation': str,
+            'nfFilter': {
+                'nfNames': [str],
+                'modelInvariantIDs': [str],
+                'modelVersionIDs': [str],
+                "modelName": [str]
+            },
+            'measurementGroups':
+                And(lambda n: len(n) > 0,
+                    [
+                        {'measurementGroup':
+                            {
+                                'measurementTypes': And(
+                                    lambda n: len(n) > 0,
+                                    [
+                                        {'measurementType': str}
+                                    ],
+                                    error="Format of measurementTypes is invalid."
+                                ),
+                                'managedObjectDNsBasic': And(
+                                    lambda n: len(n) > 0,
+                                    [
+                                        {'DN': str}
+                                    ],
+                                    error="Format of managedObjectDNsBasic is invalid."
+                                )
+                            }}],
+                    error="Format of measurementGroups is invalid.")
+        })
+        try:
+            data = config["policy"]["subscription"]
+            schema.validate(data)
+            nf_Filters = data["nfFilter"]
+            for filter in nf_Filters:
+                if len(nf_Filters[filter]) > 0:
+                    valid = True
+                    break
+            else:
+                raise SchemaError("Filters within nfFilter are empty")
+        except SchemaError as e:
+            valid = False
+            logger.error(f"Invalid subscription object found: \n{e}", exc_info=True)
+
+        return valid
 
 
 class _DmaapMrClient:
