@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -145,3 +145,43 @@ class PmshUtilsTestCase(BaseClassSetup):
         with self.assertRaises(RetryError):
             self.app_conf.refresh_config()
         mock_logger.assert_called_with('Failed to get config from CBS: ', exc_info=True)
+
+    def test_utils_validate_config_subscription(self):
+        conf = get_pmsh_config()
+        self.assertTrue(self.app_conf.validate_config_subscription(conf))
+
+    # validate administrativeState (locked)
+    def test_utils_validate_config_subscription_administrativeState_locked(self):
+        conf = get_pmsh_config()
+        conf["policy"]["subscription"]["administrativeState"] = "LOCKED"
+        self.assertTrue(self.app_conf.validate_config_subscription(conf))
+
+    # validate administrativeState (failed)
+    def test_utils_validate_config_subscription_administrativeState_invalid_value(self):
+        conf = get_pmsh_config()
+        conf["policy"]["subscription"]["administrativeState"] = "FAILED"
+        self.assertFalse(self.app_conf.validate_config_subscription(conf))
+
+    # validate nfFilter (no filters present)
+    def test_utils_validate_config_subscription_nfFilter_failed(self):
+        conf = get_pmsh_config()
+        conf["policy"]["subscription"]["nfFilter"]["nfNames"] = []
+        self.assertFalse(self.app_conf.validate_config_subscription(conf))
+
+    # come back to measurementGroups (might be 6 test cases)
+    def test_utils_validate_config_subscription_where_measurementTypes_is_empty(self):
+        conf = get_pmsh_config()
+        for entry in conf["policy"]["subscription"]["measurementGroups"]:
+            entry["measurementGroup"]["measurementTypes"] = []
+        self.assertFalse(self.app_conf.validate_config_subscription(conf))
+
+    def test_utils_validate_config_subscription_where_managedObjectDNsBasic_is_empty(self):
+        conf = get_pmsh_config()
+        for entry in conf["policy"]["subscription"]["measurementGroups"]:
+            entry["measurementGroup"]["managedObjectDNsBasic"] = []
+        self.assertFalse(self.app_conf.validate_config_subscription(conf))
+
+    def test_utils_validate_config_subscription_where_measurementGroups_is_empty(self):
+        conf = get_pmsh_config()
+        conf["policy"]["subscription"]["measurementGroups"] = []
+        self.assertFalse(self.app_conf.validate_config_subscription(conf))
