@@ -1,0 +1,33 @@
+{
+    'subscriptionName': str,
+    'administrativeState': schema.And(str, schema.Or('UNLOCKED', 'LOCKED')),
+    'fileBasedGP': int,
+    'fileLocation': str,
+    'nfFilter': {
+        'nfNames': [str],
+        'modelInvariantIDs': [str],
+        'modelVersionIDs': [str],
+        'modelNames': [str]
+    },
+    'measurementGroups':
+        schema.And(lambda n: len(n) > 0,
+            [
+                {'measurementGroup':
+                    {
+                        'measurementTypes': schema.And(
+                            lambda n: len(n) > 0,
+                            [
+                                {'measurementType': str}
+                            ],
+                            error='Format of measurementTypes is invalid.'
+                        ),
+                        'managedObjectDNsBasic': schema.And(
+                            lambda n: len(n) > 0,
+                            [
+                                {'DN': str}
+                            ],
+                            error='Format of managedObjectDNsBasic is invalid.'
+                        )
+                    }}],
+            error='Format of measurementGroups is invalid.')
+}
