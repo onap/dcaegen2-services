@@ -1,5 +1,5 @@
 # ============LICENSE_START=======================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 #  Copyright 2020 Deutsche Telekom. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,5 +39,6 @@ setup(
         "psycopg2-binary==2.8.4",
         "onap_dcae_cbs_docker_client==2.1.1",
         "onappylog==1.0.9",
-        "ruamel.yaml==0.16.10"]
+        "ruamel.yaml==0.16.10",
+        "schema==0.7.2"]
 )

@@ -23,11 +23,45 @@ import requests
 from onap_dcae_cbs_docker_client.client import get_all
 from onaplogging.mdcContext import MDC
 from requests.auth import HTTPBasicAuth
+from schema import Schema, And, Or, SchemaError
 from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type
 
-import mod.network_function
 from mod import logger
 from mod.subscription import Subscription
+
+SUB_SCHEMA = Schema({
+    'subscriptionName': str,
+    'administrativeState': And(str, Or('UNLOCKED', "LOCKED")),
+    'fileBasedGP': int,
+    'fileLocation': str,
+    'nfFilter': {
+        'nfNames': [str],
+        'modelInvariantIDs': [str],
+        'modelVersionIDs': [str],
+        "modelName": [str]
+    },
+    'measurementGroups':
+        And(lambda n: len(n) > 0,
+            [
+                {'measurementGroup':
+                    {
+                        'measurementTypes': And(
+                            lambda n: len(n) > 0,
+                            [
+                                {'measurementType': str}
+                            ],
+                            error="Format of measurementTypes is invalid."
+                        ),
+                        'managedObjectDNsBasic': And(
+                            lambda n: len(n) > 0,
+                            [
+                                {'DN': str}
+                            ],
+                            error="Format of managedObjectDNsBasic is invalid."
+                        )
+                    }}],
+            error="Format of measurementGroups is invalid.")
+})
 
 
 def mdc_handler(function):
@@ -73,8 +107,9 @@ class AppConfig:
         self.streams_publishes = conf['config'].get('streams_publishes')
         self.operational_policy_name = conf['config'].get('operational_policy_name')
         self.control_loop_name = conf['config'].get('control_loop_name')
+        self.sub_schema = SUB_SCHEMA
         self.subscription = Subscription(**conf['policy']['subscription'])
-        self.nf_filter = mod.network_function.NetworkFunctionFilter(**self.subscription.nfFilter)
+        self.nf_filter = None
 
     def __new__(cls, *args, **kwargs):
         if AppConfig.INSTANCE is None:
@@ -102,6 +137,23 @@ class AppConfig:
         except Exception as e:
             logger.error(f'Failed to get config from CBS: {e}', exc_info=True)
             raise ValueError(e)
+
+    def validate_sub_schema(self):
+        """
+        Validates schema of PMSH operational policy
+
+        Raises:
+            SchemaError: If filters within nfFilter are empty
+        """
+        sub_data = self.subscription.__dict__
+        self.sub_schema.validate(sub_data)
+        nf_filter = sub_data["nfFilter"]
+        for filter_name in nf_filter:
+            if len(nf_filter[filter_name]) > 0:
+                break
+        else:
+            raise SchemaError("At least one filter within nfFilter must not be empty")
+        logger.info("Subscription validation has succeed")
 
     def refresh_config(self):
         """
