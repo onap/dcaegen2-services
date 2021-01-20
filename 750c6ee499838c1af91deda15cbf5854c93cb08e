@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5791b799_67244b42",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-01-20T11:03:20Z",
+      "side": 1,
+      "message": "Is an empty filter not a valid filter?",
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
