@@ -1,0 +1,35 @@
+{
+    "domain": "measurementsForKpi",
+    "methodForKpi": [{
+            "eventName": "perf3gpp_CORE_AMF_pmMeasResult",
+            "controlLoopSchemaType": "SLICE",
+            "policyScope": "resource=networkSlice;type=configuration",
+            "policyName": "configuration.dcae.microservice.pm-mapper.xml",
+            "policyVersion": "v0.0.1",
+            "kpis": [{
+                "measType": "AMFRegNbr",
+                "operation": "SUM",
+                "operands": "RM.RegisteredSubNbrMean"
+            }]
+        },
+        {
+            "eventName": "perf3gpp_AcmeNode-Acme_pmMeasResult",
+            "controlLoopSchemaType": "SLICE",
+            "policyScope": "resource=networkSlice;type=configuration",
+            "policyName": "configuration.dcae.microservice.pm-mapper.xml",
+            "policyVersion": "v0.0.1",
+            "kpis": [{
+                    "measType": "UpstreamThr",
+                    "operation": "SUM",
+                    "operands": "GTP.InDataOctN3UPF"
+
+                },
+                {
+                    "measType": "DownstreamThr",
+                    "operation": "SUM",
+                    "operands": "GTP.OutDataOctN3UPF"
+                }
+            ]
+        }
+    ]
+}
