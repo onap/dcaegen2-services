@@ -52,6 +52,24 @@
       "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32842cd0_e70c40e0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-21T03:00:21Z",
+      "side": 1,
+      "message": "perhaps a better error message would be something like this:\n\"At least one filter within nFilter must not be empty\"\nThe current message doesn\u0027t really give a good clue on how to fix it; it could be taken to mean that all of the filters must be non-empty instead of just the one.",
+      "parentUuid": "53830ac6_989a8f1b",
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
