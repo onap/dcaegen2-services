@@ -2,6 +2,213 @@
   "comments": [
     {
       "key": {
+        "uuid": "c58769c7_9dcd1f14",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-21T13:45:02Z",
+      "side": 1,
+      "message": "better to pass in the subscription dict from the calling function\nconfig[\"policy\"][\"subscription\"]",
+      "range": {
+        "startLine": 175,
+        "startChar": 43,
+        "endLine": 175,
+        "endChar": 49
+      },
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e789e53_6860ca00",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-21T13:45:02Z",
+      "side": 1,
+      "message": "maybe naming like \"_validate_sub_schema\" might be better",
+      "range": {
+        "startLine": 175,
+        "startChar": 17,
+        "endLine": 175,
+        "endChar": 30
+      },
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d19cda4_7e8762b5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-21T13:45:02Z",
+      "side": 1,
+      "message": "add an _ to indicate it\u0027s private",
+      "range": {
+        "startLine": 175,
+        "startChar": 8,
+        "endLine": 175,
+        "endChar": 10
+      },
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b3fb34b_a3006f1e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-21T13:45:02Z",
+      "side": 1,
+      "message": "prob no need to return a boolean. We can just catch an exception if thrown and log it",
+      "range": {
+        "startLine": 182,
+        "startChar": 8,
+        "endLine": 183,
+        "endChar": 24
+      },
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b6107d6_3a6e3f9e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-21T13:45:02Z",
+      "side": 1,
+      "message": "can be removed as we are catching it",
+      "range": {
+        "startLine": 185,
+        "startChar": 8,
+        "endLine": 186,
+        "endChar": 44
+      },
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec7d2d4c_7902d20c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-21T13:45:02Z",
+      "side": 1,
+      "message": "It would be nice to assign this as part of the AppConfig object and assign it in thew __init__ function. ie. \"self.sub_schema\"\nI played around with loading it from a file but we could prob just define it as a global variable at the top of the module and assign it from there.",
+      "range": {
+        "startLine": 188,
+        "startChar": 8,
+        "endLine": 188,
+        "endChar": 14
+      },
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48ab265c_17647de2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-21T13:45:02Z",
+      "side": 1,
+      "message": "singular",
+      "range": {
+        "startLine": 224,
+        "startChar": 21,
+        "endLine": 224,
+        "endChar": 22
+      },
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74c6fe34_f5c03653",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-21T13:45:02Z",
+      "side": 1,
+      "message": "should be snake case\nnf_filters",
+      "range": {
+        "startLine": 224,
+        "startChar": 15,
+        "endLine": 224,
+        "endChar": 16
+      },
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f605aba9_802e0ce0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-21T13:45:02Z",
+      "side": 1,
+      "message": "change to nf_filter as this shadows a built-in name in python",
+      "range": {
+        "startLine": 225,
+        "startChar": 16,
+        "endLine": 225,
+        "endChar": 22
+      },
+      "revId": "750c6ee499838c1af91deda15cbf5854c93cb08e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5791b799_67244b42",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 2
