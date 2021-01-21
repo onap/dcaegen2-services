@@ -1,0 +1,43 @@
+{
+    "config": {
+        "streams_subscribes": {
+            "performance_management_topic": {
+                "aaf_password": null,
+                "type": "message-router",
+                "dmaap_info": {
+                    "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/unauthenticated.VES_MEASUREMENT_OUTPUT",
+                    "client_role": "org.onap.dcae.pmPublisher",
+                    "location": "onap",
+                    "client_id": "dcae@dcae.onap.org"
+                },
+                "aaf_username": null
+            }
+        },
+        "streams_publishes": {
+            "CL_topic": {
+                "aaf_password": null,
+                "type": "message-router",
+                "dmaap_info": {
+                    "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/unauthenticated.DCAE_CL_OUTPUT",
+                    "client_role": "org.onap.dcae.pmPublisher",
+                    "location": "onap",
+                    "client_id": "dcae@dcae.onap.org"
+                },
+                "aaf_username": null
+            }
+        },
+        "dmaap.server": [
+            "dmaap"
+        ],
+        "cbsPollingInterval": 60,
+        "cg": "kpims-cg",
+        "pollingInterval": 20,
+        "cid": "kpims-cid",
+        "service_calls": {
+            "policy-req": []
+        }
+    },
+    "policies": {
+
+    }
+}
