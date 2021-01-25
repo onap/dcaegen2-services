@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a98ecaa_e021bdfb",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "2021",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c1110a8_9d4618d7",
+        "filename": "components/kpi-computation-ms/src/main/docker/config/dmaap/MsgRtrApi.properties",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "2021?",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf101fc4_a7b96d03",
+        "filename": "components/kpi-computation-ms/src/main/docker/docker-compose.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "2021?",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b7cf20c_ef2467f6",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/Application.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "please add javadoc for this and the other public methods",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c804fe1_54f7f72f",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/CommandHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "please add the module javadoc",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b026df92_bfe4cea8",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumKpiComputation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "please add javadocs for the module and public methods",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "553fc612_92fb3ba2",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/dmaap/KpiComputationCallBack.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "please add module javadoc here and method javadoc on the public methods below that don\u0027t ahve one",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef926ba7_04caf10e",
+        "filename": "components/kpi-computation-ms/src/main/resources/application.properties",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "2021?",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b38194b5_31e26d1c",
+        "filename": "components/kpi-computation-ms/src/main/resources/logback.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "2021 ?",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1029153_314f2966",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/FileUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "the method javadoc comments below are excellent\n\nbut please a module javadoc comment",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "269a69d1_756a77ec",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/utils/JsonUtilTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "what is the result that is getting tested here?\nif this throws an exception, please add a comment that effect",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1989012_e646d396",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/utils/JsonUtilTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-25T22:25:05Z",
+      "side": 1,
+      "message": "what is the result that is getting tested here?\nif this throws an exception, please add a comment that effect",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
