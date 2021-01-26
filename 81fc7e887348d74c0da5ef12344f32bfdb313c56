@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0e455252_de9c5f9b",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a98ecaa_e021bdfb",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c1110a8_9d4618d7",
         "filename": "components/kpi-computation-ms/src/main/docker/config/dmaap/MsgRtrApi.properties",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5971f968_a51998ef",
+        "filename": "components/kpi-computation-ms/src/main/docker/config/dmaap/MsgRtrApi.properties",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c1110a8_9d4618d7",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "69be0a2a_1d69ecc8",
+        "filename": "components/kpi-computation-ms/src/main/docker/docker-compose.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf101fc4_a7b96d03",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3b7cf20c_ef2467f6",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/Application.java",
         "patchSetId": 4
@@ -67,6 +121,24 @@
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07d2ff4f_9d4ae5b8",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/Application.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b7cf20c_ef2467f6",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "6182f230_c994c2e2",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/CommandHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c804fe1_54f7f72f",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b026df92_bfe4cea8",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumKpiComputation.java",
         "patchSetId": 4
@@ -101,6 +191,24 @@
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e2d6228_d270e820",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumKpiComputation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b026df92_bfe4cea8",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "262082d5_a076f32f",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/dmaap/KpiComputationCallBack.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "553fc612_92fb3ba2",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef926ba7_04caf10e",
         "filename": "components/kpi-computation-ms/src/main/resources/application.properties",
         "patchSetId": 4
@@ -135,6 +261,24 @@
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9279fb45_279b157c",
+        "filename": "components/kpi-computation-ms/src/main/resources/application.properties",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef926ba7_04caf10e",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "c7266391_9d78b657",
+        "filename": "components/kpi-computation-ms/src/main/resources/logback.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b38194b5_31e26d1c",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1029153_314f2966",
         "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/FileUtils.java",
         "patchSetId": 4
@@ -169,6 +331,24 @@
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bffece3c_34b4e675",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/FileUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1029153_314f2966",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "6be9273b_d0f65040",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/utils/JsonUtilTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "JsonUtil class is unwanted, will delete it.",
+      "parentUuid": "269a69d1_756a77ec",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c1989012_e646d396",
         "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/utils/JsonUtilTest.java",
         "patchSetId": 4
@@ -200,6 +398,24 @@
       "writtenOn": "2021-01-25T22:25:05Z",
       "side": 1,
       "message": "what is the result that is getting tested here?\nif this throws an exception, please add a comment that effect",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e615bde0_1dda2bd0",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/utils/JsonUtilTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-26T03:07:20Z",
+      "side": 1,
+      "message": "same comments like above",
+      "parentUuid": "c1989012_e646d396",
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
