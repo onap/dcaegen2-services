@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d53531b0_cc2089e0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-26T14:59:48Z",
+      "side": 1,
+      "message": "this appears to be a no-op",
+      "revId": "734b861445639261069b066ca62d40d020930a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fef2d50d_dec69e29",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-26T14:59:48Z",
+      "side": 1,
+      "message": "please update the syntax\nexcept (ValueError, Exception) as e:\n\npylint:\n W0711: Exception to catch is the result of a binary \"or\" operation (binary-op-exception)\n\n\nof course, there\u0027s the question of why ValueError is being listed separately when you\u0027re also catching Exception (a superclass of ValueError)? So for that, this could be simplified to\n\nexcept Exception as e:",
+      "revId": "734b861445639261069b066ca62d40d020930a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fd416b6_206b670c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-26T14:59:48Z",
+      "side": 1,
+      "message": "this except+raise appears to be a no-op\n\nany particular reason to keep it?\n\nif it\u0027s kept, change to a bare \"raise\" (which also eliminates the need to declare \u0027e\"",
+      "revId": "734b861445639261069b066ca62d40d020930a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
