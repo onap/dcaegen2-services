@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "79cb9df6_08c914c1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-26T16:33:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d53531b0_cc2089e0",
+      "revId": "734b861445639261069b066ca62d40d020930a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fef2d50d_dec69e29",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2a3faff1_edf13a30",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-26T16:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fef2d50d_dec69e29",
+      "revId": "734b861445639261069b066ca62d40d020930a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8fd416b6_206b670c",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2021-01-26T14:59:48Z",
       "side": 1,
       "message": "this except+raise appears to be a no-op\n\nany particular reason to keep it?\n\nif it\u0027s kept, change to a bare \"raise\" (which also eliminates the need to declare \u0027e\"",
+      "revId": "734b861445639261069b066ca62d40d020930a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1467e25e_b9b86c1d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-01-26T16:33:34Z",
+      "side": 1,
+      "message": "Yep, I will raise it up the call stack so. Missed that.\nAgain, we will revsit our exception handling asap.",
+      "parentUuid": "8fd416b6_206b670c",
       "revId": "734b861445639261069b066ca62d40d020930a16",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
