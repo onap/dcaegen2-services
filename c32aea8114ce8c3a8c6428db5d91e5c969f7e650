@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d64b6ee4_3983c5a4",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-27T23:50:58Z",
+      "side": 1,
+      "message": "This file should go into blueprint repository",
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c87f3e0f_52001099",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-27T23:50:58Z",
+      "side": 1,
+      "message": "dmaap import not required as it is not used in the blueprint",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 30
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17b9e3f1_b4f16542",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-27T23:50:58Z",
+      "side": 1,
+      "message": "nexus3.onap.org:10001",
+      "range": {
+        "startLine": 31,
+        "startChar": 14,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ffd00a2_d34dca92",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-27T23:50:58Z",
+      "side": 1,
+      "message": "policyName - configuration.dcae.microservice.pm-mapper.xml?\npls update this to reflect the H release targetted usecase",
+      "range": {
+        "startLine": 153,
+        "startChar": 13,
+        "endLine": 153,
+        "endChar": 756
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "516185c3_35c13439",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-27T23:50:58Z",
+      "side": 1,
+      "message": "switch to latest version \nhttps://docs.onap.org/projects/onap-dcaegen2/en/latest/sections/sdk/changelog.html",
+      "range": {
+        "startLine": 38,
+        "startChar": 21,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d7b40b0_ac4d6e24",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-27T23:50:58Z",
+      "side": 1,
+      "message": "indentation to be fixed",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 15
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d70f574c_287ba21b",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-27T23:50:58Z",
+      "side": 1,
+      "message": "Switch to ONAP base img\nonap/integration-java11:8.0.0",
+      "range": {
+        "startLine": 363,
+        "startChar": 31,
+        "endLine": 363,
+        "endChar": 54
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e39141fb_ca3776f1",
+        "filename": "components/kpi-computation-ms/src/main/docker/config/dmaap/MsgRtrApi.properties",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-27T23:50:58Z",
+      "side": 1,
+      "message": "I assume this is for test; docker files can moved under root (kpi-computation-ms)",
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b16979f_41ef16c8",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiComputationTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-27T23:50:58Z",
+      "side": 1,
+      "message": "can be removed",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 24
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
