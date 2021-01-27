@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "1d6b1fc4_26f10392",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "0e455252_de9c5f9b",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c1110a8_9d4618d7",
         "filename": "components/kpi-computation-ms/src/main/docker/config/dmaap/MsgRtrApi.properties",
         "patchSetId": 4
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "2c1110a8_9d4618d7",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96cf4c14_c4d317cc",
+        "filename": "components/kpi-computation-ms/src/main/docker/config/dmaap/MsgRtrApi.properties",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "5971f968_a51998ef",
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
@@ -107,6 +143,24 @@
     },
     {
       "key": {
+        "uuid": "6497f5b0_31533981",
+        "filename": "components/kpi-computation-ms/src/main/docker/docker-compose.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "69be0a2a_1d69ecc8",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3b7cf20c_ef2467f6",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/Application.java",
         "patchSetId": 4
@@ -136,6 +190,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "3b7cf20c_ef2467f6",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8840baa_0b517703",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/Application.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "07d2ff4f_9d4ae5b8",
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
@@ -177,6 +249,24 @@
     },
     {
       "key": {
+        "uuid": "d4a7e0a6_24479164",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/CommandHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "6182f230_c994c2e2",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b026df92_bfe4cea8",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumKpiComputation.java",
         "patchSetId": 4
@@ -206,6 +296,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "b026df92_bfe4cea8",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df8fee35_ab35ee80",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumKpiComputation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "8e2d6228_d270e820",
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
@@ -247,6 +355,24 @@
     },
     {
       "key": {
+        "uuid": "00d39ffb_e14f0b2e",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/dmaap/KpiComputationCallBack.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "262082d5_a076f32f",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef926ba7_04caf10e",
         "filename": "components/kpi-computation-ms/src/main/resources/application.properties",
         "patchSetId": 4
@@ -276,6 +402,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "ef926ba7_04caf10e",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "288a8358_0f7ac390",
+        "filename": "components/kpi-computation-ms/src/main/resources/application.properties",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "9279fb45_279b157c",
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
@@ -317,6 +461,24 @@
     },
     {
       "key": {
+        "uuid": "4f050eb4_c59b9cec",
+        "filename": "components/kpi-computation-ms/src/main/resources/logback.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "c7266391_9d78b657",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1029153_314f2966",
         "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/FileUtils.java",
         "patchSetId": 4
@@ -346,6 +508,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "e1029153_314f2966",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a391dbc6_5eec18bd",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/FileUtils.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "bffece3c_34b4e675",
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
@@ -387,6 +567,24 @@
     },
     {
       "key": {
+        "uuid": "765d39b1_dff514c6",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/utils/JsonUtilTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6be9273b_d0f65040",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1989012_e646d396",
         "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/utils/JsonUtilTest.java",
         "patchSetId": 4
@@ -419,6 +617,24 @@
       "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09c9e700_af27b681",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/utils/JsonUtilTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-01-27T18:41:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e615bde0_1dda2bd0",
+      "revId": "81fc7e887348d74c0da5ef12344f32bfdb313c56",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
