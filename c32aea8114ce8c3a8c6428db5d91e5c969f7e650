@@ -111,6 +111,30 @@
     },
     {
       "key": {
+        "uuid": "82629e31_4371b062",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-28T09:02:05Z",
+      "side": 1,
+      "message": "when I switch sdk-version to 1.5.0, the service start error: it seems that netty error cause the problem?\nWARNING: All illegal access operations will be denied in a future release\nException in thread \"Thread-0\" java.lang.NoSuchMethodError: \u0027boolean io.netty.handler.ssl.SslProvider.isAlpnSupported(io.netty.handler.ssl.SslProvider)\u0027\n        at reactor.netty.http.client.HttpClientSecure.\u003cclinit\u003e(HttpClientSecure.java:72)\n        at reactor.netty.http.client.HttpClient.secure(HttpClient.java:1305)\n        at org.onap.dcaegen2.services.sdk.rest.services.adapters.http.RxHttpClientFactory.create(RxHttpClientFactory.java:62)\n        at org.onap.dcaegen2.services.sdk.rest.services.adapters.http.RxHttpClientFactory.create(RxHttpClientFactory.java:53)\n        at org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsClientFactory.buildHttpClient(CbsClientFactory.java:64)\n        at org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsClientFactory.lambda$createCbsClient$0(CbsClientFactory.java:57)\n        at reactor.core.publisher.MonoCallable.subscribe(MonoCallable.java:56)\n        at reactor.core.publisher.MonoCacheTime.subscribeOrReturn(MonoCacheTime.java:134)\n        at reactor.core.publisher.Flux.subscribe(Flux.java:8081)\n        at reactor.core.publisher.Flux.subscribeWith(Flux.java:8268)\n        at reactor.core.publisher.Flux.subscribe(Flux.java:8065)\n        at reactor.core.publisher.Flux.subscribe(Flux.java:7989)\n        at reactor.core.publisher.Flux.subscribe(Flux.java:7959)\n        at org.onap.dcaegen2.kpi.controller.ConfigFetchFromCbs.getAppConfig(ConfigFetchFromCbs.java:77)\n        at org.onap.dcaegen2.kpi.controller.ConfigFetchFromCbs.run(ConfigFetchFromCbs.java:98)\n        at java.base/java.lang.Thread.run(Unknown Source)",
+      "parentUuid": "516185c3_35c13439",
+      "range": {
+        "startLine": 38,
+        "startChar": 21,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1d7b40b0_ac4d6e24",
         "filename": "components/kpi-computation-ms/pom.xml",
         "patchSetId": 5
@@ -134,6 +158,30 @@
     },
     {
       "key": {
+        "uuid": "6a381c3c_93eb4304",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-28T09:02:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d7b40b0_ac4d6e24",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 15
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d70f574c_287ba21b",
         "filename": "components/kpi-computation-ms/pom.xml",
         "patchSetId": 5
@@ -145,6 +193,30 @@
       "writtenOn": "2021-01-27T23:50:58Z",
       "side": 1,
       "message": "Switch to ONAP base img\nonap/integration-java11:8.0.0",
+      "range": {
+        "startLine": 363,
+        "startChar": 31,
+        "endLine": 363,
+        "endChar": 54
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad867faa_c9ee1051",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-01-28T09:02:05Z",
+      "side": 1,
+      "message": "if changed to onap/intergration11:8, it will report a error like below when build image:\n[ERROR] Failed to execute goal com.spotify:docker-maven-plugin:1.2.2:build (default-cli) on project kpi-ms: Exception caught: The command \u0027/bin/sh -c adduser --disabled-password kpiuser\u0027 returned a non-zero code: 1 -\u003e [Help 1]",
+      "parentUuid": "d70f574c_287ba21b",
       "range": {
         "startLine": 363,
         "startChar": 31,
