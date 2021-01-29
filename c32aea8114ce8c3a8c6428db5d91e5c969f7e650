@@ -183,6 +183,30 @@
     },
     {
       "key": {
+        "uuid": "26307636_0aba12ff",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-29T23:10:05Z",
+      "side": 1,
+      "message": "Remi - Can you check/suggest what other changes required to use new CBS sdk version.",
+      "parentUuid": "c4f19276_17b4eafa",
+      "range": {
+        "startLine": 38,
+        "startChar": 21,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1d7b40b0_ac4d6e24",
         "filename": "components/kpi-computation-ms/pom.xml",
         "patchSetId": 5
