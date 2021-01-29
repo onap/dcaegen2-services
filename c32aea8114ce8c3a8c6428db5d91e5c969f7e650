@@ -135,6 +135,30 @@
     },
     {
       "key": {
+        "uuid": "c773c738_7889a3ed",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-29T00:46:50Z",
+      "side": 1,
+      "message": "This version will require change to how the cbs is invoked.. you could chk dcaegen2/collectors/hv-ves or switch to 1.4.3",
+      "parentUuid": "82629e31_4371b062",
+      "range": {
+        "startLine": 38,
+        "startChar": 21,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1d7b40b0_ac4d6e24",
         "filename": "components/kpi-computation-ms/pom.xml",
         "patchSetId": 5
@@ -217,6 +241,30 @@
       "side": 1,
       "message": "if changed to onap/intergration11:8, it will report a error like below when build image:\n[ERROR] Failed to execute goal com.spotify:docker-maven-plugin:1.2.2:build (default-cli) on project kpi-ms: Exception caught: The command \u0027/bin/sh -c adduser --disabled-password kpiuser\u0027 returned a non-zero code: 1 -\u003e [Help 1]",
       "parentUuid": "d70f574c_287ba21b",
+      "range": {
+        "startLine": 363,
+        "startChar": 31,
+        "endLine": 363,
+        "endChar": 54
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "608d2373_2ef3f314",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-01-29T00:46:50Z",
+      "side": 1,
+      "message": "You can remove the user setting as it aleady set to onap in the base image - https://git.onap.org/integration/docker/onap-java11/tree/Dockerfile",
+      "parentUuid": "ad867faa_c9ee1051",
       "range": {
         "startLine": 363,
         "startChar": 31,
