@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15877ed1_989ce43f",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/controller/ConfigFetchFromCbs.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-02-01T10:35:48Z",
+      "side": 1,
+      "message": "Consider being more descriptive.",
+      "range": {
+        "startLine": 104,
+        "startChar": 42,
+        "endLine": 104,
+        "endChar": 47
+      },
+      "revId": "d372a261e3980e20669e40bc2535d6cbf5f64f25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "322b4b2d_b38eeedd",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/controller/ConfigFetchFromCbs.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-02-01T10:35:48Z",
+      "side": 1,
+      "message": "Consider logging that the config won\u0027t be updated anymore.",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 3
+      },
+      "revId": "d372a261e3980e20669e40bc2535d6cbf5f64f25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
