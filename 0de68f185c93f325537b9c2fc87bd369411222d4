@@ -117,6 +117,30 @@
     },
     {
       "key": {
+        "uuid": "6b54c47e_7b6a8ef4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-02-04T16:51:45Z",
+      "side": 1,
+      "message": "edit\n\"Subscription schema is valid.\"",
+      "parentUuid": "d45758d3_3c8fdd6e",
+      "range": {
+        "startLine": 156,
+        "startChar": 15,
+        "endLine": 156,
+        "endChar": 19
+      },
+      "revId": "0de68f185c93f325537b9c2fc87bd369411222d4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd0e1579_ec3e9cb4",
         "filename": "components/pm-subscription-handler/tests/data/cbs_data_1.json",
         "patchSetId": 5
