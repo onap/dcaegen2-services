@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dd480414_418ab24e",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/controller/ConfigFetchFromCbs.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-05T00:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15877ed1_989ce43f",
+      "range": {
+        "startLine": 104,
+        "startChar": 42,
+        "endLine": 104,
+        "endChar": 47
+      },
+      "revId": "d372a261e3980e20669e40bc2535d6cbf5f64f25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "322b4b2d_b38eeedd",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/controller/ConfigFetchFromCbs.java",
         "patchSetId": 9
@@ -45,6 +69,30 @@
       "revId": "d372a261e3980e20669e40bc2535d6cbf5f64f25",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7701b8d5_ecf6e2a9",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/controller/ConfigFetchFromCbs.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-05T00:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "322b4b2d_b38eeedd",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 3
+      },
+      "revId": "d372a261e3980e20669e40bc2535d6cbf5f64f25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }

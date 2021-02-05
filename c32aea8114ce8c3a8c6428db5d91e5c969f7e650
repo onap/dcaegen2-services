@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4c307322_48919926",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-05T00:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d64b6ee4_3983c5a4",
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c87f3e0f_52001099",
         "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
         "patchSetId": 5
@@ -39,6 +57,30 @@
       "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acc066b4_83126e34",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-05T00:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c87f3e0f_52001099",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 30
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "b0abd14e_1dfd125d",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-05T00:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17b9e3f1_b4f16542",
+      "range": {
+        "startLine": 31,
+        "startChar": 14,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ffd00a2_d34dca92",
         "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
         "patchSetId": 5
@@ -85,6 +151,30 @@
       "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c99922e9_590b8ea5",
+        "filename": "components/kpi-computation-ms/k8s-kpi-ms.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-05T00:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ffd00a2_d34dca92",
+      "range": {
+        "startLine": 153,
+        "startChar": 13,
+        "endLine": 153,
+        "endChar": 756
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -255,6 +345,30 @@
     },
     {
       "key": {
+        "uuid": "51613e3c_70c98ef2",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-05T00:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "475fefe6_19115d3f",
+      "range": {
+        "startLine": 38,
+        "startChar": 21,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d7b40b0_ac4d6e24",
         "filename": "components/kpi-computation-ms/pom.xml",
         "patchSetId": 5
@@ -373,6 +487,30 @@
     },
     {
       "key": {
+        "uuid": "8d487e70_93533794",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-05T00:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "608d2373_2ef3f314",
+      "range": {
+        "startLine": 363,
+        "startChar": 31,
+        "endLine": 363,
+        "endChar": 54
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e39141fb_ca3776f1",
         "filename": "components/kpi-computation-ms/src/main/docker/config/dmaap/MsgRtrApi.properties",
         "patchSetId": 5
@@ -387,6 +525,24 @@
       "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31efe8f6_caa97691",
+        "filename": "components/kpi-computation-ms/src/main/docker/config/dmaap/MsgRtrApi.properties",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-05T00:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e39141fb_ca3776f1",
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -410,6 +566,30 @@
       "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "156e5541_11eda2b7",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiComputationTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-05T00:36:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b16979f_41ef16c8",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 24
+      },
+      "revId": "c32aea8114ce8c3a8c6428db5d91e5c969f7e650",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
