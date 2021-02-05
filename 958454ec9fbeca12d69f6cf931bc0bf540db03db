@@ -22,6 +22,30 @@
       "revId": "958454ec9fbeca12d69f6cf931bc0bf540db03db",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc6e4cbb_ef79be7f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7486
+      },
+      "writtenOn": "2021-02-05T13:24:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02c80e3a_b656139e",
+      "range": {
+        "startLine": 78,
+        "startChar": 43,
+        "endLine": 78,
+        "endChar": 50
+      },
+      "revId": "958454ec9fbeca12d69f6cf931bc0bf540db03db",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
