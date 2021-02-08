@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f5c7bb7_99106b8c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-02-08T17:39:12Z",
+      "side": 1,
+      "message": "This is fraught with danger, as arbitrary python code could be stuffed into that file and then executed by this application.\n\nI\u0027m assuming that the schema_string is JSON? If so, then use the json.load() function to read the file. It will guarantee that the input truly is JSON and throw an exception otherwise.\n\nThe JSON object can then be returned.\n\neval() should RARELY be used in production code.",
+      "revId": "449effff1d7670088960099e7588083541f000b5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
