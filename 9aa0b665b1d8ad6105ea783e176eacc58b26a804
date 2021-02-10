@@ -46,6 +46,30 @@
       "revId": "9aa0b665b1d8ad6105ea783e176eacc58b26a804",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "937d7fdc_13a7f870",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/sub_schema.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7486
+      },
+      "writtenOn": "2021-02-10T10:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73bfc967_f84aaa2c",
+      "range": {
+        "startLine": 54,
+        "startChar": 10,
+        "endLine": 54,
+        "endChar": 18
+      },
+      "revId": "9aa0b665b1d8ad6105ea783e176eacc58b26a804",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
