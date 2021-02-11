@@ -15,9 +15,11 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+from jsonschema import ValidationError
 
 from mod import logger, aai_client
 from mod.aai_event_handler import process_aai_events
+from mod.network_function import NetworkFunctionFilter
 from mod.pmsh_utils import PeriodicTask
 from mod.subscription import AdministrativeState
 
@@ -42,12 +44,16 @@ class SubscriptionHandler:
                 self._check_for_failed_nfs()
             else:
                 self.app_conf.refresh_config()
+                self.app_conf.validate_sub_schema()
                 new_administrative_state = self.app_conf.subscription.administrativeState
                 if local_admin_state == new_administrative_state:
                     logger.info(f'Administrative State did not change in the app config: '
                                 f'{new_administrative_state}')
                 else:
                     self._check_state_change(local_admin_state, new_administrative_state)
+        except (ValidationError, TypeError) as err:
+            logger.error(f'Error occurred during validation of subscription schema {err}',
+                         exc_info=True)
         except Exception as err:
             logger.error(f'Error occurred during the activation/deactivation process {err}',
                          exc_info=True)
@@ -65,6 +71,8 @@ class SubscriptionHandler:
             raise Exception(f'Invalid AdministrativeState: {new_administrative_state}')
 
     def _activate(self, new_administrative_state):
+        if not self.app_conf.nf_filter:
+            self.app_conf.nf_filter = NetworkFunctionFilter(**self.app_conf.subscription.nfFilter)
         self._start_aai_event_thread()
         self.app_conf.subscription.update_sub_params(new_administrative_state,
                                                      self.app_conf.subscription.fileBasedGP,
