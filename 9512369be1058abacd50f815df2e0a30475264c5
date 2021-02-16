@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e77afd8_efc605c4",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/operational_policy_sample.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-16T15:32:35Z",
+      "side": 1,
+      "message": "This is not valid data-format.. not sure how is this json is utilized by PMSH, should this be submitted under policy project?",
+      "revId": "9512369be1058abacd50f815df2e0a30475264c5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
