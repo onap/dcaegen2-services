@@ -16,6 +16,24 @@
       "revId": "9512369be1058abacd50f815df2e0a30475264c5",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13d0faff_8efc2436",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/operational_policy_sample.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7475
+      },
+      "writtenOn": "2021-02-16T16:13:27Z",
+      "side": 1,
+      "message": "The original thought was to add a sample operational policy json file in dpo folder to assist operators as a reference on what operational policy look like, would perhaps putting this file in dpo directory instead of data-formats would suit?",
+      "parentUuid": "7e77afd8_efc605c4",
+      "revId": "9512369be1058abacd50f815df2e0a30475264c5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
