@@ -34,6 +34,24 @@
       "revId": "9512369be1058abacd50f815df2e0a30475264c5",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3de8e106_004c81f4",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/operational_policy_sample.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-02-17T16:29:39Z",
+      "side": 1,
+      "message": "I believe Policy project may have place-holder to maintain such sample operational policy config - looped Jim/Pam for guidance.\nOnce added there, we could update PMSH documentation to reference that config and provide steps for onboarding that policy",
+      "parentUuid": "13d0faff_8efc2436",
+      "revId": "9512369be1058abacd50f815df2e0a30475264c5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
