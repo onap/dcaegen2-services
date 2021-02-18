@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM nexus3.onap.org:10001/onap/integration-java11:latest
 
 ARG PROJECT_BUILD_DIR_NAME
 ARG FINAL_JAR
@@ -6,6 +6,7 @@ ARG DEPENDENCIES_DIR
 ARG DOCKER_ARTIFACT_DIR
 
 #Add a new user and group to allow container to be run as non-root
+USER root
 RUN addgroup --system bbs-ep && adduser --system --ingroup bbs-ep bbs-ep
 
 #Copy dependencies and executable jar
