@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM nexus3.onap.org:10001/onap/integration-java11
 
 MAINTAINER Guobiao Mo <guobiaomo@chinamobile.com>
 

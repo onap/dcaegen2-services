@@ -17,7 +17,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-FROM python:3.8.2-alpine3.11 as build
+FROM nexus3.onap.org:10001/onap/integration-python:7.0.1 as build
 MAINTAINER lego@est.tech
 
 RUN set -eux; \
@@ -31,7 +31,7 @@ COPY requirements.txt ./
 RUN pip install --prefix /opt -r requirements.txt --no-cache-dir
 
 # Second stage
-FROM python:3.8.2-alpine3.11
+FROM nexus3.onap.org:10001/onap/integration-python:7.0.1
 
 COPY --from=build /opt /opt
 
