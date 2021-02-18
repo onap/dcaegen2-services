@@ -15,14 +15,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-FROM openjdk:11-jre-slim
+FROM nexus3.onap.org:10001/onap/integration-java11:latest
 
 MAINTAINER Kai Lu <lukai@chinamobile.com>
 
 EXPOSE 1681
 
-RUN groupadd -r datalake && useradd -r -g datalake datalake
-RUN mkdir /home/datalake/ && \
+USER root
+RUN addgroup --system datalake && adduser --system --ingroup datalake datalake && \
+    mkdir /home/datalake/ && \
     mkdir /home/datalake/db_init
 
 WORKDIR /home/datalake
@@ -33,18 +34,13 @@ COPY src/assembly/run.sh .
 COPY src/assembly/init_db/db_scripts/init_db.sql .
 COPY src/assembly/init_db/db_scripts/init_db_data.sql .
 
-WORKDIR /home/datalake/db_init
-ADD src/assembly/init_db/scripts/db_init .
-
-WORKDIR /home/datalake
+ADD src/assembly/init_db/scripts/db_init ./db_init/
 
 RUN chmod -R 0755 ./* && \
     chown -R datalake:datalake /home/datalake 
 
-RUN apt update && \
-    apt install -y mariadb-client && \
-    apt install -y curl
+RUN apk install --no-cache mariadb curl
 
-#USER datalake
+USER datalake
 CMD ["sh", "run.sh"]
 
