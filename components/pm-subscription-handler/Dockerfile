@@ -17,9 +17,10 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-FROM python:3.8.2-alpine3.11 as build
+FROM nexus3.onap.org:10001/onap/integration-python:latest as build
 MAINTAINER lego@est.tech
 
+USER root
 RUN set -eux; \
     apk add \
     build-base \
@@ -31,10 +32,11 @@ COPY requirements.txt ./
 RUN pip install --prefix /opt -r requirements.txt --no-cache-dir
 
 # Second stage
-FROM python:3.8.2-alpine3.11
+FROM nexus3.onap.org:10001/onap/integration-python:latest
 
 COPY --from=build /opt /opt
 
+USER root
 ARG user=onap
 ARG group=onap
 
@@ -50,13 +52,14 @@ WORKDIR $APPDIR
 RUN mkdir -p $APPDIR
 
 RUN set -eux; \
-    apk add --no-cache postgresql-libs nano
+    apk add --no-cache postgresql-libs
 
 COPY ./pmsh_service ./bin
 COPY log_config.yaml ./
 
 # Create a group and user
-RUN addgroup -S $group && adduser -S -D -h /home/$user $user $group && \
+RUN mkdir -p /home/$user && \
+    chown -R $user:$group /home/$user && \
     mkdir -p ${LOGS_PATH} && \
     chown -R $user:$group ${LOGS_PATH} && \
     chown -R $user:$group ${APPDIR}
