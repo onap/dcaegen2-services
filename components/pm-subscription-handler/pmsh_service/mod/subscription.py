@@ -15,6 +15,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import json
 from enum import Enum
 
 from mod import db, logger
@@ -28,12 +29,15 @@ class SubNfState(Enum):
     PENDING_DELETE = 'PENDING_DELETE'
     DELETE_FAILED = 'DELETE_FAILED'
     DELETED = 'DELETED'
+    MODIFIED = 'MODIFIED'
+    MODIFICATION_FAILED = 'MODIFICATION_FAILED'
 
 
 class AdministrativeState(Enum):
     UNLOCKED = 'UNLOCKED'
     LOCKING = 'LOCKING'
     LOCKED = 'LOCKED'
+    FILTERING = 'FILTERING'
 
 
 subscription_nf_states = {
@@ -48,6 +52,10 @@ subscription_nf_states = {
     AdministrativeState.LOCKING.value: {
         'success': SubNfState.DELETED,
         'failed': SubNfState.DELETE_FAILED
+    },
+    AdministrativeState.FILTERING.value: {
+        'success': SubNfState.MODIFIED,
+        'failed': SubNfState.MODIFICATION_FAILED
     }
 }
 
@@ -87,12 +95,22 @@ class Subscription:
             existing_subscription = (SubscriptionModel.query.filter(
                 SubscriptionModel.subscription_name == self.subscriptionName).one_or_none())
             if existing_subscription is None:
-                new_subscription = SubscriptionModel(subscription_name=self.subscriptionName,
-                                                     status=AdministrativeState.LOCKED.value)
+                new_subscription = \
+                    SubscriptionModel(subscription_name=self.subscriptionName,
+                                      nfFilter=self.nfFilter,
+                                      status=AdministrativeState.LOCKED.value)
                 db.session.add(new_subscription)
                 db.session.commit()
                 return new_subscription
             else:
+                if existing_subscription.nfFilter and \
+                        self._filter_diff(existing_subscription.nfFilter) and \
+                        existing_subscription.status == AdministrativeState.UNLOCKED.value:
+                    self.administrativeState = \
+                        AdministrativeState.FILTERING.value
+                    self.nfFilter = existing_subscription.nfFilter
+                    self.update_subscription_status()
+
                 logger.debug(f'Subscription {self.subscriptionName} already exists,'
                              f' returning this subscription..')
                 return existing_subscription
@@ -102,12 +120,33 @@ class Subscription:
         finally:
             db.session.remove()
 
+    def _filter_diff(self, existing_subscription_filter):
+        existing_subscription_filter, nfFilter = \
+            json.dumps(existing_subscription_filter, sort_keys=True), \
+            json.dumps(self.nfFilter, sort_keys=True)
+        return existing_subscription_filter != nfFilter
+
     def update_subscription_status(self):
         """ Updates the status of subscription in subscription table """
         try:
             SubscriptionModel.query.filter(
-                SubscriptionModel.subscription_name == self.subscriptionName)\
+                SubscriptionModel.subscription_name == self.subscriptionName) \
                 .update({SubscriptionModel.status: self.administrativeState},
+                        synchronize_session='evaluate')
+
+            db.session.commit()
+        except Exception as e:
+            logger.error(f'Failed to update status of subscription: {self.subscriptionName}: {e}',
+                         exc_info=True)
+        finally:
+            db.session.remove()
+
+    def update_subscription_filter(self):
+        """ Updates the filter of subscription in subscription table """
+        try:
+            SubscriptionModel.query.filter(
+                SubscriptionModel.subscription_name == self.subscriptionName) \
+                .update({SubscriptionModel.nfFilter: self.nfFilter},
                         synchronize_session='evaluate')
 
             db.session.commit()
@@ -128,7 +167,8 @@ class Subscription:
             dict: the Subscription event to be published.
         """
         try:
-            clean_sub = {k: v for k, v in self.__dict__.items() if k != 'nfFilter'}
+            clean_sub = {k: v for k, v in self.__dict__.items()
+                         if k != 'nfFilter' and k != 'current_filter'}
             if self.administrativeState == AdministrativeState.LOCKING.value:
                 change_type = 'DELETE'
             else:
@@ -297,3 +337,14 @@ class Subscription:
         nfs = _get_nf_objects(nf_sub_relationships)
         db.session.remove()
         return nfs
+
+    def get_nfs_for_creation_and_deletion(nfs1, nfs2, action, mrpub, app_conf):
+        for x in range(len(nfs1)):
+            found = 0
+            for y in range(len(nfs2)):
+                if (nfs1[x].nf_name == nfs2[y].nf_name):
+                    found = 1
+            if found == 0 and action == 'create':
+                app_conf.subscription.create_subscription_on_nfs([nfs1[x]], mrpub, app_conf)
+            elif found == 0 and action == 'delete':
+                app_conf.subscription.delete_subscription_from_nfs([nfs1[x]], mrpub, app_conf)
