@@ -21,7 +21,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pm_subscription_handler",
-    version="1.3.1",
+    version="1.4.0",
     packages=find_packages(),
     author="lego@est.tech",
     author_email="lego@est.tech",
