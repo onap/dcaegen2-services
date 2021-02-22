@@ -21,7 +21,7 @@ from mod import logger, aai_client
 from mod.aai_event_handler import process_aai_events
 from mod.network_function import NetworkFunctionFilter
 from mod.pmsh_utils import PeriodicTask
-from mod.subscription import AdministrativeState
+from mod.subscription import AdministrativeState, Subscription
 
 
 class SubscriptionHandler:
@@ -45,6 +45,15 @@ class SubscriptionHandler:
             else:
                 self.app_conf.refresh_config()
                 self.app_conf.validate_sub_schema()
+                local_admin_state = self.app_conf.subscription.get_local_sub_admin_state()
+                if local_admin_state == AdministrativeState.FILTERING.value:
+                    existing_nfs = SubscriptionHandler.get_network_functions()
+                    self.app_conf.nf_filter = \
+                        NetworkFunctionFilter(**self.app_conf.subscription.nfFilter)
+                    new_nfs = process_aai_events(self.aai_sub, self.mr_pub, self.app, self.app_conf)
+                    Subscription.get_nfs_for_creation_and_deletion(existing_nfs, new_nfs, 'delete')
+                    Subscription.get_nfs_for_creation_and_deletion(new_nfs, existing_nfs, 'create')
+
                 new_administrative_state = self.app_conf.subscription.administrativeState
                 if local_admin_state == new_administrative_state:
                     logger.info(f'Administrative State did not change in the app config: '
