@@ -53,7 +53,7 @@
         <undertow.version>2.0.30.Final</undertow.version>
         <xml.version>2.3.1</xml.version>
         <jaxb.version>2.3.0.1</jaxb.version>
-        <docker.repository>nexus3.onap.org:10001</docker.repository>
+        <docker.repository>nexus3.onap.org:10003</docker.repository>
         <spring.version>5.2.7.RELEASE</spring.version>
         <junit.version>5.3.2</junit.version>
         <mockito.version>2.23.4</mockito.version>
