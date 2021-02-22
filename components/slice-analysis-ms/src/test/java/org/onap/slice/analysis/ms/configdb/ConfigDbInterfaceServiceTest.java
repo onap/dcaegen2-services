@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -64,8 +64,9 @@ public class ConfigDbInterfaceServiceTest {
         map.put("dLThptPerSlice", 45);
 		map.put("uLThptPerSlice", 50);
 		responsemap.put("1", map);
+
 		Mockito.when(restclient.sendGetRequest(Mockito.anyString(), Mockito.any())).thenReturn(new ResponseEntity<Object>(responsemap, HttpStatus.OK));	
-		assertEquals(responsemap, configdbservice.fetchCurrentConfigurationOfSlice("snssai"));
+		assertEquals(responsemap, configdbservice.fetchCurrentConfigurationOfRIC("snssai"));
 
 	}
 	@Test
@@ -125,3 +126,4 @@ public class ConfigDbInterfaceServiceTest {
 		assertEquals(responseMap, configdbservice.fetchServiceDetails("snssai"));
 	}
 }
+

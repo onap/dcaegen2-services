@@ -37,6 +37,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.onap.slice.analysis.ms.configdb.IConfigDbService;
+import org.onap.slice.analysis.ms.configdb.AaiService;
+import org.onap.slice.analysis.ms.configdb.CpsService;
 import org.onap.slice.analysis.ms.models.MLOutputModel;
 import org.onap.slice.analysis.ms.models.policy.AdditionalProperties;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -55,7 +57,13 @@ public class MLMessageProcessorTest {
 	
 	@Mock
 	private IConfigDbService configDbService;
-	
+
+        @Mock
+	AaiService aaiService;
+
+	@Mock
+        CpsService  cpsService;
+
 	@Mock
 	private PolicyService policyService;
 	

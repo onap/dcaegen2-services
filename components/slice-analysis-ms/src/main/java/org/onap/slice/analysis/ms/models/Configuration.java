@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ package org.onap.slice.analysis.ms.models;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
-/** 
+/**
  * Model class for the application Configuration
  */
 public class Configuration {
@@ -46,6 +47,9 @@ public class Configuration {
 	private String pgPassword;
 	private List<String> dmaapServers;
 	private String configDbService;
+	private String cpsUrl;
+	private String aaiUrl;
+	private Boolean configDbEnabled;
 	private String cg;
 	private String cid;
 	private int pollingInterval;
@@ -57,221 +61,258 @@ public class Configuration {
 	private int samples;
 	private int minPercentageChange;
 	private long initialDelaySeconds;
+
 	/**
 	 * Check if topic is secure.
 	 */
-	 public boolean isSecured() {
-		 return (aafUsername != null);
+	public boolean isSecured() {
+		return (aafUsername != null);
 
-	 }
+	}
 
-	 public String getAafUsername() {
-		 return aafUsername;
-	 }
+	public String getAafUsername() {
+		return aafUsername;
+	}
 
-	 public void setAafUsername(String aafUsername) {
-		 this.aafUsername = aafUsername;
-	 }
+	public void setAafUsername(String aafUsername) {
+		this.aafUsername = aafUsername;
+	}
 
-	 public String getAafPassword() {
-		 return aafPassword;
-	 }
+	public String getAafPassword() {
+		return aafPassword;
+	}
 
-	 public void setAafPassword(String aafPassword) {
-		 this.aafPassword = aafPassword;
-	 }
+	public void setAafPassword(String aafPassword) {
+		this.aafPassword = aafPassword;
+	}
 
-	 public Map<String, Object> getStreamsSubscribes() {
-		 return streamsSubscribes;
-	 }
+	public Map<String, Object> getStreamsSubscribes() {
+		return streamsSubscribes;
+	}
 
-	 public void setStreamsSubscribes(Map<String, Object> streamsSubscribes) {
-		 this.streamsSubscribes = streamsSubscribes;
-	 }
+	public void setStreamsSubscribes(Map<String, Object> streamsSubscribes) {
+		this.streamsSubscribes = streamsSubscribes;
+	}
 
-	 public Map<String, Object> getStreamsPublishes() {
-		 return streamsPublishes;
-	 }
+	public Map<String, Object> getStreamsPublishes() {
+		return streamsPublishes;
+	}
 
-	 public void setStreamsPublishes(Map<String, Object> streamsPublishes) {
-		 this.streamsPublishes = streamsPublishes;
-	 }
+	public void setStreamsPublishes(Map<String, Object> streamsPublishes) {
+		this.streamsPublishes = streamsPublishes;
+	}
 
-	 protected Configuration() {
+	protected Configuration() {
 
-	 }
+	}
 
-	 /**
-	  * Get instance of class.
-	  */
-	 public static Configuration getInstance() {
-		 if (instance == null) {
-			 instance = new Configuration();
-		 }
-		 return instance;
-	 }
+	/**
+	 * Get instance of class.
+	 */
+	public static Configuration getInstance() {
+		if (instance == null) {
+			instance = new Configuration();
+		}
+		return instance;
+	}
 
-	 public String getCg() {
-		 return cg;
-	 }
+	public String getCg() {
+		return cg;
+	}
 
-	 public void setCg(String cg) {
-		 this.cg = cg;
-	 }
+	public void setCg(String cg) {
+		this.cg = cg;
+	}
 
-	 public String getCid() {
-		 return cid;
-	 }
+	public String getCid() {
+		return cid;
+	}
 
-	 public void setCid(String cid) {
-		 this.cid = cid;
-	 }
+	public void setCid(String cid) {
+		this.cid = cid;
+	}
 
-	 public int getPollingInterval() {
-		 return pollingInterval;
-	 }
+	public int getPollingInterval() {
+		return pollingInterval;
+	}
 
-	 public void setPollingInterval(int pollingInterval) {
-		 this.pollingInterval = pollingInterval;
-	 }
+	public void setPollingInterval(int pollingInterval) {
+		this.pollingInterval = pollingInterval;
+	}
 
-	 public int getPollingTimeout() {
-		 return pollingTimeout;
-	 }
+	public int getPollingTimeout() {
+		return pollingTimeout;
+	}
 
-	 public void setPollingTimeout(int pollingTimeout) {
-		 this.pollingTimeout = pollingTimeout;
-	 }
+	public void setPollingTimeout(int pollingTimeout) {
+		this.pollingTimeout = pollingTimeout;
+	}
 
-	 public String getPgHost() {
-		 return pgHost;
-	 }
+	public String getPgHost() {
+		return pgHost;
+	}
 
-	 public void setPgHost(String pgHost) {
-		 this.pgHost = pgHost;
-	 }
+	public void setPgHost(String pgHost) {
+		this.pgHost = pgHost;
+	}
 
-	 public int getPgPort() {
-		 return pgPort;
-	 }
+	public int getPgPort() {
+		return pgPort;
+	}
 
-	 public void setPgPort(int pgPort) {
-		 this.pgPort = pgPort;
-	 }
+	public void setPgPort(int pgPort) {
+		this.pgPort = pgPort;
+	}
 
-	 public String getPgUsername() {
-		 return pgUsername;
-	 }
+	public String getPgUsername() {
+		return pgUsername;
+	}
 
-	 public void setPgUsername(String pgUsername) {
-		 this.pgUsername = pgUsername;
-	 }
+	public void setPgUsername(String pgUsername) {
+		this.pgUsername = pgUsername;
+	}
 
-	 public String getPgPassword() {
-		 return pgPassword;
-	 }
+	public String getPgPassword() {
+		return pgPassword;
+	}
 
-	 public void setPgPassword(String pgPassword) {
-		 this.pgPassword = pgPassword;
-	 }
+	public void setPgPassword(String pgPassword) {
+		this.pgPassword = pgPassword;
+	}
 
-	 public List<String> getDmaapServers() {
-		 return dmaapServers;
-	 }
+	public List<String> getDmaapServers() {
+		return dmaapServers;
+	}
 
-	 public void setDmaapServers(List<String> dmaapServers) {
-		 this.dmaapServers = dmaapServers;
-	 }
+	public void setDmaapServers(List<String> dmaapServers) {
+		this.dmaapServers = dmaapServers;
+	}
 
-	 public String getConfigDbService() {
-		 return configDbService;
-	 }
+	public String getConfigDbService() {
+		return configDbService;
+	}
 
-	 public void setConfigDbService(String configDbService) {
-		 this.configDbService = configDbService;
-	 }
+	public void setConfigDbService(String configDbService) {
+		this.configDbService = configDbService;
+	}
 
-	 public int getSamples() {
-		 return samples;
-	 }
+	public String getCpsUrl() {
+		return cpsUrl;
+	}
 
-	 public void setSamples(int samples) {
-		 this.samples = samples;
-	 }
+	public void setCpsUrl(String cpsUrl) {
+		this.cpsUrl = cpsUrl;
+	}
 
-	 public int getMinPercentageChange() {
-		 return minPercentageChange;
-	 }
+	public String getAaiUrl() {
+		return aaiUrl;
+	}
 
-	 public void setMinPercentageChange(int minPercentageChange) {
-		 this.minPercentageChange = minPercentageChange;
-	 }
+	public void setAaiUrl(String aaiUrl) {
+		this.aaiUrl = aaiUrl;
+	}
 
-	 public long getInitialDelaySeconds() {
-		 return initialDelaySeconds;
-	 }
+	public Boolean getConfigDbEnabled() {
+		return configDbEnabled;
+	}
 
-	 public void setInitialDelaySeconds(long initialDelaySeconds) {
-		 this.initialDelaySeconds = initialDelaySeconds;
-	 }
+	public void setConfigDbEnabled(Boolean configDbEnabled) {
+		this.configDbEnabled = configDbEnabled;
+	}
 
-	 @Override
-	 public String toString() {
-		 return "Configuration [pgHost=" + pgHost + ", pgPort=" + pgPort + ", pgUsername=" + pgUsername + ", pgPassword="
-				 + pgPassword + ", dmaapServers=" + dmaapServers + ", configDbService=" + configDbService + ", cg=" + cg
-				 + ", cid=" + cid + ", pollingInterval=" + pollingInterval + ", pollingTimeout=" + pollingTimeout
-				 + ", aafUsername=" + aafUsername + ", aafPassword=" + aafPassword + ", streamsSubscribes="
-				 + streamsSubscribes + ", streamsPublishes=" + streamsPublishes + ", samples=" + samples
-				 + ", minPercentageChange=" + minPercentageChange + ", initialDelaySeconds=" + initialDelaySeconds + "]";
-	 }
+	public int getSamples() {
+		return samples;
+	}
 
-	 /**
-	  * updates application configuration.
-	  */
-	 public void updateConfigurationFromJsonObject(JsonObject jsonObject) {
+	public void setSamples(int samples) {
+		this.samples = samples;
+	}
 
-		 log.info("Updating configuration from CBS");
+	public int getMinPercentageChange() {
+		return minPercentageChange;
+	}
 
-		 Type mapType = new TypeToken<Map<String, Object>>() {
-		 }.getType();
+	public void setMinPercentageChange(int minPercentageChange) {
+		this.minPercentageChange = minPercentageChange;
+	}
 
-		 JsonObject subscribes = jsonObject.getAsJsonObject("streams_subscribes");
-		 streamsSubscribes = new Gson().fromJson(subscribes, mapType);
+	public long getInitialDelaySeconds() {
+		return initialDelaySeconds;
+	}
 
-		 JsonObject publishes = jsonObject.getAsJsonObject("streams_publishes");
-		 streamsPublishes = new Gson().fromJson(publishes, mapType);
+	public void setInitialDelaySeconds(long initialDelaySeconds) {
+		this.initialDelaySeconds = initialDelaySeconds;
+	}
 
-		 pgPort = jsonObject.get("postgres.port").getAsInt();
-		 pollingInterval = jsonObject.get("sliceanalysisms.pollingInterval").getAsInt();
-		 pgPassword = jsonObject.get("postgres.password").getAsString();
-		 pgUsername = jsonObject.get("postgres.username").getAsString();
-		 pgHost = jsonObject.get("postgres.host").getAsString();
+	@Override
+	public String toString() {
+		return "Configuration [pgHost=" + pgHost + ", pgPort=" + pgPort + ", pgUsername=" + pgUsername + ", pgPassword="
+				+ pgPassword + ", dmaapServers=" + dmaapServers + ", configDbService=" + configDbService + ", cpsUrl="
+				+ cpsUrl + ", aaiUrl=" + aaiUrl + ", configDbEnabled=" + configDbEnabled + ", cg=" + cg + ", cid=" + cid + ", pollingInterval=" + pollingInterval + ", pollingTimeout="
+				+ pollingTimeout + ", aafUsername=" + aafUsername + ", aafPassword=" + aafPassword
+				+ ", streamsSubscribes=" + streamsSubscribes + ", streamsPublishes=" + streamsPublishes + ", samples="
+				+ samples + ", minPercentageChange=" + minPercentageChange + ", initialDelaySeconds="
+				+ initialDelaySeconds + "]";
+	}
 
-		 JsonArray servers = jsonObject.getAsJsonArray("sliceanalysisms.dmaap.server");
-		 Type listType = new TypeToken<List<String>>() {}.getType();
-		 dmaapServers = new Gson().fromJson(servers, listType);
+	/**
+	 * updates application configuration.
+	 */
+	public void updateConfigurationFromJsonObject(JsonObject jsonObject) {
 
-		 cg = jsonObject.get("sliceanalysisms.cg").getAsString();
-		 cid = jsonObject.get("sliceanalysisms.cid").getAsString();
-		 configDbService = jsonObject.get("sliceanalysisms.configDb.service").getAsString();
+		log.info("Updating configuration from CBS");
 
-		 pollingTimeout = jsonObject.get("sliceanalysisms.pollingTimeout").getAsInt();
-		 samples = jsonObject.get("sliceanalysisms.samples").getAsInt();
-		 minPercentageChange = jsonObject.get("sliceanalysisms.minPercentageChange").getAsInt();
-		 initialDelaySeconds = jsonObject.get("sliceanalysisms.initialDelaySeconds").getAsLong();
+		Type mapType = new TypeToken<Map<String, Object>>() {
+		}.getType();
 
-		 if(jsonObject.get("aafUsername") == null) {
-			 aafUsername = null;
-		 }
-		 else {
-			 aafUsername = jsonObject.get("aafUsername").getAsString();
-		 }
-		 if(jsonObject.get("aafPassword") == null) {
-			 aafPassword = null;
-		 }
-		 else {
-			 aafPassword = jsonObject.get("aafPassword").getAsString();
-		 }		 
-		 log.info("configuration from CBS {}", this);
-	 }
+		JsonObject subscribes = jsonObject.getAsJsonObject("streams_subscribes");
+		streamsSubscribes = new Gson().fromJson(subscribes, mapType);
+
+		JsonObject publishes = jsonObject.getAsJsonObject("streams_publishes");
+		streamsPublishes = new Gson().fromJson(publishes, mapType);
+
+		pgPort = jsonObject.get("postgres.port").getAsInt();
+		pollingInterval = jsonObject.get("sliceanalysisms.pollingInterval").getAsInt();
+		pgPassword = jsonObject.get("postgres.password").getAsString();
+		pgUsername = jsonObject.get("postgres.username").getAsString();
+		pgHost = jsonObject.get("postgres.host").getAsString();
+
+		JsonArray servers = jsonObject.getAsJsonArray("sliceanalysisms.dmaap.server");
+		Type listType = new TypeToken<List<String>>() {
+		}.getType();
+		dmaapServers = new Gson().fromJson(servers, listType);
+
+		cg = jsonObject.get("sliceanalysisms.cg").getAsString();
+		cid = jsonObject.get("sliceanalysisms.cid").getAsString();
+		configDbService = jsonObject.get("sliceanalysisms.configDb.service").getAsString();
+		configDbEnabled = jsonObject.get("sliceanalysisms.configDbEnabled").getAsBoolean();
+
+		pollingTimeout = jsonObject.get("sliceanalysisms.pollingTimeout").getAsInt();
+		samples = jsonObject.get("sliceanalysisms.samples").getAsInt();
+		minPercentageChange = jsonObject.get("sliceanalysisms.minPercentageChange").getAsInt();
+		initialDelaySeconds = jsonObject.get("sliceanalysisms.initialDelaySeconds").getAsLong();
+
+		if (Objects.isNull(jsonObject.get("aafUsername"))) {
+			aafUsername = null;
+		} else {
+			aafUsername = jsonObject.get("aafUsername").getAsString();
+		}
+		if (Objects.isNull(jsonObject.get("aafPassword"))) {
+			aafPassword = null;
+		} else {
+			aafPassword = jsonObject.get("aafPassword").getAsString();
+		}
+		if (Objects.isNull(jsonObject.get("sliceanalysisms.aai.url"))) {
+			aaiUrl = null;
+		} else {
+			aaiUrl = jsonObject.get("sliceanalysisms.aai.url").getAsString();
+		}
+		if (Objects.isNull(jsonObject.get("sliceanalysisms.cps.url"))) {
+			cpsUrl = null;
+		} else {
+			cpsUrl = jsonObject.get("sliceanalysisms.cps.url").getAsString();
+		}
+		log.info("configuration from CBS {}", this);
+	}
 }
+

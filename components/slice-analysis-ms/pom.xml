@@ -32,7 +32,7 @@
 
 	<groupId>org.onap.dcaegen2.services.components</groupId>
 	<artifactId>slice-analysis-ms</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.4-SNAPSHOT</version>
 	<name>dcaegen2-services-slice-analysis-ms</name>
 	<description>Network slice PM analyser</description>
         <packaging>jar</packaging>
@@ -53,7 +53,6 @@
         	<sonar.coverage.jacoco.xmlReportPaths>
             	${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
         	</sonar.coverage.jacoco.xmlReportPaths>
-		
 	</properties>
 
 	<dependencies>
