@@ -25,7 +25,7 @@
     <parent>
         <groupId>org.onap.dcaegen2.services.components</groupId>
         <artifactId>datalake-handler</artifactId>
-        <version>1.1.0-SNAPSHOT</version>
+        <version>1.1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>des</artifactId>
@@ -36,7 +36,7 @@
         <swagger.version>2.9.2</swagger.version>
         <dockerfile-maven.version>1.4.10</dockerfile-maven.version>
         <docker.image.path>onap/org.onap.dcaegen2.services.datalake.exposure.service</docker.image.path>
-        <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+	<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
     </properties>
 
     <dependencies>
@@ -60,9 +60,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <version>2.4.1</version>
+            <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+            <version>42.2.18</version>
         </dependency>
 
         <dependency>
@@ -260,6 +260,9 @@
                         <goals>
                             <goal>build</goal>
                         </goals>
+                        <configuration>
+                            <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>tag-and-push-image-latest</id>
