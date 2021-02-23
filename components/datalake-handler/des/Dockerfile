@@ -1,5 +1,6 @@
 # ============LICENSE_START===================================================
 #  Copyright (C) 2020 China Mobile.
+#  Copyright (C) 2021 Wipro Limited
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,15 +16,17 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-FROM openjdk:11-jre-slim
+
+FROM nexus3.onap.org:10001/onap/integration-java11:8.0.0
 
 MAINTAINER Kai Lu <lukai@chinamobile.com>
 
 EXPOSE 1681
 
-RUN groupadd -r datalake && useradd -r -g datalake datalake
-RUN mkdir /home/datalake/ && \
-    mkdir /home/datalake/db_init
+USER root
+
+RUN addgroup datalake && adduser -G datalake -h /home/datalake -D datalake
+RUN mkdir /home/datalake/db_init
 
 WORKDIR /home/datalake
 
@@ -41,10 +44,8 @@ WORKDIR /home/datalake
 RUN chmod -R 0755 ./* && \
     chown -R datalake:datalake /home/datalake 
 
-RUN apt update && \
-    apt install -y mariadb-client && \
-    apt install -y curl
+RUN apk --update add postgresql-client curl
 
-#USER datalake
-CMD ["sh", "run.sh"]
+USER datalake
 
+ENTRYPOINT  /home/datalake/run.sh

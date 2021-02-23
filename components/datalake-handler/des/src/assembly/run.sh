@@ -1,5 +1,6 @@
 # ============LICENSE_START===================================================
 #  Copyright (C) 2020 China Mobile.
+#  Copyright (C) 2021 Wipro Limited.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,12 +21,14 @@
 
 echo "start init db ..."
 
-/bin/run-parts /home/datalake/db_init
+export PGPASSWORD=$PG_PASSWORD
+
+sh db_init/11_create-table
+sh db_init/20_db-initdb
 
 echo "finish init db"
 
 cmd=`find . -name des*-execute.jar`
-
 if [ -n "$cmd" ]; then
     java -jar "$cmd"
 else
