@@ -3,6 +3,7 @@
 # ============LICENSE_START==========================================
 # ===================================================================
 # Copyright © 2020 China Mobile. All rights reserved.
+# Copyright (C) 2021 Wipro Limited.
 # ===================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,14 +18,5 @@
 # limitations under the License.
 # ============LICENSE_END============================================
 #
-result=`mysql -qfsB -uroot -p"$MYSQL_ROOT_PASSWORD" -h "$MYSQL_HOST" -P "$MYSQL_PORT" -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='datalake'" 2>&1`
 
-if [[ ! -z $result ]];
-then
-  echo "DATABASE ALREADY EXISTS"
-  touch /tmp/db_exist
-  exit 1
-else
-  echo "DATABASE DOES NOT EXIST"
-  exit 0
-fi
+psql -h $PG_HOST -U $PG_USER -d $PG_DB -f /home/datalake/init_db.sql
