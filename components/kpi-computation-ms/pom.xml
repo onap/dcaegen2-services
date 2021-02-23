@@ -334,9 +334,8 @@
                             <include>${project.artifactId}-${project.version}.jar</include>
                         </resource>
                         <resource>
-                                <targetPath>/app</targetPath>
+                            <targetPath>/app</targetPath>
                             <directory>${project.basedir}</directory>
-                            <include>entry.sh</include>
                         </resource>
                     </resources>
 
