@@ -239,12 +239,6 @@ public class Configuration {
         }.getType();
         dmaapServers = new Gson().fromJson(servers, listType);
 
-        port = jsonObject.get("mongo.port").getAsInt();
-        host = jsonObject.get("mongo.host").getAsString();
-//        username = jsonObject.get("mongo.username").getAsString();
-//        password = jsonObject.get("mongo.password").getAsString();
-        databasename = jsonObject.get("mongo.databasename").getAsString();
-
         if (jsonObject.get("aafUsername") == null) {
             aafUsername = null;
         } else {
