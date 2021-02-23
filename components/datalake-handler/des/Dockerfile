@@ -1,5 +1,6 @@
 # ============LICENSE_START===================================================
 #  Copyright (C) 2020 China Mobile.
+#  Copyright (C) 2021 Wipro Limited
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,8 +43,8 @@ RUN chmod -R 0755 ./* && \
     chown -R datalake:datalake /home/datalake 
 
 RUN apt update && \
-    apt install -y mariadb-client && \
-    apt install -y curl
+    apt install -y curl && \
+    apt install postgresql-client -y
 
 #USER datalake
 CMD ["sh", "run.sh"]

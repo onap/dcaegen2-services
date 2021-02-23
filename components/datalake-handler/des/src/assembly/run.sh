@@ -25,7 +25,6 @@ echo "start init db ..."
 echo "finish init db"
 
 cmd=`find . -name des*-execute.jar`
-
 if [ -n "$cmd" ]; then
     java -jar "$cmd"
 else
