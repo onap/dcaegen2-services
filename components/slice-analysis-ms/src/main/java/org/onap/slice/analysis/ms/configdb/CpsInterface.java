@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -26,15 +26,14 @@ import java.util.Map;
 
 /**
  * 
- *  Interface for config db service
+ *  Interface for CPS 
  *
  */
-public interface IConfigDbService {
+public interface CpsInterface {
 
 	public Map<String, List<String>> fetchRICsOfSnssai(String snssai);
 	public List<String> fetchNetworkFunctionsOfSnssai(String snssai);
-	public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
 	public Map<String, Map<String,Object>> fetchCurrentConfigurationOfRIC(String snssai);
-	public Map<String ,String> fetchServiceDetails(String snssai);
+	
 }
 

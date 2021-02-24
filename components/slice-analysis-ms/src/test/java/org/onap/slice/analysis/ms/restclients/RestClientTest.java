@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@
  *******************************************************************************/
 package org.onap.slice.analysis.ms.restclients;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -32,6 +31,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.onap.slice.analysis.ms.service.SnssaiSamplesProcessorTest;
 import org.onap.slice.analysis.ms.utils.BeanUtil;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
@@ -49,61 +49,60 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
-
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = RestClientTest.class)
 public class RestClientTest {
-	
+
 	@Mock
 	RestTemplate restTemplate;
 
 	@InjectMocks
 	RestClient restclient;
-	
-	@SuppressWarnings({ "static-access"})
+
+	@SuppressWarnings({ "static-access" })
 	@Test
 	public void sendGetRequestTest() {
-		ParameterizedTypeReference<Map<String,Integer>> responseType = null;
-	       HttpHeaders headers = new HttpHeaders();
-	       headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-	       headers.setContentType(MediaType.APPLICATION_JSON);
+		String requestUrl = "";
+		ParameterizedTypeReference<String> responseType = null;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<Object> requestEntity = new HttpEntity<>( headers);
-		Map<String, Integer> responsemap=new HashMap<>();
-		responsemap.put("dLThptPerSlice", 1);
-		responsemap.put("uLThptPerSlice", 2);
-		String requestUrl="";
-		when(restTemplate.exchange(requestUrl, HttpMethod.GET,requestEntity,responseType)).thenReturn(ResponseEntity.ok(responsemap));
-		 ResponseEntity<Map<String,Integer>> resp = restclient.sendGetRequest(headers, requestUrl, responseType);
-		assertEquals(resp.getBody(),responsemap);	
+		when(restTemplate.exchange(requestUrl, HttpMethod.GET, requestEntity, responseType))
+				.thenReturn(new ResponseEntity(HttpStatus.NOT_FOUND));
+		assertEquals(restclient.sendGetRequest(headers, requestUrl, responseType).getStatusCode(), HttpStatus.NOT_FOUND);
 	}
-	
+
 	@SuppressWarnings({ "static-access", "unchecked", "rawtypes" })
 	@Test
-	public void sendPostRequestTest() { 
-       ParameterizedTypeReference<String> responseType = null;
-       HttpHeaders headers = new HttpHeaders();
-       headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-       headers.setContentType(MediaType.APPLICATION_JSON);
-       String requestUrl = "Url"; String requestBody = null;  
-       HttpEntity<Object> requestEntity = new HttpEntity<>(requestBody, headers);
-       when(restTemplate.exchange(requestUrl, HttpMethod.POST,requestEntity,responseType)).thenReturn(new ResponseEntity(HttpStatus.OK)); 
-       ResponseEntity<String> resp = restclient.sendPostRequest(headers, requestUrl, requestBody,responseType);
-       assertEquals(resp.getStatusCode(), HttpStatus.OK);  
+	public void sendPostRequestTest() {
+		ParameterizedTypeReference<String> responseType = null;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		String requestUrl = "Url";
+		String requestBody = null;
+		HttpEntity<Object> requestEntity = new HttpEntity<>(requestBody, headers);
+		when(restTemplate.exchange(requestUrl, HttpMethod.POST, requestEntity, responseType))
+				.thenReturn(new ResponseEntity(HttpStatus.OK));
+		ResponseEntity<String> resp = restclient.sendPostRequest(headers, requestUrl, requestBody, responseType);
+		assertEquals(resp.getStatusCode(), HttpStatus.OK);
 	}
-	
+
 	@Test
-	public void sendPostRequestTest2() { 
-       ParameterizedTypeReference<String> responseType = null;
-       HttpHeaders headers = new HttpHeaders();
-       headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-       headers.setContentType(MediaType.APPLICATION_JSON);
-       String requestUrl = "Url"; String requestBody = null;  
-       HttpEntity<Object> requestEntity = new HttpEntity<>(requestBody, headers);
-       when(restTemplate.exchange(requestUrl, HttpMethod.POST,requestEntity,responseType)).thenReturn(new ResponseEntity(HttpStatus.NOT_FOUND));        
-       ResponseEntity<String> resp = restclient.sendPostRequest(headers, requestUrl, requestBody,responseType);
-       assertEquals(resp.getStatusCode(), HttpStatus.NOT_FOUND);  
-	}  
-	
-	
+	public void sendPostRequestTest2() {
+		ParameterizedTypeReference<String> responseType = null;
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		String requestUrl = "Url";
+		String requestBody = null;
+		HttpEntity<Object> requestEntity = new HttpEntity<>(requestBody, headers);
+		when(restTemplate.exchange(requestUrl, HttpMethod.POST, requestEntity, responseType))
+				.thenReturn(new ResponseEntity(HttpStatus.NOT_FOUND));
+		ResponseEntity<String> resp = restclient.sendPostRequest(headers, requestUrl, requestBody, responseType);
+		assertEquals(resp.getStatusCode(), HttpStatus.NOT_FOUND);
+	}
+
 }
+
