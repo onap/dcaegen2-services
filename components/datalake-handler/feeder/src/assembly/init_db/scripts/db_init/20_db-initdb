@@ -2,7 +2,8 @@
 #
 # ============LICENSE_START==========================================
 # ===================================================================
-# Copyright © 2020 QCT Property. All rights reserved.
+# Copyright © 2020 China Mobile. All rights reserved.
+# Copyright (C) 2021 Wipro Limited.
 # ===================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +19,4 @@
 # ============LICENSE_END============================================
 #
 
-if [ -f "/tmp/db_exist" ]; then
-    exit 0
-fi
-
-cat /home/datalake/init_db_data.sql | mysql -uroot -p$MYSQL_ROOT_PASSWORD -h $MYSQL_HOST -P $MYSQL_PORT || exit 1
+psql -h $PG_HOST -U $PG_USER -d $PG_DB -f /home/datalake/init_db_data.sql
