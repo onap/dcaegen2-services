@@ -24,8 +24,8 @@ COPY src/assembly/init_db/db_scripts/init_db.sql .
 COPY src/assembly/init_db/db_scripts/init_db_data.sql .
 
 RUN apt update && \
-    apt install -y mariadb-client && \
-    apt install -y curl
+    apt install -y curl && \
+    apt install postgresql-client -y
 
 USER datalake
 
