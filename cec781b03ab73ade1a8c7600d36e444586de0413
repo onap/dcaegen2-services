@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1770be3_9463c702",
+        "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-02-25T17:15:24Z",
+      "side": 1,
+      "message": "My assumption was that all nfFilter keys must be present AND at least 1 value be provided to filter on.",
+      "revId": "cec781b03ab73ade1a8c7600d36e444586de0413",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
