@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7cd59831_68b3b338",
+        "filename": "releases/kpi-computation-ms-container.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-02-25T06:27:03Z",
+      "side": 1,
+      "message": "Add version to filename \n kpi-computation-ms-1.0.0-container.yaml",
+      "revId": "5bd8b3ce0b6e35f47b921e612727dc13fae03db2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "200fbff8_48c67a62",
+        "filename": "releases/kpi-computation-ms-container.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-02-25T06:27:03Z",
+      "side": 1,
+      "message": "In general safer to use revision marked in jenkins job ( https://jenkins.onap.org/view/dcaegen2/job/dcaegen2-services-kpi-computation-ms-maven-docker-stage-master/31/ )\nWhich in that case is:\n 0923950a6fe2cc082a6768ab97859fb1117c5ad5\n\nBut that one should be fine too.",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "5bd8b3ce0b6e35f47b921e612727dc13fae03db2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
