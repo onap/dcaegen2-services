@@ -52,6 +52,24 @@
       "revId": "9512369be1058abacd50f815df2e0a30475264c5",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cdd8723_6aee04f4",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/operational_policy_sample.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7475
+      },
+      "writtenOn": "2021-02-25T09:34:21Z",
+      "side": 1,
+      "message": "Thanks Vijay, I discussed with Fiachra and Liam for putting the operational policy in the policy repo: https://gerrit.onap.org/r/gitweb?p\u003dpolicy/models.git;a\u003dtree;f\u003dmodels-examples/src/main/resources/policies;hb\u003d5a94ebda407e82a8df4abea1b8a916ea4f88d9cd, I\u0027ll abandon this commit since we don\u0027t need to put it on PMSH anymore. Once we reviewed the format of the policy I\u0027ll create a commit on the policy repo",
+      "parentUuid": "3de8e106_004c81f4",
+      "revId": "9512369be1058abacd50f815df2e0a30475264c5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
