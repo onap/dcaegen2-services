@@ -50,13 +50,7 @@
                   "type":"string"
                }
             }
-         },
-         "required":[
-            "nfNames",
-            "modelInvariantIDs",
-            "modelVersionIDs",
-            "modelNames"
-         ]
+         }
       },
       "measurementGroups":{
          "type":"array",

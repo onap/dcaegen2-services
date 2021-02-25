@@ -165,6 +165,26 @@ class PmshUtilsTestCase(BaseClassSetup):
         with self.assertRaises(ValidationError):
             self.app_conf.validate_sub_schema()
 
+    def test_utils_validate_config_subscription_nfFilter_is_empty(self):
+        self.app_conf.subscription.nfFilter = {
+            "modelInvariantIDs": [
+            ]
+        }
+        with self.assertRaises(ValidationError):
+            self.app_conf.validate_sub_schema()
+
+    @patch('mod.logger.debug')
+    def test_utils_validate_config_subscription_nfFilter_not_empty(self, mock_logger):
+        self.app_conf.subscription.nfFilter = {
+            "nfNames": [
+            ],
+            "modelInvariantIDs": [
+                "7129e420-d396-4efb-af02-6b83499b12f8"
+            ]
+        }
+        self.app_conf.validate_sub_schema()
+        mock_logger.assert_called_with("Subscription schema is valid.")
+
     def test_utils_validate_config_subscription_where_measurementTypes_is_empty(self):
         self.app_conf.subscription.measurementGroups = [{
             "measurementGroup": {
