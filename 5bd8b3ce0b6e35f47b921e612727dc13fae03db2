@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b2c102cf_fcb3cbe0",
+        "filename": "releases/kpi-computation-ms-container.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-02-25T14:21:50Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "7cd59831_68b3b338",
+      "revId": "5bd8b3ce0b6e35f47b921e612727dc13fae03db2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "200fbff8_48c67a62",
         "filename": "releases/kpi-computation-ms-container.yaml",
         "patchSetId": 4
@@ -39,6 +57,30 @@
       "revId": "5bd8b3ce0b6e35f47b921e612727dc13fae03db2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "931f2464_4e540f78",
+        "filename": "releases/kpi-computation-ms-container.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6065
+      },
+      "writtenOn": "2021-02-25T14:21:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "200fbff8_48c67a62",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "5bd8b3ce0b6e35f47b921e612727dc13fae03db2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
