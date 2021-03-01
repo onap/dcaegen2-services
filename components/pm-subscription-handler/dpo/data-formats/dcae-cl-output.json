@@ -9,85 +9,31 @@
     "name": "PM Subscription CL event",
     "version": "1.0.0",
     "properties": {
-        "version": {
+      "name": "PM Subscription CL event",
+      "version": "1.0.0",
+      "nfName": {
         "type": "string",
-        "enum": [
-          "1.0.2"
-        ]
+        "description": "name of the nf in A&AI"
       },
-      "closedLoopControlName": {
+      "ipv4Address": {
         "type": "string",
-        "description" : "This is the unique ID for the Control Loop. It is created by the CLAMP platform during Control Loop design"
-      },
-      "requestID": {
-        "type": "string",
-        "description" : "For the control loop, when an instance of the Control Loop occurs, this unique ID must be created. The same ID must be forwarded for both the ONSET and the ABATED control loop messages"
-      },
-      "closedLoopEventStatus": {
-        "type": "string",
-        "description" : "This is the status of the closedLoopControlName/requestID pair",
-        "enum": [
-          "ONSET",
-          "ABATED"
-        ]
-      },
-      "closedLoopAlarmStart": {
-        "type": "string",
-        "description" : "When the alarm was first detected"
-      },
-      "closedLoopAlarmEnd" : {
-        "type" : "string",
-        "description" : "When the alarm was cleared. This field need only be present in the ABATED message"
-      },
-      "policyVersion": {
-        "type": "string",
-        "description" : "The version of the Policy driving the DCAE Micro service. Should be a part of the configuration policy setup by CLAMP and passed by DCAE controller"
+        "description": "ipv4address of the nf that being targeted"
       },
       "policyName": {
         "type": "string",
-        "description" : "The name of the Operational Policy driving the DCAE micro service."
+        "description": "The name of the Operational Policy driving the DCAE micro service."
       },
-      "policyScope": {
+      "closedLoopControlName": {
         "type": "string",
-        "description" : "The scope of the Policy driving the DCAE micro service. Should be a part of the configuration policy setup by CLAMP and passed by DCAE controller"
+        "description": "This is the unique ID for the Control Loop. It is created by the CLAMP platform during Control Loop design"
       },
-      "from": {
+      "blueprintName": {
         "type": "string",
-        "description" : "The ONAP platform component publishing this message",
-        "enum": [
-          "DCAE"
-        ]
+        "description": "The name of the blueprint to be executed by CDS towards the nf"
       },
-      "target_type": {
+      "blueprintVersion": {
         "type": "string",
-        "description" : "The type of the target: PNF or VNF",
-        "enum": [
-          "VNF",
-          "PNF"
-        ]
-      },
-      "target": {
-        "type": "string",
-        "description" : "This is the name of the field within the A&AI sub-tag that indicates the actual entity Node details. There should be a matching node field within the A&AI subtag holding this value",
-        "enum": [
-          "generic-vnf.vnf-name",
-          "pnf.pnf-name"
-        ]
-      },
-      "AAI": {
-        "description" : "Contains the A&AI Node-Attribute list",
-        "anyOf": [
-          {
-            "generic-vnf.vnf-name": {
-              "type": "string"
-            }
-          },
-          {
-            "pnf.pnf-name": {
-              "type": "string"
-            }
-          }
-        ]
+        "description": "The version of the blueprint to be executed by CDS towards the nf"
       },
       "changeType": {
         "type": "string",
@@ -101,21 +47,25 @@
         "type": "object",
         "description": "This is the PM subscription to be applied/removed to/from an xNF",
         "properties": {
-          "subscriptionName": {
-            "type": "string"
-          },
           "administrativeState": {
             "type": "string",
+            "description": "administrative state of the subscription object",
             "enum": [
               "UNLOCKED",
               "LOCKED"
             ]
           },
+          "subscriptionName": {
+            "type": "string",
+            "description": "the unique name of the subscription object"
+          },
           "fileBasedGP": {
-            "type": "integer"
+            "type": "integer",
+            "description": "granularity period of measurement collection in minutes"
           },
           "fileLocation": {
-            "type": "string"
+            "type": "string",
+            "description": "the location of the PM measurements file on the nf"
           },
           "measurementGroups": {
             "type": "array",
@@ -182,18 +132,15 @@
       }
     },
     "required": [
-      "version",
-      "closedLoopControlName",
-      "requestID",
-      "closedLoopEventStatus",
-      "closedLoopAlarmStart",
+      "nfName",
+      "ipv4Address",
       "policyName",
-      "from",
-      "target_type",
-      "target",
-      "AAI",
+      "closedLoopControlName",
+      "blueprintName",
+      "blueprintVersion",
       "changeType",
       "subscription"
     ]
   }
 }
+

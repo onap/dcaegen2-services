@@ -2,10 +2,72 @@
   "self": {
     "name": "PMSH_CL_INPUT",
     "version": "1.0.0",
-    "description": "Unstructured PMSH CL INPUT"
+    "description": "The input format of PM Subscription CL event"
   },
   "dataformatversion": "1.0.0",
-  "unstructured": {
-    "encoding": "UTF-8"
+  "jsonSchema": {
+    "name": "PM Subscription CL input",
+    "version": "1.0.0",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "nameSpace": {
+        "type": "string"
+      },
+      "source": {
+        "type": "string"
+      },
+      "target": {
+        "type": "string"
+      },
+      "version": {
+        "type": "string"
+      },
+      "status": {
+        "type": "object",
+        "description": "status response from the policy framework",
+        "properties": {
+          "subscriptionName": {
+            "type": "string",
+            "description": "he unique name of the subscription object"
+          },
+          "nfName": {
+            "type": "string",
+            "description": "name of the nf in A&AI"
+          },
+          "changeType": {
+            "type": "string",
+            "description": "This is the change type action that was undertaken to create/delete a PM subscription",
+            "enum": [
+              "CREATE",
+              "DELETE"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "return of the change type action status taken can be success or failure",
+            "enum": [
+              "success",
+              "failure"
+            ]
+          }
+        },
+        "required": [
+          "subscriptionName",
+          "nfName",
+          "changeType",
+          "message"
+        ]
+      }
+    },
+    "required": [
+      "name",
+      "nameSpace",
+      "source",
+      "target",
+      "version",
+      "status"
+    ]
   }
 }
