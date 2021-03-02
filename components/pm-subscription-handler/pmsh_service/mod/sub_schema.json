@@ -51,11 +51,12 @@
                }
             }
          },
-         "required":[
-            "nfNames",
-            "modelInvariantIDs",
-            "modelVersionIDs",
-            "modelNames"
+         "additionalProperties": false,
+         "anyOf": [
+            {"required" :  ["nfNames"]},
+            {"required" :  ["modelInvariantIDs"]},
+            {"required" :  ["modelVersionIDs"]},
+            {"required" :  ["modelNames"]}
          ]
       },
       "measurementGroups":{
