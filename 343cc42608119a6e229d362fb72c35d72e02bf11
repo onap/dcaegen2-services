@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dfb8e12b_5629b72c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-03-12T15:15:14Z",
+      "side": 1,
+      "message": "est.tech is mainly Ericsson, we mostly check-in code under Nordix Foundation copyright it is an open source community operating on code and materials under the terms of various open source licenses, it validates/stops copyright infringement for est.tech",
+      "parentUuid": "497e0e9a_f5c54063",
+      "revId": "343cc42608119a6e229d362fb72c35d72e02bf11",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a05f593_f82e71ae",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "37595e37_954f37ce",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-03-12T15:15:14Z",
+      "side": 1,
+      "message": "Thanks for comments Tony.\nNot sure in future if nf_filter can grow bigger but definitely O(n) is better solutin than O(n**2), updated changes now.",
+      "parentUuid": "7a05f593_f82e71ae",
+      "revId": "343cc42608119a6e229d362fb72c35d72e02bf11",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0061e98_e2237e68",
         "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
         "patchSetId": 2
@@ -50,6 +86,24 @@
       "revId": "343cc42608119a6e229d362fb72c35d72e02bf11",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acbc3852_175449a9",
+        "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-03-12T15:15:14Z",
+      "side": 1,
+      "message": "Comment same as other file.",
+      "parentUuid": "d0061e98_e2237e68",
+      "revId": "343cc42608119a6e229d362fb72c35d72e02bf11",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
