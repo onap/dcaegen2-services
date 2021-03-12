@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "497e0e9a_f5c54063",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-03-12T01:55:13Z",
+      "side": 1,
+      "message": "should ext.tech be listed?",
+      "revId": "343cc42608119a6e229d362fb72c35d72e02bf11",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a05f593_f82e71ae",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-03-12T01:55:13Z",
+      "side": 1,
+      "message": "not sure how time critical this test is, or how big nf_filter can get. The above check can run in O(n**2). The following would run in O(n):\n\nif not [filter_name for filter_name, val in nf_filter.items() if len(val) \u003e 0]:\n\nIf this IS time-critical OR nf_filter can get very large, then the latter might be better.",
+      "revId": "343cc42608119a6e229d362fb72c35d72e02bf11",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0061e98_e2237e68",
+        "filename": "components/pm-subscription-handler/tests/test_pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-03-12T01:55:13Z",
+      "side": 1,
+      "message": "should est.tech be listed?",
+      "revId": "343cc42608119a6e229d362fb72c35d72e02bf11",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
