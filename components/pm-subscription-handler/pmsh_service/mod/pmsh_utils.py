@@ -128,10 +128,7 @@ class AppConfig:
         sub_data = self.subscription.__dict__
         validate(instance=sub_data, schema=self.sub_schema)
         nf_filter = sub_data["nfFilter"]
-        for filter_name in nf_filter:
-            if len(nf_filter[filter_name]) > 0:
-                break
-        else:
+        if not [filter_name for filter_name, val in nf_filter.items() if len(val) > 0]:
             raise ValidationError("At least one filter within nfFilter must not be empty")
         logger.debug("Subscription schema is valid.")
 
