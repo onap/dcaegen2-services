@@ -1,0 +1,146 @@
+{
+  "self": {
+    "name": "DCAE_CL_OUTPUT",
+    "version": "1.0.0",
+    "description": "The output format of PM Subscription CL event sent to Policy."
+  },
+  "dataformatversion": "1.0.0",
+  "jsonSchema": {
+    "name": "PM Subscription CL event",
+    "version": "1.0.0",
+    "properties": {
+      "name": "PM Subscription CL event",
+      "version": "1.0.0",
+      "nfName": {
+        "type": "string",
+        "description": "The name of the nf in A&AI."
+      },
+      "ipv4Address": {
+        "type": "string",
+        "description": "The ipv4address of the nf being targeted."
+      },
+      "policyName": {
+        "type": "string",
+        "description": "The name of the Operational Policy driving the DCAE microservice."
+      },
+      "closedLoopControlName": {
+        "type": "string",
+        "description": "This is the unique ID for the Control Loop. It is created by the CLAMP platform during Control Loop design."
+      },
+      "blueprintName": {
+        "type": "string",
+        "description": "The name of the blueprint to be executed by CDS towards the nf."
+      },
+      "blueprintVersion": {
+        "type": "string",
+        "description": "The version of the blueprint to be executed by CDS towards the nf."
+      },
+      "changeType": {
+        "type": "string",
+        "description": "This is the change indicator that determines whether to apply/remove a PM subscription.",
+        "enum": [
+          "CREATE",
+          "DELETE"
+        ]
+      },
+      "subscription": {
+        "type": "object",
+        "description": "This is the PM subscription to be applied/removed to/from an xNF.",
+        "properties": {
+          "administrativeState": {
+            "type": "string",
+            "description": "The administrative state of the subscription object.",
+            "enum": [
+              "UNLOCKED",
+              "LOCKED"
+            ]
+          },
+          "subscriptionName": {
+            "type": "string",
+            "description": "The unique name of the subscription object."
+          },
+          "fileBasedGP": {
+            "type": "integer",
+            "description": "The granularity period of measurement collection in minutes."
+          },
+          "fileLocation": {
+            "type": "string",
+            "description": "The location of the PM measurements file on the nf."
+          },
+          "measurementGroups": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "properties": {
+                  "measurementGroup": {
+                    "type": "object",
+                    "properties": {
+                      "measurementTypes": {
+                        "type": "array",
+                        "items": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "measurementType": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "measurementType"
+                            ]
+                          }
+                        ]
+                      },
+                      "managedObjectDNsBasic": {
+                        "type": "array",
+                        "items": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "DN": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "DN"
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "measurementTypes",
+                      "managedObjectDNsBasic"
+                    ]
+                  }
+                },
+                "required": [
+                  "measurementGroup"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "subscriptionName",
+          "administrativeState",
+          "fileBasedGP",
+          "fileLocation",
+          "measurementGroups"
+        ]
+      }
+    },
+    "required": [
+      "nfName",
+      "ipv4Address",
+      "policyName",
+      "closedLoopControlName",
+      "blueprintName",
+      "blueprintVersion",
+      "changeType",
+      "subscription"
+    ]
+  }
+}
+
