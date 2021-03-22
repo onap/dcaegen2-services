@@ -93,7 +93,7 @@ def get_db_connection_url():
     pg_user_pass = os.getenv('PMSH_PG_PASSWORD')
     pmsh_db_name = os.getenv('PMSH_DB_NAME', 'pmsh')
     pmsh_db_port = os.getenv('PMSH_PG_PORT', '5432')
-    db_url = f'postgres+psycopg2://{quote(str(pg_user), safe="")}:' \
+    db_url = f'postgresql+psycopg2://{quote(str(pg_user), safe="")}:' \
         f'{quote(str(pg_user_pass), safe="")}@{pg_host}:{pmsh_db_port}/{pmsh_db_name}'
     if 'None' in db_url:
         raise Exception(f'Invalid DB connection URL: {db_url} .. exiting app!')

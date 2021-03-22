@@ -120,7 +120,7 @@ class PmshUtilsTestCase(BaseClassSetup):
         self.env.set('PMSH_PG_USERNAME', 'pmsh')
         self.env.set('PMSH_PG_PASSWORD', 'pass')
         db_url = get_db_connection_url()
-        self.assertEqual(db_url, 'postgres+psycopg2://pmsh:pass@1.2.3.4:5432/pmsh')
+        self.assertEqual(db_url, 'postgresql+psycopg2://pmsh:pass@1.2.3.4:5432/pmsh')
 
     def test_get_db_connection_url_fail(self):
         self.env = EnvironmentVarGuard()
