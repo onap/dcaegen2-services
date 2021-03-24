@@ -18,26 +18,25 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
-
 package org.onap.slice.analysis.ms.data.beans;
-
 import static org.junit.Assert.*;
-
 import java.sql.Timestamp;
-
 import org.junit.Test;
-
 public class PerformanceNotificationsTest {
- 
     private Timestamp createdAt;
-
-	@Test
-	public void test() {
-		
-		 PerformanceNotifications performanceNotifications = new PerformanceNotifications();
-		 performanceNotifications.setNotification("notification");
-		 performanceNotifications.setCreatedAt(createdAt);
-	     assertEquals("notification", performanceNotifications.getNotification());
-	     assertEquals(createdAt, performanceNotifications.getCreatedAt());	}
-
+    @Test
+    public void methodTest() {
+        PerformanceNotifications performanceNotifications = new PerformanceNotifications();
+        performanceNotifications.setNotification("notification");
+        performanceNotifications.setCreatedAt(createdAt);
+        assertEquals("notification", performanceNotifications.getNotification());
+        assertEquals(createdAt, performanceNotifications.getCreatedAt());
+    }
+    @Test
+    public void constructorTest(){
+	PerformanceNotifications performanceNotification = new PerformanceNotifications("notifications",createdAt);
+	System.out.println(performanceNotification.getNotification());
+	assertEquals("notifications", performanceNotification.getNotification());
+	assertEquals(createdAt, performanceNotification.getCreatedAt());
+}
 }

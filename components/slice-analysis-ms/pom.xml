@@ -29,14 +29,12 @@
         <artifactId>oparent</artifactId>
         <version>2.0.0</version>
     </parent>
-
 	<groupId>org.onap.dcaegen2.services.components</groupId>
 	<artifactId>slice-analysis-ms</artifactId>
 	<version>1.0.4-SNAPSHOT</version>
 	<name>dcaegen2-services-slice-analysis-ms</name>
 	<description>Network slice PM analyser</description>
         <packaging>jar</packaging>
-
 	<properties>
 		<java.version>11</java.version>
 		<sdk.version>1.1.4</sdk.version>
@@ -54,7 +52,6 @@
             	${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
         	</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
-
 	<dependencies>
                 <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util -->
                 <dependency>
@@ -109,7 +106,6 @@
 			<artifactId>cbs-client</artifactId>
 			<version>${sdk.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.onap.dcaegen2.services.sdk.security.crypt</groupId>
 			<artifactId>crypt-password</artifactId>
@@ -197,11 +193,11 @@
 			<version>2.21.0</version>
 			<scope>test</scope>
 		</dependency>
-	    <dependency>
-	        <groupId>com.openpojo</groupId>
-	        <artifactId>openpojo</artifactId>
-	        <version>0.8.10</version>
-	    </dependency>
+	        <dependency>
+	                <groupId>com.openpojo</groupId>
+			<artifactId>openpojo</artifactId>
+			<version>0.8.10</version>
+	        </dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -227,19 +223,16 @@
 			<version>2.0.2</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 	            <groupId>org.functionaljava</groupId>
 	            <artifactId>functionaljava</artifactId>
 	            <version>3.0</version>
-            </dependency>
-
-	    <dependency>
-		    <groupId>org.apache.httpcomponents</groupId>
-		    <artifactId>httpclient</artifactId>
-	    	<version>4.5.7</version>
-	    </dependency>
-
+                </dependency>
+	        <dependency>
+		        <groupId>org.apache.httpcomponents</groupId>
+		        <artifactId>httpclient</artifactId>
+			<version>4.5.7</version>
+	        </dependency>
            <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
             <dependency>
                    <groupId>commons-beanutils</groupId>
@@ -275,11 +268,16 @@
 		    <artifactId>tomcat-embed-core</artifactId>
 		   <version>9.0.36</version>
 	    </dependency>
+	    <!-- https://mvnrepository.com/artifact/nl.jqno.equalsverifier/equalsverifier -->
+	    <dependency>
+		    <groupId>nl.jqno.equalsverifier</groupId>
+		    <artifactId>equalsverifier</artifactId>
+                    <version>3.5.5</version>
+                    <scope>test</scope>
+	   </dependency>
 	</dependencies>
-
 		<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -297,7 +295,6 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<configuration>
 					<serverId>${onap.nexus.dockerregistry.daily}</serverId>
-
 					<imageName>${onap.nexus.dockerregistry.daily}/${docker.image.name}</imageName>
 					<imageTags>
                                                 <imageTag>${project.version}-${maven.build.timestamp}Z</imageTag>
@@ -333,5 +330,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

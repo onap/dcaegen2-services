@@ -1,3 +1,4 @@
+
 /*******************************************************************************
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
@@ -19,35 +20,28 @@
  *
  *******************************************************************************/
 
-
-package org.onap.slice.analysis.ms.models;
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.HashMap;
-import java.util.Map;
+package org.onap.slice.analysis.ms.dmaap;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.onap.slice.analysis.ms.service.MLMessageProcessor;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-
-public class ConfigPolicyTest {
-
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes=IntelligentSlicingCallbackTest.class)
+public class IntelligentSlicingCallbackTest {
+    @Mock
+    IntelligentSlicingCallback intelligentSlicingCallback;
+    @Mock
+    MLMessageProcessor mlMessageProcessor;
     @Test
-    public void configPolicyTest() {
-        ConfigPolicy configPolicy = ConfigPolicy.getInstance();
-        Map<String, Object> config = new HashMap<String, Object>();
-        config.put("policyName", "pcims_policy");
-        configPolicy.setConfig(config);
-        assertEquals(config, configPolicy.getConfig());
-    }
-    @Test
-    public void toStringTest() {
-    ConfigPolicy configPolicy = ConfigPolicy.getInstance();
-         Map<String, Object> config = new HashMap<String, Object>();
-         config.put("policyName", "pcims_policy");
-         configPolicy.setConfig(config);
-         String expected="ConfigPolicy [config={policyName=pcims_policy}]";
-         assertEquals(expected,configPolicy.toString());
-    }
-
+    public void activeCallbackTest() {
+        String msg="";
+        intelligentSlicingCallback.activateCallBack(msg);
+	Mockito.verify(intelligentSlicingCallback).activateCallBack(msg);
+	}
 }
+

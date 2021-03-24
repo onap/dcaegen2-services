@@ -18,36 +18,23 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
-
-
-package org.onap.slice.analysis.ms.models;
-
+package org.onap.slice.analysis.ms.controller;
 import static org.junit.Assert.assertEquals;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Test;
-
-
-public class ConfigPolicyTest {
-
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes=HealthCheck.class)
+public class HealthCheckTest {
+    @Autowired
+    private HealthCheck healthcheck;
     @Test
-    public void configPolicyTest() {
-        ConfigPolicy configPolicy = ConfigPolicy.getInstance();
-        Map<String, Object> config = new HashMap<String, Object>();
-        config.put("policyName", "pcims_policy");
-        configPolicy.setConfig(config);
-        assertEquals(config, configPolicy.getConfig());
-    }
-    @Test
-    public void toStringTest() {
-    ConfigPolicy configPolicy = ConfigPolicy.getInstance();
-         Map<String, Object> config = new HashMap<String, Object>();
-         config.put("policyName", "pcims_policy");
-         configPolicy.setConfig(config);
-         String expected="ConfigPolicy [config={policyName=pcims_policy}]";
-         assertEquals(expected,configPolicy.toString());
-    }
-
+    public void testHealthCheck() {
+	ResponseEntity<HttpStatus> response= new ResponseEntity<>(HttpStatus.OK);
+	assertEquals(response,healthcheck.healthCheck());
+	}
 }
