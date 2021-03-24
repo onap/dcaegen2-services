@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1be5594_c9b4ab08",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/controller/HealthCheckTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-24T12:20:31Z",
+      "side": 1,
+      "message": "2021",
+      "range": {
+        "startLine": 5,
+        "startChar": 19,
+        "endLine": 5,
+        "endChar": 23
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7da55f9f_1fa5dfb8",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/data/beans/PerformanceNotificationsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-24T12:20:31Z",
+      "side": 1,
+      "message": "Don\u0027t use println()",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 63
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4ca8bd8_802ad747",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/IntelligentSlicingCallbackTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-24T12:20:31Z",
+      "side": 1,
+      "message": "could be private",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 30
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b9cafe51_53d1c19e",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/IntelligentSlicingCallbackTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-24T12:20:31Z",
+      "side": 1,
+      "message": "Unused",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 22
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bc234e2_42498c1d",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/ConfigPolicyTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-24T12:20:31Z",
+      "side": 1,
+      "message": "Can be replaced with sing \u003c\u003e",
+      "range": {
+        "startLine": 46,
+        "startChar": 50,
+        "endLine": 46,
+        "endChar": 64
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef764e62_c2378d12",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/ConfigurationTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-24T12:20:31Z",
+      "side": 1,
+      "message": "Why null?",
+      "range": {
+        "startLine": 35,
+        "startChar": 41,
+        "endLine": 35,
+        "endChar": 45
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07a28370_12a1a648",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/MLOutputModelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-24T12:20:31Z",
+      "side": 1,
+      "message": "2021",
+      "range": {
+        "startLine": 5,
+        "startChar": 19,
+        "endLine": 5,
+        "endChar": 23
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5018c6a1_da8e6de5",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/MLOutputModelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-24T12:20:31Z",
+      "side": 1,
+      "message": "Could be private final",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 31
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83930f9c_e638a5f6",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/MLOutputModelTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-24T12:20:31Z",
+      "side": 1,
+      "message": "Pls use assertion instead of validation",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 29
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce0676f5_c489a19d",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/ModelsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-03-24T12:20:31Z",
+      "side": 1,
+      "message": "2020-2021",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
