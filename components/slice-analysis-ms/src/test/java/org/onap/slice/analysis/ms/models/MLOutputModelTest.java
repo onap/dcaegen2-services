@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020-2021 Wipro Limited.
+ *   Copyright (C) 2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -20,25 +20,31 @@
  *******************************************************************************/
 package org.onap.slice.analysis.ms.models;
 import static org.junit.Assert.assertEquals;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
 import org.junit.Test;
-public class ConfigPolicyTest {
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import nl.jqno.equalsverifier.EqualsVerifier;
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes=MLOutputModelTest.class)
+public class MLOutputModelTest {
+    @InjectMocks
+    private final MLOutputModel mlOutputModel =new MLOutputModel();
     @Test
-    public void configPolicyTest() {
-        ConfigPolicy configPolicy = ConfigPolicy.getInstance();
-        Map<String, Object> config = new HashMap<>();
-        config.put("policyName", "pcims_policy");
-        configPolicy.setConfig(config);
-        assertEquals(config, configPolicy.getConfig());
+    public void mlOutputModelEqualHashcodeTest() {
+        EqualsVerifier.simple().forClass(MLOutputModel.class).verify();
     }
     @Test
-    public void toStringTest() {
-        ConfigPolicy configPolicy = ConfigPolicy.getInstance();
-        Map<String, Object> config = new HashMap<String, Object>();
-        config.put("policyName", "pcims_policy");
-        configPolicy.setConfig(config);
-        String expected="ConfigPolicy [config={policyName=pcims_policy}]";
-        assertEquals(expected,configPolicy.toString());
+    public void mlOutputModelMethodTest() {
+	List<CUModel> data = Collections.emptyList();
+	mlOutputModel.setSnssai("message");
+	mlOutputModel.setData(data);
+	assertEquals("message",mlOutputModel.getSnssai());
+	assertEquals(data,mlOutputModel.getData());
+	System.out.println(mlOutputModel.toString());
+	assertEquals("MLOutputModel [snssai=message, data=[]]",mlOutputModel.toString());
     }
 }
