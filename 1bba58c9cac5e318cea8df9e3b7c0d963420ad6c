@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3868426_f92b7785",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/MLOutputModelTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 3699
+      },
+      "writtenOn": "2021-03-26T12:09:11Z",
+      "side": 1,
+      "message": "Please remove",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 46
+      },
+      "revId": "1bba58c9cac5e318cea8df9e3b7c0d963420ad6c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
