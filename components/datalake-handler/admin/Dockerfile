@@ -7,9 +7,10 @@ LABEL org.label-schema.docker.build="docker build -t dl-admin . --no-cache" \
 WORKDIR /app
 COPY ./src .
 COPY ./nginx .
-RUN npm install && \
-    npm run build
 
+RUN npm config set registry http://registry.npmjs.org/  && \
+    npm install && \
+    npm run build
 
 FROM nginx:1.17.9
 
