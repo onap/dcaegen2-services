@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3455d3a4_c2e0dcd9",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-04-07T12:08:21Z",
+      "side": 1,
+      "message": "Again, like before I would advise building the image and running csits against it just to be sure.\nWhat is the diff in size here also? Ideally not too much..",
+      "range": {
+        "startLine": 20,
+        "startChar": 35,
+        "endLine": 20,
+        "endChar": 46
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c192f73_676885b9",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-04-07T12:08:21Z",
+      "side": 1,
+      "message": "Are these needed anymore?",
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a23793a3_b1c213b8",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-04-07T12:08:21Z",
+      "side": 1,
+      "message": "We need some way of editing the logging file at runtime.",
+      "range": {
+        "startLine": 55,
+        "startChar": 36,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
