@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "01d52fc0_65ca69a1",
+        "filename": "components/bbs-event-processor/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 7352
+      },
+      "writtenOn": "2021-04-07T13:57:08Z",
+      "side": 1,
+      "message": "add chown to be safe",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33a5f1bc_36ba92bc",
+        "filename": "components/bbs-event-processor/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 7352
+      },
+      "writtenOn": "2021-04-07T13:57:08Z",
+      "side": 1,
+      "message": "use $user $group",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3455d3a4_c2e0dcd9",
         "filename": "components/pm-subscription-handler/Dockerfile",
         "patchSetId": 9
@@ -13,6 +59,30 @@
       "writtenOn": "2021-04-07T12:08:21Z",
       "side": 1,
       "message": "Again, like before I would advise building the image and running csits against it just to be sure.\nWhat is the diff in size here also? Ideally not too much..",
+      "range": {
+        "startLine": 20,
+        "startChar": 35,
+        "endLine": 20,
+        "endChar": 46
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5e6edf5_0158c7b7",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7352
+      },
+      "writtenOn": "2021-04-07T13:57:08Z",
+      "side": 1,
+      "message": "I\u0027ll come back here with CSIT results \u0026 image sizes tomorrow.\nPlease note that each project (sometimes even component) have different baseOS. Even if onap-integration is slightly bigger than ptyhon:3.8.2-alpine3.11 it should be neglible difference, espiecially as it should be felt in the general onap footprint (more shared layers between onap dockers)",
+      "parentUuid": "3455d3a4_c2e0dcd9",
       "range": {
         "startLine": 20,
         "startChar": 35,
@@ -42,6 +112,24 @@
     },
     {
       "key": {
+        "uuid": "d634a8f1_85bb4217",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 7352
+      },
+      "writtenOn": "2021-04-07T13:57:08Z",
+      "side": 1,
+      "message": "only ENVs are inherited, ARGs are not, thus they are needed fo L61-65",
+      "parentUuid": "9c192f73_676885b9",
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a23793a3_b1c213b8",
         "filename": "components/pm-subscription-handler/Dockerfile",
         "patchSetId": 9
@@ -53,6 +141,30 @@
       "writtenOn": "2021-04-07T12:08:21Z",
       "side": 1,
       "message": "We need some way of editing the logging file at runtime.",
+      "range": {
+        "startLine": 55,
+        "startChar": 36,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "803ba720_c7b16117",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 7352
+      },
+      "writtenOn": "2021-04-07T13:57:08Z",
+      "side": 1,
+      "message": "Whats the use case for manual editing of logs in running container?\nAlso there is vi already avaliable in alpine",
+      "parentUuid": "a23793a3_b1c213b8",
       "range": {
         "startLine": 55,
         "startChar": 36,
