@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "341cc4ce_0c270918",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-04-07T14:03:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e5e6edf5_0158c7b7",
+      "range": {
+        "startLine": 20,
+        "startChar": 35,
+        "endLine": 20,
+        "endChar": 46
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c192f73_676885b9",
         "filename": "components/pm-subscription-handler/Dockerfile",
         "patchSetId": 9
@@ -127,6 +151,24 @@
       "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e6a32fc_81022416",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-04-07T14:03:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d634a8f1_85bb4217",
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -165,6 +207,30 @@
       "side": 1,
       "message": "Whats the use case for manual editing of logs in running container?\nAlso there is vi already avaliable in alpine",
       "parentUuid": "a23793a3_b1c213b8",
+      "range": {
+        "startLine": 55,
+        "startChar": 36,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58bf21db_3cd26cab",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-04-07T14:03:57Z",
+      "side": 1,
+      "message": "Changing the log level.\nOk, if vi is there then no prob.",
+      "parentUuid": "803ba720_c7b16117",
       "range": {
         "startLine": 55,
         "startChar": 36,
