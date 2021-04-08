@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dcfb5ee7_5c6317e1",
+        "filename": "components/bbs-event-processor/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 7352
+      },
+      "writtenOn": "2021-04-08T21:06:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01d52fc0_65ca69a1",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33a5f1bc_36ba92bc",
         "filename": "components/bbs-event-processor/Dockerfile",
         "patchSetId": 9
@@ -45,6 +69,30 @@
       "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50846b5a_1726f326",
+        "filename": "components/bbs-event-processor/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 7352
+      },
+      "writtenOn": "2021-04-08T21:06:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33a5f1bc_36ba92bc",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -119,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "0b16a243_2bd81405",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7352
+      },
+      "writtenOn": "2021-04-08T21:06:55Z",
+      "side": 1,
+      "message": "nexus3.onap.org:10001/onap/org.onap.dcaegen2.services.pmsh 156MB\nlocalhost:5000/onap/org.onap.dcaegen2.services.pmsh  82.6MB\nreduction is due to slimmer base image",
+      "parentUuid": "341cc4ce_0c270918",
+      "range": {
+        "startLine": 20,
+        "startChar": 35,
+        "endLine": 20,
+        "endChar": 46
+      },
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c192f73_676885b9",
         "filename": "components/pm-subscription-handler/Dockerfile",
         "patchSetId": 9
@@ -166,6 +238,29 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "d634a8f1_85bb4217",
+      "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afd7d779_0d0fd660",
+        "filename": "components/pm-subscription-handler/Dockerfile",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 7352
+      },
+      "writtenOn": "2021-04-08T21:06:55Z",
+      "side": 1,
+      "message": "3.9 now",
+      "range": {
+        "startLine": 46,
+        "startChar": 46,
+        "endLine": 46,
+        "endChar": 47
+      },
       "revId": "1ad7299ce20a6f1fc8def381cf1024d67aa4c387",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
