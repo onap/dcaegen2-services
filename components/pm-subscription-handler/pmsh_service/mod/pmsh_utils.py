@@ -88,7 +88,7 @@ class AppConfig:
         self.operational_policy_name = conf['config'].get('operational_policy_name')
         self.control_loop_name = conf['config'].get('control_loop_name')
         self.sub_schema = _load_sub_schema_from_file()
-        self.subscription = Subscription(**conf['policy']['subscription'])
+        self.subscription = Subscription(**conf['config']['pmsh_policy']['subscription'])
         self.nf_filter = None
 
     def __new__(cls, *args, **kwargs):
@@ -141,7 +141,7 @@ class AppConfig:
         """
         try:
             app_conf = self._get_pmsh_config()
-            self.subscription = Subscription(**app_conf['policy']['subscription'])
+            self.subscription = Subscription(**app_conf['config']['pmsh_policy']['subscription'])
             logger.info("AppConfig data has been refreshed")
         except Exception:
             logger.error('Failed to refresh PMSH AppConfig')
