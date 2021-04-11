@@ -1,68 +1,4 @@
 {
-   "policy":{
-      "subscription":{
-         "subscriptionName":"ExtraPM-All-gNB-R2B",
-         "administrativeState":"UNLOCKED",
-         "fileBasedGP":15,
-         "fileLocation":"\/pm\/pm.xml",
-         "nfFilter":{
-            "nfNames":[
-
-            ],
-            "modelInvariantIDs": [
-
-            ],
-            "modelVersionIDs": [
-
-            ],
-            "modelNames": [
-
-            ]
-         },
-         "measurementGroups":[
-            {
-               "measurementGroup":{
-                  "measurementTypes":[
-                     {
-                        "measurementType":"countera"
-                     },
-                     {
-                        "measurementType":"counterb"
-                     }
-                  ],
-                  "managedObjectDNsBasic":[
-                     {
-                        "DN":"dna"
-                     },
-                     {
-                        "DN":"dnb"
-                     }
-                  ]
-               }
-            },
-            {
-               "measurementGroup":{
-                  "measurementTypes":[
-                     {
-                        "measurementType":"counterc"
-                     },
-                     {
-                        "measurementType":"counterd"
-                     }
-                  ],
-                  "managedObjectDNsBasic":[
-                     {
-                        "DN":"dnc"
-                     },
-                     {
-                        "DN":"dnd"
-                     }
-                  ]
-               }
-            }
-         ]
-      }
-   },
    "config":{
       "control_loop_name": "pmsh-control-loop",
       "operational_policy_name": "pmsh-operational-policy",
@@ -72,6 +8,70 @@
       "key_path":"/opt/app/pmsh/etc/certs/key.pem",
       "ca_cert_path":"/opt/app/pmsh/etc/certs/cacert.pem",
       "enable_tls":"true",
+      "pmsh_policy":{
+         "subscription":{
+            "administrativeState":"UNLOCKED",
+            "fileBasedGP":15,
+            "fileLocation":"/pm/pm.xml",
+            "measurementGroups":[
+               {
+                  "measurementGroup":{
+                     "managedObjectDNsBasic":[
+                        {
+                           "DN":"dna"
+                        },
+                        {
+                           "DN":"dnb"
+                        }
+                     ],
+                     "measurementTypes":[
+                        {
+                           "measurementType":"countera"
+                        },
+                        {
+                           "measurementType":"counterb"
+                        }
+                     ]
+                  }
+               },
+               {
+                  "measurementGroup":{
+                     "managedObjectDNsBasic":[
+                        {
+                           "DN":"dnc"
+                        },
+                        {
+                           "DN":"dnd"
+                        }
+                     ],
+                     "measurementTypes":[
+                        {
+                           "measurementType":"counterc"
+                        },
+                        {
+                           "measurementType":"counterd"
+                        }
+                     ]
+                  }
+               }
+            ],
+            "nfFilter":{
+               "modelInvariantIDs":[
+
+               ],
+               "modelNames":[
+
+               ],
+               "modelVersionIDs":[
+
+               ],
+               "nfNames":[
+
+               ]
+            },
+            "subscriptionName":"ExtraPM-All-gNB-R2B"
+         }
+      },
       "streams_subscribes":{
          "aai_subscriber":{
             "type":"message_router",
