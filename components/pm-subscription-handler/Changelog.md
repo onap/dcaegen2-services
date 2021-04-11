@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [2.0.0]
+### Changed
+* Updated Subscription object retrieving key from App Config data (DCAEGEN2-2713)
+
 ## [1.2.0]
 ### Changed
 * Bug fix prevent sub threads from crashing permanently (DCAEGEN2-2501)
