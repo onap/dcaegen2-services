@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.3.1]
+### Changed
+* Updated Subscription object retrieving key from App Config data (DCAEGEN2-2713)
+
+## [1.3.0]
+### Changed
+* Change pmsh baseOS img to integration (DCAEGEN2-2420)
+
 ## [1.2.0]
 ### Changed
 * Bug fix prevent sub threads from crashing permanently (DCAEGEN2-2501)
