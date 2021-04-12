@@ -46,6 +46,30 @@
       "revId": "01800b4fc74d5422bb6c6f94a7f40a32b6006bbe",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddc10bcc_cc7f8dc8",
+        "filename": "components/pm-subscription-handler/pom.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-04-12T13:42:34Z",
+      "side": 1,
+      "message": "Fair point",
+      "parentUuid": "9ae5a85c_14984406",
+      "range": {
+        "startLine": 35,
+        "startChar": 13,
+        "endLine": 35,
+        "endChar": 14
+      },
+      "revId": "01800b4fc74d5422bb6c6f94a7f40a32b6006bbe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
