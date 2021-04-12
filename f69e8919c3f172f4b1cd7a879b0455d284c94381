@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3e6d5953_522808a5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-12T14:13:45Z",
+      "side": 1,
+      "message": "This key can be any app defined variable for static configuration load; \"config.policies\" is the key to retrieve dynamic policy (updated by Policy/PH) configuration through CBS. \n\nI think we discussed to keep PMSH static for I release and later align to support sidecar interface (https://wiki.onap.org/display/DW/Policy+function+as+Sidecar)? If the answer is yes - then changes here looks okay to me.",
+      "parentUuid": "e337fba9_708d03ab",
+      "range": {
+        "startLine": 91,
+        "startChar": 59,
+        "endLine": 91,
+        "endChar": 70
+      },
+      "revId": "f69e8919c3f172f4b1cd7a879b0455d284c94381",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e7167d16_574a031f",
         "filename": "components/pm-subscription-handler/tests/data/cbs_data_1.json",
         "patchSetId": 1
