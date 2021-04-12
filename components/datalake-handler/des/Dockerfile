@@ -1,5 +1,6 @@
 # ============LICENSE_START===================================================
 #  Copyright (C) 2020 China Mobile.
+#  Copyright (C) 2021 Samsung Electronics.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,36 +16,33 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-FROM openjdk:11-jre-slim
+FROM nexus3.onap.org:10001/onap/integration-java11:8.0.0
 
-MAINTAINER Kai Lu <lukai@chinamobile.com>
+LABEL maintainer="Kai Lu <lukai@chinamobile.com>"
+
+ARG user=datalake
+ARG group=datalake
 
 EXPOSE 1681
 
-RUN groupadd -r datalake && useradd -r -g datalake datalake
-RUN mkdir /home/datalake/ && \
-    mkdir /home/datalake/db_init
+WORKDIR /datalake
 
-WORKDIR /home/datalake
+USER root
+RUN addgroup $group && adduser --system --disabled-password --no-create-home --ingroup $group $user && \
+    mkdir -p /datalake/ && \
+    mkdir -p /datalake/db_init && \
+    chown -R $user:$group /datalake
 
 #add the fat jar
-COPY target/${JAR_FILE} .
-COPY src/assembly/run.sh .
-COPY src/assembly/init_db/db_scripts/init_db.sql .
-COPY src/assembly/init_db/db_scripts/init_db_data.sql .
+COPY --chown=$user:$group target/${JAR_FILE} .
+COPY --chown=$user:$group src/assembly/run.sh .
+COPY --chown=$user:$group src/assembly/init_db/db_scripts/init_db.sql .
+COPY --chown=$user:$group src/assembly/init_db/db_scripts/init_db_data.sql .
 
-WORKDIR /home/datalake/db_init
-ADD src/assembly/init_db/scripts/db_init .
-
-WORKDIR /home/datalake
+ADD --chown=$user:$group src/assembly/init_db/scripts/db_init ./db_init/
 
 RUN chmod -R 0755 ./* && \
-    chown -R datalake:datalake /home/datalake 
+    apk add --no-cache mariadb-client curl
 
-RUN apt update && \
-    apt install -y mariadb-client && \
-    apt install -y curl
-
-#USER datalake
+USER $user
 CMD ["sh", "run.sh"]
-
