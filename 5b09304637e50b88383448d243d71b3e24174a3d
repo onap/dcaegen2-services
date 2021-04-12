@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77a3c5c4_37967c33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-12T14:42:28Z",
+      "side": 1,
+      "message": "add alignment to onap base image",
+      "revId": "5b09304637e50b88383448d243d71b3e24174a3d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2749c8a_7af5766d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-12T14:42:28Z",
+      "side": 1,
+      "message": "add Issue-ID: DCAEGEN2-2420",
+      "revId": "5b09304637e50b88383448d243d71b3e24174a3d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3b61e08_1b9c4f20",
+        "filename": "components/datalake-handler/des/pom.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-12T14:42:28Z",
+      "side": 1,
+      "message": "remove tab",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "5b09304637e50b88383448d243d71b3e24174a3d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
