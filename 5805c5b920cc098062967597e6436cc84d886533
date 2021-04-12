@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ac8198f7_a4f8ac1d",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/IntelligentSlicingCallbackTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-04-12T06:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86f2485f_b984dd43",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 61
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c4ca8bd8_802ad747",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/IntelligentSlicingCallbackTest.java",
         "patchSetId": 1
@@ -139,6 +163,30 @@
       "revId": "5805c5b920cc098062967597e6436cc84d886533",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a205d99_c5274019",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/IntelligentSlicingCallbackTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-04-12T06:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4ca8bd8_802ad747",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 30
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -165,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9f6b6eef_0bc9cb06",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/IntelligentSlicingCallbackTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-04-12T06:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9cafe51_53d1c19e",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 22
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b57d019a_46a9e2cc",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/IntelligentSlicingCallbackTest.java",
         "patchSetId": 1
@@ -185,6 +257,30 @@
       "revId": "5805c5b920cc098062967597e6436cc84d886533",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb02768c_9dab5523",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/IntelligentSlicingCallbackTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2021-04-12T06:58:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b57d019a_46a9e2cc",
+      "range": {
+        "startLine": 41,
+        "startChar": 16,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "5805c5b920cc098062967597e6436cc84d886533",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
