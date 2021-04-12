@@ -2,12 +2,13 @@
 
 echo "start init db ..."
 
-/bin/run-parts /home/datalake/db_init
+/bin/run-parts /datalake/db_init
 
 echo "finish init db"
 
-cmd=`find . -regex  '\./feeder-[0-9]+\.[0-9]+\.[0-9]+[-SNAPSHOT]+\-exec.jar'`
-cmd1=`find . -regex '\./feeder-[0-9]+\.[0-9]+\.[0-9]+\-exec.jar'`
+cmd=`find . -name "*.jar" | grep -E '.*(feeder)-([0-9]+\.[0-9]+\.[0-9]+)(-SNAPSHOT)(-exec\.jar)$'`
+cmd1=`find . -name "*.jar" | grep -E '.*(feeder)-([0-9]+\.[0-9]+\.[0-9]+)(-exec.jar)$'`
+
 if [ -n "$cmd" ]; then
     java -jar $cmd
 elif [ -n "$cmd1" ]; then

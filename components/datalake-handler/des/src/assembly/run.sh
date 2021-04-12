@@ -28,7 +28,7 @@ sh db_init/20_db-initdb
 
 echo "finish init db"
 
-cmd=`find . -name des*-execute.jar`
+cmd=`find . -name "des*-execute.jar"`
 if [ -n "$cmd" ]; then
     java -jar "$cmd"
 else

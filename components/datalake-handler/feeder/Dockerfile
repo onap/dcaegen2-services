@@ -1,33 +1,31 @@
-FROM openjdk:11-jre-slim
+FROM nexus3.onap.org:10001/onap/integration-java11:8.0.0
 
-MAINTAINER Guobiao Mo <guobiaomo@chinamobile.com>
+LABEL maintainer="Guobiao Mo <guobiaomo@chinamobile.com>"
+
+ARG user=datalake
+ARG group=datalake
 
 EXPOSE 1680
 
-RUN groupadd -r datalake && useradd -r -g datalake datalake
-RUN mkdir /home/datalake
+USER root
 
-USER datalake
- 
-WORKDIR /home/datalake
+WORKDIR /datalake
+RUN addgroup $group && adduser --system --shell /bin/false --disabled-password --no-create-home --ingroup $group $user && \
+    chown -R $user:$group /datalake && \
+    chmod g+s /datalake && \
+    mkdir -p /datalake/db_init
 
 #add the fat jar
-COPY target/${JAR_FILE} /home/datalake/
-COPY src/assembly/run.sh /home/datalake/
+COPY --chown=$user:$group target/${JAR_FILE} .
+COPY --chown=$user:$group src/assembly/run.sh .
+COPY --chown=$user:$group src/assembly/init_db/scripts/db_init ./db_init/
+COPY --chown=$user:$group src/assembly/init_db/db_scripts/init_db.sql .
+COPY --chown=$user:$group src/assembly/init_db/db_scripts/init_db_data.sql .
 
-WORKDIR /home/datalake/db_init
-ADD src/assembly/init_db/scripts/db_init .
-USER root
-RUN chmod 0755 ./*
-WORKDIR /home/datalake
-COPY src/assembly/init_db/db_scripts/init_db.sql .
-COPY src/assembly/init_db/db_scripts/init_db_data.sql .
+RUN chmod -R 0755 *.sql && \
+    chmod u+x run.sh && \
+    apk add --no-cache mariadb-client curl
 
-RUN apt update && \
-    apt install -y mariadb-client && \
-    apt install -y curl
-
-USER datalake
-
-CMD ["sh", "run.sh"]
-
+USER $user
+ENTRYPOINT ["/bin/sh"]
+CMD ["run.sh"]
