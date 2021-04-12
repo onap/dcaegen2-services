@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3528de22_7f20ac84",
+        "filename": "components/pm-subscription-handler/pom.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-04-12T07:57:59Z",
+      "side": 1,
+      "message": "No need to bump the version as 1.2.0 hasn\u0027t been released yet.",
+      "range": {
+        "startLine": 35,
+        "startChar": 13,
+        "endLine": 35,
+        "endChar": 14
+      },
+      "revId": "01800b4fc74d5422bb6c6f94a7f40a32b6006bbe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
