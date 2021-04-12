@@ -22,6 +22,30 @@
       "revId": "01800b4fc74d5422bb6c6f94a7f40a32b6006bbe",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ae5a85c_14984406",
+        "filename": "components/pm-subscription-handler/pom.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-12T13:38:06Z",
+      "side": 1,
+      "message": "version bump is better here to track the new base image updates",
+      "parentUuid": "3528de22_7f20ac84",
+      "range": {
+        "startLine": 35,
+        "startChar": 13,
+        "endLine": 35,
+        "endChar": 14
+      },
+      "revId": "01800b4fc74d5422bb6c6f94a7f40a32b6006bbe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
