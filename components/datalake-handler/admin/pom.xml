@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.onap.dcaegen2.services.components</groupId>
 		<artifactId>datalake-handler</artifactId>
-		<version>1.1.0-SNAPSHOT</version>
+		<version>1.1.1-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.onap.dcaegen2.services.components.datalake-handler</groupId>
@@ -38,6 +38,9 @@
 						<goals>
 							<goal>build</goal>
 						</goals>
+						<configuration>
+							<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+						</configuration>
 					</execution>
 					<execution>
 						<id>tag-and-push-image-latest</id>
