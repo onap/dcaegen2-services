@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5430f900_2e7c7874",
+        "filename": "components/datalake-handler/des/src/assembly/init_db/db_scripts/init_db.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-19T16:08:05Z",
+      "side": 1,
+      "message": "Both DB initialization and db_data are almost same between DL-Feeder and DES (see same table create and data load in few instances). Can you clarify whats the need to have this included redundant among these 2 services?",
+      "revId": "1339354c0665ee7f1006e363712e7cfe610db06e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
