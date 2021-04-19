@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6c287a7_5ea4df53",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-19T15:36:59Z",
+      "side": 1,
+      "message": "major version update not required for this change; patch revision (1.3.1) should suffice.\n\nalso pls include 1.3.0 entry (this was missed in earlier review)",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "81290e902e46323f268d9258c7c9d7582555afdb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1acc87ec_3e4ebe09",
+        "filename": "components/pm-subscription-handler/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-19T15:36:59Z",
+      "side": 1,
+      "message": "patch revision should be good here",
+      "range": {
+        "startLine": 35,
+        "startChar": 11,
+        "endLine": 35,
+        "endChar": 16
+      },
+      "revId": "81290e902e46323f268d9258c7c9d7582555afdb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56a8af68_29c7b2d6",
+        "filename": "components/pm-subscription-handler/version.properties",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-19T15:36:59Z",
+      "side": 1,
+      "message": "same as earlier comment",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 7
+      },
+      "revId": "81290e902e46323f268d9258c7c9d7582555afdb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
