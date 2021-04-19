@@ -22,6 +22,30 @@
       "revId": "82dd74d615a6aa340356da77eb830f3a9ee33a14",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42a9eda1_5c37393c",
+        "filename": "components/datalake-handler/feeder/Dockerfile",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-19T15:51:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c0f8bcd_698161c4",
+      "range": {
+        "startLine": 1,
+        "startChar": 5,
+        "endLine": 1,
+        "endChar": 24
+      },
+      "revId": "82dd74d615a6aa340356da77eb830f3a9ee33a14",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
