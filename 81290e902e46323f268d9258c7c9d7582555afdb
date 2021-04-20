@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5cb217c9_801d304c",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-04-20T13:08:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6c287a7_5ea4df53",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "81290e902e46323f268d9258c7c9d7582555afdb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1acc87ec_3e4ebe09",
         "filename": "components/pm-subscription-handler/pom.xml",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "bcfabff3_f07f3968",
+        "filename": "components/pm-subscription-handler/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-04-20T13:08:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1acc87ec_3e4ebe09",
+      "range": {
+        "startLine": 35,
+        "startChar": 11,
+        "endLine": 35,
+        "endChar": 16
+      },
+      "revId": "81290e902e46323f268d9258c7c9d7582555afdb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56a8af68_29c7b2d6",
         "filename": "components/pm-subscription-handler/version.properties",
         "patchSetId": 3
@@ -68,6 +116,30 @@
       "revId": "81290e902e46323f268d9258c7c9d7582555afdb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f2b6c5d_b81db0ea",
+        "filename": "components/pm-subscription-handler/version.properties",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-04-20T13:08:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56a8af68_29c7b2d6",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 7
+      },
+      "revId": "81290e902e46323f268d9258c7c9d7582555afdb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
