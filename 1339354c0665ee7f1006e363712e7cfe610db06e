@@ -34,6 +34,24 @@
       "revId": "1339354c0665ee7f1006e363712e7cfe610db06e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f4c43cc_90fb771c",
+        "filename": "components/datalake-handler/des/src/assembly/init_db/db_scripts/init_db.sql",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-04-20T20:14:24Z",
+      "side": 1,
+      "message": "yes, agreed. Was checking to see if the initdb/data load sql can be consolidated between these services; that is certainly outside scope of this non-root change. Will create separate jira to track it.",
+      "parentUuid": "79909c17_340f96f0",
+      "revId": "1339354c0665ee7f1006e363712e7cfe610db06e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
