@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0cee77c8_e4c4217f",
+        "filename": "components/pm-subscription-handler/tests/data/cbs_data_1.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-04-21T10:58:19Z",
+      "side": 1,
+      "message": "Is it correct interpreted by application ? In base file it is \"fileLocation\":\"\\/pm\\/pm.xml\" (with extra \u0027\\\u0027), \nHas it been checked?",
+      "range": {
+        "startLine": 15,
+        "startChar": 28,
+        "endLine": 15,
+        "endChar": 38
+      },
+      "revId": "1618253e9cb388b15ff86bfef3b0e47b9c8166fc",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
