@@ -1,0 +1,10 @@
+distribution_type: 'container'
+version: '1.3.1'
+project: 'dcaegen2-services-pmsh'
+log_dir: 'dcaegen2-services-pmsh-docker-merge-master/107/'
+containers:
+  - name: 'org.onap.dcaegen2.services.pmsh'
+    version: '1.3.1-SNAPSHOT-20210430T194540Z'
+container_release_tag: '1.3.1'
+ref: '47276b70370d0e962b7f6c6423f5ec39d50c5ec1'
+git_tag: '1.3.1-pmsh'
