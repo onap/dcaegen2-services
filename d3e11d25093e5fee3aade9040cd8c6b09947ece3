@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d1b4a39_54679775",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-05-04T17:13:13Z",
+      "side": 1,
+      "message": "Going fwd, pls alsoadd brief description to indicate what enhancement/change introduced with this version in the comments",
+      "revId": "d3e11d25093e5fee3aade9040cd8c6b09947ece3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
