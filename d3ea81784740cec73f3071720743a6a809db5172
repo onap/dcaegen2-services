@@ -2,6 +2,74 @@
   "comments": [
     {
       "key": {
+        "uuid": "16a808af_63b5d315",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-06T01:07:03Z",
+      "side": 1,
+      "message": "add a 2021 copyright line with your company",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46d3c918_bd38c5ee",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-06T01:07:03Z",
+      "side": 1,
+      "message": "I know that this isn\u0027t in this Jira. But would a Varchar be better? (Similarly below.)\nIf so, please file a Jira ticket to look into making that change and reply with the Jira number.",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e09e060_50d2c3da",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-06T01:07:03Z",
+      "side": 1,
+      "message": "would Varchars be better instead of fixed-length strings?",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c94a98b6_9bad2aa3",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-06T01:07:03Z",
+      "side": 1,
+      "message": "Is there a possibility of an ipv6 address being passed in? If so, can ipv4Address hold either? If so, should it be named ipAddress instead of ipv4Address? If not, should there be a mechanism to use an ipv6 address?",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e7a56cb7_bcfc0ac3",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 4
@@ -30,6 +98,41 @@
       "writtenOn": "2021-05-04T13:06:49Z",
       "side": 1,
       "message": "would standardise method signature so existing and new nfs are in same order",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e5865f7_d5d461a0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-06T01:07:03Z",
+      "side": 1,
+      "message": "Is there a time-sensitive ordering going on that requires the different order of the nfs values?. If not, I agree that having them in different orders is a maintenance issue.",
+      "parentUuid": "df2ca50c_46a1f5a3",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ff6e8cf_10681922",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-06T01:07:03Z",
+      "side": 1,
+      "message": "add copyright for 2021 with your company",
       "revId": "d3ea81784740cec73f3071720743a6a809db5172",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
