@@ -19,4 +19,4 @@
 # ============LICENSE_END============================================
 #
 
-psql -h $PG_HOST -U $PG_USER -d $PG_DB -f /home/datalake/init_db_data.sql
+psql -h $PG_HOST -U $PG_USER -d $PG_DB -f /datalake/init_db_data.sql
