@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020-2021 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +18,11 @@
 from jsonschema import ValidationError
 
 from mod import logger, aai_client
+from mod.aai_client import _filter_nf_data
 from mod.aai_event_handler import process_aai_events
 from mod.network_function import NetworkFunctionFilter
 from mod.pmsh_utils import PeriodicTask
-from mod.subscription import AdministrativeState
+from mod.subscription import AdministrativeState, Subscription
 
 
 class SubscriptionHandler:
@@ -45,18 +46,43 @@ class SubscriptionHandler:
             else:
                 self.app_conf.refresh_config()
                 self.app_conf.validate_sub_schema()
-                new_administrative_state = self.app_conf.subscription.administrativeState
-                if local_admin_state == new_administrative_state:
-                    logger.info(f'Administrative State did not change in the app config: '
-                                f'{new_administrative_state}')
-                else:
-                    self._check_state_change(local_admin_state, new_administrative_state)
+                local_admin_state = self.apply_subscription_changes(local_admin_state)
+                self.compare_admin_state(local_admin_state)
         except (ValidationError, TypeError) as err:
             logger.error(f'Error occurred during validation of subscription schema {err}',
                          exc_info=True)
         except Exception as err:
             logger.error(f'Error occurred during the activation/deactivation process {err}',
                          exc_info=True)
+
+    def apply_subscription_changes(self, local_admin_state):
+        local_admin_state = self.app_conf.subscription.get_local_sub_admin_state()
+        if local_admin_state == AdministrativeState.FILTERING.value:
+            existing_nfs = self.app_conf.subscription.get_network_functions()
+            self.app_conf.nf_filter = \
+                NetworkFunctionFilter(**self.app_conf.subscription.nfFilter)
+            new_nfs = self.fetch_aai_nf_data()
+            Subscription.get_nfs_for_creation_and_deletion(existing_nfs, new_nfs, 'delete',
+                                                           self.mr_pub, self.app_conf)
+            Subscription.get_nfs_for_creation_and_deletion(existing_nfs, new_nfs, 'create',
+                                                           self.mr_pub, self.app_conf)
+        return local_admin_state
+
+    def compare_admin_state(self, local_admin_state):
+        new_administrative_state = self.app_conf.subscription.administrativeState
+        if local_admin_state == new_administrative_state:
+            logger.info(f'Administrative State did not change in the app config: '
+                        f'{new_administrative_state}')
+        else:
+            self._check_state_change(local_admin_state, new_administrative_state)
+
+    def fetch_aai_nf_data(self):
+        aai_nf_data = aai_client._get_all_aai_nf_data(self.app_conf)
+        if aai_nf_data:
+            new_nfs = _filter_nf_data(aai_nf_data, self.app_conf)
+        else:
+            raise RuntimeError('Failed to get data from AAI')
+        return new_nfs
 
     def _check_state_change(self, local_admin_state, new_administrative_state):
         if new_administrative_state == AdministrativeState.UNLOCKED.value:
