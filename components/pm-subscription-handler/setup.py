@@ -35,6 +35,7 @@ setup(
         "connexion==2.5.0",
         "flask_sqlalchemy==2.4.1",
         "Flask==1.1.1",
+        "tornado==6.1",
         "swagger-ui-bundle==0.0.6",
         "psycopg2-binary==2.8.6",
         "onap_dcae_cbs_docker_client==2.1.1",

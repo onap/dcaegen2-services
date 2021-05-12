@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 # ============LICENSE_END=====================================================
 import logging as logging
 import os
+import ssl
 import pathlib
 from urllib.parse import quote
 
@@ -44,11 +45,13 @@ def launch_api_server(app_config):
     connex_app.add_api('api/pmsh_swagger.yml')
     if app_config.enable_tls:
         logger.info('Launching secure http API server')
+        ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+        ssl_ctx.load_cert_chain(app_config.cert_params[0], app_config.cert_params[1])
         connex_app.run(port=os.environ.get('PMSH_API_PORT', '8443'),
-                       ssl_context=app_config.cert_params)
+                       ssl_options=ssl_ctx, server="tornado")
     else:
         logger.info('Launching unsecure http API server')
-        connex_app.run(port=os.environ.get('PMSH_API_PORT', '8443'))
+        connex_app.run(port=os.environ.get('PMSH_API_PORT', '8443'), server="tornado")
 
 
 def create_app():
