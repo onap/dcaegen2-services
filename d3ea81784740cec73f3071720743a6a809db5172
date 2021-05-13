@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "f8f4d83b_eba83c37",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-13T17:55:53Z",
+      "side": 1,
+      "message": "I verified with Vijay that ipv6 addresses must be supported in Istanbul",
+      "parentUuid": "c68e48c8_b057ee1f",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e7a56cb7_bcfc0ac3",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 4
