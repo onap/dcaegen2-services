@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "feedf2e5_43e8938b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2021-05-13T15:34:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "16a808af_63b5d315",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46d3c918_bd38c5ee",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "d3ea81784740cec73f3071720743a6a809db5172",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "769dd0a2_20339fff",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2021-05-13T15:34:43Z",
+      "side": 1,
+      "message": "https://jira.onap.org/browse/DCAEGEN2-2766",
+      "parentUuid": "46d3c918_bd38c5ee",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6aa9f61f_a37ea43d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2021-05-13T15:34:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2e09e060_50d2c3da",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6648ecea_abc28853",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 4
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "3169a264_f9f34603",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2021-05-13T15:34:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6648ecea_abc28853",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c94a98b6_9bad2aa3",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 4
@@ -81,6 +153,24 @@
       "writtenOn": "2021-05-06T01:07:03Z",
       "side": 1,
       "message": "Is there a possibility of an ipv6 address being passed in? If so, can ipv4Address hold either? If so, should it be named ipAddress instead of ipv4Address? If not, should there be a mechanism to use an ipv6 address?",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c68e48c8_b057ee1f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2021-05-13T15:34:43Z",
+      "side": 1,
+      "message": "currently ipv4 only, this can be looked at further if ipv6 is being introduced",
+      "parentUuid": "c94a98b6_9bad2aa3",
       "revId": "d3ea81784740cec73f3071720743a6a809db5172",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "4cebc127_3bf2770e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2021-05-13T15:34:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e7a56cb7_bcfc0ac3",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d2961735_a6f17123",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 4
@@ -115,6 +223,24 @@
       "writtenOn": "2021-05-12T09:43:38Z",
       "side": 1,
       "message": "for..for..if...if. It is strange logic, please refactor.",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8caaaab6_2b5afc77",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2021-05-13T15:34:43Z",
+      "side": 1,
+      "message": "i am trying to iterate through new and existing network functions and compare the 2, if the new nfs are not in the existing nfs i want to trigger a create or delete based on the action sent. any suggestion?",
+      "parentUuid": "d2961735_a6f17123",
       "revId": "d3ea81784740cec73f3071720743a6a809db5172",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -135,6 +261,24 @@
       "revId": "d3ea81784740cec73f3071720743a6a809db5172",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f84cf0de_f5946f3e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2021-05-13T15:34:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "02822a60_e1647ecc",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -173,6 +317,24 @@
     },
     {
       "key": {
+        "uuid": "05730d01_a4b81761",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2021-05-13T15:34:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2e5865f7_d5d461a0",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ff6e8cf_10681922",
         "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
         "patchSetId": 4
@@ -187,6 +349,24 @@
       "revId": "d3ea81784740cec73f3071720743a6a809db5172",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c35b1e75_a9def04b",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4745
+      },
+      "writtenOn": "2021-05-13T15:34:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5ff6e8cf_10681922",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
