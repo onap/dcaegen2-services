@@ -283,6 +283,24 @@
     },
     {
       "key": {
+        "uuid": "4cf53b39_3e40de73",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-05-17T07:29:01Z",
+      "side": 1,
+      "message": "E.g:\n\n   def _get_nfs_for_creation_and_deletion(self, nfs1, nfs2, action, mrpub, app_conf):\n        for x in range(len(nfs1)):\n            self.method_name(nfs1[x], action, app_conf, mrpub, nfs2)\n\n    def method_name(self, nfs1, action, app_conf, mrpub, nfs2):\n        for y in range(len(nfs2)):\n            if nfs1.nf_name \u003d\u003d nfs2[y].nf_name:\n                self.method_name2(action, app_conf, mrpub, nfs1)\n\n    def method_name2(self, action, app_conf, mrpub, nfs1):\n        if action \u003d\u003d \u0027create\u0027:\n            app_conf.subscription.create_subscription_on_nfs([nfs1], mrpub,\n                                                             app_conf)\n        if action \u003d\u003d \u0027delete\u0027:\n            app_conf.subscription.delete_subscription_from_nfs([nfs1], mrpub,\n                                                               app_conf)",
+      "parentUuid": "8caaaab6_2b5afc77",
+      "revId": "d3ea81784740cec73f3071720743a6a809db5172",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "02822a60_e1647ecc",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
         "patchSetId": 4
