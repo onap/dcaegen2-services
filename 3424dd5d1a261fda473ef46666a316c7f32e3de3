@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "38101095_c5de2a34",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7475
+      },
+      "writtenOn": "2021-05-17T17:24:16Z",
+      "side": 1,
+      "message": "We still using the flask_sqlalchemy, since the only thing we change is passing Tornado web server as parameter on connexion app run",
+      "parentUuid": "fd45c040_47acb85e",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "3424dd5d1a261fda473ef46666a316c7f32e3de3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43459b17_011a4bba",
         "filename": "components/pm-subscription-handler/setup.py",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2021-05-17T15:20:07Z",
       "side": 1,
       "message": "I guess this can be dropped now?",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "3424dd5d1a261fda473ef46666a316c7f32e3de3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2413a97a_0c395f3c",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 7475
+      },
+      "writtenOn": "2021-05-17T17:24:16Z",
+      "side": 1,
+      "message": "flask_sqlalchemy still used so its still required Flask to be installed, further discussion will be needed if we want potentially migrate connexion/flask to use tornado\u0027s web framework instead",
+      "parentUuid": "43459b17_011a4bba",
       "range": {
         "startLine": 37,
         "startChar": 8,
