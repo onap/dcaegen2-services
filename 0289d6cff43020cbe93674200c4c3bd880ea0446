@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d2357dc5_5f99002f",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/dcae-cl-output.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-05-17T15:16:28Z",
+      "side": 1,
+      "message": "Do we need to support both at the same time?",
+      "range": {
+        "startLine": 18,
+        "startChar": 8,
+        "endLine": 18,
+        "endChar": 10
+      },
+      "revId": "0289d6cff43020cbe93674200c4c3bd880ea0446",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e5a5435_78012ffe",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-05-17T15:16:28Z",
+      "side": 1,
+      "message": "This seems wrong to me.",
+      "revId": "0289d6cff43020cbe93674200c4c3bd880ea0446",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60484b92_891df852",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-05-17T15:16:28Z",
+      "side": 1,
+      "message": "Should be snake_case",
+      "range": {
+        "startLine": 146,
+        "startChar": 38,
+        "endLine": 146,
+        "endChar": 46
+      },
+      "revId": "0289d6cff43020cbe93674200c4c3bd880ea0446",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a14cb3d7_f8a92144",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-05-17T15:16:28Z",
+      "side": 1,
+      "message": "Don\u0027t think this is being used anywhere.",
+      "range": {
+        "startLine": 166,
+        "startChar": 15,
+        "endLine": 166,
+        "endChar": 29
+      },
+      "revId": "0289d6cff43020cbe93674200c4c3bd880ea0446",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf524fbc_e1f36aba",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-05-17T15:16:28Z",
+      "side": 1,
+      "message": "This is making changes even if the admin state is locked. Need to have a proper debugging session against a deployment with these changes.",
+      "range": {
+        "startLine": 49,
+        "startChar": 41,
+        "endLine": 49,
+        "endChar": 67
+      },
+      "revId": "0289d6cff43020cbe93674200c4c3bd880ea0446",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cfbcaf5e_9f6f7081",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-05-17T15:16:28Z",
+      "side": 1,
+      "message": "Should this be removed as it\u0027s being passed in already.",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 25
+      },
+      "revId": "0289d6cff43020cbe93674200c4c3bd880ea0446",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4229000a_157e70dc",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-05-17T15:16:28Z",
+      "side": 1,
+      "message": "Import the function instead",
+      "range": {
+        "startLine": 67,
+        "startChar": 12,
+        "endLine": 67,
+        "endChar": 25
+      },
+      "revId": "0289d6cff43020cbe93674200c4c3bd880ea0446",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0d32efc_4f67bd78",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-05-17T15:16:28Z",
+      "side": 1,
+      "message": "Is this not a duplicate of get_pmsh_nfs_from_aai ?",
+      "range": {
+        "startLine": 79,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 25
+      },
+      "revId": "0289d6cff43020cbe93674200c4c3bd880ea0446",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38098af1_e1310701",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-05-17T15:16:28Z",
+      "side": 1,
+      "message": "Shoud use get_pmsh_nfs_from_aai instead",
+      "range": {
+        "startLine": 80,
+        "startChar": 33,
+        "endLine": 80,
+        "endChar": 53
+      },
+      "revId": "0289d6cff43020cbe93674200c4c3bd880ea0446",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
