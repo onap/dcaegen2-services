@@ -39,6 +39,9 @@ public class AaiRestClient extends RestClient {
 		super();
 	}
 
+	/**
+	 * Sends post request to Aai
+	 */
 	public <T> ResponseEntity<T> sendPostRequest(String requestUrl, String requestBody,
 			ParameterizedTypeReference<T> responseType) {
 		HttpHeaders headers = new HttpHeaders();
@@ -47,6 +50,9 @@ public class AaiRestClient extends RestClient {
 		return super.sendPostRequest(headers, requestUrl, requestBody, responseType);
 	}
 
+	/**
+	 * Sends get request to Aai
+	 */
 	public <T> ResponseEntity<T> sendGetRequest(String requestUrl, ParameterizedTypeReference<T> responseType) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
@@ -55,5 +61,6 @@ public class AaiRestClient extends RestClient {
 		headers.set("X-TransactionId", "get_aai_subscr");
 		return super.sendGetRequest(headers, requestUrl, responseType);
 	}
+
 }
 

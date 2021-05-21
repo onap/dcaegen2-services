@@ -61,5 +61,5 @@ public class CpsRestClient extends RestClient {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		return super.sendGetRequest(headers, requestUrl, responseType);
 	}
-}
 
+}

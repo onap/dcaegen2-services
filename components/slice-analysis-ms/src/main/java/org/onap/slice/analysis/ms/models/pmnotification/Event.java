@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -44,4 +44,5 @@ public class Event {
     public void setPerf3gppFields(Perf3gppFields perf3gppFields) {
         this.perf3gppFields = perf3gppFields;
     }
+
 }

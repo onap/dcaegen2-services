@@ -47,6 +47,9 @@ public class MLOutputModel {
 		return "MLOutputModel [snssai=" + snssai + ", data=" + data + "]";
 	}
 	
+	/**
+	 * Returns a hashcode value for the object
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -56,6 +59,9 @@ public class MLOutputModel {
 		return result;
 	}
 	
+	/**
+	 * Checks whether the object matches with the MLOutputModel
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -77,6 +83,5 @@ public class MLOutputModel {
 			return false;
 		return true;
 	}
-	
 	
 }

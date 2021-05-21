@@ -90,5 +90,5 @@ public class MLMessageProcessor {
 		}
 		policyService.sendOnsetMessageToPolicy(snssai, addProps, serviceDetails);
 	}
-}
 
+}

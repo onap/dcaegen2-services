@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import java.util.Map;
  * Model class for configuration policy
  *
  */
-
 public class ConfigPolicy {
 
 	private static ConfigPolicy instance = null;
@@ -69,4 +68,5 @@ public class ConfigPolicy {
 	public String toString() {
 		return "ConfigPolicy [config=" + config + "]";
 	}
+
 }

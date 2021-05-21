@@ -71,5 +71,4 @@ public class AdditionalProperties<T> {
 		this.scriptName = scriptName;
 	}
 
-
 }

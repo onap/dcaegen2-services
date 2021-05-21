@@ -21,6 +21,10 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
+/**
+ * Interface for NotificationCallback
+ *
+ */
 public interface NotificationCallback {
 
     public abstract void activateCallBack(String msg);

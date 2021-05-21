@@ -32,61 +32,49 @@ public class Payload {
 	private String networkType;
 	private AdditionalProperties<?> additionalProperties;
 
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public String getServiceInstanceID() {
 		return serviceInstanceID;
 	}
-
 
 	public void setServiceInstanceID(String serviceInstanceId) {
 		this.serviceInstanceID = serviceInstanceId;
 	}
 
-
 	public String getGlobalSubscriberId() {
 		return globalSubscriberId;
 	}
-
 
 	public void setGlobalSubscriberId(String globalSubscriberId) {
 		this.globalSubscriberId = globalSubscriberId;
 	}
 
-
 	public String getSubscriptionServiceType() {
 		return subscriptionServiceType;
 	}
-
 
 	public void setSubscriptionServiceType(String subscriptionServiceType) {
 		this.subscriptionServiceType = subscriptionServiceType;
 	}
 
-
 	public String getNetworkType() {
 		return networkType;
 	}
-
 
 	public void setNetworkType(String networkType) {
 		this.networkType = networkType;
 	}
 
-
 	public AdditionalProperties<?> getAdditionalProperties() {
 		return additionalProperties;
 	}
-
 
 	public void setAdditionalProperties(AdditionalProperties<?> additionalProperties) {
 		this.additionalProperties = additionalProperties;

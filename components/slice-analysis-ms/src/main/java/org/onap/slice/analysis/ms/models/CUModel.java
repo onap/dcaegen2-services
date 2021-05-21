@@ -61,6 +61,9 @@ public class CUModel {
 		return "CUModel [gNBCUName=" + gNBCUName + ", nearRTRICId=" + nearRTRICId + ", cellCUList=" + cellCUList + "]";
 	}
 
+	/**
+	 * Returns a hashcode value for the object
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,6 +74,9 @@ public class CUModel {
 		return result;
 	}
 
+	/**
+	 * Checks whether the object matches with the CUModel
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

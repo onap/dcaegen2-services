@@ -26,12 +26,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 /** 
  * Model class for the CellsModel Object 
  */
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CellsModel {
 
 	private String cellLocalId;
-
 
 	public String getCellLocalId() {
 		return cellLocalId;
@@ -45,7 +43,5 @@ public class CellsModel {
 	public String toString() {
 		return "CellsModel [cellLocalId=" + cellLocalId + "]";
 	}
-
-
 
 }

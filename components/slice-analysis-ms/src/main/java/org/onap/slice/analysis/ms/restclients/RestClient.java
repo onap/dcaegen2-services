@@ -68,7 +68,6 @@ public class RestClient {
 	/**
 	 * Post Request Template.
 	 */
-
 	public <T> ResponseEntity<T> sendPostRequest(HttpHeaders headers, String requestUrl, String requestBody,
 			ParameterizedTypeReference<T> responseType) {
 		HttpEntity<Object> requestEntity = new HttpEntity<>(requestBody, headers);
@@ -83,7 +82,6 @@ public class RestClient {
 	/**
 	 * Get Request Template.
 	 */
-
 	public <T> ResponseEntity<T> sendGetRequest(HttpHeaders headers, String requestUrl,
 			ParameterizedTypeReference<T> responseType) {
 		HttpEntity<Void> requestEntity = new HttpEntity<>(headers);

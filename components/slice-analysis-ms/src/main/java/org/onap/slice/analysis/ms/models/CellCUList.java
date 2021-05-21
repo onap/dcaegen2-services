@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -29,6 +29,9 @@ public class CellCUList {
     private Integer cellLocalId;
     private ConfigData configData;
 
+    /**
+     * Returns a hashcode value for the object
+     */
     @Override
 	public int hashCode() {
 		final int prime = 31;
@@ -38,6 +41,9 @@ public class CellCUList {
 		return result;
 	}
 
+	/**
+	 * Checks whether the object matches with the CellCUList
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

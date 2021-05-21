@@ -37,8 +37,6 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class AppConfig {
 
-
-    
     /**
      * Rest Template bean.
      */
@@ -65,4 +63,5 @@ public class AppConfig {
         byteArrayHttpMessageConverter.setSupportedMediaTypes(supportedApplicationTypes);
         return byteArrayHttpMessageConverter;
     }
+
 }

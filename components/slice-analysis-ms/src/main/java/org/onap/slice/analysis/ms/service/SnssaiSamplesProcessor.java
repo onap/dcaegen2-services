@@ -224,4 +224,5 @@ public class SnssaiSamplesProcessor {
 		}
 		log.info("Throughput computed for RIC {}", ricToThroughputMapping);
 	}
+
 }
