@@ -43,6 +43,9 @@ public final class SubCounter {
 		return measuredObject;
 	}
 
+	/**
+	 * Returns a hashcode value for the object
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -52,6 +55,9 @@ public final class SubCounter {
 		return result;
 	}
 
+	/**
+	 * Checks whether the object matches with the SubCounter
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -53,7 +53,6 @@ public class AverageCalculator {
 		log.debug("find average for samples {}", samples);
 		int numOfSamples = samples.size();
 		List<MeasurementObject> result = new ArrayList<>();
-		if(!samples.isEmpty()) {
 			for(List<MeasurementObject> sample : samples) {
 				for(MeasurementObject cellMeasObj : sample) {
 					int index = MeasurementObject.findIndex(cellMeasObj.getMeasurementObjectId(), result);
@@ -65,7 +64,6 @@ public class AverageCalculator {
 					}
 				}
 			}
-		}
 		return findAvg(result, numOfSamples);
 	}
 
@@ -95,5 +93,5 @@ public class AverageCalculator {
 		}
 		return result;
 	}
-}
 
+}

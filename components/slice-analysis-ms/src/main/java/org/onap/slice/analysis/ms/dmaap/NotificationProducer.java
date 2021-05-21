@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@ public class NotificationProducer {
 
     private CambriaBatchingPublisher cambriaBatchingPublisher;
      
-
     /**
      * Parameterized constructor.
      */
@@ -45,9 +44,7 @@ public class NotificationProducer {
      * sends notification to dmaap.
      */
     public int sendNotification(String msg) throws IOException {
-    
         return cambriaBatchingPublisher.send("", msg);
-
     }
 
 }

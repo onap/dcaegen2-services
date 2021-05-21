@@ -34,6 +34,9 @@ public class PmNotificationCallback implements NotificationCallback {
 
     private static Logger log = LoggerFactory.getLogger(PmNotificationCallback.class);
 
+    /**
+     * Triggers on handleNofitication method
+     */
     @Override
     public void activateCallBack(String msg) {
         handleNotification(msg);

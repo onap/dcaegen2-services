@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -48,6 +48,9 @@ public class PolicyService {
 	private static Logger log = LoggerFactory.getLogger(PolicyService.class);
 	private ObjectMapper objectMapper = new ObjectMapper();
 
+	/**
+	 * Initialization
+	 */
 	@PostConstruct
 	public void init() {
 		Configuration configuration = Configuration.getInstance();

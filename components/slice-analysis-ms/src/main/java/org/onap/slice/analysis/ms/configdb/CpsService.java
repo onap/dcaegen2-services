@@ -20,8 +20,6 @@
  *******************************************************************************/
 package org.onap.slice.analysis.ms.configdb;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +28,6 @@ import org.onap.slice.analysis.ms.restclients.CpsRestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**

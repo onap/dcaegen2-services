@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@
  *******************************************************************************/
 package org.onap.slice.analysis.ms.models.configdb;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /** 
@@ -31,7 +30,6 @@ public class NetworkFunctionModel {
 	
 	private String gNBDUId;
 	
-
 	public String getgNBDUId() {
 		return gNBDUId;
 	}
@@ -44,9 +42,5 @@ public class NetworkFunctionModel {
 	public String toString() {
 		return "NetworkFunctionModel [gNBDUId=" + gNBDUId + "]";
 	}
-
-	
-	
-	
 
 }

@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -32,6 +32,9 @@ public class MeasurementObject {
 	private String measurementObjectId;
 	private Map<String, Integer> pmData;
 
+	/**
+	 * Returns the index of the MeasurementObject
+	 */
 	public static int findIndex(String measurementObjectId, List<MeasurementObject> list) {
 		int index = -1;
 		int len = list.size();
@@ -74,6 +77,9 @@ public class MeasurementObject {
 
 	}
 	
+	/**
+	 * Returns a hachcode value for the object
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -83,6 +89,9 @@ public class MeasurementObject {
 		return result;
 	}
 
+	/**
+	 * Checks whether the object matches with the MeasurementObject
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

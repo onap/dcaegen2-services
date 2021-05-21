@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -91,9 +91,9 @@ public class ConsumerThread extends Thread {
 		}
 	}
 
-        /**
-         * Checks whether enough samples are available for the network functions	 
-         */	
+    /**
+     * Checks whether enough samples are available for the network functions
+     */
 	public boolean checkForEnoughSamples(List<String> nfs, String snssai) {
 		for(String nf : nfs) {
 			if(! pmDataQueue.checkSamplesInQueue(new SubCounter(nf, snssai), samples)) {
