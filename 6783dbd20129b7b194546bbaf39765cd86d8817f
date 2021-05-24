@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "618cd5c9_a10ef1ff",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T17:22:09Z",
+      "side": 1,
+      "message": "new methods should have docstrings",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 2
+      },
+      "revId": "6783dbd20129b7b194546bbaf39765cd86d8817f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42fd5cc8_b168effe",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T17:22:09Z",
+      "side": 1,
+      "message": "new methods should have docstrings",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 7
+      },
+      "revId": "6783dbd20129b7b194546bbaf39765cd86d8817f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8633f3d4_bc4dd875",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T17:22:09Z",
+      "side": 1,
+      "message": "new methods should have docstrings",
+      "range": {
+        "startLine": 341,
+        "startChar": 4,
+        "endLine": 341,
+        "endChar": 7
+      },
+      "revId": "6783dbd20129b7b194546bbaf39765cd86d8817f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d37d40b9_8784d134",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T17:22:09Z",
+      "side": 1,
+      "message": "these lines should also be part of the if.\n\nhowever, it would be clearer if you wrote:\n\nif not aai_nf_data:\n    raise RuntimeError(\u0027Failed to get data from AAI\u0027)\nnew_nfs \u003d _filter_nf_data(aai_nf_data, self.app_conf)\nSubscription.get_nfs_for_creation_and_deletion(existing_nfs, new_nfs, \u0027delete\u0027,\netc",
+      "revId": "6783dbd20129b7b194546bbaf39765cd86d8817f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96d7d79d_22b89fae",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T17:22:09Z",
+      "side": 1,
+      "message": "add 2021 copyright for your company",
+      "revId": "6783dbd20129b7b194546bbaf39765cd86d8817f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
