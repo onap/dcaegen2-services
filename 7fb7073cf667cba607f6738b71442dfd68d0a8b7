@@ -1,0 +1,310 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea65caa9_12039963",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/configdb/NetworkFunctionModel.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3be3447_528024c6",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/MeasValuesList.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1238c568_aeacb342",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/Perf3gppFields.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b9c868f_4e95141a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/pmnotification/PmNotification.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3ac78a6_82ed6ae3",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/OnsetMessage.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc69fba3_ee288a07",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/Payload.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b497cada_bcf23d02",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/restclients/ConfigDbRestClient.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82e5973c_a0e5b8b6",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/restclients/CpsRestClient.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac1397f8_45b7216d",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/restclients/RestClient.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01980fc8_2904bcfd",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/AverageCalculator.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "893ad50d_7ec8356e",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConsumerThread.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a45c0042_5fc532d3",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/MLMessageProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c41291d_2c9b3975",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PmDataQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88973f1f_f8413629",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PmEventProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "181910be_ddad4769",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PmThread.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40deb1c2_87027917",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "328b5132_61c55b0a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at the end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25a0a0ac_7e93f60c",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/utils/AppConfig.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-05-24T21:17:59Z",
+      "side": 1,
+      "message": "missing newline at tne end of the file",
+      "revId": "7fb7073cf667cba607f6738b71442dfd68d0a8b7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
