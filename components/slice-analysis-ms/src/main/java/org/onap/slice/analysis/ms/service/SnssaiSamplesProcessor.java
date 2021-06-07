@@ -135,13 +135,32 @@ public class SnssaiSamplesProcessor {
 			calculatePercentageChange(ricConfiguration, prbThroughputMapping.get(pm));
 		});
 		updateConfiguration();
-		if (ricToThroughputMapping.size() > 0) {
-			AdditionalProperties<Map<String, Map<String, Integer>>> addProps = new AdditionalProperties<>();
-			addProps.setResourceConfig(ricToThroughputMapping);
-			policyService.sendOnsetMessageToPolicy(snssai, addProps, serviceDetails);
+		if(ricToThroughputMapping.size() > 0) {
+                        AdditionalProperties<Map<String, List<Map<String, Integer>>>> addProps = new AdditionalProperties<>();
+                        addProps.setResourceConfig(changeRICConfigFormat(ricToThroughputMapping));
+                        policyService.sendOnsetMessageToPolicy(snssai, addProps, serviceDetails);
 		}
 		return true;
 	}
+
+	/**
+         * change the RICConfig data format to be compatible with SDN-R
+         */
+        protected Map<String, List<Map<String, Integer>>> changeRICConfigFormat(Map<String, Map<String, Integer>> ricToThroughputMapping) {
+                Iterator<Map.Entry<String, Map<String, Integer>>> it = ricToThroughputMapping.entrySet().iterator();
+                Map.Entry<String, Map<String,Integer>> entry = null;
+                List<Map<String,Integer>> ricConfigList = new ArrayList<>();
+                Map<String, List<Map<String, Integer>>> ricConfigData = new HashMap<>();
+                Map<String, Integer> newConfigMap = new HashMap<>();
+                while(it.hasNext()) {
+                     entry = it.next();
+                     newConfigMap=entry.getValue();
+                     newConfigMap.put("nearRTRICId",Integer.parseInt(entry.getKey()));
+                     ricConfigList.add(newConfigMap);
+                }
+                ricConfigData.put("data",ricConfigList);
+                return ricConfigData;
+        }
 
 	/**
 	 * process the measurement data of an S-NSSAI

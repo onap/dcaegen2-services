@@ -58,7 +58,7 @@ public class PmDataQueue {
 			measQueue.add(measurementObjectData);
 			subCounterMap.put(subCounter, measQueue);
 		}
-		log.debug("Queue: {}", subCounterMap);
+                log.debug("Queue: {}", subCounterMap);
 	}
 
 	/**

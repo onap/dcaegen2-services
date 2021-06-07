@@ -62,11 +62,18 @@ public class ConfigDbInterfaceService implements IConfigDbService {
 	/**
 	 *  Fetches the current configuration of RIC from config DB
 	 */
-	public Map<String,Map<String,Object>> fetchCurrentConfigurationOfRIC(String snssai){
-		String reqUrl=configDbBaseUrl+"/api/sdnc-config-db/v4/slice-config/"+snssai;
-		ResponseEntity<Map<String,Map<String,Object>>> response=restclient.sendGetRequest(reqUrl, new ParameterizedTypeReference<Map<String,Map<String,Object>>>() {
-		});
-		return response.getBody();
+	public Map<String, Map<String, Object>> fetchCurrentConfigurationOfRIC(String snssai) {
+		String reqUrl = configDbBaseUrl + "/api/sdnc-config-db/v4/slice-config/" + snssai;
+		Map<String, Map<String, Object>> responseMap = new HashMap<String, Map<String,Object>>();
+		ResponseEntity<Map<String, List<Map<String, Object>>>> response = restclient.sendGetRequest(reqUrl,
+				new ParameterizedTypeReference<Map<String, List<Map<String, Object>>>>() {
+				});
+		for (Map.Entry<String, List<Map<String, Object>>> entry : response.getBody().entrySet()) {
+			List<Map<String, Object>> list = entry.getValue();
+			responseMap.put(String.valueOf(list.get(0).get("nearRTRICId")), list.get(0));
+
+		}
+		return responseMap;
 	}
 
 	/**

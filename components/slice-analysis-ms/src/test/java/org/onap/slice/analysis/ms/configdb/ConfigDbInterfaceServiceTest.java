@@ -61,12 +61,16 @@ public class ConfigDbInterfaceServiceTest {
 	public void fetchCurrentConfigurationOfRIC() {
 		Map<String,Integer> map=new HashMap<>();
 		Map<String, Map<String,Integer>> responsemap=new HashMap<>();
-        map.put("dLThptPerSlice", 45);
-		map.put("uLThptPerSlice", 50);
+		Map<String, List<Map<String,Integer>>> result =new HashMap<String, List<Map<String,Integer>>>();
+                map.put("dLThptPerSlice", 45);
+		map.put("uLThptPerSlice", 60);
+		map.put("nearRTRICId",1);
 		responsemap.put("1", map);
-
-		Mockito.when(restclient.sendGetRequest(Mockito.anyString(), Mockito.any())).thenReturn(new ResponseEntity<Object>(responsemap, HttpStatus.OK));	
-		assertEquals(responsemap, configdbservice.fetchCurrentConfigurationOfRIC("snssai"));
+                List<Map<String,Integer>> list = new ArrayList<Map<String,Integer>>();
+	        list.add(map);
+	        result.put("data",list);
+                Mockito.when(restclient.sendGetRequest(Mockito.anyString(), Mockito.any())).thenReturn(new ResponseEntity<Object>(result, HttpStatus.OK));
+                assertEquals(responsemap, configdbservice.fetchCurrentConfigurationOfRIC("snssai"));
 
 	}
 	@Test
