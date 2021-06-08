@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74c38ff6_96e2a7c4",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-06-08T07:48:12Z",
+      "side": 1,
+      "message": "Diamonds could be skipped.",
+      "range": {
+        "startLine": 67,
+        "startChar": 61,
+        "endLine": 67,
+        "endChar": 87
+      },
+      "revId": "218c67e2c5589371de6524b09836a760334addfd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "489bdcf1_5f96a21b",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-06-08T07:48:12Z",
+      "side": 1,
+      "message": "Diamonds could be skipped.",
+      "range": {
+        "startLine": 69,
+        "startChar": 35,
+        "endLine": 69,
+        "endChar": 71
+      },
+      "revId": "218c67e2c5589371de6524b09836a760334addfd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "440c6b9d_bea4b5e5",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-06-08T07:48:12Z",
+      "side": 1,
+      "message": "It may produce null pointer exception. Verify that response is not null.",
+      "range": {
+        "startLine": 71,
+        "startChar": 60,
+        "endLine": 71,
+        "endChar": 89
+      },
+      "revId": "218c67e2c5589371de6524b09836a760334addfd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc85e12e_5b6fe86b",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-06-08T07:48:12Z",
+      "side": 1,
+      "message": "It may produce null pointer exception. Verify that list contains at least one element and contains value for key \"nearRTRICId\" .",
+      "range": {
+        "startLine": 73,
+        "startChar": 34,
+        "endLine": 73,
+        "endChar": 64
+      },
+      "revId": "218c67e2c5589371de6524b09836a760334addfd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "760e5067_0b357f8a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-06-08T07:48:12Z",
+      "side": 1,
+      "message": "formatting",
+      "range": {
+        "startLine": 138,
+        "startChar": 2,
+        "endLine": 138,
+        "endChar": 4
+      },
+      "revId": "218c67e2c5589371de6524b09836a760334addfd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "280653d1_447acc23",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-06-08T07:48:12Z",
+      "side": 1,
+      "message": "Consider getChangedRIConfigFormat",
+      "range": {
+        "startLine": 149,
+        "startChar": 58,
+        "endLine": 149,
+        "endChar": 79
+      },
+      "revId": "218c67e2c5589371de6524b09836a760334addfd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fe238d2_90e9698f",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessor.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 6310
+      },
+      "writtenOn": "2021-06-08T07:48:12Z",
+      "side": 1,
+      "message": "Please change method logic. \nI don\u0027t see any reason to iterate all map and put keys to same key \"nearRTRICId\" - All keys will be override. \nI don\u0027t understand this method.",
+      "range": {
+        "startLine": 158,
+        "startChar": 21,
+        "endLine": 158,
+        "endChar": 86
+      },
+      "revId": "218c67e2c5589371de6524b09836a760334addfd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
