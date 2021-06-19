@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35353dd9_506ab6fd",
+        "filename": "components/pm-subscription-handler/dpo/data-formats/dcae-cl-output.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-06-19T00:05:41Z",
+      "side": 1,
+      "message": "Is referring to the keys defined above?\nIf so, this should be ipAddress, not ipv4Address.",
+      "revId": "f60ed63145f40401590ada7838721890e5bc8abe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1ed6578_285b46b0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 14
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-06-19T00:05:41Z",
+      "side": 1,
+      "message": "Something is wrong here. local_admin_state is being passed in as a parameter, then gets reset. \n\nEither REMOVE the parameter named local_admin_state.\nOR remove this assignment\nOR rename the variable that is being assigned (but then, which use below should refer to the parameter?)",
+      "revId": "f60ed63145f40401590ada7838721890e5bc8abe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
