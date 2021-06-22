@@ -12,8 +12,7 @@
             {
                "enum":[
                   "UNLOCKED",
-                  "LOCKED",
-                  "FILTERING"
+                  "LOCKED"
                ]
             }
          ]

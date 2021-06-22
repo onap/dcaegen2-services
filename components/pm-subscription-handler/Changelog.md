@@ -6,10 +6,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [1.4.0]
-### Changed
-* Update filter to allow updates in realtime (DCAEGEN2-2531)
-
 ## [1.3.1]
 ### Changed
 * Updated Subscription object retrieving key from App Config data (DCAEGEN2-2713)

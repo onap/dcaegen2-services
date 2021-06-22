@@ -19,7 +19,6 @@ import json
 import os
 from unittest.mock import patch, Mock
 
-from pmsh_service.mod.network_function import NetworkFunctionFilter
 from requests import Session
 
 import mod.aai_client as aai_client
@@ -44,9 +43,6 @@ class SubscriptionTest(BaseClassSetup):
         mock_session_put.return_value.text = self.aai_response_data
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_model_info.json'), 'r') as data:
             self.aai_model_data = data.read()
-        with open(os.path.join(os.path.dirname(__file__), 'data/cbs_data_1.json'), 'r') as data:
-            self.cbs_data = json.load(data)
-        self.nfFilter = NetworkFunctionFilter(**self.cbs_data['config']['pmsh_policy']['subscription']['nfFilter'])
         mock_session_get.return_value.status_code = 200
         mock_session_get.return_value.text = self.aai_model_data
         self.mock_mr_sub = Mock()
@@ -160,23 +156,3 @@ class SubscriptionTest(BaseClassSetup):
 
         self.assertEqual(3, len(nfs))
         self.assertIsInstance(nfs[0], NetworkFunction)
-
-    def test_filter_diff_with_difference(self):
-        print(self.nfFilter)
-        networkFunction = '{"nfNames":["^pnf.*","^vnf.*"],"modelInvariantIDs": ["Extra Data"],"modelVersionIDs": ["Extra Data"],"modelNames": ["Extra Data""]}'
-        self.assertTrue(self.app_conf.subscription._filter_diff(networkFunction));
-
-    def test_filter_diff_without_difference(self):
-        networkFunction = '{"nfNames":["^pnf.*","^vnf.*"],"modelInvariantIDs": [],"modelVersionIDs": [],"modelNames": []}'
-        self.assertTrue(self.app_conf.subscription._filter_diff(networkFunction));
-        self.assertIsNotNone(self.app_conf.subscription)
-
-    def test_update_subscription_filter(self):
-        original_filter = self.app_conf.subscription.nfFilter
-        self.app_conf.subscription.nfFilter = '{"nfNames":["^pnf.*","^vnf.*"],"modelInvariantIDs": ["Extra Data"],"modelVersionIDs": ["Extra Data"],"modelNames": ["Extra Data""]}'
-        self.app_conf.subscription.update_subscription_filter()
-        updated_subscription = (self.app_conf.subscription.get())
-        self.assertTrue(updated_subscription.nfFilter == self.app_conf.subscription.nfFilter)
-        self.assertFalse(updated_subscription == original_filter)
-        print(self.app_conf.subscription.get_network_functions())
-

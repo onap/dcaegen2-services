@@ -10,7 +10,7 @@ loggers:
 handlers:
   onap_log_handler:
     class: logging.handlers.RotatingFileHandler
-    filename: ./application.log
+    filename: /var/log/ONAP/dcaegen2/services/pmsh/application.log
     mode: a
     maxBytes: 10000000
     backupCount: 10

@@ -15,9 +15,9 @@
         "type": "string",
         "description": "The name of the nf in A&AI."
       },
-      "ipAddress": {
+      "ipv4Address": {
         "type": "string",
-        "description": "The ip address of the nf being targeted."
+        "description": "The ipv4address of the nf being targeted."
       },
       "policyName": {
         "type": "string",
@@ -133,7 +133,7 @@
     },
     "required": [
       "nfName",
-      "ipAddress",
+      "ipv4Address",
       "policyName",
       "closedLoopControlName",
       "blueprintName",

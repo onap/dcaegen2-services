@@ -5,7 +5,7 @@
    "policyName":"pmsh-operational-policy",
    "changeType":"CREATE",
    "closedLoopControlName":"pmsh-control-loop",
-   "ipAddress": "1.2.3.4",
+   "ipv4Address": "1.2.3.4",
    "subscription":{
       "subscriptionName":"ExtraPM-All-gNB-R2B",
       "administrativeState":"UNLOCKED",

@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2021 Nordix Foundation.
+#  Copyright (C) 2019-2020 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-from sqlalchemy import Column, Integer, String, ForeignKey, JSON
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
 from mod import db
@@ -26,7 +26,6 @@ class SubscriptionModel(db.Model):
     __tablename__ = 'subscriptions'
     id = Column(Integer, primary_key=True, autoincrement=True)
     subscription_name = Column(String(100), unique=True)
-    nfFilter = Column(JSON)
     status = Column(String(20))
 
     nfs = relationship(
@@ -34,15 +33,12 @@ class SubscriptionModel(db.Model):
         cascade='all, delete-orphan',
         backref='subscription')
 
-    def __init__(self, subscription_name, nfFilter, status):
+    def __init__(self, subscription_name, status):
         self.subscription_name = subscription_name
-        self.nfFilter = nfFilter
         self.status = status
 
     def __repr__(self):
-        return f'subscription_name: {self.subscription_name}, ' \
-               f'nfFilter: {self.nfFilter}, ' \
-               f'status: {self.status}'
+        return f'subscription_name: {self.subscription_name}, status: {self.status}'
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
@@ -53,9 +49,7 @@ class SubscriptionModel(db.Model):
         sub_nfs = NfSubRelationalModel.query.filter(
             NfSubRelationalModel.subscription_name == self.subscription_name).all()
         db.session.remove()
-        return {'subscription_name': self.subscription_name,
-                'nfFilter': self.nfFilter,
-                'subscription_status': self.status,
+        return {'subscription_name': self.subscription_name, 'subscription_status': self.status,
                 'network_functions': [sub_nf.serialize_nf() for sub_nf in sub_nfs]}
 
 
