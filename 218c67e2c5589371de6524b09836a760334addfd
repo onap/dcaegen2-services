@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ea2edce0_f7f8e403",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-06-24T17:37:59Z",
+      "side": 1,
+      "message": "2020-2021",
+      "revId": "218c67e2c5589371de6524b09836a760334addfd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74c38ff6_96e2a7c4",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceService.java",
         "patchSetId": 1
