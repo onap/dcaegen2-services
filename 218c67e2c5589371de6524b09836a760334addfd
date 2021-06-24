@@ -111,6 +111,23 @@
     },
     {
       "key": {
+        "uuid": "b72ff813_e834e21a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PmDataQueue.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-06-24T17:38:54Z",
+      "side": 1,
+      "message": "2020-2021",
+      "revId": "218c67e2c5589371de6524b09836a760334addfd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "760e5067_0b357f8a",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessor.java",
         "patchSetId": 1
