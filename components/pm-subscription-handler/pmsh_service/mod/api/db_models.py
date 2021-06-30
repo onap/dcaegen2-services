@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, JSON
 from sqlalchemy.orm import relationship
 
 from mod import db
@@ -27,18 +27,31 @@ class SubscriptionModel(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     subscription_name = Column(String(100), unique=True)
     status = Column(String(20))
+    administrative_state = Column(String(20))
+    file_based_gp = Column(Integer)
+    file_location = Column(String(100))
 
     nfs = relationship(
         'NfSubRelationalModel',
         cascade='all, delete-orphan',
         backref='subscription')
 
-    def __init__(self, subscription_name, status):
+    network_filter = relationship(
+        'Network_Function_Filter',
+        cascade='all, delete-orphan',
+        backref='subscription')
+
+    def __init__(self, subscription_name, status, **kwargs):
         self.subscription_name = subscription_name
         self.status = status
+        self.administrative_state = kwargs.get('administrative_state', None)
+        self.file_based_gp = kwargs.get('file_based_gp', None)
+        self.file_location = kwargs.get('file_location', None)
 
     def __repr__(self):
-        return f'subscription_name: {self.subscription_name}, status: {self.status}'
+        return f'subscription_name: {self.subscription_name}, status: {self.status},' \
+               f'administrative_state: {self.administrative_state},' \
+               f'file_based_gp: {self.file_based_gp}, file_location: {self.file_location},'
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
@@ -136,3 +149,67 @@ class NfSubRelationalModel(db.Model):
                 'model_name': nf.model_name,
                 'sdnc_model_name': nf.sdnc_model_name,
                 'sdnc_model_version': nf.sdnc_model_version}
+
+
+class Network_Function_Filter(db.Model):
+    __tablename__ = 'nf_filter'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    subscription_name = Column(
+        String,
+        ForeignKey(SubscriptionModel.subscription_name, ondelete='cascade', onupdate='cascade'),
+        unique=True
+    )
+    nf_names = Column(String(100))
+    model_invariant_ids = Column(String(100))
+    model_version_ids = Column(String(100))
+    model_names = Column(String(100))
+
+    def __init__(self, subscription_name, nf_names, model_invariant_ids, model_version_ids,
+                 model_names):
+        self.subscription_name = subscription_name
+        self.nf_names = nf_names
+        self.model_invariant_ids = model_invariant_ids
+        self.model_version_ids = model_version_ids
+        self.model_names = model_names
+
+    def __repr__(self):
+        return f'subscription_name: {self.subscription_name}, ' \
+            f'nf_names: {self.nf_names}, model_invariant_ids: {self.model_invariant_ids}' \
+               f'model_version_ids: {self.model_version_ids}, model_names: {self.model_names}'
+
+    def serialize(self):
+        return {'subscription_name': self.subscription_name, 'nf_names': self.nf_names,
+                'model_invariant_ids': self.model_invariant_ids,
+                'model_version_ids': self.model_version_ids, 'model_names': self.model_names}
+
+
+class Measurement_Group(db.Model):
+    __tablename__ = 'measurement_group'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    subscription_name = Column(
+        String,
+        ForeignKey(SubscriptionModel.subscription_name, ondelete='cascade', onupdate='cascade'),
+        unique=True
+    )
+    measurement_group_name = Column(String(100))
+    measurement_type = Column(JSON)
+    managed_object_dns_basic = Column(JSON)
+
+    def __init__(self, subscription_name, measurement_group_name,
+                 measurement_type, managed_object_dns_basic):
+        self.subscription_name = subscription_name
+        self.measurement_group_name = measurement_group_name
+        self.measurement_type = measurement_type
+        self.managed_object_dns_basic = managed_object_dns_basic
+
+    def __repr__(self):
+        return f'subscription_name: {self.subscription_name}, ' \
+               f'measurement_group_name: {self.measurement_group_name},' \
+               f'measurement_type: {self.measurement_type}' \
+               f'managed_object_dns_basic: {self.managed_object_dns_basic}'
+
+    def serialize(self):
+        return {'subscription_name': self.subscription_name,
+                'measurement_group_name': self.measurement_group_name,
+                'measurement_type': self.measurement_type,
+                'managed_object_dns_basic': self.managed_object_dns_basic}
