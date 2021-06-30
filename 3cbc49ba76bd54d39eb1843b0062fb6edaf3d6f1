@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41cfc18a_a57d8317",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-06-30T18:07:30Z",
+      "side": 1,
+      "message": "need docstrings for all new classes and new methods",
+      "revId": "3cbc49ba76bd54d39eb1843b0062fb6edaf3d6f1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
