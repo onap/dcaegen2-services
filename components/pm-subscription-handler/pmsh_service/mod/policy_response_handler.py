@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020 Nordix Foundation.
+#  Copyright (C) 2020-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,6 +31,10 @@ policy_response_handle_functions = {
         'success': Subscription.update_sub_nf_status,
         'failed': Subscription.update_sub_nf_status
     },
+    AdministrativeState.FILTERING.value: {
+        'success': NetworkFunction.delete,
+        'failed': Subscription.update_sub_nf_status
+    },
     AdministrativeState.LOCKING.value: {
         'success': NetworkFunction.delete,
         'failed': Subscription.update_sub_nf_status
@@ -60,13 +64,14 @@ class PolicyResponseHandler:
                         == self.app_conf.subscription.subscriptionName:
                     nf_name = data['status']['nfName']
                     response_message = data['status']['message']
+                    change_type = data['status']['changeType']
                     self._handle_response(self.app_conf.subscription.subscriptionName,
-                                          administrative_state, nf_name, response_message)
+                                          administrative_state, nf_name, response_message, change_type)
         except Exception as err:
             logger.error(f'Error trying to poll policy response topic on MR: {err}', exc_info=True)
 
     @staticmethod
-    def _handle_response(subscription_name, administrative_state, nf_name, response_message):
+    def _handle_response(subscription_name, administrative_state, nf_name, response_message, change_type):
         """
         Handles the response from Policy, updating the DB
 
@@ -80,6 +85,9 @@ class PolicyResponseHandler:
                     f'NF: {nf_name} received, updating the DB')
         try:
             sub_nf_status = subscription_nf_states[administrative_state][response_message].value
+            if administrative_state == AdministrativeState.UNLOCKED.value and change_type == "DELETE":
+                administrative_state = AdministrativeState.FILTERING.value
+                sub_nf_status = subscription_nf_states[administrative_state][response_message].value
             policy_response_handle_functions[administrative_state][response_message](
                 subscription_name=subscription_name, status=sub_nf_status, nf_name=nf_name)
         except Exception as err:

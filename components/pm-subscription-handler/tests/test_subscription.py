@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,11 +21,12 @@ from unittest.mock import patch, Mock
 
 from requests import Session
 
+import mod
 import mod.aai_client as aai_client
 from mod.network_function import NetworkFunction
 from mod.subscription import Subscription
 from tests.base_setup import BaseClassSetup
-
+from mod.network_function_filter import NetworkFunctionFilter
 
 class SubscriptionTest(BaseClassSetup):
 
@@ -156,3 +157,24 @@ class SubscriptionTest(BaseClassSetup):
 
         self.assertEqual(3, len(nfs))
         self.assertIsInstance(nfs[0], NetworkFunction)
+
+    def test_filter_diff_with_difference(self):
+        networkFunction = '{"nfNames":["^pnf.*","^vnf.*"],"modelInvariantIDs": ["Extra Data"],' \
+                          '"modelVersionIDs": ["Extra Data"],"modelNames": ["Extra Data""]}'
+        self.assertTrue(mod.network_function_filter.filter_diff(self.app_conf.subscription, networkFunction))
+
+    def test_filter_diff_without_difference(self):
+        networkFunction = '{"nfNames":["^pnf.*","^vnf.*"],"modelInvariantIDs": [],' \
+                          '"modelVersionIDs": [],"modelNames": []}'
+        self.assertTrue(mod.network_function_filter.filter_diff(self.app_conf.subscription, networkFunction))
+        self.assertIsNotNone(self.app_conf.subscription)
+
+    def test_update_subscription_filter(self):
+        original_filter = self.app_conf.subscription.nfFilter
+        self.app_conf.subscription.nfFilter = '{"nfNames":["^pnf.*","^vnf.*"],"modelInvariantIDs": ["Extra Data"],' \
+                                              '"modelVersionIDs": ["Extra Data"],"modelNames": ["Extra Data""]}'
+        self.app_conf.subscription.update_subscription_filter()
+        updated_subscription = (self.app_conf.subscription.get())
+        self.assertTrue(updated_subscription.nfFilter == self.app_conf.subscription.nfFilter)
+        self.assertFalse(updated_subscription == original_filter)
+        print(self.app_conf.subscription.get_network_functions())
