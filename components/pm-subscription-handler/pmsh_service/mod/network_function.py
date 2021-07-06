@@ -15,7 +15,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
+import json
 import re
 
 from mod import logger, db
@@ -154,31 +154,3 @@ class NetworkFunction:
             db.session.commit()
         db.session.remove()
 
-
-class NetworkFunctionFilter:
-    def __init__(self, **kwargs):
-        self.nf_names = kwargs.get('nfNames')
-        self.model_invariant_ids = kwargs.get('modelInvariantIDs')
-        self.model_version_ids = kwargs.get('modelVersionIDs')
-        self.model_names = kwargs.get('modelNames')
-        self.regex_matcher = re.compile('|'.join(raw_regex for raw_regex in self.nf_names))
-
-    def is_nf_in_filter(self, nf):
-        """Match the nf fields against values in Subscription.nfFilter
-
-        Args:
-            nf (NetworkFunction): The NF to be filtered.
-
-        Returns:
-            bool: True if matched, else False.
-        """
-        match = True
-        if self.nf_names and self.regex_matcher.search(nf.nf_name) is None:
-            match = False
-        if self.model_invariant_ids and nf.model_invariant_id not in self.model_invariant_ids:
-            match = False
-        if self.model_version_ids and nf.model_version_id not in self.model_version_ids:
-            match = False
-        if self.model_names and nf.model_name not in self.model_names:
-            match = False
-        return match

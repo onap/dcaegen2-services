@@ -19,6 +19,7 @@ from enum import Enum
 
 from mod import db, logger
 from mod.api.db_models import SubscriptionModel, NfSubRelationalModel, NetworkFunctionModel
+from mod.network_function_filter import filter_diff
 
 
 class SubNfState(Enum):
@@ -34,6 +35,7 @@ class AdministrativeState(Enum):
     UNLOCKED = 'UNLOCKED'
     LOCKING = 'LOCKING'
     LOCKED = 'LOCKED'
+    FILTERING = 'FILTERING'
 
 
 subscription_nf_states = {
@@ -46,6 +48,10 @@ subscription_nf_states = {
         'failed': SubNfState.CREATE_FAILED
     },
     AdministrativeState.LOCKING.value: {
+        'success': SubNfState.DELETED,
+        'failed': SubNfState.DELETE_FAILED
+    },
+    AdministrativeState.FILTERING.value: {
         'success': SubNfState.DELETED,
         'failed': SubNfState.DELETE_FAILED
     }
@@ -83,19 +89,19 @@ class Subscription:
         Returns:
             Subscription object
         """
+        existing_subscription = (SubscriptionModel.query.filter(
+            SubscriptionModel.subscription_name == self.subscriptionName).one_or_none())
+        if existing_subscription is None:
+            return self.create_new_sub()
+
+    def create_new_sub(self):
         try:
-            existing_subscription = (SubscriptionModel.query.filter(
-                SubscriptionModel.subscription_name == self.subscriptionName).one_or_none())
-            if existing_subscription is None:
-                new_subscription = SubscriptionModel(subscription_name=self.subscriptionName,
-                                                     status=AdministrativeState.LOCKED.value)
-                db.session.add(new_subscription)
-                db.session.commit()
-                return new_subscription
-            else:
-                logger.debug(f'Subscription {self.subscriptionName} already exists,'
-                             f' returning this subscription..')
-                return existing_subscription
+            new_subscription = SubscriptionModel(subscription_name=self.subscriptionName,
+                                                 nfFilter=self.nfFilter,
+                                                 status=AdministrativeState.LOCKED.value)
+            db.session.add(new_subscription)
+            db.session.commit()
+            return new_subscription
         except Exception as e:
             logger.error(f'Failed to create subscription {self.subscriptionName} in the DB: {e}',
                          exc_info=True)
@@ -106,8 +112,23 @@ class Subscription:
         """ Updates the status of subscription in subscription table """
         try:
             SubscriptionModel.query.filter(
-                SubscriptionModel.subscription_name == self.subscriptionName)\
+                SubscriptionModel.subscription_name == self.subscriptionName) \
                 .update({SubscriptionModel.status: self.administrativeState},
+                        synchronize_session='evaluate')
+
+            db.session.commit()
+        except Exception as e:
+            logger.error(f'Failed to update status of subscription: {self.subscriptionName}: {e}',
+                         exc_info=True)
+        finally:
+            db.session.remove()
+
+    def update_subscription_filter(self):
+        """ Updates the filter of subscription in subscription table """
+        try:
+            SubscriptionModel.query.filter(
+                SubscriptionModel.subscription_name == self.subscriptionName) \
+                .update({SubscriptionModel.nfFilter: self.nfFilter},
                         synchronize_session='evaluate')
 
             db.session.commit()
@@ -128,13 +149,14 @@ class Subscription:
             dict: the Subscription event to be published.
         """
         try:
-            clean_sub = {k: v for k, v in self.__dict__.items() if k != 'nfFilter'}
+            clean_sub = {k: v for k, v in self.__dict__.items()
+                         if k != 'nfFilter'}
             if self.administrativeState == AdministrativeState.LOCKING.value:
                 change_type = 'DELETE'
             else:
                 change_type = 'CREATE'
             sub_event = {'nfName': nf.nf_name,
-                         'ipv4Address': nf.ip_address,
+                         'ipAddress': nf.ip_address,
                          'blueprintName': nf.sdnc_model_name,
                          'blueprintVersion': nf.sdnc_model_version,
                          'policyName': app_conf.operational_policy_name,
