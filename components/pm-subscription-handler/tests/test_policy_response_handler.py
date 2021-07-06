@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 from unittest.mock import patch
 
 from mod.api.db_models import SubscriptionModel
-from mod.network_function import NetworkFunction
+from mod.network_function import NetworkFunction, NetworkFunctionFilter
 from mod.policy_response_handler import PolicyResponseHandler, policy_response_handle_functions
 from mod.subscription import AdministrativeState, SubNfState
 from tests.base_setup import BaseClassSetup
@@ -39,6 +39,20 @@ class PolicyResponseHandlerTest(BaseClassSetup):
         self.policy_response_handler = PolicyResponseHandler(self.mock_policy_mr_sub,
                                                              self.app_conf,
                                                              mock_app)
+        self.nfFilter = NetworkFunctionFilter(**{
+            "nfNames": [
+                "^pnf.*"
+            ],
+            "modelInvariantIDs": [
+
+            ],
+            "modelVersionIDs": [
+
+            ],
+            "modelNames": [
+
+            ]
+        })
 
     def tearDown(self):
         super().tearDown()
@@ -54,7 +68,7 @@ class PolicyResponseHandlerTest(BaseClassSetup):
             self.policy_response_handler._handle_response(
                 self.app_conf.subscription.subscriptionName,
                 AdministrativeState.LOCKED.value,
-                self.nf.nf_name, 'success')
+                self.nf.nf_name, 'success', 'DELETE')
 
             mock_delete.assert_called()
 
@@ -65,7 +79,7 @@ class PolicyResponseHandlerTest(BaseClassSetup):
             self.policy_response_handler._handle_response(
                 self.app_conf.subscription.subscriptionName,
                 AdministrativeState.LOCKED.value,
-                self.nf.nf_name, 'failed')
+                self.nf.nf_name, 'failed', 'DELETE_FAILED')
             mock_update_sub_nf.assert_called_with(
                 subscription_name=self.app_conf.subscription.subscriptionName,
                 status=SubNfState.DELETE_FAILED.value, nf_name=self.nf.nf_name)
@@ -77,7 +91,7 @@ class PolicyResponseHandlerTest(BaseClassSetup):
             self.policy_response_handler._handle_response(
                 self.app_conf.subscription.subscriptionName,
                 AdministrativeState.UNLOCKED.value,
-                self.nf.nf_name, 'success')
+                self.nf.nf_name, 'success', 'CREATE')
             mock_update_sub_nf.assert_called_with(
                 subscription_name=self.app_conf.subscription.subscriptionName,
                 status=SubNfState.CREATED.value, nf_name=self.nf.nf_name)
@@ -89,7 +103,7 @@ class PolicyResponseHandlerTest(BaseClassSetup):
             self.policy_response_handler._handle_response(
                 self.app_conf.subscription.subscriptionName,
                 AdministrativeState.UNLOCKED.value,
-                self.nf.nf_name, 'failed')
+                self.nf.nf_name, 'failed', 'CREATE_FAILED')
             mock_update_sub_nf.assert_called_with(
                 subscription_name=self.app_conf.subscription.subscriptionName,
                 status=SubNfState.CREATE_FAILED.value, nf_name=self.nf.nf_name)
@@ -102,15 +116,17 @@ class PolicyResponseHandlerTest(BaseClassSetup):
     @patch('mod.subscription.Subscription.get')
     def test_poll_policy_topic_calls_methods_correct_sub(self, mock_get_sub, mock_handle_response):
         response_data = ['{"name": "ResponseEvent","status": { "subscriptionName": '
-                         '"ExtraPM-All-gNB-R2B", "nfName": "pnf300", "message": "success" } }']
+                         '"ExtraPM-All-gNB-R2B", "nfName": "pnf300", "message": "success", "changeType": "CREATE" } }']
         self.mock_policy_mr_sub.get_from_topic.return_value = response_data
-        mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
-                                                      status=AdministrativeState.UNLOCKED.value)
+        mock_get_sub.return_value = \
+            SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
+                              nfFilter=self.nfFilter,
+                              status=AdministrativeState.UNLOCKED.value)
         self.policy_response_handler.poll_policy_topic()
         self.mock_policy_mr_sub.get_from_topic.assert_called()
         mock_handle_response.assert_called_with(self.app_conf.subscription.subscriptionName,
                                                 AdministrativeState.UNLOCKED.value, 'pnf300',
-                                                'success')
+                                                'success', 'CREATE')
 
     @patch('mod.policy_response_handler.PolicyResponseHandler._handle_response')
     @patch('mod.subscription.Subscription.get')
@@ -119,8 +135,10 @@ class PolicyResponseHandlerTest(BaseClassSetup):
         response_data = ['{"name": "ResponseEvent","status": { "subscriptionName": '
                          '"Different_Subscription", "nfName": "pnf300", "message": "success" } }']
         self.mock_policy_mr_sub.get_from_topic.return_value = response_data
-        mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
-                                                      status=AdministrativeState.UNLOCKED.value)
+        mock_get_sub.return_value = \
+            SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
+                              nfFilter=self.nfFilter,
+                              status=AdministrativeState.UNLOCKED.value)
         self.policy_response_handler.poll_policy_topic()
 
         self.mock_policy_mr_sub.get_from_topic.assert_called()
@@ -131,7 +149,9 @@ class PolicyResponseHandlerTest(BaseClassSetup):
     @patch('mod.subscription.Subscription.get')
     def test_poll_policy_topic_exception(self, mock_get_sub, mock_logger):
         self.mock_policy_mr_sub.get_from_topic.return_value = 'wrong_return'
-        mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
-                                                      status=AdministrativeState.UNLOCKED.value)
+        mock_get_sub.return_value = \
+            SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
+                              nfFilter=self.nfFilter,
+                              status=AdministrativeState.UNLOCKED.value)
         self.policy_response_handler.poll_policy_topic()
         mock_logger.assert_called()
