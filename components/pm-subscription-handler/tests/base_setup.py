@@ -21,7 +21,7 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock
 
 from mod import create_app, db
-from mod.network_function import NetworkFunctionFilter
+from mod.network_function_filter import NetworkFunctionFilter
 from mod.pmsh_utils import AppConfig
 
 

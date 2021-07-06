@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020-2021 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,9 +17,12 @@
 # ============LICENSE_END=====================================================
 from jsonschema import ValidationError
 
+import mod
 from mod import logger, aai_client
+from mod.aai_client import get_pmsh_nfs_from_aai
 from mod.aai_event_handler import process_aai_events
-from mod.network_function import NetworkFunctionFilter
+from mod.api.db_models import SubscriptionModel
+from mod.network_function_filter import NetworkFunctionFilter, process_nfs_for_creation_and_deletion, filter_diff
 from mod.pmsh_utils import PeriodicTask
 from mod.subscription import AdministrativeState
 
@@ -51,12 +54,36 @@ class SubscriptionHandler:
                                 f'{new_administrative_state}')
                 else:
                     self._check_state_change(local_admin_state, new_administrative_state)
+                existing_subscription = (SubscriptionModel.query.filter(
+                    SubscriptionModel.subscription_name == self.app_conf.subscription.subscriptionName).one_or_none())
+                if filter_diff(self.app_conf, existing_subscription.nfFilter):
+                    self._initiate_filtering()
+
         except (ValidationError, TypeError) as err:
             logger.error(f'Error occurred during validation of subscription schema {err}',
                          exc_info=True)
         except Exception as err:
             logger.error(f'Error occurred during the activation/deactivation process {err}',
                          exc_info=True)
+
+    def apply_subscription_changes(self):
+        """ Applies changes to subscription
+
+        Returns:
+            Enum: Updated administrative state
+        """
+        local_admin_state = self.app_conf.subscription.get_local_sub_admin_state()
+        if local_admin_state == AdministrativeState.FILTERING.value:
+            existing_nfs = self.app_conf.subscription.get_network_functions()
+            self.app_conf.nf_filter = \
+                NetworkFunctionFilter(**self.app_conf.subscription.nfFilter)
+            new_nfs = get_pmsh_nfs_from_aai(self.app_conf)
+
+            process_nfs_for_creation_and_deletion(existing_nfs, new_nfs,
+                                              self.mr_pub, self.app_conf)
+            self.app_conf.subscription.update_subscription_filter()
+
+        return local_admin_state
 
     def _check_state_change(self, local_admin_state, new_administrative_state):
         if new_administrative_state == AdministrativeState.UNLOCKED.value:
@@ -91,6 +118,12 @@ class SubscriptionHandler:
             logger.info('Subscription is now LOCKING/DEACTIVATING.')
             self.app_conf.subscription.delete_subscription_from_nfs(nfs, self.mr_pub, self.app_conf)
             self.app_conf.subscription.update_subscription_status()
+
+    def _initiate_filtering(self):
+        self.app_conf.subscription.administrativeState = AdministrativeState.FILTERING.value
+        self.app_conf.subscription.update_subscription_status()
+        self.apply_subscription_changes()
+
 
     def _start_aai_event_thread(self):
         logger.info('Starting polling for NF info on AAI-EVENT topic on DMaaP MR.')

@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020 Nordix Foundation.
+#  Copyright (C) 2020-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,6 +29,10 @@ policy_response_handle_functions = {
     },
     AdministrativeState.UNLOCKED.value: {
         'success': Subscription.update_sub_nf_status,
+        'failed': Subscription.update_sub_nf_status
+    },
+    AdministrativeState.FILTERING.value: {
+        'success': NetworkFunction.delete,
         'failed': Subscription.update_sub_nf_status
     },
     AdministrativeState.LOCKING.value: {
