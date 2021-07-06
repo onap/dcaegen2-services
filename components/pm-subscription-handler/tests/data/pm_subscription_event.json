@@ -6,6 +6,7 @@
    "changeType":"CREATE",
    "closedLoopControlName":"pmsh-control-loop",
    "ipv4Address": "1.2.3.4",
+   "ipv6Address": "some_ipv6_address",
    "subscription":{
       "subscriptionName":"ExtraPM-All-gNB-R2B",
       "administrativeState":"UNLOCKED",

@@ -20,7 +20,8 @@ import json
 import os
 from unittest import TestCase
 from parameterized import parameterized
-from mod.network_function import NetworkFunctionFilter, NetworkFunction
+from mod.network_function import NetworkFunction
+from mod.network_function_filter import NetworkFunctionFilter
 
 
 def custom_name_func(testcase_func, param_num, param):
