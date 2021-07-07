@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cc8145b_9adf994d",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-07-07T19:23:11Z",
+      "side": 1,
+      "message": "missing copyright update",
+      "revId": "0374c77ebc5ce9c500f4aec3ddcfbd9d71fd71b6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cf52087_2193d59c",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-07-07T19:23:11Z",
+      "side": 1,
+      "message": "version to be bumped up (also required on version.properties file)",
+      "range": {
+        "startLine": 31,
+        "startChar": 13,
+        "endLine": 31,
+        "endChar": 27
+      },
+      "revId": "0374c77ebc5ce9c500f4aec3ddcfbd9d71fd71b6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
