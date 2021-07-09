@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a6622bfc_fcbb61a7",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-07-09T16:14:43Z",
+      "side": 1,
+      "message": "Copyright from other company must not be removed; please add this as separate line",
+      "range": {
+        "startLine": 4,
+        "startChar": 23,
+        "endLine": 4,
+        "endChar": 29
+      },
+      "revId": "6ea29df6fe23377a333200bc1635c881f73dc8b2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
