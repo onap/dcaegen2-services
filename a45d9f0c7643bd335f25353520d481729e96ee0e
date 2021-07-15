@@ -1,0 +1,464 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "659c26c7_a490f39c",
+        "filename": "components/pm-subscription-handler/log_config.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "Revert. Annoying I know but it\u0027s easily missed.\nWe could prob get around by creating that path on your local machine with the correct write permissions.",
+      "range": {
+        "startLine": 13,
+        "startChar": 14,
+        "endLine": 13,
+        "endChar": 17
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85c28914_5ad54fea",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "Not used. Can remove",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 16
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89554248_a0179575",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "There shouldn\u0027t be any need to add the FILTERING state here.\nIf FILTERING you just send all the create/delete events, then reset the adminSatte to it\u0027s original state. LOCKED/UNLOCKED",
+      "range": {
+        "startLine": 80,
+        "startChar": 20,
+        "endLine": 80,
+        "endChar": 32
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "526316ee_698a145f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/sub_schema.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "No need for this here as this is checking incoming state from cbs.",
+      "range": {
+        "startLine": 16,
+        "startChar": 18,
+        "endLine": 16,
+        "endChar": 29
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08fb5d3a_00f1fce6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "This should live the NetworkFunctionFilter class",
+      "range": {
+        "startLine": 70,
+        "startChar": 3,
+        "endLine": 70,
+        "endChar": 35
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b64d626_d0a06512",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "This should live the NetworkFunctionFilter class",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 16
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4999996b_5df05455",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "Need to rethink the logic here. As mentioned, all we need is 2 lists. 1 for delete and 1 fro create.",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 24
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca7324ff_584cac15",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "Why are we setting the state to FILTERING here?",
+      "range": {
+        "startLine": 132,
+        "startChar": 10,
+        "endLine": 132,
+        "endChar": 35
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cea391f0_2226392d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "This should be done as part of the _filter() function in subscription_handler",
+      "range": {
+        "startLine": 135,
+        "startChar": 11,
+        "endLine": 135,
+        "endChar": 38
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f17aca3_4354cf42",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "This should live in the NFFilter class",
+      "range": {
+        "startLine": 154,
+        "startChar": 8,
+        "endLine": 154,
+        "endChar": 20
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b33d5ddd_259d1b76",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "This should be done as part of the _filter function in sub_handler",
+      "range": {
+        "startLine": 175,
+        "startChar": 8,
+        "endLine": 175,
+        "endChar": 34
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56564a20_ec02ef00",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "Don\u0027t think we need this",
+      "range": {
+        "startLine": 202,
+        "startChar": 43,
+        "endLine": 202,
+        "endChar": 69
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbda54ff_b1e44c1a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "As per Tonys comment, we may need to pass both ipv4 and ipv6",
+      "range": {
+        "startLine": 208,
+        "startChar": 25,
+        "endLine": 208,
+        "endChar": 36
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "537b09aa_31231652",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "I think the LOCKING state may have confused things here.\nProb at this point we should check the filter diff.\nIf there is a diff, we need a new function similar to _de/active where we set the adminState to FILTERING, and process the filter like you do in apply_sub_changes below.\n\nThen have a elif here to check for FILTERING state and if true, do nothing but log it.\n\nThe only change to the policy_handler would be to add the following:\n    AdministrativeState.FILTERING.value: {\n        \u0027success\u0027: NetworkFunction.delete,\n        \u0027failed\u0027: Subscription.update_sub_nf_status\n    },",
+      "range": {
+        "startLine": 49,
+        "startChar": 16,
+        "endLine": 49,
+        "endChar": 19
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8e9e68b_0b1f5014",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "I would move this to it\u0027s own module and define the diff logic there.\nYou still associate it with the subscription object but it would be cleaner.",
+      "range": {
+        "startLine": 68,
+        "startChar": 16,
+        "endLine": 68,
+        "endChar": 37
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a321857_a5d04f2a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "Not really sure of the logic here.\nIf we have a filter diff, we just apply the filter to both the existing nfs and any new nfs in aai which aren\u0027t already part of the sub. This would require additional logic in the NetworkFunctionFilter class.\nWe then get 2 lists. 1 for delete and 1 for create.",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 45
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9369afd4_68d7a2eb",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "I would keep this in the execute method.",
+      "range": {
+        "startLine": 78,
+        "startChar": 8,
+        "endLine": 78,
+        "endChar": 27
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e6533eb_d5cb14cf",
+        "filename": "components/pm-subscription-handler/tests/data/pm_subscription_event.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "This was originally a comment from Tony right.\nIf we are to be fully ipv6 compliant, we should prob store both as the data from AAI determines this.\n\n \"properties\": {\n                \"pnf-name\": \"pnf_1\",\n                \"pnf-id\": \"927b2580-36d9-4f13-8421-3c9d43b7a57a\",\n                \"equip-type\": \"example-equip-type-val-20348\",\n                \"equip-vendor\": \"example-equip-vendor-val-52182\",\n                \"equip-model\": \"example-equip-model-val-8370\",\n                \"management-option\": \"example-management-option-val-72881\",\n                \"orchestration-status\": \"Active\",\n                \"ipaddress-v4-oam\": \"10.10.10.43\",\n                \"in-maint\": false,\n                \"ipaddress-v6-oam\": \"some-ipv6-address\",\n                \"resource-version\": \"1626345444976\",\n                \"model-invariant-id\": \"ca5cc124b13ea88da909245b0032940d\",\n                \"model-version-id\": \"a03dc3b80b44635d7f6eb632fbb34bd4\"\n            }",
+      "range": {
+        "startLine": 8,
+        "startChar": 5,
+        "endLine": 8,
+        "endChar": 9
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35533a3c_5ea46f92",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "Should be able to get this already with self.app_config.nf_filter",
+      "range": {
+        "startLine": 42,
+        "startChar": 8,
+        "endLine": 42,
+        "endChar": 21
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c506fbe_f4edf397",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:07:37Z",
+      "side": 1,
+      "message": "Should be able to get this already with self.app_config.nf_filter",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
