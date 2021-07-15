@@ -324,6 +324,30 @@
     },
     {
       "key": {
+        "uuid": "122b1d8a_a34b3b95",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-15T13:25:43Z",
+      "side": 1,
+      "message": "Edit.\nIf state is FILTERING, we do a check and some retry for CREATE/DELETE_FAILED.\nAfter 3 attempts set the state back to it\u0027s original state.\n\nNo need for FILTERING state in policy_handler",
+      "parentUuid": "537b09aa_31231652",
+      "range": {
+        "startLine": 49,
+        "startChar": 16,
+        "endLine": 49,
+        "endChar": 19
+      },
+      "revId": "a45d9f0c7643bd335f25353520d481729e96ee0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c8e9e68b_0b1f5014",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
         "patchSetId": 1
