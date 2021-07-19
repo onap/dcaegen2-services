@@ -21,7 +21,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pm_subscription_handler",
-    version="1.3.1",
+    version="1.3.2",
     packages=find_packages(),
     author="lego@est.tech",
     author_email="lego@est.tech",
@@ -38,7 +38,7 @@ setup(
         "tornado==6.1",
         "swagger-ui-bundle==0.0.6",
         "psycopg2-binary==2.8.6",
-        "onap_dcae_cbs_docker_client==2.1.1",
+        "onap_dcae_cbs_docker_client==2.2.1",
         "onappylog==1.0.9",
         "ruamel.yaml==0.16.10",
         "jsonschema==3.2.0"]
