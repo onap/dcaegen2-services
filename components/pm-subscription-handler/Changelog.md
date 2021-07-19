@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
+## [1.3.2]
+### Changed
+* Update to use version 2.2.1 of https://pypi.org/project/onap_dcae_cbs_docker_client/
+
 ## [1.3.1]
 ### Changed
 * Updated Subscription object retrieving key from App Config data (DCAEGEN2-2713)
