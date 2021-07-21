@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90bd8abf_f867c398",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function_filter.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "If we get the local_filter object and compare it with the new app_config filter",
+      "range": {
+        "startLine": 54,
+        "startChar": 17,
+        "endLine": 54,
+        "endChar": 24
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b03a5874_16b8a8f9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function_filter.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "Make these class methods",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 15
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2714964_75a665d9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function_filter.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "Not sure about this. If we just re filter the existing nfs and get a diff, they should deleted.",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 20
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0df2e1b_3d2fa891",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function_filter.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "I\u0027m thinking, should the aai_client._filter_nf_data have logic to drop any existing nfs that are already in the sub..",
+      "range": {
+        "startLine": 80,
+        "startChar": 35,
+        "endLine": 80,
+        "endChar": 42
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67e83e32_97d501ff",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "We can make these functions of the NFFIlter class",
+      "range": {
+        "startLine": 25,
+        "startChar": 63,
+        "endLine": 25,
+        "endChar": 92
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "25d99d90_c4e6551f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "We need to have some way of blocking this if adminState is FILTERING like for LOCKING above",
+      "range": {
+        "startLine": 56,
+        "startChar": 20,
+        "endLine": 56,
+        "endChar": 43
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe271511_24682c13",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "We could prob do with a helper function to get the local_nf_filter object like we do for adminState",
+      "range": {
+        "startLine": 59,
+        "startChar": 62,
+        "endLine": 59,
+        "endChar": 70
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79f5f60e_8f6f6ebc",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "We already know we are in FILTERING state here so no need",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 25
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b65126bb_43aae4b0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "These could be filtered here with the new filter.\nI\u0027m thinking we could create a new nffilter function to take a list of nfs, loop over them with is_nf_in_filter and return the filtered list.",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 24
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2252da7e_13207f88",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "This looks like an error on my part.\nWe should really be using the appconf.subscription.nf_filter value here.\nSame for usage in aai_client and aai_event_handler",
+      "range": {
+        "startLine": 78,
+        "startChar": 17,
+        "endLine": 78,
+        "endChar": 35
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2e53bb1_f3c6643e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:14:01Z",
+      "side": 1,
+      "message": "This should prob happen earlier in the flow. Maybe in the _init_filter function",
+      "range": {
+        "startLine": 84,
+        "startChar": 32,
+        "endLine": 84,
+        "endChar": 44
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
