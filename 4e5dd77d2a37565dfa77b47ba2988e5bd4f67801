@@ -232,6 +232,30 @@
     },
     {
       "key": {
+        "uuid": "8356f8e5_fbd3b8fd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-07-21T14:21:38Z",
+      "side": 1,
+      "message": "We should prob look to remove this from the appconfig object as it\u0027s gonna cause confusion.\nBetter to use the filter associated with the subscription",
+      "parentUuid": "2252da7e_13207f88",
+      "range": {
+        "startLine": 78,
+        "startChar": 17,
+        "endLine": 78,
+        "endChar": 35
+      },
+      "revId": "4e5dd77d2a37565dfa77b47ba2988e5bd4f67801",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c2e53bb1_f3c6643e",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
         "patchSetId": 7
