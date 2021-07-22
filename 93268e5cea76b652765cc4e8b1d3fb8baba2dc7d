@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7c605232_731c20e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-07-22T14:24:58Z",
+      "side": 1,
+      "message": "DCAEGEN2-2862",
+      "range": {
+        "startLine": 11,
+        "startChar": 10,
+        "endLine": 11,
+        "endChar": 23
+      },
+      "revId": "93268e5cea76b652765cc4e8b1d3fb8baba2dc7d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57e75e65_84910697",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-07-22T14:24:58Z",
+      "side": 1,
+      "message": "missing copyright update",
+      "revId": "93268e5cea76b652765cc4e8b1d3fb8baba2dc7d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
