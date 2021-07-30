@@ -58,12 +58,12 @@ insert into db_type (id, name, tool) values ('KIBANA', 'Kibana', true);
 insert into db_type (id, name, tool) values ('SUPERSET', 'Apache Superset', true);
 
 insert into db (id, db_type_id, enabled, encrypt, name,host,login,pass,database_name) values (1, 'CB', true, true, 'Couchbase 1','dl-couchbase','dl','dl1234','datalake');
-insert into db (id, db_type_id, enabled, encrypt, name,host) values (2, 'ES', true, true, 'Elasticsearch','dl-es');
-insert into db (id, db_type_id, enabled, encrypt, name,host,port,database_name) values (3, 'MONGO', true, true, 'MongoDB 1','dl-mongodb',27017,'datalake');
-insert into db (id, db_type_id, enabled, encrypt, name,host) values (4, 'DRUID', true, true, 'Druid','dl-druid');
-insert into db (id, db_type_id, enabled, encrypt, name,host,login) values (5, 'HDFS', true, true, 'Hadoop Cluster','dl-hdfs','dl');
-insert into db (id, db_type_id, enabled, encrypt, name,host) values (6, 'KIBANA', true, false, 'Kibana demo','dl-es');
-insert into db (id, db_type_id, enabled, encrypt, name,host) values (7, 'SUPERSET', true, false, 'Superset demo','dl-druid');
+insert into db (id, db_type_id, enabled, encrypt, name,host,port,database_name) values (2, 'MONGO', true, true, 'MongoDB 1','dl-mongodb',27017,'datalake');
+insert into db (id, db_type_id, enabled, encrypt, name,host) values (3, 'DRUID', true, true, 'Druid','dl-druid');
+insert into db (id, db_type_id, enabled, encrypt, name,host,login) values (4, 'HDFS', true, true, 'Hadoop Cluster','dl-hdfs','dl');
+insert into db (id, db_type_id, enabled, encrypt, name,host) values (5, 'KIBANA', true, false, 'Kibana demo','dl-es');
+insert into db (id, db_type_id, enabled, encrypt, name,host) values (6, 'SUPERSET', true, false, 'Superset demo','dl-druid');
+-- (execute this query if Elasticsearch is needed) insert into db (id, db_type_id, enabled, encrypt, name,host) values (2, 'ES', true, true, 'Elasticsearch','dl-es');
 
 insert into topic_name (id) values ('_DL_DEFAULT_');
 insert into topic_name (id) values ('unauthenticated.SEC_FAULT_OUTPUT');
