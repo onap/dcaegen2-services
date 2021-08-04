@@ -1,5 +1,5 @@
 # ============LICENSE_START=======================================================
-#  Copyright (C) 2020 Nordix Foundation.
+#  Copyright (C) 2021 Nordix Foundation.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -87,3 +87,108 @@ paths:
                 enum: [healthy, unhealthy]
         503:
           description: the pmsh service is unavailable
+
+  /subscription:
+    post:
+      tags:
+        - "Subscriptions"
+      description: >-
+        Create a PM Subscription
+      operationId: mod.api.controllers.subscription_controller.post_subscription
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Subscription object to be created"
+          required: true
+          schema:
+            type: object
+            properties:
+              subscription:
+                type: object
+                properties:
+                  subscriptionName:
+                    type: string
+                  nfFilter:
+                    type: object
+                    properties:
+                      nfNames:
+                        type: array
+                        items:
+                          type: string
+                      modelInvariantIDs:
+                        type: array
+                        items:
+                          type: string
+                      modelVersionIDs:
+                        type: array
+                        items:
+                          type: string
+                      modelNames:
+                        type: array
+                        items:
+                          type: string
+                    additionalProperties: false
+                  measurementGroups:
+                    type: array
+                    minItems: 1
+                    items:
+                      type: object
+                      properties:
+                        measurementGroup:
+                          type: object
+                          properties:
+                            administrativeState:
+                              allOf:
+                                - type: string
+                                - enum:
+                                    - UNLOCKED
+                                    - LOCKED
+                                    - FILTERING
+                            fileBasedGP:
+                              type: integer
+                            fileLocation:
+                              type: string
+                            measurementTypes:
+                              type: array
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  measurementType:
+                                    type: string
+                                required:
+                                  - measurementType
+                            managedObjectDNsBasic:
+                              type: array
+                              minItems: 1
+                              items:
+                                type: object
+                                properties:
+                                  DN:
+                                    type: string
+                                required:
+                                  - DN
+                          required:
+                            - administrativeState
+                            - fileBasedGP
+                            - fileLocation
+                            - measurementTypes
+                            - managedObjectDNsBasic
+                      required:
+                        - measurementGroup
+                required:
+                  - subscriptionName
+                  - nfFilter
+                  - measurementGroups
+      responses:
+        201:
+          description: successfully created PM Subscription
+        409:
+          description: Duplicate data
+        400:
+          description: Invalid input
+
