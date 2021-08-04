@@ -42,6 +42,7 @@ def _get_app():
 
 def launch_api_server(app_config):
     connex_app = _get_app()
+    connex_app.app.config['app_config'] = app_config
     connex_app.add_api('api/pmsh_swagger.yml')
     if app_config.enable_tls:
         logger.info('Launching secure http API server')
