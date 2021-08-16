@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34d807ab_8f0dd01b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-08-16T17:16:33Z",
+      "side": 1,
+      "message": "Pretty sure we get an empty string from AAI but would need to double check.",
+      "range": {
+        "startLine": 137,
+        "startChar": 82,
+        "endLine": 137,
+        "endChar": 86
+      },
+      "revId": "f870e57a1fa937e66629ac020b9483bad85705ef",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dedc112b_9339d2b3",
+        "filename": "components/pm-subscription-handler/tests/data/pm_subscription_event.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-08-16T17:16:33Z",
+      "side": 1,
+      "message": "Prob good to revert this to just ipAddress. Although the policy will need to reflect this.",
+      "range": {
+        "startLine": 8,
+        "startChar": 6,
+        "endLine": 8,
+        "endChar": 8
+      },
+      "revId": "f870e57a1fa937e66629ac020b9483bad85705ef",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e8bb680_e9b26ac4",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-08-16T17:16:33Z",
+      "side": 1,
+      "message": "This fails for me as the expected event is ipv4",
+      "range": {
+        "startLine": 144,
+        "startChar": 29,
+        "endLine": 144,
+        "endChar": 41
+      },
+      "revId": "f870e57a1fa937e66629ac020b9483bad85705ef",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
