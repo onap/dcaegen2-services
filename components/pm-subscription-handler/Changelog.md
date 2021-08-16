@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.3.2]
 ### Changed
 * Update to use version 2.2.1 of https://pypi.org/project/onap_dcae_cbs_docker_client/
+* Updated DB under Enhanced API for PMSH subscription management Feature (DCAEGEN2-2802) 
 
 ## [1.3.1]
 ### Changed

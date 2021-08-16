@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,12 +33,14 @@ class NetworkFunctionTests(BaseClassSetup):
         super().setUp()
         self.nf_1 = NetworkFunction(sdnc_model_name='blah', sdnc_model_version=1.0,
                                     **{'nf_name': 'pnf_1',
-                                       'ip_address': '1.2.3.4',
+                                       'ipv4_address': '204.120.0.15',
+                                       'ipv6_address': '2001:db8:3333:4444:5555:6666:7777:8888',
                                        'model_invariant_id': 'some_id',
                                        'model_version_id': 'some_other_id'})
         self.nf_2 = NetworkFunction(sdnc_model_name='blah', sdnc_model_version=2.0,
                                     **{'nf_name': 'pnf_2',
-                                       'ip_address': '1.2.3.4',
+                                       'ipv4_address': '204.120.0.15',
+                                       'ipv6_address': '2001:db8:3333:4444:5555:6666:7777:8888',
                                        'model_invariant_id': 'some_id',
                                        'model_version_id': 'some_other_id'})
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_model_info.json'), 'r') as data:

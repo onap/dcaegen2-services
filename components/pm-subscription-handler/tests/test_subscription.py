@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -140,7 +140,24 @@ class SubscriptionTest(BaseClassSetup):
                                'data/pm_subscription_event.json'), 'r') as data:
             expected_sub_event = json.load(data)
         nf = NetworkFunction(nf_name='pnf_1',
-                             ip_address='1.2.3.4',
+                             ipv4_address='204.120.0.15',
+                             ipv6_address='',
+                             model_invariant_id='some-id',
+                             model_version_id='some-id')
+        nf.sdnc_model_name = 'some-name'
+        nf.sdnc_model_version = 'some-version'
+        actual_sub_event = self.app_conf.subscription.prepare_subscription_event(nf, self.app_conf)
+        print(actual_sub_event)
+        self.assertEqual(expected_sub_event, actual_sub_event)
+
+    def test_prepare_subscription_event_with_ipv6(self):
+        with open(os.path.join(os.path.dirname(__file__),
+                               'data/pm_subscription_event.json'), 'r') as data:
+            expected_sub_event = json.load(data)
+        expected_sub_event['ipAddress'] = '2001:db8:3333:4444:5555:6666:7777:8888'
+        nf = NetworkFunction(nf_name='pnf_1',
+                             ipv4_address='204.120.0.15',
+                             ipv6_address='2001:db8:3333:4444:5555:6666:7777:8888',
                              model_invariant_id='some-id',
                              model_version_id='some-id')
         nf.sdnc_model_name = 'some-name'
