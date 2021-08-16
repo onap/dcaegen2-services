@@ -63,7 +63,8 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
                                 f'is not "Active"')
                     continue
                 nf = NetworkFunction(nf_name=xnf_name,
-                                     ip_address=aai_entity['ipaddress-v4-oam'],
+                                     ipv4_address=aai_entity['ipaddress-v4-oam'],
+                                     ipv6_address=aai_entity['ipaddress-v6-oam'],
                                      model_invariant_id=aai_entity['model-invariant-id'],
                                      model_version_id=aai_entity['model-version-id'])
                 if not nf.set_nf_model_params(app_conf):

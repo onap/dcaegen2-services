@@ -135,7 +135,8 @@ def _filter_nf_data(nf_data, app_conf):
             name_identifier = 'pnf-name' if nf['node-type'] == 'pnf' else 'vnf-name'
             new_nf = mod.network_function.NetworkFunction(
                 nf_name=nf['properties'].get(name_identifier),
-                ip_address=nf['properties'].get('ipaddress-v4-oam'),
+                ipv4_address=nf['properties'].get('ipaddress-v4-oam'),
+                ipv6_address=nf['properties'].get('ipaddress-v6-oam'),
                 model_invariant_id=nf['properties'].get('model-invariant-id'),
                 model_version_id=nf['properties'].get('model-version-id'))
             if not new_nf.set_nf_model_params(app_conf):

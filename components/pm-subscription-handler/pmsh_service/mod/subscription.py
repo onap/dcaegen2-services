@@ -106,7 +106,7 @@ class Subscription:
         """ Updates the status of subscription in subscription table """
         try:
             SubscriptionModel.query.filter(
-                SubscriptionModel.subscription_name == self.subscriptionName)\
+                SubscriptionModel.subscription_name == self.subscriptionName) \
                 .update({SubscriptionModel.status: self.administrativeState},
                         synchronize_session='evaluate')
 
@@ -133,14 +133,16 @@ class Subscription:
                 change_type = 'DELETE'
             else:
                 change_type = 'CREATE'
-            sub_event = {'nfName': nf.nf_name,
-                         'ipv4Address': nf.ip_address,
-                         'blueprintName': nf.sdnc_model_name,
-                         'blueprintVersion': nf.sdnc_model_version,
-                         'policyName': app_conf.operational_policy_name,
-                         'changeType': change_type,
-                         'closedLoopControlName': app_conf.control_loop_name,
-                         'subscription': clean_sub}
+
+            sub_event = {
+                'nfName': nf.nf_name,
+                'ipAddress': nf.ipv4_address if nf.ipv6_address in (None, '') else nf.ipv6_address,
+                'blueprintName': nf.sdnc_model_name,
+                'blueprintVersion': nf.sdnc_model_version,
+                'policyName': app_conf.operational_policy_name,
+                'changeType': change_type,
+                'closedLoopControlName': app_conf.control_loop_name,
+                'subscription': clean_sub}
             return sub_event
         except Exception as e:
             logger.error(f'Failed to prep Sub event for xNF {nf.nf_name}: {e}', exc_info=True)
