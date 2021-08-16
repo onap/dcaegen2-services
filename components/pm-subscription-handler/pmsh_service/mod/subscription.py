@@ -134,7 +134,8 @@ class Subscription:
             else:
                 change_type = 'CREATE'
             sub_event = {'nfName': nf.nf_name,
-                         'ipv4Address': nf.ip_address,
+                         'ipv4Address': nf.ipv6_address if nf.ipv6_address is not None
+                         else nf.ipv4_address,
                          'blueprintName': nf.sdnc_model_name,
                          'blueprintVersion': nf.sdnc_model_version,
                          'policyName': app_conf.operational_policy_name,

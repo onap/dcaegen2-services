@@ -33,12 +33,14 @@ class NetworkFunctionTests(BaseClassSetup):
         super().setUp()
         self.nf_1 = NetworkFunction(sdnc_model_name='blah', sdnc_model_version=1.0,
                                     **{'nf_name': 'pnf_1',
-                                       'ip_address': '1.2.3.4',
+                                       'ipv4_address': '1.2.3.4',
+                                       'ipv6_address': '1.2.3.4.5.6',
                                        'model_invariant_id': 'some_id',
                                        'model_version_id': 'some_other_id'})
         self.nf_2 = NetworkFunction(sdnc_model_name='blah', sdnc_model_version=2.0,
                                     **{'nf_name': 'pnf_2',
-                                       'ip_address': '1.2.3.4',
+                                       'ipv4_address': '1.2.3.4',
+                                       'ipv6_address': '1.2.3.4.5.6',
                                        'model_invariant_id': 'some_id',
                                        'model_version_id': 'some_other_id'})
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_model_info.json'), 'r') as data:

@@ -140,7 +140,8 @@ class SubscriptionTest(BaseClassSetup):
                                'data/pm_subscription_event.json'), 'r') as data:
             expected_sub_event = json.load(data)
         nf = NetworkFunction(nf_name='pnf_1',
-                             ip_address='1.2.3.4',
+                             ipv4_address='1.2.3.4',
+                             ipv6_address='1.2.3.4.5.6',
                              model_invariant_id='some-id',
                              model_version_id='some-id')
         nf.sdnc_model_name = 'some-name'
