@@ -26,7 +26,8 @@ class NetworkFunction:
     def __init__(self, sdnc_model_name=None, sdnc_model_version=None, **kwargs):
         """ Object representation of the NetworkFunction. """
         self.nf_name = kwargs.get('nf_name')
-        self.ip_address = kwargs.get('ip_address')
+        self.ipv4_address = kwargs.get('ipv4_address')
+        self.ipv6_address = kwargs.get('ipv6_address')
         self.model_invariant_id = kwargs.get('model_invariant_id')
         self.model_version_id = kwargs.get('model_version_id')
         self.model_name = kwargs.get('model_name')
@@ -35,13 +36,14 @@ class NetworkFunction:
 
     @classmethod
     def nf_def(cls):
-        return cls(nf_name=None, ip_address=None, model_invariant_id=None,
-                   model_version_id=None, model_name=None,
+        return cls(nf_name=None, ipv4_address=None, ipv6_address=None,
+                   model_invariant_id=None, model_version_id=None, model_name=None,
                    sdnc_model_name=None, sdnc_model_version=None)
 
     def __str__(self):
         return f'nf-name: {self.nf_name}, ' \
-               f'ipaddress-v4-oam: {self.ip_address}, ' \
+               f'ipaddress-v4-oam: {self.ipv4_address}, ' \
+               f'ipaddress-v6-oam: {self.ipv6_address}, ' \
                f'model-invariant-id: {self.model_invariant_id}, ' \
                f'model-version-id: {self.model_version_id}, ' \
                f'model-name: {self.model_name}, ' \
@@ -51,7 +53,8 @@ class NetworkFunction:
     def __eq__(self, other):
         return \
             self.nf_name == other.nf_name and \
-            self.ip_address == other.ip_address and \
+            self.ipv4_address == other.ipv4_address and \
+            self.ipv6_address == other.ipv6_address and \
             self.model_invariant_id == other.model_invariant_id and \
             self.model_version_id == other.model_version_id and \
             self.model_name == other.model_name and \
@@ -59,8 +62,8 @@ class NetworkFunction:
             self.sdnc_model_version == other.sdnc_model_version
 
     def __hash__(self):
-        return hash((self.nf_name, self.ip_address, self.model_invariant_id,
-                     self.model_version_id, self.model_name,
+        return hash((self.nf_name, self.ipv4_address, self.ipv6_address,
+                     self.model_invariant_id, self.model_version_id, self.model_name,
                      self.sdnc_model_name, self.sdnc_model_version))
 
     def create(self):
@@ -70,7 +73,8 @@ class NetworkFunction:
 
         if existing_nf is None:
             new_nf = NetworkFunctionModel(nf_name=self.nf_name,
-                                          ip_address=self.ip_address,
+                                          ipv4_address=self.ipv6_address,
+                                          ipv6_address=self.ipv6_address,
                                           model_invariant_id=self.model_invariant_id,
                                           model_version_id=self.model_version_id,
                                           model_name=self.model_name,
