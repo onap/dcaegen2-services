@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "2e61a52b_b91d4f45",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-08-17T12:54:27Z",
+      "side": 1,
+      "message": "Shall I go with 200 for all the fields?",
+      "parentUuid": "75f69f93_a2967354",
+      "revId": "9a559458824fd458168f9da48bd1c49bee20aa3a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd11fafc_8b962239",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
         "patchSetId": 2
