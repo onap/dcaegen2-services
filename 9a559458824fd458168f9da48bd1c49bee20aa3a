@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38aa4099_5d90eb93",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-08-17T12:43:53Z",
+      "side": 1,
+      "message": "Can this be nullable\u003dfalse or would this check need to be done programmatically",
+      "revId": "9a559458824fd458168f9da48bd1c49bee20aa3a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75f69f93_a2967354",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-08-17T12:43:53Z",
+      "side": 1,
+      "message": "May need to be more than 100",
+      "revId": "9a559458824fd458168f9da48bd1c49bee20aa3a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd11fafc_8b962239",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-08-17T12:43:53Z",
+      "side": 1,
+      "message": "May need to be more than 100",
+      "revId": "9a559458824fd458168f9da48bd1c49bee20aa3a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "57cbfdc5_738bf2c5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-08-17T12:43:53Z",
+      "side": 1,
+      "message": "May need to be more than 100",
+      "revId": "9a559458824fd458168f9da48bd1c49bee20aa3a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86caca8b_9033ba84",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-08-17T12:43:53Z",
+      "side": 1,
+      "message": "May need to be more than 100",
+      "revId": "9a559458824fd458168f9da48bd1c49bee20aa3a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
