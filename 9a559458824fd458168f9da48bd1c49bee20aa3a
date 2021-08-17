@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "d0e0b447_3df62c1b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-08-17T13:58:10Z",
+      "side": 1,
+      "message": "Was just thinking out loud. It\u0027s just with multiple M/G these lists could be quite large. It\u0027s not a big deal really at the minute.",
+      "parentUuid": "2e61a52b_b91d4f45",
+      "revId": "9a559458824fd458168f9da48bd1c49bee20aa3a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd11fafc_8b962239",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
         "patchSetId": 2
