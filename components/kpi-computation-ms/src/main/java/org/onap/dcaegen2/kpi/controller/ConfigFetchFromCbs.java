@@ -45,83 +45,84 @@ import reactor.core.Disposable;
  */
 public class ConfigFetchFromCbs implements Runnable {
 
-    private static Logger log = LoggerFactory.getLogger(ConfigFetchFromCbs.class);
+	private static Logger log = LoggerFactory.getLogger(ConfigFetchFromCbs.class);
 
-    private Duration interval;
+	private Duration interval;
 
-    public ConfigFetchFromCbs() {
+	public ConfigFetchFromCbs() {
 
-    }
+	}
 
-    public ConfigFetchFromCbs(Duration interval) {
-        this.interval = interval;
-    }
+	public ConfigFetchFromCbs(Duration interval) {
+		this.interval = interval;
+	}
 
-    /**
-     * Gets app config from CBS.
-     */
-    private Disposable getAppConfig() {
+	/**
+	 * Gets app config from CBS.
+	 */
+	private Disposable getAppConfig() {
 
-        // Generate RequestID and InvocationID which will be used when logging and in
-        // HTTP requests
-        log.info("getAppconfig start ..");
-        RequestDiagnosticContext diagnosticContext = RequestDiagnosticContext.create();
-        // Read necessary properties from the environment
-        final var env = CbsClientConfiguration.fromEnvironment();
+		// Generate RequestID and InvocationID which will be used when logging and in
+		// HTTP requests
+		log.info("getAppconfig start ..");
+		RequestDiagnosticContext diagnosticContext = RequestDiagnosticContext.create();
+		// Read necessary properties from the environment
+		final var env = CbsClientConfiguration.fromEnvironment();
 
-        log.debug("environments {}", env);
-        ConfigPolicy configPolicy = ConfigPolicy.getInstance();
+		log.debug("environments {}", env);
+		ConfigPolicy configPolicy = ConfigPolicy.getInstance();
 
-        // Polling properties
-        final Duration initialDelay = Duration.ofSeconds(5);
-        final Duration period = interval;
+		// Polling properties
+		final Duration initialDelay = Duration.ofSeconds(5);
+		final Duration period = interval;
 
-        // Create the client and use it to get the configuration
-        final CbsRequest request = CbsRequests.getAll(diagnosticContext);
-        return CbsClientFactory.createCbsClient(env)
-                .flatMapMany(cbsClient -> cbsClient.updates(request, initialDelay, period)).subscribe(jsonObject -> {
-                    log.info("configuration and policy from CBS {}", jsonObject);
-                    JsonObject config = jsonObject.getAsJsonObject("config");
-                    Duration newPeriod = Duration.ofSeconds(config.get("cbsPollingInterval").getAsInt());
-                    if (!newPeriod.equals(period)) {
-                        interval = newPeriod;
-                        synchronized (this) {
-                            this.notifyAll();
-                        }
+		// Create the client and use it to get the configuration
+		final CbsRequest request = CbsRequests.getAll(diagnosticContext);
+		return CbsClientFactory.createCbsClient(env)
+				.flatMapMany(cbsClient -> cbsClient.updates(request, initialDelay, period)).subscribe(jsonObject -> {
+					log.info("configuration and policy from CBS {}", jsonObject);
+					JsonObject config = jsonObject.getAsJsonObject("config");
+					Duration newPeriod = Duration.ofSeconds(config.get("cbsPollingInterval").getAsInt());
+					if (!newPeriod.equals(period)) {
+						interval = newPeriod;
+						synchronized (this) {
+							this.notifyAll();
+						}
 
-                    }
-                    Configuration.getInstance().updateConfigurationFromJsonObject(config);
+					}
+					Configuration.getInstance().updateConfigurationFromJsonObject(config);
 
-                    Type mapType = new TypeToken<Map<String, Object>>() {
-                    }.getType();
-                    if (jsonObject.getAsJsonObject("policies") != null) {
-                        JsonObject policyJson = jsonObject.getAsJsonObject("policies").getAsJsonArray("items").get(0)
-                                .getAsJsonObject().getAsJsonObject("config");
-                        Map<String, Object> policy = new Gson().fromJson(policyJson, mapType);
-                        configPolicy.setConfig(policy);
-                        log.info("Config policy {}", configPolicy);
-                    }
-                }, throwable -> log.warn("Get config from cbs error", throwable));
-    }
+					Type mapType = new TypeToken<Map<String, Object>>() {
+					}.getType();
+					if (jsonObject.getAsJsonObject("policies") != null) {
+						JsonObject policyJson = jsonObject.getAsJsonObject("policies").getAsJsonArray("items").get(0)
+								.getAsJsonObject().getAsJsonObject("config");
+						log.info("policy json {}", policyJson);
+						log.info("calling the configuration class to update policy config");
+						Configuration.getInstance().updateconfigfrompolicy(policyJson);
+						Map<String, Object> policy = new Gson().fromJson(policyJson, mapType);
+						configPolicy.setConfig(policy);
+						log.info("Config policy {}", configPolicy);
+					}
+				}, throwable -> log.warn("Get config from cbs error", throwable));
+	}
 
-    @Override
-    public void run() {
-        Boolean done = false;
-        while (!done) {
-            try {
-                Disposable disp = getAppConfig();
-                synchronized (this) {
-                    this.wait();
-                }
-                log.info("Polling interval changed");
-                disp.dispose();
-            } catch (Exception e) {
-		log.info("The config won't be updated");
-                done = true;
-            }
-        }
-    }
+	@Override
+	public void run() {
+		Boolean done = false;
+		while (!done) {
+			try {
+				Disposable disp = getAppConfig();
+				synchronized (this) {
+					this.wait();
+				}
+				log.info("Polling interval changed");
+				disp.dispose();
+			} catch (Exception e) {
+				log.info("The config won't be updated");
+				done = true;
+			}
+		}
+	}
 
 }
-
-
