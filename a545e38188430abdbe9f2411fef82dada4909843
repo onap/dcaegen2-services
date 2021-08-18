@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d5f7329_ffa7413d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-08-18T14:29:19Z",
+      "side": 1,
+      "message": "Any modules/classes that use this object will need to reflect this change. ie aai_client, aai_event_handler",
+      "revId": "a545e38188430abdbe9f2411fef82dada4909843",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
