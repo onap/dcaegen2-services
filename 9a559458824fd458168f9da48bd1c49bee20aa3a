@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ad2a0699_1e82d978",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-08-18T08:25:29Z",
+      "side": 1,
+      "message": "I have added a nullable\u003dfalse check here here and will also be adding it programmatically with API changes.",
+      "parentUuid": "38aa4099_5d90eb93",
+      "revId": "9a559458824fd458168f9da48bd1c49bee20aa3a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75f69f93_a2967354",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
         "patchSetId": 2
