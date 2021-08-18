@@ -20,17 +20,17 @@
 
 package org.onap.dcaegen2.kpi.models;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * Model class for the application Configuration.
@@ -258,6 +258,11 @@ public class Configuration {
         cid = jsonObject.get("cid").getAsString();
         log.info("configuration from CBS {}", this);
 
+    }
+    
+    public void updateConfigFromPolicy(JsonObject policyconfig) {
+  	    kpiConfig = policyconfig.toString();
+  	    log.info("kpi config fetched from policy {}", kpiConfig);
     }
 
     public String getKpiConfig() {
