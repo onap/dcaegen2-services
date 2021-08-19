@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf16278c_cb2646aa",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-08-19T12:47:03Z",
+      "side": 1,
+      "message": "Does ipAddress need to be changed in dcae-cl-output.json?",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
