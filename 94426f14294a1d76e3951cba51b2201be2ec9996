@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "c7dcfebe_ab3cee22",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-23T17:33:00Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be \nipv4_address\u003dself.ipv4_address,\n?",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bf16278c_cb2646aa",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 5
@@ -52,6 +69,91 @@
       "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12f60dcf_387fad5e",
+        "filename": "components/pm-subscription-handler/tests/test_network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-23T17:33:00Z",
+      "side": 1,
+      "message": "add 2021 est",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70dd827d_28066247",
+        "filename": "components/pm-subscription-handler/tests/test_network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-23T17:33:00Z",
+      "side": 1,
+      "message": "this is not a valid ipv6 address",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a59b4931_948a8291",
+        "filename": "components/pm-subscription-handler/tests/test_network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-23T17:33:00Z",
+      "side": 1,
+      "message": "this is not a valid ipv6 address",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7f5d9fc_295b2716",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-23T17:33:00Z",
+      "side": 1,
+      "message": "add 2021 for est",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "33863448_6fe0a96f",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-23T17:33:00Z",
+      "side": 1,
+      "message": "this is not a valid ipv6 address",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
