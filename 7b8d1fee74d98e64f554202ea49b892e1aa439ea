@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "d1c82c33_c8c76ff8",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/controller/ConfigFetchFromCbs.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-08-23T16:50:46Z",
+      "side": 1,
+      "message": "tab spacing should be removed across this file; replace with +2 spaces as per https://google.github.io/styleguide/javaguide.html",
+      "revId": "7b8d1fee74d98e64f554202ea49b892e1aa439ea",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0971bc20_206739fb",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/models/Configuration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-08-23T16:50:46Z",
+      "side": 1,
+      "message": "same comment as before - tab spacing should be removed and replaced with spaces",
+      "revId": "7b8d1fee74d98e64f554202ea49b892e1aa439ea",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b03cc38_d5678e2f",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/models/Configuration.java",
         "patchSetId": 1
