@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b03cc38_d5678e2f",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/models/Configuration.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-23T16:11:47Z",
+      "side": 1,
+      "message": "per the code standard, this should be camelCase, as in updateConfigFromPolicy",
+      "revId": "7b8d1fee74d98e64f554202ea49b892e1aa439ea",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
