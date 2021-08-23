@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [2.0.0]
 ### Changed
 * Updated PMSH app configuration, simplified existing config (DCAEGEN2-2814)
+* Created Schema definitions in swagger file according to the new structure (DCAEGEN2-2889)
 
 ## [1.3.2]
 ### Changed
