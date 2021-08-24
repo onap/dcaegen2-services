@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "665b10b6_5044bc75",
+        "filename": "components/pm-subscription-handler/tests/data/pm_subscription_event.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-24T17:25:44Z",
+      "side": 1,
+      "message": "see comment on ipv4 addresses",
+      "revId": "6dd41031de27d72b72ebc971c5e8599c75d5ca45",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "242cd288_d2c0f446",
+        "filename": "components/pm-subscription-handler/tests/test_network_function.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-24T17:25:44Z",
+      "side": 1,
+      "message": "see comment on ipv4 addresses",
+      "revId": "6dd41031de27d72b72ebc971c5e8599c75d5ca45",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e5e09f8_f9b6313c",
+        "filename": "components/pm-subscription-handler/tests/test_network_function.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-24T17:25:44Z",
+      "side": 1,
+      "message": "see comment on ipv4 addresses",
+      "revId": "6dd41031de27d72b72ebc971c5e8599c75d5ca45",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2d08be2_6874008f",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-24T17:25:44Z",
+      "side": 1,
+      "message": "see comment on ipv4 addresses",
+      "revId": "6dd41031de27d72b72ebc971c5e8599c75d5ca45",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67fc4149_04013a90",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-24T17:25:44Z",
+      "side": 1,
+      "message": "see comment on ipv4 addresses",
+      "revId": "6dd41031de27d72b72ebc971c5e8599c75d5ca45",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
