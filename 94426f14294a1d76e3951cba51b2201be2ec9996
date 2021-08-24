@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dece7551_d8658cfb",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-08-24T09:07:28Z",
+      "side": 1,
+      "message": "Thanks Tony, I have resolved it.",
+      "parentUuid": "c7dcfebe_ab3cee22",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf16278c_cb2646aa",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 5
@@ -89,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "d92c2178_07bdb08d",
+        "filename": "components/pm-subscription-handler/tests/test_network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-08-24T09:07:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12f60dcf_387fad5e",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70dd827d_28066247",
         "filename": "components/pm-subscription-handler/tests/test_network_function.py",
         "patchSetId": 5
@@ -103,6 +139,24 @@
       "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "670d5fb2_db77be21",
+        "filename": "components/pm-subscription-handler/tests/test_network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-08-24T09:07:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70dd827d_28066247",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -123,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "193c0155_0c48b747",
+        "filename": "components/pm-subscription-handler/tests/test_network_function.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-08-24T09:07:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a59b4931_948a8291",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c7f5d9fc_295b2716",
         "filename": "components/pm-subscription-handler/tests/test_subscription.py",
         "patchSetId": 5
@@ -140,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "c7d34264_1a6e0f30",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-08-24T09:07:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7f5d9fc_295b2716",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33863448_6fe0a96f",
         "filename": "components/pm-subscription-handler/tests/test_subscription.py",
         "patchSetId": 5
@@ -154,6 +244,24 @@
       "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "954b58f9_777bdfa0",
+        "filename": "components/pm-subscription-handler/tests/test_subscription.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-08-24T09:07:28Z",
+      "side": 1,
+      "message": "I have updated the IP address in all the test cases to capture valid values.",
+      "parentUuid": "33863448_6fe0a96f",
+      "revId": "94426f14294a1d76e3951cba51b2201be2ec9996",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
