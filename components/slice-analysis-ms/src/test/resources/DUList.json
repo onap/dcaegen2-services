@@ -1,0 +1,236 @@
+[
+  {
+    "idGNBDUFunction": "22",
+    "attributes": {
+      "gNBDUFunction-url": "10.165.160.13:6080",
+      "gNBIdLength": 23,
+      "gNBDUName": "gnbdu1",
+      "gNBDUId": 22,
+      "gNBId": 98763,
+      "RRMPolicyRatio": [
+        {
+          "id": "34",
+          "attributes": {
+            "resourceType": "sharing",
+            "rRMPolicyMemberList": [
+              {
+                "idx": 34,
+                "mcc": "211",
+                "mnc": "111",
+                "sNSSAI": 102
+              }
+            ],
+            "quotaType": "STRICT",
+            "rRMPolicyMaxRatio": 23,
+            "rRMPolicyMinRatio": 4,
+            "rRMPolicyDedicatedRatio": 5
+          }
+        }
+      ],
+      "userLabel": "user",
+      "sAP": [
+        {
+          "host": "localhost",
+          "port": 8080
+        }
+      ]
+    },
+    "NRCellDU": [
+      {
+        "idNRCellDU": "15299",
+        "attributes": {
+          "nRCellDU-url": "10.165.160.15:8083",
+          "cellLocalId": 15299,
+          "operationalState": "ENABLED",
+          "administrativeState": "UNLOCKED",
+          "cellState": "ACTIVE",
+          "RRMPolicyRatio": [
+            {
+              "id": "34",
+              "attributes": {
+                "resourceType": "sharing",
+                "rRMPolicyMemberList": [
+                  {
+                    "idx": 34,
+                    "mcc": "211",
+                    "mnc": "111",
+                    "sNSSAI": 102
+                  }
+                ],
+                "quotaType": "STRICT",
+                "rRMPolicyMaxRatio": 23,
+                "rRMPolicyMinRatio": 4,
+                "rRMPolicyDedicatedRatio": 5
+              }
+            }
+          ],
+          "pLMNInfoList": [
+            {
+              "mcc": "211",
+              "mnc": "211",
+              "sNSSAIList": [
+                {
+                  "sNssai": "111-1111",
+                  "status": "active",
+                  "configData": [
+                    {
+                      "configParameter": "maxNumberOfConns",
+                      "configValue": 20
+                    },
+                    {
+                      "configParameter": "dLThptPerSlice",
+                      "configValue": 20
+                    },
+                    {
+                      "configParameter": "uLThptPerSlice",
+                      "configValue": 20
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "nRPCI": 11,
+          "nRTAC": 14777,
+          "arfcnDL": 1,
+          "arfcnUL": 2,
+          "arfcnSUL": 3,
+          "bSChannelBwDL": 4,
+          "bSChannelBwUL": 5,
+          "bSChannelBwSUL": 6,
+          "ssbFrequency": 7,
+          "ssbSubCarrierSpacing": 15,
+          "ssbOffset": 9,
+          "ssbDuration": 4,
+          "nRSectorCarrierRef": [
+            "OU=Sales"
+          ],
+          "userLabel": "user",
+          "sAP": [
+            {
+              "host": "localhost",
+              "port": 8080
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "idGNBDUFunction": "23",
+    "attributes": {
+      "gNBDUFunction-url": "10.165.160.13:6080",
+      "gNBIdLength": 23,
+      "gNBDUName": "gnbdu1",
+      "gNBDUId": 23,
+      "gNBId": 98763,
+      "RRMPolicyRatio": [
+        {
+          "id": "34",
+          "attributes": {
+            "resourceType": "sharing",
+            "rRMPolicyMemberList": [
+              {
+                "idx": 34,
+                "mcc": "211",
+                "mnc": "111",
+                "sNSSAI": 102
+              }
+            ],
+            "quotaType": "STRICT",
+            "rRMPolicyMaxRatio": 23,
+            "rRMPolicyMinRatio": 4,
+            "rRMPolicyDedicatedRatio": 5
+          }
+        }
+      ],
+      "userLabel": "user",
+      "sAP": [
+        {
+          "host": "localhost",
+          "port": 8080
+        }
+      ]
+    },
+    "NRCellDU": [
+      {
+        "idNRCellDU": "15299",
+        "attributes": {
+          "nRCellDU-url": "10.165.160.15:8083",
+          "cellLocalId": 15299,
+          "operationalState": "ENABLED",
+          "administrativeState": "UNLOCKED",
+          "cellState": "ACTIVE",
+          "RRMPolicyRatio": [
+            {
+              "id": "34",
+              "attributes": {
+                "resourceType": "sharing",
+                "rRMPolicyMemberList": [
+                  {
+                    "idx": 34,
+                    "mcc": "211",
+                    "mnc": "111",
+                    "sNSSAI": 102
+                  }
+                ],
+                "quotaType": "STRICT",
+                "rRMPolicyMaxRatio": 23,
+                "rRMPolicyMinRatio": 4,
+                "rRMPolicyDedicatedRatio": 5
+              }
+            }
+          ],
+          "pLMNInfoList": [
+            {
+              "mcc": "211",
+              "mnc": "211",
+              "sNSSAIList": [
+                {
+                  "sNssai": "111-1111",
+                  "status": "active",
+                  "configData": [
+                    {
+                      "configParameter": "maxNumberOfConns",
+                      "configValue": 20
+                    },
+                    {
+                      "configParameter": "dLThptPerSlice",
+                      "configValue": 20
+                    },
+                    {
+                      "configParameter": "uLThptPerSlice",
+                      "configValue": 20
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "nRPCI": 11,
+          "nRTAC": 14777,
+          "arfcnDL": 1,
+          "arfcnUL": 2,
+          "arfcnSUL": 3,
+          "bSChannelBwDL": 4,
+          "bSChannelBwUL": 5,
+          "bSChannelBwSUL": 6,
+          "ssbFrequency": 7,
+          "ssbSubCarrierSpacing": 15,
+          "ssbOffset": 9,
+          "ssbDuration": 4,
+          "nRSectorCarrierRef": [
+            "OU=Sales"
+          ],
+          "userLabel": "user",
+          "sAP": [
+            {
+              "host": "localhost",
+              "port": 8080
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
