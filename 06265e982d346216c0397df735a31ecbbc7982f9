@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d689fec_a3c20611",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/CpsService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-24T17:14:58Z",
+      "side": 1,
+      "message": "question: can snssai\u0027s value ever contain double quotes? If so, you may wish to use JSONObject.quote(). It may be safer to just use it. (Note: quote() will add the surrounding double quotes as well.)",
+      "revId": "06265e982d346216c0397df735a31ecbbc7982f9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "276e6bb0_5bb362c8",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/CpsService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-24T17:14:58Z",
+      "side": 1,
+      "message": "see the above question",
+      "revId": "06265e982d346216c0397df735a31ecbbc7982f9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d412482e_fff29974",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConsumerThread.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-24T17:14:58Z",
+      "side": 1,
+      "message": "umm, isConfigDbEnabled IS a boolean. So make this\n\nif (isConfigDbEnabled)",
+      "revId": "06265e982d346216c0397df735a31ecbbc7982f9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
