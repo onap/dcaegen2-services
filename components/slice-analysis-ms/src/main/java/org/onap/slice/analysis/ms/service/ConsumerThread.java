@@ -22,7 +22,9 @@
 package org.onap.slice.analysis.ms.service;
 
 import java.util.List;
+import java.util.Objects;
 
+import org.onap.slice.analysis.ms.configdb.CpsInterface;
 import org.onap.slice.analysis.ms.configdb.IConfigDbService;
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.models.SubCounter;
@@ -38,6 +40,7 @@ public class ConsumerThread extends Thread {
 	private PmDataQueue pmDataQueue;
 	private IConfigDbService configDbService;
 	private SnssaiSamplesProcessor snssaiSamplesProcessor;
+	private CpsInterface cpsInterface;
 	private long initialDelaySec; 
 	private int samples;
 
@@ -50,6 +53,7 @@ public class ConsumerThread extends Thread {
 		this.configDbService = BeanUtil.getBean(IConfigDbService.class);
 		this.initialDelaySec = Configuration.getInstance().getInitialDelaySeconds();
 		this.samples = Configuration.getInstance().getSamples();
+		this.cpsInterface = BeanUtil.getBean(CpsInterface.class);
 	}
 
 	/**
@@ -57,6 +61,8 @@ public class ConsumerThread extends Thread {
 	 */
 	@Override
 	public void run() {    
+		Boolean isConfigDbEnabled = (Objects.isNull(Configuration.getInstance().getConfigDbEnabled())) ? true
+							: Configuration.getInstance().getConfigDbEnabled();
 		boolean done = false;
 		boolean result = false;
 		String snssai = "";
@@ -69,7 +75,12 @@ public class ConsumerThread extends Thread {
 				if (!snssai.equals("")) {
 					log.info("Consumer thread processing data for s-nssai {}",snssai);    
 					try {
-						nfs = configDbService.fetchNetworkFunctionsOfSnssai(snssai);
+						if (Boolean.TRUE.equals(isConfigDbEnabled)) {
+							nfs = configDbService.fetchNetworkFunctionsOfSnssai(snssai);
+						}
+						else {
+							nfs = cpsInterface.fetchNetworkFunctionsOfSnssai(snssai);
+						}
 					}
 					catch(Exception e) {
 						pmDataQueue.putSnssaiToQueue(snssai);
