@@ -19,6 +19,29 @@
     },
     {
       "key": {
+        "uuid": "deff8888_8e68e0cd",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/CpsService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-08-24T17:25:30Z",
+      "side": 1,
+      "message": "why is this value hardcoded?",
+      "range": {
+        "startLine": 86,
+        "startChar": 15,
+        "endLine": 86,
+        "endChar": 23
+      },
+      "revId": "06265e982d346216c0397df735a31ecbbc7982f9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "276e6bb0_5bb362c8",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/CpsService.java",
         "patchSetId": 1
