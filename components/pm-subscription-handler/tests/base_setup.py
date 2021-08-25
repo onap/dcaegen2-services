@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020 Nordix Foundation.
+#  Copyright (C) 2020-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ from unittest.mock import patch, MagicMock
 from mod import create_app, db
 from mod.network_function import NetworkFunctionFilter
 from mod.pmsh_utils import AppConfig
+from mod.pmsh_config import AppConfig as NewAppConfig
 
 
 def get_pmsh_config(file_path='data/cbs_data_1.json'):
@@ -50,6 +51,10 @@ class BaseClassSetup(TestCase):
         db.create_all()
         self.app_conf = AppConfig()
         self.app_conf.nf_filter = NetworkFunctionFilter(**self.app_conf.subscription.nfFilter)
+
+    @patch('mod.pmsh_config.AppConfig._get_config', MagicMock(return_value=get_pmsh_config()))
+    def setUpAppConf(self):
+        self.pmsh_app_conf = NewAppConfig()
 
     def tearDown(self):
         db.drop_all()

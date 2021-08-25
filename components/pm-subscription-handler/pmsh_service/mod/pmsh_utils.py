@@ -18,23 +18,25 @@
 import json
 import os
 import uuid
+from functools import wraps
 from json import JSONDecodeError
 from os import getenv
 from threading import Timer
 
 import requests
+from jsonschema import validate, ValidationError
 from onap_dcae_cbs_docker_client.client import get_all
 from onaplogging.mdcContext import MDC
 from requests.auth import HTTPBasicAuth
 from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type
-from jsonschema import validate, ValidationError
 
 from mod import logger
 from mod.subscription import Subscription
 
 
-def mdc_handler(function):
-    def decorator(*args, **kwargs):
+def mdc_handler(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
         request_id = str(uuid.uuid1())
         invocation_id = str(uuid.uuid1())
         MDC.put('ServiceName', getenv('HOSTNAME'))
@@ -43,23 +45,9 @@ def mdc_handler(function):
 
         kwargs['request_id'] = request_id
         kwargs['invocation_id'] = invocation_id
-        return function(*args, **kwargs)
+        return func(*args, **kwargs)
 
-    return decorator
-
-
-class MySingleton(object):
-    instances = {}
-
-    def __new__(cls, clz=None):
-        if clz is None:
-            if cls.__name__ not in MySingleton.instances:
-                MySingleton.instances[cls.__name__] = \
-                    object.__new__(cls)
-            return MySingleton.instances[cls.__name__]
-        MySingleton.instances[clz.__name__] = clz()
-        MySingleton.first = clz
-        return type(clz.__name__, (MySingleton,), dict(clz.__dict__))
+    return wrapper
 
 
 def _load_sub_schema_from_file():

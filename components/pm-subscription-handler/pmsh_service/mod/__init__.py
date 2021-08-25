@@ -17,8 +17,8 @@
 # ============LICENSE_END=====================================================
 import logging as logging
 import os
-import ssl
 import pathlib
+import ssl
 from urllib.parse import quote
 
 from connexion import App
@@ -46,9 +46,9 @@ def launch_api_server(app_config):
     if app_config.enable_tls:
         logger.info('Launching secure http API server')
         ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-        ssl_ctx.load_cert_chain(app_config.cert_params[0], app_config.cert_params[1])
-        connex_app.run(port=os.environ.get('PMSH_API_PORT', '8443'),
-                       ssl_options=ssl_ctx, server="tornado")
+        ssl_ctx.load_cert_chain(app_config.cert_path, app_config.key_path)
+        connex_app.run(port=os.environ.get('PMSH_API_PORT', '8443'), ssl_options=ssl_ctx,
+                       server="tornado")
     else:
         logger.info('Launching unsecure http API server')
         connex_app.run(port=os.environ.get('PMSH_API_PORT', '8443'), server="tornado")
