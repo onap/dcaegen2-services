@@ -20,6 +20,7 @@ from signal import signal, SIGTERM
 
 from mod import db, create_app, launch_api_server, logger
 from mod.exit_handler import ExitHandler
+from mod.pmsh_config import AppConfig as NewAppConfig
 from mod.pmsh_utils import AppConfig, PeriodicTask
 from mod.policy_response_handler import PolicyResponseHandler
 from mod.subscription_handler import SubscriptionHandler
@@ -32,6 +33,7 @@ def main():
             app.app_context().push()
             db.create_all(app=app)
             app_conf = AppConfig()
+            pmsh_app_conf = NewAppConfig()
             policy_mr_pub = app_conf.get_mr_pub('policy_pm_publisher')
             policy_mr_sub = app_conf.get_mr_sub('policy_pm_subscriber')
             aai_event_mr_sub = app_conf.get_mr_sub('aai_subscriber')
@@ -54,7 +56,7 @@ def main():
 
         signal(SIGTERM, ExitHandler(periodic_tasks=periodic_tasks,
                                     app_conf=app_conf, subscription_handler=subscription_handler))
-        launch_api_server(app_conf)
+        launch_api_server(pmsh_app_conf)
 
     except Exception as e:
         logger.error(f'Failed to initialise PMSH: {e}', exc_info=True)
