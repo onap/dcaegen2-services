@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e08c40b9_fbcc5c65",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/CpsService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-26T14:27:03Z",
+      "side": 1,
+      "message": "should this be moved outside of the for(k) loop and for(j), below setting pLMNInfoList above?",
+      "revId": "05b4a01f22b3b0fccf3026a9c0d1b5f0f21c3d23",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7271f109_1d505410",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/CpsService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-26T14:27:03Z",
+      "side": 1,
+      "message": "should this be moved outside of this loop to after GNBDUFunctionArray gets set?",
+      "revId": "05b4a01f22b3b0fccf3026a9c0d1b5f0f21c3d23",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
