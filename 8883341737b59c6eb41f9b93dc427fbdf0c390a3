@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03fc5d3e_0061d761",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/controller/ConfigFetchFromCbs.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-08-26T16:49:59Z",
+      "side": 1,
+      "message": "replace tab with spaces (see https://google.github.io/styleguide/javaguide.html#s4.2-block-indentation)",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 80
+      },
+      "revId": "8883341737b59c6eb41f9b93dc427fbdf0c390a3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78d70f5b_e33c52e7",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/models/Configuration.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-08-26T16:49:59Z",
+      "side": 1,
+      "message": "same comment as earlier; remove tabs added across this file",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 3
+      },
+      "revId": "8883341737b59c6eb41f9b93dc427fbdf0c390a3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
