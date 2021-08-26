@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7fa59971_e581b15d",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/CpsService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 7656
+      },
+      "writtenOn": "2021-08-26T17:07:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e08c40b9_fbcc5c65",
+      "revId": "05b4a01f22b3b0fccf3026a9c0d1b5f0f21c3d23",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7271f109_1d505410",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/CpsService.java",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "05b4a01f22b3b0fccf3026a9c0d1b5f0f21c3d23",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75063f20_7acb2692",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/CpsService.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 7656
+      },
+      "writtenOn": "2021-08-26T17:07:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7271f109_1d505410",
+      "revId": "05b4a01f22b3b0fccf3026a9c0d1b5f0f21c3d23",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
