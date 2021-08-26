@@ -133,6 +133,24 @@
       "revId": "06265e982d346216c0397df735a31ecbbc7982f9",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21b65606_33e32114",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConsumerThread.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7656
+      },
+      "writtenOn": "2021-08-26T02:54:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d412482e_fff29974",
+      "revId": "06265e982d346216c0397df735a31ecbbc7982f9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
