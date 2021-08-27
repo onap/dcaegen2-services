@@ -22,6 +22,30 @@
       "revId": "87733065924f61c763c9542c564c451f153d6ba2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc5a3ec1_e557e3df",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 7656
+      },
+      "writtenOn": "2021-08-27T16:41:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34d5a51d_813877a4",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "87733065924f61c763c9542c564c451f153d6ba2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
