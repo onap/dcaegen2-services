@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34d5a51d_813877a4",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-08-27T16:01:16Z",
+      "side": 1,
+      "message": "duplicate version entry not required - this line can be removed (date should reflect the most recent update on the specified version)",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "87733065924f61c763c9542c564c451f153d6ba2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
