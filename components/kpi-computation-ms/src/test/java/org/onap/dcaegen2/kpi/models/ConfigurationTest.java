@@ -30,10 +30,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+import org.onap.dcaegen2.kpi.computation.FileUtils;
 
 
 public class ConfigurationTest {
     Configuration configuration = Configuration.getInstance();
+    private static final String KPI_CONFIG_FILE = "kpi/kpi_config.json";
 
     @Test
     public void configurationTest() {
@@ -75,5 +77,12 @@ public class ConfigurationTest {
         assertEquals(true, configuration.isEnablessl());        
         assertEquals("kpi config", configuration.getKpiConfig());    
         assertEquals(10, configuration.getCbsPollingInterval());    
+    }
+    
+    @Test
+    public void updateConfigFromPolicyTest() {
+    	String strKpiConfig = FileUtils.getFileContents(KPI_CONFIG_FILE);
+    	configuration.setKpiConfig(strKpiConfig);
+    	assertEquals(strKpiConfig, configuration.getKpiConfig());
     }
 }

@@ -97,6 +97,8 @@ public class ConfigFetchFromCbs implements Runnable {
                     if (jsonObject.getAsJsonObject("policies") != null) {
                         JsonObject policyJson = jsonObject.getAsJsonObject("policies").getAsJsonArray("items").get(0)
                                 .getAsJsonObject().getAsJsonObject("config");
+                        log.info("policy json {}", policyJson);
+                        Configuration.getInstance().updateConfigFromPolicy(policyJson);
                         Map<String, Object> policy = new Gson().fromJson(policyJson, mapType);
                         configPolicy.setConfig(policy);
                         log.info("Config policy {}", configPolicy);
