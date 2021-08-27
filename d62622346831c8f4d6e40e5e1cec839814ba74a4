@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "706b307b_bef50303",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-27T19:25:50Z",
+      "side": 1,
+      "message": "please switch the date to YYYY/MM/DD format so that it is unambiguous",
+      "revId": "d62622346831c8f4d6e40e5e1cec839814ba74a4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
