@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ed5d77b_e29defd0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-08-30T17:40:53Z",
+      "side": 1,
+      "message": "I think if we are gonna move away from MR_Pub/Sub objects, then we should move all MR calls to use this new module.\nThe aai_event_handler and policy_response_handler will still need to run periodically. Can they share the same Singleton without conflict?",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 18
+      },
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaccc314_4db5009c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-08-30T17:40:53Z",
+      "side": 1,
+      "message": "We should increase this to 5000",
+      "range": {
+        "startLine": 114,
+        "startChar": 91,
+        "endLine": 114,
+        "endChar": 95
+      },
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92897613_7ec22a89",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-08-30T17:40:53Z",
+      "side": 1,
+      "message": "If most of this module is being scrapped, then it needs to be removed.",
+      "range": {
+        "startLine": 53,
+        "startChar": 14,
+        "endLine": 53,
+        "endChar": 33
+      },
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be26634d_05195cf0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-08-30T17:40:53Z",
+      "side": 1,
+      "message": "How is this going to be handled going forward? In the pmsh_config module?",
+      "range": {
+        "startLine": 239,
+        "startChar": 14,
+        "endLine": 239,
+        "endChar": 35
+      },
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffb1e635_dd7bf794",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-08-30T17:40:53Z",
+      "side": 1,
+      "message": "I think we should do a hard cut over now.\nRemove the sub handler thread below.\nMove the aai_event thread up here.\npass the new app_config to them and call your simplified methods towards the topics.",
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
