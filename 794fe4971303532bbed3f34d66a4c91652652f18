@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "33201692_06111191",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-30T17:51:51Z",
+      "side": 1,
+      "message": "don\u0027t forget to add a module docstring on new modules",
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "976897da_ff879ca7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-30T17:51:51Z",
+      "side": 1,
+      "message": "don\u0027t forget to add class docstrings",
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2640a283_7b577423",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-08-30T17:51:51Z",
+      "side": 1,
+      "message": "don\u0027t forget to add class docstrings",
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0ed5d77b_e29defd0",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
         "patchSetId": 1
