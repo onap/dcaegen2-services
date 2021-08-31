@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "18d44f5f_9ec20d2f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-08-31T11:36:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33201692_06111191",
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "976897da_ff879ca7",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "d305ee37_b4a2f953",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-08-31T11:36:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "976897da_ff879ca7",
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2640a283_7b577423",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "71c4417a_b418b18f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-08-31T11:36:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2640a283_7b577423",
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "53dc1339_229f61d0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-08-31T11:36:05Z",
+      "side": 1,
+      "message": "Mainly this module will be used in new Create API code, Once the create code is merged will be updating leftover references.\nYes, I dont see any issue in aai_event_handler and policy_response_handler using same AppConfig Singleton Object.",
+      "parentUuid": "0ed5d77b_e29defd0",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 18
+      },
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eaccc314_4db5009c",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
         "patchSetId": 1
@@ -96,6 +174,30 @@
       "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d4a0231b_0fa8f89a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-08-31T11:36:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaccc314_4db5009c",
+      "range": {
+        "startLine": 114,
+        "startChar": 91,
+        "endLine": 114,
+        "endChar": 95
+      },
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "63720812_6bea4b19",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-08-31T11:36:05Z",
+      "side": 1,
+      "message": "Yes, it will be removed after create api code is merged.\nAt present entire application is using existing AppConfig if we go ahead and remove few of the methods then old code needs an update and also am uncertian about create api code if its using existing methods by updating them or new methods of existing modules.",
+      "parentUuid": "92897613_7ec22a89",
+      "range": {
+        "startLine": 53,
+        "startChar": 14,
+        "endLine": 53,
+        "endChar": 33
+      },
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be26634d_05195cf0",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 1
@@ -145,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "f91b88e1_2366abf5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-08-31T11:36:05Z",
+      "side": 1,
+      "message": "This should be taken care by Create API code, creating/updatig subscription_event must not be included in pmsh_config module.",
+      "parentUuid": "be26634d_05195cf0",
+      "range": {
+        "startLine": 239,
+        "startChar": 14,
+        "endLine": 239,
+        "endChar": 35
+      },
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ffb1e635_dd7bf794",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 1
@@ -159,6 +309,24 @@
       "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "263666d3_cbff4d5a",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-08-31T11:36:05Z",
+      "side": 1,
+      "message": "Yes, we need to do hard cutover but should be only after Create API changes are merged.",
+      "parentUuid": "ffb1e635_dd7bf794",
+      "revId": "794fe4971303532bbed3f34d66a4c91652652f18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
