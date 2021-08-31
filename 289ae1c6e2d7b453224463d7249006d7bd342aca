@@ -16,6 +16,24 @@
       "revId": "289ae1c6e2d7b453224463d7249006d7bd342aca",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b83e1a5b_ba9db4ae",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-08-31T16:34:09Z",
+      "side": 1,
+      "message": "This PR is final and redy for review, I have added comment to be addressed in subsequent PR\u0027s.\nIf you Notice JIRA (https://jira.onap.org/browse/DCAEGEN2-2814) for this PR contains two parts, 1st part is addressed in here and there will be one more PR coming later for code cleanup/refactoring there will be taking care of added comment.",
+      "parentUuid": "6619039b_36f1adb7",
+      "revId": "289ae1c6e2d7b453224463d7249006d7bd342aca",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
