@@ -89,6 +89,31 @@ paths:
         503:
           description: the pmsh service is unavailable
 
+  /subscription:
+    post:
+      tags:
+        - "Subscription"
+      description: >-
+        Create a PM Subscription
+      operationId: mod.api.controller.post_subscription
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/subscription"
+      responses:
+        201:
+          description: successfully created PM Subscription
+        409:
+          description: Duplicate data
+        400:
+          description: Invalid input
+
 definitions:
   subscription:
     type: object
@@ -119,29 +144,29 @@ definitions:
 
   nfFilter:
     type: object
-    minProperties: 1
     additionalProperties: false
     properties:
       nfNames:
         type: array
-        minItems: 1
         items:
           type: string
       modelInvariantIDs:
         type: array
-        minItems: 1
         items:
           type: string
       modelVersionIDs:
         type: array
-        minItems: 1
         items:
           type: string
       modelNames:
         type: array
-        minItems: 1
         items:
           type: string
+    required:
+      - nfNames
+      - modelInvariantIDs
+      - modelVersionIDs
+      - modelNames
 
   measurementGroup:
     type: object

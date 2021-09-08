@@ -78,7 +78,7 @@ class SubscriptionHandler:
                                                      self.app_conf.subscription.fileBasedGP,
                                                      self.app_conf.subscription.fileLocation,
                                                      self.app_conf.subscription.measurementGroups)
-        nfs_in_aai = aai_client.get_pmsh_nfs_from_aai(self.app_conf)
+        nfs_in_aai = aai_client.get_pmsh_nfs_from_aai(self.app_conf, self.app_conf.nf_filter)
         self.app_conf.subscription.create_subscription_on_nfs(nfs_in_aai, self.mr_pub,
                                                               self.app_conf)
         self.app_conf.subscription.update_subscription_status()

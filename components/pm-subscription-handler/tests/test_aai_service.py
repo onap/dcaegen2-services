@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ class AaiClientTestCase(BaseClassSetup):
         mock_get_session.return_value.status_code = 200
         mock_get_session.return_value.text = self.good_model_info
         mock_get_sdnc_params.return_value = True
-        xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf)
+        xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf, self.app_conf.nf_filter)
         self.assertEqual(self.app_conf.subscription.subscriptionName, 'ExtraPM-All-gNB-R2B')
         self.assertEqual(self.app_conf.subscription.administrativeState, 'UNLOCKED')
         self.assertEqual(len(xnfs), 3)
@@ -67,7 +67,7 @@ class AaiClientTestCase(BaseClassSetup):
         mock_session.return_value.status_code = 404
         with mock.patch('mod.aai_client._get_all_aai_nf_data', return_value=None):
             with self.assertRaises(RuntimeError):
-                aai_client.get_pmsh_nfs_from_aai(self.app_conf)
+                aai_client.get_pmsh_nfs_from_aai(self.app_conf, self.app_conf.nf_filter)
 
     @responses.activate
     def test_aai_client_get_all_aai_xnf_data_not_found(self):
