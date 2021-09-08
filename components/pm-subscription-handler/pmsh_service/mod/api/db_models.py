@@ -179,9 +179,11 @@ class NetworkFunctionFilterModel(db.Model):
                f'model_version_ids: {self.model_version_ids}, model_names: {self.model_names}'
 
     def serialize(self):
-        return {'subscription_name': self.subscription_name, 'nf_names': self.nf_names,
-                'model_invariant_ids': self.model_invariant_ids,
-                'model_version_ids': self.model_version_ids, 'model_names': self.model_names}
+        return {'subscriptionName': self.subscription_name,
+                'nfNames': convert_db_string_to_list(self.nf_names),
+                'modelInvariantIDs': convert_db_string_to_list(self.model_invariant_ids),
+                'modelVersionIDs': convert_db_string_to_list(self.model_version_ids),
+                'modelNames': convert_db_string_to_list(self.model_names)}
 
 
 class MeasurementGroupModel(db.Model):
@@ -256,3 +258,7 @@ class NfMeasureGroupRelationalModel(db.Model):
     def __repr__(self):
         return f'measurement_grp_name: {self.measurement_grp_name}, ' \
             f'nf_name: {self.nf_name}, nf_measure_grp_status: {self.nf_measure_grp_status}'
+
+
+def convert_db_string_to_list(db_string):
+    return None if not db_string else db_string.strip('{}').split(',')
