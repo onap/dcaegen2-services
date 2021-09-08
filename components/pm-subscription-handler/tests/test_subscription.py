@@ -48,7 +48,7 @@ class SubscriptionTest(BaseClassSetup):
         self.mock_mr_sub = Mock()
         self.mock_mr_pub = Mock()
         self.app_conf.subscription.create()
-        self.xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf)
+        self.xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf, self.app_conf.nf_filter)
         self.sub_model = self.app_conf.subscription.get()
 
     def tearDown(self):

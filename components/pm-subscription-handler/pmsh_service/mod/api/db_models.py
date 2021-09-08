@@ -179,9 +179,9 @@ class NetworkFunctionFilterModel(db.Model):
                f'model_version_ids: {self.model_version_ids}, model_names: {self.model_names}'
 
     def serialize(self):
-        return {'subscription_name': self.subscription_name, 'nf_names': self.nf_names,
-                'model_invariant_ids': self.model_invariant_ids,
-                'model_version_ids': self.model_version_ids, 'model_names': self.model_names}
+        return {'subscriptionName': self.subscription_name, 'nfNames': self.nf_names,
+                'modelInvariantIDs': self.model_invariant_ids,
+                'modelVersionIDs': self.model_version_ids, 'modelNames': self.model_names}
 
 
 class MeasurementGroupModel(db.Model):

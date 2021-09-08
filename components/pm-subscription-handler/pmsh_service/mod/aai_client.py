@@ -17,22 +17,20 @@
 # ============LICENSE_END=====================================================
 import json
 from os import environ
-
 import requests
 from requests.auth import HTTPBasicAuth
-
 import mod.network_function
 import mod.pmsh_utils
 from mod import logger
 
 
-def get_pmsh_nfs_from_aai(app_conf):
+def get_pmsh_nfs_from_aai(app_conf, nf_filter):
     """
     Returns the Network Functions from AAI related to the Subscription.
 
     Args:
         app_conf (AppConfig): the AppConfig object.
-
+        nf_filter (NetworkFunctionFilter): the filter to apply on nf from aai
     Returns:
         NetworkFunctions (list): list of NetworkFunctions.
 
@@ -41,7 +39,7 @@ def get_pmsh_nfs_from_aai(app_conf):
     """
     aai_nf_data = _get_all_aai_nf_data(app_conf)
     if aai_nf_data:
-        nfs = _filter_nf_data(aai_nf_data, app_conf)
+        nfs = _filter_nf_data(aai_nf_data, app_conf, nf_filter)
     else:
         raise RuntimeError('Failed to get data from AAI')
     return nfs
@@ -114,14 +112,14 @@ def _get_aai_request_headers(**kwargs):
             'RequestID': kwargs['request_id']}
 
 
-def _filter_nf_data(nf_data, app_conf):
+def _filter_nf_data(nf_data, app_conf, nf_filter):
     """
     Returns a list of filtered NetworkFunctions using the nf_filter.
 
     Args:
         nf_data (dict): the nf json data from AAI.
         app_conf (AppConfig): the AppConfig object.
-
+        nf_filter (NetworkFunctionFilter): filter data to apply on network functions
     Returns:
         NetworkFunction (list): a list of filtered NetworkFunction Objects.
 
@@ -142,7 +140,7 @@ def _filter_nf_data(nf_data, app_conf):
                 model_version_id=nf['properties'].get('model-version-id'))
             if not new_nf.set_nf_model_params(app_conf):
                 continue
-            if app_conf.nf_filter.is_nf_in_filter(new_nf):
+            if nf_filter.is_nf_in_filter(new_nf):
                 nf_list.append(new_nf)
     except KeyError as e:
         logger.error(f'Failed to parse AAI data: {e}', exc_info=True)
