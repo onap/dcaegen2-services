@@ -19,7 +19,7 @@
 import re
 
 from mod import logger, db
-from mod.api.db_models import NetworkFunctionModel
+from mod.api.db_models import NetworkFunctionModel, NetworkFunctionFilterModel
 
 
 class NetworkFunction:
@@ -166,6 +166,20 @@ class NetworkFunctionFilter:
         self.model_version_ids = kwargs.get('modelVersionIDs')
         self.model_names = kwargs.get('modelNames')
         self.regex_matcher = re.compile('|'.join(raw_regex for raw_regex in self.nf_names))
+
+    @staticmethod
+    def get_network_function_filter(sub_name):
+        """Gets the network function filter from the Database
+
+        Args:
+            sub_name (string): The name of the subscription
+
+        Returns:
+            NetworkFunctionFilter: Returns network function filter for sub_name
+        """
+        nf_filter = NetworkFunctionFilterModel.query.filter(
+            NetworkFunctionFilterModel.subscription_name == sub_name).one_or_none()
+        return NetworkFunctionFilter(**nf_filter.serialize())
 
     def is_nf_in_filter(self, nf):
         """Match the nf fields against values in Subscription.nfFilter

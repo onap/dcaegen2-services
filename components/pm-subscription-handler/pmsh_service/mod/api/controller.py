@@ -17,6 +17,11 @@
 # ============LICENSE_END=====================================================
 
 from mod.subscription import Subscription
+from http import HTTPStatus
+from mod import logger
+from mod.api.services import subscription_service
+from connexion import NoContent
+from mod.api.custom_exception import InvalidDataException, DuplicateDataException
 
 
 def status():
@@ -40,3 +45,34 @@ def get_all_sub_to_nf_relations():
     """
     subs_dict = [s.serialize() for s in Subscription.get_all()]
     return subs_dict
+
+
+def post_subscription(body):
+    """
+    Creates a subscription
+
+    Args:
+        body (dict): subscription request body to save.
+
+    Returns:
+        Success : NoContent, 201
+        Invalid Data : Invalid message, 400
+        Duplicate Data : Duplicate field detail, 409
+
+    Raises:
+        Error: If anything fails in the server.
+    """
+    response = NoContent, HTTPStatus.CREATED.value
+    try:
+        subscription_service.create_subscription(body['subscription'])
+    except DuplicateDataException as e:
+        logger.error(f'Failed to create subscription for '
+                     f'{body["subscription"]["subscriptionName"]} due to duplicate data: {e}',
+                     exc_info=True)
+        response = e.duplicate_field_info, HTTPStatus.CONFLICT.value
+    except InvalidDataException as e:
+        logger.error(f'Failed to create subscription for '
+                     f'{body["subscription"]["subscriptionName"]} due to invalid data: {e}',
+                     exc_info=True)
+        response = e.invalid_message, HTTPStatus.BAD_REQUEST.value
+    return response
