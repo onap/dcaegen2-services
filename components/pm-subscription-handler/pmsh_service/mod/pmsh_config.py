@@ -69,6 +69,9 @@ class AppConfig(metaclass=MetaSingleton):
         self.streams_subscribes = app_config['config'].get('streams_subscribes')
         # TODO: aaf_creds variable should be removed on code cleanup
         self.aaf_creds = {'aaf_id': self.aaf_id, 'aaf_pass': self.aaf_pass}
+        # TODO: changes under discussion once resolve is confirmed will be removed
+        self.operational_policy_name = 'pmsh-operational-policy'
+        self.control_loop_name = 'pmsh-control-loop'
 
     @staticmethod
     def get_instance():
