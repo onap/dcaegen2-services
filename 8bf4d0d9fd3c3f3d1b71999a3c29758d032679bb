@@ -22,6 +22,30 @@
       "revId": "8bf4d0d9fd3c3f3d1b71999a3c29758d032679bb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53fd32d2_3d956ab5",
+        "filename": "releases/slice-analysis-ms-1.0.6-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-09-09T14:02:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dc8819b_99f41cc2",
+      "range": {
+        "startLine": 10,
+        "startChar": 10,
+        "endLine": 10,
+        "endChar": 33
+      },
+      "revId": "8bf4d0d9fd3c3f3d1b71999a3c29758d032679bb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
