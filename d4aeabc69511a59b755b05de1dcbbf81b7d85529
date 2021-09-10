@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54bce6a6_e64ca387",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-09-10T13:54:15Z",
+      "side": 1,
+      "message": "Do include a brief discription on what change is being introduced with this version. Not blocking merge this time, but kindly include them going forward",
+      "revId": "d4aeabc69511a59b755b05de1dcbbf81b7d85529",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
