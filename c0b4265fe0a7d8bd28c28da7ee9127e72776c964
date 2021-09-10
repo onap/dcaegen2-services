@@ -46,6 +46,30 @@
       "revId": "c0b4265fe0a7d8bd28c28da7ee9127e72776c964",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0f10480_711f3efc",
+        "filename": "releases/pmsh-1.3.2-container.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-09-10T13:34:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c0a97ae_8d8cf25e",
+      "range": {
+        "startLine": 4,
+        "startChar": 53,
+        "endLine": 4,
+        "endChar": 56
+      },
+      "revId": "c0b4265fe0a7d8bd28c28da7ee9127e72776c964",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
