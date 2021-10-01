@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5461a169_03f5f2ac",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-10-01T14:20:03Z",
+      "side": 1,
+      "message": "Hi Fiachra, as discussed will be removing pmsh_config.py and merging code in pmsh_util.py in future.",
+      "parentUuid": "35be4775_009fb0ef",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 24
+      },
+      "revId": "87bdcaad5fd6386c65bdf689c5b067f01ddd4180",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6bc31ae_ed732d38",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "87bdcaad5fd6386c65bdf689c5b067f01ddd4180",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8c4f409_0aebb598",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-10-01T14:20:03Z",
+      "side": 1,
+      "message": "Tried but it reduced code coverage, most of the redundant code will be removed in Update API changes.",
+      "parentUuid": "e6bc31ae_ed732d38",
+      "range": {
+        "startLine": 189,
+        "startChar": 6,
+        "endLine": 189,
+        "endChar": 21
+      },
+      "revId": "87bdcaad5fd6386c65bdf689c5b067f01ddd4180",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
