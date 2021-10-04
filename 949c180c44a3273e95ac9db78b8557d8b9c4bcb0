@@ -22,6 +22,30 @@
       "revId": "949c180c44a3273e95ac9db78b8557d8b9c4bcb0",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b01cdc2a_7d5a42dc",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-10-04T11:06:54Z",
+      "side": 1,
+      "message": "Updated the attribute names as discussed.",
+      "parentUuid": "a20323ee_fa93d5af",
+      "range": {
+        "startLine": 114,
+        "startChar": 12,
+        "endLine": 114,
+        "endChar": 22
+      },
+      "revId": "949c180c44a3273e95ac9db78b8557d8b9c4bcb0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
