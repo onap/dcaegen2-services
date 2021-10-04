@@ -22,6 +22,30 @@
       "revId": "053579b1a3a9d71fdc8fde5ed67600b453de083c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a73a785_80f31da8",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 6004
+      },
+      "writtenOn": "2021-10-04T16:34:56Z",
+      "side": 1,
+      "message": "Hi Vijay,\nMajor version change is needed, starting this PR and subsequent changes coming in J release for PMSH app will update its existing operational behavior.",
+      "parentUuid": "acf37977_eac3347a",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 9
+      },
+      "revId": "053579b1a3a9d71fdc8fde5ed67600b453de083c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
