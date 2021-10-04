@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a20323ee_fa93d5af",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-10-04T09:42:09Z",
+      "side": 1,
+      "message": "Discussed with Sagar that this will cause the create to fail if policyName isn\u0027t present.\nThe structure of the create json will no longer contain policy name.",
+      "range": {
+        "startLine": 114,
+        "startChar": 12,
+        "endLine": 114,
+        "endChar": 22
+      },
+      "revId": "949c180c44a3273e95ac9db78b8557d8b9c4bcb0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
