@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "acf37977_eac3347a",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-10-04T15:38:22Z",
+      "side": 1,
+      "message": "as this is not backward incompatible change, suggest 1.4.0 unless there is specific reason to change major version?",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 9
+      },
+      "revId": "053579b1a3a9d71fdc8fde5ed67600b453de083c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
