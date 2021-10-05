@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cc7f9b91_c8caed53",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-10-05T15:40:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a36674f_51d592dd",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 22
+      },
+      "revId": "cb22861fa9e4db83ebb29373ecee8c4b25090e4e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "591d77c2_2b1031bc",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "cb22861fa9e4db83ebb29373ecee8c4b25090e4e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3a2ceef_7949b9de",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-10-05T15:40:21Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "591d77c2_2b1031bc",
+      "range": {
+        "startLine": 22,
+        "startChar": 12,
+        "endLine": 22,
+        "endChar": 17
+      },
+      "revId": "cb22861fa9e4db83ebb29373ecee8c4b25090e4e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
