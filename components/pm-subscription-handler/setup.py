@@ -22,7 +22,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pm_subscription_handler",
-    version="1.3.2",
+    version="2.0.0",
     packages=find_packages(),
     author="lego@est.tech",
     author_email="lego@est.tech",

@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -74,7 +74,8 @@ def _get_all_aai_nf_data(app_conf):
                                                   app_conf.aaf_creds.get('aaf_pass')),
                                data=data, params=params,
                                verify=(app_conf.ca_cert_path if app_conf.enable_tls else False),
-                               cert=(app_conf.cert_params if app_conf.enable_tls else None))
+                               cert=((app_conf.cert_path,
+                                     app_conf.key_path) if app_conf.enable_tls else None))
         response.raise_for_status()
         if response.ok:
             nf_data = json.loads(response.text)
@@ -177,7 +178,8 @@ def get_aai_model_data(app_conf, model_invariant_id, model_version_id, nf_name):
                                auth=HTTPBasicAuth(app_conf.aaf_creds.get('aaf_id'),
                                                   app_conf.aaf_creds.get('aaf_pass')),
                                verify=(app_conf.ca_cert_path if app_conf.enable_tls else False),
-                               cert=(app_conf.cert_params if app_conf.enable_tls else None))
+                               cert=((app_conf.cert_path,
+                                      app_conf.key_path) if app_conf.enable_tls else None))
         response.raise_for_status()
         if response.ok:
             data = json.loads(response.text)
