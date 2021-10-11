@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "454a7cf6_366746a2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-10-11T12:28:24Z",
+      "side": 1,
+      "message": "Is the nf_filter not obtained through the app_conf anyway?",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18ba8764_be0cd58e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-10-11T12:28:24Z",
+      "side": 1,
+      "message": "As above re:nf_filter",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6532cd5_cbf8d150",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-10-11T12:28:24Z",
+      "side": 1,
+      "message": "2019-2021",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86007735_bbe102dd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-10-11T12:28:24Z",
+      "side": 1,
+      "message": "Does this allow for 4 blank arrays for nfNames etc?",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ab983f7_78755f4d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-10-11T12:28:24Z",
+      "side": 1,
+      "message": "Do we need to handle failures?",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3172f1f3_244d2405",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-10-11T12:28:24Z",
+      "side": 1,
+      "message": "Do we need to handle failures?",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
