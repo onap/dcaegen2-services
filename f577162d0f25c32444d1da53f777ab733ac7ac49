@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c9391a4_7430fb80",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-10-12T16:16:15Z",
+      "side": 1,
+      "message": "NetworkFunction entry is not coming into DB(Even there is a matching NF available). This occurs when i sent \u0027modelNames\u0027 values and rest all empty. The reason i found was an empty string is coming to the highlighted above. I feel that\u0027s because of {convert db value to string}. Due to the empty string as single quotes,\u0027if\u0027 condition is failing and assigns \u0027false\u0027 to the match variable. So, in this process it\u0027s always return \u0027false\u0027 with the \u0027is_nf_in_filter\u0027. \n\ncan you please check, whether the same thing happening with you?",
+      "range": {
+        "startLine": 196,
+        "startChar": 11,
+        "endLine": 196,
+        "endChar": 35
+      },
+      "revId": "f577162d0f25c32444d1da53f777ab733ac7ac49",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
