@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d8ee9bb8_c0d0c64e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-12T14:22:30Z",
+      "side": 1,
+      "message": "We are getting nf_filter from subscription create request body.",
+      "parentUuid": "454a7cf6_366746a2",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18ba8764_be0cd58e",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d1f3921_0600aee6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-12T14:22:30Z",
+      "side": 1,
+      "message": "We are getting nf_filter from subscription create request body.",
+      "parentUuid": "18ba8764_be0cd58e",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "8a3710e0_dc23dba7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-12T14:22:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6532cd5_cbf8d150",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86007735_bbe102dd",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 3
@@ -67,6 +121,24 @@
       "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77684807_7c50dd07",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-12T14:22:30Z",
+      "side": 1,
+      "message": "Yes, it allows. So we have validated it in the program to ensure we get atleast one filter.",
+      "parentUuid": "86007735_bbe102dd",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "f1a86f2d_6052c66e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-12T14:22:30Z",
+      "side": 1,
+      "message": "In case of failure, the database is rolled back to the last commit point and the error details are logged.",
+      "parentUuid": "3ab983f7_78755f4d",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3172f1f3_244d2405",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 3
@@ -101,6 +191,24 @@
       "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e48632e_97cb933c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-12T14:22:30Z",
+      "side": 1,
+      "message": "In case of failure, the database is rolled back to the last commit point and the error details are logged.",
+      "parentUuid": "3172f1f3_244d2405",
+      "revId": "26c89b6a6eadefe0b62b0224b6bec2faec12d179",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
