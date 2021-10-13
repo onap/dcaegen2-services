@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20b44d74_50e66f7a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-10-13T15:42:43Z",
+      "side": 1,
+      "message": "I feel that would be great, If we do empty value checks for all the required properties which are available in the schema definition. For example \u0027fileLocation\u0027, \u0027measurementType\u0027 etc..",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 86
+      },
+      "revId": "0f0fa75273110bb766c5fb62a4f44d72d4328daf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
