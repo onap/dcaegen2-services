@@ -70,6 +70,30 @@
       "revId": "f577162d0f25c32444d1da53f777ab733ac7ac49",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7e915b1_9c6bd156",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-13T12:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4aa4f7e2_74f64463",
+      "range": {
+        "startLine": 196,
+        "startChar": 11,
+        "endLine": 196,
+        "endChar": 35
+      },
+      "revId": "f577162d0f25c32444d1da53f777ab733ac7ac49",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
