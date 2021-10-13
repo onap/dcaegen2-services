@@ -22,6 +22,30 @@
       "revId": "f577162d0f25c32444d1da53f777ab733ac7ac49",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c7121ea_396a252b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/network_function.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-13T08:50:43Z",
+      "side": 1,
+      "message": "Please provide the create request body(with nfFilter and model names) and Xerxes instance you are referring here.",
+      "parentUuid": "0c9391a4_7430fb80",
+      "range": {
+        "startLine": 196,
+        "startChar": 11,
+        "endLine": 196,
+        "endChar": 35
+      },
+      "revId": "f577162d0f25c32444d1da53f777ab733ac7ac49",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
