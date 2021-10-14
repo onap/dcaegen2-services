@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6cdfcf95_b54787cd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-14T16:09:41Z",
+      "side": 1,
+      "message": "Yes, the data stored in the db for nf_names is as {\"^pnf.*\",\"^vnf.*\"}",
+      "parentUuid": "5c993508_1ae71576",
+      "range": {
+        "startLine": 273,
+        "startChar": 40,
+        "endLine": 273,
+        "endChar": 42
+      },
+      "revId": "0f0fa75273110bb766c5fb62a4f44d72d4328daf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "89b2ad38_22daadf7",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "0f0fa75273110bb766c5fb62a4f44d72d4328daf",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac6ddeab_45e961cf",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-14T16:09:41Z",
+      "side": 1,
+      "message": "Refactored as per suggestion.",
+      "parentUuid": "89b2ad38_22daadf7",
+      "range": {
+        "startLine": 275,
+        "startChar": 12,
+        "endLine": 275,
+        "endChar": 19
+      },
+      "revId": "0f0fa75273110bb766c5fb62a4f44d72d4328daf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
