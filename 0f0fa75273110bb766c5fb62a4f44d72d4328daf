@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "a2124971_3e470892",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-10-14T17:45:04Z",
+      "side": 1,
+      "message": "I am seeing empty dict is storing in to the DB as a value, if post request body has not having any value in that case I feel we need to store as empty/None but storing \u0027{}\u0027",
+      "parentUuid": "6cdfcf95_b54787cd",
+      "range": {
+        "startLine": 273,
+        "startChar": 40,
+        "endLine": 273,
+        "endChar": 42
+      },
+      "revId": "0f0fa75273110bb766c5fb62a4f44d72d4328daf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "89b2ad38_22daadf7",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
         "patchSetId": 5

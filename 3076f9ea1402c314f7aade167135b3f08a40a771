@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab181ae3_56d1a547",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-10-14T17:45:04Z",
+      "side": 1,
+      "message": "We may get \"Attribute Error\", If the \u0027db_string\u0027 value is empty/None.",
+      "range": {
+        "startLine": 272,
+        "startChar": 19,
+        "endLine": 272,
+        "endChar": 34
+      },
+      "revId": "3076f9ea1402c314f7aade167135b3f08a40a771",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6dc66d46_f83db68d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-10-14T17:45:04Z",
+      "side": 1,
+      "message": "I think empty dict is storing in to the DB as a value, if post request body has not having any value in that case I feel we need to store as empty/None but storing \u0027{}\u0027",
+      "range": {
+        "startLine": 272,
+        "startChar": 36,
+        "endLine": 272,
+        "endChar": 38
+      },
+      "revId": "3076f9ea1402c314f7aade167135b3f08a40a771",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
