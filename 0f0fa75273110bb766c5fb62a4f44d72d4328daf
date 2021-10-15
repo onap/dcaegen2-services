@@ -164,6 +164,23 @@
       "revId": "0f0fa75273110bb766c5fb62a4f44d72d4328daf",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1c81130_ffd8ed59",
+        "filename": "components/pm-subscription-handler/tests/data/create_subscription_request.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-10-15T18:04:06Z",
+      "side": 1,
+      "message": "the file is missing the final newline",
+      "revId": "0f0fa75273110bb766c5fb62a4f44d72d4328daf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
