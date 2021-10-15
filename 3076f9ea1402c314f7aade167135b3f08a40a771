@@ -69,6 +69,30 @@
       "revId": "3076f9ea1402c314f7aade167135b3f08a40a771",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0b7e83c_2bc9a104",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-15T09:48:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6dc66d46_f83db68d",
+      "range": {
+        "startLine": 272,
+        "startChar": 36,
+        "endLine": 272,
+        "endChar": 38
+      },
+      "revId": "3076f9ea1402c314f7aade167135b3f08a40a771",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
