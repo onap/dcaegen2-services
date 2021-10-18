@@ -110,6 +110,24 @@
       "revId": "3076f9ea1402c314f7aade167135b3f08a40a771",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53fd46ef_88600a27",
+        "filename": "components/pm-subscription-handler/tests/data/create_subscription_request.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-18T15:52:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "318cdf2d_1fac339a",
+      "revId": "3076f9ea1402c314f7aade167135b3f08a40a771",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
