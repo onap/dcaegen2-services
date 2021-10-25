@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f828284a_9ca317f6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-10-25T18:15:11Z",
+      "side": 1,
+      "message": "is there a JIRA for this TODO ? Or should this be fixed now before being merged?",
+      "revId": "70de6a27b7722e3ed02d8e8a8c7933e053eacabb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7868e05_75384237",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-10-25T18:15:11Z",
+      "side": 1,
+      "message": "is there a JIRA for this TODO ? Or should this be fixed now before being merged?",
+      "revId": "70de6a27b7722e3ed02d8e8a8c7933e053eacabb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
