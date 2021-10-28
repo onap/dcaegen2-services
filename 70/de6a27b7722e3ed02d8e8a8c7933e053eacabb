@@ -1,0 +1,9 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: Gerard Nugent <gerard.nugent@est.tech>
+Code-Review+1: Vijay Venkatesh Kumar <vv770d@att.com>
+Code-Review+2: Tony Hansen <tony@att.com>
+Submitted-by: Tony Hansen <tony@att.com>
+Submitted-at: Thu, 28 Oct 2021 23:00:04 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/services/+/124704
+Project: dcaegen2/services
+Branch: refs/heads/master
