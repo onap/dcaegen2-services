@@ -215,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "efb0fa16_94125911",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-10-28T16:12:35Z",
+      "side": 1,
+      "message": "Hi Vijay, \nWe would be handling it following story: https://jira.onap.org/browse/DCAEGEN2-2945.",
+      "parentUuid": "6e593cff_c96ba392",
+      "range": {
+        "startLine": 158,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 86
+      },
+      "revId": "0f0fa75273110bb766c5fb62a4f44d72d4328daf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1c81130_ffd8ed59",
         "filename": "components/pm-subscription-handler/tests/data/create_subscription_request.json",
         "patchSetId": 5
