@@ -211,7 +211,8 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         mock_filter_call.return_value = NetworkFunctionFilter(**subscription["nfFilter"])
         filtered_nfs = nf_service.capture_filtered_nfs(subscription["subscriptionName"])
         subscription_service.publish_measurement_grp_to_nfs(
-            subscription["subscriptionName"], filtered_nfs, measurement_grps)
+            subscription["subscriptionName"], filtered_nfs, measurement_grps,
+            subscription['operationalPolicyName'], subscription['controlLoopName'])
         # Two unlocked measurement Group published
         self.assertEqual(mock_publish.call_count, 6)
 
@@ -238,7 +239,8 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         mock_filter_call.return_value = NetworkFunctionFilter(**subscription["nfFilter"])
         filtered_nfs = nf_service.capture_filtered_nfs(subscription["subscriptionName"])
         subscription_service.publish_measurement_grp_to_nfs(
-            subscription["subscriptionName"], filtered_nfs, measurement_grps)
+            subscription["subscriptionName"], filtered_nfs, measurement_grps,
+            subscription['operationalPolicyName'], subscription['controlLoopName'])
         mock_logger.assert_called_with('Publish event failed for nf name, measure_grp_name, '
                                        'sub_name: pnf_33_ericsson,meas2, xtraPM-All-gNB-R2B-new2 '
                                        'with error: Publish failed')

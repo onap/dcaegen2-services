@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020 Nordix Foundation.
+#  Copyright (C) 2020-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ def process_aai_events(mr_sub, mr_pub, app, app_conf):
 def _process_event(action, nf, mr_pub, app_conf):
     if action == AAIEvent.UPDATE.value:
         logger.info(f'Update event found for network function {nf.nf_name}')
-        app_conf.subscription.create_subscription_on_nfs([nf], mr_pub, app_conf)
+        app_conf.subscription.create_subscription_on_nfs([nf], mr_pub)
     elif action == AAIEvent.DELETE.value:
         logger.info(f'Delete event found for network function {nf.nf_name}')
         NetworkFunction.delete(nf_name=nf.nf_name)

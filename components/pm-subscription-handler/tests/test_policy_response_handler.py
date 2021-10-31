@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2020 Nordix Foundation.
+#  Copyright (C) 2019-2021 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -105,6 +105,8 @@ class PolicyResponseHandlerTest(BaseClassSetup):
                          '"ExtraPM-All-gNB-R2B", "nfName": "pnf300", "message": "success" } }']
         self.mock_policy_mr_sub.get_from_topic.return_value = response_data
         mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
+                                                      operational_policy_name='policy-name',
+                                                      control_loop_name='control-loop-name',
                                                       status=AdministrativeState.UNLOCKED.value)
         self.policy_response_handler.poll_policy_topic()
         self.mock_policy_mr_sub.get_from_topic.assert_called()
@@ -120,6 +122,8 @@ class PolicyResponseHandlerTest(BaseClassSetup):
                          '"Different_Subscription", "nfName": "pnf300", "message": "success" } }']
         self.mock_policy_mr_sub.get_from_topic.return_value = response_data
         mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
+                                                      operational_policy_name='policy-name',
+                                                      control_loop_name='control-loop-name',
                                                       status=AdministrativeState.UNLOCKED.value)
         self.policy_response_handler.poll_policy_topic()
 
@@ -132,6 +136,8 @@ class PolicyResponseHandlerTest(BaseClassSetup):
     def test_poll_policy_topic_exception(self, mock_get_sub, mock_logger):
         self.mock_policy_mr_sub.get_from_topic.return_value = 'wrong_return'
         mock_get_sub.return_value = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B',
+                                                      operational_policy_name='policy-name',
+                                                      control_loop_name='control-loop-name',
                                                       status=AdministrativeState.UNLOCKED.value)
         self.policy_response_handler.poll_policy_topic()
         mock_logger.assert_called()

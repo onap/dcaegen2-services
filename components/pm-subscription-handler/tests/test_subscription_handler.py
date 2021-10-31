@@ -76,7 +76,7 @@ class SubscriptionHandlerTest(BaseClassSetup):
         sub_handler.execute()
         self.assertEqual(AdministrativeState.UNLOCKED.value,
                          self.app_conf.subscription.administrativeState)
-        mock_activate_sub.assert_called_with(self.nfs, self.mock_mr_pub, self.app_conf)
+        mock_activate_sub.assert_called_with(self.nfs, self.mock_mr_pub)
 
     @patch('mod.subscription.Subscription.get_network_functions', MagicMock(return_value=nfs))
     @patch('mod.pmsh_utils.AppConfig.refresh_config', MagicMock(return_value=get_pmsh_config()))
@@ -89,7 +89,7 @@ class SubscriptionHandlerTest(BaseClassSetup):
         sub_handler = SubscriptionHandler(self.mock_mr_pub, self.mock_mr_sub, self.app,
                                           self.app_conf)
         sub_handler.execute()
-        mock_deactivate_sub.assert_called_with(self.nfs, self.mock_mr_pub, self.app_conf)
+        mock_deactivate_sub.assert_called_with(self.nfs, self.mock_mr_pub)
 
     @patch('mod.subscription_handler.SubscriptionHandler._start_aai_event_thread', MagicMock())
     @patch('mod.pmsh_utils.AppConfig.refresh_config', MagicMock(return_value=get_pmsh_config()))
