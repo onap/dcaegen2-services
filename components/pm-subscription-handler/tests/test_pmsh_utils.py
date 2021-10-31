@@ -90,8 +90,7 @@ class PmshUtilsTestCase(BaseClassSetup):
                 self.app_conf.subscription,
                 NetworkFunction(nf_name='pnf_1',
                                 model_invariant_id='some-id',
-                                model_version_id='some-id'),
-                self.app_conf)
+                                model_version_id='some-id'))
             pub_to_topic_call.assert_called_once()
 
     @responses.activate

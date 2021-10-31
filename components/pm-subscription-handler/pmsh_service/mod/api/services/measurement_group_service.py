@@ -63,19 +63,19 @@ def apply_nf_to_measgroup(nf_name, measurement_group_name):
     db.session.add(new_nf_measure_grp_rel)
 
 
-def publish_measurement_group(subscription_name, measurement_group, nf):
+def publish_measurement_group(sub_model, measurement_group, nf):
     """
     Publishes an event for measurement group against nfs to MR
 
     Args:
-        subscription_name (string): Subscription name to publish against nf
+        sub_model(SubscriptionModel): Subscription model object
         measurement_group (MeasurementGroupModel): Measurement group to publish
         nf (NetworkFunction): Network function to publish.
    """
-    event_body = nf_service.create_nf_event_body(nf, 'CREATE')
+    event_body = nf_service.create_nf_event_body(nf, 'CREATE', sub_model)
     event_body['subscription'] = {
         "administrativeState": measurement_group.administrative_state,
-        "subscriptionName": subscription_name,
+        "subscriptionName": sub_model.subscription_name,
         "fileBasedGP": measurement_group.file_based_gp,
         "fileLocation": measurement_group.file_location,
         "measurementGroup": {
@@ -84,4 +84,5 @@ def publish_measurement_group(subscription_name, measurement_group, nf):
             "managedObjectDNsBasic": measurement_group.managed_object_dns_basic
         }
     }
+    logger.debug(f'Event Body: {event_body}')
     AppConfig.get_instance().publish_to_topic(MRTopic.POLICY_PM_PUBLISHER.value, event_body)

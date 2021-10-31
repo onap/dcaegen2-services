@@ -20,7 +20,7 @@ import json
 import os
 from unittest.mock import patch
 from flask import current_app
-from mod.api.db_models import NetworkFunctionModel
+from mod.api.db_models import NetworkFunctionModel, SubscriptionModel
 from mod import aai_client
 from tests.base_setup import BaseClassSetup
 from mod.api.services import nf_service
@@ -78,16 +78,19 @@ class NetworkFunctionServiceTestCase(BaseClassSetup):
         subscription = json.loads(self.subscription_request)['subscription']
         mock_filter_call.return_value = NetworkFunctionFilter(**subscription["nfFilter"])
         nf = nf_service.capture_filtered_nfs(subscription["subscriptionName"])[0]
-        event_body = nf_service.create_nf_event_body(nf, 'CREATE')
+        sub_model = SubscriptionModel(subscription["subscriptionName"],
+                                      subscription['operationalPolicyName'],
+                                      subscription['controlLoopName'], 'LOCKED')
+        event_body = nf_service.create_nf_event_body(nf, 'CREATE', sub_model)
         self.assertEqual(event_body['nfName'], nf.nf_name)
         self.assertEqual(event_body['ipAddress'], nf.ipv6_address)
         self.assertEqual(event_body['blueprintName'], nf.sdnc_model_name)
         self.assertEqual(event_body['blueprintVersion'], nf.sdnc_model_version)
-        self.assertEqual(event_body['policyName'],
-                         self.app_conf.operational_policy_name)
+        self.assertEqual(event_body['operationalPolicyName'],
+                         sub_model.operational_policy_name)
         self.assertEqual(event_body['changeType'], 'CREATE')
-        self.assertEqual(event_body['closedLoopControlName'],
-                         self.app_conf.control_loop_name)
+        self.assertEqual(event_body['controlLoopName'],
+                         sub_model.control_loop_name)
 
     @patch.object(aai_client, '_get_all_aai_nf_data')
     @patch.object(aai_client, 'get_aai_model_data')

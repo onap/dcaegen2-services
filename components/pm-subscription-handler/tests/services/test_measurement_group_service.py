@@ -24,7 +24,8 @@ from mod.pmsh_config import AppConfig
 from mod import db
 from tests.base_setup import BaseClassSetup
 from mod.api.services import measurement_group_service
-from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel
+from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel,\
+    SubscriptionModel
 from mod.subscription import SubNfState
 
 
@@ -65,16 +66,18 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
                                                 'msg_publish', 'UNLOCKED',
                                                 15, 'pm.xml', [{"measurementType": "counter_a"}],
                                                 [{"DN": "string"}])
+        sub_model = SubscriptionModel('sub_publish', 'pmsh-operational-policy',
+                                      'pmsh-control-loop', 'LOCKED')
         measurement_group_service.publish_measurement_group(
-            'sub_publish', measurement_grp, nf_1)
+            sub_model, measurement_grp, nf_1)
         mock_mr.assert_called_once_with('policy_pm_publisher',
                                         {'nfName': 'pnf_1',
                                          'ipAddress': '2001:db8:3333:4444:5555:6666:7777:8888',
                                          'blueprintName': 'blah',
                                          'blueprintVersion': 1.0,
-                                         'policyName': 'pmsh-operational-policy',
+                                         'operationalPolicyName': 'pmsh-operational-policy',
                                          'changeType': 'CREATE',
-                                         'closedLoopControlName': 'pmsh-control-loop',
+                                         'controlLoopName': 'pmsh-control-loop',
                                          'subscription':
                                              {'administrativeState': 'UNLOCKED',
                                               'subscriptionName': 'sub_publish',
