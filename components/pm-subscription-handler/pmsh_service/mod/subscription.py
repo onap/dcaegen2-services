@@ -62,13 +62,15 @@ def _get_nf_objects(nf_sub_relationships):
 
 
 class Subscription:
-    def __init__(self, **kwargs):
+    def __init__(self, control_loop_name, operational_policy_name, **kwargs):
         self.subscriptionName = kwargs.get('subscriptionName')
         self.administrativeState = kwargs.get('administrativeState')
         self.fileBasedGP = kwargs.get('fileBasedGP')
         self.fileLocation = kwargs.get('fileLocation')
         self.nfFilter = kwargs.get('nfFilter')
         self.measurementGroups = kwargs.get('measurementGroups')
+        self.control_loop_name = control_loop_name
+        self.policy_name = operational_policy_name
         self.create()
 
     def update_sub_params(self, admin_state, file_based_gp, file_location, meas_groups):
@@ -88,7 +90,10 @@ class Subscription:
                 SubscriptionModel.subscription_name == self.subscriptionName).one_or_none())
             if existing_subscription is None:
                 new_subscription = SubscriptionModel(subscription_name=self.subscriptionName,
+                                                     operational_policy_name=self.policy_name,
+                                                     control_loop_name=self.control_loop_name,
                                                      status=AdministrativeState.LOCKED.value)
+
                 db.session.add(new_subscription)
                 db.session.commit()
                 return new_subscription
@@ -117,7 +122,7 @@ class Subscription:
         finally:
             db.session.remove()
 
-    def prepare_subscription_event(self, nf, app_conf):
+    def prepare_subscription_event(self, nf):
         """Prepare the sub event for publishing
 
         Args:
@@ -128,7 +133,8 @@ class Subscription:
             dict: the Subscription event to be published.
         """
         try:
-            clean_sub = {k: v for k, v in self.__dict__.items() if k != 'nfFilter'}
+            clean_sub = {k: v for k, v in self.__dict__.items()
+                         if (k != 'nfFilter' and k != 'control_loop_name' and k != 'policy_name')}
             if self.administrativeState == AdministrativeState.LOCKING.value:
                 change_type = 'DELETE'
             else:
@@ -139,9 +145,9 @@ class Subscription:
                 'ipAddress': nf.ipv4_address if nf.ipv6_address in (None, '') else nf.ipv6_address,
                 'blueprintName': nf.sdnc_model_name,
                 'blueprintVersion': nf.sdnc_model_version,
-                'policyName': app_conf.operational_policy_name,
+                'operationalPolicyName': self.policy_name,
                 'changeType': change_type,
-                'closedLoopControlName': app_conf.control_loop_name,
+                'controlLoopName': self.control_loop_name,
                 'subscription': clean_sub}
             return sub_event
         except Exception as e:

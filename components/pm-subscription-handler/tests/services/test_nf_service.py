@@ -78,16 +78,20 @@ class NetworkFunctionServiceTestCase(BaseClassSetup):
         subscription = json.loads(self.subscription_request)['subscription']
         mock_filter_call.return_value = NetworkFunctionFilter(**subscription["nfFilter"])
         nf = nf_service.capture_filtered_nfs(subscription["subscriptionName"])[0]
-        event_body = nf_service.create_nf_event_body(nf, 'CREATE')
+        operational_policy_name = subscription['operationalPolicyName']
+        control_loop_name = subscription['controlLoopName']
+        event_body = nf_service.create_nf_event_body(nf, 'CREATE',
+                                                     operational_policy_name,
+                                                     control_loop_name)
         self.assertEqual(event_body['nfName'], nf.nf_name)
         self.assertEqual(event_body['ipAddress'], nf.ipv6_address)
         self.assertEqual(event_body['blueprintName'], nf.sdnc_model_name)
         self.assertEqual(event_body['blueprintVersion'], nf.sdnc_model_version)
-        self.assertEqual(event_body['policyName'],
-                         self.app_conf.operational_policy_name)
+        self.assertEqual(event_body['operationalPolicyName'],
+                         operational_policy_name)
         self.assertEqual(event_body['changeType'], 'CREATE')
-        self.assertEqual(event_body['closedLoopControlName'],
-                         self.app_conf.control_loop_name)
+        self.assertEqual(event_body['controlLoopName'],
+                         control_loop_name)
 
     @patch.object(aai_client, '_get_all_aai_nf_data')
     @patch.object(aai_client, 'get_aai_model_data')

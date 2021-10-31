@@ -76,7 +76,9 @@ class AppConfig:
         self.operational_policy_name = conf['config'].get('operational_policy_name')
         self.control_loop_name = conf['config'].get('control_loop_name')
         self.sub_schema = _load_sub_schema_from_file()
-        self.subscription = Subscription(**conf['config']['pmsh_policy']['subscription'])
+        self.subscription = Subscription(self.control_loop_name,
+                                         self.operational_policy_name,
+                                         **conf['config']['pmsh_policy']['subscription'])
         self.nf_filter = None
 
     def __new__(cls, *args, **kwargs):
@@ -129,7 +131,11 @@ class AppConfig:
         """
         try:
             app_conf = self._get_pmsh_config()
-            self.subscription = Subscription(**app_conf['config']['pmsh_policy']['subscription'])
+            self.operational_policy_name = app_conf['config'].get('operational_policy_name')
+            self.control_loop_name = app_conf['config'].get('control_loop_name')
+            self.subscription = Subscription(self.control_loop_name,
+                                             self.operational_policy_name,
+                                             **app_conf['config']['pmsh_policy']['subscription'])
             logger.info("AppConfig data has been refreshed")
         except Exception:
             logger.error('Failed to refresh PMSH AppConfig')
@@ -246,7 +252,9 @@ class _MrPub(_DmaapMrClient):
             app_conf (AppConfig): the application configuration.
         """
         try:
-            subscription_event = subscription.prepare_subscription_event(nf, app_conf)
+            subscription_event = subscription.prepare_subscription_event(nf)
+            logger.debug('Subscription event')
+            logger.debug(subscription_event)
             self.publish_to_topic(subscription_event)
         except Exception as e:
             logger.error(f'Failed to publish to topic {self.topic_url}: {e}', exc_info=True)

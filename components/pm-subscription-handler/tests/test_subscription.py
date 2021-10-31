@@ -146,7 +146,7 @@ class SubscriptionTest(BaseClassSetup):
                              model_version_id='some-id')
         nf.sdnc_model_name = 'some-name'
         nf.sdnc_model_version = 'some-version'
-        actual_sub_event = self.app_conf.subscription.prepare_subscription_event(nf, self.app_conf)
+        actual_sub_event = self.app_conf.subscription.prepare_subscription_event(nf)
         print(actual_sub_event)
         self.assertEqual(expected_sub_event, actual_sub_event)
 
@@ -162,7 +162,7 @@ class SubscriptionTest(BaseClassSetup):
                              model_version_id='some-id')
         nf.sdnc_model_name = 'some-name'
         nf.sdnc_model_version = 'some-version'
-        actual_sub_event = self.app_conf.subscription.prepare_subscription_event(nf, self.app_conf)
+        actual_sub_event = self.app_conf.subscription.prepare_subscription_event(nf)
         print(actual_sub_event)
         self.assertEqual(expected_sub_event, actual_sub_event)
 
