@@ -37,25 +37,27 @@ def capture_filtered_nfs(sub_name):
     return aai_client.get_pmsh_nfs_from_aai(AppConfig.get_instance(), nf_filter)
 
 
-def create_nf_event_body(nf, change_type):
+def create_nf_event_body(nf, change_type,
+                         operational_policy_name, control_loop_name):
     """
     Creates a network function event body to publish on MR
 
     Args:
         nf (NetworkFunction): the Network function to include in the event.
         change_type (string): define the change type to be applied on node
+        operational_policy_name (string): name of the policy
+        control_loop_name (string): name of the control loop
     Returns:
         dict: network function event body to publish on MR.
     """
-    app_conf = AppConfig.get_instance()
     return {'nfName': nf.nf_name,
             'ipAddress': nf.ipv4_address if nf.ipv6_address in (None, '')
             else nf.ipv6_address,
             'blueprintName': nf.sdnc_model_name,
             'blueprintVersion': nf.sdnc_model_version,
-            'policyName': app_conf.operational_policy_name,
+            'operationalPolicyName': operational_policy_name,
             'changeType': change_type,
-            'closedLoopControlName': app_conf.control_loop_name}
+            'controlLoopName': control_loop_name}
 
 
 def save_nf(nf):

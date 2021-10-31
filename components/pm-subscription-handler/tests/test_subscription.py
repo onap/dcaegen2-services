@@ -114,7 +114,7 @@ class SubscriptionTest(BaseClassSetup):
     @patch('mod.subscription.Subscription.update_sub_nf_status')
     def test_process_activate_subscription(self, mock_update_sub_nf, mock_add_nfs):
         self.app_conf.subscription.create_subscription_on_nfs([list(self.xnfs)[0]],
-                                                              self.mock_mr_pub, self.app_conf)
+                                                              self.mock_mr_pub)
 
         mock_add_nfs.assert_called()
         self.assertTrue(self.mock_mr_pub.publish_subscription_event_data.called)
@@ -126,8 +126,7 @@ class SubscriptionTest(BaseClassSetup):
     def test_process_deactivate_subscription(self, mock_update_sub_nf, mock_get_nfs):
         self.app_conf.subscription.administrativeState = 'LOCKED'
         mock_get_nfs.return_value = [list(self.xnfs)[0]]
-        self.app_conf.subscription.delete_subscription_from_nfs(self.xnfs, self.mock_mr_pub,
-                                                                self.app_conf)
+        self.app_conf.subscription.delete_subscription_from_nfs(self.xnfs, self.mock_mr_pub)
         self.assertTrue(self.mock_mr_pub.publish_subscription_event_data.called)
         self.assertEqual(mock_update_sub_nf.call_count, 3)
 
@@ -146,8 +145,10 @@ class SubscriptionTest(BaseClassSetup):
                              model_version_id='some-id')
         nf.sdnc_model_name = 'some-name'
         nf.sdnc_model_version = 'some-version'
-        actual_sub_event = self.app_conf.subscription.prepare_subscription_event(nf, self.app_conf)
+        actual_sub_event = self.app_conf.subscription.prepare_subscription_event(nf)
         print(actual_sub_event)
+        print('******************')
+        print(expected_sub_event)
         self.assertEqual(expected_sub_event, actual_sub_event)
 
     def test_prepare_subscription_event_with_ipv6(self):
@@ -162,7 +163,7 @@ class SubscriptionTest(BaseClassSetup):
                              model_version_id='some-id')
         nf.sdnc_model_name = 'some-name'
         nf.sdnc_model_version = 'some-version'
-        actual_sub_event = self.app_conf.subscription.prepare_subscription_event(nf, self.app_conf)
+        actual_sub_event = self.app_conf.subscription.prepare_subscription_event(nf)
         print(actual_sub_event)
         self.assertEqual(expected_sub_event, actual_sub_event)
 

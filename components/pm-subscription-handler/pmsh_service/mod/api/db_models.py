@@ -26,6 +26,8 @@ class SubscriptionModel(db.Model):
     __tablename__ = 'subscriptions'
     id = Column(Integer, primary_key=True, autoincrement=True)
     subscription_name = Column(String(100), unique=True, nullable=False)
+    operational_policy_name = Column(String(80), nullable=False)
+    control_loop_name = Column(String(80))
     status = Column(String(20))
 
     nfs = relationship(
@@ -43,12 +45,17 @@ class SubscriptionModel(db.Model):
         cascade='all, delete-orphan',
         backref='subscription')
 
-    def __init__(self, subscription_name, status):
+    def __init__(self, subscription_name, operational_policy_name, control_loop_name, status):
         self.subscription_name = subscription_name
+        self.operational_policy_name = operational_policy_name
+        self.control_loop_name = control_loop_name
         self.status = status
 
     def __repr__(self):
-        return f'subscription_name: {self.subscription_name}, status: {self.status}'
+        return f'subscription_name: {self.subscription_name},' \
+               f'operational_policy_name: {self.operational_policy_name},' \
+               f'control_loop_name: {self.control_loop_name},' \
+               f'status: {self.status}'
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
@@ -59,7 +66,10 @@ class SubscriptionModel(db.Model):
         sub_nfs = NfSubRelationalModel.query.filter(
             NfSubRelationalModel.subscription_name == self.subscription_name).all()
         db.session.remove()
-        return {'subscription_name': self.subscription_name, 'subscription_status': self.status,
+        return {'subscription_name': self.subscription_name,
+                'operational_policy_name': self.operational_policy_name,
+                'control_loop_name': self.control_loop_name,
+                'subscription_status': self.status,
                 'network_functions': [sub_nf.serialize_nf() for sub_nf in sub_nfs]}
 
 
