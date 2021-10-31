@@ -1,6 +1,8 @@
 {
   "subscription": {
     "subscriptionName": "ExtraPM-All-gNB-R2B",
+    "operationalPolicyName":"pmsh-operational-policy",
+    "controlLoopName":"pmsh-control-loop",
     "nfFilter": {
       "nfNames": [
         "^pnf.*",

@@ -2,9 +2,9 @@
    "nfName":"pnf_1",
    "blueprintName": "some-name",
    "blueprintVersion": "some-version",
-   "policyName":"pmsh-operational-policy",
+   "operationalPolicyName":"pmsh-operational-policy",
    "changeType":"CREATE",
-   "closedLoopControlName":"pmsh-control-loop",
+   "controlLoopName":"pmsh-control-loop",
    "ipAddress": "204.120.0.15",
    "subscription":{
       "subscriptionName":"ExtraPM-All-gNB-R2B",

@@ -66,15 +66,16 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
                                                 15, 'pm.xml', [{"measurementType": "counter_a"}],
                                                 [{"DN": "string"}])
         measurement_group_service.publish_measurement_group(
-            'sub_publish', measurement_grp, nf_1)
+            'sub_publish', measurement_grp, nf_1,
+            'pmsh-operational-policy', 'pmsh-control-loop')
         mock_mr.assert_called_once_with('policy_pm_publisher',
                                         {'nfName': 'pnf_1',
                                          'ipAddress': '2001:db8:3333:4444:5555:6666:7777:8888',
                                          'blueprintName': 'blah',
                                          'blueprintVersion': 1.0,
-                                         'policyName': 'pmsh-operational-policy',
+                                         'operationalPolicyName': 'pmsh-operational-policy',
                                          'changeType': 'CREATE',
-                                         'closedLoopControlName': 'pmsh-control-loop',
+                                         'controlLoopName': 'pmsh-control-loop',
                                          'subscription':
                                              {'administrativeState': 'UNLOCKED',
                                               'subscriptionName': 'sub_publish',

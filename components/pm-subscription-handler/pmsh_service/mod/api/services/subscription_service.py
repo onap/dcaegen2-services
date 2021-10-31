@@ -43,6 +43,10 @@ def create_subscription(subscription):
         db.session.commit()
         logger.info(f'Successfully saved subscription request for: '
                     f'{subscription["subscriptionName"]}')
+        control_loop_name = ""
+        if 'controlLoopName' in subscription:
+            control_loop_name = subscription['controlLoopName']
+        operational_policy_name = subscription["operationalPolicyName"]
         filtered_nfs = nf_service.capture_filtered_nfs(sub_name)
         if filtered_nfs:
             logger.info(f'Applying the filtered nfs for subscription: {sub_name}')
@@ -51,7 +55,10 @@ def create_subscription(subscription):
             unlocked_msmt_groups = apply_measurement_grp_to_nfs(filtered_nfs, measurement_groups)
             db.session.commit()
             if unlocked_msmt_groups:
-                publish_measurement_grp_to_nfs(sub_name, filtered_nfs, unlocked_msmt_groups)
+                publish_measurement_grp_to_nfs(sub_name, filtered_nfs,
+                                               unlocked_msmt_groups,
+                                               operational_policy_name,
+                                               control_loop_name)
             else:
                 logger.error(f'All measurement groups are locked for subscription: {sub_name}, '
                              f'please verify/check measurement groups.')
@@ -68,7 +75,10 @@ def create_subscription(subscription):
         db.session.remove()
 
 
-def publish_measurement_grp_to_nfs(subscription_name, filtered_nfs, measurement_groups):
+def publish_measurement_grp_to_nfs(subscription_name, filtered_nfs,
+                                   measurement_groups,
+                                   operational_policy_name,
+                                   control_loop_name):
     """
     Publishes an event for measurement groups against nfs
 
@@ -76,6 +86,8 @@ def publish_measurement_grp_to_nfs(subscription_name, filtered_nfs, measurement_
         subscription_name (string): subscription name against nfs
         filtered_nfs (list[NetworkFunction])): list of filtered network functions
         measurement_groups (list[MeasurementGroupModel]): list of unlocked measurement group
+        operational_policy_name (string): name of the policy
+        control_loop_name (string): name of the control loop
     """
     for measurement_group in measurement_groups:
         for nf in filtered_nfs:
@@ -83,7 +95,8 @@ def publish_measurement_grp_to_nfs(subscription_name, filtered_nfs, measurement_
                 logger.info(f'Publishing event for nf name, measure_grp_name: {nf.nf_name},'
                             f'{measurement_group.measurement_group_name}')
                 measurement_group_service.publish_measurement_group(
-                    subscription_name, measurement_group, nf)
+                    subscription_name, measurement_group, nf,
+                    operational_policy_name, control_loop_name)
             except Exception as ex:
                 logger.error(f'Publish event failed for nf name, measure_grp_name, sub_name: '
                              f'{nf.nf_name},{measurement_group.measurement_group_name}, '
@@ -157,6 +170,8 @@ def check_missing_data(subscription):
     """
     if subscription['subscriptionName'].strip() in (None, ''):
         raise InvalidDataException("No value provided in subscription name")
+    if subscription['operationalPolicyName'].strip() in (None, ''):
+        raise InvalidDataException("Value required for operational Policy Name")
 
     for measurement_group in subscription.get('measurementGroups'):
         measurement_group_details = measurement_group['measurementGroup']
@@ -236,7 +251,13 @@ def save_subscription(subscription):
     Args:
         subscription (dict): subscription model to be saved.
     """
+    control_loop_name = ""
+    if 'controlLoopName' in subscription:
+        control_loop_name = subscription['controlLoopName']
+    operational_policy_name = subscription["operationalPolicyName"]
     subscription_model = SubscriptionModel(subscription_name=subscription["subscriptionName"],
+                                           operational_policy_name=operational_policy_name,
+                                           control_loop_name=control_loop_name,
                                            status=AdministrativeState.LOCKED.value)
     db.session.add(subscription_model)
     return subscription_model

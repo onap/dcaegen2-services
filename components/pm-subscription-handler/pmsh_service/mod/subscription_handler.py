@@ -79,8 +79,7 @@ class SubscriptionHandler:
                                                      self.app_conf.subscription.fileLocation,
                                                      self.app_conf.subscription.measurementGroups)
         nfs_in_aai = aai_client.get_pmsh_nfs_from_aai(self.app_conf, self.app_conf.nf_filter)
-        self.app_conf.subscription.create_subscription_on_nfs(nfs_in_aai, self.mr_pub,
-                                                              self.app_conf)
+        self.app_conf.subscription.create_subscription_on_nfs(nfs_in_aai, self.mr_pub)
         self.app_conf.subscription.update_subscription_status()
 
     def _deactivate(self):
@@ -89,7 +88,7 @@ class SubscriptionHandler:
             self.stop_aai_event_thread()
             self.app_conf.subscription.administrativeState = AdministrativeState.LOCKING.value
             logger.info('Subscription is now LOCKING/DEACTIVATING.')
-            self.app_conf.subscription.delete_subscription_from_nfs(nfs, self.mr_pub, self.app_conf)
+            self.app_conf.subscription.delete_subscription_from_nfs(nfs, self.mr_pub)
             self.app_conf.subscription.update_subscription_status()
 
     def _start_aai_event_thread(self):
@@ -117,8 +116,7 @@ class SubscriptionHandler:
                     logger.info(f'Retry deletion of subscription '
                                 f'{self.app_conf.subscription.subscriptionName} '
                                 f'from NF: {nf.nf_name}')
-                    self.app_conf.subscription.delete_subscription_from_nfs([nf], self.mr_pub,
-                                                                            self.app_conf)
+                    self.app_conf.subscription.delete_subscription_from_nfs([nf], self.mr_pub)
                     nf.increment_retry_count()
                 else:
                     logger.error(f'Failed to delete the subscription '
