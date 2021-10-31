@@ -62,13 +62,15 @@ def _get_nf_objects(nf_sub_relationships):
 
 
 class Subscription:
-    def __init__(self, **kwargs):
+    def __init__(self, control_loop_name, operational_policy_name, **kwargs):
         self.subscriptionName = kwargs.get('subscriptionName')
         self.administrativeState = kwargs.get('administrativeState')
         self.fileBasedGP = kwargs.get('fileBasedGP')
         self.fileLocation = kwargs.get('fileLocation')
         self.nfFilter = kwargs.get('nfFilter')
         self.measurementGroups = kwargs.get('measurementGroups')
+        self.control_loop_name = control_loop_name
+        self.policy_name = operational_policy_name
         self.create()
 
     def update_sub_params(self, admin_state, file_based_gp, file_location, meas_groups):
@@ -88,7 +90,10 @@ class Subscription:
                 SubscriptionModel.subscription_name == self.subscriptionName).one_or_none())
             if existing_subscription is None:
                 new_subscription = SubscriptionModel(subscription_name=self.subscriptionName,
+                                                     operational_policy_name=self.policy_name,
+                                                     control_loop_name=self.control_loop_name,
                                                      status=AdministrativeState.LOCKED.value)
+
                 db.session.add(new_subscription)
                 db.session.commit()
                 return new_subscription
@@ -117,18 +122,18 @@ class Subscription:
         finally:
             db.session.remove()
 
-    def prepare_subscription_event(self, nf, app_conf):
+    def prepare_subscription_event(self, nf):
         """Prepare the sub event for publishing
 
         Args:
             nf (NetworkFunction): the AAI nf.
-            app_conf (AppConfig): the application configuration.
 
         Returns:
             dict: the Subscription event to be published.
         """
         try:
-            clean_sub = {k: v for k, v in self.__dict__.items() if k != 'nfFilter'}
+            clean_sub = {k: v for k, v in self.__dict__.items()
+                         if (k != 'nfFilter' and k != 'control_loop_name' and k != 'policy_name')}
             if self.administrativeState == AdministrativeState.LOCKING.value:
                 change_type = 'DELETE'
             else:
@@ -139,9 +144,9 @@ class Subscription:
                 'ipAddress': nf.ipv4_address if nf.ipv6_address in (None, '') else nf.ipv6_address,
                 'blueprintName': nf.sdnc_model_name,
                 'blueprintVersion': nf.sdnc_model_version,
-                'policyName': app_conf.operational_policy_name,
+                'operationalPolicyName': self.policy_name,
                 'changeType': change_type,
-                'closedLoopControlName': app_conf.control_loop_name,
+                'controlLoopName': self.control_loop_name,
                 'subscription': clean_sub}
             return sub_event
         except Exception as e:
@@ -207,13 +212,12 @@ class Subscription:
         db.session.remove()
         return sub_models
 
-    def create_subscription_on_nfs(self, nfs, mr_pub, app_conf):
+    def create_subscription_on_nfs(self, nfs, mr_pub):
         """ Publishes an event to create a Subscription on an nf
 
         Args:
             nfs(list[NetworkFunction]): A list of NetworkFunction Objects.
             mr_pub (_MrPub): MR publisher
-            app_conf (AppConfig): the application configuration.
         """
         try:
             existing_nfs = self.get_network_functions()
@@ -221,26 +225,25 @@ class Subscription:
             for nf in [new_nf for new_nf in nfs if new_nf not in existing_nfs]:
                 logger.info(f'Publishing event to create '
                             f'Sub: {self.subscriptionName} on nf: {nf.nf_name}')
-                mr_pub.publish_subscription_event_data(self, nf, app_conf)
+                mr_pub.publish_subscription_event_data(self, nf)
                 self.add_network_function_to_subscription(nf, sub_model)
                 self.update_sub_nf_status(self.subscriptionName, SubNfState.PENDING_CREATE.value,
                                           nf.nf_name)
         except Exception as err:
             raise Exception(f'Error publishing create event to MR: {err}')
 
-    def delete_subscription_from_nfs(self, nfs, mr_pub, app_conf):
+    def delete_subscription_from_nfs(self, nfs, mr_pub):
         """ Publishes an event to delete a Subscription from an nf
 
         Args:
             nfs(list[NetworkFunction]): A list of NetworkFunction Objects.
             mr_pub (_MrPub): MR publisher
-            app_conf (AppConfig): the application configuration.
         """
         try:
             for nf in nfs:
                 logger.debug(f'Publishing Event to delete '
                              f'Sub: {self.subscriptionName} from the nf: {nf.nf_name}')
-                mr_pub.publish_subscription_event_data(self, nf, app_conf)
+                mr_pub.publish_subscription_event_data(self, nf)
                 self.update_sub_nf_status(self.subscriptionName,
                                           SubNfState.PENDING_DELETE.value,
                                           nf.nf_name)
