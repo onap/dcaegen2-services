@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "524cf1b2_3f5259ad",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-11-01T11:21:19Z",
+      "side": 1,
+      "message": "Keep uniform, see pmsh_utils",
+      "revId": "90d4d23279546c64e1530497b8ff42746afc1d27",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9820b942_f4e266b2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-11-01T11:21:19Z",
+      "side": 1,
+      "message": "Add new fields to Args in javadoc",
+      "revId": "90d4d23279546c64e1530497b8ff42746afc1d27",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf7a6869_7b7c72df",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-11-01T11:21:19Z",
+      "side": 1,
+      "message": "Keep uniform. Write the debug like this or like in measurement_group_service.",
+      "revId": "90d4d23279546c64e1530497b8ff42746afc1d27",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
