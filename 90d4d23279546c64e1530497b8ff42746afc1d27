@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "dc708b19_02ae866a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-11-01T11:22:53Z",
+      "side": 1,
+      "message": "Apply consistent logger text format with no stars.",
+      "range": {
+        "startLine": 92,
+        "startChar": 18,
+        "endLine": 92,
+        "endChar": 30
+      },
+      "revId": "90d4d23279546c64e1530497b8ff42746afc1d27",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f37cc709_6c39a572",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-11-01T11:22:53Z",
+      "side": 1,
+      "message": "Need a doc string here.",
+      "range": {
+        "startLine": 80,
+        "startChar": 35,
+        "endLine": 80,
+        "endChar": 58
+      },
+      "revId": "90d4d23279546c64e1530497b8ff42746afc1d27",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9820b942_f4e266b2",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 1
