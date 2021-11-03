@@ -1,0 +1,343 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e77f842_992c6ba4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "I think this is no longer relevant. This has moved to meas_group correct?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 10
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a8ed14c_a56bbad2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "Can we not set a default value to \"\"\nOr better, just remove it because nobody is using it to be honest.\nThe operational policy would need to be updated but that needs to happen anyway",
+      "range": {
+        "startLine": 48,
+        "startChar": 67,
+        "endLine": 48,
+        "endChar": 84
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91358242_302ec6e4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "I suggest returning the SubscriptionModel object here, like we are doing with the MeasGroupModel.\nThen we can just get the attributes from that in \"create_subscription\" function.",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 12
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9a8ad27_9eedc97c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "No need to assign a var. Just set it like the others below",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 27
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3b254d8_9bb0d7a2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "add a Returns doc string",
+      "range": {
+        "startLine": 263,
+        "startChar": 11,
+        "endLine": 263,
+        "endChar": 29
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6efb55f_848562d9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "If these are no longer part of the config and now part of the subscription object, remove them.",
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78312356_1ae36a5a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "These are now part of the sub object no?",
+      "range": {
+        "startLine": 134,
+        "startChar": 12,
+        "endLine": 134,
+        "endChar": 40
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f147daf_1827cd8b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "Can be done on 1 line.\nlogger.debug(f\u0027Subscription event: {subscription_event}\u0027)",
+      "range": {
+        "startLine": 255,
+        "startChar": 12,
+        "endLine": 255,
+        "endChar": 46
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "151d1e73_4614820f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "These should be gotten from kwargs.\nAlso, try to keep the name consistent. operational_policy_name",
+      "range": {
+        "startLine": 73,
+        "startChar": 13,
+        "endLine": 73,
+        "endChar": 24
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e30881a6_e8401e08",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "Why the need for this removal?\nIf they are moving in the code, the default helm configmap also needs to change.",
+      "range": {
+        "startLine": 136,
+        "startChar": 44,
+        "endLine": 136,
+        "endChar": 95
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fb3c422_21f5d653",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "If these are some of the few methods that are going to be used in future, then move them to the services modules.\nThis is used by the aai thread.\ndelete below is used in the exit handler.\nLeaving dead code around is really bad practice and should be avoided.\nIf the services modules are re writing both this class and network function class then all dead code should be removed as you go.",
+      "range": {
+        "startLine": 215,
+        "startChar": 8,
+        "endLine": 215,
+        "endChar": 34
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dafd8c6_4a55ac26",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "If this is no longer being used, remove the thread from main and remove any dead code.",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 15
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f07b138_823f0874",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "Move the aai_thread to main and start it there.",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf1276e6_42988315",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "If there are no active subs, don\u0027t query aai, else do.",
+      "range": {
+        "startLine": 96,
+        "startChar": 49,
+        "endLine": 96,
+        "endChar": 67
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "804a19cd_24e07ee5",
+        "filename": "components/pm-subscription-handler/tests/data/pm_subscription_event.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-03T11:57:51Z",
+      "side": 1,
+      "message": "If the adminState has moved to measGroup, this test data should reflect that. Or are we assuming that all measGroups are enabled here?\nAlso, why is the measgroupName not being passed below?",
+      "range": {
+        "startLine": 11,
+        "startChar": 7,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
