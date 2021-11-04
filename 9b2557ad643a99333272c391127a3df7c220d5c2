@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e36d252f_f6cd4e03",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3e77f842_992c6ba4",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 10
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a8ed14c_a56bbad2",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17e11e3b_5041d603",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4a8ed14c_a56bbad2",
+      "range": {
+        "startLine": 48,
+        "startChar": 67,
+        "endLine": 48,
+        "endChar": 84
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "475b06d9_2c6c368f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19b5a0de_67ecf4ef",
+      "range": {
+        "startLine": 92,
+        "startChar": 11,
+        "endLine": 92,
+        "endChar": 30
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "91358242_302ec6e4",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 3
@@ -91,6 +163,30 @@
       "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f3c5f6ee_68f3e689",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91358242_302ec6e4",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 12
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "5b14af9a_54c23ff6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9a8ad27_9eedc97c",
+      "range": {
+        "startLine": 257,
+        "startChar": 4,
+        "endLine": 257,
+        "endChar": 27
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3b254d8_9bb0d7a2",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 3
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "c1981868_35f9fcad",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3b254d8_9bb0d7a2",
+      "range": {
+        "startLine": 263,
+        "startChar": 11,
+        "endLine": 263,
+        "endChar": 29
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6efb55f_848562d9",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 3
@@ -154,6 +298,24 @@
       "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "830c004b_8312d1da",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e6efb55f_848562d9",
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -180,6 +342,30 @@
     },
     {
       "key": {
+        "uuid": "cb3fdd47_b3b5b23e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "78312356_1ae36a5a",
+      "range": {
+        "startLine": 134,
+        "startChar": 12,
+        "endLine": 134,
+        "endChar": 40
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f147daf_1827cd8b",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 3
@@ -203,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "f9928125_53a3a18b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f147daf_1827cd8b",
+      "range": {
+        "startLine": 255,
+        "startChar": 12,
+        "endLine": 255,
+        "endChar": 46
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "151d1e73_4614820f",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 3
@@ -214,6 +424,30 @@
       "writtenOn": "2021-11-03T11:57:51Z",
       "side": 1,
       "message": "These should be gotten from kwargs.\nAlso, try to keep the name consistent. operational_policy_name",
+      "range": {
+        "startLine": 73,
+        "startChar": 13,
+        "endLine": 73,
+        "endChar": 24
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86ef6220_4df92d78",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "This is used by the old style of subscription creation. So, won\u0027t come with the kwargs. This class is cleaned up with story[DCAEGEN2-2820] once all new work done.\n\n\u0027policy_name\u0027 is updated to \u0027operational_policy_name\u0027",
+      "parentUuid": "151d1e73_4614820f",
       "range": {
         "startLine": 73,
         "startChar": 13,
@@ -249,6 +483,30 @@
     },
     {
       "key": {
+        "uuid": "017bd9db_8331ba93",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "This removal is to support the old way. this file can be cleaned up with story[DCAEGEN2-2820], Once all the new work done.",
+      "parentUuid": "e30881a6_e8401e08",
+      "range": {
+        "startLine": 136,
+        "startChar": 44,
+        "endLine": 136,
+        "endChar": 95
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8fb3c422_21f5d653",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 3
@@ -260,6 +518,30 @@
       "writtenOn": "2021-11-03T11:57:51Z",
       "side": 1,
       "message": "If these are some of the few methods that are going to be used in future, then move them to the services modules.\nThis is used by the aai thread.\ndelete below is used in the exit handler.\nLeaving dead code around is really bad practice and should be avoided.\nIf the services modules are re writing both this class and network function class then all dead code should be removed as you go.",
+      "range": {
+        "startLine": 215,
+        "startChar": 8,
+        "endLine": 215,
+        "endChar": 34
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b11d0700_cabb9b44",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "This will handle in DCAEGEN2-2820",
+      "parentUuid": "8fb3c422_21f5d653",
       "range": {
         "startLine": 215,
         "startChar": 8,
@@ -295,6 +577,30 @@
     },
     {
       "key": {
+        "uuid": "4f9d62d7_af72ac21",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "As discussed, Code clean up is handled at DCAEGEN2-2820",
+      "parentUuid": "8dafd8c6_4a55ac26",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 15
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3f07b138_823f0874",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
         "patchSetId": 3
@@ -306,6 +612,30 @@
       "writtenOn": "2021-11-03T11:57:51Z",
       "side": 1,
       "message": "Move the aai_thread to main and start it there.",
+      "range": {
+        "startLine": 76,
+        "startChar": 12,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03e4d06e_c7756b6c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "This will be handled in DCAEGEN2-2912",
+      "parentUuid": "3f07b138_823f0874",
       "range": {
         "startLine": 76,
         "startChar": 12,
@@ -341,6 +671,30 @@
     },
     {
       "key": {
+        "uuid": "320d7d84_d7374e64",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "This will be checked in DCAEGEN2-2912",
+      "parentUuid": "bf1276e6_42988315",
+      "range": {
+        "startLine": 96,
+        "startChar": 49,
+        "endLine": 96,
+        "endChar": 67
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "804a19cd_24e07ee5",
         "filename": "components/pm-subscription-handler/tests/data/pm_subscription_event.json",
         "patchSetId": 3
@@ -352,6 +706,30 @@
       "writtenOn": "2021-11-03T11:57:51Z",
       "side": 1,
       "message": "If the adminState has moved to measGroup, this test data should reflect that. Or are we assuming that all measGroups are enabled here?\nAlso, why is the measgroupName not being passed below?",
+      "range": {
+        "startLine": 11,
+        "startChar": 7,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "9b2557ad643a99333272c391127a3df7c220d5c2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90e0170e_3403d8ca",
+        "filename": "components/pm-subscription-handler/tests/data/pm_subscription_event.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-04T13:23:43Z",
+      "side": 1,
+      "message": "This file is used by the old way of subscription creation. Can be updated with code cleanup story[DCAEGEN2-2820]",
+      "parentUuid": "804a19cd_24e07ee5",
       "range": {
         "startLine": 11,
         "startChar": 7,
