@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f14c4a42_73a477d6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-05T13:22:50Z",
+      "side": 1,
+      "message": "Why not just pass the sub_model object and get the attributes from it?",
+      "range": {
+        "startLine": 66,
+        "startChar": 30,
+        "endLine": 66,
+        "endChar": 47
+      },
+      "revId": "636ee25383a30091f308cd4bb8d0c33659a80c45",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "043008dd_f4f6c1f1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-05T13:22:50Z",
+      "side": 1,
+      "message": "Same here. Just pass the sub_model object",
+      "range": {
+        "startLine": 41,
+        "startChar": 25,
+        "endLine": 41,
+        "endChar": 67
+      },
+      "revId": "636ee25383a30091f308cd4bb8d0c33659a80c45",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
