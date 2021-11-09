@@ -16,7 +16,6 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-from mod.subscription import Subscription
 from http import HTTPStatus
 from mod import logger
 from mod.api.services import subscription_service
@@ -35,16 +34,6 @@ def status():
         NA
     """
     return {'status': 'healthy'}
-
-
-def get_all_sub_to_nf_relations():
-    """ Retrieves all subscription to nf relations
-
-    Returns:
-        list: of Subscriptions and it's related Network Functions, else empty
-    """
-    subs_dict = [s.serialize() for s in Subscription.get_all()]
-    return subs_dict
 
 
 def post_subscription(body):
@@ -76,3 +65,36 @@ def post_subscription(body):
                      exc_info=True)
         response = e.invalid_message, HTTPStatus.BAD_REQUEST.value
     return response
+
+
+def get_subscription_by_name(subscription_name):
+    """
+    Retrieves subscription based on the name
+
+    Args:
+        subscription_name (String): Name of the subscription.
+
+    Returns:
+       Dictionary: of single Subscription
+
+    Raises:
+        Error: If subscription was not defined (or) Exception occurs while querying
+               database.
+    """
+    logger.info('API call received to fetch subscription by name')
+    try:
+        subscription = subscription_service.get_subscription_by_name(subscription_name)
+        if subscription is not None:
+            logger.info(f'subscription object with the name "{subscription_name}" '
+                        'was fetched successfully from database')
+            return subscription.serialize(), HTTPStatus.OK
+        else:
+            logger.error(f'subscription object with the name "{subscription_name}" '
+                         'was un successful to fetch from database')
+            return {'error': 'Subscription was not defined with the name : '
+                             f'{subscription_name}'}, HTTPStatus.NOT_FOUND
+    except Exception as exception:
+        logger.error(f'The following exception occurred "{exception}" while fetching subscription '
+                     f'with the name "{subscription_name}"')
+        return {'error': 'Request was not processed due to Exception : '
+                         f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR

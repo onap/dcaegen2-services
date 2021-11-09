@@ -15,12 +15,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import copy
 import json
 import os
 from unittest import TestCase
 from unittest.mock import patch, MagicMock
 
 from mod import create_app, db
+from mod.api.db_models import NetworkFunctionFilterModel, \
+    MeasurementGroupModel, SubscriptionModel
 from mod.network_function import NetworkFunctionFilter
 from mod.pmsh_utils import AppConfig
 from mod.pmsh_config import AppConfig as NewAppConfig
@@ -29,6 +32,24 @@ from mod.pmsh_config import AppConfig as NewAppConfig
 def get_pmsh_config(file_path='data/cbs_data_1.json'):
     with open(os.path.join(os.path.dirname(__file__), file_path), 'r') as data:
         return json.load(data)
+
+
+def subscription_data(subscription_name):
+    nf_filter = NetworkFunctionFilterModel(subscription_name, '{^pnf.*,^vnf.*}',
+                                           '{}', '{}', '{}')
+    mg_first = MeasurementGroupModel(subscription_name, 'MG1', 'UNLOCKED', 15, '/pm/pm.xml',
+                                     '[{ "measurementType": "countera" }, '
+                                     '{ "measurementType": "counterb" }]',
+                                     '[{ "DN":"dna"},{"DN":"dnb"}]')
+    mg_second = copy.deepcopy(mg_first)
+    mg_second.measurement_group_name = 'MG2'
+    mg_second.administrative_state = 'LOCKED'
+    mg_list = [mg_first, mg_second]
+    subscription_model = SubscriptionModel(subscription_name, 'pmsh_operational_policy',
+                                           'pmsh_control_loop_name', 'LOCKED')
+    subscription_model.network_filter = nf_filter
+    subscription_model.measurement_groups = mg_list
+    return subscription_model
 
 
 class BaseClassSetup(TestCase):
