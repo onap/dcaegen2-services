@@ -31,10 +31,16 @@ import org.onap.dcaegen2.kpi.computation.KpiComputation;
 import org.onap.dcaegen2.kpi.models.Configuration;
 import org.onap.dcaegen2.kpi.models.VesEvent;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.*;
+import java.math.*;
+
 public class KpiComputationTest {
 
     private static final String KPI_CONFIG_FILE = "kpi/kpi_config.json";
     private static final String VES_MESSAGE_FILE = "kpi/ves_message.json";
+    private static final String KPI_CONFIG_RATIO_FILE = "kpi/kpi_config_ratio.json";
 
     @Test
     public void testKpiComputation() {
@@ -51,6 +57,18 @@ public class KpiComputationTest {
         VesEvent vesEvent = vesList.get(0);
         assertEquals(vesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
                 .getMeasValuesList().get(0).getMeasResults().get(0).getSvalue(), "40");
+    }
+
+    @Test
+    public void testKpiComputationRatio() {
+        String strKpiConfigRatio = FileUtils.getFileContents(KPI_CONFIG_RATIO_FILE);
+        String vesMessage = FileUtils.getFileContents(VES_MESSAGE_FILE);
+        Configuration config = mock(Configuration.class);
+        when(config.getKpiConfig()).thenReturn(strKpiConfigRatio);
+        List<VesEvent> vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
+	VesEvent vesEvent = vesList.get(0);
+	assertEquals(vesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
+			.getMeasValuesList().get(0).getMeasResults().get(0).getSvalue(), "50");
     }
 
 }
