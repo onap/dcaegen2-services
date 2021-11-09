@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "473997f2_e1fb12e7",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/BaseKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-09T15:51:33Z",
+      "side": 1,
+      "message": "import * must be expanded, here and in all other files\n\ncomponents/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/\n\nBaseKpiComputation.java:import org.onap.dcaegen2.kpi.models.*;\nKpiComputation.java:import java.util.*;\nKpiComputation.java:import org.onap.dcaegen2.kpi.config.*;\nKpiComputation.java:import org.onap.dcaegen2.kpi.models.*;\nRatioKpiComputation.java:import java.util.*;\nRatioKpiComputation.java:import org.onap.dcaegen2.kpi.models.*;\nSumKpiComputation.java:import java.util.*;\nSumKpiComputation.java:import org.onap.dcaegen2.kpi.models.*;\nKpiComputationTest.java:import java.util.*;\nKpiComputationTest.java:import java.math.*;",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
