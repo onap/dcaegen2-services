@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "6e699c23_21f63bb2",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/BaseKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-09T16:04:14Z",
+      "side": 1,
+      "message": "a new file would not have a 2020 copyright date",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "473997f2_e1fb12e7",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/BaseKpiComputation.java",
         "patchSetId": 1
@@ -13,6 +30,108 @@
       "writtenOn": "2021-11-09T15:51:33Z",
       "side": 1,
       "message": "import * must be expanded, here and in all other files\n\ncomponents/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/\n\nBaseKpiComputation.java:import org.onap.dcaegen2.kpi.models.*;\nKpiComputation.java:import java.util.*;\nKpiComputation.java:import org.onap.dcaegen2.kpi.config.*;\nKpiComputation.java:import org.onap.dcaegen2.kpi.models.*;\nRatioKpiComputation.java:import java.util.*;\nRatioKpiComputation.java:import org.onap.dcaegen2.kpi.models.*;\nSumKpiComputation.java:import java.util.*;\nSumKpiComputation.java:import org.onap.dcaegen2.kpi.models.*;\nKpiComputationTest.java:import java.util.*;\nKpiComputationTest.java:import java.math.*;",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe17edc8_7e395146",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/BaseKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-09T16:04:14Z",
+      "side": 1,
+      "message": "javadoc for new public methods?",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aae8e44d_c50f4c66",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-09T16:04:14Z",
+      "side": 1,
+      "message": "change back to expanded list",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28cd5746_14f6af93",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-09T16:04:14Z",
+      "side": 1,
+      "message": "change back to expanded list",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ca4c958_52a3dd0f",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-09T16:04:14Z",
+      "side": 1,
+      "message": "why an array of String instead of just a simple String?",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b782a39a_6bac89ac",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-09T16:04:14Z",
+      "side": 1,
+      "message": "use a boolean here",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4558b105_03c5c881",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-09T16:04:14Z",
+      "side": 1,
+      "message": "a new file would not have a 2020 copyright date",
       "revId": "623e898862cfebc003cf467c090edc6023063387",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
