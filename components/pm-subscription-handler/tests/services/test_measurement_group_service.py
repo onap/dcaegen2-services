@@ -23,9 +23,9 @@ from mod.network_function import NetworkFunction
 from mod.pmsh_config import AppConfig
 from mod import db
 from tests.base_setup import BaseClassSetup
-from mod.api.services import measurement_group_service
-from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel,\
-    SubscriptionModel
+from mod.api.services import measurement_group_service, nf_service
+from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel, \
+    SubscriptionModel, NetworkFunctionModel
 from mod.subscription import SubNfState
 
 
@@ -99,16 +99,84 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             MeasurementGroupModel.subscription_name == 'ExtraPM-All-gNB-R2B').one_or_none())
         self.assertIsNotNone(measurement_grp)
 
-    def test_apply_nf_to_measgroup(self):
-        measurement_group_service.apply_nf_to_measgroup("pnf_test", "measure_grp_name")
+    def test_apply_nf_to_measurement_group_status(self):
+        measurement_group_service.apply_nf_status_to_measurement_group(
+            "pnf_test", "measure_grp_name", SubNfState.PENDING_CREATE.value)
         db.session.commit()
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test').one_or_none())
-        db.session.commit()
         self.assertIsNotNone(measurement_grp_rel)
         self.assertEqual(measurement_grp_rel.nf_measure_grp_status,
                          SubNfState.PENDING_CREATE.value)
+
+    def test_update_measurement_group_nf_status(self):
+        measurement_group_service.apply_nf_status_to_measurement_group(
+            "pnf_test", "measure_grp_name", SubNfState.PENDING_CREATE.value)
+        measurement_group_service.update_measurement_group_nf_status(
+            "measure_grp_name", SubNfState.CREATED.value, "pnf_test")
+        db.session.commit()
+        measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name',
+            NfMeasureGroupRelationalModel.nf_name == 'pnf_test').one_or_none())
+        self.assertIsNotNone(measurement_grp_rel)
+        self.assertEqual(measurement_grp_rel.nf_measure_grp_status,
+                         SubNfState.CREATED.value)
+
+    def test_delete_nf_to_measurement_group_without_nf_delete(self):
+        nf = NetworkFunction(nf_name='pnf_test1')
+        nf_service.save_nf(nf)
+        db.session.commit()
+        measurement_group_service.apply_nf_status_to_measurement_group(
+            "pnf_test1", "measure_grp_name1", SubNfState.PENDING_CREATE.value)
+        measurement_group_service.apply_nf_status_to_measurement_group(
+            "pnf_test1", "measure_grp_name2", SubNfState.PENDING_CREATE.value)
+        measurement_group_service.delete_nf_to_measurement_group(
+            "pnf_test1", "measure_grp_name1", SubNfState.DELETED.value)
+        measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name1',
+            NfMeasureGroupRelationalModel.nf_name == 'pnf_test1').one_or_none())
+        self.assertIsNone(measurement_grp_rel)
+        network_function = (NetworkFunctionModel.query.filter(
+            NetworkFunctionModel.nf_name == 'pnf_test1').one_or_none())
+        self.assertIsNotNone(network_function)
+
+    def test_delete_nf_to_measurement_group_with_nf_delete(self):
+        nf = NetworkFunction(nf_name='pnf_test2')
+        nf_service.save_nf(nf)
+        db.session.commit()
+        measurement_group_service.apply_nf_status_to_measurement_group(
+            "pnf_test2", "measure_grp_name2", SubNfState.PENDING_CREATE.value)
+        measurement_group_service.delete_nf_to_measurement_group(
+            "pnf_test2", "measure_grp_name2", SubNfState.DELETED.value)
+        measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name2',
+            NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
+        self.assertIsNone(measurement_grp_rel)
+        network_function = (NetworkFunctionModel.query.filter(
+            NetworkFunctionModel.nf_name == 'pnf_test2').one_or_none())
+        self.assertIsNone(network_function)
+
+    @patch.object(NetworkFunction, 'delete')
+    @patch('mod.logger.error')
+    def test_delete_nf_to_measurement_group_failure(self, mock_logger, nf_delete_func):
+        nf = NetworkFunction(nf_name='pnf_test2')
+        nf_service.save_nf(nf)
+        db.session.commit()
+        measurement_group_service.apply_nf_status_to_measurement_group(
+            "pnf_test2", "measure_grp_name2", SubNfState.PENDING_CREATE.value)
+        nf_delete_func.side_effect = Exception('delete failed')
+        measurement_group_service.delete_nf_to_measurement_group(
+            "pnf_test2", "measure_grp_name2", SubNfState.DELETED.value)
+        measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name2',
+            NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
+        self.assertIsNone(measurement_grp_rel)
+        network_function = (NetworkFunctionModel.query.filter(
+            NetworkFunctionModel.nf_name == 'pnf_test2').one_or_none())
+        self.assertIsNotNone(network_function)
+        mock_logger.assert_called_with('Failed to delete nf: pnf_test2 for '
+                                       'measurement group: measure_grp_name2: delete failed')
 
     def create_test_subs(self, new_sub_name, new_msrmt_grp_name):
         subscription = self.subscription_request.replace('ExtraPM-All-gNB-R2B', new_sub_name)
