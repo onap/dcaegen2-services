@@ -35,13 +35,12 @@ def main():
             app_conf = AppConfig()
             pmsh_app_conf = NewAppConfig()
             policy_mr_pub = app_conf.get_mr_pub('policy_pm_publisher')
-            policy_mr_sub = app_conf.get_mr_sub('policy_pm_subscriber')
             aai_event_mr_sub = app_conf.get_mr_sub('aai_subscriber')
         except Exception as e:
             logger.error(f'Failed to get config and create application: {e}', exc_info=True)
             sys.exit(e)
 
-        policy_response_handler = PolicyResponseHandler(policy_mr_sub, app_conf, app)
+        policy_response_handler = PolicyResponseHandler(app)
         policy_response_handler_thread = PeriodicTask(25, policy_response_handler.poll_policy_topic)
         policy_response_handler_thread.name = 'policy_event_thread'
         logger.info('Start polling PMSH_CL_INPUT topic on DMaaP MR.')

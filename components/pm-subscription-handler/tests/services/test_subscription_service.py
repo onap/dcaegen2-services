@@ -171,7 +171,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
 
     @patch.object(aai_client, '_get_all_aai_nf_data')
     @patch.object(aai_client, 'get_aai_model_data')
-    @patch.object(measurement_group_service, 'apply_nf_to_measgroup')
+    @patch.object(measurement_group_service, 'apply_nf_status_to_measurement_group')
     @patch.object(NetworkFunctionFilter, 'get_network_function_filter')
     def test_apply_measurement_grp_to_nfs(self, mock_filter_call, mock_apply_nf,
                                           mock_model_aai, mock_aai):
