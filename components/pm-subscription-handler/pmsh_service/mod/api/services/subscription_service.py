@@ -23,6 +23,7 @@ from mod.api.services import measurement_group_service, nf_service
 from mod.api.custom_exception import InvalidDataException, DuplicateDataException
 from mod.subscription import AdministrativeState
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import joinedload
 
 
 def create_subscription(subscription):
@@ -289,3 +290,48 @@ def save_nf_filter(nf_filter, subscription_name):
                                             model_version_ids=nf_filter['modelVersionIDs'],
                                             model_names=nf_filter['modelNames'])
     db.session.add(new_filter)
+
+
+def get_subscription_by_name(subscription_name):
+    """
+    Retrieves the subscription information by matching its Name
+
+    Args:
+        subscription_name(String): Name of the Subscription
+    Returns:
+        subscription(SubscriptionModel): else empty
+    """
+    logger.info(f'Subscription object is fetching from DB with the name \"{subscription_name}\"')
+    subscription_model = db.session.query(SubscriptionModel) \
+        .options(joinedload(SubscriptionModel.network_filter),
+                 joinedload(SubscriptionModel.measurement_groups)) \
+        .filter_by(subscription_name=subscription_name).first()
+    db.session.remove()
+    return subscription_model
+
+
+def subscription_encoder(subscription):
+    """
+    Encodes the subscription Model as JSON
+
+    Args:
+        subscription(SubscriptionModel) : SubscriptionModel from the DB
+    Returns:
+        Subscription JSON: which contains subscriptionName, controlLoopName,
+        operationalPolicyName, nfFilter, and measurementGroups
+    """
+    logger.info(f'Encoding Subscription object \"{subscription} \" as JSON')
+    control_loop_name = ''
+    if subscription.control_loop_name is not None:
+        control_loop_name = subscription.control_loop_name
+    return \
+        {'subscription':
+            {'subscriptionName': subscription.subscription_name,
+             'operationalPolicyName': subscription.operational_policy_name,
+             'controlLoopName': control_loop_name,
+             'nfFilter':
+                nf_service.nf_filter_encoder
+                (subscription.network_filter[0]),
+             'measurementGroups': [measurement_group_service.
+                                   measurement_group_encoder(mg)
+                                   for mg in subscription.measurement_groups]}}

@@ -86,3 +86,23 @@ def publish_measurement_group(sub_model, measurement_group, nf):
     }
     logger.debug(f'Event Body: {event_body}')
     AppConfig.get_instance().publish_to_topic(MRTopic.POLICY_PM_PUBLISHER.value, event_body)
+
+
+def measurement_group_encoder(measurement_group):
+    """
+    Encodes the Measurement Group object as JSON
+
+    Args:
+        measurement_group(MeasurementGroupModel): Measurement Group object
+    Returns:
+        Measurement Group Object in JSON Format
+    """
+    logger.info(f'Encoding Measurement Group object \"{measurement_group} \" as JSON')
+    return {'measurementGroup': {'measurementGroupName': measurement_group.measurement_group_name,
+                                 'administrativeState': measurement_group.administrative_state,
+                                 'fileBasedGP': measurement_group.file_based_gp,
+                                 'fileLocation': measurement_group.file_location,
+                                 'measurementTypes':
+                                     measurement_group.measurement_type,
+                                 'managedObjectDNsBasic':
+                                     measurement_group.managed_object_dns_basic}}
