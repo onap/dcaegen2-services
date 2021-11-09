@@ -75,12 +75,6 @@ class SubscriptionTest(BaseClassSetup):
         self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[1],
                                                                         self.sub_model)
 
-    def test_create_existing_subscription(self):
-        sub1 = self.app_conf.subscription.create()
-        same_sub1 = self.app_conf.subscription.create()
-        self.assertEqual(sub1, same_sub1)
-        self.assertEqual(1, len(self.app_conf.subscription.get_all()))
-
     def test_add_duplicate_network_functions_per_subscription(self):
         self.app_conf.subscription.add_network_function_to_subscription(list(self.xnfs)[0],
                                                                         self.sub_model)

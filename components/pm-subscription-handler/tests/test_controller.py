@@ -18,14 +18,17 @@
 import json
 import os
 from unittest.mock import patch, MagicMock
-import responses
-from requests import Session
+from http import HTTPStatus
+
+from mod.api.services import subscription_service
 from mod import aai_client
-from mod.api.controller import status, get_all_sub_to_nf_relations, post_subscription
+from mod.api.controller import status, post_subscription, \
+    get_subscription_by_name
 from tests.base_setup import BaseClassSetup
 from mod.api.db_models import SubscriptionModel, NfMeasureGroupRelationalModel
 from mod.subscription import SubNfState
 from mod.network_function import NetworkFunctionFilter
+from tests.base_setup import subscription_data
 
 
 class ControllerTestCase(BaseClassSetup):
@@ -54,26 +57,6 @@ class ControllerTestCase(BaseClassSetup):
 
     def test_status_response_healthy(self):
         self.assertEqual(status()['status'], 'healthy')
-
-    @patch.object(Session, 'get')
-    @patch.object(Session, 'put')
-    def test_get_all_sub_to_nf_relations(self, mock_put_session, mock_get_session):
-        mock_put_session.return_value.status_code = 200
-        mock_put_session.return_value.text = self.aai_response_data
-        mock_get_session.return_value.status_code = 200
-        mock_get_session.return_value.text = self.good_model_info
-        responses.add(responses.GET,
-                      'https://aai:8443/aai/v20/service-design-and-creation/models/model/'
-                      '7129e420-d396-4efb-af02-6b83499b12f8/model-vers/model-ver/'
-                      'e80a6ae3-cafd-4d24-850d-e14c084a5ca9',
-                      json=json.loads(self.good_model_info), status=200)
-        self.xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf, self.app_conf.nf_filter)
-        sub_model = self.app_conf.subscription.get()
-        for nf in self.xnfs:
-            self.app_conf.subscription.add_network_function_to_subscription(nf, sub_model)
-        all_subs = get_all_sub_to_nf_relations()
-        self.assertEqual(len(all_subs[0]['network_functions']), 3)
-        self.assertEqual(all_subs[0]['subscription_name'], 'ExtraPM-All-gNB-R2B')
 
     def create_test_subs(self, new_sub_name, new_msrmt_grp_name):
         subscription = self.subscription_request.replace('ExtraPM-All-gNB-R2B', new_sub_name)
@@ -129,3 +112,31 @@ class ControllerTestCase(BaseClassSetup):
         response = post_subscription(subscription)
         self.assertEqual(response[1], 400)
         self.assertEqual(response[0], 'No value provided in subscription name')
+
+    @patch('mod.api.services.subscription_service.get_subscription_by_name',
+           MagicMock(return_value=subscription_data('sub_demo')))
+    def test_get_subscription_by_name_api(self):
+        self.sub = get_subscription_by_name('sub_demo')
+        self.assertEqual(self.sub[1], HTTPStatus.OK)
+        self.assertEqual(self.sub[0]['subscription']['subscriptionName'], 'sub_demo')
+        self.assertEqual(self.sub[0]['subscription']['nfFilter']['nfNames'],
+                         ['^pnf.*', '^vnf.*'])
+        self.assertEqual(self.sub[0]['subscription']['controlLoopName'],
+                         'pmsh_control_loop_name')
+        self.assertEqual(len(self.sub[0]['subscription']['measurementGroups']), 2)
+        self.assertEqual(self.sub[0]['subscription']['operationalPolicyName'],
+                         'pmsh_operational_policy')
+
+    @patch('mod.api.services.subscription_service.get_subscription_by_name',
+           MagicMock(return_value=None))
+    def test_get_subscription_by_name_api_error(self):
+        self.sub = get_subscription_by_name('sub_demo')
+        self.assertEqual(self.sub[1], HTTPStatus.NOT_FOUND)
+        self.assertEqual(self.sub[0]['error'],
+                         'Subscription was not defined with the name : sub_demo')
+
+    @patch.object(subscription_service, 'get_subscription_by_name')
+    def test_get_subscription_by_name_api_exception(self, mock_get_sub):
+        mock_get_sub.side_effect = Exception('Some error in Database')
+        self.assertRaises(Exception, subscription_service.get_subscription_by_name,
+                          'Some error in Database')
