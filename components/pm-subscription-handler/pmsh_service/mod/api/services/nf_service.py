@@ -17,7 +17,7 @@
 # ============LICENSE_END=====================================================
 
 from mod import db, aai_client, logger
-from mod.api.db_models import NetworkFunctionModel
+from mod.api.db_models import NetworkFunctionModel, convert_db_string_to_list
 from mod.pmsh_config import AppConfig
 from mod.network_function import NetworkFunctionFilter
 
@@ -73,3 +73,19 @@ def save_nf(nf):
                                             sdnc_model_name=nf.sdnc_model_name,
                                             sdnc_model_version=nf.sdnc_model_version)
     db.session.add(network_function)
+
+
+def nf_filter_encoder(nf_filter):
+    """
+    Encodes the Network Function Filter object as JSON
+
+    Args:
+        nf_filter(NetworkFunctionFilterModel): Network Function Filter object
+    Returns:
+        Network Function Filter Object in JSON Format
+    """
+    logger.info(f'Encoding Network Function Filter object "{nf_filter}" as JSON')
+    return{'nfNames': convert_db_string_to_list(nf_filter.nf_names),
+           'modelInvariantIDs': convert_db_string_to_list(nf_filter.model_invariant_ids),
+           'modelVersionIDs': convert_db_string_to_list(nf_filter.model_version_ids),
+           'modelNames': convert_db_string_to_list(nf_filter.model_names)}

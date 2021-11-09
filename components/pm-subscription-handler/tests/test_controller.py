@@ -15,15 +15,22 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
+import copy
 import json
 import os
 from unittest.mock import patch, MagicMock
+from http import HTTPStatus
+
 import responses
 from requests import Session
+
+from mod.api.services import subscription_service
 from mod import aai_client
-from mod.api.controller import status, get_all_sub_to_nf_relations, post_subscription
+from mod.api.controller import status, get_all_sub_to_nf_relations, post_subscription, \
+    get_subscription_by_name
 from tests.base_setup import BaseClassSetup
-from mod.api.db_models import SubscriptionModel, NfMeasureGroupRelationalModel
+from mod.api.db_models import NetworkFunctionFilterModel, SubscriptionModel, \
+    MeasurementGroupModel, NfMeasureGroupRelationalModel
 from mod.subscription import SubNfState
 from mod.network_function import NetworkFunctionFilter
 
@@ -33,6 +40,24 @@ class ControllerTestCase(BaseClassSetup):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+
+    def subscription_data(self, subscription_name):
+        nf_filter = NetworkFunctionFilterModel(subscription_name, '{^pnf.*,^vnf.*}',
+                                               '{}', '{}', '{}')
+        mg_first = MeasurementGroupModel(subscription_name, 'MG1', 'UNLOCKED', 15, '/pm/pm.xml',
+                                         "[{ \"measurementType\": \"countera\" },\
+                                         { \"measurementType\": \"counterb\" }]",
+                                         "[{ \"DN\":\"dna\"},{\"DN\":\"dnb\"}]")
+        mg_second = copy.deepcopy(mg_first)
+        mg_second.measurement_group_name = 'MG2'
+        mg_second.administrative_state = 'LOCKED'
+        nf_filter_list = [nf_filter]
+        mg_list = [mg_first, mg_second]
+        subscription_model = SubscriptionModel(subscription_name, 'pmsh_operational_policy',
+                                               'pmsh_control_loop_name', 'LOCKED')
+        subscription_model.network_filter = nf_filter_list
+        subscription_model.measurement_groups = mg_list
+        return subscription_model
 
     def setUp(self):
         super().setUp()
@@ -129,3 +154,37 @@ class ControllerTestCase(BaseClassSetup):
         response = post_subscription(subscription)
         self.assertEqual(response[1], 400)
         self.assertEqual(response[0], 'No value provided in subscription name')
+
+    @patch('mod.api.services.subscription_service.get_subscription_by_name',
+           MagicMock(return_value=subscription_data('self', 'sub_demo')))
+    def test_get_subscription_by_name_api(self):
+        self.sub = get_subscription_by_name('sub_demo')
+        self.assertEqual(self.sub[1], HTTPStatus.OK)
+        self.assertEqual(self.sub[0]['subscription']['subscriptionName'], 'sub_demo')
+        self.assertEqual(self.sub[0]['subscription']['nfFilter']['nfNames'],
+                         ['^pnf.*', '^vnf.*'])
+        self.assertEqual(len(self.sub[0]['subscription']['nfFilter']['nfNames']), 2)
+        self.assertEqual(len(self.sub[0]['subscription']['nfFilter']['modelNames']), 0)
+        self.assertEqual(len(self.sub[0]['subscription']['nfFilter']['modelVersionIDs']), 0)
+        self.assertEqual(len(self.sub[0]['subscription']['nfFilter']['modelInvariantIDs']), 0)
+        self.assertEqual(self.sub[0]['subscription']['measurementGroups'][0]
+                         ['measurementGroup']['measurementGroupName'], 'MG1')
+        self.assertEqual(self.sub[0]['subscription']['controlLoopName'],
+                         'pmsh_control_loop_name')
+        self.assertEqual(len(self.sub[0]['subscription']['measurementGroups']), 2)
+        self.assertEqual(self.sub[0]['subscription']['operationalPolicyName'],
+                         'pmsh_operational_policy')
+
+    @patch('mod.api.services.subscription_service.get_subscription_by_name',
+           MagicMock(return_value=None))
+    def test_get_subscription_by_name_api_error(self):
+        self.sub = get_subscription_by_name('sub_demo')
+        self.assertEqual(self.sub[1], HTTPStatus.NOT_FOUND)
+        self.assertEqual(self.sub[0]['error'],
+                         'Subscription is not defined with the name : sub_demo')
+
+    @patch.object(subscription_service, 'get_subscription_by_name')
+    def test_get_subscription_by_name_api_exception(self, mock_get_sub):
+        mock_get_sub.side_effect = Exception('Some error in Database')
+        self.assertRaises(Exception, subscription_service.get_subscription_by_name,
+                          'exception')
