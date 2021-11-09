@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Created Schema definitions in swagger file according to the new structure (DCAEGEN2-2889)
 * Implemented Create Subscription public API (DCAEGEN2-2819)
 * Added 2 new attributes to the subscription model (DCAEGEN2-2913)
+* Read subscription API by using subscription name (DCAEGEN2-2818)
 
 ## [1.3.2]
 ### Changed
