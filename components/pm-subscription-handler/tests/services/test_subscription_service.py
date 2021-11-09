@@ -21,7 +21,7 @@ import os
 from unittest.mock import patch, MagicMock
 from mod.api.db_models import SubscriptionModel, MeasurementGroupModel, \
     NfMeasureGroupRelationalModel, NetworkFunctionModel, NfSubRelationalModel, \
-    convert_db_string_to_list
+    convert_db_string_to_list, NetworkFunctionFilterModel
 from mod.network_function import NetworkFunctionFilter
 from mod.subscription import SubNfState
 from mod import aai_client
@@ -35,6 +35,24 @@ class SubscriptionServiceTestCase(BaseClassSetup):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+
+    def subscription_data(self, subscription_name):
+        nf_filter = NetworkFunctionFilterModel(subscription_name, '{^pnf.*,^vnf.*}',
+                                               '{}', '{}', '{}')
+        mg_first = MeasurementGroupModel(subscription_name, 'MG1', 'UNLOCKED', 15, '/pm/pm.xml',
+                                         "[{ \"measurementType\": \"countera\" },\
+                                         { \"measurementType\": \"counterb\" }]",
+                                         "[{ \"DN\":\"dna\"},{\"DN\":\"dnb\"}]")
+        mg_second = copy.deepcopy(mg_first)
+        mg_second.measurement_group_name = 'MG2'
+        mg_second.administrative_state = 'LOCKED'
+        nf_filter_list = [nf_filter]
+        mg_list = [mg_first, mg_second]
+        subscription_model = SubscriptionModel(subscription_name, 'pmsh_operational_policy',
+                                               'pmsh_control_loop_name', 'LOCKED')
+        subscription_model.network_filter = nf_filter_list
+        subscription_model.measurement_groups = mg_list
+        return subscription_model
 
     def setUp(self):
         super().setUp()
@@ -357,3 +375,30 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         db_string = '{}'
         db_array = convert_db_string_to_list(db_string)
         self.assertEqual(len(db_array), 0)
+
+    def test_subscription_encoder(self):
+        self.sub_encode = \
+            subscription_service.subscription_encoder(self.subscription_data('sub_encode'))
+        self.assertEqual(self.sub_encode['subscription']['nfFilter']['nfNames'],
+                         ['^pnf.*,^vnf.*'])
+        self.assertEqual(self.sub_encode['subscription']['measurementGroups'][1]
+                         ['measurementGroup']['measurementGroupName'], 'MG2')
+        self.assertEqual(len(self.sub_encode['subscription']['measurementGroups']), 2)
+        self.assertEqual(self.sub_encode['subscription']['subscriptionName'], 'sub_encode')
+        self.assertEqual(self.sub_encode['subscription']['operationalPolicyName'],
+                         'pmsh_operational_policy')
+
+    def test_subscription_encoder_None(self):
+        self.subscription = self.subscription_data('sub_encode')
+        self.subscription.control_loop_name = None
+        self.sub_encode = \
+            subscription_service.subscription_encoder(self.subscription)
+        self.assertEqual(self.sub_encode['subscription']['nfFilter']['nfNames'],
+                         ['^pnf.*,^vnf.*'])
+        self.assertEqual(self.sub_encode['subscription']['measurementGroups'][1]
+                         ['measurementGroup']['measurementGroupName'], 'MG2')
+        self.assertEqual(len(self.sub_encode['subscription']['measurementGroups']), 2)
+        self.assertEqual(self.sub_encode['subscription']['subscriptionName'], 'sub_encode')
+        self.assertEqual(self.sub_encode['subscription']['controlLoopName'], '')
+        self.assertEqual(self.sub_encode['subscription']['operationalPolicyName'],
+                         'pmsh_operational_policy')

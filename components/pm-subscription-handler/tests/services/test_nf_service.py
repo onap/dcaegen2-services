@@ -15,12 +15,13 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
+import copy
 import json
 import os
 from unittest.mock import patch
 from flask import current_app
-from mod.api.db_models import NetworkFunctionModel, SubscriptionModel
+from mod.api.db_models import NetworkFunctionModel, SubscriptionModel, \
+    NetworkFunctionFilterModel, MeasurementGroupModel
 from mod import aai_client
 from tests.base_setup import BaseClassSetup
 from mod.api.services import nf_service
@@ -31,6 +32,24 @@ class NetworkFunctionServiceTestCase(BaseClassSetup):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+
+    def subscription_data(self, subscription_name):
+        nf_filter = NetworkFunctionFilterModel(subscription_name, '{^pnf.*,^vnf.*}',
+                                               '{}', '{}', '{}')
+        mg_first = MeasurementGroupModel(subscription_name, 'MG1', 'UNLOCKED', 15, '/pm/pm.xml',
+                                         "[{ \"measurementType\": \"countera\" },\
+                                         { \"measurementType\": \"counterb\" }]",
+                                         "[{ \"DN\":\"dna\"},{\"DN\":\"dnb\"}]")
+        mg_second = copy.deepcopy(mg_first)
+        mg_second.measurement_group_name = 'MG2'
+        mg_second.administrative_state = 'LOCKED'
+        nf_filter_list = [nf_filter]
+        mg_list = [mg_first, mg_second]
+        subscription_model = SubscriptionModel(subscription_name, 'pmsh_operational_policy',
+                                               'pmsh_control_loop_name', 'LOCKED')
+        subscription_model.network_filter = nf_filter_list
+        subscription_model.measurement_groups = mg_list
+        return subscription_model
 
     def setUp(self):
         super().setUp()
@@ -106,3 +125,18 @@ class NetworkFunctionServiceTestCase(BaseClassSetup):
         network_function = NetworkFunctionModel.query.filter(
             NetworkFunctionModel.nf_name == nf.nf_name).one_or_none()
         self.assertIsNotNone(network_function)
+
+    def test_nf_filter_encoder(self):
+        self.nf_filter = self.subscription_data('nf_filter_encode').network_filter[0]
+        self.nf_filter_encode = nf_service.nf_filter_encoder(self.nf_filter)
+        self.assertEqual(self.nf_filter_encode['nfNames'], ['^pnf.*,^vnf.*'])
+        self.assertEqual(self.nf_filter_encode['modelNames'], [''])
+        self.assertEqual(self.nf_filter_encode['modelVersionIDs'], [''])
+
+    def test_nf_filter_encoder_None(self):
+        self.nf_filter = self.subscription_data('nf_filter_encode_none').network_filter[0]
+        self.nf_filter.model_version_ids = None
+        self.nf_filter_encode = nf_service.nf_filter_encoder(self.nf_filter)
+        self.assertEqual(self.nf_filter_encode['nfNames'], ['^pnf.*,^vnf.*'])
+        self.assertEqual(self.nf_filter_encode['modelNames'], [''])
+        self.assertEqual(self.nf_filter_encode['modelVersionIDs'], [''])

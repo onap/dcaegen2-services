@@ -76,3 +76,29 @@ def post_subscription(body):
                      exc_info=True)
         response = e.invalid_message, HTTPStatus.BAD_REQUEST.value
     return response
+
+
+def get_subscription_by_name(subscription_name):
+    """
+    Retrieves subscription based on the input subscription Name
+
+    Args:
+        subscription_name(String): Name of the subscription to fetch subscription from DB
+    Returns:
+       SubscriptionModel: Single Subscription information as JSON
+    Raises:
+        Error: If subscription is not defined (or) Exception occurs while retrieving
+               from DB
+    """
+    try:
+        subscription = subscription_service.get_subscription_by_name(subscription_name)
+        if subscription is not None:
+            return subscription_service.subscription_encoder(subscription), HTTPStatus.OK
+        else:
+            return {'error': 'Subscription is not defined with the name : '
+                             '{subscription_name}'
+                             .format(subscription_name=subscription_name)}, HTTPStatus.NOT_FOUND
+    except Exception as exception:
+        return {'error': 'Request is not processed due to Exception :'
+                         '{exception}'
+                         .format(exception=exception)}, HTTPStatus.INTERNAL_SERVER_ERROR

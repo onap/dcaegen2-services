@@ -112,6 +112,24 @@ paths:
         400:
           description: Invalid input
 
+  /subscription/{subscription_name}:
+    get:
+      description: Get the Subscription from ONAP specified by Parameter
+      operationId: mod.api.controller.get_subscription_by_name
+      parameters:
+        - name: subscription_name
+          in: path
+          required: true
+          description: The name of the subscription to return
+          type: string
+      responses:
+        200:
+          description: OK; Requested Subscription returned as an object
+          schema:
+            $ref : "#/definitions/subscription"
+        404:
+          description: Subscription with the specified name not found
+
 definitions:
   subscription:
     type: object

@@ -73,3 +73,27 @@ def save_nf(nf):
                                             sdnc_model_name=nf.sdnc_model_name,
                                             sdnc_model_version=nf.sdnc_model_version)
     db.session.add(network_function)
+
+
+def nf_filter_encoder(nf_filter):
+    """
+    Encodes the Network Function Filter object as JSON
+
+    Args:
+        nf_filter(NetworkFunctionFilterModel): Network Function Filter object
+    Returns:
+        Network Function Filter Object in JSON Format
+    """
+    nf_names, model_invariant_ids, model_version_ids, model_names = '', '', '', ''
+    if nf_filter.nf_names is not None:
+        nf_names = nf_filter.nf_names.strip('{}')
+    if nf_filter.model_invariant_ids is not None:
+        model_invariant_ids = nf_filter.model_invariant_ids.strip('{}')
+    if nf_filter.model_version_ids is not None:
+        model_version_ids = nf_filter.model_version_ids.strip('{}')
+    if nf_filter.model_names is not None:
+        model_names = nf_filter.model_names.strip('{}')
+    return{'nfNames': [nf_names],
+           'modelInvariantIDs': [model_invariant_ids],
+           'modelVersionIDs': [model_version_ids],
+           'modelNames': [model_names]}

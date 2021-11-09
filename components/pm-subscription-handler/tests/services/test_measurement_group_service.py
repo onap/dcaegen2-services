@@ -15,7 +15,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
-
+import copy
 import json
 import os
 from unittest.mock import patch
@@ -24,8 +24,8 @@ from mod.pmsh_config import AppConfig
 from mod import db
 from tests.base_setup import BaseClassSetup
 from mod.api.services import measurement_group_service
-from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel,\
-    SubscriptionModel
+from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel, \
+    SubscriptionModel, NetworkFunctionFilterModel
 from mod.subscription import SubNfState
 
 
@@ -33,6 +33,24 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+
+    def subscription_data(self, subscription_name):
+        nf_filter = NetworkFunctionFilterModel(subscription_name, '{^pnf.*,^vnf.*}',
+                                               '{}', '{}', '{}')
+        mg_first = MeasurementGroupModel(subscription_name, 'MG1', 'UNLOCKED', 15, '/pm/pm.xml',
+                                         "[{ \"measurementType\": \"countera\" },\
+                                         { \"measurementType\": \"counterb\" }]",
+                                         "[{ \"DN\":\"dna\"},{\"DN\":\"dnb\"}]")
+        mg_second = copy.deepcopy(mg_first)
+        mg_second.measurement_group_name = 'MG2'
+        mg_second.administrative_state = 'LOCKED'
+        nf_filter_list = [nf_filter]
+        mg_list = [mg_first, mg_second]
+        subscription_model = SubscriptionModel(subscription_name, 'pmsh_operational_policy',
+                                               'pmsh_control_loop_name', 'LOCKED')
+        subscription_model.network_filter = nf_filter_list
+        subscription_model.measurement_groups = mg_list
+        return subscription_model
 
     def setUp(self):
         super().setUp()
@@ -114,3 +132,11 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         subscription = self.subscription_request.replace('ExtraPM-All-gNB-R2B', new_sub_name)
         subscription = subscription.replace('msrmt_grp_name', new_msrmt_grp_name)
         return subscription
+
+    def test_measurement_group_encoder(self):
+        self.mg_encode = measurement_group_service.measurement_group_encoder(
+            self.subscription_data('nf_filter_encode').measurement_groups[0]
+        )
+        self.assertEqual(self.mg_encode['measurementGroup']['measurementGroupName'], 'MG1')
+        self.assertEqual(self.mg_encode['measurementGroup']['managedObjectDNsBasic'],
+                         '[{ \"DN\":\"dna\"},{\"DN\":\"dnb\"}]')
