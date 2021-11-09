@@ -23,6 +23,7 @@ from mod.api.services import measurement_group_service, nf_service
 from mod.api.custom_exception import InvalidDataException, DuplicateDataException
 from mod.subscription import AdministrativeState
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import joinedload
 
 
 def create_subscription(subscription):
@@ -203,7 +204,7 @@ def save_subscription_request(subscription):
         subscription (dict): subscription request to be saved.
 
     Returns:
-        string: Subscription name
+        SubscriptionModel: subscription object which was added to the session
         list[MeasurementGroupModel]: list of measurement groups
     """
     logger.info(f'Saving subscription request for: {subscription["subscriptionName"]}')
@@ -289,3 +290,22 @@ def save_nf_filter(nf_filter, subscription_name):
                                             model_version_ids=nf_filter['modelVersionIDs'],
                                             model_names=nf_filter['modelNames'])
     db.session.add(new_filter)
+
+
+def get_subscription_by_name(subscription_name):
+    """
+    Retrieves the subscription information by name
+
+    Args:
+        subscription_name (String): Name of the Subscription
+
+    Returns:
+        SubscriptionModel: If subscription was defined else None
+    """
+    logger.info(f'Attempting to fetch subscription by name: {subscription_name}')
+    subscription_model = db.session.query(SubscriptionModel) \
+        .options(joinedload(SubscriptionModel.network_filter),
+                 joinedload(SubscriptionModel.measurement_groups)) \
+        .filter_by(subscription_name=subscription_name).first()
+    db.session.remove()
+    return subscription_model
