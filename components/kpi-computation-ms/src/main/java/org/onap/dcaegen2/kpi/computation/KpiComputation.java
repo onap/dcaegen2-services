@@ -21,29 +21,14 @@
 package org.onap.dcaegen2.kpi.computation;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import org.apache.commons.lang.StringUtils;
-import org.onap.dcaegen2.kpi.config.ControlLoopSchemaType;
-import org.onap.dcaegen2.kpi.config.Kpi;
-import org.onap.dcaegen2.kpi.config.KpiConfig;
-import org.onap.dcaegen2.kpi.config.KpiJsonConversion;
-import org.onap.dcaegen2.kpi.config.MethodForKpi;
-import org.onap.dcaegen2.kpi.config.Operation;
+
+import org.onap.dcaegen2.kpi.config.*;
+
 import org.onap.dcaegen2.kpi.exception.KpiComputationException;
-import org.onap.dcaegen2.kpi.models.CommonEventHeader;
-import org.onap.dcaegen2.kpi.models.Configuration;
-import org.onap.dcaegen2.kpi.models.MeasDataCollection;
-import org.onap.dcaegen2.kpi.models.MeasInfo;
-import org.onap.dcaegen2.kpi.models.MeasResult;
-import org.onap.dcaegen2.kpi.models.MeasValues;
-import org.onap.dcaegen2.kpi.models.Perf3gppFields;
-import org.onap.dcaegen2.kpi.models.PerformanceEvent;
-import org.onap.dcaegen2.kpi.models.VesEvent;
+import org.onap.dcaegen2.kpi.models.*;
 import org.onap.dcaegen2.kpi.utils.VesJsonConversion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +37,7 @@ import org.slf4j.LoggerFactory;
  * KPI computation.
  *
  * @author Kai Lu
+ * @author Tarun Agrawal
  */
 public class KpiComputation {
 
@@ -98,10 +84,10 @@ public class KpiComputation {
                 .map(Perf3gppFields::getMeasDataCollection)
                 .orElseThrow(() -> new KpiComputationException("Required Field: MeasData not present"));
         // Do computation for each KPI
-        List<VesEvent> events = new ArrayList<>();
+        List<VesEvent> events = new LinkedList<>();
         List<Kpi> kpis = methodForKpi.getKpis();
         kpis.forEach(k -> {
-            Map<String, List<BigDecimal>> measInfoMap = getOperands(measDataCollection, k.getOperands());
+            Map<String, List<KpiOperand>> measInfoMap = getOperands(measDataCollection, k.getOperands());
             if (measInfoMap == null) {
                 logger.info("No kpi need to do computation for {}", k.getOperands());
                 return;
@@ -111,36 +97,84 @@ public class KpiComputation {
             String measType = k.getMeasType();
             Operation operation = k.getOperation();
 
-            VesEvent kpiVesEvent = CommandHandler.handle(operation.value, pmEvent, schemaType, measInfoMap, measType);
-            events.add(kpiVesEvent);
+            List<VesEvent> kpiVesEvent = CommandHandler.handle(operation.value, pmEvent, schemaType,
+                                                  measInfoMap, measType, k.getOperands());
+            if (kpiVesEvent != null && !kpiVesEvent.isEmpty()) {
+
+                events.addAll(kpiVesEvent);
+            }
+
         });
+
         return events;
     }
 
-    private Map<String, List<BigDecimal>> getOperands(MeasDataCollection measDataCollection, String operands) {
-        List<BigDecimal> kpiOperands = new ArrayList<>();
+    private Map<String, List<KpiOperand>> getOperands(MeasDataCollection measDataCollection, List<String> operands) {
+
+        Map<String, List<KpiOperand>> measInfoMap = new HashMap<>();
         List<MeasInfo> measInfoList = measDataCollection.getMeasInfoList();
-        String[] key = new String[1];
-        measInfoList.forEach(m -> {
-            List<String> measTypesList = m.getMeasTypes().getMeasTypesList();
-            String measValue = measTypesList.stream()
-                    .filter(s -> StringUtils.substring(s, 0, operands.length()).equalsIgnoreCase(operands)).findFirst()
-                    .orElse(null);
-            if (measValue != null) {
-                key[0] = measValue.substring(operands.length() + 1);
-                int index = measTypesList.indexOf(measValue);
-                MeasValues measValues = m.getMeasValuesList().stream().findFirst().orElse(null);
-                List<MeasResult> measResults = measValues.getMeasResults();
-                kpiOperands.add(new BigDecimal(measResults.get(index).getSvalue()));
-            }
-        });
-        if (kpiOperands.size() <= 0) {
-            logger.info("No measureValues matched");
+        String key = null;
+        boolean flag;
+
+        if (operands == null || operands.size() <= 0) {
+            logger.info("No operands, no need to do computation ");
             return null;
         }
-        Map<String, List<BigDecimal>> measInfoMap = new HashMap<>();
-        measInfoMap.put(key[0], kpiOperands);
-        logger.info("kpi operate: {}", kpiOperands);
-        return measInfoMap;
+
+        // check all operands part of MeasInfo. else remove them from curated list.
+	List<MeasInfo> curatedMeasInfoList = new ArrayList<>();
+        for(MeasInfo measInfo : measInfoList) {
+                flag = false;
+                 for(String operand : operands) {
+                         List<String> measTypesList = measInfo.getMeasTypes().getMeasTypesList();
+			 String measValue = measTypesList.stream()
+                         .filter(s -> StringUtils.substring(s, 0, operand.length()).equalsIgnoreCase(operand))
+                         .findFirst()
+                         .orElse(null);
+			 if (measValue == null) {
+				 flag = true;
+			 }
+
+                 }
+		 if (!flag) {
+			 //add to new list
+			 curatedMeasInfoList.add(measInfo);
+		 }
+        }
+        
+	for (String operand: operands) {
+		List<KpiOperand> kpiOperands = new ArrayList<>();
+		for(MeasInfo m: curatedMeasInfoList) {
+			List<String> measTypesList = m.getMeasTypes().getMeasTypesList();
+			String measValue = measTypesList.stream()
+				.filter(s -> StringUtils.substring(s, 0, operand.length()).equalsIgnoreCase(operand))
+				.findFirst()
+				.orElse(null);
+			if (measValue != null) {
+				key = new StringBuilder().append(operand).toString();
+				int index = measTypesList.indexOf(measValue);
+				MeasValues measValues = m.getMeasValuesList().stream().findFirst().orElse(null);
+				List<MeasResult> measResults = measValues.getMeasResults();
+				String measObjInstId = measValues.getMeasObjInstId();
+				MeasResult measResult = measResults.stream()
+					.filter(v -> v.getPvalue() == (index + 1))
+					.findFirst()
+					.orElse(null);
+				if (measResult != null) {
+					KpiOperand newKpiOperand = new KpiOperand(measObjInstId, new BigDecimal(measResult.getSvalue()));
+					kpiOperands.add(newKpiOperand);
+				} else {
+					logger.info("measResults mis-matched - incorrect ves msg construction");
+				}
+			}
+		}
+		if (kpiOperands.size() <= 0) {
+			logger.info("No measureValues matched");
+			return null;
+		}
+		measInfoMap.put(key, kpiOperands);
+		logger.info("kpi operate: {}", kpiOperands);
+	}
+	return measInfoMap;
     }
 }
