@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "6da38351_72e36342",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-10T15:20:37Z",
+      "side": 1,
+      "message": "why not use an f-string?",
+      "revId": "924073b88cdb0cb80a4cb110d4fc57aa7cd3eeb3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5028b429_d580c97c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-10T15:20:37Z",
+      "side": 1,
+      "message": "why not use an f-string?",
+      "revId": "924073b88cdb0cb80a4cb110d4fc57aa7cd3eeb3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e748e388_bfbcfaf5",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
         "patchSetId": 1
