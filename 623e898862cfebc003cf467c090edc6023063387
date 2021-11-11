@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "bad61e05_fac7030c",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/BaseKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-11T22:43:08Z",
+      "side": 1,
+      "message": "do NOT remove the copyright line. Just remove the 2020 from it.",
+      "parentUuid": "e43910e5_3f748080",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "473997f2_e1fb12e7",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/BaseKpiComputation.java",
         "patchSetId": 1
@@ -177,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "81f8882e_533525a6",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-11T22:43:08Z",
+      "side": 1,
+      "message": "still using a \"*\". Please expand.",
+      "parentUuid": "54e14eab_ea414763",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5ca4c958_52a3dd0f",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
         "patchSetId": 1
@@ -191,6 +227,24 @@
       "revId": "623e898862cfebc003cf467c090edc6023063387",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea389efd_f38fe263",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-11T22:43:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ca4c958_52a3dd0f",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -261,6 +315,24 @@
       "revId": "623e898862cfebc003cf467c090edc6023063387",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "886a7ef5_c0eefdd1",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-11T22:43:08Z",
+      "side": 1,
+      "message": "You NEED the copyright line. But it should ONLY mention 2021.",
+      "parentUuid": "94b703bb_3e779d63",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
