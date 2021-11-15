@@ -27,11 +27,13 @@ import java.util.Map;
 import org.onap.dcaegen2.kpi.config.ControlLoopSchemaType;
 import org.onap.dcaegen2.kpi.models.PerformanceEvent;
 import org.onap.dcaegen2.kpi.models.VesEvent;
+import org.onap.dcaegen2.kpi.models.KpiOperand;
 
 /**
  * Command Type.
  *
  * @author Kai Lu
+ * @author Tarun Agrawal
  *
  */
 @FunctionalInterface
@@ -44,9 +46,10 @@ public interface Command {
      * @param schemaType  schemaType
      * @param measInfoMap measInfoMap
      * @param measType    measType
+     * @param operands    operands list of measurements
      * 
      * @return object
      */
-    VesEvent handle(PerformanceEvent pmEvent, ControlLoopSchemaType schemaType,
-            Map<String, List<BigDecimal>> measInfoMap, String measType);
+    List<VesEvent> handle(PerformanceEvent pmEvent, ControlLoopSchemaType schemaType,
+            Map<String, List<KpiOperand>> measInfoMap, String measType, List<String> operands);
 }

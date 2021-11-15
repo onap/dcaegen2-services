@@ -1,6 +1,6 @@
 /*-
  * ============LICENSE_START=======================================================
- *  Copyright (C) 2020-2021 China Mobile.
+ *  Copyright (C) 2021 China Mobile.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,11 @@
 package org.onap.dcaegen2.kpi.computation;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.UUID;
 
@@ -43,26 +45,35 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * SumKpiComputation.
+ * RatioKpiComputation.
  *
- * @author Kai Lu
  * @author Tarun Agrawal
  */
-public class SumKpiComputation extends BaseKpiComputation {
-
-    private static Logger logger = LoggerFactory.getLogger(SumKpiComputation.class);
+public class RatioKpiComputation extends BaseKpiComputation {
+    private static Logger logger = LoggerFactory.getLogger(RatioKpiComputation.class);
 
     @Override
-    public List<VesEvent> handle(PerformanceEvent pmEvent, ControlLoopSchemaType schemaType,
-            Map<String, List<KpiOperand>> measInfoMap, String measType, List<String> operands) {
-
-        List<KpiOperand> k1 = measInfoMap.get(operands.get(0));
-
-        BigDecimal result = k1.stream().map(KpiOperand::getValue).reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        final List<VesEvent> vesEvents = new LinkedList<>();
-        vesEvents.add(generateVesEvent(pmEvent, schemaType.toString(), result, measType));
+    public List < VesEvent > handle(PerformanceEvent pmEvent, ControlLoopSchemaType schemaType,
+        Map < String, List < KpiOperand >> measInfoMap, String measType, List < String > operands) {
+        final List < VesEvent > vesEvents = new LinkedList < > ();
+        if (operands.size() == 2) {
+            List < KpiOperand > k1 = measInfoMap.get(operands.get(0));
+            List < KpiOperand > k2 = measInfoMap.get(operands.get(1));
+            if (k1.size() != k2.size()) {
+                return null;
+            }
+            ListIterator < KpiOperand > listIteratorK1 = k1.listIterator();
+            ListIterator < KpiOperand > listIteratorK2 = k2.listIterator();
+            while (listIteratorK1.hasNext()) {
+                final KpiOperand myK1 = listIteratorK1.next();
+                final KpiOperand myK2 = listIteratorK2.next();
+                if (myK2.getValue().compareTo(BigDecimal.ZERO) != 0) {
+                    final BigDecimal result = myK1.getValue().multiply(new BigDecimal("100"))
+                        .divide(myK2.getValue(), 0, RoundingMode.HALF_UP);
+                    vesEvents.add(generateVesEvent(pmEvent, schemaType.toString(), result, measType));
+                }
+            }
+        }
         return vesEvents;
     }
-
 }
