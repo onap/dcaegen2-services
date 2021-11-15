@@ -1,0 +1,797 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67ecaf38_6bff853e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Add white space before type?\nSame for other doc strings",
+      "range": {
+        "startLine": 86,
+        "startChar": 25,
+        "endLine": 86,
+        "endChar": 26
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "951ce4a9_1eae221d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Can be removed",
+      "range": {
+        "startLine": 86,
+        "startChar": 69,
+        "endLine": 86,
+        "endChar": 81
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dca1cb9_4dabeb9f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Add a new line between the doc string elements",
+      "range": {
+        "startLine": 86,
+        "startChar": 88,
+        "endLine": 86,
+        "endChar": 89
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dd6dd5c_e4a2fcdd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Should this be a dict?\nAlso, just the type should be defined for Returns param",
+      "range": {
+        "startLine": 88,
+        "startChar": 7,
+        "endLine": 88,
+        "endChar": 24
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acf36993_bd82c4cc",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Will this return None if the query fails?",
+      "range": {
+        "startLine": 94,
+        "startChar": 44,
+        "endLine": 94,
+        "endChar": 68
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "822d33d9_7423eed5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Do we need the double quotes?",
+      "range": {
+        "startLine": 96,
+        "startChar": 60,
+        "endLine": 96,
+        "endChar": 61
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae52ef92_7ba2ac35",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "was?",
+      "range": {
+        "startLine": 97,
+        "startChar": 25,
+        "endLine": 97,
+        "endChar": 27
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ad5b7fc_9698418a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "occured",
+      "range": {
+        "startLine": 105,
+        "startChar": 47,
+        "endLine": 105,
+        "endChar": 53
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f64bd415_dd51a7cd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "was?",
+      "range": {
+        "startLine": 107,
+        "startChar": 34,
+        "endLine": 107,
+        "endChar": 36
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3653a9d8_7e626c82",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Should this be included iun the swagger?",
+      "range": {
+        "startLine": 108,
+        "startChar": 53,
+        "endLine": 108,
+        "endChar": 74
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d40c8365_a2a95aae",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "This is no longer used so can remove",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 16
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b210166b_49002747",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "by name?",
+      "range": {
+        "startLine": 117,
+        "startChar": 40,
+        "endLine": 117,
+        "endChar": 72
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "554f7807_16d6dc88",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "query?",
+      "range": {
+        "startLine": 123,
+        "startChar": 55,
+        "endLine": 123,
+        "endChar": 61
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9155139e_c7259e49",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Do we need to add the 500?",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 11
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1527e654_e5716b76",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "space",
+      "range": {
+        "startLine": 96,
+        "startChar": 25,
+        "endLine": 96,
+        "endChar": 26
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b01161db_89aff70b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "dict: blah blah",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 13
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "761aade8_691b0a4b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "space",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 18
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f83367b1_beb7d1d2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "This is actually just a dict correct?\nSame for the other encoder functions",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 12
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2e5fd3c_c39ae52a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "missing white space",
+      "range": {
+        "startLine": 88,
+        "startChar": 10,
+        "endLine": 88,
+        "endChar": 11
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97d896e1_719a3774",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": ".. name",
+      "range": {
+        "startLine": 297,
+        "startChar": 46,
+        "endLine": 297,
+        "endChar": 63
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "445b75cc_a4749b21",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Just type is required",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 302,
+        "endChar": 21
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f39619e0_e00d2097",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "None?",
+      "range": {
+        "startLine": 302,
+        "startChar": 46,
+        "endLine": 302,
+        "endChar": 51
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "386506f1_bca1182e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Attempting to fetch Subscription: {sub_name}",
+      "range": {
+        "startLine": 304,
+        "startChar": 18,
+        "endLine": 304,
+        "endChar": 71
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3dad93c0_525a5fce",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "These encoder functions look a lot like what the serialize functions do in the db models class.\nWhy can they be done there and returned by the get_subscription_by_name function?",
+      "range": {
+        "startLine": 313,
+        "startChar": 17,
+        "endLine": 313,
+        "endChar": 24
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "591d1394_5a96f9c1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "white space",
+      "range": {
+        "startLine": 318,
+        "startChar": 20,
+        "endLine": 318,
+        "endChar": 21
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e5546d9_f4562d25",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "new lines",
+      "range": {
+        "startLine": 318,
+        "startChar": 70,
+        "endLine": 318,
+        "endChar": 71
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "254d3d44_3571fe5a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "dict?",
+      "range": {
+        "startLine": 320,
+        "startChar": 8,
+        "endLine": 320,
+        "endChar": 25
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8eaabdf2_95886128",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "do we need the double quotes",
+      "range": {
+        "startLine": 323,
+        "startChar": 47,
+        "endLine": 323,
+        "endChar": 48
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96c52a92_cce66ab7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Is this necessary?\nWill the entry not be set as an empty string in the db if not present in the create?",
+      "range": {
+        "startLine": 325,
+        "startChar": 7,
+        "endLine": 325,
+        "endChar": 31
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98426e13_5b75bbc1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "No need to wrap these lines.\n\n\u0027nfFilter\u0027: nf_service.nf_filter_encoder(subscription.network_filter[0]),\n\u0027measurementGroups\u0027: [measurement_group_service.measurement_group_encoder(mg)\n                      for mg in subscription.measurement_groups]}}",
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e376f6c6_edcd7660",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "If this is replicated across the test classes, just put it in the BaseClassSetup",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 25
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a928a047_d880a902",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "Why is this a list?\nIt should be just 1 nf_filter per sub correct?",
+      "range": {
+        "startLine": 51,
+        "startChar": 44,
+        "endLine": 51,
+        "endChar": 58
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42a864d5_59a48146",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "duplicate test data",
+      "range": {
+        "startLine": 44,
+        "startChar": 18,
+        "endLine": 44,
+        "endChar": 22
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbaf9ff2_44e81ab3",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "can be removed",
+      "range": {
+        "startLine": 159,
+        "startChar": 52,
+        "endLine": 159,
+        "endChar": 59
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45f94de6_8ce5511b",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:49:25Z",
+      "side": 1,
+      "message": "It is good to check as much as possible but I feel this isn\u0027t necessary",
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
