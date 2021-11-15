@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04b7d06b_dfeab33d",
+        "filename": "components/kpi-computation-ms/Changelog.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-15T13:10:48Z",
+      "side": 1,
+      "message": "I\u0027m sorry. This should have been a \"*\" instead of a \"#\".",
+      "revId": "9fe2f6df071fd1b4011414eb518276b139446721",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c4a264f_b78545f2",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-15T13:10:48Z",
+      "side": 1,
+      "message": "Please check your IDE settings. There should not be spaces around the \u003c and \u003e within type declarations. The spaces are also inconsistent with the rest of the code within the module. See all of the examples in the styleguide that we follow:\n\nhttps://google.github.io/styleguide/javaguide.html",
+      "revId": "9fe2f6df071fd1b4011414eb518276b139446721",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
