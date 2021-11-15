@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "9749b3e1_d1ea2a4f",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/BaseKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 7878
+      },
+      "writtenOn": "2021-11-15T05:03:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bad61e05_fac7030c",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "473997f2_e1fb12e7",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/BaseKpiComputation.java",
         "patchSetId": 1
@@ -213,6 +231,24 @@
     },
     {
       "key": {
+        "uuid": "54117309_e6360312",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 7878
+      },
+      "writtenOn": "2021-11-15T05:03:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81f8882e_533525a6",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5ca4c958_52a3dd0f",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
         "patchSetId": 1
@@ -333,6 +369,24 @@
       "revId": "623e898862cfebc003cf467c090edc6023063387",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c8ee363_459b4d33",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 7878
+      },
+      "writtenOn": "2021-11-15T05:03:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "886a7ef5_c0eefdd1",
+      "revId": "623e898862cfebc003cf467c090edc6023063387",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
