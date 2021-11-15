@@ -554,6 +554,30 @@
     },
     {
       "key": {
+        "uuid": "619ad2da_32d6983c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T17:52:00Z",
+      "side": 1,
+      "message": "\u003e These encoder functions look a lot like what the serialize functions do in the db models class.\n\u003e Why can they be done there and returned by the get_subscription_by_name function?\n\n*can\u0027t",
+      "parentUuid": "3dad93c0_525a5fce",
+      "range": {
+        "startLine": 313,
+        "startChar": 17,
+        "endLine": 313,
+        "endChar": 24
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "591d1394_5a96f9c1",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
