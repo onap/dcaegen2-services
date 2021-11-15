@@ -439,6 +439,29 @@
     },
     {
       "key": {
+        "uuid": "d3552198_d2c66aef",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-15T18:10:02Z",
+      "side": 1,
+      "message": "SubscriptionModel",
+      "range": {
+        "startLine": 207,
+        "startChar": 7,
+        "endLine": 207,
+        "endChar": 14
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "97d896e1_719a3774",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
