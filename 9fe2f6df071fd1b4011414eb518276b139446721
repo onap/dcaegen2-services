@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "05683892_36c4bf65",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-15T13:14:23Z",
+      "side": 1,
+      "message": "Please check your IDE settings. These tabs should be spaces.\n\nhttps://google.github.io/styleguide/javaguide.html#s2.3.1-whitespace-characters\nTab characters are not used for indentation.",
+      "revId": "9fe2f6df071fd1b4011414eb518276b139446721",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9c4a264f_b78545f2",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
         "patchSetId": 3
@@ -30,6 +47,23 @@
       "writtenOn": "2021-11-15T13:10:48Z",
       "side": 1,
       "message": "Please check your IDE settings. There should not be spaces around the \u003c and \u003e within type declarations. The spaces are also inconsistent with the rest of the code within the module. See all of the examples in the styleguide that we follow:\n\nhttps://google.github.io/styleguide/javaguide.html",
+      "revId": "9fe2f6df071fd1b4011414eb518276b139446721",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d783bb6d_e4fa7a72",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiComputationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-15T13:14:23Z",
+      "side": 1,
+      "message": "Please check your IDE settings. These tabs should be spaces.\n\nhttps://google.github.io/styleguide/javaguide.html#s2.3.1-whitespace-characters\nTab characters are not used for indentation.",
       "revId": "9fe2f6df071fd1b4011414eb518276b139446721",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
