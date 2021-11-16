@@ -71,6 +71,78 @@
     },
     {
       "key": {
+        "uuid": "c7ce5c1a_65667846",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dca1cb9_4dabeb9f",
+      "range": {
+        "startLine": 86,
+        "startChar": 88,
+        "endLine": 86,
+        "endChar": 89
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca0c82ca_307958b5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67ecaf38_6bff853e",
+      "range": {
+        "startLine": 86,
+        "startChar": 25,
+        "endLine": 86,
+        "endChar": 26
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b9df563_a8aa85cc",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Feels that is needed and modified the statement for better understanding.",
+      "parentUuid": "951ce4a9_1eae221d",
+      "range": {
+        "startLine": 86,
+        "startChar": 69,
+        "endLine": 86,
+        "endChar": 81
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9dd6dd5c_e4a2fcdd",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
         "patchSetId": 4
@@ -91,6 +163,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97eca3a4_c1bd8d4c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dd6dd5c_e4a2fcdd",
+      "range": {
+        "startLine": 88,
+        "startChar": 7,
+        "endLine": 88,
+        "endChar": 24
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "3fcf176b_dfd34279",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "yes, If the desired subscription_name is not present in DB, We will get None.",
+      "parentUuid": "acf36993_bd82c4cc",
+      "range": {
+        "startLine": 94,
+        "startChar": 44,
+        "endLine": 94,
+        "endChar": 68
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "822d33d9_7423eed5",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
         "patchSetId": 4
@@ -137,6 +257,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59b68a3a_dc091b4e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Yes, I used it to differentiate the name in middle of string.",
+      "parentUuid": "822d33d9_7423eed5",
+      "range": {
+        "startLine": 96,
+        "startChar": 60,
+        "endLine": 96,
+        "endChar": 61
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "6544ef1c_8f70ae21",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae52ef92_7ba2ac35",
+      "range": {
+        "startLine": 97,
+        "startChar": 25,
+        "endLine": 97,
+        "endChar": 27
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ad5b7fc_9698418a",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
         "patchSetId": 4
@@ -183,6 +351,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6e91eb2_f2ce9e93",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ad5b7fc_9698418a",
+      "range": {
+        "startLine": 105,
+        "startChar": 47,
+        "endLine": 105,
+        "endChar": 53
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "effa2797_fb2ece00",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f64bd415_dd51a7cd",
+      "range": {
+        "startLine": 107,
+        "startChar": 34,
+        "endLine": 107,
+        "endChar": 36
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3653a9d8_7e626c82",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
         "patchSetId": 4
@@ -229,6 +445,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f35444a4_4735288c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3653a9d8_7e626c82",
+      "range": {
+        "startLine": 108,
+        "startChar": 53,
+        "endLine": 108,
+        "endChar": 74
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "a0e985c2_35e9a9d5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Addressing this as per the discussion of other comment.",
+      "parentUuid": "d40c8365_a2a95aae",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 34,
+        "endChar": 16
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b210166b_49002747",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 4
@@ -275,6 +539,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d182cea_54d0708b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b210166b_49002747",
+      "range": {
+        "startLine": 117,
+        "startChar": 40,
+        "endLine": 117,
+        "endChar": 72
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -301,6 +589,30 @@
     },
     {
       "key": {
+        "uuid": "222076e9_bbb6b2fd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "554f7807_16d6dc88",
+      "range": {
+        "startLine": 123,
+        "startChar": 55,
+        "endLine": 123,
+        "endChar": 61
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9155139e_c7259e49",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 4
@@ -321,6 +633,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c664e2c_cb7ca7ec",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9155139e_c7259e49",
+      "range": {
+        "startLine": 130,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 11
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -347,6 +683,30 @@
     },
     {
       "key": {
+        "uuid": "e5dc32fe_0476bbb9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Cleaning this encoder function to utilize the serialize functions there in db models",
+      "parentUuid": "1527e654_e5716b76",
+      "range": {
+        "startLine": 96,
+        "startChar": 25,
+        "endLine": 96,
+        "endChar": 26
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b01161db_89aff70b",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
         "patchSetId": 4
@@ -367,6 +727,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "331c1a56_944ef203",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Cleaning this encoder function to utilize the serialize functions there in db models",
+      "parentUuid": "b01161db_89aff70b",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 13
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -393,6 +777,30 @@
     },
     {
       "key": {
+        "uuid": "7caea7a4_25b96909",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Cleaning this encoder function to utilize the serialize functions there in db models",
+      "parentUuid": "761aade8_691b0a4b",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 18
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f83367b1_beb7d1d2",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
         "patchSetId": 4
@@ -413,6 +821,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ff8f339_399b6d25",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Cleaning this encoder function to utilize the serialize functions there in db models",
+      "parentUuid": "f83367b1_beb7d1d2",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 12
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -439,6 +871,30 @@
     },
     {
       "key": {
+        "uuid": "605f9a46_09d95f96",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Cleaning this encoder function to utilize the serialize functions there in db models",
+      "parentUuid": "d2e5fd3c_c39ae52a",
+      "range": {
+        "startLine": 88,
+        "startChar": 10,
+        "endLine": 88,
+        "endChar": 11
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3552198_d2c66aef",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -462,6 +918,30 @@
     },
     {
       "key": {
+        "uuid": "23f2ea62_b769a1e8",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3552198_d2c66aef",
+      "range": {
+        "startLine": 207,
+        "startChar": 7,
+        "endLine": 207,
+        "endChar": 14
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97d896e1_719a3774",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -482,6 +962,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31eca871_2d8ad64f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97d896e1_719a3774",
+      "range": {
+        "startLine": 297,
+        "startChar": 46,
+        "endLine": 297,
+        "endChar": 63
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -531,6 +1035,54 @@
     },
     {
       "key": {
+        "uuid": "260ff663_32d2e4f0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "445b75cc_a4749b21",
+      "range": {
+        "startLine": 302,
+        "startChar": 8,
+        "endLine": 302,
+        "endChar": 21
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3e170a1_4a3ab785",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f39619e0_e00d2097",
+      "range": {
+        "startLine": 302,
+        "startChar": 46,
+        "endLine": 302,
+        "endChar": 51
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "386506f1_bca1182e",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -551,6 +1103,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47c01291_2ee325c6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "386506f1_bca1182e",
+      "range": {
+        "startLine": 304,
+        "startChar": 18,
+        "endLine": 304,
+        "endChar": 71
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -589,6 +1165,30 @@
       "side": 1,
       "message": "\u003e These encoder functions look a lot like what the serialize functions do in the db models class.\n\u003e Why can they be done there and returned by the get_subscription_by_name function?\n\n*can\u0027t",
       "parentUuid": "3dad93c0_525a5fce",
+      "range": {
+        "startLine": 313,
+        "startChar": 17,
+        "endLine": 313,
+        "endChar": 24
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12215a27_43112eba",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Updating this as per the discussion.",
+      "parentUuid": "619ad2da_32d6983c",
       "range": {
         "startLine": 313,
         "startChar": 17,
@@ -647,6 +1247,54 @@
     },
     {
       "key": {
+        "uuid": "a1c42f88_45fa7c6b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Cleaning this encoder function to utilize the serialize functions there in db models",
+      "parentUuid": "9e5546d9_f4562d25",
+      "range": {
+        "startLine": 318,
+        "startChar": 70,
+        "endLine": 318,
+        "endChar": 71
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ea6fa44_1800dc7b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Cleaning this encoder function to utilize the serialize functions there in db models",
+      "parentUuid": "591d1394_5a96f9c1",
+      "range": {
+        "startLine": 318,
+        "startChar": 20,
+        "endLine": 318,
+        "endChar": 21
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "254d3d44_3571fe5a",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -670,6 +1318,30 @@
     },
     {
       "key": {
+        "uuid": "051a7222_36cf5a13",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Cleaning this encoder function to utilize the serialize functions there in db models",
+      "parentUuid": "254d3d44_3571fe5a",
+      "range": {
+        "startLine": 320,
+        "startChar": 8,
+        "endLine": 320,
+        "endChar": 25
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8eaabdf2_95886128",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -681,6 +1353,30 @@
       "writtenOn": "2021-11-15T17:49:25Z",
       "side": 1,
       "message": "do we need the double quotes",
+      "range": {
+        "startLine": 323,
+        "startChar": 47,
+        "endLine": 323,
+        "endChar": 48
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5c93d31_f971f4ad",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Yes, I used it to differentiate the name in middle of string.",
+      "parentUuid": "8eaabdf2_95886128",
       "range": {
         "startLine": 323,
         "startChar": 47,
@@ -716,6 +1412,30 @@
     },
     {
       "key": {
+        "uuid": "9ee676dd_2bbfb64f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "This is optional at this place, I removed the condition.",
+      "parentUuid": "96c52a92_cce66ab7",
+      "range": {
+        "startLine": 325,
+        "startChar": 7,
+        "endLine": 325,
+        "endChar": 31
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "98426e13_5b75bbc1",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -733,6 +1453,24 @@
     },
     {
       "key": {
+        "uuid": "d113e59d_c9096988",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Cleaning this encoder function to utilize the serialize functions there in db models",
+      "parentUuid": "98426e13_5b75bbc1",
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e376f6c6_edcd7660",
         "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
         "patchSetId": 4
@@ -744,6 +1482,30 @@
       "writtenOn": "2021-11-15T17:49:25Z",
       "side": 1,
       "message": "If this is replicated across the test classes, just put it in the BaseClassSetup",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 25
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7615e102_01b47e86",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Thanks, for the suggestion Fiachra, I put in basesetup.py file on top of BaseClassSetup, Which avoids of inheriting that method in all other unrelated test cases.",
+      "parentUuid": "e376f6c6_edcd7660",
       "range": {
         "startLine": 37,
         "startChar": 8,
@@ -779,6 +1541,30 @@
     },
     {
       "key": {
+        "uuid": "f38df2cb_8ede8b8e",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "From DB model i am getting this as list, mentioned the same many days back in one of other comments.",
+      "parentUuid": "a928a047_d880a902",
+      "range": {
+        "startLine": 51,
+        "startChar": 44,
+        "endLine": 51,
+        "endChar": 58
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "42a864d5_59a48146",
         "filename": "components/pm-subscription-handler/tests/test_controller.py",
         "patchSetId": 4
@@ -799,6 +1585,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cb7ff3c_650d2178",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Moved this to the base_setup.py file",
+      "parentUuid": "42a864d5_59a48146",
+      "range": {
+        "startLine": 44,
+        "startChar": 18,
+        "endLine": 44,
+        "endChar": 22
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -825,6 +1635,30 @@
     },
     {
       "key": {
+        "uuid": "eea86167_69650f4b",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "It is necessary, I want to send 2 positional parameters the first is the object reference which we need to send manually here. So, sending dummy String object reference.",
+      "parentUuid": "cbaf9ff2_44e81ab3",
+      "range": {
+        "startLine": 159,
+        "startChar": 52,
+        "endLine": 159,
+        "endChar": 59
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "45f94de6_8ce5511b",
         "filename": "components/pm-subscription-handler/tests/test_controller.py",
         "patchSetId": 4
@@ -839,6 +1673,24 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4af0ad0c_f29a4d9a",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-16T14:42:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45f94de6_8ce5511b",
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
