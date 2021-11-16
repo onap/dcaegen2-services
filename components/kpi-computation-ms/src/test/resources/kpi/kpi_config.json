@@ -9,7 +9,7 @@
             "kpis": [{
                 "measType": "AMFRegNbr",
                 "operation": "SUM",
-                "operands": "RM.RegisteredSubNbrMean"
+                "operands": ["RM.RegisteredSubNbrMean"]
             }]
         },
         {
@@ -18,16 +18,16 @@
             "policyScope": "resource=networkSlice;type=configuration",
             "policyName": "configuration.dcae.microservice.pm-mapper.xml",
             "policyVersion": "v0.0.1",
-            "kpis": [{
+	     "kpis": [{
                     "measType": "UpstreamThr",
                     "operation": "SUM",
-                    "operands": "GTP.InDataOctN3UPF"
+                    "operands": ["GTP.InDataOctN3UPF"]
 
                 },
                 {
                     "measType": "DownstreamThr",
                     "operation": "SUM",
-                    "operands": "GTP.OutDataOctN3UPF"
+                    "operands": ["GTP.OutDataOctN3UPF"]
                 }
             ]
         }
