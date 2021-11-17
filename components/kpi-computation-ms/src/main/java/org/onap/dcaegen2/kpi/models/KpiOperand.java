@@ -1,6 +1,6 @@
-/*-
- * ============LICENSE_START=======================================================
- *  Copyright (C) 2021 China Mobile.
+/*
+ * ================================================================================
+ * Copyright (C) 2021 Deutsche Telekom AG. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,51 +13,36 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * SPDX-License-Identifier: Apache-2.0
  * ============LICENSE_END=========================================================
+ *
  */
 
-package org.onap.dcaegen2.kpi.config;
+package org.onap.dcaegen2.kpi.models;
 
-import com.google.gson.annotations.SerializedName;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import java.util.List;
+
+import java.math.BigDecimal;
 
 /**
- * KPI Formula.
+ * Operand Values.
  *
- * @author Kai Lu
- * @author Tarun Agrawal
+ * @author curated code
+ *
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class Kpi extends BaseModule {
-
-    private static final long serialVersionUID = 1L;
+@AllArgsConstructor
+public class KpiOperand {
 
     /**
-     * measType.
+     * measValuesList[0].measObjInstId
      */
-    @SerializedName("measType")
-    private String measType;
+    private String measObjInstId;
 
     /**
-     * operation.
+     * measResult.svalue
      */
-    private Operation operation;
-
-    /**
-     * operands.
-     */
-    private List<String> operands;
-
-    /**
-     * condition.
-     *
-     */
-    private String condition;
+    private BigDecimal value;
 
 }
+

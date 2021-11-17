@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.onap.dcaegen2.kpi.config.ControlLoopSchemaType;
+import org.onap.dcaegen2.kpi.models.KpiOperand;
 import org.onap.dcaegen2.kpi.models.PerformanceEvent;
 import org.onap.dcaegen2.kpi.models.VesEvent;
 
@@ -32,27 +33,29 @@ import org.onap.dcaegen2.kpi.models.VesEvent;
  * Get special methods to do computation.
  *
  * @author Kai Lu
+ * @author Tarun Agrawal
  *
  */
 public class CommandHandler {
 
     /**
      * The method to handle data.
-     * 
+     *
      * @param className   class name
      * @param pmEvent     pmEvent
      * @param schemaType  schemaType
      * @param measInfoMap measInfoMap
      * @param measType    measType
+     * @param operands    operands list of measurements
      * @return VesEvent VesEvent
      */
-    public static VesEvent handle(String className, PerformanceEvent pmEvent, ControlLoopSchemaType schemaType,
-            Map<String, List<BigDecimal>> measInfoMap, String measType) {
+    public static List<VesEvent> handle(String className, PerformanceEvent pmEvent, ControlLoopSchemaType schemaType,
+            Map<String, List<KpiOperand>> measInfoMap, String measType, List<String> operands) {
 
         try {
             // Load Command Object
             Command command = (Command) Class.forName(className).getDeclaredConstructor().newInstance();
-            return command.handle(pmEvent, schemaType, measInfoMap, measType);
+            return command.handle(pmEvent, schemaType, measInfoMap, measType, operands);
         } catch (Exception e) {
             e.printStackTrace();
         }
