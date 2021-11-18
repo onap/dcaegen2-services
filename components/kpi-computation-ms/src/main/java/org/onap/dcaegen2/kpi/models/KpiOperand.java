@@ -1,7 +1,6 @@
-/*-
- * ============LICENSE_START=======================================================
- *  Copyright (C) 2021 China Mobile.
- *  Copyright (C) 2021 Deutsche Telekom AG. All rights reserved.
+/*
+ * ================================================================================
+ * Copyright (C) 2021 Deutsche Telekom AG. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +13,36 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * SPDX-License-Identifier: Apache-2.0
  * ============LICENSE_END=========================================================
+ *
  */
 
-package org.onap.dcaegen2.kpi.config;
+package org.onap.dcaegen2.kpi.models;
 
-public enum Operation {
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-    SUM("org.onap.dcaegen2.kpi.computation.SumKpiComputation"),
-    RATIO("org.onap.dcaegen2.kpi.computation.RatioKpiComputation"),
-    MEAN("org.onap.dcaegen2.kpi.computation.MEAN");
+import java.math.BigDecimal;
 
-    public final String value;
+/**
+ * Operand Values.
+ *
+ * @author curated code
+ *
+ */
+@Data
+@AllArgsConstructor
+public class KpiOperand {
 
-    private Operation(String value) {
-        this.value = value;
-    }
+    /**
+     * measValuesList[0].measObjInstId
+     */
+    private String measObjInstId;
 
-    public String value() {
-        return this.value;
-    }
+    /**
+     * measResult.svalue
+     */
+    private BigDecimal value;
+
 }
+

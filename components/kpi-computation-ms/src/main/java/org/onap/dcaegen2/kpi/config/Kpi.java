@@ -1,6 +1,7 @@
 /*-
  * ============LICENSE_START=======================================================
  *  Copyright (C) 2021 China Mobile.
+ *  Copyright (C) 2021 Deutsche Telekom AG. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +25,13 @@ import com.google.gson.annotations.SerializedName;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import java.util.List;
 
 /**
  * KPI Formula.
  *
  * @author Kai Lu
+ * @author Tarun Agrawal
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -50,7 +53,7 @@ public class Kpi extends BaseModule {
     /**
      * operands.
      */
-    private String operands;
+    private List<String> operands;
 
     /**
      * condition.
