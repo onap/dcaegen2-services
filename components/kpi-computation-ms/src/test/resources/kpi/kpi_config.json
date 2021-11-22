@@ -9,7 +9,7 @@
             "kpis": [{
                 "measType": "AMFRegNbr",
                 "operation": "SUM",
-                "operands": "RM.RegisteredSubNbrMean"
+                "operands": ["RM.RegisteredSubNbrMean"]
             }]
         },
         {
@@ -21,13 +21,13 @@
             "kpis": [{
                     "measType": "UpstreamThr",
                     "operation": "SUM",
-                    "operands": "GTP.InDataOctN3UPF"
+                    "operands": ["GTP.InDataOctN3UPF"]
 
                 },
                 {
                     "measType": "DownstreamThr",
                     "operation": "SUM",
-                    "operands": "GTP.OutDataOctN3UPF"
+                    "operands": ["GTP.OutDataOctN3UPF"]
                 }
             ]
         }

@@ -1,6 +1,7 @@
 /*-
  * ============LICENSE_START=======================================================
  *  Copyright (C) 2021 China Mobile.
+ *  Copyright (C) 2021 Deutsche Telekom AG. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +33,7 @@ public class KpiTest {
 
     private static final String KPI_CONFIG_FILE = "kpi/kpi_config.json";
     private static final String VES_MESSAGE_FILE = "kpi/ves_message.json";
+    private static final String KPI_CONFIG_RATIO_FILE = "kpi/kpi_config_ratio.json";
 
     @Test
     public void testKpiConfigValidate() {
@@ -49,6 +51,13 @@ public class KpiTest {
 
         VesEvent vesEvent = VesJsonConversion.convertVesEvent(vesMessage);
         assertEquals(vesEvent.getEvent().getCommonEventHeader().getDomain(), "perf3gpp");
+    }
+
+    @Test
+    public void testKpiConfigRatioValidate() {
+        String strKpiConfig = FileUtils.getFileContents(KPI_CONFIG_RATIO_FILE);
+        KpiConfig kpiConfig = KpiJsonConversion.convertKpiConfig(strKpiConfig);
+        assertEquals(kpiConfig.getDomain(), "measurementsForKpi");
     }
 
 }

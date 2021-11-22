@@ -1,6 +1,7 @@
 /*-
  * ============LICENSE_START=======================================================
  *  Copyright (C) 2021 China Mobile.
+ *  Copyright (C) 2021 Deutsche Telekom AG. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,11 +28,13 @@ import java.util.Map;
 import org.onap.dcaegen2.kpi.config.ControlLoopSchemaType;
 import org.onap.dcaegen2.kpi.models.PerformanceEvent;
 import org.onap.dcaegen2.kpi.models.VesEvent;
+import org.onap.dcaegen2.kpi.models.KpiOperand;
 
 /**
  * Command Type.
  *
  * @author Kai Lu
+ * @author Tarun Agrawal
  *
  */
 @FunctionalInterface
@@ -44,9 +47,10 @@ public interface Command {
      * @param schemaType  schemaType
      * @param measInfoMap measInfoMap
      * @param measType    measType
-     * 
+     * @param operands    operands list of measurements
+     *
      * @return object
      */
-    VesEvent handle(PerformanceEvent pmEvent, ControlLoopSchemaType schemaType,
-            Map<String, List<BigDecimal>> measInfoMap, String measType);
+    List<VesEvent> handle(PerformanceEvent pmEvent, ControlLoopSchemaType schemaType,
+            Map<String, List<KpiOperand>> measInfoMap, String measType, List<String> operands);
 }
