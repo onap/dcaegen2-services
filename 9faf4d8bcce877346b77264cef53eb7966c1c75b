@@ -1201,6 +1201,30 @@
     },
     {
       "key": {
+        "uuid": "202a97e0_422379f6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-23T14:25:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "12215a27_43112eba",
+      "range": {
+        "startLine": 313,
+        "startChar": 17,
+        "endLine": 313,
+        "endChar": 24
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "591d1394_5a96f9c1",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -1389,6 +1413,30 @@
     },
     {
       "key": {
+        "uuid": "d472990b_0879f835",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-23T14:25:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b5c93d31_f971f4ad",
+      "range": {
+        "startLine": 323,
+        "startChar": 47,
+        "endLine": 323,
+        "endChar": 48
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96c52a92_cce66ab7",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -1518,6 +1566,30 @@
     },
     {
       "key": {
+        "uuid": "016881ad_43e25bfa",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-23T14:25:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7615e102_01b47e86",
+      "range": {
+        "startLine": 37,
+        "startChar": 8,
+        "endLine": 37,
+        "endChar": 25
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a928a047_d880a902",
         "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
         "patchSetId": 4
@@ -1562,6 +1634,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e32856a_7b354505",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-23T14:25:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f38df2cb_8ede8b8e",
+      "range": {
+        "startLine": 51,
+        "startChar": 44,
+        "endLine": 51,
+        "endChar": 58
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -1656,6 +1752,30 @@
       "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6bc024a_fc300ca2",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-23T14:25:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eea86167_69650f4b",
+      "range": {
+        "startLine": 159,
+        "startChar": 52,
+        "endLine": 159,
+        "endChar": 59
+      },
+      "revId": "9faf4d8bcce877346b77264cef53eb7966c1c75b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
