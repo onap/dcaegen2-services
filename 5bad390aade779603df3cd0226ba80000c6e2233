@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3436c991_f553ea41",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-23T13:57:16Z",
+      "side": 1,
+      "message": "dict should suffice. Also we may need to include the possible variations and the HTTPStatus codes",
+      "range": {
+        "startLine": 78,
+        "startChar": 7,
+        "endLine": 78,
+        "endChar": 17
+      },
+      "revId": "5bad390aade779603df3cd0226ba80000c6e2233",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00d5d90c_ce3372b0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-23T13:57:16Z",
+      "side": 1,
+      "message": "Don\u0027t think we are raising anything here. Just returning",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 10
+      },
+      "revId": "5bad390aade779603df3cd0226ba80000c6e2233",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bf4759b_ca2dd843",
+        "filename": "components/pm-subscription-handler/tests/base_setup.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-23T13:57:16Z",
+      "side": 1,
+      "message": "No real need for the line wrap",
+      "range": {
+        "startLine": 25,
+        "startChar": 58,
+        "endLine": 25,
+        "endChar": 59
+      },
+      "revId": "5bad390aade779603df3cd0226ba80000c6e2233",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55767dc6_ffff7055",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-23T13:57:16Z",
+      "side": 1,
+      "message": "No real need for line wrap",
+      "range": {
+        "startLine": 25,
+        "startChar": 57,
+        "endLine": 25,
+        "endChar": 59
+      },
+      "revId": "5bad390aade779603df3cd0226ba80000c6e2233",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ef80fb1_9c182bac",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-23T13:57:16Z",
+      "side": 1,
+      "message": "If a function returns 2 vars then we should assign it to 2 vars",
+      "range": {
+        "startLine": 119,
+        "startChar": 13,
+        "endLine": 119,
+        "endChar": 16
+      },
+      "revId": "5bad390aade779603df3cd0226ba80000c6e2233",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
