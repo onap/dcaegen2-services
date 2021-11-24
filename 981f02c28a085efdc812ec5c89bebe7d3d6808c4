@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2a30cabf_a4fd147c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T14:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "285fd2d2_4e50335e",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 25
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c939cfba_dd277ddc",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ea21240_c9342d80",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T14:52:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c939cfba_dd277ddc",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 13
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "a17181e2_4c24c3d7",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T14:52:57Z",
+      "side": 1,
+      "message": "Here AppConfig() creates subscription without \u0027measurement groups\u0027 and \u0027nfFilter\u0027 that gets the exception when using Read all API. I feel we need to update the Policy Response handler as per the new API work. So, can add those new lines when working on that story. Deleted these lines to avoid exception in Read_all due to PMSH old flow of create subscription. I suggest CSITS need to updated once all the tasks finished.",
+      "parentUuid": "3b5c9535_97365b2f",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "edb57c5f_c93d78a0",
         "filename": "components/pm-subscription-handler/tests/base_setup.py",
         "patchSetId": 1
@@ -106,6 +178,30 @@
       "writtenOn": "2021-11-24T14:14:20Z",
       "side": 1,
       "message": "We can have method name as verb here. For example: create_subscriptions",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 25
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdf091b1_8db8b5d1",
+        "filename": "components/pm-subscription-handler/tests/base_setup.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T14:52:57Z",
+      "side": 1,
+      "message": "May be we can update as \u0027subscriptions_data\u0027 similar to the above function.",
+      "parentUuid": "edb57c5f_c93d78a0",
       "range": {
         "startLine": 54,
         "startChar": 4,
