@@ -292,9 +292,9 @@ def save_nf_filter(nf_filter, subscription_name):
     db.session.add(new_filter)
 
 
-def get_subscription_by_name(subscription_name):
+def query_subscription_by_name(subscription_name):
     """
-    Retrieves the subscription information by name
+    Queries the db for existing subscription by name
 
     Args:
         subscription_name (String): Name of the Subscription
@@ -309,3 +309,38 @@ def get_subscription_by_name(subscription_name):
         .filter_by(subscription_name=subscription_name).first()
     db.session.remove()
     return subscription_model
+
+
+def query_all_subscriptions():
+    """
+    Queries the db for all existing subscriptions defined in PMSH
+
+    Returns
+        list (dict): of all subscriptions else None
+    """
+    logger.info('Attempting to fetch all the subscriptions')
+    subscriptions = db.session.query(SubscriptionModel) \
+        .options(joinedload(SubscriptionModel.network_filter),
+                 joinedload(SubscriptionModel.measurement_groups)) \
+        .all()
+    db.session.remove()
+    return subscriptions
+
+
+def get_subscriptions_list():
+    """ Converts all subscriptions to JSON and appends to list
+
+    Returns
+       list (dict):: of all subscriptions else None
+    """
+    subscriptions = query_all_subscriptions()
+    if subscriptions is not None:
+        logger.info('successfully fetched all the subscriptions')
+        subscriptions_list = []
+        for subscription in subscriptions:
+            if (subscription.network_filter is not None) and \
+                    (len(subscription.measurement_groups) != 0):
+                subscriptions_list.append(subscription.serialize())
+        return subscriptions_list
+    else:
+        return None

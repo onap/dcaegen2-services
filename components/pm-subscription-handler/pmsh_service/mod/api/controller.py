@@ -81,7 +81,7 @@ def get_subscription_by_name(subscription_name):
     """
     logger.info('API call received to fetch subscription by name')
     try:
-        subscription = subscription_service.get_subscription_by_name(subscription_name)
+        subscription = subscription_service.query_subscription_by_name(subscription_name)
         if subscription is not None:
             logger.info(f'subscription object with the name "{subscription_name}" '
                         'was fetched successfully from database')
@@ -94,5 +94,27 @@ def get_subscription_by_name(subscription_name):
     except Exception as exception:
         logger.error(f'The following exception occurred "{exception}" while fetching subscription '
                      f'with the name "{subscription_name}"')
+        return {'error': 'Request was not processed due to Exception : '
+                         f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR
+
+
+def get_subscriptions():
+    """ Retrieves all the subscriptions that are defined in PMSH.
+
+    Returns:
+       success: list of all Subscriptions, 200
+       None: subscriptions not defined, 404
+       Exception: Details about exception, 500
+    """
+    logger.info('API call received to fetch all subscriptions')
+    try:
+        subscriptions = subscription_service.get_subscriptions_list()
+        if subscriptions is not None:
+            return subscriptions, HTTPStatus.OK
+        else:
+            logger.error('There are no subscriptions defined')
+            return {'error': 'There are no subscriptions defined'}, HTTPStatus.NOT_FOUND
+    except Exception as exception:
+        logger.error(f'The following exception occurred "{exception}" while fetching subscriptions')
         return {'error': 'Request was not processed due to Exception : '
                          f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR

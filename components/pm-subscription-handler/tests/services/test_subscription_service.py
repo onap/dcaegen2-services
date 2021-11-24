@@ -29,6 +29,7 @@ from mod.api.custom_exception import DuplicateDataException, InvalidDataExceptio
 from mod.pmsh_config import AppConfig
 from tests.base_setup import BaseClassSetup
 from mod.api.services import subscription_service, nf_service, measurement_group_service
+from tests.base_setup import get_subscriptions_data
 
 
 class SubscriptionServiceTestCase(BaseClassSetup):
@@ -357,3 +358,20 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         db_string = '{}'
         db_array = convert_db_string_to_list(db_string)
         self.assertEqual(len(db_array), 0)
+
+    @patch('mod.api.services.subscription_service.query_all_subscriptions',
+           MagicMock(return_value=get_subscriptions_data(['sub_demo_one', 'sub_demo_two'])))
+    def test_get_subscriptions_list(self):
+        subs = subscription_service.get_subscriptions_list()
+        self.assertEqual(subs[0]['subscription']['subscriptionName'], 'sub_demo_one')
+        self.assertEqual(subs[1]['subscription']['subscriptionName'], 'sub_demo_two')
+        self.assertEqual(subs[1]['subscription']['measurementGroups'][0]['measurementGroup']
+                         ['measurementGroupName'], 'MG1')
+        self.assertEqual(len(subs[1]['subscription']['measurementGroups']), 2)
+        self.assertEqual(len(subs), 2)
+
+    @patch('mod.api.services.subscription_service.query_all_subscriptions',
+           MagicMock(return_value=None))
+    def test_get_subscriptions_list_none(self):
+        subs = subscription_service.get_subscriptions_list()
+        self.assertEqual(subs, None)

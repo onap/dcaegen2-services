@@ -72,9 +72,26 @@ paths:
         400:
           description: Invalid input
 
+    get:
+      description: Get all the subscriptions from PMSH.
+      operationId: mod.api.controller.get_subscriptions
+      tags:
+        - "Subscription"
+      responses:
+        200:
+          description: OK; Array of subscriptions are returned
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/subscription"
+        404:
+          description: There are no subscriptions defined in PMSH
+        500:
+          description: Exception occurred while querying database
+
   /subscription/{subscription_name}:
     get:
-      description: Get the Subscription from ONAP specified by Name
+      description: Get the Subscription from PMSH specified by Name
       operationId: mod.api.controller.get_subscription_by_name
       tags:
         - "Subscription"
@@ -92,7 +109,7 @@ paths:
         404:
           description: Subscription with specified name not found
         500:
-          description: Exception occurs while querying database
+          description: Exception occurred while querying database
 
 definitions:
   subscription:
