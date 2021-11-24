@@ -202,18 +202,6 @@ class Subscription:
         db.session.remove()
         return sub_model.status
 
-    @staticmethod
-    def get_all():
-        """ Retrieves a list of subscriptions
-
-        Returns:
-            list(SubscriptionModel): Subscriptions list else empty
-        """
-
-        sub_models = SubscriptionModel.query.all()
-        db.session.remove()
-        return sub_models
-
     def create_subscription_on_nfs(self, nfs, mr_pub):
         """ Publishes an event to create a Subscription on an nf
 

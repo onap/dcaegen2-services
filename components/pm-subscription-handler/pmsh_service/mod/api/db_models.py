@@ -38,7 +38,7 @@ class SubscriptionModel(db.Model):
     network_filter = relationship(
         'NetworkFunctionFilterModel',
         cascade='all, delete-orphan',
-        backref='subscription')
+        backref='subscription', uselist=False)
 
     measurement_groups = relationship(
         'MeasurementGroupModel',
@@ -63,14 +63,12 @@ class SubscriptionModel(db.Model):
         return False
 
     def serialize(self):
-        sub_nfs = NfSubRelationalModel.query.filter(
-            NfSubRelationalModel.subscription_name == self.subscription_name).all()
-        db.session.remove()
-        return {'subscription_name': self.subscription_name,
-                'operational_policy_name': self.operational_policy_name,
-                'control_loop_name': self.control_loop_name,
-                'subscription_status': self.status,
-                'network_functions': [sub_nf.serialize_nf() for sub_nf in sub_nfs]}
+        return {'subscription': {'subscriptionName': self.subscription_name,
+                                 'operationalPolicyName': self.operational_policy_name,
+                                 'controlLoopName': self.control_loop_name,
+                                 'nfFilter': self.network_filter.serialize(),
+                                 'measurementGroups':
+                                     [mg.serialize() for mg in self.measurement_groups]}}
 
 
 class NetworkFunctionModel(db.Model):
@@ -141,7 +139,7 @@ class NfSubRelationalModel(db.Model):
 
     def __repr__(self):
         return f'subscription_name: {self.subscription_name}, ' \
-            f'nf_name: {self.nf_name}, nf_sub_status: {self.nf_sub_status}'
+               f'nf_name: {self.nf_name}, nf_sub_status: {self.nf_sub_status}'
 
     def serialize(self):
         return {'subscription_name': self.subscription_name, 'nf_name': self.nf_name,
@@ -185,12 +183,11 @@ class NetworkFunctionFilterModel(db.Model):
 
     def __repr__(self):
         return f'subscription_name: {self.subscription_name}, ' \
-            f'nf_names: {self.nf_names}, model_invariant_ids: {self.model_invariant_ids}' \
+               f'nf_names: {self.nf_names}, model_invariant_ids: {self.model_invariant_ids}' \
                f'model_version_ids: {self.model_version_ids}, model_names: {self.model_names}'
 
     def serialize(self):
-        return {'subscriptionName': self.subscription_name,
-                'nfNames': convert_db_string_to_list(self.nf_names),
+        return {'nfNames': convert_db_string_to_list(self.nf_names),
                 'modelInvariantIDs': convert_db_string_to_list(self.model_invariant_ids),
                 'modelVersionIDs': convert_db_string_to_list(self.model_version_ids),
                 'modelNames': convert_db_string_to_list(self.model_names)}
@@ -231,13 +228,12 @@ class MeasurementGroupModel(db.Model):
                f'managed_object_dns_basic: {self.managed_object_dns_basic}'
 
     def serialize(self):
-        return {'subscription_name': self.subscription_name,
-                'measurement_group_name': self.measurement_group_name,
-                'administrative_state': self.administrative_state,
-                'file_based_gp': self.file_based_gp,
-                'file_location': self.file_location,
-                'measurement_type': self.measurement_type,
-                'managed_object_dns_basic': self.managed_object_dns_basic}
+        return {'measurementGroup': {'measurementGroupName': self.measurement_group_name,
+                                     'administrativeState': self.administrative_state,
+                                     'fileBasedGP': self.file_based_gp,
+                                     'fileLocation': self.file_location,
+                                     'measurementTypes': self.measurement_type,
+                                     'managedObjectDNsBasic': self.managed_object_dns_basic}}
 
 
 class NfMeasureGroupRelationalModel(db.Model):
@@ -267,7 +263,7 @@ class NfMeasureGroupRelationalModel(db.Model):
 
     def __repr__(self):
         return f'measurement_grp_name: {self.measurement_grp_name}, ' \
-            f'nf_name: {self.nf_name}, nf_measure_grp_status: {self.nf_measure_grp_status}'
+               f'nf_name: {self.nf_name}, nf_measure_grp_status: {self.nf_measure_grp_status}'
 
 
 def convert_db_string_to_list(db_string):
