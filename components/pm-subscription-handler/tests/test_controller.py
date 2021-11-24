@@ -21,12 +21,13 @@ from unittest.mock import patch, MagicMock
 from http import HTTPStatus
 
 from mod import aai_client
-from mod.api.controller import status, post_subscription, get_subscription_by_name
+from mod.api.controller import status, post_subscription, get_subscription_by_name,\
+    get_subscriptions
 from tests.base_setup import BaseClassSetup
 from mod.api.db_models import SubscriptionModel, NfMeasureGroupRelationalModel
 from mod.subscription import SubNfState
 from mod.network_function import NetworkFunctionFilter
-from tests.base_setup import subscription_data
+from tests.base_setup import get_subscription_data, get_subscriptions_data
 
 
 class ControllerTestCase(BaseClassSetup):
@@ -111,8 +112,8 @@ class ControllerTestCase(BaseClassSetup):
         self.assertEqual(response[1], 400)
         self.assertEqual(response[0], 'No value provided in subscription name')
 
-    @patch('mod.api.services.subscription_service.get_subscription_by_name',
-           MagicMock(return_value=subscription_data('sub_demo')))
+    @patch('mod.api.services.subscription_service.query_subscription_by_name',
+           MagicMock(return_value=get_subscription_data('sub_demo')))
     def test_get_subscription_by_name_api(self):
         sub, status_code = get_subscription_by_name('sub_demo')
         self.assertEqual(status_code, HTTPStatus.OK)
@@ -125,16 +126,41 @@ class ControllerTestCase(BaseClassSetup):
         self.assertEqual(sub['subscription']['operationalPolicyName'],
                          'pmsh_operational_policy')
 
-    @patch('mod.api.services.subscription_service.get_subscription_by_name',
+    @patch('mod.api.services.subscription_service.query_subscription_by_name',
            MagicMock(return_value=None))
-    def test_get_subscription_by_name_api_error(self):
+    def test_get_subscription_by_name_api_none(self):
         sub, status_code = get_subscription_by_name('sub_demo')
         self.assertEqual(status_code, HTTPStatus.NOT_FOUND)
         self.assertEqual(sub['error'],
                          'Subscription was not defined with the name : sub_demo')
 
-    @patch('mod.api.services.subscription_service.get_subscription_by_name',
+    @patch('mod.api.services.subscription_service.query_subscription_by_name',
            MagicMock(side_effect=Exception('something failed')))
     def test_get_subscription_by_name_api_exception(self):
         sub, status_code = get_subscription_by_name('sub_demo')
+        self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
+
+    @patch('mod.api.services.subscription_service.query_all_subscriptions',
+           MagicMock(return_value=get_subscriptions_data(['sub_demo_one', 'sub_demo_two'])))
+    def test_get_subscriptions_api(self):
+        subs, status_code = get_subscriptions()
+        self.assertEqual(status_code, HTTPStatus.OK)
+        self.assertEqual(subs[0]['subscription']['subscriptionName'], 'sub_demo_one')
+        self.assertEqual(subs[1]['subscription']['subscriptionName'], 'sub_demo_two')
+        self.assertEqual(subs[1]['subscription']['measurementGroups'][0]['measurementGroup']
+                         ['measurementGroupName'], 'MG1')
+        self.assertEqual(len(subs[1]['subscription']['measurementGroups']), 2)
+        self.assertEqual(len(subs), 2)
+
+    @patch('mod.api.services.subscription_service.query_all_subscriptions',
+           MagicMock(return_value=None))
+    def test_get_subscriptions_api_none(self):
+        subs, status_code = get_subscriptions()
+        self.assertEqual(status_code, HTTPStatus.OK)
+        self.assertEqual(subs, [])
+
+    @patch('mod.api.services.subscription_service.query_all_subscriptions',
+           MagicMock(side_effect=Exception('something failed')))
+    def test_get_subscriptions_api_exception(self):
+        subs, status_code = get_subscriptions()
         self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
