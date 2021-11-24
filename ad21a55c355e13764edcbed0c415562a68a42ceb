@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41369e01_723d7204",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-24T16:11:27Z",
+      "side": 1,
+      "message": "PMSH",
+      "range": {
+        "startLine": 102,
+        "startChar": 60,
+        "endLine": 102,
+        "endChar": 64
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18ee034c_5e0e4b5c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-24T16:11:27Z",
+      "side": 1,
+      "message": "PMSH",
+      "range": {
+        "startLine": 76,
+        "startChar": 50,
+        "endLine": 76,
+        "endChar": 54
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93c6c695_357b71af",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-24T16:11:27Z",
+      "side": 1,
+      "message": "occurred\n\nSame below",
+      "range": {
+        "startLine": 90,
+        "startChar": 33,
+        "endLine": 90,
+        "endChar": 39
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f74abb07_fb763973",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-24T16:11:27Z",
+      "side": 1,
+      "message": "Ideally we should name these as query functions. Same for the above.\n\nquery_all_subscriptions()\n\"\"\" Queries the db for all existing Subscrptions ...",
+      "range": {
+        "startLine": 314,
+        "startChar": 4,
+        "endLine": 314,
+        "endChar": 14
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13f33cf0_d7016a5d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-24T16:11:27Z",
+      "side": 1,
+      "message": "list (SubscriptionModel): blah",
+      "range": {
+        "startLine": 318,
+        "startChar": 8,
+        "endLine": 318,
+        "endChar": 12
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0da96e37_22e54e0a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-24T16:11:27Z",
+      "side": 1,
+      "message": "list (dict): srtbsrt",
+      "range": {
+        "startLine": 333,
+        "startChar": 8,
+        "endLine": 333,
+        "endChar": 12
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5465116c_8121b4d2",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-24T16:11:27Z",
+      "side": 1,
+      "message": "If the old appconfig class is being removed, then delete it and move anything needed, like the mdchandler and PeriodicTask to the new class.\nAlso, just import the new one as AppConfig",
+      "range": {
+        "startLine": 30,
+        "startChar": 28,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f548d2be_b970787f",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-24T16:11:27Z",
+      "side": 1,
+      "message": "If we remove the other threads, this completely breaks the app.\nWhy can\u0027t the subhandler be removed and just move the aai_event thread here?",
+      "range": {
+        "startLine": 33,
+        "startChar": 19,
+        "endLine": 33,
+        "endChar": 23
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f388e31e_43ba42fd",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-24T16:11:27Z",
+      "side": 1,
+      "message": "We should have csits in place for this.",
+      "range": {
+        "startLine": 145,
+        "startChar": 8,
+        "endLine": 145,
+        "endChar": 30
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
