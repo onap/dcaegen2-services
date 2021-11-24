@@ -33,7 +33,7 @@ def get_pmsh_config(file_path='data/cbs_data_1.json'):
         return json.load(data)
 
 
-def subscription_data(subscription_name):
+def get_subscription_data(subscription_name):
     nf_filter = NetworkFunctionFilterModel(subscription_name, '{^pnf.*,^vnf.*}',
                                            '{}', '{}', '{}')
     mg_first = MeasurementGroupModel(subscription_name, 'MG1', 'UNLOCKED', 15, '/pm/pm.xml',
@@ -49,6 +49,13 @@ def subscription_data(subscription_name):
     subscription_model.network_filter = nf_filter
     subscription_model.measurement_groups = mg_list
     return subscription_model
+
+
+def get_subscriptions_data(subscription_names):
+    subscriptions = []
+    for subscription_name in subscription_names:
+        subscriptions.append(get_subscription_data(subscription_name))
+    return subscriptions
 
 
 class BaseClassSetup(TestCase):
