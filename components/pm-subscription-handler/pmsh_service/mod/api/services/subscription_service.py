@@ -309,3 +309,35 @@ def get_subscription_by_name(subscription_name):
         .filter_by(subscription_name=subscription_name).first()
     db.session.remove()
     return subscription_model
+
+
+def get_subscriptions():
+    """ Retrieves all the subscriptions that are defined in ONAP
+
+    Returns
+        List: of subscriptions else None
+    """
+    logger.info('Attempting to fetch all the subscriptions')
+    subscriptions = db.session.query(SubscriptionModel) \
+        .options(joinedload(SubscriptionModel.network_filter),
+                 joinedload(SubscriptionModel.measurement_groups)) \
+        .all()
+    db.session.remove()
+    return subscriptions
+
+
+def get_subscriptions_list():
+    """ Converts all subscriptions to JSON and appends to list
+
+    Returns
+        List: of subscriptions else None
+    """
+    subscriptions = get_subscriptions()
+    if subscriptions is not None:
+        logger.info('successfully fetched all the subscriptions')
+        subscriptions_list = []
+        for subscription in subscriptions:
+            subscriptions_list.append(subscription.serialize())
+        return subscriptions_list
+    else:
+        return None

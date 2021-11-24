@@ -72,6 +72,23 @@ paths:
         400:
           description: Invalid input
 
+    get:
+      description: Get all the subscriptions from ONAP.
+      operationId: mod.api.controller.get_subscriptions
+      tags:
+        - "Subscription"
+      responses:
+        200:
+          description: OK; Array of subscriptions are returned
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/subscription"
+        404:
+          description: There are no subscriptions defined in ONAP
+        500:
+          description: Exception occurs while querying database
+
   /subscription/{subscription_name}:
     get:
       description: Get the Subscription from ONAP specified by Name
