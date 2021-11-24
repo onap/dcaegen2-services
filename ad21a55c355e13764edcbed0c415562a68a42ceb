@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3e127558_dd89da0c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T17:45:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41369e01_723d7204",
+      "range": {
+        "startLine": 102,
+        "startChar": 60,
+        "endLine": 102,
+        "endChar": 64
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18ee034c_5e0e4b5c",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3da471a_f4965399",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T17:45:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18ee034c_5e0e4b5c",
+      "range": {
+        "startLine": 76,
+        "startChar": 50,
+        "endLine": 76,
+        "endChar": 54
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9cd3f9d9_f86a4536",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T17:45:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93c6c695_357b71af",
+      "range": {
+        "startLine": 90,
+        "startChar": 33,
+        "endLine": 90,
+        "endChar": 39
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f74abb07_fb763973",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2803997_5eb58d39",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T17:45:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f74abb07_fb763973",
+      "range": {
+        "startLine": 314,
+        "startChar": 4,
+        "endLine": 314,
+        "endChar": 14
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "6aa065a5_6ad04fb1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T17:45:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f33cf0_d7016a5d",
+      "range": {
+        "startLine": 318,
+        "startChar": 8,
+        "endLine": 318,
+        "endChar": 12
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0da96e37_22e54e0a",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2257ba0_604dfc88",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T17:45:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0da96e37_22e54e0a",
+      "range": {
+        "startLine": 333,
+        "startChar": 8,
+        "endLine": 333,
+        "endChar": 12
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "b4d8ef45_de59af33",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T17:45:15Z",
+      "side": 1,
+      "message": "closing this as discussed",
+      "parentUuid": "5465116c_8121b4d2",
+      "range": {
+        "startLine": 30,
+        "startChar": 28,
+        "endLine": 30,
+        "endChar": 36
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f548d2be_b970787f",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 2
@@ -186,6 +354,30 @@
     },
     {
       "key": {
+        "uuid": "9fdd3ea8_16607012",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T17:45:15Z",
+      "side": 1,
+      "message": "closing this as discussed",
+      "parentUuid": "f548d2be_b970787f",
+      "range": {
+        "startLine": 33,
+        "startChar": 19,
+        "endLine": 33,
+        "endChar": 23
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f388e31e_43ba42fd",
         "filename": "components/pm-subscription-handler/tests/test_controller.py",
         "patchSetId": 2
@@ -206,6 +398,30 @@
       "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de59f1e9_1b948512",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T17:45:15Z",
+      "side": 1,
+      "message": "Handling csits in \u0027DCAEGEN2-2990\u0027",
+      "parentUuid": "f388e31e_43ba42fd",
+      "range": {
+        "startLine": 145,
+        "startChar": 8,
+        "endLine": 145,
+        "endChar": 30
+      },
+      "revId": "ad21a55c355e13764edcbed0c415562a68a42ceb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
