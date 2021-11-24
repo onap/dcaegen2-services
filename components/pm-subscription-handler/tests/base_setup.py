@@ -29,11 +29,29 @@ from mod.pmsh_config import AppConfig as NewAppConfig
 
 
 def get_pmsh_config(file_path='data/cbs_data_1.json'):
+    """
+    Gets PMSH config from the JSON file
+
+    Args:
+        file_path (String): Name of the file with path
+
+    Returns
+        dict: Dictionary representation of the the service configuration
+    """
     with open(os.path.join(os.path.dirname(__file__), file_path), 'r') as data:
         return json.load(data)
 
 
-def subscription_data(subscription_name):
+def create_subscription_data(subscription_name):
+    """
+    Creates subscription model object
+
+    Args:
+        subscription_name (String): Name of the Subscription
+
+    Returns
+        SubscriptionModel: single subscription model object
+    """
     nf_filter = NetworkFunctionFilterModel(subscription_name, '{^pnf.*,^vnf.*}',
                                            '{}', '{}', '{}')
     mg_first = MeasurementGroupModel(subscription_name, 'MG1', 'UNLOCKED', 15, '/pm/pm.xml',
@@ -49,6 +67,22 @@ def subscription_data(subscription_name):
     subscription_model.network_filter = nf_filter
     subscription_model.measurement_groups = mg_list
     return subscription_model
+
+
+def create_multiple_subscription_data(subscription_names):
+    """
+    Creates a list of subscription model objects
+
+    Args:
+        subscription_names (List): Name of the Subscriptions
+
+    Returns
+        list (SubscriptionModel): of subscription model objects
+    """
+    subscriptions = []
+    for subscription_name in subscription_names:
+        subscriptions.append(create_subscription_data(subscription_name))
+    return subscriptions
 
 
 class BaseClassSetup(TestCase):

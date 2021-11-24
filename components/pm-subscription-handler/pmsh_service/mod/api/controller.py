@@ -75,24 +75,40 @@ def get_subscription_by_name(subscription_name):
         subscription_name (String): Name of the subscription.
 
     Returns:
-       success: dict of single Subscription, 200
-       None: subscription not defined, 404
-       Exception: Details about exception, 500
+       dict, HTTPStatus: single Sub in PMSH, 200
+       dict, HTTPStatus: subscription not defined, 404
+       dict, HTTPStatus: Exception details of failure, 500
     """
     logger.info('API call received to fetch subscription by name')
     try:
-        subscription = subscription_service.get_subscription_by_name(subscription_name)
+        subscription = subscription_service.query_subscription_by_name(subscription_name)
         if subscription is not None:
-            logger.info(f'subscription object with the name "{subscription_name}" '
-                        'was fetched successfully from database')
-            return subscription.serialize(), HTTPStatus.OK
+            logger.info(f'queried subscription was successful with the name: {subscription_name}')
+            return subscription.serialize(), HTTPStatus.OK.value
         else:
-            logger.error(f'subscription object with the name "{subscription_name}" '
-                         'was un successful to fetch from database')
+            logger.error('queried subscription was un successful with the name: '
+                         f'{subscription_name}')
             return {'error': 'Subscription was not defined with the name : '
-                             f'{subscription_name}'}, HTTPStatus.NOT_FOUND
+                             f'{subscription_name}'}, HTTPStatus.NOT_FOUND.value
     except Exception as exception:
-        logger.error(f'The following exception occurred "{exception}" while fetching subscription '
-                     f'with the name "{subscription_name}"')
+        logger.error(f'While querying the subscription with name: {subscription_name}, '
+                     f'it occurred the following exception "{exception}"')
         return {'error': 'Request was not processed due to Exception : '
-                         f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR
+                         f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
+
+
+def get_subscriptions():
+    """ Retrieves all the subscriptions that are defined in PMSH.
+
+    Returns:
+       list (dict), HTTPStatus: All subs in PMSH, 200
+       dict, HTTPStatus: Exception details of failure, 500
+    """
+    logger.info('API call received to fetch all subscriptions')
+    try:
+        subscriptions = subscription_service.get_subscriptions_list()
+        return subscriptions, HTTPStatus.OK.value
+    except Exception as exception:
+        logger.error(f'The following exception occurred while fetching subscriptions: {exception}')
+        return {'error': 'Request was not processed due to Exception : '
+                         f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
