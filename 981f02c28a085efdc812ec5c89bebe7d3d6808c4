@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "285fd2d2_4e50335e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-11-24T14:14:20Z",
+      "side": 1,
+      "message": "How does method name get_subscriptions or get_all_subscription sound? I feel first one sounds concise.",
+      "range": {
+        "startLine": 101,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 25
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c939cfba_dd277ddc",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-11-24T14:14:20Z",
+      "side": 1,
+      "message": "The business logic here can move to service layer that gives a good separation of concern from design perspective. What do you think?",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 118,
+        "endChar": 13
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "71ed22e3_8976c01b",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 1
@@ -22,6 +68,53 @@
       "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3b5c9535_97365b2f",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-11-24T14:14:20Z",
+      "side": 1,
+      "message": "We can evaluate and handle the cleanup in the respective story without increasing the scope of current and up coming stories. For example, Response handler would be needed here with new feature as well. Also, we can first have automation suite aligned to our new requirements before clean up that would provide better feedback during cleanup if existing functionalities like response handler are impacted.",
+      "parentUuid": "71ed22e3_8976c01b",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "edb57c5f_c93d78a0",
+        "filename": "components/pm-subscription-handler/tests/base_setup.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-11-24T14:14:20Z",
+      "side": 1,
+      "message": "We can have method name as verb here. For example: create_subscriptions",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 25
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
