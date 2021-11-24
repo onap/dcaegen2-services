@@ -51,6 +51,13 @@ def subscription_data(subscription_name):
     return subscription_model
 
 
+def subscription_multiple(subscription_names):
+    subscriptions = []
+    for subscription_name in subscription_names:
+        subscriptions.append(subscription_data(subscription_name))
+    return subscriptions
+
+
 class BaseClassSetup(TestCase):
     app = None
     app_context = None

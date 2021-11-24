@@ -21,12 +21,13 @@ from unittest.mock import patch, MagicMock
 from http import HTTPStatus
 
 from mod import aai_client
-from mod.api.controller import status, post_subscription, get_subscription_by_name
+from mod.api.controller import status, post_subscription, get_subscription_by_name,\
+    get_subscriptions_all
 from tests.base_setup import BaseClassSetup
 from mod.api.db_models import SubscriptionModel, NfMeasureGroupRelationalModel
 from mod.subscription import SubNfState
 from mod.network_function import NetworkFunctionFilter
-from tests.base_setup import subscription_data
+from tests.base_setup import subscription_data, subscription_multiple
 
 
 class ControllerTestCase(BaseClassSetup):
@@ -137,4 +138,29 @@ class ControllerTestCase(BaseClassSetup):
            MagicMock(side_effect=Exception('something failed')))
     def test_get_subscription_by_name_api_exception(self):
         sub, status_code = get_subscription_by_name('sub_demo')
+        self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR)
+
+    @patch('mod.api.services.subscription_service.get_subscriptions_all',
+           MagicMock(return_value=subscription_multiple(['sub_demo_one', 'sub_demo_two'])))
+    def test_get_subscriptions_all_api(self):
+        subs, status_code = get_subscriptions_all()
+        self.assertEqual(status_code, HTTPStatus.OK)
+        self.assertEqual(subs[0]['subscription']['subscriptionName'], 'sub_demo_one')
+        self.assertEqual(subs[1]['subscription']['subscriptionName'], 'sub_demo_two')
+        self.assertEqual(subs[1]['subscription']['measurementGroups'][0]['measurementGroup']
+                         ['measurementGroupName'], 'MG1')
+        self.assertEqual(len(subs[1]['subscription']['measurementGroups']), 2)
+        self.assertEqual(len(subs), 2)
+
+    @patch('mod.api.services.subscription_service.get_subscriptions_all',
+           MagicMock(return_value=None))
+    def test_get_subscriptions_all_api_error(self):
+        subs, status_code = get_subscriptions_all()
+        self.assertEqual(status_code, HTTPStatus.NOT_FOUND)
+        self.assertEqual(subs['error'], 'There are no subscriptions defined')
+
+    @patch('mod.api.services.subscription_service.get_subscriptions_all',
+           MagicMock(side_effect=Exception('something failed')))
+    def test_get_subscriptions_all_api_exception(self):
+        subs, status_code = get_subscriptions_all()
         self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR)

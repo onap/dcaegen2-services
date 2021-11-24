@@ -16,14 +16,9 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 import sys
-from signal import signal, SIGTERM
 
 from mod import db, create_app, launch_api_server, logger
-from mod.exit_handler import ExitHandler
 from mod.pmsh_config import AppConfig as NewAppConfig
-from mod.pmsh_utils import AppConfig, PeriodicTask
-from mod.policy_response_handler import PolicyResponseHandler
-from mod.subscription_handler import SubscriptionHandler
 
 
 def main():
@@ -32,30 +27,10 @@ def main():
             app = create_app()
             app.app_context().push()
             db.create_all(app=app)
-            app_conf = AppConfig()
             pmsh_app_conf = NewAppConfig()
-            policy_mr_pub = app_conf.get_mr_pub('policy_pm_publisher')
-            policy_mr_sub = app_conf.get_mr_sub('policy_pm_subscriber')
-            aai_event_mr_sub = app_conf.get_mr_sub('aai_subscriber')
         except Exception as e:
             logger.error(f'Failed to get config and create application: {e}', exc_info=True)
             sys.exit(e)
-
-        policy_response_handler = PolicyResponseHandler(policy_mr_sub, app_conf, app)
-        policy_response_handler_thread = PeriodicTask(25, policy_response_handler.poll_policy_topic)
-        policy_response_handler_thread.name = 'policy_event_thread'
-        logger.info('Start polling PMSH_CL_INPUT topic on DMaaP MR.')
-        policy_response_handler_thread.start()
-
-        subscription_handler = SubscriptionHandler(policy_mr_pub, aai_event_mr_sub, app, app_conf)
-        subscription_handler_thread = PeriodicTask(20, subscription_handler.execute)
-        subscription_handler_thread.name = 'sub_handler_thread'
-        subscription_handler_thread.start()
-
-        periodic_tasks = [subscription_handler_thread, policy_response_handler_thread]
-
-        signal(SIGTERM, ExitHandler(periodic_tasks=periodic_tasks,
-                                    app_conf=app_conf, subscription_handler=subscription_handler))
         launch_api_server(pmsh_app_conf)
 
     except Exception as e:

@@ -309,3 +309,18 @@ def get_subscription_by_name(subscription_name):
         .filter_by(subscription_name=subscription_name).first()
     db.session.remove()
     return subscription_model
+
+
+def get_subscriptions_all():
+    """ Retrieves all the subscriptions that are defined in ONAP
+
+    Returns
+        List: of subscriptions else None
+    """
+    logger.info('Attempting to fetch all the subscriptions')
+    subscriptions_all = db.session.query(SubscriptionModel) \
+        .options(joinedload(SubscriptionModel.network_filter),
+                 joinedload(SubscriptionModel.measurement_groups)) \
+        .all()
+    db.session.remove()
+    return subscriptions_all

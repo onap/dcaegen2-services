@@ -96,3 +96,29 @@ def get_subscription_by_name(subscription_name):
                      f'with the name "{subscription_name}"')
         return {'error': 'Request was not processed due to Exception : '
                          f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR
+
+
+def get_subscriptions_all():
+    """ Retrieves all the subscriptions that are defined in ONAP.
+
+    Returns:
+       success: list of all Subscriptions, 200
+       None: subscriptions not defined, 404
+       Exception: Details about exception, 500
+    """
+    logger.info('API call received to fetch all subscriptions')
+    try:
+        subscriptions_all = subscription_service.get_subscriptions_all()
+        if subscriptions_all is not None:
+            logger.info('successfully fetched all the subscriptions')
+            subscriptions_list = []
+            for subscription in subscriptions_all:
+                subscriptions_list.append(subscription.serialize())
+            return subscriptions_list, HTTPStatus.OK
+        else:
+            logger.error('There are no subscriptions defined')
+            return {'error': 'There are no subscriptions defined'}, HTTPStatus.NOT_FOUND
+    except Exception as exception:
+        logger.error(f'The following exception occurred "{exception}" while fetching subscriptions')
+        return {'error': 'Request was not processed due to Exception : '
+                         f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR
