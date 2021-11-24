@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "3dcb5653_8dcb9f9a",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-11-24T15:31:18Z",
+      "side": 1,
+      "message": "As discussed, old Appconfigs are breaking read API so we can go ahead this change.",
+      "parentUuid": "a17181e2_4c24c3d7",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "edb57c5f_c93d78a0",
         "filename": "components/pm-subscription-handler/tests/base_setup.py",
         "patchSetId": 1
@@ -202,6 +226,30 @@
       "side": 1,
       "message": "May be we can update as \u0027subscriptions_data\u0027 similar to the above function.",
       "parentUuid": "edb57c5f_c93d78a0",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 25
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2deeb824_848b4c0b",
+        "filename": "components/pm-subscription-handler/tests/base_setup.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-11-24T15:31:18Z",
+      "side": 1,
+      "message": "Yes, go ahead we can make updates to both.",
+      "parentUuid": "bdf091b1_8db8b5d1",
       "range": {
         "startLine": 54,
         "startChar": 4,
