@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71ed22e3_8976c01b",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-24T13:28:15Z",
+      "side": 1,
+      "message": "Removed few lines to avoid inserting values by old PMSH flow. Related code cleanup will be handled in DCAEGEN2-2820 once all tasks are finished(We haven\u0027t sure which code will be reused for later tasks)",
+      "range": {
+        "startLine": 24,
+        "startChar": 4,
+        "endLine": 24,
+        "endChar": 11
+      },
+      "revId": "981f02c28a085efdc812ec5c89bebe7d3d6808c4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
