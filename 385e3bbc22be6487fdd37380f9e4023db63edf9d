@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "756068ff_6ec1fcaf",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-25T15:15:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f9ccc22_4ed42bb5",
+      "range": {
+        "startLine": 113,
+        "startChar": 56,
+        "endLine": 113,
+        "endChar": 69
+      },
+      "revId": "385e3bbc22be6487fdd37380f9e4023db63edf9d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab1cd00c_a97ed86e",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "385e3bbc22be6487fdd37380f9e4023db63edf9d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49510a82_0feb6ef4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-25T15:15:44Z",
+      "side": 1,
+      "message": "Modified to use .value to maintain consistency. But both ways communicating the same status to the client application.",
+      "parentUuid": "ab1cd00c_a97ed86e",
+      "range": {
+        "startLine": 115,
+        "startChar": 53,
+        "endLine": 115,
+        "endChar": 74
+      },
+      "revId": "385e3bbc22be6487fdd37380f9e4023db63edf9d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "b69d733f_c9380a61",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-25T15:15:44Z",
+      "side": 1,
+      "message": "If we are keeping if else in this function then change not needed i guess because the existing doc string says it returns dict of all subscriptions as list or returns empty list",
+      "parentUuid": "2162d25d_6aa9c874",
+      "range": {
+        "startLine": 334,
+        "startChar": 7,
+        "endLine": 334,
+        "endChar": 12
+      },
+      "revId": "385e3bbc22be6487fdd37380f9e4023db63edf9d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "db542eb1_9d606c5b",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2021-11-25T14:38:24Z",
       "side": 1,
       "message": "No need for the else here",
+      "range": {
+        "startLine": 345,
+        "startChar": 4,
+        "endLine": 345,
+        "endChar": 9
+      },
+      "revId": "385e3bbc22be6487fdd37380f9e4023db63edf9d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23a08598_f54e1813",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-25T15:15:44Z",
+      "side": 1,
+      "message": "I feel else is needed because i am checking is none or not in if condition which is required. otherwise we will get an error in serialize function.",
+      "parentUuid": "db542eb1_9d606c5b",
       "range": {
         "startLine": 345,
         "startChar": 4,
