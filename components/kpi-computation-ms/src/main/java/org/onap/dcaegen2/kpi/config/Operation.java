@@ -1,7 +1,7 @@
 /*-
  * ============LICENSE_START=======================================================
- *  Copyright (C) 2021 China Mobile.
- *  Copyright (C) 2021 Deutsche Telekom AG. All rights reserved.
+ *  Copyright (C) 2022 China Mobile.
+ *  Copyright (C) 2022 Deutsche Telekom AG. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,8 @@ public enum Operation {
 
     SUM("org.onap.dcaegen2.kpi.computation.SumKpiComputation"),
     RATIO("org.onap.dcaegen2.kpi.computation.RatioKpiComputation"),
-    MEAN("org.onap.dcaegen2.kpi.computation.MEAN");
+    MEAN("org.onap.dcaegen2.kpi.computation.MEAN"),
+    SUMRATIO("org.onap.dcaegen2.kpi.computation.SumRatioKpiComputation");
 
     public final String value;
 
