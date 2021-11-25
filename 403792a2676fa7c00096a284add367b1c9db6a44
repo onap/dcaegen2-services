@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1dbf5c6_c7e3b628",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-25T11:22:30Z",
+      "side": 1,
+      "message": "list(dict)",
+      "range": {
+        "startLine": 105,
+        "startChar": 16,
+        "endLine": 105,
+        "endChar": 20
+      },
+      "revId": "403792a2676fa7c00096a284add367b1c9db6a44",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b38ba095_d95b8bab",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-25T11:22:30Z",
+      "side": 1,
+      "message": "Should we be returning a 404 here?\nI think an empty list would be more appropriate.",
+      "range": {
+        "startLine": 116,
+        "startChar": 79,
+        "endLine": 116,
+        "endChar": 88
+      },
+      "revId": "403792a2676fa7c00096a284add367b1c9db6a44",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc9b6616_758b3e52",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-25T11:22:30Z",
+      "side": 1,
+      "message": "SubscriptionModel",
+      "range": {
+        "startLine": 319,
+        "startChar": 14,
+        "endLine": 319,
+        "endChar": 18
+      },
+      "revId": "403792a2676fa7c00096a284add367b1c9db6a44",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ae6d55f_a0363617",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-25T11:22:30Z",
+      "side": 1,
+      "message": "can remove",
+      "range": {
+        "startLine": 334,
+        "startChar": 19,
+        "endLine": 334,
+        "endChar": 20
+      },
+      "revId": "403792a2676fa7c00096a284add367b1c9db6a44",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "584478ee_ca1886c8",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-25T11:22:30Z",
+      "side": 1,
+      "message": "I think this should return the list whether empty or not and the calling function should return it with a 200",
+      "range": {
+        "startLine": 334,
+        "startChar": 7,
+        "endLine": 334,
+        "endChar": 18
+      },
+      "revId": "403792a2676fa7c00096a284add367b1c9db6a44",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1423ac3_a665b3f2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-11-25T11:22:30Z",
+      "side": 1,
+      "message": "Surely the filter and measgroups cannot be None or empty?",
+      "range": {
+        "startLine": 341,
+        "startChar": 44,
+        "endLine": 341,
+        "endChar": 55
+      },
+      "revId": "403792a2676fa7c00096a284add367b1c9db6a44",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
