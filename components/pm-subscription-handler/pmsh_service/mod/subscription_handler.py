@@ -18,9 +18,7 @@
 from jsonschema import ValidationError
 
 from mod import logger, aai_client
-from mod.aai_event_handler import process_aai_events
 from mod.network_function import NetworkFunctionFilter
-from mod.pmsh_utils import PeriodicTask
 from mod.subscription import AdministrativeState
 
 
@@ -73,7 +71,6 @@ class SubscriptionHandler:
     def _activate(self, new_administrative_state):
         if not self.app_conf.nf_filter:
             self.app_conf.nf_filter = NetworkFunctionFilter(**self.app_conf.subscription.nfFilter)
-        self._start_aai_event_thread()
         self.app_conf.subscription.update_sub_params(new_administrative_state,
                                                      self.app_conf.subscription.fileBasedGP,
                                                      self.app_conf.subscription.fileLocation,
@@ -90,15 +87,6 @@ class SubscriptionHandler:
             logger.info('Subscription is now LOCKING/DEACTIVATING.')
             self.app_conf.subscription.delete_subscription_from_nfs(nfs, self.mr_pub)
             self.app_conf.subscription.update_subscription_status()
-
-    def _start_aai_event_thread(self):
-        logger.info('Starting polling for NF info on AAI-EVENT topic on DMaaP MR.')
-        self.aai_event_thread = PeriodicTask(20, process_aai_events, args=(self.aai_sub,
-                                                                           self.mr_pub,
-                                                                           self.app,
-                                                                           self.app_conf))
-        self.aai_event_thread.name = 'aai_event_thread'
-        self.aai_event_thread.start()
 
     def stop_aai_event_thread(self):
         if self.aai_event_thread is not None:

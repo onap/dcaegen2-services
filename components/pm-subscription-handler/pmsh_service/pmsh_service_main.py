@@ -18,6 +18,7 @@
 import sys
 from signal import signal, SIGTERM
 
+from mod.aai_event_handler import AAIEventHandler
 from mod import db, create_app, launch_api_server, logger
 from mod.exit_handler import ExitHandler
 from mod.pmsh_config import AppConfig as NewAppConfig
@@ -51,7 +52,13 @@ def main():
         subscription_handler_thread.name = 'sub_handler_thread'
         subscription_handler_thread.start()
 
-        periodic_tasks = [subscription_handler_thread, policy_response_handler_thread]
+        aai_event_handler = AAIEventHandler(app)
+        aai_event_handler = PeriodicTask(20, aai_event_handler.execute)
+        aai_event_handler.name = 'aai_event_thread'
+        aai_event_handler.start()
+
+        periodic_tasks = [subscription_handler_thread, policy_response_handler_thread,
+                          aai_event_handler]
 
         signal(SIGTERM, ExitHandler(periodic_tasks=periodic_tasks,
                                     app_conf=app_conf, subscription_handler=subscription_handler))
