@@ -25,7 +25,8 @@ public enum Operation {
 
     SUM("org.onap.dcaegen2.kpi.computation.SumKpiComputation"),
     RATIO("org.onap.dcaegen2.kpi.computation.RatioKpiComputation"),
-    MEAN("org.onap.dcaegen2.kpi.computation.MEAN");
+    MEAN("org.onap.dcaegen2.kpi.computation.MEAN"),
+    SUMRATIO("org.onap.dcaegen2.kpi.computation.SumRatioKpiComputation");
 
     public final String value;
 
