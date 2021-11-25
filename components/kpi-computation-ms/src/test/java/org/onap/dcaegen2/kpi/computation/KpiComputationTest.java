@@ -40,6 +40,10 @@ public class KpiComputationTest {
     private static final String KPI_CONFIG_FILE = "kpi/kpi_config.json";
     private static final String VES_MESSAGE_FILE = "kpi/ves_message.json";
     private static final String KPI_CONFIG_RATIO_FILE = "kpi/kpi_config_ratio.json";
+    private static final String KPI_CONFIG_SUMRATIO_FILE = "kpi/kpi_config_sumratio.json";
+    private static final String VES_MESSAGE_EMPTY_FILE = "kpi/ves_message_empty.json";
+    private static final String VES_MESSAGE_NULL_FILE = "kpi/ves_message_null.json";
+    private static final String VES_MESSAGE_EVENTNAME_FILE = "kpi/ves_message_eventname.json";
 
     @Test
     public void testKpiComputation() {
@@ -68,6 +72,52 @@ public class KpiComputationTest {
         VesEvent vesEvent = vesList.get(0);
         assertEquals(vesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
                  .getMeasValuesList().get(0).getMeasResults().get(0).getSvalue(), "50");
+    }
+
+    @Test
+    public void testKpiComputationSumRatio() {
+
+        String strKpiConfigSumRatio  = FileUtils.getFileContents(KPI_CONFIG_SUMRATIO_FILE);
+        String vesMessage = FileUtils.getFileContents(VES_MESSAGE_FILE);
+        Configuration config = mock(Configuration.class);
+        when(config.getKpiConfig()).thenReturn(strKpiConfigSumRatio);
+        List<VesEvent> vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
+        VesEvent vesEvent = vesList.get(0);
+        assertEquals(vesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
+                .getMeasValuesList().get(0).getMeasResults().get(0).getSvalue(), "67");
+    }
+
+    @Test
+    public void testKpiComputationSumRatioEmptyCheck() {
+        String strKpiConfigSumRatio = FileUtils.getFileContents(KPI_CONFIG_SUMRATIO_FILE);
+
+        String vesMessage = FileUtils.getFileContents(VES_MESSAGE_EMPTY_FILE);
+        Configuration config = mock(Configuration.class);
+        when(config.getKpiConfig()).thenReturn(strKpiConfigSumRatio);
+        List<VesEvent> vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
+        assertEquals(0, vesList.size());
+    }
+
+    @Test
+    public void testKpiComputationSumRatioOperandsCheck() {
+        String strKpiConfigSumRatio = FileUtils.getFileContents(KPI_CONFIG_SUMRATIO_FILE);
+
+        String vesMessage = FileUtils.getFileContents(VES_MESSAGE_NULL_FILE);
+        Configuration config = mock(Configuration.class);
+        when(config.getKpiConfig()).thenReturn(strKpiConfigSumRatio);
+        List<VesEvent> vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
+        assertEquals(0, vesList.size());
+    }
+
+    @Test
+    public void testKpiComputationSumRatioEventNameCheck() {
+        String strKpiConfigSumRatio = FileUtils.getFileContents(KPI_CONFIG_SUMRATIO_FILE);
+
+        String vesMessage = FileUtils.getFileContents(VES_MESSAGE_EVENTNAME_FILE);
+        Configuration config = mock(Configuration.class);
+        when(config.getKpiConfig()).thenReturn(strKpiConfigSumRatio);
+        List<VesEvent> vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
+        assertEquals(null, vesList);
     }
 
 }
