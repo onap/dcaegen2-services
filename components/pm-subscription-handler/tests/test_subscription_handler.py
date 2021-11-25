@@ -61,8 +61,6 @@ class SubscriptionHandlerTest(BaseClassSetup):
         mock_logger.assert_called_with('Administrative State did not change '
                                        'in the app config: UNLOCKED')
 
-    @patch('mod.subscription_handler.SubscriptionHandler._start_aai_event_thread',
-           MagicMock())
     @patch('mod.pmsh_utils.AppConfig.refresh_config', MagicMock(return_value=get_pmsh_config()))
     @patch('mod.subscription.Subscription.get_local_sub_admin_state')
     @patch('mod.subscription.Subscription.create_subscription_on_nfs')
@@ -91,7 +89,6 @@ class SubscriptionHandlerTest(BaseClassSetup):
         sub_handler.execute()
         mock_deactivate_sub.assert_called_with(self.nfs, self.mock_mr_pub)
 
-    @patch('mod.subscription_handler.SubscriptionHandler._start_aai_event_thread', MagicMock())
     @patch('mod.pmsh_utils.AppConfig.refresh_config', MagicMock(return_value=get_pmsh_config()))
     @patch('mod.subscription.Subscription.create_subscription_on_nfs')
     @patch('mod.logger.error')

@@ -129,7 +129,7 @@ def apply_measurement_grp_to_nfs(filtered_nfs, measurement_groups):
     Saves measurement groups against nfs with status as PENDING_CREATE
 
     Args:
-        filtered_nfs (list[NetworkFunction])): list of filtered network functions
+        filtered_nfs (list[NetworkFunction]): list of filtered network functions
         measurement_groups (list[MeasurementGroupModel]): list of measurement group
 
     Returns:
