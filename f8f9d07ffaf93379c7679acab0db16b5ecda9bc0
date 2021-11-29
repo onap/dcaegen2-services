@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc7e1565_1acd98eb",
+        "filename": "components/pm-subscription-handler/tests/base_setup.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-29T01:43:45Z",
+      "side": 1,
+      "message": "all new code should have docstrings. (It would be nice if existing code did too.)\n\nCan this function be named something more dissimilar to get_subscription_data()? Having two function names this similar is poor style.",
+      "revId": "f8f9d07ffaf93379c7679acab0db16b5ecda9bc0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
