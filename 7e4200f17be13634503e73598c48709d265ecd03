@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad10644f_3ae0fd98",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumRatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-29T01:34:38Z",
+      "side": 1,
+      "message": "use spaces for indentation.\nCheck your IDE settings.",
+      "revId": "7e4200f17be13634503e73598c48709d265ecd03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eaae43cb_a247f957",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumRatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-11-29T01:34:38Z",
+      "side": 1,
+      "message": "use spaces for indentation",
+      "revId": "7e4200f17be13634503e73598c48709d265ecd03",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
