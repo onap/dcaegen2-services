@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95a8efe9_7840d3b1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-30T18:02:03Z",
+      "side": 1,
+      "message": "I think we need to keep this in try \u0026 except to handle any exceptions while update",
+      "range": {
+        "startLine": 102,
+        "startChar": 3,
+        "endLine": 107,
+        "endChar": 23
+      },
+      "revId": "60d4843b1b7b81854610bfb8fe21561830089bbf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07be9954_364bea8e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-30T18:02:03Z",
+      "side": 1,
+      "message": "May be we missed to add \u0027d\u0027 at the start of this string",
+      "range": {
+        "startLine": 54,
+        "startChar": 68,
+        "endLine": 54,
+        "endChar": 92
+      },
+      "revId": "60d4843b1b7b81854610bfb8fe21561830089bbf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61f59f96_22e5b44e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-11-30T18:02:03Z",
+      "side": 1,
+      "message": "I suggest to change this variable to \u0027nf_measure_grp_status\u0027",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 25
+      },
+      "revId": "60d4843b1b7b81854610bfb8fe21561830089bbf",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
