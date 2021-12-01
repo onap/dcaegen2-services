@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0153494_2d29c0d2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-01T16:54:53Z",
+      "side": 1,
+      "message": "mgNfState?",
+      "range": {
+        "startLine": 24,
+        "startChar": 50,
+        "endLine": 24,
+        "endChar": 60
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "901ec904_d119b56e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-01T16:54:53Z",
+      "side": 1,
+      "message": "May be we need to update this as \u0027No available measurement group for the received response with name : {measurement_group_name}\u0027 or may be we can use other statement.",
+      "range": {
+        "startLine": 68,
+        "startChar": 34,
+        "endLine": 68,
+        "endChar": 70
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b986f4ea_b3b1bf05",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-01T16:54:53Z",
+      "side": 1,
+      "message": "other places in the code we had written as \u0027string\u0027. So, update this if you feel good.",
+      "range": {
+        "startLine": 77,
+        "startChar": 36,
+        "endLine": 77,
+        "endChar": 39
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5c6a5cd_3f6d29b9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-01T16:54:53Z",
+      "side": 1,
+      "message": "May be we need to rewrite this",
+      "range": {
+        "startLine": 78,
+        "startChar": 40,
+        "endLine": 78,
+        "endChar": 89
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc73f263_182cb866",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-01T16:54:53Z",
+      "side": 1,
+      "message": "Do we need to change this to \u0027measgroup\u0027?",
+      "range": {
+        "startLine": 82,
+        "startChar": 40,
+        "endLine": 82,
+        "endChar": 43
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccf52efa_c22d7c57",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-01T16:54:53Z",
+      "side": 1,
+      "message": "I think we are sending parameter values in sequence order. So, this assignment is not necessary.",
+      "range": {
+        "startLine": 88,
+        "startChar": 16,
+        "endLine": 88,
+        "endChar": 39
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2bcf061e_ac1b2f33",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-01T16:54:53Z",
+      "side": 1,
+      "message": "I think it need to call \u0027delete_nf_to_measurement_group\u0027 function there in measurement_group_service?",
+      "range": {
+        "startLine": 46,
+        "startChar": 33,
+        "endLine": 46,
+        "endChar": 55
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49934503_701bdde4",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-01T16:54:53Z",
+      "side": 1,
+      "message": "Do we need to write test cases for locking scenario?",
+      "range": {
+        "startLine": 81,
+        "startChar": 8,
+        "endLine": 81,
+        "endChar": 44
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4159195_baf4321a",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-01T16:54:53Z",
+      "side": 1,
+      "message": "mg? same for the below test case as well",
+      "range": {
+        "startLine": 98,
+        "startChar": 53,
+        "endLine": 98,
+        "endChar": 56
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c54b6496_aefa55c8",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-01T16:54:53Z",
+      "side": 1,
+      "message": "we can use \u0027create_subscription_data()\u0027 there in basesetup.py to generate this data",
+      "range": {
+        "startLine": 104,
+        "startChar": 7,
+        "endLine": 111,
+        "endChar": 61
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
