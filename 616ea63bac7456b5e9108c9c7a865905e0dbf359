@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "38aa0827_82cc602d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-02T15:14:51Z",
+      "side": 1,
+      "message": "We need to add this point in the respective story.",
+      "parentUuid": "6e735b50_e0210ef8",
+      "range": {
+        "startLine": 24,
+        "startChar": 50,
+        "endLine": 24,
+        "endChar": 60
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "901ec904_d119b56e",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
         "patchSetId": 2
@@ -328,6 +352,30 @@
       "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "479eb4ee_d9c081e9",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-02T15:14:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fbe9c6fc_d304cfbf",
+      "range": {
+        "startLine": 46,
+        "startChar": 33,
+        "endLine": 46,
+        "endChar": 55
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
