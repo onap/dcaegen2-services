@@ -22,7 +22,8 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock
 
 from mod import create_app, db
-from mod.api.db_models import NetworkFunctionFilterModel, MeasurementGroupModel, SubscriptionModel, NfSubRelationalModel
+from mod.api.db_models import NetworkFunctionFilterModel, MeasurementGroupModel, \
+    SubscriptionModel, NetworkFunctionModel, NfSubRelationalModel
 from mod.network_function import NetworkFunctionFilter
 from mod.pmsh_utils import AppConfig
 from mod.pmsh_config import AppConfig as NewAppConfig
@@ -86,6 +87,26 @@ def create_multiple_subscription_data(subscription_names):
     for subscription_name in subscription_names:
         subscriptions.append(create_subscription_data(subscription_name))
     return subscriptions
+
+
+def create_multiple_network_function_data(nf_name_list):
+    """
+    Creates list of network function model objects
+
+    Args:
+        nf_name_list (list): Network function names
+
+    Returns
+        list: of network function model objects
+    """
+    nf_list = []
+    for nf_name in nf_name_list:
+        nf = NetworkFunctionModel(nf_name, '10.10.10.32', '2001:0db8:0:0:0:0:1428:57ab',
+                                  '687kj45-d396-4efb-af02-6b83499b12f8',
+                                  'e80a6ae3-cafd-4d24-850d-e14c084a5ca9',
+                                  'model_name', 'pm_control', '1.0.2')
+        nf_list.append(nf)
+    return nf_list
 
 
 class BaseClassSetup(TestCase):
