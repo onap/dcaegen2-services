@@ -86,3 +86,20 @@ def publish_measurement_group(sub_model, measurement_group, nf):
     }
     logger.debug(f'Event Body: {event_body}')
     AppConfig.get_instance().publish_to_topic(MRTopic.POLICY_PM_PUBLISHER.value, event_body)
+
+
+def query_meas_group_by_name(subscription_name, measurement_group_name):
+    """
+    Retrieves the measurement group by using sub name and measurement group name
+
+    Args:
+        subscription_name (String): Name of the subscription.
+        measurement_group_name (String): Name of the measurement group
+
+    Returns:
+        MeasurementGroupModel: queried measurement group (or) None
+    """
+    meas_group = db.session.query(MeasurementGroupModel).filter(
+        MeasurementGroupModel.subscription_name == subscription_name,
+        MeasurementGroupModel.measurement_group_name == measurement_group_name).one_or_none()
+    return meas_group
