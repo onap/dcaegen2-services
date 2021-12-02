@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "730c1892_b3cb5fac",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-02T16:28:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "467a9c39_3ef29144",
+      "range": {
+        "startLine": 68,
+        "startChar": 34,
+        "endLine": 68,
+        "endChar": 70
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b986f4ea_b3b1bf05",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
         "patchSetId": 2
@@ -329,6 +353,30 @@
       "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e22c5a0d_41087d9c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-02T16:28:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f5cea69f_c701b990",
+      "range": {
+        "startLine": 88,
+        "startChar": 16,
+        "endLine": 88,
+        "endChar": 39
+      },
+      "revId": "616ea63bac7456b5e9108c9c7a865905e0dbf359",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
