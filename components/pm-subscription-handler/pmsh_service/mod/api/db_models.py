@@ -220,11 +220,11 @@ class MeasurementGroupModel(db.Model):
 
     def __repr__(self):
         return f'subscription_name: {self.subscription_name}, ' \
-               f'measurement_group_name: {self.measurement_group_name},' \
-               f'administrative_state: {self.administrative_state},' \
-               f'file_based_gp: {self.file_based_gp},' \
-               f'file_location: {self.file_location},' \
-               f'measurement_type: {self.measurement_type}' \
+               f'measurement_group_name: {self.measurement_group_name}, ' \
+               f'administrative_state: {self.administrative_state}, ' \
+               f'file_based_gp: {self.file_based_gp}, ' \
+               f'file_location: {self.file_location}, ' \
+               f'measurement_type: {self.measurement_type}, ' \
                f'managed_object_dns_basic: {self.managed_object_dns_basic}'
 
     def serialize(self):
@@ -234,6 +234,23 @@ class MeasurementGroupModel(db.Model):
                                      'fileLocation': self.file_location,
                                      'measurementTypes': self.measurement_type,
                                      'managedObjectDNsBasic': self.managed_object_dns_basic}}
+
+    def meas_group_with_nfs(self):
+        """
+        Generates the dictionary of subscription name, measurement group name, administrative state
+        and network functions
+
+        Returns:
+           dict: of subscription name, measurement group name, administrative state
+                 and network functions
+        """
+        meas_group_nfs = db.session.query(NfMeasureGroupRelationalModel).filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == self.measurement_group_name).all()
+        db.session.remove()
+        return {'subscriptionName': self.subscription_name,
+                'measurementGroupName': self.measurement_group_name,
+                'administrativeState': self.administrative_state,
+                'networkFunctions': [meas_group_nf.serialize() for meas_group_nf in meas_group_nfs]}
 
 
 class NfMeasureGroupRelationalModel(db.Model):
@@ -264,6 +281,20 @@ class NfMeasureGroupRelationalModel(db.Model):
     def __repr__(self):
         return f'measurement_grp_name: {self.measurement_grp_name}, ' \
                f'nf_name: {self.nf_name}, nf_measure_grp_status: {self.nf_measure_grp_status}'
+
+    def serialize(self):
+        nf = db.session.query(NetworkFunctionModel).filter(
+            NetworkFunctionModel.nf_name == self.nf_name).one_or_none()
+        db.session.remove()
+        return{'nfName': self.nf_name,
+               'ipv4Address': nf.ipv4_address,
+               'ipv6Address': nf.ipv6_address,
+               'nfMgStatus': self.nf_measure_grp_status,
+               'modelInvariantId': nf.model_invariant_id,
+               'modelVersionId': nf.model_version_id,
+               'modelName': nf.model_name,
+               'sdncModelName': nf.sdnc_model_name,
+               'sdncModelVersion': nf.sdnc_model_version}
 
 
 def convert_db_string_to_list(db_string):

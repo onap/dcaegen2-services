@@ -20,14 +20,16 @@ import os
 from unittest.mock import patch, MagicMock
 from http import HTTPStatus
 
-from mod import aai_client
+from mod import aai_client, db
 from mod.api.controller import status, post_subscription, get_subscription_by_name,\
-    get_subscriptions
+    get_subscriptions, get_meas_group_with_nfs
 from tests.base_setup import BaseClassSetup
 from mod.api.db_models import SubscriptionModel, NfMeasureGroupRelationalModel
 from mod.subscription import SubNfState
 from mod.network_function import NetworkFunctionFilter
-from tests.base_setup import create_subscription_data, create_multiple_subscription_data
+from tests.base_setup import create_subscription_data, create_multiple_subscription_data, \
+    create_multiple_network_function_data
+from mod.api.services import measurement_group_service, nf_service
 
 
 class ControllerTestCase(BaseClassSetup):
@@ -164,4 +166,35 @@ class ControllerTestCase(BaseClassSetup):
            MagicMock(side_effect=Exception('something failed')))
     def test_get_subscriptions_api_exception(self):
         subs, status_code = get_subscriptions()
+        self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)
+
+    def test_get_meas_group_with_nfs_api(self):
+        sub = create_subscription_data('sub1')
+        nf_list = create_multiple_network_function_data(['pnf101', 'pnf102'])
+        measurement_group_service.save_measurement_group(sub.measurement_groups[0].
+                                                         serialize()['measurementGroup'],
+                                                         sub.subscription_name)
+        for nf in nf_list:
+            nf_service.save_nf(nf)
+            measurement_group_service.apply_nf_to_measgroup(nf.nf_name,
+                                                            sub.measurement_groups[0].
+                                                            measurement_group_name)
+        db.session.commit()
+        mg_with_nfs, status_code = get_meas_group_with_nfs('sub1', 'MG1')
+        self.assertEqual(status_code, HTTPStatus.OK.value)
+        self.assertEqual(mg_with_nfs['subscriptionName'], 'sub1')
+        self.assertEqual(mg_with_nfs['measurementGroupName'], 'MG1')
+        self.assertEqual(mg_with_nfs['administrativeState'], 'UNLOCKED')
+        self.assertEqual(len(mg_with_nfs['networkFunctions']), 2)
+
+    def test_get_meas_group_with_nfs_api_none(self):
+        error, status_code = get_meas_group_with_nfs('sub1', 'MG1')
+        self.assertEqual(error['error'], 'measurement group was not defined with '
+                         'the sub name: sub1 and meas group name: MG1')
+        self.assertEqual(status_code, HTTPStatus.NOT_FOUND.value)
+
+    @patch('mod.api.services.measurement_group_service.query_meas_group_by_name',
+           MagicMock(side_effect=Exception('something failed')))
+    def test_get_meas_group_with_nfs_api_exception(self):
+        error, status_code = get_meas_group_with_nfs('sub1', 'MG1')
         self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)

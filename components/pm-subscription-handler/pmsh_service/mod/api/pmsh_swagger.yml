@@ -109,6 +109,30 @@ paths:
         500:
           description: Exception occurred while querying database
 
+  /subscription/{subscription_name}/measurementGroups/{measurement_group_name}:
+    get:
+      description: Get the  measurement group and associated network functions
+                  from PMSH by using sub name and meas group name
+      operationId: mod.api.controller.get_meas_group_with_nfs
+      tags:
+        - "measurement group"
+      parameters:
+        - name : subscription_name
+          in: path
+          required: true
+          description: Name of the subscription
+          type: string
+        - name: measurement_group_name
+          in: path
+          required: true
+          description: Name of the measurement group name
+          type: string
+      responses:
+        200:
+          description: OK; Received requested measurement group with associated NF's
+          schema:
+            $ref : "#/definitions/measGroupWithNFs"
+
 definitions:
   subscription:
     type: object
@@ -215,3 +239,48 @@ definitions:
         type: string
     required:
       - DN
+
+  measGroupWithNFs:
+    type: object
+    properties:
+      subscriptionName:
+        type: string
+        description: Name of the subscription
+      measurementGroupName:
+        type: string
+        description: Name of the measurement group
+      administrativeState:
+        type: string
+        description: Administrative state of the measeurement group
+      network_functions:
+        type: array
+        items:
+          type: object
+          properties:
+            nfName:
+              type: string
+              description: Name of the Network Function
+            ipv4Address:
+              type: string
+              description: Address of the IPV4
+            ipv6Address:
+              type: string
+              description: Address of the IPV6
+            nfMgStatus:
+              type: string
+              description: status of network function for one meas group
+            modelInvariantId:
+              type: string
+              description: ID of the model invariant
+            modelVersionId:
+              type: string
+              description: ID of the model version
+            modelName:
+              type: string
+              description: Name of the model
+            sdncModelName:
+              type: string
+              description: Name of the sdnc model
+            sdncModelVersion:
+              type: string
+              description: Version of the sdnc model
