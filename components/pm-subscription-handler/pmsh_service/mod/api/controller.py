@@ -18,7 +18,7 @@
 
 from http import HTTPStatus
 from mod import logger
-from mod.api.services import subscription_service
+from mod.api.services import subscription_service, measurement_group_service
 from connexion import NoContent
 from mod.api.custom_exception import InvalidDataException, DuplicateDataException
 
@@ -110,5 +110,40 @@ def get_subscriptions():
         return subscriptions, HTTPStatus.OK.value
     except Exception as exception:
         logger.error(f'The following exception occurred while fetching subscriptions: {exception}')
+        return {'error': 'Request was not processed due to Exception : '
+                         f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
+
+
+def get_meas_group_with_nfs(subscription_name, measurement_group_name):
+    """
+    Retrieves the measurement group and it's associated network functions
+
+    Args:
+        subscription_name (String): Name of the subscription.
+        measurement_group_name (String): Name of the measurement group
+
+    Returns:
+       dict, HTTPStatus: measurement group info with associated nfs, 200
+       dict, HTTPStatus: measurement group was not defined, 404
+       dict, HTTPStatus: Exception details of failure, 500
+    """
+    logger.info('API call received to query measurement group and associated network'
+                f' functions by using sub name: {subscription_name} and measurement '
+                f'group name: {measurement_group_name}')
+    try:
+        meas_group = measurement_group_service.query_meas_group_by_name(subscription_name,
+                                                                        measurement_group_name)
+        if meas_group is not None:
+            return meas_group.meas_group_with_nfs(), HTTPStatus.OK.value
+        else:
+            logger.error('measurement group was not defined with the sub name: '
+                         f'{subscription_name} and meas group name: '
+                         f'{measurement_group_name}')
+            return {'error': 'measurement group was not defined with the sub name: '
+                             f'{subscription_name} and meas group name: '
+                             f'{measurement_group_name}'}, HTTPStatus.NOT_FOUND.value
+    except Exception as exception:
+        logger.error('The following exception occurred while fetching measurement group: '
+                     f'{exception}')
         return {'error': 'Request was not processed due to Exception : '
                          f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
