@@ -135,3 +135,20 @@ def delete_nf_to_measurement_group(nf_name, measurement_group_name, status):
     except Exception as e:
         logger.error(f'Failed to delete nf: {nf_name} for measurement group: '
                      f'{measurement_group_name} due to: {e}')
+
+
+def query_meas_group_by_name(subscription_name, measurement_group_name):
+    """
+    Retrieves the measurement group by using sub name and measurement group name
+
+    Args:
+        subscription_name (String): Name of the subscription.
+        measurement_group_name (String): Name of the measurement group
+
+    Returns:
+        MeasurementGroupModel: queried measurement group (or) None
+    """
+    meas_group = db.session.query(MeasurementGroupModel).filter(
+        MeasurementGroupModel.subscription_name == subscription_name,
+        MeasurementGroupModel.measurement_group_name == measurement_group_name).one_or_none()
+    return meas_group
