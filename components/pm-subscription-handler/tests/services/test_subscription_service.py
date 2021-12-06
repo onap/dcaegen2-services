@@ -370,6 +370,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
                          ['measurementGroupName'], 'MG1')
         self.assertEqual(len(subs[1]['subscription']['measurementGroups']), 2)
         self.assertEqual(len(subs), 2)
+        self.assertEqual(len(subs[0]['subscription']['nfs']), 2)
 
     @patch('mod.api.services.subscription_service.query_all_subscriptions',
            MagicMock(return_value=[]))

@@ -22,7 +22,7 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock
 
 from mod import create_app, db
-from mod.api.db_models import NetworkFunctionFilterModel, MeasurementGroupModel, SubscriptionModel
+from mod.api.db_models import NetworkFunctionFilterModel, MeasurementGroupModel, SubscriptionModel, NfSubRelationalModel
 from mod.network_function import NetworkFunctionFilter
 from mod.pmsh_utils import AppConfig
 from mod.pmsh_config import AppConfig as NewAppConfig
@@ -66,6 +66,9 @@ def create_subscription_data(subscription_name):
                                            'pmsh_control_loop_name', 'LOCKED')
     subscription_model.network_filter = nf_filter
     subscription_model.measurement_groups = mg_list
+    nf1 = NfSubRelationalModel(subscription_name, "pnf_101", "LOCKED")
+    nf2 = NfSubRelationalModel(subscription_name, "pnf_102", "LOCKED")
+    subscription_model.nfs = [nf1, nf2]
     return subscription_model
 
 

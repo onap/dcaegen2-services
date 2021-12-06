@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * Read subscription API by using subscription name (DCAEGEN2-2818)
 * Read All subscriptions API  (DCAEGEN2-2847)
 * PMSH Response Event Handler Integration (DCAEGEN2-2915)
+* Updated to get NFs list when requesting a specific subscription (DCAEGEN2-2992)
 
 ## [1.3.2]
 ### Changed
