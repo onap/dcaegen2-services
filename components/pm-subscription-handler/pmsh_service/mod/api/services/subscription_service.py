@@ -305,7 +305,8 @@ def query_subscription_by_name(subscription_name):
     logger.info(f'Attempting to fetch subscription by name: {subscription_name}')
     subscription_model = db.session.query(SubscriptionModel) \
         .options(joinedload(SubscriptionModel.network_filter),
-                 joinedload(SubscriptionModel.measurement_groups)) \
+                 joinedload(SubscriptionModel.measurement_groups),
+                 joinedload(SubscriptionModel.nfs)) \
         .filter_by(subscription_name=subscription_name).first()
     db.session.remove()
     return subscription_model

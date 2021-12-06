@@ -67,6 +67,8 @@ class SubscriptionModel(db.Model):
                                  'operationalPolicyName': self.operational_policy_name,
                                  'controlLoopName': self.control_loop_name,
                                  'nfFilter': self.network_filter.serialize(),
+                                 'nfs':
+                                     [nf.nf_name for nf in self.nfs],
                                  'measurementGroups':
                                      [mg.serialize() for mg in self.measurement_groups]}}
 
