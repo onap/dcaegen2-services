@@ -21,7 +21,7 @@ from mod.api.db_models import SubscriptionModel, NfSubRelationalModel, \
     NetworkFunctionFilterModel, NetworkFunctionModel
 from mod.api.services import measurement_group_service, nf_service
 from mod.api.custom_exception import InvalidDataException, DuplicateDataException
-from mod.subscription import AdministrativeState
+from mod.subscription import AdministrativeState, SubNfState
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
 
@@ -143,8 +143,9 @@ def apply_measurement_grp_to_nfs(filtered_nfs, measurement_groups):
             for nf in filtered_nfs:
                 logger.info(f'Saving measurement group to nf name, measure_grp_name: {nf.nf_name},'
                             f'{measurement_group.measurement_group_name}')
-                measurement_group_service.apply_nf_to_measgroup(
-                    nf.nf_name, measurement_group.measurement_group_name)
+                measurement_group_service.apply_nf_status_to_measurement_group(
+                    nf.nf_name, measurement_group.measurement_group_name,
+                    SubNfState.PENDING_CREATE.value)
         else:
             logger.info(f'No nfs added as measure_grp_name: '
                         f'{measurement_group.measurement_group_name} is LOCKED')
