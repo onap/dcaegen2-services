@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "668d0af6_78378e93",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-12-07T11:10:58Z",
+      "side": 1,
+      "message": "Earlier we used to pass admin state of subscription, and now its admin state of MeasGroup as per the new format.\nThe DELETE change type will be triggered on update from UNLOCK to LOCKED admin status that would be handled in story DCAEGEN2-2820.\nI believe the third scenario is not possible as DELETE would be sent on admin state Locked.",
+      "parentUuid": "d5f5e1a7_ed9fb0fc",
+      "range": {
+        "startLine": 78,
+        "startChar": 49,
+        "endLine": 78,
+        "endChar": 59
+      },
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f0c3f8ce_1479ff21",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2021-12-06T13:51:53Z",
       "side": 1,
       "message": "When does the PENDING_DELETE scenario get set. Are we going with any retries?\nWhat if the sub still exists on the nf?",
+      "range": {
+        "startLine": 114,
+        "startChar": 20,
+        "endLine": 114,
+        "endChar": 30
+      },
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a2b4adf_71ba32c5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-12-07T11:10:58Z",
+      "side": 1,
+      "message": "PENDING_DELETE scenario would be set on Measgrp admin status update from UNLOCKED to LOCKED performed in DCAEGEN2-2820. \nAlso, originally subscription_handler used to perform create and retry operation. Now create API handles the create action and retry needs to refactored now pertaining to a measurement group to remove measurement group assigned to a nf and eventually on subscription.",
+      "parentUuid": "f0c3f8ce_1479ff21",
       "range": {
         "startLine": 114,
         "startChar": 20,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "a99b02e2_505b0364",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-12-07T11:10:58Z",
+      "side": 1,
+      "message": "Line length check of flake8 fails if I turn it around.",
+      "parentUuid": "676ffb06_e42a0663",
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3085b9e4_23a17289",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
         "patchSetId": 3
@@ -76,6 +142,30 @@
       "writtenOn": "2021-12-06T13:51:53Z",
       "side": 1,
       "message": "This function awful. Really bad idea.\nCould we look to refactor this class altogether?",
+      "range": {
+        "startLine": 66,
+        "startChar": 25,
+        "endLine": 66,
+        "endChar": 41
+      },
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1f26e53_d749e3c5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-12-07T11:10:58Z",
+      "side": 1,
+      "message": "The problem in this class was readability (dictionary lookup isn\u0027t handy to navigate through functions) but from maintenance perspective the dictionaries are making handler functions loosely coupled. Therefore as per discussion we considered maintainability with no changes to the class.",
+      "parentUuid": "3085b9e4_23a17289",
       "range": {
         "startLine": 66,
         "startChar": 25,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "a448d67b_66909d39",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-12-07T11:10:58Z",
+      "side": 1,
+      "message": "Refactoring would increase the scope of functional stories thereby impacting the delivery. Additionally, we have a story to handle NFR\u0027s like refactoring where this change is already mentioned DCAEGEN2-2820.",
+      "parentUuid": "ff61832d_bf0aa661",
+      "range": {
+        "startLine": 89,
+        "startChar": 36,
+        "endLine": 89,
+        "endChar": 58
+      },
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fde955f_17fbcb1a",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
         "patchSetId": 3
@@ -122,6 +236,30 @@
       "writtenOn": "2021-12-06T13:51:53Z",
       "side": 1,
       "message": "Again, this is a terrible way of handling these changes. Look to refactor.",
+      "range": {
+        "startLine": 91,
+        "startChar": 12,
+        "endLine": 91,
+        "endChar": 44
+      },
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35e5ee99_ef20a092",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-12-07T11:10:58Z",
+      "side": 1,
+      "message": "As per discussion on the trade off between readability (dictionary lookup isn\u0027t handy to navigate through functions) vs maintainability(enhancement would be easy through dictionary updates as functions are loosely coupled). So, we considered maintainability here without any changes to this function.",
+      "parentUuid": "6fde955f_17fbcb1a",
       "range": {
         "startLine": 91,
         "startChar": 12,
