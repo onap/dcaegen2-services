@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1c1cc751_8153cc66",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-07T11:26:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "668d0af6_78378e93",
+      "range": {
+        "startLine": 78,
+        "startChar": 49,
+        "endLine": 78,
+        "endChar": 59
+      },
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0c3f8ce_1479ff21",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
         "patchSetId": 3
@@ -96,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "db6f72c3_f1cfb99a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-07T11:26:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3a2b4adf_71ba32c5",
+      "range": {
+        "startLine": 114,
+        "startChar": 20,
+        "endLine": 114,
+        "endChar": 30
+      },
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "676ffb06_e42a0663",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
         "patchSetId": 3
@@ -128,6 +176,24 @@
       "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1217c2e4_df90912b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-07T11:26:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a99b02e2_505b0364",
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -178,6 +244,30 @@
     },
     {
       "key": {
+        "uuid": "e9d0a650_86ae7930",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-07T11:26:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d1f26e53_d749e3c5",
+      "range": {
+        "startLine": 66,
+        "startChar": 25,
+        "endLine": 66,
+        "endChar": 41
+      },
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff61832d_bf0aa661",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
         "patchSetId": 3
@@ -225,6 +315,30 @@
     },
     {
       "key": {
+        "uuid": "d0943eef_ad2887e1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-07T11:26:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a448d67b_66909d39",
+      "range": {
+        "startLine": 89,
+        "startChar": 36,
+        "endLine": 89,
+        "endChar": 58
+      },
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6fde955f_17fbcb1a",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
         "patchSetId": 3
@@ -269,6 +383,30 @@
       "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e1c5e66_dcda0feb",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-07T11:26:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "35e5ee99_ef20a092",
+      "range": {
+        "startLine": 91,
+        "startChar": 12,
+        "endLine": 91,
+        "endChar": 44
+      },
+      "revId": "24454771f523f65fce5e3dce91cfe8cd15fc8be7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
