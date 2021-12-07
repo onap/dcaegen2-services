@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f0e4ddb_fa747189",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-07T11:38:18Z",
+      "side": 1,
+      "message": "I\u0027m guessing this will be tested in the csits but should we cover it in a unit test also?",
+      "range": {
+        "startLine": 71,
+        "startChar": 64,
+        "endLine": 71,
+        "endChar": 67
+      },
+      "revId": "6f9f8ab609114aa8a155bf55815d92898a0198f6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01a5e95a_901ad828",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-07T11:38:18Z",
+      "side": 1,
+      "message": "No real need for new line here",
+      "range": {
+        "startLine": 71,
+        "startChar": 37,
+        "endLine": 71,
+        "endChar": 41
+      },
+      "revId": "6f9f8ab609114aa8a155bf55815d92898a0198f6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
