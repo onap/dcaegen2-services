@@ -45,6 +45,54 @@
       "revId": "6f9f8ab609114aa8a155bf55815d92898a0198f6",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c9d1d92_e95536be",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-12-07T11:49:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01a5e95a_901ad828",
+      "range": {
+        "startLine": 71,
+        "startChar": 37,
+        "endLine": 71,
+        "endChar": 41
+      },
+      "revId": "6f9f8ab609114aa8a155bf55815d92898a0198f6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53efab9a_5caf1308",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2021-12-07T11:49:35Z",
+      "side": 1,
+      "message": "When we will be simulating the AAI I don\u0027t really see the benefit of unit testing also. My idea was to CSIT it which should give us a better indication of the functionality.",
+      "parentUuid": "1f0e4ddb_fa747189",
+      "range": {
+        "startLine": 71,
+        "startChar": 64,
+        "endLine": 71,
+        "endChar": 67
+      },
+      "revId": "6f9f8ab609114aa8a155bf55815d92898a0198f6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
