@@ -93,6 +93,30 @@
       "revId": "6f9f8ab609114aa8a155bf55815d92898a0198f6",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50be587a_e324c487",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2021-12-08T19:38:16Z",
+      "side": 1,
+      "message": "+1 on unit test inaddition to CSIT even if we mock expected AAI data. \n\nThis will be useful to flag when any breaking code change is introduced (with underlyin datamodel unchanged)",
+      "parentUuid": "53efab9a_5caf1308",
+      "range": {
+        "startLine": 71,
+        "startChar": 64,
+        "endLine": 71,
+        "endChar": 67
+      },
+      "revId": "6f9f8ab609114aa8a155bf55815d92898a0198f6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
