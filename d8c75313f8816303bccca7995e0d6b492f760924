@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9eb3ba81_bc5146f3",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2021-12-08T15:32:03Z",
+      "side": 1,
+      "message": "We can add a measurement group object containing a name that would provide more information.",
+      "range": {
+        "startLine": 249,
+        "startChar": 6,
+        "endLine": 249,
+        "endChar": 26
+      },
+      "revId": "d8c75313f8816303bccca7995e0d6b492f760924",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
