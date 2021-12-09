@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22b7ab3d_a4195c83",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2021-12-09T01:55:05Z",
+      "side": 1,
+      "message": "this is a new function, so should have pydoc",
+      "revId": "eadde6e1eee33e0f9089eb0ae045aed6bb2de3a5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
