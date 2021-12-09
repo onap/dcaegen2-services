@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a9ab79db_e56750e3",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-09T17:18:58Z",
+      "side": 1,
+      "message": "Agree, will remove this",
+      "parentUuid": "555cd017_2c56a058",
+      "range": {
+        "startLine": 300,
+        "startChar": 8,
+        "endLine": 300,
+        "endChar": 16
+      },
+      "revId": "c47e924b514f56be957964ddd71dea6a07bd65d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2c4cdf1c_28480d28",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 4
