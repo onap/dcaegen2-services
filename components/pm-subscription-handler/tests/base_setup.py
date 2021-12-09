@@ -22,7 +22,8 @@ from unittest import TestCase
 from unittest.mock import patch, MagicMock
 
 from mod import create_app, db
-from mod.api.db_models import NetworkFunctionFilterModel, MeasurementGroupModel, SubscriptionModel, NfSubRelationalModel
+from mod.api.db_models import NetworkFunctionFilterModel, MeasurementGroupModel, \
+    SubscriptionModel, NfSubRelationalModel
 from mod.network_function import NetworkFunctionFilter
 from mod.pmsh_utils import AppConfig
 from mod.pmsh_config import AppConfig as NewAppConfig
