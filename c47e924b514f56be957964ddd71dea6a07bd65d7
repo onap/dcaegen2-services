@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "54490705_83c5979f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-09T16:55:47Z",
+      "side": 1,
+      "message": "There is a chance to get \u0027None\u0027 in \"meas_group_nfs\" when no network functions associated to that measurement group. If \u0027None\u0027 for loop won\u0027t success.",
+      "parentUuid": "da81f522_7337bda7",
+      "range": {
+        "startLine": 258,
+        "startChar": 37,
+        "endLine": 258,
+        "endChar": 50
+      },
+      "revId": "c47e924b514f56be957964ddd71dea6a07bd65d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "46392771_72a54beb",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "eebfb557_55d6da6f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-09T16:55:47Z",
+      "side": 1,
+      "message": "Will update this and uploaded the new patch set once the other comments agreed",
+      "parentUuid": "46392771_72a54beb",
+      "range": {
+        "startLine": 290,
+        "startChar": 8,
+        "endLine": 290,
+        "endChar": 17
+      },
+      "revId": "c47e924b514f56be957964ddd71dea6a07bd65d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2c4cdf1c_28480d28",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2021-12-09T16:21:57Z",
       "side": 1,
       "message": "Is network_functions not \"required\" here?",
+      "range": {
+        "startLine": 307,
+        "startChar": 25,
+        "endLine": 307,
+        "endChar": 33
+      },
+      "revId": "c47e924b514f56be957964ddd71dea6a07bd65d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c02a7de6_a471394f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2021-12-09T16:55:47Z",
+      "side": 1,
+      "message": "I think yes, For example if there are no network functions that are matching with the nfFilter. In that scenario network list was empty.",
+      "parentUuid": "2c4cdf1c_28480d28",
       "range": {
         "startLine": 307,
         "startChar": 25,
