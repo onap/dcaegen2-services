@@ -292,41 +292,59 @@
 			</plugin>
 			<plugin>
 				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.10</version>
 				<configuration>
-					<serverId>${onap.nexus.dockerregistry.daily}</serverId>
-					<imageName>${onap.nexus.dockerregistry.daily}/${docker.image.name}</imageName>
-					<imageTags>
-                                                <imageTag>${project.version}-${maven.build.timestamp}Z</imageTag>
-                                                <imageTag>${project.version}</imageTag>
-                                                <imageTag>latest</imageTag>
-					</imageTags>
-					<baseImage>openjdk:11.0.6-jre-slim</baseImage>
-					<user>sliceanalysis</user>
-					<resources>
-						<resource>
-							<targetPath>/bin</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.artifactId}-${project.version}.jar</include>
-						</resource>
-						<resource>
-							<targetPath>/bin</targetPath>
-							<directory>${project.basedir}</directory>
-							<include>entry.sh</include>
-						</resource>
-					</resources>
-					<runs>
-						<!-- Maven is loosing file permissions during artifacts copy -->
-				 		<run>adduser --disabled-password sliceanalysis </run>
-						<run>mv /bin/*.jar /bin/application.jar</run>
-						<run>chmod -R 777 /bin</run>
-						<run>chmod +x /bin/entry.sh</run>
-					</runs>
-					<exposes>
-						<expose>8080</expose>
-					</exposes>
-					<entryPoint>./bin/entry.sh</entryPoint>
+					<repository>${onap.nexus.dockerregistry.daily}/${docker.image.name}</repository>
+					<tag>${project.version}</tag>
+					<dockerfile>Dockerfile</dockerfile>
+					<buildArgs>
+						<JAR_FILE>${project.artifactId}-${project.version}.jar</JAR_FILE>
+					</buildArgs>
+					<skipDockerInfo>true</skipDockerInfo>
 				</configuration>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>tag-image-latest</id>
+						<phase>package</phase>
+						<goals>
+							<goal>tag</goal>
+						</goals>
+						<configuration>
+							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.name}</repository>
+							<tag>latest</tag>
+						</configuration>
+					</execution>
+					<execution>
+						<id>tag-and-push-image-with-version</id>
+						<phase>package</phase>
+						<goals>
+							<goal>tag</goal>
+						</goals>
+						<configuration>
+							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.name}</repository>
+							<tag>${project.version}</tag>
+						</configuration>
+					</execution>
+					<execution>
+						<id>tag-and-push-image-with-version-and-date</id>
+						<phase>package</phase>
+						<goals>
+							<goal>tag</goal>
+						</goals>
+						<configuration>
+							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.name}</repository>
+							<tag>${project.version}-${maven.build.timestamp}Z</tag>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
