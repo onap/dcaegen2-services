@@ -24,17 +24,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
- <parent>
-        <groupId>org.onap.oparent</groupId>
-        <artifactId>oparent</artifactId>
-        <version>2.0.0</version>
-    </parent>
+	<parent>
+		<groupId>org.onap.oparent</groupId>
+		<artifactId>oparent</artifactId>
+		<version>2.0.0</version>
+	</parent>
 	<groupId>org.onap.dcaegen2.services.components</groupId>
 	<artifactId>slice-analysis-ms</artifactId>
-	<version>1.0.6-SNAPSHOT</version>
+	<version>1.0.7-SNAPSHOT</version>
 	<name>dcaegen2-services-slice-analysis-ms</name>
 	<description>Network slice PM analyser</description>
-        <packaging>jar</packaging>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>11</java.version>
 		<sdk.version>1.1.4</sdk.version>
@@ -48,58 +48,58 @@
 		<releases.path>content/repositories/releases/</releases.path>
 		<site.path>content/sites/site/org/onap/dcaegen2/services/${project.artifactId}/${project.version}</site.path>
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
-        	<sonar.coverage.jacoco.xmlReportPaths>
-            	${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
-        	</sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.coverage.jacoco.xmlReportPaths>
+			${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
+		</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 	<dependencies>
-                <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util -->
-                <dependency>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-util</artifactId>
-                        <version>9.0.37</version>
-                </dependency>
-                <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
-                <dependency>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-autoconfigure</artifactId>
-                        <version>2.3.1.RELEASE</version>
-                </dependency>
-                <dependency>
-		        <groupId>org.springframework</groupId>
-		        <artifactId>spring-webmvc</artifactId>
-		        <version>5.3.7</version>
-	        </dependency>
-                <dependency>
-		         <groupId>org.springframework</groupId>
-		         <artifactId>spring-core</artifactId>
-		         <version>5.3.7</version>
-	        </dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-util</artifactId>
+			<version>9.0.37</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+			<version>2.3.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>5.3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>5.3.7</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 			<version>5.3.7</version>
 		</dependency>
-	        <dependency>
-		        <groupId>org.springframework</groupId>
-		        <artifactId>spring-expression</artifactId>
-		        <version>5.3.7</version>
-                </dependency>
-	        <dependency>
-		        <groupId>org.springframework</groupId>
-		        <artifactId>spring-web</artifactId>
-		        <version>5.3.7</version>
-	        </dependency>
-                <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>spring-tx</artifactId>
-                        <version>5.3.7</version>
-                </dependency>
-                <dependency>
-                        <groupId>org.springframework.data</groupId>
-                        <artifactId>spring-data-commons</artifactId>
-                        <version>2.2.0.RELEASE</version>
-                </dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+			<version>5.3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>5.3.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+			<version>2.2.0.RELEASE</version>
+		</dependency>
 		<!-- cbs client -->
 		<dependency>
 			<groupId>org.onap.dcaegen2.services.sdk.rest.services</groupId>
@@ -135,10 +135,10 @@
 			<version>2.11.0</version>
 		</dependency>
 		<dependency>
-    		<groupId>net.javacrumbs.json-unit</groupId>
-    		<artifactId>json-unit-assertj</artifactId>
-    		<version>2.14.0</version>
-    		<scope>test</scope>
+			<groupId>net.javacrumbs.json-unit</groupId>
+			<artifactId>json-unit-assertj</artifactId>
+			<version>2.14.0</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -184,8 +184,8 @@
 			<version>2.1.3.RELEASE</version>
 			<scope>test</scope>
 			<!-- exclusions> <exclusion> <groupId>org.mockito</groupId> <artifactId>mockito-core</artifactId>
-				</exclusion> </exclusions -->
-		</dependency>
+			     </exclusion> </exclusions -->
+                </dependency>
 		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
 		<dependency>
 			<groupId>org.mockito</groupId>
@@ -193,29 +193,29 @@
 			<version>2.21.0</version>
 			<scope>test</scope>
 		</dependency>
-	        <dependency>
-	                <groupId>com.openpojo</groupId>
+		<dependency>
+			<groupId>com.openpojo</groupId>
 			<artifactId>openpojo</artifactId>
 			<version>0.8.10</version>
-	        </dependency>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-                <!-- https://mvnrepository.com/artifact/org.powermock/powermock-api-mockito2 -->
-	        <dependency>
-	                <groupId>org.powermock</groupId>
-		        <artifactId>powermock-api-mockito2</artifactId>
-		        <version>2.0.2</version>
-		        <exclusions>
-			        <exclusion>
-				        <groupId>org.mockito</groupId>
-				        <artifactId>mockito-all</artifactId>
-	                        </exclusion>
-		        </exclusions>
-	        </dependency>
+		<!-- https://mvnrepository.com/artifact/org.powermock/powermock-api-mockito2 -->
+		<dependency>
+			<groupId>org.powermock</groupId>
+			<artifactId>powermock-api-mockito2</artifactId>
+			<version>2.0.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mockito</groupId>
+					<artifactId>mockito-all</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4 -->
 		<dependency>
 			<groupId>org.powermock</groupId>
@@ -224,59 +224,59 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-	            <groupId>org.functionaljava</groupId>
-	            <artifactId>functionaljava</artifactId>
-	            <version>3.0</version>
-                </dependency>
-	        <dependency>
-		        <groupId>org.apache.httpcomponents</groupId>
-		        <artifactId>httpclient</artifactId>
+			<groupId>org.functionaljava</groupId>
+			<artifactId>functionaljava</artifactId>
+			<version>3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
 			<version>4.5.13</version>
-	        </dependency>
-           <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
-            <dependency>
-                   <groupId>commons-beanutils</groupId>
-                   <artifactId>commons-beanutils</artifactId>
-                   <version>1.9.4</version>
-            </dependency>
-            <!-- mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
-            <dependency>
-                   <groupId>org.eclipse.jetty</groupId>
-                   <artifactId>jetty-server</artifactId>
-                   <version>9.4.41.v20210516</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
-            <dependency>
-                   <groupId>org.webjars</groupId>
-                   <artifactId>bootstrap</artifactId>
-                   <version>4.3.1</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
-            <dependency>
-                   <groupId>javax.xml.bind</groupId>
-                   <artifactId>jaxb-api</artifactId>
-                   <version>2.3.0</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
-            <dependency>
-                   <groupId>org.javassist</groupId>
-                   <artifactId>javassist</artifactId>
-                   <version>3.24.1-GA</version>
-            </dependency>
-	    <dependency>
-		    <groupId>org.apache.tomcat.embed</groupId>
-		    <artifactId>tomcat-embed-core</artifactId>
-		   <version>9.0.46</version>
-	    </dependency>
-	    <!-- https://mvnrepository.com/artifact/nl.jqno.equalsverifier/equalsverifier -->
-	    <dependency>
-		    <groupId>nl.jqno.equalsverifier</groupId>
-		    <artifactId>equalsverifier</artifactId>
-                    <version>3.5.5</version>
-                    <scope>test</scope>
-	   </dependency>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.4</version>
+		</dependency>
+		<!-- mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>9.4.41.v20210516</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap</artifactId>
+			<version>4.3.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.24.1-GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<version>9.0.46</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/nl.jqno.equalsverifier/equalsverifier -->
+		<dependency>
+			<groupId>nl.jqno.equalsverifier</groupId>
+			<artifactId>equalsverifier</artifactId>
+			<version>3.5.5</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-		<build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -297,12 +297,16 @@
 					<serverId>${onap.nexus.dockerregistry.daily}</serverId>
 					<imageName>${onap.nexus.dockerregistry.daily}/${docker.image.name}</imageName>
 					<imageTags>
-                                                <imageTag>${project.version}-${maven.build.timestamp}Z</imageTag>
-                                                <imageTag>${project.version}</imageTag>
-                                                <imageTag>latest</imageTag>
+						<imageTag>${project.version}-${maven.build.timestamp}Z</imageTag>
+						<imageTag>${project.version}</imageTag>
+						<imageTag>latest</imageTag>
 					</imageTags>
-					<baseImage>openjdk:11.0.6-jre-slim</baseImage>
-					<user>sliceanalysis</user>
+					<baseImage>nexus3.onap.org:10001/onap/integration-java11:10.0.0</baseImage>
+					<user>sliceanalysis></user>
+					<dockerDirectory>${project.basedir}/src/main/docker/dockerfile</dockerDirectory>
+					<buildArgs>
+						<JAR_FILE>${project.artifactId}-${project.version}.jar</JAR_FILE>
+					</buildArgs>
 					<resources>
 						<resource>
 							<targetPath>/bin</targetPath>
@@ -315,17 +319,6 @@
 							<include>entry.sh</include>
 						</resource>
 					</resources>
-					<runs>
-						<!-- Maven is loosing file permissions during artifacts copy -->
-				 		<run>adduser --disabled-password sliceanalysis </run>
-						<run>mv /bin/*.jar /bin/application.jar</run>
-						<run>chmod -R 777 /bin</run>
-						<run>chmod +x /bin/entry.sh</run>
-					</runs>
-					<exposes>
-						<expose>8080</expose>
-					</exposes>
-					<entryPoint>./bin/entry.sh</entryPoint>
 				</configuration>
 			</plugin>
 		</plugins>

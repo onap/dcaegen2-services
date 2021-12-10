@@ -8,4 +8,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 	 - [DCAEGEN2-2885](https://jira.onap.org/browse/DCAEGEN2-2885) - DCAE SliceAnalysis MS - CPS Integration
 
 	 - [DCAEGEN2-2811](https://jira.onap.org/browse/DCAEGEN2-2811) - Remove security vulnerabilities
-
+## [1.0.7] - 2021/12/16
+	 - [DCAEGEN2-2963](https://jira.onap.org/browse/DCAEGEN2-2963) - Use onap/integration-java11 image
