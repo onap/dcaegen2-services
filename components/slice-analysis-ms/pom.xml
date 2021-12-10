@@ -4,8 +4,8 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020-2021 Wipro Limited.
- *   ==============================================================================
+ *  Copyright (C) 2020-2021 Wipro Limited.
+ *  ================================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
  *     You may obtain a copy of the License at
@@ -20,39 +20,41 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
-  -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
- <parent>
-        <groupId>org.onap.oparent</groupId>
-        <artifactId>oparent</artifactId>
-        <version>2.0.0</version>
-    </parent>
-	<groupId>org.onap.dcaegen2.services.components</groupId>
-	<artifactId>slice-analysis-ms</artifactId>
-	<version>1.0.6-SNAPSHOT</version>
-	<name>dcaegen2-services-slice-analysis-ms</name>
-	<description>Network slice PM analyser</description>
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+        <modelVersion>4.0.0</modelVersion>
+        <parent>
+                <groupId>org.onap.oparent</groupId>
+                <artifactId>oparent</artifactId>
+                <version>2.0.0</version>
+        </parent>
+        <groupId>org.onap.dcaegen2.services.components</groupId>
+        <artifactId>slice-analysis-ms</artifactId>
+        <version>1.0.7-SNAPSHOT</version>
+        <name>dcaegen2-services-slice-analysis-ms</name>
+        <description>Network slice PM analyser</description>
         <packaging>jar</packaging>
-	<properties>
-		<java.version>11</java.version>
-		<sdk.version>1.1.4</sdk.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
-		<docker.image.name>onap/${project.groupId}.${project.artifactId}</docker.image.name>
-		<!-- NEXUS RELATED SETTINGS -->
-		<nexusproxy>https://nexus.onap.org</nexusproxy>
-		<snapshots.path>content/repositories/snapshots/</snapshots.path>
-		<releases.path>content/repositories/releases/</releases.path>
-		<site.path>content/sites/site/org/onap/dcaegen2/services/${project.artifactId}/${project.version}</site.path>
-		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
-        	<sonar.coverage.jacoco.xmlReportPaths>
-            	${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
-        	</sonar.coverage.jacoco.xmlReportPaths>
-	</properties>
-	<dependencies>
+        <properties>
+                <java.version>11</java.version>
+                <sdk.version>1.1.4</sdk.version>
+                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                <maven.compiler.source>11</maven.compiler.source>
+                <maven.compiler.target>11</maven.compiler.target>
+                <docker.image.name>onap/${project.groupId}.${project.artifactId}</docker.image.name>
+                <!-- NEXUS RELATED SETTINGS -->
+                <nexusproxy>https://nexus.onap.org</nexusproxy>
+                <snapshots.path>content/repositories/snapshots/</snapshots.path>
+                <releases.path>content/repositories/releases/</releases.path>
+                <site.path>content/sites/site/org/onap/dcaegen2/services/${project.artifactId}/${project.version}</site.path>
+                <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+                <sonar.coverage.jacoco.xmlReportPaths>
+                        ${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml
+                </sonar.coverage.jacoco.xmlReportPaths>
+        </properties>
+        <dependencies>
                 <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-util -->
                 <dependency>
                         <groupId>org.apache.tomcat</groupId>
@@ -66,30 +68,30 @@
                         <version>2.3.1.RELEASE</version>
                 </dependency>
                 <dependency>
-		        <groupId>org.springframework</groupId>
-		        <artifactId>spring-webmvc</artifactId>
-		        <version>5.3.7</version>
-	        </dependency>
-                <dependency>
-		         <groupId>org.springframework</groupId>
-		         <artifactId>spring-core</artifactId>
-		         <version>5.3.7</version>
-	        </dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>5.3.7</version>
-		</dependency>
-	        <dependency>
-		        <groupId>org.springframework</groupId>
-		        <artifactId>spring-expression</artifactId>
-		        <version>5.3.7</version>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-webmvc</artifactId>
+                        <version>5.3.7</version>
                 </dependency>
-	        <dependency>
-		        <groupId>org.springframework</groupId>
-		        <artifactId>spring-web</artifactId>
-		        <version>5.3.7</version>
-	        </dependency>
+                <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-core</artifactId>
+                        <version>5.3.7</version>
+                </dependency>
+                <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-beans</artifactId>
+                        <version>5.3.7</version>
+                </dependency>
+                <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-expression</artifactId>
+                        <version>5.3.7</version>
+                </dependency>
+                <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-web</artifactId>
+                        <version>5.3.7</version>
+                </dependency>
                 <dependency>
                         <groupId>org.springframework</groupId>
                         <artifactId>spring-tx</artifactId>
@@ -100,234 +102,227 @@
                         <artifactId>spring-data-commons</artifactId>
                         <version>2.2.0.RELEASE</version>
                 </dependency>
-		<!-- cbs client -->
-		<dependency>
-			<groupId>org.onap.dcaegen2.services.sdk.rest.services</groupId>
-			<artifactId>cbs-client</artifactId>
-			<version>${sdk.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.onap.dcaegen2.services.sdk.security.crypt</groupId>
-			<artifactId>crypt-password</artifactId>
-			<version>${sdk.version}</version>
-		</dependency>
-		<dependency>
-			<!-- Import dependency management from Spring Boot -->
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-dependencies</artifactId>
-			<version>2.1.3.RELEASE</version>
-			<type>pom</type>
-			<scope>import</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.att.nsa</groupId>
-			<artifactId>cambriaClient</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-		<dependency>
-    		<groupId>net.javacrumbs.json-unit</groupId>
-    		<artifactId>json-unit-assertj</artifactId>
-    		<version>2.14.0</version>
-    		<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.11.0</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
-		<dependency>
-			<groupId>javax.json</groupId>
-			<artifactId>javax.json-api</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.1.3.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-tomcat</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>42.2.13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>2.1.3.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>1.0.1.Final</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<version>2.1.3.RELEASE</version>
-			<scope>test</scope>
-			<!-- exclusions> <exclusion> <groupId>org.mockito</groupId> <artifactId>mockito-core</artifactId>
-				</exclusion> </exclusions -->
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>2.21.0</version>
-			<scope>test</scope>
-		</dependency>
-	        <dependency>
-	                <groupId>com.openpojo</groupId>
-			<artifactId>openpojo</artifactId>
-			<version>0.8.10</version>
-	        </dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-                <!-- https://mvnrepository.com/artifact/org.powermock/powermock-api-mockito2 -->
-	        <dependency>
-	                <groupId>org.powermock</groupId>
-		        <artifactId>powermock-api-mockito2</artifactId>
-		        <version>2.0.2</version>
-		        <exclusions>
-			        <exclusion>
-				        <groupId>org.mockito</groupId>
-				        <artifactId>mockito-all</artifactId>
-	                        </exclusion>
-		        </exclusions>
-	        </dependency>
-		<!-- https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4 -->
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-module-junit4</artifactId>
-			<version>2.0.2</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-	            <groupId>org.functionaljava</groupId>
-	            <artifactId>functionaljava</artifactId>
-	            <version>3.0</version>
+                <!-- cbs client -->
+                <dependency>
+                        <groupId>org.onap.dcaegen2.services.sdk.rest.services</groupId>
+                        <artifactId>cbs-client</artifactId>
+                        <version>${sdk.version}</version>
                 </dependency>
-	        <dependency>
-		        <groupId>org.apache.httpcomponents</groupId>
-		        <artifactId>httpclient</artifactId>
-			<version>4.5.13</version>
-	        </dependency>
-           <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
-            <dependency>
-                   <groupId>commons-beanutils</groupId>
-                   <artifactId>commons-beanutils</artifactId>
-                   <version>1.9.4</version>
-            </dependency>
-            <!-- mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
-            <dependency>
-                   <groupId>org.eclipse.jetty</groupId>
-                   <artifactId>jetty-server</artifactId>
-                   <version>9.4.41.v20210516</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
-            <dependency>
-                   <groupId>org.webjars</groupId>
-                   <artifactId>bootstrap</artifactId>
-                   <version>4.3.1</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
-            <dependency>
-                   <groupId>javax.xml.bind</groupId>
-                   <artifactId>jaxb-api</artifactId>
-                   <version>2.3.0</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
-            <dependency>
-                   <groupId>org.javassist</groupId>
-                   <artifactId>javassist</artifactId>
-                   <version>3.24.1-GA</version>
-            </dependency>
-	    <dependency>
-		    <groupId>org.apache.tomcat.embed</groupId>
-		    <artifactId>tomcat-embed-core</artifactId>
-		   <version>9.0.46</version>
-	    </dependency>
-	    <!-- https://mvnrepository.com/artifact/nl.jqno.equalsverifier/equalsverifier -->
-	    <dependency>
-		    <groupId>nl.jqno.equalsverifier</groupId>
-		    <artifactId>equalsverifier</artifactId>
-                    <version>3.5.5</version>
-                    <scope>test</scope>
-	   </dependency>
-	</dependencies>
-		<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.3.1.RELEASE</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<configuration>
-					<serverId>${onap.nexus.dockerregistry.daily}</serverId>
-					<imageName>${onap.nexus.dockerregistry.daily}/${docker.image.name}</imageName>
-					<imageTags>
+                <dependency>
+                        <groupId>org.onap.dcaegen2.services.sdk.security.crypt</groupId>
+                        <artifactId>crypt-password</artifactId>
+                        <version>${sdk.version}</version>
+                </dependency>
+                <dependency>
+                        <!-- Import dependency management from Spring Boot -->
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-dependencies</artifactId>
+                        <version>2.1.3.RELEASE</version>
+                        <type>pom</type>
+                        <scope>import</scope>
+                </dependency>
+                <dependency>
+                        <groupId>com.att.nsa</groupId>
+                        <artifactId>cambriaClient</artifactId>
+                        <version>0.0.1</version>
+                </dependency>
+                <dependency>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                        <scope>test</scope>
+                </dependency>
+                <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-core</artifactId>
+                        <version>2.11.0</version>
+                </dependency>
+                <dependency>
+                        <groupId>net.javacrumbs.json-unit</groupId>
+                        <artifactId>json-unit-assertj</artifactId>
+                        <version>2.14.0</version>
+                        <scope>test</scope>
+                </dependency>
+                <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-databind</artifactId>
+                        <version>2.11.0</version>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/javax.json/javax.json-api -->
+                <dependency>
+                        <groupId>javax.json</groupId>
+                        <artifactId>javax.json-api</artifactId>
+                        <version>1.1.2</version>
+                </dependency>
+                <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-web</artifactId>
+                        <version>2.1.3.RELEASE</version>
+                        <exclusions>
+                                <exclusion>
+                                        <groupId>org.springframework.boot</groupId>
+                                        <artifactId>spring-boot-starter-tomcat</artifactId>
+                                </exclusion>
+                        </exclusions>
+                </dependency>
+                <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>42.2.13</version>
+                </dependency>
+                <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-data-jpa</artifactId>
+                        <version>2.1.3.RELEASE</version>
+                </dependency>
+                <dependency>
+                        <groupId>org.hibernate.javax.persistence</groupId>
+                        <artifactId>hibernate-jpa-2.0-api</artifactId>
+                        <version>1.0.1.Final</version>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+                <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-test</artifactId>
+                        <version>2.1.3.RELEASE</version>
+                        <scope>test</scope>
+                        <!-- exclusions> <exclusion> <groupId>org.mockito</groupId>
+                                <artifactId>mockito-core</artiifactId> </exclusion> </exclusions -->
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+                <dependency>
+                        <groupId>org.mockito</groupId>
+                        <artifactId>mockito-core</artifactId>
+                        <version>2.21.0</version>
+                        <scope>test</scope>
+                </dependency>
+                <dependency>
+                        <groupId>com.openpojo</groupId>
+                        <artifactId>openpojo</artifactId>
+                        <version>0.8.10</version>
+                </dependency>
+                <dependency>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                        <version>4.12</version>
+                        <scope>test</scope>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/org.powermock/powermock-api-mockito2 -->
+                <dependency>
+                        <groupId>org.powermock</groupId>
+                        <artifactId>powermock-api-mockito2</artifactId>
+                        <version>2.0.2</version>
+                        <exclusions>
+                                <exclusion>
+                                        <groupId>org.mockito</groupId>
+                                        <artifactId>mockito-all</artifactId>
+                                </exclusion>
+                        </exclusions>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4 -->
+                <dependency>
+                        <groupId>org.powermock</groupId>
+                        <artifactId>powermock-module-junit4</artifactId>
+                        <version>2.0.2</version>
+                        <scope>test</scope>
+                </dependency>
+                <dependency>
+                        <groupId>org.functionaljava</groupId>
+                        <artifactId>functionaljava</artifactId>
+                        <version>3.0</version>
+                </dependency>
+                <dependency>
+                        <groupId>org.apache.httpcomponents</groupId>
+                        <artifactId>httpclient</artifactId>
+                        <version>4.5.13</version>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+                <dependency>
+                        <groupId>commons-beanutils</groupId>
+                        <artifactId>commons-beanutils</artifactId>
+                        <version>1.9.4</version>
+                </dependency>
+                <!-- mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+                <dependency>
+                        <groupId>org.eclipse.jetty</groupId>
+                        <artifactId>jetty-server</artifactId>
+                        <version>9.4.41.v20210516</version>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
+                <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>bootstrap</artifactId>
+                        <version>4.3.1</version>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+                <dependency>
+                        <groupId>javax.xml.bind</groupId>
+                        <artifactId>jaxb-api</artifactId>
+                        <version>2.3.0</version>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
+                <dependency>
+                        <groupId>org.javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                        <version>3.24.1-GA</version>
+                </dependency>
+                <dependency>
+                        <groupId>org.apache.tomcat.embed</groupId>
+                        <artifactId>tomcat-embed-core</artifactId>
+                        <version>9.0.46</version>
+                </dependency>
+                <!-- https://mvnrepository.com/artifact/nl.jqno.equalsverifier/equalsverifier -->
+                <dependency>
+                        <groupId>nl.jqno.equalsverifier</groupId>
+                        <artifactId>equalsverifier</artifactId>
+                        <version>3.5.5</version>
+                        <scope>test</scope>
+                </dependency>
+        </dependencies>
+        <build>
+                <plugins>
+                        <plugin>
+                                <groupId>org.springframework.boot</groupId>
+                                <artifactId>spring-boot-maven-plugin</artifactId>
+                                <version>2.3.1.RELEASE</version>
+                                <executions>
+                                        <execution>
+                                                <goals>
+                                                        <goal>repackage</goal>
+                                                </goals>
+                                        </execution>
+                                </executions>
+                        </plugin>
+                        <plugin>
+                                <groupId>com.spotify</groupId>
+                                <artifactId>docker-maven-plugin</artifactId>
+                                <configuration>
+                                        <serverId>${onap.nexus.dockerregistry.daily}</serverId>
+                                        <imageName>${onap.nexus.dockerregistry.daily}/${docker.image.name}</imageName>
+                                        <imageTags>
                                                 <imageTag>${project.version}-${maven.build.timestamp}Z</imageTag>
                                                 <imageTag>${project.version}</imageTag>
                                                 <imageTag>latest</imageTag>
-					</imageTags>
-					<baseImage>openjdk:11.0.6-jre-slim</baseImage>
-					<user>sliceanalysis</user>
-					<resources>
-						<resource>
-							<targetPath>/bin</targetPath>
-							<directory>${project.build.directory}</directory>
-							<include>${project.artifactId}-${project.version}.jar</include>
-						</resource>
-						<resource>
-							<targetPath>/bin</targetPath>
-							<directory>${project.basedir}</directory>
-							<include>entry.sh</include>
-						</resource>
-					</resources>
-					<runs>
-						<!-- Maven is loosing file permissions during artifacts copy -->
-				 		<run>adduser --disabled-password sliceanalysis </run>
-						<run>mv /bin/*.jar /bin/application.jar</run>
-						<run>chmod -R 777 /bin</run>
-						<run>chmod +x /bin/entry.sh</run>
-					</runs>
-					<exposes>
-						<expose>8080</expose>
-					</exposes>
-					<entryPoint>./bin/entry.sh</entryPoint>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+                                        </imageTags>
+                                        <baseImage>nexus3.onap.org:10001/onap/integration-java11:10.0.0</baseImage>
+                                        <user>sliceanalysis></user>
+                                        <dockerDirectory>${project.basedir}/src/main/docker/dockerfile</dockerDirectory>
+                                        <buildArgs>
+                                                <JAR_FILE>${project.artifactId}-${project.version}.jar</JAR_FILE>
+                                        </buildArgs>
+                                        <resources>
+                                                <resource>
+                                                        <targetPath>/bin</targetPath>
+                                                        <directory>${project.build.directory}</directory>
+                                                        <include>${project.artifactId}-${project.version}.jar</include>
+                                                </resource>
+                                                <resource>
+                                                        <targetPath>/bin</targetPath>
+                                                        <directory>${project.basedir}</directory>
+                                                        <include>entry.sh</include>
+                                                </resource>
+                                        </resources>
+                                </configuration>
+                        </plugin>
+                </plugins>
+        </build>
 </project>
