@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "9a1ea608_d136c109",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-14T16:49:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "54490705_83c5979f",
+      "range": {
+        "startLine": 258,
+        "startChar": 37,
+        "endLine": 258,
+        "endChar": 50
+      },
+      "revId": "c47e924b514f56be957964ddd71dea6a07bd65d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46392771_72a54beb",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
         "patchSetId": 4
@@ -93,6 +117,30 @@
       "revId": "c47e924b514f56be957964ddd71dea6a07bd65d7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef9095a4_576fcec2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-14T16:49:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eebfb557_55d6da6f",
+      "range": {
+        "startLine": 290,
+        "startChar": 8,
+        "endLine": 290,
+        "endChar": 17
+      },
+      "revId": "c47e924b514f56be957964ddd71dea6a07bd65d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -187,6 +235,30 @@
       "revId": "c47e924b514f56be957964ddd71dea6a07bd65d7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af8e351d_9c2e3b4a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2021-12-14T16:49:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c02a7de6_a471394f",
+      "range": {
+        "startLine": 307,
+        "startChar": 25,
+        "endLine": 307,
+        "endChar": 33
+      },
+      "revId": "c47e924b514f56be957964ddd71dea6a07bd65d7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
