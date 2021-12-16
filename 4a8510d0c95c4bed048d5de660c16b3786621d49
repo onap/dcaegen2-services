@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6a77e9cb_9b85d522",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 7656
+      },
+      "writtenOn": "2021-12-16T18:35:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e41b4499_4fcb73a1",
+      "revId": "4a8510d0c95c4bed048d5de660c16b3786621d49",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdcf326b_39845c9a",
         "filename": "components/slice-analysis-ms/entry.sh",
         "patchSetId": 7
@@ -33,6 +51,24 @@
       "revId": "4a8510d0c95c4bed048d5de660c16b3786621d49",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db93225b_7f15b1b7",
+        "filename": "components/slice-analysis-ms/entry.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 7656
+      },
+      "writtenOn": "2021-12-16T18:35:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdcf326b_39845c9a",
+      "revId": "4a8510d0c95c4bed048d5de660c16b3786621d49",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
