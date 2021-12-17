@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.models.configdb.CellsModel;
@@ -62,11 +63,26 @@ public class ConfigDbInterfaceService implements IConfigDbService {
 	/**
 	 *  Fetches the current configuration of RIC from config DB
 	 */
-	public Map<String,Map<String,Object>> fetchCurrentConfigurationOfRIC(String snssai){
-		String reqUrl=configDbBaseUrl+"/api/sdnc-config-db/v4/slice-config/"+snssai;
-		ResponseEntity<Map<String,Map<String,Object>>> response=restclient.sendGetRequest(reqUrl, new ParameterizedTypeReference<Map<String,Map<String,Object>>>() {
-		});
-		return response.getBody();
+        public Map<String, Map<String, Object>> fetchCurrentConfigurationOfRIC(String snssai) {
+		String reqUrl = configDbBaseUrl + "/api/sdnc-config-db/v4/slice-config/" + snssai;
+		Map<String, Map<String, Object>> responseMap = new HashMap<String, Map<String, Object>>();
+		ResponseEntity<Map<String, List<Map<String, Object>>>> response = restclient.sendGetRequest(reqUrl,
+				new ParameterizedTypeReference<Map<String, List<Map<String, Object>>>>() {
+				});
+		if (Objects.nonNull(response)) {
+			for (Map.Entry<String, List<Map<String, Object>>> entry : response.getBody().entrySet()) {
+				List<Map<String, Object>> list = entry.getValue();
+				if (!list.isEmpty()) {
+					list.forEach(l -> {
+						if (l.containsKey("nearRTRICId")) {
+							responseMap.put(String.valueOf(l.get("nearRTRICId")), l);
+						}
+					});
+				}
+
+			}
+		}
+		return responseMap;
 	}
 
 	/**

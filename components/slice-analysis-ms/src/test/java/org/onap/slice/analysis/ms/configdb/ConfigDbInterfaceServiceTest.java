@@ -57,18 +57,23 @@ public class ConfigDbInterfaceServiceTest {
 		assertEquals(responsemap, configdbservice.fetchCurrentConfigurationOfSlice("snssai"));
 	}
 
-	@Test
-	public void fetchCurrentConfigurationOfRIC() {
-		Map<String,Integer> map=new HashMap<>();
-		Map<String, Map<String,Integer>> responsemap=new HashMap<>();
-        map.put("dLThptPerSlice", 45);
-		map.put("uLThptPerSlice", 50);
-		responsemap.put("1", map);
+        @Test
+        public void fetchCurrentConfigurationOfRIC() {
+                Map<String,Integer> map=new HashMap<>();
+                Map<String, Map<String,Integer>> responsemap=new HashMap<>();
+                Map<String, List<Map<String,Integer>>> result =new HashMap<String, List<Map<String,Integer>>>();
+                map.put("dLThptPerSlice", 45);
+                map.put("uLThptPerSlice", 60);
+                map.put("nearRTRICId",1);
+                responsemap.put("1", map);
+                List<Map<String,Integer>> list = new ArrayList<Map<String,Integer>>();
+                list.add(map);
+                result.put("data",list);
+                Mockito.when(restclient.sendGetRequest(Mockito.anyString(), Mockito.any())).thenReturn(new ResponseEntity<Object>(result, HttpStatus.OK));
+                assertEquals(responsemap, configdbservice.fetchCurrentConfigurationOfRIC("snssai"));
 
-		Mockito.when(restclient.sendGetRequest(Mockito.anyString(), Mockito.any())).thenReturn(new ResponseEntity<Object>(responsemap, HttpStatus.OK));	
-		assertEquals(responsemap, configdbservice.fetchCurrentConfigurationOfRIC("snssai"));
+        }
 
-	}
 	@Test
 	public void fetchRICsOfSnssai() {
 		Map<String, List<CellsModel>> response=new HashMap<>();

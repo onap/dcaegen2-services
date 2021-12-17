@@ -122,8 +122,8 @@ public class SnssaiSamplesProcessor {
 		} else {
 			ricToCellMapping = cpsInterface.fetchRICsOfSnssai(snssai);
 			ricConfiguration = cpsInterface.fetchCurrentConfigurationOfRIC(snssai);
-			sliceConfiguration = aaiInterface.fetchCurrentConfigurationOfSlice(snssai);
 			serviceDetails = aaiInterface.fetchServiceDetails(snssai);
+                        sliceConfiguration = aaiInterface.fetchCurrentConfigurationOfSlice(snssai);
 		}
 		log.info("RIC to Cell Mapping for {} S-NSSAI: {}", snssai, ricToCellMapping);
 		log.info("RIC Configuration {} and Slice Configuration {}", ricConfiguration, sliceConfiguration);
@@ -136,12 +136,32 @@ public class SnssaiSamplesProcessor {
 		});
 		updateConfiguration();
 		if (ricToThroughputMapping.size() > 0) {
-			AdditionalProperties<Map<String, Map<String, Integer>>> addProps = new AdditionalProperties<>();
-			addProps.setResourceConfig(ricToThroughputMapping);
+			AdditionalProperties<Map<String,  List<Map<String, Integer>>>> addProps = new AdditionalProperties<>();
+			addProps.setResourceConfig(getChangedRIConfigFormat(ricToThroughputMapping));
 			policyService.sendOnsetMessageToPolicy(snssai, addProps, serviceDetails);
 		}
 		return true;
 	}
+
+         /**
+         * change the RICConfig data format to be compatible with SDN-R
+         */
+        protected Map<String, List<Map<String, Integer>>> getChangedRIConfigFormat(
+			Map<String, Map<String, Integer>> ricToThroughputMapping) {
+                Iterator<Map.Entry<String, Map<String, Integer>>> it = ricToThroughputMapping.entrySet().iterator();
+                Map.Entry<String, Map<String, Integer>> entry = null;
+                List<Map<String, Integer>> ricConfigList = new ArrayList<>();
+                Map<String, List<Map<String, Integer>>> ricConfigData = new HashMap<>();
+                while (it.hasNext()) {
+                        Map<String, Integer> newConfigMap = new HashMap<>();
+                        entry = it.next();
+                        newConfigMap = entry.getValue();
+                        newConfigMap.put("nearRTRICId", Integer.parseInt(entry.getKey()));
+                        ricConfigList.add(newConfigMap);
+                }
+                ricConfigData.put("data", ricConfigList);
+                return ricConfigData;
+        }
 
 	/**
 	 * process the measurement data of an S-NSSAI
