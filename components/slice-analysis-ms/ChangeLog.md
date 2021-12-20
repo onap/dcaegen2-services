@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.0.7] - 2021/12/16
          - [DCAEGEN2-2963](https://jira.onap.org/browse/DCAEGEN2-2963) - Use onap/integration-java11 image
 
+         - [DCAEGEN2-2966](https://jira.onap.org/browse/DCAEGEN2-2966) - Switch CBS client library to 1.8.7
+
+         - [DCAEGEN2-3025](https://jira.onap.org/browse/DCAEGEN2-3025) - Fix null pointer exception while fetching slice-config
+
 ## [1.0.6] - 2021/08/28
          - [DCAEGEN2-2885](https://jira.onap.org/browse/DCAEGEN2-2885) - DCAE SliceAnalysis MS - CPS Integration
 

@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2021 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -32,7 +32,8 @@ import java.util.Map;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsClientFactory;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsRequests;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.CbsRequest;
-import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.EnvProperties;
+import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.CbsClientConfiguration;
+import org.onap.dcaegen2.services.sdk.rest.services.model.logging.ImmutableRequestDiagnosticContext;
 import org.onap.dcaegen2.services.sdk.rest.services.model.logging.RequestDiagnosticContext;
 import org.onap.slice.analysis.ms.models.ConfigPolicy;
 import org.onap.slice.analysis.ms.models.Configuration;
@@ -69,8 +70,9 @@ public class ConfigFetchFromCbs implements Runnable {
         log.info("getAppconfig start ..");
         RequestDiagnosticContext diagnosticContext = RequestDiagnosticContext.create();
         // Read necessary properties from the environment
-        final EnvProperties env = EnvProperties.fromEnvironment();
-        log.debug("environments {}", env);
+        final CbsClientConfiguration cbsClientConfiguration = CbsClientConfiguration.fromEnvironment();
+
+        log.debug("environments {}", cbsClientConfiguration);
         ConfigPolicy configPolicy = ConfigPolicy.getInstance();
 
         // Polling properties
@@ -79,7 +81,7 @@ public class ConfigFetchFromCbs implements Runnable {
 
         // Create the client and use it to get the configuration
         final CbsRequest request = CbsRequests.getAll(diagnosticContext);
-        return CbsClientFactory.createCbsClient(env)
+        return CbsClientFactory.createCbsClient(cbsClientConfiguration)
                 .flatMapMany(cbsClient -> cbsClient.updates(request, initialDelay, period)).subscribe(jsonObject -> {
                     log.info("configuration and policy from CBS {}", jsonObject);
                     JsonObject config = jsonObject.getAsJsonObject("config");
