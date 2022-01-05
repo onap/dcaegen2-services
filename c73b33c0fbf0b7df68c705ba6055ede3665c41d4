@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3247376b_00e3a74e",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumRatioKpiComputation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-05T19:17:25Z",
+      "side": 1,
+      "message": "please add 2022",
+      "revId": "c73b33c0fbf0b7df68c705ba6055ede3665c41d4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04f95a92_55fe66b3",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumRatioKpiComputation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-05T19:17:25Z",
+      "side": 1,
+      "message": "Please check your IDE settings. It\u0027s generating tabs when it should not.",
+      "revId": "c73b33c0fbf0b7df68c705ba6055ede3665c41d4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6697d62_801be8a9",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/config/Operation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-05T19:17:25Z",
+      "side": 1,
+      "message": "please add 2022",
+      "revId": "c73b33c0fbf0b7df68c705ba6055ede3665c41d4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "445be688_65846d65",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiComputationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-05T19:17:25Z",
+      "side": 1,
+      "message": "please add 2022",
+      "revId": "c73b33c0fbf0b7df68c705ba6055ede3665c41d4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c2b3016_e101dcc9",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-05T19:17:25Z",
+      "side": 1,
+      "message": "please add 2022",
+      "revId": "c73b33c0fbf0b7df68c705ba6055ede3665c41d4",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
