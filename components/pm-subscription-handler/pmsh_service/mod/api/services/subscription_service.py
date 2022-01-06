@@ -323,7 +323,8 @@ def query_all_subscriptions():
     logger.info('Attempting to fetch all the subscriptions')
     subscriptions = db.session.query(SubscriptionModel) \
         .options(joinedload(SubscriptionModel.network_filter),
-                 joinedload(SubscriptionModel.measurement_groups)) \
+                 joinedload(SubscriptionModel.measurement_groups),
+                 joinedload(SubscriptionModel.nfs)) \
         .all()
     db.session.remove()
     return subscriptions

@@ -26,6 +26,7 @@ def capture_filtered_nfs(sub_name):
     """
     Retrieves network functions from AAI client and
     returns a list of filtered NetworkFunctions using the Filter
+    else gives an empty list if no network function is filtered
 
     Args:
         sub_name (string): The name of subscription inorder to perform filtering
