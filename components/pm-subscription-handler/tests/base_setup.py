@@ -86,6 +86,7 @@ def create_multiple_subscription_data(subscription_names):
     subscriptions = []
     for subscription_name in subscription_names:
         subscriptions.append(create_subscription_data(subscription_name))
+    subscriptions[1].nfs = []
     return subscriptions
 
 

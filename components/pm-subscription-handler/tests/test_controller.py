@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2021 Nordix Foundation.
+#  Copyright (C) 2019-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -153,6 +153,9 @@ class ControllerTestCase(BaseClassSetup):
         self.assertEqual(subs[1]['subscription']['measurementGroups'][0]['measurementGroup']
                          ['measurementGroupName'], 'MG1')
         self.assertEqual(len(subs[1]['subscription']['measurementGroups']), 2)
+        self.assertEqual(subs[0]['subscription']['nfs'][0], 'pnf_101')
+        self.assertEqual(subs[0]['subscription']['nfs'][1], 'pnf_102')
+        self.assertEqual(subs[1]['subscription']['nfs'], [])
         self.assertEqual(len(subs), 2)
 
     @patch('mod.api.services.subscription_service.query_all_subscriptions',
