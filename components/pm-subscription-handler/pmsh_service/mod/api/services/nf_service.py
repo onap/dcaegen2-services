@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ def capture_filtered_nfs(sub_name):
     """
     Retrieves network functions from AAI client and
     returns a list of filtered NetworkFunctions using the Filter
+    else gives an empty list if no network function is filtered
 
     Args:
         sub_name (string): The name of subscription inorder to perform filtering
