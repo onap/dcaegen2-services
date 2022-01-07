@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1c48986_19cdeebd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-07T14:06:24Z",
+      "side": 1,
+      "message": "add 2022",
+      "revId": "ef6c00537f956ffb4ccaac2e1f0b42663700106b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4232dbe0_6bbdd23b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-07T14:06:24Z",
+      "side": 1,
+      "message": "where is the test for an empty list?",
+      "revId": "ef6c00537f956ffb4ccaac2e1f0b42663700106b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50e38b39_51631121",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-07T14:06:24Z",
+      "side": 1,
+      "message": "add 2022",
+      "revId": "ef6c00537f956ffb4ccaac2e1f0b42663700106b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d391ebb0_4df96520",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-07T14:06:24Z",
+      "side": 1,
+      "message": "add 2022",
+      "revId": "ef6c00537f956ffb4ccaac2e1f0b42663700106b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
