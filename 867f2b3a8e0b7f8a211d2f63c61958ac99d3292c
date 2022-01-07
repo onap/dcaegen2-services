@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fba639df_d3a0351e",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/config/Operation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-01-07T21:59:23Z",
+      "side": 1,
+      "message": "This should not have been modified",
+      "range": {
+        "startLine": 3,
+        "startChar": 18,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "867f2b3a8e0b7f8a211d2f63c61958ac99d3292c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e60b39d1_4688bce1",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiComputationTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-01-07T21:59:23Z",
+      "side": 1,
+      "message": "shld not have been modified",
+      "range": {
+        "startLine": 3,
+        "startChar": 18,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "867f2b3a8e0b7f8a211d2f63c61958ac99d3292c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a82c389b_61134c2a",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-01-07T21:59:23Z",
+      "side": 1,
+      "message": "ditto as earlier comment",
+      "range": {
+        "startLine": 3,
+        "startChar": 18,
+        "endLine": 3,
+        "endChar": 23
+      },
+      "revId": "867f2b3a8e0b7f8a211d2f63c61958ac99d3292c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
