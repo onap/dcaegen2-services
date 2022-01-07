@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,8 @@ def capture_filtered_nfs(sub_name):
     Args:
         sub_name (string): The name of subscription inorder to perform filtering
     Returns:
-        list[NetworkFunction]: a list of filtered NetworkFunction Objects.
+        list[NetworkFunction]: a list of filtered NetworkFunction Objects
+        or an empty list if no network function is filtered.
     """
     logger.info(f'Getting filtered nfs for subscription: {sub_name}')
     nf_filter = NetworkFunctionFilter.get_network_function_filter(sub_name)

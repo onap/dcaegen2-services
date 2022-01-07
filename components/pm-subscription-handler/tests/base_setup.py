@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020-2021 Nordix Foundation.
+#  Copyright (C) 2020-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -86,6 +86,7 @@ def create_multiple_subscription_data(subscription_names):
     subscriptions = []
     for subscription_name in subscription_names:
         subscriptions.append(create_subscription_data(subscription_name))
+    subscriptions[1].nfs = []
     return subscriptions
 
 
