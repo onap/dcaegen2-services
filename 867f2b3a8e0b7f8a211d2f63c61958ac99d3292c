@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a8a20e70_7fc3efd1",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/config/Operation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 7878
+      },
+      "writtenOn": "2022-01-08T09:34:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fba639df_d3a0351e",
+      "range": {
+        "startLine": 3,
+        "startChar": 18,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "867f2b3a8e0b7f8a211d2f63c61958ac99d3292c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e60b39d1_4688bce1",
         "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiComputationTest.java",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8953586c_3198bd36",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiComputationTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 7878
+      },
+      "writtenOn": "2022-01-08T09:34:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e60b39d1_4688bce1",
+      "range": {
+        "startLine": 3,
+        "startChar": 18,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "867f2b3a8e0b7f8a211d2f63c61958ac99d3292c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a82c389b_61134c2a",
         "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiTest.java",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "867f2b3a8e0b7f8a211d2f63c61958ac99d3292c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5336c2e9_a2e860c0",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 7878
+      },
+      "writtenOn": "2022-01-08T09:34:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a82c389b_61134c2a",
+      "range": {
+        "startLine": 3,
+        "startChar": 18,
+        "endLine": 3,
+        "endChar": 23
+      },
+      "revId": "867f2b3a8e0b7f8a211d2f63c61958ac99d3292c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
