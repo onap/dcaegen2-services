@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65ed08c2_3c44aa69",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-01-10T10:37:44Z",
+      "side": 1,
+      "message": "I would add this to the Returns: statement instead",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 22
+      },
+      "revId": "ba0f4ea0b36a9eb133c0fafd7da4bf044b25f5fe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
