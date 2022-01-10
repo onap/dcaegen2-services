@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,16 +18,19 @@
 import copy
 import json
 import os
+from http import HTTPStatus
 from unittest.mock import patch, MagicMock
+
+from mod.api.controller import delete_subscription_by_name
 from mod.api.db_models import SubscriptionModel, MeasurementGroupModel, \
     NfMeasureGroupRelationalModel, NetworkFunctionModel, NfSubRelationalModel, \
     convert_db_string_to_list
 from mod.network_function import NetworkFunctionFilter
 from mod.subscription import SubNfState
-from mod import aai_client
+from mod import aai_client, db
 from mod.api.custom_exception import DuplicateDataException, InvalidDataException
 from mod.pmsh_config import AppConfig
-from tests.base_setup import BaseClassSetup
+from tests.base_setup import BaseClassSetup, create_subscription_data
 from mod.api.services import subscription_service, nf_service, measurement_group_service
 from tests.base_setup import create_multiple_subscription_data
 
@@ -377,3 +380,31 @@ class SubscriptionServiceTestCase(BaseClassSetup):
     def test_get_subscriptions_list_empty(self):
         subs = subscription_service.get_subscriptions_list()
         self.assertEqual(subs, [])
+
+    def test_delete_when_state_unlocked(self):
+        subscription_unlocked_data = create_subscription_data('MG_unlocked')
+        subscription_unlocked_data.measurement_groups[0].measurement_group_name = 'unlock'
+        subscription_unlocked_data.measurement_groups[0].administrative_state = 'UNLOCKED'
+        db.session.add(subscription_unlocked_data)
+        db.session.add(subscription_unlocked_data.measurement_groups[0])
+        db.session.commit()
+        db.session.remove()
+        message, status_code = delete_subscription_by_name('MG_unlocked')
+        self.assertEqual(status_code, HTTPStatus.CONFLICT.value)
+
+    def test_delete_when_state_locked(self):
+        subscription_unlocked_data = create_subscription_data('MG_locked')
+        subscription_unlocked_data.measurement_groups[0].measurement_group_name = 'lock'
+        subscription_unlocked_data.measurement_groups[0].administrative_state = 'LOCKED'
+        db.session.add(subscription_unlocked_data)
+        db.session.add(subscription_unlocked_data.measurement_groups[0])
+        db.session.commit()
+        db.session.remove()
+        none_type, status_code = delete_subscription_by_name('MG_locked')
+        self.assertEqual(none_type, None)
+        self.assertEqual(status_code, HTTPStatus.NO_CONTENT.value)
+
+    def test_delete_sub_none(self):
+        message, status_code = delete_subscription_by_name('None')
+        self.assertEqual(message['error'], 'subscription is not defined with name None')
+        self.assertEqual(status_code, HTTPStatus.NOT_FOUND.value)
