@@ -16,6 +16,24 @@
       "revId": "33f78d6a26ab2f8116cf400faf66c8b8fa08793a",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0cbddc3a_b4a2c52e",
+        "filename": "components/pm-subscription-handler/tests/base_setup.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-10T16:23:38Z",
+      "side": 1,
+      "message": "Question 1: This test data creation/setup function is used when at least 2 subscriptions are required else create_subscription_data is utilised for single subscription test data setup. So subscription name sent here contains at least 2 static names. Therefore, we wont encounter subscriptions[1] will throw an index error. \n \nQuestion 2: Yes, it will wipe out. And it is supposed to do that for testing 2 scenarios with one subscription having nfs and second subscription with no nfs.\n\n\nQuestion 3: To test no nfs scenario in API response, we need to wipe it out.",
+      "parentUuid": "3bb08591_e2d580db",
+      "revId": "33f78d6a26ab2f8116cf400faf66c8b8fa08793a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
