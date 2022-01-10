@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3bb08591_e2d580db",
+        "filename": "components/pm-subscription-handler/tests/base_setup.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-10T15:47:48Z",
+      "side": 1,
+      "message": "I\u0027m concerned about this code.\n\nWhat if subscription_names is empty? If so, subscriptions[1] will throw an index error. \n\nWhat if subscription_names has more than one entry? Won\u0027t this wipe out the [1] entry\u0027s nfs value?\n\nWhy just wipe out the [1] entry\u0027s nfs value?",
+      "revId": "33f78d6a26ab2f8116cf400faf66c8b8fa08793a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
