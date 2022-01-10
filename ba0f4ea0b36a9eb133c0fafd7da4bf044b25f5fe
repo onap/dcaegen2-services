@@ -22,6 +22,30 @@
       "revId": "ba0f4ea0b36a9eb133c0fafd7da4bf044b25f5fe",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4af435a_596a5211",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/nf_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-10T10:43:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65ed08c2_3c44aa69",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 22
+      },
+      "revId": "ba0f4ea0b36a9eb133c0fafd7da4bf044b25f5fe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
