@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ from mod.api.custom_exception import InvalidDataException, DuplicateDataExceptio
 from mod.subscription import AdministrativeState, SubNfState
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
+from http import HTTPStatus
 
 
 def create_subscription(subscription):
@@ -344,3 +345,42 @@ def get_subscriptions_list():
                     (len(subscription.measurement_groups) != 0):
                 subscriptions_list.append(subscription.serialize())
     return subscriptions_list
+
+
+def delete_subscription_by_name(subscription_name):
+    """ Deletes subscription based on the name
+
+    Args:
+        subscription_name (String): Name of the subscription
+
+    Returns:
+       HTTPStatus: 204
+       dict, HTTPStatus: subscription not defined, 404
+       dict, HTTPStatus: Exception details of failure, 409
+    """
+    logger.info('started to delete subscription by name')
+    subscription_model = query_subscription_by_name(subscription_name)
+    mg_unlocked = []
+    mg_locked = []
+    if subscription_model is not None:
+        for mg in subscription_model.measurement_groups:
+            if mg.administrative_state == 'LOCKED':
+                mg_locked.append(mg.measurement_group_name)
+            else:
+                mg_unlocked.append(mg.measurement_group_name)
+        if len(mg_locked) == len(subscription_model.measurement_groups):
+            db.session.delete(subscription_model)
+            db.session.commit()
+            return HTTPStatus.NO_CONTENT
+        else:
+            logger.error('Subscription is not deleted for the reason of following UNLOCKED MGs',
+                         {'measurementGroupNames':
+                          [{'measurementGroupName': mg}for mg in mg_unlocked]})
+            return {'error': 'Subscription is not deleted for the reason of following UNLOCKED MGs',
+                    'measurementGroupNames':
+                        [{'measurementGroupName': mg}for mg in mg_unlocked]}, \
+                HTTPStatus.CONFLICT.value
+    else:
+        logger.error(f'subscription is not defined with name {subscription_name}')
+        return {'error': f'subscription is not defined with name {subscription_name}'}, \
+            HTTPStatus.NOT_FOUND.value

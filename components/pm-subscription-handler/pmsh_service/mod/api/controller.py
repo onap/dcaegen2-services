@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2021 Nordix Foundation.
+#  Copyright (C) 2019-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -147,3 +147,27 @@ def get_meas_group_with_nfs(subscription_name, measurement_group_name):
                      f'{exception}')
         return {'error': 'Request was not processed due to Exception : '
                          f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
+
+
+def delete_subscription_by_name(subscription_name):
+    """ Deletes subscription based on the name
+
+    Args:
+        subscription_name (String): Name of the subscription
+
+    Returns:
+       HTTPStatus: 204
+       dict, HTTPStatus: subscription not defined, 404
+       dict, HTTPStatus: Reason for not deleting subscription, 409
+       dict, HTTPStatus: Exception details of failure, 500
+    """
+    logger.info('API call received to delete subscription by name')
+    try:
+        delete_response = subscription_service.delete_subscription_by_name(subscription_name)
+        return delete_response
+    except Exception as exception:
+        logger.error(f'Try again, subscription with name {subscription_name}'
+                     f'is not deleted due to following exception: {exception}')
+        return {'error': f'Try again, subscription with name {subscription_name}'
+                         f'is not deleted due to following exception: {exception}'}, \
+            HTTPStatus.INTERNAL_SERVER_ERROR.value
