@@ -34,6 +34,24 @@
       "revId": "33f78d6a26ab2f8116cf400faf66c8b8fa08793a",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d10c65c1_4f2beeb8",
+        "filename": "components/pm-subscription-handler/tests/base_setup.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-01-11T23:23:21Z",
+      "side": 1,
+      "message": "Thank you for verifying that.",
+      "parentUuid": "0cbddc3a_b4a2c52e",
+      "revId": "33f78d6a26ab2f8116cf400faf66c8b8fa08793a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
