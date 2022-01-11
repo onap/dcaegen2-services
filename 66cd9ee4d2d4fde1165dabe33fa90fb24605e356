@@ -16,6 +16,24 @@
       "revId": "66cd9ee4d2d4fde1165dabe33fa90fb24605e356",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "239ee8a5_d4fe7a15",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-11T15:41:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b6fdae3_25c88bc8",
+      "revId": "66cd9ee4d2d4fde1165dabe33fa90fb24605e356",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
