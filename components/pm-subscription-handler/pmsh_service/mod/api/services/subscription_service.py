@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -323,7 +323,8 @@ def query_all_subscriptions():
     logger.info('Attempting to fetch all the subscriptions')
     subscriptions = db.session.query(SubscriptionModel) \
         .options(joinedload(SubscriptionModel.network_filter),
-                 joinedload(SubscriptionModel.measurement_groups)) \
+                 joinedload(SubscriptionModel.measurement_groups),
+                 joinedload(SubscriptionModel.nfs)) \
         .all()
     db.session.remove()
     return subscriptions
