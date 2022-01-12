@@ -22,14 +22,14 @@ from http import HTTPStatus
 
 from mod import aai_client, db
 from mod.api.controller import status, post_subscription, get_subscription_by_name, \
-    get_subscriptions, get_meas_group_with_nfs
+    get_subscriptions, get_meas_group_with_nfs, delete_subscription_by_name
 from tests.base_setup import BaseClassSetup
 from mod.api.db_models import SubscriptionModel, NfMeasureGroupRelationalModel
 from mod.subscription import SubNfState
 from mod.network_function import NetworkFunctionFilter
 from tests.base_setup import create_subscription_data, create_multiple_subscription_data, \
     create_multiple_network_function_data
-from mod.api.services import measurement_group_service, nf_service
+from mod.api.services import measurement_group_service, nf_service, subscription_service
 
 
 class ControllerTestCase(BaseClassSetup):
@@ -201,4 +201,54 @@ class ControllerTestCase(BaseClassSetup):
            MagicMock(side_effect=Exception('something failed')))
     def test_get_meas_group_with_nfs_api_exception(self):
         error, status_code = get_meas_group_with_nfs('sub1', 'MG1')
+        self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)
+
+    def test_delete_when_state_unlocked(self):
+        subscription_unlocked_data = create_subscription_data('MG_unlocked')
+        subscription_unlocked_data.measurement_groups[0].measurement_group_name = 'unlock'
+        subscription_unlocked_data.measurement_groups[0].administrative_state = 'UNLOCKED'
+        db.session.add(subscription_unlocked_data)
+        db.session.add(subscription_unlocked_data.measurement_groups[0])
+        db.session.commit()
+        db.session.remove()
+        message, status_code = delete_subscription_by_name('MG_unlocked')
+        self.assertEqual(status_code, HTTPStatus.CONFLICT.value)
+        self.assertEqual(subscription_service.query_subscription_by_name('MG_unlocked')
+                         .subscription_name, 'MG_unlocked')
+
+    def test_delete_when_state_locked(self):
+        subscription_unlocked_data = create_subscription_data('MG_locked')
+        subscription_unlocked_data.measurement_groups[0].measurement_group_name = 'lock'
+        subscription_unlocked_data.measurement_groups[0].administrative_state = 'LOCKED'
+        db.session.add(subscription_unlocked_data)
+        db.session.add(subscription_unlocked_data.measurement_groups[0])
+        db.session.commit()
+        db.session.remove()
+        none_type, status_code = delete_subscription_by_name('MG_locked')
+        self.assertEqual(none_type, None)
+        self.assertEqual(status_code, HTTPStatus.NO_CONTENT.value)
+        self.assertEqual(subscription_service.query_subscription_by_name('MG_locked'), None)
+
+    def test_delete_when_state_locking(self):
+        subscription_locking_data = create_subscription_data('MG_locking')
+        subscription_locking_data.measurement_groups[0].measurement_group_name = 'locking'
+        subscription_locking_data.measurement_groups[0].administrative_state = 'LOCKING'
+        db.session.add(subscription_locking_data)
+        db.session.add(subscription_locking_data.measurement_groups[0])
+        db.session.commit()
+        db.session.remove()
+        message, status_code = delete_subscription_by_name('MG_locking')
+        self.assertEqual(status_code, HTTPStatus.CONFLICT.value)
+        self.assertEqual(subscription_service.query_subscription_by_name('MG_locking')
+                         .subscription_name, 'MG_locking')
+
+    def test_delete_sub_none(self):
+        message, status_code = delete_subscription_by_name('None')
+        self.assertEqual(message['error'], 'Subscription is not defined with name None')
+        self.assertEqual(status_code, HTTPStatus.NOT_FOUND.value)
+
+    @patch('mod.api.services.subscription_service.query_to_delete_subscription_by_name',
+           MagicMock(side_effect=Exception('something failed')))
+    def test_delete_sub_exception(self):
+        error, status_code = delete_subscription_by_name('None')
         self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)

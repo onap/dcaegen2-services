@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 * AAI Event handler changes with new subscription format (DCAEGEN2-2912)
 * Read NFS associated with MG by using MGName and subName(DCAEGEN2-2993)
 * Lazy loading error for nfs in read API (DCAEGEN2-3029)
+* Delete subscription API by Name(DCAEGEN2-2821)
 
 ## [1.3.2]
 ### Changed

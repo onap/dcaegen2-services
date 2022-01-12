@@ -1,5 +1,5 @@
 # ============LICENSE_START=======================================================
-#  Copyright (C) 2020-2021 Nordix Foundation.
+#  Copyright (C) 2020-2022 Nordix Foundation.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -108,6 +108,27 @@ paths:
           description: Subscription with specified name not found
         500:
           description: Exception occurred while querying database
+
+    delete:
+      description: Deletes the Subscription from PMSH specified by Name
+      operationId: mod.api.controller.delete_subscription_by_name
+      parameters:
+        - name: subscription_name
+          in: path
+          required: true
+          description: The name of the subscription to delete
+          type: string
+      responses:
+        204:
+          description: Successfully deleted the subscription and returns NO Content
+        404:
+          description: Subscription with the specified name not found
+        409:
+          description: Subscription could not be deleted as it contains measurement groups
+                       with state UNLOCKED OR state change to LOCKED was under process
+        500:
+          description: Exception occurred on the server
+
 
   /subscription/{subscription_name}/measurementGroups/{measurement_group_name}:
     get:
