@@ -18,7 +18,7 @@
 
 from mod import db, logger
 from mod.api.db_models import SubscriptionModel, NfSubRelationalModel, \
-    NetworkFunctionFilterModel, NetworkFunctionModel
+    NetworkFunctionFilterModel, NetworkFunctionModel, MeasurementGroupModel
 from mod.api.services import measurement_group_service, nf_service
 from mod.api.custom_exception import InvalidDataException, DuplicateDataException
 from mod.subscription import AdministrativeState, SubNfState
@@ -345,3 +345,38 @@ def get_subscriptions_list():
                     (len(subscription.measurement_groups) != 0):
                 subscriptions_list.append(subscription.serialize())
     return subscriptions_list
+
+
+def query_unlocked_mg_by_sub_name(subscription_name):
+    """
+    Queries the db for unlocked measurement groups by subscription name
+
+    Args:
+        subscription_name (String): Name of the Subscription
+
+    Returns:
+        list (MeasurementGroupModel): If measurement groups with admin state
+                                      UNLOCKED exists else empty list
+    """
+    logger.info(f'Attempting to fetch subscription by name: {subscription_name}')
+    mg_model = db.session.query(MeasurementGroupModel) \
+        .filter_by(subscription_name=subscription_name) \
+        .filter_by(administrative_state='UNLOCKED').all()
+    db.session.remove()
+    return mg_model
+
+
+def delete_subscription_by_name(subscription_name):
+    """
+    Deletes the subscription by name
+
+    Args:
+        subscription_name (String): Name of the Subscription
+
+    Returns:
+        int: Returns '1' if subscription exists and deleted successfully else '0'
+    """
+    success_fail = db.session.query(SubscriptionModel) \
+        .filter_by(subscription_name=subscription_name).delete()
+    db.session.commit()
+    return success_fail

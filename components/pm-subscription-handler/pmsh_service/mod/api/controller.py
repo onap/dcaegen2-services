@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2021 Nordix Foundation.
+#  Copyright (C) 2019-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -147,3 +147,45 @@ def get_meas_group_with_nfs(subscription_name, measurement_group_name):
                      f'{exception}')
         return {'error': 'Request was not processed due to Exception : '
                          f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
+
+
+def delete_subscription_by_name(subscription_name):
+    """ Deletes the subscription by name
+
+    Args:
+        subscription_name (String): Name of the subscription
+
+    Returns:
+       NoneType, HTTPStatus: None, 204
+       dict, HTTPStatus: subscription not defined, 404
+       dict, HTTPStatus: Reason for not deleting subscription, 409
+       dict, HTTPStatus: Exception details of failure, 500
+    """
+    logger.info(f'API call received to delete subscription by name: {subscription_name}')
+    try:
+        unlocked_measurement_groups = \
+            subscription_service.query_unlocked_mg_by_sub_name(subscription_name)
+        if not unlocked_measurement_groups:
+            success_fail = subscription_service.delete_subscription_by_name(subscription_name)
+            if success_fail == 1:
+                return None, HTTPStatus.NO_CONTENT
+            else:
+                logger.error(f'subscription is not defined with name {subscription_name}')
+                return {'error': f'subscription is not defined with name {subscription_name}'}, \
+                    HTTPStatus.NOT_FOUND.value
+        else:
+            logger.error('Subscription is not deleted for the reason of following UNLOCKED MGs',
+                         {'measurementGroupNames':
+                          [{'measurementGroupName':
+                              mg.measurement_group_name}for mg in unlocked_measurement_groups]})
+            return {'error': 'Subscription is not deleted for the reason of following UNLOCKED MGs',
+                    'measurementGroupNames':
+                        [{'measurementGroupName':
+                            mg.measurement_group_name}for mg in unlocked_measurement_groups]}, \
+                HTTPStatus.CONFLICT.value
+    except Exception as exception:
+        logger.error(f'Try again, subscription with name {subscription_name}'
+                     f'is not deleted due to following exception: {exception}')
+        return {'error': f'Try again, subscription with name {subscription_name}'
+                         f'is not deleted due to following exception: {exception}'}, \
+            HTTPStatus.INTERNAL_SERVER_ERROR.value
