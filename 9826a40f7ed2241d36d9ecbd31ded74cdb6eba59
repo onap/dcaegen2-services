@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5454b489_02430653",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-12T09:34:03Z",
+      "side": 1,
+      "message": "Does the following description look good:: Successfully deleted the subscription.",
+      "range": {
+        "startLine": 123,
+        "startChar": 35,
+        "endLine": 123,
+        "endChar": 42
+      },
+      "revId": "9826a40f7ed2241d36d9ecbd31ded74cdb6eba59",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0654570_7afedb56",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-12T09:34:03Z",
+      "side": 1,
+      "message": "I think we need to elaborate the reason. Example: Subscription could not be deleted as it contain unlocked measurement group.",
+      "range": {
+        "startLine": 127,
+        "startChar": 23,
+        "endLine": 127,
+        "endChar": 75
+      },
+      "revId": "9826a40f7ed2241d36d9ecbd31ded74cdb6eba59",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b58bbd28_8ac098c4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-12T09:34:03Z",
+      "side": 1,
+      "message": "I think we can mention: Exception occurred on the server.(this includes db errors)",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 65
+      },
+      "revId": "9826a40f7ed2241d36d9ecbd31ded74cdb6eba59",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29146f8c_8f803c41",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-12T09:34:03Z",
+      "side": 1,
+      "message": "I think we can return business objects from service layer and UI response with HTTP status at controller layer.",
+      "range": {
+        "startLine": 358,
+        "startChar": 24,
+        "endLine": 358,
+        "endChar": 25
+      },
+      "revId": "9826a40f7ed2241d36d9ecbd31ded74cdb6eba59",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43e1a5a9_b753f44f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-12T09:34:03Z",
+      "side": 1,
+      "message": "Try to check if we can directly query for unlocked measurement groups using subscription name to avoid some checks below.",
+      "range": {
+        "startLine": 362,
+        "startChar": 25,
+        "endLine": 362,
+        "endChar": 51
+      },
+      "revId": "9826a40f7ed2241d36d9ecbd31ded74cdb6eba59",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20135e16_2ff4dd6a",
+        "filename": "components/pm-subscription-handler/tests/services/test_subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-12T09:34:03Z",
+      "side": 1,
+      "message": "Need to test if records are still present in the DB when conflict occurs that ensures no delete happens.",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 384,
+        "endChar": 39
+      },
+      "revId": "9826a40f7ed2241d36d9ecbd31ded74cdb6eba59",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2644618b_815967eb",
+        "filename": "components/pm-subscription-handler/tests/services/test_subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-12T09:34:03Z",
+      "side": 1,
+      "message": "I think we can query the DB to test if record is deleted.",
+      "range": {
+        "startLine": 405,
+        "startChar": 38,
+        "endLine": 405,
+        "endChar": 48
+      },
+      "revId": "9826a40f7ed2241d36d9ecbd31ded74cdb6eba59",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
