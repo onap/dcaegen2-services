@@ -71,6 +71,80 @@
     },
     {
       "key": {
+        "uuid": "2ac34afa_f88b3af4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-01-13T09:56:21Z",
+      "side": 1,
+      "message": "Capitalise for continuity",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d352b51e_eb71dc33",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-01-13T09:56:21Z",
+      "side": 1,
+      "message": "Capitalise for continuity",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc2e7bb9_a4f721f9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-01-13T09:56:21Z",
+      "side": 1,
+      "message": "Rephrase: Subscription is not deleted due to the following UNLOCKED MGs",
+      "range": {
+        "startLine": 177,
+        "startChar": 53,
+        "endLine": 177,
+        "endChar": 54
+      },
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4224b04b_2756cded",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-01-13T09:56:21Z",
+      "side": 1,
+      "message": "As above",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9a73bc89_963b39ae",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 3
@@ -88,6 +162,57 @@
         "endLine": 113,
         "endChar": 51
       },
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09c43e07_9cdd4e39",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-01-13T09:56:21Z",
+      "side": 1,
+      "message": "Description needs to be changed",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a784dfb_68d33cd5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-01-13T09:56:21Z",
+      "side": 1,
+      "message": "Capitalise the S in successfully",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a14e508a_7ee0d1f2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-01-13T09:56:21Z",
+      "side": 1,
+      "message": "Do all measurement groups need to be locked to delete?",
       "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
