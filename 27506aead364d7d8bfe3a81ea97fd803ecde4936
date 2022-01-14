@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "7bca3bf4_52d7baa1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcc0d5b8_d2fd17b4",
+      "range": {
+        "startLine": 169,
+        "startChar": 14,
+        "endLine": 169,
+        "endChar": 23
+      },
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a101fbc_3ba66ff2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e778003a_d5cddf62",
+      "range": {
+        "startLine": 169,
+        "startChar": 48,
+        "endLine": 169,
+        "endChar": 65
+      },
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "085639a9_95a81815",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
         "patchSetId": 3
@@ -88,6 +136,48 @@
     },
     {
       "key": {
+        "uuid": "b65623b7_e62e33c7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "From my knowledge the delete query which i was formed always return the number of rows effected. If there are no rows available with the condition it returns \u00270\u0027. I considered this logic.",
+      "parentUuid": "085639a9_95a81815",
+      "range": {
+        "startLine": 173,
+        "startChar": 35,
+        "endLine": 173,
+        "endChar": 60
+      },
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e3a11eb_dbafc78f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ac34afa_f88b3af4",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d352b51e_eb71dc33",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
         "patchSetId": 3
@@ -102,6 +192,24 @@
       "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6bc8082d_7e698e9a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d352b51e_eb71dc33",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -128,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "774d3c80_e5e35a76",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc2e7bb9_a4f721f9",
+      "range": {
+        "startLine": 177,
+        "startChar": 53,
+        "endLine": 177,
+        "endChar": 54
+      },
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4224b04b_2756cded",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
         "patchSetId": 3
@@ -142,6 +274,24 @@
       "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f6b9d58_076d18f7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4224b04b_2756cded",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -185,6 +335,48 @@
     },
     {
       "key": {
+        "uuid": "62d135a4_60789c08",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a73bc89_963b39ae",
+      "range": {
+        "startLine": 113,
+        "startChar": 19,
+        "endLine": 113,
+        "endChar": 51
+      },
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d38c320c_80258362",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09c43e07_9cdd4e39",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a784dfb_68d33cd5",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 3
@@ -202,6 +394,24 @@
     },
     {
       "key": {
+        "uuid": "601c06ae_1cd6d678",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a784dfb_68d33cd5",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a14e508a_7ee0d1f2",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 3
@@ -213,6 +423,24 @@
       "writtenOn": "2022-01-13T09:56:21Z",
       "side": 1,
       "message": "Do all measurement groups need to be locked to delete?",
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6ac8f2c_9593513c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Yes, if we consider locked scenario that would be a best approach without any hassle. If it is UNLOCKED/LOCKING, it may under some process.",
+      "parentUuid": "a14e508a_7ee0d1f2",
       "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -239,6 +467,30 @@
       "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59c092fd_11f363b8",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-14T12:36:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "988363ad_c59401f3",
+      "range": {
+        "startLine": 361,
+        "startChar": 20,
+        "endLine": 361,
+        "endChar": 44
+      },
+      "revId": "27506aead364d7d8bfe3a81ea97fd803ecde4936",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
