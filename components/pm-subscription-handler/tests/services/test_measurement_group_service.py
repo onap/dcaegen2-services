@@ -69,7 +69,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         sub_model = SubscriptionModel('sub_publish', 'pmsh-operational-policy',
                                       'pmsh-control-loop', 'LOCKED')
         measurement_group_service.publish_measurement_group(
-            sub_model, measurement_grp, nf_1)
+            sub_model, measurement_grp, nf_1, 'CREATE')
         mock_mr.assert_called_once_with('policy_pm_publisher',
                                         {'nfName': 'pnf_1',
                                          'ipAddress': '2001:db8:3333:4444:5555:6666:7777:8888',

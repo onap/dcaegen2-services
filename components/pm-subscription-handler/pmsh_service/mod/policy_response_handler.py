@@ -32,7 +32,7 @@ policy_response_handle_functions = {
         'failed': measurement_group_service.update_measurement_group_nf_status
     },
     AdministrativeState.LOCKING.value: {
-        'success': measurement_group_service.delete_nf_to_measurement_group,
+        'success': measurement_group_service.delete_nf_to_meas_grp_for_locking,
         'failed': measurement_group_service.update_measurement_group_nf_status
     }
 }

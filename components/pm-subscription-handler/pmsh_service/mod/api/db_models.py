@@ -149,7 +149,6 @@ class NfSubRelationalModel(db.Model):
     def serialize_nf(self):
         nf = NetworkFunctionModel.query.filter(
             NetworkFunctionModel.nf_name == self.nf_name).one_or_none()
-        db.session.remove()
         return {'nf_name': self.nf_name,
                 'ipv4_address': nf.ipv4_address,
                 'ipv6_address': nf.ipv6_address,
@@ -297,7 +296,6 @@ class NfMeasureGroupRelationalModel(db.Model):
         """
         nf = db.session.query(NetworkFunctionModel).filter(
             NetworkFunctionModel.nf_name == self.nf_name).one_or_none()
-        db.session.remove()
         return {'nfName': self.nf_name,
                 'ipv4Address': nf.ipv4_address,
                 'ipv6Address': nf.ipv6_address,
