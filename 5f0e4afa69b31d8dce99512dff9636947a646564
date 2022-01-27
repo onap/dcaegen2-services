@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9dfaac56_081ddc0e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/custom_exception.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-27T18:46:47Z",
+      "side": 1,
+      "message": "Small update to (2021-2022)",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "952a3bd5_9cd71b79",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-27T18:46:47Z",
+      "side": 1,
+      "message": "small update to (2020-2022)",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 26
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98880285_ee5a3619",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-27T18:46:47Z",
+      "side": 1,
+      "message": "2021-2022",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4098eb71_1a30ee0d",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-27T18:46:47Z",
+      "side": 1,
+      "message": "returning multiple values using tuple. So, we can store that in 2 variables as below.",
+      "range": {
+        "startLine": 269,
+        "startChar": 19,
+        "endLine": 269,
+        "endChar": 37
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f249cdb2_b0a603ba",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-27T18:46:47Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 287,
+        "startChar": 8,
+        "endLine": 287,
+        "endChar": 16
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
