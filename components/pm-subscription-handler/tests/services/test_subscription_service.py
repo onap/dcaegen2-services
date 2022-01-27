@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -101,7 +101,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         try:
             subscription_service.create_subscription(subscription)
         except InvalidDataException as exception:
-            self.assertEqual(exception.invalid_message, ["AAI call failed"])
+            self.assertEqual(exception.args[0], ["AAI call failed"])
 
         # Checking Rollback on publish failure with subscription and nfs captured
         existing_subscription = (SubscriptionModel.query.filter(
@@ -122,7 +122,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         try:
             subscription_service.create_subscription(subscription)
         except InvalidDataException as exception:
-            self.assertEqual(exception.invalid_message, ["AAI call failed"])
+            self.assertEqual(exception.args[0], ["AAI call failed"])
 
         # Checking Rollback on AAI failure with subscription request saved
         existing_subscription = (SubscriptionModel.query.filter(
@@ -134,7 +134,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
             subscription_service.create_subscription(json.loads(self.subscription_request)
                                                      ['subscription'])
         except DuplicateDataException as exception:
-            self.assertEqual(exception.duplicate_field_info,
+            self.assertEqual(exception.args[0],
                              "subscription Name: ExtraPM-All-gNB-R2B already exists.")
 
     def test_missing_measurement_grp_name(self):
@@ -142,7 +142,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         try:
             subscription_service.create_subscription(json.loads(subscription)['subscription'])
         except InvalidDataException as exception:
-            self.assertEqual(exception.invalid_message,
+            self.assertEqual(exception.args[0],
                              "No value provided for measurement group name")
 
     def test_missing_administrative_state(self):
@@ -152,7 +152,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         try:
             subscription_service.create_subscription(subscription['subscription'])
         except InvalidDataException as exception:
-            self.assertEqual(exception.invalid_message,
+            self.assertEqual(exception.args[0],
                              "No value provided for administrative state")
 
     @patch.object(subscription_service, 'save_nf_filter')
@@ -319,7 +319,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         try:
             subscription_service.check_missing_data(subscription)
         except InvalidDataException as invalidEx:
-            self.assertEqual(invalidEx.invalid_message, "No value provided in subscription name")
+            self.assertEqual(invalidEx.args[0], "No value provided in subscription name")
 
     def test_check_missing_data_admin_status_missing(self):
         subscription = self.subscription_request.replace(
@@ -328,7 +328,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         try:
             subscription_service.check_missing_data(subscription)
         except InvalidDataException as invalidEx:
-            self.assertEqual(invalidEx.invalid_message,
+            self.assertEqual(invalidEx.args[0],
                              "No value provided for administrative state")
 
     def test_check_missing_data_msr_grp_name(self):
@@ -337,7 +337,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         try:
             subscription_service.check_missing_data(subscription)
         except InvalidDataException as invalidEx:
-            self.assertEqual(invalidEx.invalid_message,
+            self.assertEqual(invalidEx.args[0],
                              "No value provided for measurement group name")
 
     def test_validate_nf_filter_with_no_filter_values(self):
@@ -346,7 +346,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         try:
             subscription_service.validate_nf_filter(json.loads(nfFilter))
         except InvalidDataException as invalidEx:
-            self.assertEqual(invalidEx.invalid_message,
+            self.assertEqual(invalidEx.args[0],
                              "At least one filter within nfFilter must not be empty")
 
     def test_db_string_to_list(self):
