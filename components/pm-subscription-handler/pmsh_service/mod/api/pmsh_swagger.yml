@@ -112,6 +112,8 @@ paths:
     delete:
       description: Deletes the Subscription from PMSH specified by Name
       operationId: mod.api.controller.delete_subscription_by_name
+      tags:
+        - "Subscription"
       parameters:
         - name: subscription_name
           in: path
@@ -136,7 +138,7 @@ paths:
                   from PMSH by using sub name and meas group name
       operationId: mod.api.controller.get_meas_group_with_nfs
       tags:
-        - "measurement group"
+        - "Measurement Group"
       parameters:
         - name : subscription_name
           in: path
@@ -157,6 +159,41 @@ paths:
           description: Measurement group with specified name not found
         500:
           description: Exception occurred while querying database
+
+  /subscription/{subscription_name}/measurementGroups/{measurement_group_name}/adminState:
+    put:
+      description: Update the admin status of the Measurement Group by using sub name and measurement group name
+      operationId: mod.api.controller.update_admin_state
+      tags:
+        - "Measurement Group"
+      parameters:
+        - name: subscription_name
+          in: path
+          required: true
+          description: Name of the subscription
+          type: string
+        - name: measurement_group_name
+          in: path
+          required: true
+          description: Name of the measurement group
+          type: string
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            properties:
+              administrativeState:
+                type: string
+                enum: [ LOCKED, UNLOCKED ]
+      responses:
+        200:
+          description: Successfully updated admin state
+        409:
+          description: Cannot update as Locked request is in progress
+        400:
+          description: Invalid input request details
+        500:
+          description: Exception details of server failure
 
 definitions:
   subscription:

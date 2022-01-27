@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,11 +16,14 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel
+from mod.api.custom_exception import InvalidDataException, DataConflictException
+from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel, \
+    SubscriptionModel
 from mod import db, logger
-from mod.api.services import nf_service
+from mod.api.services import nf_service, subscription_service
 from mod.network_function import NetworkFunction
 from mod.pmsh_config import MRTopic, AppConfig
+from mod.subscription import AdministrativeState, SubNfState
 
 
 def save_measurement_group(measurement_group, subscription_name):
@@ -64,16 +67,17 @@ def apply_nf_status_to_measurement_group(nf_name, measurement_group_name, status
     db.session.add(new_nf_measure_grp_rel)
 
 
-def publish_measurement_group(sub_model, measurement_group, nf):
+def publish_measurement_group(sub_model, measurement_group, nf, change_type):
     """
     Publishes an event for measurement group against nfs to MR
 
     Args:
         sub_model(SubscriptionModel): Subscription model object
         measurement_group (MeasurementGroupModel): Measurement group to publish
-        nf (NetworkFunction): Network function to publish.
+        nf (NetworkFunction): Network function to publish
+        change_type (string): defines event type like CREATE or DELETE
    """
-    event_body = nf_service.create_nf_event_body(nf, 'CREATE', sub_model)
+    event_body = nf_service.create_nf_event_body(nf, change_type, sub_model)
     event_body['subscription'] = {
         "administrativeState": measurement_group.administrative_state,
         "subscriptionName": sub_model.subscription_name,
@@ -152,3 +156,132 @@ def query_meas_group_by_name(subscription_name, measurement_group_name):
         MeasurementGroupModel.subscription_name == subscription_name,
         MeasurementGroupModel.measurement_group_name == measurement_group_name).one_or_none()
     return meas_group
+
+
+def lock_nf_to_meas_grp(nf_name, measurement_group_name, status):
+    """ Deletes a particular nf related to a measurement group name and
+        if no more relations of nf exist to measurement group then delete nf from PMSH
+
+    Args:
+        nf_name (string): The network function name
+        measurement_group_name (string): Measurement group name
+        status (string): status of the network function for measurement group
+    """
+    try:
+        delete_nf_to_measurement_group(nf_name, measurement_group_name, status)
+        nf_measurement_group_rels = NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == measurement_group_name).all()
+        if not nf_measurement_group_rels:
+            MeasurementGroupModel.query.filter(
+                MeasurementGroupModel.measurement_group_name == measurement_group_name). \
+                update({MeasurementGroupModel.administrative_state: AdministrativeState.
+                       LOCKED.value}, synchronize_session='evaluate')
+            db.session.commit()
+    except Exception as e:
+        logger.error('Failed update LOCKED status for measurement group name: '
+                     f'{measurement_group_name} due to: {e}')
+
+
+def deactivate_nfs(sub_model, measurement_group, nf_meas_relations):
+    """
+    Deactivates network functions associated with measurement group
+
+    Args:
+        sub_model (SubscriptionModel): Subscription model
+        measurement_group (MeasurementGroupModel): Measurement group to update
+        nf_meas_relations (list[NfMeasureGroupRelationalModel]): nf to measurement grp relations
+    """
+    for nf in nf_meas_relations:
+        logger.info(f'Saving measurement group to nf name, measure_grp_name: {nf.nf_name},'
+                    f'{measurement_group.measurement_group_name}  with DELETE request')
+        update_measurement_group_nf_status(measurement_group.measurement_group_name,
+                                           SubNfState.PENDING_DELETE.value, nf.nf_name)
+        try:
+            network_function = NetworkFunction(**nf.serialize_meas_group_nfs())
+            logger.info(f'Publishing event for nf name, measure_grp_name: {nf.nf_name},'
+                        f'{measurement_group.measurement_group_name} with DELETE request')
+            publish_measurement_group(sub_model, measurement_group, network_function, 'DELETE')
+        except Exception as ex:
+            logger.error(f'Publish event failed for nf name, measure_grp_name, sub_name: '
+                         f'{nf.nf_name},{measurement_group.measurement_group_name}, '
+                         f'{sub_model.subscription_name} with error: {ex}')
+
+
+def activate_nfs(sub_model, measurement_group):
+    """
+    Activates network functions associated with measurement group
+
+    Args:
+        sub_model (SubscriptionModel): Subscription model
+        measurement_group (MeasurementGroupModel): Measurement group to update
+    """
+    nfs = []
+    if sub_model.nfs:
+        nfs = sub_model.nfs
+    else:
+        filtered_nfs = nf_service.capture_filtered_nfs(sub_model.subscription_name)
+        if filtered_nfs:
+            logger.info(f'Applying the filtered nfs for subscription: '
+                        f'{sub_model.subscription_name}')
+            subscription_service.save_filtered_nfs(filtered_nfs)
+            subscription_service.apply_subscription_to_nfs(filtered_nfs,
+                                                           sub_model.subscription_name)
+        nfs = filtered_nfs
+    for nf in nfs:
+        logger.info(f'Saving measurement group to nf name, measure_grp_name: {nf.nf_name},'
+                    f'{measurement_group.measurement_group_name} with CREATE request')
+
+        apply_nf_status_to_measurement_group(nf.nf_name,
+                                             measurement_group.measurement_group_name,
+                                             SubNfState.PENDING_CREATE.value)
+        db.session.commit()
+        try:
+            network_function = NetworkFunction(**nf.serialize_nf())
+            logger.info(f'Publishing event for nf name, measure_grp_name: {nf.nf_name},'
+                        f'{measurement_group.measurement_group_name}  with CREATE request')
+            publish_measurement_group(sub_model, measurement_group, network_function, 'CREATE')
+        except Exception as ex:
+            logger.error(f'Publish event failed for nf name, measure_grp_name, sub_name: '
+                         f'{nf.nf_name},{measurement_group.measurement_group_name}, '
+                         f'{sub_model.subscription_name} with error: {ex}')
+
+
+def update_admin_status(measurement_group, status):
+    """
+    Performs administrative status updates for the measurement group
+
+    Args:
+        measurement_group (MeasurementGroupModel): Measurement group to update
+        status (string): Admin status to update for measurement group
+
+    Raises:
+        InvalidDataException: contains details on invalid fields
+        DataConflictException: contains details on conflicting state of a field
+        Exception: contains runtime error details
+    """
+    if measurement_group is None:
+        raise InvalidDataException('Requested measurement group not available '
+                                   'for admin status update')
+    elif measurement_group.administrative_state == AdministrativeState.LOCKING.value:
+        raise DataConflictException('Cannot update admin status as Locked request is in progress'
+                                    f' for sub name: {measurement_group.subscription_name}  and '
+                                    f'meas group name: {measurement_group.measurement_group_name}')
+    elif measurement_group.administrative_state == status:
+        raise InvalidDataException(f'Measurement group is already in {status} state '
+                                   f'for sub name: {measurement_group.subscription_name}  and '
+                                   f'meas group name: {measurement_group.measurement_group_name}')
+    else:
+        sub_model = SubscriptionModel.query.filter(
+            SubscriptionModel.subscription_name == measurement_group.subscription_name) \
+            .one_or_none()
+        nf_meas_relations = NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == measurement_group.
+            measurement_group_name).all()
+        if nf_meas_relations and status == AdministrativeState.LOCKED.value:
+            status = AdministrativeState.LOCKING.value
+        measurement_group.administrative_state = status
+        db.session.commit()
+        if status == AdministrativeState.LOCKING.value:
+            deactivate_nfs(sub_model, measurement_group, nf_meas_relations)
+        elif status == AdministrativeState.UNLOCKED.value:
+            activate_nfs(sub_model, measurement_group)
