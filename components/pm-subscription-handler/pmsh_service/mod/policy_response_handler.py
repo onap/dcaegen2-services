@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020-2021 Nordix Foundation.
+#  Copyright (C) 2020-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ policy_response_handle_functions = {
         'failed': measurement_group_service.update_measurement_group_nf_status
     },
     AdministrativeState.LOCKING.value: {
-        'success': measurement_group_service.delete_nf_to_measurement_group,
+        'success': measurement_group_service.lock_nf_to_meas_grp,
         'failed': measurement_group_service.update_measurement_group_nf_status
     }
 }
