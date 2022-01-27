@@ -36,3 +36,14 @@ class DuplicateDataException(Exception):
 
     def __init__(self, duplicate_field_info):
         self.duplicate_field_info = duplicate_field_info
+
+
+class DataConflictException(Exception):
+    """Exception raised for conflicting data state in PMSH.
+
+    Attributes:
+        message -- detail on conflicting data
+    """
+
+    def __init__(self, data_conflict_message):
+        self.data_conflict_message = data_conflict_message

@@ -22,8 +22,9 @@ from http import HTTPStatus
 
 from mod import aai_client, db
 from mod.api.controller import status, post_subscription, get_subscription_by_name, \
-    get_subscriptions, get_meas_group_with_nfs, delete_subscription_by_name
+    get_subscriptions, get_meas_group_with_nfs, delete_subscription_by_name, update_admin_state
 from tests.base_setup import BaseClassSetup
+from mod.api.custom_exception import InvalidDataException, DataConflictException
 from mod.api.db_models import SubscriptionModel, NfMeasureGroupRelationalModel
 from mod.subscription import SubNfState
 from mod.network_function import NetworkFunctionFilter
@@ -251,4 +252,67 @@ class ControllerTestCase(BaseClassSetup):
            MagicMock(side_effect=Exception('something failed')))
     def test_delete_sub_exception(self):
         error, status_code = delete_subscription_by_name('None')
+        self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)
+
+    @patch('mod.pmsh_config.AppConfig.publish_to_topic', MagicMock(return_value=None))
+    def test_update_admin_state_api_for_locked_update(self):
+        sub = create_subscription_data('sub1')
+        nf_list = create_multiple_network_function_data(['pnf_101', 'pnf_102'])
+        db.session.add(sub)
+        for nf in nf_list:
+            nf_service.save_nf(nf)
+            measurement_group_service. \
+                apply_nf_status_to_measurement_group(nf.nf_name, sub.measurement_groups[0].
+                                                     measurement_group_name,
+                                                     SubNfState.CREATED.value)
+        db.session.commit()
+        response = update_admin_state('sub1', 'MG1', {'administrativeState': 'LOCKED'})
+        self.assertEqual(response[1], HTTPStatus.OK.value)
+        self.assertEqual(response[0], 'Successfully updated admin state')
+        mg_with_nfs, status_code = get_meas_group_with_nfs('sub1', 'MG1')
+        self.assertEqual(mg_with_nfs['subscriptionName'], 'sub1')
+        self.assertEqual(mg_with_nfs['measurementGroupName'], 'MG1')
+        self.assertEqual(mg_with_nfs['administrativeState'], 'LOCKING')
+        for nf in mg_with_nfs['networkFunctions']:
+            self.assertEqual(nf['nfMgStatus'], SubNfState.PENDING_DELETE.value)
+
+    @patch('mod.pmsh_config.AppConfig.publish_to_topic', MagicMock(return_value=None))
+    def test_update_admin_state_api_for_unlocked_update(self):
+        sub = create_subscription_data('sub1')
+        db.session.add(sub)
+        nf_list = create_multiple_network_function_data(['pnf_101', 'pnf_102'])
+        for network_function in nf_list:
+            db.session.add(network_function)
+        db.session.commit()
+        response = update_admin_state('sub1', 'MG2', {'administrativeState': 'UNLOCKED'})
+        self.assertEqual(response[1], HTTPStatus.OK.value)
+        self.assertEqual(response[0], 'Successfully updated admin state')
+        mg_with_nfs, status_code = get_meas_group_with_nfs('sub1', 'MG2')
+        self.assertEqual(mg_with_nfs['subscriptionName'], 'sub1')
+        self.assertEqual(mg_with_nfs['measurementGroupName'], 'MG2')
+        self.assertEqual(mg_with_nfs['administrativeState'], 'UNLOCKED')
+        for nf in mg_with_nfs['networkFunctions']:
+            self.assertEqual(nf['nfMgStatus'], SubNfState.PENDING_CREATE.value)
+
+    @patch('mod.api.services.measurement_group_service.update_admin_status',
+           MagicMock(side_effect=InvalidDataException('Bad request')))
+    def test_update_admin_state_api_invalid_data_exception(self):
+        error, status_code = update_admin_state('sub4', 'MG2',
+                                                {'administrativeState': 'UNLOCKED'})
+        self.assertEqual(status_code, HTTPStatus.BAD_REQUEST.value)
+        self.assertEqual(error, 'Bad request')
+
+    @patch('mod.api.services.measurement_group_service.update_admin_status',
+           MagicMock(side_effect=DataConflictException('Data conflict')))
+    def test_update_admin_state_api_data_conflict_exception(self):
+        error, status_code = update_admin_state('sub4', 'MG2',
+                                                {'administrativeState': 'UNLOCKED'})
+        self.assertEqual(status_code, HTTPStatus.CONFLICT.value)
+        self.assertEqual(error, 'Data conflict')
+
+    @patch('mod.api.services.measurement_group_service.update_admin_status',
+           MagicMock(side_effect=Exception('Server Error')))
+    def test_update_admin_state_api_exception(self):
+        error, status_code = update_admin_state('sub4', 'MG2',
+                                                {'administrativeState': 'UNLOCKED'})
         self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)

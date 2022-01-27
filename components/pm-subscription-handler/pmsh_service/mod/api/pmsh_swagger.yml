@@ -158,6 +158,41 @@ paths:
         500:
           description: Exception occurred while querying database
 
+  /subscription/{subscription_name}/measurementGroups/{measurement_group_name}/adminState:
+    put:
+      description: Update the admin status in PMSH by using sub name and measurement group name
+      operationId: mod.api.controller.update_admin_state
+      tags:
+        - "admin state"
+      parameters:
+        - name: subscription_name
+          in: path
+          required: true
+          description: Name of the subscription
+          type: string
+        - name: measurement_group_name
+          in: path
+          required: true
+          description: Name of the measurement group
+          type: string
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            properties:
+              administrativeState:
+                type: string
+                enum: [ LOCKED, UNLOCKED ]
+      responses:
+        200:
+          description: Successfully updated admin state
+        409:
+          description: Cannot update as Locked request is in progress
+        400:
+          description: Invalid input request details
+        500:
+          description: Exception details of server failure
+
 definitions:
   subscription:
     type: object
