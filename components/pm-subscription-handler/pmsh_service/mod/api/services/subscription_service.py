@@ -89,7 +89,7 @@ def publish_measurement_grp_to_nfs(sub_model, filtered_nfs,
                 logger.info(f'Publishing event for nf name, measure_grp_name: {nf.nf_name},'
                             f'{measurement_group.measurement_group_name}')
                 measurement_group_service.publish_measurement_group(
-                    sub_model, measurement_group, nf)
+                    sub_model, measurement_group, nf, 'CREATE')
             except Exception as ex:
                 logger.error(f'Publish event failed for nf name, measure_grp_name, sub_name: '
                              f'{nf.nf_name},{measurement_group.measurement_group_name}, '
