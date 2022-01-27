@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ class InvalidDataException(Exception):
     """
 
     def __init__(self, invalid_message):
-        self.invalid_message = invalid_message
+        super().__init__(invalid_message)
 
 
 class DuplicateDataException(Exception):
@@ -35,4 +35,15 @@ class DuplicateDataException(Exception):
     """
 
     def __init__(self, duplicate_field_info):
-        self.duplicate_field_info = duplicate_field_info
+        super().__init__(duplicate_field_info)
+
+
+class DataConflictException(Exception):
+    """Exception raised for conflicting data state in PMSH.
+
+    Attributes:
+        message -- detail on conflicting data
+    """
+
+    def __init__(self, data_conflict_message):
+        super().__init__(data_conflict_message)

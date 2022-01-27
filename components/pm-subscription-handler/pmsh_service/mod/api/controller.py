@@ -20,7 +20,8 @@ from http import HTTPStatus
 from mod import logger
 from mod.api.services import subscription_service, measurement_group_service
 from connexion import NoContent
-from mod.api.custom_exception import InvalidDataException, DuplicateDataException
+from mod.api.custom_exception import InvalidDataException, DuplicateDataException, \
+    DataConflictException
 
 
 def status():
@@ -58,12 +59,12 @@ def post_subscription(body):
         logger.error(f'Failed to create subscription for '
                      f'{body["subscription"]["subscriptionName"]} due to duplicate data: {e}',
                      exc_info=True)
-        response = e.duplicate_field_info, HTTPStatus.CONFLICT.value
+        response = e.args[0], HTTPStatus.CONFLICT.value
     except InvalidDataException as e:
         logger.error(f'Failed to create subscription for '
                      f'{body["subscription"]["subscriptionName"]} due to invalid data: {e}',
                      exc_info=True)
-        response = e.invalid_message, HTTPStatus.BAD_REQUEST.value
+        response = e.args[0], HTTPStatus.BAD_REQUEST.value
     return response
 
 
@@ -186,3 +187,42 @@ def delete_subscription_by_name(subscription_name):
         return {'error': f'Try again, subscription with name {subscription_name}'
                          f'is not deleted due to following exception: {exception}'}, \
             HTTPStatus.INTERNAL_SERVER_ERROR.value
+
+
+def update_admin_state(subscription_name, measurement_group_name, body):
+    """
+    Performs administrative state update for the respective subscription
+    and measurement group name
+
+    Args:
+        subscription_name (String): Name of the subscription.
+        measurement_group_name (String): Name of the measurement group
+        body (dict): Request body with admin state to update.
+    Returns:
+       string, HTTPStatus: Successfully updated admin state, 200
+       string, HTTPStatus: Invalid request details, 400
+       string, HTTPStatus: Cannot update as Locked request is in progress, 409
+       string, HTTPStatus: Exception details of server failure, 500
+    """
+    logger.info('Performing administration status update for measurement group '
+                f'with sub name: {subscription_name} and measurement '
+                f'group name: {measurement_group_name} to {body["administrativeState"]} status')
+    response = 'Successfully updated admin state', HTTPStatus.OK.value
+    try:
+        meas_group = measurement_group_service.query_meas_group_by_name(subscription_name,
+                                                                        measurement_group_name)
+        measurement_group_service.update_admin_status(meas_group, body["administrativeState"])
+    except InvalidDataException as exception:
+        logger.error(exception.args[0])
+        response = exception.args[0], HTTPStatus.BAD_REQUEST.value
+    except DataConflictException as exception:
+        logger.error(exception.args[0])
+        response = exception.args[0], HTTPStatus.CONFLICT.value
+    except Exception as exception:
+        logger.error('Update admin status request was not processed for sub name: '
+                     f'{subscription_name} and meas group name: '
+                     f'{measurement_group_name} due to Exception : {exception}')
+        response = {'error': 'Update admin status request was not processed for sub name: '
+                             f'{subscription_name} and meas group name: {measurement_group_name}'
+                             f' due to Exception : {exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR
+    return response
