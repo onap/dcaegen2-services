@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "00d8b47e_ec3bccab",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/custom_exception.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-28T17:40:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dfaac56_081ddc0e",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "952a3bd5_9cd71b79",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5325823f_1d8769d2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-28T17:40:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "952a3bd5_9cd71b79",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 26
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ddd1b63c_86a13606",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-28T17:40:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98880285_ee5a3619",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4098eb71_1a30ee0d",
         "filename": "components/pm-subscription-handler/tests/test_controller.py",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "690e6e84_227cec51",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-28T17:40:59Z",
+      "side": 1,
+      "message": "Here we are accessing the tuple using the index and making sure the sequence of response entities are returned correctly by the function. So I believe its fine if we are able to capture the right output tuple sequence.",
+      "parentUuid": "4098eb71_1a30ee0d",
+      "range": {
+        "startLine": 269,
+        "startChar": 19,
+        "endLine": 269,
+        "endChar": 37
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f249cdb2_b0a603ba",
         "filename": "components/pm-subscription-handler/tests/test_controller.py",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2022-01-27T18:46:47Z",
       "side": 1,
       "message": "same as above",
+      "range": {
+        "startLine": 287,
+        "startChar": 8,
+        "endLine": 287,
+        "endChar": 16
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37a3c2d1_f9841a54",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-28T17:40:59Z",
+      "side": 1,
+      "message": "Here we are accessing the tuple using the index and making sure the sequence of response entities are returned correctly by the function. So I believe its fine if we are able to capture the right output tuple sequence.",
+      "parentUuid": "f249cdb2_b0a603ba",
       "range": {
         "startLine": 287,
         "startChar": 8,
