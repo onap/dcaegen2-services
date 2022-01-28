@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "c503b730_728ddc78",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-28T17:53:37Z",
+      "side": 1,
+      "message": "If i am not wrong, We should capture in 2 vars if function returning 2 vars like below 2 lines after.",
+      "parentUuid": "690e6e84_227cec51",
+      "range": {
+        "startLine": 269,
+        "startChar": 19,
+        "endLine": 269,
+        "endChar": 37
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f249cdb2_b0a603ba",
         "filename": "components/pm-subscription-handler/tests/test_controller.py",
         "patchSetId": 1
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "Here we are accessing the tuple using the index and making sure the sequence of response entities are returned correctly by the function. So I believe its fine if we are able to capture the right output tuple sequence.",
       "parentUuid": "f249cdb2_b0a603ba",
+      "range": {
+        "startLine": 287,
+        "startChar": 8,
+        "endLine": 287,
+        "endChar": 16
+      },
+      "revId": "5f0e4afa69b31d8dce99512dff9636947a646564",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6ccec7d_5ea75e9b",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-01-28T17:53:37Z",
+      "side": 1,
+      "message": "If i am not wrong, We should capture in 2 vars if function returning 2 vars like below 2 lines after.",
+      "parentUuid": "37a3c2d1_f9841a54",
       "range": {
         "startLine": 287,
         "startChar": 8,
