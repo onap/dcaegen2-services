@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e84e76c5_a5ffc43d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-31T10:13:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a537370_08f7f9eb",
+      "revId": "31af79d6051db660b3f9812b6a79b33daee94e04",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "feffbae0_4f703f34",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/custom_exception.py",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "31af79d6051db660b3f9812b6a79b33daee94e04",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9158641d_70787ea9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/custom_exception.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-31T10:13:18Z",
+      "side": 1,
+      "message": "Thank Tony for the knowledge, I have made the respective changes.",
+      "parentUuid": "feffbae0_4f703f34",
+      "revId": "31af79d6051db660b3f9812b6a79b33daee94e04",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "653f2977_0574e7b8",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-31T10:13:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b30e667f_98756d35",
+      "revId": "31af79d6051db660b3f9812b6a79b33daee94e04",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb03766f_88a4024b",
         "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "31af79d6051db660b3f9812b6a79b33daee94e04",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "628cc930_2957b876",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-01-31T10:13:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb03766f_88a4024b",
+      "revId": "31af79d6051db660b3f9812b6a79b33daee94e04",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
