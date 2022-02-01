@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f85bbc38_ad608d8e",
+        "filename": "components/pm-subscription-handler/tests/services/test_subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-01T22:22:36Z",
+      "side": 1,
+      "message": "need to add 2022 copyright line",
+      "revId": "06d301ebc8b6eb1b39ae7650ff02c436b86fdae7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
