@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab6d806a_d237cace",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-02-02T12:56:24Z",
+      "side": 0,
+      "message": "Is this no longer required?",
+      "revId": "5b11f4ff05cf4bd3f042a4c531848b939e4ead8a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}

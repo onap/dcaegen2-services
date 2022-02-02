@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "091f817d_4b9730fb",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-02-02T12:56:24Z",
+      "side": 1,
+      "message": "Is there a more obvious way to name this, finding it a bit tough to understand?",
+      "revId": "06d301ebc8b6eb1b39ae7650ff02c436b86fdae7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f85bbc38_ad608d8e",
         "filename": "components/pm-subscription-handler/tests/services/test_subscription_service.py",
         "patchSetId": 4
