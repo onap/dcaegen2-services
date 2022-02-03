@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
          - [DCAEGEN2-3054](https://jira.onap.org/browse/DCAEGEN2-3054) - Remove security vulnerabilities
 
+         - [DCAEGEN2-2942](https://jira.onap.org/browse/DCAEGEN2-2942) - Calculate slice utilization data
+
 ## [1.0.6] - 2021/08/28
          - [DCAEGEN2-2885](https://jira.onap.org/browse/DCAEGEN2-2885) - DCAE SliceAnalysis MS - CPS Integration
 
