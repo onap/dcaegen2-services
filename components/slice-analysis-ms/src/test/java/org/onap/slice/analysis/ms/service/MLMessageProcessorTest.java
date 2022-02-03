@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2022 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -21,6 +21,16 @@
 
 package org.onap.slice.analysis.ms.service;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.anyMap;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -29,73 +39,71 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.onap.slice.analysis.ms.aai.AaiService;
 import org.onap.slice.analysis.ms.configdb.IConfigDbService;
-import org.onap.slice.analysis.ms.configdb.AaiService;
-import org.onap.slice.analysis.ms.configdb.CpsService;
+import org.onap.slice.analysis.ms.cps.CpsService;
 import org.onap.slice.analysis.ms.models.MLOutputModel;
 import org.onap.slice.analysis.ms.models.policy.AdditionalProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MLMessageProcessorTest.class)
 public class MLMessageProcessorTest {
-	ObjectMapper obj = new ObjectMapper();
-	
-	@InjectMocks
-	private MLMessageProcessor mlMessageProcessor;
-	
-	@Mock
-	private IConfigDbService configDbService;
+    ObjectMapper obj = new ObjectMapper();
 
-        @Mock
-	AaiService aaiService;
+    @InjectMocks
+    private MLMessageProcessor mlMessageProcessor;
 
-	@Mock
-        CpsService  cpsService;
+    @Mock
+    private IConfigDbService configDbService;
 
-	@Mock
-	private PolicyService policyService;
-	
-	@SuppressWarnings({"unchecked" })
-	@Test
-	public void processMLMsgTest() {
-		MLOutputModel mloutput = null;
-		MLOutputModel mloutputExp = null;
+    @Mock
+    AaiService aaiService;
 
-		Map<String, List<String>> ricToCellMapping = new HashMap<>();
-		List<String> myList = new ArrayList<String>();
-		myList.add("111");
-		myList.add("112");
-		ricToCellMapping.put("12", myList);
-		myList = new ArrayList<String>();
-		myList.add("113");
-		myList.add("114");
-		ricToCellMapping.put("13", myList);
+    @Mock
+    CpsService cpsService;
 
-		try {
-			mloutput = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel1.json"))), new TypeReference<MLOutputModel>(){});
-			mloutputExp = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel.json"))), new TypeReference<MLOutputModel>(){});
-		}
-		catch (IOException e) { 
-             e.printStackTrace(); 
-        } 
-		when(configDbService.fetchRICsOfSnssai("0001-0111")).thenReturn(ricToCellMapping);
-		AdditionalProperties<MLOutputModel> addProps = new AdditionalProperties<>();
-		addProps.setResourceConfig(mloutputExp);
-		doNothing().when(policyService).sendOnsetMessageToPolicy(anyString(), any(AdditionalProperties.class), anyMap());
-		mlMessageProcessor.processMLMsg(mloutput);
-		assertEquals(mloutputExp, mloutput);
-	}
-	
+    @Mock
+    private PolicyService policyService;
+
+    @SuppressWarnings({"unchecked"})
+    @Test
+    public void processMLMsgTest() {
+        MLOutputModel mloutput = null;
+        MLOutputModel mloutputExp = null;
+
+        Map<String, List<String>> ricToCellMapping = new HashMap<>();
+        List<String> myList = new ArrayList<String>();
+        myList.add("111");
+        myList.add("112");
+        ricToCellMapping.put("12", myList);
+        myList = new ArrayList<String>();
+        myList.add("113");
+        myList.add("114");
+        ricToCellMapping.put("13", myList);
+
+        try {
+            mloutput =
+                    obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel1.json"))),
+                            new TypeReference<MLOutputModel>() {});
+            mloutputExp =
+                    obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel.json"))),
+                            new TypeReference<MLOutputModel>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        when(configDbService.fetchRICsOfSnssai("0001-0111")).thenReturn(ricToCellMapping);
+        AdditionalProperties<MLOutputModel> addProps = new AdditionalProperties<>();
+        addProps.setResourceConfig(mloutputExp);
+        doNothing().when(policyService).sendOnsetMessageToPolicy(anyString(), any(AdditionalProperties.class),
+                anyMap());
+        mlMessageProcessor.processMLMsg(mloutput);
+        assertEquals(mloutputExp, mloutput);
+    }
+
 }

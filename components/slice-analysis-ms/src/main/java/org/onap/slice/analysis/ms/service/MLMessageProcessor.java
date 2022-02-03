@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020-2021 Wipro Limited.
+ *   Copyright (C) 2020-2022 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.onap.slice.analysis.ms.configdb.AaiInterface;
-import org.onap.slice.analysis.ms.configdb.CpsInterface;
+import org.onap.slice.analysis.ms.aai.AaiInterface;
 import org.onap.slice.analysis.ms.configdb.IConfigDbService;
+import org.onap.slice.analysis.ms.cps.CpsInterface;
 import org.onap.slice.analysis.ms.models.CUModel;
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.models.MLOutputModel;
@@ -44,51 +44,54 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("prototype")
 public class MLMessageProcessor {
-	private static Logger log = LoggerFactory.getLogger(MLMessageProcessor.class);
+    private static Logger log = LoggerFactory.getLogger(MLMessageProcessor.class);
 
-	@Autowired
-	private IConfigDbService configDbService;
+    @Autowired
+    private IConfigDbService configDbService;
 
-	@Autowired
-	private PolicyService policyService;
+    @Autowired
+    private PolicyService policyService;
 
-	@Autowired
-	private AaiInterface aaiInterface;
+    @Autowired
+    private AaiInterface aaiInterface;
 
-	@Autowired
-	private CpsInterface cpsInterface;
+    @Autowired
+    private CpsInterface cpsInterface;
 
-	public void processMLMsg(MLOutputModel mlOutputMsg) {
-		Boolean isConfigDbEnabled = (Objects.isNull(Configuration.getInstance().getConfigDbEnabled())) ? true
-				: Configuration.getInstance().getConfigDbEnabled();
-		Map<String, List<String>> ricToCellMapping = null;
-		Map<String, String> serviceDetails = null;
-		String snssai = mlOutputMsg.getSnssai();
-		List<CUModel> cuData = mlOutputMsg.getData();
-		if (isConfigDbEnabled) {
-			ricToCellMapping = configDbService.fetchRICsOfSnssai(snssai);
-		} else {
-			ricToCellMapping = cpsInterface.fetchRICsOfSnssai(snssai);
-		}
-		log.debug("RIC to cell mapping of S-NSSAI {} is {}", snssai, ricToCellMapping);
-		for (CUModel cuModel : cuData) {
-			String cellId = String.valueOf(cuModel.getCellCUList().get(0).getCellLocalId());
-			ricToCellMapping.forEach((ricId, cells) -> {
-				if (cells.contains(cellId)) {
-					cuModel.setNearRTRICId(ricId);
-				}
-			});
-		}
-		AdditionalProperties<MLOutputModel> addProps = new AdditionalProperties<>();
-		addProps.setResourceConfig(mlOutputMsg);
+    /**
+     * Process the message sent by ML service and sends notification to policy
+     */
+    public void processMLMsg(MLOutputModel mlOutputMsg) {
+        Boolean isConfigDbEnabled = (Objects.isNull(Configuration.getInstance().getConfigDbEnabled())) ? true
+                : Configuration.getInstance().getConfigDbEnabled();
+        Map<String, List<String>> ricToCellMapping = null;
+        Map<String, String> serviceDetails = null;
+        String snssai = mlOutputMsg.getSnssai();
+        List<CUModel> cuData = mlOutputMsg.getData();
+        if (isConfigDbEnabled) {
+            ricToCellMapping = configDbService.fetchRICsOfSnssai(snssai);
+        } else {
+            ricToCellMapping = cpsInterface.fetchRICsOfSnssai(snssai);
+        }
+        log.debug("RIC to cell mapping of S-NSSAI {} is {}", snssai, ricToCellMapping);
+        for (CUModel cuModel : cuData) {
+            String cellId = String.valueOf(cuModel.getCellCUList().get(0).getCellLocalId());
+            ricToCellMapping.forEach((ricId, cells) -> {
+                if (cells.contains(cellId)) {
+                    cuModel.setNearRTRICId(ricId);
+                }
+            });
+        }
+        AdditionalProperties<MLOutputModel> addProps = new AdditionalProperties<>();
+        addProps.setResourceConfig(mlOutputMsg);
 
-		if (isConfigDbEnabled) {
-			serviceDetails = configDbService.fetchServiceDetails(snssai);
-		} else {
-			serviceDetails = aaiInterface.fetchServiceDetails(snssai);
+        if (isConfigDbEnabled) {
+            serviceDetails = configDbService.fetchServiceDetails(snssai);
+        } else {
+            serviceDetails = aaiInterface.fetchServiceDetails(snssai);
 
-		}
-		policyService.sendOnsetMessageToPolicy(snssai, addProps, serviceDetails);
-	}
+        }
+        policyService.sendOnsetMessageToPolicy(snssai, addProps, serviceDetails);
+    }
 
 }
