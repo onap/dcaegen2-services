@@ -1,0 +1,21 @@
+{ 
+
+    "sliceIdentifiers": [ 
+
+        "14559ead-f4fe-4c1c-a94c-8015fad3ea35", 
+
+        "14559ead-f4fe-4c1c-a94c-8015fad3ea36" 
+
+    ], 
+
+    "configParams": [ 
+
+        "dLThptPerSlice", 
+
+        "uLThptPerSlice", 
+
+        "maxNumberOfConns" 
+
+    ] 
+
+} 
