@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021 Wipro Limited.
+ *   Copyright (C) 2022 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -19,21 +19,20 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.configdb;
+package org.onap.slice.analysis.ms.models.aai;
 
 import java.util.List;
-import java.util.Map;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 
- *  Interface for CPS 
- *
+ * Model for receiving RelationshipList data of a service from AAI
  */
-public interface CpsInterface {
+@Data
+@NoArgsConstructor
+public class RelationshipList {
 
-	public Map<String, List<String>> fetchRICsOfSnssai(String snssai);
-	public List<String> fetchNetworkFunctionsOfSnssai(String snssai);
-	public Map<String, Map<String,Object>> fetchCurrentConfigurationOfRIC(String snssai);
-	
+    List<Relationship> relationship;
+
 }
-

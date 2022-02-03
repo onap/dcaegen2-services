@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021 Wipro Limited.
+ *   Copyright (C) 2022 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -19,18 +19,20 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.configdb;
+package org.onap.slice.analysis.ms.models;
 
-import java.util.Map;
+import java.util.List;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * 
- * Interface for AAI
- *
+ * SliceConfigResponse contains slice utilization data for requested slices
  */
-public interface AaiInterface {
+@Data
+@NoArgsConstructor
+public class SliceConfigResponse {
 
-	public Map<String, String> fetchServiceDetails(String snssai);
-	public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+    List<SliceConfigDetails> sliceConfigDetails;
+
 }
-
