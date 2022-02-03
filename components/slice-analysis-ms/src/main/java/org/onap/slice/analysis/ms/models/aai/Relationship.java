@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021 Wipro Limited.
+ *   Copyright (C) 2022 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -19,18 +19,29 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.configdb;
+package org.onap.slice.analysis.ms.models.aai;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 import java.util.Map;
 
-/**
- * 
- * Interface for AAI
- *
- */
-public interface AaiInterface {
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-	public Map<String, String> fetchServiceDetails(String snssai);
-	public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+@Data
+@NoArgsConstructor
+public class Relationship {
+
+    @JsonProperty("related-to")
+    private String relatedTo;
+    @JsonProperty("relationship-label")
+    private String relationshipLabel;
+    @JsonProperty("related-link")
+    private String relatedLink;
+    @JsonProperty("relationship-data")
+    private List<Map<String, String>> relationshipData;
+    @JsonProperty("related-to-property")
+    private List<Map<String, String>> relatedToProperty;
+
 }
-

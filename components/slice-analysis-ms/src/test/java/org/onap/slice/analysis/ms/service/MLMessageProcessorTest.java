@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2022 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -37,8 +37,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.onap.slice.analysis.ms.configdb.IConfigDbService;
-import org.onap.slice.analysis.ms.configdb.AaiService;
-import org.onap.slice.analysis.ms.configdb.CpsService;
+import org.onap.slice.analysis.ms.aai.AaiService;
+import org.onap.slice.analysis.ms.cps.CpsService;
 import org.onap.slice.analysis.ms.models.MLOutputModel;
 import org.onap.slice.analysis.ms.models.policy.AdditionalProperties;
 import org.springframework.boot.test.context.SpringBootTest;

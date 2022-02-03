@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020-2021 Wipro Limited.
+ *   Copyright (C) 2020-2022 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import org.onap.slice.analysis.ms.configdb.AaiInterface;
-import org.onap.slice.analysis.ms.configdb.CpsInterface;
+import org.onap.slice.analysis.ms.aai.AaiInterface;
+import org.onap.slice.analysis.ms.cps.CpsInterface;
 import org.onap.slice.analysis.ms.configdb.IConfigDbService;
 import org.onap.slice.analysis.ms.models.CUModel;
 import org.onap.slice.analysis.ms.models.Configuration;
