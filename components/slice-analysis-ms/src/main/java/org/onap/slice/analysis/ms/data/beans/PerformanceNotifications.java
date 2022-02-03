@@ -18,6 +18,7 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+
 package org.onap.slice.analysis.ms.data.beans;
 
 import java.sql.Timestamp;
@@ -30,7 +31,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 /**
- * Entity for  PERFORMANCE_NOTIFICATIONS table
+ * Entity for PERFORMANCE_NOTIFICATIONS table
  */
 @Entity
 @Table(name = "PERFORMANCE_NOTIFICATIONS")
@@ -53,6 +54,7 @@ public class PerformanceNotifications {
 
     /**
      * Constructs PerformanceNotifications instance
+     * 
      * @param notification
      * @param createdAt
      */

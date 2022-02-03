@@ -33,40 +33,40 @@ public class CellCUList {
      * Returns a hashcode value for the object
      */
     @Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cellLocalId == null) ? 0 : cellLocalId.hashCode());
-		result = prime * result + ((configData == null) ? 0 : configData.hashCode());
-		return result;
-	}
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((cellLocalId == null) ? 0 : cellLocalId.hashCode());
+        result = prime * result + ((configData == null) ? 0 : configData.hashCode());
+        return result;
+    }
 
-	/**
-	 * Checks whether the object matches with the CellCUList
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CellCUList other = (CellCUList) obj;
-		if (cellLocalId == null) {
-			if (other.cellLocalId != null)
-				return false;
-		} else if (!cellLocalId.equals(other.cellLocalId))
-			return false;
-		if (configData == null) {
-			if (other.configData != null)
-				return false;
-		} else if (!configData.equals(other.configData))
-			return false;
-		return true;
-	}
+    /**
+     * Checks whether the object matches with the CellCUList
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CellCUList other = (CellCUList) obj;
+        if (cellLocalId == null) {
+            if (other.cellLocalId != null)
+                return false;
+        } else if (!cellLocalId.equals(other.cellLocalId))
+            return false;
+        if (configData == null) {
+            if (other.configData != null)
+                return false;
+        } else if (!configData.equals(other.configData))
+            return false;
+        return true;
+    }
 
-	public Integer getCellLocalId() {
+    public Integer getCellLocalId() {
         return cellLocalId;
     }
 
@@ -81,6 +81,5 @@ public class CellCUList {
     public void setConfigData(ConfigData configData) {
         this.configData = configData;
     }
-    
-    
+
 }

@@ -23,114 +23,114 @@ package org.onap.slice.analysis.ms.models.policy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** 
- * Model class for the OnsetMessage Object 
+/**
+ * Model class for the OnsetMessage Object
  */
 public class OnsetMessage {
 
-	private String closedLoopControlName;
-	private Long closedLoopAlarmStart;
-	private String closedLoopEventClient;
-	private String closedLoopEventStatus;
-	private String requestID;
+    private String closedLoopControlName;
+    private Long closedLoopAlarmStart;
+    private String closedLoopEventClient;
+    private String closedLoopEventStatus;
+    private String requestID;
 
-	@JsonProperty("target_type")
-	private String targetType;   
+    @JsonProperty("target_type")
+    private String targetType;
 
-	@JsonProperty("AAI")
-	private AAI aai;
+    @JsonProperty("AAI")
+    private AAI aai;
 
-	private String target;
-	private String payload;
-	private String from;
-	private String version;
+    private String target;
+    private String payload;
+    private String from;
+    private String version;
 
-	public String getClosedLoopControlName() {
-		return closedLoopControlName;
-	}
+    public String getClosedLoopControlName() {
+        return closedLoopControlName;
+    }
 
-	public void setClosedLoopControlName(String closedLoopControlName) {
-		this.closedLoopControlName = closedLoopControlName;
-	}
+    public void setClosedLoopControlName(String closedLoopControlName) {
+        this.closedLoopControlName = closedLoopControlName;
+    }
 
-	public Long getClosedLoopAlarmStart() {
-		return closedLoopAlarmStart;
-	}
+    public Long getClosedLoopAlarmStart() {
+        return closedLoopAlarmStart;
+    }
 
-	public void setClosedLoopAlarmStart(Long closedLoopAlarmStart) {
-		this.closedLoopAlarmStart = closedLoopAlarmStart;
-	}
+    public void setClosedLoopAlarmStart(Long closedLoopAlarmStart) {
+        this.closedLoopAlarmStart = closedLoopAlarmStart;
+    }
 
-	public String getClosedLoopEventClient() {
-		return closedLoopEventClient;
-	}
+    public String getClosedLoopEventClient() {
+        return closedLoopEventClient;
+    }
 
-	public void setClosedLoopEventClient(String closedLoopEventClient) {
-		this.closedLoopEventClient = closedLoopEventClient;
-	}
+    public void setClosedLoopEventClient(String closedLoopEventClient) {
+        this.closedLoopEventClient = closedLoopEventClient;
+    }
 
-	public String getClosedLoopEventStatus() {
-		return closedLoopEventStatus;
-	}
+    public String getClosedLoopEventStatus() {
+        return closedLoopEventStatus;
+    }
 
-	public void setClosedLoopEventStatus(String closedLoopEventStatus) {
-		this.closedLoopEventStatus = closedLoopEventStatus;
-	}
+    public void setClosedLoopEventStatus(String closedLoopEventStatus) {
+        this.closedLoopEventStatus = closedLoopEventStatus;
+    }
 
-	public String getRequestID() {
-		return requestID;
-	}
+    public String getRequestID() {
+        return requestID;
+    }
 
-	public void setRequestID(String requestID) {
-		this.requestID = requestID;
-	}
+    public void setRequestID(String requestID) {
+        this.requestID = requestID;
+    }
 
-	public String getTargetType() {
-		return targetType;
-	}
+    public String getTargetType() {
+        return targetType;
+    }
 
-	public void setTargetType(String targetType) {
-		this.targetType = targetType;
-	}
+    public void setTargetType(String targetType) {
+        this.targetType = targetType;
+    }
 
-	public String getTarget() {
-		return target;
-	}
+    public String getTarget() {
+        return target;
+    }
 
-	public void setTarget(String target) {
-		this.target = target;
-	}
+    public void setTarget(String target) {
+        this.target = target;
+    }
 
-	public AAI getAai() {
-		return aai;
-	}
+    public AAI getAai() {
+        return aai;
+    }
 
-	public void setAai(AAI aAI) {
-		this.aai = aAI;
-	}
+    public void setAai(AAI aAI) {
+        this.aai = aAI;
+    }
 
-	public String getPayload() {
-		return payload;
-	}
+    public String getPayload() {
+        return payload;
+    }
 
-	public void setPayload(String payload) {
-		this.payload = payload;
-	}
+    public void setPayload(String payload) {
+        this.payload = payload;
+    }
 
-	public String getFrom() {
-		return from;
-	}
+    public String getFrom() {
+        return from;
+    }
 
-	public void setFrom(String from) {
-		this.from = from;
-	}
+    public void setFrom(String from) {
+        this.from = from;
+    }
 
-	public String getVersion() {
-		return version;
-	}
+    public String getVersion() {
+        return version;
+    }
 
-	public void setVersion(String version) {
-		this.version = version;
-	}
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
 }

@@ -29,37 +29,37 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-/** 
+/**
  * This class represents rest client for config db interfaces
  */
 @Component
 public class ConfigDbRestClient extends RestClient {
 
-	public ConfigDbRestClient() {
-		super();
-	}
+    public ConfigDbRestClient() {
+        super();
+    }
 
-	/**
-	 * Send Post Request to Config DB.
-	 */
+    /**
+     * Send Post Request to Config DB.
+     */
 
-	public <T> ResponseEntity<T> sendPostRequest(String requestUrl, String requestBody,
-			ParameterizedTypeReference<T> responseType) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		return super.sendPostRequest(headers, requestUrl, requestBody, responseType);
-	}
+    public <T> ResponseEntity<T> sendPostRequest(String requestUrl, String requestBody,
+            ParameterizedTypeReference<T> responseType) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return super.sendPostRequest(headers, requestUrl, requestBody, responseType);
+    }
 
-	/**
-	 * Send Get Request to Config DB.
-	 */
+    /**
+     * Send Get Request to Config DB.
+     */
 
-	public <T> ResponseEntity<T> sendGetRequest(String requestUrl, ParameterizedTypeReference<T> responseType) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		return super.sendGetRequest(headers, requestUrl, responseType);
-	}
+    public <T> ResponseEntity<T> sendGetRequest(String requestUrl, ParameterizedTypeReference<T> responseType) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return super.sendGetRequest(headers, requestUrl, responseType);
+    }
 
 }

@@ -35,32 +35,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class AaiRestClient extends RestClient {
 
-	public AaiRestClient() {
-		super();
-	}
+    public AaiRestClient() {
+        super();
+    }
 
-	/**
-	 * Sends post request to Aai
-	 */
-	public <T> ResponseEntity<T> sendPostRequest(String requestUrl, String requestBody,
-			ParameterizedTypeReference<T> responseType) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		return super.sendPostRequest(headers, requestUrl, requestBody, responseType);
-	}
+    /**
+     * Sends post request to Aai
+     */
+    public <T> ResponseEntity<T> sendPostRequest(String requestUrl, String requestBody,
+            ParameterizedTypeReference<T> responseType) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return super.sendPostRequest(headers, requestUrl, requestBody, responseType);
+    }
 
-	/**
-	 * Sends get request to Aai
-	 */
-	public <T> ResponseEntity<T> sendGetRequest(String requestUrl, ParameterizedTypeReference<T> responseType) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.set("X-FromAppId", "AAI");
-		headers.set("X-TransactionId", "get_aai_subscr");
-		return super.sendGetRequest(headers, requestUrl, responseType);
-	}
+    /**
+     * Sends get request to Aai
+     */
+    public <T> ResponseEntity<T> sendGetRequest(String requestUrl, ParameterizedTypeReference<T> responseType) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("X-FromAppId", "AAI");
+        headers.set("X-TransactionId", "get_aai_subscr");
+        return super.sendGetRequest(headers, requestUrl, responseType);
+    }
 
 }
-

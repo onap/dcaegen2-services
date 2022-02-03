@@ -18,9 +18,8 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
-package org.onap.slice.analysis.ms.models.policy;
 
-import org.junit.Test;
+package org.onap.slice.analysis.ms.models.policy;
 
 import com.openpojo.reflection.PojoClass;
 import com.openpojo.reflection.impl.PojoClassFactory;
@@ -31,39 +30,36 @@ import com.openpojo.validation.rule.impl.SetterMustExistRule;
 import com.openpojo.validation.test.impl.GetterTester;
 import com.openpojo.validation.test.impl.SetterTester;
 
+import org.junit.Test;
+
 public class PolicyModelsTest {
-	@Test
+    @Test
     public void testGetterSetterPayload() {
         PojoClass pojoclass = PojoClassFactory.getPojoClass(Payload.class);
         validateMd(pojoclass);
     }
-	
-	@Test
+
+    @Test
     public void testGetterSetterAAI() {
         PojoClass pojoclass = PojoClassFactory.getPojoClass(AAI.class);
         validateMd(pojoclass);
     }
-	
-	@Test
+
+    @Test
     public void testGetterSetterOnsetMessage() {
         PojoClass pojoclass = PojoClassFactory.getPojoClass(OnsetMessage.class);
         validateMd(pojoclass);
     }
-	
-	@Test
+
+    @Test
     public void testGetterSetterAdditionalProperties() {
         PojoClass pojoclass = PojoClassFactory.getPojoClass(AdditionalProperties.class);
         validateMd(pojoclass);
     }
-	
-	public void validateMd(PojoClass pojoclass) {
-		Validator validator = ValidatorBuilder
-                .create()
-                .with(new SetterMustExistRule())
-                .with(new GetterMustExistRule())
-                .with(new SetterTester())
-                .with(new GetterTester())
-                .build();
+
+    public void validateMd(PojoClass pojoclass) {
+        Validator validator = ValidatorBuilder.create().with(new SetterMustExistRule()).with(new GetterMustExistRule())
+                .with(new SetterTester()).with(new GetterTester()).build();
         validator.validate(pojoclass);
-	}
+    }
 }

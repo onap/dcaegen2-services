@@ -23,19 +23,19 @@ package org.onap.slice.analysis.ms.models.pmnotification;
 
 import java.util.List;
 
-/** 
- * Model class for the MeasTypes Object 
+/**
+ * Model class for the MeasTypes Object
  */
 public class MeasTypes {
 
-	private List<String> sMeasTypesList;
+    private List<String> sMeasTypesList;
 
-	public List<String> getsMeasTypesList() {
-		return sMeasTypesList;
-	}
+    public List<String> getsMeasTypesList() {
+        return sMeasTypesList;
+    }
 
-	public void setsMeasTypesList(List<String> sMeasTypesList) {
-		this.sMeasTypesList = sMeasTypesList;
-	}
+    public void setsMeasTypesList(List<String> sMeasTypesList) {
+        this.sMeasTypesList = sMeasTypesList;
+    }
 
 }

@@ -18,30 +18,30 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
-package org.onap.slice.analysis.ms.models.configdb;
 
+package org.onap.slice.analysis.ms.models.configdb;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/** 
- * Model class for the CellsModel Object 
+/**
+ * Model class for the CellsModel Object
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CellsModel {
 
-	private String cellLocalId;
+    private String cellLocalId;
 
-	public String getCellLocalId() {
-		return cellLocalId;
-	}
+    public String getCellLocalId() {
+        return cellLocalId;
+    }
 
-	public void setCellLocalId(String cellLocalId) {
-		this.cellLocalId = cellLocalId;
-	}
+    public void setCellLocalId(String cellLocalId) {
+        this.cellLocalId = cellLocalId;
+    }
 
-	@Override
-	public String toString() {
-		return "CellsModel [cellLocalId=" + cellLocalId + "]";
-	}
+    @Override
+    public String toString() {
+        return "CellsModel [cellLocalId=" + cellLocalId + "]";
+    }
 
 }

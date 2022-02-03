@@ -26,15 +26,18 @@ import java.util.Map;
 
 /**
  * 
- *  Interface for config db service
+ * Interface for config db service
  *
  */
 public interface IConfigDbService {
 
-	public Map<String, List<String>> fetchRICsOfSnssai(String snssai);
-	public List<String> fetchNetworkFunctionsOfSnssai(String snssai);
-	public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
-	public Map<String, Map<String,Object>> fetchCurrentConfigurationOfRIC(String snssai);
-	public Map<String ,String> fetchServiceDetails(String snssai);
-}
+    public Map<String, List<String>> fetchRICsOfSnssai(String snssai);
 
+    public List<String> fetchNetworkFunctionsOfSnssai(String snssai);
+
+    public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+
+    public Map<String, Map<String, Object>> fetchCurrentConfigurationOfRIC(String snssai);
+
+    public Map<String, String> fetchServiceDetails(String snssai);
+}

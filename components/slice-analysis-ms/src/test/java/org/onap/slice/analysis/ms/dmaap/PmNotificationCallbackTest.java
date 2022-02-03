@@ -19,6 +19,7 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+
 package org.onap.slice.analysis.ms.dmaap;
 
 import org.junit.Test;
@@ -37,23 +38,24 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(PowerMockRunner.class)
 @PowerMockIgnore({"com.sun.org.apache.xerces.*", "javax.xml.*", "org.xml.*", "javax.management.*"})
 @PowerMockRunnerDelegate(SpringRunner.class)
-@PrepareForTest({ BeanUtil.class })
+@PrepareForTest({BeanUtil.class})
 @SpringBootTest(classes = PmNotificationCallbackTest.class)
 public class PmNotificationCallbackTest {
-	
-	@Mock
-	PerformanceNotificationsRepository performanceNotificationsRepository;
-	
-	@Mock
-	NewPmNotification newPmNotif;
-	
-	@Test
-	public void testActivateCallBack() {
-		PowerMockito.mockStatic(BeanUtil.class);
-		PowerMockito.when(BeanUtil.getBean(PerformanceNotificationsRepository.class)).thenReturn(performanceNotificationsRepository);
-		PowerMockito.when(BeanUtil.getBean(NewPmNotification.class)).thenReturn(newPmNotif);
-		PmNotificationCallback pmNotificationCallback = new PmNotificationCallback();
-		pmNotificationCallback.activateCallBack("pmNotification");
-	}
+
+    @Mock
+    PerformanceNotificationsRepository performanceNotificationsRepository;
+
+    @Mock
+    NewPmNotification newPmNotif;
+
+    @Test
+    public void testActivateCallBack() {
+        PowerMockito.mockStatic(BeanUtil.class);
+        PowerMockito.when(BeanUtil.getBean(PerformanceNotificationsRepository.class))
+                .thenReturn(performanceNotificationsRepository);
+        PowerMockito.when(BeanUtil.getBean(NewPmNotification.class)).thenReturn(newPmNotif);
+        PmNotificationCallback pmNotificationCallback = new PmNotificationCallback();
+        pmNotificationCallback.activateCallBack("pmNotification");
+    }
 
 }

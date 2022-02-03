@@ -27,61 +27,65 @@ import java.util.List;
  * Model class for ML output object
  */
 public class MLOutputModel {
-	private String snssai;
-	private List<CUModel> data;
-	public String getSnssai() {
-		return snssai;
-	}
-	public void setSnssai(String snssai) {
-		this.snssai = snssai;
-	}
-	public List<CUModel> getData() {
-		return data;
-	}
-	public void setData(List<CUModel> data) {
-		this.data = data;
-	}
-	
-	@Override
-	public String toString() {
-		return "MLOutputModel [snssai=" + snssai + ", data=" + data + "]";
-	}
-	
-	/**
-	 * Returns a hashcode value for the object
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((data == null) ? 0 : data.hashCode());
-		result = prime * result + ((snssai == null) ? 0 : snssai.hashCode());
-		return result;
-	}
-	
-	/**
-	 * Checks whether the object matches with the MLOutputModel
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		MLOutputModel other = (MLOutputModel) obj;
-		if (data == null) {
-			if (other.data != null)
-				return false;
-		} else if (!data.equals(other.data))
-			return false;
-		if (snssai == null) {
-			if (other.snssai != null)
-				return false;
-		} else if (!snssai.equals(other.snssai))
-			return false;
-		return true;
-	}
-	
+    private String snssai;
+    private List<CUModel> data;
+
+    public String getSnssai() {
+        return snssai;
+    }
+
+    public void setSnssai(String snssai) {
+        this.snssai = snssai;
+    }
+
+    public List<CUModel> getData() {
+        return data;
+    }
+
+    public void setData(List<CUModel> data) {
+        this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "MLOutputModel [snssai=" + snssai + ", data=" + data + "]";
+    }
+
+    /**
+     * Returns a hashcode value for the object
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((data == null) ? 0 : data.hashCode());
+        result = prime * result + ((snssai == null) ? 0 : snssai.hashCode());
+        return result;
+    }
+
+    /**
+     * Checks whether the object matches with the MLOutputModel
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        MLOutputModel other = (MLOutputModel) obj;
+        if (data == null) {
+            if (other.data != null)
+                return false;
+        } else if (!data.equals(other.data))
+            return false;
+        if (snssai == null) {
+            if (other.snssai != null)
+                return false;
+        } else if (!snssai.equals(other.snssai))
+            return false;
+        return true;
+    }
+
 }

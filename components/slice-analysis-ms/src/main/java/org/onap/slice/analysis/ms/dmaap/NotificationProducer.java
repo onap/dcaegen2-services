@@ -31,7 +31,7 @@ import java.io.IOException;
 public class NotificationProducer {
 
     private CambriaBatchingPublisher cambriaBatchingPublisher;
-     
+
     /**
      * Parameterized constructor.
      */

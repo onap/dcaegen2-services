@@ -18,29 +18,30 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+
 package org.onap.slice.analysis.ms.models.configdb;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/** 
- * Model class for the NetworkFunction Object 
+/**
+ * Model class for the NetworkFunction Object
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NetworkFunctionModel {
-	
-	private String gNBDUId;
-	
-	public String getgNBDUId() {
-		return gNBDUId;
-	}
 
-	public void setgNBDUId(String gNBDUId) {
-		this.gNBDUId = gNBDUId;
-	}
+    private String gNBDUId;
 
-	@Override
-	public String toString() {
-		return "NetworkFunctionModel [gNBDUId=" + gNBDUId + "]";
-	}
+    public String getgNBDUId() {
+        return gNBDUId;
+    }
+
+    public void setgNBDUId(String gNBDUId) {
+        this.gNBDUId = gNBDUId;
+    }
+
+    @Override
+    public String toString() {
+        return "NetworkFunctionModel [gNBDUId=" + gNBDUId + "]";
+    }
 
 }

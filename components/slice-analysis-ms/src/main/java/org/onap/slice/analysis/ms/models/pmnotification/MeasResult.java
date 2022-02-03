@@ -21,28 +21,28 @@
 
 package org.onap.slice.analysis.ms.models.pmnotification;
 
-/** 
- * Model class for the MeasResult Object 
+/**
+ * Model class for the MeasResult Object
  */
 public class MeasResult {
 
-	private int p;
-	private String sValue;
+    private int p;
+    private String sValue;
 
-	public int getP() {
-		return p;
-	}
+    public int getP() {
+        return p;
+    }
 
-	public void setP(int p) {
-		this.p = p;
-	}
+    public void setP(int p) {
+        this.p = p;
+    }
 
-	public String getsValue() {
-		return sValue;
-	}
+    public String getsValue() {
+        return sValue;
+    }
 
-	public void setsValue(String sValue) {
-		this.sValue = sValue;
-	}
+    public void setsValue(String sValue) {
+        this.sValue = sValue;
+    }
 
 }

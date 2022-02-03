@@ -21,8 +21,8 @@
 
 package org.onap.slice.analysis.ms.models.pmnotification;
 
-/** 
- * Model class for the Event Object 
+/**
+ * Model class for the Event Object
  */
 public class Event {
 

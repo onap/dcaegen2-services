@@ -18,9 +18,13 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+
 package org.onap.slice.analysis.ms.service;
 
 import static org.junit.Assert.assertEquals;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -42,111 +46,118 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = PmDataQueueTest.class)
 public class PmDataQueueTest {
-	ObjectMapper obj = new ObjectMapper();
-	
-	@InjectMocks
-	PmDataQueue pmDataQueue;
+    ObjectMapper obj = new ObjectMapper();
 
-	@Before
-	public void setup() {
-		Queue<List<MeasurementObject>> measList = null;
-        try { 
-              measList = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/measurementObjectList.json"))), new TypeReference<Queue<List<MeasurementObject>>>(){});
-        } 
-        catch (IOException e) { 
-            e.printStackTrace(); 
-        } 
-        SubCounter sub1 = new SubCounter("nf1", "nssai1");
-    	Map<SubCounter, Queue<List<MeasurementObject>>> subCounterMap = Collections.synchronizedMap(new LinkedHashMap<SubCounter, Queue<List<MeasurementObject>>>());
-    	subCounterMap.put(sub1, measList);
-		ReflectionTestUtils.setField(pmDataQueue, "subCounterMap", subCounterMap);
-		
-		Queue<String> snssaiList = new LinkedBlockingQueue<>();
-		snssaiList.add("nssai1");
-		snssaiList.add("nssai2");
-		snssaiList.add("nssai3");
-		ReflectionTestUtils.setField(pmDataQueue, "snssaiList", snssaiList);
+    @InjectMocks
+    PmDataQueue pmDataQueue;
 
-	}
-	
-	@Test
-	public void putDataToQueueSameNssaiTest() {
+    @Before
+    public void setup() {
+        Queue<List<MeasurementObject>> measList = null;
+        try {
+            measList = obj.readValue(
+                    new String(Files.readAllBytes(Paths.get("src/test/resources/measurementObjectList.json"))),
+                    new TypeReference<Queue<List<MeasurementObject>>>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         SubCounter sub1 = new SubCounter("nf1", "nssai1");
-    	Map<SubCounter, Queue<List<MeasurementObject>>> subCounterMapExp = Collections.synchronizedMap(new LinkedHashMap<SubCounter, Queue<List<MeasurementObject>>>());
+        Map<SubCounter, Queue<List<MeasurementObject>>> subCounterMap =
+                Collections.synchronizedMap(new LinkedHashMap<SubCounter, Queue<List<MeasurementObject>>>());
+        subCounterMap.put(sub1, measList);
+        ReflectionTestUtils.setField(pmDataQueue, "subCounterMap", subCounterMap);
+
+        Queue<String> snssaiList = new LinkedBlockingQueue<>();
+        snssaiList.add("nssai1");
+        snssaiList.add("nssai2");
+        snssaiList.add("nssai3");
+        ReflectionTestUtils.setField(pmDataQueue, "snssaiList", snssaiList);
+
+    }
+
+    @Test
+    public void putDataToQueueSameNssaiTest() {
+        SubCounter sub1 = new SubCounter("nf1", "nssai1");
+        Map<SubCounter, Queue<List<MeasurementObject>>> subCounterMapExp =
+                Collections.synchronizedMap(new LinkedHashMap<SubCounter, Queue<List<MeasurementObject>>>());
         List<MeasurementObject> measObj = null;
         Queue<List<MeasurementObject>> measObjExp = null;
-        try { 
-              measObj = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/average.json"))), new TypeReference<List<MeasurementObject>>(){});
-              measObjExp = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/appendData.json"))), new TypeReference<Queue<List<MeasurementObject>>>(){});
+        try {
+            measObj = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/average.json"))),
+                    new TypeReference<List<MeasurementObject>>() {});
+            measObjExp = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/appendData.json"))),
+                    new TypeReference<Queue<List<MeasurementObject>>>() {});
 
-        } 
-        catch (IOException e) { 
-            e.printStackTrace(); 
-        } 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         subCounterMapExp.put(sub1, measObjExp);
         pmDataQueue.putDataToQueue(sub1, measObj);
         assertEquals(subCounterMapExp, ReflectionTestUtils.getField(pmDataQueue, "subCounterMap"));
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Test
-	public void putDataToQueueDiffNssaiTest() {
-		SubCounter sub = new SubCounter("nf1", "nssai1");
-		SubCounter sub1 = new SubCounter("nf1", "nssai2");
-    	Map<SubCounter, Queue<List<MeasurementObject>>> subCounterMapExp = Collections.synchronizedMap(new LinkedHashMap<SubCounter, Queue<List<MeasurementObject>>>());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void putDataToQueueDiffNssaiTest() {
+        SubCounter sub = new SubCounter("nf1", "nssai1");
+        SubCounter sub1 = new SubCounter("nf1", "nssai2");
+        Map<SubCounter, Queue<List<MeasurementObject>>> subCounterMapExp =
+                Collections.synchronizedMap(new LinkedHashMap<SubCounter, Queue<List<MeasurementObject>>>());
         List<MeasurementObject> measObj = null;
         Queue<List<MeasurementObject>> measObjExp = null;
         Queue<List<MeasurementObject>> measObjExp1 = new LinkedBlockingQueue<>();
-        try { 
-              measObj = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/average.json"))), new TypeReference<List<MeasurementObject>>(){});
-              measObjExp = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/measurementObjectList.json"))), new TypeReference<Queue<List<MeasurementObject>>>(){});
-        } 
-        catch (IOException e) { 
-            e.printStackTrace(); 
-        } 
+        try {
+            measObj = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/average.json"))),
+                    new TypeReference<List<MeasurementObject>>() {});
+            measObjExp = obj.readValue(
+                    new String(Files.readAllBytes(Paths.get("src/test/resources/measurementObjectList.json"))),
+                    new TypeReference<Queue<List<MeasurementObject>>>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         measObjExp1.add(measObj);
         subCounterMapExp.put(sub, measObjExp);
         subCounterMapExp.put(sub1, measObjExp1);
         pmDataQueue.putDataToQueue(sub1, measObj);
-        assertEquals(subCounterMapExp.get(sub), ((Map<SubCounter,Queue<List<MeasurementObject>>>) ReflectionTestUtils.getField(pmDataQueue, "subCounterMap")).get(sub));
-        assertEquals(subCounterMapExp.get(sub1).contains(measObj), ((Map<SubCounter,Queue<List<MeasurementObject>>>) ReflectionTestUtils.getField(pmDataQueue, "subCounterMap")).get(sub1).contains(measObj));
-	}
-	
-	@Test
-	public void getSamplesFromQueueTest() {
-		SubCounter sub = new SubCounter("nf1", "nssai1");
+        assertEquals(subCounterMapExp.get(sub), ((Map<SubCounter, Queue<List<MeasurementObject>>>) ReflectionTestUtils
+                .getField(pmDataQueue, "subCounterMap")).get(sub));
+        assertEquals(subCounterMapExp.get(sub1).contains(measObj),
+                ((Map<SubCounter, Queue<List<MeasurementObject>>>) ReflectionTestUtils.getField(pmDataQueue,
+                        "subCounterMap")).get(sub1).contains(measObj));
+    }
+
+    @Test
+    public void getSamplesFromQueueTest() {
+        SubCounter sub = new SubCounter("nf1", "nssai1");
         List<List<MeasurementObject>> measObj = null;
-        try { 
-            measObj = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/getResponse.json"))), new TypeReference<List<List<MeasurementObject>>>(){});
-      } 
-      catch (IOException e) { 
-          e.printStackTrace(); 
-      } 
-		assertEquals(measObj, pmDataQueue.getSamplesFromQueue(sub, 1));
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Test
-	public void putSnssaiToQueueTest() {
-		pmDataQueue.putSnssaiToQueue("nssai1");
-		assertEquals(3, ((Queue<String>)ReflectionTestUtils.getField(pmDataQueue, "snssaiList")).size());
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Test
-	public void putNewSnssaiToQueueTest() {
-		pmDataQueue.putSnssaiToQueue("nssai9");
-		assertEquals(4, ((Queue<String>)ReflectionTestUtils.getField(pmDataQueue, "snssaiList")).size());
-	}
-	
-	@Test
-	public void getSnnsaiFromQueueTest() {
-		assertEquals("nssai1", pmDataQueue.getSnnsaiFromQueue());
-	}
+        try {
+            measObj = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/getResponse.json"))),
+                    new TypeReference<List<List<MeasurementObject>>>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assertEquals(measObj, pmDataQueue.getSamplesFromQueue(sub, 1));
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void putSnssaiToQueueTest() {
+        pmDataQueue.putSnssaiToQueue("nssai1");
+        assertEquals(3, ((Queue<String>) ReflectionTestUtils.getField(pmDataQueue, "snssaiList")).size());
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void putNewSnssaiToQueueTest() {
+        pmDataQueue.putSnssaiToQueue("nssai9");
+        assertEquals(4, ((Queue<String>) ReflectionTestUtils.getField(pmDataQueue, "snssaiList")).size());
+    }
+
+    @Test
+    public void getSnnsaiFromQueueTest() {
+        assertEquals("nssai1", pmDataQueue.getSnnsaiFromQueue());
+    }
 }

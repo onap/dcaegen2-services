@@ -21,28 +21,28 @@
 
 package org.onap.slice.analysis.ms.models.pmnotification;
 
-/** 
- * Model class for the Perf3gppFields Object 
+/**
+ * Model class for the Perf3gppFields Object
  */
 public class Perf3gppFields {
 
-	private String perf3gppFieldsVersion;
-	private MeasDataCollection measDataCollection;
+    private String perf3gppFieldsVersion;
+    private MeasDataCollection measDataCollection;
 
-	public String getPerf3gppFieldsVersion() {
-		return perf3gppFieldsVersion;
-	}
+    public String getPerf3gppFieldsVersion() {
+        return perf3gppFieldsVersion;
+    }
 
-	public void setPerf3gppFieldsVersion(String perf3gppFieldsVersion) {
-		this.perf3gppFieldsVersion = perf3gppFieldsVersion;
-	}
+    public void setPerf3gppFieldsVersion(String perf3gppFieldsVersion) {
+        this.perf3gppFieldsVersion = perf3gppFieldsVersion;
+    }
 
-	public MeasDataCollection getMeasDataCollection() {
-		return measDataCollection;
-	}
+    public MeasDataCollection getMeasDataCollection() {
+        return measDataCollection;
+    }
 
-	public void setMeasDataCollection(MeasDataCollection measDataCollection) {
-		this.measDataCollection = measDataCollection;
-	}
+    public void setMeasDataCollection(MeasDataCollection measDataCollection) {
+        this.measDataCollection = measDataCollection;
+    }
 
 }

@@ -18,15 +18,21 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+
 package org.onap.slice.analysis.ms.models;
+
 import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Test;
+
 public class ConfigurationTest {
     Configuration configuration = Configuration.getInstance();
+
     @Test
     public void configurationTest() {
         List<String> list = new ArrayList<String>();
@@ -52,11 +58,11 @@ public class ConfigurationTest {
         configuration.setSamples(10);
         configuration.setMinPercentageChange(50);
         configuration.setInitialDelaySeconds(1000);
-        assertEquals(true,configuration.isSecured());
+        assertEquals(true, configuration.isSecured());
         assertEquals("user", configuration.getAafUsername());
         assertEquals("password", configuration.getAafPassword());
-        assertEquals(subscribes,configuration.getStreamsSubscribes());
-        assertEquals(subscribes,configuration.getStreamsPublishes());
+        assertEquals(subscribes, configuration.getStreamsSubscribes());
+        assertEquals(subscribes, configuration.getStreamsPublishes());
         assertEquals("cg", configuration.getCg());
         assertEquals("cid", configuration.getCid());
         assertEquals(30, configuration.getPollingInterval());
@@ -67,11 +73,11 @@ public class ConfigurationTest {
         assertEquals("password", configuration.getPgPassword());
         assertEquals(list, configuration.getDmaapServers());
         assertEquals("sdnrService", configuration.getConfigDbService());
-        assertEquals("",configuration.getCpsUrl());
-        assertEquals("",configuration.getAaiUrl());
-        assertEquals(true,configuration.getConfigDbEnabled());
-        assertEquals(10,configuration.getSamples());
-        assertEquals(50,configuration.getMinPercentageChange());
-        assertEquals(1000,configuration.getInitialDelaySeconds());
+        assertEquals("", configuration.getCpsUrl());
+        assertEquals("", configuration.getAaiUrl());
+        assertEquals(true, configuration.getConfigDbEnabled());
+        assertEquals(10, configuration.getSamples());
+        assertEquals(50, configuration.getMinPercentageChange());
+        assertEquals(1000, configuration.getInitialDelaySeconds());
     }
 }

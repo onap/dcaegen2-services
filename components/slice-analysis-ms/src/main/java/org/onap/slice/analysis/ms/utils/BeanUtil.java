@@ -42,6 +42,7 @@ public class BeanUtil implements ApplicationContextAware {
 
     /**
      * Get bean class
+     * 
      * @param <T>
      * @param beanClass
      * @return

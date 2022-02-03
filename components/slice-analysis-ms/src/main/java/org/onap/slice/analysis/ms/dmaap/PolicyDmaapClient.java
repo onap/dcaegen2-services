@@ -22,6 +22,7 @@
 package org.onap.slice.analysis.ms.dmaap;
 
 import com.att.nsa.cambria.client.CambriaBatchingPublisher;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.utils.DmaapUtils;
 
 /**
- * Client class to handle Policy interactions 
+ * Client class to handle Policy interactions
  */
 public class PolicyDmaapClient {
 
@@ -48,8 +49,9 @@ public class PolicyDmaapClient {
     @SuppressWarnings("unchecked")
     public boolean sendNotificationToPolicy(String msg) {
         Map<String, Object> streamsPublishes = configuration.getStreamsPublishes();
-        String policyTopicUrl = ((Map<String, String>) ((Map<String, Object>) streamsPublishes.get("CL_topic"))
-                .get("dmaap_info")).get("topic_url");
+        String policyTopicUrl =
+                ((Map<String, String>) ((Map<String, Object>) streamsPublishes.get("CL_topic")).get("dmaap_info"))
+                        .get("topic_url");
         String[] policyTopicSplit = policyTopicUrl.split("\\/");
         String policyTopic = policyTopicSplit[policyTopicSplit.length - 1];
         CambriaBatchingPublisher cambriaBatchingPublisher;

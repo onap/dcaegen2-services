@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * This Controller provides the slice-analysis-ms 
+ * This Controller provides the slice-analysis-ms
  * application's health
  */
 @RestController

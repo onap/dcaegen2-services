@@ -18,8 +18,11 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+
 package org.onap.slice.analysis.ms.controller;
+
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +30,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=HealthCheck.class)
+@SpringBootTest(classes = HealthCheck.class)
 public class HealthCheckTest {
     @Autowired
     private HealthCheck healthcheck;
+
     @Test
     public void testHealthCheck() {
-	ResponseEntity<HttpStatus> response= new ResponseEntity<>(HttpStatus.OK);
-	assertEquals(response,healthcheck.healthCheck());
-	}
+        ResponseEntity<HttpStatus> response = new ResponseEntity<>(HttpStatus.OK);
+        assertEquals(response, healthcheck.healthCheck());
+    }
 }

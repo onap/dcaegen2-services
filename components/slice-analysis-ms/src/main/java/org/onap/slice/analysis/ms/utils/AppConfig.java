@@ -48,8 +48,8 @@ public class AppConfig {
     }
 
     private static HttpComponentsClientHttpRequestFactory useApacheHttpClientWithSelfSignedSupport() {
-        CloseableHttpClient httpClient = HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier())
-                .build();
+        CloseableHttpClient httpClient =
+                HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
         HttpComponentsClientHttpRequestFactory useApacheHttpClient = new HttpComponentsClientHttpRequestFactory();
         useApacheHttpClient.setHttpClient(httpClient);
         return useApacheHttpClient;

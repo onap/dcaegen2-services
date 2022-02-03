@@ -27,9 +27,9 @@ import java.util.Map;
 import org.onap.slice.analysis.ms.models.MeasurementObject;
 import org.onap.slice.analysis.ms.models.pmnotification.Event;
 
-/** 
+/**
  * Interface for pm event processor
  */
 public interface IPmEventProcessor {
-	public Map<String, List<MeasurementObject>> processEvent(Event event);
+    public Map<String, List<MeasurementObject>> processEvent(Event event);
 }

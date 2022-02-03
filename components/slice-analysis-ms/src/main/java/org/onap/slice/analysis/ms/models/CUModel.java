@@ -28,80 +28,80 @@ import java.util.List;
  */
 public class CUModel {
 
-	private String gNBCUName;
+    private String gNBCUName;
     private String nearRTRICId;
     private List<CellCUList> cellCUList;
 
     public String getgNBCUName() {
-		return gNBCUName;
-	}
+        return gNBCUName;
+    }
 
-	public void setgNBCUName(String gNBCUName) {
-		this.gNBCUName = gNBCUName;
-	}
+    public void setgNBCUName(String gNBCUName) {
+        this.gNBCUName = gNBCUName;
+    }
 
-	public String getNearRTRICId() {
-		return nearRTRICId;
-	}
+    public String getNearRTRICId() {
+        return nearRTRICId;
+    }
 
-	public void setNearRTRICId(String nearRTRICId) {
-		this.nearRTRICId = nearRTRICId;
-	}
+    public void setNearRTRICId(String nearRTRICId) {
+        this.nearRTRICId = nearRTRICId;
+    }
 
-	public List<CellCUList> getCellCUList() {
+    public List<CellCUList> getCellCUList() {
         return cellCUList;
     }
 
     public void setCellCUList(List<CellCUList> cellCUList) {
         this.cellCUList = cellCUList;
     }
-    
+
     @Override
-	public String toString() {
-		return "CUModel [gNBCUName=" + gNBCUName + ", nearRTRICId=" + nearRTRICId + ", cellCUList=" + cellCUList + "]";
-	}
+    public String toString() {
+        return "CUModel [gNBCUName=" + gNBCUName + ", nearRTRICId=" + nearRTRICId + ", cellCUList=" + cellCUList + "]";
+    }
 
-	/**
-	 * Returns a hashcode value for the object
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cellCUList == null) ? 0 : cellCUList.hashCode());
-		result = prime * result + ((gNBCUName == null) ? 0 : gNBCUName.hashCode());
-		result = prime * result + ((nearRTRICId == null) ? 0 : nearRTRICId.hashCode());
-		return result;
-	}
+    /**
+     * Returns a hashcode value for the object
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((cellCUList == null) ? 0 : cellCUList.hashCode());
+        result = prime * result + ((gNBCUName == null) ? 0 : gNBCUName.hashCode());
+        result = prime * result + ((nearRTRICId == null) ? 0 : nearRTRICId.hashCode());
+        return result;
+    }
 
-	/**
-	 * Checks whether the object matches with the CUModel
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CUModel other = (CUModel) obj;
-		if (cellCUList == null) {
-			if (other.cellCUList != null)
-				return false;
-		} else if (!cellCUList.equals(other.cellCUList))
-			return false;
-		if (gNBCUName == null) {
-			if (other.gNBCUName != null)
-				return false;
-		} else if (!gNBCUName.equals(other.gNBCUName))
-			return false;
-		if (nearRTRICId == null) {
-			if (other.nearRTRICId != null)
-				return false;
-		} else if (!nearRTRICId.equals(other.nearRTRICId))
-			return false;
-		return true;
-	}
+    /**
+     * Checks whether the object matches with the CUModel
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CUModel other = (CUModel) obj;
+        if (cellCUList == null) {
+            if (other.cellCUList != null)
+                return false;
+        } else if (!cellCUList.equals(other.cellCUList))
+            return false;
+        if (gNBCUName == null) {
+            if (other.gNBCUName != null)
+                return false;
+        } else if (!gNBCUName.equals(other.gNBCUName))
+            return false;
+        if (nearRTRICId == null) {
+            if (other.nearRTRICId != null)
+                return false;
+        } else if (!nearRTRICId.equals(other.nearRTRICId))
+            return false;
+        return true;
+    }
 
 }

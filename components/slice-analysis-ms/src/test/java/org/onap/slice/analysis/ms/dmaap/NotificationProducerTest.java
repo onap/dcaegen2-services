@@ -19,7 +19,6 @@
  *
  *******************************************************************************/
 
-
 package org.onap.slice.analysis.ms.dmaap;
 
 import static org.junit.Assert.assertEquals;
@@ -41,23 +40,23 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(classes = NotificationProducerTest.class)
 public class NotificationProducerTest {
 
-	@Mock
-	CambriaBatchingPublisher cambriaBatchingPublisher;
+    @Mock
+    CambriaBatchingPublisher cambriaBatchingPublisher;
 
-	@InjectMocks
-	NotificationProducer notificationProducer;
+    @InjectMocks
+    NotificationProducer notificationProducer;
 
-	@Test
-	public void notificationProducerTest() {
+    @Test
+    public void notificationProducerTest() {
 
-		try {
+        try {
 
-			when(cambriaBatchingPublisher.send(Mockito.anyString(), Mockito.anyString())).thenReturn(0);
-			int result = notificationProducer.sendNotification("msg");
-			assertEquals(0, result);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+            when(cambriaBatchingPublisher.send(Mockito.anyString(), Mockito.anyString())).thenReturn(0);
+            int result = notificationProducer.sendNotification("msg");
+            assertEquals(0, result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 }

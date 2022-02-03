@@ -23,39 +23,39 @@ package org.onap.slice.analysis.ms.models.policy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** 
- * Model class for the AAI Object 
+/**
+ * Model class for the AAI Object
  */
 public class AAI {
-	@JsonProperty("vserver.is-closed-loop-disabled")
-	private String vserverIsClosedLoopDisabled;
-	@JsonProperty("vserver.prov-status")
-	private String vserverProvStatus;
-	@JsonProperty("generic-vnf.vnf-id")
-	private String vServerVNFId;
+    @JsonProperty("vserver.is-closed-loop-disabled")
+    private String vserverIsClosedLoopDisabled;
+    @JsonProperty("vserver.prov-status")
+    private String vserverProvStatus;
+    @JsonProperty("generic-vnf.vnf-id")
+    private String vServerVNFId;
 
-	public String getVserverIsClosedLoopDisabled() {
-		return vserverIsClosedLoopDisabled;
-	}
+    public String getVserverIsClosedLoopDisabled() {
+        return vserverIsClosedLoopDisabled;
+    }
 
-	public void setVserverIsClosedLoopDisabled(String vserverIsClosedLoopDisabled) {
-		this.vserverIsClosedLoopDisabled = vserverIsClosedLoopDisabled;
-	}
+    public void setVserverIsClosedLoopDisabled(String vserverIsClosedLoopDisabled) {
+        this.vserverIsClosedLoopDisabled = vserverIsClosedLoopDisabled;
+    }
 
-	public String getVserverProvStatus() {
-		return vserverProvStatus;
-	}
+    public String getVserverProvStatus() {
+        return vserverProvStatus;
+    }
 
-	public void setVserverProvStatus(String vserverProvStatus) {
-		this.vserverProvStatus = vserverProvStatus;
-	}
+    public void setVserverProvStatus(String vserverProvStatus) {
+        this.vserverProvStatus = vserverProvStatus;
+    }
 
-	public String getvServerVNFId() {
-		return vServerVNFId;
-	}
+    public String getvServerVNFId() {
+        return vServerVNFId;
+    }
 
-	public void setvServerVNFId(String vServerVNFId) {
-		this.vServerVNFId = vServerVNFId;
-	}
-	
+    public void setvServerVNFId(String vServerVNFId) {
+        this.vServerVNFId = vServerVNFId;
+    }
+
 }

@@ -19,10 +19,12 @@
  *
  *******************************************************************************/
 
-
 package org.onap.slice.analysis.ms.dmaap;
 
 import static org.junit.Assert.assertTrue;
+
+import com.att.nsa.cambria.client.CambriaBatchingPublisher;
+import com.att.nsa.cambria.client.CambriaConsumer;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -39,36 +41,33 @@ import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.utils.DmaapUtils;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.att.nsa.cambria.client.CambriaBatchingPublisher;
-import com.att.nsa.cambria.client.CambriaConsumer;
-
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest(classes = PolicyDmaapClient.class)
 public class PolicyDmaapClientTest {
-    
+
     @Mock
     Configuration configurationMock;
-    
+
     @Mock
     DmaapUtils dmaapUtilsMock;
-    
+
     @InjectMocks
     PolicyDmaapClient policyDmaapClient;
-    
+
     @Mock
     CambriaConsumer policyResponseCambriaConsumerMock;
-    
+
     @Mock
     CambriaBatchingPublisher cambriaBatchingPublisherMock;
-    
+
     @Mock
     NotificationProducer notificationProducerMock;
-    
+
     @Before
     public void setup() {
         policyDmaapClient = new PolicyDmaapClient(dmaapUtilsMock, configurationMock);
     }
-    
+
     @Test
     public void sendNotificationToPolicyTest() {
         Map<String, Object> streamsPublishes = new HashMap<>();
@@ -78,13 +77,14 @@ public class PolicyDmaapClientTest {
         dmaapInfo.put("dmaap_info", topics);
         streamsPublishes.put("CL_topic", dmaapInfo);
         Mockito.when(configurationMock.getStreamsPublishes()).thenReturn(streamsPublishes);
-        Mockito.when(dmaapUtilsMock.buildPublisher(configurationMock, "DCAE_CL_OUTPUT")).thenReturn(cambriaBatchingPublisherMock);
+        Mockito.when(dmaapUtilsMock.buildPublisher(configurationMock, "DCAE_CL_OUTPUT"))
+                .thenReturn(cambriaBatchingPublisherMock);
         try {
             Mockito.when(cambriaBatchingPublisherMock.send("", "hello")).thenReturn(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
         assertTrue(policyDmaapClient.sendNotificationToPolicy("hello"));
-        
+
     }
 }

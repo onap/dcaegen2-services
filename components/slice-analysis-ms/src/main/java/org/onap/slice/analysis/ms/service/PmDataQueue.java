@@ -35,86 +35,85 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-/** 
- * This class represents the data structure for storing the pm events 
+/**
+ * This class represents the data structure for storing the pm events
  */
 @Component
 public class PmDataQueue {
     private static Logger log = LoggerFactory.getLogger(PmDataQueue.class);
 
-	private Map<SubCounter, Queue<List<MeasurementObject>>> subCounterMap = Collections.synchronizedMap(new LinkedHashMap<SubCounter, Queue<List<MeasurementObject>>>());
-	private Queue<String> snssaiList = new LinkedBlockingQueue<>();
+    private Map<SubCounter, Queue<List<MeasurementObject>>> subCounterMap =
+            Collections.synchronizedMap(new LinkedHashMap<SubCounter, Queue<List<MeasurementObject>>>());
+    private Queue<String> snssaiList = new LinkedBlockingQueue<>();
 
-	/**
-	 * put the measurement data for (an S-NSSAI from a network function) in the queue
-	 */
-	public void putDataToQueue(SubCounter subCounter, List<MeasurementObject> measurementObjectData) {
-		Queue<List<MeasurementObject>> measQueue;
-		if (subCounterMap.containsKey(subCounter)){
-			subCounterMap.get(subCounter).add(measurementObjectData);
-		}
-		else {
-			measQueue = new LinkedBlockingQueue<>();
-			measQueue.add(measurementObjectData);
-			subCounterMap.put(subCounter, measQueue);
-		}
-		log.debug("Queue: {}", subCounterMap);
-	}
+    /**
+     * put the measurement data for (an S-NSSAI from a network function) in the queue
+     */
+    public void putDataToQueue(SubCounter subCounter, List<MeasurementObject> measurementObjectData) {
+        Queue<List<MeasurementObject>> measQueue;
+        if (subCounterMap.containsKey(subCounter)) {
+            subCounterMap.get(subCounter).add(measurementObjectData);
+        } else {
+            measQueue = new LinkedBlockingQueue<>();
+            measQueue.add(measurementObjectData);
+            subCounterMap.put(subCounter, measQueue);
+        }
+        log.debug("Queue: {}", subCounterMap);
+    }
 
-	/**
-	 * get the measurement data for (an S-NSSAI from a network function) from the queue
-	 * returns the specified number of samples
-	 */
-	public List<List<MeasurementObject>> getSamplesFromQueue(SubCounter subCounter, int samples) {
-		List<List<MeasurementObject>> sampleList = null;
-		if (subCounterMap.containsKey(subCounter)){
-			Queue<List<MeasurementObject>> measQueue = subCounterMap.get(subCounter);
-			if(measQueue.size() >= samples) {
-				sampleList = new LinkedList<>();
-				while(samples > 0) {
-					sampleList.add(measQueue.remove());
-					samples --;
-				}
-			}
-		}
-		return sampleList;
-	}
-	
-	/**
-	 * check whether the queue has enough number of samples for that subcounter
-	 */
-	public boolean checkSamplesInQueue(SubCounter subCounter, int samples) {
-		if (subCounterMap.containsKey(subCounter)){
-			Queue<List<MeasurementObject>> measQueue = subCounterMap.get(subCounter);
-			if(measQueue.size() >= samples) {
-				return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * get the measurement data for (an S-NSSAI from a network function) from the queue
+     * returns the specified number of samples
+     */
+    public List<List<MeasurementObject>> getSamplesFromQueue(SubCounter subCounter, int samples) {
+        List<List<MeasurementObject>> sampleList = null;
+        if (subCounterMap.containsKey(subCounter)) {
+            Queue<List<MeasurementObject>> measQueue = subCounterMap.get(subCounter);
+            if (measQueue.size() >= samples) {
+                sampleList = new LinkedList<>();
+                while (samples > 0) {
+                    sampleList.add(measQueue.remove());
+                    samples--;
+                }
+            }
+        }
+        return sampleList;
+    }
 
-	/**
-	 * put S-NSSAI to the queue
-	 */
-	public void putSnssaiToQueue(String snssai) {
-		if (!snssaiList.contains(snssai)) 
-			snssaiList.add(snssai);
-	}
+    /**
+     * check whether the queue has enough number of samples for that subcounter
+     */
+    public boolean checkSamplesInQueue(SubCounter subCounter, int samples) {
+        if (subCounterMap.containsKey(subCounter)) {
+            Queue<List<MeasurementObject>> measQueue = subCounterMap.get(subCounter);
+            if (measQueue.size() >= samples) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * get S-NSSAI from the queue
-	 */
-	public String getSnnsaiFromQueue() {
-		String snssai = "";
-		try {
-			if(!snssaiList.isEmpty()){
-				snssai = snssaiList.remove();
-			}
-		}
-		catch(Exception e) {
-			log.error("Problem fetching from the Queue, {}", e.getMessage());
-		}
-		return snssai;
-	}
+    /**
+     * put S-NSSAI to the queue
+     */
+    public void putSnssaiToQueue(String snssai) {
+        if (!snssaiList.contains(snssai))
+            snssaiList.add(snssai);
+    }
+
+    /**
+     * get S-NSSAI from the queue
+     */
+    public String getSnnsaiFromQueue() {
+        String snssai = "";
+        try {
+            if (!snssaiList.isEmpty()) {
+                snssai = snssaiList.remove();
+            }
+        } catch (Exception e) {
+            log.error("Problem fetching from the Queue, {}", e.getMessage());
+        }
+        return snssai;
+    }
 
 }

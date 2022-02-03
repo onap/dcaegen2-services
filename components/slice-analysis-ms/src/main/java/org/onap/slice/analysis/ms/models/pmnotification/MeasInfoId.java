@@ -21,19 +21,19 @@
 
 package org.onap.slice.analysis.ms.models.pmnotification;
 
-/** 
- * Model class for the MeasInfoId Object 
+/**
+ * Model class for the MeasInfoId Object
  */
 public class MeasInfoId {
 
-	private String sMeasInfoId;
+    private String sMeasInfoId;
 
-	public String getsMeasInfoId() {
-		return sMeasInfoId;
-	}
+    public String getsMeasInfoId() {
+        return sMeasInfoId;
+    }
 
-	public void setsMeasInfoId(String sMeasInfoId) {
-		this.sMeasInfoId = sMeasInfoId;
-	}
+    public void setsMeasInfoId(String sMeasInfoId) {
+        this.sMeasInfoId = sMeasInfoId;
+    }
 
 }

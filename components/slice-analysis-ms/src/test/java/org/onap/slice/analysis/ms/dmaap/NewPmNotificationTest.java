@@ -28,15 +28,15 @@ import org.junit.Test;
 
 public class NewPmNotificationTest {
 
-	@Test
-	public void testNewPmNotif() {
-		NewPmNotification newPmNotif1 = new NewPmNotification(true);
-		NewPmNotification newPmNotif2 = new NewPmNotification();
-		newPmNotif2.setNewNotif(true);
-		assertTrue(newPmNotif2.getNewNotif());
-		newPmNotif2.init();
-		assertEquals(false, newPmNotif2.getNewNotif());
-		assertTrue(newPmNotif1.getNewNotif());
+    @Test
+    public void testNewPmNotif() {
+        NewPmNotification newPmNotif1 = new NewPmNotification(true);
+        NewPmNotification newPmNotif2 = new NewPmNotification();
+        newPmNotif2.setNewNotif(true);
+        assertTrue(newPmNotif2.getNewNotif());
+        newPmNotif2.init();
+        assertEquals(false, newPmNotif2.getNewNotif());
+        assertTrue(newPmNotif1.getNewNotif());
 
-	}
+    }
 }

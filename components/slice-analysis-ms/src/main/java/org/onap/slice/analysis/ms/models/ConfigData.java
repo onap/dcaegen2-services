@@ -54,47 +54,47 @@ public class ConfigData {
         this.lastUpdatedTS = lastUpdatedTS;
     }
 
-	/**
-	 * Returns a hashcode value for the object
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((lastUpdatedTS == null) ? 0 : lastUpdatedTS.hashCode());
-		result = prime * result + ((maxNumberofConns == null) ? 0 : maxNumberofConns.hashCode());
-		result = prime * result + ((predictedMaxNumberofConns == null) ? 0 : predictedMaxNumberofConns.hashCode());
-		return result;
-	}
+    /**
+     * Returns a hashcode value for the object
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((lastUpdatedTS == null) ? 0 : lastUpdatedTS.hashCode());
+        result = prime * result + ((maxNumberofConns == null) ? 0 : maxNumberofConns.hashCode());
+        result = prime * result + ((predictedMaxNumberofConns == null) ? 0 : predictedMaxNumberofConns.hashCode());
+        return result;
+    }
 
-	/**
-	 * Checks whether the object matches with ConfigData
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ConfigData other = (ConfigData) obj;
-		if (lastUpdatedTS == null) {
-			if (other.lastUpdatedTS != null)
-				return false;
-		} else if (!lastUpdatedTS.equals(other.lastUpdatedTS))
-			return false;
-		if (maxNumberofConns == null) {
-			if (other.maxNumberofConns != null)
-				return false;
-		} else if (!maxNumberofConns.equals(other.maxNumberofConns))
-			return false;
-		if (predictedMaxNumberofConns == null) {
-			if (other.predictedMaxNumberofConns != null)
-				return false;
-		} else if (!predictedMaxNumberofConns.equals(other.predictedMaxNumberofConns))
-			return false;
-		return true;
-	}
-    
+    /**
+     * Checks whether the object matches with ConfigData
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ConfigData other = (ConfigData) obj;
+        if (lastUpdatedTS == null) {
+            if (other.lastUpdatedTS != null)
+                return false;
+        } else if (!lastUpdatedTS.equals(other.lastUpdatedTS))
+            return false;
+        if (maxNumberofConns == null) {
+            if (other.maxNumberofConns != null)
+                return false;
+        } else if (!maxNumberofConns.equals(other.maxNumberofConns))
+            return false;
+        if (predictedMaxNumberofConns == null) {
+            if (other.predictedMaxNumberofConns != null)
+                return false;
+        } else if (!predictedMaxNumberofConns.equals(other.predictedMaxNumberofConns))
+            return false;
+        return true;
+    }
+
 }

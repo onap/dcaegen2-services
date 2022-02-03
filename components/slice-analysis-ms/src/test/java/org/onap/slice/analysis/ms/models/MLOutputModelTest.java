@@ -18,32 +18,40 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+
 package org.onap.slice.analysis.ms.models;
+
 import static org.junit.Assert.assertEquals;
+
 import java.util.Collections;
 import java.util.List;
+
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import nl.jqno.equalsverifier.EqualsVerifier;
+
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes=MLOutputModelTest.class)
+@SpringBootTest(classes = MLOutputModelTest.class)
 public class MLOutputModelTest {
     @InjectMocks
-    private final MLOutputModel mlOutputModel =new MLOutputModel();
+    private final MLOutputModel mlOutputModel = new MLOutputModel();
+
     @Test
     public void mlOutputModelEqualHashcodeTest() {
         EqualsVerifier.simple().forClass(MLOutputModel.class).verify();
     }
+
     @Test
     public void mlOutputModelMethodTest() {
-	List<CUModel> data = Collections.emptyList();
-	mlOutputModel.setSnssai("message");
-	mlOutputModel.setData(data);
-	assertEquals("message",mlOutputModel.getSnssai());
-	assertEquals(data,mlOutputModel.getData());
-	assertEquals("MLOutputModel [snssai=message, data=[]]",mlOutputModel.toString());
+        List<CUModel> data = Collections.emptyList();
+        mlOutputModel.setSnssai("message");
+        mlOutputModel.setData(data);
+        assertEquals("message", mlOutputModel.getSnssai());
+        assertEquals(data, mlOutputModel.getData());
+        assertEquals("MLOutputModel [snssai=message, data=[]]", mlOutputModel.toString());
     }
 }

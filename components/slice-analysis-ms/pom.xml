@@ -282,6 +282,12 @@
                         <groupId>ch.qos.logback</groupId>
                         <artifactId>logback-core</artifactId>
                         <version>1.2.10</version>
+                 </dependency>
+                 <dependency>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>1.18.22</version>
+                        <scope>provided</scope>
                 </dependency>
         </dependencies>
         <build>
@@ -328,7 +334,33 @@
                                                 </resource>
                                         </resources>
                                 </configuration>
-                        </plugin>
+			</plugin>
+			 <plugin>
+         <groupId>net.revelc.code.formatter</groupId>
+         <artifactId>formatter-maven-plugin</artifactId>
+         <version>2.8.1</version>
+         <configuration>
+            <configFile>./onap-java-formatter.xml</configFile>
+         </configuration>
+         <!-- https://code.revelc.net/formatter-maven-plugin/
+              use mvn formatter:format to rewrite source files
+              use mvn formatter:validate to validate source files -->
+     </plugin>
+    <plugin>
+      <groupId>com.diffplug.spotless</groupId>
+      <artifactId>spotless-maven-plugin</artifactId>
+      <version>1.18.0</version>
+      <configuration>
+        <java>
+         <importOrder>
+           <order>com,java,javax,org</order>
+         </importOrder>
+        </java>
+      </configuration>
+    <!-- https://github.com/diffplug/spotless/tree/master/plugin-maven
+         use mvn spotless:apply to rewrite source files
+         use mvn spotless:check to validate source files -->
+    </plugin>
                 </plugins>
         </build>
 </project>

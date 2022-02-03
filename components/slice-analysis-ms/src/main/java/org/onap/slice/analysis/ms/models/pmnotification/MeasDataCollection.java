@@ -23,8 +23,8 @@ package org.onap.slice.analysis.ms.models.pmnotification;
 
 import java.util.List;
 
-/** 
- * Model class for the MeasDataCollection Object 
+/**
+ * Model class for the MeasDataCollection Object
  */
 public class MeasDataCollection {
 

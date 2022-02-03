@@ -23,37 +23,37 @@ package org.onap.slice.analysis.ms.models.pmnotification;
 
 import java.util.List;
 
-/** 
- * Model class for the MeasInfoList Object 
+/**
+ * Model class for the MeasInfoList Object
  */
 public class MeasInfoList {
 
-	private MeasInfoId measInfoId;
-	private MeasTypes measTypes;
-	private List<MeasValuesList> measValuesList = null;
+    private MeasInfoId measInfoId;
+    private MeasTypes measTypes;
+    private List<MeasValuesList> measValuesList = null;
 
-	public MeasInfoId getMeasInfoId() {
-		return measInfoId;
-	}
+    public MeasInfoId getMeasInfoId() {
+        return measInfoId;
+    }
 
-	public void setMeasInfoId(MeasInfoId measInfoId) {
-		this.measInfoId = measInfoId;
-	}
+    public void setMeasInfoId(MeasInfoId measInfoId) {
+        this.measInfoId = measInfoId;
+    }
 
-	public MeasTypes getMeasTypes() {
-		return measTypes;
-	}
+    public MeasTypes getMeasTypes() {
+        return measTypes;
+    }
 
-	public void setMeasTypes(MeasTypes measTypes) {
-		this.measTypes = measTypes;
-	}
+    public void setMeasTypes(MeasTypes measTypes) {
+        this.measTypes = measTypes;
+    }
 
-	public List<MeasValuesList> getMeasValuesList() {
-		return measValuesList;
-	}
+    public List<MeasValuesList> getMeasValuesList() {
+        return measValuesList;
+    }
 
-	public void setMeasValuesList(List<MeasValuesList> measValuesList) {
-		this.measValuesList = measValuesList;
-	}
+    public void setMeasValuesList(List<MeasValuesList> measValuesList) {
+        this.measValuesList = measValuesList;
+    }
 
 }

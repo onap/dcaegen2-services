@@ -24,12 +24,12 @@ package org.onap.slice.analysis.ms.dmaap;
 import org.junit.Test;
 
 public class PolicyNotificationCallbackTest {
-	
-	@Test
-	public void testPolicyActivateCallback() {
-		
-		PolicyNotificationCallback policyNotificationCallback = new PolicyNotificationCallback();
-		policyNotificationCallback.activateCallBack("newPolicyNotificationMsg");
-	}
+
+    @Test
+    public void testPolicyActivateCallback() {
+
+        PolicyNotificationCallback policyNotificationCallback = new PolicyNotificationCallback();
+        policyNotificationCallback.activateCallBack("newPolicyNotificationMsg");
+    }
 
 }

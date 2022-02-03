@@ -43,13 +43,14 @@ public class PmNotificationCallback implements NotificationCallback {
     }
 
     /**
-     * Parse Performance dmaap notification and save to DB 
+     * Parse Performance dmaap notification and save to DB
+     * 
      * @param msg
      */
     private void handleNotification(String msg) {
 
-        PerformanceNotificationsRepository performanceNotificationsRepository = BeanUtil
-                .getBean(PerformanceNotificationsRepository.class);
+        PerformanceNotificationsRepository performanceNotificationsRepository =
+                BeanUtil.getBean(PerformanceNotificationsRepository.class);
         PerformanceNotifications performanceNotification = new PerformanceNotifications();
         performanceNotification.setNotification(msg);
         log.info("Performance notification {}", performanceNotification);

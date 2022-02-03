@@ -31,15 +31,14 @@ import java.util.Map;
 
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsClientFactory;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.api.CbsRequests;
-import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.CbsRequest;
 import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.CbsClientConfiguration;
+import org.onap.dcaegen2.services.sdk.rest.services.cbs.client.model.CbsRequest;
 import org.onap.dcaegen2.services.sdk.rest.services.model.logging.ImmutableRequestDiagnosticContext;
 import org.onap.dcaegen2.services.sdk.rest.services.model.logging.RequestDiagnosticContext;
 import org.onap.slice.analysis.ms.models.ConfigPolicy;
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import reactor.core.Disposable;
 
 /**
@@ -95,8 +94,7 @@ public class ConfigFetchFromCbs implements Runnable {
                     }
                     Configuration.getInstance().updateConfigurationFromJsonObject(config);
 
-                    Type mapType = new TypeToken<Map<String, Object>>() {
-                    }.getType();
+                    Type mapType = new TypeToken<Map<String, Object>>() {}.getType();
                     if (jsonObject.getAsJsonObject("policies") != null) {
                         JsonObject policyJson = jsonObject.getAsJsonObject("policies").getAsJsonArray("items").get(0)
                                 .getAsJsonObject().getAsJsonObject("config");
@@ -106,8 +104,6 @@ public class ConfigFetchFromCbs implements Runnable {
                     }
                 }, throwable -> log.warn("Ooops", throwable));
     }
-
-
 
     @Override
     public void run() {

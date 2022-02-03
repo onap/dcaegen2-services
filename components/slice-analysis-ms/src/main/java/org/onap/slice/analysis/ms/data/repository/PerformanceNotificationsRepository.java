@@ -33,13 +33,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PerformanceNotificationsRepository extends CrudRepository<PerformanceNotifications, String> {
 
-	  /**
+    /**
      * read performanceNotifications from db
-     * @return 
+     * 
+     * @return
      */
-    @Query(nativeQuery = true, value = "DELETE FROM performance_notifications "
-            + "WHERE notification = ( SELECT notification FROM performance_notifications ORDER BY "
-            + "created_at FOR UPDATE SKIP LOCKED LIMIT 1 ) RETURNING notification;")
+    @Query(
+            nativeQuery = true,
+            value = "DELETE FROM performance_notifications "
+                    + "WHERE notification = ( SELECT notification FROM performance_notifications ORDER BY "
+                    + "created_at FOR UPDATE SKIP LOCKED LIMIT 1 ) RETURNING notification;")
     public String getPerformanceNotificationFromQueue();
 
 }

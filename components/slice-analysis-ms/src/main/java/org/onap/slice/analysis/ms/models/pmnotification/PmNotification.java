@@ -21,19 +21,19 @@
 
 package org.onap.slice.analysis.ms.models.pmnotification;
 
-/** 
- * Model class for the PmNotification Object 
+/**
+ * Model class for the PmNotification Object
  */
 public class PmNotification {
 
-	Event event;
+    Event event;
 
-	public Event getEvent() {
-		return event;
-	}
+    public Event getEvent() {
+        return event;
+    }
 
-	public void setEvent(Event event) {
-		this.event = event;
-	}
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 
 }

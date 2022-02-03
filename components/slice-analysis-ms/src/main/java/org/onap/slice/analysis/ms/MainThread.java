@@ -26,26 +26,26 @@ import org.onap.slice.analysis.ms.service.PmThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** 
+/**
  * This class starts the pm thread and consumer thread
  */
 public class MainThread {
 
-	private static Logger log = LoggerFactory.getLogger(MainThread.class);
-	
-	private MainThread() {
-		
-	}
-	
-	/**
-	 * main thread initialization.
-	 */
-	public static void initiateThreads() {
-		log.debug("initializing Pm thread & Consumer thread");
-		Thread pmThread = new Thread(new PmThread());
-		pmThread.start();
-		Thread consumerThread = new Thread(new ConsumerThread());
-		consumerThread.start();
-	}
+    private static Logger log = LoggerFactory.getLogger(MainThread.class);
+
+    private MainThread() {
+
+    }
+
+    /**
+     * main thread initialization.
+     */
+    public static void initiateThreads() {
+        log.debug("initializing Pm thread & Consumer thread");
+        Thread pmThread = new Thread(new PmThread());
+        pmThread.start();
+        Thread consumerThread = new Thread(new ConsumerThread());
+        consumerThread.start();
+    }
 
 }

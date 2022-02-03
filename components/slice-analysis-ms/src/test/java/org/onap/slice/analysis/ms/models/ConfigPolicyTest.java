@@ -18,11 +18,16 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+
 package org.onap.slice.analysis.ms.models;
+
 import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.Test;
+
 public class ConfigPolicyTest {
     @Test
     public void configPolicyTest() {
@@ -32,13 +37,14 @@ public class ConfigPolicyTest {
         configPolicy.setConfig(config);
         assertEquals(config, configPolicy.getConfig());
     }
+
     @Test
     public void toStringTest() {
         ConfigPolicy configPolicy = ConfigPolicy.getInstance();
         Map<String, Object> config = new HashMap<String, Object>();
         config.put("policyName", "pcims_policy");
         configPolicy.setConfig(config);
-        String expected="ConfigPolicy [config={policyName=pcims_policy}]";
-        assertEquals(expected,configPolicy.toString());
+        String expected = "ConfigPolicy [config={policyName=pcims_policy}]";
+        assertEquals(expected, configPolicy.toString());
     }
 }

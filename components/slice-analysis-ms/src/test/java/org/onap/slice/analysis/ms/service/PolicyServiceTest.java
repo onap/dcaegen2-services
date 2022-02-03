@@ -23,6 +23,10 @@ package org.onap.slice.analysis.ms.service;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -37,48 +41,44 @@ import org.onap.slice.analysis.ms.models.policy.OnsetMessage;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = PolicyServiceTest.class)
 public class PolicyServiceTest {
-	ObjectMapper obj = new ObjectMapper();
-	
-	@InjectMocks
-	PolicyService policyService;
-	
-	@Test
-	public void formPolicyOnsetMessageTest() {
-		String snssai = "001-100001";
-		Map<String, String> input = null;
-		OnsetMessage output = null;
-		String expected = "";
-		String actual = "";
-		Map<String, Map<String, Integer>> ricToThroughputMapping = new HashMap<>();
-		Map<String, Integer> ric1 = new HashMap<>();
-		Map<String, Integer> ric2 = new HashMap<>();
-		ric1.put("dLThptPerSlice",50);
-		ric1.put("uLThptPerSlice",40);
-		ric2.put("dLThptPerSlice",50);
-		ric2.put("uLThptPerSlice",30);		
-		ricToThroughputMapping.put("1", ric1);
-		ricToThroughputMapping.put("2", ric2);
-        try { 
-             input = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/serviceDetails.json"))), new TypeReference<Map<String,String>>(){});
-             output = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/onsetMessage.json"))), OnsetMessage.class);
-             expected = obj.writeValueAsString(output);
-        } 
-        catch (IOException e) { 
-             e.printStackTrace(); 
-        } 
+    ObjectMapper obj = new ObjectMapper();
+
+    @InjectMocks
+    PolicyService policyService;
+
+    @Test
+    public void formPolicyOnsetMessageTest() {
+        String snssai = "001-100001";
+        Map<String, String> input = null;
+        OnsetMessage output = null;
+        String expected = "";
+        String actual = "";
+        Map<String, Map<String, Integer>> ricToThroughputMapping = new HashMap<>();
+        Map<String, Integer> ric1 = new HashMap<>();
+        Map<String, Integer> ric2 = new HashMap<>();
+        ric1.put("dLThptPerSlice", 50);
+        ric1.put("uLThptPerSlice", 40);
+        ric2.put("dLThptPerSlice", 50);
+        ric2.put("uLThptPerSlice", 30);
+        ricToThroughputMapping.put("1", ric1);
+        ricToThroughputMapping.put("2", ric2);
+        try {
+            input = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/serviceDetails.json"))),
+                    new TypeReference<Map<String, String>>() {});
+            output = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/onsetMessage.json"))),
+                    OnsetMessage.class);
+            expected = obj.writeValueAsString(output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         AdditionalProperties<Map<String, Map<String, Integer>>> addProps = new AdditionalProperties<>();
-		addProps.setResourceConfig(ricToThroughputMapping);
-        actual = new Gson().toJson(policyService.formPolicyOnsetMessage(snssai,addProps,input));
-           
-        assertThatJson(actual)
-        .whenIgnoringPaths("requestID","payload","closedLoopAlarmStart", "AAI", "target_type", "aai", "targetType")
-        .isEqualTo(expected);
-	}
+        addProps.setResourceConfig(ricToThroughputMapping);
+        actual = new Gson().toJson(policyService.formPolicyOnsetMessage(snssai, addProps, input));
+
+        assertThatJson(actual).whenIgnoringPaths("requestID", "payload", "closedLoopAlarmStart", "AAI", "target_type",
+                "aai", "targetType").isEqualTo(expected);
+    }
 }

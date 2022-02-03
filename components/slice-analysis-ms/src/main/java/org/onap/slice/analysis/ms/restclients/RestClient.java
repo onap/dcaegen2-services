@@ -21,11 +21,12 @@
 
 package org.onap.slice.analysis.ms.restclients;
 
-import java.security.KeyStoreException;
 import java.security.KeyManagementException;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 
 import javax.net.ssl.SSLContext;
+
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
@@ -35,8 +36,8 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
-import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.ssl.SSLContexts;
+import org.apache.http.ssl.TrustStrategy;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -55,64 +56,64 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class RestClient {
 
-	private static final String EXCEPTION_MSG = "Exception caught during request {}";
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(RestClient.class);
+    private static final String EXCEPTION_MSG = "Exception caught during request {}";
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(RestClient.class);
 
-	@Autowired
-	private RestTemplate restTemplate;
+    @Autowired
+    private RestTemplate restTemplate;
 
-	protected RestClient() {
+    protected RestClient() {
 
-	}
+    }
 
-	/**
-	 * Post Request Template.
-	 */
-	public <T> ResponseEntity<T> sendPostRequest(HttpHeaders headers, String requestUrl, String requestBody,
-			ParameterizedTypeReference<T> responseType) {
-		HttpEntity<Object> requestEntity = new HttpEntity<>(requestBody, headers);
-		try {
-			return restTemplate.exchange(requestUrl, HttpMethod.POST, requestEntity, responseType);
-		} catch (Exception e) {
-			log.debug(EXCEPTION_MSG, e.getMessage());
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
+    /**
+     * Post Request Template.
+     */
+    public <T> ResponseEntity<T> sendPostRequest(HttpHeaders headers, String requestUrl, String requestBody,
+            ParameterizedTypeReference<T> responseType) {
+        HttpEntity<Object> requestEntity = new HttpEntity<>(requestBody, headers);
+        try {
+            return restTemplate.exchange(requestUrl, HttpMethod.POST, requestEntity, responseType);
+        } catch (Exception e) {
+            log.debug(EXCEPTION_MSG, e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
-	/**
-	 * Get Request Template.
-	 */
-	public <T> ResponseEntity<T> sendGetRequest(HttpHeaders headers, String requestUrl,
-			ParameterizedTypeReference<T> responseType) {
-		HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
-		try {
-			RestTemplate restTemplate = new RestTemplate(useApacheHttpClientWithSelfSignedSupport());
-			return restTemplate.exchange(requestUrl, HttpMethod.GET, requestEntity, responseType);
-		} catch (Exception e) {
-			log.info(EXCEPTION_MSG, e.getMessage());
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	}
+    /**
+     * Get Request Template.
+     */
+    public <T> ResponseEntity<T> sendGetRequest(HttpHeaders headers, String requestUrl,
+            ParameterizedTypeReference<T> responseType) {
+        HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+        try {
+            RestTemplate restTemplate = new RestTemplate(useApacheHttpClientWithSelfSignedSupport());
+            return restTemplate.exchange(requestUrl, HttpMethod.GET, requestEntity, responseType);
+        } catch (Exception e) {
+            log.info(EXCEPTION_MSG, e.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
-	private static HttpComponentsClientHttpRequestFactory useApacheHttpClientWithSelfSignedSupport() {
+    private static HttpComponentsClientHttpRequestFactory useApacheHttpClientWithSelfSignedSupport() {
 
-		TrustStrategy acceptingTrustStrategy = (cert, authType) -> true;
-		SSLContext sslContext = null;
-		try {
-			sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
-		} catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
-			log.error(EXCEPTION_MSG, e);
-		}
-		SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE);
-		Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
-				.register("https", sslsf).register("http", new PlainConnectionSocketFactory()).build();
-		BasicHttpClientConnectionManager connectionManager = new BasicHttpClientConnectionManager(
-				socketFactoryRegistry);
-		CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(sslsf)
-				.setConnectionManager(connectionManager).build();
-		HttpComponentsClientHttpRequestFactory useApacheHttpClient = new HttpComponentsClientHttpRequestFactory();
-		useApacheHttpClient.setHttpClient(httpClient);
-		return useApacheHttpClient;
-	}
+        TrustStrategy acceptingTrustStrategy = (cert, authType) -> true;
+        SSLContext sslContext = null;
+        try {
+            sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
+        } catch (KeyManagementException | NoSuchAlgorithmException | KeyStoreException e) {
+            log.error(EXCEPTION_MSG, e);
+        }
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, NoopHostnameVerifier.INSTANCE);
+        Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
+                .register("https", sslsf).register("http", new PlainConnectionSocketFactory()).build();
+        BasicHttpClientConnectionManager connectionManager =
+                new BasicHttpClientConnectionManager(socketFactoryRegistry);
+        CloseableHttpClient httpClient =
+                HttpClients.custom().setSSLSocketFactory(sslsf).setConnectionManager(connectionManager).build();
+        HttpComponentsClientHttpRequestFactory useApacheHttpClient = new HttpComponentsClientHttpRequestFactory();
+        useApacheHttpClient.setHttpClient(httpClient);
+        return useApacheHttpClient;
+    }
 
 }

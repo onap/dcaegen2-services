@@ -23,6 +23,8 @@ package org.onap.slice.analysis.ms.dmaap;
 
 import static org.mockito.Mockito.when;
 
+import com.att.nsa.cambria.client.CambriaConsumer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,33 +36,31 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.att.nsa.cambria.client.CambriaConsumer;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = NotificationConsumerTest.class)
 public class NotificationConsumerTest {
-	
-	@Mock
-	CambriaConsumer cambriaConsumer;
-	
-	@Mock
-	NotificationCallback notificationCallback;
 
-	@InjectMocks
-	NotificationConsumer notificationConsumer;
+    @Mock
+    CambriaConsumer cambriaConsumer;
 
-	@Test
-	public void testNotificationConsumer() {
-		try {
-			List<String> notifications = new ArrayList<>();
-			notifications.add("notification1");
-			when(cambriaConsumer.fetch()).thenReturn(notifications);
-			Mockito.doNothing().when(notificationCallback).activateCallBack(Mockito.anyString());
-			notificationConsumer.run();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+    @Mock
+    NotificationCallback notificationCallback;
+
+    @InjectMocks
+    NotificationConsumer notificationConsumer;
+
+    @Test
+    public void testNotificationConsumer() {
+        try {
+            List<String> notifications = new ArrayList<>();
+            notifications.add("notification1");
+            when(cambriaConsumer.fetch()).thenReturn(notifications);
+            Mockito.doNothing().when(notificationCallback).activateCallBack(Mockito.anyString());
+            notificationConsumer.run();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

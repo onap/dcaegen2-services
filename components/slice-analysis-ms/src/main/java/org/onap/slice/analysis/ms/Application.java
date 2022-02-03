@@ -22,6 +22,10 @@
 
 package org.onap.slice.analysis.ms;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.reflect.Type;
@@ -42,13 +46,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-
 /**
  * 
- * Entry point for the slice analysis service application 
+ * Entry point for the slice analysis service application
  *
  */
 @EnableScheduling
@@ -58,16 +58,17 @@ public class Application {
     private static Logger log = LoggerFactory.getLogger(Application.class);
 
     /**
-     * Main method where initial configuration and context is set 
+     * Main method where initial configuration and context is set
+     * 
      * @param args
      */
-	public static void main(String[] args) {
-		getConfig();
+    public static void main(String[] args) {
+        getConfig();
         log.info("Starting spring boot application");
-		SpringApplication.run(Application.class, args);
-		MainThread.initiateThreads();
-	}
-	
+        SpringApplication.run(Application.class, args);
+        MainThread.initiateThreads();
+    }
+
     private static void getConfig() {
 
         Boolean standalone = Boolean.parseBoolean(System.getenv("STANDALONE"));
@@ -85,8 +86,7 @@ public class Application {
             Configuration.getInstance().updateConfigurationFromJsonObject(config);
 
             ConfigPolicy configPolicy = ConfigPolicy.getInstance();
-            Type mapType = new TypeToken<Map<String, Object>>() {
-            }.getType();
+            Type mapType = new TypeToken<Map<String, Object>>() {}.getType();
             if (configAll.getAsJsonObject("policies") != null) {
                 JsonObject policyJson = configAll.getAsJsonObject("policies").getAsJsonArray("items").get(0)
                         .getAsJsonObject().getAsJsonObject("config");
@@ -116,12 +116,13 @@ public class Application {
     public DataSource dataSource() {
         Configuration configuration = Configuration.getInstance();
 
-        String url = "jdbc:postgresql://" + configuration.getPgHost() + ":" + configuration.getPgPort() + "/sliceanalysisms";
+        String url =
+                "jdbc:postgresql://" + configuration.getPgHost() + ":" + configuration.getPgPort() + "/sliceanalysisms";
 
         return DataSourceBuilder.create().url(url).username(configuration.getPgUsername())
                 .password(configuration.getPgPassword()).build();
     }
-    
+
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();

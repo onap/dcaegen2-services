@@ -21,6 +21,9 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 
 import org.onap.slice.analysis.ms.models.MLOutputModel;
@@ -29,41 +32,38 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 /**
  * Handles Notification on dmaap for ML ms events
  */
 @Component
 public class IntelligentSlicingCallback implements NotificationCallback {
-	private static final Logger log = org.slf4j.LoggerFactory.getLogger(IntelligentSlicingCallback.class);
-	
-	@Autowired
-	private MLMessageProcessor mlMsMessageProcessor;
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(IntelligentSlicingCallback.class);
 
-	/**
-	 * Trigger on Notification from ML ms
-	 */
-	@Override
-	public void activateCallBack(String msg) {
-		handlePolicyNotification(msg);
-	}
+    @Autowired
+    private MLMessageProcessor mlMsMessageProcessor;
 
-	/**
-	 * Parse and take actions on reception of Notification from ML ms
-	 * @param msg
-	 */
-	private void handlePolicyNotification(String msg) {
-		log.info("Message received from ML ms: {}" ,msg);
-		ObjectMapper obj = new ObjectMapper();
-		MLOutputModel output = null;
-		try { 
-			output = obj.readValue(msg, new TypeReference<MLOutputModel>(){});
-			mlMsMessageProcessor.processMLMsg(output);
-		} 
-		catch (IOException e) { 
-			log.error("Error converting ML msg to object, {}",e.getMessage());
-		} 
-	}
+    /**
+     * Trigger on Notification from ML ms
+     */
+    @Override
+    public void activateCallBack(String msg) {
+        handlePolicyNotification(msg);
+    }
+
+    /**
+     * Parse and take actions on reception of Notification from ML ms
+     * 
+     * @param msg
+     */
+    private void handlePolicyNotification(String msg) {
+        log.info("Message received from ML ms: {}", msg);
+        ObjectMapper obj = new ObjectMapper();
+        MLOutputModel output = null;
+        try {
+            output = obj.readValue(msg, new TypeReference<MLOutputModel>() {});
+            mlMsMessageProcessor.processMLMsg(output);
+        } catch (IOException e) {
+            log.error("Error converting ML msg to object, {}", e.getMessage());
+        }
+    }
 }

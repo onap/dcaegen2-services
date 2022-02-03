@@ -21,6 +21,8 @@
 
 package org.onap.slice.analysis.ms.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,79 +42,78 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Component
 public class PolicyService {
-	private PolicyDmaapClient policyDmaapClient;
-	private static Logger log = LoggerFactory.getLogger(PolicyService.class);
-	private ObjectMapper objectMapper = new ObjectMapper();
+    private PolicyDmaapClient policyDmaapClient;
+    private static Logger log = LoggerFactory.getLogger(PolicyService.class);
+    private ObjectMapper objectMapper = new ObjectMapper();
 
-	/**
-	 * Initialization
-	 */
-	@PostConstruct
-	public void init() {
-		Configuration configuration = Configuration.getInstance();
-		policyDmaapClient = new PolicyDmaapClient(new DmaapUtils(), configuration);
-	}
-	
-	protected <T> OnsetMessage formPolicyOnsetMessage(String snssai, AdditionalProperties<T> addProps, Map<String, String> serviceDetails) {
-		OnsetMessage onsetmsg = new OnsetMessage();
-		Payload payload = new Payload();
-		payload.setGlobalSubscriberId(serviceDetails.get("globalSubscriberId"));
-		payload.setSubscriptionServiceType(serviceDetails.get("subscriptionServiceType"));
-		payload.setNetworkType("AN");
-		payload.setName(serviceDetails.get("ranNFNSSIId"));
-		payload.setServiceInstanceID(serviceDetails.get("ranNFNSSIId"));
+    /**
+     * Initialization
+     */
+    @PostConstruct
+    public void init() {
+        Configuration configuration = Configuration.getInstance();
+        policyDmaapClient = new PolicyDmaapClient(new DmaapUtils(), configuration);
+    }
 
-		addProps.setModifyAction("");
-		Map<String, String> nsiInfo = new HashMap<>();
-		nsiInfo.put("nsiId", UUID.randomUUID().toString());
-		nsiInfo.put("nsiName", "");
-		addProps.setNsiInfo(nsiInfo);
-		addProps.setScriptName("AN");
-		addProps.setSliceProfileId(serviceDetails.get("sliceProfileId"));
-		addProps.setModifyAction("reconfigure");
-		List<String> snssaiList = new ArrayList<>();
-		snssaiList.add(snssai);
-		addProps.setSnssaiList(snssaiList);
+    protected <T> OnsetMessage formPolicyOnsetMessage(String snssai, AdditionalProperties<T> addProps,
+            Map<String, String> serviceDetails) {
+        OnsetMessage onsetmsg = new OnsetMessage();
+        Payload payload = new Payload();
+        payload.setGlobalSubscriberId(serviceDetails.get("globalSubscriberId"));
+        payload.setSubscriptionServiceType(serviceDetails.get("subscriptionServiceType"));
+        payload.setNetworkType("AN");
+        payload.setName(serviceDetails.get("ranNFNSSIId"));
+        payload.setServiceInstanceID(serviceDetails.get("ranNFNSSIId"));
 
-		payload.setAdditionalProperties(addProps);
-		try {
-			onsetmsg.setPayload(objectMapper.writeValueAsString(payload));
-		} catch (Exception e) {
-			log.error("Error while mapping payload as string , {}",e.getMessage());
-		}
+        addProps.setModifyAction("");
+        Map<String, String> nsiInfo = new HashMap<>();
+        nsiInfo.put("nsiId", UUID.randomUUID().toString());
+        nsiInfo.put("nsiName", "");
+        addProps.setNsiInfo(nsiInfo);
+        addProps.setScriptName("AN");
+        addProps.setSliceProfileId(serviceDetails.get("sliceProfileId"));
+        addProps.setModifyAction("reconfigure");
+        List<String> snssaiList = new ArrayList<>();
+        snssaiList.add(snssai);
+        addProps.setSnssaiList(snssaiList);
 
-		onsetmsg.setClosedLoopControlName("ControlLoop-Slicing-116d7b00-dbeb-4d03-8719-d0a658fa735b");
-		onsetmsg.setClosedLoopAlarmStart(System.currentTimeMillis());
-		onsetmsg.setClosedLoopEventClient("microservice.sliceAnalysisMS");
-		onsetmsg.setClosedLoopEventStatus("ONSET");
-		onsetmsg.setRequestID(UUID.randomUUID().toString());
-		onsetmsg.setTarget("generic-vnf.vnf-id");
-		onsetmsg.setTargetType("VNF");
-		onsetmsg.setFrom("DCAE");
-		onsetmsg.setVersion("1.0.2");
-		AAI aai = new AAI();
-		aai.setVserverIsClosedLoopDisabled("false");
-		aai.setVserverProvStatus("ACTIVE");
-		aai.setvServerVNFId(serviceDetails.get("ranNFNSSIId"));
-		onsetmsg.setAai(aai); 
-		return onsetmsg;
-	}
+        payload.setAdditionalProperties(addProps);
+        try {
+            onsetmsg.setPayload(objectMapper.writeValueAsString(payload));
+        } catch (Exception e) {
+            log.error("Error while mapping payload as string , {}", e.getMessage());
+        }
 
-	protected <T> void sendOnsetMessageToPolicy(String snssai, AdditionalProperties<T> addProps, Map<String, String> serviceDetails) {
-		OnsetMessage onsetMessage = formPolicyOnsetMessage(snssai, addProps, serviceDetails);
-		String msg =  "";
-		try { 
-			msg = objectMapper.writeValueAsString(onsetMessage);
-			log.info("Policy onset message for S-NSSAI: {} is {}", snssai, msg);
-			policyDmaapClient.sendNotificationToPolicy(msg);
-		} 
-		catch (Exception e) { 
-			log.error("Error sending notification to policy, {}",e.getMessage());
-		} 		
-	}
+        onsetmsg.setClosedLoopControlName("ControlLoop-Slicing-116d7b00-dbeb-4d03-8719-d0a658fa735b");
+        onsetmsg.setClosedLoopAlarmStart(System.currentTimeMillis());
+        onsetmsg.setClosedLoopEventClient("microservice.sliceAnalysisMS");
+        onsetmsg.setClosedLoopEventStatus("ONSET");
+        onsetmsg.setRequestID(UUID.randomUUID().toString());
+        onsetmsg.setTarget("generic-vnf.vnf-id");
+        onsetmsg.setTargetType("VNF");
+        onsetmsg.setFrom("DCAE");
+        onsetmsg.setVersion("1.0.2");
+        AAI aai = new AAI();
+        aai.setVserverIsClosedLoopDisabled("false");
+        aai.setVserverProvStatus("ACTIVE");
+        aai.setvServerVNFId(serviceDetails.get("ranNFNSSIId"));
+        onsetmsg.setAai(aai);
+        return onsetmsg;
+    }
+
+    protected <T> void sendOnsetMessageToPolicy(String snssai, AdditionalProperties<T> addProps,
+            Map<String, String> serviceDetails) {
+        OnsetMessage onsetMessage = formPolicyOnsetMessage(snssai, addProps, serviceDetails);
+        String msg = "";
+        try {
+            msg = objectMapper.writeValueAsString(onsetMessage);
+            log.info("Policy onset message for S-NSSAI: {} is {}", snssai, msg);
+            policyDmaapClient.sendNotificationToPolicy(msg);
+        } catch (Exception e) {
+            log.error("Error sending notification to policy, {}", e.getMessage());
+        }
+    }
 
 }
