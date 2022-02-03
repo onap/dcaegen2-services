@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021 Wipro Limited.
+ *   Copyright (C) 2022 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -19,21 +19,34 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.configdb;
+package org.onap.slice.analysis.ms.models.aai;
 
-import java.util.List;
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * 
- *  Interface for CPS 
- *
- */
-public interface CpsInterface {
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-	public Map<String, List<String>> fetchRICsOfSnssai(String snssai);
-	public List<String> fetchNetworkFunctionsOfSnssai(String snssai);
-	public Map<String, Map<String,Object>> fetchCurrentConfigurationOfRIC(String snssai);
-	
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Data
+@NoArgsConstructor
+public class ServiceInstance {
+
+    @JsonProperty("service-instance-id")
+    private String serviceInstanceId;
+    @JsonProperty("service-instance-name")
+    private String serviceInstanceName;
+    @JsonProperty("service-type;")
+    private String serviceType;
+    @JsonProperty("service-role")
+    private String serviceRole;
+    @JsonProperty("environment-context")
+    private String environmentContext;
+    @JsonProperty("workload-context")
+    private String workloadContext;
+    @JsonProperty("orchestration-status")
+    private String orchestrationStatus;
+    @JsonProperty("relationship-list")
+    private RelationshipList relationshipList;
+
 }
-
