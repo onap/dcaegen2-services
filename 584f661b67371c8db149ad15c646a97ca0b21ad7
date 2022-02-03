@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "51b88b42_5a14abcd",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:26:42Z",
+      "side": 1,
+      "message": "add 2022 copyright",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b11515a_536c1ca3",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SliceUtilization.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:26:42Z",
+      "side": 1,
+      "message": "check your IDE settings. Leading tabs not allowed.",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
