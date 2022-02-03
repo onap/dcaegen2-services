@@ -19,6 +19,176 @@
     },
     {
       "key": {
+        "uuid": "8bed5cc9_fba560f3",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/controller/SliceConfiguraton.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:52:33Z",
+      "side": 1,
+      "message": "all new code should have javadocs on the public methods",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65566641_90674d7e",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/exception/CpsClientException.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:52:33Z",
+      "side": 1,
+      "message": "all new code should have javadocs on the module and public methods",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b65820a1_129abf9a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/exception/DesClientException.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:52:33Z",
+      "side": 1,
+      "message": "all new code should have javadocs on the module and public methods",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73ef8d39_abeddc32",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/AggregatedConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:52:33Z",
+      "side": 1,
+      "message": "all new code should have javadocs on the module and public methods",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "996387a0_5b6473fc",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/Configuration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:52:33Z",
+      "side": 1,
+      "message": "should have javadocs on the new public methods",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b335ede8_707e7501",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/Configuration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:52:33Z",
+      "side": 1,
+      "message": "what does \"Des\" mean? DES encryption? Desired? Destination? Deserialized? Descendent? Designated? Desired?",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c01b63a9_5f0458ea",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/SliceConfigDetails.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:52:33Z",
+      "side": 1,
+      "message": "all new code should have javadocs on the module",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ca719dd_5d4347eb",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/SliceConfigRequest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:52:33Z",
+      "side": 1,
+      "message": "all new code should have javadocs on the module",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "719c7145_41e122b5",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/SliceConfigResponse.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:52:33Z",
+      "side": 1,
+      "message": "all new code should have javadocs on the module",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ef6b4a4_7e163667",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SliceUtilization.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-03T14:52:33Z",
+      "side": 1,
+      "message": "all new code should have javadocs on the module and public methods",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5b11515a_536c1ca3",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SliceUtilization.java",
         "patchSetId": 4
