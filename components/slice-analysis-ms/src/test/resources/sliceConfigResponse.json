@@ -1,0 +1,20 @@
+{
+   "sliceConfigDetails":[
+      {
+         "sliceIdentifiers":"14559ead-f4fe-4c1c-a94c-8015fad3ea35",
+         "aggregatedConfig":{
+            "maxNumberOfConns":null,
+            "dlthptPerSlice":190857028,
+            "ulthptPerSlice":119285978
+         }
+      },
+      {
+         "sliceIdentifiers":"14559ead-f4fe-4c1c-a94c-8015fad3ea36",
+         "aggregatedConfig":{
+            "maxNumberOfConns":null,
+            "dlthptPerSlice":190857028,
+            "ulthptPerSlice":119285978
+         }
+      }
+   ]
+}
