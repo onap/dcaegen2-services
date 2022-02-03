@@ -5,7 +5,7 @@
         "aaf_password": null,
         "type": "message-router",
         "dmaap_info": {
-          "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/unauthenticated.VES_MEASUREMENT_OUTPUT",
+          "topic_url": "http://message-router.onap.svc.cluster.local:3904/events/unauthenticated.PERFORMANCE_MEASUREMENTS",
           "client_role": "sliceanalysis-subscriber",
           "location": "onap",
           "client_id": "sdnr-sliceanalysis-1"
@@ -16,7 +16,18 @@
         "aaf_password": null,
         "type": "message-router",
         "dmaap_info": {
-          "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/DCAE_CL_RSP",
+          "topic_url": "http://message-router.onap.svc.cluster.local:3904/events/DCAE_CL_RSP",
+          "client_role": "sliceanalysis-subscriber",
+          "location": "onap",
+          "client_id": "sdnr-sliceanalysis-1"
+        },
+        "aaf_username": null
+      },
+      "intelligent_slicing_topic": {
+        "aaf_password": null,
+        "type": "message-router",
+        "dmaap_info": {
+          "topic_url": "http://message-router.onap.svc.cluster.local:3904/events/unauthenticated.ML_RESPONSE_TOPIC",
           "client_role": "sliceanalysis-subscriber",
           "location": "onap",
           "client_id": "sdnr-sliceanalysis-1"
@@ -29,7 +40,7 @@
         "aaf_password": null,
         "type": "message-router",
         "dmaap_info": {
-          "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/unauthenticated.DCAE_CL_OUTPUT",
+          "topic_url": "http://message-router.onap.svc.cluster.local:3904/events/unauthenticated.DCAE_CL_OUTPUT",
           "client_role": "sliceanalysis-subscriber",
           "location": "onap",
           "client_id": "sdnr-sliceanalysis-1"
@@ -47,13 +58,35 @@
     "cbsPollingInterval": 60,
     "sliceanalysisms.cg": "sliceanalysisms-cg",
     "sliceanalysisms.pollingInterval": 20,
+    "sliceanalysisms.samples": 3,
+    "sliceanalysisms.minPercentageChange": 5,
+    "sliceanalysisms.initialDelaySeconds": 300000,
+    "sliceanalysisms.pollingTimeout": 60,
     "sliceanalysisms.cid": "sliceanalysisms-cid",
-    "sliceanalysisms.configDb.service": "http://sdnc.onap:8181",
+    "sliceanalysisms.configDb.service": "http://configdb_sim:5000",
+    "sliceanalysisms.aai.url": "https://aai-resources:8447/aai/v21",
+    "sliceanalysisms.cps.url": "http://cps-tbdmt:8080/execute/ran-network",
+    "sliceanalysisms.configDbEnabled": "false",
+    "sliceanalysisms.rannfnssiDetailsTemplateId": "get-rannfnssiid-details",
+    "sliceanalysisms.desUrl": "http://dl-des:1681/datalake/v1/exposure/pm_data",
+    "sliceanalysisms.pmDataDurationInWeeks": 4,
     "service_calls": {
       "policy-req": []
-    }
+    },
+    "trust_store_path": "/opt/app/sliceanalysisms/etc/cert/trust.jks",
+    "trust_store_pass_path": "/opt/app/sliceanalysisms/etc/cert/trust.pass"
   },
-  "policies": {
-    
+ "policies": {
+    "event": {
+      "action": "gathered",
+      "timestamp": "2019-09-18T14:57:55.320Z",
+      "update_id": "dbb88da8-8df1-489d-b51d-8d5cbbfbcd99",
+      "policies_count": 1
+    },
+    "items": [
+      {
+        "policyName": "com.Config_PCIMS_CONFIG_POLICY.1.xml"
+      }
+    ]
   }
 }
