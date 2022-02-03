@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "671190fe_bf271616",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-03T16:31:03Z",
+      "side": 1,
+      "message": "This needs a tag\n      tags:\n        - \"Subscription\"",
+      "range": {
+        "startLine": 114,
+        "startChar": 60,
+        "endLine": 114,
+        "endChar": 65
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13b0cd00_2a7563c9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-03T16:31:03Z",
+      "side": 1,
+      "message": "This should be upper case\nMeasurement Group",
+      "range": {
+        "startLine": 139,
+        "startChar": 11,
+        "endLine": 139,
+        "endChar": 28
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94e9aae4_40b34528",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-03T16:31:03Z",
+      "side": 1,
+      "message": "\"of the Measurement Group\"",
+      "range": {
+        "startLine": 163,
+        "startChar": 42,
+        "endLine": 163,
+        "endChar": 43
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e4d7923_e53dacb5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-03T16:31:03Z",
+      "side": 1,
+      "message": "This should be Measurement Group",
+      "range": {
+        "startLine": 166,
+        "startChar": 11,
+        "endLine": 166,
+        "endChar": 22
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c86a75f_07d6ca39",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-03T16:31:03Z",
+      "side": 1,
+      "message": "How come we are referencing the sub_model nfs here but the nf_meas_relations in the deactivate?",
+      "range": {
+        "startLine": 218,
+        "startChar": 14,
+        "endLine": 218,
+        "endChar": 27
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99d561ed_059f74f4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-03T16:31:03Z",
+      "side": 1,
+      "message": "Im not sure the logic is correct here.\nWhy are we setting the status to LOCKING?",
+      "range": {
+        "startLine": 269,
+        "startChar": 12,
+        "endLine": 269,
+        "endChar": 54
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
