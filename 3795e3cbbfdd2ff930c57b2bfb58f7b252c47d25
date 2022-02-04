@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3be93fb7_7d21fdbe",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-04T10:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "671190fe_bf271616",
+      "range": {
+        "startLine": 114,
+        "startChar": 60,
+        "endLine": 114,
+        "endChar": 65
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13b0cd00_2a7563c9",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 5
@@ -45,6 +69,30 @@
       "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9faf40a6_86e35400",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-04T10:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13b0cd00_2a7563c9",
+      "range": {
+        "startLine": 139,
+        "startChar": 11,
+        "endLine": 139,
+        "endChar": 28
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7e37cbd1_500b13e6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-04T10:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94e9aae4_40b34528",
+      "range": {
+        "startLine": 163,
+        "startChar": 42,
+        "endLine": 163,
+        "endChar": 43
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e4d7923_e53dacb5",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 5
@@ -91,6 +163,30 @@
       "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8a8bf4d_b6697b82",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-04T10:39:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e4d7923_e53dacb5",
+      "range": {
+        "startLine": 166,
+        "startChar": 11,
+        "endLine": 166,
+        "endChar": 22
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "5896b716_14674fc6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-04T10:39:08Z",
+      "side": 1,
+      "message": "The activation process here is performed on filtered nfs in subscription so referred sub_modle.nfs.  As per discussion marking it resolved.",
+      "parentUuid": "5c86a75f_07d6ca39",
+      "range": {
+        "startLine": 218,
+        "startChar": 14,
+        "endLine": 218,
+        "endChar": 27
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99d561ed_059f74f4",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
         "patchSetId": 5
@@ -137,6 +257,30 @@
       "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "587e118a_cc3e3df1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-04T10:39:08Z",
+      "side": 1,
+      "message": "To initiate locking process on created and pending creating nf_to_meas relations. As per discussion marking it resolved.",
+      "parentUuid": "99d561ed_059f74f4",
+      "range": {
+        "startLine": 269,
+        "startChar": 12,
+        "endLine": 269,
+        "endChar": 54
+      },
+      "revId": "3795e3cbbfdd2ff930c57b2bfb58f7b252c47d25",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
