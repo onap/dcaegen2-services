@@ -22,6 +22,30 @@
       "revId": "752e8752fabd3af657734b9dcd786b2d44c4ce7c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f715c763_d12c8a7a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-07T11:40:15Z",
+      "side": 1,
+      "message": "Yes Ravi, you are right that this would be an issue. I was trying to avoid an AAI call here but I guess we would need one.",
+      "parentUuid": "ff9b4152_f63032e7",
+      "range": {
+        "startLine": 218,
+        "startChar": 14,
+        "endLine": 218,
+        "endChar": 27
+      },
+      "revId": "752e8752fabd3af657734b9dcd786b2d44c4ce7c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
