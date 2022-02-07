@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff9b4152_f63032e7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-02-07T11:36:29Z",
+      "side": 1,
+      "message": "I think in some scenarios this will be empty. So, not able to publish create events. \n\nFor example consider the below scenario: \n-\u003e We have 1 subscription and MG with UNLOCKED initially(In this case it fetches NFS from AAI and creates entry in MG_NF relation and publishes the event) \n\n-\u003e After that if we update it to LOCKED then we are publishing event with change type:Delete. Once this success, We are deleting related entries in NF_MG relation and NF table. So, due to this we will get empty.\n \n-\u003e Due to requirement if we change the state now to UNLOCKED, it is not publishing any create event due to empty. But here we need to pull NFS from AAI and publish Create event.",
+      "range": {
+        "startLine": 218,
+        "startChar": 14,
+        "endLine": 218,
+        "endChar": 27
+      },
+      "revId": "752e8752fabd3af657734b9dcd786b2d44c4ce7c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
