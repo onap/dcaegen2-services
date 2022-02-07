@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37ea027b_18ce7930",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-02-07T17:18:50Z",
+      "side": 1,
+      "message": "Update looks good, But please have a look the below scenario\n\n--\u003e Having 2 subscriptions A \u0026 B with 4 NF\u0027s as 1,2,3,4\n\nA matches NF\u0027s of 1,2 and 3\nB matches NF\u0027s of 1,2,3 and 4\n\nSo, if we UNLOCKED to LOCKED of sub B then 1,2 and 3 NF\u0027s won\u0027t be deleted due to relation is there with other\u0027s and NF 4 will be deleted. So, next time if we do LOCKED to UNLOCKED by this code we are missing NF 4 because if condition is satisfied with 1,2 and 3 NF\u0027s",
+      "range": {
+        "startLine": 219,
+        "startChar": 3,
+        "endLine": 229,
+        "endChar": 26
+      },
+      "revId": "5174adfd2ba8012fd9ab04c11f9019b9948f632c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
