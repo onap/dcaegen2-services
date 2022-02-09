@@ -19,6 +19,52 @@
     },
     {
       "key": {
+        "uuid": "96dcd918_8f2b11e8",
+        "filename": "components/slice-analysis-ms/src/main/docker/config/sliceanalysisms/config_all.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2022-02-09T08:33:05Z",
+      "side": 1,
+      "message": "Typo",
+      "range": {
+        "startLine": 30,
+        "startChar": 68,
+        "endLine": 30,
+        "endChar": 70
+      },
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e63454e_cf6c59c9",
+        "filename": "components/slice-analysis-ms/src/main/docker/config/sliceanalysisms/config_all.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6044
+      },
+      "writtenOn": "2022-02-09T08:33:05Z",
+      "side": 1,
+      "message": "Typo",
+      "range": {
+        "startLine": 43,
+        "startChar": 68,
+        "endLine": 43,
+        "endChar": 70
+      },
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8bed5cc9_fba560f3",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/controller/SliceConfiguraton.java",
         "patchSetId": 4
