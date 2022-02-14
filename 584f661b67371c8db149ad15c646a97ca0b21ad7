@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bafeed22_c94a144d",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51b88b42_5a14abcd",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "96dcd918_8f2b11e8",
         "filename": "components/slice-analysis-ms/src/main/docker/config/sliceanalysisms/config_all.json",
         "patchSetId": 4
@@ -39,6 +57,30 @@
       "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3415d09b_341ecf8c",
+        "filename": "components/slice-analysis-ms/src/main/docker/config/sliceanalysisms/config_all.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96dcd918_8f2b11e8",
+      "range": {
+        "startLine": 30,
+        "startChar": 68,
+        "endLine": 30,
+        "endChar": 70
+      },
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "89851444_bd1cf639",
+        "filename": "components/slice-analysis-ms/src/main/docker/config/sliceanalysisms/config_all.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e63454e_cf6c59c9",
+      "range": {
+        "startLine": 43,
+        "startChar": 68,
+        "endLine": 43,
+        "endChar": 70
+      },
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8bed5cc9_fba560f3",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/controller/SliceConfiguraton.java",
         "patchSetId": 4
@@ -79,6 +145,24 @@
       "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8907c1f2_772cb0ed",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/controller/SliceConfiguraton.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bed5cc9_fba560f3",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -99,6 +183,24 @@
     },
     {
       "key": {
+        "uuid": "19f1c76d_5c98697a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/exception/CpsClientException.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65566641_90674d7e",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b65820a1_129abf9a",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/exception/DesClientException.java",
         "patchSetId": 4
@@ -113,6 +215,24 @@
       "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "511770b9_2d87e398",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/exception/DesClientException.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b65820a1_129abf9a",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -133,6 +253,24 @@
     },
     {
       "key": {
+        "uuid": "ee0008c2_f3e9a09b",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/AggregatedConfig.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73ef8d39_abeddc32",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "996387a0_5b6473fc",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/Configuration.java",
         "patchSetId": 4
@@ -150,6 +288,24 @@
     },
     {
       "key": {
+        "uuid": "8feb8dc2_05f1487b",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/Configuration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "996387a0_5b6473fc",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b335ede8_707e7501",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/Configuration.java",
         "patchSetId": 4
@@ -161,6 +317,24 @@
       "writtenOn": "2022-02-03T14:52:33Z",
       "side": 1,
       "message": "what does \"Des\" mean? DES encryption? Desired? Destination? Deserialized? Descendent? Designated? Desired?",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82437ac6_4bfa0476",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/Configuration.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Data Extraction Service",
+      "parentUuid": "b335ede8_707e7501",
       "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -184,6 +358,24 @@
     },
     {
       "key": {
+        "uuid": "f04133f9_69d9003d",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/SliceConfigDetails.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c01b63a9_5f0458ea",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ca719dd_5d4347eb",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/SliceConfigRequest.java",
         "patchSetId": 4
@@ -198,6 +390,24 @@
       "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8a34051_a96568a7",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/SliceConfigRequest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ca719dd_5d4347eb",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -218,6 +428,24 @@
     },
     {
       "key": {
+        "uuid": "f4507c5d_8a6fb5d0",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/SliceConfigResponse.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "719c7145_41e122b5",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ef6b4a4_7e163667",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SliceUtilization.java",
         "patchSetId": 4
@@ -235,6 +463,24 @@
     },
     {
       "key": {
+        "uuid": "97c608cb_038281e8",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SliceUtilization.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ef6b4a4_7e163667",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b11515a_536c1ca3",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SliceUtilization.java",
         "patchSetId": 4
@@ -249,6 +495,24 @@
       "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "321366be_4ac8cc69",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SliceUtilization.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-02-14T15:18:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b11515a_536c1ca3",
+      "revId": "584f661b67371c8db149ad15c646a97ca0b21ad7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
