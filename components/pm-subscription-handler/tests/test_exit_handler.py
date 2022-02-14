@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020 Nordix Foundation.
+#  Copyright (C) 2020-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,10 +17,9 @@
 # ============LICENSE_END=====================================================
 import os
 from signal import SIGTERM, signal
-from unittest.mock import patch, Mock
+from unittest.mock import patch
 
 from mod.exit_handler import ExitHandler
-from mod.subscription import Subscription
 from tests.base_setup import BaseClassSetup
 
 
@@ -31,10 +30,11 @@ class ExitHandlerTests(BaseClassSetup):
         super().setUpClass()
 
     @patch('mod.pmsh_utils.PeriodicTask')
-    def setUp(self, mock_periodic_task):
+    @patch('mod.pmsh_utils.PeriodicTask')
+    def setUp(self, mock_periodic_task_aai, mock_periodic_task_policy):
         super().setUp()
-        self.mock_aai_event_thread = mock_periodic_task
-        self.sub = self.app_conf.subscription
+        self.mock_aai_event_thread = mock_periodic_task_aai
+        self.mock_policy_resp_handler_thread = mock_periodic_task_policy
 
     def tearDown(self):
         super().tearDown()
@@ -43,13 +43,9 @@ class ExitHandlerTests(BaseClassSetup):
     def tearDownClass(cls):
         super().tearDownClass()
 
-    @patch.object(Subscription, 'update_sub_nf_status')
-    @patch.object(Subscription, 'update_subscription_status')
-    def test_terminate_signal_successful(self, mock_upd_sub_status,
-                                         mock_upd_subnf_status):
-        handler = ExitHandler(periodic_tasks=[self.mock_aai_event_thread],
-                              app_conf=self.app_conf,
-                              subscription_handler=Mock())
+    def test_terminate_signal_successful(self):
+        handler = ExitHandler(periodic_tasks=[self.mock_aai_event_thread,
+                                              self.mock_policy_resp_handler_thread])
         signal(SIGTERM, handler)
         os.kill(os.getpid(), SIGTERM)
         self.assertTrue(ExitHandler.shutdown_signal_received)

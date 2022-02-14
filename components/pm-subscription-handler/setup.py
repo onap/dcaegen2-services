@@ -1,5 +1,5 @@
 # ============LICENSE_START=======================================================
-#  Copyright (C) 2019-2021 Nordix Foundation.
+#  Copyright (C) 2019-2022 Nordix Foundation.
 #  Copyright (C) 2021 AT&T Property. All rights reserved.
 #  Copyright 2020 Deutsche Telekom. All rights reserved.
 # ================================================================================
@@ -22,7 +22,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pm_subscription_handler",
-    version="2.0.0",
+    version="3.0.0",
     packages=find_packages(),
     author="lego@est.tech",
     author_email="lego@est.tech",
