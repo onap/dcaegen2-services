@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.1.0]
+### Changed
+* PMSH Exit Handler Update (DCAEGEN2-3084)
+
 ## [2.0.0]
 ### Changed
 * Updated PMSH app configuration, simplified existing config (DCAEGEN2-2814)
