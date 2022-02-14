@@ -22,7 +22,9 @@ from http import HTTPStatus
 
 from mod import aai_client, db
 from mod.api.controller import status, post_subscription, get_subscription_by_name, \
-    get_subscriptions, get_meas_group_with_nfs, delete_subscription_by_name, update_admin_state
+    get_subscriptions, get_meas_group_with_nfs, delete_subscription_by_name, update_admin_state, \
+    delete_meas_group_by_name
+from mod.api.services.measurement_group_service import query_meas_group_by_name
 from tests.base_setup import BaseClassSetup
 from mod.api.custom_exception import InvalidDataException, DataConflictException
 from mod.api.db_models import SubscriptionModel, NfMeasureGroupRelationalModel
@@ -204,7 +206,7 @@ class ControllerTestCase(BaseClassSetup):
         error, status_code = get_meas_group_with_nfs('sub1', 'MG1')
         self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)
 
-    def test_delete_when_state_unlocked(self):
+    def test_delete_sub_when_state_unlocked(self):
         subscription_unlocked_data = create_subscription_data('MG_unlocked')
         subscription_unlocked_data.measurement_groups[0].measurement_group_name = 'unlock'
         subscription_unlocked_data.measurement_groups[0].administrative_state = 'UNLOCKED'
@@ -217,7 +219,18 @@ class ControllerTestCase(BaseClassSetup):
         self.assertEqual(subscription_service.query_subscription_by_name('MG_unlocked')
                          .subscription_name, 'MG_unlocked')
 
-    def test_delete_when_state_locked(self):
+    def test_delete_mg_when_state_unlocked(self):
+        subscription_unlocked_data = create_subscription_data('MG_unlocked')
+        db.session.add(subscription_unlocked_data)
+        db.session.commit()
+        db.session.remove()
+        message, status_code = delete_meas_group_by_name('MG_unlocked', 'MG1')
+        self.assertEqual(status_code, HTTPStatus.CONFLICT.value)
+        self.assertEqual(query_meas_group_by_name('MG_unlocked', 'MG1').measurement_group_name,
+                         'MG1')
+
+
+    def test_delete_sub_when_state_locked(self):
         subscription_unlocked_data = create_subscription_data('MG_locked')
         subscription_unlocked_data.measurement_groups[0].measurement_group_name = 'lock'
         subscription_unlocked_data.measurement_groups[0].administrative_state = 'LOCKED'
@@ -230,7 +243,19 @@ class ControllerTestCase(BaseClassSetup):
         self.assertEqual(status_code, HTTPStatus.NO_CONTENT.value)
         self.assertEqual(subscription_service.query_subscription_by_name('MG_locked'), None)
 
-    def test_delete_when_state_locking(self):
+    def test_delete_mg_when_state_locked(self):
+        subscription_locked_data = create_subscription_data('MG_locked')
+        subscription_locked_data.measurement_groups[0].administrative_state = 'LOCKED'
+        db.session.add(subscription_locked_data)
+        db.session.add(subscription_locked_data.measurement_groups[0])
+        db.session.commit()
+        db.session.remove()
+        non_type, status_code = delete_meas_group_by_name('MG_locked', 'MG1')
+        self.assertEqual(non_type, None)
+        self.assertEqual(status_code, HTTPStatus.NO_CONTENT.value)
+        self.assertEqual(query_meas_group_by_name('MG_locked', 'MG1'), None)
+
+    def test_delete_sub_when_state_locking(self):
         subscription_locking_data = create_subscription_data('MG_locking')
         subscription_locking_data.measurement_groups[0].measurement_group_name = 'locking'
         subscription_locking_data.measurement_groups[0].administrative_state = 'LOCKING'
@@ -243,10 +268,27 @@ class ControllerTestCase(BaseClassSetup):
         self.assertEqual(subscription_service.query_subscription_by_name('MG_locking')
                          .subscription_name, 'MG_locking')
 
+    def test_delete_mg_when_state_locking(self):
+        subscription_locking_data = create_subscription_data('MG_locking')
+        subscription_locking_data.measurement_groups[0].administrative_state = 'LOCKING'
+        db.session.add(subscription_locking_data)
+        db.session.add(subscription_locking_data.measurement_groups[0])
+        db.session.commit()
+        db.session.remove()
+        message, status_code = delete_meas_group_by_name('MG_locking', 'MG1')
+        self.assertEqual(status_code, HTTPStatus.CONFLICT.value)
+        self.assertEqual(query_meas_group_by_name('MG_locking', 'MG1').measurement_group_name,
+                         'MG1')
+
     def test_delete_sub_none(self):
         message, status_code = delete_subscription_by_name('None')
         self.assertEqual(message['error'], 'Subscription is not defined with name None')
         self.assertEqual(status_code, HTTPStatus.NOT_FOUND.value)
+
+    def test_delete_mg_exception(self):
+        subscription_locking_data = create_subscription_data('MG_locking')
+        message, status_code = delete_meas_group_by_name(subscription_locking_data, 'None')
+        self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)
 
     @patch('mod.api.services.subscription_service.query_to_delete_subscription_by_name',
            MagicMock(side_effect=Exception('something failed')))

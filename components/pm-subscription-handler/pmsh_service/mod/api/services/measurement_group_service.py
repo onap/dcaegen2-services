@@ -158,6 +158,38 @@ def query_meas_group_by_name(subscription_name, measurement_group_name):
     return meas_group
 
 
+def query_to_delete_meas_group(subscription_name, measurement_group_name):
+    """
+    Deletes a measurement group by name
+
+    Args:
+        subscription_name (String): Name of the Subscription
+        measurement_group_name (String): Name of MG
+
+    Returns:
+        int: Returns '1' if subscription exists and deleted successfully else '0'
+    """
+    affected_rows = db.session.query(MeasurementGroupModel) \
+        .filter_by(subscription_name=subscription_name, measurement_group_name=measurement_group_name).delete()
+    db.session.commit()
+    return affected_rows
+
+
+def query_get_meas_group_admin_status(subscription_name, measurement_group_name):
+    """
+    Queries the administrative state by using subscription name and measurement group name
+
+    Args:
+        subscription_name (String): Name of the subscription.
+        measurement_group_name (String): Name of the measurement group
+
+    Returns:
+        administrative_state (String): Admin State (LOCKED, UNLOCKED, LOCKING)
+    """
+    meas_group = query_meas_group_by_name(subscription_name, measurement_group_name)
+    return meas_group.administrative_state
+
+
 def lock_nf_to_meas_grp(nf_name, measurement_group_name, status):
     """ Deletes a particular nf related to a measurement group name and
         if no more relations of nf exist to measurement group then delete nf from PMSH
