@@ -160,6 +160,32 @@ paths:
         500:
           description: Exception occurred while querying database
 
+    delete:
+      description: Delete a measurement group
+      operationId: mod.api.controller.delete_meas_group
+      tags:
+        - "measurement group"
+      parameters:
+        - name : subscription_name
+          in: path
+          required: true
+          description: Name of the subscription
+          type: string
+        - name: measurement_group_name
+          in: path
+          required: true
+          description: Name of the measurement group name
+          type: string
+      responses:
+        204:
+          description: Successfully deleted the measurement group and returns NO Content
+        404:
+          description: Measurement group with the specified name not found
+        409:
+          description: Measurement  not deleted because state UNLOCKED OR state change to LOCKED was under process
+        500:
+          description: Exception occurred on the server
+
   /subscription/{subscription_name}/measurementGroups/{measurement_group_name}/adminState:
     put:
       description: Update the admin status of the Measurement Group by using sub name and measurement group name

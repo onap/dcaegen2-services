@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [3.0.0]
 ### Changed
 * Exit Handler Update (DCAEGEN2-3084)
+* Delete Measurement Group API (DCAEGEN2-2921)
 
 ## [2.0.0]
 ### Changed
