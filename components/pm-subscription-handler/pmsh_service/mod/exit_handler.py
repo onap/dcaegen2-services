@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020-2021 Nordix Foundation.
+#  Copyright (C) 2020-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 # ============LICENSE_END=====================================================
 
 from mod import logger, db
+from mod.api.services import subscription_service, measurement_group_service
 from mod.subscription import AdministrativeState
 
 
@@ -25,29 +26,25 @@ class ExitHandler:
 
     Args:
         periodic_tasks (List[PeriodicTask]): PeriodicTasks that needs to be cancelled.
-        app_conf (AppConfig): The PMSH Application Configuration.
-        subscription_handler (SubscriptionHandler): The subscription handler instance.
     """
 
     shutdown_signal_received = False
 
-    def __init__(self, *, periodic_tasks, app_conf, subscription_handler):
+    def __init__(self, *, periodic_tasks):
         self.periodic_tasks = periodic_tasks
-        self.app_conf = app_conf
-        self.subscription_handler = subscription_handler
 
     def __call__(self, sig_num, frame):
         logger.info('Graceful shutdown of PMSH initiated.')
         logger.debug(f'ExitHandler was called with signal number: {sig_num}.')
-        self.subscription_handler.stop_aai_event_thread()
-        current_sub = self.app_conf.subscription
-        if current_sub.administrativeState == AdministrativeState.UNLOCKED.value:
-            try:
-                nfs = self.app_conf.subscription.get_network_functions()
-                current_sub.delete_subscription_from_nfs(nfs, self.subscription_handler.mr_pub,
-                                                         self.app_conf)
-            except Exception as e:
-                logger.error(f'Failed to shut down PMSH application: {e}', exc_info=True)
+        try:
+            subscriptions_all = subscription_service.query_all_subscriptions()
+            for subscription in subscriptions_all:
+                for mg in subscription.measurement_groups:
+                    if mg.administrative_state == AdministrativeState.UNLOCKED.value:
+                        measurement_group_service.\
+                            update_admin_status(mg, AdministrativeState.LOCKED.value)
+        except Exception as e:
+            logger.error(f'Failed to shut down PMSH application: {e}', exc_info=True)
         for thread in self.periodic_tasks:
             logger.info(f'Cancelling thread {thread.name}')
             thread.cancel()
