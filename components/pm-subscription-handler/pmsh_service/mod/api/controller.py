@@ -22,6 +22,7 @@ from mod.api.services import subscription_service, measurement_group_service
 from connexion import NoContent
 from mod.api.custom_exception import InvalidDataException, DuplicateDataException, \
     DataConflictException
+from mod.subscription import AdministrativeState
 
 
 def status():
@@ -148,6 +149,43 @@ def get_meas_group_with_nfs(subscription_name, measurement_group_name):
                      f'{exception}')
         return {'error': 'Request was not processed due to Exception : '
                          f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
+
+
+def delete_meas_group_by_name(subscription_name, measurement_group_name):
+    """Deletes the measurement group by name
+
+    Args:
+        subscription_name (String): Name of the subscription
+        measurement_group_name (String): Name of measurement group
+
+    Returns:
+          NoneType, HTTPStatus: None, 204
+          dict, HTTPStatus: measurement group not defined, 404
+          dict, HTTPStatus: Reason for not deleting measurement group, 409
+          dict, HTTPStatus: Exception details of failure, 500
+    """
+    logger.info(f'API call received to delete measurement group: {measurement_group_name}')
+    try:
+        measurement_group_administrative_status = \
+            measurement_group_service.query_get_meas_group_admin_status(subscription_name, measurement_group_name)
+        if measurement_group_administrative_status == AdministrativeState.LOCKED.value:
+            if measurement_group_service.query_to_delete_meas_group(subscription_name, measurement_group_name) == 1:
+                return None, HTTPStatus.NO_CONTENT
+            else:
+                logger.error(f'Measurement Group not found with name {measurement_group_name}')
+                return {'error': f'Measurement Group not found with name {measurement_group_name}'}, \
+                    HTTPStatus.NOT_FOUND.value
+        else:
+            logger.error('Measurement Group was not deleted because the Administrative State '
+                         f'was {measurement_group_administrative_status}')
+            return {'error': 'Measurement Group was not deleted because the Administrative State '
+                             'was {measurement_group_administrative_status}'}, \
+                HTTPStatus.CONFLICT.value
+    except Exception as e:
+        logger.error(f'Try again, measurement group {measurement_group_name} was not'
+                     f'deleted due to exception: {e}')
+        return {'error': f'Try again, measurement group {measurement_group_name} was not '
+                         f'deleted due to exception: {e}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
 
 
 def delete_subscription_by_name(subscription_name):
