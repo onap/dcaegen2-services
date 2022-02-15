@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ class PmshConfigTestCase(BaseClassSetup):
         super().setUpClass()
 
     def setUp(self):
-        super().setUpAppConf()
+        super().setUp()
         self.mock_app = Mock()
 
     def tearDown(self):
@@ -42,14 +42,14 @@ class PmshConfigTestCase(BaseClassSetup):
         super().tearDownClass()
 
     def test_config_get_aaf_creds(self):
-        self.assertEqual(self.pmsh_app_conf.enable_tls, 'true')
-        self.assertEqual(self.pmsh_app_conf.aaf_id, 'dcae@dcae.onap.org')
-        self.assertEqual(self.pmsh_app_conf.aaf_pass, 'demo123456!')
+        self.assertEqual(self.app_conf.enable_tls, 'true')
+        self.assertEqual(self.app_conf.aaf_id, 'dcae@dcae.onap.org')
+        self.assertEqual(self.app_conf.aaf_pass, 'demo123456!')
 
     def test_config_get_cert_data(self):
-        self.assertEqual(self.pmsh_app_conf.key_path, '/opt/app/pmsh/etc/certs/key.pem')
-        self.assertEqual(self.pmsh_app_conf.cert_path, '/opt/app/pmsh/etc/certs/cert.pem')
-        self.assertEqual(self.pmsh_app_conf.ca_cert_path, '/opt/app/pmsh/etc/certs/cacert.pem')
+        self.assertEqual(self.app_conf.key_path, '/opt/app/pmsh/etc/certs/key.pem')
+        self.assertEqual(self.app_conf.cert_path, '/opt/app/pmsh/etc/certs/cert.pem')
+        self.assertEqual(self.app_conf.ca_cert_path, '/opt/app/pmsh/etc/certs/cacert.pem')
 
     def test_singleton_instance_is_accessible_using_class_method(self):
         my_singleton_instance = AppConfig.get_instance()
@@ -60,8 +60,8 @@ class PmshConfigTestCase(BaseClassSetup):
     def test_mr_pub_publish_to_topic_success(self, mock_session):
         mock_session.return_value.status_code = 200
         with patch('requests.Session.post') as session_post_call:
-            self.pmsh_app_conf.publish_to_topic(MRTopic.POLICY_PM_PUBLISHER.value,
-                                                {"key": "43c4ee19-6b8d-4279-a80f-c507850aae47"})
+            self.app_conf.publish_to_topic(MRTopic.POLICY_PM_PUBLISHER.value,
+                                           {"key": "43c4ee19-6b8d-4279-a80f-c507850aae47"})
             session_post_call.assert_called_once()
 
     @responses.activate
@@ -70,8 +70,8 @@ class PmshConfigTestCase(BaseClassSetup):
                       'https://message-router:3905/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS',
                       json={"error": "Client Error"}, status=400)
         with self.assertRaises(Exception):
-            self.pmsh_app_conf.publish_to_topic(MRTopic.POLICY_PM_PUBLISHER.value,
-                                                {"key": "43c4ee19-6b8d-4279-a80f-c507850aae47"})
+            self.app_conf.publish_to_topic(MRTopic.POLICY_PM_PUBLISHER.value,
+                                           {"key": "43c4ee19-6b8d-4279-a80f-c507850aae47"})
 
     @responses.activate
     def test_mr_sub_get_from_topic_success(self):
@@ -79,7 +79,7 @@ class PmshConfigTestCase(BaseClassSetup):
                       'https://message-router:3905/events/org.onap.dmaap.mr.PM_SUBSCRIPTIONS/'
                       'dcae_pmsh_cg/1?timeout=5000',
                       json={"key": "43c4ee19-6b8d-4279-a80f-c507850aae47"}, status=200)
-        mr_topic_data = self.pmsh_app_conf.get_from_topic(MRTopic.POLICY_PM_SUBSCRIBER.value, 1)
+        mr_topic_data = self.app_conf.get_from_topic(MRTopic.POLICY_PM_SUBSCRIBER.value, 1)
         self.assertIsNotNone(mr_topic_data)
 
     @responses.activate
@@ -89,4 +89,4 @@ class PmshConfigTestCase(BaseClassSetup):
                       'dcae_pmsh_cg/1?timeout=5000',
                       json={"key": "43c4ee19-6b8d-4279-a80f-c507850aae47"}, status=400)
         with self.assertRaises(Exception):
-            self.pmsh_app_conf.get_from_topic(MRTopic.POLICY_PM_SUBSCRIBER.value, 1)
+            self.app_conf.get_from_topic(MRTopic.POLICY_PM_SUBSCRIBER.value, 1)

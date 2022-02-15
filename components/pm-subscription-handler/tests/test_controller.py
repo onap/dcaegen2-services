@@ -43,7 +43,6 @@ class ControllerTestCase(BaseClassSetup):
 
     def setUp(self):
         super().setUp()
-        super().setUpAppConf()
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
             self.aai_response_data = data.read()
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_model_info.json'), 'r') as data:
@@ -95,6 +94,9 @@ class ControllerTestCase(BaseClassSetup):
 
     def test_post_subscription_duplicate_sub(self):
         # Posting the same subscription request stored in previous test to get duplicate response
+        subscription = create_subscription_data('ExtraPM-All-gNB-R2B')
+        db.session.add(subscription)
+        db.session.commit()
         response = post_subscription(json.loads(self.subscription_request))
         self.assertEqual(response[1], 409)
         self.assertEqual(response[0], 'subscription Name: ExtraPM-All-gNB-R2B already exists.')

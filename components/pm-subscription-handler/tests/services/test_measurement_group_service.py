@@ -57,7 +57,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
 
     @patch.object(AppConfig, 'publish_to_topic')
     def test_publish_measurement_group(self, mock_mr):
-        super().setUpAppConf()
+        super().setUp()
         nf_1 = NetworkFunction(**{'nf_name': 'pnf_1',
                                   'ipv4_address': '204.120.0.15',
                                   'ipv6_address': '2001:db8:3333:4444:5555:6666:7777:8888',
@@ -197,7 +197,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
 
     @patch.object(AppConfig, 'publish_to_topic')
     def test_update_admin_status_to_locking(self, mock_mr):
-        super().setUpAppConf()
+        super().setUp()
         sub = create_subscription_data('sub')
         nf_list = create_multiple_network_function_data(['pnf_101', 'pnf_102'])
         db.session.add(sub)
@@ -221,7 +221,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
 
     @patch.object(AppConfig, 'publish_to_topic')
     def test_update_admin_status_to_locked(self, mock_mr):
-        super().setUpAppConf()
+        super().setUp()
         sub = create_subscription_data('sub')
         db.session.add(sub)
         measurement_group_service.update_admin_status(sub.measurement_groups[0], 'LOCKED')
@@ -238,7 +238,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
                                                          mock_model_aai, mock_aai, mock_mr):
         mock_aai.return_value = json.loads(self.aai_response_data)
         mock_model_aai.return_value = json.loads(self.good_model_info)
-        super().setUpAppConf()
+        super().setUp()
         sub = create_subscription_data('sub')
         sub.nfs = []
         db.session.add(sub)
@@ -263,7 +263,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
                                               mock_model_aai, mock_aai, mock_mr):
         mock_aai.return_value = json.loads(self.aai_response_data)
         mock_model_aai.return_value = json.loads(self.good_model_info)
-        super().setUpAppConf()
+        super().setUp()
         sub = create_subscription_data('sub')
         db.session.add(sub)
         db.session.commit()
@@ -287,7 +287,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
                                         'for admin status update')
 
     def test_update_admin_status_for_data_conflict(self):
-        super().setUpAppConf()
+        super().setUp()
         sub = create_subscription_data('sub1')
         sub.measurement_groups[0].administrative_state = 'LOCKING'
         try:
@@ -298,7 +298,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
                                         'meas group name: MG1')
 
     def test_update_admin_status_for_same_state(self):
-        super().setUpAppConf()
+        super().setUp()
         sub = create_subscription_data('sub1')
         try:
             measurement_group_service.update_admin_status(sub.measurement_groups[0], 'UNLOCKED')

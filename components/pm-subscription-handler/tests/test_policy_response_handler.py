@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2021 Nordix Foundation.
+#  Copyright (C) 2019-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,7 +32,6 @@ class PolicyResponseHandlerTest(BaseClassSetup):
     @patch('mod.create_app')
     def setUp(self, mock_app):
         super().setUp()
-        super().setUpAppConf()
         self.nf = NetworkFunction(nf_name='nf1')
         self.policy_response_handler = PolicyResponseHandler(mock_app)
 

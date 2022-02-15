@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2021 Nordix Foundation.
+#  Copyright (C) 2019-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 # ============LICENSE_END=====================================================
 import json
 import os
-from unittest.mock import patch, Mock
+from unittest.mock import patch
 
 from mod.network_function import NetworkFunction
 from tests.base_setup import BaseClassSetup
@@ -82,7 +82,7 @@ class NetworkFunctionTests(BaseClassSetup):
 
     def test_delete_network_function(self):
         for nf in [self.nf_1, self.nf_2]:
-            self.app_conf.subscription.add_network_function_to_subscription(nf, Mock())
+            nf.create()
         nfs = NetworkFunction.get_all()
         self.assertEqual(2, len(nfs))
         NetworkFunction.delete(nf_name=self.nf_1.nf_name)

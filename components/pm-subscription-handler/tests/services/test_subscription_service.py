@@ -24,10 +24,10 @@ from mod.api.db_models import SubscriptionModel, MeasurementGroupModel, \
     convert_db_string_to_list
 from mod.network_function import NetworkFunctionFilter
 from mod.subscription import SubNfState
-from mod import aai_client
+from mod import aai_client, db
 from mod.api.custom_exception import DuplicateDataException, InvalidDataException
 from mod.pmsh_config import AppConfig
-from tests.base_setup import BaseClassSetup
+from tests.base_setup import BaseClassSetup, create_subscription_data
 from mod.api.services import subscription_service, nf_service, measurement_group_service
 from tests.base_setup import create_multiple_subscription_data
 
@@ -131,6 +131,9 @@ class SubscriptionServiceTestCase(BaseClassSetup):
 
     def test_perform_validation_existing_sub(self):
         try:
+            subscription = create_subscription_data('ExtraPM-All-gNB-R2B')
+            db.session.add(subscription)
+            db.session.commit()
             subscription_service.create_subscription(json.loads(self.subscription_request)
                                                      ['subscription'])
         except DuplicateDataException as exception:
@@ -341,10 +344,10 @@ class SubscriptionServiceTestCase(BaseClassSetup):
                              "No value provided for measurement group name")
 
     def test_validate_nf_filter_with_no_filter_values(self):
-        nfFilter = '{"nfNames": [],"modelInvariantIDs": [], ' \
-                   '"modelVersionIDs": [],"modelNames": []}'
+        nf_filter = '{"nfNames": [],"modelInvariantIDs": [], ' \
+                    '"modelVersionIDs": [],"modelNames": []}'
         try:
-            subscription_service.validate_nf_filter(json.loads(nfFilter))
+            subscription_service.validate_nf_filter(json.loads(nf_filter))
         except InvalidDataException as invalidEx:
             self.assertEqual(invalidEx.args[0],
                              "At least one filter within nfFilter must not be empty")
