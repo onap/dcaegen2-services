@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "abc46f0d_07b18c2b",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-15T12:31:42Z",
+      "side": 0,
+      "message": "I presume we would be removing the subscription handler source file consecutively.",
+      "range": {
+        "startLine": 52,
+        "startChar": 36,
+        "endLine": 52,
+        "endChar": 41
+      },
+      "revId": "2a21c78886d13c4266da639252d8fb899b7d34a5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48aac6e3_4d5acf5c",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-15T12:31:42Z",
+      "side": 0,
+      "message": "I see the csits look good with new app conf in the job below. Also, did we perform some local dry runs over schedulers and API to confirm the new app conf have no impact.",
+      "range": {
+        "startLine": 62,
+        "startChar": 45,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "2a21c78886d13c4266da639252d8fb899b7d34a5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
