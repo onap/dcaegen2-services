@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "05205e49_92b168e0",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-15T13:15:28Z",
+      "side": 0,
+      "message": "I would suggest changes be mapped to specific sub task going ahead. Like current task applies to exit handler while the subscription handler can be a part of the resp. sub task and push that helps in proper documentation.",
+      "parentUuid": "0aaec047_33767859",
+      "range": {
+        "startLine": 52,
+        "startChar": 36,
+        "endLine": 52,
+        "endChar": 41
+      },
+      "revId": "2a21c78886d13c4266da639252d8fb899b7d34a5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "48aac6e3_4d5acf5c",
         "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
         "patchSetId": 2
@@ -84,6 +108,30 @@
       "side": 0,
       "message": "There is no impact on new APPConfig because we haven\u0027t updated anything on that. Here APPConfig is not necessary as we are not consuming any application configuration. So, I am removing the same. The old APPConfig is used to get the subscription object, The same we are not doing now.",
       "parentUuid": "48aac6e3_4d5acf5c",
+      "range": {
+        "startLine": 62,
+        "startChar": 45,
+        "endLine": 62,
+        "endChar": 53
+      },
+      "revId": "2a21c78886d13c4266da639252d8fb899b7d34a5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a20b1a01_6fbebbca",
+        "filename": "components/pm-subscription-handler/pmsh_service/pmsh_service_main.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-15T13:15:28Z",
+      "side": 0,
+      "message": "Good that you have removed it.",
+      "parentUuid": "8b23186f_98879aa7",
       "range": {
         "startLine": 62,
         "startChar": 45,
