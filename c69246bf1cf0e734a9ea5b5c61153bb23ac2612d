@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c44b1b4_bdf2c08f",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SliceUtilization.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-15T15:42:49Z",
+      "side": 1,
+      "message": "Given that the old name was \"totalPRB\", should this be TOTAL_PRB instead of TORAL_PRB ?",
+      "revId": "c69246bf1cf0e734a9ea5b5c61153bb23ac2612d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
