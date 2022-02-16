@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5219f7a2_c6b221a2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-16T14:27:59Z",
+      "side": 1,
+      "message": "effected \u003d\u003e affected\n\neffect is a noun, affect is an adjective",
+      "revId": "2e8ca2c644827d8576c27bd9684b5d0e48d66231",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
