@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea7b0dab_580ba72f",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-02-16T16:12:09Z",
+      "side": 1,
+      "message": "Version need to update as 2.1.0",
+      "range": {
+        "startLine": 8,
+        "startChar": 4,
+        "endLine": 8,
+        "endChar": 9
+      },
+      "revId": "b3c26643734ff654fbdca5ef7d46e9982dcbee09",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6741ea70_0dfe3e37",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-02-16T16:12:09Z",
+      "side": 1,
+      "message": "If suitable Please update as \u0027Queries the administrative state by using subscription name and measurement group name\u0027.",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 180,
+        "endChar": 43
+      },
+      "revId": "b3c26643734ff654fbdca5ef7d46e9982dcbee09",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b08ff6fa_f17806ea",
+        "filename": "components/pm-subscription-handler/setup.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-02-16T16:12:09Z",
+      "side": 1,
+      "message": "Do we need to change to 2022?",
+      "range": {
+        "startLine": 2,
+        "startChar": 25,
+        "endLine": 2,
+        "endChar": 26
+      },
+      "revId": "b3c26643734ff654fbdca5ef7d46e9982dcbee09",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
