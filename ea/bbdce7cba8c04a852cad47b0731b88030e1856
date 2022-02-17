@@ -1,0 +1,9 @@
+Verified+1: ONAP Jobbuilder <onap-jobbuilder@jenkins.onap.org>
+Code-Review+1: RAVITEJA KARUMURI <raviteja.karumuri@est.tech>
+Code-Review+1: Sagar Shetty <sagar.shetty@est.tech>
+Code-Review+2: Tony Hansen <tony@att.com>
+Submitted-by: Tony Hansen <tony@att.com>
+Submitted-at: Thu, 17 Feb 2022 23:05:39 +0000
+Reviewed-on: https://gerrit.onap.org/r/c/dcaegen2/services/+/127100
+Project: dcaegen2/services
+Branch: refs/heads/master
