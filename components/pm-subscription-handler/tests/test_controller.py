@@ -229,7 +229,6 @@ class ControllerTestCase(BaseClassSetup):
         self.assertEqual(query_meas_group_by_name('MG_unlocked', 'MG1').measurement_group_name,
                          'MG1')
 
-
     def test_delete_sub_when_state_locked(self):
         subscription_unlocked_data = create_subscription_data('MG_locked')
         subscription_unlocked_data.measurement_groups[0].measurement_group_name = 'lock'

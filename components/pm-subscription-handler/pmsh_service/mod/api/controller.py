@@ -167,14 +167,16 @@ def delete_meas_group_by_name(subscription_name, measurement_group_name):
     logger.info(f'API call received to delete measurement group: {measurement_group_name}')
     try:
         measurement_group_administrative_status = \
-            measurement_group_service.query_get_meas_group_admin_status(subscription_name, measurement_group_name)
+            measurement_group_service.query_get_meas_group_admin_status(subscription_name,
+                                                                        measurement_group_name)
         if measurement_group_administrative_status == AdministrativeState.LOCKED.value:
-            if measurement_group_service.query_to_delete_meas_group(subscription_name, measurement_group_name) == 1:
+            if measurement_group_service.query_to_delete_meas_group(subscription_name,
+                                                                    measurement_group_name) == 1:
                 return None, HTTPStatus.NO_CONTENT
             else:
                 logger.error(f'Measurement Group not found with name {measurement_group_name}')
-                return {'error': f'Measurement Group not found with name {measurement_group_name}'}, \
-                    HTTPStatus.NOT_FOUND.value
+                return {'error': f'Measurement Group not found with name '
+                                 f'{measurement_group_name}'}, HTTPStatus.NOT_FOUND.value
         else:
             logger.error('Measurement Group was not deleted because the Administrative State '
                          f'was {measurement_group_administrative_status}')
