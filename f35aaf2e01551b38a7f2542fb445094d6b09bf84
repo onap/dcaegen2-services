@@ -16,6 +16,24 @@
       "revId": "f35aaf2e01551b38a7f2542fb445094d6b09bf84",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b97f4944_de4279c9",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-02-18T16:09:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c470efc_554305db",
+      "revId": "f35aaf2e01551b38a7f2542fb445094d6b09bf84",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
