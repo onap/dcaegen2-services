@@ -170,7 +170,8 @@ def query_to_delete_meas_group(subscription_name, measurement_group_name):
         int: Returns '1' if subscription exists and deleted successfully else '0'
     """
     affected_rows = db.session.query(MeasurementGroupModel) \
-        .filter_by(subscription_name=subscription_name, measurement_group_name=measurement_group_name).delete()
+        .filter_by(subscription_name=subscription_name,
+                   measurement_group_name=measurement_group_name).delete()
     db.session.commit()
     return affected_rows
 

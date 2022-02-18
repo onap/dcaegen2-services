@@ -46,8 +46,10 @@ class AAIEventHandlerTest(BaseClassSetup):
         super().tearDownClass()
 
     @patch('mod.pmsh_config.AppConfig.get_from_topic')
-    @patch('mod.aai_event_handler.NetworkFunction.delete')
-    def test_process_aai_delete_events(self, mock_nf_delete, mr_aai_mock):
+    @patch('mod.network_function.NetworkFunction.set_nf_model_params')
+    @patch('mod.network_function.NetworkFunction.delete')
+    def test_process_aai_delete_events(self, mock_nf_delete, mock_set_sdnc_params, mr_aai_mock):
+        mock_set_sdnc_params.return_value = True
         mr_aai_mock.return_value = self.mr_aai_events
         aai_handler = AAIEventHandler(self.app)
         network_function = NetworkFunctionModel(
