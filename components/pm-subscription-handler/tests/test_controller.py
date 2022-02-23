@@ -23,11 +23,12 @@ from http import HTTPStatus
 from mod import aai_client, db
 from mod.api.controller import status, post_subscription, get_subscription_by_name, \
     get_subscriptions, get_meas_group_with_nfs, delete_subscription_by_name, update_admin_state, \
-    delete_meas_group_by_name, put_nf_filter
+    delete_meas_group_by_name, post_meas_group, put_nf_filter
 from mod.api.services.measurement_group_service import query_meas_group_by_name
 from tests.base_setup import BaseClassSetup
 from mod.api.custom_exception import InvalidDataException, DataConflictException
-from mod.api.db_models import SubscriptionModel, NfMeasureGroupRelationalModel
+from mod.api.db_models import SubscriptionModel, \
+    NfMeasureGroupRelationalModel, MeasurementGroupModel
 from mod.network_function import NetworkFunctionFilter
 from tests.base_setup import create_subscription_data, create_multiple_subscription_data, \
     create_multiple_network_function_data
@@ -196,6 +197,38 @@ class ControllerTestCase(BaseClassSetup):
     def test_get_meas_group_with_nfs_api_exception(self):
         error, status_code = get_meas_group_with_nfs('sub1', 'MG1')
         self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)
+
+    @patch.object(aai_client, '_get_all_aai_nf_data')
+    @patch.object(aai_client, 'get_aai_model_data')
+    def test_post_meas_group(self, mock_model_aai, mock_aai):
+        mock_aai.return_value = json.loads(self.aai_response_data)
+        mock_model_aai.return_value = json.loads(self.good_model_info)
+        subscription_data = create_subscription_data('Post_MG')
+        measurement_grp = {'subscription_name': 'sub',
+                           'measurementGroupName': 'MG2',
+                           'administrativeState': 'UNLOCKED',
+                           'fileBasedGP': 15,
+                           'fileLocation': '/pm/pm.xml',
+                           'measurementTypes': '[{ "measurementType": "countera" }, '
+                                                '{ "measurementType": "counterb" }]',
+                           'managedObjectDNsBasic': '[{ "DN":"dna"},{"DN":"dnb"}]'}
+        db.session.add(subscription_data)
+        db.session.commit()
+        db.session.remove()
+        _, status_code = post_meas_group('Post_MG', 'MG3', measurement_grp)
+        self.assertEqual(status_code, 201)
+
+    def test_post_meas_group_with_duplicate(self):
+        subscription_data = create_subscription_data('Post_MG')
+        measurement_grp = MeasurementGroupModel('Post_MG', 'MG1', 'UNLOCKED', 15, '/pm/pm.xml',
+                                                '[{ "measurementType": "countera" }, '
+                                                '{ "measurementType": "counterb" }]',
+                                                '[{ "DN":"dna"},{"DN":"dnb"}]')
+        db.session.add(subscription_data)
+        db.session.commit()
+        db.session.remove()
+        _, status_code = post_meas_group('Post_MG', 'MG1', measurement_grp)
+        self.assertEqual(status_code, 409)
 
     def test_delete_sub_when_state_unlocked(self):
         subscription_unlocked_data = create_subscription_data('MG_unlocked')

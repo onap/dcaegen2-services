@@ -23,7 +23,6 @@ from mod.api.db_models import SubscriptionModel, NfSubRelationalModel, \
 from mod.api.services import measurement_group_service, nf_service
 from mod.api.custom_exception import InvalidDataException, DuplicateDataException, \
     DataConflictException
-from mod.api.services.measurement_group_service import MgNfState, AdministrativeState
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
 
@@ -155,7 +154,7 @@ def apply_measurement_grp_to_nfs(filtered_nfs, unlocked_mgs):
                         f'{measurement_group.measurement_group_name}')
             measurement_group_service.apply_nf_status_to_measurement_group(
                 nf.nf_name, measurement_group.measurement_group_name,
-                MgNfState.PENDING_CREATE.value)
+                measurement_group_service.MgNfState.PENDING_CREATE.value)
 
 
 def check_missing_data(subscription):
@@ -261,7 +260,7 @@ def save_subscription(subscription):
         SubscriptionModel(subscription_name=subscription["subscriptionName"],
                           operational_policy_name=subscription["operationalPolicyName"],
                           control_loop_name=control_loop_name,
-                          status=AdministrativeState.LOCKED.value)
+                          status=measurement_group_service.AdministrativeState.LOCKED.value)
     db.session.add(subscription_model)
     return subscription_model
 
@@ -450,7 +449,7 @@ def get_unlocked_measurement_grps(sub_model):
     unlocked_mgs = []
     for measurement_group in sub_model.measurement_groups:
         if measurement_group.administrative_state \
-                == AdministrativeState.UNLOCKED.value:
+                == measurement_group_service.AdministrativeState.UNLOCKED.value:
             unlocked_mgs.append(measurement_group)
         else:
             logger.info(f'No nfs added as measure_grp_name: '
@@ -474,7 +473,8 @@ def delete_filtered_nfs(del_nfs, sub_model, unlocked_mgs):
         for mg in unlocked_mgs:
             MeasurementGroupModel.query.filter(
                 MeasurementGroupModel.measurement_group_name == mg.measurement_group_name) \
-                .update({MeasurementGroupModel.administrative_state: AdministrativeState.
+                .update({MeasurementGroupModel.administrative_state:
+                        measurement_group_service.AdministrativeState.
                         FILTERING.value}, synchronize_session='evaluate')
             db.session.commit()
             nf_meas_relations = NfMeasureGroupRelationalModel.query.filter(
@@ -515,7 +515,9 @@ def validate_sub_mgs_state(sub_model):
         DataConflictException: contains details on conflicting status in measurement group
     """
     mg_names_processing = [mg for mg in sub_model.measurement_groups
-                           if mg.administrative_state in [AdministrativeState.FILTERING.value,
+                           if mg.administrative_state in [measurement_group_service.
+                                                          AdministrativeState.FILTERING.value,
+                                                          measurement_group_service.
                                                           AdministrativeState.LOCKING.value]]
     if mg_names_processing:
         raise DataConflictException('Cannot update filter as subscription: '
