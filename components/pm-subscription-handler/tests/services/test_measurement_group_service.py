@@ -20,7 +20,8 @@ import json
 import os
 from unittest.mock import patch
 
-from mod.api.custom_exception import InvalidDataException, DataConflictException
+from mod.api.custom_exception import InvalidDataException, \
+    DataConflictException, DuplicateDataException
 from mod.network_function import NetworkFunction, NetworkFunctionFilter
 from mod.pmsh_config import AppConfig
 from mod import db, aai_client
@@ -358,3 +359,11 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         self.assertEqual(meas_grp.subscription_name, 'sub')
         self.assertEqual(meas_grp.measurement_group_name, 'MG2')
         self.assertEqual(meas_grp.administrative_state, 'LOCKING')
+
+    def test_check_duplication_exception(self):
+        sub = create_subscription_data('sub')
+        db.session.add(sub)
+        try:
+            measurement_group_service.check_duplication('sub', 'MG1')
+        except DuplicateDataException as e:
+            self.assertEqual(e.args[0], 'Measurement Group Name: MG1 already exists.')
