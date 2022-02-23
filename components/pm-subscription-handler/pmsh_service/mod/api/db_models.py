@@ -71,6 +71,21 @@ class SubscriptionModel(db.Model):
                                  'measurementGroups':
                                      [mg.serialize() for mg in self.measurement_groups]}}
 
+    def sub_nfs(self):
+        """
+        Generates the dictionary of subscription name, measurement group name, administrative state
+        and network functions
+
+        Returns:
+           dict: of subscription name, measurement group name, administrative state
+                 and network functions
+        """
+        sub_nfs = db.session.query(NetworkFunctionModel).filter(
+            NfSubRelationalModel.subscription_name == self.subscription_name).all()
+        db.session.remove()
+        return {'networkFunctions':
+                [sub_nf.to_nf() for sub_nf in sub_nfs]}
+
 
 class NetworkFunctionModel(db.Model):
     __tablename__ = 'network_functions'
@@ -145,19 +160,6 @@ class NfSubRelationalModel(db.Model):
     def serialize(self):
         return {'subscription_name': self.subscription_name, 'nf_name': self.nf_name,
                 'nf_sub_status': self.nf_sub_status}
-
-    def serialize_nf(self):
-        nf = NetworkFunctionModel.query.filter(
-            NetworkFunctionModel.nf_name == self.nf_name).one_or_none()
-        return {'nf_name': self.nf_name,
-                'ipv4_address': nf.ipv4_address,
-                'ipv6_address': nf.ipv6_address,
-                'nf_sub_status': self.nf_sub_status,
-                'model_invariant_id': nf.model_invariant_id,
-                'model_version_id': nf.model_version_id,
-                'model_name': nf.model_name,
-                'sdnc_model_name': nf.sdnc_model_name,
-                'sdnc_model_version': nf.sdnc_model_version}
 
 
 class NetworkFunctionFilterModel(db.Model):

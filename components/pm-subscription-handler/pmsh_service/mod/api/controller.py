@@ -22,7 +22,6 @@ from mod.api.services import subscription_service, measurement_group_service
 from connexion import NoContent
 from mod.api.custom_exception import InvalidDataException, DuplicateDataException, \
     DataConflictException
-from mod.api.services.measurement_group_service import AdministrativeState
 
 
 def status():
@@ -66,6 +65,58 @@ def post_subscription(body):
                      f'{body["subscription"]["subscriptionName"]} due to invalid data: {e}',
                      exc_info=True)
         response = e.args[0], HTTPStatus.BAD_REQUEST.value
+    return response
+
+
+def post_meas_group(subscription_name, measurement_group_name, body):
+    """
+    Creates a measurement group for a subscription
+
+    Args:
+        subscription_name (String): Name of the subscription.
+        measurement_group_name (String): Name of the measurement group
+        body (dict): measurement group request body to save.
+
+    Returns:
+        Success : NoContent, 201
+        Invalid Data: Invalid message, 400
+        Not Found: Subscription no found, 404
+        Duplicate Data : Duplicate field detail, 409
+
+    Raises:
+        Error: If anything fails in the server.
+    """
+    response = NoContent, HTTPStatus.CREATED.value
+    try:
+        subscription = subscription_service.query_subscription_by_name(subscription_name)
+        if subscription is not None:
+            try:
+                measurement_group_service.create_measurement_group(subscription,
+                                                                   measurement_group_name, body)
+            except DuplicateDataException as e:
+                logger.error(f'Failed to create measurement group for '
+                             f'{subscription_name} due to duplicate data: {e}',
+                             exc_info=True)
+                response = e.args[0], HTTPStatus.CONFLICT.value
+            except InvalidDataException as e:
+                logger.error(f'Failed to create measurement group for '
+                             f'{subscription_name} due to invalid data: {e}',
+                             exc_info=True)
+                response = e.args[0], HTTPStatus.BAD_REQUEST.value
+            except Exception as e:
+                logger.error(f'Failed to create measurement group due to exception {e}')
+                response = e.args[0], HTTPStatus.INTERNAL_SERVER_ERROR.value
+        else:
+            logger.error('queried subscription was un successful with the name: '
+                         f'{subscription_name}')
+            return {'error': 'Subscription was not defined with the name : '
+                             f'{subscription_name}'}, HTTPStatus.NOT_FOUND.value
+
+    except Exception as exception:
+        logger.error(f'While querying the subscription with name: {subscription_name}, '
+                     f'it occurred the following exception "{exception}"')
+        return {'error': 'Request was not processed due to Exception : '
+                f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
     return response
 
 
@@ -169,7 +220,8 @@ def delete_meas_group_by_name(subscription_name, measurement_group_name):
         measurement_group_administrative_status = \
             measurement_group_service.query_get_meas_group_admin_status(subscription_name,
                                                                         measurement_group_name)
-        if measurement_group_administrative_status == AdministrativeState.LOCKED.value:
+        if measurement_group_administrative_status == \
+                measurement_group_service.AdministrativeState.LOCKED.value:
             if measurement_group_service.query_to_delete_meas_group(subscription_name,
                                                                     measurement_group_name) == 1:
                 return None, HTTPStatus.NO_CONTENT
