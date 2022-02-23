@@ -16,14 +16,83 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-from mod.api.custom_exception import InvalidDataException, DataConflictException
-from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel, \
-    SubscriptionModel
+from mod.api.custom_exception import InvalidDataException, \
+    DataConflictException, DuplicateDataException
+from mod.api.db_models import MeasurementGroupModel, \
+    NfMeasureGroupRelationalModel, SubscriptionModel
 from mod import db, logger
 from mod.api.services import nf_service, subscription_service
 from mod.network_function import NetworkFunction
 from mod.pmsh_config import MRTopic, AppConfig
 from mod.subscription import AdministrativeState, SubNfState
+
+
+def create_measurement_group(subscription, measurement_group_name, body):
+    """
+    Creates a measurement group for a subscription
+
+    Args:
+        subscription (String): Name of the subscription.
+        measurement_group_name (String): Name of MeasGroup
+        body (dict): measurement group request body to save.
+
+    """
+    logger.info(f'Initiating create measurement group for: {body.measurement_group_name}')
+    check_duplication(subscription.subscription_name, body.measurement_group_name)
+    check_measurement_group_names_comply(measurement_group_name, body.measurement_group_name)
+    save_measurement_group(body, subscription.subscription_name)
+    measurement_groups = [body]
+    filtered_nfs = nf_service.capture_filtered_nfs(subscription.subscription_name)
+    if filtered_nfs:
+        subscription_service.save_filtered_nfs(filtered_nfs)
+        subscription_service.apply_subscription_to_nfs(filtered_nfs, subscription.subscription_name)
+        unlocked_msmt_groups = subscription_service.apply_measurement_grp_to_nfs(filtered_nfs,
+                                                                                 measurement_groups)
+        if unlocked_msmt_groups:
+            subscription_service.publish_measurement_grp_to_nfs(subscription, filtered_nfs,
+                                                                unlocked_msmt_groups)
+        else:
+            logger.error(f'Measurement group is locked for subscription: '
+                         f'{subscription.subscription_name}, '
+                         f'please verify/check measurement group.')
+    else:
+        logger.error(f'No network functions found for subscription: '
+                     f'{subscription.subscription_name}, '
+                     f'please verify/check NetworkFunctionFilter.')
+    db.session.commit()
+
+
+def check_measurement_group_names_comply(measurement_group_name, body_measurement_group_name):
+    """
+    Check if measurement_group_name matches the name in the URI
+
+    Args:
+        measurement_group_name (String): Name of the measurement group
+        body_measurement_group_name (String): Name of the measurement group in body
+
+    Raises:
+        InvalidDataException: exception informing that measurement_group_names do not match
+    """
+    if measurement_group_name != body_measurement_group_name:
+        raise InvalidDataException('Measurement Group Name in body does not match with URI')
+
+
+def check_duplication(subscription_name, measurement_group_name):
+    """
+    Check if measurement group exists already
+
+    Args:
+        measurement_group_name (String): Name of the measurement group
+        subscription_name (string) : subscription name to associate with measurement group.
+
+    Raises:
+        DuplicateDataException: exception containing the detail on duplicate data field.
+    """
+    logger.info(f"Checking that measurement group {measurement_group_name} does not exist")
+    existing_meas_group = query_meas_group_by_name(subscription_name, measurement_group_name)
+    if existing_meas_group is not None:
+        raise DuplicateDataException(f'Measurement Group Name: '
+                                     f'{measurement_group_name} already exists.')
 
 
 def save_measurement_group(measurement_group, subscription_name):
@@ -38,14 +107,17 @@ def save_measurement_group(measurement_group, subscription_name):
         MeasurementGroupModel : measurement group saved in the database
     """
     logger.info(f'Saving measurement group for subscription request: {subscription_name}')
-    new_measurement_group = MeasurementGroupModel(
-        subscription_name=subscription_name,
-        measurement_group_name=measurement_group['measurementGroupName'],
-        administrative_state=measurement_group['administrativeState'],
-        file_based_gp=measurement_group['fileBasedGP'],
-        file_location=measurement_group['fileLocation'],
-        measurement_type=measurement_group['measurementTypes'],
-        managed_object_dns_basic=measurement_group['managedObjectDNsBasic'])
+    if type(measurement_group) != MeasurementGroupModel:
+        new_measurement_group = MeasurementGroupModel(
+            subscription_name=subscription_name,
+            measurement_group_name=measurement_group['measurementGroupName'],
+            administrative_state=measurement_group['administrativeState'],
+            file_based_gp=measurement_group['fileBasedGP'],
+            file_location=measurement_group['fileLocation'],
+            measurement_type=measurement_group['measurementTypes'],
+            managed_object_dns_basic=measurement_group['managedObjectDNsBasic'])
+    else:
+        new_measurement_group = measurement_group
     db.session.add(new_measurement_group)
     return new_measurement_group
 
