@@ -160,6 +160,37 @@ paths:
           description: Exception occurred while querying database
 
   /subscription/{subscription_name}/measurementGroups/{measurement_group_name}:
+    post:
+      description: Create a measurement group for a given subscription
+      operationId: mod.api.controller.post_meas_group
+      tags:
+        - "Measurement Group"
+      parameters:
+        - name : subscription_name
+          in: path
+          required: true
+          description: Name of the subscription
+          type: string
+        - name: measurement_group_name
+          in: path
+          required: true
+          description: Name of the measurement group
+          type: string
+        - in: "body"
+            name: "body"
+            required: true
+            schema:
+              $ref: "#/definitions/measurementGroup"
+      responses:
+        201:
+          description: Successfully created measurement group
+        404:
+          description: Subscription with the specified name not found
+        409:
+          description: Duplicate data
+        500:
+          description: Internal server error
+
     get:
       description: Get the  measurement group and associated network functions
                   from PMSH by using sub name and meas group name
