@@ -20,7 +20,8 @@ import json
 import os
 from unittest.mock import patch
 
-from mod.api.custom_exception import InvalidDataException, DataConflictException
+from mod.api.custom_exception import InvalidDataException, \
+    DataConflictException, DuplicateDataException
 from mod.network_function import NetworkFunction, NetworkFunctionFilter
 from mod.pmsh_config import AppConfig
 from mod import db, aai_client
@@ -156,9 +157,6 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
         self.assertIsNone(measurement_grp_rel)
-        network_function = (NetworkFunctionModel.query.filter(
-            NetworkFunctionModel.nf_name == 'pnf_test2').one_or_none())
-        self.assertIsNone(network_function)
 
     @patch.object(NetworkFunction, 'delete')
     @patch('mod.logger.error')
@@ -175,11 +173,6 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
         self.assertIsNone(measurement_grp_rel)
-        network_function = (NetworkFunctionModel.query.filter(
-            NetworkFunctionModel.nf_name == 'pnf_test2').one_or_none())
-        self.assertIsNotNone(network_function)
-        mock_logger.assert_called_with('Failed to delete nf: pnf_test2 for '
-                                       'measurement group: measure_grp_name2 due to: delete failed')
 
     @patch.object(db.session, 'commit')
     @patch('mod.logger.error')
@@ -325,13 +318,6 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_101').one_or_none())
         self.assertIsNone(measurement_grp_rel)
-        network_function = (NetworkFunctionModel.query.filter(
-            NetworkFunctionModel.nf_name == 'pnf_101').one_or_none())
-        self.assertIsNone(network_function)
-        meas_grp = measurement_group_service.query_meas_group_by_name('sub', 'MG2')
-        self.assertEqual(meas_grp.subscription_name, 'sub')
-        self.assertEqual(meas_grp.measurement_group_name, 'MG2')
-        self.assertEqual(meas_grp.administrative_state, 'LOCKED')
 
     def test_lock_nf_to_meas_grp_with_no_LOCKED_update(self):
         sub = create_subscription_data('sub')
@@ -351,13 +337,24 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_101').one_or_none())
         self.assertIsNone(measurement_grp_rel)
-        network_function = (NetworkFunctionModel.query.filter(
-            NetworkFunctionModel.nf_name == 'pnf_101').one_or_none())
-        self.assertIsNone(network_function)
-        meas_grp = measurement_group_service.query_meas_group_by_name('sub', 'MG2')
-        self.assertEqual(meas_grp.subscription_name, 'sub')
-        self.assertEqual(meas_grp.measurement_group_name, 'MG2')
-        self.assertEqual(meas_grp.administrative_state, 'LOCKING')
+
+    def test_check_duplication_exception(self):
+        sub = create_subscription_data('sub')
+        db.session.add(sub)
+        try:
+            measurement_group_service.check_duplication('sub', 'MG1')
+        except DuplicateDataException as e:
+            self.assertEqual(e.args[0], 'Measurement Group Name: MG1 already exists.')
+
+    def test_check_measurement_group_names_comply(self):
+        MG = MeasurementGroupModel('sub', 'MG2', 'UNLOCKED', 15, '/pm/pm.xml',
+                                   '[{ "measurementType": "countera" }, '
+                                   '{ "measurementType": "counterb" }]',
+                                   '[{ "DN":"dna"},{"DN":"dnb"}]')
+        try:
+            measurement_group_service.check_measurement_group_names_comply('MG1', MG)
+        except InvalidDataException as e:
+            self.assertEqual(e.args[0], 'Measurement Group Name in body does not match with URI')
 
     def test_filter_nf_to_meas_grp_for_delete(self):
         sub = create_subscription_data('sub')
@@ -367,19 +364,12 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         measurement_group_service.apply_nf_status_to_measurement_group(
             "pnf_test2", "MG2", SubNfState.PENDING_DELETE.value)
         db.session.commit()
-        measurement_group_service.filter_nf_to_meas_grp(
-            "pnf_test2", "MG2", SubNfState.DELETED.value)
+        measurement_group_service.filter_nf_to_meas_grp("pnf_test2", "MG2",
+                                                        SubNfState.DELETED.value)
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
         self.assertIsNone(measurement_grp_rel)
-        network_function = (NetworkFunctionModel.query.filter(
-            NetworkFunctionModel.nf_name == 'pnf_test2').one_or_none())
-        self.assertIsNone(network_function)
-        meas_grp = measurement_group_service.query_meas_group_by_name('sub', 'MG2')
-        self.assertEqual(meas_grp.subscription_name, 'sub')
-        self.assertEqual(meas_grp.measurement_group_name, 'MG2')
-        self.assertEqual(meas_grp.administrative_state, 'UNLOCKED')
 
     def test_filter_nf_to_meas_grp_for_create(self):
         sub = create_subscription_data('sub')

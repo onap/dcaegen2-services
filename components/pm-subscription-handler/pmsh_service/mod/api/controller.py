@@ -69,6 +69,58 @@ def post_subscription(body):
     return response
 
 
+def post_meas_group(subscription_name, measurement_group_name, body):
+    """
+    Creates a measurement group for a subscription
+
+    Args:
+        subscription_name (String): Name of the subscription.
+        measurement_group_name (String): Name of the measurement group
+        body (dict): measurement group request body to save.
+
+    Returns:
+        Success : NoContent, 201
+        Invalid Data: Invalid message, 400
+        Not Found: Subscription no found, 404
+        Duplicate Data : Duplicate field detail, 409
+
+    Raises:
+        Error: If anything fails in the server.
+    """
+    response = NoContent, HTTPStatus.CREATED.value
+    try:
+        subscription = subscription_service.query_subscription_by_name(subscription_name)
+        if subscription is not None:
+            try:
+                measurement_group_service.create_measurement_group(subscription,
+                                                                   measurement_group_name, body)
+            except DuplicateDataException as e:
+                logger.error(f'Failed to create measurement group for '
+                             f'{subscription_name} due to duplicate data: {e}',
+                             exc_info=True)
+                response = e.args[0], HTTPStatus.CONFLICT.value
+            except InvalidDataException as e:
+                logger.error(f'Failed to create measurement group for '
+                             f'{subscription_name} due to invalid data: {e}',
+                             exc_info=True)
+                response = e.args[0], HTTPStatus.BAD_REQUEST.value
+            except Exception as e:
+                logger.error(f'Failed to create measurement group due to exception {e}')
+                response = e.args[0], HTTPStatus.INTERNAL_SERVER_ERROR.value
+        else:
+            logger.error('queried subscription was un successful with the name: '
+                         f'{subscription_name}')
+            return {'error': 'Subscription was not defined with the name : '
+                             f'{subscription_name}'}, HTTPStatus.NOT_FOUND.value
+
+    except Exception as exception:
+        logger.error(f'While querying the subscription with name: {subscription_name}, '
+                     f'it occurred the following exception "{exception}"')
+        return {'error': 'Request was not processed due to Exception : '
+                f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
+    return response
+
+
 def get_subscription_by_name(subscription_name):
     """
     Retrieves subscription based on the name
@@ -114,6 +166,22 @@ def get_subscriptions():
         logger.error(f'The following exception occurred while fetching subscriptions: {exception}')
         return {'error': 'Request was not processed due to Exception : '
                          f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
+
+
+def get_sub_nfs(subscription_name):
+    try:
+        sub = subscription_service.query_subscription_by_name(subscription_name)
+        if sub is not None:
+            return sub.sub_nfs(), HTTPStatus.OK.value
+        else:
+            logger.error(f'Subscription {subscription_name} does not exist')
+            return {'error': 'Subscription does not exist: '
+                    f'{subscription_name} '}, HTTPStatus.NOT_FOUND.value
+    except Exception as exception:
+        logger.error('The following exception occurred while fetching subscription: '
+                     f'{exception}')
+        return {'error': 'Request was not processed due to Exception : '
+                f'{exception}'}, HTTPStatus.INTERNAL_SERVER_ERROR.value
 
 
 def get_meas_group_with_nfs(subscription_name, measurement_group_name):

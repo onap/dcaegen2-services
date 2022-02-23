@@ -16,15 +16,70 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-from mod.api.custom_exception import InvalidDataException, DataConflictException
-from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel, \
-    SubscriptionModel
+from mod.api.custom_exception import InvalidDataException, \
+    DataConflictException, DuplicateDataException
+from mod.api.db_models import MeasurementGroupModel, \
+    NfMeasureGroupRelationalModel, SubscriptionModel
 from mod import db, logger
 from mod.api.services import nf_service, subscription_service
 from mod.network_function import NetworkFunction
 from mod.pmsh_config import MRTopic, AppConfig
 from mod.subscription import AdministrativeState, SubNfState
 from sqlalchemy import or_
+
+
+def create_measurement_group(subscription, measurement_group_name, body):
+    """
+    Creates a measurement group for a subscription
+
+    Args:
+        subscription (SubscriptionModel): Subscription.
+        measurement_group_name (String): Name of MeasGroup
+        body (dict): measurement group request body to save.
+
+    """
+    logger.info(f'Initiating create measurement group for: {measurement_group_name}')
+    meas_group = [body]
+    check_measurement_group_names_comply(measurement_group_name, body)
+    check_duplication(subscription.subscription_name, measurement_group_name)
+    save_measurement_group(body, subscription.subscription_name)
+    filtered_nfs = nf_service.capture_filtered_nfs(subscription.subscription_name)
+    subscription_service.add_new_filtered_nfs(filtered_nfs, meas_group, subscription)
+
+
+def check_measurement_group_names_comply(measurement_group_name, measurement_group):
+    """
+    Check if measurement_group_name matches the name in the URI
+
+    Args:
+        measurement_group_name (String): Name of the measurement group
+        measurement_group (MeasurementGroupModel): Measurement Group
+
+    """
+    if measurement_group.measurement_group_name is not None:
+        if measurement_group_name != measurement_group.measurement_group_name:
+            logger.info(f'Changing measurement_group_name in body to {measurement_group_name}')
+            measurement_group.measurement_group_name = measurement_group_name
+    else:
+        measurement_group.measurement_group_name = measurement_group_name
+
+
+def check_duplication(subscription_name, measurement_group_name):
+    """
+    Check if measurement group exists already
+
+    Args:
+        measurement_group_name (String): Name of the measurement group
+        subscription_name (string) : subscription name to associate with measurement group.
+
+    Raises:
+        DuplicateDataException: exception containing the detail on duplicate data field.
+    """
+    logger.info(f"Checking that measurement group {measurement_group_name} does not exist")
+    existing_meas_group = query_meas_group_by_name(subscription_name, measurement_group_name)
+    if existing_meas_group is not None:
+        raise DuplicateDataException(f'Measurement Group Name: '
+                                     f'{measurement_group_name} already exists.')
 
 
 def save_measurement_group(measurement_group, subscription_name):
@@ -39,14 +94,17 @@ def save_measurement_group(measurement_group, subscription_name):
         MeasurementGroupModel : measurement group saved in the database
     """
     logger.info(f'Saving measurement group for subscription request: {subscription_name}')
-    new_measurement_group = MeasurementGroupModel(
-        subscription_name=subscription_name,
-        measurement_group_name=measurement_group['measurementGroupName'],
-        administrative_state=measurement_group['administrativeState'],
-        file_based_gp=measurement_group['fileBasedGP'],
-        file_location=measurement_group['fileLocation'],
-        measurement_type=measurement_group['measurementTypes'],
-        managed_object_dns_basic=measurement_group['managedObjectDNsBasic'])
+    if type(measurement_group) != MeasurementGroupModel:
+        new_measurement_group = MeasurementGroupModel(
+            subscription_name=subscription_name,
+            measurement_group_name=measurement_group['measurementGroupName'],
+            administrative_state=measurement_group['administrativeState'],
+            file_based_gp=measurement_group['fileBasedGP'],
+            file_location=measurement_group['fileLocation'],
+            measurement_type=measurement_group['measurementTypes'],
+            managed_object_dns_basic=measurement_group['managedObjectDNsBasic'])
+    else:
+        new_measurement_group = measurement_group
     db.session.add(new_measurement_group)
     return new_measurement_group
 
@@ -133,10 +191,6 @@ def delete_nf_to_measurement_group(nf_name, measurement_group_name, status):
             NfMeasureGroupRelationalModel.nf_name == nf_name).one_or_none()
         db.session.delete(nf_measurement_group_rel)
         db.session.commit()
-        nf_relations = NfMeasureGroupRelationalModel.query.filter(
-            NfMeasureGroupRelationalModel.nf_name == nf_name).all()
-        if not nf_relations:
-            NetworkFunction.delete(nf_name=nf_name)
     except Exception as e:
         logger.error(f'Failed to delete nf: {nf_name} for measurement group: '
                      f'{measurement_group_name} due to: {e}')
