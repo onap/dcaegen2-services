@@ -131,6 +131,33 @@ paths:
         500:
           description: Exception occurred on the server
 
+  /subscription/{subscription_name}/nfFilter:
+    put:
+      tags:
+        - "Subscription"
+      description: >-
+        Update a Subscription nf filter
+      operationId: mod.api.controller.put_nf_filter
+      parameters:
+        - name: subscription_name
+          in: path
+          required: true
+          description: The name of the subscription to update nf filters
+          type: string
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/nfFilter"
+      responses:
+        201:
+          description: Successfully updated nf filter
+        409:
+          description: Conflicting data
+        400:
+          description: Invalid input
+        500:
+          description: Exception occurred while querying database
 
   /subscription/{subscription_name}/measurementGroups/{measurement_group_name}:
     get:
@@ -162,9 +189,9 @@ paths:
 
     delete:
       description: Delete a measurement group
-      operationId: mod.api.controller.delete_meas_group
+      operationId: mod.api.controller.delete_meas_group_by_name
       tags:
-        - "measurement group"
+        - "Measurement Group"
       parameters:
         - name : subscription_name
           in: path
