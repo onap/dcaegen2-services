@@ -21,13 +21,14 @@ import os
 from unittest.mock import patch, MagicMock
 from mod.api.db_models import SubscriptionModel, MeasurementGroupModel, \
     NfMeasureGroupRelationalModel, NetworkFunctionModel, NfSubRelationalModel, \
-    convert_db_string_to_list
+    convert_db_string_to_list, NetworkFunctionFilterModel
 from mod.network_function import NetworkFunctionFilter
 from mod.subscription import SubNfState
-from mod import aai_client
-from mod.api.custom_exception import DuplicateDataException, InvalidDataException
+from mod import aai_client, db
+from mod.api.custom_exception import DuplicateDataException, InvalidDataException, \
+    DataConflictException
 from mod.pmsh_config import AppConfig
-from tests.base_setup import BaseClassSetup
+from tests.base_setup import BaseClassSetup, create_subscription_data
 from mod.api.services import subscription_service, nf_service, measurement_group_service
 from tests.base_setup import create_multiple_subscription_data
 
@@ -184,11 +185,10 @@ class SubscriptionServiceTestCase(BaseClassSetup):
                                                 'msrmt_grp_name', 'UNLOCKED',
                                                 15, 'pm.xml', [], [])
         measurement2 = self.create_measurement_grp(measurement_grp, 'meas2', 'UNLOCKED')
-        measurement3 = self.create_measurement_grp(measurement_grp, 'meas3', 'LOCKED')
-        measurement_grps = [measurement_grp, measurement2, measurement3]
+        unlocked_msgs = [measurement_grp, measurement2]
         mock_filter_call.return_value = NetworkFunctionFilter(**subscription["nfFilter"])
         filtered_nfs = nf_service.capture_filtered_nfs(subscription["subscriptionName"])
-        subscription_service.apply_measurement_grp_to_nfs(filtered_nfs, measurement_grps)
+        subscription_service.apply_measurement_grp_to_nfs(filtered_nfs, unlocked_msgs)
         # 2 measurement group with 2 nfs each contribute 4 calls
         self.assertEqual(mock_apply_nf.call_count, 4)
 
@@ -377,3 +377,168 @@ class SubscriptionServiceTestCase(BaseClassSetup):
     def test_get_subscriptions_list_empty(self):
         subs = subscription_service.get_subscriptions_list()
         self.assertEqual(subs, [])
+
+    @patch('mod.api.services.nf_service.save_nf_filter_update')
+    @patch('mod.api.services.subscription_service.is_duplicate_filter',
+           MagicMock(return_value=False))
+    @patch('mod.api.services.subscription_service.save_nf_filter', MagicMock(return_value=None))
+    @patch('mod.pmsh_config.AppConfig.publish_to_topic', MagicMock(return_value=None))
+    @patch.object(aai_client, '_get_all_aai_nf_data')
+    @patch.object(aai_client, 'get_aai_model_data')
+    @patch.object(NetworkFunctionFilter, 'get_network_function_filter')
+    def test_update_filter(self, mock_filter_call, mock_model_aai, mock_aai, mock_update_filter):
+        mock_aai.return_value = json.loads(self.aai_response_data)
+        mock_model_aai.return_value = json.loads(self.good_model_info)
+        mock_update_filter.return_value = None
+        subscription = self.create_test_subs('sub_01', 'msg_01')
+        subscription = json.loads(subscription)['subscription']
+        nf_filter = subscription['nfFilter']
+        mock_filter_call.return_value = NetworkFunctionFilter(**nf_filter)
+        subscription_service.create_subscription(subscription)
+        subscription_service.update_filter('sub_01', nf_filter)
+        self.assertTrue(mock_update_filter.called)
+
+    @patch('mod.api.services.nf_service.save_nf_filter_update')
+    @patch('mod.api.services.subscription_service.is_duplicate_filter',
+           MagicMock(return_value=False))
+    @patch('mod.api.services.subscription_service.save_nf_filter', MagicMock(return_value=None))
+    @patch('mod.pmsh_config.AppConfig.publish_to_topic', MagicMock(return_value=None))
+    @patch.object(aai_client, '_get_all_aai_nf_data')
+    @patch.object(aai_client, 'get_aai_model_data')
+    @patch.object(NetworkFunctionFilter, 'get_network_function_filter')
+    def test_update_filter_with_new_del_nfs(self, mock_filter_call, mock_model_aai, mock_aai,
+                                            mock_update_filter):
+        mock_aai.return_value = json.loads(self.aai_response_data)
+        mock_model_aai.return_value = json.loads(self.good_model_info)
+        mock_update_filter.return_value = None
+        subscription = self.create_test_subs('sub_01', 'msg_01')
+        subscription = json.loads(subscription)['subscription']
+        nf_filter = subscription['nfFilter']
+        mock_filter_call.return_value = NetworkFunctionFilter(**nf_filter)
+        subscription_service.create_subscription(subscription)
+        # Check existing network functions
+        meas_group_nfs = db.session.query(NfMeasureGroupRelationalModel).filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == 'msg_01') \
+            .all()
+        self.assertEqual(len(meas_group_nfs), 2)
+        self.assertEqual(meas_group_nfs[0].nf_name, 'pnf201')
+        self.assertEqual(meas_group_nfs[0].nf_measure_grp_status,
+                         SubNfState.PENDING_CREATE.value)
+        self.assertEqual(meas_group_nfs[1].nf_name, 'pnf_33_ericsson')
+        self.assertEqual(meas_group_nfs[1].nf_measure_grp_status,
+                         SubNfState.PENDING_CREATE.value)
+        meas_grp = measurement_group_service.query_meas_group_by_name('sub_01', 'msg_01')
+        self.assertEqual(meas_grp.administrative_state, 'UNLOCKED')
+        # Creating test data for update filter function
+        aai_response = self.aai_response_data.replace('pnf201', 'xnf111')
+        mock_aai.return_value = json.loads(aai_response)
+        nf_filter['nfNames'] = ["^vnf.*", "^xnf.*"]
+        mock_filter_call.return_value = NetworkFunctionFilter(**nf_filter)
+        subscription_service.update_filter('sub_01', nf_filter)
+        self.assertTrue(mock_update_filter.called)
+        # Check updated network functions after filter change
+        meas_group_nfs = db.session.query(NfMeasureGroupRelationalModel).filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == 'msg_01') \
+            .all()
+        self.assertEqual(meas_group_nfs[0].nf_name, 'pnf201')
+        self.assertEqual(meas_group_nfs[0].nf_measure_grp_status,
+                         SubNfState.PENDING_DELETE.value)
+        self.assertEqual(meas_group_nfs[1].nf_name, 'pnf_33_ericsson')
+        self.assertEqual(meas_group_nfs[1].nf_measure_grp_status,
+                         SubNfState.PENDING_DELETE.value)
+        self.assertEqual(meas_group_nfs[2].nf_name, 'xnf111')
+        self.assertEqual(meas_group_nfs[2].nf_measure_grp_status,
+                         SubNfState.PENDING_CREATE.value)
+        meas_grp = measurement_group_service.query_meas_group_by_name('sub_01', 'msg_01')
+        self.assertEqual(meas_grp.administrative_state, 'FILTERING')
+
+    def test_update_filter_locking(self):
+        sub = create_subscription_data('sub')
+        sub.measurement_groups[1].administrative_state = 'LOCKING'
+        db.session.add(sub)
+        try:
+            subscription_service.update_filter('sub', json.loads('{"nfNames": "^pnf.*"}'))
+        except DataConflictException as conflictEx:
+            self.assertEqual(conflictEx.args[0],
+                             'Cannot update filter as subscription: sub is under transitioning'
+                             ' state for the following measurement groups: [subscription_name:'
+                             ' sub, measurement_group_name: MG2, administrative_state: LOCKING,'
+                             ' file_based_gp: 15, file_location: /pm/pm.xml, measurement_type: '
+                             '[{ "measurementType": "countera" }, { "measurementType": '
+                             '"counterb" }], managed_object_dns_basic: [{ "DN":"dna"},'
+                             '{"DN":"dnb"}]]')
+
+    def test_update_filter_filtering(self):
+        sub = create_subscription_data('sub')
+        sub.measurement_groups[1].administrative_state = 'FILTERING'
+        db.session.add(sub)
+        try:
+            subscription_service.update_filter('sub', json.loads('{"nfNames": "^pnf.*"}'))
+        except DataConflictException as conflictEx:
+            self.assertEqual(conflictEx.args[0],
+                             'Cannot update filter as subscription: sub is under transitioning'
+                             ' state for the following measurement groups: [subscription_name:'
+                             ' sub, measurement_group_name: MG2, administrative_state: FILTERING,'
+                             ' file_based_gp: 15, file_location: /pm/pm.xml, measurement_type: ['
+                             '{ "measurementType": "countera" }, { "measurementType": "counterb" '
+                             '}], managed_object_dns_basic: [{ "DN":"dna"},{"DN":"dnb"}]]')
+
+    def test_update_filter_invalid_request(self):
+        try:
+            subscription_service.update_filter("sub3", json.loads('{"nfNames": "^pnf.*"}'))
+        except InvalidDataException as invalidEx:
+            self.assertEqual(invalidEx.args[0],
+                             "Requested subscription is not available with sub name: sub3 "
+                             "for nf filter update")
+
+    @patch('mod.api.services.nf_service.save_nf_filter_update')
+    @patch('mod.api.services.subscription_service.is_duplicate_filter',
+           MagicMock(return_value=True))
+    @patch('mod.api.services.subscription_service.save_nf_filter', MagicMock(return_value=None))
+    @patch('mod.pmsh_config.AppConfig.publish_to_topic', MagicMock(return_value=None))
+    @patch.object(aai_client, '_get_all_aai_nf_data')
+    @patch.object(aai_client, 'get_aai_model_data')
+    @patch.object(NetworkFunctionFilter, 'get_network_function_filter')
+    def test_update_filter_invalid_duplicate_request(self, mock_filter_call, mock_model_aai,
+                                                     mock_aai, mock_update_filter):
+        try:
+            mock_aai.return_value = json.loads(self.aai_response_data)
+            mock_model_aai.return_value = json.loads(self.good_model_info)
+            mock_update_filter.return_value = None
+            subscription = self.create_test_subs('sub_01', 'msg_01')
+            subscription = json.loads(subscription)['subscription']
+            nf_filter = subscription['nfFilter']
+            mock_filter_call.return_value = NetworkFunctionFilter(**nf_filter)
+            subscription_service.create_subscription(subscription)
+            subscription_service.update_filter("sub_01", json.loads('{"nfNames": "^pnf.*"}'))
+        except InvalidDataException as invalidEx:
+            self.assertEqual(invalidEx.args[0],
+                             "Duplicate nf filter update requested for subscription "
+                             "with sub name: sub_01")
+
+    def test_is_duplicate_filter_true(self):
+        subscription = self.create_test_subs('sub_01', 'msg_01')
+        subscription = json.loads(subscription)['subscription']
+        nf_filter = subscription['nfFilter']
+        db_network_filter = NetworkFunctionFilterModel('sub_01',
+                                                       '{^pnf.*,^vnf.*}',
+                                                       '{8lk4578-d396-4efb-af02-6b83499b12f8,'
+                                                       '687kj45-d396-4efb-af02-6b83499b12f8,'
+                                                       '597b524-d396-4efb-af02-6b83499b12f8}',
+                                                       '{e80a6ae3-cafd-4d24-850d-e14c084a5ca9}',
+                                                       '{PNF102}')
+        similar = subscription_service.is_duplicate_filter(nf_filter, db_network_filter)
+        self.assertTrue(similar)
+
+    def test_is_duplicate_filter_false(self):
+        subscription = self.create_test_subs('sub_01', 'msg_01')
+        subscription = json.loads(subscription)['subscription']
+        nf_filter = subscription['nfFilter']
+        db_network_filter = NetworkFunctionFilterModel('sub_01',
+                                                       '{^pnf.*,^vnf.*}',
+                                                       '{8lk4578-d396-4efb-af02-6b83499b12f8,'
+                                                       '687kj45-d396-4efb-af02-6b83499b12f8}',
+                                                       '{e80a6ae3-cafd-4d24-850d-e14c084a5ca9}',
+                                                       '{PNF102}')
+        similar = subscription_service.is_duplicate_filter(nf_filter, db_network_filter)
+        self.assertFalse(similar)

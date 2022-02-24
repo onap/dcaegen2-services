@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2021 Nordix Foundation.
+#  Copyright (C) 2019-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 from unittest.mock import patch, MagicMock
 
 from mod import db
+from mod.api.services import measurement_group_service
 from mod.network_function import NetworkFunction
 from mod.policy_response_handler import PolicyResponseHandler, policy_response_handle_functions
 from mod.subscription import AdministrativeState, SubNfState
@@ -100,6 +101,40 @@ class PolicyResponseHandlerTest(BaseClassSetup):
                 status=SubNfState.CREATED.value, nf_name=self.nf.nf_name)
 
     @patch('mod.api.services.measurement_group_service.update_measurement_group_nf_status')
+    def test_handle_response_unlocked_success_filtering(self, mock_update_sub_nf):
+        with patch.dict(policy_response_handle_functions,
+                        {AdministrativeState.UNLOCKED.value: {'success': mock_update_sub_nf}}):
+            sub = create_subscription_data('sub')
+            db.session.add(sub)
+            measurement_group_service.apply_nf_status_to_measurement_group(
+                self.nf.nf_name, "MG2", SubNfState.PENDING_CREATE.value)
+            db.session.commit()
+            self.policy_response_handler._handle_response(
+                'MG2',
+                AdministrativeState.FILTERING.value,
+                self.nf.nf_name, 'success')
+            mock_update_sub_nf.assert_called_with(
+                measurement_group_name='MG2',
+                status=SubNfState.CREATED.value, nf_name=self.nf.nf_name)
+
+    @patch('mod.api.services.measurement_group_service.update_measurement_group_nf_status')
+    def test_handle_response_locking_success_filtering(self, mock_update_sub_nf):
+        with patch.dict(policy_response_handle_functions,
+                        {AdministrativeState.LOCKING.value: {'success': mock_update_sub_nf}}):
+            sub = create_subscription_data('sub')
+            db.session.add(sub)
+            measurement_group_service.apply_nf_status_to_measurement_group(
+                self.nf.nf_name, "MG2", SubNfState.PENDING_DELETE.value)
+            db.session.commit()
+            self.policy_response_handler._handle_response(
+                'MG2',
+                AdministrativeState.FILTERING.value,
+                self.nf.nf_name, 'success')
+            mock_update_sub_nf.assert_called_with(
+                measurement_group_name='MG2',
+                status=SubNfState.DELETED.value, nf_name=self.nf.nf_name)
+
+    @patch('mod.api.services.measurement_group_service.update_measurement_group_nf_status')
     def test_handle_response_unlocked_failed(self, mock_update_sub_nf):
         with patch.dict(policy_response_handle_functions,
                         {AdministrativeState.UNLOCKED.value: {'failed': mock_update_sub_nf}}):
@@ -110,6 +145,40 @@ class PolicyResponseHandlerTest(BaseClassSetup):
             mock_update_sub_nf.assert_called_with(
                 measurement_group_name='msr_grp_name',
                 status=SubNfState.CREATE_FAILED.value, nf_name=self.nf.nf_name)
+
+    @patch('mod.api.services.measurement_group_service.update_measurement_group_nf_status')
+    def test_handle_response_create_failed_filtering(self, mock_update_sub_nf):
+        with patch.dict(policy_response_handle_functions,
+                        {AdministrativeState.UNLOCKED.value: {'failed': mock_update_sub_nf}}):
+            sub = create_subscription_data('sub')
+            db.session.add(sub)
+            measurement_group_service.apply_nf_status_to_measurement_group(
+                self.nf.nf_name, "MG2", SubNfState.PENDING_CREATE.value)
+            db.session.commit()
+            self.policy_response_handler._handle_response(
+                'MG2',
+                AdministrativeState.FILTERING.value,
+                self.nf.nf_name, 'failed')
+            mock_update_sub_nf.assert_called_with(
+                measurement_group_name='MG2',
+                status=SubNfState.CREATE_FAILED.value, nf_name=self.nf.nf_name)
+
+    @patch('mod.api.services.measurement_group_service.update_measurement_group_nf_status')
+    def test_handle_response_delete_failed_filtering(self, mock_update_sub_nf):
+        with patch.dict(policy_response_handle_functions,
+                        {AdministrativeState.LOCKING.value: {'failed': mock_update_sub_nf}}):
+            sub = create_subscription_data('sub')
+            db.session.add(sub)
+            measurement_group_service.apply_nf_status_to_measurement_group(
+                self.nf.nf_name, "MG2", SubNfState.PENDING_DELETE.value)
+            db.session.commit()
+            self.policy_response_handler._handle_response(
+                'MG2',
+                AdministrativeState.FILTERING.value,
+                self.nf.nf_name, 'failed')
+            mock_update_sub_nf.assert_called_with(
+                measurement_group_name='MG2',
+                status=SubNfState.DELETE_FAILED.value, nf_name=self.nf.nf_name)
 
     def test_handle_response_exception(self):
         self.assertRaises(Exception, self.policy_response_handler._handle_response, 'sub1',
