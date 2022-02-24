@@ -17,7 +17,7 @@
 # ============LICENSE_END=====================================================
 
 from mod import db, aai_client, logger
-from mod.api.db_models import NetworkFunctionModel
+from mod.api.db_models import NetworkFunctionModel, NetworkFunctionFilterModel
 from mod.pmsh_config import AppConfig
 from mod.network_function import NetworkFunctionFilter
 
@@ -74,3 +74,22 @@ def save_nf(nf):
                                             sdnc_model_name=nf.sdnc_model_name,
                                             sdnc_model_version=nf.sdnc_model_version)
     db.session.add(network_function)
+
+
+def save_nf_filter_update(sub_name, nf_filter):
+    """
+    Updates the network function filter for the subscription in the db
+
+    Args:
+       sub_name (String): Name of the Subscription
+       nf_filter (dict): filter object to update in the subscription
+    """
+    NetworkFunctionFilterModel.query.filter(
+        NetworkFunctionFilterModel.subscription_name == sub_name). \
+        update({NetworkFunctionFilterModel.nf_names: nf_filter['nfNames'],
+                NetworkFunctionFilterModel.model_invariant_ids: nf_filter['modelInvariantIDs'],
+                NetworkFunctionFilterModel.model_version_ids: nf_filter['modelVersionIDs'],
+                NetworkFunctionFilterModel.model_names: nf_filter['modelNames']},
+               synchronize_session='evaluate')
+    db.session.commit()
+    logger.info(f'Successfully saved filter for subscription: {sub_name}')

@@ -23,7 +23,7 @@ from http import HTTPStatus
 from mod import aai_client, db
 from mod.api.controller import status, post_subscription, get_subscription_by_name, \
     get_subscriptions, get_meas_group_with_nfs, delete_subscription_by_name, update_admin_state, \
-    delete_meas_group_by_name
+    delete_meas_group_by_name, put_nf_filter
 from mod.api.services.measurement_group_service import query_meas_group_by_name
 from tests.base_setup import BaseClassSetup
 from mod.api.custom_exception import InvalidDataException, DataConflictException
@@ -366,3 +366,33 @@ class ControllerTestCase(BaseClassSetup):
         self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)
         self.assertEqual(error, 'Update admin status request was not processed for sub name: sub4 '
                                 'and meas group name: MG2 due to Exception : Server Error')
+
+    @patch('mod.api.services.subscription_service.update_filter', MagicMock(return_value=None))
+    def test_put_nf_filter(self):
+        response = put_nf_filter('sub1', json.loads('{"nfNames": ["^pnf.*", "^vnf.*"]}'))
+        self.assertEqual(response[0], 'Successfully updated network function Filter')
+        self.assertEqual(response[1], HTTPStatus.OK.value)
+
+    @patch('mod.api.services.subscription_service.update_filter',
+           MagicMock(side_effect=InvalidDataException('Bad request')))
+    def test_put_nf_filter_api_invalid_data_exception(self):
+        error, status_code = put_nf_filter('sub1',
+                                           json.loads('{"nfNames": ["^pnf.*", "^vnf.*"]}'))
+        self.assertEqual(status_code, HTTPStatus.BAD_REQUEST.value)
+        self.assertEqual(error, 'Bad request')
+
+    @patch('mod.api.services.subscription_service.update_filter',
+           MagicMock(side_effect=DataConflictException('Data conflict')))
+    def test_put_nf_filter_api_data_conflict_exception(self):
+        error, status_code = put_nf_filter('sub1',
+                                           json.loads('{"nfNames": ["^pnf.*", "^vnf.*"]}'))
+        self.assertEqual(status_code, HTTPStatus.CONFLICT.value)
+        self.assertEqual(error, 'Data conflict')
+
+    @patch('mod.api.services.subscription_service.update_filter',
+           MagicMock(side_effect=Exception('Server Error')))
+    def test_put_nf_filter_api_exception(self):
+        error, status_code = put_nf_filter('sub1', json.loads('{"nfNames": ["^pnf.*", "^vnf.*"]}'))
+        self.assertEqual(status_code, HTTPStatus.INTERNAL_SERVER_ERROR.value)
+        self.assertEqual(error, 'Update nf filter request was not processed for sub name: sub1 '
+                                'due to Exception : Server Error')
