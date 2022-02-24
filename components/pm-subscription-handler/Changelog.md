@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [2.1.1]
 ### Changed
 * Fixes for Flask, MarkupSafe versions + tox (DCAEGEN2-3086)
+* Update Filter API (DCAEGEN2-2922)
 
 ## [2.1.0]
 ### Changed
