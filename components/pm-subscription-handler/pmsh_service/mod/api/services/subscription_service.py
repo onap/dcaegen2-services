@@ -18,9 +18,11 @@
 
 from mod import db, logger
 from mod.api.db_models import SubscriptionModel, NfSubRelationalModel, \
-    NetworkFunctionFilterModel, NetworkFunctionModel, MeasurementGroupModel
+    NetworkFunctionFilterModel, NetworkFunctionModel, MeasurementGroupModel, \
+    NfMeasureGroupRelationalModel
 from mod.api.services import measurement_group_service, nf_service
-from mod.api.custom_exception import InvalidDataException, DuplicateDataException
+from mod.api.custom_exception import InvalidDataException, DuplicateDataException, \
+    DataConflictException
 from mod.subscription import AdministrativeState, SubNfState
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
@@ -380,3 +382,97 @@ def query_to_delete_subscription_by_name(subscription_name):
         .filter_by(subscription_name=subscription_name).delete()
     db.session.commit()
     return effected_rows
+
+
+def init_nf_filter_update(sub_name, nf_filter):
+    """
+       Updates the network function filter for the subscription in the db
+
+       Args:
+           sub_name (String): Name of the Subscription
+           nf_filter (dict): filter object to update in the subscription
+    """
+    NetworkFunctionFilterModel.query.filter(
+        NetworkFunctionFilterModel.subscription_name == sub_name). \
+        update({NetworkFunctionFilterModel.nf_names: nf_filter['nfNames'],
+                NetworkFunctionFilterModel.model_invariant_ids: nf_filter['modelInvariantIDs'],
+                NetworkFunctionFilterModel.model_version_ids: nf_filter['modelVersionIDs'],
+                NetworkFunctionFilterModel.model_names: nf_filter['modelNames']},
+               synchronize_session='evaluate')
+    db.session.commit()
+    logger.info(f'Successfully saved filter for subscription: {sub_name}')
+
+
+def update_filter(sub_name, nf_filter):
+    """
+    Updates the network function filter for the subscription
+
+    Args:
+        sub_name (String): Name of the Subscription
+        nf_filter (dict): filter object to update in the subscription
+
+    Returns:
+        InvalidDataException: contains details on invalid fields
+        DataConflictException: contains details on conflicting state of a field
+        Exception: contains runtime error details
+    """
+    sub_model = query_subscription_by_name(sub_name)
+    if sub_model is None:
+        raise InvalidDataException('Requested subscription is not available '
+                                   f'with sub name: {sub_name} for nf filter update')
+    status = ''
+    mg_names_processing = []
+    unlocked_mgs = []
+    for mg in sub_model.measurement_groups:
+        if mg.administrative_state in [AdministrativeState.FILTERING.value,
+                                       AdministrativeState.LOCKING.value]:
+            mg_names_processing.append(mg.measurement_group_name)
+            if status == '':
+                status = mg.administrative_state
+        elif mg.administrative_state == AdministrativeState.UNLOCKED.value:
+            unlocked_mgs.append(mg)
+    if mg_names_processing:
+        raise DataConflictException(f'Cannot update filter as subscription: {sub_name} is under '
+                                    f'{status} status for the following measurement '
+                                    f'groups: {mg_names_processing}')
+
+    init_nf_filter_update(sub_name, nf_filter)
+
+    if unlocked_mgs:
+        filtered_nfs = nf_service.capture_filtered_nfs(sub_name)
+        filtered_nf_names = [nf.nf_name for nf in filtered_nfs]
+        existing_nf_names = [nf.nf_name for nf in sub_model.nfs]
+        new_nfs = list(filter(lambda x: x.nf_name not in existing_nf_names, filtered_nfs))
+        del_nfs = [nf.nf_name for nf in sub_model.nfs if nf.nf_name not in filtered_nf_names]
+
+        if new_nfs:
+            logger.info(f'Applying the new nfs for subscription: '
+                        f'{sub_model.subscription_name}')
+            save_filtered_nfs(new_nfs)
+            apply_subscription_to_nfs(new_nfs, sub_model.subscription_name)
+            unlocked_msmt_groups = apply_measurement_grp_to_nfs(new_nfs,
+                                                                sub_model.measurement_groups)
+            db.session.commit()
+            if unlocked_msmt_groups:
+                publish_measurement_grp_to_nfs(sub_model, new_nfs, unlocked_msmt_groups)
+        else:
+            logger.error(f'No network functions found for subscription: '
+                         f'{sub_model.subscription_name}, '
+                         f'please verify/check NetworkFunctionFilter.')
+
+        if del_nfs:
+            logger.info(f'Removing nfs from subscription: '
+                        f'{sub_model.subscription_name}')
+            if unlocked_mgs:
+                for mg in unlocked_mgs:
+                    MeasurementGroupModel.query.filter(
+                        MeasurementGroupModel.measurement_group_name == mg.measurement_group_name)\
+                        .update({MeasurementGroupModel.administrative_state: AdministrativeState.
+                                FILTERING.value}, synchronize_session='evaluate')
+                    db.session.commit()
+                    nf_meas_relations = NfMeasureGroupRelationalModel.query.filter(
+                        NfMeasureGroupRelationalModel.measurement_grp_name == mg.
+                        measurement_group_name, NfMeasureGroupRelationalModel.
+                        nf_name.in_(del_nfs)).all()
+                    measurement_group_service.deactivate_nfs(sub_model, mg, nf_meas_relations)
+        db.session.remove()

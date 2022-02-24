@@ -267,3 +267,36 @@ def update_admin_state(subscription_name, measurement_group_name, body):
                    f' due to Exception : {exception}', HTTPStatus.INTERNAL_SERVER_ERROR
 
     return response
+
+
+def put_nf_filter(subscription_name, body):
+    """
+    Performs network function filter update for the respective subscription
+
+    Args:
+        subscription_name (String): Name of the subscription.
+        body (dict): Request body with admin state to update.
+    Returns:
+       string, HTTPStatus: Successfully updated network function Filter, 200
+       string, HTTPStatus: Invalid request details, 400
+       string, HTTPStatus: Cannot update as Locked/Filtering request is in progress, 409
+       string, HTTPStatus: Exception details of server failure, 500
+    """
+    logger.info('Performing network function filter update for subscription '
+                f'with sub name: {subscription_name} ')
+    response = 'Successfully updated network function Filter', HTTPStatus.OK.value
+    try:
+        subscription_service.update_filter(subscription_name, body)
+    except InvalidDataException as exception:
+        logger.error(exception.args[0])
+        response = exception.args[0], HTTPStatus.BAD_REQUEST.value
+    except DataConflictException as exception:
+        logger.error(exception.args[0])
+        response = exception.args[0], HTTPStatus.CONFLICT.value
+    except Exception as exception:
+        logger.error('Update nf filter request was not processed for sub name: '
+                     f'{subscription_name} due to Exception : {exception}')
+        response = 'Update nf filter request was not processed for sub name: ' \
+                   f'{subscription_name} due to Exception : {exception}', \
+                   HTTPStatus.INTERNAL_SERVER_ERROR
+    return response
