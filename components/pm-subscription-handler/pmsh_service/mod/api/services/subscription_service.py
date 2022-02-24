@@ -18,9 +18,11 @@
 
 from mod import db, logger
 from mod.api.db_models import SubscriptionModel, NfSubRelationalModel, \
-    NetworkFunctionFilterModel, NetworkFunctionModel, MeasurementGroupModel
+    NetworkFunctionFilterModel, NetworkFunctionModel, MeasurementGroupModel, \
+    NfMeasureGroupRelationalModel
 from mod.api.services import measurement_group_service, nf_service
-from mod.api.custom_exception import InvalidDataException, DuplicateDataException
+from mod.api.custom_exception import InvalidDataException, DuplicateDataException, \
+    DataConflictException
 from mod.subscription import AdministrativeState, SubNfState
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
@@ -45,24 +47,8 @@ def create_subscription(subscription):
         logger.info(f'Successfully saved subscription request for: '
                     f'{subscription["subscriptionName"]}')
         filtered_nfs = nf_service.capture_filtered_nfs(sub_model.subscription_name)
-        if filtered_nfs:
-            logger.info(f'Applying the filtered nfs for subscription: '
-                        f'{sub_model.subscription_name}')
-            save_filtered_nfs(filtered_nfs)
-            apply_subscription_to_nfs(filtered_nfs, sub_model.subscription_name)
-            unlocked_msmt_groups = apply_measurement_grp_to_nfs(filtered_nfs, measurement_groups)
-            db.session.commit()
-            if unlocked_msmt_groups:
-                publish_measurement_grp_to_nfs(sub_model, filtered_nfs,
-                                               unlocked_msmt_groups)
-            else:
-                logger.error(f'All measurement groups are locked for subscription: '
-                             f'{sub_model.subscription_name}, '
-                             f'please verify/check measurement groups.')
-        else:
-            logger.error(f'No network functions found for subscription: '
-                         f'{sub_model.subscription_name}, '
-                         f'please verify/check NetworkFunctionFilter.')
+        unlocked_mgs = get_unlocked_measurement_grps(sub_model)
+        add_new_filtered_nfs(filtered_nfs, unlocked_mgs, sub_model)
     except IntegrityError as e:
         db.session.rollback()
         raise DuplicateDataException(f'DB Integrity issue encountered: {e.orig.args[0]}')
@@ -71,6 +57,36 @@ def create_subscription(subscription):
         raise e
     finally:
         db.session.remove()
+
+
+def add_new_filtered_nfs(filtered_nfs, unlocked_mgs, sub_model):
+    """
+    Inserts the filtered nfs in measurement groups of subscription
+
+    Args:
+        filtered_nfs (List[NetworkFunction]): nfs to be inserted
+        unlocked_mgs (List[MeasurementGroupModel]): mgs to be updated with new nfs
+        sub_model (SubscriptionModel): subscription model to update
+    """
+    if filtered_nfs:
+        logger.info(f'Applying the filtered nfs for subscription: '
+                    f'{sub_model.subscription_name}')
+        save_filtered_nfs(filtered_nfs)
+        apply_subscription_to_nfs(filtered_nfs, sub_model.subscription_name)
+        db.session.commit()
+        if unlocked_mgs:
+            apply_measurement_grp_to_nfs(filtered_nfs, unlocked_mgs)
+            db.session.commit()
+            publish_measurement_grp_to_nfs(sub_model, filtered_nfs,
+                                           unlocked_mgs)
+        else:
+            logger.error(f'All measurement groups are locked for subscription: '
+                         f'{sub_model.subscription_name}, '
+                         f'please verify/check measurement groups.')
+    else:
+        logger.error(f'No network functions found for subscription: '
+                     f'{sub_model.subscription_name}, '
+                     f'please verify/check NetworkFunctionFilter.')
 
 
 def publish_measurement_grp_to_nfs(sub_model, filtered_nfs,
@@ -124,32 +140,22 @@ def apply_subscription_to_nfs(filtered_nfs, subscription_name):
         db.session.add(new_nf_sub_rel)
 
 
-def apply_measurement_grp_to_nfs(filtered_nfs, measurement_groups):
+def apply_measurement_grp_to_nfs(filtered_nfs, unlocked_mgs):
     """
     Saves measurement groups against nfs with status as PENDING_CREATE
 
     Args:
         filtered_nfs (list[NetworkFunction]): list of filtered network functions
-        measurement_groups (list[MeasurementGroupModel]): list of measurement group
+        unlocked_mgs (list[MeasurementGroupModel]): list of measurement group
 
-    Returns:
-        list[MeasurementGroupModel]: list of Unlocked measurement groups
     """
-    unlocked_msmt_groups = []
-    for measurement_group in measurement_groups:
-        if measurement_group.administrative_state \
-                == AdministrativeState.UNLOCKED.value:
-            unlocked_msmt_groups.append(measurement_group)
-            for nf in filtered_nfs:
-                logger.info(f'Saving measurement group to nf name, measure_grp_name: {nf.nf_name},'
-                            f'{measurement_group.measurement_group_name}')
-                measurement_group_service.apply_nf_status_to_measurement_group(
-                    nf.nf_name, measurement_group.measurement_group_name,
-                    SubNfState.PENDING_CREATE.value)
-        else:
-            logger.info(f'No nfs added as measure_grp_name: '
-                        f'{measurement_group.measurement_group_name} is LOCKED')
-    return unlocked_msmt_groups
+    for measurement_group in unlocked_mgs:
+        for nf in filtered_nfs:
+            logger.info(f'Saving measurement group to nf name, measure_grp_name: {nf.nf_name},'
+                        f'{measurement_group.measurement_group_name}')
+            measurement_group_service.apply_nf_status_to_measurement_group(
+                nf.nf_name, measurement_group.measurement_group_name,
+                SubNfState.PENDING_CREATE.value)
 
 
 def check_missing_data(subscription):
@@ -380,3 +386,139 @@ def query_to_delete_subscription_by_name(subscription_name):
         .filter_by(subscription_name=subscription_name).delete()
     db.session.commit()
     return effected_rows
+
+
+def is_duplicate_filter(nf_filter, db_network_filter):
+    """
+    Checks if the network function filter is unchanged for the subscription
+
+    Args:
+        nf_filter (dict): filter object to update in the subscription
+        db_network_filter (NetworkFunctionFilterModel): nf filter object from db
+
+    Returns:
+        (boolean) : True is nf filters are same else False
+    """
+    return nf_filter == db_network_filter.serialize()
+
+
+def update_filter(sub_name, nf_filter):
+    """
+    Updates the network function filter for the subscription
+
+    Args:
+        sub_name (String): Name of the Subscription
+        nf_filter (dict): filter object to update in the subscription
+
+    Returns:
+        InvalidDataException: contains details on invalid fields
+        DataConflictException: contains details on conflicting state of a field
+        Exception: contains runtime error details
+    """
+    sub_model = query_subscription_by_name(sub_name)
+    if sub_model is None:
+        raise InvalidDataException('Requested subscription is not available '
+                                   f'with sub name: {sub_name} for nf filter update')
+    if is_duplicate_filter(nf_filter, sub_model.network_filter):
+        raise InvalidDataException('Duplicate nf filter update requested for subscription '
+                                   f'with sub name: {sub_name}')
+    validate_sub_mgs_state(sub_model)
+    nf_service.save_nf_filter_update(sub_name, nf_filter)
+    del_nfs, new_nfs = extract_del_new_nfs(sub_model)
+    NfSubRelationalModel.query.filter(
+        NfSubRelationalModel.subscription_name == sub_name,
+        NfSubRelationalModel.nf_name.in_(del_nfs)).delete()
+    db.session.commit()
+    unlocked_mgs = get_unlocked_measurement_grps(sub_model)
+    if unlocked_mgs:
+        add_new_filtered_nfs(new_nfs, unlocked_mgs, sub_model)
+        delete_filtered_nfs(del_nfs, sub_model, unlocked_mgs)
+    db.session.remove()
+
+
+def get_unlocked_measurement_grps(sub_model):
+    """
+    Gets unlocked measurement groups and logs locked measurement groups
+
+    Args:
+        sub_model (SubscriptionModel): Subscription model to perform nfs delete
+
+    Returns:
+        unlocked_mgs (List[MeasurementGroupModel]): unlocked msgs in a subscription
+
+    """
+    unlocked_mgs = []
+    for measurement_group in sub_model.measurement_groups:
+        if measurement_group.administrative_state \
+                == AdministrativeState.UNLOCKED.value:
+            unlocked_mgs.append(measurement_group)
+        else:
+            logger.info(f'No nfs added as measure_grp_name: '
+                        f'{measurement_group.measurement_group_name} is LOCKED')
+    return unlocked_mgs
+
+
+def delete_filtered_nfs(del_nfs, sub_model, unlocked_mgs):
+    """
+    Removes unfiltered nfs
+
+    Args:
+        del_nfs (List[String]): Names of nfs to be deleted
+        sub_model (SubscriptionModel): Subscription model to perform nfs delete
+        unlocked_mgs (List[MeasurementGroupModel]): unlocked msgs to perform nfs delete
+
+    """
+    if del_nfs:
+        logger.info(f'Removing nfs from subscription: '
+                    f'{sub_model.subscription_name}')
+        for mg in unlocked_mgs:
+            MeasurementGroupModel.query.filter(
+                MeasurementGroupModel.measurement_group_name == mg.measurement_group_name) \
+                .update({MeasurementGroupModel.administrative_state: AdministrativeState.
+                        FILTERING.value}, synchronize_session='evaluate')
+            db.session.commit()
+            nf_meas_relations = NfMeasureGroupRelationalModel.query.filter(
+                NfMeasureGroupRelationalModel.measurement_grp_name == mg.
+                measurement_group_name, NfMeasureGroupRelationalModel.
+                nf_name.in_(del_nfs)).all()
+            measurement_group_service.deactivate_nfs(sub_model, mg, nf_meas_relations)
+
+
+def extract_del_new_nfs(sub_model):
+    """
+    Removes unfiltered nfs
+
+    Args:
+        sub_model (SubscriptionModel): Subscription model to perform nfs delete
+
+    Returns:
+        del_nfs (List[String]): Names of nfs to be deleted
+        new_nfs (List[NetworkFunction]): nfs to be inserted
+    """
+    filtered_nfs = nf_service.capture_filtered_nfs(sub_model.subscription_name)
+    filtered_nf_names = [nf.nf_name for nf in filtered_nfs]
+    existing_nf_names = [nf.nf_name for nf in sub_model.nfs]
+    new_nfs = list(filter(lambda x: x.nf_name not in existing_nf_names, filtered_nfs))
+    del_nfs = [nf.nf_name for nf in sub_model.nfs if nf.nf_name not in filtered_nf_names]
+    return del_nfs, new_nfs
+
+
+def validate_sub_mgs_state(sub_model):
+    """
+    Validates if any measurement group in subscription has
+    status Locking or Filtering
+
+    Args:
+        sub_model (SubscriptionModel): Subscription model to perform validation before nf filter
+
+    Returns:
+        DataConflictException: contains details on conflicting status in measurement group
+    """
+    mg_names_processing = [mg for mg in sub_model.measurement_groups
+                           if mg.administrative_state in [AdministrativeState.FILTERING.value,
+                                                          AdministrativeState.LOCKING.value]]
+    if mg_names_processing:
+        raise DataConflictException('Cannot update filter as subscription: '
+                                    f'{sub_model.subscription_name} is under '
+                                    'transitioning state for the following measurement '
+                                    f'groups: {mg_names_processing}')
