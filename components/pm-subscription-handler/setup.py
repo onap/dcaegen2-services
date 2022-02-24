@@ -22,7 +22,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pm_subscription_handler",
-    version="2.1.1",
+    version="2.2.0",
     packages=find_packages(),
     author="lego@est.tech",
     author_email="lego@est.tech",
@@ -43,5 +43,6 @@ setup(
         "onap_dcae_cbs_docker_client==2.2.1",
         "onappylog==1.0.9",
         "ruamel.yaml==0.16.10",
-        "jsonschema==3.2.0"]
+        "jsonschema==3.2.0",
+        "pyyaml==5.4.1"]
 )
