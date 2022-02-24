@@ -34,6 +34,10 @@ policy_response_handle_functions = {
     AdministrativeState.LOCKING.value: {
         'success': measurement_group_service.lock_nf_to_meas_grp,
         'failed': measurement_group_service.update_measurement_group_nf_status
+    },
+    AdministrativeState.FILTERING.value: {
+        'success': measurement_group_service.filter_nf_to_meas_grp,
+        'failed': measurement_group_service.filter_nf_to_meas_grp_failed
     }
 }
 
@@ -86,8 +90,10 @@ class PolicyResponseHandler:
         logger.info(f'Response from MR: measurement group name: {measurement_group_name} for '
                     f'NF: {nf_name} received, updating the DB')
         try:
-            nf_measure_grp_status = subscription_nf_states[administrative_state][response_message]\
-                .value
+            nf_measure_grp_status = ''
+            if administrative_state != AdministrativeState.FILTERING.value:
+                nf_measure_grp_status = (subscription_nf_states[administrative_state]
+                                         [response_message]).value
             policy_response_handle_functions[administrative_state][response_message](
                 measurement_group_name=measurement_group_name, status=nf_measure_grp_status,
                 nf_name=nf_name)

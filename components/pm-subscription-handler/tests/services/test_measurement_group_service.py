@@ -358,3 +358,85 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         self.assertEqual(meas_grp.subscription_name, 'sub')
         self.assertEqual(meas_grp.measurement_group_name, 'MG2')
         self.assertEqual(meas_grp.administrative_state, 'LOCKING')
+
+    def test_filter_nf_to_meas_grp_for_delete(self):
+        sub = create_subscription_data('sub')
+        db.session.add(sub)
+        nf = NetworkFunction(nf_name='pnf_test2')
+        nf_service.save_nf(nf)
+        measurement_group_service.apply_nf_status_to_measurement_group(
+            "pnf_test2", "MG2", SubNfState.PENDING_DELETE.value)
+        db.session.commit()
+        measurement_group_service.filter_nf_to_meas_grp(
+            "pnf_test2", "MG2", '')
+        measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
+            NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
+        self.assertIsNone(measurement_grp_rel)
+        network_function = (NetworkFunctionModel.query.filter(
+            NetworkFunctionModel.nf_name == 'pnf_test2').one_or_none())
+        self.assertIsNone(network_function)
+        meas_grp = measurement_group_service.query_meas_group_by_name('sub', 'MG2')
+        self.assertEqual(meas_grp.subscription_name, 'sub')
+        self.assertEqual(meas_grp.measurement_group_name, 'MG2')
+        self.assertEqual(meas_grp.administrative_state, 'UNLOCKED')
+
+    def test_filter_nf_to_meas_grp_for_create(self):
+        sub = create_subscription_data('sub')
+        db.session.add(sub)
+        nf = NetworkFunction(nf_name='pnf_test2')
+        nf_service.save_nf(nf)
+        measurement_group_service.apply_nf_status_to_measurement_group(
+            "pnf_test2", "MG2", SubNfState.PENDING_CREATE.value)
+        db.session.commit()
+        measurement_group_service.filter_nf_to_meas_grp(
+            "pnf_test2", "MG2", '')
+        measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
+            NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
+        self.assertIsNotNone(measurement_grp_rel)
+        self.assertEqual(measurement_grp_rel.nf_measure_grp_status, 'CREATED')
+        network_function = (NetworkFunctionModel.query.filter(
+            NetworkFunctionModel.nf_name == 'pnf_test2').one_or_none())
+        self.assertIsNotNone(network_function)
+        meas_grp = measurement_group_service.query_meas_group_by_name('sub', 'MG2')
+        self.assertEqual(meas_grp.subscription_name, 'sub')
+        self.assertEqual(meas_grp.measurement_group_name, 'MG2')
+        self.assertEqual(meas_grp.administrative_state, 'UNLOCKED')
+
+    def test_filter_nf_to_meas_grp_failed_for_delete(self):
+        sub = create_subscription_data('sub')
+        sub.measurement_groups[1].administrative_state = 'FILTERING'
+        db.session.add(sub)
+        nf = NetworkFunction(nf_name='pnf_test2')
+        nf_service.save_nf(nf)
+        measurement_group_service.apply_nf_status_to_measurement_group(
+            "pnf_test2", "MG2", SubNfState.PENDING_DELETE.value)
+        db.session.commit()
+        measurement_group_service.filter_nf_to_meas_grp_failed(
+            "pnf_test2", "MG2", '')
+        measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
+            NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
+        self.assertEqual(measurement_grp_rel.nf_measure_grp_status, 'DELETE_FAILED')
+        meas_grp = measurement_group_service.query_meas_group_by_name('sub', 'MG2')
+        self.assertEqual(meas_grp.administrative_state, 'FILTERING')
+
+    def test_filter_nf_to_meas_grp_failed_for_create(self):
+        sub = create_subscription_data('sub')
+        sub.measurement_groups[1].administrative_state = 'FILTERING'
+        db.session.add(sub)
+        nf = NetworkFunction(nf_name='pnf_test2')
+        nf_service.save_nf(nf)
+        measurement_group_service.apply_nf_status_to_measurement_group(
+            "pnf_test2", "MG2", SubNfState.PENDING_CREATE.value)
+        db.session.commit()
+        measurement_group_service.filter_nf_to_meas_grp_failed(
+            "pnf_test2", "MG2", '')
+        measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
+            NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
+        self.assertIsNotNone(measurement_grp_rel)
+        self.assertEqual(measurement_grp_rel.nf_measure_grp_status, 'CREATE_FAILED')
+        meas_grp = measurement_group_service.query_meas_group_by_name('sub', 'MG2')
+        self.assertEqual(meas_grp.administrative_state, 'FILTERING')

@@ -24,6 +24,7 @@ from mod.api.services import nf_service, subscription_service
 from mod.network_function import NetworkFunction
 from mod.pmsh_config import MRTopic, AppConfig
 from mod.subscription import AdministrativeState, SubNfState
+from sqlalchemy import or_
 
 
 def save_measurement_group(measurement_group, subscription_name):
@@ -318,3 +319,66 @@ def update_admin_status(measurement_group, status):
             deactivate_nfs(sub_model, measurement_group, nf_meas_relations)
         elif status == AdministrativeState.UNLOCKED.value:
             activate_nfs(sub_model, measurement_group)
+
+
+def filter_nf_to_meas_grp(nf_name, measurement_group_name, status):
+    """ Performs successful status update for a nf under filter update
+    request for a particular subscription and measurement group
+
+    Args:
+        nf_name (string): The network function name
+        measurement_group_name (string): Measurement group name
+        status (string): status of the network function for measurement group
+    """
+    try:
+        nf_measurement_group_rel = NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == measurement_group_name,
+            NfMeasureGroupRelationalModel.nf_name == nf_name
+        ).one_or_none()
+
+        if nf_measurement_group_rel.nf_measure_grp_status == SubNfState.PENDING_DELETE.value:
+            delete_nf_to_measurement_group(nf_name, measurement_group_name,
+                                           SubNfState.DELETED.value)
+        elif nf_measurement_group_rel.nf_measure_grp_status == SubNfState.PENDING_CREATE.value:
+            update_measurement_group_nf_status(measurement_group_name,
+                                               SubNfState.CREATED.value, nf_name)
+        nf_measurement_group_rels = NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == measurement_group_name,
+            or_(NfMeasureGroupRelationalModel.nf_measure_grp_status.like('PENDING_%'),
+                NfMeasureGroupRelationalModel.nf_measure_grp_status.like('%_FAILED'))
+        ).all()
+        if not nf_measurement_group_rels:
+            MeasurementGroupModel.query.filter(
+                MeasurementGroupModel.measurement_group_name == measurement_group_name). \
+                update({MeasurementGroupModel.administrative_state: AdministrativeState.
+                       UNLOCKED.value}, synchronize_session='evaluate')
+            db.session.commit()
+    except Exception as e:
+        logger.error('Failed update filter response for measurement group name: '
+                     f'{measurement_group_name}, nf name: {nf_name} due to: {e}')
+
+
+def filter_nf_to_meas_grp_failed(nf_name, measurement_group_name, status):
+    """ Performs failed status update for a nf under filter update
+    request for a particular subscription and measurement group
+
+    Args:
+        nf_name (string): The network function name
+        measurement_group_name (string): Measurement group name
+        status (string): status of the network function for measurement group
+    """
+    try:
+        nf_measurement_group_rel = NfMeasureGroupRelationalModel.query.filter(
+            NfMeasureGroupRelationalModel.measurement_grp_name == measurement_group_name,
+            NfMeasureGroupRelationalModel.nf_name == nf_name
+        ).one_or_none()
+
+        if nf_measurement_group_rel.nf_measure_grp_status == SubNfState.PENDING_DELETE.value:
+            update_measurement_group_nf_status(measurement_group_name,
+                                               SubNfState.DELETE_FAILED.value, nf_name)
+        elif nf_measurement_group_rel.nf_measure_grp_status == SubNfState.PENDING_CREATE.value:
+            update_measurement_group_nf_status(measurement_group_name,
+                                               SubNfState.CREATE_FAILED.value, nf_name)
+    except Exception as e:
+        logger.error('Failed update filter response for measurement group name: '
+                     f'{measurement_group_name}, nf name: {nf_name} due to: {e}')
