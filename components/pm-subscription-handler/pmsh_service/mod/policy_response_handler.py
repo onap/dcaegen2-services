@@ -18,8 +18,8 @@
 import json
 from mod.pmsh_config import MRTopic, AppConfig
 from mod import logger
-from mod.subscription import AdministrativeState, subscription_nf_states
-from mod.api.db_models import MeasurementGroupModel
+from mod.subscription import AdministrativeState, subscription_nf_states, SubNfState
+from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel
 from mod.api.services import measurement_group_service
 
 policy_response_handle_functions = {
@@ -33,6 +33,10 @@ policy_response_handle_functions = {
     },
     AdministrativeState.LOCKING.value: {
         'success': measurement_group_service.lock_nf_to_meas_grp,
+        'failed': measurement_group_service.update_measurement_group_nf_status
+    },
+    AdministrativeState.FILTERING.value: {
+        'success': measurement_group_service.filter_nf_to_meas_grp,
         'failed': measurement_group_service.update_measurement_group_nf_status
     }
 }
@@ -86,8 +90,19 @@ class PolicyResponseHandler:
         logger.info(f'Response from MR: measurement group name: {measurement_group_name} for '
                     f'NF: {nf_name} received, updating the DB')
         try:
-            nf_measure_grp_status = subscription_nf_states[administrative_state][response_message]\
-                .value
+
+            if administrative_state == AdministrativeState.FILTERING.value:
+                nf_msg_rel = NfMeasureGroupRelationalModel.query.filter(
+                    NfMeasureGroupRelationalModel.measurement_grp_name == measurement_group_name,
+                    NfMeasureGroupRelationalModel.nf_name == nf_name
+                ).one_or_none()
+                if nf_msg_rel.nf_measure_grp_status == SubNfState.PENDING_DELETE.value:
+                    administrative_state = AdministrativeState.LOCKING.value
+                elif nf_msg_rel.nf_measure_grp_status == SubNfState.PENDING_CREATE.value:
+                    administrative_state = AdministrativeState.UNLOCKED.value
+
+            nf_measure_grp_status = (subscription_nf_states[administrative_state]
+                                     [response_message]).value
             policy_response_handle_functions[administrative_state][response_message](
                 measurement_group_name=measurement_group_name, status=nf_measure_grp_status,
                 nf_name=nf_name)
