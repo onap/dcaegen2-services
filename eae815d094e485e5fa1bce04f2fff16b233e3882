@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e6e8112_73524433",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-02-25T14:02:20Z",
+      "side": 1,
+      "message": "Response for a 500 is missing",
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "428f7152_3ad0d8d1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-02-25T14:02:20Z",
+      "side": 1,
+      "message": "If status is assigned, for example, FILTERING for the first mg if will  never be reassigned another value. Could this cause misleading logging?",
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fed2c3b_7d031e52",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-02-25T14:02:20Z",
+      "side": 1,
+      "message": "Do we need a subscription_nf_states like below or does that just cause more issues?",
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "265dda3e_2a12f7b5",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-02-25T14:02:20Z",
+      "side": 1,
+      "message": "2022 update",
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
