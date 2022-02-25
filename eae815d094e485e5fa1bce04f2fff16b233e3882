@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a5822a61_cd5eaa69",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67273665_17022fc9",
+      "range": {
+        "startLine": 278,
+        "startChar": 37,
+        "endLine": 278,
+        "endChar": 51
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e6e8112_73524433",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 2
@@ -39,6 +63,24 @@
       "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1177490a_a2e9baff",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e6e8112_73524433",
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "20680b0a_cde990a9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb87d0a4_aac6208f",
+      "range": {
+        "startLine": 244,
+        "startChar": 18,
+        "endLine": 244,
+        "endChar": 27
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "167832e5_e5265498",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 2
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "bd0d4bde_b20f0ab5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "167832e5_e5265498",
+      "range": {
+        "startLine": 406,
+        "startChar": 4,
+        "endLine": 406,
+        "endChar": 13
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "428f7152_3ad0d8d1",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 2
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "6f350fc1_a4ad640b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "The two scenarios captured here are either Filtering or Locking. And all the MG\u0027s would either be in Locking or Filtering state that gets captured in one go. And we will not miss anything.",
+      "parentUuid": "428f7152_3ad0d8d1",
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "969cfab8_87ea2ffe",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 2
@@ -116,6 +224,30 @@
       "writtenOn": "2022-02-25T14:20:31Z",
       "side": 1,
       "message": "This doesn\u0027t seem right. We could have multiple diff states across many mg\u0027s",
+      "range": {
+        "startLine": 431,
+        "startChar": 16,
+        "endLine": 431,
+        "endChar": 28
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89705b9e_c3393f69",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "As discussed earlier, we are rejecting requests where we get Locking or Filtering states. Also we are ensuring that measurement groups for a subscription will be in one state either locking or Filtering and not both or multiple states at the same time.",
+      "parentUuid": "969cfab8_87ea2ffe",
       "range": {
         "startLine": 431,
         "startChar": 16,
@@ -151,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "d943fddb_8fd77d10",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "Updated the flow as per discussion to have validations first followed by filter insert, capture filtered nfs from AAI, delete sub nf relations and perform add,del for unlocked measurement group.",
+      "parentUuid": "6b291319_26e0d43f",
+      "range": {
+        "startLine": 439,
+        "startChar": 4,
+        "endLine": 439,
+        "endChar": 24
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd420e36_eb83ab38",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 2
@@ -171,6 +327,30 @@
       "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85487812_b5c64438",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "Updated the flow as per discussion to have validations first followed by filter insert, capture filtered nfs from AAI, delete sub nf relations and perform add,del for unlocked measurement group.",
+      "parentUuid": "fd420e36_eb83ab38",
+      "range": {
+        "startLine": 442,
+        "startChar": 8,
+        "endLine": 442,
+        "endChar": 54
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -197,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "2fb2596e_cc9cee84",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81e798bc_bfc603d0",
+      "range": {
+        "startLine": 448,
+        "startChar": 7,
+        "endLine": 448,
+        "endChar": 19
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "18b3f031_1e3e7d03",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 2
@@ -217,6 +421,30 @@
       "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04aa1cfe_254db14b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "That check helps us to avoid duplicate entry when current subscription filter captures a new nfs that could be added by other subscription.",
+      "parentUuid": "18b3f031_1e3e7d03",
+      "range": {
+        "startLine": 451,
+        "startChar": 12,
+        "endLine": 451,
+        "endChar": 29
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -243,6 +471,30 @@
     },
     {
       "key": {
+        "uuid": "ed103955_12bdc545",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "As discussed, separated the function to get unlocked measurement group and update nf to msg relation.",
+      "parentUuid": "320084b6_176dbe21",
+      "range": {
+        "startLine": 453,
+        "startChar": 35,
+        "endLine": 453,
+        "endChar": 63
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1fed2c3b_7d031e52",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 2
@@ -254,6 +506,24 @@
       "writtenOn": "2022-02-25T14:02:20Z",
       "side": 1,
       "message": "Do we need a subscription_nf_states like below or does that just cause more issues?",
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e119c19_68a4737c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "I believe the we would not require new states as policy handler utilises existing states while Filtering based on delete or create actions.",
+      "parentUuid": "1fed2c3b_7d031e52",
       "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -274,6 +544,24 @@
       "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0908debc_65b74a70",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-25T16:37:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "265dda3e_2a12f7b5",
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
