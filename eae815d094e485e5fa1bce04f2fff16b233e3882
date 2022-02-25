@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "67273665_17022fc9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/controller.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-25T14:20:31Z",
+      "side": 1,
+      "message": "nf filter",
+      "range": {
+        "startLine": 278,
+        "startChar": 37,
+        "endLine": 278,
+        "endChar": 51
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1e6e8112_73524433",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 2
@@ -19,6 +42,52 @@
     },
     {
       "key": {
+        "uuid": "eb87d0a4_aac6208f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-25T14:20:31Z",
+      "side": 1,
+      "message": "Some of these need to be updated",
+      "range": {
+        "startLine": 244,
+        "startChar": 18,
+        "endLine": 244,
+        "endChar": 27
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "167832e5_e5265498",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-25T14:20:31Z",
+      "side": 1,
+      "message": "Need to refactor this to smaller functions",
+      "range": {
+        "startLine": 406,
+        "startChar": 4,
+        "endLine": 406,
+        "endChar": 13
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "428f7152_3ad0d8d1",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 2
@@ -30,6 +99,144 @@
       "writtenOn": "2022-02-25T14:02:20Z",
       "side": 1,
       "message": "If status is assigned, for example, FILTERING for the first mg if will  never be reassigned another value. Could this cause misleading logging?",
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "969cfab8_87ea2ffe",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-25T14:20:31Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right. We could have multiple diff states across many mg\u0027s",
+      "range": {
+        "startLine": 431,
+        "startChar": 16,
+        "endLine": 431,
+        "endChar": 28
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b291319_26e0d43f",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-25T14:20:31Z",
+      "side": 1,
+      "message": "This should happen earlier in the flow",
+      "range": {
+        "startLine": 439,
+        "startChar": 4,
+        "endLine": 439,
+        "endChar": 24
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd420e36_eb83ab38",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-25T14:20:31Z",
+      "side": 1,
+      "message": "Thus should happen before and measgroup checking",
+      "range": {
+        "startLine": 442,
+        "startChar": 8,
+        "endLine": 442,
+        "endChar": 54
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81e798bc_bfc603d0",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-25T14:20:31Z",
+      "side": 1,
+      "message": "There is a fair amount of duplication here with the create_sub function above.\nMaybe look to refactor to another function and reuse",
+      "range": {
+        "startLine": 448,
+        "startChar": 7,
+        "endLine": 448,
+        "endChar": 19
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18b3f031_1e3e7d03",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-25T14:20:31Z",
+      "side": 1,
+      "message": "This function already does a check for non existing nfs",
+      "range": {
+        "startLine": 451,
+        "startChar": 12,
+        "endLine": 451,
+        "endChar": 29
+      },
+      "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "320084b6_176dbe21",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-25T14:20:31Z",
+      "side": 1,
+      "message": "This function already provides the unlocked meas groups",
+      "range": {
+        "startLine": 453,
+        "startChar": 35,
+        "endLine": 453,
+        "endChar": 63
+      },
       "revId": "eae815d094e485e5fa1bce04f2fff16b233e3882",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
