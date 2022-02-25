@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "db31c430_19d4c50b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-25T01:19:37Z",
+      "side": 1,
+      "message": "status appears to be unused",
+      "revId": "a9691697c6bf4839298d609e29ef66401f18f4dd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2243396e_838eb118",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-02-25T01:19:37Z",
+      "side": 1,
+      "message": "status appears to be unused",
+      "revId": "a9691697c6bf4839298d609e29ef66401f18f4dd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
