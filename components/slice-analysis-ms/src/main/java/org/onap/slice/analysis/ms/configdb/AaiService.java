@@ -32,6 +32,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -174,6 +175,35 @@ public class AaiService implements AaiInterface {
 			log.info("AAI Slice: " + e);
 		}
 		return responseMap;
+	}
+
+	/**
+	 * Get network policy of an ethernet service, the network policy have same network-policy-fqdn as service-instance-id
+	 */
+	public Map<String, Integer> fetchMaxBandwidthofService(String serviceId){
+		log.info("Fetching max-bandwidth from AAI network-policy");
+		String networkPolicyUrl = aaiBaseUrl + "/network/network-policies" + "?network-policy-fqdn="
+				+ serviceId;
+		Map<String, Integer> result = new HashMap<>();
+		try {
+			ResponseEntity<String> resp = restclient.sendGetRequest(networkPolicyUrl, new ParameterizedTypeReference<String>() {
+			});
+			if (resp.getStatusCodeValue() == 200){
+				String networkPolicy = resp.getBody();
+				JSONObject networkPolicyJson = new JSONObject(networkPolicy);
+				JSONArray networkPolicyList	= networkPolicyJson.optJSONArray("network-policy");
+				if (networkPolicyList != null){
+					JSONObject networkPolicyOjb = networkPolicyList.getJSONObject(0);
+					result.put("maxBandwidth", networkPolicyOjb.getInt("max-bandwidth"));
+					return result;
+				}
+				log.info("Successfully fetched max bandwidth {}: {}", serviceId, result);
+			}
+		} catch (Exception e){
+			log.warn("Error encountered when fetching maxbandwidth: " + e);
+
+		}
+		return null;
 	}
 }
 

@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -18,20 +18,36 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+package org.onap.slice.analysis.ms.service;
 
-package org.onap.slice.analysis.ms.configdb;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.onap.slice.analysis.ms.models.ccvpnnotification.CCVPNPmDatastoreTest;
+import org.onap.slice.analysis.ms.models.ccvpnnotification.Event;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Map;
+import static org.junit.Assert.*;
 
-/**
- * 
- * Interface for AAI
- *
- */
-public interface AaiInterface {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = BandwidthEvaluatorTest.class)
+public class BandwidthEvaluatorTest {
 
-	public Map<String, String> fetchServiceDetails(String snssai);
-	public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
-	public Map<String, Integer> fetchMaxBandwidthofService(String serviceId);
+    @Spy
+    @InjectMocks
+    BandwidthEvaluator bandwidthEvaluator;
+
+    @Before
+    public void setup(){
+        MockitoAnnotations.initMocks(this);
+    }
+    @Test
+    public void initTest() {
+        bandwidthEvaluator.init();
+        Mockito.verify(bandwidthEvaluator, Mockito.atLeastOnce()).post(Mockito.any(Event.class));
+    }
 }
-
