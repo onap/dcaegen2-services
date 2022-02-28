@@ -35,6 +35,8 @@ import org.onap.slice.analysis.ms.models.policy.AAI;
 import org.onap.slice.analysis.ms.models.policy.AdditionalProperties;
 import org.onap.slice.analysis.ms.models.policy.OnsetMessage;
 import org.onap.slice.analysis.ms.models.policy.Payload;
+import org.onap.slice.analysis.ms.models.policy.Sla;
+import org.onap.slice.analysis.ms.models.policy.TransportNetwork;
 import org.onap.slice.analysis.ms.utils.DmaapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -114,5 +116,58 @@ public class PolicyService {
 			log.error("Error sending notification to policy, {}",e.getMessage());
 		} 		
 	}
+
+	protected <T> OnsetMessage formPolicyOnsetMessageForCCVPN(String cllId, Integer newBw) {
+		Sla sla = new Sla(2, newBw);
+		String transportNetworkId = cllId + "-network-001";
+		TransportNetwork transportNetwork = new TransportNetwork(transportNetworkId, sla);
+		AdditionalProperties additionalProperties = new AdditionalProperties();
+		additionalProperties.setModifyAction("bandwidth");
+		additionalProperties.setEnableSdnc("true");
+		List<TransportNetwork> transportNetworks = new ArrayList();
+		transportNetworks.add(transportNetwork);
+		additionalProperties.setTransportNetworks(transportNetworks);
+
+		Payload payload = new Payload();
+		payload.setGlobalSubscriberId("IBNCustomer");
+		payload.setSubscriptionServiceType("IBN");
+		payload.setServiceType("CLL");
+		payload.setName("cloud-leased-line-101");
+		payload.setServiceInstanceID(cllId);
+		payload.setAdditionalProperties(additionalProperties);
+
+		OnsetMessage onsetmsg = new OnsetMessage();
+		try {
+			onsetmsg.setPayload(objectMapper.writeValueAsString(payload));
+		} catch (Exception e) {
+			log.error("Error while mapping payload as string , {}",e.getMessage());
+		}
+		onsetmsg.setClosedLoopControlName("ControlLoop-CCVPN-CLL-227e8b00-dbeb-4d03-8719-d0a658fb846c");
+		onsetmsg.setClosedLoopAlarmStart(System.currentTimeMillis());
+		onsetmsg.setClosedLoopEventClient("microservice.sliceAnalysisMS");
+		onsetmsg.setClosedLoopEventStatus("ONSET");
+		onsetmsg.setRequestID(UUID.randomUUID().toString());
+		onsetmsg.setTarget("generic-vnf.vnf-id");
+		onsetmsg.setTargetType("VNF");
+		onsetmsg.setFrom("DCAE");
+		onsetmsg.setVersion("1.0.2");
+		AAI aai = new AAI();
+		aai.setVserverIsClosedLoopDisabled("true");
+		onsetmsg.setAai(aai);
+		return onsetmsg;
+	}
+	protected <T> void sendOnsetMessageToPolicy(OnsetMessage onsetMessage){
+		String msg =  "";
+		try {
+			msg = objectMapper.writeValueAsString(onsetMessage);
+			log.info("Policy onset message for ControlLoop-CCVPN-CLL is {}", msg);
+			policyDmaapClient.sendNotificationToPolicy(msg);
+		}
+		catch (Exception e) {
+			log.error("Error sending notification to policy, {}",e.getMessage());
+		}
+	}
+
+
 
 }
