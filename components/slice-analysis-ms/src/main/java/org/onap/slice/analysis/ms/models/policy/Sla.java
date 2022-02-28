@@ -2,7 +2,6 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,21 +19,45 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.aai;
+package org.onap.slice.analysis.ms.models.policy;
 
-import java.util.Map;
+public class Sla {
 
-/**
- *
- * Interface for AAI
- *
- */
-public interface AaiInterface {
+    private int latency;
+    private int maxBandwidth;
 
-    public Map<String, String> fetchServiceDetails(String snssai);
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Sla() {
+    }
 
-    public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+    /**
+     *
+     * @param maxBandwidth
+     * @param latency
+     */
+    public Sla(int latency, int maxBandwidth) {
+        super();
+        this.latency = latency;
+        this.maxBandwidth = maxBandwidth;
+    }
 
-    public Map<String, Integer> fetchMaxBandwidthofService(String serviceId);
+    public int getLatency() {
+        return latency;
+    }
+
+    public void setLatency(int latency) {
+        this.latency = latency;
+    }
+
+    public int getMaxBandwidth() {
+        return maxBandwidth;
+    }
+
+    public void setMaxBandwidth(int maxBandwidth) {
+        this.maxBandwidth = maxBandwidth;
+    }
+
 }
-

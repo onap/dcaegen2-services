@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -52,6 +53,9 @@ public class DmaapClient {
     @Autowired
     private IntelligentSlicingCallback intelligentSlicingCallback;
 
+    @Autowired
+    private CCVPNPmNotificationCallback ccvpnPmNotificationCallback;
+
     /**
      * init dmaap client.
      */
@@ -92,10 +96,19 @@ public class DmaapClient {
         String[] intelligentSlicingTopicSplit = intelligentSlicingTopicUrl.split("\\/");
         String intelligentSlicingTopic = intelligentSlicingTopicSplit[intelligentSlicingTopicSplit.length - 1];
         log.debug("intelligent slicing topic : {}", pmTopic);
+
+        // Parsing ccvpn notification topic
+        String ccvpnNotiTopicUrl = ((Map<String, String>) ((Map<String, Object>) streamSubscribes
+                .get("ves_ccvpn_notification_topic")).get("dmaap_info")).get("topic_url");
+        String[] ccvpnNotiTopicSplit = ccvpnNotiTopicUrl.split("\\/");
+        String ccvpnNotiTopic = ccvpnNotiTopicSplit[ccvpnNotiTopicSplit.length - 1];
+        log.debug("ccvpn notification topic : {}", ccvpnNotiTopic);
         
         CambriaConsumer pmNotifCambriaConsumer = dmaapUtils.buildConsumer(configuration, pmTopic);
         CambriaConsumer policyResponseCambriaConsumer = dmaapUtils.buildConsumer(configuration, policyResponseTopic);
         CambriaConsumer intelligentSlicingCambriaConsumer = dmaapUtils.buildConsumer(configuration, intelligentSlicingTopic);
+        // Creating ccvpn notification cambriaconsumer
+        CambriaConsumer ccvpnNotiCambriaConsumer = dmaapUtils.buildConsumer(configuration, ccvpnNotiTopic);
 
         ScheduledExecutorService executorPool;
 
@@ -108,20 +121,27 @@ public class DmaapClient {
                 TimeUnit.SECONDS);
         
         // create notification consumers for Policy
- 		NotificationConsumer policyNotificationConsumer = new NotificationConsumer(policyResponseCambriaConsumer,
- 				new PolicyNotificationCallback());
- 		// start policy notification consumer threads
- 		executorPool = Executors.newScheduledThreadPool(10);
- 		executorPool.scheduleAtFixedRate(policyNotificationConsumer, 0, configuration.getPollingInterval(),
- 				TimeUnit.SECONDS);
- 		
-		// create notification consumers for ML MS
- 		NotificationConsumer intelligentSlicingConsumer = new NotificationConsumer(intelligentSlicingCambriaConsumer,
- 				intelligentSlicingCallback);
- 		// start intelligent Slicing notification consumer threads
- 		executorPool = Executors.newScheduledThreadPool(10);
- 		executorPool.scheduleAtFixedRate(intelligentSlicingConsumer, 0, configuration.getPollingInterval(),
- 				TimeUnit.SECONDS);
+        NotificationConsumer policyNotificationConsumer = new NotificationConsumer(policyResponseCambriaConsumer,
+                new PolicyNotificationCallback());
+        // start policy notification consumer threads
+        executorPool = Executors.newScheduledThreadPool(10);
+        executorPool.scheduleAtFixedRate(policyNotificationConsumer, 0, configuration.getPollingInterval(),
+                TimeUnit.SECONDS);
+
+        // create notification consumers for ML MS
+        NotificationConsumer intelligentSlicingConsumer = new NotificationConsumer(intelligentSlicingCambriaConsumer,
+                intelligentSlicingCallback);
+        // start intelligent Slicing notification consumer threads
+        executorPool = Executors.newScheduledThreadPool(10);
+        executorPool.scheduleAtFixedRate(intelligentSlicingConsumer, 0, configuration.getPollingInterval(),
+                TimeUnit.SECONDS);
+
+        // create notification consumers for ccvpn close-loop PM
+        NotificationConsumer ccvpnNotiConsumer = new NotificationConsumer(ccvpnNotiCambriaConsumer,
+                ccvpnPmNotificationCallback);
+        executorPool= Executors.newScheduledThreadPool(1);
+        executorPool.scheduleWithFixedDelay(ccvpnNotiConsumer, 0, configuration.getCCVPNNotiPollingInterval(),
+                TimeUnit.SECONDS);
     }
 
 }

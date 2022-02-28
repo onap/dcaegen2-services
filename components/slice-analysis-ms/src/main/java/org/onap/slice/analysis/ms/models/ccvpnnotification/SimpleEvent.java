@@ -2,7 +2,6 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,22 +18,47 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+package org.onap.slice.analysis.ms.models.ccvpnnotification;
 
-package org.onap.slice.analysis.ms.aai;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
-import java.util.Map;
+public class SimpleEvent<T extends Enum, S> implements Event<T, S> {
+    private final T type;
+    private final S subject;
+    private final long time;
 
-/**
- *
- * Interface for AAI
- *
- */
-public interface AaiInterface {
+    public enum Type {
+        PERIODIC_CHECK,
+        ONDEMAND_CHECK,
+        AAI_BW_REQ
+    }
 
-    public Map<String, String> fetchServiceDetails(String snssai);
 
-    public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+    public SimpleEvent(T type, S subject){
+        this.type = type;
+        this.subject = subject;
+        this.time = System.currentTimeMillis();
+    }
 
-    public Map<String, Integer> fetchMaxBandwidthofService(String serviceId);
+    @Override
+    public long time(){ return time;}
+
+    @Override
+    public T type() { return type;}
+
+    @Override
+    public S subject() {
+        return subject;
+    }
+
+    @Override
+    public String toString(){
+        return new StringBuilder()
+                .append("time " + LocalDateTime.ofInstant(Instant.ofEpochMilli(time), ZoneId.systemDefault()))
+                .append("type "+ type())
+                .append("subject " + subject())
+                .toString();
+    }
 }
-
