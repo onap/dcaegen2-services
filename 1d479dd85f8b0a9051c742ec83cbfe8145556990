@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "fd6a6f08_1135878b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T14:32:04Z",
+      "side": 1,
+      "message": "When its empty where it would be false we are logging the details.",
+      "parentUuid": "ab3a5840_14d0da94",
+      "range": {
+        "startLine": 78,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 23
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb57da9e_948bd340",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
