@@ -2,9 +2,8 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021-2022 Wipro Limited.
- *   Copyright (C) 2022 Huawei Canada Limited.
- *   ==============================================================================
+ *  Copyright (C) 2022 Huawei Canada Limited.
+ *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
  *     You may obtain a copy of the License at
@@ -20,20 +19,12 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.aai;
-
-import java.util.Map;
+package org.onap.slice.analysis.ms.service.ccvpn;
 
 /**
- *
- * Interface for AAI
- *
+ * Modification request owner
  */
-public interface AaiInterface {
-
-    public Map<String, String> fetchServiceDetails(String snssai);
-
-    public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
-
-    public Map<String, Integer> fetchMaxBandwidthOfService(String serviceId);
+public enum RequestOwner {
+    DCAE,
+    UUI
 }
