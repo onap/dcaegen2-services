@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020-2021 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -52,6 +53,12 @@ public class ConfigurationTest {
         configuration.setSamples(10);
         configuration.setMinPercentageChange(50);
         configuration.setInitialDelaySeconds(1000);
+        configuration.setVesNotifPollingInterval(5);
+        configuration.setVesNotifChangeIdentifier("PM_BW_UPDATE");
+        configuration.setVesNotifChangeType("BandwidthChanged");
+        configuration.setCcvpnEvalInterval(5);
+        configuration.setCcvpnEvalPrecision(100);
+        configuration.setCcvpnEvalThreshold(0.8);
         assertEquals(true,configuration.isSecured());
         assertEquals("user", configuration.getAafUsername());
         assertEquals("password", configuration.getAafPassword());
@@ -73,5 +80,11 @@ public class ConfigurationTest {
         assertEquals(10,configuration.getSamples());
         assertEquals(50,configuration.getMinPercentageChange());
         assertEquals(1000,configuration.getInitialDelaySeconds());
+        assertEquals(5, configuration.getVesNotifPollingInterval());
+        assertEquals("PM_BW_UPDATE", configuration.getVesNotifChangeIdentifier());
+        assertEquals("BandwidthChanged", configuration.getVesNotifChangeType());
+        assertEquals(5, configuration.getCcvpnEvalInterval());
+        assertEquals(100.0, configuration.getCcvpnEvalPrecision(), 0.001);
+        assertEquals(0.8, configuration.getCcvpnEvalThreshold(), 0.001);
     }
 }
