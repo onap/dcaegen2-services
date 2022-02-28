@@ -2,7 +2,6 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,20 +19,47 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.aai;
-
-import java.util.Map;
+package org.onap.slice.analysis.ms.models.policy;
 
 /**
- *
- * Interface for AAI
- *
+ * Model class TransportNetwork inside payload.additionalProperties for CCVPN closeLoop
  */
-public interface AaiInterface {
+public class TransportNetwork {
 
-    public Map<String, String> fetchServiceDetails(String snssai);
+    private String id;
+    private Sla sla;
 
-    public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public TransportNetwork() {
+    }
 
-    public Map<String, Integer> fetchMaxBandwidthOfService(String serviceId);
+    /**
+     *
+     * @param sla
+     * @param id
+     */
+    public TransportNetwork(String id, Sla sla) {
+        this.id = id;
+        this.sla = sla;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Sla getSla() {
+        return sla;
+    }
+
+    public void setSla(Sla sla) {
+        this.sla = sla;
+    }
+
 }

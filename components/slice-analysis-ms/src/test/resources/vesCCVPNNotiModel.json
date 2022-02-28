@@ -1,0 +1,16 @@
+{
+  "changeIdentifier": "PM_BW_UPDATE",
+  "changeType": "BandwidthChanged",
+  "ccvpnNotificationFieldsVersion": "2.0",
+  "arrayOfNamedHashMap": [
+    {
+      "name": "DomainId-1-cll-instance-01-uni-01-8745745764578",
+      "hashMap": {
+        "cllId": "cll-instance-01",
+        "uniId": "uni-01",
+        "bandwidthValue": "4000",
+        "time": "2022-02-08T11:13:34.781-05:00"
+      }
+    }
+  ]
+}
