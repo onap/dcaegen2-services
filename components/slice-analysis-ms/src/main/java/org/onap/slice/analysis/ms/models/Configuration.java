@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020-2022 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -64,6 +65,13 @@ public class Configuration {
     private String rannfnssiDetailsTemplateId;
     private String desUrl;
     private int pmDataDurationInWeeks;
+
+    private int vesNotifPollingInterval;
+    private String vesNotifChangeIdentifier;
+    private String vesNotifChangeType;
+    private int ccvpnEvalInterval;
+    private double ccvpnEvalThreshold;
+    private double ccvpnEvalPrecision;
 
     /**
      * Check if topic is secure.
@@ -141,6 +149,52 @@ public class Configuration {
 
     public void setPollingInterval(int pollingInterval) {
         this.pollingInterval = pollingInterval;
+    }
+
+    public int getVesNotifPollingInterval() { return vesNotifPollingInterval;}
+
+    public void setVesNotifPollingInterval(int vesNotifPollingInterval) {
+        this.vesNotifPollingInterval = vesNotifPollingInterval;
+    }
+
+    public String getVesNotifChangeIdentifier() {
+        return vesNotifChangeIdentifier;
+    }
+
+    public void setVesNotifChangeIdentifier(String vesNotifChangeIdentifier) {
+        this.vesNotifChangeIdentifier = vesNotifChangeIdentifier;
+    }
+
+    public String getVesNotifChangeType() {
+        return vesNotifChangeType;
+    }
+
+    public void setVesNotifChangeType(String vesNotifChangeType) {
+        this.vesNotifChangeType = vesNotifChangeType;
+    }
+
+    public int getCcvpnEvalInterval() {
+        return ccvpnEvalInterval;
+    }
+
+    public void setCcvpnEvalInterval(int ccvpnEvalInterval) {
+        this.ccvpnEvalInterval = ccvpnEvalInterval;
+    }
+
+    public double getCcvpnEvalThreshold() {
+        return ccvpnEvalThreshold;
+    }
+
+    public void setCcvpnEvalThreshold(double ccvpnEvalThreshold) {
+        this.ccvpnEvalThreshold = ccvpnEvalThreshold;
+    }
+
+    public double getCcvpnEvalPrecision() {
+        return ccvpnEvalPrecision;
+    }
+
+    public void setCcvpnEvalPrecision(double ccvpnEvalPrecision) {
+        this.ccvpnEvalPrecision = ccvpnEvalPrecision;
     }
 
     public int getPollingTimeout() {
@@ -339,6 +393,13 @@ public class Configuration {
         rannfnssiDetailsTemplateId = jsonObject.get("sliceanalysisms.rannfnssiDetailsTemplateId").getAsString();
         desUrl = jsonObject.get("sliceanalysisms.desUrl").getAsString();
         pmDataDurationInWeeks = jsonObject.get("sliceanalysisms.pmDataDurationInWeeks").getAsInt();
+
+        vesNotifChangeIdentifier = jsonObject.get("sliceanalysisms.vesNotifChangeIdentifier").getAsString();
+        vesNotifChangeType = jsonObject.get("sliceanalysisms.vesNotifChangeType").getAsString();
+        vesNotifPollingInterval = jsonObject.get("sliceanalysisms.vesNotifPollingInterval").getAsInt();
+        ccvpnEvalInterval = jsonObject.get("sliceanalysisms.ccvpnEvalInterval").getAsInt();
+        ccvpnEvalThreshold = jsonObject.get("sliceanalysisms.ccvpnEvalThreshold").getAsDouble();
+        ccvpnEvalPrecision = jsonObject.get("sliceanalysisms.ccvpnEvalPrecision").getAsDouble();
 
         if (Objects.isNull(jsonObject.get("aafUsername"))) {
             aafUsername = null;
