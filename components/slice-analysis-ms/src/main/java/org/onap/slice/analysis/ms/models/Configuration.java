@@ -64,6 +64,7 @@ public class Configuration {
     private String rannfnssiDetailsTemplateId;
     private String desUrl;
     private int pmDataDurationInWeeks;
+    private int ccvpnNotipollingInterval;
 
     /**
      * Check if topic is secure.
@@ -143,9 +144,15 @@ public class Configuration {
         this.pollingInterval = pollingInterval;
     }
 
-    public int getPollingTimeout() {
-        return pollingTimeout;
-    }
+	public int getCCVPNNotiPollingInterval() { return ccvpnNotipollingInterval;}
+
+	public void setCcvpnNotipollingInterval(int ccvpnNotipollingInterval) {
+		this.ccvpnNotipollingInterval = ccvpnNotipollingInterval;
+	}
+
+	public int getPollingTimeout() {
+		return pollingTimeout;
+	}
 
     public void setPollingTimeout(int pollingTimeout) {
         this.pollingTimeout = pollingTimeout;

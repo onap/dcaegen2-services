@@ -81,4 +81,27 @@ public class PolicyServiceTest {
         .whenIgnoringPaths("requestID","payload","closedLoopAlarmStart", "AAI", "target_type", "aai", "targetType")
         .isEqualTo(expected);
 	}
+
+	@Test
+	public void formPolicyOnsetMessageForCCVPNTest() {
+		String cllId = "cll-instance-01";
+		OnsetMessage output = null;
+		String expected = "";
+		String actual = "";
+		try {
+			output = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/onsetMessage2.json"))), OnsetMessage.class);
+			expected = obj.writeValueAsString(output);
+
+			String msg = obj.writeValueAsString(
+				policyService.formPolicyOnsetMessageForCCVPN(cllId, 3000)
+			);
+			actual = new Gson().toJson(msg);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		assertThatJson(actual)
+				.whenIgnoringPaths("requestID","payload","closedLoopAlarmStart", "AAI", "target_type", "aai", "targetType")
+				.isEqualTo(expected);
+	}
 }
