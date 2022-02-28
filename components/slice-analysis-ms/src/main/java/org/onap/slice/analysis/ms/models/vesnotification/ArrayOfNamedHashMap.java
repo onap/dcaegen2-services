@@ -2,7 +2,6 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,21 +18,33 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+package org.onap.slice.analysis.ms.models.vesnotification;
 
-package org.onap.slice.analysis.ms.aai;
-
-import java.util.Map;
+import javax.annotation.Generated;
 
 /**
- *
- * Interface for AAI
- *
+ * Model class for Ves ccvpnNotification.arrayOfNamedHashMap
  */
-public interface AaiInterface {
+@Generated("jsonschema2pojo")
+public class ArrayOfNamedHashMap {
 
-    public Map<String, String> fetchServiceDetails(String snssai);
+    private String name;
+    private HashMap hashMap;
 
-    public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+    public String getName() {
+        return name;
+    }
 
-    public Map<String, Integer> fetchMaxBandwidthOfService(String serviceId);
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public HashMap getHashMap() {
+        return hashMap;
+    }
+
+    public void setHashMap(HashMap hashMap) {
+        this.hashMap = hashMap;
+    }
+
 }
