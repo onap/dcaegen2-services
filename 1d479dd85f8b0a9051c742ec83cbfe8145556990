@@ -1,0 +1,303 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd1637a1_758a7c31",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "Measurement Group",
+      "range": {
+        "startLine": 167,
+        "startChar": 11,
+        "endLine": 167,
+        "endChar": 28
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "711fdc43_cbc6981c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "Can we move this up to where the Subscription group tag is",
+      "range": {
+        "startLine": 224,
+        "startChar": 2,
+        "endLine": 224,
+        "endChar": 22
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a39acc53_91200eac",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "NetworkFunction",
+      "range": {
+        "startLine": 67,
+        "startChar": 27,
+        "endLine": 67,
+        "endChar": 42
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c103c65_d9c93904",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "This will always be true",
+      "range": {
+        "startLine": 78,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 23
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb57da9e_948bd340",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "This module is getting a bit too big. I suggest moving some of these to say the nfservice module",
+      "range": {
+        "startLine": 390,
+        "startChar": 12,
+        "endLine": 390,
+        "endChar": 23
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd9c5873_c1bfd652",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "Why are we doing this here?\nShould this not happen within the actual delete/remove function?",
+      "range": {
+        "startLine": 448,
+        "startChar": 46,
+        "endLine": 448,
+        "endChar": 55
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d40e5ae2_15a32e46",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "Do we need some logic to determine if the nf can be completely removed from the db?\nie. when it no longer has any relations to a sub or mg",
+      "range": {
+        "startLine": 453,
+        "startChar": 14,
+        "endLine": 453,
+        "endChar": 24
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "062e48c6_fd10857c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "return [measurement_group for measurement_group in sub_model.measurement_groups \n            if measurement_group.administrative_state \u003d\u003d AdministrativeState.UNLOCKED.value]",
+      "range": {
+        "startLine": 476,
+        "startChar": 5,
+        "endLine": 476,
+        "endChar": 22
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7628ca8a_1729df04",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "Suggested edit:\n\ndelete_filtered_nfs",
+      "range": {
+        "startLine": 479,
+        "startChar": 4,
+        "endLine": 479,
+        "endChar": 26
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "980c1e1a_b33a9805",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "This will always be true",
+      "range": {
+        "startLine": 492,
+        "startChar": 11,
+        "endLine": 492,
+        "endChar": 22
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "554de895_cbbbc4aa",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "NetworkFunction",
+      "range": {
+        "startLine": 515,
+        "startChar": 22,
+        "endLine": 515,
+        "endChar": 37
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72f4f8b9_7dd910ba",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "Is this correct?",
+      "range": {
+        "startLine": 531,
+        "startChar": 61,
+        "endLine": 531,
+        "endChar": 79
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5da1213e_b717949c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-02-28T12:50:51Z",
+      "side": 1,
+      "message": "Suggested edit:\n\n    mg_names_processing \u003d [mg for mg in sub_model.measurement_groups \n                           if mg.administrative_state in [AdministrativeState.FILTERING.value, \n                                                          AdministrativeState.LOCKING.value]]\n    if mg_names_processing:\n        raise DataConflictException(f\u0027Cannot update filter as subscription: \u0027\n                                    f\u0027{sub_model.subscription_name} is in a transitioning state \u0027\n                                    f\u0027for the following measurement groups: {mg_names_processing}\u0027)",
+      "range": {
+        "startLine": 537,
+        "startChar": 4,
+        "endLine": 537,
+        "endChar": 15
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
