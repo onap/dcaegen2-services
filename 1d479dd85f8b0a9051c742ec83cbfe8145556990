@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "29feb402_3ab58fba",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd1637a1_758a7c31",
+      "range": {
+        "startLine": 167,
+        "startChar": 11,
+        "endLine": 167,
+        "endChar": 28
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "711fdc43_cbc6981c",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff1dde0c_ae67846c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/pmsh_swagger.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "711fdc43_cbc6981c",
+      "range": {
+        "startLine": 224,
+        "startChar": 2,
+        "endLine": 224,
+        "endChar": 22
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "aeb41256_414d28e7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a39acc53_91200eac",
+      "range": {
+        "startLine": 67,
+        "startChar": 27,
+        "endLine": 67,
+        "endChar": 42
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6c103c65_d9c93904",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -91,6 +163,30 @@
       "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab3a5840_14d0da94",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "True, I removed it.",
+      "parentUuid": "6c103c65_d9c93904",
+      "range": {
+        "startLine": 78,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 23
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "315680ab_3b57ea83",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb57da9e_948bd340",
+      "range": {
+        "startLine": 390,
+        "startChar": 12,
+        "endLine": 390,
+        "endChar": 23
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd9c5873_c1bfd652",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -128,6 +248,30 @@
       "writtenOn": "2022-02-28T12:50:51Z",
       "side": 1,
       "message": "Why are we doing this here?\nShould this not happen within the actual delete/remove function?",
+      "range": {
+        "startLine": 448,
+        "startChar": 46,
+        "endLine": 448,
+        "endChar": 55
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e57b7263_aebfb550",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "If all msgs are locked then the delete function in unlocked msg section below wont run so removed here.",
+      "parentUuid": "bd9c5873_c1bfd652",
       "range": {
         "startLine": 448,
         "startChar": 46,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "e2c224a0_8c5a591a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "Complete removal of nf is performed now in policy response so not included it here.",
+      "parentUuid": "d40e5ae2_15a32e46",
+      "range": {
+        "startLine": 453,
+        "startChar": 14,
+        "endLine": 453,
+        "endChar": 24
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "062e48c6_fd10857c",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -174,6 +342,30 @@
       "writtenOn": "2022-02-28T12:50:51Z",
       "side": 1,
       "message": "return [measurement_group for measurement_group in sub_model.measurement_groups \n            if measurement_group.administrative_state \u003d\u003d AdministrativeState.UNLOCKED.value]",
+      "range": {
+        "startLine": 476,
+        "startChar": 5,
+        "endLine": 476,
+        "endChar": 22
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0aca3fbc_abdf8a0d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "We would loose logging if we perform this that we added during create API",
+      "parentUuid": "062e48c6_fd10857c",
       "range": {
         "startLine": 476,
         "startChar": 5,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "1444f884_98a59d52",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7628ca8a_1729df04",
+      "range": {
+        "startLine": 479,
+        "startChar": 4,
+        "endLine": 479,
+        "endChar": 26
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "980c1e1a_b33a9805",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -229,6 +445,30 @@
       "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a5bc8a1_b52504bf",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "980c1e1a_b33a9805",
+      "range": {
+        "startLine": 492,
+        "startChar": 11,
+        "endLine": 492,
+        "endChar": 22
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "8d59b54c_bc074d01",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "554de895_cbbbc4aa",
+      "range": {
+        "startLine": 515,
+        "startChar": 22,
+        "endLine": 515,
+        "endChar": 37
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72f4f8b9_7dd910ba",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 4
@@ -266,6 +530,30 @@
       "writtenOn": "2022-02-28T12:50:51Z",
       "side": 1,
       "message": "Is this correct?",
+      "range": {
+        "startLine": 531,
+        "startChar": 61,
+        "endLine": 531,
+        "endChar": 79
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c4a5003_26ed3268",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "Rephrased it to define validation",
+      "parentUuid": "72f4f8b9_7dd910ba",
       "range": {
         "startLine": 531,
         "startChar": 61,
@@ -298,6 +586,30 @@
       "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "495576f4_ce53284d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-02-28T13:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5da1213e_b717949c",
+      "range": {
+        "startLine": 537,
+        "startChar": 4,
+        "endLine": 537,
+        "endChar": 15
+      },
+      "revId": "1d479dd85f8b0a9051c742ec83cbfe8145556990",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
