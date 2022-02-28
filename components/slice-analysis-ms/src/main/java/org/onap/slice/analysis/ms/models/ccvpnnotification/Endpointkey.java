@@ -2,7 +2,6 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,22 +18,46 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+package org.onap.slice.analysis.ms.models.ccvpnnotification;
 
-package org.onap.slice.analysis.ms.aai;
-
-import java.util.Map;
+import java.util.Objects;
 
 /**
- *
- * Interface for AAI
- *
+ * Endpoint key class represents each uni associated with each cll
  */
-public interface AaiInterface {
+public class Endpointkey {
 
-    public Map<String, String> fetchServiceDetails(String snssai);
+    private final String cllId;
+    private final String uniId;
 
-    public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+    public Endpointkey(String cllId, String uniId){
+        this.cllId = cllId;
+        this.uniId = uniId;
+    }
 
-    public Map<String, Integer> fetchMaxBandwidthofService(String serviceId);
+    public String getCllId() {
+        return cllId;
+    }
+
+    public String getUniId() {
+        return uniId;
+    }
+
+    @Override
+    public int hashCode() { return Objects.hash(cllId, uniId); }
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (obj instanceof Endpointkey){
+            final Endpointkey other = (Endpointkey) obj;
+            return Objects.equals(this.cllId, other.cllId) &&
+                    Objects.equals(this.uniId, other.uniId);
+        }
+        return false;
+    }
+
+
 }
-
