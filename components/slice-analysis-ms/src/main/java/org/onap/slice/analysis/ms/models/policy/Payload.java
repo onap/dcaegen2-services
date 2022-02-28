@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -20,64 +21,73 @@
  *******************************************************************************/
 package org.onap.slice.analysis.ms.models.policy;
 
-/** 
- * Model class for the Paylaod Object 
+/**
+ * Model class for the Paylaod Object
  */
 public class Payload {
 
-	private String name;
-	private String serviceInstanceID;
-	private String globalSubscriberId;
-	private String subscriptionServiceType;
-	private String networkType;
-	private AdditionalProperties<?> additionalProperties;
+    private String name;
+    private String serviceInstanceID;
+    private String globalSubscriberId;
+    private String subscriptionServiceType;
+    private String networkType;
+    private AdditionalProperties<?> additionalProperties;
+    private String serviceType;
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getServiceInstanceID() {
-		return serviceInstanceID;
-	}
+    public String getServiceInstanceID() {
+        return serviceInstanceID;
+    }
 
-	public void setServiceInstanceID(String serviceInstanceId) {
-		this.serviceInstanceID = serviceInstanceId;
-	}
+    public void setServiceInstanceID(String serviceInstanceId) {
+        this.serviceInstanceID = serviceInstanceId;
+    }
 
-	public String getGlobalSubscriberId() {
-		return globalSubscriberId;
-	}
+    public String getGlobalSubscriberId() {
+        return globalSubscriberId;
+    }
 
-	public void setGlobalSubscriberId(String globalSubscriberId) {
-		this.globalSubscriberId = globalSubscriberId;
-	}
+    public void setGlobalSubscriberId(String globalSubscriberId) {
+        this.globalSubscriberId = globalSubscriberId;
+    }
 
-	public String getSubscriptionServiceType() {
-		return subscriptionServiceType;
-	}
+    public String getSubscriptionServiceType() {
+        return subscriptionServiceType;
+    }
 
-	public void setSubscriptionServiceType(String subscriptionServiceType) {
-		this.subscriptionServiceType = subscriptionServiceType;
-	}
+    public void setSubscriptionServiceType(String subscriptionServiceType) {
+        this.subscriptionServiceType = subscriptionServiceType;
+    }
 
-	public String getNetworkType() {
-		return networkType;
-	}
+    public String getNetworkType() {
+        return networkType;
+    }
 
-	public void setNetworkType(String networkType) {
-		this.networkType = networkType;
-	}
+    public void setNetworkType(String networkType) {
+        this.networkType = networkType;
+    }
 
-	public AdditionalProperties<?> getAdditionalProperties() {
-		return additionalProperties;
-	}
+    public AdditionalProperties<?> getAdditionalProperties() {
+        return additionalProperties;
+    }
 
-	public void setAdditionalProperties(AdditionalProperties<?> additionalProperties) {
-		this.additionalProperties = additionalProperties;
-	}
+    public void setAdditionalProperties(AdditionalProperties<?> additionalProperties) {
+        this.additionalProperties = additionalProperties;
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
+    }
 
 }
