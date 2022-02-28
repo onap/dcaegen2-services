@@ -53,6 +53,7 @@ public class Configuration {
 	private String cg;
 	private String cid;
 	private int pollingInterval;
+	private int ccvpnNotipollingInterval;
 	private int pollingTimeout;
 	private String aafUsername;
 	private String aafPassword;
@@ -138,6 +139,12 @@ public class Configuration {
 
 	public void setPollingInterval(int pollingInterval) {
 		this.pollingInterval = pollingInterval;
+	}
+
+	public int getCCVPNNotiPollingInterval() { return ccvpnNotipollingInterval;}
+
+	public void setCcvpnNotipollingInterval(int ccvpnNotipollingInterval) {
+		this.ccvpnNotipollingInterval = ccvpnNotipollingInterval;
 	}
 
 	public int getPollingTimeout() {
@@ -273,6 +280,7 @@ public class Configuration {
 
 		pgPort = jsonObject.get("postgres.port").getAsInt();
 		pollingInterval = jsonObject.get("sliceanalysisms.pollingInterval").getAsInt();
+		ccvpnNotipollingInterval = jsonObject.get("sliceanalysisms.ccvpnnotification.pollingInterval").getAsInt();
 		pgPassword = jsonObject.get("postgres.password").getAsString();
 		pgUsername = jsonObject.get("postgres.username").getAsString();
 		pgHost = jsonObject.get("postgres.host").getAsString();
