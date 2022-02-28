@@ -2,7 +2,6 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,21 +19,38 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.aai;
+package org.onap.slice.analysis.ms.service;
 
-import java.util.Map;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+import org.onap.slice.analysis.ms.models.ccvpnnotification.Event;
+import org.onap.slice.analysis.ms.models.ccvpnnotification.SimpleEvent;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import static org.mockito.Mockito.mock;
 
-/**
- *
- * Interface for AAI
- *
- */
-public interface AaiInterface {
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = BandwidthEvaluatorTest.class)
+public class BandwidthEvaluatorTest {
 
-    public Map<String, String> fetchServiceDetails(String snssai);
+    @Spy
+    @InjectMocks
+    BandwidthEvaluator bandwidthEvaluator;
 
-    public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+    @Before
+    public void setup(){
+        MockitoAnnotations.initMocks(this);
+    }
 
-    public Map<String, Integer> fetchMaxBandwidthofService(String serviceId);
+    @Test
+    public void postTest() {
+        Event evt = mock(SimpleEvent.class);
+        bandwidthEvaluator.post(evt);
+        Mockito.verify(bandwidthEvaluator, Mockito.atLeastOnce()).post(Mockito.any(Event.class));
+    }
 }
-

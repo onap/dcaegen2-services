@@ -2,7 +2,6 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,22 +18,15 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
-
-package org.onap.slice.analysis.ms.aai;
-
-import java.util.Map;
+package org.onap.slice.analysis.ms.models.ccvpnnotification;
 
 /**
- *
- * Interface for AAI
- *
+ * Enum class represents possible state of a Ethernet service (designed for CCVPN CLL serivce)
  */
-public interface AaiInterface {
-
-    public Map<String, String> fetchServiceDetails(String snssai);
-
-    public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
-
-    public Map<String, Integer> fetchMaxBandwidthofService(String serviceId);
+public enum ServiceState {
+    RUNNING,
+    BEING_MAINTAINED,
+    ERROR,
+    DELETED,
+    UNKNOWN
 }
-

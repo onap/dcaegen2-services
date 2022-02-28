@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020-2022 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -64,6 +65,7 @@ public class Configuration {
     private String rannfnssiDetailsTemplateId;
     private String desUrl;
     private int pmDataDurationInWeeks;
+    private int ccvpnNotipollingInterval;
 
     /**
      * Check if topic is secure.
@@ -141,6 +143,12 @@ public class Configuration {
 
     public void setPollingInterval(int pollingInterval) {
         this.pollingInterval = pollingInterval;
+    }
+
+    public int getCCVPNNotiPollingInterval() { return ccvpnNotipollingInterval;}
+
+    public void setCcvpnNotipollingInterval(int ccvpnNotipollingInterval) {
+        this.ccvpnNotipollingInterval = ccvpnNotipollingInterval;
     }
 
     public int getPollingTimeout() {
