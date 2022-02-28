@@ -22,6 +22,17 @@
           "client_id": "sdnr-sliceanalysis-1"
         },
         "aaf_username": null
+      },
+      "ves_ccvpn_notification_topic": {
+        "aaf_password": null,
+        "type": "message-router",
+        "dmaap_info": {
+          "topic_url": "http://message-router.onap.svc.cluster.local:3904/events/unauthenticated.VES_NOTIFICATION_OUTPUT",
+          "client_role": "sliceanalysis-subscriber",
+          "location": "onap",
+          "client_id": "sdnr-sliceanalysis-1"
+        },
+        "aaf_username": null
       }
     },
     "streams_publishes": {
@@ -55,7 +66,13 @@
     "sliceanalysisms.initialDelaySeconds": 60000,
     "service_calls": {
       "policy-req": []
-    }
+    },
+    "sliceanalysisms.vesNotifPollingInterval": 5,
+    "sliceanalysisms.vesNotifChangeIdentifier": "PM_BW_UPDATE",
+    "sliceanalysisms.vesNotifPollingInterval": "BandwidthChanged",
+    "sliceanalysisms.ccvpnEvalInterval": 5,
+    "sliceanalysisms.ccvpnEvalThreshold": 0.8,
+    "sliceanalysisms.ccvpnEvalPrecision": 100.0
   },
   "policies": {
     

@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
          - [DCAEGEN2-3100](https://jira.onap.org/browse/DCAEGEN2-3100) - Update onset message test data
 
+         - [DCAEGEN2-3063](https://jira.onap.org/browse/DCAEGEN2-3063) - IBN user-triggered CLoud Leased Line update and CCVPN closed-loop
+
 ## [1.0.6] - 2021/08/28
          - [DCAEGEN2-2885](https://jira.onap.org/browse/DCAEGEN2-2885) - DCAE SliceAnalysis MS - CPS Integration
 
