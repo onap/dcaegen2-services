@@ -21,12 +21,16 @@
 
 package org.onap.slice.analysis.ms.models.policy;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /** 
  * Model class for the AdditionalProperties Object 
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AdditionalProperties<T> {
 	private String modifyAction;
 	private List<String> snssaiList;
@@ -34,6 +38,10 @@ public class AdditionalProperties<T> {
 	private T resourceConfig;
 	private Map<String, String> nsiInfo;
 	private String scriptName;
+	// Extra attributes for CCVPN CloseLoop
+	private String enableSdnc;
+	private List<TransportNetwork> transportNetworks;
+
 	public String getModifyAction() {
 		return modifyAction;
 	}
@@ -70,5 +78,20 @@ public class AdditionalProperties<T> {
 	public void setScriptName(String scriptName) {
 		this.scriptName = scriptName;
 	}
+	// Extra attributes setter/getter for CCVPN CloseLoop
+	public String getEnableSdnc() {
+		return enableSdnc;
+	}
 
+	public void setEnableSdnc(String enableSdnc) {
+		this.enableSdnc = enableSdnc;
+	}
+
+	public List<TransportNetwork> getTransportNetworks() {
+		return transportNetworks;
+	}
+
+	public void setTransportNetworks(List<TransportNetwork> transportNetworks) {
+		this.transportNetworks = transportNetworks;
+	}
 }

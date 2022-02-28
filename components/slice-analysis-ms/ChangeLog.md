@@ -11,8 +11,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
          - [DCAEGEN2-3025](https://jira.onap.org/browse/DCAEGEN2-3025) - Fix null pointer exception while fetching slice-config
 
-         - [DCAEGEN2-3054](https://jira.onap.org/browse/DCAEGEN2-3054) - Remove security vulnerabilities
-
 ## [1.0.6] - 2021/08/28
          - [DCAEGEN2-2885](https://jira.onap.org/browse/DCAEGEN2-2885) - DCAE SliceAnalysis MS - CPS Integration
 
