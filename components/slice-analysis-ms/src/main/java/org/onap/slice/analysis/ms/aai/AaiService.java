@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2021-2022 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -38,6 +39,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -347,4 +349,35 @@ public class AaiService implements AaiInterface {
 
     }
 
+    /**
+     * Get network bandwidth attribute of an ethernet service. These data is inside a network policy whose
+     * etwork-policy-fqdn equals to provided service-instance-id
+     * @param serviceId target service instance id
+     * @return Map contains maxBandwidth value of given service-instance
+     */
+    public Map<String, Integer> fetchMaxBandwidthofService(String serviceId){
+        log.info("Fetching max-bandwidth from AAI network-policy");
+        String networkPolicyUrl = aaiBaseUrl + "/network/network-policies" + "?network-policy-fqdn="
+                + serviceId;
+        Map<String, Integer> result = new HashMap<>();
+        try {
+            ResponseEntity<String> resp = restclient.sendGetRequest(networkPolicyUrl, new ParameterizedTypeReference<String>() {
+            });
+            if (resp.getStatusCodeValue() == 200){
+                String networkPolicy = resp.getBody();
+                JSONObject networkPolicyJson = new JSONObject(networkPolicy);
+                JSONArray networkPolicyList	= networkPolicyJson.optJSONArray("network-policy");
+                if (networkPolicyList != null){
+                    JSONObject networkPolicyOjb = networkPolicyList.getJSONObject(0);
+                    result.put("maxBandwidth", networkPolicyOjb.getInt("max-bandwidth"));
+                    return result;
+                }
+                log.info("Successfully fetched max bandwidth {}: {}", serviceId, result);
+            }
+        } catch (Exception e){
+            log.warn("Error encountered when fetching maxbandwidth: " + e);
+
+        }
+        return null;
+    }
 }
