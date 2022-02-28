@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -18,20 +18,48 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+package org.onap.slice.analysis.ms.models.ccvpnnotification;
 
-package org.onap.slice.analysis.ms.configdb;
+import javax.annotation.Generated;
 
-import java.util.Map;
+@Generated("jsonschema2pojo")
+public class HashMap {
 
-/**
- * 
- * Interface for AAI
- *
- */
-public interface AaiInterface {
+    private String cllId;
+    private String uniId;
+    private String bandwidthValue;
+    private String time;
 
-	public Map<String, String> fetchServiceDetails(String snssai);
-	public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
-	public Map<String, Integer> fetchMaxBandwidthofService(String serviceId);
+    public String getCllId() {
+        return cllId;
+    }
+
+    public void setCllId(String cllId) {
+        this.cllId = cllId;
+    }
+
+    public String getUniId() {
+        return uniId;
+    }
+
+    public void setUniId(String uniId) {
+        this.uniId = uniId;
+    }
+
+    public String getBandwidthValue() {
+        return bandwidthValue;
+    }
+
+    public void setBandwidthValue(String bandwidthValue) {
+        this.bandwidthValue = bandwidthValue;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
 }
-

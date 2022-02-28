@@ -31,6 +31,7 @@ public class Payload {
 	private String subscriptionServiceType;
 	private String networkType;
 	private AdditionalProperties<?> additionalProperties;
+	private String serviceType;
 
 	public String getName() {
 		return name;
@@ -78,6 +79,14 @@ public class Payload {
 
 	public void setAdditionalProperties(AdditionalProperties<?> additionalProperties) {
 		this.additionalProperties = additionalProperties;
+	}
+
+	public String getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
 	}
 
 }
