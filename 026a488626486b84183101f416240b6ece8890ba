@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e76b6600_c19e7a4a",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-03-01T08:07:30Z",
+      "side": 1,
+      "message": "I\u0027d go with a new 2.2.0 preferably",
+      "revId": "026a488626486b84183101f416240b6ece8890ba",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
