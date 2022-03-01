@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "80e4b59e_d974e0dd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-03-01T14:17:25Z",
+      "side": 1,
+      "message": "Its a stage wise data removal as we had in create API, that starts with data removal from subscription followed by unlocked measurement groups. If we have rollback than even one msg failure will stop subscription level updates. So we have filter and nfs associated with subscription consistently removed first.",
+      "parentUuid": "57871979_983b5479",
+      "range": {
+        "startLine": 428,
+        "startChar": 4,
+        "endLine": 431,
+        "endChar": 23
+      },
+      "revId": "0970a3c59cc8753e5169f62d3ef299600eca9ef6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8eca7d2f_88f0c331",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2022-03-01T13:57:46Z",
       "side": 1,
       "message": "This isn\u0027t really accurate.\nMaybe we need to rethink where we do the check for an empty list",
+      "range": {
+        "startLine": 456,
+        "startChar": 26,
+        "endLine": 456,
+        "endChar": 44
+      },
+      "revId": "0970a3c59cc8753e5169f62d3ef299600eca9ef6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45c8a047_80f4043d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-03-01T14:17:25Z",
+      "side": 1,
+      "message": "This was something we finalised during create API review. Also here we are logging LOCKED msgs for debug as addressed during Create API review.",
+      "parentUuid": "8eca7d2f_88f0c331",
       "range": {
         "startLine": 456,
         "startChar": 26,
