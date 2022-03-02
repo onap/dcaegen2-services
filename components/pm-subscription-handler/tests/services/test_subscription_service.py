@@ -22,8 +22,8 @@ from unittest.mock import patch, MagicMock
 from mod.api.db_models import SubscriptionModel, MeasurementGroupModel, \
     NfMeasureGroupRelationalModel, NetworkFunctionModel, NfSubRelationalModel, \
     convert_db_string_to_list, NetworkFunctionFilterModel
+from mod.api.services.measurement_group_service import MgNfState
 from mod.network_function import NetworkFunctionFilter
-from mod.subscription import SubNfState
 from mod import aai_client, db
 from mod.api.custom_exception import DuplicateDataException, InvalidDataException, \
     DataConflictException
@@ -34,9 +34,6 @@ from tests.base_setup import create_multiple_subscription_data
 
 
 class SubscriptionServiceTestCase(BaseClassSetup):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
 
     def setUp(self):
         super().setUp()
@@ -48,13 +45,6 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         with open(os.path.join(os.path.dirname(__file__), '../data/aai_model_info.json'),
                   'r') as data:
             self.good_model_info = data.read()
-
-    def tearDown(self):
-        super().tearDown()
-
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
 
     def create_test_subs(self, new_sub_name, new_msrmt_grp_name):
         subscription = self.subscription_request.replace('ExtraPM-All-gNB-R2B', new_sub_name)
@@ -84,7 +74,7 @@ class SubscriptionServiceTestCase(BaseClassSetup):
             NfMeasureGroupRelationalModel.measurement_grp_name == 'msrmt_grp_name-new')).all()
         for pubslished_event in msr_grp_nf_rel:
             self.assertEqual(pubslished_event.nf_measure_grp_status,
-                             SubNfState.PENDING_CREATE.value)
+                             MgNfState.PENDING_CREATE.value)
 
     @patch('mod.api.services.subscription_service.save_nf_filter', MagicMock(return_value=None))
     @patch.object(AppConfig, 'publish_to_topic')
@@ -132,6 +122,9 @@ class SubscriptionServiceTestCase(BaseClassSetup):
 
     def test_perform_validation_existing_sub(self):
         try:
+            subscription = create_subscription_data('ExtraPM-All-gNB-R2B')
+            db.session.add(subscription)
+            db.session.commit()
             subscription_service.create_subscription(json.loads(self.subscription_request)
                                                      ['subscription'])
         except DuplicateDataException as exception:
@@ -341,10 +334,10 @@ class SubscriptionServiceTestCase(BaseClassSetup):
                              "No value provided for measurement group name")
 
     def test_validate_nf_filter_with_no_filter_values(self):
-        nfFilter = '{"nfNames": [],"modelInvariantIDs": [], ' \
-                   '"modelVersionIDs": [],"modelNames": []}'
+        nf_filter = '{"nfNames": [],"modelInvariantIDs": [], ' \
+                    '"modelVersionIDs": [],"modelNames": []}'
         try:
-            subscription_service.validate_nf_filter(json.loads(nfFilter))
+            subscription_service.validate_nf_filter(json.loads(nf_filter))
         except InvalidDataException as invalidEx:
             self.assertEqual(invalidEx.args[0],
                              "At least one filter within nfFilter must not be empty")
@@ -423,10 +416,10 @@ class SubscriptionServiceTestCase(BaseClassSetup):
         self.assertEqual(len(meas_group_nfs), 2)
         self.assertEqual(meas_group_nfs[0].nf_name, 'pnf201')
         self.assertEqual(meas_group_nfs[0].nf_measure_grp_status,
-                         SubNfState.PENDING_CREATE.value)
+                         MgNfState.PENDING_CREATE.value)
         self.assertEqual(meas_group_nfs[1].nf_name, 'pnf_33_ericsson')
         self.assertEqual(meas_group_nfs[1].nf_measure_grp_status,
-                         SubNfState.PENDING_CREATE.value)
+                         MgNfState.PENDING_CREATE.value)
         meas_grp = measurement_group_service.query_meas_group_by_name('sub_01', 'msg_01')
         self.assertEqual(meas_grp.administrative_state, 'UNLOCKED')
         # Creating test data for update filter function
@@ -442,13 +435,13 @@ class SubscriptionServiceTestCase(BaseClassSetup):
             .all()
         self.assertEqual(meas_group_nfs[0].nf_name, 'pnf201')
         self.assertEqual(meas_group_nfs[0].nf_measure_grp_status,
-                         SubNfState.PENDING_DELETE.value)
+                         MgNfState.PENDING_DELETE.value)
         self.assertEqual(meas_group_nfs[1].nf_name, 'pnf_33_ericsson')
         self.assertEqual(meas_group_nfs[1].nf_measure_grp_status,
-                         SubNfState.PENDING_DELETE.value)
+                         MgNfState.PENDING_DELETE.value)
         self.assertEqual(meas_group_nfs[2].nf_name, 'xnf111')
         self.assertEqual(meas_group_nfs[2].nf_measure_grp_status,
-                         SubNfState.PENDING_CREATE.value)
+                         MgNfState.PENDING_CREATE.value)
         meas_grp = measurement_group_service.query_meas_group_by_name('sub_01', 'msg_01')
         self.assertEqual(meas_grp.administrative_state, 'FILTERING')
 
