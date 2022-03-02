@@ -20,30 +20,25 @@ import json
 from os import path
 from unittest.mock import patch, MagicMock
 from mod.aai_event_handler import AAIEventHandler
-from mod.api.db_models import NetworkFunctionModel, NetworkFunctionFilterModel, \
-    MeasurementGroupModel, SubscriptionModel
-from mod.subscription import AdministrativeState
-from tests.base_setup import BaseClassSetup
+from mod.api.db_models import NetworkFunctionModel
+from tests.base_setup import BaseClassSetup, create_subscription_data
 from mod import db
 
 
 class AAIEventHandlerTest(BaseClassSetup):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
 
     def setUp(self):
         super().setUp()
-        super().setUpAppConf()
+        subscription = create_subscription_data('aai_event_handler')
+        subscription.measurement_groups[1].administravtive_sate = 'UNLOCKED'
+        db.session.add(subscription)
+        db.session.add(subscription.measurement_groups[0])
+        db.session.add(subscription.measurement_groups[1])
+        db.session.add(subscription.network_filter)
+        db.session.add(subscription.nfs[0])
+        db.session.commit()
         with open(path.join(path.dirname(__file__), 'data/mr_aai_events.json'), 'r') as data:
             self.mr_aai_events = json.load(data)["mr_response"]
-
-    def tearDown(self):
-        super().tearDown()
-
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
 
     @patch('mod.pmsh_config.AppConfig.get_from_topic')
     @patch('mod.network_function.NetworkFunction.set_nf_model_params')
@@ -87,16 +82,14 @@ class AAIEventHandlerTest(BaseClassSetup):
                                                     apply_nfs_to_measure_grp):
         mock_set_sdnc_params.return_value = True
         mr_aai_mock.return_value = self.mr_aai_events
+        nf_to_subscription = create_subscription_data('nf_to_subscription')
+        nf_to_subscription.measurement_groups[0].measurement_group_name = 'NF_MG_ONE'
+        nf_to_subscription.measurement_groups[1].measurement_group_name = 'NF_MG_TWO'
+        db.session.add(nf_to_subscription)
+        db.session.add(nf_to_subscription.measurement_groups[0])
+        db.session.add(nf_to_subscription.network_filter)
+        db.session.commit()
         aai_handler = AAIEventHandler(self.app)
-        subscription = SubscriptionModel(subscription_name='ExtraPM-All-gNB-R2B2',
-                                         operational_policy_name='operation_policy',
-                                         control_loop_name="control-loop",
-                                         status=AdministrativeState.UNLOCKED.value)
-        db.session.add(subscription)
-        db.session.commit()
-        generate_nf_filter_measure_grp('ExtraPM-All-gNB-R2B', 'msr_grp_name')
-        generate_nf_filter_measure_grp('ExtraPM-All-gNB-R2B2', 'msr_grp_name2')
-        db.session.commit()
         aai_handler.execute()
         self.assertEqual(apply_nfs_to_measure_grp.call_count, 2)
 
@@ -111,11 +104,9 @@ class AAIEventHandlerTest(BaseClassSetup):
         mr_aai_mock.return_value = self.mr_aai_events
         apply_nfs_to_measure_grp.side_effect = Exception("publish failed")
         aai_handler = AAIEventHandler(self.app)
-        generate_nf_filter_measure_grp('ExtraPM-All-gNB-R2B', 'msr_grp_name3')
-        db.session.commit()
         aai_handler.execute()
         mock_logger.assert_called_with('Failed to process AAI event for '
-                                       'subscription: ExtraPM-All-gNB-R2B '
+                                       'subscription: aai_event_handler '
                                        'due to: publish failed')
 
     @patch('mod.pmsh_config.AppConfig.publish_to_topic', MagicMock(return_value=None))
@@ -126,21 +117,5 @@ class AAIEventHandlerTest(BaseClassSetup):
         mock_set_sdnc_params.return_value = True
         mr_aai_mock.side_effect = Exception("AAI failure")
         aai_handler = AAIEventHandler(self.app)
-        generate_nf_filter_measure_grp('ExtraPM-All-gNB-R2B', 'msr_grp_name3')
-        db.session.commit()
         aai_handler.execute()
         mock_logger.assert_called_with('Failed to process AAI event due to: AAI failure')
-
-
-def generate_nf_filter_measure_grp(sub_name, msg_name):
-    nf_filter = NetworkFunctionFilterModel(
-        subscription_name=sub_name, nf_names='{^pnf.*, ^vnf.*}',
-        model_invariant_ids='{}',
-        model_version_ids='{}',
-        model_names='{}')
-    measurement_group = MeasurementGroupModel(
-        subscription_name=sub_name, measurement_group_name=msg_name,
-        administrative_state='UNLOCKED', file_based_gp=15, file_location='pm.xml',
-        measurement_type=[], managed_object_dns_basic=[])
-    db.session.add(nf_filter)
-    db.session.add(measurement_group)

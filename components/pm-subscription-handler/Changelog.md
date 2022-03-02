@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [2.2.0]
 ### Changed
 * Update Filter API (DCAEGEN2-2922)
+* Cleaning up old App Config, subscription handler and it's subsequent calls (DCAEGEN2-3085)
 
 ## [2.1.1]
 ### Changed

@@ -21,8 +21,22 @@ from mod.aai_event_handler import AAIEventHandler
 from mod import db, create_app, launch_api_server, logger
 from mod.exit_handler import ExitHandler
 from mod.pmsh_config import AppConfig
-from mod.pmsh_utils import PeriodicTask
 from mod.policy_response_handler import PolicyResponseHandler
+from threading import Timer
+
+
+class PeriodicTask(Timer):
+    """
+    See :class:`Timer`.
+    """
+
+    def run(self):
+        self.function(*self.args, **self.kwargs)
+        while not self.finished.wait(self.interval):
+            try:
+                self.function(*self.args, **self.kwargs)
+            except Exception as e:
+                logger.error(f'Exception in thread: {self.name}: {e}', exc_info=True)
 
 
 def main():

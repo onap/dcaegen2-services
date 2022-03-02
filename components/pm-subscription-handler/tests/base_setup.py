@@ -24,9 +24,7 @@ from unittest.mock import patch, MagicMock
 from mod import create_app, db
 from mod.api.db_models import NetworkFunctionFilterModel, MeasurementGroupModel, \
     SubscriptionModel, NetworkFunctionModel, NfSubRelationalModel
-from mod.network_function import NetworkFunctionFilter
-from mod.pmsh_utils import AppConfig
-from mod.pmsh_config import AppConfig as NewAppConfig
+from mod.pmsh_config import AppConfig
 
 
 def get_pmsh_config(file_path='data/cbs_data_1.json'):
@@ -124,16 +122,11 @@ class BaseClassSetup(TestCase):
         cls.app_context = cls.app.app_context()
         cls.app_context.push()
 
-    @patch('mod.pmsh_utils.AppConfig._get_pmsh_config', MagicMock(return_value=get_pmsh_config()))
+    @patch('mod.pmsh_config.AppConfig._get_config', MagicMock(return_value=get_pmsh_config()))
     def setUp(self):
         os.environ['AAI_SERVICE_PORT'] = '8443'
         db.create_all()
         self.app_conf = AppConfig()
-        self.app_conf.nf_filter = NetworkFunctionFilter(**self.app_conf.subscription.nfFilter)
-
-    @patch('mod.pmsh_config.AppConfig._get_config', MagicMock(return_value=get_pmsh_config()))
-    def setUpAppConf(self):
-        self.pmsh_app_conf = NewAppConfig()
 
     def tearDown(self):
         db.drop_all()

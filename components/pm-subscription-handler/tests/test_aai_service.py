@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2021 Nordix Foundation.
+#  Copyright (C) 2019-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -23,29 +23,20 @@ from unittest.mock import patch
 import responses
 from requests import Session, HTTPError
 
-import mod.aai_client as aai_client
-from tests.base_setup import BaseClassSetup
+from mod import aai_client
+from mod.network_function import NetworkFunctionFilter
+from tests.base_setup import BaseClassSetup, create_subscription_data
 
 
 class AaiClientTestCase(BaseClassSetup):
 
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
     def setUp(self):
         super().setUp()
+        self.subscription = create_subscription_data('ExtraPM-All-gNB-R2B')
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
             self.aai_response_data = data.read()
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_model_info.json'), 'r') as data:
             self.good_model_info = data.read()
-
-    def tearDown(self):
-        super().tearDown()
-
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
 
     @patch('mod.network_function.NetworkFunction.set_nf_model_params')
     @patch.object(Session, 'get')
@@ -57,9 +48,10 @@ class AaiClientTestCase(BaseClassSetup):
         mock_get_session.return_value.status_code = 200
         mock_get_session.return_value.text = self.good_model_info
         mock_get_sdnc_params.return_value = True
-        xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf, self.app_conf.nf_filter)
-        self.assertEqual(self.app_conf.subscription.subscriptionName, 'ExtraPM-All-gNB-R2B')
-        self.assertEqual(self.app_conf.subscription.administrativeState, 'UNLOCKED')
+        nf_filter = NetworkFunctionFilter(**self.subscription.network_filter.serialize())
+        xnfs = aai_client.get_pmsh_nfs_from_aai(self.app_conf, nf_filter)
+        self.assertEqual(self.subscription.subscription_name, 'ExtraPM-All-gNB-R2B')
+        self.assertEqual(self.subscription.measurement_groups[0].administrative_state, 'UNLOCKED')
         self.assertEqual(len(xnfs), 3)
 
     @patch.object(Session, 'put')
@@ -67,7 +59,7 @@ class AaiClientTestCase(BaseClassSetup):
         mock_session.return_value.status_code = 404
         with mock.patch('mod.aai_client._get_all_aai_nf_data', return_value=None):
             with self.assertRaises(RuntimeError):
-                aai_client.get_pmsh_nfs_from_aai(self.app_conf, self.app_conf.nf_filter)
+                aai_client.get_pmsh_nfs_from_aai(self.app_conf, self.subscription.network_filter)
 
     @responses.activate
     def test_aai_client_get_all_aai_xnf_data_not_found(self):

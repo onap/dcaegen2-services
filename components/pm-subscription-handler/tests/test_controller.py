@@ -28,22 +28,17 @@ from mod.api.services.measurement_group_service import query_meas_group_by_name
 from tests.base_setup import BaseClassSetup
 from mod.api.custom_exception import InvalidDataException, DataConflictException
 from mod.api.db_models import SubscriptionModel, NfMeasureGroupRelationalModel
-from mod.subscription import SubNfState
 from mod.network_function import NetworkFunctionFilter
 from tests.base_setup import create_subscription_data, create_multiple_subscription_data, \
     create_multiple_network_function_data
 from mod.api.services import measurement_group_service, nf_service, subscription_service
+from mod.api.services.measurement_group_service import MgNfState
 
 
 class ControllerTestCase(BaseClassSetup):
 
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
     def setUp(self):
         super().setUp()
-        super().setUpAppConf()
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_xnfs.json'), 'r') as data:
             self.aai_response_data = data.read()
         with open(os.path.join(os.path.dirname(__file__), 'data/aai_model_info.json'), 'r') as data:
@@ -51,13 +46,6 @@ class ControllerTestCase(BaseClassSetup):
         with open(os.path.join(os.path.dirname(__file__),
                                'data/create_subscription_request.json'), 'r') as data:
             self.subscription_request = data.read()
-
-    def tearDown(self):
-        super().tearDown()
-
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
 
     def test_status_response_healthy(self):
         self.assertEqual(status()['status'], 'healthy')
@@ -90,11 +78,14 @@ class ControllerTestCase(BaseClassSetup):
             NfMeasureGroupRelationalModel.measurement_grp_name == mes_grp_name)).all()
         for published_event in msr_grp_nf_rel:
             self.assertEqual(published_event.nf_measure_grp_status,
-                             SubNfState.PENDING_CREATE.value)
+                             MgNfState.PENDING_CREATE.value)
         self.assertEqual(response[1], 201)
 
     def test_post_subscription_duplicate_sub(self):
         # Posting the same subscription request stored in previous test to get duplicate response
+        subscription = create_subscription_data('ExtraPM-All-gNB-R2B')
+        db.session.add(subscription)
+        db.session.commit()
         response = post_subscription(json.loads(self.subscription_request))
         self.assertEqual(response[1], 409)
         self.assertEqual(response[0], 'subscription Name: ExtraPM-All-gNB-R2B already exists.')
@@ -185,7 +176,7 @@ class ControllerTestCase(BaseClassSetup):
             measurement_group_service. \
                 apply_nf_status_to_measurement_group(nf.nf_name, sub.measurement_groups[0].
                                                      measurement_group_name,
-                                                     SubNfState.PENDING_CREATE.value)
+                                                     MgNfState.PENDING_CREATE.value)
         db.session.commit()
         mg_with_nfs, status_code = get_meas_group_with_nfs('sub1', 'MG1')
         self.assertEqual(status_code, HTTPStatus.OK.value)
@@ -305,7 +296,7 @@ class ControllerTestCase(BaseClassSetup):
             measurement_group_service. \
                 apply_nf_status_to_measurement_group(nf.nf_name, sub.measurement_groups[0].
                                                      measurement_group_name,
-                                                     SubNfState.CREATED.value)
+                                                     MgNfState.CREATED.value)
         db.session.commit()
         response = update_admin_state('sub1', 'MG1', {'administrativeState': 'LOCKED'})
         self.assertEqual(response[1], HTTPStatus.OK.value)
@@ -315,7 +306,7 @@ class ControllerTestCase(BaseClassSetup):
         self.assertEqual(mg_with_nfs['measurementGroupName'], 'MG1')
         self.assertEqual(mg_with_nfs['administrativeState'], 'LOCKING')
         for nf in mg_with_nfs['networkFunctions']:
-            self.assertEqual(nf['nfMgStatus'], SubNfState.PENDING_DELETE.value)
+            self.assertEqual(nf['nfMgStatus'], MgNfState.PENDING_DELETE.value)
 
     @patch('mod.pmsh_config.AppConfig.publish_to_topic', MagicMock(return_value=None))
     @patch.object(aai_client, '_get_all_aai_nf_data')
@@ -340,7 +331,7 @@ class ControllerTestCase(BaseClassSetup):
         self.assertEqual(mg_with_nfs['measurementGroupName'], 'MG2')
         self.assertEqual(mg_with_nfs['administrativeState'], 'UNLOCKED')
         for nf in mg_with_nfs['networkFunctions']:
-            self.assertEqual(nf['nfMgStatus'], SubNfState.PENDING_CREATE.value)
+            self.assertEqual(nf['nfMgStatus'], MgNfState.PENDING_CREATE.value)
 
     @patch('mod.api.services.measurement_group_service.update_admin_status',
            MagicMock(side_effect=InvalidDataException('Bad request')))
