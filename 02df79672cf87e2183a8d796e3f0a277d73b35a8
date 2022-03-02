@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74852f69_ef57b6c6",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-03-02T14:36:53Z",
+      "side": 1,
+      "message": "This entire block is refactored to function add_new_filtered_nfs",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "02df79672cf87e2183a8d796e3f0a277d73b35a8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85c2989d_56d4d8c9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-03-02T14:36:53Z",
+      "side": 1,
+      "message": "The function is refactored. To get unlocked msgs:\n\nunlocked_mgs \u003d get_unlocked_measurement_grps(sub_model)\n\nAlso, the input to apply_measurement_grp_to_nfs is unlocked_msgs",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 100
+      },
+      "revId": "02df79672cf87e2183a8d796e3f0a277d73b35a8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
