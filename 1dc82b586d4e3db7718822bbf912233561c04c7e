@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6a504c48_31039fdd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-02T18:25:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8133e39d_807315b7",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff706bb6_f51fc9f5",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/subscription.py",
         "patchSetId": 1
@@ -105,6 +123,24 @@
     },
     {
       "key": {
+        "uuid": "a9dd1eee_723f9a26",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-02T18:25:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b42b6efb_4a575a61",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e94a277_9f41bd49",
         "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
         "patchSetId": 1
@@ -119,6 +155,24 @@
       "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6587cbb7_96491bee",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-02T18:25:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e94a277_9f41bd49",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -139,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "2963b72f_4656b204",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-02T18:25:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8858f44b_4c011de2",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68dfae7b_f65e9586",
         "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
         "patchSetId": 1
@@ -153,6 +225,24 @@
       "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "617fd855_4d0b606f",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-02T18:25:49Z",
+      "side": 1,
+      "message": "Done with the changes needed",
+      "parentUuid": "68dfae7b_f65e9586",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -173,6 +263,24 @@
     },
     {
       "key": {
+        "uuid": "a9df3d72_e0b287a4",
+        "filename": "components/pm-subscription-handler/tests/test_aai_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-02T18:25:49Z",
+      "side": 1,
+      "message": "Done with the changes needed",
+      "parentUuid": "64c6a0b3_a842e20f",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "491c2451_6e156a97",
         "filename": "components/pm-subscription-handler/tests/test_controller.py",
         "patchSetId": 1
@@ -187,6 +295,24 @@
       "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9a0a93e8_7a93d24c",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-02T18:25:49Z",
+      "side": 1,
+      "message": "Done with the changes needed",
+      "parentUuid": "491c2451_6e156a97",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -207,6 +333,24 @@
     },
     {
       "key": {
+        "uuid": "948768fe_eed2740d",
+        "filename": "components/pm-subscription-handler/tests/test_pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-02T18:25:49Z",
+      "side": 1,
+      "message": "Done with the changes needed",
+      "parentUuid": "58540aa4_698cb44d",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f2cdd96_7bff4195",
         "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
         "patchSetId": 1
@@ -221,6 +365,24 @@
       "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8412d910_73fd6410",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-02T18:25:49Z",
+      "side": 1,
+      "message": "Done with the changes needed",
+      "parentUuid": "7f2cdd96_7bff4195",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
