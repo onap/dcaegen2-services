@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "554c0331_402de860",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-03-02T13:50:14Z",
+      "side": 1,
+      "message": "Actually, I removed as sub_model has it.",
+      "parentUuid": "acca6727_df2f8449",
+      "revId": "0970a3c59cc8753e5169f62d3ef299600eca9ef6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "55422596_e84a7096",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
         "patchSetId": 11
@@ -33,6 +51,24 @@
       "revId": "0970a3c59cc8753e5169f62d3ef299600eca9ef6",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11806814_e4b157f1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/subscription_service.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-03-02T13:50:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55422596_e84a7096",
+      "revId": "0970a3c59cc8753e5169f62d3ef299600eca9ef6",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
