@@ -23,8 +23,40 @@ from mod import db, logger
 from mod.api.services import nf_service, subscription_service
 from mod.network_function import NetworkFunction
 from mod.pmsh_config import MRTopic, AppConfig
-from mod.subscription import AdministrativeState, SubNfState
 from sqlalchemy import or_
+from enum import Enum
+
+
+class MgNfState(Enum):
+    PENDING_CREATE = 'PENDING_CREATE'
+    CREATE_FAILED = 'CREATE_FAILED'
+    CREATED = 'CREATED'
+    PENDING_DELETE = 'PENDING_DELETE'
+    DELETE_FAILED = 'DELETE_FAILED'
+    DELETED = 'DELETED'
+
+
+class AdministrativeState(Enum):
+    UNLOCKED = 'UNLOCKED'
+    LOCKING = 'LOCKING'
+    LOCKED = 'LOCKED'
+    FILTERING = 'FILTERING'
+
+
+mg_nf_states = {
+    AdministrativeState.LOCKED.value: {
+        'success': MgNfState.DELETED,
+        'failed': MgNfState.DELETE_FAILED
+    },
+    AdministrativeState.UNLOCKED.value: {
+        'success': MgNfState.CREATED,
+        'failed': MgNfState.CREATE_FAILED
+    },
+    AdministrativeState.LOCKING.value: {
+        'success': MgNfState.DELETED,
+        'failed': MgNfState.DELETE_FAILED
+    }
+}
 
 
 def save_measurement_group(measurement_group, subscription_name):
@@ -229,7 +261,7 @@ def deactivate_nfs(sub_model, measurement_group, nf_meas_relations):
         logger.info(f'Saving measurement group to nf name, measure_grp_name: {nf.nf_name},'
                     f'{measurement_group.measurement_group_name}  with DELETE request')
         update_measurement_group_nf_status(measurement_group.measurement_group_name,
-                                           SubNfState.PENDING_DELETE.value, nf.nf_name)
+                                           MgNfState.PENDING_DELETE.value, nf.nf_name)
         try:
             network_function = NetworkFunction(**nf.serialize_meas_group_nfs())
             logger.info(f'Publishing event for nf name, measure_grp_name: {nf.nf_name},'
@@ -267,7 +299,7 @@ def activate_nfs(sub_model, measurement_group):
 
         apply_nf_status_to_measurement_group(nf.nf_name,
                                              measurement_group.measurement_group_name,
-                                             SubNfState.PENDING_CREATE.value)
+                                             MgNfState.PENDING_CREATE.value)
         db.session.commit()
         try:
             network_function = NetworkFunction(**nf.serialize_nf())
@@ -331,12 +363,12 @@ def filter_nf_to_meas_grp(nf_name, measurement_group_name, status):
         status (string): status of the network function for measurement group
     """
     try:
-        if status == SubNfState.DELETED.value:
+        if status == MgNfState.DELETED.value:
             delete_nf_to_measurement_group(nf_name, measurement_group_name,
-                                           SubNfState.DELETED.value)
-        elif status == SubNfState.CREATED.value:
+                                           MgNfState.DELETED.value)
+        elif status == MgNfState.CREATED.value:
             update_measurement_group_nf_status(measurement_group_name,
-                                               SubNfState.CREATED.value, nf_name)
+                                               MgNfState.CREATED.value, nf_name)
         nf_measurement_group_rels = NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == measurement_group_name,
             or_(NfMeasureGroupRelationalModel.nf_measure_grp_status.like('PENDING_%'),

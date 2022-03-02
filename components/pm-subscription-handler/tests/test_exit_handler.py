@@ -17,32 +17,31 @@
 # ============LICENSE_END=====================================================
 import os
 from signal import SIGTERM, signal
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
+from mod import db
 
 from mod.exit_handler import ExitHandler
-from tests.base_setup import BaseClassSetup
+from tests.base_setup import BaseClassSetup, create_subscription_data
 
 
 class ExitHandlerTests(BaseClassSetup):
 
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-
-    @patch('mod.pmsh_utils.PeriodicTask')
-    @patch('mod.pmsh_utils.PeriodicTask')
+    @patch('pmsh_service_main.PeriodicTask')
+    @patch('pmsh_service_main.PeriodicTask')
     def setUp(self, mock_periodic_task_aai, mock_periodic_task_policy):
         super().setUp()
+        subscription = create_subscription_data('aai_event_handler')
+        subscription.measurement_groups[1].administravtive_sate = 'UNLOCKED'
+        db.session.add(subscription)
+        db.session.add(subscription.measurement_groups[0])
+        db.session.add(subscription.measurement_groups[1])
+        db.session.add(subscription.network_filter)
+        db.session.add(subscription.nfs[0])
+        db.session.commit()
         self.mock_aai_event_thread = mock_periodic_task_aai
         self.mock_policy_resp_handler_thread = mock_periodic_task_policy
 
-    def tearDown(self):
-        super().tearDown()
-
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
-
+    @patch('mod.pmsh_config.AppConfig.publish_to_topic', MagicMock(return_value=None))
     def test_terminate_signal_successful(self):
         handler = ExitHandler(periodic_tasks=[self.mock_aai_event_thread,
                                               self.mock_policy_resp_handler_thread])

@@ -21,6 +21,7 @@ import os
 from unittest.mock import patch
 
 from mod.api.custom_exception import InvalidDataException, DataConflictException
+from mod.api.services.measurement_group_service import MgNfState
 from mod.network_function import NetworkFunction, NetworkFunctionFilter
 from mod.pmsh_config import AppConfig
 from mod import db, aai_client
@@ -29,13 +30,9 @@ from tests.base_setup import BaseClassSetup, create_subscription_data, \
 from mod.api.services import measurement_group_service, nf_service
 from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel, \
     SubscriptionModel, NetworkFunctionModel
-from mod.subscription import SubNfState
 
 
 class MeasurementGroupServiceTestCase(BaseClassSetup):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
 
     def setUp(self):
         super().setUp()
@@ -48,16 +45,9 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
                   'r') as data:
             self.good_model_info = data.read()
 
-    def tearDown(self):
-        super().tearDown()
-
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
-
     @patch.object(AppConfig, 'publish_to_topic')
     def test_publish_measurement_group(self, mock_mr):
-        super().setUpAppConf()
+        super().setUp()
         nf_1 = NetworkFunction(**{'nf_name': 'pnf_1',
                                   'ipv4_address': '204.120.0.15',
                                   'ipv6_address': '2001:db8:3333:4444:5555:6666:7777:8888',
@@ -104,38 +94,38 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
 
     def test_apply_nf_to_measurement_group_status(self):
         measurement_group_service.apply_nf_status_to_measurement_group(
-            "pnf_test", "measure_grp_name", SubNfState.PENDING_CREATE.value)
+            "pnf_test", "measure_grp_name", MgNfState.PENDING_CREATE.value)
         db.session.commit()
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test').one_or_none())
         self.assertIsNotNone(measurement_grp_rel)
         self.assertEqual(measurement_grp_rel.nf_measure_grp_status,
-                         SubNfState.PENDING_CREATE.value)
+                         MgNfState.PENDING_CREATE.value)
 
     def test_update_measurement_group_nf_status(self):
         measurement_group_service.apply_nf_status_to_measurement_group(
-            "pnf_test", "measure_grp_name", SubNfState.PENDING_CREATE.value)
+            "pnf_test", "measure_grp_name", MgNfState.PENDING_CREATE.value)
         measurement_group_service.update_measurement_group_nf_status(
-            "measure_grp_name", SubNfState.CREATED.value, "pnf_test")
+            "measure_grp_name", MgNfState.CREATED.value, "pnf_test")
         db.session.commit()
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test').one_or_none())
         self.assertIsNotNone(measurement_grp_rel)
         self.assertEqual(measurement_grp_rel.nf_measure_grp_status,
-                         SubNfState.CREATED.value)
+                         MgNfState.CREATED.value)
 
     def test_delete_nf_to_measurement_group_without_nf_delete(self):
         nf = NetworkFunction(nf_name='pnf_test1')
         nf_service.save_nf(nf)
         db.session.commit()
         measurement_group_service.apply_nf_status_to_measurement_group(
-            "pnf_test1", "measure_grp_name1", SubNfState.PENDING_CREATE.value)
+            "pnf_test1", "measure_grp_name1", MgNfState.PENDING_CREATE.value)
         measurement_group_service.apply_nf_status_to_measurement_group(
-            "pnf_test1", "measure_grp_name2", SubNfState.PENDING_CREATE.value)
+            "pnf_test1", "measure_grp_name2", MgNfState.PENDING_CREATE.value)
         measurement_group_service.delete_nf_to_measurement_group(
-            "pnf_test1", "measure_grp_name1", SubNfState.DELETED.value)
+            "pnf_test1", "measure_grp_name1", MgNfState.DELETED.value)
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name1',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test1').one_or_none())
@@ -149,9 +139,9 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         nf_service.save_nf(nf)
         db.session.commit()
         measurement_group_service.apply_nf_status_to_measurement_group(
-            "pnf_test2", "measure_grp_name2", SubNfState.PENDING_CREATE.value)
+            "pnf_test2", "measure_grp_name2", MgNfState.PENDING_CREATE.value)
         measurement_group_service.delete_nf_to_measurement_group(
-            "pnf_test2", "measure_grp_name2", SubNfState.DELETED.value)
+            "pnf_test2", "measure_grp_name2", MgNfState.DELETED.value)
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
@@ -167,10 +157,10 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         nf_service.save_nf(nf)
         db.session.commit()
         measurement_group_service.apply_nf_status_to_measurement_group(
-            "pnf_test2", "measure_grp_name2", SubNfState.PENDING_CREATE.value)
+            "pnf_test2", "measure_grp_name2", MgNfState.PENDING_CREATE.value)
         nf_delete_func.side_effect = Exception('delete failed')
         measurement_group_service.delete_nf_to_measurement_group(
-            "pnf_test2", "measure_grp_name2", SubNfState.DELETED.value)
+            "pnf_test2", "measure_grp_name2", MgNfState.DELETED.value)
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'measure_grp_name2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
@@ -186,7 +176,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
     def test_update_nf_to_measurement_group_failure(self, mock_logger, db_commit_call):
         db_commit_call.side_effect = Exception('update failed')
         measurement_group_service.update_measurement_group_nf_status(
-            "measure_grp_name2", SubNfState.CREATE_FAILED.value, "pnf_test2")
+            "measure_grp_name2", MgNfState.CREATE_FAILED.value, "pnf_test2")
         mock_logger.assert_called_with('Failed to update nf: pnf_test2 for '
                                        'measurement group: measure_grp_name2 due to: update failed')
 
@@ -195,9 +185,8 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         subscription = subscription.replace('msrmt_grp_name', new_msrmt_grp_name)
         return subscription
 
-    @patch.object(AppConfig, 'publish_to_topic')
-    def test_update_admin_status_to_locking(self, mock_mr):
-        super().setUpAppConf()
+    def test_update_admin_status_to_locking(self):
+        super().setUp()
         sub = create_subscription_data('sub')
         nf_list = create_multiple_network_function_data(['pnf_101', 'pnf_102'])
         db.session.add(sub)
@@ -206,7 +195,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             measurement_group_service. \
                 apply_nf_status_to_measurement_group(nf.nf_name, sub.measurement_groups[0].
                                                      measurement_group_name,
-                                                     SubNfState.CREATED.value)
+                                                     MgNfState.CREATED.value)
         db.session.commit()
         measurement_group_service.update_admin_status(sub.measurement_groups[0], 'LOCKED')
         meas_grp = measurement_group_service.query_meas_group_by_name('sub', 'MG1')
@@ -217,11 +206,10 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             NfMeasureGroupRelationalModel.measurement_grp_name == meas_grp.measurement_group_name)\
             .all()
         for nf in meas_group_nfs:
-            self.assertEqual(nf.nf_measure_grp_status, SubNfState.PENDING_DELETE.value)
+            self.assertEqual(nf.nf_measure_grp_status, MgNfState.PENDING_DELETE.value)
 
-    @patch.object(AppConfig, 'publish_to_topic')
-    def test_update_admin_status_to_locked(self, mock_mr):
-        super().setUpAppConf()
+    def test_update_admin_status_to_locked(self):
+        super().setUp()
         sub = create_subscription_data('sub')
         db.session.add(sub)
         measurement_group_service.update_admin_status(sub.measurement_groups[0], 'LOCKED')
@@ -230,15 +218,14 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         self.assertEqual(meas_grp.measurement_group_name, 'MG1')
         self.assertEqual(meas_grp.administrative_state, 'LOCKED')
 
-    @patch.object(AppConfig, 'publish_to_topic')
     @patch.object(aai_client, '_get_all_aai_nf_data')
     @patch.object(aai_client, 'get_aai_model_data')
     @patch.object(NetworkFunctionFilter, 'get_network_function_filter')
     def test_update_admin_status_to_unlocked_with_no_nfs(self, mock_filter_call,
-                                                         mock_model_aai, mock_aai, mock_mr):
+                                                         mock_model_aai, mock_aai):
         mock_aai.return_value = json.loads(self.aai_response_data)
         mock_model_aai.return_value = json.loads(self.good_model_info)
-        super().setUpAppConf()
+        super().setUp()
         sub = create_subscription_data('sub')
         sub.nfs = []
         db.session.add(sub)
@@ -253,17 +240,16 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             NfMeasureGroupRelationalModel.measurement_grp_name == meas_grp.measurement_group_name)\
             .all()
         for nf in meas_group_nfs:
-            self.assertEqual(nf.nf_measure_grp_status, SubNfState.PENDING_CREATE.value)
+            self.assertEqual(nf.nf_measure_grp_status, MgNfState.PENDING_CREATE.value)
 
-    @patch.object(AppConfig, 'publish_to_topic')
     @patch.object(aai_client, '_get_all_aai_nf_data')
     @patch.object(aai_client, 'get_aai_model_data')
     @patch.object(NetworkFunctionFilter, 'get_network_function_filter')
     def test_update_admin_status_to_unlocking(self, mock_filter_call,
-                                              mock_model_aai, mock_aai, mock_mr):
+                                              mock_model_aai, mock_aai):
         mock_aai.return_value = json.loads(self.aai_response_data)
         mock_model_aai.return_value = json.loads(self.good_model_info)
-        super().setUpAppConf()
+        super().setUp()
         sub = create_subscription_data('sub')
         db.session.add(sub)
         db.session.commit()
@@ -277,7 +263,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             NfMeasureGroupRelationalModel.measurement_grp_name == meas_grp.measurement_group_name)\
             .all()
         for nf in meas_group_nfs:
-            self.assertEqual(nf.nf_measure_grp_status, SubNfState.PENDING_CREATE.value)
+            self.assertEqual(nf.nf_measure_grp_status, MgNfState.PENDING_CREATE.value)
 
     def test_update_admin_status_for_missing_measurement_group(self):
         try:
@@ -287,7 +273,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
                                         'for admin status update')
 
     def test_update_admin_status_for_data_conflict(self):
-        super().setUpAppConf()
+        super().setUp()
         sub = create_subscription_data('sub1')
         sub.measurement_groups[0].administrative_state = 'LOCKING'
         try:
@@ -298,7 +284,7 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
                                         'meas group name: MG1')
 
     def test_update_admin_status_for_same_state(self):
-        super().setUpAppConf()
+        super().setUp()
         sub = create_subscription_data('sub1')
         try:
             measurement_group_service.update_admin_status(sub.measurement_groups[0], 'UNLOCKED')
@@ -317,10 +303,10 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             measurement_group_service. \
                 apply_nf_status_to_measurement_group(nf.nf_name, sub.measurement_groups[1].
                                                      measurement_group_name,
-                                                     SubNfState.PENDING_DELETE.value)
+                                                     MgNfState.PENDING_DELETE.value)
         db.session.commit()
         measurement_group_service.lock_nf_to_meas_grp(
-            "pnf_101", "MG2", SubNfState.DELETED.value)
+            "pnf_101", "MG2", MgNfState.DELETED.value)
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_101').one_or_none())
@@ -343,10 +329,10 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             measurement_group_service. \
                 apply_nf_status_to_measurement_group(nf.nf_name, sub.measurement_groups[1].
                                                      measurement_group_name,
-                                                     SubNfState.PENDING_DELETE.value)
+                                                     MgNfState.PENDING_DELETE.value)
         db.session.commit()
         measurement_group_service.lock_nf_to_meas_grp(
-            "pnf_101", "MG2", SubNfState.DELETED.value)
+            "pnf_101", "MG2", MgNfState.DELETED.value)
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_101').one_or_none())
@@ -365,10 +351,10 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         nf = NetworkFunction(nf_name='pnf_test2')
         nf_service.save_nf(nf)
         measurement_group_service.apply_nf_status_to_measurement_group(
-            "pnf_test2", "MG2", SubNfState.PENDING_DELETE.value)
+            "pnf_test2", "MG2", MgNfState.PENDING_DELETE.value)
         db.session.commit()
         measurement_group_service.filter_nf_to_meas_grp(
-            "pnf_test2", "MG2", SubNfState.DELETED.value)
+            "pnf_test2", "MG2", MgNfState.DELETED.value)
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())
@@ -387,10 +373,10 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
         nf = NetworkFunction(nf_name='pnf_test2')
         nf_service.save_nf(nf)
         measurement_group_service.apply_nf_status_to_measurement_group(
-            "pnf_test2", "MG2", SubNfState.PENDING_CREATE.value)
+            "pnf_test2", "MG2", MgNfState.PENDING_CREATE.value)
         db.session.commit()
         measurement_group_service.filter_nf_to_meas_grp(
-            "pnf_test2", "MG2", SubNfState.CREATED.value)
+            "pnf_test2", "MG2", MgNfState.CREATED.value)
         measurement_grp_rel = (NfMeasureGroupRelationalModel.query.filter(
             NfMeasureGroupRelationalModel.measurement_grp_name == 'MG2',
             NfMeasureGroupRelationalModel.nf_name == 'pnf_test2').one_or_none())

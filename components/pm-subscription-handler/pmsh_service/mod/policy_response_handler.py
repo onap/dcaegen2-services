@@ -16,9 +16,11 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 import json
+
+from mod.api.services.measurement_group_service import mg_nf_states, \
+    AdministrativeState, MgNfState
 from mod.pmsh_config import MRTopic, AppConfig
 from mod import logger
-from mod.subscription import AdministrativeState, subscription_nf_states, SubNfState
 from mod.api.db_models import MeasurementGroupModel, NfMeasureGroupRelationalModel
 from mod.api.services import measurement_group_service
 
@@ -96,12 +98,12 @@ class PolicyResponseHandler:
                     NfMeasureGroupRelationalModel.measurement_grp_name == measurement_group_name,
                     NfMeasureGroupRelationalModel.nf_name == nf_name
                 ).one_or_none()
-                if nf_msg_rel.nf_measure_grp_status == SubNfState.PENDING_DELETE.value:
+                if nf_msg_rel.nf_measure_grp_status == MgNfState.PENDING_DELETE.value:
                     administrative_state = AdministrativeState.LOCKING.value
-                elif nf_msg_rel.nf_measure_grp_status == SubNfState.PENDING_CREATE.value:
+                elif nf_msg_rel.nf_measure_grp_status == MgNfState.PENDING_CREATE.value:
                     administrative_state = AdministrativeState.UNLOCKED.value
 
-            nf_measure_grp_status = (subscription_nf_states[administrative_state]
+            nf_measure_grp_status = (mg_nf_states[administrative_state]
                                      [response_message]).value
             policy_response_handle_functions[administrative_state][response_message](
                 measurement_group_name=measurement_group_name, status=nf_measure_grp_status,
