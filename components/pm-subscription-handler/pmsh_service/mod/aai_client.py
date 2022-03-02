@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2021 Nordix Foundation.
+#  Copyright (C) 2019-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,8 +20,7 @@ from os import environ
 import requests
 from requests.auth import HTTPBasicAuth
 import mod.network_function
-import mod.pmsh_utils
-from mod import logger
+from mod import logger, mdc_handler
 
 
 def get_pmsh_nfs_from_aai(app_conf, nf_filter):
@@ -68,8 +67,8 @@ def _get_all_aai_nf_data(app_conf):
                 }"""
         params = {'format': 'simple', 'nodesOnly': 'true'}
         response = session.put(aai_named_query_endpoint, headers=headers,
-                               auth=HTTPBasicAuth(app_conf.aaf_creds.get('aaf_id'),
-                                                  app_conf.aaf_creds.get('aaf_pass')),
+                               auth=HTTPBasicAuth(app_conf.aaf_id,
+                                                  app_conf.aaf_pass),
                                data=data, params=params,
                                verify=(app_conf.ca_cert_path if app_conf.enable_tls else False),
                                cert=((app_conf.cert_path,
@@ -102,7 +101,7 @@ def _get_aai_service_url():
         raise
 
 
-@mod.pmsh_utils.mdc_handler
+@mdc_handler
 def _get_aai_request_headers(**kwargs):
     return {'accept': 'application/json',
             'content-type': 'application/json',
@@ -173,8 +172,8 @@ def get_aai_model_data(app_conf, model_invariant_id, model_version_id, nf_name):
         logger.info(f'Fetching sdnc-model info for xNF: {nf_name} from AAI.')
         headers = _get_aai_request_headers()
         response = session.get(aai_model_ver_endpoint, headers=headers,
-                               auth=HTTPBasicAuth(app_conf.aaf_creds.get('aaf_id'),
-                                                  app_conf.aaf_creds.get('aaf_pass')),
+                               auth=HTTPBasicAuth(app_conf.aaf_id,
+                                                  app_conf.aaf_pass),
                                verify=(app_conf.ca_cert_path if app_conf.enable_tls else False),
                                cert=((app_conf.cert_path,
                                       app_conf.key_path) if app_conf.enable_tls else None))
@@ -183,5 +182,5 @@ def get_aai_model_data(app_conf, model_invariant_id, model_version_id, nf_name):
             data = json.loads(response.text)
             logger.debug(f'Successfully fetched sdnc-model info from AAI: {data}')
             return data
-    except Exception:
-        raise
+    except Exception as e:
+        raise e

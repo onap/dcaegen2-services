@@ -26,11 +26,30 @@ from flask_sqlalchemy import SQLAlchemy
 from onaplogging import monkey
 from onaplogging.mdcContext import MDC
 from ruamel.yaml import YAML
+import uuid
+from functools import wraps
+from os import getenv
 
 db = SQLAlchemy()
 basedir = os.path.abspath(os.path.dirname(__file__))
 _connexion_app = None
 logger = logging.getLogger('onap_logger')
+
+
+def mdc_handler(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        request_id = str(uuid.uuid1())
+        invocation_id = str(uuid.uuid1())
+        MDC.put('ServiceName', getenv('HOSTNAME'))
+        MDC.put('RequestID', request_id)
+        MDC.put('InvocationID', invocation_id)
+
+        kwargs['request_id'] = request_id
+        kwargs['invocation_id'] = invocation_id
+        return func(*args, **kwargs)
+
+    return wrapper
 
 
 def _get_app():

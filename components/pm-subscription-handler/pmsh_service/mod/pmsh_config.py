@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,8 +28,7 @@ from onap_dcae_cbs_docker_client.client import get_all
 from requests.auth import HTTPBasicAuth
 from tenacity import wait_fixed, stop_after_attempt, retry, retry_if_exception_type
 
-from mod import logger
-from mod.pmsh_utils import mdc_handler
+from mod import logger, mdc_handler
 
 
 @unique
@@ -67,8 +66,6 @@ class AppConfig(metaclass=MetaSingleton):
         self.aaf_pass = app_config['config'].get('aaf_password')
         self.streams_publishes = app_config['config'].get('streams_publishes')
         self.streams_subscribes = app_config['config'].get('streams_subscribes')
-        # TODO: aaf_creds variable should be removed on code cleanup
-        self.aaf_creds = {'aaf_id': self.aaf_id, 'aaf_pass': self.aaf_pass}
 
     @staticmethod
     def get_instance():
@@ -94,7 +91,7 @@ class AppConfig(metaclass=MetaSingleton):
             return config
         except Exception as e:
             logger.error(f'Failed to get config from CBS: {e}', exc_info=True)
-            raise ValueError(e)
+            raise ValueError(e) from e
 
     @mdc_handler
     def publish_to_topic(self, mr_topic, event_json, **kwargs):
@@ -149,7 +146,6 @@ class AppConfig(metaclass=MetaSingleton):
                                    verify=(self.ca_cert_path if self.enable_tls else False))
             if response.status_code == 503:
                 logger.error(f'MR Service is unavailable at present: {response.content}')
-                pass
             response.raise_for_status()
             if response.ok:
                 return response.json()
