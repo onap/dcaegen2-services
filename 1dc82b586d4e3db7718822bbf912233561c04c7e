@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8133e39d_807315b7",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T01:56:59Z",
+      "side": 1,
+      "message": "raise ValueError(e) from e",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b42b6efb_4a575a61",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T01:56:59Z",
+      "side": 1,
+      "message": "mock_mr is unused",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e94a277_9f41bd49",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T01:56:59Z",
+      "side": 1,
+      "message": "mock_mr is unused",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8858f44b_4c011de2",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T01:56:59Z",
+      "side": 1,
+      "message": "mock_mr is unused",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68dfae7b_f65e9586",
+        "filename": "components/pm-subscription-handler/tests/test_aai_event_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T01:56:59Z",
+      "side": 1,
+      "message": "why provide this method? It doesn\u0027t do anything more than what would be done if it were not specified\n\nI marked several other classes that have the same issue, but you should check all definitions of tearDown()",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64c6a0b3_a842e20f",
+        "filename": "components/pm-subscription-handler/tests/test_aai_service.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T01:56:59Z",
+      "side": 1,
+      "message": "why provide this method? It doesn\u0027t do anything more than what would be done if it were not specified",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "491c2451_6e156a97",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T01:56:59Z",
+      "side": 1,
+      "message": "why provide this method? It doesn\u0027t do anything more than what would be done if it were not specified",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58540aa4_698cb44d",
+        "filename": "components/pm-subscription-handler/tests/test_pmsh_config.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T01:56:59Z",
+      "side": 1,
+      "message": "why provide this method? It doesn\u0027t do anything more than what would be done if it were not specified",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f2cdd96_7bff4195",
+        "filename": "components/pm-subscription-handler/tests/test_policy_response_handler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T01:56:59Z",
+      "side": 1,
+      "message": "why provide this method? It doesn\u0027t do anything more than what would be done if it were not specified",
+      "revId": "1dc82b586d4e3db7718822bbf912233561c04c7e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
