@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "91f52bc3_14489f99",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/aai/Relationship.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-03-02T04:43:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b310f9a_aab1346d",
+      "revId": "dee1c34343e1bc3cb95236af3a9965b61009b2e9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ea164cf4_2d7cf049",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/aai/RelationshipList.java",
         "patchSetId": 10
@@ -33,6 +51,24 @@
       "revId": "dee1c34343e1bc3cb95236af3a9965b61009b2e9",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47aeb6f1_f520e92f",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/aai/RelationshipList.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-03-02T04:43:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea164cf4_2d7cf049",
+      "revId": "dee1c34343e1bc3cb95236af3a9965b61009b2e9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "bee668bd_577be365",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/aai/ServiceInstance.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-03-02T04:43:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d89090ce_8ab757c4",
+      "revId": "dee1c34343e1bc3cb95236af3a9965b61009b2e9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "db1d603e_abae4cd2",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/MLMessageProcessorTest.java",
         "patchSetId": 10
@@ -67,6 +121,24 @@
       "revId": "dee1c34343e1bc3cb95236af3a9965b61009b2e9",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46671e2e_885bd721",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/MLMessageProcessorTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-03-02T04:43:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db1d603e_abae4cd2",
+      "revId": "dee1c34343e1bc3cb95236af3a9965b61009b2e9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
