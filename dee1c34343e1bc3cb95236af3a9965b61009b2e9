@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b310f9a_aab1346d",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/aai/Relationship.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T00:26:41Z",
+      "side": 1,
+      "message": "module javadoc?",
+      "revId": "dee1c34343e1bc3cb95236af3a9965b61009b2e9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea164cf4_2d7cf049",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/aai/RelationshipList.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T00:26:41Z",
+      "side": 1,
+      "message": "module javadoc?",
+      "revId": "dee1c34343e1bc3cb95236af3a9965b61009b2e9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d89090ce_8ab757c4",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/aai/ServiceInstance.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T00:26:41Z",
+      "side": 1,
+      "message": "A new module should have a javadoc",
+      "revId": "dee1c34343e1bc3cb95236af3a9965b61009b2e9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db1d603e_abae4cd2",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/MLMessageProcessorTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-02T00:26:41Z",
+      "side": 1,
+      "message": "import * is not allowed",
+      "revId": "dee1c34343e1bc3cb95236af3a9965b61009b2e9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
