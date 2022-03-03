@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1144f4ee_35ce9500",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 7746
+      },
+      "writtenOn": "2022-03-03T10:28:05Z",
+      "side": 1,
+      "message": "Publish is already performed on line 47 in add_new_filtered_nfs so I believe we would not need one here.",
+      "range": {
+        "startLine": 50,
+        "startChar": 29,
+        "endLine": 50,
+        "endChar": 59
+      },
+      "revId": "5085f480b6a55a1dfdc6c571b5453d2366b9ebdb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
