@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "80129eb2_ba6d8163",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 12
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-03-03T13:46:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73e86b7c_29986562",
+      "revId": "0292601bf5a6c4f97a0e6068e9723e4d91094cfe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d4f106f_3a1c437a",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SliceUtilization.java",
         "patchSetId": 12
@@ -39,6 +57,30 @@
       "revId": "0292601bf5a6c4f97a0e6068e9723e4d91094cfe",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e957d9c_fb510973",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/SliceUtilization.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-03-03T13:46:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d4f106f_3a1c437a",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 45
+      },
+      "revId": "0292601bf5a6c4f97a0e6068e9723e4d91094cfe",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
