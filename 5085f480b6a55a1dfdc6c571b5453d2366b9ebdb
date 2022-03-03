@@ -22,6 +22,30 @@
       "revId": "5085f480b6a55a1dfdc6c571b5453d2366b9ebdb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "875e397c_42633bd3",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-03-03T10:45:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1144f4ee_35ce9500",
+      "range": {
+        "startLine": 50,
+        "startChar": 29,
+        "endLine": 50,
+        "endChar": 59
+      },
+      "revId": "5085f480b6a55a1dfdc6c571b5453d2366b9ebdb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
