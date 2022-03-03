@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e804e3aa_d73ca81d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-03T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2276c1c_4fc84ea8",
+      "range": {
+        "startLine": 187,
+        "startChar": 9,
+        "endLine": 187,
+        "endChar": 29
+      },
+      "revId": "45769774069ad20d55f94797a7dd9d905b5fb6da",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36c6a3fd_a64f5c00",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/exit_handler.py",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "45769774069ad20d55f94797a7dd9d905b5fb6da",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1daeb331_7eaa9b20",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/exit_handler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-03T15:29:09Z",
+      "side": 1,
+      "message": "Thanks Fiach, I am closing this as we mutually agreed over call.",
+      "parentUuid": "36c6a3fd_a64f5c00",
+      "range": {
+        "startLine": 45,
+        "startChar": 28,
+        "endLine": 45,
+        "endChar": 47
+      },
+      "revId": "45769774069ad20d55f94797a7dd9d905b5fb6da",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e0ad0423_34c8d5bc",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-03T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8169b4f8_ad11e5b8",
+      "range": {
+        "startLine": 120,
+        "startChar": 12,
+        "endLine": 120,
+        "endChar": 33
+      },
+      "revId": "45769774069ad20d55f94797a7dd9d905b5fb6da",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "792adf63_cd272354",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "f95b3d0c_1eab32cd",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-03T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "792adf63_cd272354",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "45769774069ad20d55f94797a7dd9d905b5fb6da",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3d6312c_40485c1b",
         "filename": "components/pm-subscription-handler/tests/base_setup.py",
         "patchSetId": 2
@@ -114,6 +210,30 @@
       "revId": "45769774069ad20d55f94797a7dd9d905b5fb6da",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef6c6ad6_ffb10aaf",
+        "filename": "components/pm-subscription-handler/tests/base_setup.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-03T15:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3d6312c_40485c1b",
+      "range": {
+        "startLine": 30,
+        "startChar": 37,
+        "endLine": 30,
+        "endChar": 44
+      },
+      "revId": "45769774069ad20d55f94797a7dd9d905b5fb6da",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
