@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "61b2fcad_09937908",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-03T16:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f7ca1f3_17b4ef01",
+      "revId": "b457ae4345a6ae30f6c365b1b212e19b993b4c3e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c06eeab_2d58836c",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
         "patchSetId": 3
@@ -33,6 +51,24 @@
       "revId": "b457ae4345a6ae30f6c365b1b212e19b993b4c3e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "367b6c39_160c62e4",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-03T16:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c06eeab_2d58836c",
+      "revId": "b457ae4345a6ae30f6c365b1b212e19b993b4c3e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "98cc02b4_344a8f2d",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-03T16:37:18Z",
+      "side": 1,
+      "message": "Verified and removed this.",
+      "parentUuid": "8876aba1_9330ff28",
+      "revId": "b457ae4345a6ae30f6c365b1b212e19b993b4c3e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d5681f2e_3c9cc92f",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
         "patchSetId": 3
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "e0f2ab8e_03069b92",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/pmsh_config.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-03T16:37:18Z",
+      "side": 1,
+      "message": "Verified and removed this.",
+      "parentUuid": "d5681f2e_3c9cc92f",
+      "revId": "b457ae4345a6ae30f6c365b1b212e19b993b4c3e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c260153a_1c682d2c",
         "filename": "components/pm-subscription-handler/tests/data/cbs_data_1.json",
         "patchSetId": 3
@@ -84,6 +156,24 @@
       "revId": "b457ae4345a6ae30f6c365b1b212e19b993b4c3e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3cc21218_976ec803",
+        "filename": "components/pm-subscription-handler/tests/data/cbs_data_1.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-03T16:37:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c260153a_1c682d2c",
+      "revId": "b457ae4345a6ae30f6c365b1b212e19b993b4c3e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
