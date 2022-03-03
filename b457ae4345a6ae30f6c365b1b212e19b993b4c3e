@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "4c06eeab_2d58836c",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/__init__.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-03T16:23:31Z",
+      "side": 1,
+      "message": "\"as logging\" here does nothing",
+      "revId": "b457ae4345a6ae30f6c365b1b212e19b993b4c3e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8876aba1_9330ff28",
         "filename": "components/pm-subscription-handler/pmsh_service/mod/aai_client.py",
         "patchSetId": 3
@@ -64,6 +81,23 @@
       "writtenOn": "2022-03-03T16:03:12Z",
       "side": 1,
       "message": "should have a NL at the end of the file",
+      "revId": "b457ae4345a6ae30f6c365b1b212e19b993b4c3e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bec561e4_b383c0f5",
+        "filename": "components/pm-subscription-handler/tests/test_aai_service.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-03T16:23:31Z",
+      "side": 1,
+      "message": "why not \nfrom mod import aai_client\n?",
       "revId": "b457ae4345a6ae30f6c365b1b212e19b993b4c3e",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
