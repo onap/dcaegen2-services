@@ -1,0 +1,29 @@
+ # requirements.txt
+ #
+ # installs dependencies from ./setup.py, and the package itself,
+ # in editable mode
+ # -e .
+
+ # (the -e above is optional). you could also just install the package
+ # normally with just the line below (after uncommenting)
+
+ flask==1.1.2
+ requests==2.24.0
+ responses==0.16.0
+ pandas==1.1.5
+ tensorflow
+ scikit-learn
+ scipy
+ matplotlib
+ pytest-cov
+ xlrd
+ mock==4.0.3
+ openpyxl==3.0.10
+ configparser
+ pyyaml
+ pytest
+ requests-mock
+ numpy==1.23.1
+ confluent_kafka
+
+
