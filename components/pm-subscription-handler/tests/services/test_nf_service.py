@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2021 Nordix Foundation.
+#  Copyright (C) 2021-2022 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,9 +28,6 @@ from mod.network_function import NetworkFunctionFilter
 
 
 class NetworkFunctionServiceTestCase(BaseClassSetup):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
 
     def setUp(self):
         super().setUp()
@@ -43,13 +40,6 @@ class NetworkFunctionServiceTestCase(BaseClassSetup):
         with open(os.path.join(os.path.dirname(__file__), '../data/aai_model_info.json'),
                   'r') as data:
             self.good_model_info = data.read()
-
-    def tearDown(self):
-        super().tearDown()
-
-    @classmethod
-    def tearDownClass(cls):
-        super().tearDownClass()
 
     def create_test_subs(self, new_sub_name, new_msrmt_grp_name):
         subscription = self.subscription_request.replace('ExtraPM-All-gNB-R2B', new_sub_name)

@@ -22,7 +22,7 @@ from mod.api.services import subscription_service, measurement_group_service
 from connexion import NoContent
 from mod.api.custom_exception import InvalidDataException, DuplicateDataException, \
     DataConflictException
-from mod.subscription import AdministrativeState
+from mod.api.services.measurement_group_service import AdministrativeState
 
 
 def status():

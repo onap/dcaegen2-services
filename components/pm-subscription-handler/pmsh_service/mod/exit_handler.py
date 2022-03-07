@@ -18,7 +18,7 @@
 
 from mod import logger, db
 from mod.api.services import subscription_service, measurement_group_service
-from mod.subscription import AdministrativeState
+from mod.api.services.measurement_group_service import AdministrativeState
 
 
 class ExitHandler:
