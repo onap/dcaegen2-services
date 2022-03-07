@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58a1f8a5_989407d2",
+        "filename": "components/ml-prediction-ms/Changelog.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "need to list the Jira ticket number",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d20dff1_ba743c58",
+        "filename": "components/ml-prediction-ms/LICENSE.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "you should copy the appropriate copyright line from each of the components/*/LICENSE.txt files to here",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0c4c13d_5daae28a",
+        "filename": "components/ml-prediction-ms/log_config.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "copyright and license block is missing",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98cb4c45_9ca80c28",
+        "filename": "components/ml-prediction-ms/src/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "add 2022 copyright",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "896831a0_f55e43ad",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "socket, tensorflow, pandas and traceback are unused",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd84fe33_174bb988",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "sys is imported twice",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b4e68ad_f912301b",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "tab indentation is not allowed. Please use 4-space indentation levels.",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e53117ac_3e4543d4",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "e is unused",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "794b7938_4624d03e",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "where is logger defined?",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a27c8d5_15f12e8f",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "where is time defined?",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ca27873_f621689b",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "Having code here other than calling a function, eg main(), gives scoping issues. The variables e and x here have scope conflicts with the e and x used in the various other functions.",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "757b9d57_0da97c75",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T21:00:56Z",
+      "side": 1,
+      "message": "threading is undefined",
+      "revId": "1458469eec70bc8d2e00e794695ab1bbd20ae144",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
