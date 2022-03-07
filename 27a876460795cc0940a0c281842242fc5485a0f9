@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f906bc4_37314c30",
+        "filename": "components/slice-analysis-ms/src/test/resources/onsetMessage2.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-07T20:43:30Z",
+      "side": 1,
+      "message": "This is not valid JSON. It has a unicode \\“ before cll-instance-01 instead of a \\\".",
+      "revId": "27a876460795cc0940a0c281842242fc5485a0f9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
