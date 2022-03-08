@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1ce8153_fd143bb9",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-08T19:53:34Z",
+      "side": 1,
+      "message": "As this is new feature enhancement, suggest updating minor version (i.e 1.1.0 with this patch)",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 138
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2d2eb63_382bb9f5",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/aai/AaiService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-08T19:53:34Z",
+      "side": 1,
+      "message": "can this sub-path be read as configuration parameter?",
+      "range": {
+        "startLine": 360,
+        "startChar": 48,
+        "endLine": 360,
+        "endChar": 73
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d712a04_217dd864",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/CCVPNPmNotificationCallback.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-08T19:53:34Z",
+      "side": 1,
+      "message": "Thinkin CCVPN prefix is not required as notification event aligns to VES, no?",
+      "range": {
+        "startLine": 42,
+        "startChar": 13,
+        "endLine": 42,
+        "endChar": 18
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "686d980d_cb2a3552",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/DmaapClient.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-08T19:53:34Z",
+      "side": 1,
+      "message": "syncup these new properities also under ./src/main/docker/config/sliceanalysisms/config_all.json",
+      "range": {
+        "startLine": 102,
+        "startChar": 22,
+        "endLine": 102,
+        "endChar": 50
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3584345_8ffd87ae",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/ccvpnnotification/CCVPNNotificationFields.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-08T19:53:34Z",
+      "side": 1,
+      "message": "I assume this notification is aligned with VES notification domain, if so do we need this CCVPN prefix?",
+      "range": {
+        "startLine": 31,
+        "startChar": 13,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "acc938a4_d7329507",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/BandwidthEvaluator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-08T19:53:34Z",
+      "side": 1,
+      "message": "How are these defaults identified? possibly this should also be config driven?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 62
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de5d84ca_6d494ace",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-08T19:53:34Z",
+      "side": 1,
+      "message": "This controlloop name should match what is being set in Policy. I\u0027m not sure how this specific operation policy is created in Policy framework for CCVPN usecase,  but generally these are dynamic values.\n\nI see CL generated from slicing usecase (line#14) also has similar hardcoding - will be better handle both as (policy) configuration in future and also refactor this into separate class for ccvpn and slicing. These could be followed as separate item - pls do create a jira and discuss with Niranjana as well.",
+      "range": {
+        "startLine": 156,
+        "startChar": 43,
+        "endLine": 156,
+        "endChar": 101
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
