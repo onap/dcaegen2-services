@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "058192cc_1d6dcd47",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/ccvpnnotification/CCVPNPmDatastore.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:38:24Z",
+      "side": 1,
+      "message": "each of the public methods should have javadoc",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2191e82_d3f00f5a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/AdditionalProperties.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:38:24Z",
+      "side": 1,
+      "message": "need 2022 update",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6a22b83_4f0d105a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/Sla.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:38:24Z",
+      "side": 1,
+      "message": "end of file is missing the NL",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74cea40d_f19c65d7",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/TransportNetwork.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:38:24Z",
+      "side": 1,
+      "message": "end of file is missing the NL",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c51d02f9_486774bb",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/BandwidthEvaluator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:38:24Z",
+      "side": 1,
+      "message": "each of the public methods should have javadoc descriptions",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "197dad70_16cf3d0f",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:38:24Z",
+      "side": 1,
+      "message": "each of the new public methods should have javadoc descriptions",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78d395e0_14887d24",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/ccvpnnotification/CCVPNPmDatastoreTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:38:24Z",
+      "side": 1,
+      "message": "end of file is missing the NL",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4baac749_1b3b4a6f",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/BandwidthEvaluatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:38:24Z",
+      "side": 1,
+      "message": "end of file is missing the NL",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
