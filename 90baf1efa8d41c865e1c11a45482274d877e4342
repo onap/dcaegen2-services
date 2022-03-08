@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ea28ff7_b73509f9",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/db_models.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "Do we need this?",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 15
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "679fc806_75785192",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "dict",
+      "range": {
+        "startLine": 70,
+        "startChar": 17,
+        "endLine": 70,
+        "endChar": 29
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "499e9321_06f318f2",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "This should prob happen first",
+      "range": {
+        "startLine": 76,
+        "startChar": 7,
+        "endLine": 76,
+        "endChar": 19
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1edeb8d3_27bf4a8a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "new_mg \u003d",
+      "range": {
+        "startLine": 77,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 7
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e435fadf_96270fc8",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "if body[\"administrativeState\"] \u003d\u003d AdministrativeState.UNLOCKED.value:",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 18
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e099409_add82809",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "new_mg",
+      "range": {
+        "startLine": 80,
+        "startChar": 64,
+        "endLine": 80,
+        "endChar": 74
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00d5c0d2_a549d692",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "\"in an\"\n\nShould we respond to the caller here or just log it?",
+      "range": {
+        "startLine": 82,
+        "startChar": 74,
+        "endLine": 82,
+        "endChar": 76
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d261735_5a0de60b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "Must be non null/None from swagger no?",
+      "range": {
+        "startLine": 85,
+        "startChar": 67,
+        "endLine": 85,
+        "endChar": 76
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2410702_5534281a",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "if measurement_group_name !\u003d measurement_group[\"measurementGroupName\"]:\n        logger.info(f\u0027Changing measurement_group_name in body to {measurement_group_name}\u0027)\n        measurement_group[\"measurementGroupName\"] \u003d measurement_group_name",
+      "range": {
+        "startLine": 94,
+        "startChar": 3,
+        "endLine": 94,
+        "endChar": 12
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1631c8b3_cea6346b",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "if query_meas_group_by_name(subscription_name, measurement_group_name):",
+      "range": {
+        "startLine": 115,
+        "startChar": 5,
+        "endLine": 115,
+        "endChar": 39
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53aff1dc_70c400b1",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-08T17:35:48Z",
+      "side": 1,
+      "message": "It will always be a dictionary",
+      "range": {
+        "startLine": 132,
+        "startChar": 7,
+        "endLine": 132,
+        "endChar": 26
+      },
+      "revId": "90baf1efa8d41c865e1c11a45482274d877e4342",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
