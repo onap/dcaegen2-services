@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e274df8_f86f2104",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:26:21Z",
+      "side": 1,
+      "message": "use isinstance() rather than type() for a typecheck\n\nif not isinstance(measurement_group, MeasurementGroupModel):",
+      "revId": "2ad8579fda8960fb922b36a248e18a7eae30d501",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f98a4651_8b913a21",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:26:21Z",
+      "side": 1,
+      "message": "mock_logger parameter is no longer used",
+      "revId": "2ad8579fda8960fb922b36a248e18a7eae30d501",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b05dfa4_491b7c21",
+        "filename": "components/pm-subscription-handler/tests/services/test_measurement_group_service.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:26:21Z",
+      "side": 1,
+      "message": "names that start with Caps should be reserved for class names",
+      "revId": "2ad8579fda8960fb922b36a248e18a7eae30d501",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40d27db9_2234a602",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:26:21Z",
+      "side": 1,
+      "message": "response is unused, change to \"_\"",
+      "revId": "2ad8579fda8960fb922b36a248e18a7eae30d501",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72f48d2c_b42ffb98",
+        "filename": "components/pm-subscription-handler/tests/test_controller.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-08T15:26:21Z",
+      "side": 1,
+      "message": "response is unused. change name to \"_\"",
+      "revId": "2ad8579fda8960fb922b36a248e18a7eae30d501",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
