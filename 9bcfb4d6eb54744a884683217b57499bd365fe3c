@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b060447_e0c390c5",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-08T11:38:47Z",
+      "side": 1,
+      "message": "We need to execute these statements, When adminstate is \u0027UNLOCKED\u0027 otherwise not necessary to execute these 2 statements.",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 85
+      },
+      "revId": "9bcfb4d6eb54744a884683217b57499bd365fe3c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cc37bfd_308a0239",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-08T11:38:47Z",
+      "side": 1,
+      "message": "I think it\u0027s dict",
+      "range": {
+        "startLine": 56,
+        "startChar": 27,
+        "endLine": 56,
+        "endChar": 48
+      },
+      "revId": "9bcfb4d6eb54744a884683217b57499bd365fe3c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17804a36_1d505d47",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-08T11:38:47Z",
+      "side": 1,
+      "message": "I hope if measurement_group is a dict, We need to get a group name in a different way",
+      "range": {
+        "startLine": 59,
+        "startChar": 24,
+        "endLine": 59,
+        "endChar": 25
+      },
+      "revId": "9bcfb4d6eb54744a884683217b57499bd365fe3c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
