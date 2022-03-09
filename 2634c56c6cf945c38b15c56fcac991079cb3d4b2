@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b1ea43f_ecb8e34e",
+        "filename": "components/pm-subscription-handler/pmsh_service/mod/api/services/measurement_group_service.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 7735
+      },
+      "writtenOn": "2022-03-09T12:24:19Z",
+      "side": 1,
+      "message": "I hope it\u0027s \u0027dict\u0027",
+      "range": {
+        "startLine": 90,
+        "startChar": 27,
+        "endLine": 90,
+        "endChar": 48
+      },
+      "revId": "2634c56c6cf945c38b15c56fcac991079cb3d4b2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
