@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
          - [DCAEGEN2-3034](https://jira.onap.org/browse/DCAEGEN2-3034) - Migrate SliceAnalysis MS to use unauthenticated topic
 
+         - [DCAEGEN2-3100](https://jira.onap.org/browse/DCAEGEN2-3100) - Update onset message test data
+
 ## [1.0.6] - 2021/08/28
          - [DCAEGEN2-2885](https://jira.onap.org/browse/DCAEGEN2-2885) - DCAE SliceAnalysis MS - CPS Integration
 
