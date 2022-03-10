@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "556ecbea_ddb68f31",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-03-10T10:28:03Z",
+      "side": 1,
+      "message": "I think if 2.2.0 wasn\u0027t released we don\u0027t really need a patch bump.\nMy understanding is that these should only refer to released images.\nDo we need a ticket? Or maybe reuse the 2920 Jira?",
+      "range": {
+        "startLine": 10,
+        "startChar": 26,
+        "endLine": 10,
+        "endChar": 27
+      },
+      "revId": "3e793dfc4c00318585ef6788a90b48cdd2f2958c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
