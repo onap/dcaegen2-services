@@ -5,12 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.2.1]
+### Changed
+* Swagger Indentation Error (DCAEGEN2-3103)
+
 ## [2.2.0]
 ### Changed
 * Update Filter API (DCAEGEN2-2922)
 * Cleaning up old App Config, subscription handler and it's subsequent calls (DCAEGEN2-3085)
 * Create Measurement Group API (DCAEGEN2-2920)
-
 
 ## [2.1.1]
 ### Changed

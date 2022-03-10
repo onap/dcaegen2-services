@@ -176,11 +176,11 @@ paths:
           required: true
           description: Name of the measurement group
           type: string
-        - in: "body"
-            name: "body"
-            required: true
-            schema:
-              $ref: "#/definitions/measurementGroup"
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/measurementGroup"
       responses:
         201:
           description: Successfully created measurement group
