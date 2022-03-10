@@ -70,6 +70,23 @@
       "revId": "3e793dfc4c00318585ef6788a90b48cdd2f2958c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1468aab5_10b39a3b",
+        "filename": "components/pm-subscription-handler/Changelog.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-10T13:46:22Z",
+      "side": 1,
+      "message": "add the JIRA ticket number",
+      "revId": "3e793dfc4c00318585ef6788a90b48cdd2f2958c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
