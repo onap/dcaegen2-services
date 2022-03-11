@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7b8b25b0_4bdf19f6",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/ccvpnnotification/CCVPNPmDatastore.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "058192cc_1d6dcd47",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f2191e82_d3f00f5a",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/AdditionalProperties.java",
         "patchSetId": 9
@@ -33,6 +51,24 @@
       "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b8e24f1_8bc7f9d5",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/AdditionalProperties.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2191e82_d3f00f5a",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "af572cdd_0da42cc7",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/Sla.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6a22b83_4f0d105a",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74cea40d_f19c65d7",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/TransportNetwork.java",
         "patchSetId": 9
@@ -67,6 +121,24 @@
       "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd62854f_6cd8c1bb",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/TransportNetwork.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74cea40d_f19c65d7",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4e885f46_2c4fd896",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/BandwidthEvaluator.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c51d02f9_486774bb",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "197dad70_16cf3d0f",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
         "patchSetId": 9
@@ -101,6 +191,24 @@
       "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44f82bda_fbbc7b39",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "197dad70_16cf3d0f",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "53b0dd05_d2cf0cec",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/ccvpnnotification/CCVPNPmDatastoreTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78d395e0_14887d24",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4baac749_1b3b4a6f",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/BandwidthEvaluatorTest.java",
         "patchSetId": 9
@@ -135,6 +261,24 @@
       "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53564e23_a01002b6",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/BandwidthEvaluatorTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4baac749_1b3b4a6f",
+      "revId": "f0f7e68de885dd74ff370b50e5e529d745554ce0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }

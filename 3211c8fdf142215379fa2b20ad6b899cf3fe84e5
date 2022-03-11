@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3fb062e7_a00abb68",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1ce8153_fd143bb9",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 138
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2d2eb63_382bb9f5",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/aai/AaiService.java",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2022-03-08T19:53:34Z",
       "side": 1,
       "message": "can this sub-path be read as configuration parameter?",
+      "range": {
+        "startLine": 360,
+        "startChar": 48,
+        "endLine": 360,
+        "endChar": 73
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f025cee_c348d884",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/aai/AaiService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Well, for this one. Our functions in this whole file hardcode Uris. I guess the logic here was the Uri used by each of these func hardly, if ever changed. And it can be messy to put all these sub-paths into config file. I personally align with these way. What do you think...",
+      "parentUuid": "b2d2eb63_382bb9f5",
       "range": {
         "startLine": 360,
         "startChar": 48,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5ec9e1c7_6e9edae9",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/CCVPNPmNotificationCallback.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Agree, rename it to VesNotificationCallback.java.",
+      "parentUuid": "7d712a04_217dd864",
+      "range": {
+        "startLine": 42,
+        "startChar": 13,
+        "endLine": 42,
+        "endChar": 18
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "686d980d_cb2a3552",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/DmaapClient.java",
         "patchSetId": 11
@@ -91,6 +163,30 @@
       "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7339afe_ecfe9344",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/DmaapClient.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done, add new subscriber for ves_ccvpn_notification_topic inside ./src/main/docker/config/sliceanalysisms/config_all.json",
+      "parentUuid": "686d980d_cb2a3552",
+      "range": {
+        "startLine": 102,
+        "startChar": 22,
+        "endLine": 102,
+        "endChar": 50
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "3d2688bf_bf6dd962",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/ccvpnnotification/CCVPNNotificationFields.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Agree, use VES notification domain instead.",
+      "parentUuid": "b3584345_8ffd87ae",
+      "range": {
+        "startLine": 31,
+        "startChar": 13,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "acc938a4_d7329507",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/BandwidthEvaluator.java",
         "patchSetId": 11
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "a009ca87_71d8aa81",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/BandwidthEvaluator.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Total agreed, done in latest patch",
+      "parentUuid": "acc938a4_d7329507",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 62
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de5d84ca_6d494ace",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
         "patchSetId": 11
@@ -151,6 +295,30 @@
       "writtenOn": "2022-03-08T19:53:34Z",
       "side": 1,
       "message": "This controlloop name should match what is being set in Policy. I\u0027m not sure how this specific operation policy is created in Policy framework for CCVPN usecase,  but generally these are dynamic values.\n\nI see CL generated from slicing usecase (line#14) also has similar hardcoding - will be better handle both as (policy) configuration in future and also refactor this into separate class for ccvpn and slicing. These could be followed as separate item - pls do create a jira and discuss with Niranjana as well.",
+      "range": {
+        "startLine": 156,
+        "startChar": 43,
+        "endLine": 156,
+        "endChar": 101
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac7cb511_9544f382",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Sure, I created jira tickets for these two issue. Will get back to this after \nthis CCVPN features passes integration/csit tests\nhttps://jira.onap.org/browse/DCAEGEN2-3106\nhttps://jira.onap.org/browse/DCAEGEN2-3107",
+      "parentUuid": "de5d84ca_6d494ace",
       "range": {
         "startLine": 156,
         "startChar": 43,

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "33ec0301_efe29011",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/DmaapClient.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0348cda9_497cb386",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 4
+      },
+      "revId": "08b5dedb7a0e7cdab00113d27e5966a58ccb0d61",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3fe95d1_ce8601a1",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/ccvpnnotification/ArrayOfNamedHashMap.java",
         "patchSetId": 7
@@ -39,6 +63,24 @@
       "revId": "08b5dedb7a0e7cdab00113d27e5966a58ccb0d61",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61f2df11_12011f11",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/ccvpnnotification/ArrayOfNamedHashMap.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-11T04:13:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3fe95d1_ce8601a1",
+      "revId": "08b5dedb7a0e7cdab00113d27e5966a58ccb0d61",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
