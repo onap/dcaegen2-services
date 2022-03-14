@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "17405e93_3b1582a4",
+        "filename": "releases/pmsh-2.2.1-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-14T15:01:07Z",
+      "side": 1,
+      "message": "This commit points to 2.2.0; should be 5386335b9fa32a761a22cafdac319e169fec6896",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "eeacfc71aafb2ae92ac464f3484efc1d181c75ca",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
