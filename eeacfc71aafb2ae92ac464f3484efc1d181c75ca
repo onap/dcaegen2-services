@@ -22,6 +22,30 @@
       "revId": "eeacfc71aafb2ae92ac464f3484efc1d181c75ca",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4432cc8_52666dc7",
+        "filename": "releases/pmsh-2.2.1-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4893
+      },
+      "writtenOn": "2022-03-14T16:31:41Z",
+      "side": 1,
+      "message": "That\u0027s the same ref number",
+      "parentUuid": "17405e93_3b1582a4",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "eeacfc71aafb2ae92ac464f3484efc1d181c75ca",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
