@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b73c992a_b2791b4a",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 18
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-16T17:19:43Z",
+      "side": 1,
+      "message": "shld reflect new version - 1.1.0\nand also version.property file should be synced",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 31
+      },
+      "revId": "7fc29ece219329424df506caef61f4e8ccf6ef99",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "175d53a9_71533e4a",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 18
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-16T17:19:43Z",
+      "side": 1,
+      "message": "Most of DCAE components leverage sdk/dmaapclient\n\u003cdependency\u003e\n  \u003cgroupId\u003eorg.onap.dcaegen2.services.sdk.rest.services\u003c/groupId\u003e\n  \u003cartifactId\u003edmaap-client\u003c/artifactId\u003e\n  \u003cversion\u003e1.8.8\u003c/version\u003e\n\u003c/dependency\u003e\nWould prefer using the same for consistency (already tracked under DCAEGEN2-3030) rather than adding new dependency.\n\nAn exception scenario is if messagerouter library will be continued to be supported post Strimzi migration. Fiachra - could you confirm?",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 49
+      },
+      "revId": "7fc29ece219329424df506caef61f4e8ccf6ef99",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c957e919_23b8ef96",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitor.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-16T17:19:43Z",
+      "side": 1,
+      "message": "This may be something be revisited - not sure if long polling feature will be supported part of Strimizi migration (Another question to Fiachra)\n\nBtw DCAE sdk/dmaap-client also support persistence (https://docs.onap.org/projects/onap-dcaegen2/en/latest/sections/sdk/apis.html#configure-custom-persistent-connection)",
+      "revId": "7fc29ece219329424df506caef61f4e8ccf6ef99",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
