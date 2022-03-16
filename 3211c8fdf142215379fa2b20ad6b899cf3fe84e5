@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "57f52e4f_f0e8edf2",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/aai/AaiService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-16T04:19:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2f025cee_c348d884",
+      "range": {
+        "startLine": 360,
+        "startChar": 48,
+        "endLine": 360,
+        "endChar": 73
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7d712a04_217dd864",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/CCVPNPmNotificationCallback.java",
         "patchSetId": 11
@@ -328,6 +352,30 @@
       "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8eb859b3_79fa1234",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-16T04:19:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ac7cb511_9544f382",
+      "range": {
+        "startLine": 156,
+        "startChar": 43,
+        "endLine": 156,
+        "endChar": 101
+      },
+      "revId": "3211c8fdf142215379fa2b20ad6b899cf3fe84e5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
