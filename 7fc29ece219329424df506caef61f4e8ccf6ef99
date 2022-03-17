@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "552fb3e2_b225225b",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 18
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-17T12:55:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b73c992a_b2791b4a",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 31
+      },
+      "revId": "7fc29ece219329424df506caef61f4e8ccf6ef99",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "175d53a9_71533e4a",
         "filename": "components/slice-analysis-ms/pom.xml",
         "patchSetId": 18
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "dfa9f220_6f94f657",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 18
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-17T12:55:52Z",
+      "side": 1,
+      "message": "Thanks for your comments. In this release, we are adding new components and functions into slice-analysis-ms to implement our CCVPN closed-loop solution. Since we are still trying to prove the concept and also need to fully utilize the long-polling feature of Dmaap. We implement this through old-school thread-bound style of coding. I understand sdk/dmaap-client can support this approach as well. However, we are short of manpower to migrate this to Reactive streams, asynchronous client. say... before M4\nI also notice the whole slice-analysis-ms project is using old-school thread-bound style and using even older cambriaClient\n                \u003cdependency\u003e\n                        \u003cgroupId\u003ecom.att.nsa\u003c/groupId\u003e\n                        \u003cartifactId\u003ecambriaClient\u003c/artifactId\u003e\n                        \u003cversion\u003e0.0.1\u003c/version\u003e\n                \u003c/dependency\u003e\nat components/slice-analysis-ms/pom.xml#114\nMy understanding is the team will change this to sdk/dmaapclient in future release and align to whatever Strimzi migration requests. Again, due to limited manpower, cannot achieve this in this release. \nBut still, totally agree with the subject in DCAEGEN2-3030 -- \"standadize the inteface via common library\" is hands down what we can do in coming release.",
+      "parentUuid": "175d53a9_71533e4a",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 49
+      },
+      "revId": "7fc29ece219329424df506caef61f4e8ccf6ef99",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c957e919_23b8ef96",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitor.java",
         "patchSetId": 18
@@ -59,6 +107,24 @@
       "writtenOn": "2022-03-16T17:19:43Z",
       "side": 1,
       "message": "This may be something be revisited - not sure if long polling feature will be supported part of Strimizi migration (Another question to Fiachra)\n\nBtw DCAE sdk/dmaap-client also support persistence (https://docs.onap.org/projects/onap-dcaegen2/en/latest/sections/sdk/apis.html#configure-custom-persistent-connection)",
+      "revId": "7fc29ece219329424df506caef61f4e8ccf6ef99",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f49750cd_78686fd2",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitor.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-17T12:55:52Z",
+      "side": 1,
+      "message": "According to Dmaap MR\u0027s API document, Dmaap API supports long poll mechanism to prevent subscribers from overwhelming an API server. I would be surprised If they dropped it for adopting Strimizi. Still, I can be wrong. Fiachra can confirm on this.",
+      "parentUuid": "c957e919_23b8ef96",
       "revId": "7fc29ece219329424df506caef61f4e8ccf6ef99",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
