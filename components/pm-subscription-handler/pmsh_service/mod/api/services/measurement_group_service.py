@@ -73,12 +73,13 @@ def create_measurement_group(subscription, measurement_group_name, body):
     logger.info(f'Initiating create measurement group for: {measurement_group_name}')
     check_duplication(subscription.subscription_name, measurement_group_name)
     check_measurement_group_names_comply(measurement_group_name, body)
-    new_mg = [save_measurement_group(body, subscription.subscription_name)]
-    if body["administrativeState"] == AdministrativeState.UNLOCKED.value:
+    new_mg = [save_measurement_group(body["measurementGroup"], subscription.subscription_name)]
+    if body["measurementGroup"]["administrativeState"] == AdministrativeState.UNLOCKED.value:
         filtered_nfs = nf_service.capture_filtered_nfs(subscription.subscription_name)
         subscription_service.add_new_filtered_nfs(filtered_nfs, new_mg, subscription)
     else:
         logger.info(f'Measurement Group {measurement_group_name} is not in an unlocked state')
+    db.session.commit()
 
 
 def check_measurement_group_names_comply(measurement_group_name, measurement_group):
@@ -90,9 +91,10 @@ def check_measurement_group_names_comply(measurement_group_name, measurement_gro
         measurement_group (dict): Measurement Group
 
     """
-    if measurement_group_name != measurement_group["measurementGroupName"]:
+    logger.info("Checking names match")
+    if measurement_group_name != measurement_group["measurementGroup"]["measurementGroupName"]:
         logger.info(f'Changing measurement_group_name in body to {measurement_group_name}')
-        measurement_group["measurementGroupName"] = measurement_group_name
+        measurement_group["measurementGroup"]["measurementGroupName"] = measurement_group_name
 
 
 def check_duplication(subscription_name, measurement_group_name):
