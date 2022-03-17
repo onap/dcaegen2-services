@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cfcdf02_3537b2a2",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-17T17:54:02Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be Huawei Canada Limited ?\n(to match the copyright notices in the other files?)",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f389f07_3b52307f",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicParams.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-17T17:54:02Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be Huawei Canada Limited ?\n(to match the copyright notices in the other files?)",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8c7cbd4_fdcf0332",
+        "filename": "components/slice-analysis-ms/src/test/resources/aaiEventDmaapMsg.json",
+        "patchSetId": 20
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-17T17:54:02Z",
+      "side": 1,
+      "message": "there is no NL at the end of the file",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b21f42b2_6936402d",
+        "filename": "components/slice-analysis-ms/src/test/resources/onsetMessage2.json",
+        "patchSetId": 20
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-17T17:54:02Z",
+      "side": 1,
+      "message": "there is no NL at the end of the file",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83a9d3fa_b6e57c76",
+        "filename": "components/slice-analysis-ms/src/test/resources/vesCCVPNNotiModel.json",
+        "patchSetId": 20
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-17T17:54:02Z",
+      "side": 1,
+      "message": "there is no NL at the end of the file",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "130fe7e1_dcedf444",
+        "filename": "components/slice-analysis-ms/version.properties",
+        "patchSetId": 20
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-17T17:54:02Z",
+      "side": 1,
+      "message": "update for 2022 Huawei",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
