@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3a67e83_95217c81",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 19
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-17T15:32:29Z",
+      "side": 1,
+      "message": "why 2.1.1? shld be 1.1.0 (as noted on changelog)",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 22
+      },
+      "revId": "582777d29f9a6fc05e0daffa1a4efff4e070dbf1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ce1cf69_f9f97eb1",
+        "filename": "components/slice-analysis-ms/version.properties",
+        "patchSetId": 19
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-17T15:32:29Z",
+      "side": 1,
+      "message": "should reflect 1.1.0",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 7
+      },
+      "revId": "582777d29f9a6fc05e0daffa1a4efff4e070dbf1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
