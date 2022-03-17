@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e227b23_57c0abb4",
+        "filename": "releases/kpi-computation-ms-1.0.4-container.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-03-17T14:45:14Z",
+      "side": 1,
+      "message": "Though this is commit the job#415 pulls, this ref should be set to 9cad4acaf0aa557589599baa5a965d13d44b9f7b (as this is last change for KPI commit we want to set the tagging)",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "9c4ef86e579649833d17b5a0911af238fc476cd5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
