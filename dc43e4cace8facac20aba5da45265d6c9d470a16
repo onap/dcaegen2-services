@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d86972e5_7b88edcf",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitor.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-17T18:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cfcdf02_3537b2a2",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f389f07_3b52307f",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicParams.java",
         "patchSetId": 20
@@ -33,6 +51,24 @@
       "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86b220a2_24c0e670",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicParams.java",
+        "patchSetId": 20
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-17T18:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f389f07_3b52307f",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "bbd351ee_a4e6a64a",
+        "filename": "components/slice-analysis-ms/src/test/resources/aaiEventDmaapMsg.json",
+        "patchSetId": 20
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-17T18:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8c7cbd4_fdcf0332",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b21f42b2_6936402d",
         "filename": "components/slice-analysis-ms/src/test/resources/onsetMessage2.json",
         "patchSetId": 20
@@ -67,6 +121,24 @@
       "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cba4cc8_ada484c0",
+        "filename": "components/slice-analysis-ms/src/test/resources/onsetMessage2.json",
+        "patchSetId": 20
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-17T18:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b21f42b2_6936402d",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "4fdf95be_1716545f",
+        "filename": "components/slice-analysis-ms/src/test/resources/vesCCVPNNotiModel.json",
+        "patchSetId": 20
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-17T18:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83a9d3fa_b6e57c76",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "130fe7e1_dcedf444",
         "filename": "components/slice-analysis-ms/version.properties",
         "patchSetId": 20
@@ -101,6 +191,24 @@
       "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cfb812a_d9f3bd79",
+        "filename": "components/slice-analysis-ms/version.properties",
+        "patchSetId": 20
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-17T18:39:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "130fe7e1_dcedf444",
+      "revId": "dc43e4cace8facac20aba5da45265d6c9d470a16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }

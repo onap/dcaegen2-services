@@ -176,6 +176,24 @@
       "revId": "7fc29ece219329424df506caef61f4e8ccf6ef99",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "916eece3_3da37480",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitor.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-03-17T18:39:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f49750cd_78686fd2",
+      "revId": "7fc29ece219329424df506caef61f4e8ccf6ef99",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
