@@ -336,14 +336,14 @@ class MeasurementGroupServiceTestCase(BaseClassSetup):
             self.assertEqual(e.args[0], 'Measurement Group Name: MG1 already exists.')
 
     def test_check_measurement_group_names_comply(self):
-        mg = {'subscription_name': 'sub',
+        mg = {'measurementGroup': {
               'measurementGroupName': 'MG2',
               'administrativeState': 'UNLOCKED',
               'fileBasedGP': 15,
               'fileLocation': '/pm/pm.xml',
               'measurementTypes': '[{ "measurementType": "countera" }, '
                                   '{ "measurementType": "counterb" }]',
-              'managedObjectDNsBasic': '[{ "DN":"dna"},{"DN":"dnb"}]'}
+              'managedObjectDNsBasic': '[{ "DN":"dna"},{"DN":"dnb"}]'}}
         try:
             measurement_group_service.check_measurement_group_names_comply('MG1', mg)
         except InvalidDataException as e:
