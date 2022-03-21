@@ -2,9 +2,8 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
- *   ==============================================================================
+ *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
  *     You may obtain a copy of the License at
@@ -19,21 +18,20 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
-
-package org.onap.slice.analysis.ms.aai;
-
-import java.util.Map;
+package org.onap.slice.analysis.ms.service.ccvpn;
 
 /**
- *
- * Interface for AAI
- *
+ * Event (CCVPN) interface;
+ * It is the message entity inside CCVPN Closed-loop.
+ * @param <T> message type
+ * @param <S> message paylaod
  */
-public interface AaiInterface {
+public interface Event<T extends Enum, S> {
 
-    public Map<String, String> fetchServiceDetails(String snssai);
+    long time();
 
-    public Map<String, Integer> fetchCurrentConfigurationOfSlice(String snssai);
+    T type();
 
-    public Map<String, Integer> fetchMaxBandwidthOfService(String serviceId);
+    S subject();
+
 }

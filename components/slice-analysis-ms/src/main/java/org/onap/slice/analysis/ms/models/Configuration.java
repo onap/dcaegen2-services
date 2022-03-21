@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020-2022 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -31,12 +32,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Model class for the application Configuration
  */
+@Getter
+@Setter
 public class Configuration {
     private static Logger log = LoggerFactory.getLogger(Configuration.class);
 
@@ -65,48 +70,22 @@ public class Configuration {
     private String desUrl;
     private int pmDataDurationInWeeks;
 
+    private int vesNotifPollingInterval;
+    private String vesNotifChangeIdentifier;
+    private String vesNotifChangeType;
+    private int ccvpnEvalInterval;
+    private double ccvpnEvalThreshold;
+    private double ccvpnEvalPrecision;
+    private String aaiNotifTargetAction;
+    private String aaiNotifTargetSource;
+    private String aaiNotifTargetEntity;
+    private boolean ccvpnEvalPeriodicCheckOn;
+    private boolean ccvpnEvalOnDemandCheckOn;
+
     /**
-     * Check if topic is secure.
+     * No args constructor
      */
-    public boolean isSecured() {
-        return (aafUsername != null);
-
-    }
-
-    public String getAafUsername() {
-        return aafUsername;
-    }
-
-    public void setAafUsername(String aafUsername) {
-        this.aafUsername = aafUsername;
-    }
-
-    public String getAafPassword() {
-        return aafPassword;
-    }
-
-    public void setAafPassword(String aafPassword) {
-        this.aafPassword = aafPassword;
-    }
-
-    public Map<String, Object> getStreamsSubscribes() {
-        return streamsSubscribes;
-    }
-
-    public void setStreamsSubscribes(Map<String, Object> streamsSubscribes) {
-        this.streamsSubscribes = streamsSubscribes;
-    }
-
-    public Map<String, Object> getStreamsPublishes() {
-        return streamsPublishes;
-    }
-
-    public void setStreamsPublishes(Map<String, Object> streamsPublishes) {
-        this.streamsPublishes = streamsPublishes;
-    }
-
     protected Configuration() {
-
     }
 
     /**
@@ -119,174 +98,11 @@ public class Configuration {
         return instance;
     }
 
-    public String getCg() {
-        return cg;
-    }
-
-    public void setCg(String cg) {
-        this.cg = cg;
-    }
-
-    public String getCid() {
-        return cid;
-    }
-
-    public void setCid(String cid) {
-        this.cid = cid;
-    }
-
-    public int getPollingInterval() {
-        return pollingInterval;
-    }
-
-    public void setPollingInterval(int pollingInterval) {
-        this.pollingInterval = pollingInterval;
-    }
-
-    public int getPollingTimeout() {
-        return pollingTimeout;
-    }
-
-    public void setPollingTimeout(int pollingTimeout) {
-        this.pollingTimeout = pollingTimeout;
-    }
-
-    public String getPgHost() {
-        return pgHost;
-    }
-
-    public void setPgHost(String pgHost) {
-        this.pgHost = pgHost;
-    }
-
-    public int getPgPort() {
-        return pgPort;
-    }
-
-    public void setPgPort(int pgPort) {
-        this.pgPort = pgPort;
-    }
-
-    public String getPgUsername() {
-        return pgUsername;
-    }
-
-    public void setPgUsername(String pgUsername) {
-        this.pgUsername = pgUsername;
-    }
-
-    public String getPgPassword() {
-        return pgPassword;
-    }
-
-    public void setPgPassword(String pgPassword) {
-        this.pgPassword = pgPassword;
-    }
-
-    public List<String> getDmaapServers() {
-        return dmaapServers;
-    }
-
-    public void setDmaapServers(List<String> dmaapServers) {
-        this.dmaapServers = dmaapServers;
-    }
-
-    public String getConfigDbService() {
-        return configDbService;
-    }
-
-    public void setConfigDbService(String configDbService) {
-        this.configDbService = configDbService;
-    }
-
-    public String getCpsUrl() {
-        return cpsUrl;
-    }
-
-    public void setCpsUrl(String cpsUrl) {
-        this.cpsUrl = cpsUrl;
-    }
-
-    public String getAaiUrl() {
-        return aaiUrl;
-    }
-
-    public void setAaiUrl(String aaiUrl) {
-        this.aaiUrl = aaiUrl;
-    }
-
-    public Boolean getConfigDbEnabled() {
-        return configDbEnabled;
-    }
-
-    public void setConfigDbEnabled(Boolean configDbEnabled) {
-        this.configDbEnabled = configDbEnabled;
-    }
-
-    public int getSamples() {
-        return samples;
-    }
-
-    public void setSamples(int samples) {
-        this.samples = samples;
-    }
-
-    public int getMinPercentageChange() {
-        return minPercentageChange;
-    }
-
-    public void setMinPercentageChange(int minPercentageChange) {
-        this.minPercentageChange = minPercentageChange;
-    }
-
-    public long getInitialDelaySeconds() {
-        return initialDelaySeconds;
-    }
-
-    public void setInitialDelaySeconds(long initialDelaySeconds) {
-        this.initialDelaySeconds = initialDelaySeconds;
-    }
-
     /**
-     * Get RannfnssiDetails TemplateId from Configuration
+     * Check if topic is secure.
      */
-    public String getRannfnssiDetailsTemplateId() {
-        return rannfnssiDetailsTemplateId;
-    }
-
-    /**
-     * Set RannfnssiDetails TemplateId
-     */
-    public void setRannfnssiDetailsTemplateId(String rannfnssiDetailsTemplateId) {
-        this.rannfnssiDetailsTemplateId = rannfnssiDetailsTemplateId;
-    }
-
-    /**
-     * Get Data Extraction Service Url
-     */
-    public String getDesUrl() {
-        return desUrl;
-    }
-
-    /**
-     * Set Data Extraction Service Url
-     */
-    public void setDesUrl(String desUrl) {
-        this.desUrl = desUrl;
-    }
-
-    /**
-     * Get duration for which PM data is to be fetched from DES
-     */
-    public int getPmDataDurationInWeeks() {
-        return pmDataDurationInWeeks;
-    }
-
-    /**
-     * Set duration for which PM data is to be fetched from DES
-     */
-    public void setPmDataDurationInWeeks(int pmDataDurationInWeeks) {
-        this.pmDataDurationInWeeks = pmDataDurationInWeeks;
+    public boolean isSecured() {
+        return (aafUsername != null);
     }
 
     @Override
@@ -339,6 +155,19 @@ public class Configuration {
         rannfnssiDetailsTemplateId = jsonObject.get("sliceanalysisms.rannfnssiDetailsTemplateId").getAsString();
         desUrl = jsonObject.get("sliceanalysisms.desUrl").getAsString();
         pmDataDurationInWeeks = jsonObject.get("sliceanalysisms.pmDataDurationInWeeks").getAsInt();
+
+        vesNotifChangeIdentifier = jsonObject.get("sliceanalysisms.vesNotifChangeIdentifier").getAsString();
+        vesNotifChangeType = jsonObject.get("sliceanalysisms.vesNotifChangeType").getAsString();
+        vesNotifPollingInterval = jsonObject.get("sliceanalysisms.vesNotifPollingInterval").getAsInt();
+
+        aaiNotifTargetAction = jsonObject.get("sliceanalysisms.aaiNotif.targetAction").getAsString();
+        aaiNotifTargetSource = jsonObject.get("sliceanalysisms.aaiNotif.targetSource").getAsString();
+        aaiNotifTargetSource = jsonObject.get("sliceanalysisms.aaiNotif.targetEntity").getAsString();
+        ccvpnEvalInterval = jsonObject.get("sliceanalysisms.ccvpnEvalInterval").getAsInt();
+        ccvpnEvalThreshold = jsonObject.get("sliceanalysisms.ccvpnEvalThreshold").getAsDouble();
+        ccvpnEvalPrecision = jsonObject.get("sliceanalysisms.ccvpnEvalPrecision").getAsDouble();
+        ccvpnEvalPeriodicCheckOn = jsonObject.get("sliceanalysisms.ccvpnEvalPeriodicCheckOn").getAsBoolean();
+        ccvpnEvalOnDemandCheckOn = jsonObject.get("sliceanalysisms.ccvpnEvalOnDemandCheckOn").getAsBoolean();
 
         if (Objects.isNull(jsonObject.get("aafUsername"))) {
             aafUsername = null;

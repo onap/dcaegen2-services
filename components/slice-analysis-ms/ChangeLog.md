@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.0] - 2022/3/10
+         - [DCAEGEN2-3063](https://jira.onap.org/browse/DCAEGEN2-3063) - IBN user-triggered CLoud Leased Line update and CCVPN closed-loop
+
 ## [1.0.7] - 2021/12/16
          - [DCAEGEN2-2963](https://jira.onap.org/browse/DCAEGEN2-2963) - Use onap/integration-java11 image
 
