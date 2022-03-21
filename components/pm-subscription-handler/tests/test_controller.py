@@ -204,14 +204,14 @@ class ControllerTestCase(BaseClassSetup):
         mock_aai.return_value = json.loads(self.aai_response_data)
         mock_model_aai.return_value = json.loads(self.good_model_info)
         subscription_data = create_subscription_data('Post_MG')
-        measurement_grp = {'subscription_name': 'sub',
+        measurement_grp = {'measurementGroup': {
                            'measurementGroupName': 'MG2',
                            'administrativeState': 'UNLOCKED',
                            'fileBasedGP': 15,
                            'fileLocation': '/pm/pm.xml',
                            'measurementTypes': '[{ "measurementType": "countera" }, '
-                                                '{ "measurementType": "counterb" }]',
-                           'managedObjectDNsBasic': '[{ "DN":"dna"},{"DN":"dnb"}]'}
+                                               '{ "measurementType": "counterb" }]',
+                           'managedObjectDNsBasic': '[{ "DN":"dna"},{"DN":"dnb"}]'}}
         db.session.add(subscription_data)
         db.session.commit()
         db.session.remove()
