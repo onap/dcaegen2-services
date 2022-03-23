@@ -19,6 +19,40 @@
     },
     {
       "key": {
+        "uuid": "1e2e63b8_1331ccca",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:35:26Z",
+      "side": 1,
+      "message": "shouldn\u0027t this use the integration base image?",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3125cada_ec82602d",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:35:26Z",
+      "side": 1,
+      "message": "this will execute run.py as root\n\nchange to another user",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "634612dd_9e94f686",
         "filename": "components/ml-prediction-ms/LICENSE.txt",
         "patchSetId": 6
