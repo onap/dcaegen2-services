@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f22ab93e_6d04578f",
+        "filename": "components/ml-prediction-ms/ tox.ini",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "somehow this filename got a space in its name. It is not going to be recognized by the tox command. Rename the file.",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "634612dd_9e94f686",
+        "filename": "components/ml-prediction-ms/LICENSE.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "2022 ????",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76655202_eaee1572",
+        "filename": "components/ml-prediction-ms/log_config.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "2022",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f736015_ee878811",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "use 4-space indents -- no tabs",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "174ac647_c3cde64a",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "see my comments elsewhere on how to change this code to not use range(len(source))",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f3e7807_2ba22fc3",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "see my comments elsewhere on how to change this code to not use range(len(source))",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e80159d9_1ec80b6b",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "see my comments elsewhere on how to change this code to not use range(len(source))",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2047d9db_977f551d",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "use\n    for key, Predicted_Result in Predicted_Results.items():\n\nreplace Predicted_Results[key] with Predicted_Result",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2076d3b_82d6e131",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "the code after the pass is being ignored.\n\nEither remove the subsequent code or decide what should be done with it",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b5a3d65_a3724b72",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "see my comments elsewhere on how to change this code to not use range(len(source))",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d32284d1_d3ff294f",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "FIX these TODOs\n\neither decide what to do \n\nor remove the TODO notes",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a89e9d3_6bee2356",
+        "filename": "components/ml-prediction-ms/tests/test_predict_unittest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "license / copyright block is missing",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b09d958f_436b75ab",
+        "filename": "components/ml-prediction-ms/tests/test_predict_unittest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "change tabs to space indentations, 4-spaces per level\n\ncheck your IDE settings",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94a9ce8b_8855fc3a",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "change tabs to space indentations, 4-spaces per level\n\ncheck your IDE settings",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63cb8d2e_96d98d6c",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "is \"i\" is needed in subsequent code, replace with\n\n    for i, cells_data in enumerate(cells_data_list):\n\nthen replace cells_data_list[i] with cells_data\n\n\nif \"i\" is NOT needed in subsequent code (and it does not look like it is in this code), replace with\n\n    for cells_data in cells_data_list:\n\nUsing\n    for i in range(len(cells_data_list)):\nis an example of an anti-pattern, a way of constructing code that should NOT be used except in very exacting circumstances.",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e900509_2eb08a4d",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "see comments above on the for look, and change this for to\n\n    for result in results:\n\nthen change uses of results[j] with result.",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2b23fae_9e5fe97f",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "use\n    for datum in data:\nthen replace data[i] with datum",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6a1cb9d_5f4c6f4a",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "THIS for loop does not need to change",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b66511ec_236496ad",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-23T13:22:52Z",
+      "side": 1,
+      "message": "missing NL at the end of the file. Check your IDE settings.",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
