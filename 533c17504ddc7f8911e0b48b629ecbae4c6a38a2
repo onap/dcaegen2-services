@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6880e6da_efc8f1e8",
+        "filename": "components/ml-prediction-ms/ tox.ini",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f22ab93e_6d04578f",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1e2e63b8_1331ccca",
         "filename": "components/ml-prediction-ms/Dockerfile",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7d924c4_ce3caaa6",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1e2e63b8_1331ccca",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "7609cfcb_6af93e11",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3125cada_ec82602d",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "634612dd_9e94f686",
         "filename": "components/ml-prediction-ms/LICENSE.txt",
         "patchSetId": 6
@@ -67,6 +121,24 @@
       "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2718b04c_671003a6",
+        "filename": "components/ml-prediction-ms/LICENSE.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "634612dd_9e94f686",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "d4f9a856_b6beb06f",
+        "filename": "components/ml-prediction-ms/log_config.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "76655202_eaee1572",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f736015_ee878811",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 6
@@ -101,6 +191,24 @@
       "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38d22297_832f2610",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6f736015_ee878811",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "3b54984e_95ba1ac9",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "174ac647_c3cde64a",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f3e7807_2ba22fc3",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 6
@@ -135,6 +261,24 @@
       "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6cee8108_44a0a6cb",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9f3e7807_2ba22fc3",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "906b1a0c_7a9b6b91",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e80159d9_1ec80b6b",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2047d9db_977f551d",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 6
@@ -169,6 +331,24 @@
       "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb9edfbc_b1813336",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2047d9db_977f551d",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "dae42fdb_23f64766",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c2076d3b_82d6e131",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7b5a3d65_a3724b72",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 6
@@ -203,6 +401,24 @@
       "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a0aa089_c08fc55d",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7b5a3d65_a3724b72",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "f542ac52_d87657d4",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d32284d1_d3ff294f",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a89e9d3_6bee2356",
         "filename": "components/ml-prediction-ms/tests/test_predict_unittest.py",
         "patchSetId": 6
@@ -237,6 +471,24 @@
       "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff1f23fb_412647c4",
+        "filename": "components/ml-prediction-ms/tests/test_predict_unittest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6a89e9d3_6bee2356",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "88c8772f_12b41b3d",
+        "filename": "components/ml-prediction-ms/tests/test_predict_unittest.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b09d958f_436b75ab",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "94a9ce8b_8855fc3a",
         "filename": "components/ml-prediction-ms/train/ParseTrain.py",
         "patchSetId": 6
@@ -271,6 +541,24 @@
       "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1483a28e_3900b7fe",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "94a9ce8b_8855fc3a",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "2b42965a_552eec1d",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "63cb8d2e_96d98d6c",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e900509_2eb08a4d",
         "filename": "components/ml-prediction-ms/train/ParseTrain.py",
         "patchSetId": 6
@@ -305,6 +611,24 @@
       "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "098c81dc_ec01d009",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0e900509_2eb08a4d",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -325,6 +649,24 @@
     },
     {
       "key": {
+        "uuid": "a498916a_7d0c21a7",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e2b23fae_9e5fe97f",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c6a1cb9d_5f4c6f4a",
         "filename": "components/ml-prediction-ms/train/ParseTrain.py",
         "patchSetId": 6
@@ -342,6 +684,24 @@
     },
     {
       "key": {
+        "uuid": "3f1e0684_2f5c61dd",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c6a1cb9d_5f4c6f4a",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b66511ec_236496ad",
         "filename": "components/ml-prediction-ms/train/ParseTrain.py",
         "patchSetId": 6
@@ -356,6 +716,24 @@
       "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "382dcf3b_7f3e2f67",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-03-24T14:14:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b66511ec_236496ad",
+      "revId": "533c17504ddc7f8911e0b48b629ecbae4c6a38a2",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
