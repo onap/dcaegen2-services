@@ -1,6 +1,8 @@
 {
   "closedLoopControlName": "ControlLoop-CCVPN-CLL-227e8b00-dbeb-4d03-8719-d0a658fb846c",
   "closedLoopAlarmStart": 1605691996370,
+  "modelInvariantUuid": "6790ab0e-034f-11eb-adc1-0242ac120002",
+  "modelUuid": "6790ab0e-034f-11eb-adc1-0242ac120002",
   "closedLoopEventClient": "microservice.sliceAnalysisMS",
   "closedLoopEventStatus": "ONSET",
   "requestID": "1e946480-1232-46d4-a39b-614ac534400f",

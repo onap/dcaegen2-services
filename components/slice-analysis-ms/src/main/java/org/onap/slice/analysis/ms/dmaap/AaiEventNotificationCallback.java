@@ -29,6 +29,8 @@ import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.service.ccvpn.BandwidthEvaluator;
 import org.onap.slice.analysis.ms.service.ccvpn.Event;
 import org.onap.slice.analysis.ms.service.ccvpn.SimpleEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +42,7 @@ import javax.annotation.PostConstruct;
 @Component
 public class AaiEventNotificationCallback implements NotificationCallback {
 
+    private static Logger logger = LoggerFactory.getLogger(AaiEventNotificationCallback.class);
     private static final String EVENT_HEADER = "event-header";
     private static final String ACTION = "action";
     private static final String ENTITY_TYPE = "entity-type";
@@ -71,26 +74,60 @@ public class AaiEventNotificationCallback implements NotificationCallback {
         JsonElement jsonElement = parser.parse(msg);
         if (jsonElement.isJsonObject()){
             //handle a single AAI_EVENT
+            logger.debug("Handle a single aai-event");
             handleMsgJsonObject(jsonElement.getAsJsonObject());
         } else if (jsonElement.isJsonArray()){
             //handle a series of AAI_EVENT
+            logger.debug("Handle a series of aai-event");
             JsonArray jsonArray = jsonElement.getAsJsonArray();
             for (int i=0,e=jsonArray.size(); i<e; i++){
-                handleMsgJsonObject(jsonArray.get(i).getAsJsonObject());
+                if (jsonArray.get(i).isJsonPrimitive()){
+                    // Deal with a batch of event message
+                    handleNotification(jsonArray.get(i).getAsString());
+                } else {
+                    handleMsgJsonObject(jsonArray.get(i).getAsJsonObject());
+                }
+
             }
         }
     }
 
     private void handleMsgJsonObject(JsonObject jsonObject){
         JsonObject header = jsonObject.get(EVENT_HEADER).getAsJsonObject();
-        if (header.has(ACTION) && header.get(ACTION).getAsString().equals(aaiNotifTargetAction)) {
-            if (header.has(ENTITY_TYPE) && header.get(ENTITY_TYPE).getAsString().equals(aaiNotifTargetEntity)){
-                if (header.has(SOURCE_NAME) && header.get(SOURCE_NAME).getAsString().equals(aaiNotifTargetSource)) {
-                    JsonObject body = jsonObject.get(ENTITY).getAsJsonObject();
-                    Event event = new SimpleEvent<>(SimpleEvent.Type.ONDEMAND_CHECK, body);
-                    bandwidthEvaluator.post(event);
+        if (!header.has(ACTION) || !header.get(ACTION).getAsString().equals(aaiNotifTargetAction)){
+            return;
+        }
+        if (!header.has(ENTITY_TYPE) || !header.get(ENTITY_TYPE).getAsString().equals(aaiNotifTargetEntity)){
+            return;
+        }
+        if (!header.has(SOURCE_NAME) || !header.get(SOURCE_NAME).getAsString().equals(aaiNotifTargetSource)){
+            return;
+        }
+        JsonObject entity = jsonObject.get(ENTITY).getAsJsonObject();
+        JsonObject body = getNestedJsonObject(entity, aaiNotifTargetEntity);
+        logger.debug("AAI-EVENT entity object {}", body);
+        if (body == null){
+            return;
+        }
+        Event event = new SimpleEvent<>(SimpleEvent.Type.ONDEMAND_CHECK, body);
+        bandwidthEvaluator.post(event);
+    }
+
+    private JsonObject getNestedJsonObject(JsonObject obj, String target){
+        for (String k: obj.keySet()){
+            if (k.equals(target)){
+                //Found it;
+                return obj.getAsJsonArray(k).get(0).getAsJsonObject();
+            }
+            if (obj.get(k).isJsonObject()) {
+                return getNestedJsonObject(obj.getAsJsonObject(k), target);
+            } else if (obj.get(k).isJsonArray()){
+                JsonElement tmp = obj.getAsJsonArray(k).get(0);
+                if (tmp.isJsonObject()){
+                    return getNestedJsonObject(tmp.getAsJsonObject(), target);
                 }
             }
         }
+        return null;
     }
 }

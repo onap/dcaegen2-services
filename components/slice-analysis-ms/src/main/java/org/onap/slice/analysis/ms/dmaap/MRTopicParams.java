@@ -321,12 +321,7 @@ public class MRTopicParams {
                     servers.add(jsonArray.get(i).getAsString());
                 }
             }
-            if (jsonObject.has("servers") && !jsonObject.get("servers").isJsonNull()) {
-                JsonArray jsonArray = jsonObject.get("servers").getAsJsonArray();
-                for (int i=0, e=jsonArray.size(); i<e; i++){
-                    servers.add(jsonArray.get(i).getAsString());
-                }
-            }
+
             String topicUrl = jsonObject.get("dmaap_info").getAsJsonObject().get("topic_url").getAsString();
             if (topicUrl.startsWith("https")){
                 useHttps = true;
