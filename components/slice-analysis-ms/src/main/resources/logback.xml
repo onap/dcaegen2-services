@@ -21,7 +21,7 @@
  *  
  *******************************************************************************/
   -->
-	<configuration>
+	<configuration scan="true">
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
