@@ -153,6 +153,8 @@ public class PolicyService {
         payload.setName("cloud-leased-line-101");
         payload.setServiceInstanceID(cllId);
         payload.setAdditionalProperties(additionalProperties);
+        payload.setModelInvariantUuid("6790ab0e-034f-11eb-adc1-0242ac120002");
+        payload.setModelUuid("6790ab0e-034f-11eb-adc1-0242ac120002");
 
         OnsetMessage onsetmsg = new OnsetMessage();
         try {
@@ -184,7 +186,7 @@ public class PolicyService {
         String msg =  "";
         try {
             msg = objectMapper.writeValueAsString(onsetMessage);
-            log.info("Policy onset message for ControlLoop-CCVPN-CLL is {}", msg);
+            log.info("Sending onset message to Onap/Policy for ControlLoop-CCVPN-CLL, the msg: {}", msg);
             policyDmaapClient.sendNotificationToPolicy(msg);
         }
         catch (Exception e) {

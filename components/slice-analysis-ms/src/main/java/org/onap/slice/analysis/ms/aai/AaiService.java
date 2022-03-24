@@ -363,21 +363,24 @@ public class AaiService implements AaiInterface {
         try {
             ResponseEntity<String> resp = restclient.sendGetRequest(networkPolicyUrl, new ParameterizedTypeReference<String>() {
             });
+            log.debug("AaiService received {} : {}", resp.getStatusCodeValue(), resp.getBody());
             if (resp.getStatusCodeValue() == 200){
                 String networkPolicy = resp.getBody();
                 JSONObject networkPolicyJson = new JSONObject(networkPolicy);
                 JSONArray networkPolicyList	= networkPolicyJson.optJSONArray("network-policy");
-                if (networkPolicyList != null){
+                if (networkPolicyList != null && networkPolicyList.length() > 0){
                     JSONObject networkPolicyOjb = networkPolicyList.getJSONObject(0);
                     result.put("maxBandwidth", networkPolicyOjb.getInt("max-bandwidth"));
+                    log.info("Successfully retrieved max bandwidth for service {}: {}",
+                            serviceId, result.get("maxBandwidth"));
                     return result;
                 }
-                log.info("Successfully fetched max bandwidth {}: {}", serviceId, result);
             }
+            log.warn("Failed to retrieve max bandwidth for service {}, no such network-policy or no valid max-bandwidth " +
+                    "associated", serviceId);
         } catch (Exception e){
             log.warn("Error encountered when fetching maxbandwidth: " + e);
-
         }
-        return null;
+        return new HashMap<String, Integer>();
     }
 }

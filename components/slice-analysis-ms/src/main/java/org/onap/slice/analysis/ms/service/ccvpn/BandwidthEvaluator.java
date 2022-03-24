@@ -146,8 +146,9 @@ public class BandwidthEvaluator {
                     if (!isServiceUnderMaintenance(serviceId)){
                         int newBandwidth = payload.get(BANDWIDTH_TOTAL).getAsInt();
                         Map<String, Integer> maxBandwidthData = aaiService.fetchMaxBandwidthOfService(serviceId);
-                        int oldBandwidth = maxBandwidthData.get("maxBandwidth");
-                        if (newBandwidth != oldBandwidth) {
+                        if (maxBandwidthData.get("maxBandwidth") != null
+                        && maxBandwidthData.get("maxBandwidth") != newBandwidth){
+                            log.info("Trigger bandwidth modification");
                             ccvpnPmDatastore.updateSvcState(serviceId, ServiceState.UNDER_MAINTENANCE);
                             sendModifyRequest(serviceId, newBandwidth, RequestOwner.UUI);
                         }
@@ -156,6 +157,8 @@ public class BandwidthEvaluator {
             }
 
             private void sendModifyRequest(String cllId, Integer newBandwidth, RequestOwner owner) {
+                log.info("Sending modification request to policy. RequestOwner: {} - Service: {} change to bw: {}",
+                        owner, cllId, newBandwidth);
                 policyService.sendOnsetMessageToPolicy(
                         policyService.formPolicyOnsetMessageForCCVPN(cllId, newBandwidth, owner)
                 );
@@ -180,12 +183,12 @@ public class BandwidthEvaluator {
                     log.info("Received new AAI network policy query at: {}", event.time());
                     String serviceId = (String) event.subject();
                     Map<String, Integer> maxBandwidthData = aaiService.fetchMaxBandwidthOfService(serviceId);
-                    int bwVal = maxBandwidthData.get("maxBandwidth");
-                    if (maxBandwidthData != null){
+                    if (maxBandwidthData.get("maxBandwidth") != null){
+                        int bwValue = maxBandwidthData.get("maxBandwidth").intValue();
                         if (ccvpnPmDatastore.getMaxBwOfSvc(serviceId) == 0){
-                            ccvpnPmDatastore.updateMaxBw(serviceId, bwVal, true);
-                        } else if (ccvpnPmDatastore.getMaxBwOfSvc(serviceId) != bwVal) {
-                            ccvpnPmDatastore.updateMaxBw(serviceId, bwVal, true);
+                            ccvpnPmDatastore.updateMaxBw(serviceId, bwValue, true);
+                        } else if (ccvpnPmDatastore.getMaxBwOfSvc(serviceId) != bwValue) {
+                            ccvpnPmDatastore.updateMaxBw(serviceId, bwValue, true);
                             ccvpnPmDatastore.updateSvcState(serviceId, ServiceState.RUNNING);
                         }
                     }
@@ -229,6 +232,8 @@ public class BandwidthEvaluator {
      * @param event event object
      */
     public void post(@NonNull Event event){
+        log.debug("A new event triggered, type: {}, subject: {}, at time: {}",
+                event.type(), event.subject(), event.time());
         if (event.type() == SimpleEvent.Type.AAI_BW_REQ) {
             aaiEventLoop.add(event);
         } else if (event.type() == SimpleEvent.Type.PERIODIC_CHECK) {

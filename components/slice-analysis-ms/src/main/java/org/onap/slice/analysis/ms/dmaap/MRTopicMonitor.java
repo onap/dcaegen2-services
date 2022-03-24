@@ -93,6 +93,8 @@ public class MRTopicMonitor implements Runnable {
             try {
                 Iterable<String> dmaapMsgs = consumerWrapper.fetch();
                 for (String msg : dmaapMsgs){
+                    logger.debug("Received message: {}" +
+                            "\r\n and processing start", msg);
                     process(msg);
                 }
             } catch (IOException | RuntimeException e){
