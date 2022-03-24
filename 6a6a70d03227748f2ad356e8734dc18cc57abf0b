@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ece12676_41680bbf",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-24T18:49:25Z",
+      "side": 1,
+      "message": "since the ARG statement defining $user and $group is commented out above, won\u0027t this fail?",
+      "revId": "6a6a70d03227748f2ad356e8734dc18cc57abf0b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b1fa3d7_4dc08bd0",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-24T18:49:25Z",
+      "side": 1,
+      "message": "if you add the #! line to run.py below, this can become\n\nRUN chmod a+x /src/run.py\nCMD [\"/src/run.py\"]",
+      "revId": "6a6a70d03227748f2ad356e8734dc18cc57abf0b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ec643ca_8a7a5c23",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-24T18:49:25Z",
+      "side": 1,
+      "message": "should add \n\n#!/usr/bin/env python3",
+      "revId": "6a6a70d03227748f2ad356e8734dc18cc57abf0b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73c670f9_84395f4d",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-03-24T18:49:25Z",
+      "side": 1,
+      "message": "change to\n    for prev_t in Prev_Thresh:\n\nthen replace Prev_Thresh[cell_instance] with prev_t",
+      "revId": "6a6a70d03227748f2ad356e8734dc18cc57abf0b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
