@@ -104,6 +104,8 @@ public class VesNotificationCallback implements NotificationCallback {
             log.error("Error converting VES msg to object, {}", e.getMessage());
         }
         if (cllId != null && uniId != null && bw != null){
+            log.info("Saving new CCVPN service usage data into ccvpnPmDatastore");
+            log.debug("new bandwidth data -- serviceId: {}, uniId: {}, bw: {}", cllId, uniId, bw);
             ccvpnPmDatastore.addUsedBwToEndpoint(cllId, uniId, bw);
         }
 

@@ -60,7 +60,7 @@ public class BandwidthEvaluatorTest {
 
     @Test
     public void postTest() {
-        Event evt = mock(SimpleEvent.class);
+        Event evt = new SimpleEvent(null, "{}");
         bandwidthEvaluator.post(evt);
         Mockito.verify(bandwidthEvaluator, Mockito.atLeastOnce()).post(Mockito.any(Event.class));
     }
