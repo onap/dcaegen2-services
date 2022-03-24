@@ -40,13 +40,13 @@
         "aaf_password": null,
         "api_key" : null,
         "api_secret" : null,
-        "servers" : ["message-router"],
+        "servers" : ["message-router:3904"],
         "consumer_group" : "dcae_ccvpn_cl",
         "consumer_instance" : "dcae_ccvpn_cl_aaievent",
         "fetch_timeout" : 15000,
         "fetch_limit" : 100,
         "dmaap_info":{
-          "topic_url":"https://message-router:3905/events/AAI_EVENT",
+          "topic_url":"http://message-router:3904/events/AAI-EVENT",
           "client_role":"org.onap.dcae.aaiSub",
           "location":"onap",
           "client_id":"sdnr-sliceanalysis-1"

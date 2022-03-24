@@ -162,7 +162,7 @@ public class Configuration {
 
         aaiNotifTargetAction = jsonObject.get("sliceanalysisms.aaiNotif.targetAction").getAsString();
         aaiNotifTargetSource = jsonObject.get("sliceanalysisms.aaiNotif.targetSource").getAsString();
-        aaiNotifTargetSource = jsonObject.get("sliceanalysisms.aaiNotif.targetEntity").getAsString();
+        aaiNotifTargetEntity = jsonObject.get("sliceanalysisms.aaiNotif.targetEntity").getAsString();
         ccvpnEvalInterval = jsonObject.get("sliceanalysisms.ccvpnEvalInterval").getAsInt();
         ccvpnEvalThreshold = jsonObject.get("sliceanalysisms.ccvpnEvalThreshold").getAsDouble();
         ccvpnEvalPrecision = jsonObject.get("sliceanalysisms.ccvpnEvalPrecision").getAsDouble();

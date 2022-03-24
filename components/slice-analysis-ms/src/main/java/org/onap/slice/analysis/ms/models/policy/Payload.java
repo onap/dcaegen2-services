@@ -22,13 +22,11 @@
 package org.onap.slice.analysis.ms.models.policy;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Model class for the Paylaod Object
  */
-@JsonInclude(Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Payload {
 
     private String name;
@@ -38,6 +36,8 @@ public class Payload {
     private String networkType;
     private AdditionalProperties<?> additionalProperties;
     private String serviceType;
+    private String modelInvariantUuid;
+    private String modelUuid;
 
     public String getName() {
         return name;
@@ -95,4 +95,19 @@ public class Payload {
         this.serviceType = serviceType;
     }
 
+    public String getModelInvariantUuid() {
+        return modelInvariantUuid;
+    }
+
+    public void setModelInvariantUuid(String modelInvariantUuid) {
+        this.modelInvariantUuid = modelInvariantUuid;
+    }
+
+    public String getModelUuid() {
+        return modelUuid;
+    }
+
+    public void setModelUuid(String modelUuid) {
+        this.modelUuid = modelUuid;
+    }
 }
