@@ -36,6 +36,52 @@
     },
     {
       "key": {
+        "uuid": "09a1b4c7_fcd61f7e",
+        "filename": "components/ml-prediction-ms/setup.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-03-25T11:26:26Z",
+      "side": 1,
+      "message": "Remove extra spaces in all the files.",
+      "range": {
+        "startLine": 29,
+        "startChar": 95,
+        "endLine": 29,
+        "endChar": 104
+      },
+      "revId": "6a6a70d03227748f2ad356e8734dc18cc57abf0b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01c95305_73f0ba95",
+        "filename": "components/ml-prediction-ms/setup.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-03-25T11:26:26Z",
+      "side": 1,
+      "message": "Remove tabs in all the files",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 1
+      },
+      "revId": "6a6a70d03227748f2ad356e8734dc18cc57abf0b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4ec643ca_8a7a5c23",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 8
@@ -47,6 +93,52 @@
       "writtenOn": "2022-03-24T18:49:25Z",
       "side": 1,
       "message": "should add \n\n#!/usr/bin/env python3",
+      "revId": "6a6a70d03227748f2ad356e8734dc18cc57abf0b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e04e7a5_139139ec",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-03-25T11:26:26Z",
+      "side": 1,
+      "message": "Should this value be hardcoded? isn\u0027t it supposed to be based on the \u0027snssai\u0027 that is received from the PM message?",
+      "range": {
+        "startLine": 61,
+        "startChar": 125,
+        "endLine": 61,
+        "endChar": 134
+      },
+      "revId": "6a6a70d03227748f2ad356e8734dc18cc57abf0b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c5815f4_e20caace",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-03-25T11:26:26Z",
+      "side": 1,
+      "message": "Hardcoding can be avoided, the URLs, usernames/password used in this file can be set as a part of the application configuration or as an environment variable.",
+      "range": {
+        "startLine": 61,
+        "startChar": 41,
+        "endLine": 61,
+        "endChar": 63
+      },
       "revId": "6a6a70d03227748f2ad356e8734dc18cc57abf0b",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
