@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04a1e7b9_2749fb6b",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 6928
+      },
+      "writtenOn": "2022-04-06T12:56:02Z",
+      "side": 1,
+      "message": "sNSSAI value can be read from PM data as it is done for Prediction, instead of giving some fixed value.",
+      "range": {
+        "startLine": 83,
+        "startChar": 77,
+        "endLine": 83,
+        "endChar": 86
+      },
+      "revId": "cf02b899ed9fff3e88edda0e89c1b5fbf55c3407",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
