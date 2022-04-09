@@ -22,6 +22,30 @@
       "revId": "cf02b899ed9fff3e88edda0e89c1b5fbf55c3407",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3a01616_db1bf5e0",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-09T09:06:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "04a1e7b9_2749fb6b",
+      "range": {
+        "startLine": 83,
+        "startChar": 77,
+        "endLine": 83,
+        "endChar": 86
+      },
+      "revId": "cf02b899ed9fff3e88edda0e89c1b5fbf55c3407",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
