@@ -1,0 +1,296 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58aaf09d_9dbbf58e",
+        "filename": "components/ml-prediction-ms/Changelog.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "remove spaces",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 3
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "702c6a90_b787fa6e",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "remove trailing spaces",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 16
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9389f142_0ed474bf",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "Remove all trailing spaces",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5d153e2e_05133db7",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "Provide a reference/Wiki on how this training module is setup, sample training data uses and how the training is performed",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e149df84_f63f7eb6",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "1) remove all IP references here as well\n2) indicate references for external component doc whereever applicable (which creates/own the topics)\n3) switch performance_measurement topic to http (this was changed in J release)",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcd8dbbb_b55418fa",
+        "filename": "components/ml-prediction-ms/log_config.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "This structure seems different from what is being proposed by SECCOM - https://wiki.onap.org/display/DW/Jakarta+Best+Practice+Proposal+for+Standardized+Logging+Fields+-+v2\n\ncan you share a sample log output?",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4387eb72_21ddc47d",
+        "filename": "components/ml-prediction-ms/ml-prediction-ms.config",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "ip\u0027s should be changed to corresponding onap service:port name\n\nsame for all below ip references",
+      "range": {
+        "startLine": 21,
+        "startChar": 27,
+        "endLine": 21,
+        "endChar": 37
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0ede6b6_fb6932c6",
+        "filename": "components/ml-prediction-ms/mvn-phase-script.sh",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "This script is not required for this project build setup which is using global jobs",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "591dd09e_cefaf1a9",
+        "filename": "components/ml-prediction-ms/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "can be removed along with corresponding executions any invoking this",
+      "range": {
+        "startLine": 128,
+        "startChar": 11,
+        "endLine": 128,
+        "endChar": 75
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6233e05_6e0babe9",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "pls remove all trailing space on this file",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b0e5fd2_8d2d8cf1",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "cred should not be hardcoded, should be sourced from config file",
+      "range": {
+        "startLine": 302,
+        "startChar": 78,
+        "endLine": 302,
+        "endChar": 110
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90137a4a_2ced04e6",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 325,
+        "startChar": 77,
+        "endLine": 325,
+        "endChar": 112
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb9af2aa_902a84fc",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "same as above.. also as this PM_mapper topic - this can be switched to http/unauthenticated topic",
+      "range": {
+        "startLine": 346,
+        "startChar": 71,
+        "endLine": 346,
+        "endChar": 106
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ca40387_ecd80bf1",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-11T22:15:29Z",
+      "side": 1,
+      "message": "These may be needed from training perpective; are these steps required for ML-prediction execution?",
+      "range": {
+        "startLine": 489,
+        "startChar": 0,
+        "endLine": 493,
+        "endChar": 30
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
