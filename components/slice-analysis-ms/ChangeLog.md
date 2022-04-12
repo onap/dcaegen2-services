@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.1] - 2022/04/12
+         - [DCAEGEN2-3142](https://jira.onap.org/browse/DCAEGEN2-3142) - Filter data from AAI to avoid possible exceptions, remove null parameters in policy payload and add logs
+
 ## [1.1.0] - 2022/3/10
          - [DCAEGEN2-3063](https://jira.onap.org/browse/DCAEGEN2-3063) - IBN user-triggered CLoud Leased Line update and CCVPN closed-loop
 

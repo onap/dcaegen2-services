@@ -21,9 +21,14 @@
  *******************************************************************************/
 package org.onap.slice.analysis.ms.models.policy;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Model class for the Paylaod Object
  */
+@JsonInclude(Include.NON_NULL)
 public class Payload {
 
     private String name;

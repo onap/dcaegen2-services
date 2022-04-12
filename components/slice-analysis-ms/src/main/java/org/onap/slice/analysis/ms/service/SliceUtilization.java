@@ -134,6 +134,8 @@ public class SliceUtilization {
 
             String jsonRequestBody = new ObjectMapper().writeValueAsString(inputParameter);
             log.info("fetching PM Data for : {}", snssai);
+            log.info("desUrl {}", desUrl);
+            log.info("jsonRequestBody {}", jsonRequestBody);
             response =
                     desRestClient.sendPostRequest(desUrl, jsonRequestBody, new ParameterizedTypeReference<String>() {});
             pmData = new JSONObject(response.getBody());

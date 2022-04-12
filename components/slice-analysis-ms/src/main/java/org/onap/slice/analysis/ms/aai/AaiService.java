@@ -70,6 +70,7 @@ public class AaiService implements AaiInterface {
         Map<String, String> responseMap = fetchSubscriberAndSubscriptionServiceType();
         String serviceReqUrl = aaiBaseUrl + "/business/customers/customer/" + globalSubscriberId
                 + "/service-subscriptions/service-subscription/" + subscriptionServiceType + "/service-instances";
+        log.info("serviceReqUrl {}", serviceReqUrl);
         String serviceRole = "AN-NF";
         try {
             String serviceInstance =
@@ -78,7 +79,7 @@ public class AaiService implements AaiInterface {
             JSONArray serviceInstanceList = serviceInstanceJson.getJSONArray("service-instance");
             for (int i = 0; i < serviceInstanceList.length(); i++) {
                 JSONObject serviceObj = serviceInstanceList.getJSONObject(i);
-                if (serviceObj.getString("environment-context").equalsIgnoreCase(snssai)) {
+                if (serviceObj.has("environment-context") && serviceObj.getString("environment-context").equalsIgnoreCase(snssai)) {
                     responseMap.put("sliceProfileId", serviceObj.getString("service-instance-id"));
                 }
             }
@@ -86,7 +87,7 @@ public class AaiService implements AaiInterface {
             String serviceRoleReqUrl = aaiBaseUrl + "/business/customers/customer/" + globalSubscriberId
                     + "/service-subscriptions/service-subscription/" + subscriptionServiceType
                     + "/service-instances/?service-role=nssi&depth=2";
-
+            log.info("serviceRoleReqUrl {}", serviceRoleReqUrl);
             String serviceInstanceForServiceRole =
                     restclient.sendGetRequest(serviceRoleReqUrl, new ParameterizedTypeReference<String>() {}).getBody();
             JSONObject serviceInstanceForServiceRoleJson = new JSONObject(serviceInstanceForServiceRole);
@@ -94,7 +95,7 @@ public class AaiService implements AaiInterface {
                     serviceInstanceForServiceRoleJson.getJSONArray("service-instance");
             for (int i = 0; i < serviceInstanceListForServiceRole.length(); i++) {
                 JSONObject serviceObj = serviceInstanceListForServiceRole.getJSONObject(i);
-                if (serviceObj.getString("workload-context").trim().equalsIgnoreCase(serviceRole)) {
+                if (serviceObj.has("workload-context") && serviceObj.getString("workload-context").trim().equalsIgnoreCase(serviceRole)) {
                     responseMap.put("ranNFNSSIId", serviceObj.getString("service-instance-id"));
                 }
             }
@@ -117,6 +118,7 @@ public class AaiService implements AaiInterface {
         String serviceInstaneId = null;
         String serviceReqUrl = aaiBaseUrl + "/business/customers/customer/" + globalSubscriberId
                 + "/service-subscriptions/service-subscription/" + subscriptionServiceType + "/service-instances";
+        log.info("serviceReqUrl {}", serviceReqUrl);
         Map<String, Integer> responseMap = new HashMap<String, Integer>();
         try {
             String serviceInstance =
@@ -126,7 +128,7 @@ public class AaiService implements AaiInterface {
             JSONArray serviceInstanceList = serviceInstanceJson.getJSONArray("service-instance");
             for (int i = 0; i < serviceInstanceList.length(); i++) {
                 JSONObject serviceObj = serviceInstanceList.getJSONObject(i);
-                if (serviceObj.getString("environment-context").equalsIgnoreCase(snssai)) {
+                if (serviceObj.has("environment-context") && serviceObj.getString("environment-context").equalsIgnoreCase(snssai)) {
                     serviceInstaneId = serviceObj.getString("service-instance-id");
                 }
             }
@@ -134,7 +136,7 @@ public class AaiService implements AaiInterface {
             String sliceProfileReqUrl = aaiBaseUrl + "/business/customers/customer/" + globalSubscriberId
                     + "/service-subscriptions/service-subscription/" + subscriptionServiceType
                     + "/service-instances/service-instance/" + serviceInstaneId + "/slice-profiles";
-
+            log.info("sliceProfileReqUrl {}", sliceProfileReqUrl);
             String sliceProfile = restclient
                     .sendGetRequest(sliceProfileReqUrl, new ParameterizedTypeReference<String>() {}).getBody();
             JSONObject sliceProfileJson = new JSONObject(sliceProfile);
@@ -163,6 +165,7 @@ public class AaiService implements AaiInterface {
 
         log.info("Get GlobalSubscriberId");
         String subscriberReqUrl = aaiBaseUrl + "/business/customers";
+        log.info("subscriberReqUrl {}", subscriberReqUrl);
         try {
             String subscriberReq =
                     restclient.sendGetRequest(subscriberReqUrl, new ParameterizedTypeReference<String>() {}).getBody();
@@ -178,7 +181,7 @@ public class AaiService implements AaiInterface {
             log.info("Get subscriptionServiceType");
             String subscriptionServiceReqUrl =
                     aaiBaseUrl + "/business/customers/customer/" + globalSubscriberId + "/service-subscriptions";
-
+            log.info("subscriptionServiceReqUrl: {}", subscriptionServiceReqUrl);
             String subscriptionService = restclient
                     .sendGetRequest(subscriptionServiceReqUrl, new ParameterizedTypeReference<String>() {}).getBody();
             JSONObject subscriptionServiceJson = new JSONObject(subscriptionService);
@@ -214,14 +217,14 @@ public class AaiService implements AaiInterface {
         String serviceReqUrl = aaiBaseUrl + "/business/customers/customer/" + globalSubscriberId
                 + "/service-subscriptions/service-subscription/" + subscriptionServiceType
                 + "/service-instances/service-instance/" + sliceInstanceId;
-
+        log.info("serviceReqUrl {}", serviceReqUrl);
         try {
             String serviceInstanceString =
                     restclient.sendGetRequest(serviceReqUrl, new ParameterizedTypeReference<String>() {}).getBody();
             ServiceInstance serviceInstance = objectMapper.readValue(serviceInstanceString, ServiceInstance.class);
             if (serviceInstance.getServiceRole().equalsIgnoreCase("nsi")) {
                 serviceInstance.getRelationshipList().getRelationship().forEach(relationship -> {
-                    if (relationship.getRelatedTo().equalsIgnoreCase("allotted-resource")) {
+                    if (Objects.nonNull(relationship.getRelatedTo()) && relationship.getRelatedTo().equalsIgnoreCase("allotted-resource")) {
                         relationship.getRelationshipData().forEach(data -> {
                             if (data.get("relationship-key").equalsIgnoreCase("service-instance.service-instance-id")) {
                                 allotedResource.add(data.get("relationship-value"));
@@ -280,6 +283,7 @@ public class AaiService implements AaiInterface {
                 String serviceReqUrl = aaiBaseUrl + "/business/customers/customer/" + globalSubscriberId
                         + "/service-subscriptions/service-subscription/" + subscriptionServiceType
                         + "/service-instances/service-instance/" + serviceInstanceId;
+                log.info("serviceReqUrl {}", serviceReqUrl);
                 String serviceInstanceString =
                         restclient.sendGetRequest(serviceReqUrl, new ParameterizedTypeReference<String>() {}).getBody();
                 ServiceInstance serviceInstance = objectMapper.readValue(serviceInstanceString, ServiceInstance.class);
@@ -326,7 +330,7 @@ public class AaiService implements AaiInterface {
             String serviceReqUrl = aaiBaseUrl + "/business/customers/customer/" + globalSubscriberId
                     + "/service-subscriptions/service-subscription/" + subscriptionServiceType + "/service-instances/"
                     + "service-instance/" + serviceInstanceId;
-
+            log.info("serviceReqUrl {}", serviceReqUrl);
             try {
                 String serviceInstanceString =
                         restclient.sendGetRequest(serviceReqUrl, new ParameterizedTypeReference<String>() {}).getBody();

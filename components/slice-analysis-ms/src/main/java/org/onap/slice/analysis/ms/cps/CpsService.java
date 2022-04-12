@@ -58,7 +58,9 @@ public class CpsService implements CpsInterface {
         Map<String, Map<String, Object>> responseMap = new HashMap<String, Map<String, Object>>();
         String reqUrl = cpsBaseUrl + "/get-nearrtric-config";
         log.info("fetching current configuration of RIC from Cps: {s-NSSAI: " + snssai + "}");
+        log.info("reqUrl {}", reqUrl);
         String requestBody = "{\"inputParameters\": {\"sNssai\":" + JSONObject.quote(snssai) + "}}";
+        log.info("requestBody {}", requestBody);
         try {
             String response = restclient
                     .sendPostRequest(reqUrl, requestBody, new ParameterizedTypeReference<String>() {}).getBody();
@@ -93,7 +95,9 @@ public class CpsService implements CpsInterface {
         List<String> responseList = new ArrayList<>();
         String reqUrl = cpsBaseUrl + "/get-gnbdufunction-by-snssai";
         log.info("fetching network functions of snssai from Cps: {s-NSSAI: " + snssai + "}");
+        log.info("reqUrl {}", reqUrl);
         String requestBody = "{\"inputParameters\": {\"sNssai\":" + JSONObject.quote(snssai) + "}}";
+        log.info("requestBody {}", requestBody);
         try {
             String response = restclient
                     .sendPostRequest(reqUrl, requestBody, new ParameterizedTypeReference<String>() {}).getBody();
@@ -115,7 +119,9 @@ public class CpsService implements CpsInterface {
         Map<String, List<String>> responseMap = new HashMap<>();
         String reqUrl = cpsBaseUrl + "/get-nrcelldu-by-snssai";
         log.info("fetching RIC of s-NSSAI from Cps: {s-NSSAI: " + snssai + "}");
+        log.info("reqUrl {}", reqUrl);
         String requestBody = "{\"inputParameters\": {\"sNssai\":" + JSONObject.quote(snssai) + "}}";
+        log.info("requestBody {}", requestBody);
         try {
             String response = restclient
                     .sendPostRequest(reqUrl, requestBody, new ParameterizedTypeReference<String>() {}).getBody();
