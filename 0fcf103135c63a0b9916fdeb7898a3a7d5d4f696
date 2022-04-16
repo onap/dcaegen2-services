@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d7f0ecad_2bef949a",
+        "filename": "components/ml-prediction-ms/Changelog.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "58aaf09d_9dbbf58e",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 3
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "702c6a90_b787fa6e",
         "filename": "components/ml-prediction-ms/Dockerfile",
         "patchSetId": 13
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a0fcf353_66ff0945",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "702c6a90_b787fa6e",
+      "range": {
+        "startLine": 27,
+        "startChar": 15,
+        "endLine": 27,
+        "endChar": 16
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9389f142_0ed474bf",
         "filename": "components/ml-prediction-ms/README.md",
         "patchSetId": 13
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "5d9511d3_89810510",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9389f142_0ed474bf",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5d153e2e_05133db7",
         "filename": "components/ml-prediction-ms/README.md",
         "patchSetId": 13
@@ -79,6 +145,24 @@
       "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f08ceff_8a0c3fa1",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5d153e2e_05133db7",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -105,6 +189,30 @@
     },
     {
       "key": {
+        "uuid": "2958c739_82735413",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e149df84_f63f7eb6",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 0
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fcd8dbbb_b55418fa",
         "filename": "components/ml-prediction-ms/log_config.yaml",
         "patchSetId": 13
@@ -116,6 +224,24 @@
       "writtenOn": "2022-04-11T22:15:29Z",
       "side": 1,
       "message": "This structure seems different from what is being proposed by SECCOM - https://wiki.onap.org/display/DW/Jakarta+Best+Practice+Proposal+for+Standardized+Logging+Fields+-+v2\n\ncan you share a sample log output?",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac9fee2e_68911342",
+        "filename": "components/ml-prediction-ms/log_config.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Sample log output content\n\n2022-03-31 19:13:24,076 Error while Start topic to generated data:\nHTTPConnectionPool(host\u003d\u002710.31.4.14\u0027, port\u003d8081): Max retries exceeded with url: /ransim/api/GenerateIntelligentSlicingPmData (Caused by NewConnectionError(\u0027\u003curllib3.connection.HTTPConnection object at 0x7f027cd0a358\u003e: Failed to establish a new connection: [Errno 110] Connection timed out\u0027,))",
+      "parentUuid": "fcd8dbbb_b55418fa",
       "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -145,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "50fca24d_c78a27cf",
+        "filename": "components/ml-prediction-ms/ml-prediction-ms.config",
+        "patchSetId": 13
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "These ip are from RAN simulation and the RAN Simulator is not deployed through HELMS Charts",
+      "parentUuid": "4387eb72_21ddc47d",
+      "range": {
+        "startLine": 21,
+        "startChar": 27,
+        "endLine": 21,
+        "endChar": 37
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a0ede6b6_fb6932c6",
         "filename": "components/ml-prediction-ms/mvn-phase-script.sh",
         "patchSetId": 13
@@ -159,6 +309,24 @@
       "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1ee5d3eb_618ca17a",
+        "filename": "components/ml-prediction-ms/mvn-phase-script.sh",
+        "patchSetId": 13
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a0ede6b6_fb6932c6",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -185,6 +353,30 @@
     },
     {
       "key": {
+        "uuid": "5527cc04_01689fc7",
+        "filename": "components/ml-prediction-ms/pom.xml",
+        "patchSetId": 13
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "591dd09e_cefaf1a9",
+      "range": {
+        "startLine": 128,
+        "startChar": 11,
+        "endLine": 128,
+        "endChar": 75
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b6233e05_6e0babe9",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 13
@@ -199,6 +391,24 @@
       "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "231af06b_0cd7c203",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b6233e05_6e0babe9",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -225,6 +435,30 @@
     },
     {
       "key": {
+        "uuid": "c4634424_16aa7cbc",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4b0e5fd2_8d2d8cf1",
+      "range": {
+        "startLine": 302,
+        "startChar": 78,
+        "endLine": 302,
+        "endChar": 110
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90137a4a_2ced04e6",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 13
@@ -245,6 +479,30 @@
       "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b56d3574_6fb451ff",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "90137a4a_2ced04e6",
+      "range": {
+        "startLine": 325,
+        "startChar": 77,
+        "endLine": 325,
+        "endChar": 112
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -271,6 +529,30 @@
     },
     {
       "key": {
+        "uuid": "e3f0dbc1_05d9977e",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fb9af2aa_902a84fc",
+      "range": {
+        "startLine": 346,
+        "startChar": 71,
+        "endLine": 346,
+        "endChar": 106
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1ca40387_ecd80bf1",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 13
@@ -291,6 +573,30 @@
       "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db8de882_1e3278be",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-04-16T00:26:33Z",
+      "side": 1,
+      "message": "Ack, This is done for ML Prediction execution. The Sleep were introduced to get implementation synchronized with the integration on RAN PM Data Simulation Topics.",
+      "parentUuid": "1ca40387_ecd80bf1",
+      "range": {
+        "startLine": 489,
+        "startChar": 0,
+        "endLine": 493,
+        "endChar": 30
+      },
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
