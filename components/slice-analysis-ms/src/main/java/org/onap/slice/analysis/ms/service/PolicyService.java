@@ -104,7 +104,7 @@ public class PolicyService {
         AAI aai = new AAI();
         aai.setVserverIsClosedLoopDisabled("false");
         aai.setVserverProvStatus("ACTIVE");
-        aai.setvServerVNFId(serviceDetails.get("ranNFNSSIId"));
+        aai.setGenericVnfVNFId(serviceDetails.get("ranNFNSSIId"));
         onsetmsg.setAai(aai);
         return onsetmsg;
     }
@@ -172,7 +172,10 @@ public class PolicyService {
         onsetmsg.setFrom("DCAE");
         onsetmsg.setVersion("1.0.2");
         AAI aai = new AAI();
-        aai.setVserverIsClosedLoopDisabled("true");
+        aai.setGenericVnfIsClosedLoopDisabled("false");
+        aai.setGenericVnfProvStatus("ACTIVE");
+        aai.setGenericVnfVNFId("00000000-0000-0000-0000-000000000000");
+        aai.setGenericVnfVnfName("00000");
         onsetmsg.setAai(aai);
         return onsetmsg;
     }

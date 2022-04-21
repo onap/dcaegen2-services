@@ -93,10 +93,8 @@ public class PolicyServiceTest {
         try {
             output = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/onsetMessage2.json"))), OnsetMessage.class);
             expected = obj.writeValueAsString(output);
-
-            String msg = obj.writeValueAsString(policyService
+            actual = new Gson().toJson(policyService
                     .formPolicyOnsetMessageForCCVPN(cllId, 3000, RequestOwner.UUI));
-            actual = new Gson().toJson(msg);
         }
         catch (IOException e) {
             e.printStackTrace();
