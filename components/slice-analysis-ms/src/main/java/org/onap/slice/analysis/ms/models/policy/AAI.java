@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -21,41 +22,72 @@
 
 package org.onap.slice.analysis.ms.models.policy;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** 
+/**
  * Model class for the AAI Object 
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AAI {
-	@JsonProperty("vserver.is-closed-loop-disabled")
-	private String vserverIsClosedLoopDisabled;
-	@JsonProperty("vserver.prov-status")
-	private String vserverProvStatus;
-	@JsonProperty("generic-vnf.vnf-id")
-	private String vServerVNFId;
+    @JsonProperty("vserver.is-closed-loop-disabled")
+    private String vserverIsClosedLoopDisabled;
+    @JsonProperty("vserver.prov-status")
+    private String vserverProvStatus;
+    @JsonProperty("generic-vnf.vnf-id")
+    private String genericVnfVNFId;
+    @JsonProperty("generic-vnf.is-closed-loop-disabled")
+    private String genericVnfIsClosedLoopDisabled;
+    @JsonProperty("generic-vnf.prov-status")
+    private String genericVnfProvStatus;
+    @JsonProperty("generic-vnf.vnf-name")
+    private String genericVnfVnfName;
 
-	public String getVserverIsClosedLoopDisabled() {
-		return vserverIsClosedLoopDisabled;
-	}
+    public String getVserverIsClosedLoopDisabled() {
+        return vserverIsClosedLoopDisabled;
+    }
 
-	public void setVserverIsClosedLoopDisabled(String vserverIsClosedLoopDisabled) {
-		this.vserverIsClosedLoopDisabled = vserverIsClosedLoopDisabled;
-	}
+    public void setVserverIsClosedLoopDisabled(String vserverIsClosedLoopDisabled) {
+        this.vserverIsClosedLoopDisabled = vserverIsClosedLoopDisabled;
+    }
 
-	public String getVserverProvStatus() {
-		return vserverProvStatus;
-	}
+    public String getVserverProvStatus() {
+        return vserverProvStatus;
+    }
 
-	public void setVserverProvStatus(String vserverProvStatus) {
-		this.vserverProvStatus = vserverProvStatus;
-	}
+    public void setVserverProvStatus(String vserverProvStatus) {
+        this.vserverProvStatus = vserverProvStatus;
+    }
 
-	public String getvServerVNFId() {
-		return vServerVNFId;
-	}
+    public String getGenericVnfVNFId() {
+        return genericVnfVNFId;
+    }
 
-	public void setvServerVNFId(String vServerVNFId) {
-		this.vServerVNFId = vServerVNFId;
-	}
-	
+    public void setGenericVnfVNFId(String genericVnfVNFId) {
+        this.genericVnfVNFId = genericVnfVNFId;
+    }
+
+    public String getGenericVnfProvStatus() {
+        return genericVnfProvStatus;
+    }
+
+    public void setGenericVnfProvStatus(String genericVnfProvStatus) {
+        this.genericVnfProvStatus = genericVnfProvStatus;
+    }
+
+    public String getGenericVnfIsClosedLoopDisabled() {
+        return genericVnfIsClosedLoopDisabled;
+    }
+
+    public void setGenericVnfIsClosedLoopDisabled(String genericVnfIsClosedLoopDisabled) {
+        this.genericVnfIsClosedLoopDisabled = genericVnfIsClosedLoopDisabled;
+    }
+
+    public String getGenericVnfVnfName() {
+        return genericVnfVnfName;
+    }
+
+    public void setGenericVnfVnfName(String genericVnfVnfName) {
+        this.genericVnfVnfName = genericVnfVnfName;
+    }
 }
