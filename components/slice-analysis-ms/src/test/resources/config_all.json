@@ -5,7 +5,7 @@
         "aaf_password": null,
         "type": "message-router",
         "dmaap_info": {
-          "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/unauthenticated.VES_MEASUREMENT_OUTPUT",
+          "topic_url": "http://message-router.onap.svc.cluster.local:3904/events/unauthenticated.PERFORMANCE_MEASUREMENTS",
           "client_role": "sliceanalysis-subscriber",
           "location": "onap",
           "client_id": "sdnr-sliceanalysis-1"
@@ -16,7 +16,18 @@
         "aaf_password": null,
         "type": "message-router",
         "dmaap_info": {
-          "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/DCAE_CL_RSP",
+          "topic_url": "http://message-router.onap.svc.cluster.local:3904/events/DCAE_CL_RSP",
+          "client_role": "sliceanalysis-subscriber",
+          "location": "onap",
+          "client_id": "sdnr-sliceanalysis-1"
+        },
+        "aaf_username": null
+      },
+      "intelligent_slicing_topic": {
+        "aaf_password": null,
+        "type": "message-router",
+        "dmaap_info": {
+          "topic_url": "http://message-router.onap.svc.cluster.local:3904/events/unauthenticated.ML_RESPONSE_TOPIC",
           "client_role": "sliceanalysis-subscriber",
           "location": "onap",
           "client_id": "sdnr-sliceanalysis-1"
@@ -40,7 +51,7 @@
         "aaf_password": null,
         "api_key" : null,
         "api_secret" : null,
-        "servers" : ["message-router:3904"],
+        "servers" : ["dmaap:3904"],
         "consumer_group" : "dcae_ccvpn_cl",
         "consumer_instance" : "dcae_ccvpn_cl_aaievent",
         "fetch_timeout" : 15000,
@@ -58,7 +69,7 @@
         "aaf_password": null,
         "type": "message-router",
         "dmaap_info": {
-          "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/unauthenticated.DCAE_CL_OUTPUT",
+          "topic_url": "http://message-router.onap.svc.cluster.local:3904/events/unauthenticated.DCAE_CL_OUTPUT",
           "client_role": "sliceanalysis-subscriber",
           "location": "onap",
           "client_id": "sdnr-sliceanalysis-1"
