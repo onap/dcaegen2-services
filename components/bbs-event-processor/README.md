@@ -1,3 +1,8 @@
+************************************************************
+This component has been deprecated with ONAP Jakarta release
+See https://jira.onap.org/browse/DCAEGEN2-2974 for details.
+************************************************************
+
 # BBS use case event processor
 
 ---
