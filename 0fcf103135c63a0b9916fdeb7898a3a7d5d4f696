@@ -284,6 +284,24 @@
     },
     {
       "key": {
+        "uuid": "326fa7ce_0e41e507",
+        "filename": "components/ml-prediction-ms/log_config.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-04-27T20:10:27Z",
+      "side": 1,
+      "message": "Possibly missing:\nIs there a trace id? principal id?\n(Are they in mdcfmt under another name?)\nstatus code? (values: SUCCESS, INPROGRESS, FAIL_WARN, FAIL_ERROR, FAIL_FATAL)",
+      "parentUuid": "7ac33059_a281c1cd",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4387eb72_21ddc47d",
         "filename": "components/ml-prediction-ms/ml-prediction-ms.config",
         "patchSetId": 13
