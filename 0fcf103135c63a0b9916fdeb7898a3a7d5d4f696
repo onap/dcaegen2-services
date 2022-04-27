@@ -166,6 +166,24 @@
     },
     {
       "key": {
+        "uuid": "2a031d59_bfa6581a",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-27T19:30:09Z",
+      "side": 1,
+      "message": "I do not see this addressed; pls include corresponding wiki reference",
+      "parentUuid": "0f08ceff_8a0c3fa1",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e149df84_f63f7eb6",
         "filename": "components/ml-prediction-ms/README.md",
         "patchSetId": 13
@@ -242,6 +260,24 @@
       "side": 1,
       "message": "Sample log output content\n\n2022-03-31 19:13:24,076 Error while Start topic to generated data:\nHTTPConnectionPool(host\u003d\u002710.31.4.14\u0027, port\u003d8081): Max retries exceeded with url: /ransim/api/GenerateIntelligentSlicingPmData (Caused by NewConnectionError(\u0027\u003curllib3.connection.HTTPConnection object at 0x7f027cd0a358\u003e: Failed to establish a new connection: [Errno 110] Connection timed out\u0027,))",
       "parentUuid": "fcd8dbbb_b55418fa",
+      "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ac33059_a281c1cd",
+        "filename": "components/ml-prediction-ms/log_config.yaml",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-27T19:30:09Z",
+      "side": 1,
+      "message": "This is not consistent to the BP Log structure proposed, need to be aligned with it.",
+      "parentUuid": "ac9fee2e_68911342",
       "revId": "0fcf103135c63a0b9916fdeb7898a3a7d5d4f696",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true

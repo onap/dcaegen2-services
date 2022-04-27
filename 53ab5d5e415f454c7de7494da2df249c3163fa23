@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36571719_28780d55",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-27T19:30:09Z",
+      "side": 1,
+      "message": "Rephrase as below\n\nTraining module requires following RANSim Topics. To setup RANsim, refer \n   https://wiki.onap.org/plugins/servlet/mobile?contentId\u003d1015829#content/view/93002871",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 87
+      },
+      "revId": "53ab5d5e415f454c7de7494da2df249c3163fa23",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6714e837_0c03ed34",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-27T19:30:09Z",
+      "side": 1,
+      "message": "As configdb is onap service, this should be switched to corresponding servicename or keep have a templatized parameter (\u003c\u003cconfig-db\u003e\u003e) to indicate this should be changed prior to deployment",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "53ab5d5e415f454c7de7494da2df249c3163fa23",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e432f1b_89257a4b",
+        "filename": "components/ml-prediction-ms/ml-prediction-ms.config",
+        "patchSetId": 15
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-27T19:30:09Z",
+      "side": 1,
+      "message": "set this as \u003c\u003cransim\u003e\u003e and add step in the readme (and deployment wiki to update this to correct ip prior to deployment)",
+      "range": {
+        "startLine": 21,
+        "startChar": 27,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "53ab5d5e415f454c7de7494da2df249c3163fa23",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7eb95ef_6581e550",
+        "filename": "components/ml-prediction-ms/ml-prediction-ms.config",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-27T19:30:09Z",
+      "side": 1,
+      "message": "\u003c\u003cransim\u003e\u003e",
+      "range": {
+        "startLine": 22,
+        "startChar": 26,
+        "endLine": 22,
+        "endChar": 32
+      },
+      "revId": "53ab5d5e415f454c7de7494da2df249c3163fa23",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba7f217a_fe285858",
+        "filename": "components/ml-prediction-ms/ml-prediction-ms.config",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-27T19:30:09Z",
+      "side": 1,
+      "message": "remove this ip also",
+      "range": {
+        "startLine": 26,
+        "startChar": 29,
+        "endLine": 26,
+        "endChar": 39
+      },
+      "revId": "53ab5d5e415f454c7de7494da2df249c3163fa23",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af9ad64e_999b307d",
+        "filename": "components/ml-prediction-ms/pom.xml",
+        "patchSetId": 15
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-04-27T19:30:09Z",
+      "side": 1,
+      "message": "remove this line",
+      "range": {
+        "startLine": 128,
+        "startChar": 12,
+        "endLine": 128,
+        "endChar": 14
+      },
+      "revId": "53ab5d5e415f454c7de7494da2df249c3163fa23",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
