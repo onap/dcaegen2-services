@@ -97,7 +97,7 @@ public class MLMessageProcessorTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        when(configDbService.fetchRICsOfSnssai("0001-0111")).thenReturn(ricToCellMapping);
+        when(configDbService.fetchCUCPCellsOfSnssai("0001-0111")).thenReturn(ricToCellMapping);
         AdditionalProperties<MLOutputModel> addProps = new AdditionalProperties<>();
         addProps.setResourceConfig(mloutputExp);
         doNothing().when(policyService).sendOnsetMessageToPolicy(anyString(), any(AdditionalProperties.class),

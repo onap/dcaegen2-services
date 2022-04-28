@@ -46,7 +46,7 @@
          "service-type":"00-000",
          "service-role":"slice-profile-instance",
          "environment-context":"001-00110",
-         "workload-context":"ÁN-NF",
+         "workload-context":"AN-NF",
          "service-instance-location-id":"[\"460-00\",\"460-01\"]",
          "resource-version":"1613715676282",
          "orchestration-status":"deactivated"
