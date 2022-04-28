@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1944a589_fcb585d8",
+        "filename": "components/slice-analysis-ms/src/main/resources/logback.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-04-28T14:48:10Z",
+      "side": 1,
+      "message": "tab indentation should not be used",
+      "revId": "5ccbd253c9f745785d96adf29508dd8496c254e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
