@@ -69,11 +69,13 @@ public class MLMessageProcessor {
         String snssai = mlOutputMsg.getSnssai();
         List<CUModel> cuData = mlOutputMsg.getData();
         if (isConfigDbEnabled) {
-            ricToCellMapping = configDbService.fetchRICsOfSnssai(snssai);
+            serviceDetails = configDbService.fetchServiceDetails(snssai);
+            ricToCellMapping = configDbService.fetchCUCPCellsOfSnssai(snssai);
         } else {
-            ricToCellMapping = cpsInterface.fetchRICsOfSnssai(snssai);
+            ricToCellMapping = cpsInterface.fetchnrCellCUsOfSnssai(snssai);
+            serviceDetails = aaiInterface.fetchServiceDetails(snssai);
         }
-        log.debug("RIC to cell mapping of S-NSSAI {} is {}", snssai, ricToCellMapping);
+        log.info("RIC to cell mapping of S-NSSAI {} is {}", snssai, ricToCellMapping);
         for (CUModel cuModel : cuData) {
             String cellId = String.valueOf(cuModel.getCellCUList().get(0).getCellLocalId());
             ricToCellMapping.forEach((ricId, cells) -> {
@@ -84,13 +86,6 @@ public class MLMessageProcessor {
         }
         AdditionalProperties<MLOutputModel> addProps = new AdditionalProperties<>();
         addProps.setResourceConfig(mlOutputMsg);
-
-        if (isConfigDbEnabled) {
-            serviceDetails = configDbService.fetchServiceDetails(snssai);
-        } else {
-            serviceDetails = aaiInterface.fetchServiceDetails(snssai);
-
-        }
         policyService.sendOnsetMessageToPolicy(snssai, addProps, serviceDetails);
     }
 

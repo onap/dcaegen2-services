@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.2] - 2022/04/28
+         - [DCAEGEN2-3145](https://jira.onap.org/browse/DCAEGEN2-3145) - Filter RAN related service instances in AAI
+
+         - [DCAEGEN2-3146](https://jira.onap.org/browse/DCAEGEN2-3146) - Fetch CU Cells instead of DU cells data for ML message processing
+
 ## [1.1.1] - 2022/04/12
          - [DCAEGEN2-3142](https://jira.onap.org/browse/DCAEGEN2-3142) - Filter data from AAI to avoid possible exceptions, remove null parameters in policy payload and add logs
 
