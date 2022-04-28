@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd97d684_fbddc723",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-04-28T14:44:10Z",
+      "side": 1,
+      "message": "2022",
+      "revId": "200cefb1f85edb29640c3a383e605c40034101c9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb48a419_ed52ebd6",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/IConfigDbService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-04-28T14:44:10Z",
+      "side": 1,
+      "message": "add 2022",
+      "revId": "200cefb1f85edb29640c3a383e605c40034101c9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f6e8189_7d452149",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/IConfigDbService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-04-28T14:44:10Z",
+      "side": 1,
+      "message": "do not use tabs for indentation",
+      "revId": "200cefb1f85edb29640c3a383e605c40034101c9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44395a7b_db984cbb",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceServiceTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-04-28T14:44:10Z",
+      "side": 1,
+      "message": "add 2022",
+      "revId": "200cefb1f85edb29640c3a383e605c40034101c9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
