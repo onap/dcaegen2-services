@@ -128,5 +128,24 @@ public class ConfigDbInterfaceService implements IConfigDbService {
                 return response.getBody();
         }
 
+        /**
+         *  Fetches the CUCP Cells of an S-NSSAI from config DB
+         */
+        public Map<String, List<String>> fetchCUCPCellsOfSnssai(String snssai){
+                Map<String,List<String>> responseMap=new HashMap<>();
+                String reqUrl=configDbBaseUrl+"/api/sdnc-config-db/v4/cucp-cell-list/"+snssai;
+                ResponseEntity<Map<String,List<CellsModel>>> response = restclient.sendGetRequest(reqUrl, new ParameterizedTypeReference<Map<String,List<CellsModel>>>() {
+                });
+
+                for (Map.Entry<String, List<CellsModel>> entry : response.getBody().entrySet()) {
+                        List<String> cellslist=new ArrayList<>();
+                        for(CellsModel cellmodel:entry.getValue()) {
+                                cellslist.add(cellmodel.getCellLocalId());
+                        }
+                        responseMap.put(entry.getKey(), cellslist);
+                }
+                return responseMap;
+        }
+
 }
 
