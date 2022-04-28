@@ -2,7 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020-2021 Wipro Limited.
+ *   Copyright (C) 2020-2022 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -126,6 +126,7 @@ public class ConfigDbInterfaceServiceTest {
 
         }
 
+        @Test
         public void fetchServiceProfile() {
                 Map<String,String> responseMap=new HashMap<String, String>();
                 responseMap.put("sNSSAI", "001-010");
@@ -135,6 +136,35 @@ public class ConfigDbInterfaceServiceTest {
                 Mockito.when(restclient.sendGetRequest(Mockito.anyString(), Mockito.any()))
                             .thenReturn(new ResponseEntity<Object>(responseMap, HttpStatus.OK));
                 assertEquals(responseMap, configdbservice.fetchServiceDetails("snssai"));
+        }
+
+        @Test
+        public void fetchCUCPCellsOfSnssaiTest() {
+                Map<String, List<CellsModel>> response = new HashMap<>();
+                List<CellsModel> cellslist = new ArrayList<>();
+                List<CellsModel> cellslist1 = new ArrayList<>();
+                CellsModel cellsmodel1 = new CellsModel();
+                cellsmodel1.setCellLocalId("1111");
+                CellsModel cellsmodel2 = new CellsModel();
+                cellsmodel2.setCellLocalId("2222");
+                cellslist.add(cellsmodel1);
+                cellslist.add(cellsmodel2);
+                response.put("1", cellslist);
+                CellsModel cellsmodel3 = new CellsModel();
+                cellsmodel3.setCellLocalId("3333");
+                CellsModel cellsmodel4 = new CellsModel();
+                cellsmodel4.setCellLocalId("4444");
+                cellslist1.add(cellsmodel3);
+                cellslist1.add(cellsmodel4);
+                response.put("2", cellslist1);
+                Mockito.when(restclient.sendGetRequest(Mockito.anyString(), Mockito.any()))
+                                 .thenReturn(new ResponseEntity<Object>(response, HttpStatus.OK));
+                List<String> outputlist = new ArrayList<>();
+                outputlist.add("1111");
+                outputlist.add("2222");
+                Map<String, List<String>> output = configdbservice.fetchCUCPCellsOfSnssai("snssai");
+                assertEquals(outputlist, output.get("1"));
+
         }
 }
 

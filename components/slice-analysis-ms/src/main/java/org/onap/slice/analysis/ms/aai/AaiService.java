@@ -79,7 +79,10 @@ public class AaiService implements AaiInterface {
             JSONArray serviceInstanceList = serviceInstanceJson.getJSONArray("service-instance");
             for (int i = 0; i < serviceInstanceList.length(); i++) {
                 JSONObject serviceObj = serviceInstanceList.getJSONObject(i);
-                if (serviceObj.has("environment-context") && serviceObj.getString("environment-context").equalsIgnoreCase(snssai)) {
+                if (serviceObj.has("environment-context") && serviceObj.getString("environment-context").equalsIgnoreCase(snssai)
+                        && serviceObj.has("workload-context") && serviceObj.getString("workload-context").contains("AN")
+                        && serviceObj.has("service-role")
+                        && serviceObj.getString("service-role").contains("slice-profile")) {
                     responseMap.put("sliceProfileId", serviceObj.getString("service-instance-id"));
                 }
             }
@@ -128,7 +131,10 @@ public class AaiService implements AaiInterface {
             JSONArray serviceInstanceList = serviceInstanceJson.getJSONArray("service-instance");
             for (int i = 0; i < serviceInstanceList.length(); i++) {
                 JSONObject serviceObj = serviceInstanceList.getJSONObject(i);
-                if (serviceObj.has("environment-context") && serviceObj.getString("environment-context").equalsIgnoreCase(snssai)) {
+                if (serviceObj.has("environment-context") && serviceObj.getString("environment-context").equalsIgnoreCase(snssai)
+                        && serviceObj.has("workload-context") && serviceObj.getString("workload-context").contains("AN")
+                        && serviceObj.has("service-role")
+                        && serviceObj.getString("service-role").contains("slice-profile-instance")) {
                     serviceInstaneId = serviceObj.getString("service-instance-id");
                 }
             }

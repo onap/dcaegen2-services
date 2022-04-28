@@ -37,4 +37,6 @@ public interface CpsInterface {
 
     public Map<String, Map<String, Object>> fetchCurrentConfigurationOfRIC(String snssai);
 
+    public Map<String, List<String>> fetchnrCellCUsOfSnssai(String snssai);
+
 }

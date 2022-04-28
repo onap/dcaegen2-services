@@ -142,6 +142,41 @@ public class CpsService implements CpsInterface {
         } catch (Exception e) {
             log.info("Fetch RICS of S-NSSAI from CPS" + e);
         }
+        log.info("responseMap: {}", responseMap);
+        return responseMap;
+    }
+
+     /**
+     * Fetches the NRCellCUs of an S-NSSAI from CPS
+     */
+    public Map<String, List<String>> fetchnrCellCUsOfSnssai(String snssai) {
+        Map<String, List<String>> responseMap = new HashMap<>();
+        String reqUrl = cpsBaseUrl + "/get-nearrtric-config";
+        log.info("fetching NrCellCUs of s-NSSAI from Cps: {s-NSSAI: " + snssai + "}");
+        log.info("reqUrl {}", reqUrl);
+        String requestBody = "{\"inputParameters\": {\"sNssai\":" + JSONObject.quote(snssai) + "}}";
+        log.info("requestBody {}", requestBody);
+        try {
+            String response = restclient
+                    .sendPostRequest(reqUrl, requestBody, new ParameterizedTypeReference<String>() {}).getBody();
+            JSONArray sliceArray = new JSONArray(response);
+            for (int i = 0; i < sliceArray.length(); i++) {
+                String nearRTTICid = sliceArray.getJSONObject(i).optString("idNearRTRIC");
+                JSONArray GNBCUCPFunctionArray = sliceArray.getJSONObject(i).getJSONArray("GNBCUCPFunction");
+                for (int j = 0; j < GNBCUCPFunctionArray.length(); j++) {
+                    JSONArray NRCellCUArray = GNBCUCPFunctionArray.getJSONObject(j).getJSONArray("NRCellCU");
+                    List<String> cellslist = new ArrayList<>();
+                    for (int k = 0; k < NRCellCUArray.length(); k++) {
+                        cellslist.add(
+                                NRCellCUArray.getJSONObject(k).getJSONObject("attributes").optString("cellLocalId"));
+                    }
+                    responseMap.put(nearRTTICid, cellslist);
+                }
+            }
+        } catch (Exception e) {
+            log.info("Exception: {}", e);
+        }
+        log.info("responseMap: {}", responseMap);
         return responseMap;
     }
 }
