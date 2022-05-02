@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "8978d479_0fdd9542",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-02T20:27:05Z",
+      "side": 1,
+      "message": "My comment/question was for line#177,178 setting of vnfid and vnfname - these should be coming based on AAI event/enrichment",
+      "parentUuid": "e67e6d3a_d41c6a22",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 42
+      },
+      "revId": "b699fbecf9627fe052454d26914b2202e7044a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b378d601_225cbf54",
         "filename": "components/slice-analysis-ms/src/test/resources/config_all.json",
         "patchSetId": 2
@@ -178,6 +202,30 @@
       "side": 1,
       "message": "Yes, this config is expected to be used in K8s env, \"message-router\" is the correct host-name. If the config is expected to be used through docker-compose, such as integration/csit does, then the correct hostname is dmaap.",
       "parentUuid": "b378d601_225cbf54",
+      "range": {
+        "startLine": 54,
+        "startChar": 22,
+        "endLine": 54,
+        "endChar": 27
+      },
+      "revId": "b699fbecf9627fe052454d26914b2202e7044a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63743933_d774e3c5",
+        "filename": "components/slice-analysis-ms/src/test/resources/config_all.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-02T20:27:05Z",
+      "side": 1,
+      "message": "okay",
+      "parentUuid": "3b955f9e_7b543a46",
       "range": {
         "startLine": 54,
         "startChar": 22,
