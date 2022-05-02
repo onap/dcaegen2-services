@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ce8af56_1bcdf9d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-02T16:50:47Z",
+      "side": 1,
+      "message": "Consider breaking up this commit-ms as \n1) Commit header (recommended \u003c50 char) \n       A brief description of patch goes here (this shows up under \"gerrit\"  subject_\n       e.g [SliceAnalysis] Fix CCVPN CL structure for Policy \n\n\u003cNewline\u003e\n2) Commit body (longer description as you noted is acceptable here)",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 149
+      },
+      "revId": "b699fbecf9627fe052454d26914b2202e7044a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39a28048_05999ddd",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-02T16:50:47Z",
+      "side": 1,
+      "message": "As you had already created separate jira - DCAEGEN2-3141 for build exception, you can include that jira reference as separate entry here",
+      "range": {
+        "startLine": 12,
+        "startChar": 158,
+        "endLine": 12,
+        "endChar": 206
+      },
+      "revId": "b699fbecf9627fe052454d26914b2202e7044a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c6cde79e_b4ca14d0",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-02T16:50:47Z",
+      "side": 1,
+      "message": "Why these are set to invalid defaults? \nBoth vnfid and vnfname should be enriched from AAI (Policy also depends on these values set correctly for CL flow to work)",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 42
+      },
+      "revId": "b699fbecf9627fe052454d26914b2202e7044a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b378d601_225cbf54",
+        "filename": "components/slice-analysis-ms/src/test/resources/config_all.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-02T16:50:47Z",
+      "side": 1,
+      "message": "Had noted this on other commit earlier as well - should this be \"message-router\"?",
+      "range": {
+        "startLine": 54,
+        "startChar": 22,
+        "endLine": 54,
+        "endChar": 27
+      },
+      "revId": "b699fbecf9627fe052454d26914b2202e7044a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f528ba9_41f1bed7",
+        "filename": "components/slice-analysis-ms/src/test/resources/onsetMessage2.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-02T16:50:47Z",
+      "side": 1,
+      "message": "if the target_type is VNF, this should generic-vnf.prov-status",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 12
+      },
+      "revId": "b699fbecf9627fe052454d26914b2202e7044a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
