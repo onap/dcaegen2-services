@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "22a3d2d0_a2de9651",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-02T22:58:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd97d684_fbddc723",
+      "revId": "200cefb1f85edb29640c3a383e605c40034101c9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb48a419_ed52ebd6",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/IConfigDbService.java",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "200cefb1f85edb29640c3a383e605c40034101c9",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3a38163_7a7074ba",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/configdb/IConfigDbService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-02T22:58:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb48a419_ed52ebd6",
+      "revId": "200cefb1f85edb29640c3a383e605c40034101c9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -67,6 +103,24 @@
       "revId": "200cefb1f85edb29640c3a383e605c40034101c9",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a47d6609_5f83c486",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/configdb/ConfigDbInterfaceServiceTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-02T22:58:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44395a7b_db984cbb",
+      "revId": "200cefb1f85edb29640c3a383e605c40034101c9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
