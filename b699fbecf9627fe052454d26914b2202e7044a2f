@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "39db9bae_26c20792",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-05-03T01:35:23Z",
+      "side": 1,
+      "message": "Right, in regards to line 177,178. The CCVPN closed loop we designed doesn\u0027t need to send any AAI info to Policy. In other words, the receiver side of Policy doesn\u0027t need that info. However, it appears in our test that Policy has a safe guide checking for this Field. There must be a generic-vnf.vnf-id, generic-vnf.vnf-name, generic-vnf.vnf-status, cannot ignore these fields or giving null value. That\u0027s why I put all 0\u0027s. To the best of my knowledge.",
+      "parentUuid": "8978d479_0fdd9542",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 42
+      },
+      "revId": "b699fbecf9627fe052454d26914b2202e7044a2f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b378d601_225cbf54",
         "filename": "components/slice-analysis-ms/src/test/resources/config_all.json",
         "patchSetId": 2
