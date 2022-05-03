@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d9d3c58f_04a140cd",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/AAI.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-05-03T15:40:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3149b38e_f0ae375c",
+      "range": {
+        "startLine": 38,
+        "startChar": 19,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "6051ced8d09e8b091ac46a5e9d3d050dcfe31a18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a9ca915_2d52a70d",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/AAI.java",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5553e7bc_4764f9a7",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/policy/AAI.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-05-03T15:40:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a9ca915_2d52a70d",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 5
+      },
+      "revId": "6051ced8d09e8b091ac46a5e9d3d050dcfe31a18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee0db109_1e57e42e",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "6051ced8d09e8b091ac46a5e9d3d050dcfe31a18",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e71a0bad_494536eb",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-05-03T15:40:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee0db109_1e57e42e",
+      "range": {
+        "startLine": 177,
+        "startChar": 12,
+        "endLine": 177,
+        "endChar": 27
+      },
+      "revId": "6051ced8d09e8b091ac46a5e9d3d050dcfe31a18",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
