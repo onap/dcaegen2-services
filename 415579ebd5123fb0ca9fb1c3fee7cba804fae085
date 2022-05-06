@@ -22,6 +22,30 @@
       "revId": "415579ebd5123fb0ca9fb1c3fee7cba804fae085",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f8ca24a_8ccda717",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-05-06T14:45:31Z",
+      "side": 1,
+      "message": "No issues, was trying to address the parent rebase and resulted in conflict when other change was merged in J branch..anyways shld be good now",
+      "parentUuid": "f92e1fdf_37dba939",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 144
+      },
+      "revId": "415579ebd5123fb0ca9fb1c3fee7cba804fae085",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
