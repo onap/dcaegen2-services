@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f92e1fdf_37dba939",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-05-06T14:35:03Z",
+      "side": 1,
+      "message": "Yes Vijay, When I updated the changelogs, I corrected this url in ChangeLog.md. Now the master should have corrected url. Is this the question?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 144
+      },
+      "revId": "415579ebd5123fb0ca9fb1c3fee7cba804fae085",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
