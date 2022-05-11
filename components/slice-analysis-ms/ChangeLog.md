@@ -4,7 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+<<<<<<< HEAD   (48805b [SLICEANALYSIS] Fix CCVPN CLL Payload to Policy and Suppress)
 ## [1.1.2] - 2022/04/28
+=======
+## [1.1.3] - 2022/05/11
+         - [DCAEGEN2-3156](https://jira.onap.org/browse/DCAEGEN2-3156) - Fix bug in fetching PM data from DES
+
+## [1.1.2] - 2022/05/01
+>>>>>>> CHANGE (383452 [SLICEANALYSIS] Fix bug in fetching PM data from DES)
          - [DCAEGEN2-3145](https://jira.onap.org/browse/DCAEGEN2-3145) - Filter RAN related service instances in AAI
 
          - [DCAEGEN2-3146](https://jira.onap.org/browse/DCAEGEN2-3146) - Fetch CU Cells instead of DU cells data for ML message processing
