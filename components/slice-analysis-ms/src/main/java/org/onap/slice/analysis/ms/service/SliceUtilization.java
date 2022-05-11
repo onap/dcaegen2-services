@@ -181,9 +181,9 @@ public class SliceUtilization {
                     numOfPRBData += measValuesArray.length();
                     for (int j = 0; j < measValuesArray.length(); j++) {
                         dlPRBUsed +=
-                                measValuesArray.getJSONArray(j).getJSONArray(2).getJSONArray(dlThptIndex).getInt(1);
+                                measValuesArray.getJSONArray(j).getJSONArray(1).getJSONArray(dlThptIndex).getInt(1);
                         ulPRBUsed +=
-                                measValuesArray.getJSONArray(j).getJSONArray(2).getJSONArray(ulThptIndex).getInt(1);
+                                measValuesArray.getJSONArray(j).getJSONArray(1).getJSONArray(ulThptIndex).getInt(1);
                     }
                 }
             }

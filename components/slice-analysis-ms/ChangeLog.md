@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.2] - 2022/05/01
+         - [DCAEGEN2-3156](https://jira.onap.org/browse/DCAEGEN2-3156) - Fix bug in fetching PM data from DES
+
+## [1.1.2] - 2022/05/01
          - [DCAEGEN2-3145](https://jira.onap.org/browse/DCAEGEN2-3145) - Filter RAN related service instances in AAI
 
          - [DCAEGEN2-3146](https://jira.onap.org/browse/DCAEGEN2-3146) - Fetch CU Cells instead of DU cells data for ML message processing
