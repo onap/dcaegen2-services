@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ff2e971_c3e5c14a",
+        "filename": "components/slice-analysis-ms/version.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-05-17T19:41:40Z",
+      "side": 1,
+      "message": "please add a copyright line for Wipro",
+      "revId": "ddc7bd9f3c75cf45033f0bd4c07a197e132255a5",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
