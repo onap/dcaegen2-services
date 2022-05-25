@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "797c3008_57b46ee4",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 18
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-05-25T23:49:16Z",
+      "side": 1,
+      "message": "this USER line appears to be redundant",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2dc2bfe3_7eaa6466",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 18
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-05-25T23:49:16Z",
+      "side": 1,
+      "message": "python3\n\nalso, why not write the code to use unbuffered or line buffered output?\n\nwith python 3.7, try\nsys.stdout.reconfigure(line_buffering\u003dTrue)\n\nanother possibility is\nsys.stdout \u003d io.TextIOWrapper(open(sys.stdout.fileno(), \u0027wb\u0027, 0), write_through\u003dTrue)    \n\n(some other suggestions can be found at\nhttps://fedingo.com/how-to-disable-output-buffering-in-python/ \nhttps://stackoverflow.com/questions/107705/disable-output-buffering\nhttps://blog.finxter.com/what-is-python-output-buffering-and-how-to-disable-it/\n\nand many other pages)",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
