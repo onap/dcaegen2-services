@@ -33,6 +33,29 @@
       "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5044886_aff0aec1",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 6219
+      },
+      "writtenOn": "2022-05-31T14:30:12Z",
+      "side": 1,
+      "message": "I think the below 2 lines were missed in the successive patchsets. This is the bug-fix I had mentioned few weeks back(to convert message to json and add header details in post message). Please add the below 2 lines\n\njson_object \u003d json.dumps(Post_Message, indent \u003d 4)\nresponse \u003d requests.post(pathToDmapTopic, json_object, verify\u003dFalse, headers\u003d{\"Content-Type\":\"application/json\"})",
+      "range": {
+        "startLine": 271,
+        "startChar": 12,
+        "endLine": 271,
+        "endChar": 67
+      },
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
