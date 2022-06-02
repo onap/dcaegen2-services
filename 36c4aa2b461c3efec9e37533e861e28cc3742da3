@@ -56,6 +56,23 @@
       "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f38cd180_78e0c105",
+        "filename": "components/ml-prediction-ms/tox.ini",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-06-02T13:49:53Z",
+      "side": 1,
+      "message": "How are you testing this?\nThis empty tox.ini file causes the tests to be ignored by \"tox test\"\nand no coverage data is being generated.",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
