@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "df27b3b8_e8a330fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-06-07T18:48:17Z",
+      "side": 1,
+      "message": "Suggest adding new line separator after line#7 to limit the commit header length",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "797c3008_57b46ee4",
         "filename": "components/ml-prediction-ms/Dockerfile",
         "patchSetId": 18
@@ -36,6 +53,69 @@
     },
     {
       "key": {
+        "uuid": "2db9ae22_7a4b6bc7",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-06-07T18:48:17Z",
+      "side": 1,
+      "message": "Excellent level of details; thanks for the efforts in documentation",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8cf6fd0_c9fabcdb",
+        "filename": "components/ml-prediction-ms/setup.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-06-07T18:48:17Z",
+      "side": 1,
+      "message": "Remove empty spaces and tabs (#29-37)",
+      "range": {
+        "startLine": 29,
+        "startChar": 95,
+        "endLine": 37,
+        "endChar": 1
+      },
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5b4cd548_7df12385",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-06-07T18:48:17Z",
+      "side": 1,
+      "message": "This could be split in separate config class; consider leveraging onap_dcae_cbs_docker_client lib for config retrieval for consistency among DCAE services (this will also handle env secrets/substitution when deployed through k8s, policy file lookup built in)",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 69
+      },
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f5044886_aff0aec1",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 18
@@ -59,6 +139,23 @@
     },
     {
       "key": {
+        "uuid": "9e1a6607_9d9f0731",
+        "filename": "components/ml-prediction-ms/tests/test_predict_unittest.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-06-07T18:48:17Z",
+      "side": 1,
+      "message": "remove all trailing spaces on this file",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f38cd180_78e0c105",
         "filename": "components/ml-prediction-ms/tox.ini",
         "patchSetId": 18
@@ -70,6 +167,23 @@
       "writtenOn": "2022-06-02T13:49:53Z",
       "side": 1,
       "message": "How are you testing this?\nThis empty tox.ini file causes the tests to be ignored by \"tox test\"\nand no coverage data is being generated.",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce3b8c70_554d1cb1",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-06-07T18:48:17Z",
+      "side": 1,
+      "message": "remove all trailing spaces across this file",
       "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
