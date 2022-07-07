@@ -59,6 +59,7 @@ public class VesNotificationCallback implements NotificationCallback {
     @PostConstruct
     public void init(){
         configuration = Configuration.getInstance();
+        ccvpnPmDatastore = new CCVPNPmDatastore();
         vesNotifChangeIdentifier = configuration.getVesNotifChangeIdentifier();
         vesNotfiChangeType = configuration.getVesNotifChangeType();
     }
