@@ -252,8 +252,8 @@ public class BandwidthEvaluator {
         executorPool.scheduleAtFixedRate(new Runnable() {
                 @Override
                 public void run() {
-                    post(new SimpleEvent(SimpleEvent.Type.PERIODIC_CHECK, 1));
-                }
+                post(new SimpleEvent(SimpleEvent.Type.PERIODIC_CHECK, 1));
+            }
             }, 0, (evaluationInterval == 0? DEFAULT_EVAL_INTERVAL : evaluationInterval), TimeUnit.SECONDS);
     }
 
