@@ -22,14 +22,24 @@
 package org.onap.slice.analysis.ms.dmaap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.onap.slice.analysis.ms.models.Configuration;
+import org.onap.slice.analysis.ms.service.ccvpn.CCVPNPmDatastore;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import org.mockito.MockitoAnnotations;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -43,9 +53,18 @@ public class VesNotificationCallbackTest {
     @InjectMocks
     VesNotificationCallback vesNotificationCallback;
 
+    @Before
+    public void init() {
+        Configuration configuration = Configuration.getInstance();
+        String configAllJson = readFromFile("src/test/resources/config_all.json");
+        JsonObject configAll = new Gson().fromJson(configAllJson, JsonObject.class);
+        JsonObject config = configAll.getAsJsonObject("config");
+        configuration.updateConfigurationFromJsonObject(config);
+        vesNotificationCallback.init();
+    }
+
     @Test
     public void initTest() {
-        vesNotificationCallback.init();
         Mockito.verify(vesNotificationCallback, Mockito.atLeastOnce()).init();
     }
 
@@ -59,5 +78,22 @@ public class VesNotificationCallbackTest {
         }
         vesNotificationCallback.activateCallBack(input);
         Mockito.verify(vesNotificationCallback, Mockito.atLeastOnce()).activateCallBack(Mockito.anyString());
+
     }
+
+    private static String readFromFile(String file) {
+        String content = "";
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            content = bufferedReader.readLine();
+            String temp;
+            while ((temp = bufferedReader.readLine()) != null) {
+                content = content.concat(temp);
+            }
+            content = content.trim();
+        } catch (Exception e) {
+            content = null;
+        }
+        return content;
+    }
+
 }
