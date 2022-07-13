@@ -29,7 +29,7 @@
 
     <groupId>org.onap.dcaegen2.services.components</groupId>
     <artifactId>kpi-ms</artifactId>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.5-SNAPSHOT</version>
     <name>dcaegen2-services-kpi-computation-ms</name>
     <description>Kpi ms</description>
     <packaging>jar</packaging>
@@ -297,7 +297,7 @@
             <artifactId>openpojo</artifactId>
             <version>0.8.10</version>
         </dependency>
-	<!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
+        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-core -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
