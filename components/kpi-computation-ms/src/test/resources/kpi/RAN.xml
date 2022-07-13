@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<measCollecFile xmlns="http://www.3gpp.org/ftp/specs/archive/32_series/32.435#measCollec">
+	<fileHeader dnPrefix="Prefix" fileFormatVersion="32.435 V10.0" vendorName="Acme Ltd">
+		<fileSender localDn="cucpserver2"/>
+		<measCollec beginTime="2021-01-15T05:46:30.387"/>
+	</fileHeader>
+	<measData>
+		<managedElement localDn="cucpserver2" swVersion="r0.1"/>
+		<measInfo measInfoId="measInfoIsVal">
+			<job jobId="7836"/>
+			<granPeriod duration="PT900S" endTime="2021-01-15T05:46:30.387"/>
+			<repPeriod duration="PT900S"/>
+			<measType p="1">SM.PduSessionCreationSucc.0011-0010</measType>
+			<measType p="2">SM.PduSessionCreationReq.0011-0010</measType>
+			<measType p="3">SM.PduSessionCreationFail.0</measType>
+			<measValue measObjLdn="10896">
+				<r p="1">5813.0</r>
+				<r p="2">3679.0</r>
+				<r p="3">1333.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="10897">
+				<r p="1">5637.0</r>
+				<r p="2">3406.0</r>
+				<r p="3">1333.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="11561">
+				<r p="1">5130.0</r>
+				<r p="2">3083.0</r>
+				<r p="3">1333.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="11562">
+				<r p="1">6020.0</r>
+				<r p="2">3956.0</r>
+				<r p="3">1333.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="11568">
+				<r p="1">5527.0</r>
+				<r p="2">4117.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="11569">
+				<r p="1">5086.0</r>
+				<r p="2">3206.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="13905">
+				<r p="1">1655.0</r>
+				<r p="2">1183.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="13910">
+				<r p="1">2587.0</r>
+				<r p="2">1900.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="14427">
+				<r p="1">1668.0</r>
+				<r p="2">1217.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="14655">
+				<r p="1">4904.0</r>
+				<r p="2">3155.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="14656">
+				<r p="1">5357.0</r>
+				<r p="2">3577.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="15360">
+				<r p="1">2177.0</r>
+				<r p="2">1438.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="15361">
+				<r p="1">2480.0</r>
+				<r p="2">1615.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="15548">
+				<r p="1">1730.0</r>
+				<r p="2">1174.0</r>
+				<suspect>false</suspect>
+			</measValue>
+			<measValue measObjLdn="15549">
+				<r p="1">2227.0</r>
+				<r p="2">1341.0</r>
+				<suspect>false</suspect>
+			</measValue>
+		</measInfo>
+	</measData>
+	<fileFooter>
+		<measCollec endTime="2021-01-15T05:46:30.387"/>
+	</fileFooter>
+</measCollecFile>

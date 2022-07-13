@@ -2,6 +2,7 @@
  * ============LICENSE_START=======================================================
  *  Copyright (C) 2021 China Mobile.
  *  Copyright (C) 2021 Deutsche Telekom AG. All rights reserved.
+ *  Copyright (C) 2022 Wipro Limited. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -169,18 +170,20 @@ public class KpiComputation {
                 if (measValue != null) {
                     key = new StringBuilder().append(operand).toString();
                     int index = measTypesList.indexOf(measValue);
-                    MeasValues measValues = m.getMeasValuesList().stream().findFirst().orElse(null);
-                    List<MeasResult> measResults = measValues.getMeasResults();
-                    String measObjInstId = measValues.getMeasObjInstId();
-                    MeasResult measResult = measResults.stream()
-                            .filter(v -> v.getPvalue() == (index + 1))
-                            .findFirst()
-                            .orElse(null);
-                    if (measResult != null) {
-                        KpiOperand newKpiOperand = new KpiOperand(measObjInstId, new BigDecimal(measResult.getSvalue()));
-                        kpiOperands.add(newKpiOperand);
-                    } else {
-                        logger.info("measResults mis-matched - incorrect ves msg construction");
+                    List<MeasValues> measValuesList = m.getMeasValuesList();
+                    for ( MeasValues measValues : measValuesList) {
+                         List<MeasResult> measResults = measValues.getMeasResults();
+                         String measObjInstId = measValues.getMeasObjInstId();
+                         MeasResult measResult = measResults.stream()
+                                 .filter(v -> v.getPvalue() == (index + 1))
+                                 .findFirst()
+                                 .orElse(null);
+                         if (measResult != null) {
+                             KpiOperand newKpiOperand = new KpiOperand(measObjInstId, new BigDecimal(measResult.getSvalue()));
+                             kpiOperands.add(newKpiOperand);
+                         } else {
+                             logger.info("measResults mis-matched - incorrect ves msg construction");
+                         }
                     }
                 }
             }
