@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1bf2a48f_66c3a322",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-07-15T05:32:58Z",
+      "side": 1,
+      "message": "I\u0027ve updated the commit message now. The PM data XML file used for the Slicing usecase has multiple measValues within a single event unlike the sample PM file uploaded here - https://wiki.onap.org/display/DW/DCAE+R8+KPI-Computation+ms. The code also had followed the same schema type, so had to update it to support both kinds of PM file.",
+      "parentUuid": "75600c42_ce546c2b",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "6e517389fe86cd23bac974c0dc8b50f00e9a346c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c66fc04d_f1a40df7",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "6e517389fe86cd23bac974c0dc8b50f00e9a346c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bd1f560_3d7cf7e6",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-07-15T05:32:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c66fc04d_f1a40df7",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 3
+      },
+      "revId": "6e517389fe86cd23bac974c0dc8b50f00e9a346c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "aa7ea757_65368588",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-07-15T05:32:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2856c16a_c2a15f9d",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 2
+      },
+      "revId": "6e517389fe86cd23bac974c0dc8b50f00e9a346c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f9672b8_5b0c5faf",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "19f9cfa2_f519e2f1",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-07-15T05:32:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f9672b8_5b0c5faf",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 98
+      },
+      "revId": "6e517389fe86cd23bac974c0dc8b50f00e9a346c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec805e9a_baa46917",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumRatioKpiComputation.java",
         "patchSetId": 1
@@ -114,6 +210,30 @@
       "revId": "6e517389fe86cd23bac974c0dc8b50f00e9a346c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87e9fecc_7210eb36",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumRatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-07-15T05:32:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec805e9a_baa46917",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 2
+      },
+      "revId": "6e517389fe86cd23bac974c0dc8b50f00e9a346c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
