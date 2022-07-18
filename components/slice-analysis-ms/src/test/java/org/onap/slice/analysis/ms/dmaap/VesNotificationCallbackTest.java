@@ -22,14 +22,17 @@
 package org.onap.slice.analysis.ms.dmaap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -43,21 +46,26 @@ public class VesNotificationCallbackTest {
     @InjectMocks
     VesNotificationCallback vesNotificationCallback;
 
+    @Before
+    public void init() throws IOException {
+        Configuration configuration = Configuration.getInstance();
+        String configAllJson = new String(Files.readAllBytes(Paths.get("src/test/resources/config_all.json")));
+        JsonObject configAll = new Gson().fromJson(configAllJson, JsonObject.class);
+        JsonObject config = configAll.getAsJsonObject("config");
+        configuration.updateConfigurationFromJsonObject(config);
+        vesNotificationCallback.init();
+    }
+
     @Test
     public void initTest() {
-        vesNotificationCallback.init();
         Mockito.verify(vesNotificationCallback, Mockito.atLeastOnce()).init();
     }
 
     @Test
-    public void activateCallBackTest() {
-        String input = null;
-        try {
-            input = new String(Files.readAllBytes(Paths.get("src/test/resources/vesCCVPNNotiModel.json")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void activateCallBackTest() throws Exception{
+        String input = new String(Files.readAllBytes(Paths.get("src/test/resources/vesCCVPNNotiModel.json")));
         vesNotificationCallback.activateCallBack(input);
         Mockito.verify(vesNotificationCallback, Mockito.atLeastOnce()).activateCallBack(Mockito.anyString());
     }
+
 }

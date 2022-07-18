@@ -59,6 +59,7 @@ public class VesNotificationCallback implements NotificationCallback {
     @PostConstruct
     public void init(){
         configuration = Configuration.getInstance();
+        ccvpnPmDatastore = new CCVPNPmDatastore();
         vesNotifChangeIdentifier = configuration.getVesNotifChangeIdentifier();
         vesNotfiChangeType = configuration.getVesNotifChangeType();
     }
@@ -73,7 +74,7 @@ public class VesNotificationCallback implements NotificationCallback {
     }
 
     /**
-     * Parse Performance dmaap notification and save to DB 
+     * Parse Performance dmaap notification and save to DB
      * @param msg incoming message
      */
     private void handleNotification(String msg) {
@@ -94,7 +95,7 @@ public class VesNotificationCallback implements NotificationCallback {
             notifChangeIdentifier = output.getChangeIdentifier();
             notifChangeType = output.getChangeType();
             if (notifChangeType.equals(vesNotfiChangeType)
-            && notifChangeIdentifier.equals(vesNotifChangeIdentifier)) {
+                && notifChangeIdentifier.equals(vesNotifChangeIdentifier)) {
                 cllId = output.getArrayOfNamedHashMap().get(0).getHashMap().getCllId();
                 uniId = output.getArrayOfNamedHashMap().get(0).getHashMap().getUniId();
                 bw = output.getArrayOfNamedHashMap().get(0).getHashMap().getBandwidthValue();
