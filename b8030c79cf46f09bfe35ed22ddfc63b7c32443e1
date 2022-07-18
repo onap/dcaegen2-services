@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "48b4a402_646de041",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/VesNotificationCallbackTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-07-18T12:04:59Z",
+      "side": 1,
+      "message": "Thanks for reviewing.",
+      "parentUuid": "540b38e3_95c4fcc9",
+      "revId": "b8030c79cf46f09bfe35ed22ddfc63b7c32443e1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ca982cc_6c0d21f0",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/VesNotificationCallbackTest.java",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "6f20c4ca_b5294706",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/VesNotificationCallbackTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-07-18T12:04:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7ca982cc_6c0d21f0",
+      "revId": "b8030c79cf46f09bfe35ed22ddfc63b7c32443e1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9b9d0499_54ec424d",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/VesNotificationCallbackTest.java",
         "patchSetId": 1
@@ -80,6 +116,24 @@
         "id": 105
       },
       "writtenOn": "2022-07-18T03:53:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b9d0499_54ec424d",
+      "revId": "b8030c79cf46f09bfe35ed22ddfc63b7c32443e1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c6b6ad1c_6c7516ff",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/VesNotificationCallbackTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-07-18T12:04:59Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "9b9d0499_54ec424d",
