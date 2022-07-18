@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "22ded684_cdcf3b21",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-18T03:59:19Z",
+      "side": 1,
+      "message": "while this file is open for editing, please fix the tabs in it",
+      "revId": "25104f23c0908e675b4dc84dbeab84096af04723",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51c8baf6_75b0bfd1",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-18T03:59:19Z",
+      "side": 1,
+      "message": "add a copyright 2022 for Wipro",
+      "revId": "25104f23c0908e675b4dc84dbeab84096af04723",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d614946f_398b5061",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-18T03:59:19Z",
+      "side": 1,
+      "message": "add a copyright 2022 for Wipro",
+      "revId": "25104f23c0908e675b4dc84dbeab84096af04723",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "46b26954_da55c934",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/SumRatioKpiComputation.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-18T03:59:19Z",
+      "side": 1,
+      "message": "add a copyright 2022 for Wipro",
+      "revId": "25104f23c0908e675b4dc84dbeab84096af04723",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a055f973_6cba822d",
+        "filename": "components/kpi-computation-ms/version.properties",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-18T03:59:19Z",
+      "side": 1,
+      "message": "add a copyright 2022 for Wipro",
+      "revId": "25104f23c0908e675b4dc84dbeab84096af04723",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
