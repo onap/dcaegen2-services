@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "efeb9bf0_34d548eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-18T03:53:13Z",
+      "side": 1,
+      "message": "Since handleNotification fix is noted in previous line, either remove the previous line, OR change this to just\n\nImprove test code coverage.",
+      "revId": "b00dd7083db946efa95c3a55c4697be949791421",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
