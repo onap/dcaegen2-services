@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "c4de49f5_3d37ea78",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-07-22T14:11:19Z",
+      "side": 1,
+      "message": "Okay, thanks for the clarification. \n\nBtw, I do not see any corresponding test updates for this change? Will be good test instrumenation includes sample PM file you had been testing with.",
+      "parentUuid": "1bf2a48f_66c3a322",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "6e517389fe86cd23bac974c0dc8b50f00e9a346c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c66fc04d_f1a40df7",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
         "patchSetId": 1
