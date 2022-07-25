@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1e86a17_fa808693",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/computation/KpiComputationTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-07-25T13:45:22Z",
+      "side": 1,
+      "message": "remove tabs",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "5e2f3122eb9ce5b4fff62cc567c90ca2b90f6bbc",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
