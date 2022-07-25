@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "75ce0d25_2151174d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-07-25T08:16:51Z",
+      "side": 1,
+      "message": "Since both the kinds of schemas will work, it wasn\u0027t throwing an error for the current testcase, so I had missed to add a new one for testing the other type of schema. I\u0027ve added a new testcase for that change also now and have included the sample PM file for your reference.",
+      "parentUuid": "c4de49f5_3d37ea78",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "6e517389fe86cd23bac974c0dc8b50f00e9a346c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c66fc04d_f1a40df7",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
         "patchSetId": 1
