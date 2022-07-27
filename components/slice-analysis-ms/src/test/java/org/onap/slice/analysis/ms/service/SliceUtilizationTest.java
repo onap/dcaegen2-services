@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Wipro Limited.
+ *   Modifications Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -22,7 +23,6 @@
 package org.onap.slice.analysis.ms.service;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,13 +49,9 @@ import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.models.SliceConfigRequest;
 import org.onap.slice.analysis.ms.models.SliceConfigResponse;
 import org.onap.slice.analysis.ms.restclients.DesRestClient;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,7 +59,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringRunner.class)
-@PrepareForTest({SliceUtilization.class, Configuration.class})
 @PowerMockIgnore({"com.sun.org.apache.xerces.*", "javax.xml.*", "org.xml.*", "javax.management.*"})
 @SpringBootTest(classes = SliceUtilizationTest.class)
 public class SliceUtilizationTest {
@@ -93,9 +88,6 @@ public class SliceUtilizationTest {
     public void getPmDataTest() throws Exception {
         configuration.setDesUrl("http://des:1681/datalake/v1/exposure/pm_data");
         configuration.setPmDataDurationInWeeks(4);
-        PowerMockito.mockStatic(SliceUtilization.class);
-        PowerMockito.mockStatic(Configuration.class);
-        PowerMockito.when(Configuration.getInstance()).thenReturn(configuration);
         String pmData = null;
         try {
             pmData = new String(Files.readAllBytes(Paths.get("src/test/resources/pm_data.json")));
@@ -113,7 +105,6 @@ public class SliceUtilizationTest {
     @Test
     public void calculateSliceUtilizationTest() throws Exception {
 
-        PowerMockito.mockStatic(SliceUtilization.class);
         List<JSONObject> pmDataList = new ArrayList<>();
         String pmData;
         try {
@@ -134,7 +125,6 @@ public class SliceUtilizationTest {
     @Test
     public void getSliceUtilizationDataTest() throws Exception {
 
-        PowerMockito.mockStatic(SliceUtilization.class);
         SliceConfigRequest sliceConfigRequest = new SliceConfigRequest();
         List<String> sliceIdentifiersList = new ArrayList<>();
         sliceIdentifiersList.add("14559ead-f4fe-4c1c-a94c-8015fad3ea35");
@@ -150,9 +140,6 @@ public class SliceUtilizationTest {
         configuration.setDesUrl("http://des:1681/datalake/v1/exposure/pm_data");
         configuration.setPmDataDurationInWeeks(4);
 
-        PowerMockito.mockStatic(SliceUtilization.class);
-        PowerMockito.mockStatic(Configuration.class);
-        PowerMockito.when(Configuration.getInstance()).thenReturn(configuration);
 
         try {
 

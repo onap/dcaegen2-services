@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020-2021 Wipro Limited.
+ *   Modifications Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -21,7 +22,11 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
-import com.att.nsa.cambria.client.CambriaBatchingPublisher;
+import com.google.gson.JsonPrimitive;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
+import reactor.core.publisher.Flux;
 
 import java.io.IOException;
 
@@ -30,21 +35,25 @@ import java.io.IOException;
  */
 public class NotificationProducer {
 
-    private CambriaBatchingPublisher cambriaBatchingPublisher;
+    private MessageRouterPublisher publisher;
+    private MessageRouterPublishRequest request;
      
     /**
      * Parameterized constructor.
      */
-    public NotificationProducer(CambriaBatchingPublisher cambriaBatchingPublisher) {
+    public NotificationProducer(MessageRouterPublisher publisher, MessageRouterPublishRequest request) {
         super();
-        this.cambriaBatchingPublisher = cambriaBatchingPublisher;
+        this.publisher = publisher;
+        this.request = request;
     }
 
     /**
      * sends notification to dmaap.
      */
-    public int sendNotification(String msg) throws IOException {
-        return cambriaBatchingPublisher.send("", msg);
+    public void sendNotification(String msg) throws IOException {
+        Flux<JsonPrimitive> singleMessage = Flux.just(msg).map(JsonPrimitive::new);
+        Flux<MessageRouterPublishResponse> result = this.publisher.put(request, singleMessage);
+        result.then().block();
     }
 
 }

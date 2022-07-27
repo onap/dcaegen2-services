@@ -2,8 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
- *   Modifications Copyright (C) 2022 CTC, Inc.
+ *   Copyright (C) 2020-2021 CTC.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -20,53 +19,46 @@
  *
  *******************************************************************************/
 
+package org.onap.slice.analysis.ms.utils;
 
-package org.onap.slice.analysis.ms.dmaap;
-
-import static org.mockito.Mockito.when;
-
-import com.google.gson.JsonPrimitive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.ImmutableMessageRouterPublishResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeRequest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import reactor.core.publisher.Flux;
+
+import static org.junit.Assert.assertNotNull;
+import static org.onap.slice.analysis.ms.utils.DcaeDmaapUtil.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = NotificationProducerTest.class)
-public class NotificationProducerTest {
+@SpringBootTest(classes = DcaeDmaapUtilTest.class)
+public class DcaeDmaapUtilTest {
 
-	@Mock
-	MessageRouterPublisher publisher;
+    @Test
+    public void buildSubscriberTest(){
+        MessageRouterSubscriber subscriber = buildSubscriber();
+        assertNotNull(subscriber);
+    }
 
-	@Mock
-	MessageRouterPublishRequest request;
+    @Test
+    public void buildSubscriberRequestTest(){
+        MessageRouterSubscribeRequest request = buildSubscriberRequest("name", "url");
+        assertNotNull(request);
+    }
 
-	@InjectMocks
-	NotificationProducer notificationProducer;
+    @Test
+    public void buildPublisherTest(){
+        MessageRouterPublisher publisher = buildPublisher();
+        assertNotNull(publisher);
+    }
 
-	@Test
-	public void notificationProducerTest() {
+    @Test
+    public void buildPublisherRequestTest(){
+        MessageRouterPublishRequest request = buildPublisherRequest("name", "url");
+        assertNotNull(request);
+    }
 
-		try {
-			io.vavr.collection.List<String> expectedItems = io.vavr.collection.List.of("I", "like", "pizza");
-			MessageRouterPublishResponse expectedResponse = ImmutableMessageRouterPublishResponse
-					.builder().items(expectedItems.map(JsonPrimitive::new))
-					.build();
-			Flux<MessageRouterPublishResponse> responses = Flux.just(expectedResponse);
-			Flux<JsonPrimitive> singleMessage = Flux.just("msg").map(JsonPrimitive::new);
-			when(publisher.put(request, singleMessage)).thenReturn(responses);
-
-			notificationProducer.sendNotification("msg");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
 }

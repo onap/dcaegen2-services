@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *  Copyright (C) 2022 Huawei Canada Limited.
+ *  Modifications Copyright (C) 2022 CTC, Inc.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -21,11 +22,16 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -41,6 +47,40 @@ public class AaiEventNotificationCallbackTest {
     @Spy
     @InjectMocks
     AaiEventNotificationCallback aaiEventNotificationCallback;
+    @Before
+    public void initConfiguration() {
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("sliceanalysisms.aaiNotif.targetAction", "UPDATE");
+        jsonObject.addProperty("sliceanalysisms.aaiNotif.targetEntity", "service-instance");
+        jsonObject.addProperty("sliceanalysisms.aaiNotif.targetSource", "UUI");
+        jsonObject.addProperty("postgres.port", "1");
+        jsonObject.addProperty("sliceanalysisms.pollingInterval", "1");
+        jsonObject.addProperty("postgres.password", "1");
+        jsonObject.addProperty("postgres.username", "1");
+        jsonObject.addProperty("postgres.host", "1");
+        jsonObject.addProperty("sliceanalysisms.cg", "1");
+        jsonObject.addProperty("sliceanalysisms.cid", "1");
+        jsonObject.addProperty("sliceanalysisms.configDb.service", "1");
+        jsonObject.addProperty("sliceanalysisms.configDbEnabled", "1");
+        jsonObject.addProperty("sliceanalysisms.pollingTimeout", "1");
+        jsonObject.addProperty("sliceanalysisms.samples", "1");
+        jsonObject.addProperty("sliceanalysisms.minPercentageChange", "1");
+        jsonObject.addProperty("sliceanalysisms.initialDelaySeconds", "1");
+        jsonObject.addProperty("sliceanalysisms.rannfnssiDetailsTemplateId", "1");
+        jsonObject.addProperty("sliceanalysisms.desUrl", "1");
+        jsonObject.addProperty("sliceanalysisms.pmDataDurationInWeeks", "1");
+        jsonObject.addProperty("sliceanalysisms.pollingInterval", "1");
+        jsonObject.addProperty("sliceanalysisms.vesNotifChangeIdentifier", "1");
+        jsonObject.addProperty("sliceanalysisms.vesNotifChangeType", "1");
+        jsonObject.addProperty("sliceanalysisms.vesNotifPollingInterval", "1");
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalInterval", "1");
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalThreshold", "1");
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalPrecision", "1");
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalPeriodicCheckOn", "1");
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalOnDemandCheckOn", "1");
+        Configuration configuration = Configuration.getInstance();
+        configuration.updateConfigurationFromJsonObject(jsonObject);
+    }
 
     @Test
     public void initTest() {
@@ -50,6 +90,7 @@ public class AaiEventNotificationCallbackTest {
 
     @Test
     public void activateCallBackTest() {
+        aaiEventNotificationCallback.init();
         String input = null;
         try {
             input = new String(Files.readAllBytes(Paths.get("src/test/resources/aaiEventDmaapMsg.json")));
@@ -57,6 +98,22 @@ public class AaiEventNotificationCallbackTest {
             e.printStackTrace();
         }
         aaiEventNotificationCallback.activateCallBack(input);
+        Mockito.verify(aaiEventNotificationCallback, Mockito.atLeastOnce()).activateCallBack(Mockito.anyString());
+    }
+    @Test
+    public void activateCallBackArrayTest() {
+        aaiEventNotificationCallback.init();
+        String input = null;
+        JsonArray jsonArray = new JsonArray();
+        try {
+            input = new String(Files.readAllBytes(Paths.get("src/test/resources/aaiEventDmaapMsg.json")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JsonPrimitive jsonPrimitive = new JsonPrimitive(input);
+        jsonArray.add(jsonPrimitive);
+        aaiEventNotificationCallback.activateCallBack(jsonArray.toString());
         Mockito.verify(aaiEventNotificationCallback, Mockito.atLeastOnce()).activateCallBack(Mockito.anyString());
     }
 }

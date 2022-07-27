@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
+ *   Modifications Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -22,10 +23,15 @@
 package org.onap.slice.analysis.ms.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +40,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.onap.slice.analysis.ms.aai.AaiInterface;
+import org.onap.slice.analysis.ms.configdb.IConfigDbService;
+import org.onap.slice.analysis.ms.cps.CpsInterface;
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.models.MeasurementObject;
+import org.onap.slice.analysis.ms.models.SubCounter;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -43,13 +57,31 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
+@PrepareForTest(SnssaiSamplesProcessor.class)
 @SpringBootTest(classes = SnssaiSamplesProcessorTest.class)
 public class SnssaiSamplesProcessorTest {
 	ObjectMapper obj = new ObjectMapper();
 
 	@InjectMocks
 	SnssaiSamplesProcessor snssaiSamplesProcessor;
-	
+	@Mock
+	private PolicyService policyService;
+
+	@Mock
+	private PmDataQueue pmDataQueue;
+
+	@Mock
+	private AverageCalculator averageCalculator;
+
+	@Mock
+	private IConfigDbService configDbService;
+
+	@Mock
+	private AaiInterface aaiInterface;
+
+	@Mock
+	private CpsInterface cpsInterface;
+
 	@Before
 	public void setup() {
 		Map<String, Map<String, Integer>> ricToThroughputMapping = new HashMap<>();
@@ -85,7 +117,88 @@ public class SnssaiSamplesProcessorTest {
 		ReflectionTestUtils.setField(snssaiSamplesProcessor, "ricToCellMapping", ricToCellMapping);
 		ReflectionTestUtils.setField(snssaiSamplesProcessor, "prbThroughputMapping", prbThroughputMapping);
 	}
-	
+
+
+	@Test
+	public void processSamplesOfSnnsaiTest() {
+		List<List<MeasurementObject>> samples = new ArrayList<>();
+		when(pmDataQueue.getSamplesFromQueue(any(SubCounter.class),anyInt())).thenReturn(samples);
+		List<MeasurementObject> sample = new ArrayList<>();
+		when(averageCalculator.findAverageOfSamples(samples)).thenReturn(sample);
+
+		Map<String, List<String>> ricToCellMapping = new HashMap<>();
+		when(configDbService.fetchRICsOfSnssai(any())).thenReturn(ricToCellMapping);
+		Map<String, Map<String, Object>> ricConfiguration = new HashMap<>();
+		when(configDbService.fetchCurrentConfigurationOfRIC(any())).thenReturn(ricConfiguration);
+		Map<String, Integer> sliceConfiguration = new HashMap<>();
+		when(configDbService.fetchCurrentConfigurationOfSlice(any())).thenReturn(sliceConfiguration);
+		Map<String, String> serviceDetails = new HashMap<>();
+		when(configDbService.fetchServiceDetails(any())).thenReturn(serviceDetails);
+
+		List<String> networkFunctions = new ArrayList<>();
+		networkFunctions.add("nf1");
+		SnssaiSamplesProcessor spy = PowerMockito.spy(snssaiSamplesProcessor);
+		doNothing().when(spy).sumOfPrbsAcrossCells(anyString());
+		doReturn(1).when(spy).computeSum(any());
+		doNothing().when(spy).computeThroughput(any(),anyInt(),any());
+		doNothing().when(spy).calculatePercentageChange(any(),any());
+		doNothing().when(spy).updateConfiguration();
+
+		Map<String, List<Map<String, Integer>>> map = new HashMap<>();
+		doReturn(map).when(spy).getChangedRIConfigFormat(any());
+		doNothing().when(policyService).sendOnsetMessageToPolicy(any(),any(), any());
+
+		spy.init();
+		boolean b = spy.processSamplesOfSnnsai("", networkFunctions);
+		assertTrue(b);
+
+
+	}
+	@Test
+	public void processSamplesOfSnnsaiFalseTest() {
+		Configuration.getInstance().setConfigDbEnabled(false);
+		List<List<MeasurementObject>> samples = new ArrayList<>();
+		when(pmDataQueue.getSamplesFromQueue(any(SubCounter.class),anyInt())).thenReturn(samples);
+		List<MeasurementObject> sample = new ArrayList<>();
+		when(averageCalculator.findAverageOfSamples(samples)).thenReturn(sample);
+
+		Map<String, List<String>> ricToCellMapping = new HashMap<>();
+		when(cpsInterface.fetchRICsOfSnssai(any())).thenReturn(ricToCellMapping);
+		Map<String, Map<String, Object>> ricConfiguration = new HashMap<>();
+		when(cpsInterface.fetchCurrentConfigurationOfRIC(any())).thenReturn(ricConfiguration);
+		Map<String, Integer> sliceConfiguration = new HashMap<>();
+		when(aaiInterface.fetchCurrentConfigurationOfSlice(any())).thenReturn(sliceConfiguration);
+		Map<String, String> serviceDetails = new HashMap<>();
+		when(aaiInterface.fetchServiceDetails(any())).thenReturn(serviceDetails);
+
+
+		List<String> networkFunctions = new ArrayList<>();
+		networkFunctions.add("nf1");
+		SnssaiSamplesProcessor spy = PowerMockito.spy(snssaiSamplesProcessor);
+		doNothing().when(spy).sumOfPrbsAcrossCells(anyString());
+		doReturn(1).when(spy).computeSum(any());
+		doNothing().when(spy).computeThroughput(any(),anyInt(),any());
+		doNothing().when(spy).calculatePercentageChange(any(),any());
+		doNothing().when(spy).updateConfiguration();
+
+		Map<String, List<Map<String, Integer>>> map = new HashMap<>();
+		doReturn(map).when(spy).getChangedRIConfigFormat(any());
+		doNothing().when(policyService).sendOnsetMessageToPolicy(any(),any(), any());
+
+		spy.init();
+		boolean b = spy.processSamplesOfSnnsai("", networkFunctions);
+		assertTrue(b);
+	}
+	@Test
+	public void getChangedRIConfigFormatTest() {
+		Map<String, Map<String, Integer>> ricToThroughputMapping = new HashMap<>();
+		Map<String, Integer> newConfigMap = new HashMap<>();
+		ricToThroughputMapping.put("1", newConfigMap);
+		Map<String, List<Map<String, Integer>>> riConfigFormat = snssaiSamplesProcessor.getChangedRIConfigFormat(ricToThroughputMapping);
+		assertEquals(1, riConfigFormat.size());
+
+	}
+
 	@Test
 	public void computeSumTest() {
 		assertEquals(Integer.valueOf(100), snssaiSamplesProcessor.computeSum("PrbUsedDl"));

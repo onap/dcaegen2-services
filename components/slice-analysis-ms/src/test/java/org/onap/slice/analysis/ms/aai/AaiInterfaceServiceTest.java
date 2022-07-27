@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2021-2022 Wipro Limited.
+ *   Modifications Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -30,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -37,9 +39,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.restclients.AaiRestClient;
-import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,7 +50,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringRunner.class)
 @PowerMockIgnore({"com.sun.org.apache.xerces.*", "javax.xml.*", "org.xml.*", "javax.management.*"})
-@PrepareForTest({AaiService.class, Configuration.class})
 @SpringBootTest(classes = AaiInterfaceServiceTest.class)
 public class AaiInterfaceServiceTest {
 
@@ -65,9 +64,6 @@ public class AaiInterfaceServiceTest {
     @Test
     public void fetchCurrentConfigurationOfSlice() {
         configuration.setAaiUrl("http://aai:30233/aai/v21/business/customers/customer/");
-        PowerMockito.mockStatic(AaiService.class);
-        PowerMockito.mockStatic(Configuration.class);
-        PowerMockito.when(Configuration.getInstance()).thenReturn(configuration);
         Map<String, Integer> responsemap = new HashMap<>();
         responsemap.put("dLThptPerSlice", 60);
         responsemap.put("uLThptPerSlice", 54);
@@ -114,9 +110,6 @@ public class AaiInterfaceServiceTest {
         Map<String, String> expectedResponse = new HashMap<String, String>();
         expectedResponse.put("globalSubscriberId", "5GCustomer");
         expectedResponse.put("subscriptionServiceType", "5G");
-        PowerMockito.mockStatic(AaiService.class);
-        PowerMockito.mockStatic(Configuration.class);
-        PowerMockito.when(Configuration.getInstance()).thenReturn(configuration);
 
         try {
 
@@ -142,9 +135,6 @@ public class AaiInterfaceServiceTest {
         expectedResponse.add("b2ae730f-1d5f-495a-8112-dac017a7348c");
         expectedResponse.add("cad8fa36-2d55-4c12-a92e-1bd551517a0c");
         expectedResponse.add("8d0d698e-77f4-4453-8c09-ae2cbe6a9a04");
-        PowerMockito.mockStatic(AaiService.class);
-        PowerMockito.mockStatic(Configuration.class);
-        PowerMockito.when(Configuration.getInstance()).thenReturn(configuration);
 
         try {
 
@@ -172,9 +162,6 @@ public class AaiInterfaceServiceTest {
         expectedResponse.add("01-06E442");
         expectedResponse.add("01-B989BD");
 
-        PowerMockito.mockStatic(AaiService.class);
-        PowerMockito.mockStatic(Configuration.class);
-        PowerMockito.when(Configuration.getInstance()).thenReturn(configuration);
         String serviceInstanceUrlAn = "b2ae730f-1d5f-495a-8112-dac017a7348c";
         String serviceInstanceUrlCn = "cad8fa36-2d55-4c12-a92e-1bd551517a0c";
         String serviceInstanceUrlTn = "8d0d698e-77f4-4453-8c09-ae2cbe6a9a04";
@@ -210,9 +197,6 @@ public class AaiInterfaceServiceTest {
         List<String> expectedResponse = new ArrayList<>();
         expectedResponse.add("01-06E442");
         expectedResponse.add("01-B989BD");
-        PowerMockito.mockStatic(AaiService.class);
-        PowerMockito.mockStatic(Configuration.class);
-        PowerMockito.when(Configuration.getInstance()).thenReturn(configuration);
 
         try {
 
@@ -258,9 +242,6 @@ public class AaiInterfaceServiceTest {
         configuration.setAaiUrl("http://aai:30233/aai/v21");
         List<String> expectedResponse = new ArrayList<>();
         expectedResponse.add("01-06E442");
-        PowerMockito.mockStatic(AaiService.class);
-        PowerMockito.mockStatic(Configuration.class);
-        PowerMockito.when(Configuration.getInstance()).thenReturn(configuration);
         try {
 
             String nssi = new String(Files.readAllBytes(Paths.get("src/test/resources/nssi.json")));
@@ -280,5 +261,19 @@ public class AaiInterfaceServiceTest {
         }
         List<String> actualResponse = aaiService.getSnssaiList("50f418a6-804f-4453-bf70-21f0efaf6fcd");
         assertEquals(expectedResponse, actualResponse);
+    }
+
+    @Test
+    public void fetchMaxBandwidthOfServiceTest() {
+        String data = "{" +
+                "    \"network-policy\":[" +
+                "        {" +
+                "            \"max-bandwidth\":99" +
+                "        }" +
+                "    ]" +
+                "}";
+        Mockito.when(restClient.sendGetRequest(Mockito.anyString(), Mockito.any())).thenReturn(new ResponseEntity<>(data, HttpStatus.OK));
+        Map<String, Integer> map = aaiService.fetchMaxBandwidthOfService("");
+        assertEquals(99, MapUtils.getIntValue(map, "maxBandwidth"));
     }
 }

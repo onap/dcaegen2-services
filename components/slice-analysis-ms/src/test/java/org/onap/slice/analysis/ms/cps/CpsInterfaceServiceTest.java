@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2021-2022 Wipro Limited.
+ *   Modifications Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -35,10 +36,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.restclients.CpsRestClient;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -49,7 +48,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringRunner.class)
 @PowerMockIgnore({"com.sun.org.apache.xerces.*", "javax.xml.*", "org.xml.*", "javax.management.*"})
-@PrepareForTest({CpsService.class, Configuration.class})
 @SpringBootTest(classes = CpsInterfaceServiceTest.class)
 public class CpsInterfaceServiceTest {
     @InjectMocks
@@ -106,5 +104,21 @@ public class CpsInterfaceServiceTest {
             e.printStackTrace();
         }
         assertEquals(responseMap, cpsService.fetchRICsOfSnssai("111-1111"));
+    }
+
+    @Test
+    public void fetchnrCellCUsOfSnssaiTest() {
+        Map<String, List<String>> responseMap = new HashMap<>();
+        List<String> cellslist = new ArrayList<>();
+        cellslist.add("15199");
+        responseMap.put("11", cellslist);
+        try {
+            String serviceInstance = new String(Files.readAllBytes(Paths.get("src/test/resources/DUCellsList.json")));
+            Mockito.when(restClient.sendPostRequest(Mockito.anyString(), Mockito.anyString(), Mockito.any()))
+                    .thenReturn(new ResponseEntity<>(serviceInstance, HttpStatus.OK));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assertEquals(responseMap, cpsService.fetchnrCellCUsOfSnssai("111-1111"));
     }
 }

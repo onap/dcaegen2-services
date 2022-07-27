@@ -6,6 +6,7 @@
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Modifications Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -27,7 +28,7 @@
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
-                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36}:%line - %msg%n
             </Pattern>
         </layout>
     </appender>
