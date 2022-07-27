@@ -16,6 +16,24 @@
       "revId": "f019d46e66fa2ccc6b6ca48500aa33ad56b2c9e1",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d454f5b0_dd9c6b97",
+        "filename": "components/kpi-computation-ms/src/test/resources/kpi/RAN.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-07-27T13:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8109797b_ad062ce1",
+      "revId": "f019d46e66fa2ccc6b6ca48500aa33ad56b2c9e1",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
