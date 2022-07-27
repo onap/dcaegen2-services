@@ -1,6 +1,7 @@
 /*-
 * ============LICENSE_START=======================================================
 * Copyright (C) 2022 Deutsche Telekom AG. All rights reserved.
+* Copyright (C) 2022 Wipro Limited. All rights reserved.
 * ================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -29,6 +30,7 @@ import java.util.ListIterator;
 import java.util.Map;
 
 import org.onap.dcaegen2.kpi.config.ControlLoopSchemaType;
+import org.onap.dcaegen2.kpi.exception.KpiComputationException;
 import org.onap.dcaegen2.kpi.models.CommonEventHeader;
 import org.onap.dcaegen2.kpi.models.KpiOperand;
 import org.onap.dcaegen2.kpi.models.MeasDataCollection;
@@ -77,6 +79,9 @@ public class SumRatioKpiComputation extends BaseKpiComputation {
 
             BigDecimal result =  sumK1.multiply(new BigDecimal("100")).divide(sumK2, 0, RoundingMode.HALF_UP);
             vesEvents.add(generateVesEvent(pmEvent, schemaType.toString(), result, measType));
+        }
+        else {
+            throw new KpiComputationException("Insufficient number of operands to perform SumRatio computation");
         }
         return vesEvents;
     }
