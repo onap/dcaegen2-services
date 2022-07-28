@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *  Copyright (C) 2022 Huawei Canada Limited.
+ *  Copyright (C) 2022 CTC, Inc.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -105,7 +106,7 @@ public class AaiEventNotificationCallback implements NotificationCallback {
         }
         JsonObject entity = jsonObject.get(ENTITY).getAsJsonObject();
         JsonObject body = getNestedJsonObject(entity, aaiNotifTargetEntity);
-        logger.debug("AAI-EVENT entity object {}", body);
+        logger.info("AAI-EVENT entity object {}", body);
         if (body == null){
             return;
         }

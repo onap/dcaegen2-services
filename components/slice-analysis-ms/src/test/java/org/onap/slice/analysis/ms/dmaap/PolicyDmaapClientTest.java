@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -22,51 +23,50 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
-import static org.junit.Assert.assertTrue;
-
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.JsonPrimitive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.ImmutableMessageRouterPublishResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
 import org.onap.slice.analysis.ms.models.Configuration;
-import org.onap.slice.analysis.ms.utils.DmaapUtils;
+import org.onap.slice.analysis.ms.utils.DcaeDmaapUtil;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import reactor.core.publisher.Flux;
 
-import com.att.nsa.cambria.client.CambriaBatchingPublisher;
-import com.att.nsa.cambria.client.CambriaConsumer;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-@SpringBootTest(classes = PolicyDmaapClient.class)
+@RunWith(PowerMockRunner.class)
+@PowerMockIgnore({"com.sun.org.apache.xerces.*", "javax.xml.*", "org.xml.*", "javax.management.*"})
+@PowerMockRunnerDelegate(SpringRunner.class)
+@PrepareForTest({ DcaeDmaapUtil.class})
+@SpringBootTest(classes = PolicyDmaapClientTest.class)
 public class PolicyDmaapClientTest {
     
     @Mock
     Configuration configurationMock;
     
-    @Mock
-    DmaapUtils dmaapUtilsMock;
-    
     @InjectMocks
     PolicyDmaapClient policyDmaapClient;
     
-    @Mock
-    CambriaConsumer policyResponseCambriaConsumerMock;
-    
-    @Mock
-    CambriaBatchingPublisher cambriaBatchingPublisherMock;
-    
-    @Mock
-    NotificationProducer notificationProducerMock;
-    
     @Before
     public void setup() {
-        policyDmaapClient = new PolicyDmaapClient(dmaapUtilsMock, configurationMock);
+        policyDmaapClient = new PolicyDmaapClient(configurationMock);
     }
     
     @Test
@@ -78,13 +78,21 @@ public class PolicyDmaapClientTest {
         dmaapInfo.put("dmaap_info", topics);
         streamsPublishes.put("CL_topic", dmaapInfo);
         Mockito.when(configurationMock.getStreamsPublishes()).thenReturn(streamsPublishes);
-        Mockito.when(dmaapUtilsMock.buildPublisher(configurationMock, "DCAE_CL_OUTPUT")).thenReturn(cambriaBatchingPublisherMock);
-        try {
-            Mockito.when(cambriaBatchingPublisherMock.send("", "hello")).thenReturn(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assertTrue(policyDmaapClient.sendNotificationToPolicy("hello"));
-        
+
+        PowerMockito.mockStatic(DcaeDmaapUtil.class);
+        MessageRouterPublisher publisher = PowerMockito.mock(MessageRouterPublisher.class);
+        PowerMockito.when(DcaeDmaapUtil.buildPublisher()).thenReturn(publisher);
+
+        MessageRouterPublishRequest request = PowerMockito.mock(MessageRouterPublishRequest.class);
+        PowerMockito.when(DcaeDmaapUtil.buildPublisherRequest(any(),any())).thenReturn(request);
+
+        io.vavr.collection.List<String> expectedItems = io.vavr.collection.List.of("I", "like", "pizza");
+        MessageRouterPublishResponse expectedResponse = ImmutableMessageRouterPublishResponse
+                .builder().items(expectedItems.map(JsonPrimitive::new))
+                .build();
+        Flux<MessageRouterPublishResponse> responses = Flux.just(expectedResponse);
+        when(publisher.put(any(), any())).thenReturn(responses);
+
+        policyDmaapClient.sendNotificationToPolicy("msg");
     }
 }
