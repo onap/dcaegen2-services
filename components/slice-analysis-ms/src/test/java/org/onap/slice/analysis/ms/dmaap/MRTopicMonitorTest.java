@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -31,19 +32,22 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.stubbing.Answer;
 import org.onap.slice.analysis.ms.models.Configuration;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.Map;
+import java.util.concurrent.Executors;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-@RunWith(SpringRunner.class)
+@RunWith(PowerMockRunner.class)
+@PowerMockIgnore({"com.sun.org.apache.xerces.*", "javax.xml.*", "org.xml.*", "javax.management.*"})
+@PowerMockRunnerDelegate(SpringRunner.class)
+@PrepareForTest({ Executors.class})
 @SpringBootTest(classes = MRTopicMonitorTest.class)
 public class MRTopicMonitorTest {
 
@@ -64,12 +68,6 @@ public class MRTopicMonitorTest {
 
         mrTopicMonitor = new MRTopicMonitor("aai_subscriber", aaiEventNotificationCallback);
         MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public void start() {
-        mrTopicMonitor.start();
-        Mockito.verify(mrTopicMonitor, Mockito.times(1)).start();
     }
 
     @Test
