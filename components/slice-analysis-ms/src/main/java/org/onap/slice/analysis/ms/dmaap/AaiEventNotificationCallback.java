@@ -105,7 +105,7 @@ public class AaiEventNotificationCallback implements NotificationCallback {
         }
         JsonObject entity = jsonObject.get(ENTITY).getAsJsonObject();
         JsonObject body = getNestedJsonObject(entity, aaiNotifTargetEntity);
-        logger.debug("AAI-EVENT entity object {}", body);
+        logger.info("AAI-EVENT entity object {}", body);
         if (body == null){
             return;
         }

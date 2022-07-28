@@ -21,23 +21,23 @@
 package org.onap.slice.analysis.ms.dmaap;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.vavr.collection.List;
 import lombok.Getter;
 import lombok.NonNull;
-import org.onap.dmaap.mr.client.impl.MRConsumerImpl;
-import org.onap.dmaap.mr.client.response.MRConsumerResponse;
-import org.onap.dmaap.mr.test.clients.ProtocolTypeConstants;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeRequest;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeResponse;
 import org.onap.slice.analysis.ms.models.Configuration;
-import org.onap.slice.analysis.ms.dmaap.MRTopicParams;
 
+import org.onap.slice.analysis.ms.utils.DcaeDmaapUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import reactor.core.publisher.Mono;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -92,11 +92,11 @@ public class MRTopicMonitor implements Runnable {
         while (running){
             try {
                 logger.debug("Topic: {} getting new msg...", name);
-                Iterable<String> dmaapMsgs = consumerWrapper.fetch();
-                for (String msg : dmaapMsgs){
+                List<JsonElement> dmaapMsgs = consumerWrapper.fetch();
+                for (JsonElement msg : dmaapMsgs){
                     logger.debug("Received message: {}" +
                             "\r\n and processing start", msg);
-                    process(msg);
+                    process(msg.toString());
                 }
             } catch (IOException | RuntimeException e){
                 logger.error("fetchMessage encountered error: {}", e);
@@ -123,7 +123,7 @@ public class MRTopicMonitor implements Runnable {
         }
     }
 
-    private Iterable<String> fetch() throws IOException {
+    private List<JsonElement> fetch() throws IOException {
         return this.consumerWrapper.fetch();
     }
 
@@ -162,7 +162,9 @@ public class MRTopicMonitor implements Runnable {
         /**
          * MR Consumer.
          */
-        protected MRConsumerImpl consumer;
+        //protected MRConsumerImpl consumer;
+        protected MessageRouterSubscriber subscriber;
+        protected MessageRouterSubscribeRequest request;
 
         /**
          * Constructs the object.
@@ -188,42 +190,13 @@ public class MRTopicMonitor implements Runnable {
             }
 
             try{
-                this.consumer = new MRConsumerImpl.MRConsumerImplBuilder()
-                        .setHostPart(MRTopicParams.getServers())
-                        .setTopic(MRTopicParams.getTopic())
-                        .setConsumerGroup(MRTopicParams.getConsumerGroup())
-                        .setConsumerId(MRTopicParams.getConsumerInstance())
-                        .setTimeoutMs(MRTopicParams.getFetchTimeout())
-                        .setLimit(MRTopicParams.getFetchLimit())
-                        .setApiKey(MRTopicParams.getApiKey())
-                        .setApiSecret(MRTopicParams.getApiSecret())
-                        .createMRConsumerImpl();
-            } catch (MalformedURLException e) {
+                this.subscriber = DcaeDmaapUtil.buildSubscriber();
+                this.request = DcaeDmaapUtil.buildSubscriberRequest("aai_subscriber", MRTopicParams.getTopic());
+
+            } catch (Exception e) {
                 throw new IllegalArgumentException("Illegal MrConsumer parameters");
             }
 
-
-            this.consumer.setUsername(MRTopicParams.getUserName());
-            this.consumer.setPassword(MRTopicParams.getPassword());
-
-            if(MRTopicParams.isUserNameValid() && MRTopicParams.isPasswordValid()){
-                this.consumer.setProtocolFlag(ProtocolTypeConstants.AAF_AUTH.getValue());
-            } else {
-                this.consumer.setProtocolFlag(ProtocolTypeConstants.HTTPNOAUTH.getValue());
-            }
-
-            Properties props = new Properties();
-
-            if (MRTopicParams.isUseHttps()) {
-                props.setProperty(PROTOCOL_PROP, "https");
-                this.consumer.setHost(MRTopicParams.getServers().get(0) + ":3905");
-
-            } else {
-                props.setProperty(PROTOCOL_PROP, "http");
-                this.consumer.setHost(MRTopicParams.getServers().get(0) + ":3904");
-            }
-
-            this.consumer.setProps(props);
         }
 
         /**
@@ -231,31 +204,12 @@ public class MRTopicMonitor implements Runnable {
          * @return
          * @throws IOException
          */
-        public Iterable<String> fetch() throws IOException {
-            final MRConsumerResponse response = this.consumer.fetchWithReturnConsumerResponse();
-            if (response == null) {
-                logger.warn("{}: DMaaP NULL response received", this);
+        public List<JsonElement> fetch() throws IOException {
+            Mono<MessageRouterSubscribeResponse> responses = this.subscriber.get(this.request);
+            MessageRouterSubscribeResponse resp = responses.block();
+            List<JsonElement> list = resp.items();
+            return list;
 
-                sleepAfterFetchFailure();
-                return new ArrayList<>();
-            } else {
-                logger.debug("DMaaP consumer received {} : {}", response.getResponseCode(),
-                        response.getResponseMessage());
-
-                if (!"200".equals(response.getResponseCode())) {
-
-                    logger.error("DMaaP consumer received: {} : {}", response.getResponseCode(),
-                            response.getResponseMessage());
-
-                    sleepAfterFetchFailure();
-                }
-            }
-
-            if (response.getActualMessages() == null) {
-                return new ArrayList<>();
-            } else {
-                return response.getActualMessages();
-            }
         }
 
         /**
@@ -280,7 +234,6 @@ public class MRTopicMonitor implements Runnable {
          */
         public void close() {
             this.closeCondition.countDown();
-            this.consumer.close();
         }
     }
 }
