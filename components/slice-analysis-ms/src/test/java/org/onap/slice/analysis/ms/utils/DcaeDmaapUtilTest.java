@@ -2,7 +2,6 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
  *   Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,52 +19,49 @@
  *
  *******************************************************************************/
 
-package org.onap.slice.analysis.ms.dmaap;
+package org.onap.slice.analysis.ms.utils;
 
-import static org.mockito.Mockito.when;
-
-import com.google.gson.JsonPrimitive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.ImmutableMessageRouterSubscribeResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeRequest;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeResponse;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import reactor.core.publisher.Mono;
+import static org.junit.Assert.assertNotNull;
+import static org.onap.slice.analysis.ms.utils.DcaeDmaapUtil.buildPublisher;
+import static org.onap.slice.analysis.ms.utils.DcaeDmaapUtil.buildPublisherRequest;
+import static org.onap.slice.analysis.ms.utils.DcaeDmaapUtil.buildSubscriber;
+import static org.onap.slice.analysis.ms.utils.DcaeDmaapUtil.buildSubscriberRequest;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = NotificationConsumerTest.class)
-public class NotificationConsumerTest {
-    
-    @Mock
-    NotificationCallback notificationCallback;
-
-    @Mock
-    MessageRouterSubscriber subscriber;
-
-    @Mock
-    MessageRouterSubscribeRequest request;
-
-    @InjectMocks
-    NotificationConsumer notificationConsumer;
+@SpringBootTest(classes = DcaeDmaapUtilTest.class)
+public class DcaeDmaapUtilTest {
 
     @Test
-    public void testNotificationConsumer() {
-        io.vavr.collection.List<String> expectedItems = io.vavr.collection.List.of("I", "like", "pizza");
-        MessageRouterSubscribeResponse expectedResponse = ImmutableMessageRouterSubscribeResponse
-                .builder()
-                .items(expectedItems.map(JsonPrimitive::new))
-                .build();
-        Mono<MessageRouterSubscribeResponse> responses = Mono.just(expectedResponse);
-        when(subscriber.get(request)).thenReturn(responses);
-        Mockito.doNothing().when(notificationCallback).activateCallBack(Mockito.anyString());
-        notificationConsumer.run();
+    public void buildSubscriberTest(){
+        MessageRouterSubscriber subscriber = buildSubscriber();
+        assertNotNull(subscriber);
+    }
+
+    @Test
+    public void buildSubscriberRequestTest(){
+        MessageRouterSubscribeRequest request = buildSubscriberRequest("name", "url");
+        assertNotNull(request);
+    }
+
+    @Test
+    public void buildPublisherTest(){
+        MessageRouterPublisher publisher = buildPublisher();
+        assertNotNull(publisher);
+    }
+
+    @Test
+    public void buildPublisherRequestTest(){
+        MessageRouterPublishRequest request = buildPublisherRequest("name", "url");
+        assertNotNull(request);
     }
 
 }

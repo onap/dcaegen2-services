@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -22,42 +23,47 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
-import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.att.nsa.cambria.client.CambriaBatchingPublisher;
-
-import java.io.IOException;
-
+import com.google.gson.JsonPrimitive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.ImmutableMessageRouterPublishResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import reactor.core.publisher.Flux;
+
+import java.io.IOException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = NotificationProducerTest.class)
 public class NotificationProducerTest {
 
-	@Mock
-	CambriaBatchingPublisher cambriaBatchingPublisher;
+    @Mock
+    MessageRouterPublisher publisher;
 
-	@InjectMocks
-	NotificationProducer notificationProducer;
+    @Mock
+    MessageRouterPublishRequest request;
 
-	@Test
-	public void notificationProducerTest() {
+    @InjectMocks
+    NotificationProducer notificationProducer;
 
-		try {
+    @Test
+    public void notificationProducerTest() throws IOException {
+            io.vavr.collection.List<String> expectedItems = io.vavr.collection.List.of("I", "like", "pizza");
+            MessageRouterPublishResponse expectedResponse = ImmutableMessageRouterPublishResponse
+                    .builder().items(expectedItems.map(JsonPrimitive::new))
+                    .build();
+            Flux<MessageRouterPublishResponse> responses = Flux.just(expectedResponse);
+//            Flux<JsonPrimitive> singleMessage = Flux.just("msg").map(JsonPrimitive::new);
+            when(publisher.put(any(), any())).thenReturn(responses);
 
-			when(cambriaBatchingPublisher.send(Mockito.anyString(), Mockito.anyString())).thenReturn(0);
-			int result = notificationProducer.sendNotification("msg");
-			assertEquals(0, result);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
+            notificationProducer.sendNotification("msg");
+    }
 }
