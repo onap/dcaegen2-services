@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -23,44 +24,54 @@ package org.onap.slice.analysis.ms.dmaap;
 
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.google.gson.JsonPrimitive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.ImmutableMessageRouterSubscribeResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeRequest;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeResponse;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.att.nsa.cambria.client.CambriaConsumer;
+import reactor.core.publisher.Mono;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = NotificationConsumerTest.class)
 public class NotificationConsumerTest {
-	
-	@Mock
-	CambriaConsumer cambriaConsumer;
-	
-	@Mock
-	NotificationCallback notificationCallback;
+    
+    @Mock
+    NotificationCallback notificationCallback;
 
-	@InjectMocks
-	NotificationConsumer notificationConsumer;
+    @Mock
+    MessageRouterSubscriber subscriber;
 
-	@Test
-	public void testNotificationConsumer() {
-		try {
-			List<String> notifications = new ArrayList<>();
-			notifications.add("notification1");
-			when(cambriaConsumer.fetch()).thenReturn(notifications);
-			Mockito.doNothing().when(notificationCallback).activateCallBack(Mockito.anyString());
-			notificationConsumer.run();
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
+    @Mock
+    MessageRouterSubscribeRequest request;
+
+    @InjectMocks
+    NotificationConsumer notificationConsumer;
+
+    @Test
+    public void testNotificationConsumer() {
+        try {
+            io.vavr.collection.List<String> expectedItems = io.vavr.collection.List.of("I", "like", "pizza");
+            MessageRouterSubscribeResponse expectedResponse = ImmutableMessageRouterSubscribeResponse
+                    .builder()
+                    .items(expectedItems.map(JsonPrimitive::new))
+                    .build();
+
+            Mono<MessageRouterSubscribeResponse> responses = Mono.just(expectedResponse);
+            when(subscriber.get(request)).thenReturn(responses);
+            Mockito.doNothing().when(notificationCallback).activateCallBack(Mockito.anyString());
+            notificationConsumer.run();
+            
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }
