@@ -165,6 +165,193 @@
     },
     {
       "key": {
+        "uuid": "695fbf4c_59c5d0c9",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/aai/AaiInterfaceServiceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "would an ignored exception in anything in this try block still be caught as a failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "450d428b_ef1317bb",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/aai/AaiInterfaceServiceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "would an ignored exception in anything in this try block still be caught as a failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "532beed3_7940090e",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/aai/AaiInterfaceServiceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "would an ignored exception in anything in this try block still be caught as a failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0df7c26e_fbfbc0cf",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/aai/AaiInterfaceServiceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "would an ignored exception in anything in this try block still be caught as a failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7f90dc2_964ac081",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/aai/AaiInterfaceServiceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "would an ignored exception in anything in this try block still be caught as a failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3303da13_e98163b9",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/controller/ConfigFetchFromCbsTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "this assertion is always true. Where is the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a350157_a05901ef",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/cps/CpsInterfaceServiceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "would an ignored exception in anything in this try block still be caught as a failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7c98dc9_920256e5",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/cps/CpsInterfaceServiceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "would an ignored exception in anything in this try block still be caught as a failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2b00925_6fe1ea94",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/AaiEventNotificationCallbackTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "will a null string cause the test to fail?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "743e9fff_fef804af",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/AaiEventNotificationCallbackTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "will a null string cause the test to fail?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc4d4ca3_38a79d8f",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/DmaapClientTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "commented-out code should be removed",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5e2d4b8_d31ae95e",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/DmaapClientTest.java",
         "patchSetId": 3
@@ -211,6 +398,40 @@
     },
     {
       "key": {
+        "uuid": "7174963c_b8077cf7",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/DmaapClientTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "commented-out code should be removed",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c85a638b_cbd4ff5a",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/DmaapClientTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "should an exception in anything above really suppress the failure of the test",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "03d67cb9_5f006088",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitorTest.java",
         "patchSetId": 3
@@ -251,6 +472,193 @@
         "endLine": 68,
         "endChar": 22
       },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6edefc3_1262ea7b",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/NotificationConsumerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "should an exception in anything above really suppress the failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6e35917_8929ef9d",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/NotificationProducerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "should an exception in anything above really suppress the failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e0d94c1_a494671f",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/PolicyDmaapClientTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "should an exception in anything in this try block really suppress the failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d64ec064_fc2450f0",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/aai/RelationshipListTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure what this last assertion is testing. All objects will have a hashCode value",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cfd97cd_0c5aef64",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/aai/RelationshipTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure what this last assertion is testing. All objects will have a hashCode value",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c219793_8476ee4e",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/aai/ServiceInstanceTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure what this last assertion is testing. All classes will have a hashcode.",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc09c15b_f99b89f7",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/PmThreadTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "This assertion will always be true. So what is being tested here?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afdb9dd3_c4f3ae3e",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SliceUtilizationTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "should an exception in anything in this try block really suppress the failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "835b2604_ca14b9ae",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "should an exception in anything in this try block really suppress the failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37d95827_a98d778e",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "should an exception in anything in this try block really suppress the failure of the test?",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f523f66c_9f01b797",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-07-28T14:52:55Z",
+      "side": 1,
+      "message": "would an empty hashmap still cause a failure of the test?",
       "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
