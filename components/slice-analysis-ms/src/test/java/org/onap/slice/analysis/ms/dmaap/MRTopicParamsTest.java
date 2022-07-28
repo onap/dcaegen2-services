@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *.  Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -30,7 +31,16 @@ import com.openpojo.validation.rule.impl.SetterMustExistRule;
 import com.openpojo.validation.test.impl.GetterTester;
 import com.openpojo.validation.test.impl.SetterTester;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 
 public class MRTopicParamsTest {
     private static final String TEST_TOPIC = "test-topic";
@@ -93,4 +103,84 @@ public class MRTopicParamsTest {
                 .build();
         validator.validate(pojoclass);
     }
+
+    @Test
+    public void initProperty() {
+        List<String> strings = new ArrayList<>();
+        Map<String, String> map = new HashMap<>();
+        MRTopicParams params = MRTopicParams.builder()
+                .topic(TEST_TOPIC)
+                .hostname(TEST_HOST)
+                .clientName(MY_CLIENT)
+                .consumerGroup(MY_CG)
+                .consumerInstance(MY_CI)
+                .apiSecret(MY_API_SEC)
+                .apiKey(MY_API_KEY)
+                .fetchLimit(MY_FETCH_LIMIT)
+                .fetchTimeout(MY_FETCH_TIMEOUT)
+                .password(MY_PASS)
+                .userName(MY_USERNAME)
+                .port(MY_PORT)
+                .servers(strings)
+                .additionalProps(map)
+                .effectiveTopic("")
+                .useHttps(true)
+                .allowSelfSignedCerts(true)
+                .managed(true)
+                .environment("")
+                .aftEnvironment("")
+                .partner("")
+                .latitude("")
+                .longitude("")
+                .partitionId("")
+                .basePath("")
+                .serializationProvider("")
+                .build();
+        assertEquals(TEST_TOPIC, params.getTopic());
+        assertEquals(TEST_HOST, params.getHostname());
+        assertEquals(MY_CLIENT, params.getClientName());
+        assertEquals(MY_CG, params.getConsumerGroup());
+        assertEquals(MY_CI, params.getConsumerInstance());
+        assertEquals(MY_API_SEC, params.getApiSecret());
+        assertEquals(MY_API_KEY, params.getApiKey());
+        assertEquals(MY_FETCH_LIMIT, params.getFetchLimit());
+        assertEquals(MY_FETCH_TIMEOUT, params.getFetchTimeout());
+        assertEquals(MY_PASS, params.getPassword());
+        assertEquals(MY_USERNAME, params.getUserName());
+        assertEquals(MY_PORT, params.getPort());
+        assertEquals(strings, params.getServers());
+        assertEquals(map, params.getAdditionalProps());
+        assertEquals("", params.getEffectiveTopic());
+        assertTrue(params.isUseHttps());
+        assertTrue(params.isAllowSelfSignedCerts());
+        assertTrue(params.isManaged());
+        assertEquals("", params.getEnvironment());
+        assertEquals("", params.getAftEnvironment());
+        assertEquals("", params.getPartner());
+        assertEquals("", params.getLongitude());
+        assertEquals("", params.getPartitionId());
+        assertEquals("", params.getBasePath());
+        assertEquals("", params.getSerializationProvider());
+
+        assertTrue(params.isEnvironmentInvalid());
+        assertTrue(params.isAftEnvironmentInvalid());
+        assertTrue(params.isLatitudeInvalid());
+        assertTrue(params.isLongitudeInvalid());
+        assertTrue(params.isPartnerInvalid());
+        assertTrue(params.isServersInvalid());
+        assertTrue(params.isPartitionIdInvalid());
+        assertTrue(params.isApiKeyValid());
+        assertTrue(params.isApiSecretValid());
+        assertTrue(params.isUserNameValid());
+        assertTrue(params.isPasswordValid());
+        assertTrue(params.isAdditionalPropsValid());
+        assertFalse(params.isConsumerInstanceInvalid());
+        assertFalse(params.isConsumerGroupInvalid());
+        assertFalse(params.isClientNameInvalid());
+        assertFalse(params.isTopicInvalid());
+        assertFalse(params.isHostnameInvalid());
+        assertFalse(params.isPortInvalid());
+    }
+
+
 }
