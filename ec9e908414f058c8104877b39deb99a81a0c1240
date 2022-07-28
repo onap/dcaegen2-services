@@ -48,6 +48,52 @@
     },
     {
       "key": {
+        "uuid": "8d660867_61c24c23",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-07-28T14:45:58Z",
+      "side": 1,
+      "message": "Update comments where necessary",
+      "range": {
+        "startLine": 164,
+        "startChar": 11,
+        "endLine": 164,
+        "endChar": 17
+      },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fee3cb96_f18e8cac",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitor.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-07-28T14:45:58Z",
+      "side": 1,
+      "message": "Can be removed",
+      "range": {
+        "startLine": 166,
+        "startChar": 7,
+        "endLine": 166,
+        "endChar": 13
+      },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4766f98_91dccd42",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/utils/DcaeDmaapUtil.java",
         "patchSetId": 3
@@ -88,6 +134,122 @@
         "startChar": 15,
         "endLine": 42,
         "endChar": 26
+      },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58724a2b_702470a4",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/utils/DcaeDmaapUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-07-28T14:45:58Z",
+      "side": 1,
+      "message": "Ok. Understood.",
+      "parentUuid": "2e7d6a0c_1c842fa8",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 26
+      },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a5e2d4b8_d31ae95e",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/DmaapClientTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-07-28T14:45:58Z",
+      "side": 1,
+      "message": "Remove commented out code",
+      "range": {
+        "startLine": 70,
+        "startChar": 13,
+        "endLine": 70,
+        "endChar": 23
+      },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac9e9b00_f5bf021c",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/DmaapClientTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-07-28T14:45:58Z",
+      "side": 1,
+      "message": "Same as above",
+      "range": {
+        "startLine": 118,
+        "startChar": 25,
+        "endLine": 118,
+        "endChar": 33
+      },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03d67cb9_5f006088",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-07-28T14:45:58Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 49,
+        "startChar": 3,
+        "endLine": 49,
+        "endChar": 15
+      },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2eb197ac_05389f64",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/dmaap/MRTopicMonitorTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2022-07-28T14:45:58Z",
+      "side": 1,
+      "message": "Remove.\nSame for others elsewhere",
+      "range": {
+        "startLine": 68,
+        "startChar": 16,
+        "endLine": 68,
+        "endChar": 22
       },
       "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
