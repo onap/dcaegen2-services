@@ -4,6 +4,7 @@
  *  ================================================================================
  *   Copyright (C) 2020-2021 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -39,7 +40,6 @@ import org.onap.slice.analysis.ms.models.policy.Payload;
 import org.onap.slice.analysis.ms.models.policy.Sla;
 import org.onap.slice.analysis.ms.models.policy.TransportNetwork;
 import org.onap.slice.analysis.ms.service.ccvpn.RequestOwner;
-import org.onap.slice.analysis.ms.utils.DmaapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -61,7 +61,7 @@ public class PolicyService {
     @PostConstruct
     public void init() {
         Configuration configuration = Configuration.getInstance();
-        policyDmaapClient = new PolicyDmaapClient(new DmaapUtils(), configuration);
+        policyDmaapClient = new PolicyDmaapClient(configuration);
     }
 
     protected <T> OnsetMessage formPolicyOnsetMessage(String snssai, AdditionalProperties<T> addProps, Map<String, String> serviceDetails) {
