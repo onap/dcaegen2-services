@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -21,24 +22,22 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
-import com.att.nsa.cambria.client.CambriaBatchingPublisher;
 import java.io.IOException;
 import java.util.Map;
 
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
 import org.onap.slice.analysis.ms.models.Configuration;
-import org.onap.slice.analysis.ms.utils.DmaapUtils;
+import org.onap.slice.analysis.ms.utils.DcaeDmaapUtil;
 
 /**
  * Client class to handle Policy interactions 
  */
 public class PolicyDmaapClient {
 
-    private DmaapUtils dmaapUtils;
-
     private Configuration configuration;
 
-    public PolicyDmaapClient(DmaapUtils dmaapUtils, Configuration configuration) {
-        this.dmaapUtils = dmaapUtils;
+    public PolicyDmaapClient(Configuration configuration) {
         this.configuration = configuration;
     }
 
@@ -50,14 +49,11 @@ public class PolicyDmaapClient {
         Map<String, Object> streamsPublishes = configuration.getStreamsPublishes();
         String policyTopicUrl = ((Map<String, String>) ((Map<String, Object>) streamsPublishes.get("CL_topic"))
                 .get("dmaap_info")).get("topic_url");
-        String[] policyTopicSplit = policyTopicUrl.split("\\/");
-        String policyTopic = policyTopicSplit[policyTopicSplit.length - 1];
-        CambriaBatchingPublisher cambriaBatchingPublisher;
         try {
+            MessageRouterPublisher publisher = DcaeDmaapUtil.buildPublisher();
+            MessageRouterPublishRequest request = DcaeDmaapUtil.buildPublisherRequest("CL_topic", policyTopicUrl);
 
-            cambriaBatchingPublisher = dmaapUtils.buildPublisher(configuration, policyTopic);
-
-            NotificationProducer notificationProducer = new NotificationProducer(cambriaBatchingPublisher);
+            NotificationProducer notificationProducer = new NotificationProducer(publisher, request);
             notificationProducer.sendNotification(msg);
         } catch (IOException e) {
             return false;
