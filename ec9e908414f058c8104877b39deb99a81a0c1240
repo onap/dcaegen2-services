@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "157e2d24_ffec8dd6",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-07-28T14:33:04Z",
+      "side": 1,
+      "message": "should be removed",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 29
+      },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2e072e6_e57db593",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-07-28T14:33:04Z",
+      "side": 1,
+      "message": "duplicate entry",
+      "range": {
+        "startLine": 350,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 29
+      },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4766f98_91dccd42",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/utils/DcaeDmaapUtil.java",
         "patchSetId": 3
@@ -13,6 +59,30 @@
       "writtenOn": "2022-07-28T10:08:25Z",
       "side": 1,
       "message": "As the mr apis are being deprecated I would strongly advise not to code towards dmaap, even if we are using the dcae sdk here.",
+      "range": {
+        "startLine": 42,
+        "startChar": 15,
+        "endLine": 42,
+        "endChar": 26
+      },
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e7d6a0c_1c842fa8",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/utils/DcaeDmaapUtil.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-07-28T14:33:04Z",
+      "side": 1,
+      "message": "Fiachra - this is more of phased approach to facilitate the migration to strimzi/kafka. Once the SDK updates are done (or other standard lib identified), components can migrate to use them later.",
+      "parentUuid": "c4766f98_91dccd42",
       "range": {
         "startLine": 42,
         "startChar": 15,
