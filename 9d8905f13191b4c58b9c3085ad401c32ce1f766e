@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ce2499f_0a2725b3",
+        "filename": "components/ml-prediction-ms/pyproject.toml",
+        "patchSetId": 20
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-08-02T16:32:04Z",
+      "side": 1,
+      "message": "there\u0027s no NL at the end of the file",
+      "revId": "9d8905f13191b4c58b9c3085ad401c32ce1f766e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ea7470e_d947ffee",
+        "filename": "components/ml-prediction-ms/tests/unit/__init__.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-08-02T16:32:04Z",
+      "side": 1,
+      "message": "commented-out code should be deleted",
+      "revId": "9d8905f13191b4c58b9c3085ad401c32ce1f766e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd2359a6_cbc3f7b6",
+        "filename": "components/ml-prediction-ms/tests/unit/test_predict_unittest.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-08-02T16:32:04Z",
+      "side": 1,
+      "message": "use spaces for indentation",
+      "revId": "9d8905f13191b4c58b9c3085ad401c32ce1f766e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
