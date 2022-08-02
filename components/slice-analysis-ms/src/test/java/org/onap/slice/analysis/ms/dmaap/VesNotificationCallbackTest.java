@@ -29,7 +29,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.onap.slice.analysis.ms.models.Configuration;
+import org.onap.slice.analysis.ms.service.ccvpn.CCVPNPmDatastore;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -45,6 +50,9 @@ public class VesNotificationCallbackTest {
     @Spy
     @InjectMocks
     VesNotificationCallback vesNotificationCallback;
+
+    @Spy
+    CCVPNPmDatastore ccvpnPmDatastore = new CCVPNPmDatastore();
 
     @Before
     public void init() throws IOException {
