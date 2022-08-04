@@ -23,6 +23,7 @@
 package org.onap.dcaegen2.kpi.models;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +33,14 @@ import java.util.Map;
 import org.junit.Test;
 import org.onap.dcaegen2.kpi.computation.FileUtils;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 
 public class ConfigurationTest {
     Configuration configuration = Configuration.getInstance();
     private static final String KPI_CONFIG_FILE = "kpi/kpi_config.json";
+    private static final String CBS_CONFIG_FILE = "kpi/cbs_config4.json";
 
     @Test
     public void configurationTest() {
@@ -84,5 +89,17 @@ public class ConfigurationTest {
     	String strKpiConfig = FileUtils.getFileContents(KPI_CONFIG_FILE);
     	configuration.setKpiConfig(strKpiConfig);
     	assertEquals(strKpiConfig, configuration.getKpiConfig());
+    }
+    
+    @Test
+    public void testNullFields() {
+        String strCbsConfig = FileUtils.getFileContents(CBS_CONFIG_FILE);
+
+        JsonObject jsonObject = new JsonParser().parse(strCbsConfig).getAsJsonObject().getAsJsonObject("config");
+        Configuration config = new Configuration();
+        config.updateConfigurationFromJsonObject(jsonObject);
+        
+        assertNull(config.getAafUsername());
+        assertNull(config.getAafPassword());
     }
 }
