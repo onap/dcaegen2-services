@@ -29,7 +29,7 @@
 
     <groupId>org.onap.dcaegen2.services.components</groupId>
     <artifactId>kpi-ms</artifactId>
-    <version>1.0.5-SNAPSHOT</version>
+    <version>1.0.6-SNAPSHOT</version>
     <name>dcaegen2-services-kpi-computation-ms</name>
     <description>Kpi ms</description>
     <packaging>jar</packaging>
@@ -345,7 +345,6 @@
                             <directory>${project.basedir}</directory>
                         </resource>
                     </resources>
-
                     <runs>
                         <!-- Maven is loosing file permissions during artifacts copy -->
                         <run>export trustpass=`cat /opt/app/kpims/etc/cert/trust.pass`</run>
