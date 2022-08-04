@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.5]
 ### Changed
+* CodeCoverage improvement for dcaegen2-services-kpi-computation-ms (DCAEGEN2-3162)
+
+## [1.0.5]
+### Changed
 * Enhancements to KPI Computation MS for Kohn Release (DCAEGEN2-3193)
 
 ## [1.0.4]
