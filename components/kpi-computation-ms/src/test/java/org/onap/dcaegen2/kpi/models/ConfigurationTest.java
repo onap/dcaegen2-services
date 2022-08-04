@@ -1,8 +1,9 @@
 /*******************************************************************************
  *  ============LICENSE_START=======================================================
- *  slice-analysis-ms
+ *  kpi-computation-ms
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2022 Wipro Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -23,6 +24,7 @@
 package org.onap.dcaegen2.kpi.models;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,10 +34,14 @@ import java.util.Map;
 import org.junit.Test;
 import org.onap.dcaegen2.kpi.computation.FileUtils;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 
 public class ConfigurationTest {
     Configuration configuration = Configuration.getInstance();
     private static final String KPI_CONFIG_FILE = "kpi/kpi_config.json";
+    private static final String CBS_CONFIG_FILE = "kpi/cbs_config4.json";
 
     @Test
     public void configurationTest() {
@@ -43,7 +49,6 @@ public class ConfigurationTest {
         List<String> list = new ArrayList<String>();
         list.add("server");
         Map<String, Object> subscribes = new HashMap<>();
-        
         configuration.setStreamsSubscribes(subscribes);
         configuration.setStreamsPublishes(subscribes);
         configuration.setDmaapServers(list);
@@ -61,7 +66,6 @@ public class ConfigurationTest {
         configuration.setEnablessl(true);
         configuration.setCbsPollingInterval(10);
         configuration.setKpiConfig("kpi config");
-
         assertEquals("cg", configuration.getCg());
         assertEquals("cid", configuration.getCid());
         assertEquals("user", configuration.getAafUsername());
@@ -72,17 +76,25 @@ public class ConfigurationTest {
         assertEquals("192.168.1.1", configuration.getHost());
         assertEquals(21, configuration.getPort());
         assertEquals("user", configuration.getUsername());
-        assertEquals("password", configuration.getPassword());        
-        assertEquals("database", configuration.getDatabasename());        
-        assertEquals(true, configuration.isEnablessl());        
-        assertEquals("kpi config", configuration.getKpiConfig());    
-        assertEquals(10, configuration.getCbsPollingInterval());    
+        assertEquals("password", configuration.getPassword());
+        assertEquals("database", configuration.getDatabasename());
+        assertEquals(true, configuration.isEnablessl());
+        assertEquals("kpi config", configuration.getKpiConfig());
+        assertEquals(10, configuration.getCbsPollingInterval());
     }
-    
     @Test
     public void updateConfigFromPolicyTest() {
-    	String strKpiConfig = FileUtils.getFileContents(KPI_CONFIG_FILE);
-    	configuration.setKpiConfig(strKpiConfig);
-    	assertEquals(strKpiConfig, configuration.getKpiConfig());
+        String strKpiConfig = FileUtils.getFileContents(KPI_CONFIG_FILE);
+        configuration.setKpiConfig(strKpiConfig);
+        assertEquals(strKpiConfig, configuration.getKpiConfig());
+    }
+    @Test
+    public void testNullFields() {
+        String strCbsConfig = FileUtils.getFileContents(CBS_CONFIG_FILE);
+        JsonObject jsonObject = new JsonParser().parse(strCbsConfig).getAsJsonObject().getAsJsonObject("config");
+        Configuration config = new Configuration();
+        config.updateConfigurationFromJsonObject(jsonObject);
+        assertNull(config.getAafUsername());
+        assertNull(config.getAafPassword());
     }
 }

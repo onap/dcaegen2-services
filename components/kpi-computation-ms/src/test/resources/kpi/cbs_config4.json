@@ -1,0 +1,36 @@
+{
+    "config": {
+        "pollingInterval": 20,
+        "cbsPollingInterval": 60,
+        "mongo.host": "192.168.225.61",
+        "cid": "kpi-cid",
+        "trust_store_pass_path": "/opt/app/kpims/etc/cert/trust.pass",
+        "cg": "kpi-cg",
+        "mongo.port": 27017,
+        "mongo.databasename": "datalake",
+        "streams_subscribes": {
+            "performance_management_topic": {
+                "aaf_password": "demo123456!",
+                "type": "message-router",
+                "dmaap_info": {
+                    "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/org.onap.dmaap.mr.PERFORMANCE_MEASUREMENTS"
+                },
+                "aaf_username": "dcae@dcae.onap.org"
+            }
+        },
+        "trust_store_path": "/opt/app/kpims/etc/cert/trust.jks",
+        "pollingTimeout": 60,
+        "streams_publishes": {
+            "kpi_topic": {
+                "aaf_password": "demo123456!",
+                "type": "message-router",
+                "dmaap_info": {
+                    "topic_url": "https://message-router.onap.svc.cluster.local:3905/events/unauthenticated.DCAE_KPI_OUTPUT"
+                },
+                "aaf_username": "dcae@dcae.onap.org"
+            }
+        },
+        "kpi.policy": "{\"domain\":\"measurementsForKpi\",\"methodForKpi\":[{\"eventName\":\"perf3gpp_CORE-AMF_pmMeasResult\",\"controlLoopSchemaType\":\"SLICE\",\"policyScope\":\"resource=networkSlice;type=configuration\",\"policyName\":\"configuration.dcae.microservice.pm-mapper.xml\",\"policyVersion\":\"v0.0.1\",\"kpis\":[{\"measType\":\"AMFRegNbr\",\"operation\":\"SUM\",\"operands\":[\"RM.RegisteredSubNbrMean\"]}]},{\"eventName\":\"perf3gpp_AcmeNode-Acme_pmMeasResult\",\"controlLoopSchemaType\":\"SLICE\",\"policyScope\":\"resource=networkSlice;type=configuration\",\"policyName\":\"configuration.dcae.microservice.pm-mapper.xml\",\"policyVersion\":\"v0.0.1\",\"kpis\":[{\"measType\":\"UpstreamThr\",\"operation\":\"SUMRATIO\",\"operands\":[\"GTP.InDataOctN3UPF\",\"GTP.OutDataOctN3UPF\"]},{\"measType\":\"DownstreamThr\",\"operation\":\"SUMRATIO\",\"operands\":[\"GTP.InDataOctN3UPF\",\"GTP.OutDataOctN3UPF\"]}]}]}",
+        "dmaap.server": ["message-router"]
+    }
+}
