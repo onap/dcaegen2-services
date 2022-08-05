@@ -917,6 +917,24 @@
     },
     {
       "key": {
+        "uuid": "32310cfe_1ad77180",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/aai/RelationshipTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-08-05T15:11:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cfd97cd_0c5aef64",
+      "revId": "ec9e908414f058c8104877b39deb99a81a0c1240",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c219793_8476ee4e",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/models/aai/ServiceInstanceTest.java",
         "patchSetId": 3
