@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b327876f_17415395",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-05T17:20:01Z",
+      "side": 1,
+      "message": "2.8.6 has open vulnerabilties, bump to 2.9.0",
+      "range": {
+        "startLine": 64,
+        "startChar": 33,
+        "endLine": 64,
+        "endChar": 38
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "099003d2_05e4dfed",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-05T17:20:01Z",
+      "side": 1,
+      "message": "remove trailing tab/spaces",
+      "range": {
+        "startLine": 96,
+        "startChar": 38,
+        "endLine": 96,
+        "endChar": 46
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39ab06f1_e69b427c",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-05T17:20:01Z",
+      "side": 1,
+      "message": "remove trailing tab/spaces",
+      "range": {
+        "startLine": 98,
+        "startChar": 46,
+        "endLine": 98,
+        "endChar": 50
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "697bc5d0_b6c03d2e",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-05T17:20:01Z",
+      "side": 1,
+      "message": "remove trailing tab/spaces",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 4
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58796eb1_3e2afe02",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-05T17:20:01Z",
+      "side": 1,
+      "message": "remove trailing tab/spaces",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 50
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c30833a2_6a5f346b",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-05T17:20:01Z",
+      "side": 1,
+      "message": "remove tab/spaces",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 4
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fbde50fd_13f56366",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-05T17:20:01Z",
+      "side": 1,
+      "message": "remove tab/spaces",
+      "range": {
+        "startLine": 261,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 4
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d9e6bde_66e54e24",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-05T17:20:01Z",
+      "side": 1,
+      "message": "remove tab/spaces",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 4
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}

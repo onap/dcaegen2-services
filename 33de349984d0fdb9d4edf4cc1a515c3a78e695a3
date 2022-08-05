@@ -69,6 +69,24 @@
       "revId": "33de349984d0fdb9d4edf4cc1a515c3a78e695a3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1a39491_ec90505a",
+        "filename": "components/slice-analysis-ms/version.properties",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-05T17:20:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf684815_b5635932",
+      "revId": "33de349984d0fdb9d4edf4cc1a515c3a78e695a3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
