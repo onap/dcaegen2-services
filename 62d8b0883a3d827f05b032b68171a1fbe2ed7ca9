@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53045e7b_22d168e6",
+        "filename": "components/ml-prediction-ms/tox.ini",
+        "patchSetId": 26
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-08-05T15:33:41Z",
+      "side": 1,
+      "message": "if there is only one envlist value given, then skip_missing_interpreters should be set to false",
+      "revId": "62d8b0883a3d827f05b032b68171a1fbe2ed7ca9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
