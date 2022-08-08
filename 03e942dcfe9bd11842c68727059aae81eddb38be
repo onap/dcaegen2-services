@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "d25d4828_473668c2",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-08T17:17:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "099003d2_05e4dfed",
+      "range": {
+        "startLine": 96,
+        "startChar": 38,
+        "endLine": 96,
+        "endChar": 46
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39ab06f1_e69b427c",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
         "patchSetId": 11
@@ -68,6 +92,30 @@
       "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5db27bd2_f72d5445",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-08T17:17:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39ab06f1_e69b427c",
+      "range": {
+        "startLine": 98,
+        "startChar": 46,
+        "endLine": 98,
+        "endChar": 50
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "53bb9898_2e3d1452",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-08T17:17:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "697bc5d0_b6c03d2e",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 100,
+        "endChar": 4
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58796eb1_3e2afe02",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
         "patchSetId": 11
@@ -114,6 +186,30 @@
       "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8692bbf_44a4d5a1",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-08T17:17:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58796eb1_3e2afe02",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 50
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "aa901e39_5a72f02b",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-08T17:17:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c30833a2_6a5f346b",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 4
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbde50fd_13f56366",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
         "patchSetId": 11
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "6381ec54_06904742",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-08T17:17:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbde50fd_13f56366",
+      "range": {
+        "startLine": 261,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 4
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8d9e6bde_66e54e24",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
         "patchSetId": 11
@@ -183,6 +327,30 @@
       "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6aa27e14_3eef1800",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/SnssaiSamplesProcessorTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-08T17:17:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d9e6bde_66e54e24",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 4
+      },
+      "revId": "03e942dcfe9bd11842c68727059aae81eddb38be",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
