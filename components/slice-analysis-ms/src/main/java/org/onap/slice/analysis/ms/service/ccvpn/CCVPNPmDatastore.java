@@ -45,7 +45,10 @@ public class CCVPNPmDatastore {
     private final ConcurrentMap<String, ServiceState> svcStatus = new ConcurrentHashMap<>();
     private final ConcurrentMap<String, Integer> endpointToMaxBw = new ConcurrentHashMap<>();
     private final ConcurrentMap<Endpointkey, EvictingQueue<Integer>> endpointToUsedBw = new ConcurrentHashMap<>();
-
+    /**
+    *  If closed loop status is on/off, then cll closed loop modification will be turned on/off.
+    */
+    private final ConcurrentMap<String, Boolean> closedloopModifyStatus = new ConcurrentHashMap<>();
     /**
      * Given a cllId, return a map between Endpointkey and their corresponding UsedBw Queue.
      * All Endpoints belongs to this same service
@@ -85,6 +88,15 @@ public class CCVPNPmDatastore {
     }
 
     /**
+     * get closed loop check status of this cll service
+     * @param cllId
+     * @return
+     */
+    public Boolean getClosedloopStatus(String cllId){
+        return closedloopModifyStatus.getOrDefault(cllId,true);
+    }
+
+    /**
      * return the complete map of cll service status
      * @return complete map of serviceStatusMap
      */
@@ -110,6 +122,15 @@ public class CCVPNPmDatastore {
         double bwvvaldb = Double.parseDouble(bw);
         int bwvval = (int) bwvvaldb;
         updateMaxBw(cllId, bwvval, false);
+    }
+
+    /**
+     * Update the status, whether close loop bw modification of this cll service is on.
+     * @param cllId
+     * @param status
+     */
+    public void updateClosedloopStatus(String cllId, Boolean status){
+        closedloopModifyStatus.put(cllId, status);
     }
 
     /**

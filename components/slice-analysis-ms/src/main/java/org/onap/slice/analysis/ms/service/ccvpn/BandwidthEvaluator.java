@@ -112,7 +112,10 @@ public class BandwidthEvaluator {
                     for(Map.Entry<Endpointkey, CCVPNPmDatastore.EvictingQueue<Integer>> entry: usedBwMap.entrySet()) {
                         String serviceId = entry.getKey().getCllId();
                         Object[] usedBws = entry.getValue().tryReadToArray();
-
+                        if (!ccvpnPmDatastore.getClosedloopStatus(serviceId)) {
+                            log.debug("CCVPN Evaluator Output: service {}, closed loop bw modification is off.", serviceId);
+                            continue;
+                        }
                         if (usedBws == null) {
                             // No enough data for evaluating
                             log.debug("CCVPN Evaluator Output: service {}, not enough data to evaluate", serviceId);
@@ -141,21 +144,27 @@ public class BandwidthEvaluator {
                     }
                     // fetch the maxbandwidth info if underMaintenance; otherwise send modification request
                     for(Map.Entry<String, Integer> entry: candidate.entrySet()) {
-                        if (isServiceUnderMaintenance(entry.getKey())) {
-                            if (entry.getValue() == 0){
+                        String serviceId = entry.getKey();
+                        Integer newBw = entry.getValue();
+                        if(!ccvpnPmDatastore.getClosedloopStatus(serviceId)) {
+                            log.debug("CCVPN Evaluator Output: service {}, closed loop triggered bw modification is off", serviceId);
+                            continue;
+                        }
+                        if (isServiceUnderMaintenance(serviceId)) {
+                            if (newBw == 0){
                                 log.debug("CCVPN Evaluator Output: service {}," +
-                                        " are in maintenance state, fetching bandwidth info from AAI", entry.getKey());
+                                        " are in maintenance state, fetching bandwidth info from AAI", serviceId);
                             } else {
                                 log.debug("CCVPN Evaluator Output: candidate {}," +
-                                        " need adjustment, but skipped due to maintenance state", entry.getKey());
+                                        " need adjustment, but skipped due to maintenance state", serviceId);
                             }
-                            post(new SimpleEvent(SimpleEvent.Type.AAI_BW_REQ, entry.getKey()));
+                            post(new SimpleEvent(SimpleEvent.Type.AAI_BW_REQ, serviceId));
                             continue;
                         }
                         log.debug("CCVPN Evaluator Output: candidate {}," +
-                                " need adjustment, sending request to policy", entry.getKey());
-                        ccvpnPmDatastore.updateSvcState(entry.getKey(), ServiceState.UNDER_MAINTENANCE);
-                        sendModifyRequest(entry.getKey(), entry.getValue(), RequestOwner.DCAE);
+                                " need adjustment, sending request to policy", serviceId);
+                        ccvpnPmDatastore.updateSvcState(serviceId, ServiceState.UNDER_MAINTENANCE);
+                        sendModifyRequest(serviceId, newBw, RequestOwner.DCAE);
                     }
                     log.info("=== Processing periodic check complete ===");
 
@@ -226,6 +235,7 @@ public class BandwidthEvaluator {
                             log.debug("Service modification complete; serviceId: {} with new bandwidth: {}", serviceId, bwValue);
                             ccvpnPmDatastore.updateMaxBw(serviceId, bwValue, true);
                             ccvpnPmDatastore.updateSvcState(serviceId, ServiceState.RUNNING);
+                            ccvpnPmDatastore.updateClosedloopStatus(serviceId, true);
                         }
                     }
                     log.info("=== Processing AAI network policy query complete ===");
