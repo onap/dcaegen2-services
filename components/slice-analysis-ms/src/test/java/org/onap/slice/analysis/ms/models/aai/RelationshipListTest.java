@@ -24,6 +24,7 @@ package org.onap.slice.analysis.ms.models.aai;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -109,5 +110,10 @@ public class RelationshipListTest {
 
         assertTrue(relationshipList1.equals(relationshipList));
         assertTrue(StringUtils.isNotBlank(relationshipList.toString()));
+    }
+    @Test
+    public void equalsContract() {
+        EqualsVerifier.simple().forClass(RelationshipList.class)
+                .verify();
     }
 }

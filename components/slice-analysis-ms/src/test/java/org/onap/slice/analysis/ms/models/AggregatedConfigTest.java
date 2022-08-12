@@ -21,6 +21,7 @@
 
 package org.onap.slice.analysis.ms.models;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.validation.constraints.NotEmpty;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -71,5 +74,11 @@ public class AggregatedConfigTest {
         assertTrue(aggregatedConfig2.equals(aggregatedConfig));
         assertTrue(StringUtils.isNotBlank(aggregatedConfig.toString()));
         assertTrue(aggregatedConfig.hashCode() != 0);
+    }
+    @Test
+    public void equalsContract() {
+        EqualsVerifier.simple().forClass(AggregatedConfig.class)
+                .withIgnoredAnnotations(NotEmpty.class)
+                .verify();
     }
 }

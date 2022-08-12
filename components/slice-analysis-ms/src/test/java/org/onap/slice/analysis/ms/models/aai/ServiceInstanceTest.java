@@ -21,6 +21,7 @@
 
 package org.onap.slice.analysis.ms.models.aai;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -100,5 +101,11 @@ public class ServiceInstanceTest {
 
         assertTrue(serviceInstance1.equals(serviceInstance));
         assertTrue(StringUtils.isNotBlank(serviceInstance.toString()));
+    }
+
+    @Test
+    public void equalsContract() {
+        EqualsVerifier.simple().forClass(ServiceInstance.class)
+                .verify();
     }
 }

@@ -21,6 +21,7 @@
 
 package org.onap.slice.analysis.ms.models;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,7 @@ import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,5 +71,11 @@ public class SliceConfigResponseTest {
         assertTrue(sliceConfigResponse1.equals(sliceConfigResponse));
         assertTrue(StringUtils.isNotBlank(sliceConfigResponse.toString()));
         assertTrue(sliceConfigResponse.hashCode() != 0);
+    }
+    @Test
+    public void equalsContract() {
+        EqualsVerifier.simple().forClass(SliceConfigResponse.class)
+                .withIgnoredAnnotations(NotEmpty.class)
+                .verify();
     }
 }
