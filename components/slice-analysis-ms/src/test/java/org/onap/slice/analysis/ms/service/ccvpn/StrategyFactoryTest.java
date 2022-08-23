@@ -3,7 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
- *   ==============================================================================
+ *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
  *     You may obtain a copy of the License at
@@ -18,28 +18,27 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
-
 package org.onap.slice.analysis.ms.service.ccvpn;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = BandwidthEvaluatorTest.class)
-public class BandwidthEvaluatorTest {
+public class StrategyFactoryTest {
 
-    FixedUpperBoundStrategy s1 = new FixedUpperBoundStrategy();
-    FlexibleThresholdStrategy s2 = new FlexibleThresholdStrategy();
+    private static final String STRATEGY = "FixedUpperBoundStrategy";
+    @Mock
+    FixedUpperBoundStrategy fixedUpperBoundStrategy;
 
     @Spy
     private List<EvaluationStrategy> strategies = new ArrayList<>();
@@ -48,34 +47,15 @@ public class BandwidthEvaluatorTest {
     @InjectMocks
     StrategyFactory strategyFactory;
 
-    @Spy
-    @InjectMocks
-    BandwidthEvaluator bandwidthEvaluator;
-
     @Before
     public void setup(){
         MockitoAnnotations.initMocks(this);
-        strategies.add(s1);
-        strategies.add(s2);
+        strategies.add(fixedUpperBoundStrategy);
     }
 
     @Test
-    public void initTest(){
-        bandwidthEvaluator.init();
-        Mockito.verify(bandwidthEvaluator, Mockito.atLeastOnce()).init();
-    }
-
-    @Test
-    public void stopTest(){
-        bandwidthEvaluator.init();
-        bandwidthEvaluator.stop();
-        Mockito.verify(bandwidthEvaluator, Mockito.atLeastOnce()).stop();
-    }
-
-    @Test
-    public void postTest() {
-        Event evt = new SimpleEvent(null, "{}");
-        bandwidthEvaluator.post(evt);
-        Mockito.verify(bandwidthEvaluator, Mockito.atLeastOnce()).post(Mockito.any(Event.class));
+    public void getStrategyTest(){
+        when(fixedUpperBoundStrategy.getName()).thenReturn(STRATEGY);
+        assertEquals(STRATEGY, strategyFactory.getStrategy(STRATEGY).getName());
     }
 }

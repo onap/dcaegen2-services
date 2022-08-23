@@ -21,7 +21,6 @@
 
 package org.onap.slice.analysis.ms.service.ccvpn;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -30,9 +29,7 @@ import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.concurrent.ConcurrentMap;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -58,8 +55,8 @@ public class CCVPNPmDatastoreTest {
 
     @Test
     public void getMaxBwOfSvcTest() {
-        datastore.updateMaxBw("cll-test", 100, false);
-        assertEquals(datastore.getMaxBwOfSvc("cll-test"), Integer.valueOf(100));
+        datastore.updateProvBw("cll-test", 100, false);
+        assertEquals(datastore.getProvBwOfSvc("cll-test"), Integer.valueOf(100));
     }
 
     @Test
@@ -100,8 +97,14 @@ public class CCVPNPmDatastoreTest {
 
     @Test
     public void updateMaxBwTest() throws NoSuchFieldException, IllegalAccessException {
-        datastore.updateMaxBw("cll-01", "300");
-        Mockito.verify(datastore, Mockito.atLeastOnce()).updateMaxBw(Mockito.any(String.class), Mockito.any(String.class));
+        datastore.updateProvBw("cll-01", "300");
+        Mockito.verify(datastore, Mockito.atLeastOnce()).updateProvBw(Mockito.any(String.class), Mockito.any(String.class));
+    }
+
+    @Test
+    public void updateUpperBoundBwTest() throws NoSuchFieldException, IllegalAccessException {
+        datastore.updateUpperBoundBw("cll-01", 300);
+        Mockito.verify(datastore, Mockito.atLeastOnce()).updateUpperBoundBw(Mockito.any(String.class), Mockito.any(Integer.class));
     }
 
     @Test
