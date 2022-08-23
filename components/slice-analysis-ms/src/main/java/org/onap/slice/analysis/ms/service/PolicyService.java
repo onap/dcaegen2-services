@@ -51,9 +51,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Component
 public class PolicyService {
+    private final static int SERVICE_RATE_INTERVAL = 5000; // in ms
     private PolicyDmaapClient policyDmaapClient;
     private static Logger log = LoggerFactory.getLogger(PolicyService.class);
     private ObjectMapper objectMapper = new ObjectMapper();
+    private RateLimiter rateLimiter;
 
     /**
      * Initialization
@@ -62,6 +64,7 @@ public class PolicyService {
     public void init() {
         Configuration configuration = Configuration.getInstance();
         policyDmaapClient = new PolicyDmaapClient(configuration);
+        rateLimiter = new RateLimiter(1, SERVICE_RATE_INTERVAL);
     }
 
     protected <T> OnsetMessage formPolicyOnsetMessage(String snssai, AdditionalProperties<T> addProps, Map<String, String> serviceDetails) {
@@ -189,6 +192,7 @@ public class PolicyService {
         String msg =  "";
         try {
             msg = objectMapper.writeValueAsString(onsetMessage);
+            rateLimiter.getToken();
             log.info("Sending onset message to Onap/Policy for ControlLoop-CCVPN-CLL, the msg: {}", msg);
             policyDmaapClient.sendNotificationToPolicy(msg);
         }
