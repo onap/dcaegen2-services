@@ -1,13 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
 /*******************************************************************************
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
- *   Copyright (C) 2020 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
- *   Copyright (C) 2022 CTC, Inc.
- *   ==============================================================================
+ *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
  *     You may obtain a copy of the License at
@@ -22,19 +18,19 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
--->
-<configuration>
+package org.onap.slice.analysis.ms.service.ccvpn;
 
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>
-                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36}:%line - %msg%n
-            </Pattern>
-        </layout>
-    </appender>
+public interface EvaluationStrategy {
 
-    <root level="debug">
-        <appender-ref ref="CONSOLE"/>
-    </root>
+    /**
+     * Defined strategy logic to deal with different events
+     * @param event
+     */
+    void execute(Event event);
 
-</configuration>
+    /**
+     * Return name of this strategy
+     * @return name
+     */
+    String getName();
+}

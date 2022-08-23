@@ -43,7 +43,11 @@ public class CCVPNPmDatastore {
     private static final Pattern pattern = Pattern.compile("([0-9.]+)\\s*(kb|Kb|mb|Mb|Gb|gb)*");
     private static final int WINDOW_SIZE = 5;
     private final ConcurrentMap<String, ServiceState> svcStatus = new ConcurrentHashMap<>();
-    private final ConcurrentMap<String, Integer> endpointToMaxBw = new ConcurrentHashMap<>();
+    // Provisioned bandwidth of each endpoint
+    private final ConcurrentMap<String, Integer> endpointToProvBw = new ConcurrentHashMap<>();
+    // Max bandwidth (upper-bound) of each endpoint
+    private final ConcurrentMap<String, Integer> upperBoundBw = new ConcurrentHashMap<>();
+    // Current bandwidth usage data list from customers
     private final ConcurrentMap<Endpointkey, EvictingQueue<Integer>> endpointToUsedBw = new ConcurrentHashMap<>();
 
     /**
@@ -67,12 +71,12 @@ public class CCVPNPmDatastore {
     }
 
     /**
-     * Return max bandwidth of cll service. If max bandwidth is null or missing, return 0;
+     * Return provisioned bandwidth of cll service. If provisioned bandwidth is null or missing, return 0;
      * @param cllId target cll instance id
      * @return Integer bandwidth value
      */
-    public Integer getMaxBwOfSvc(String cllId){
-        return endpointToMaxBw.getOrDefault(cllId, 0);
+    public Integer getProvBwOfSvc(String cllId){
+        return endpointToProvBw.getOrDefault(cllId, 0);
     }
 
     /**
@@ -82,6 +86,10 @@ public class CCVPNPmDatastore {
      */
     public ServiceState getStatusOfSvc(String cllId){
         return svcStatus.getOrDefault(cllId, ServiceState.UNKNOWN);
+    }
+
+    public Integer getUpperBoundBwOfSvc(String cllId){
+        return upperBoundBw.getOrDefault(cllId, Integer.MAX_VALUE);
     }
 
     /**
@@ -102,18 +110,27 @@ public class CCVPNPmDatastore {
     }
 
     /**
-     * Update max bandwidth value to given bandwidth string
+     * Update provisioned bandwidth value to given bandwidth string
      * @param cllId target cll instance id
      * @param bw new bandwidth
      */
-    public void updateMaxBw(String cllId, String bw){
+    public void updateProvBw(String cllId, String bw){
         double bwvvaldb = Double.parseDouble(bw);
         int bwvval = (int) bwvvaldb;
-        updateMaxBw(cllId, bwvval, false);
+        updateProvBw(cllId, bwvval, false);
     }
 
     /**
-     * Update max bandwidth to given bandwidth value;
+     * Update upper bound bandwidth value to given bandwidth
+     * @param cllId target cll instance id
+     * @param bw new bandwidth
+     */
+    public void updateUpperBoundBw(String cllId, int bw){
+        upperBoundBw.put(cllId, bw);
+    }
+
+    /**
+     * Update provisioned bandwidth to given bandwidth value;
      * if @param{override} is false, only write the bandwidth if it is absent.
      * Otherwise override the old value no matter if it exists or not
      * Also, when @param{override} is true, compare the provided value with the old value, if equals, return false;
@@ -123,15 +140,15 @@ public class CCVPNPmDatastore {
      * @param override override old value or not
      * @return whether bandwidth value is changed or not.
      */
-    public boolean updateMaxBw(String cllId, int bw, boolean override){
-        ;
-        if ( endpointToMaxBw.putIfAbsent(cllId, bw) == null || !override){
+    public boolean updateProvBw(String cllId, int bw, boolean override){
+        if (!override && !endpointToProvBw.containsKey(cllId)){
+            endpointToProvBw.put(cllId, bw);
             return true;
         } else {
-            if (endpointToMaxBw.get(cllId) == bw){
+            if (endpointToProvBw.get(cllId) == bw){
                 return false;
             } else {
-                endpointToMaxBw.replace(cllId, bw);
+                endpointToProvBw.replace(cllId, bw);
                 return true;
             }
         }
@@ -166,13 +183,7 @@ public class CCVPNPmDatastore {
             log.warn("Illigal bw string: " + bw);
         }
 
-        EvictingQueue<Integer> dataq = new EvictingQueue<Integer>(WINDOW_SIZE);
-        dataq.offer(result);
-        EvictingQueue q = endpointToUsedBw.putIfAbsent(enk, dataq);
-        if (q != null) {
-            q.offer(result);
-        }
-
+        endpointToUsedBw.computeIfAbsent(enk, k -> new EvictingQueue<Integer>(WINDOW_SIZE)).offer(result);
     }
 
     /**
