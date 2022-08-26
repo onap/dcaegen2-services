@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a03f743b_26e16837",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/AaiEventNotificationCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-08-26T21:08:58Z",
+      "side": 1,
+      "message": "is there junit tests for this new code?",
+      "revId": "e5ce4a5f5fe8378cfc7dd05bc3780d156959b501",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d48f30dc_f9fae125",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-08-26T21:08:58Z",
+      "side": 1,
+      "message": "is there a junit test for this new code?",
+      "revId": "e5ce4a5f5fe8378cfc7dd05bc3780d156959b501",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
