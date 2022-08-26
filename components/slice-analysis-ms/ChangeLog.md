@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.4] - 2022/07/28
          - [DCAEGEN2-3120](https://jira.onap.org/browse/DCAEGEN2-3120) - Enhance sliceanalysis MS to use DCAE SDK dmaap-client lib
          - [DCAEGEN2-3157](https://jira.onap.org/browse/DCAEGEN2-3157) - CodeCoverage improvement for dcaegen2-services-slice-analysis-ms
+         - [DCAEGEN2-3242](https://jira.onap.org/browse/DCAEGEN2-3242) - Fix bug in ConfigFectchFromCbs that fetch will get hung when policy config in pdp engine is empty
 
 ## [1.1.3] - 2022/05/11
          - [DCAEGEN2-3156](https://jira.onap.org/browse/DCAEGEN2-3156) - Fix bug in fetching PM data from DES

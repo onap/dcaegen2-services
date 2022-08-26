@@ -82,31 +82,34 @@ public class ConfigFetchFromCbs implements Runnable {
         // Create the client and use it to get the configuration
         final CbsRequest request = CbsRequests.getAll(diagnosticContext);
         return CbsClientFactory.createCbsClient(cbsClientConfiguration)
-                .flatMapMany(cbsClient -> cbsClient.updates(request, initialDelay, period)).subscribe(jsonObject -> {
-                    log.info("configuration and policy from CBS {}", jsonObject);
-                    JsonObject config = jsonObject.getAsJsonObject("config");
-                    Duration newPeriod = Duration.ofSeconds(config.get("cbsPollingInterval").getAsInt());
-                    if (!newPeriod.equals(period)) {
-                        interval = newPeriod;
-                        synchronized (this) {
-                            this.notifyAll();
-                        }
-
+            .flatMapMany(cbsClient -> cbsClient.updates(request, initialDelay, period)).subscribe(jsonObject -> {
+                log.info("configuration and policy from CBS {}", jsonObject);
+                JsonObject config = jsonObject.getAsJsonObject("config");
+                Duration newPeriod = Duration.ofSeconds(config.get("cbsPollingInterval").getAsInt());
+                if (!newPeriod.equals(period)) {
+                    interval = newPeriod;
+                    synchronized (this) {
+                        this.notifyAll();
                     }
-                    Configuration.getInstance().updateConfigurationFromJsonObject(config);
+                }
+                Configuration.getInstance().updateConfigurationFromJsonObject(config);
 
-                    Type mapType = new TypeToken<Map<String, Object>>() {
-                    }.getType();
-                    if (jsonObject.getAsJsonObject("policies") != null) {
+                Type mapType = new TypeToken<Map<String, Object>>() {
+                }.getType();
+
+                if (jsonObject.getAsJsonObject("policies") != null) {
+                    if(jsonObject.getAsJsonObject("policies").getAsJsonArray("items").size() == 0) {
+                        log.info("No policy in policy drool pdp engine, nothing to update.");
+                    } else {
                         JsonObject policyJson = jsonObject.getAsJsonObject("policies").getAsJsonArray("items").get(0)
-                                .getAsJsonObject().getAsJsonObject("config");
+                            .getAsJsonObject().getAsJsonObject("config");
                         Map<String, Object> policy = new Gson().fromJson(policyJson, mapType);
                         configPolicy.setConfig(policy);
                         log.info("Config policy {}", configPolicy);
                     }
-                }, throwable -> log.warn("Ooops", throwable));
+                }
+            }, throwable -> log.warn("Ooops", throwable));
     }
-
 
 
     @Override
