@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.5] - 2022/08/27
+         - [DCAEGEN2-3221](https://jira.onap.org/browse/DCAEGEN2-3221) - Slice-Analysis-Ms vulnerability updates
+
 ## [1.1.4] - 2022/07/28
          - [DCAEGEN2-3120](https://jira.onap.org/browse/DCAEGEN2-3120) - Enhance sliceanalysis MS to use DCAE SDK dmaap-client lib
          - [DCAEGEN2-3157](https://jira.onap.org/browse/DCAEGEN2-3157) - CodeCoverage improvement for dcaegen2-services-slice-analysis-ms

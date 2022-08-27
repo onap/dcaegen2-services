@@ -89,8 +89,8 @@ public class MLMessageProcessorTest {
 
         try {
             mloutput =
-                    obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel1.json"))),
-                            new TypeReference<MLOutputModel>() {});
+                    obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel.json"))),
+                            new TypeReference<MLOutputModel>() {});	    
             mloutputExp =
                     obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel.json"))),
                             new TypeReference<MLOutputModel>() {});
