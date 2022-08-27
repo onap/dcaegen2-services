@@ -88,12 +88,8 @@ public class MLMessageProcessorTest {
         ricToCellMapping.put("13", myList);
 
         try {
-            mloutput =
-                    obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel1.json"))),
-                            new TypeReference<MLOutputModel>() {});
-            mloutputExp =
-                    obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel.json"))),
-                            new TypeReference<MLOutputModel>() {});
+            mloutput = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel.json"))),new TypeReference<MLOutputModel>() {});
+            mloutputExp = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel.json"))),new TypeReference<MLOutputModel>() {});
         } catch (IOException e) {
             e.printStackTrace();
         }
