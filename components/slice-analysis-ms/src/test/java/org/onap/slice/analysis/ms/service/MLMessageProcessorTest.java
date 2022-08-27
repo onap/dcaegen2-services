@@ -103,7 +103,7 @@ public class MLMessageProcessorTest {
         doNothing().when(policyService).sendOnsetMessageToPolicy(anyString(), any(AdditionalProperties.class),
                 anyMap());
         mlMessageProcessor.processMLMsg(mloutput);
-        assertEquals(mloutputExp, mloutput);
+	assertEquals(ricToCellMapping,configDbService.fetchCUCPCellsOfSnssai("0001-0111"));
     }
 
 }
