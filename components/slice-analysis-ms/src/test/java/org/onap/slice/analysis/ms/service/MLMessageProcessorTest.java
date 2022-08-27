@@ -3,6 +3,8 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020-2022 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 CTC, Inc.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -103,7 +105,7 @@ public class MLMessageProcessorTest {
         doNothing().when(policyService).sendOnsetMessageToPolicy(anyString(), any(AdditionalProperties.class),
                 anyMap());
         mlMessageProcessor.processMLMsg(mloutput);
-        assertEquals(mloutputExp, mloutput);
+        assertEquals(ricToCellMapping,configDbService.fetchCUCPCellsOfSnssai("0001-0111"));
     }
 
 }
