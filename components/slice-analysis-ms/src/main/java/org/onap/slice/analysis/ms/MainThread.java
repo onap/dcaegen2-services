@@ -21,6 +21,8 @@
 
 package org.onap.slice.analysis.ms;
 
+import org.onap.slice.analysis.ms.models.ConfigPolicy;
+import org.onap.slice.analysis.ms.service.ConfigThread;
 import org.onap.slice.analysis.ms.service.ConsumerThread;
 import org.onap.slice.analysis.ms.service.PmThread;
 import org.slf4j.Logger;
@@ -46,6 +48,8 @@ public class MainThread {
 		pmThread.start();
 		Thread consumerThread = new Thread(new ConsumerThread());
 		consumerThread.start();
+		Thread configThread = new Thread(new ConfigThread());
+		configThread.start();
 	}
 
 }

@@ -87,6 +87,7 @@ public class AaiEventNotificationCallbackTest {
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalPrecision", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalPeriodicCheckOn", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalOnDemandCheckOn", "1");
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalFlexibleThreshold", "1");
         Configuration configuration = Configuration.getInstance();
         configuration.updateConfigurationFromJsonObject(jsonObject);
         doNothing().when(bandwidthEvaluator).post(any());

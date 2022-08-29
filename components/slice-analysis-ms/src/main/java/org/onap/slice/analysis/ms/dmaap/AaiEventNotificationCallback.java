@@ -95,7 +95,7 @@ public class AaiEventNotificationCallback implements NotificationCallback {
 
     private void handleMsgJsonObject(JsonObject jsonObject){
         JsonObject header = jsonObject.get(EVENT_HEADER).getAsJsonObject();
-        if (!header.has(ACTION) || !header.get(ACTION).getAsString().equals(aaiNotifTargetAction)){
+        if (!header.has(ACTION) || !isValid(header, ACTION, aaiNotifTargetAction)){
             return;
         }
         if (!header.has(ENTITY_TYPE) || !header.get(ENTITY_TYPE).getAsString().equals(aaiNotifTargetEntity)){
@@ -130,5 +130,15 @@ public class AaiEventNotificationCallback implements NotificationCallback {
             }
         }
         return null;
+    }
+
+    private boolean isValid(JsonObject header, String targetKey, String allowed){
+        boolean valid = false;
+        String[] allowedArr = allowed.split("\\|");
+        String targetVal= header.get(targetKey).getAsString();
+        for (String al: allowedArr){
+            valid |= targetVal.equals(al);
+        }
+        return valid;
     }
 }

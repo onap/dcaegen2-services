@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020-2021 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -98,11 +99,15 @@ public class ConfigFetchFromCbs implements Runnable {
                     Type mapType = new TypeToken<Map<String, Object>>() {
                     }.getType();
                     if (jsonObject.getAsJsonObject("policies") != null) {
-                        JsonObject policyJson = jsonObject.getAsJsonObject("policies").getAsJsonArray("items").get(0)
+                        if(jsonObject.getAsJsonObject("policies").getAsJsonArray("items").size() == 0) {
+                            log.info("No policy in policy drool pdp engine, nothing to update.");
+                        } else {
+                            JsonObject policyJson = jsonObject.getAsJsonObject("policies").getAsJsonArray("items").get(0)
                                 .getAsJsonObject().getAsJsonObject("config");
-                        Map<String, Object> policy = new Gson().fromJson(policyJson, mapType);
-                        configPolicy.setConfig(policy);
-                        log.info("Config policy {}", configPolicy);
+                            Map<String, Object> policy = new Gson().fromJson(policyJson, mapType);
+                            configPolicy.setConfig(policy);
+                            log.info("Config policy {}", configPolicy);
+                        }
                     }
                 }, throwable -> log.warn("Ooops", throwable));
     }

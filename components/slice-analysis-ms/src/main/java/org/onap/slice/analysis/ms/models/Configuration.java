@@ -81,6 +81,7 @@ public class Configuration {
     private String aaiNotifTargetEntity;
     private boolean ccvpnEvalPeriodicCheckOn;
     private boolean ccvpnEvalOnDemandCheckOn;
+    private boolean ccvpnEvalFlexibleThreshold;
 
     /**
      * No args constructor
@@ -168,6 +169,7 @@ public class Configuration {
         ccvpnEvalPrecision = jsonObject.get("sliceanalysisms.ccvpnEvalPrecision").getAsDouble();
         ccvpnEvalPeriodicCheckOn = jsonObject.get("sliceanalysisms.ccvpnEvalPeriodicCheckOn").getAsBoolean();
         ccvpnEvalOnDemandCheckOn = jsonObject.get("sliceanalysisms.ccvpnEvalOnDemandCheckOn").getAsBoolean();
+        ccvpnEvalFlexibleThreshold = jsonObject.get("sliceanalysisms.ccvpnEvalFlexibleThreshold").getAsBoolean();
 
         if (Objects.isNull(jsonObject.get("aafUsername"))) {
             aafUsername = null;

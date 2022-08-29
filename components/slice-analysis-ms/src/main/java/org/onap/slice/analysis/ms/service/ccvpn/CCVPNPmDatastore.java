@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -20,6 +21,7 @@
  *******************************************************************************/
 package org.onap.slice.analysis.ms.service.ccvpn;
 
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -43,8 +45,15 @@ public class CCVPNPmDatastore {
     private static final Pattern pattern = Pattern.compile("([0-9.]+)\\s*(kb|Kb|mb|Mb|Gb|gb)*");
     private static final int WINDOW_SIZE = 5;
     private final ConcurrentMap<String, ServiceState> svcStatus = new ConcurrentHashMap<>();
-    private final ConcurrentMap<String, Integer> endpointToMaxBw = new ConcurrentHashMap<>();
+    // Provisioned bandwidth of each endpoint
+    private final ConcurrentMap<String, Integer> endpointToProvBw = new ConcurrentHashMap<>();
+    // Max bandwidth (upper-bound) of each endpoint
+    private final ConcurrentMap<String, Integer> upperBoundBw = new ConcurrentHashMap<>();
+    // Initial bandwidth of each endpoint
+    private final ConcurrentMap<String, Integer> endpointToOriginalBw = new ConcurrentHashMap<>();
+    // Current bandwidth usage data list from customers
     private final ConcurrentMap<Endpointkey, EvictingQueue<Integer>> endpointToUsedBw = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, Boolean> closedLoopBwAssuranceStatus = new ConcurrentHashMap<>();
 
     /**
      * Given a cllId, return a map between Endpointkey and their corresponding UsedBw Queue.
@@ -54,8 +63,8 @@ public class CCVPNPmDatastore {
      */
     public Map<Endpointkey, EvictingQueue<Integer>> getUsedBwOfSvc(String cllId){
         return endpointToUsedBw.entrySet().stream()
-                .filter(map -> map.getKey().getCllId() == cllId)
-                .collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue()));
+            .filter(map -> map.getKey().getCllId() == cllId)
+            .collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue()));
     }
 
     /**
@@ -67,12 +76,12 @@ public class CCVPNPmDatastore {
     }
 
     /**
-     * Return max bandwidth of cll service. If max bandwidth is null or missing, return 0;
+     * Return provisioned bandwidth of cll service. If provisioned bandwidth is null or missing, return 0;
      * @param cllId target cll instance id
      * @return Integer bandwidth value
      */
-    public Integer getMaxBwOfSvc(String cllId){
-        return endpointToMaxBw.getOrDefault(cllId, 0);
+    public Integer getProvBwOfSvc(String cllId){
+        return endpointToProvBw.getOrDefault(cllId, 0);
     }
 
     /**
@@ -82,6 +91,29 @@ public class CCVPNPmDatastore {
      */
     public ServiceState getStatusOfSvc(String cllId){
         return svcStatus.getOrDefault(cllId, ServiceState.UNKNOWN);
+    }
+
+    /**
+     * If ccvpn flexible threshold is on, then bandwidth can be assured within scope.
+     * @param cllId
+     * @return
+     */
+    public Integer getUpperBoundBwOfSvc(String cllId){
+        Configuration configuration = Configuration.getInstance();
+        return upperBoundBw.getOrDefault(cllId, Integer.MAX_VALUE);
+    }
+
+    /**
+     * Get closed loop check status of this cll service
+     * @param cllId
+     * @return
+     */
+    public Boolean getClosedloopStatus(String cllId){
+        return closedLoopBwAssuranceStatus.getOrDefault(cllId,true);
+    }
+
+    public int getOriginalBw(String cllId) {
+        return endpointToOriginalBw.getOrDefault(cllId, 0);
     }
 
     /**
@@ -102,18 +134,46 @@ public class CCVPNPmDatastore {
     }
 
     /**
-     * Update max bandwidth value to given bandwidth string
+     * Update provisioned bandwidth value to given bandwidth string
      * @param cllId target cll instance id
      * @param bw new bandwidth
      */
-    public void updateMaxBw(String cllId, String bw){
+    public void updateProvBw(String cllId, String bw){
         double bwvvaldb = Double.parseDouble(bw);
         int bwvval = (int) bwvvaldb;
-        updateMaxBw(cllId, bwvval, false);
+        updateProvBw(cllId, bwvval, false);
+    }
+
+    /**
+     * Update the status, whether close loop bw modification of this cll service is on.
+     * @param cllId
+     * @param status
+     */
+    public void updateClosedloopStatus(String cllId, Boolean status){
+        closedLoopBwAssuranceStatus.put(cllId, status);
+    }
+
+    /**
+     * Update cll original bw, which will not influenced by closed loop bw assurance
+     * @param cllId
+     * @param originalBw
+     */
+    public void updateOriginalBw(String cllId, int originalBw){
+        endpointToOriginalBw.put(cllId, originalBw);
     }
 
     /**
      * Update max bandwidth to given bandwidth value;
+     * Update upper bound bandwidth value to given bandwidth
+     * @param cllId target cll instance id
+     * @param bw new bandwidth
+     */
+    public void updateUpperBoundBw(String cllId, int bw){
+        upperBoundBw.put(cllId, bw);
+    }
+
+    /**
+     * Update provisioned bandwidth to given bandwidth value;
      * if @param{override} is false, only write the bandwidth if it is absent.
      * Otherwise override the old value no matter if it exists or not
      * Also, when @param{override} is true, compare the provided value with the old value, if equals, return false;
@@ -123,15 +183,15 @@ public class CCVPNPmDatastore {
      * @param override override old value or not
      * @return whether bandwidth value is changed or not.
      */
-    public boolean updateMaxBw(String cllId, int bw, boolean override){
-        ;
-        if ( endpointToMaxBw.putIfAbsent(cllId, bw) == null || !override){
+    public boolean updateProvBw(String cllId, int bw, boolean override){
+        if (!override && !endpointToProvBw.containsKey(cllId)){
+            endpointToProvBw.put(cllId, bw);
             return true;
         } else {
-            if (endpointToMaxBw.get(cllId) == bw){
+            if (endpointToProvBw.get(cllId) == bw){
                 return false;
             } else {
-                endpointToMaxBw.replace(cllId, bw);
+                endpointToProvBw.replace(cllId, bw);
                 return true;
             }
         }
@@ -166,13 +226,7 @@ public class CCVPNPmDatastore {
             log.warn("Illigal bw string: " + bw);
         }
 
-        EvictingQueue<Integer> dataq = new EvictingQueue<Integer>(WINDOW_SIZE);
-        dataq.offer(result);
-        EvictingQueue q = endpointToUsedBw.putIfAbsent(enk, dataq);
-        if (q != null) {
-            q.offer(result);
-        }
-
+        endpointToUsedBw.computeIfAbsent(enk, k -> new EvictingQueue<Integer>(WINDOW_SIZE)).offer(result);
     }
 
     /**
@@ -183,6 +237,17 @@ public class CCVPNPmDatastore {
      */
     public Object[] readToArray(String cllId, String uniId){
         return endpointToUsedBw.get(new Endpointkey(cllId, uniId)).tryReadToArray();
+    }
+
+    /**
+     * Update runtime configurations;
+     * @param cllId
+     * @param closedLoopBwAssuranceStatus
+     * @param originalBw
+     */
+    public void updateConfigFromPolicy(String cllId, Boolean closedLoopBwAssuranceStatus, int originalBw) {
+        updateClosedloopStatus(cllId, closedLoopBwAssuranceStatus);
+        updateOriginalBw(cllId, originalBw);
     }
 
     /**
