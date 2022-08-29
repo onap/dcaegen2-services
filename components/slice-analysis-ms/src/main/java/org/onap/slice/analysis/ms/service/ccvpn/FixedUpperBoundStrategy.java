@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -76,6 +77,10 @@ public class FixedUpperBoundStrategy implements EvaluationStrategy{
             for(Map.Entry<Endpointkey, CCVPNPmDatastore.EvictingQueue<Integer>> entry: usedBwMap.entrySet()) {
                 String serviceId = entry.getKey().getCllId();
                 Object[] usedBws = entry.getValue().tryReadToArray();
+                if (!ccvpnPmDatastore.getClosedloopStatus(serviceId)) {
+                    log.info("CCVPN Evaluator Output: service {}, closed loop bw modification is off.", serviceId);
+                    continue;
+                }
 
                 if (usedBws == null) {
                     // No enough data for evaluating
@@ -110,22 +115,28 @@ public class FixedUpperBoundStrategy implements EvaluationStrategy{
             // fetch the provisioned bandwidth info if underMaintenance; otherwise send modification request
             for(Map.Entry<String, Integer> entry: candidate.entrySet()) {
                 //still doing adjustment
-                if (isServiceUnderMaintenance(entry.getKey())) {
-                    if (entry.getValue() == 0){
+                String cllId = entry.getKey();
+                Integer newBw = entry.getValue();
+                if(!ccvpnPmDatastore.getClosedloopStatus(cllId)) {
+                    log.debug("CCVPN Evaluator Output: service {} is not under closed loop assurance", cllId);
+                    continue;
+                }
+                if (isServiceUnderMaintenance(cllId)) {
+                    if (newBw == 0){
                         log.debug("CCVPN Evaluator Output: service {}," +
-                                " is in maintenance state, fetching bandwidth info from AAI", entry.getKey());
+                            " is in maintenance state, fetching bandwidth info from AAI", cllId);
                     } else {
                         log.debug("CCVPN Evaluator Output: candidate {}," +
-                                " need an adjustment, but skipped due to in maintenance state", entry.getKey());
+                            " need an adjustment, but skipped due to in maintenance state", cllId);
                     }
-                    post(new SimpleEvent(SimpleEvent.Type.AAI_BW_REQ, entry.getKey()));
+                    post(new SimpleEvent(SimpleEvent.Type.AAI_BW_REQ, cllId));
                     continue;
                 }
                 //not in the mid of adjustment; we are free to adjust.
                 log.info("CCVPN Evaluator Output: candidate {}," +
-                        " need an adjustment, sending request to policy", entry.getKey());
+                    " need an adjustment, sending request to policy", entry.getKey());
                 ccvpnPmDatastore.updateSvcState(entry.getKey(), ServiceState.UNDER_MAINTENANCE);
-                sendModifyRequest(entry.getKey(), entry.getValue(), RequestOwner.DCAE);
+                sendModifyRequest(entry.getKey(), newBw, RequestOwner.DCAE);
             }
             log.debug("=== Processing periodic check complete ===");
         }

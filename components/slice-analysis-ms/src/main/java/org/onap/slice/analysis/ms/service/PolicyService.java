@@ -54,7 +54,9 @@ public class PolicyService {
     private PolicyDmaapClient policyDmaapClient;
     private static Logger log = LoggerFactory.getLogger(PolicyService.class);
     private ObjectMapper objectMapper = new ObjectMapper();
+
     private RateLimiter rateLimiter;
+
 
     /**
      * Initialization
@@ -64,6 +66,7 @@ public class PolicyService {
         Configuration configuration = Configuration.getInstance();
         policyDmaapClient = new PolicyDmaapClient(configuration);
         rateLimiter = new RateLimiter(1, 5000);
+
     }
 
     protected <T> OnsetMessage formPolicyOnsetMessage(String snssai, AdditionalProperties<T> addProps, Map<String, String> serviceDetails) {
@@ -191,12 +194,49 @@ public class PolicyService {
         String msg =  "";
         try {
             msg = objectMapper.writeValueAsString(onsetMessage);
+
             rateLimiter.getToken();
+
             log.info("Sending onset message to Onap/Policy for ControlLoop-CCVPN-CLL, the msg: {}", msg);
             policyDmaapClient.sendNotificationToPolicy(msg);
         }
         catch (Exception e) {
             log.error("Error sending notification to policy, {}",e.getMessage());
         }
+    }
+
+    /**
+     * A simple rate-limiter; make sure bandwidth adjustment requests don't swarm underlay controller
+     */
+    private class TokenBucket {
+        private int MAX_TOKENS;
+        private long lastRequestTime = System.currentTimeMillis();
+        private long possibleTokens = 0;
+        private long interval = 1000;
+
+        /**
+         * Constructor for rate limiter (simple token bucket filter)
+         * @param maxTokens max number of token allowed
+         * @param interval interval(ms) between received new token
+         */
+        public TokenBucket(int maxTokens, int interval){
+            MAX_TOKENS = maxTokens;
+            interval = interval;
+        }
+
+        synchronized void getToken() throws InterruptedException {
+            possibleTokens += (System.currentTimeMillis() - lastRequestTime) / interval;
+            if (possibleTokens > MAX_TOKENS){
+                possibleTokens = MAX_TOKENS;
+            }
+            if (possibleTokens == 0){
+                Thread.sleep(interval);
+            } else {
+                possibleTokens--;
+            }
+            // granting token
+            lastRequestTime = System.currentTimeMillis();
+        }
+
     }
 }
