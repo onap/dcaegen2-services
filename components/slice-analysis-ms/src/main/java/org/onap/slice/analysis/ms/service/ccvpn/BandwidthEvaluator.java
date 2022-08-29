@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -63,7 +64,7 @@ public class BandwidthEvaluator {
 
     private static final Event KILL_PILL = new SimpleEvent(null, 0);
     private static final int DEFAULT_EVAL_INTERVAL = 5;
-    private static final String DEFAULT_STRATEGY_NAME = "FixedUpperBoundStrategy";
+    private static final String DEFAULT_STRATEGY_NAME = "FlexibleThresholdStrategy";
 
     /**
      * Interval of each round of evaluation, defined in config_all.json
@@ -117,6 +118,7 @@ public class BandwidthEvaluator {
                             log.info("Service modification complete; serviceId: {} with new bandwidth: {}", serviceId, bwValue);
                             ccvpnPmDatastore.updateProvBw(serviceId, bwValue, true);
                             ccvpnPmDatastore.updateSvcState(serviceId, ServiceState.RUNNING);
+                            ccvpnPmDatastore.updateClosedloopStatus(serviceId, true);
                         }
                     }
                     log.debug("=== Processing AAI network policy query complete ===");
@@ -141,11 +143,11 @@ public class BandwidthEvaluator {
      */
     private void scheduleEvaluation(){
         executorPool.scheduleAtFixedRate(new Runnable() {
-                @Override
-                public void run() {
-                    post(new SimpleEvent(SimpleEvent.Type.PERIODIC_CHECK, 1));
-                }
-            }, 0, (evaluationInterval == 0? DEFAULT_EVAL_INTERVAL : evaluationInterval), TimeUnit.SECONDS);
+            @Override
+            public void run() {
+                post(new SimpleEvent(SimpleEvent.Type.PERIODIC_CHECK, 1));
+            }
+        }, 0, (evaluationInterval == 0? DEFAULT_EVAL_INTERVAL : evaluationInterval), TimeUnit.SECONDS);
     }
 
     /**
@@ -161,7 +163,7 @@ public class BandwidthEvaluator {
      */
     public void post(@NonNull Event event){
         log.debug("A new event triggered, type: {}, subject: {}, at time: {}",
-                event.type(), event.subject(), event.time());
+            event.type(), event.subject(), event.time());
         if (event.type() == SimpleEvent.Type.AAI_BW_REQ) {
             aaiEventLoop.add(event);
         } else if (event.type() == SimpleEvent.Type.PERIODIC_CHECK) {
@@ -171,6 +173,7 @@ public class BandwidthEvaluator {
         }
     }
 
+    // update configuration
     private void loadConfig() {
         configuration = Configuration.getInstance();
         evaluationInterval = configuration.getCcvpnEvalInterval();
