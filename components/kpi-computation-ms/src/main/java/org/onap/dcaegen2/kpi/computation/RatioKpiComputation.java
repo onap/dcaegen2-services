@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.onap.dcaegen2.kpi.config.ControlLoopSchemaType;
@@ -71,10 +72,75 @@ public class RatioKpiComputation extends BaseKpiComputation {
             while (listIteratorK1.hasNext()) {
                 final KpiOperand myK1 = listIteratorK1.next();
                 final KpiOperand myK2 = listIteratorK2.next();
+
+                String value = myK1.getValue().toString();
+                List<MeasInfo> measInfoList = Optional.of(pmEvent).map(PerformanceEvent::getPerf3gppFields)
+                      .map(Perf3gppFields::getMeasDataCollection)
+                      .map(MeasDataCollection::getMeasInfoList)
+                      .orElseThrow(() -> new KpiComputationException("MeasInfoList not present"));
+
+                int pValue = 0;
+
+                for(MeasInfo meas: measInfoList){
+                   for(MeasValues measValue: meas.getMeasValuesList()){
+                      for(MeasResult measResult: measValue.getMeasResults()){
+                          String s = measResult.getSvalue();
+                          if(s.equalsIgnoreCase(value)){
+                               pValue = measResult.getPvalue();
+                          }
+                      } 
+                   }        
+                }
+
+                String operand = null;
+
+                for(MeasInfo measInfo: measInfoList){
+                   List<String> measTypesList = measInfo.getMeasTypes().getMeasTypesList();
+                   if(!measTypesList.isEmpty()){
+                      for(String s : measTypesList){
+                         int index = measTypesList.indexOf(s);
+                         if( index == (pValue-1)){
+                            operand = s;
+                         }
+                      }
+                   }
+                }       
+
+                StringBuilder sb = new StringBuilder();
+                if(!operand.isEmpty()){
+                   char[] chars = operand.toCharArray();
+                   for(char c : chars){
+                      if(Character.isDigit(c)){
+                         sb.append(c);
+                      }
+                   }
+                }
+                else{
+                   logger.info("operand is empty");
+                }
+
+                String snssai = sb.toString();
+
+                StringBuilder sb1 = new StringBuilder();
+                if(!measType.isEmpty()){
+                   char[] chars = measType.toCharArray();
+                   for(char c : chars){
+                      if(!Character.isDigit(c)){
+                        sb1.append(c);
+                      }
+                   }
+                }
+                else{
+                   logger.info("operand is empty");
+                }
+       
+                String meas = sb1.toString();
+                String measTypes = meas + snssai;
+
                 if (myK2.getValue().compareTo(BigDecimal.ZERO) != 0) {
                     final BigDecimal result = myK1.getValue().multiply(new BigDecimal("100"))
                         .divide(myK2.getValue(), 0, RoundingMode.HALF_UP);
-                    vesEvents.add(generateVesEvent(pmEvent, schemaType.toString(), result, measType));
+                    vesEvents.add(generateVesEvent(pmEvent, schemaType.toString(), result, measTypes));
                 }
             }
         }

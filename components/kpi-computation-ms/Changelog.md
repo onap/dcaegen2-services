@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.7]
+### Changed
+* Append SNSSAI with MeasType string and handle multiple operands (DCAEGEN2-3193)
+
 ## [1.0.6]
 ### Changed
 * CodeCoverage improvement for dcaegen2-services-kpi-computation-ms (DCAEGEN2-3162)
