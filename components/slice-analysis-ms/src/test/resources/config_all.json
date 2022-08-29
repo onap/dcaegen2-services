@@ -110,7 +110,11 @@
     "sliceanalysisms.ccvpnEvalPrecision": 100.0,
     "sliceanalysisms.ccvpnEvalPeriodicCheckOn": true,
     "sliceanalysisms.ccvpnEvalOnDemandCheckOn": true,
+<<<<<<< HEAD
     "sliceanalysisms.ccvpnEvalStrategy": "FixedUpperBoundStrategy",
+=======
+    "sliceanalysisms.ccvpnEvalFlexibleThreshold" : false,
+>>>>>>> d8bc0ba ([SLICEMS] Add bw decrease logics and enhance runtime config feature)
     "service_calls": {
       "policy-req": []
     },

@@ -93,14 +93,12 @@ public class ConfigFetchFromCbs implements Runnable {
                         this.notifyAll();
                     }
                 }
-                Configuration.getInstance().updateConfigurationFromJsonObject(config);
-
                 Type mapType = new TypeToken<Map<String, Object>>() {
                 }.getType();
-
                 if (jsonObject.getAsJsonObject("policies") != null) {
+                    log.info("Policy file exist");
                     if(jsonObject.getAsJsonObject("policies").getAsJsonArray("items").size() == 0) {
-                        log.error("No policy in policy drool pdp engine, nothing to update.");
+                        log.info("No policy in policy drool pdp engine, nothing to update.");
                     } else {
                         JsonObject policyJson = jsonObject.getAsJsonObject("policies").getAsJsonArray("items").get(0)
                             .getAsJsonObject().getAsJsonObject("config");

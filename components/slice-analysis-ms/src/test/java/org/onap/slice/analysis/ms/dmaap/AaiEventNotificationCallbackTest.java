@@ -87,7 +87,11 @@ public class AaiEventNotificationCallbackTest {
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalPrecision", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalPeriodicCheckOn", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalOnDemandCheckOn", "1");
+<<<<<<< HEAD
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalStrategy", "1");
+=======
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalFlexibleThreshold", "1");
+>>>>>>> d8bc0ba ([SLICEMS] Add bw decrease logics and enhance runtime config feature)
         Configuration configuration = Configuration.getInstance();
         configuration.updateConfigurationFromJsonObject(jsonObject);
         doNothing().when(bandwidthEvaluator).post(any());

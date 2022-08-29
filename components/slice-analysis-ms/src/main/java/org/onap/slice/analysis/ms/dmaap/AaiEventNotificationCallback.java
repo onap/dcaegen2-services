@@ -132,7 +132,10 @@ public class AaiEventNotificationCallback implements NotificationCallback {
         return null;
     }
 
+<<<<<<< HEAD
     // make sure dmaap mesg header is expected type and valid;
+=======
+>>>>>>> d8bc0ba ([SLICEMS] Add bw decrease logics and enhance runtime config feature)
     private boolean isValid(JsonObject header, String targetKey, String allowed){
         boolean valid = false;
         String[] allowedArr = allowed.split("\\|");
