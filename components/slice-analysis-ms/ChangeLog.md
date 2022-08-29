@@ -4,13 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.1.4] - 2022/08/24
+## [1.1.4] - 2022/09/5
          - [DCAEGEN2-3120](https://jira.onap.org/browse/DCAEGEN2-3120) - Enhance sliceanalysis MS to use DCAE SDK dmaap-client lib
 
          - [DCAEGEN2-3157](https://jira.onap.org/browse/DCAEGEN2-3157) - CodeCoverage improvement for dcaegen2-services-slice-analysis-ms
+
          - [DCAEGEN2-3242](https://jira.onap.org/browse/DCAEGEN2-3242) - Fix bug in ConfigFectchFromCbs that fetch will get hung when policy config in pdp engine is empty
 
          - [DCAEGEN2-3239](Enhance BandwidthEvaluator to listen on user's bandwidth threshold)
+
+         - [DCAEGEN2-3239](https://jira.onap.org/browse/DCAEGEN2-3239) - Enhance BandwidthEvaluator to listen on user's bandwidth threshold
+
+         - [DCAEGEN2-3195](https://jira.onap.org/browse/DCAEGEN2-3195) - Add bw decrease logics and enhance runtime configs feature
 
 ## [1.1.3] - 2022/05/11
          - [DCAEGEN2-3156](https://jira.onap.org/browse/DCAEGEN2-3156) - Fix bug in fetching PM data from DES

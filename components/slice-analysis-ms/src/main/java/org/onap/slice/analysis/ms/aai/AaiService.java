@@ -210,7 +210,6 @@ public class AaiService implements AaiInterface {
     /**
      * Fetches the SNSSIs of a serviceInstanceId
      *
-     * @param serviceInstanceId service instance ID
      * @return snssaiList contains list of SNSSAIs
      */
     public List<String> getSnssaiList(String sliceInstanceId) {
