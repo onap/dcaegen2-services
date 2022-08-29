@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bba22ef8_16308c13",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/controller/ConfigFetchFromCbs.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-08-29T16:25:01Z",
+      "side": 1,
+      "message": "should be logged as error (or at the min warn) as policy is expected to be non-empty",
+      "range": {
+        "startLine": 103,
+        "startChar": 28,
+        "endLine": 103,
+        "endChar": 32
+      },
+      "revId": "28b8e9d8d967d2ece02cfd50debee9291154ca0e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
