@@ -57,11 +57,10 @@ public class KpiComputationTest {
     private static final String VES_MESSAGE_SLICING_FILE = "kpi/ves_message_slicing.json";
     private static final String VES_MESSAGE_EVENTNAME_FILE = "kpi/ves_message_eventname.json";
     private static final String VES_MESSAGE_FIELD_MISSING ="kpi/ves_message_missing_field.json";
-    
-    
+    private static final String VES_MESSAGE_MULTIPLESNSSAI_SLICING_FILE = "kpi/ves_message_slicing_multiplesnssai.json";
+
     @Test
     public void testKpiComputation() {
-
 
         String strKpiConfig = FileUtils.getFileContents(KPI_CONFIG_FILE);
 
@@ -99,6 +98,33 @@ public class KpiComputationTest {
         assertEquals(vesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
                      .getMeasValuesList().get(0).getMeasResults().get(0).getSvalue(), "158");
     }
+
+    @Test
+    public void testKpiComputationSlicingMeasType() {
+        String strKpiConfigRatio = FileUtils.getFileContents(KPI_CONFIG_SLICING_RATIO_FILE);
+        String vesMessage = FileUtils.getFileContents(VES_MESSAGE_SLICING_FILE);
+        Configuration config = mock(Configuration.class);
+        when(config.getKpiConfig()).thenReturn(strKpiConfigRatio);
+        List<VesEvent> vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
+        VesEvent vesEvent = vesList.get(0);
+        assertEquals(vesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
+                .getMeasTypes().getMeasTypesList().get(0), "PDUSessionEstSR.00110010");
+    }
+
+    @Test
+    public void testKpiComputationSlicingMultipleSNSSAI() {
+        String strKpiConfigRatio = FileUtils.getFileContents(KPI_CONFIG_SLICING_RATIO_FILE);
+        String vesMessage = FileUtils.getFileContents(VES_MESSAGE_MULTIPLESNSSAI_SLICING_FILE);
+        Configuration config = mock(Configuration.class);
+        when(config.getKpiConfig()).thenReturn(strKpiConfigRatio);
+        List<VesEvent> vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
+        VesEvent vesEvent = vesList.get(0);
+        VesEvent anotherVesEvent = vesList.get(18);
+        assertEquals(vesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
+                .getMeasTypes().getMeasTypesList().get(0), "PDUSessionEstSR.00110010");
+        assertEquals(anotherVesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
+                      .getMeasTypes().getMeasTypesList().get(0), "PDUSessionEstSR.00101110");
+    }
     
     @Test
     public void testKpiComputationSumRatio() {
@@ -116,7 +142,6 @@ public class KpiComputationTest {
     @Test
     public void testKpiComputationSumRatioEmptyCheck() {
         String strKpiConfigSumRatio = FileUtils.getFileContents(KPI_CONFIG_SUMRATIO_FILE);
-
         String vesMessage = FileUtils.getFileContents(VES_MESSAGE_EMPTY_FILE);
         Configuration config = mock(Configuration.class);
         when(config.getKpiConfig()).thenReturn(strKpiConfigSumRatio);
@@ -154,7 +179,7 @@ public class KpiComputationTest {
         Configuration config = mock(Configuration.class);
         when(config.getKpiConfig()).thenReturn(strKpiConfigSumRatio);
         KpiComputationException kpiException = Assertions.assertThrows(KpiComputationException.class, () -> {
-        	List<VesEvent>  vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
+          List<VesEvent>  vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
         });
         Assertions.assertEquals("Required Field: EventName not present", kpiException.getMessage());
     }
@@ -166,23 +191,23 @@ public class KpiComputationTest {
     }
     @Test
     public void testEmptyOperands() throws Exception {
-    	 Map<String, List<KpiOperand>> operands = null;
-    	 List<String> inputOperands = new ArrayList<String>();
-         operands = Whitebox.invokeMethod(new KpiComputation(), "getOperands", new MeasDataCollection(), inputOperands);
-         Assertions.assertNull(operands);
+        Map<String, List<KpiOperand>> operands = null;
+        List<String> inputOperands = new ArrayList<String>();
+        operands = Whitebox.invokeMethod(new KpiComputation(), "getOperands", new MeasDataCollection(), inputOperands);
+        Assertions.assertNull(operands);
     }
     @Test
     public void testNullVESMessage() {
-    	String strKpiConfigSumRatio = FileUtils.getFileContents(KPI_CONFIG_FILE);
-    	Configuration config = mock(Configuration.class);
+        String strKpiConfigSumRatio = FileUtils.getFileContents(KPI_CONFIG_FILE);
+        Configuration config = mock(Configuration.class);
         when(config.getKpiConfig()).thenReturn(strKpiConfigSumRatio);
         List<VesEvent> vesList = new KpiComputation().checkAndDoComputation(null, config);
         Assertions.assertNull(vesList);
     }
     @Test
     public void testEmptyVESMessage() {
-    	String strKpiConfigSumRatio = FileUtils.getFileContents(KPI_CONFIG_FILE);
-    	Configuration config = mock(Configuration.class);
+        String strKpiConfigSumRatio = FileUtils.getFileContents(KPI_CONFIG_FILE);
+        Configuration config = mock(Configuration.class);
         when(config.getKpiConfig()).thenReturn(strKpiConfigSumRatio);
         String vesMessage = "{}";
         List<VesEvent> vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
