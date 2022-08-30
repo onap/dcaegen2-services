@@ -22,6 +22,7 @@
 
 package org.onap.dcaegen2.kpi.computation;
 
+import java.lang.String;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +30,7 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Optional;
-
+import java.util.stream.Collectors;
 import org.apache.commons.lang.StringUtils;
 
 import org.onap.dcaegen2.kpi.config.ControlLoopSchemaType;
@@ -45,6 +46,7 @@ import org.onap.dcaegen2.kpi.models.Configuration;
 import org.onap.dcaegen2.kpi.models.MeasDataCollection;
 import org.onap.dcaegen2.kpi.models.MeasInfo;
 import org.onap.dcaegen2.kpi.models.MeasResult;
+import org.onap.dcaegen2.kpi.models.MeasTypes;
 import org.onap.dcaegen2.kpi.models.MeasValues;
 import org.onap.dcaegen2.kpi.models.Perf3gppFields;
 import org.onap.dcaegen2.kpi.models.PerformanceEvent;
@@ -104,6 +106,29 @@ public class KpiComputation {
         MeasDataCollection measDataCollection = Optional.of(pmEvent).map(PerformanceEvent::getPerf3gppFields)
                 .map(Perf3gppFields::getMeasDataCollection)
                 .orElseThrow(() -> new KpiComputationException("Required Field: MeasData not present"));
+
+        List<MeasInfo> measInfoList = Optional.of(pmEvent).map(PerformanceEvent::getPerf3gppFields)
+                 .map(Perf3gppFields::getMeasDataCollection)
+                 .map(MeasDataCollection::getMeasInfoList)
+                 .orElseThrow(() -> new KpiComputationException("Required Field: MeasInfoList not present"));
+
+        StringBuilder sb = new StringBuilder();
+        for(MeasInfo measInfo: measInfoList){
+           List<String> measTypes = measInfo.getMeasTypes().getMeasTypesList();
+           if(!measTypes.isEmpty()){
+              String anyString = measTypes.get(0);
+              char[] chars = anyString.toCharArray();
+              for(char c : chars){
+                 if(Character.isDigit(c)){
+                    sb.append(c);
+                 }
+              }
+           }
+           else{
+              logger.info("MeasTypesList is empty");
+           }
+        }
+        String snssai = sb.toString();
         // Do computation for each KPI
         List<VesEvent> events = new LinkedList<>();
         List<Kpi> kpis = methodForKpi.getKpis();
@@ -115,7 +140,7 @@ public class KpiComputation {
             }
 
             ControlLoopSchemaType schemaType = methodForKpi.getControlLoopSchemaType();
-            String measType = k.getMeasType();
+            String measType = k.getMeasType() + "." + snssai;
             Operation operation = k.getOperation();
 
             List<VesEvent> kpiVesEvent = CommandHandler.handle(operation.value, pmEvent, schemaType,
@@ -144,10 +169,9 @@ public class KpiComputation {
             flag = false;
             for (String operand : operands) {
                 List<String> measTypesList = measInfo.getMeasTypes().getMeasTypesList();
-                String measValue = measTypesList.stream()
+                List<String> measValue = measTypesList.stream()
                         .filter(s -> StringUtils.substring(s, 0, operand.length()).equalsIgnoreCase(operand))
-                        .findFirst()
-                        .orElse(null);
+                        .collect(Collectors.toList());
                 if (measValue == null) {
                     flag = true;
                 }
@@ -157,19 +181,19 @@ public class KpiComputation {
                 curatedMeasInfoList.add(measInfo);
             }
         }
-        
+
         for (String operand: operands) {
             String key = null;
             List<KpiOperand> kpiOperands = new ArrayList<>();
             for (MeasInfo m: curatedMeasInfoList) {
                 List<String> measTypesList = m.getMeasTypes().getMeasTypesList();
-                String measValue = measTypesList.stream()
+                List<String> measValueList = measTypesList.stream()
                         .filter(s -> StringUtils.substring(s, 0, operand.length()).equalsIgnoreCase(operand))
-                        .findFirst()
-                        .orElse(null);
-                if (measValue != null) {
+                        .collect(Collectors.toList());
+                if (measValueList != null) {
+                  for(String measValue:measValueList){
                     key = new StringBuilder().append(operand).toString();
-                    int index = measTypesList.indexOf(measValue);
+                    int index = measTypesList.indexOf(measValue);          
                     List<MeasValues> measValuesList = m.getMeasValuesList();
                     for ( MeasValues measValues : measValuesList) {
                          List<MeasResult> measResults = measValues.getMeasResults();
@@ -185,6 +209,7 @@ public class KpiComputation {
                              logger.info("measResults mis-matched - incorrect ves msg construction");
                          }
                     }
+                  }
                 }
             }
             if (kpiOperands.size() <= 0) {
