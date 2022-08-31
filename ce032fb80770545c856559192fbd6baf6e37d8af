@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "966f0dae_edcf10d2",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-08-31T17:20:18Z",
+      "side": 1,
+      "message": "why are you mixing spring versions? Some of your dependencies are now using 5.3.14 and the others 5.3.20. Why aren\u0027t you using 5.3.20 for ALL spring versions? (And doing this change by changing the ${spring.version} property on line 58 above?)",
+      "revId": "ce032fb80770545c856559192fbd6baf6e37d8af",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
