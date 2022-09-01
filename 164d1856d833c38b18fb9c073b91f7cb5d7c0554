@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "cf85c782_187ef527",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-01T23:21:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c93c6b22_87d0b75e",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 21
+      },
+      "revId": "164d1856d833c38b18fb9c073b91f7cb5d7c0554",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f0e704e8_182366bc",
         "filename": "components/kpi-computation-ms/pom.xml",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "97faf763_449973ef",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-01T23:21:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0e704e8_182366bc",
+      "range": {
+        "startLine": 306,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 8
+      },
+      "revId": "164d1856d833c38b18fb9c073b91f7cb5d7c0554",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef21e715_563ca578",
         "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/dmaap/NotificationConsumerTest.java",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "164d1856d833c38b18fb9c073b91f7cb5d7c0554",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b90787a_36bd976b",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/dmaap/NotificationConsumerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-01T23:21:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef21e715_563ca578",
+      "range": {
+        "startLine": 68,
+        "startChar": 97,
+        "endLine": 68,
+        "endChar": 98
+      },
+      "revId": "164d1856d833c38b18fb9c073b91f7cb5d7c0554",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
