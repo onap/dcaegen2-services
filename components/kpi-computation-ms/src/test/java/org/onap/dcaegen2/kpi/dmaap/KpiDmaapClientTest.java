@@ -21,6 +21,8 @@
 package org.onap.dcaegen2.kpi.dmaap;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -35,10 +37,15 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.onap.dcaegen2.kpi.models.Configuration;
 import org.onap.dcaegen2.kpi.utils.DmaapUtils;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.ImmutableMessageRouterPublishResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.att.nsa.cambria.client.CambriaBatchingPublisher;
-import com.att.nsa.cambria.client.CambriaConsumer;
+import com.google.gson.JsonPrimitive;
+
+import reactor.core.publisher.Flux;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest(classes = KpiDmaapClient.class)
@@ -48,42 +55,43 @@ public class KpiDmaapClientTest {
     Configuration configurationMock;
 
     @Mock
-    DmaapUtils dmaapUtilsMock;
+    DmaapUtils dmaapUtilsMock;    
+    
+    @Mock
+    MessageRouterPublisher messageRouterPublisher;
+	
+    @Mock
+    MessageRouterPublishRequest messageRouterPublishRequest;
 
-    @InjectMocks
+    @Mock
     KpiDmaapClient kpiDmaapClient;
-
-    @Mock
-    CambriaConsumer kpiResponseCambriaConsumerMock;
-
-    @Mock
-    CambriaBatchingPublisher cambriaBatchingPublisherMock;
 
     @Mock
     NotificationProducer notificationProducerMock;
 
-    @Before
-    public void setup() {
-        kpiDmaapClient = new KpiDmaapClient(dmaapUtilsMock, configurationMock);
-    }
+	/*
+	 * @Before public void setup() { kpiDmaapClient = new
+	 * KpiDmaapClient(dmaapUtilsMock, configurationMock); }
+	 */
 
     @Test
-    public void sendNotificationToPolicyTest() {
+    public void sendNotificationToPolicyTest() throws IOException {
         Map<String, Object> streamsPublishes = new HashMap<>();
         Map<String, String> topics = new HashMap<>();
         Map<String, Object> dmaapInfo = new HashMap<>();
         topics.put("topic_url", "https://message-router.onap.svc.cluster.local:3905/events/DCAE_KPI_OUTPUT");
         dmaapInfo.put("dmaap_info", topics);
         streamsPublishes.put("kpi_topic", dmaapInfo);
-        Mockito.when(configurationMock.getStreamsPublishes()).thenReturn(streamsPublishes);
-        Mockito.when(dmaapUtilsMock.buildPublisher(configurationMock, "DCAE_KPI_OUTPUT"))
-                .thenReturn(cambriaBatchingPublisherMock);
-        try {
-            Mockito.when(cambriaBatchingPublisherMock.send("", "hello")).thenReturn(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assertTrue(kpiDmaapClient.sendNotificationToDmaap("hello"));
-
-    }
+        Mockito.when(configurationMock.getStreamsPublishes()).thenReturn(streamsPublishes);	
+        Mockito.doNothing().when(notificationProducerMock).sendNotification(Mockito.anyString());
+        io.vavr.collection.List<String> expectedItems = io.vavr.collection.List.of("kpi-1", "kpi-2", "kpi-3");
+    	MessageRouterPublishResponse expectedResponse = ImmutableMessageRouterPublishResponse
+                .builder().items(expectedItems.map(JsonPrimitive::new))
+                .build();    	
+    	Flux<MessageRouterPublishResponse> responses = Flux.just(expectedResponse);
+        when(messageRouterPublisher.put(Mockito.any(), Mockito.any())).thenReturn(responses);
+        when(kpiDmaapClient.sendNotificationToDmaap(Mockito.anyString())).thenReturn(Boolean.TRUE);
+		Boolean response = kpiDmaapClient.sendNotificationToDmaap(Mockito.anyString());
+		assertEquals(Boolean.TRUE, response);
+		}
 }

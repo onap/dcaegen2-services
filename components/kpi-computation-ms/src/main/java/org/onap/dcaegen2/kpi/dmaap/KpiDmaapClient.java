@@ -25,10 +25,10 @@ import java.util.Map;
 
 import org.onap.dcaegen2.kpi.models.Configuration;
 import org.onap.dcaegen2.kpi.utils.DmaapUtils;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.att.nsa.cambria.client.CambriaBatchingPublisher;
 
 /**
  * Client class to handle kpi interactions.
@@ -61,12 +61,14 @@ public class KpiDmaapClient {
         logger.info("Kpi publish topic url: {}", topicUrl);
         String[] topicSplit = topicUrl.split("\\/");
         String topic = topicSplit[topicSplit.length - 1];
-        CambriaBatchingPublisher cambriaBatchingPublisher;
+        MessageRouterPublisher messageRouterPublisher;
+        MessageRouterPublishRequest messageRouterPublishRequest;
         try {
 
-            cambriaBatchingPublisher = dmaapUtils.buildPublisher(configuration, topic);
+        	messageRouterPublisher = dmaapUtils.buildPublisher();
+        	messageRouterPublishRequest = dmaapUtils.buildPublisherRequest(configuration, topic);
 
-            NotificationProducer notificationProducer = new NotificationProducer(cambriaBatchingPublisher);
+            NotificationProducer notificationProducer = new NotificationProducer(messageRouterPublisher, messageRouterPublishRequest);
             notificationProducer.sendNotification(msg);
         } catch (IOException e) {
             return false;

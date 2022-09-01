@@ -20,32 +20,53 @@
 
 package org.onap.dcaegen2.kpi.dmaap;
 
-import com.att.nsa.cambria.client.CambriaBatchingPublisher;
-
 import java.io.IOException;
+
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.gson.JsonPrimitive;
+
+import reactor.core.publisher.Flux;
 
 /**
  * Produces Notification on DMAAP events.
  */
 public class NotificationProducer {
 
-    private CambriaBatchingPublisher cambriaBatchingPublisher;
+	private static Logger logger = LoggerFactory.getLogger(NotificationProducer.class);
+	private MessageRouterPublisher messageRouterPublisher;
+	private MessageRouterPublishRequest messageRouterPublishRequest;
 
-    /**
+	/**
      * Parameterized constructor.
      */
-    public NotificationProducer(CambriaBatchingPublisher cambriaBatchingPublisher) {
+    public NotificationProducer(MessageRouterPublisher messageRouterPublisher, MessageRouterPublishRequest messageRouterPublishRequest) {
         super();
-        this.cambriaBatchingPublisher = cambriaBatchingPublisher;
+        this.messageRouterPublisher = messageRouterPublisher;
+        this.messageRouterPublishRequest = messageRouterPublishRequest;
     }
 
-    /**
-     * sends notification to dmaap.
-     */
-    public int sendNotification(String msg) throws IOException {
-
-        return cambriaBatchingPublisher.send("", msg);
-
-    }
+	/**
+	 * sends notification to dmaap.
+	 */
+	public void sendNotification(String msg) throws IOException {
+		
+		Flux.just(1, 2, 3)
+        .map(JsonPrimitive::new)
+        .transform(input -> messageRouterPublisher.put(messageRouterPublishRequest, input))
+        .subscribe(resp -> {
+                    if (resp.successful()) {
+                        logger.debug("Sent a batch of messages to the MR");
+                    } else {
+                        logger.warn("Message sending has failed: {}", resp.failReason());
+                    }
+                },
+                ex -> {
+                    logger.warn("An unexpected error while sending messages to DMaaP", ex);
+                });
+	}
 
 }

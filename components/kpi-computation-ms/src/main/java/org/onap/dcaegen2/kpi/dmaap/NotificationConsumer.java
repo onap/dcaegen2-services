@@ -20,10 +20,14 @@
 
 package org.onap.dcaegen2.kpi.dmaap;
 
-import com.att.nsa.cambria.client.CambriaConsumer;
+import java.time.Duration;
 
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.JsonElement;
 
 /**
  * Consume Notifications from DMAAP events.
@@ -31,15 +35,17 @@ import org.slf4j.LoggerFactory;
 public class NotificationConsumer implements Runnable {
 
     private static Logger log = LoggerFactory.getLogger(NotificationConsumer.class);
-    private CambriaConsumer cambriaConsumer;
+    private MessageRouterSubscriber messageSubscriber;
+    private MessageRouterSubscribeRequest subscriberRequest;
     private NotificationCallback notificationCallback;
 
     /**
      * Parameterized Constructor.
      */
-    public NotificationConsumer(CambriaConsumer cambriaConsumer, NotificationCallback notificationCallback) {
+    public NotificationConsumer(MessageRouterSubscriber messageSubscriber, MessageRouterSubscribeRequest subscriberRequest, NotificationCallback notificationCallback) {
         super();
-        this.cambriaConsumer = cambriaConsumer;
+        this.messageSubscriber = messageSubscriber;
+        this.subscriberRequest = subscriberRequest;
         this.notificationCallback = notificationCallback;
     }
 
@@ -48,15 +54,14 @@ public class NotificationConsumer implements Runnable {
      */
     @Override
     public void run() {
-        try {
-            Iterable<String> msgs = cambriaConsumer.fetch();
-            for (String msg : msgs) {
-                log.info(msg);
-                notificationCallback.activateCallBack(msg);
-            }
-        } catch (Exception e) {
-            log.debug("exception when fetching msgs from dmaap", e);
-        }
-
+        	messageSubscriber.subscribeForElements(subscriberRequest, Duration.ofMinutes(1))
+            .map(JsonElement::getAsString)
+            .subscribe(msg -> {
+            	log.info(msg);
+            	notificationCallback.activateCallBack(msg);
+            },
+                    ex -> {
+                        log.warn("An unexpected error while receiving messages from DMaaP", ex);
+                    });
     }
 }
