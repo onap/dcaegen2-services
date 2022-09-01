@@ -1,6 +1,7 @@
 /*-
  * ============LICENSE_START=======================================================
  *  Copyright (C) 2021 China Mobile.
+ *  Copyright (C) 2022 Wipro Limited.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,43 +21,53 @@
 
 package org.onap.dcaegen2.kpi.dmaap;
 
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Duration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeRequest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.att.nsa.cambria.client.CambriaConsumer;
+import com.google.gson.JsonElement;
+
+import reactor.core.CoreSubscriber;
+import reactor.core.publisher.Flux;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = NotificationConsumerTest.class)
 public class NotificationConsumerTest {
 
     @Mock
-    CambriaConsumer cambriaConsumer;
-
-    @Mock
     NotificationCallback notificationCallback;
 
     @InjectMocks
     NotificationConsumer notificationConsumer;
+    
+    @Mock
+    MessageRouterSubscriber messageSubscriber;
+    
+    @Mock
+    MessageRouterSubscribeRequest subscriberRequest;
 
     @Test
     public void testNotificationConsumer() {
         try {
-            List<String> notifications = new ArrayList<>();
-            notifications.add("notification1");
-            when(cambriaConsumer.fetch()).thenReturn(notifications);
-            Mockito.doNothing().when(notificationCallback).activateCallBack(Mockito.anyString());
-            notificationConsumer.run();
-
+            Flux<JsonElement> json = new Flux<JsonElement>() {
+                @Override
+                public void subscribe(CoreSubscriber<? super JsonElement> actual) {
+                }
+            };
+            Mockito.doNothing().when(notificationCallback).activateCallBack(Mockito.anyString());		
+            when(messageSubscriber.subscribeForElements(subscriberRequest, Duration.ofMinutes(1))).thenReturn(json);
+            assertNotNull(messageSubscriber.subscribeForElements(subscriberRequest, Duration.ofMinutes(1)));
         } catch (Exception e) {
             e.printStackTrace();
         }
