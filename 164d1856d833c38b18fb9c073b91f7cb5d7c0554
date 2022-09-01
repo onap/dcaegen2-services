@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c93c6b22_87d0b75e",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-01T18:36:37Z",
+      "side": 1,
+      "message": "remove this lib",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 21
+      },
+      "revId": "164d1856d833c38b18fb9c073b91f7cb5d7c0554",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0e704e8_182366bc",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-01T18:36:37Z",
+      "side": 1,
+      "message": "remove tab/space here",
+      "range": {
+        "startLine": 306,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 8
+      },
+      "revId": "164d1856d833c38b18fb9c073b91f7cb5d7c0554",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef21e715_563ca578",
+        "filename": "components/kpi-computation-ms/src/test/java/org/onap/dcaegen2/kpi/dmaap/NotificationConsumerTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-01T18:36:37Z",
+      "side": 1,
+      "message": "remove tab/spaces",
+      "range": {
+        "startLine": 68,
+        "startChar": 97,
+        "endLine": 68,
+        "endChar": 98
+      },
+      "revId": "164d1856d833c38b18fb9c073b91f7cb5d7c0554",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
