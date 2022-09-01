@@ -1,6 +1,7 @@
 /*-
  * ============LICENSE_START=======================================================
  *  Copyright (C) 2021 China Mobile.
+ *  Copyright (C) 2022 Wipro Limited.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +21,6 @@
 
 package org.onap.dcaegen2.kpi.dmaap;
 
-import com.att.nsa.cambria.client.CambriaConsumer;
-
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -31,9 +30,10 @@ import javax.annotation.PostConstruct;
 
 import org.onap.dcaegen2.kpi.models.Configuration;
 import org.onap.dcaegen2.kpi.utils.DmaapUtils;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Component;
 
 /**
@@ -77,12 +77,13 @@ public class DmaapClient {
         String pmTopic = pmTopicSplit[pmTopicSplit.length - 1];
         log.debug("pm topic : {}", pmTopic);
 
-        CambriaConsumer pmNotifCambriaConsumer = dmaapUtils.buildConsumer(configuration, pmTopic);
+        MessageRouterSubscriber pmNotifSubscriber = dmaapUtils.buildSubscriber();
+        MessageRouterSubscribeRequest subscriberRequest = dmaapUtils.buildSubscriberRequest(configuration, pmTopic);
 
         ScheduledExecutorService executorPool;
 
         // create notification consumers for PM
-        NotificationConsumer pmNotificationConsumer = new NotificationConsumer(pmNotifCambriaConsumer,
+        NotificationConsumer pmNotificationConsumer = new NotificationConsumer(pmNotifSubscriber, subscriberRequest,
                 new KpiComputationCallBack());
         // start pm notification consumer threads
         executorPool = Executors.newScheduledThreadPool(10);
