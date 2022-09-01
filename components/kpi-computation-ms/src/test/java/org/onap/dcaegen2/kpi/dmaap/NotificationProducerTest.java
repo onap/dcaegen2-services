@@ -1,6 +1,7 @@
 /*-
  * ============LICENSE_START=======================================================
  *  Copyright (C) 2021 China Mobile.
+ *  Copyright (C) 2022 Wipro Limited.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,10 +26,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.att.nsa.cambria.client.CambriaBatchingPublisher;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
+
+import reactor.core.publisher.Flux;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +44,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.onap.dcaegen2.kpi.computation.FileUtils;
 import org.onap.dcaegen2.kpi.models.Configuration;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.ImmutableMessageRouterPublishResponse;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
+import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
 import org.powermock.api.mockito.PowerMockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -49,24 +60,25 @@ public class NotificationProducerTest {
     private static final String CBS_CONFIG_FILE = "kpi/cbs_config2.json";
 
     @Mock
-    CambriaBatchingPublisher cambriaBatchingPublisher;
-
+    MessageRouterPublisher messageRouterPublisher;
+	
+    @Mock
+    MessageRouterPublishRequest messageRouterPublishRequest;
+    
     @InjectMocks
     NotificationProducer notificationProducer;
 
     @Test
-    public void notificationProducerTest() {
-
-        try {
-            when(cambriaBatchingPublisher.send(Mockito.anyString(), Mockito.anyString())).thenReturn(0);
-            int result = notificationProducer.sendNotification("msg");
-            assertEquals(0, result);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public void notificationProducerTest() throws IOException {
+    	io.vavr.collection.List<String> expectedItems = io.vavr.collection.List.of("kpi-1", "kpi-2", "kpi-3");
+    	MessageRouterPublishResponse expectedResponse = ImmutableMessageRouterPublishResponse
+                .builder().items(expectedItems.map(JsonPrimitive::new))
+                .build();    	
+    	Flux<MessageRouterPublishResponse> responses = Flux.just(expectedResponse);
+        when(messageRouterPublisher.put(Mockito.any(), Mockito.any())).thenReturn(responses);
+        notificationProducer.sendNotification("msg");
     }
-
+    
     @Test
     public void kpiResultWithoutConfigTest() {
 
