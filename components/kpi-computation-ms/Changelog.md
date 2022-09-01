@@ -6,13 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 <<<<<<< HEAD
+
+
+##[1.0.8]
+### Changed
+* dcaegen2-services-kpi-computation-ms vulnerability updates (DCAEGEN2-3216)
+
 ## [1.0.7]
 ### Changed
 * Append SNSSAI with MeasType string and handle multiple operands (DCAEGEN2-3243)
-=======
-##[1.0.7]
-##Changed
-* dcaegen2-services-kpi-computation-ms vulnerability updates (DCAEGEN2-3216)
 
 ## [1.0.6]
 ### Changed
