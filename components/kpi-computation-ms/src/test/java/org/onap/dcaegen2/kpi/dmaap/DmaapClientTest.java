@@ -20,15 +20,8 @@
 
 package org.onap.dcaegen2.kpi.dmaap;
 
-import static org.mockito.Mockito.when;
-
-import com.att.nsa.cambria.client.CambriaTopicManager;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -38,19 +31,23 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.onap.dcaegen2.kpi.models.Configuration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+//import com.att.nsa.cambria.client.CambriaTopicManager;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DmaapClientTest.class)
 public class DmaapClientTest {
 
-    @Mock
-    private CambriaTopicManager topicManager;
+	/*
+	 * @Mock private CambriaTopicManager topicManager;
+	 */
 
     @InjectMocks
     DmaapClient client;
@@ -74,17 +71,14 @@ public class DmaapClientTest {
         configuration.setPollingInterval(30);
         configuration.setPollingTimeout(100);
 
-        try {
-            when(topicManager.getTopics()).thenReturn(topics);
+       
+            //when(topicManager.getTopics()).thenReturn(topics);
 
             client = Mockito.mock(DmaapClient.class);
             client.initClient();
             Mockito.verify(client).initClient();
             // Mockito.verifycreateAndConfigureTopics();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Test
