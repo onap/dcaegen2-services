@@ -22,13 +22,13 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
-import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import java.io.IOException;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterPublisher;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishRequest;
 import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterPublishResponse;
 import reactor.core.publisher.Flux;
-
-import java.io.IOException;
 
 /**
  * Produces Notification on DMAAP events
@@ -51,7 +51,8 @@ public class NotificationProducer {
      * sends notification to dmaap.
      */
     public void sendNotification(String msg) throws IOException {
-        Flux<JsonPrimitive> singleMessage = Flux.just(msg).map(JsonPrimitive::new);
+        JsonElement jsonElement = JsonParser.parseString(msg);
+        Flux<JsonElement> singleMessage = Flux.just(jsonElement);
         Flux<MessageRouterPublishResponse> result = this.publisher.put(request, singleMessage);
         result.then().block();
     }
