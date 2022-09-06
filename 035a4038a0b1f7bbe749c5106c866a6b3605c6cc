@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5827433_e36c5d82",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:08:52Z",
+      "side": 1,
+      "message": "you need a line for DCAEGEN2-3239 as well",
+      "revId": "035a4038a0b1f7bbe749c5106c866a6b3605c6cc",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
