@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26bf5a91_aec1a925",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/MLMessageProcessorTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:56:07Z",
+      "side": 1,
+      "message": "hmmm, this looks like a stray typo. The functionality didn\u0027t change, so should not be in the update.",
+      "revId": "3111c001578fe5b9d976e71dd88ab64dc7f4b828",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
