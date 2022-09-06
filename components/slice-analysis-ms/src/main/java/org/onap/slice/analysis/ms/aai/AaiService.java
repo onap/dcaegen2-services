@@ -4,6 +4,7 @@
  *  ================================================================================
  *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -210,7 +211,7 @@ public class AaiService implements AaiInterface {
     /**
      * Fetches the SNSSIs of a serviceInstanceId
      *
-     * @param serviceInstanceId service instance ID
+     * @param sliceInstanceId service instance id
      * @return snssaiList contains list of SNSSAIs
      */
     public List<String> getSnssaiList(String sliceInstanceId) {
