@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -47,8 +48,11 @@ public class CCVPNPmDatastore {
     private final ConcurrentMap<String, Integer> endpointToProvBw = new ConcurrentHashMap<>();
     // Max bandwidth (upper-bound) of each endpoint
     private final ConcurrentMap<String, Integer> upperBoundBw = new ConcurrentHashMap<>();
+    // Original bandwidth of each endpoint
+    private final ConcurrentMap<String, Integer> endpointToOriginalBw = new ConcurrentHashMap<>();
     // Current bandwidth usage data list from customers
     private final ConcurrentMap<Endpointkey, EvictingQueue<Integer>> endpointToUsedBw = new ConcurrentHashMap<>();
+    private final ConcurrentMap<String, Boolean> closedLoopBwAssuranceStatus = new ConcurrentHashMap<>();
 
     /**
      * Given a cllId, return a map between Endpointkey and their corresponding UsedBw Queue.
@@ -58,8 +62,8 @@ public class CCVPNPmDatastore {
      */
     public Map<Endpointkey, EvictingQueue<Integer>> getUsedBwOfSvc(String cllId){
         return endpointToUsedBw.entrySet().stream()
-                .filter(map -> map.getKey().getCllId() == cllId)
-                .collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue()));
+            .filter(map -> map.getKey().getCllId() == cllId)
+            .collect(Collectors.toMap(map -> map.getKey(), map -> map.getValue()));
     }
 
     /**
@@ -88,8 +92,27 @@ public class CCVPNPmDatastore {
         return svcStatus.getOrDefault(cllId, ServiceState.UNKNOWN);
     }
 
+    /**
+     * If ccvpn flexible threshold is on, then bandwidth can be assured within scope.
+     * @param cllId
+     * @return
+     */
     public Integer getUpperBoundBwOfSvc(String cllId){
+        // Configuration configuration = Configuration.getInstance();
         return upperBoundBw.getOrDefault(cllId, Integer.MAX_VALUE);
+    }
+
+    /**
+     * Get closed loop check status of this cll service
+     * @param cllId
+     * @return
+     */
+    public Boolean getClosedloopStatus(String cllId){
+        return closedLoopBwAssuranceStatus.getOrDefault(cllId,true);
+    }
+
+    public int getOriginalBw(String cllId) {
+        return endpointToOriginalBw.getOrDefault(cllId, 0);
     }
 
     /**
@@ -120,7 +143,27 @@ public class CCVPNPmDatastore {
         updateProvBw(cllId, bwvval, false);
     }
 
+
     /**
+     * Update the status, whether close loop bw modification of this cll service is on.
+     * @param cllId
+     * @param status
+     */
+    public void updateClosedloopStatus(String cllId, Boolean status){
+        closedLoopBwAssuranceStatus.put(cllId, status);
+    }
+
+    /**
+     * Update cll original bw, which will not influenced by closed loop bw assurance
+     * @param cllId
+     * @param originalBw
+     */
+    public void updateOriginalBw(String cllId, int originalBw){
+        endpointToOriginalBw.put(cllId, originalBw);
+    }
+
+    /**
+     * Update max bandwidth to given bandwidth value;
      * Update upper bound bandwidth value to given bandwidth
      * @param cllId target cll instance id
      * @param bw new bandwidth
@@ -194,6 +237,17 @@ public class CCVPNPmDatastore {
      */
     public Object[] readToArray(String cllId, String uniId){
         return endpointToUsedBw.get(new Endpointkey(cllId, uniId)).tryReadToArray();
+    }
+
+    /**
+     * Update runtime configurations;
+     * @param cllId
+     * @param closedLoopBwAssuranceStatus
+     * @param originalBw
+     */
+    public void updateConfigFromPolicy(String cllId, Boolean closedLoopBwAssuranceStatus, int originalBw) {
+        updateClosedloopStatus(cllId, closedLoopBwAssuranceStatus);
+        updateOriginalBw(cllId, originalBw);
     }
 
     /**
