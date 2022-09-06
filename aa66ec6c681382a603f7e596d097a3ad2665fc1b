@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99d594ee_46723cd6",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:36:30Z",
+      "side": 1,
+      "message": "This is a duplicated JIRA reference",
+      "revId": "aa66ec6c681382a603f7e596d097a3ad2665fc1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d257ea09_2cd3fc8e",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/aai/AaiService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:36:30Z",
+      "side": 1,
+      "message": "why not replace it with the @param for sliceInstanceId ?",
+      "revId": "aa66ec6c681382a603f7e596d097a3ad2665fc1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75a6b08e_ddebad98",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/Configuration.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:36:30Z",
+      "side": 1,
+      "message": "you do not need a new copyright line here if you did not make any code changes in the file",
+      "revId": "aa66ec6c681382a603f7e596d097a3ad2665fc1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4693e53f_ba1c43b7",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConfigThread.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:36:30Z",
+      "side": 1,
+      "message": "javadocs need to be added for the class and all public methods",
+      "revId": "aa66ec6c681382a603f7e596d097a3ad2665fc1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7113ef6_da68d1f7",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:36:30Z",
+      "side": 1,
+      "message": "this needs to be in its own class file and there need to be tests",
+      "revId": "aa66ec6c681382a603f7e596d097a3ad2665fc1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e79b8ca1_72edc80c",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:36:30Z",
+      "side": 1,
+      "message": "where\u0027s the javadoc for this class?",
+      "revId": "aa66ec6c681382a603f7e596d097a3ad2665fc1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b82808b_ee54e9c4",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:36:30Z",
+      "side": 1,
+      "message": "all public methods need javadoc",
+      "revId": "aa66ec6c681382a603f7e596d097a3ad2665fc1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ef26307_7598635c",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:36:30Z",
+      "side": 1,
+      "message": "\"No\" \u003d\u003e \"Not\"",
+      "revId": "aa66ec6c681382a603f7e596d097a3ad2665fc1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b8d7db7_64ebe221",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:36:30Z",
+      "side": 1,
+      "message": "you can use \"else if\" here instead of just \"if\"",
+      "revId": "aa66ec6c681382a603f7e596d097a3ad2665fc1b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
