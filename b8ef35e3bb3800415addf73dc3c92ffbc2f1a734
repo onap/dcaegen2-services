@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ce51027_bcc3f331",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T01:30:54Z",
+      "side": 1,
+      "message": "should these values (1, 5000) be configurable properties somewhere?",
+      "revId": "b8ef35e3bb3800415addf73dc3c92ffbc2f1a734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd7d59e5_c9bfd469",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/RateLimiter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T01:30:54Z",
+      "side": 1,
+      "message": "nit: change \"underlay\" to \"underlying\"",
+      "revId": "b8ef35e3bb3800415addf73dc3c92ffbc2f1a734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
