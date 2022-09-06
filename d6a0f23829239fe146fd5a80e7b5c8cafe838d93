@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6a3e496_6db80dee",
+        "filename": "components/kpi-computation-ms/pom.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T12:50:09Z",
+      "side": 1,
+      "message": "Please check your IDE settings. No tabs please.",
+      "revId": "d6a0f23829239fe146fd5a80e7b5c8cafe838d93",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
