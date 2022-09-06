@@ -16,6 +16,24 @@
       "revId": "3111c001578fe5b9d976e71dd88ab64dc7f4b828",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9987ab96_d7e6139c",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/MLMessageProcessorTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-06T15:54:15Z",
+      "side": 1,
+      "message": "Agree with Tony - remove extra tab/spaces at EOL",
+      "parentUuid": "26bf5a91_aec1a925",
+      "revId": "3111c001578fe5b9d976e71dd88ab64dc7f4b828",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
