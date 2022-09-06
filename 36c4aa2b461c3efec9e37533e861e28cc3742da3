@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b57edba2_5c243500",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df27b3b8_e8a330fb",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "797c3008_57b46ee4",
         "filename": "components/ml-prediction-ms/Dockerfile",
         "patchSetId": 18
@@ -33,6 +51,24 @@
       "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d083e16c_37028ec9",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 18
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "797c3008_57b46ee4",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "364fbd3e_2922b221",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 18
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2dc2bfe3_7eaa6466",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2db9ae22_7a4b6bc7",
         "filename": "components/ml-prediction-ms/README.md",
         "patchSetId": 18
@@ -67,6 +121,24 @@
       "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d449ec8d_4d147c57",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2db9ae22_7a4b6bc7",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -93,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "23f1f2d0_dc787057",
+        "filename": "components/ml-prediction-ms/setup.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8cf6fd0_c9fabcdb",
+      "range": {
+        "startLine": 29,
+        "startChar": 95,
+        "endLine": 37,
+        "endChar": 1
+      },
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b4cd548_7df12385",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 18
@@ -104,6 +200,30 @@
       "writtenOn": "2022-06-07T18:48:17Z",
       "side": 1,
       "message": "This could be split in separate config class; consider leveraging onap_dcae_cbs_docker_client lib for config retrieval for consistency among DCAE services (this will also handle env secrets/substitution when deployed through k8s, policy file lookup built in)",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 69
+      },
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "957ab627_8abafffc",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Split the properties into a separate class object. Have install onap_dcae_cbs_docker_client, however it required additional dependent packages \"mod import trapd_settings as tds. These package couldn\u0027t install on development environment to proceed further, seek your help to proceed.",
+      "parentUuid": "5b4cd548_7df12385",
       "range": {
         "startLine": 48,
         "startChar": 0,
@@ -139,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "269b5621_0f5e8956",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5044886_aff0aec1",
+      "range": {
+        "startLine": 271,
+        "startChar": 12,
+        "endLine": 271,
+        "endChar": 67
+      },
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e1a6607_9d9f0731",
         "filename": "components/ml-prediction-ms/tests/test_predict_unittest.py",
         "patchSetId": 18
@@ -153,6 +297,24 @@
       "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30536655_06368dca",
+        "filename": "components/ml-prediction-ms/tests/test_predict_unittest.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e1a6607_9d9f0731",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -191,6 +353,24 @@
     },
     {
       "key": {
+        "uuid": "b7a9e07a_a9de6d7b",
+        "filename": "components/ml-prediction-ms/tox.ini",
+        "patchSetId": 18
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Ack\nI was not aware on tox.ini thanks for your review comments.\nDirectly tested by executing following statement \"pytest ./tests/unit/test_predict_unitest.py -v -s\" to unit test the code coverage.",
+      "parentUuid": "f38cd180_78e0c105",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce3b8c70_554d1cb1",
         "filename": "components/ml-prediction-ms/train/ParseTrain.py",
         "patchSetId": 18
@@ -205,6 +385,24 @@
       "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96827843_82e58920",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ce3b8c70_554d1cb1",
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }

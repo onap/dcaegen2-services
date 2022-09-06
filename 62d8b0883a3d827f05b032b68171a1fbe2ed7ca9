@@ -34,6 +34,24 @@
       "revId": "62d8b0883a3d827f05b032b68171a1fbe2ed7ca9",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "babefc07_1a631352",
+        "filename": "components/ml-prediction-ms/tox.ini",
+        "patchSetId": 26
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-06T14:25:45Z",
+      "side": 1,
+      "message": "Hi Tony\n\nOn Tox build we see following InvocationError, However in development environment, run tox is getting pass and pytest coverage report are generated for 73% coverage. But it is getting failed in jerkin build. Anyway forward. Any specific python version or environment version that i need to use to resolve please let me know. \n\n\nERROR: InvocationError for command /w/workspace/dcaegen2-services-ml-prediction-ms-tox-verify-all/components/ml-prediction-ms/.tox/py3/bin/pytest --cov-report term:skip-covered --cov\u003dsrc ./tests/unit/test_predict_unittest.py -v -s (exited with code 2)\n___________________________________ summary ____________________________________\nERROR:   py3: commands failed",
+      "parentUuid": "53045e7b_22d168e6",
+      "revId": "62d8b0883a3d827f05b032b68171a1fbe2ed7ca9",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
