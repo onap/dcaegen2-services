@@ -111,6 +111,7 @@
     "sliceanalysisms.ccvpnEvalPeriodicCheckOn": true,
     "sliceanalysisms.ccvpnEvalOnDemandCheckOn": true,
     "sliceanalysisms.ccvpnEvalStrategy": "FixedUpperBoundStrategy",
+
     "service_calls": {
       "policy-req": []
     },
