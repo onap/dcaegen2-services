@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2227d04_c5f5cd74",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/aai/AaiService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T13:27:57Z",
+      "side": 1,
+      "message": "why not replace the line with an @param for sliceInstanceId ?",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69a39c8a_cbe98b92",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConfigThread.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T13:27:57Z",
+      "side": 1,
+      "message": "where are the javadocs for the class and public methods?",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0999a4b1_72721bb3",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T13:27:57Z",
+      "side": 1,
+      "message": "this needs to be in its own class file and there need to be unit tests for it",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e2123a7_491b065d",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T13:27:57Z",
+      "side": 1,
+      "message": "where are the javadoc comments for the class and all public methods?",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a98de8fd_698aefb9",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T13:27:57Z",
+      "side": 1,
+      "message": "\"No\" \u003d\u003e \"Not\" ??",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97195056_c1f0364e",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T13:27:57Z",
+      "side": 1,
+      "message": "you can use \"else if\" here instead of \"if\"",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cae09dbd_ee96b304",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T13:27:57Z",
+      "side": 1,
+      "message": "I\u0027m wondering if the threshold values should be tunable via configuration?",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8e9009d_7276f813",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/utils/SpringContextUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-06T13:27:57Z",
+      "side": 1,
+      "message": "javadocs?",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
