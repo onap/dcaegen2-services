@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2e5dd8e_7a754630",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-07T18:18:02Z",
+      "side": 1,
+      "message": "Add also Issue-ID: DCAEGEN2-3195  (this allows linking the gerrit submission under this jira)",
+      "revId": "d74217dbba7ef7080787cf341f7a1b8ac2b98788",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
