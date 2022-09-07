@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ffabc769_bd58c3d8",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/aai/AaiService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-07T06:56:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2227d04_c5f5cd74",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69a39c8a_cbe98b92",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConfigThread.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8afc07e4_a9b4eee9",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConfigThread.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-07T06:56:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69a39c8a_cbe98b92",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0999a4b1_72721bb3",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2022-09-06T13:27:57Z",
       "side": 1,
       "message": "this needs to be in its own class file and there need to be unit tests for it",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eef4fbb7_5275ebff",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-07T06:56:41Z",
+      "side": 1,
+      "message": "this is created by decheng.",
+      "parentUuid": "0999a4b1_72721bb3",
       "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "89cd507b_004e4211",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-07T06:56:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e2123a7_491b065d",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a98de8fd_698aefb9",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
         "patchSetId": 1
@@ -84,6 +156,24 @@
       "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad7d2bfa_de8c6fdd",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-07T06:56:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a98de8fd_698aefb9",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     },
     {
       "key": {
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "7bd98f8a_6c53157a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-07T06:56:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97195056_c1f0364e",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cae09dbd_ee96b304",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
         "patchSetId": 1
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "7e7c620b_0aeaae5b",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/FlexibleThresholdStrategy.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-07T06:56:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cae09dbd_ee96b304",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f8e9009d_7276f813",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/utils/SpringContextUtil.java",
         "patchSetId": 1
@@ -135,6 +261,24 @@
       "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df9d75a5_7559dcd1",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/utils/SpringContextUtil.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-07T06:56:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8e9009d_7276f813",
+      "revId": "0d28dbcf48be1a7c84be73bdb06e626c04eb90e8",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
