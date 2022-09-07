@@ -34,6 +34,24 @@
       "revId": "3111c001578fe5b9d976e71dd88ab64dc7f4b828",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20cf30d0_ba4399a9",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/MLMessageProcessorTest.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-07T13:54:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9987ab96_d7e6139c",
+      "revId": "3111c001578fe5b9d976e71dd88ab64dc7f4b828",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
