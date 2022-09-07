@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9f865870_ff483b22",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/MLMessageProcessorTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-07T13:54:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54d4c0fb_376c744f",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 33
+      },
+      "revId": "8f6e27ee720ff6115f82bddc303d7916296eeb24",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "182cb62e_97adb54b",
         "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/MLMessageProcessorTest.java",
         "patchSetId": 5
@@ -39,6 +63,24 @@
       "revId": "8f6e27ee720ff6115f82bddc303d7916296eeb24",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ba25dfd_0baaf977",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/MLMessageProcessorTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-07T13:54:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "182cb62e_97adb54b",
+      "revId": "8f6e27ee720ff6115f82bddc303d7916296eeb24",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
