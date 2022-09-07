@@ -16,6 +16,23 @@
       "revId": "d74217dbba7ef7080787cf341f7a1b8ac2b98788",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73eb7dab_5905299e",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/RateLimiter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-07T18:30:25Z",
+      "side": 1,
+      "message": "nit: change \"underlaying\" to \"underlying\"",
+      "revId": "d74217dbba7ef7080787cf341f7a1b8ac2b98788",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
