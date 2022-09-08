@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020-2021 Wipro Limited.
+ *   Copyright (C) 2020-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,14 +21,17 @@
  *
  *******************************************************************************/
 package org.onap.slice.analysis.ms.models;
+
 import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import org.junit.Test;
+
 public class ConfigurationTest {
     Configuration configuration = Configuration.getInstance();
+    
     @Test
     public void configurationTest() {
         List<String> list = new ArrayList<String>();

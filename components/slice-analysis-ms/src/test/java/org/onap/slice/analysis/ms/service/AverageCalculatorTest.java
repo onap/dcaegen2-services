@@ -22,6 +22,7 @@
 package org.onap.slice.analysis.ms.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -56,6 +57,14 @@ public class AverageCalculatorTest {
 		pmNames.add("PrbUsedDl");
 		pmNames.add("PrbUsedUl");
 		ReflectionTestUtils.setField(averageCalculator, "pmNames", pmNames);
+	}
+	@Test
+	public void init() {
+		List<String> pmNames = new ArrayList<>();
+		pmNames.add("PrbUsedDl");
+		pmNames.add("PrbUsedUl");
+		averageCalculator.init();
+		assertNotNull(pmNames);
 	}
 	
 	@Test

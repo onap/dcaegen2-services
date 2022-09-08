@@ -22,14 +22,11 @@
 package org.onap.slice.analysis.ms.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyMap;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.anyMap;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -51,6 +48,9 @@ import org.onap.slice.analysis.ms.models.policy.AdditionalProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MLMessageProcessorTest.class)
 public class MLMessageProcessorTest {
@@ -70,13 +70,14 @@ public class MLMessageProcessorTest {
 
     @Mock
     private PolicyService policyService;
-
+    
+   
     @SuppressWarnings({"unchecked"})
     @Test
     public void processMLMsgTest() {
         MLOutputModel mloutput = null;
         MLOutputModel mloutputExp = null;
-
+   
         Map<String, List<String>> ricToCellMapping = new HashMap<>();
         List<String> myList = new ArrayList<String>();
         myList.add("111");
@@ -89,7 +90,7 @@ public class MLMessageProcessorTest {
 
         try {
             mloutput =
-                    obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel1.json"))),
+                    obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel.json"))),
                             new TypeReference<MLOutputModel>() {});
             mloutputExp =
                     obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/MLOutputModel.json"))),
@@ -97,6 +98,7 @@ public class MLMessageProcessorTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         when(configDbService.fetchCUCPCellsOfSnssai("0001-0111")).thenReturn(ricToCellMapping);
         AdditionalProperties<MLOutputModel> addProps = new AdditionalProperties<>();
         addProps.setResourceConfig(mloutputExp);
@@ -105,5 +107,5 @@ public class MLMessageProcessorTest {
         mlMessageProcessor.processMLMsg(mloutput);
         assertEquals(mloutputExp, mloutput);
     }
-
+    
 }

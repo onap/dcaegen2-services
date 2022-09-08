@@ -21,6 +21,8 @@
 
 package org.onap.slice.analysis.ms.models;
 
+import org.junit.Test;
+
 import com.openpojo.reflection.PojoClass;
 import com.openpojo.reflection.impl.PojoClassFactory;
 import com.openpojo.validation.Validator;
@@ -32,8 +34,6 @@ import com.openpojo.validation.test.impl.GetterTester;
 import com.openpojo.validation.test.impl.SetterTester;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-
-import org.junit.Test;
 
 public class ModelsTest {
     @Test
@@ -50,7 +50,6 @@ public class ModelsTest {
     public void cuModelEqualHashcodeTest() {
         EqualsVerifier.simple().forClass(CUModel.class).verify();
     }
-
     @Test
     public void subCounterEqualHashcodeTest() {
         EqualsVerifier.simple().forClass(SubCounter.class).verify();
@@ -60,7 +59,7 @@ public class ModelsTest {
     public void measurementObjectEqualHashcodeTest() {
         EqualsVerifier.simple().forClass(MeasurementObject.class).verify();
     }
-
+    
     @Test
     public void testGetterSetterSubCounter() {
         PojoClass pojoclass = PojoClassFactory.getPojoClass(SubCounter.class);
@@ -116,7 +115,7 @@ public class ModelsTest {
         PojoClass pojoclass = PojoClassFactory.getPojoClass(SliceConfigResponse.class);
         validateMd(pojoclass);
     }
-
+    
     public void validateMd(PojoClass pojoclass) {
         Validator validator = ValidatorBuilder
                 .create()
@@ -125,4 +124,10 @@ public class ModelsTest {
                 .with(new SetterTester()).with(new GetterTester()).build();
         validator.validate(pojoclass);
     }
+
+	@Override
+	public String toString() {
+		return "ModelsTest [toString()=" + super.toString() + "]";
+	}
+   
 }

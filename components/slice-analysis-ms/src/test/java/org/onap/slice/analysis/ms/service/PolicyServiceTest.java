@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
+ *   Copyright (C) 2020-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,9 +34,12 @@ import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.onap.slice.analysis.ms.dmaap.PolicyDmaapClient;
+import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.models.policy.AdditionalProperties;
 import org.onap.slice.analysis.ms.models.policy.OnsetMessage;
 import org.onap.slice.analysis.ms.service.ccvpn.RequestOwner;
+import org.onap.slice.analysis.ms.utils.DmaapUtils;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -46,61 +50,69 @@ import com.google.gson.Gson;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = PolicyServiceTest.class)
 public class PolicyServiceTest {
-    ObjectMapper obj = new ObjectMapper();
+	ObjectMapper obj = new ObjectMapper();
+	
+	@InjectMocks
+	PolicyService policyService;
 
-    @InjectMocks
-    PolicyService policyService;
+	@Test
+	public void formPolicyOnsetMessageTest() {
+		String snssai = "001-100001";
+		Map<String, String> input = null;
+		OnsetMessage output = null;
+		String expected = "";
+		String actual = "";
+		Map<String, Map<String, Integer>> ricToThroughputMapping = new HashMap<>();
+		Map<String, Integer> ric1 = new HashMap<>();
+		Map<String, Integer> ric2 = new HashMap<>();
+		ric1.put("dLThptPerSlice", 50);
+		ric1.put("uLThptPerSlice", 40);
+		ric2.put("dLThptPerSlice", 50);
+		ric2.put("uLThptPerSlice", 30);
+		ricToThroughputMapping.put("1", ric1);
+		ricToThroughputMapping.put("2", ric2);
+		try {
+			input = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/serviceDetails.json"))),
+					new TypeReference<Map<String, String>>() {
+					});
+			output = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/onsetMessage.json"))),
+					OnsetMessage.class);
+			expected = obj.writeValueAsString(output);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		AdditionalProperties<Map<String, Map<String, Integer>>> addProps = new AdditionalProperties<>();
+		addProps.setResourceConfig(ricToThroughputMapping);
+		actual = new Gson().toJson(policyService.formPolicyOnsetMessage(snssai, addProps, input));
 
-    @Test
-    public void formPolicyOnsetMessageTest() {
-        String snssai = "001-100001";
-        Map<String, String> input = null;
-        OnsetMessage output = null;
-        String expected = "";
-        String actual = "";
-        Map<String, Map<String, Integer>> ricToThroughputMapping = new HashMap<>();
-        Map<String, Integer> ric1 = new HashMap<>();
-        Map<String, Integer> ric2 = new HashMap<>();
-        ric1.put("dLThptPerSlice",50);
-        ric1.put("uLThptPerSlice",40);
-        ric2.put("dLThptPerSlice",50);
-        ric2.put("uLThptPerSlice",30);
-        ricToThroughputMapping.put("1", ric1);
-        ricToThroughputMapping.put("2", ric2);
-        try {
-            input = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/serviceDetails.json"))), new TypeReference<Map<String,String>>(){});
-            output = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/onsetMessage.json"))), OnsetMessage.class);
-            expected = obj.writeValueAsString(output);
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        AdditionalProperties<Map<String, Map<String, Integer>>> addProps = new AdditionalProperties<>();
-        addProps.setResourceConfig(ricToThroughputMapping);
-        actual = new Gson().toJson(policyService.formPolicyOnsetMessage(snssai,addProps,input));
+		assertThatJson(actual).whenIgnoringPaths("requestID", "payload", "closedLoopAlarmStart", "AAI", "target_type",
+				"aai", "targetType").isEqualTo(expected);
+	}
 
-        assertThatJson(actual)
-                .whenIgnoringPaths("requestID","payload","closedLoopAlarmStart", "AAI", "target_type", "aai", "targetType")
-                .isEqualTo(expected);
-    }
+	@Test
+	public void init() {
+		Configuration configuration = Configuration.getInstance();
+		@SuppressWarnings("unused")
+		PolicyDmaapClient policyDmaapClient = new PolicyDmaapClient(new DmaapUtils(), configuration);
+		policyService.init();
+	}
 
-    @Test
-    public void formPolicyOnsetMessageForCCVPNTest() {
-        String cllId = "cll-instance-01";
-        OnsetMessage output = null;
-        String expected = "";
-        String actual = "";
-        try {
-            output = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/onsetMessage2.json"))), OnsetMessage.class);
-            expected = obj.writeValueAsString(output);
-            actual = new Gson().toJson(policyService
-                    .formPolicyOnsetMessageForCCVPN(cllId, 3000, RequestOwner.UUI));
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        assertThatJson(actual)
-                .whenIgnoringPaths("requestID","payload","closedLoopAlarmStart", "AAI", "target_type", "aai", "targetType")
-                .isEqualTo(expected);
-    }
+	@Test
+	public void formPolicyOnsetMessageForCCVPNTest() {
+		String cllId = "cll-instance-01";
+		OnsetMessage output = null;
+		String expected = "";
+		String actual = "";
+		try {
+			output = obj.readValue(new String(Files.readAllBytes(Paths.get("src/test/resources/onsetMessage2.json"))),
+					OnsetMessage.class);
+			expected = obj.writeValueAsString(output);
+			actual = new Gson().toJson(policyService.formPolicyOnsetMessageForCCVPN(cllId, 3000, RequestOwner.UUI));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		assertThatJson(actual).whenIgnoringPaths("requestID", "payload", "closedLoopAlarmStart", "AAI", "target_type",
+				"aai", "targetType").isEqualTo(expected);
+	}
+	
 }

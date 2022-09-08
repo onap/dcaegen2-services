@@ -21,8 +21,10 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,72 +33,88 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.mockito.stubbing.Answer;
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.Map;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MRTopicMonitorTest.class)
 public class MRTopicMonitorTest {
 
-    @Spy
-    @InjectMocks
-    MRTopicMonitor mrTopicMonitor;
+	@Spy
+	@InjectMocks
+	MRTopicMonitor mrTopicMonitor;
 
-    @Mock
-    AaiEventNotificationCallback aaiEventNotificationCallback;
+	@Mock
+	AaiEventNotificationCallback aaiEventNotificationCallback;
+	
+	@Before
+	public void before() {
+		Configuration configuration = Configuration.getInstance();
+		String configAllJson = readFromFile("src/test/resources/config_all.json");
+		JsonObject configAll = new Gson().fromJson(configAllJson, JsonObject.class);
+		JsonObject config = configAll.getAsJsonObject("config");
+		configuration.updateConfigurationFromJsonObject(config);
+		mrTopicMonitor = new MRTopicMonitor("aai_subscriber", aaiEventNotificationCallback);
+		MockitoAnnotations.initMocks(this);
+	}
 
-    @Before
-    public void before(){
-        Configuration configuration = Configuration.getInstance();
-        String configAllJson = readFromFile("src/test/resources/config_all.json");
-        JsonObject configAll = new Gson().fromJson(configAllJson, JsonObject.class);
-        JsonObject config = configAll.getAsJsonObject("config");
-        configuration.updateConfigurationFromJsonObject(config);
+	@Test
+	public void start() {
+		mrTopicMonitor.start();
+		Mockito.verify(mrTopicMonitor, Mockito.times(1)).start();
+	}
 
-        mrTopicMonitor = new MRTopicMonitor("aai_subscriber", aaiEventNotificationCallback);
-        MockitoAnnotations.initMocks(this);
-    }
+	@Test
+	public void run() throws IOException {
+		mrTopicMonitor.run();
+		Mockito.verify(mrTopicMonitor, Mockito.times(1)).run();
+	}
 
-    @Test
-    public void start() {
-        mrTopicMonitor.start();
-        Mockito.verify(mrTopicMonitor, Mockito.times(1)).start();
-    }
+	@Test
+	public void stop() {
+		mrTopicMonitor.start();
+		mrTopicMonitor.stop();
+		Mockito.verify(mrTopicMonitor, Mockito.times(1)).stop();
+	}
+	
 
-    @Test
-    public void run() {
-        mrTopicMonitor.run();
-        Mockito.verify(mrTopicMonitor, Mockito.times(1)).run();
-    }
+	private static String readFromFile(String file) {
+		String content = "";
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			content = bufferedReader.readLine();
+			String temp;
+			while ((temp = bufferedReader.readLine()) != null) {
+				content = content.concat(temp);
+			}
+			content = content.trim();
+		} catch (Exception e) {
+			content = null;
+		}
+		return content;
+	}
 
-    @Test
-    public void stop() {
-        mrTopicMonitor.start();
-        mrTopicMonitor.stop();
-        Mockito.verify(mrTopicMonitor, Mockito.times(1)).stop();
-    }
+	@Test
+	public void startClientTest() {
+		try {
+			Configuration configuration = Configuration.getInstance();
+			String configAllJson = readFromFile("src/test/resources/config_all.json");
 
-    private static String readFromFile(String file) {
-        String content = "";
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            content = bufferedReader.readLine();
-            String temp;
-            while ((temp = bufferedReader.readLine()) != null) {
-                content = content.concat(temp);
-            }
-            content = content.trim();
-        } catch (Exception e) {
-            content = null;
-        }
-        return content;
-    }
+			JsonObject configAll = new Gson().fromJson(configAllJson, JsonObject.class);
+
+			JsonObject config = configAll.getAsJsonObject("config");
+			System.out.println(configuration);
+			configuration.updateConfigurationFromJsonObject(config);
+			DmaapClient client = new DmaapClient();
+			client.initClient();
+			Mockito.verify(client).startClient();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }

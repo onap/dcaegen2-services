@@ -40,32 +40,38 @@ import java.nio.file.Paths;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = VesNotificationCallbackTest.class)
 public class VesNotificationCallbackTest {
-    ObjectMapper obj = new ObjectMapper();
+	ObjectMapper obj = new ObjectMapper();
 
-    @Spy
-    @InjectMocks
-    VesNotificationCallback vesNotificationCallback;
+	@Spy
+	@InjectMocks
+	VesNotificationCallback vesNotificationCallback;
 
-    @Before
-    public void init() throws IOException {
-        Configuration configuration = Configuration.getInstance();
-        String configAllJson = new String(Files.readAllBytes(Paths.get("src/test/resources/config_all.json")));
-        JsonObject configAll = new Gson().fromJson(configAllJson, JsonObject.class);
-        JsonObject config = configAll.getAsJsonObject("config");
-        configuration.updateConfigurationFromJsonObject(config);
-        vesNotificationCallback.init();
-    }
+	@Before
+	public void init() throws IOException {
+		Configuration configuration = Configuration.getInstance();
+		String configAllJson = new String(Files.readAllBytes(Paths.get("src/test/resources/config_all.json")));
+		JsonObject configAll = new Gson().fromJson(configAllJson, JsonObject.class);
+		JsonObject config = configAll.getAsJsonObject("config");
+		configuration.updateConfigurationFromJsonObject(config);
+		vesNotificationCallback.init();
+	}
 
-    @Test
-    public void initTest() {
-        Mockito.verify(vesNotificationCallback, Mockito.atLeastOnce()).init();
-    }
+	@Test
+	public void initTest() {
+		vesNotificationCallback.init();
+		Mockito.verify(vesNotificationCallback, Mockito.atLeastOnce()).init();
+	}
 
-    @Test
-    public void activateCallBackTest() throws Exception{
-        String input = new String(Files.readAllBytes(Paths.get("src/test/resources/vesCCVPNNotiModel.json")));
-        vesNotificationCallback.activateCallBack(input);
-        Mockito.verify(vesNotificationCallback, Mockito.atLeastOnce()).activateCallBack(Mockito.anyString());
-    }
+	@Test
+	public void activateCallBackTest() {
+		String input = null;
+		try {
+			input = new String(Files.readAllBytes(Paths.get("src/test/resources/vesCCVPNNotiModel.json")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		vesNotificationCallback.activateCallBack(input);
+		Mockito.verify(vesNotificationCallback, Mockito.atLeastOnce()).activateCallBack(Mockito.anyString());
+	}
 
 }

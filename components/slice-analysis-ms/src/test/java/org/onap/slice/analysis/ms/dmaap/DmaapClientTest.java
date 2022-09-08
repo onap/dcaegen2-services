@@ -19,7 +19,6 @@
  *
  *******************************************************************************/
 
-
 package org.onap.slice.analysis.ms.dmaap;
 
 import static org.mockito.Mockito.when;

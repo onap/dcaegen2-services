@@ -66,4 +66,5 @@ public class IntelligentSlicingCallback implements NotificationCallback {
 			log.error("Error converting ML msg to object, {}",e.getMessage());
 		} 
 	}
+
 }

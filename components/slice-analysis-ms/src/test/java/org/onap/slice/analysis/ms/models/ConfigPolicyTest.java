@@ -19,10 +19,12 @@
  *
  *******************************************************************************/
 package org.onap.slice.analysis.ms.models;
+
 import static org.junit.Assert.assertEquals;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;
+
 public class ConfigPolicyTest {
     @Test
     public void configPolicyTest() {

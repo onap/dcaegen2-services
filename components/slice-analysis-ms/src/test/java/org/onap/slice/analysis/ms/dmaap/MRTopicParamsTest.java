@@ -2,6 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
+ *   Copyright (C) 2020-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +22,10 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import com.openpojo.reflection.PojoClass;
 import com.openpojo.reflection.impl.PojoClassFactory;
 import com.openpojo.validation.Validator;
@@ -29,8 +34,6 @@ import com.openpojo.validation.rule.impl.GetterMustExistRule;
 import com.openpojo.validation.rule.impl.SetterMustExistRule;
 import com.openpojo.validation.test.impl.GetterTester;
 import com.openpojo.validation.test.impl.SetterTester;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
 public class MRTopicParamsTest {
     private static final String TEST_TOPIC = "test-topic";
@@ -45,6 +48,20 @@ public class MRTopicParamsTest {
     private static final String MY_PASS = "my-pass";
     private static final String MY_USERNAME = "my-username";
     private static final int MY_PORT = 5555;
+    private boolean  useHttps;
+    private boolean allowSelfSignedCerts;
+    private boolean managed;
+    private static final String environment="Environment";
+    private static final String aftEnvironment="AftEnvironment";
+    private static final String partner="Partner";
+    private static final String latitude="Latitude";
+    private static final String longitude="Longitude";
+    private static final String partitionId="PartitionID";
+    private static final String basePath="BasePath";
+    private static final String serializationProvider= "SerializationProvider";
+    private static String servers="Servers";
+    private static String additionalProps="AdditionalProps";
+    private static String effectiveTopic="EffectiveTopic";
 
     @Test
     public void builderTest() {
@@ -61,6 +78,20 @@ public class MRTopicParamsTest {
                 .password(MY_PASS)
                 .userName(MY_USERNAME)
                 .port(MY_PORT)
+                .latitude(latitude)
+                .longitude(longitude)
+                .partner(partner)
+                .environment(environment)
+                .aftEnvironment(aftEnvironment)
+                .basePath(basePath)
+                .partitionId(partitionId)
+                .useHttps(useHttps)
+                .allowSelfSignedCerts(allowSelfSignedCerts)
+                .managed(managed)
+                .serializationProvider(serializationProvider)
+                .servers(null)
+                .additionalProps(null)
+                .effectiveTopic(effectiveTopic)
                 .build();
 
         assertEquals(TEST_TOPIC, params.getTopic());
@@ -75,6 +106,40 @@ public class MRTopicParamsTest {
         assertEquals(MY_PASS, params.getPassword());
         assertEquals(MY_USERNAME, params.getUserName());
         assertEquals(MY_PORT, params.getPort());
+        assertEquals(latitude, params.getLatitude());
+        assertEquals(longitude, params.getLongitude());
+        assertEquals(partner, params.getPartner());
+        assertEquals(environment, params.getEnvironment());
+        assertEquals(aftEnvironment, params.getAftEnvironment());
+        assertEquals(basePath, params.getBasePath());
+        assertEquals(partitionId, params.getPartitionId());
+        assertEquals(serializationProvider, params.getSerializationProvider());
+        assertEquals(effectiveTopic, params.getEffectiveTopic());
+        assertEquals(useHttps, params.isUseHttps());
+        assertEquals(allowSelfSignedCerts, params.isAllowSelfSignedCerts());
+        assertEquals(longitude, params.getLongitude());
+        assertEquals(null, params.getServers());
+        assertEquals(null, params.getAdditionalProps());
+        assertEquals(managed, params.isManaged());
+        assertEquals(false, params.isTopicInvalid());
+        assertEquals(false, params.isHostnameInvalid());
+        assertEquals(false, params.isClientNameInvalid());
+        assertEquals(false, params.isConsumerGroupInvalid());
+        assertEquals(false, params.isConsumerInstanceInvalid());
+        assertEquals(true, params.isApiSecretValid());
+        assertEquals(true, params.isApiKeyValid());
+        assertEquals(true, params.isPasswordValid());
+        assertEquals(true, params.isUserNameValid());
+        assertEquals(false, params.isPortInvalid());
+        assertEquals(false, params.isLatitudeInvalid());
+        assertEquals(false, params.isLongitudeInvalid());
+        assertEquals(false, params.isPartnerInvalid());
+        assertEquals(false, params.isEnvironmentInvalid());
+        assertEquals(false, params.isAftEnvironmentInvalid());
+        assertEquals(false, params.isPartitionIdInvalid());
+        assertEquals(true, params.isServersInvalid());
+        assertEquals(false, params.isAdditionalPropsValid());
+     
     }
 
     @Test
@@ -93,4 +158,5 @@ public class MRTopicParamsTest {
                 .build();
         validator.validate(pojoclass);
     }
+   
 }

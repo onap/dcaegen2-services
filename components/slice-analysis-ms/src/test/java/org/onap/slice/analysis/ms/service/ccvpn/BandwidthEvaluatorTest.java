@@ -30,7 +30,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.mockito.Mockito.mock;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = BandwidthEvaluatorTest.class)
@@ -60,7 +59,8 @@ public class BandwidthEvaluatorTest {
 
     @Test
     public void postTest() {
-        Event evt = new SimpleEvent(null, "{}");
+        @SuppressWarnings({ "rawtypes", "unchecked" })
+		Event evt = new SimpleEvent(null, "{}");
         bandwidthEvaluator.post(evt);
         Mockito.verify(bandwidthEvaluator, Mockito.atLeastOnce()).post(Mockito.any(Event.class));
     }

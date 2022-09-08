@@ -2,6 +2,7 @@
  *  ============LICENSE_START=======================================================
  *  slice-analysis-ms
  *  ================================================================================
+ * Copyright (C) 2020-2022 Wipro Limited.
  *  Copyright (C) 2022 Huawei Canada Limited.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +22,10 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -29,34 +34,30 @@ import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = VesNotificationCallbackTest.class)
 public class AaiEventNotificationCallbackTest {
 
-    @Spy
-    @InjectMocks
-    AaiEventNotificationCallback aaiEventNotificationCallback;
+	@Spy
+	@InjectMocks
+	AaiEventNotificationCallback aaiEventNotificationCallback;
+	
+	@Test
+	public void initTest() {
+		aaiEventNotificationCallback.init();
+		Mockito.verify(aaiEventNotificationCallback, Mockito.atLeastOnce()).init();
+	}
 
-    @Test
-    public void initTest() {
-        aaiEventNotificationCallback.init();
-        Mockito.verify(aaiEventNotificationCallback, Mockito.atLeastOnce()).init();
-    }
-
-    @Test
-    public void activateCallBackTest() {
-        String input = null;
-        try {
-            input = new String(Files.readAllBytes(Paths.get("src/test/resources/aaiEventDmaapMsg.json")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        aaiEventNotificationCallback.activateCallBack(input);
-        Mockito.verify(aaiEventNotificationCallback, Mockito.atLeastOnce()).activateCallBack(Mockito.anyString());
-    }
+	@Test
+	public void activateCallBackTest() {
+		String input = null;
+		try {
+			input = new String(Files.readAllBytes(Paths.get("src/test/resources/aaiEventDmaapMsg.json")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		aaiEventNotificationCallback.activateCallBack(input);
+		Mockito.verify(aaiEventNotificationCallback, Mockito.atLeastOnce()).activateCallBack(Mockito.anyString());
+	}
+	
 }

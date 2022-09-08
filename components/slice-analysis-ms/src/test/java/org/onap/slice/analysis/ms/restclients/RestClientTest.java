@@ -24,20 +24,11 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.onap.slice.analysis.ms.service.SnssaiSamplesProcessorTest;
-import org.onap.slice.analysis.ms.utils.BeanUtil;
-import org.powermock.core.classloader.annotations.PowerMockIgnore;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -59,7 +50,7 @@ public class RestClientTest {
 	@InjectMocks
 	RestClient restclient;
 
-	@SuppressWarnings({ "static-access" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Test
 	public void sendGetRequestTest() {
 		String requestUrl = "";
@@ -73,7 +64,7 @@ public class RestClientTest {
 		assertEquals(restclient.sendGetRequest(headers, requestUrl, responseType).getStatusCode(), HttpStatus.NOT_FOUND);
 	}
 
-	@SuppressWarnings({ "static-access", "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Test
 	public void sendPostRequestTest() {
 		ParameterizedTypeReference<String> responseType = null;
@@ -89,6 +80,7 @@ public class RestClientTest {
 		assertEquals(resp.getStatusCode(), HttpStatus.OK);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Test
 	public void sendPostRequestTest2() {
 		ParameterizedTypeReference<String> responseType = null;
