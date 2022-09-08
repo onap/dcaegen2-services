@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.9]
+### Changed
+* KPI MS - Vulnerability updates (DCAEGEN2-3216)
+
 ## [1.0.8]
 ### Changed
 * KPI MS - Switch from Cambria library to dmaap-client library (dcaegen2/sdk) (DCAEGEN2-3180)
