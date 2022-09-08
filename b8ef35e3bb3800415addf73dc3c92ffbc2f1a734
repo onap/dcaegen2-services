@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "4d7a28b1_cb82363a",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-09-08T16:54:26Z",
+      "side": 1,
+      "message": "Agreed, will create a jira to have this fixed.",
+      "parentUuid": "4fbe0bc6_93c49c77",
+      "revId": "b8ef35e3bb3800415addf73dc3c92ffbc2f1a734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd7d59e5_c9bfd469",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/RateLimiter.java",
         "patchSetId": 5
