@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "83da4f84_d15afcde",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-09-08T13:44:35Z",
+      "side": 1,
+      "message": "It is an unvarying property for policy service. For the time being, declare this into static final string SERVICE_RATE_INTERVAL.",
+      "parentUuid": "0ce51027_bcc3f331",
+      "revId": "b8ef35e3bb3800415addf73dc3c92ffbc2f1a734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd7d59e5_c9bfd469",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/RateLimiter.java",
         "patchSetId": 5
@@ -47,6 +65,24 @@
       "writtenOn": "2022-09-07T18:30:25Z",
       "side": 1,
       "message": "close. Still a grammar issue though.",
+      "parentUuid": "bd7d59e5_c9bfd469",
+      "revId": "b8ef35e3bb3800415addf73dc3c92ffbc2f1a734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "271fa001_6bb47efd",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/RateLimiter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-09-08T13:44:35Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "bd7d59e5_c9bfd469",
       "revId": "b8ef35e3bb3800415addf73dc3c92ffbc2f1a734",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",

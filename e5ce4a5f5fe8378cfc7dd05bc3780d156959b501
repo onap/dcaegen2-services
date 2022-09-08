@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f4eb3e71_5f5ac1f9",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/AaiEventNotificationCallback.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-09-08T13:44:35Z",
+      "side": 1,
+      "message": "They are private method, do we need to include new test for private method?",
+      "parentUuid": "a03f743b_26e16837",
+      "revId": "e5ce4a5f5fe8378cfc7dd05bc3780d156959b501",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d48f30dc_f9fae125",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2022-09-06T01:30:54Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "d48f30dc_f9fae125",
+      "revId": "e5ce4a5f5fe8378cfc7dd05bc3780d156959b501",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e86ec7a8_e8d5fea4",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-09-08T13:44:35Z",
+      "side": 1,
+      "message": "Have move the inner class outside, and added test cases for it. Thanks",
       "parentUuid": "d48f30dc_f9fae125",
       "revId": "e5ce4a5f5fe8378cfc7dd05bc3780d156959b501",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",

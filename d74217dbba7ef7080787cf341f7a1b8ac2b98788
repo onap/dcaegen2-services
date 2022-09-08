@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b6c831ca_12feaa05",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-09-08T13:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2e5dd8e_7a754630",
+      "revId": "d74217dbba7ef7080787cf341f7a1b8ac2b98788",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73eb7dab_5905299e",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/RateLimiter.java",
         "patchSetId": 9
@@ -33,6 +51,24 @@
       "revId": "d74217dbba7ef7080787cf341f7a1b8ac2b98788",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6950ba2_47987878",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/RateLimiter.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 7453
+      },
+      "writtenOn": "2022-09-08T13:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73eb7dab_5905299e",
+      "revId": "d74217dbba7ef7080787cf341f7a1b8ac2b98788",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
