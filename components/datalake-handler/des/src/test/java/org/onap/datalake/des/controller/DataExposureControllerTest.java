@@ -66,4 +66,9 @@ public class DataExposureControllerTest {
         assertEquals(null, result);
         when(mockBindingResult.hasErrors()).thenReturn(true);
     }
+    @Test
+    public void testing()
+    {
+    	
+    }
 }

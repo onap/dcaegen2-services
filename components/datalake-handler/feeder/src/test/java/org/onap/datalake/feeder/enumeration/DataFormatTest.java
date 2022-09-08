@@ -21,7 +21,8 @@ package org.onap.datalake.feeder.enumeration;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test; 
+import org.junit.Test;
+import org.mockito.Mockito; 
 
 /**
  * Test Data format of DMaaP messages
@@ -42,4 +43,5 @@ public class DataFormatTest {
     public void fromStringWithException() {
     	DataFormat.fromString("test");
     }
+   
 }

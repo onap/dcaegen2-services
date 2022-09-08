@@ -21,6 +21,7 @@
 package org.onap.datalake.feeder.controller.domain;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -35,4 +36,5 @@ public class PostReturnBodyTest {
         postReturnBody.setReturnBody("abc");
         assertTrue("abc".equals(postReturnBody.getReturnBody()));
     }
+  
 }

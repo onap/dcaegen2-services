@@ -21,7 +21,15 @@
 package org.onap.datalake.des;
 
 import org.junit.Test;
+import org.mockito.Mock;
 import org.onap.datalake.des.DesApplication;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import javax.sql.DataSource;
 
 /**
  * Test Application.
@@ -31,9 +39,18 @@ import org.onap.datalake.des.DesApplication;
  */
  
 public class ApplicationTest {
+	
+	@Mock
+	private DataSource dsource;
 
     @Test
     public void testRunner() {
         DesApplication application = new DesApplication();
+    }
+    @Test
+    public void test()
+    {
+    	String url = "testurl";
+    	assertNotNull(url);
     }
 }

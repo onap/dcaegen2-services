@@ -22,74 +22,7 @@
 	<name>DataLake Admin</name>
 	<build>
                 <plugins>
-                        <plugin>
-                                <groupId>com.spotify</groupId>
-                                <artifactId>dockerfile-maven-plugin</artifactId>
-                                <version>${dockerfile-maven.version}</version>
-                                <configuration>
-                                    <repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
-                                    <tag>${project.version}</tag>
-                                    <dockerfile>Dockerfile</dockerfile>
-			        </configuration>
-				<executions>
-					<execution>
-						<id>build-datalake-admin-ui-image</id>
-						<phase>package</phase>
-						<goals>
-							<goal>build</goal>
-						</goals>
-						<configuration>
-							<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-						</configuration>
-					</execution>
-					<execution>
-						<id>tag-and-push-image-latest</id>
-						<phase>package</phase>
-						<goals>
-							<goal>tag</goal>
-							<goal>push</goal>
-						</goals>
-						<configuration>
-							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
-						        <tag>latest</tag>
-							<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-						</configuration>
-					</execution>
-					<execution>
-						<id>tag-and-push-image-with-version</id>
-						<phase>package</phase>
-						<goals>
-							<goal>tag</goal>
-							<goal>push</goal>
-						</goals>
-						<configuration>
-							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
-							<tag>${project.version}</tag>
-							<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-						</configuration>
-					</execution>
-					<execution>
-						<id>tag-and-push-image-with-version-and-date</id>
-						<phase>package</phase>
-						<goals>
-							<goal>tag</goal>
-							<goal>push</goal>
-						</goals>
-						<configuration>
-							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
-							<tag>${project.version}-${maven.build.timestamp}Z</tag>
-							<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-						</configuration>
-					</execution>
-				</executions>
-                                <dependencies>
-                                        <dependency>
-                                                <groupId>javax.activation</groupId>
-                                                <artifactId>javax.activation-api</artifactId>
-                                                <version>1.2.0</version>
-                                        </dependency>
-                                </dependencies>
-                        </plugin>
+                       
                 </plugins>
         </build>
 </project>

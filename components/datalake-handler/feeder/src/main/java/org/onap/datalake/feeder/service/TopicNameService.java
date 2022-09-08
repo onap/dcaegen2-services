@@ -56,4 +56,9 @@ public class TopicNameService {
 			topicNameRepository.saveAll(additions);
 		 
 	}
+
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
 }

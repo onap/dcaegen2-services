@@ -42,7 +42,7 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "topic_name")
-public class TopicName {
+public class TopicName  {
 	@Id	
 	@Column(name = "`id`")
 	private String id;//topic name 
