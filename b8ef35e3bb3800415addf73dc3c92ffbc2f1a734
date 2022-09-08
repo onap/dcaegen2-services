@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "4fbe0bc6_93c49c77",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/PolicyService.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-08T16:23:06Z",
+      "side": 1,
+      "message": "Rate interval can be made configurable (incase if 5 sec is too short and need to be updated at runtime), however I\u0027m not blocking for it now. Pls create a separate jira task to have this updated as bugfix later.",
+      "parentUuid": "83da4f84_d15afcde",
+      "revId": "b8ef35e3bb3800415addf73dc3c92ffbc2f1a734",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "bd7d59e5_c9bfd469",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/RateLimiter.java",
         "patchSetId": 5
