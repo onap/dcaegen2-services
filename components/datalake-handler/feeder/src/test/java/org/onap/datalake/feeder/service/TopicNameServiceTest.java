@@ -3,6 +3,7 @@
 * ONAP : DATALAKE
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright 2022 Wipro Limited
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -17,48 +18,41 @@
 * limitations under the License.
 * ============LICENSE_END=========================================================
 */
-
 package org.onap.datalake.feeder.service;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.onap.datalake.feeder.domain.TopicName;
 import org.onap.datalake.feeder.repository.TopicNameRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-/**
- * Service for TopicName
- * 
- * @author Guobiao Mo
- *
- */
-@Service
-public class TopicNameService {
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
-
-	@Autowired
-	private TopicNameRepository topicNameRepository;
-
-	public void update(Collection<String> allTopicNames) {
-
-		List<TopicName> all = allTopicNames.stream().map(s-> new TopicName(s)).collect(Collectors.toList());
-		List<TopicName> allInDb = (List<TopicName>) topicNameRepository.findAll();
-		
-		Collection<TopicName> additions =  CollectionUtils.subtract(all, allInDb);
-
-		if(!additions.isEmpty())
-			topicNameRepository.saveAll(additions);
-		 
+public class TopicNameServiceTest {
+	
+	
+	@Mock
+	Collection<String> allTopicNames;
+	TopicNameRepository topicNameRepository;
+	@Test
+	public void test() {
+		TopicNameService tst= new TopicNameService();
+		Throwable throwable = Mockito.mock(Throwable.class);
+		TopicNameService tst1= new TopicNameService();
+		assert(true);
 	}
-
-	public void run() {
-		// TODO Auto-generated method stub
+	@Test
+	public void testing()
+	{
+		TopicNameService tns= new TopicNameService();
+		tns.run();
+		assertTrue(true);
 		
 	}
 }

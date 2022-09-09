@@ -142,7 +142,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.10</version>
+			<version>1.18.24</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -215,85 +215,7 @@
                     <classifier>exec</classifier>
                 </configuration>
             </plugin>
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>${dockerfile-maven.version}</version>
-				<configuration> 
-				<!-- 
-					<username>docker</username>
-					<password>docker</password>  -->
-					<!-- repository>repo.treescale.com/moguobiao/datalake-feeder-maven</repository -->
-					<!-- repository>moguobiao/datalake-feeder-maven-spotify</repository -->
-			                <repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
-					<!-- <repository>mizunoami123/dl-feeder</repository> -->
-					<tag>${project.version}</tag>
-					<dockerfile>Dockerfile</dockerfile>
-					<!-- useMavenSettingsForAuth>true</useMavenSettingsForAuth -->
-					<buildArgs>
-						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-					</buildArgs>
-				</configuration>
-				<executions>
-					<execution>
-						<id>build-sl-feeder-image</id>
-						<phase>package</phase>
-						<goals>
-						    <goal>build</goal>
-		                                </goals>
-                                                <configuration>
-				                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-					        </configuration>
-					</execution>
-					<execution>
-						<id>tag-and-push-image-latest</id>
-						<phase>package</phase>
-						<goals>
-						    <goal>tag</goal>
-						    <goal>push</goal>
-					        </goals>
-						<configuration>
-							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
-						        <tag>latest</tag>
-						        <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-						</configuration>	
-					</execution>
-					<execution>
-						<id>tag-and-push-image-with-version</id>
-						<phase>package</phase>
-						<goals>
-						    <goal>tag</goal>
-						    <goal>push</goal>
-					        </goals>
-						<configuration>
-							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
-							<tag>${project.version}</tag>
-						        <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-						</configuration>	
-					</execution>
-					<execution>
-						<id>tag-and-push-image-with-version-and-date</id>
-						<phase>package</phase>
-						<goals>
-						    <goal>tag</goal>
-						    <goal>push</goal>
-					        </goals>
-						<configuration>
-							<repository>${onap.nexus.dockerregistry.daily}/${docker.image.path}</repository>
-							<tag>${project.version}-${maven.build.timestamp}Z</tag>
-							<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
-					        </configuration>
-				        </execution>
-			        </executions>
-				<dependencies>
-					<!-- To make this work on JDK 9+ -->
-					<dependency>
-						<groupId>javax.activation</groupId>
-						<artifactId>javax.activation-api</artifactId>
-						<version>1.2.0</version>
-					</dependency>
-				</dependencies>
-			</plugin>
+			
 		</plugins>
 	</build>
 </project>
