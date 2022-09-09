@@ -8,4 +8,5 @@
 * change the structure of the project ([f761909](https://gerrit.onap.org/r/dcaegen2/services/commits/f761909))
 * new changes for design module ([c4c391b](https://gerrit.onap.org/r/dcaegen2/services/commits/c4c391b))
 
-
+## [1.1.2] - 2022/09/12
+         - [DCAEGEN2-3161](https://jira.onap.org/browse/DCAEGEN2-3161) - CodeCoverage improvement for dcaegen2-service-datalake-handler
