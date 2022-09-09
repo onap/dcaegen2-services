@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1635e402_35af7788",
+        "filename": "components/ml-prediction-ms/docker/Dockerfile",
+        "patchSetId": 33
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-09T18:21:36Z",
+      "side": 1,
+      "message": "Add here - \nARG user\u003donap\nARG group\u003donap\nUSER $user",
+      "revId": "3d5631561a283034f2e64a54ae49e9a9e262b5cb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a414726e_25da80e6",
+        "filename": "components/ml-prediction-ms/docker/Dockerfile",
+        "patchSetId": 33
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-09T18:21:36Z",
+      "side": 1,
+      "message": "Why is test folder added into container? This should be removed and Dockerfile overall should be optimized as current image size is \u003e3GB and may not be supported through onap ci/cd pipeline.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 15
+      },
+      "revId": "3d5631561a283034f2e64a54ae49e9a9e262b5cb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f30ad63_6db82aff",
+        "filename": "components/ml-prediction-ms/docker/Dockerfile",
+        "patchSetId": 33
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-09T18:21:36Z",
+      "side": 1,
+      "message": "To be removed",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 20
+      },
+      "revId": "3d5631561a283034f2e64a54ae49e9a9e262b5cb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}

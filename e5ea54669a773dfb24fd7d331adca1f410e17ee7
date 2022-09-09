@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d3f2341_f77346ca",
+        "filename": "components/ml-prediction-ms/docker/docker-compose1.yaml",
+        "patchSetId": 32
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-09T18:21:36Z",
+      "side": 1,
+      "message": "why is this file removed?",
+      "revId": "e5ea54669a773dfb24fd7d331adca1f410e17ee7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
