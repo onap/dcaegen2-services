@@ -3,6 +3,7 @@
 * ONAP : DATALAKE
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright (C) 2022 Wipro Limited. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -40,20 +41,20 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TopicNameService {
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
+        private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private TopicNameRepository topicNameRepository;
-
-	public void update(Collection<String> allTopicNames) {
-
-		List<TopicName> all = allTopicNames.stream().map(s-> new TopicName(s)).collect(Collectors.toList());
-		List<TopicName> allInDb = (List<TopicName>) topicNameRepository.findAll();
-		
-		Collection<TopicName> additions =  CollectionUtils.subtract(all, allInDb);
-
-		if(!additions.isEmpty())
-			topicNameRepository.saveAll(additions);
-		 
-	}
+        @Autowired
+        private TopicNameRepository topicNameRepository;
+        
+        public void update(Collection<String> allTopicNames) {
+      
+                List<TopicName> all = allTopicNames.stream().map(s-> new TopicName(s)).collect(Collectors.toList());
+                List<TopicName> allInDb = (List<TopicName>) topicNameRepository.findAll();
+                
+                Collection<TopicName> additions =  CollectionUtils.subtract(all, allInDb);
+                 
+                if(!additions.isEmpty())
+                            topicNameRepository.saveAll(additions);
+                 
+             }
 }
