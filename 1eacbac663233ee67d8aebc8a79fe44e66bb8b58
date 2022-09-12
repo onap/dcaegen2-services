@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4467ca54_af0b942b",
+        "filename": "components/ml-prediction-ms/docker/src/run.py",
+        "patchSetId": 34
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-12T21:25:30Z",
+      "side": 1,
+      "message": "do NOT pass in something like IsUnitetestPath. Use mocks \u0026 fakes instead within Test modules.",
+      "revId": "1eacbac663233ee67d8aebc8a79fe44e66bb8b58",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
