@@ -106,11 +106,12 @@
     "sliceanalysisms.aaiNotif.targetSource" : "UUI",
     "sliceanalysisms.aaiNotif.targetEntity" : "service-instance",
     "sliceanalysisms.ccvpnEvalInterval": 5,
-    "sliceanalysisms.ccvpnEvalThreshold": 0.8,
     "sliceanalysisms.ccvpnEvalPrecision": 100.0,
     "sliceanalysisms.ccvpnEvalPeriodicCheckOn": true,
     "sliceanalysisms.ccvpnEvalOnDemandCheckOn": true,
     "sliceanalysisms.ccvpnEvalStrategy" : "FlexibleThresholdStrategy",
+    "sliceanalysisms.ccvpnEvalUpperThreshold": 0.8,
+    "sliceanalysisms.ccvpnEvalLowerThreshold": 0.3,
     "service_calls": {
       "policy-req": []
     },
