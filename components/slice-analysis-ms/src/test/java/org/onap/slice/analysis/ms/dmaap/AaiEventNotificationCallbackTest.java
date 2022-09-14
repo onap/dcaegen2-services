@@ -83,7 +83,8 @@ public class AaiEventNotificationCallbackTest {
         jsonObject.addProperty("sliceanalysisms.vesNotifChangeType", "1");
         jsonObject.addProperty("sliceanalysisms.vesNotifPollingInterval", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalInterval", "1");
-        jsonObject.addProperty("sliceanalysisms.ccvpnEvalThreshold", "1");
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalUpperThreshold", "1");
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalLowerThreshold", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalPrecision", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalPeriodicCheckOn", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalOnDemandCheckOn", "1");
