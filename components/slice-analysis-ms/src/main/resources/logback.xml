@@ -7,6 +7,7 @@
  *   Copyright (C) 2020 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
  *   Copyright (C) 2022 CTC, Inc.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -33,7 +34,7 @@
         </layout>
     </appender>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="CONSOLE"/>
     </root>
 
