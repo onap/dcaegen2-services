@@ -4,6 +4,7 @@
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -22,12 +23,20 @@
 package org.onap.slice.analysis.ms.dmaap;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.onap.slice.analysis.ms.aai.AaiService;
+import org.onap.slice.analysis.ms.service.ccvpn.CCVPNPmDatastore;
+import org.powermock.api.mockito.PowerMockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
@@ -38,6 +47,12 @@ import java.nio.file.Paths;
 @SpringBootTest(classes = VesNotificationCallbackTest.class)
 public class VesNotificationCallbackTest {
     ObjectMapper obj = new ObjectMapper();
+
+    @Mock
+    AaiService aaiService;
+
+    @Mock
+    CCVPNPmDatastore ccvpnPmDatastore;
 
     @Spy
     @InjectMocks
@@ -57,6 +72,11 @@ public class VesNotificationCallbackTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Set<String> cllInstances = new HashSet<>();
+        cllInstances.add("cll-01");
+        cllInstances.add("cll-02");
+        Mockito.when(aaiService.fetchAllCllInstances()).thenReturn(cllInstances);
+        Mockito.doNothing().when(ccvpnPmDatastore).updateCllInstances(Mockito.any());
         vesNotificationCallback.activateCallBack(input);
         Mockito.verify(vesNotificationCallback, Mockito.atLeastOnce()).activateCallBack(Mockito.anyString());
     }

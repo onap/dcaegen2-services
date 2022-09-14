@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -21,6 +22,8 @@
 
 package org.onap.slice.analysis.ms.service.ccvpn;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -118,5 +121,29 @@ public class CCVPNPmDatastoreTest {
         assertTrue(Arrays.stream(datastore.readToArray("cll-01", "uni-n1"))
                 .mapToInt(o -> (int)o)
                 .sum() == 300602 );
+    }
+
+    @Test
+    public void updateCllInstancesTest() {
+        datastore.addUsedBwToEndpoint("cll-01", "uni-n1", "300Mb");
+        datastore.updateUpperBoundBw("cll-01", 300);
+        datastore.updateProvBw("cll-01", "300");
+        datastore.updateSvcState("cll-01", ServiceState.RUNNING);
+        datastore.updateOriginalBw("cll-01", 1000);
+        datastore.updateClosedloopStatus("cll-01", true);
+        datastore.addUsedBwToEndpoint("cll-02", "uni-n2", "300Mb");
+        datastore.updateUpperBoundBw("cll-02", 300);
+        datastore.updateProvBw("cll-02", "300");
+        datastore.updateSvcState("cll-02", ServiceState.RUNNING);
+        datastore.updateOriginalBw("cll-02", 1000);
+        datastore.updateClosedloopStatus("cll-02", true);
+        Set<String> cllId = new HashSet<>();
+        cllId.add("cll-01");
+        datastore.updateCllInstances(cllId);
+        assertEquals(datastore.getEndpointToUsedBw().keySet().size(), 1);
+        assertEquals(datastore.getUpperBoundBw().keySet().equals(cllId), true);
+        assertEquals(datastore.getEndpointToProvBw().keySet().equals(cllId), true);
+        assertEquals(datastore.getSvcStatus().keySet().equals(cllId), true);
+        assertEquals(datastore.getEndpointToOriginalBw().keySet().equals(cllId), true);
     }
 }
