@@ -4,6 +4,7 @@
  *  ================================================================================
  *  Copyright (C) 2022 Huawei Canada Limited.
  *  Copyright (C) 2022 CTC, Inc.
+ *  Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -83,7 +84,8 @@ public class AaiEventNotificationCallbackTest {
         jsonObject.addProperty("sliceanalysisms.vesNotifChangeType", "1");
         jsonObject.addProperty("sliceanalysisms.vesNotifPollingInterval", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalInterval", "1");
-        jsonObject.addProperty("sliceanalysisms.ccvpnEvalThreshold", "1");
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalUpperThreshold", "1");
+        jsonObject.addProperty("sliceanalysisms.ccvpnEvalLowerThreshold", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalPrecision", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalPeriodicCheckOn", "1");
         jsonObject.addProperty("sliceanalysisms.ccvpnEvalOnDemandCheckOn", "1");

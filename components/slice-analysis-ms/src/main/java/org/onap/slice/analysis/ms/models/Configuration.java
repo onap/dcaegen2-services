@@ -4,6 +4,7 @@
  *  ================================================================================
  *   Copyright (C) 2020-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -69,12 +70,12 @@ public class Configuration {
     private String rannfnssiDetailsTemplateId;
     private String desUrl;
     private int pmDataDurationInWeeks;
-
     private int vesNotifPollingInterval;
     private String vesNotifChangeIdentifier;
     private String vesNotifChangeType;
     private int ccvpnEvalInterval;
-    private double ccvpnEvalThreshold;
+    private double ccvpnEvalUpperThreshold;
+    private double ccvpnEvalLowerThreshold;
     private double ccvpnEvalPrecision;
     private String aaiNotifTargetAction;
     private String aaiNotifTargetSource;
@@ -109,14 +110,20 @@ public class Configuration {
     @Override
     public String toString() {
         return "Configuration [pgHost=" + pgHost + ", pgPort=" + pgPort + ", pgUsername=" + pgUsername + ", pgPassword="
-                + pgPassword + ", dmaapServers=" + dmaapServers + ", configDbService=" + configDbService + ", cpsUrl="
-                + cpsUrl + ", aaiUrl=" + aaiUrl + ", configDbEnabled=" + configDbEnabled + ", cg=" + cg + ", cid=" + cid
-                + ", pollingInterval=" + pollingInterval + ", pollingTimeout=" + pollingTimeout + ", aafUsername="
-                + aafUsername + ", aafPassword=" + aafPassword + ", streamsSubscribes=" + streamsSubscribes
-                + ", streamsPublishes=" + streamsPublishes + ", samples=" + samples + ", minPercentageChange="
-                + minPercentageChange + ", initialDelaySeconds=" + initialDelaySeconds + ", rannfnssiDetailsTemplateId="
-                + rannfnssiDetailsTemplateId + ", desUrl=" + desUrl + ", pmDataDurationInWeeks=" + pmDataDurationInWeeks
-                + "]";
+            + pgPassword + ", dmaapServers=" + dmaapServers + ", configDbService=" + configDbService + ", cpsUrl="
+            + cpsUrl + ", aaiUrl=" + aaiUrl + ", configDbEnabled=" + configDbEnabled + ", cg=" + cg + ", cid=" + cid
+            + ", pollingInterval=" + pollingInterval + ", pollingTimeout=" + pollingTimeout + ", aafUsername="
+            + aafUsername + ", aafPassword=" + aafPassword + ", streamsSubscribes=" + streamsSubscribes
+            + ", streamsPublishes=" + streamsPublishes + ", samples=" + samples + ", minPercentageChange="
+            + minPercentageChange + ", initialDelaySeconds=" + initialDelaySeconds + ", rannfnssiDetailsTemplateId="
+            + rannfnssiDetailsTemplateId + ", desUrl=" + desUrl + ", pmDataDurationInWeeks=" + pmDataDurationInWeeks
+            + ", vesNotifPollingInterval=" + vesNotifPollingInterval + ", vesNotifChangeIdentifier="
+            + vesNotifChangeIdentifier + ", vesNotifChangeIdentifier=" + vesNotifChangeType + ", ccvpnEvalInterval=" +
+            ccvpnEvalInterval + ", ccvpnEvalUpperThreshold=" + ccvpnEvalUpperThreshold + ", ccvpnEvalLowerThreshold=" +
+            ccvpnEvalLowerThreshold + ", ccvpnEvalPrecision=" + ccvpnEvalPrecision + ", aaiNotifTargetAction=" +
+            aaiNotifTargetAction + ", aaiNotifTargetSource=" + aaiNotifTargetSource + ", aaiNotifTargetEntity=" +
+            aaiNotifTargetEntity + ", ccvpnEvalPeriodicCheckOn=" + ccvpnEvalPeriodicCheckOn +
+            ", ccvpnEvalOnDemandCheckOn=" + ccvpnEvalOnDemandCheckOn + ", ccvpnEvalStrategy=" + ccvpnEvalStrategy + "]";
     }
 
     /**
@@ -165,7 +172,8 @@ public class Configuration {
         aaiNotifTargetSource = jsonObject.get("sliceanalysisms.aaiNotif.targetSource").getAsString();
         aaiNotifTargetEntity = jsonObject.get("sliceanalysisms.aaiNotif.targetEntity").getAsString();
         ccvpnEvalInterval = jsonObject.get("sliceanalysisms.ccvpnEvalInterval").getAsInt();
-        ccvpnEvalThreshold = jsonObject.get("sliceanalysisms.ccvpnEvalThreshold").getAsDouble();
+        ccvpnEvalUpperThreshold = jsonObject.get("sliceanalysisms.ccvpnEvalUpperThreshold").getAsDouble();
+        ccvpnEvalLowerThreshold = jsonObject.get("sliceanalysisms.ccvpnEvalLowerThreshold").getAsDouble();
         ccvpnEvalPrecision = jsonObject.get("sliceanalysisms.ccvpnEvalPrecision").getAsDouble();
         ccvpnEvalPeriodicCheckOn = jsonObject.get("sliceanalysisms.ccvpnEvalPeriodicCheckOn").getAsBoolean();
         ccvpnEvalOnDemandCheckOn = jsonObject.get("sliceanalysisms.ccvpnEvalOnDemandCheckOn").getAsBoolean();
@@ -191,6 +199,6 @@ public class Configuration {
         } else {
             cpsUrl = jsonObject.get("sliceanalysisms.cps.url").getAsString();
         }
-        log.info("configuration from CBS {}", this);
+        log.info("configuration from CBS has been updated to {}", this);
     }
 }
