@@ -4,6 +4,8 @@ MAINTAINER Ekko Chang <ekko.chang@qct.io>
 LABEL org.label-schema.docker.build="docker build -t dl-admin . --no-cache" \
       org.label-schema.docker.run="docker run -p 80:80 --add-host=dl_feeder:your_feeder_ipaddress dl-admin"
 
+ENV NODE_OPTIONS "--openssl-legacy-provider"
+
 WORKDIR /app
 COPY ./src .
 COPY ./nginx .
