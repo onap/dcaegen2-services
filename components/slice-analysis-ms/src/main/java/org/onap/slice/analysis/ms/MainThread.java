@@ -1,8 +1,9 @@
 /*******************************************************************************
  *  ============LICENSE_START=======================================================
- *  son-handler
+ *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2019-2020 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -21,6 +22,7 @@
 
 package org.onap.slice.analysis.ms;
 
+import org.onap.slice.analysis.ms.service.ConfigThread;
 import org.onap.slice.analysis.ms.service.ConsumerThread;
 import org.onap.slice.analysis.ms.service.PmThread;
 import org.slf4j.Logger;
@@ -46,6 +48,8 @@ public class MainThread {
 		pmThread.start();
 		Thread consumerThread = new Thread(new ConsumerThread());
 		consumerThread.start();
+		Thread configThread = new Thread(new ConfigThread());
+		configThread.start();
 	}
 
 }
