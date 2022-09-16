@@ -1,15 +1,16 @@
 /*******************************************************************************
  *  ============LICENSE_START=======================================================
- *  son-handler
+ *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2019-2020 Wipro Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
  *     You may obtain a copy of the License at
- *  
- *          http://www.apache.org/licenses/LICENSE-2.0
- *  
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
  *     Unless required by applicable law or agreed to in writing, software
  *     distributed under the License is distributed on an "AS IS" BASIS,
  *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -31,21 +32,21 @@ import org.slf4j.LoggerFactory;
  */
 public class MainThread {
 
-	private static Logger log = LoggerFactory.getLogger(MainThread.class);
-	
-	private MainThread() {
-		
-	}
-	
-	/**
-	 * main thread initialization.
-	 */
-	public static void initiateThreads() {
-		log.debug("initializing Pm thread & Consumer thread");
-		Thread pmThread = new Thread(new PmThread());
-		pmThread.start();
-		Thread consumerThread = new Thread(new ConsumerThread());
-		consumerThread.start();
-	}
+    private static Logger log = LoggerFactory.getLogger(MainThread.class);
+
+    private MainThread() {
+
+    }
+
+    /**
+     * main thread initialization.
+    */
+    public static void initiateThreads() {
+        log.debug("initializing Pm thread & Consumer thread");
+        Thread pmThread = new Thread(new PmThread());
+        pmThread.start();
+        Thread consumerThread = new Thread(new ConsumerThread());
+        consumerThread.start();
+    }
 
 }
