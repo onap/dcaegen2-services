@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4430a735_30c54f99",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-16T02:52:16Z",
+      "side": 1,
+      "message": "Application fails to start using 10.0.21.",
+      "parentUuid": "c21741af_9ab302d4",
+      "revId": "107b36c98dcc18115a4b9ca3d5a9205d4bc08536",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "98917103_a0b50132",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/Configuration.java",
         "patchSetId": 6
@@ -33,6 +51,24 @@
       "revId": "107b36c98dcc18115a4b9ca3d5a9205d4bc08536",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84bb5bde_f5a47c19",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/models/Configuration.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-16T02:52:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98917103_a0b50132",
+      "revId": "107b36c98dcc18115a4b9ca3d5a9205d4bc08536",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
