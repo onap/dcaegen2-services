@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c9c27f5_b4483e7a",
+        "filename": "components/slice-analysis-ms/pom.xml",
+        "patchSetId": 11
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-19T15:21:03Z",
+      "side": 1,
+      "message": "Switch to 9.0.65 which is latest (and also default in the spring-boot 2.7.2)",
+      "range": {
+        "startLine": 320,
+        "startChar": 33,
+        "endLine": 320,
+        "endChar": 39
+      },
+      "revId": "6ff9e277f0e41aedd3092dcc93b6412f79b33568",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
