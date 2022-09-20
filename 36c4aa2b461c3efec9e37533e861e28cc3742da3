@@ -236,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "52cbf202_58a89270",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-20T22:05:51Z",
+      "side": 1,
+      "message": "Moved these properties into a separate class Config",
+      "parentUuid": "957ab627_8abafffc",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 69
+      },
+      "revId": "36c4aa2b461c3efec9e37533e861e28cc3742da3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5044886_aff0aec1",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 18

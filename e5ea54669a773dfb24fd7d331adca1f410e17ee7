@@ -16,6 +16,24 @@
       "revId": "e5ea54669a773dfb24fd7d331adca1f410e17ee7",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb1c4a77_7d147067",
+        "filename": "components/ml-prediction-ms/docker/docker-compose1.yaml",
+        "patchSetId": 32
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-20T22:05:51Z",
+      "side": 1,
+      "message": "created a docker folder due to internal review comments\nRolled back the changes,",
+      "parentUuid": "5d3f2341_f77346ca",
+      "revId": "e5ea54669a773dfb24fd7d331adca1f410e17ee7",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }

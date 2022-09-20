@@ -16,6 +16,24 @@
       "revId": "1eacbac663233ee67d8aebc8a79fe44e66bb8b58",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73847cff_0bc97c51",
+        "filename": "components/ml-prediction-ms/docker/src/run.py",
+        "patchSetId": 34
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2022-09-20T22:05:51Z",
+      "side": 1,
+      "message": "Ack, Have added mocks in the test modules to test GET and POST from two topics, however to train and predict ML models, we need the data to be prepared in historical form (to contain last 5 time instances). This requirement lead to prepare bulk data to contain all the Topics data in a iterative manner, It is difficult to refactor against ML Implementation for the topic used to get the dmaap config data against each cell.",
+      "parentUuid": "4467ca54_af0b942b",
+      "revId": "1eacbac663233ee67d8aebc8a79fe44e66bb8b58",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
