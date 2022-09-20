@@ -22,6 +22,30 @@
       "revId": "db545364f0a6caa8287df5d2243ad50b2e7c5788",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "054e5900_bdd757d4",
+        "filename": "releases/kpi-computation-ms-1.0.9-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-09-20T04:55:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f01abccd_b1eefc90",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "db545364f0a6caa8287df5d2243ad50b2e7c5788",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
