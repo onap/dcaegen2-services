@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47af3781_e98fe3ba",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 36
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-21T20:37:54Z",
+      "side": 1,
+      "message": "is there any way to eliminate IsUnittestPath?\n\nCan a set of faked objects be used instead of a mock, say some that use a generator for multiple return values?",
+      "revId": "f410fcca4768dcbcfd2eee65e9fd695a622e0e0c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bb27378_11adbd9f",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 36
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-09-21T20:37:54Z",
+      "side": 1,
+      "message": "Is there any way to avoid hardcoding a server name here? What happens in production code when this is executed?",
+      "revId": "f410fcca4768dcbcfd2eee65e9fd695a622e0e0c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
