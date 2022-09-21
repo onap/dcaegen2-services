@@ -22,6 +22,30 @@
       "revId": "297e77f6402d0ad237de1b128f2630ff4db40589",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bd4692c_e1035d54",
+        "filename": "releases/kpi-computation-ms-1.0.9-container.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-09-21T11:19:07Z",
+      "side": 1,
+      "message": "May I know where I can find the snapshot image being generated? I had checked in the nexus build logs - https://logs.onap.org/production/vex-yul-ecomp-jenkins-1/dcaegen2-services-kpi-computation-ms-maven-stage-master/588 , but couldn\u0027t find it. In case I\u0027m using a latest job, where can I fetch the snapshot image from?",
+      "parentUuid": "e95d0369_6972f27d",
+      "range": {
+        "startLine": 4,
+        "startChar": 72,
+        "endLine": 4,
+        "endChar": 78
+      },
+      "revId": "297e77f6402d0ad237de1b128f2630ff4db40589",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
