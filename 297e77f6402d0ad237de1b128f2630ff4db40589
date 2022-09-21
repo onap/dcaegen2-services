@@ -46,6 +46,30 @@
       "revId": "297e77f6402d0ad237de1b128f2630ff4db40589",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "673a4761_a4be90c5",
+        "filename": "releases/kpi-computation-ms-1.0.9-container.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-21T12:28:24Z",
+      "side": 1,
+      "message": "You should be looking into https://jenkins.onap.org/view/dcaegen2/job/dcaegen2-services-kpi-computation-ms-maven-docker-stage-master/ job logs (which is identified in line#4 also and not the \"docker\" in job name)\nThis is different from dcaegen2-services-kpi-computation-ms-maven-stage-master which only generates/pushes maven artifact.",
+      "parentUuid": "7bd4692c_e1035d54",
+      "range": {
+        "startLine": 4,
+        "startChar": 72,
+        "endLine": 4,
+        "endChar": 78
+      },
+      "revId": "297e77f6402d0ad237de1b128f2630ff4db40589",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
