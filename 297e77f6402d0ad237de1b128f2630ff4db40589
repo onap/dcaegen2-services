@@ -94,6 +94,30 @@
       "revId": "297e77f6402d0ad237de1b128f2630ff4db40589",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d37b571d_9849b098",
+        "filename": "releases/kpi-computation-ms-1.0.9-container.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-21T13:44:06Z",
+      "side": 1,
+      "message": "Could you confirm if this snapshot was verified locally? Noticed issues with SON-handler and Slice-Analysis after vulnerability updates and had to revert back some lib version.",
+      "parentUuid": "6bf582e6_cae87061",
+      "range": {
+        "startLine": 4,
+        "startChar": 72,
+        "endLine": 4,
+        "endChar": 78
+      },
+      "revId": "297e77f6402d0ad237de1b128f2630ff4db40589",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
