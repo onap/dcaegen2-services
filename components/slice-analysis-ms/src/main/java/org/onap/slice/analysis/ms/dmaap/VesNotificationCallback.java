@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *  Copyright (C) 2022 Huawei Canada Limited.
+ *  Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -21,9 +22,10 @@
 
 package org.onap.slice.analysis.ms.dmaap;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Set;
+import org.onap.slice.analysis.ms.aai.AaiService;
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.models.vesnotification.NotificationFields;
 
@@ -50,6 +52,9 @@ public class VesNotificationCallback implements NotificationCallback {
 
     @Autowired
     CCVPNPmDatastore ccvpnPmDatastore;
+
+    @Autowired
+    AaiService aaiService;
 
     private static Logger log = LoggerFactory.getLogger(VesNotificationCallback.class);
 
@@ -86,6 +91,7 @@ public class VesNotificationCallback implements NotificationCallback {
         String uniId = null;
         String bw = null;
         try {
+            updateCllInstance();
             JsonNode node = obj.readTree(msg);
             JsonNode notificationNode = node.get(EVENT).get(NOTIFICATIONFIELDS);
             output = obj.treeToValue(notificationNode, NotificationFields.class);
@@ -104,11 +110,18 @@ public class VesNotificationCallback implements NotificationCallback {
             log.error("Error converting VES msg to object, {}", e.getMessage());
         }
         if (cllId != null && uniId != null && bw != null){
-            log.info("Saving new CCVPN service usage data into ccvpnPmDatastore");
             log.debug("new bandwidth data -- serviceId: {}, uniId: {}, bw: {}", cllId, uniId, bw);
             ccvpnPmDatastore.addUsedBwToEndpoint(cllId, uniId, bw);
         }
+    }
 
+    /**
+     * Get latest services list, and update local related variables.
+     */
+    public void updateCllInstance(){
+        Set<String> instances = aaiService.fetchAllCllInstances();
+        log.error("instances {}", instances);
+        ccvpnPmDatastore.updateCllInstances(instances);
     }
 
 }

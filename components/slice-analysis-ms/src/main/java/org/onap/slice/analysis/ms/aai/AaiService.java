@@ -4,6 +4,7 @@
  *  ================================================================================
  *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -26,10 +27,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.onap.slice.analysis.ms.models.Configuration;
@@ -108,6 +111,39 @@ public class AaiService implements AaiInterface {
         responseMap.put("sNSSAI", snssai);
         log.info("subscriber details: " + responseMap);
         return responseMap;
+    }
+
+    /**
+     * fetch all valid cll instances
+     * @return
+     */
+    public Set<String> fetchAllCllInstances() {
+        globalSubscriberId = "IBNCustomer";
+        subscriptionServiceType = "IBN";
+        String serviceReqUrl = aaiBaseUrl + "/business/customers/customer/" + globalSubscriberId
+            + "/service-subscriptions/service-subscription/" + subscriptionServiceType + "/service-instances";
+        log.info("serviceReqUrl {}", serviceReqUrl);
+        Set<String> cllInstances = new HashSet<>();
+        try {
+            String serviceInstance =
+                restclient.sendGetRequest(serviceReqUrl, new ParameterizedTypeReference<String>() {}).getBody();
+            log.debug("The service instance response msg are :{}", serviceInstance);
+            JSONObject serviceInstanceJson = new JSONObject(serviceInstance);
+            JSONArray serviceInstanceArray = serviceInstanceJson.getJSONArray("service-instance");
+            for (int i = 0; i < serviceInstanceArray.length(); i++) {
+                JSONObject serviceObj = serviceInstanceArray.getJSONObject(i);
+                String serviceId = serviceObj.getString("service-instance-id");
+                log.debug("Jsonobject {}", serviceObj);
+                if(serviceId.startsWith("cll")){
+                    cllInstances.add(serviceId);
+                    log.debug("Add {} to latest service id list", serviceId);
+                }
+            }
+            return cllInstances;
+        } catch (Exception e) {
+            log.error("Exception while fetching serviceDetails: " + e);
+        }
+        return new HashSet<>();
     }
 
     /**
@@ -210,7 +246,7 @@ public class AaiService implements AaiInterface {
     /**
      * Fetches the SNSSIs of a serviceInstanceId
      *
-     * @param serviceInstanceId service instance ID
+     * @param sliceInstanceId service instance ID
      * @return snssaiList contains list of SNSSAIs
      */
     public List<String> getSnssaiList(String sliceInstanceId) {

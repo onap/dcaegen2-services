@@ -4,12 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.1.5] - 2022/08/27
+## [1.1.5] - 2022/09/14
          - [DCAEGEN2-3221](https://jira.onap.org/browse/DCAEGEN2-3221) - Slice-Analysis-Ms vulnerability updates
 
          - [DCAEGEN2-3195](https://jira.onap.org/browse/DCAEGEN2-3195) - CCVPN Kohn Enhancements for Intent-based Cloud Leased Line and Transport Slicing
 
          - [DCAEGEN2-3239](https://jira.onap.org/browse/DCAEGEN2-3239) - Enhance BandwidthEvaluator to listen on user's bandwidth threshold
+
+         - [DCAEGEN2-3238](https://jira.onap.org/browse/DCAEGEN2-3238) - Enhance BandwidthEvaluator in slice-analysis-ms to support detailed bandwidth adjustment
+
+         - [DCAEGEN2-3255](https://jira.onap.org/browse/DCAEGEN2-3255) - Fix bug of application failed to start
+
+         - [DCAEGEN2-3264](https://jira.onap.org/browse/DCAEGEN2-3264) - Fix bug that cll service instance info didn't get updated when a cll service is deleted
+    
+         - [DCAEGEN2-3240](https://jira.onap.org/browse/DCAEGEN2-3240) - Implement runtime service configuration
 
 ## [1.1.4] - 2022/07/28
          - [DCAEGEN2-3120](https://jira.onap.org/browse/DCAEGEN2-3120) - Enhance sliceanalysis MS to use DCAE SDK dmaap-client lib

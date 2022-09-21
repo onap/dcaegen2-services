@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -20,6 +21,11 @@
  *******************************************************************************/
 package org.onap.slice.analysis.ms.service.ccvpn;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -42,13 +48,23 @@ public class CCVPNPmDatastore {
     private static Logger log = LoggerFactory.getLogger(CCVPNPmDatastore.class);
     private static final Pattern pattern = Pattern.compile("([0-9.]+)\\s*(kb|Kb|mb|Mb|Gb|gb)*");
     private static final int WINDOW_SIZE = 5;
+    @Getter
     private final ConcurrentMap<String, ServiceState> svcStatus = new ConcurrentHashMap<>();
     // Provisioned bandwidth of each endpoint
+    @Getter
     private final ConcurrentMap<String, Integer> endpointToProvBw = new ConcurrentHashMap<>();
     // Max bandwidth (upper-bound) of each endpoint
+    @Getter
     private final ConcurrentMap<String, Integer> upperBoundBw = new ConcurrentHashMap<>();
     // Current bandwidth usage data list from customers
+    @Getter
     private final ConcurrentMap<Endpointkey, EvictingQueue<Integer>> endpointToUsedBw = new ConcurrentHashMap<>();
+    // Original bandwidth of each endpoint
+    @Getter
+    private final ConcurrentMap<String, Integer> endpointToOriginalBw = new ConcurrentHashMap<>();
+    // Assurance Status of each endpoint
+    @Getter
+    private final ConcurrentMap<String, Boolean> closedLoopBwAssuranceStatus = new ConcurrentHashMap<>();
 
     /**
      * Given a cllId, return a map between Endpointkey and their corresponding UsedBw Queue.
@@ -88,9 +104,28 @@ public class CCVPNPmDatastore {
         return svcStatus.getOrDefault(cllId, ServiceState.UNKNOWN);
     }
 
+    /**
+     * If ccvpn flexible threshold is on, then bandwidth can be assured within scope.
+     * @param cllId
+     * @return
+     */
     public Integer getUpperBoundBwOfSvc(String cllId){
         return upperBoundBw.getOrDefault(cllId, Integer.MAX_VALUE);
     }
+
+    /**
+     * Get closed loop check status of this cll service
+     * @param cllId
+     * @return
+     */
+    public Boolean getClosedloopStatus(String cllId){
+        return closedLoopBwAssuranceStatus.getOrDefault(cllId,true);
+    }
+
+    public int getOriginalBw(String cllId) {
+        return endpointToOriginalBw.getOrDefault(cllId, 0);
+    }
+
 
     /**
      * return the complete map of cll service status
@@ -121,12 +156,82 @@ public class CCVPNPmDatastore {
     }
 
     /**
+     * Update the status, whether close loop bw modification of this cll service is on.
+     * @param cllId
+     * @param status
+     */
+    public void updateClosedloopStatus(String cllId, Boolean status){
+        closedLoopBwAssuranceStatus.put(cllId, status);
+    }
+
+    /**
+     * Update cll original bw, which will not influenced by closed loop bw assurance
+     * @param cllId
+     * @param originalBw
+     */
+    public void updateOriginalBw(String cllId, int originalBw){
+        endpointToOriginalBw.put(cllId, originalBw);
+    }
+
+    /**
+     * Update runtime configurations;
+     * @param cllId
+     * @param closedLoopBwAssuranceStatus
+     * @param originalBw
+     */
+    public void updateConfigFromPolicy(String cllId, Boolean closedLoopBwAssuranceStatus, int originalBw) {
+        updateClosedloopStatus(cllId, closedLoopBwAssuranceStatus);
+        updateOriginalBw(cllId, originalBw);
+    }
+
+    /**
      * Update upper bound bandwidth value to given bandwidth
      * @param cllId target cll instance id
      * @param bw new bandwidth
      */
     public void updateUpperBoundBw(String cllId, int bw){
         upperBoundBw.put(cllId, bw);
+    }
+
+    /**
+     * Update local service related variables in case cll is deleted.
+     * @param allValidCllInstances
+     */
+    public void updateCllInstances(Set<String> allValidCllInstances){
+        Set<String> invalidCllIds;
+        invalidCllIds= filterInvalidCllIds(allValidCllInstances, svcStatus.keySet());
+        svcStatus.keySet().removeAll(invalidCllIds);
+        invalidCllIds = filterInvalidCllIds(allValidCllInstances, endpointToProvBw.keySet());
+        endpointToProvBw.keySet().removeAll(invalidCllIds);
+        invalidCllIds = filterInvalidCllIds(allValidCllInstances, upperBoundBw.keySet());
+        upperBoundBw.keySet().removeAll(invalidCllIds);
+        invalidCllIds = filterInvalidCllIds(allValidCllInstances, endpointToOriginalBw.keySet());
+        endpointToOriginalBw.keySet().removeAll(invalidCllIds);
+        invalidCllIds = filterInvalidCllIds(allValidCllInstances, closedLoopBwAssuranceStatus.keySet());
+        closedLoopBwAssuranceStatus.keySet().removeAll(invalidCllIds);
+        for(String invalidCllId : invalidCllIds) {
+            log.debug("drop {} from endpointToUsedBw", invalidCllId);
+            endpointToUsedBw.entrySet().stream().dropWhile(map -> map.getKey().getCllId().equalsIgnoreCase(invalidCllId));
+            Iterator<Map.Entry<Endpointkey, EvictingQueue<Integer>>> iterator = endpointToUsedBw.entrySet().iterator();
+            while(iterator.hasNext()) {
+                Endpointkey endpointkey = iterator.next().getKey();
+                if(endpointkey.getCllId().equalsIgnoreCase(invalidCllId)) {
+                    endpointToUsedBw.remove(endpointkey);
+                }
+            }
+        }
+    }
+
+    /**
+     * Filter out cllId to be deleted
+     * @param allValidCllInstances
+     * @param currentCllInstances
+     * @return
+     */
+    public Set<String> filterInvalidCllIds(Set<String> allValidCllInstances, Set<String> currentCllInstances) {
+        Set<String> invalidCllInstances = new HashSet<>(currentCllInstances);
+        invalidCllInstances.removeAll(allValidCllInstances);
+        return invalidCllInstances;
     }
 
     /**
@@ -141,8 +246,7 @@ public class CCVPNPmDatastore {
      * @return whether bandwidth value is changed or not.
      */
     public boolean updateProvBw(String cllId, int bw, boolean override){
-        if (!override && !endpointToProvBw.containsKey(cllId)){
-            endpointToProvBw.put(cllId, bw);
+        if ( endpointToProvBw.putIfAbsent(cllId, bw) == null || !override){
             return true;
         } else {
             if (endpointToProvBw.get(cllId) == bw){

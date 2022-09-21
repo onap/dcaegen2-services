@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -64,7 +65,6 @@ public class BandwidthEvaluator {
     private static final Event KILL_PILL = new SimpleEvent(null, 0);
     private static final int DEFAULT_EVAL_INTERVAL = 5;
     private static final String DEFAULT_STRATEGY_NAME = "FixedUpperBoundStrategy";
-
     /**
      * Interval of each round of evaluation, defined in config_all.json
      */
@@ -86,6 +86,7 @@ public class BandwidthEvaluator {
         strategyName = (strategyName != null)? strategyName : DEFAULT_STRATEGY_NAME;
         evaluationInterval = (evaluationInterval == 0)? DEFAULT_EVAL_INTERVAL : evaluationInterval;
         EvaluationStrategy strategy = strategyFactory.getStrategy(strategyName);
+        log.info("{} is utilized as the bandwidth evaluatior strategy", strategyName);
 
         /**
          * Evalution main loop
@@ -117,6 +118,7 @@ public class BandwidthEvaluator {
                             log.info("Service modification complete; serviceId: {} with new bandwidth: {}", serviceId, bwValue);
                             ccvpnPmDatastore.updateProvBw(serviceId, bwValue, true);
                             ccvpnPmDatastore.updateSvcState(serviceId, ServiceState.RUNNING);
+                            log.debug("Service state of {} is changed to running", serviceId);
                         }
                     }
                     log.debug("=== Processing AAI network policy query complete ===");
@@ -160,7 +162,7 @@ public class BandwidthEvaluator {
      * @param event event object
      */
     public void post(@NonNull Event event){
-        log.debug("A new event triggered, type: {}, subject: {}, at time: {}",
+        log.info("A new event triggered, type: {}, subject: {}, at time: {}",
                 event.type(), event.subject(), event.time());
         if (event.type() == SimpleEvent.Type.AAI_BW_REQ) {
             aaiEventLoop.add(event);
@@ -171,10 +173,12 @@ public class BandwidthEvaluator {
         }
     }
 
+    // update configuration
     private void loadConfig() {
         configuration = Configuration.getInstance();
         evaluationInterval = configuration.getCcvpnEvalInterval();
         strategyName = configuration.getCcvpnEvalStrategy();
+        log.info("Evaluation loop configs has been loaded. Strategy {}.", strategyName);
     }
 
     /**
