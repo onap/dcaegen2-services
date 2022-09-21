@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6dd38a87_d546513f",
+        "filename": "components/ml-prediction-ms/docker/Dockerfile",
+        "patchSetId": 33
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-21T03:04:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1635e402_35af7788",
+      "revId": "3d5631561a283034f2e64a54ae49e9a9e262b5cb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a414726e_25da80e6",
         "filename": "components/ml-prediction-ms/docker/Dockerfile",
         "patchSetId": 33
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "b8226ab9_8ad6d394",
+        "filename": "components/ml-prediction-ms/docker/Dockerfile",
+        "patchSetId": 33
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-21T03:04:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a414726e_25da80e6",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 15
+      },
+      "revId": "3d5631561a283034f2e64a54ae49e9a9e262b5cb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f30ad63_6db82aff",
         "filename": "components/ml-prediction-ms/docker/Dockerfile",
         "patchSetId": 33
@@ -62,6 +104,30 @@
       "revId": "3d5631561a283034f2e64a54ae49e9a9e262b5cb",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8898c6f3_106b83da",
+        "filename": "components/ml-prediction-ms/docker/Dockerfile",
+        "patchSetId": 33
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-21T03:04:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f30ad63_6db82aff",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 20
+      },
+      "revId": "3d5631561a283034f2e64a54ae49e9a9e262b5cb",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
