@@ -3,6 +3,7 @@
  * ONAP : DATALAKE DES
  * ================================================================================
  * Copyright (C) 2020 China Mobile. All rights reserved.
+ * Copyright (C) 2022 Wipro Limited.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,5 +54,7 @@ public class DbConfigTest {
         assertFalse("123".equals(dbConfig.getPort()));
         dbConfig.setPoperties("driver");
         assertTrue("driver".equals(dbConfig.getPoperties()));
+        dbConfig.setDbTypeId("123");
+        assertTrue("123".equals(dbConfig.getDbTypeId()));
     }
 }
