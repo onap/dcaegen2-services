@@ -3,6 +3,7 @@
  * ONAP : DataLake
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +20,23 @@
  */
 package org.onap.datalake.feeder.domain;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class DbTypeTest {
 
     @Test
-    public void test(){
-        DbType dbType = new DbType("ES","Elasticsearch");
-        
+    public void test() {
+        DbType dbType = new DbType("ES", "Elasticsearch");
+
 
         DbType dbType2 = new DbType("MONGO", "MongoDB");
-        dbType.setTool(false); 
-        
+        dbType.setTool(false);
+
 
         assertNotNull(dbType.toString());
         assertEquals(dbType, dbType);
@@ -44,7 +48,7 @@ public class DbTypeTest {
         assertEquals("MongoDB", dbType2.getName());
         dbType2.setName(null);
         dbType2.setDefaultPort(1);
-        assertTrue(1==dbType2.getDefaultPort());
+        assertTrue(1 == dbType2.getDefaultPort());
 
         dbType2.setDbs(null);
         assertNull(dbType2.getDbs());

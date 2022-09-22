@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +22,7 @@
 package org.onap.datalake.feeder.service;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +32,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -40,6 +43,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.util.TestUtil;
 
@@ -51,73 +55,86 @@ import org.onap.datalake.feeder.util.TestUtil;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TopicConfigPollingServiceTest {
-	@Mock
-	private ApplicationConfiguration config;
 
-	@Mock
-	private DmaapService dmaapService;
+    @Mock
+    private ApplicationConfiguration config;
 
-	@InjectMocks
-	private TopicConfigPollingService topicConfigPollingService = new TopicConfigPollingService();
+    @Mock
+    private DmaapService dmaapService;
 
-	static String KAFKA_NAME = "kafka1";
+    @Mock
+    private Map < Integer, Map < String, List < EffectiveTopic >>> effectiveTopicMap = new HashMap < > ();
 
-	@Before
-	public void init() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
-		Method init = topicConfigPollingService.getClass().getDeclaredMethod("init");
-		init.setAccessible(true);
-		init.invoke(topicConfigPollingService);
+    @InjectMocks
+    private TopicConfigPollingService topicConfigPollingService = new TopicConfigPollingService();
 
-		Set<String> activeTopics = new HashSet<>(Arrays.asList("test"));
-		Map<Integer, Set<String>> activeTopicMap = new HashMap<>();
-		activeTopicMap.put(1, activeTopics);
+    static String KAFKA_NAME = "kafka1";
 
-		Field activeTopicsField = TopicConfigPollingService.class.getDeclaredField("activeTopicMap");
-		activeTopicsField.setAccessible(true);
-		activeTopicsField.set(topicConfigPollingService, activeTopicMap);
+    @Before
+    public void init() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+        Method init = topicConfigPollingService.getClass().getDeclaredMethod("init");
+        init.setAccessible(true);
+        init.invoke(topicConfigPollingService);
 
-		Method initMethod = TopicConfigPollingService.class.getDeclaredMethod("init");
-		initMethod.setAccessible(true);
-		initMethod.invoke(topicConfigPollingService);
-	}
+        Set < String > activeTopics = new HashSet < > (Arrays.asList("test"));
+        Map < Integer, Set < String >> activeTopicMap = new HashMap < > ();
+        activeTopicMap.put(1, activeTopics);
 
-	@Test
-	public void testRun() throws InterruptedException {
+        Field activeTopicsField = TopicConfigPollingService.class.getDeclaredField("activeTopicMap");
+        activeTopicsField.setAccessible(true);
+        activeTopicsField.set(topicConfigPollingService, activeTopicMap);
 
-		when(config.getCheckTopicInterval()).thenReturn(1L);
+        Method initMethod = TopicConfigPollingService.class.getDeclaredMethod("init");
+        initMethod.setAccessible(true);
+        initMethod.invoke(topicConfigPollingService);
+    }
 
-		Thread thread = new Thread(topicConfigPollingService);
-		thread.start();
+    @Test
+    public void testRun() throws InterruptedException {
 
-		Thread.sleep(50);
-		topicConfigPollingService.shutdown();
-		thread.join();
+        when(config.getCheckTopicInterval()).thenReturn(1 L);
 
-		assertTrue(topicConfigPollingService.isActiveTopicsChanged(new Kafka()));
-	}
+        Thread thread = new Thread(topicConfigPollingService);
+        thread.start();
 
-	@Test
-	public void testRunNoChange() throws InterruptedException {
+        Thread.sleep(50);
+        topicConfigPollingService.shutdown();
+        thread.join();
 
-		when(config.getCheckTopicInterval()).thenReturn(1L);
+        assertTrue(topicConfigPollingService.isActiveTopicsChanged(new Kafka()));
+    }
 
-		Thread thread = new Thread(topicConfigPollingService);
-		thread.start();
+    @Test
+    public void testRunNoChange() throws InterruptedException {
 
-		Thread.sleep(50);
-		topicConfigPollingService.shutdown();
-		thread.join();
+        when(config.getCheckTopicInterval()).thenReturn(1 L);
 
-		assertTrue(topicConfigPollingService.isActiveTopicsChanged(new Kafka()));
-	}
+        Thread thread = new Thread(topicConfigPollingService);
+        thread.start();
 
-	@Test
-	public void testGet() {
-		Kafka kafka = TestUtil.newKafka(KAFKA_NAME);
-		kafka.setId(1);
-		//assertNull(topicConfigPollingService.getEffectiveTopic (kafka, "test"));
-		assertNotNull(topicConfigPollingService.getActiveTopics(kafka));
+        Thread.sleep(50);
+        topicConfigPollingService.shutdown();
+        thread.join();
 
-	}
+        assertTrue(topicConfigPollingService.isActiveTopicsChanged(new Kafka()));
+    }
+
+    @Test
+    public void testGet() {
+        Kafka kafka = TestUtil.newKafka(KAFKA_NAME);
+        kafka.setId(1);
+        //assertNull(topicConfigPollingService.getEffectiveTopic (kafka, "test"));
+        assertNotNull(topicConfigPollingService.getActiveTopics(kafka));
+
+    }
+
+    @Test
+    public void testGetEffectiveTopic() {
+        Kafka kafka = TestUtil.newKafka(KAFKA_NAME);
+        kafka.setId(1);
+        Map < String, List < EffectiveTopic >> effectiveTopicMapKafka = new HashMap < > ();
+        when(effectiveTopicMap.get(kafka.getId())).thenReturn(effectiveTopicMapKafka);
+        assertNull(topicConfigPollingService.getEffectiveTopic(kafka, "test"));
+    }
 
 }

@@ -3,6 +3,7 @@
  * ONAP : DataLake DES
  * ================================================================================
  * Copyright 2020 China Mobile. All rights reserved.
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +24,7 @@ package org.onap.datalake.des.domain;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -74,5 +76,7 @@ public class DbTest {
         assertTrue("property2".equals(mongoDb2.getProperty2()));
         assertTrue("property3".equals(mongoDb2.getProperty3()));
         assertEquals(mongoDb2.getDbConfig().getHost(), mongoDb2.getHost());
+        assertNotNull(mongoDb1.toString());
     }
+
 }
