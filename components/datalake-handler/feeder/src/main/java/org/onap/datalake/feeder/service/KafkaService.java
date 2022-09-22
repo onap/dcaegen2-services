@@ -20,13 +20,14 @@
 
 package org.onap.datalake.feeder.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.dto.KafkaConfig;
 import org.onap.datalake.feeder.repository.KafkaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.*;
 
 /**
  * Service for kafkas
@@ -41,15 +42,15 @@ public class KafkaService {
 
     public Kafka getKafkaById(int id) {
 
-        Optional<Kafka> ret = kafkaRepository.findById(id);
+        Optional < Kafka > ret = kafkaRepository.findById(id);
         return ret.isPresent() ? ret.get() : null;
     }
 
-    public List<KafkaConfig> getAllKafka() {
+    public List < KafkaConfig > getAllKafka() {
 
-        List<KafkaConfig> kafkaConfigList = new ArrayList<>();
-        Iterable<Kafka> kafkaIterable = kafkaRepository.findAll();
-        for(Kafka portal : kafkaIterable) {
+        List < KafkaConfig > kafkaConfigList = new ArrayList < > ();
+        Iterable < Kafka > kafkaIterable = kafkaRepository.findAll();
+        for (Kafka portal: kafkaIterable) {
             kafkaConfigList.add(portal.getKafkaConfig());
         }
         return kafkaConfigList;

@@ -19,11 +19,11 @@
  */
 package org.onap.datalake.feeder.dto;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.util.TestUtil;
-
-import static org.junit.Assert.*;
 
 /**
  * Test Kafka

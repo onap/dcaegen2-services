@@ -28,12 +28,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.dto.KafkaConfig;
 import org.onap.datalake.feeder.repository.KafkaRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)

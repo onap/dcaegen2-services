@@ -19,9 +19,11 @@
  *
  *******************************************************************************/
 package org.onap.slice.analysis.ms.data.beans;
-import static org.junit.Assert.*;
+
 import java.sql.Timestamp;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
 public class PerformanceNotificationsTest {
     private Timestamp createdAt;
     @Test

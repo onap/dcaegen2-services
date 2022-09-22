@@ -20,12 +20,12 @@
 
 package org.onap.datalake.feeder.dto;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 import org.onap.datalake.feeder.domain.Design;
 import org.onap.datalake.feeder.domain.DesignType;
 import org.onap.datalake.feeder.domain.TopicName;
-
-import static org.junit.Assert.*;
 
 public class DesignConfigTest {
 

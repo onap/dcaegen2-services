@@ -20,10 +20,11 @@
 
 package org.onap.datalake.feeder.domain;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.onap.datalake.feeder.util.TestUtil;
-
-import static org.junit.Assert.*;
 
 public class DesignTest {
 

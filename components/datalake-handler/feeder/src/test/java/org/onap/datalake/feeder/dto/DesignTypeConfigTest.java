@@ -1,9 +1,9 @@
 /*
  * ============LICENSE_START=======================================================
- * ONAP : DATALAKE
+ * ONAP : DCAE
  * ================================================================================
- * Copyright 2019 China Mobile
- *=================================================================================
+ * Copyright (C) 2022 Wipro Limited.
+ * =================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,26 +17,21 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
-
-package org.onap.datalake.feeder.domain;
+package org.onap.datalake.feeder.dto;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-public class DesignTypeTest {
+public class DesignTypeConfigTest {
 
     @Test
-    public void test(){
-        DesignType designType = new DesignType();
-        designType.setName("Kibana Dashboard");
-        designType.setNote("test");
-        assertEquals("Kibana Dashboard", designType.getName());
-        assertEquals("test", designType.getNote());
-
-        designType.setDbType(null);
-        designType.getDbType();
-        designType.setDesigns(null);
-        designType.getDesigns();
-        designType.getDesignTypeConfig();
+    public void testDesignTypeConfig() {
+        DesignTypeConfig designTypeConfig = new DesignTypeConfig();
+        designTypeConfig.setId("123");
+        designTypeConfig.setName("test");
+        assertEquals("123", designTypeConfig.getId());
+        assertEquals("test", designTypeConfig.getName());
     }
+
 }
