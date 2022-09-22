@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,12 +29,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.dto.KafkaConfig;
 import org.onap.datalake.feeder.repository.KafkaRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
