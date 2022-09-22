@@ -1,10 +1,10 @@
 /*
  * ============LICENSE_START=======================================================
- * ONAP : DataLake
+ * ONAP : DCAE
  * ================================================================================
- * Copyright 2019 China Mobile
+ * Copyright 2022 Wipro Limited.
  * Copyright (C) 2022 Wipro Limited.
- *=================================================================================
+ * =================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,44 +20,37 @@
  */
 package org.onap.datalake.feeder.service;
 
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.onap.datalake.feeder.domain.DesignType;
-import org.onap.datalake.feeder.dto.DesignTypeConfig;
-import org.onap.datalake.feeder.repository.DesignTypeRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+import org.onap.datalake.feeder.domain.TopicName;
+import org.onap.datalake.feeder.repository.TopicNameRepository;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DesignTypeServiceTest {
+public class TopicNameServiceTest {
 
     @Mock
-    private DesignTypeRepository designTypeRepository;
+    private TopicNameRepository topicNameRepository;
 
     @InjectMocks
-    private DesignTypeService designTypeService;
+    private TopicNameService topicNameService;
 
     @Test
-    public void testDesignTypeService() {
-        List < DesignType > designTypeList = new ArrayList < > ();
-        DesignType designType = new DesignType();
-        designType.setName("test");
-        designTypeList.add(designType);
-        when(designTypeRepository.findAll()).thenReturn(designTypeList);
-        assertNotNull(designTypeService.getDesignTypes());
-    }
-
-    @Test
-    public void testDesignTypeServiceNull() {
-        when(designTypeRepository.findAll()).thenReturn(null);
-        assertEquals(0, designTypeService.getDesignTypes().size());
+    public void testUpdate() {
+        List < TopicName > topicNameList = new ArrayList < > ();
+        topicNameList.add(new TopicName("test"));
+        Collection < String > allTopicNames = new ArrayList < > ();
+        allTopicNames.add("MONGODB");
+        when(topicNameRepository.findAll()).thenReturn(topicNameList);
+        topicNameService.update(allTopicNames);
     }
 
 }

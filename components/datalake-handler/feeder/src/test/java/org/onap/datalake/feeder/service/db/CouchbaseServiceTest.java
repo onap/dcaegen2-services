@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright (C) 2018-2019 Huawei. All rights reserved.
+ * Copyright (C) 2022 Wipro Limited.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +21,12 @@
 
 package org.onap.datalake.feeder.service.db;
 
+import static org.mockito.Mockito.when;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -29,6 +34,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
@@ -39,6 +46,7 @@ import org.onap.datalake.feeder.util.TestUtil;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.CouchbaseCluster;
 import com.couchbase.client.java.env.DefaultCouchbaseEnvironment;
+import com.couchbase.client.java.error.DocumentAlreadyExistsException;
 import com.couchbase.mock.Bucket;
 import com.couchbase.mock.BucketConfiguration;
 import com.couchbase.mock.CouchbaseMock;
@@ -46,111 +54,151 @@ import com.couchbase.mock.client.MockClient;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CouchbaseServiceTest {
-	protected final BucketConfiguration bucketConfiguration = new BucketConfiguration();
-	protected MockClient mockClient;
-	protected CouchbaseMock couchbaseMock;
-	protected Cluster cluster;
-	protected com.couchbase.client.java.Bucket bucket;
-	protected int carrierPort;
-	protected int httpPort;
+    protected final BucketConfiguration bucketConfiguration = new BucketConfiguration();
+    protected MockClient mockClient;
+    protected CouchbaseMock couchbaseMock;
+    protected Cluster cluster;
+    protected com.couchbase.client.java.Bucket bucket;
+    protected int carrierPort;
+    protected int httpPort;
 
-	protected void getPortInfo(String bucket) throws Exception {
-		httpPort = couchbaseMock.getHttpPort();
-		carrierPort = couchbaseMock.getCarrierPort(bucket);
-	}
+    @InjectMocks
+    private CouchbaseService couchbaseService;
 
-	protected void createMock(@NotNull String name, @NotNull String password) throws Exception {
-		bucketConfiguration.numNodes = 1;
-		bucketConfiguration.numReplicas = 1;
-		bucketConfiguration.numVBuckets = 1024;
-		bucketConfiguration.name = name;
-		bucketConfiguration.type = Bucket.BucketType.COUCHBASE;
-		bucketConfiguration.password = password;
-		ArrayList<BucketConfiguration> configList = new ArrayList<BucketConfiguration>();
-		configList.add(bucketConfiguration);
-		couchbaseMock = new CouchbaseMock(0, configList);
-		couchbaseMock.start();
-		couchbaseMock.waitForStartup();
-	}
+    @Mock
+    private ApplicationConfiguration config;
 
-	protected void createClient() {
-		cluster = CouchbaseCluster.create(DefaultCouchbaseEnvironment.builder().bootstrapCarrierDirectPort(carrierPort).bootstrapHttpDirectPort(httpPort).build(), "couchbase://127.0.0.1");
-		bucket = cluster.openBucket("default");
-	}
+    @Before
+    public void init() throws NoSuchFieldException, IllegalAccessException {
+        Db db = TestUtil.newDb("Coachbasedb");
+        db.setDatabase("database");
+        db.setLogin("login");
+        couchbaseService = new CouchbaseService(db);
 
-	@Before
-	public void setUp() throws Exception {
-		createMock("default", "");
-		getPortInfo("default");
-		createClient();
-	}
+        Field configField = CouchbaseService.class.getDeclaredField("config");
+        configField.setAccessible(true);
+        configField.set(couchbaseService, config);
+        couchbaseService.bucket = bucket;
+        couchbaseService.init();
+    }
 
-	@After
-	public void tearDown() {
-		if (cluster != null) {
-			cluster.disconnect();
-		}
-		if (couchbaseMock != null) {
-			couchbaseMock.stop();
-		}
-		if (mockClient != null) {
-			mockClient.shutdown();
-		}
-	}
+    protected void getPortInfo(String bucket) throws Exception {
+        httpPort = couchbaseMock.getHttpPort();
+        carrierPort = couchbaseMock.getCarrierPort(bucket);
+    }
 
-	@Test
-	public void testSaveJsonsWithTopicId() {
-		ApplicationConfiguration appConfig = new ApplicationConfiguration();
-		appConfig.setTimestampLabel("datalake_ts_");
+    protected void createMock(@NotNull String name, @NotNull String password) throws Exception {
+        bucketConfiguration.numNodes = 1;
+        bucketConfiguration.numReplicas = 1;
+        bucketConfiguration.numVBuckets = 1024;
+        bucketConfiguration.name = name;
+        bucketConfiguration.type = Bucket.BucketType.COUCHBASE;
+        bucketConfiguration.password = password;
+        ArrayList < BucketConfiguration > configList = new ArrayList < BucketConfiguration > ();
+        configList.add(bucketConfiguration);
+        couchbaseMock = new CouchbaseMock(0, configList);
+        couchbaseMock.start();
+        couchbaseMock.waitForStartup();
+    }
 
-		String text = "{ data: { data2 : { value : 'hello'}}}";
+    protected void createClient() {
+        cluster = CouchbaseCluster.create(DefaultCouchbaseEnvironment.builder().bootstrapCarrierDirectPort(carrierPort).bootstrapHttpDirectPort(httpPort).build(), "couchbase://127.0.0.1");
+        bucket = cluster.openBucket("default");
+    }
 
-		JSONObject json = new JSONObject(text);
+    @Before
+    public void setUp() throws Exception {
+        createMock("default", "");
+        getPortInfo("default");
+        createClient();
+    }
 
-		Topic topic = TestUtil.newTopic("test getMessageId");
-		topic.setMessageIdPath("/data/data2/value");
-		List<JSONObject> jsons = new ArrayList<>();
-		json.put(appConfig.getTimestampLabel(), 1234);
-		jsons.add(json);
-		CouchbaseService couchbaseService = new CouchbaseService(new Db());
-		couchbaseService.bucket = bucket;
-		couchbaseService.config = appConfig;
+    @After
+    public void tearDown() {
+        if (cluster != null) {
+            cluster.disconnect();
+        }
+        if (couchbaseMock != null) {
+            couchbaseMock.stop();
+        }
+        if (mockClient != null) {
+            mockClient.shutdown();
+        }
+    }
 
-		couchbaseService.init();
-		EffectiveTopic effectiveTopic = new EffectiveTopic(topic, "test");
-		couchbaseService.saveJsons(effectiveTopic, jsons);
+    @Test
+    public void testSaveJsonsWithTopicId() {
+        ApplicationConfiguration appConfig = new ApplicationConfiguration();
+        appConfig.setTimestampLabel("datalake_ts_");
 
-	}
+        String text = "{ data: { data2 : { value : 'hello'}}}";
 
-	@Test
-	public void testSaveJsonsWithOutTopicId() {
-		ApplicationConfiguration appConfig = new ApplicationConfiguration();
-		appConfig.setTimestampLabel("datalake_ts_");
+        JSONObject json = new JSONObject(text);
 
-		String text = "{ data: { data2 : { value : 'hello'}}}";
+        Topic topic = TestUtil.newTopic("test getMessageId");
+        topic.setMessageIdPath("/data/data2/value");
+        List < JSONObject > jsons = new ArrayList < > ();
+        json.put(appConfig.getTimestampLabel(), 1234);
+        jsons.add(json);
+        CouchbaseService couchbaseService = new CouchbaseService(new Db());
+        couchbaseService.bucket = bucket;
+        couchbaseService.config = appConfig;
 
-		JSONObject json = new JSONObject(text);
+        couchbaseService.init();
+        EffectiveTopic effectiveTopic = new EffectiveTopic(topic, "test");
+        couchbaseService.saveJsons(effectiveTopic, jsons);
 
-		Topic topic = TestUtil.newTopic("test getMessageId");
-		List<JSONObject> jsons = new ArrayList<>();
-		json.put(appConfig.getTimestampLabel(), 1234);
-		jsons.add(json);
-		CouchbaseService couchbaseService = new CouchbaseService(new Db());
-		couchbaseService.bucket = bucket;
-		couchbaseService.config = appConfig;
+    }
 
-		couchbaseService.init();
-		EffectiveTopic effectiveTopic = new EffectiveTopic(topic, "test");
-		couchbaseService.saveJsons(effectiveTopic, jsons);
-	}
+    @Test(expected = DocumentAlreadyExistsException.class)
+    public void testSaveJsons() {
+        ApplicationConfiguration appConfig = new ApplicationConfiguration();
+        appConfig.setTimestampLabel("datalake_ts_");
 
-	@Test
-	public void testCleanupBucket() {
-		// CouchbaseService couchbaseService = new CouchbaseService(new Db());
-		// couchbaseService.bucket = bucket;
-		// ApplicationConfiguration appConfig = new ApplicationConfiguration();
-		// couchbaseService.config = appConfig;
-		// couchbaseService.cleanUp();
-	}
+        String text = "{ data: { data2 : { value : 'hello'}}}";
+
+        JSONObject json = new JSONObject(text);
+
+        Topic topic = TestUtil.newTopic("test getMessageId");
+        topic.setMessageIdPath("/data/data2/value");
+        List < JSONObject > jsons = new ArrayList < > ();
+        json.put(appConfig.getTimestampLabel(), 1234);
+        jsons.add(json);
+        CouchbaseService couchbaseService = new CouchbaseService(new Db());
+        couchbaseService.bucket = bucket;
+        couchbaseService.config = appConfig;
+
+        couchbaseService.init();
+        EffectiveTopic effectiveTopic = new EffectiveTopic(topic, "test");
+        couchbaseService.saveJsons(effectiveTopic, jsons);
+    }
+
+    @Test
+    public void testSaveJsonsWithOutTopicId() {
+        ApplicationConfiguration appConfig = new ApplicationConfiguration();
+        appConfig.setTimestampLabel("datalake_ts_");
+
+        String text = "{ data: { data2 : { value : 'hello'}}}";
+
+        JSONObject json = new JSONObject(text);
+
+        Topic topic = TestUtil.newTopic("test getMessageId");
+        List < JSONObject > jsons = new ArrayList < > ();
+        json.put(appConfig.getTimestampLabel(), 1234);
+        jsons.add(json);
+        CouchbaseService couchbaseService = new CouchbaseService(new Db());
+        couchbaseService.bucket = bucket;
+        couchbaseService.config = appConfig;
+
+        couchbaseService.init();
+        EffectiveTopic effectiveTopic = new EffectiveTopic(topic, "test");
+        couchbaseService.saveJsons(effectiveTopic, jsons);
+    }
+
+    @Test
+    public void testCleanupBucket() {
+        when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
+        couchbaseService.cleanUp();
+    }
 
 }
