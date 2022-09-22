@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,50 +25,51 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.domain.DesignType;
+import org.onap.datalake.feeder.dto.DesignTypeConfig;
+import org.onap.datalake.feeder.repository.DesignTypeRepository;
 import org.onap.datalake.feeder.service.DesignTypeService;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DesignTypeControllerTest {
 
-    @InjectMocks
+    @Mock
+    private DesignTypeRepository designTypeRepository;
+
+    @Mock
     private DesignTypeService designTypeService;
+
+    @InjectMocks
+    private DesignTypeController designTypeController;
 
     @Before
     public void setupTest() {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void getTemplateTypeName() throws NoSuchFieldException, IllegalAccessException {
-
-        DesignTypeController testDesignTypeController = new DesignTypeController();
-        setAccessPrivateFields(testDesignTypeController);
-        DesignType testDesignType = fillDomain();
-        List<String> designTypeNamesList = new ArrayList<>();
-        designTypeNamesList.add(testDesignType.getName());
-        assertEquals(1, testDesignTypeController.getDesignType().size());
-    }
-
-    public void setAccessPrivateFields(DesignTypeController designTypeController) throws NoSuchFieldException, IllegalAccessException {
-
-        Field testDesignTypeService = designTypeController.getClass().getDeclaredField("designTypeService");
-        testDesignTypeService.setAccessible(true);
-        testDesignTypeService.set(designTypeController, designTypeService);
-    }
-
-
-    public DesignType fillDomain(){
+    public DesignType fillDomain() {
         DesignType designType = new DesignType();
         designType.setName("Kibana Dashboard");
         return designType;
     }
+
+    @Test
+    public void testGetDesignType() {
+        List < DesignTypeConfig > designTypeNamesList = new ArrayList < > ();
+        List < DesignType > designTypeList = new ArrayList < > ();
+        DesignType designType = fillDomain();
+        designTypeList.add(designType);
+        when(designTypeService.getDesignTypes()).thenReturn(designTypeNamesList);
+        assertNotNull(designTypeController.getDesignType());
+    }
+
 }
