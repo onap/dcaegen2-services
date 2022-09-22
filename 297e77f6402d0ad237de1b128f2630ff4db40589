@@ -118,6 +118,30 @@
       "revId": "297e77f6402d0ad237de1b128f2630ff4db40589",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "995551df_395ad77f",
+        "filename": "releases/kpi-computation-ms-1.0.9-container.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-09-22T06:11:50Z",
+      "side": 1,
+      "message": "I wasn\u0027t able to test the release image version because of the following issue I found in the logs, I think its due to this change - https://gerrit.onap.org/r/c/dcaegen2/services/+/130628\n\n06:06:53.993 [reactor-http-epoll-1] WARN  o.o.d.kpi.dmaap.NotificationConsumer - An unexpected error while receiving messages from DMaaP\njava.net.UnknownHostException: failed to resolve \u0027unauthenticated.PERFORMANCE_MEASUREMENTS\u0027 after 2 queries\n        at io.netty.resolver.dns.DnsResolveContext.finishResolve(DnsResolveContext.java:1005)\n        at io.netty.resolver.dns.DnsResolveContext.tryToFinishResolve(DnsResolveContext.java:958)\n        at io.netty.resolver.dns.DnsResolveContext.query(DnsResolveContext.java:406)\n        at io.netty.resolver.dns.DnsResolveContext.onResponse(DnsResolveContext.java:617)\n        at io.netty.resolver.dns.DnsResolveContext.access$400(DnsResolveContext.java:63)\n        at io.netty.resolver.dns.DnsResolveContext$2.operationComplete(DnsResolveContext.java:450)\n        at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:577)\n        at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:570)\n        at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:549)\n        at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:490)\n        at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:615)\n        at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:604)\n        at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:104)\n        at io.netty.resolver.dns.DnsQueryContext.trySuccess(DnsQueryContext.java:201)\n        at io.netty.resolver.dns.DnsQueryContext.finish(DnsQueryContext.java:193)\n        at io.netty.resolver.dns.DnsNameResolver$DnsResponseHandler.channelRead(DnsNameResolver.java:1230)\n        at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n        at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n        at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)\n        at io.netty.handler.codec.MessageToMessageDecoder.channelRead(MessageToMessageDecoder.java:103)\n        at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n        at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n        at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:357)\n        at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1410)\n        at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)\n        at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:365)\n        at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:919)\n        at io.netty.channel.epoll.EpollDatagramChannel.read(EpollDatagramChannel.java:681)\n        at io.netty.channel.epoll.EpollDatagramChannel.access$100(EpollDatagramChannel.java:58)\n        at io.netty.channel.epoll.EpollDatagramChannel$EpollDatagramChannelUnsafe.epollInReady(EpollDatagramChannel.java:499)\n        at io.netty.channel.epoll.EpollEventLoop.processReady(EpollEventLoop.java:475)\n        at io.netty.channel.epoll.EpollEventLoop.run(EpollEventLoop.java:378)\n        at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)\n        at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)\n        at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)\n        at java.base/java.lang.Thread.run(Unknown Source)",
+      "parentUuid": "d37b571d_9849b098",
+      "range": {
+        "startLine": 4,
+        "startChar": 72,
+        "endLine": 4,
+        "endChar": 78
+      },
+      "revId": "297e77f6402d0ad237de1b128f2630ff4db40589",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
