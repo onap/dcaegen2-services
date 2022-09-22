@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +21,11 @@
 
 package org.onap.datalake.feeder.domain;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.onap.datalake.feeder.util.TestUtil;
-
-import static org.junit.Assert.*;
 
 public class DesignTest {
 
