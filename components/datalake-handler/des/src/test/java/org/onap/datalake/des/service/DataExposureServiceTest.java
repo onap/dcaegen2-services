@@ -3,6 +3,7 @@
  * ONAP : DataLake DES
  * ================================================================================
  * Copyright 2020 China Mobile. All rights reserved.
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +23,9 @@ package org.onap.datalake.des.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -40,7 +39,6 @@ import org.onap.datalake.des.dto.DbConfig;
 import org.onap.datalake.des.repository.DataExposureRepository;
 import org.onap.datalake.des.repository.DbRepository;
 import org.springframework.context.ApplicationContext;
-
 /**
  * Test DB exposure Service.
  *
@@ -100,6 +98,34 @@ public class DataExposureServiceTest {
     }
 
     @Test
+    public void testGetDataExposure() {
+        Db newdb = new Db();
+        DbConfig dbConfig = getDbConfig();
+        newdb.setName(dbConfig.getName());
+        newdb.setHost(dbConfig.getHost());
+        newdb.setPort(dbConfig.getPort());
+        newdb.setEnabled(dbConfig.isEnabled());
+        newdb.setLogin(dbConfig.getLogin());
+        newdb.setPass(dbConfig.getPass());
+        newdb.setEncrypt(dbConfig.isEncrypt());
+
+        DataExposure de = new DataExposure();
+        de.setId("1");
+        de.setNote("note");
+        de.setSqlTemplate("sqlTemplate");
+        de.setDb(newdb);
+        when(dataExposureRepository.findById("1")).thenReturn(Optional.of(de));
+        assertEquals(de, dataExposureService.getDataExposure("1"));
+    }
+
+    @Test
+    public void testGetDataExposureNull() {
+        Optional < DataExposure > de = Optional.ofNullable(null);
+        when(dataExposureRepository.findById(null)).thenReturn(de);
+        assertEquals(dataExposureService.getDataExposure(null), null);
+    }
+
+    @Test
     public void testQueryAllDataExposure() {
         Db newdb = new Db();
         DbConfig dbConfig = getDbConfig();
@@ -110,17 +136,53 @@ public class DataExposureServiceTest {
         newdb.setLogin(dbConfig.getLogin());
         newdb.setPass(dbConfig.getPass());
         newdb.setEncrypt(dbConfig.isEncrypt());
+        
         DataExposureConfig deConfig = getDataExposureConfig();
         DataExposure de = new DataExposure();
         de.setDb(newdb);
         de.setId(deConfig.getId());
         de.setNote(deConfig.getNote());
         de.setSqlTemplate(deConfig.getSqlTemplate());
-        List<DataExposure> deList = new ArrayList<>();
+        List < DataExposure > deList = new ArrayList < > ();
         deList.add(de);
         when(dataExposureRepository.findAll()).thenReturn(deList);
-        List<DataExposureConfig> deConfigList = dataExposureService.queryAllDataExposure();
+        List < DataExposureConfig > deConfigList = dataExposureService.queryAllDataExposure();
         assertEquals(de.getId(), deConfigList.get(0).getId());
+    }
+
+    @Test
+    public void testQueryAllDataExposureNull() {
+        List < DataExposure > deList = new ArrayList < > ();
+        when(dataExposureRepository.findAll()).thenReturn(deList);
+        assertEquals(dataExposureService.queryAllDataExposure(), deList);
+    }
+
+    @Test
+    public void testGetDataExposureById() {
+        Db newdb = new Db();
+        DbConfig dbConfig = getDbConfig();
+        newdb.setName(dbConfig.getName());
+        newdb.setHost(dbConfig.getHost());
+        newdb.setPort(dbConfig.getPort());
+        newdb.setEnabled(dbConfig.isEnabled());
+        newdb.setLogin(dbConfig.getLogin());
+        newdb.setPass(dbConfig.getPass());
+        newdb.setEncrypt(dbConfig.isEncrypt());
+
+        DataExposure de = new DataExposure();
+        de.setId("1");
+        de.setNote("note");
+        de.setSqlTemplate("sqlTemplate");
+        de.setDb(newdb);
+        when(dataExposureRepository.findById("1")).thenReturn(Optional.of(de));
+        assertEquals(de, dataExposureService.getDataExposureById("1"));
+    }
+
+    @Test
+    public void testGetDataExposureByIdNull() {
+        Optional < DataExposure > de = Optional.ofNullable(null);
+        when(dataExposureRepository.findById(null)).thenReturn(de);
+        assertEquals(dataExposureService.getDataExposureById(null), null);
     }
 
     @Test
@@ -153,12 +215,29 @@ public class DataExposureServiceTest {
         newdb.setEncrypt(dbConfig.isEncrypt());
         DataExposureConfig deConfig = getDataExposureConfig();
         when(dbRepository.findById(deConfig.getDbId())).thenReturn(Optional.of(newdb));
+        
         DataExposure de = new DataExposure();
         de.setDb(newdb);
         de.setId(deConfig.getId());
         de.setNote(deConfig.getNote());
         de.setSqlTemplate(deConfig.getSqlTemplate());
         dataExposureService.fillDataExposureConfiguration(deConfig, de);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFillDataExposureException() {
+        DataExposureConfig deConfig = getDataExposureConfig();
+        deConfig.setDbId(null);
+        dataExposureService.fillDataExposureConfiguration(deConfig);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFillDataExposureIllegalArgumentException() {
+        DataExposureConfig deConfig = getDataExposureConfig();
+        deConfig.setDbId(1);
+        Optional < Db > dbOptional = Optional.ofNullable(null);
+        when(dbRepository.findById(deConfig.getDbId())).thenReturn(dbOptional);
+        dataExposureService.fillDataExposureConfiguration(deConfig);
     }
 
 }
