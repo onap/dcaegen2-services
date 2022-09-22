@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2022 Wipro Limited
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,74 +28,72 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.springframework.context.ApplicationContext;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PullServiceTest {
 
-	@InjectMocks
-	private PullService pullService;
+    @InjectMocks
+    private PullService pullService;
 
-	@Mock
-	private ApplicationContext context;
+    @Mock
+    private ApplicationContext context;
 
-	@Mock
-	private ApplicationConfiguration config;
+    @Mock
+    private ApplicationConfiguration config;
 
-	@Mock
-	private ExecutorService executorService;
+    @Mock
+    private ExecutorService executorService;
 
-	@Mock
-	private List<Puller> consumers;
+    @Mock
+    private List < Puller > consumers;
 
-	@Test
-	public void isRunning() {
-		assertFalse(pullService.isRunning());
-	}
+    @Test
+    public void isRunning() {
+        assertFalse(pullService.isRunning());
+    }
 
-	@Test(expected = NullPointerException.class)
-	public void start() {
-		setRunning(false);
-		pullService.start();
-		setRunning(true);
-		pullService.start();
-	}
+    @Test(expected = NullPointerException.class)
+    public void start() {
+        setRunning(false);
+        pullService.start();
+        setRunning(true);
+        pullService.start();
+    }
 
-	@Test
-	public void shutdown() {
-		when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
-		setRunning(false);
-		pullService.shutdown();
-		setRunning(true);
-		pullService.shutdown();
-	}
+    @Test
+    public void shutdown() {
+        when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
+        setRunning(false);
+        pullService.shutdown();
+        setRunning(true);
+        pullService.shutdown();
+    }
 
-	private void setRunning(boolean running) {
-		Field configField;
-		try {
-			configField = PullService.class.getDeclaredField("isRunning");
-			configField.setAccessible(true);
-			configField.set(pullService, running);
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+    private void setRunning(boolean running) {
+        Field configField;
+        try {
+            configField = PullService.class.getDeclaredField("isRunning");
+            configField.setAccessible(true);
+            configField.set(pullService, running);
+        } catch (IllegalArgumentException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
 
-		} catch (NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+        } catch (NoSuchFieldException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 }

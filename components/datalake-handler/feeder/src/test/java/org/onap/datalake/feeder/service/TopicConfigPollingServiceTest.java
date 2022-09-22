@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +22,7 @@
 package org.onap.datalake.feeder.service;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +32,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -40,6 +43,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
+import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.util.TestUtil;
 
@@ -51,11 +55,15 @@ import org.onap.datalake.feeder.util.TestUtil;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TopicConfigPollingServiceTest {
+
 	@Mock
 	private ApplicationConfiguration config;
 
 	@Mock
 	private DmaapService dmaapService;
+
+	@Mock
+	private Map<Integer, Map<String, List<EffectiveTopic>>> effectiveTopicMap = new HashMap<>();
 
 	@InjectMocks
 	private TopicConfigPollingService topicConfigPollingService = new TopicConfigPollingService();
@@ -63,7 +71,8 @@ public class TopicConfigPollingServiceTest {
 	static String KAFKA_NAME = "kafka1";
 
 	@Before
-	public void init() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
+	public void init()
+			throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, NoSuchFieldException {
 		Method init = topicConfigPollingService.getClass().getDeclaredMethod("init");
 		init.setAccessible(true);
 		init.invoke(topicConfigPollingService);
@@ -82,34 +91,34 @@ public class TopicConfigPollingServiceTest {
 	}
 
 	@Test
-	public void testRun() throws InterruptedException {
+    public void testRun() throws InterruptedException {
 
-		when(config.getCheckTopicInterval()).thenReturn(1L);
+        when(config.getCheckTopicInterval()).thenReturn(1L);
 
-		Thread thread = new Thread(topicConfigPollingService);
-		thread.start();
+        Thread thread = new Thread(topicConfigPollingService);
+        thread.start();
 
-		Thread.sleep(50);
-		topicConfigPollingService.shutdown();
-		thread.join();
+        Thread.sleep(50);
+        topicConfigPollingService.shutdown();
+        thread.join();
 
-		assertTrue(topicConfigPollingService.isActiveTopicsChanged(new Kafka()));
-	}
+        assertTrue(topicConfigPollingService.isActiveTopicsChanged(new Kafka()));
+    }
 
 	@Test
-	public void testRunNoChange() throws InterruptedException {
+    public void testRunNoChange() throws InterruptedException {
 
-		when(config.getCheckTopicInterval()).thenReturn(1L);
+        when(config.getCheckTopicInterval()).thenReturn(1L);
 
-		Thread thread = new Thread(topicConfigPollingService);
-		thread.start();
+        Thread thread = new Thread(topicConfigPollingService);
+        thread.start();
 
-		Thread.sleep(50);
-		topicConfigPollingService.shutdown();
-		thread.join();
+        Thread.sleep(50);
+        topicConfigPollingService.shutdown();
+        thread.join();
 
-		assertTrue(topicConfigPollingService.isActiveTopicsChanged(new Kafka()));
-	}
+        assertTrue(topicConfigPollingService.isActiveTopicsChanged(new Kafka()));
+    }
 
 	@Test
 	public void testGet() {
@@ -118,6 +127,15 @@ public class TopicConfigPollingServiceTest {
 		//assertNull(topicConfigPollingService.getEffectiveTopic (kafka, "test"));
 		assertNotNull(topicConfigPollingService.getActiveTopics(kafka));
 
+	}
+
+	@Test
+	public void testGetEffectiveTopic() {
+		Kafka kafka = TestUtil.newKafka(KAFKA_NAME);
+		kafka.setId(1);
+		Map<String, List<EffectiveTopic>> effectiveTopicMapKafka = new HashMap<>();
+		when(effectiveTopicMap.get(kafka.getId())).thenReturn(effectiveTopicMapKafka);
+		assertNull(topicConfigPollingService.getEffectiveTopic(kafka, "test"));
 	}
 
 }

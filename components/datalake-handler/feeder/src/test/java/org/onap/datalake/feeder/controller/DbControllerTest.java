@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright (C) 2018-2019 Huawei. All rights reserved.
+ * Copyright (C) 2022 Wipro Limited.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +30,13 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
 import org.onap.datalake.feeder.domain.Db;
+import org.onap.datalake.feeder.domain.DbType;
+import org.onap.datalake.feeder.domain.DesignType;
 import org.onap.datalake.feeder.domain.Topic;
 import org.onap.datalake.feeder.dto.DbConfig;
 import org.onap.datalake.feeder.repository.DbRepository;
+import org.onap.datalake.feeder.repository.DbTypeRepository;
+import org.onap.datalake.feeder.repository.DesignTypeRepository;
 import org.onap.datalake.feeder.service.DbService;
 import org.onap.datalake.feeder.util.TestUtil;
 import org.springframework.validation.BindingResult;
@@ -62,11 +67,20 @@ public class DbControllerTest {
     private DbRepository dbRepository;
 
     @Mock
+    private DbTypeRepository dbTypeRepository;
+
+    @Mock
+    private DesignTypeRepository designTypeRepository;
+
+    @Mock
     private BindingResult mockBindingResult;
 
     @InjectMocks
     private DbService dbService1;
-    
+
+    @InjectMocks
+    private DbController dbController;
+
     public DbConfig getDbConfig() {
         DbConfig dbConfig = new DbConfig();
         dbConfig.setId(1);
@@ -77,16 +91,16 @@ public class DbControllerTest {
         dbConfig.setDatabase("Elecsticsearch");
         dbConfig.setPort(123);
         dbConfig.setPoperties("driver");
-      	dbConfig.setDbTypeId("ES");
+        dbConfig.setDbTypeId("ES");
         return dbConfig;
     }
 
     public void setAccessPrivateFields(DbController dbController) throws NoSuchFieldException,
-            IllegalAccessException {
-        Field dbRepository1 = dbController.getClass().getDeclaredField("dbRepository");
-        dbRepository1.setAccessible(true);
-        dbRepository1.set(dbController, dbRepository);
-    }
+        IllegalAccessException {
+            Field dbRepository1 = dbController.getClass().getDeclaredField("dbRepository");
+            dbRepository1.setAccessible(true);
+            dbRepository1.set(dbController, dbRepository);
+        }
 
     @Before
     public void setupTest() {
@@ -101,7 +115,7 @@ public class DbControllerTest {
         DbController dbController = new DbController();
         DbConfig dbConfig = getDbConfig();
         setAccessPrivateFields(dbController);
-        PostReturnBody<DbConfig> db = dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
+        PostReturnBody < DbConfig > db = dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
         assertEquals(200, db.getStatusCode());
         when(mockBindingResult.hasErrors()).thenReturn(true);
         db = dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
@@ -113,8 +127,8 @@ public class DbControllerTest {
         DbController dbController = new DbController();
         DbConfig dbConfig = getDbConfig();
         when(mockBindingResult.hasErrors()).thenReturn(true);
-        PostReturnBody<DbConfig> db = dbController.updateDb(dbConfig.getId(), dbConfig, mockBindingResult,
-                                                            httpServletResponse);
+        PostReturnBody < DbConfig > db = dbController.updateDb(dbConfig.getId(), dbConfig, mockBindingResult,
+            httpServletResponse);
         assertEquals(null, db);
         //when(mockBindingResult.hasErrors()).thenReturn(false);
         setAccessPrivateFields(dbController);
@@ -135,12 +149,12 @@ public class DbControllerTest {
         DbController dbController = new DbController();
         String name = "Elecsticsearch";
         int testId = 1234;
-        List<Db> dbs = new ArrayList<>();
+        List < Db > dbs = new ArrayList < > ();
         dbs.add(TestUtil.newDb(name));
         setAccessPrivateFields(dbController);
         when(dbRepository.findAll()).thenReturn(dbs);
-        List<Integer> list = dbController.list();
-        for (int id : list) {
+        List < Integer > list = dbController.list();
+        for (int id: list) {
             assertNotEquals(1234, id);
         }
         //dbController.deleteDb("Elecsticsearch", httpServletResponse);
@@ -155,18 +169,18 @@ public class DbControllerTest {
         Topic topic = TestUtil.newTopic(topicName);
         topic.setEnabled(true);
         topic.setId(1);
-        Set<Topic> topics = new HashSet<>();
+        Set < Topic > topics = new HashSet < > ();
         topics.add(topic);
         Db db1 = TestUtil.newDb(dbName);
         db1.setTopics(topics);
         setAccessPrivateFields(dbController);
-        Set<Topic> elecsticsearch = dbController.getDbTopics(dbName, httpServletResponse);
+        Set < Topic > elecsticsearch = dbController.getDbTopics(dbName, httpServletResponse);
         assertEquals(Collections.emptySet(), elecsticsearch);
         when(dbRepository.findByName(dbName)).thenReturn(db1);
         elecsticsearch = dbController.getDbTopics(dbName, httpServletResponse);
-        for (Topic anElecsticsearch : elecsticsearch) {
-        	Topic tmp = TestUtil.newTopic(topicName);
-        	tmp.setId(2);
+        for (Topic anElecsticsearch: elecsticsearch) {
+            Topic tmp = TestUtil.newTopic(topicName);
+            tmp.setId(2);
             assertNotEquals(tmp, anElecsticsearch);
         }
         //dbController.deleteDb(dbName, httpServletResponse);
@@ -177,7 +191,7 @@ public class DbControllerTest {
         DbController dbController = new DbController();
         DbConfig dbConfig = getDbConfig();
         setAccessPrivateFields(dbController);
-        PostReturnBody<DbConfig> db = dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
+        PostReturnBody < DbConfig > db = dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
         assertNotNull(db);
     }
 
@@ -185,8 +199,102 @@ public class DbControllerTest {
     public void testVerifyConnection() throws IOException {
         DbController dbController = new DbController();
         DbConfig dbConfig = getDbConfig();
-        PostReturnBody<DbConfig> dbConfigPostReturnBody = dbController.verifyDbConnection(dbConfig, httpServletResponse);
+        PostReturnBody < DbConfig > dbConfigPostReturnBody = dbController.verifyDbConnection(dbConfig, httpServletResponse);
         assertEquals(null, dbConfigPostReturnBody);
+    }
+
+    @Test
+    public void testDeleteDbNull() throws IOException {
+        Optional < Db > dbOptional = Optional.ofNullable(null);
+        when(dbRepository.findById(1)).thenReturn(dbOptional);
+        dbController.deleteDb(1, httpServletResponse);
+    }
+
+    @Test
+    public void deleteDbTest() throws IOException {
+        Db db = TestUtil.newDb("Elecsticsearch");
+        Topic topic = TestUtil.newTopic("Elecsticsearch");
+        topic.setEnabled(true);
+        topic.setId(1);
+        Set < Topic > topics = new HashSet < > ();
+        topics.add(topic);
+        db.setTopics(topics);
+        Optional < Db > dbOptional = Optional.ofNullable(db);
+        when(dbRepository.findById(1)).thenReturn(dbOptional);
+        dbController.deleteDb(1, httpServletResponse);
+    }
+
+    @Test
+    public void testUpdateDbNull() throws IOException {
+        DbConfig dbConfig = getDbConfig();
+        Db db = TestUtil.newDb("Elecsticsearch");
+        Optional < Db > dbOptional = Optional.ofNullable(db);
+        when(dbRepository.findById(dbConfig.getId())).thenReturn(dbOptional);
+        dbController.updateDb(dbConfig.getId(), dbConfig, mockBindingResult, httpServletResponse);
+    }
+
+    @Test
+    public void testDblistByTool() {
+        List < DbType > dbTypeList = new ArrayList < > ();
+        DbType dbType = new DbType("ES", "Elasticsearch");
+        Set < Db > dbs = new HashSet < > ();
+        dbs.add(TestUtil.newDb("MongoDB"));
+        dbType.setDbs(dbs);
+        dbTypeList.add(dbType);
+        when(dbTypeRepository.findByTool(false)).thenReturn(dbTypeList);
+        dbController.dblistByTool(true);
+    }
+
+    @Test
+    public void testListIdAndName() {
+        DesignType designType = new DesignType();
+        DbType dbType = new DbType("ES", "Elasticsearch");
+        Set < Db > dbs = new HashSet < > ();
+        dbs.add(TestUtil.newDb("MongoDB"));
+        dbType.setDbs(dbs);
+        designType.setName("Kibana");
+        designType.setDbType(dbType);
+        when(designTypeRepository.findById("1")).thenReturn(Optional.of(designType));
+        dbController.listIdAndName("1");
+    }
+
+    @Test
+    public void testCreateDbError() throws IOException {
+        when(mockBindingResult.hasErrors()).thenReturn(true);
+        assertEquals(null, dbController.createDb(getDbConfig(), mockBindingResult, httpServletResponse));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCreateDbException() throws IOException {
+        DbConfig dbConfig = getDbConfig();
+        dbConfig.setDbTypeId("");
+        dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
+    }
+
+    @Test
+    public void createDbTest() throws IOException {
+        DbConfig dbConfig = getDbConfig();
+        DbType dbType = new DbType("ES", "Elasticsearch");
+        when(dbTypeRepository.findById(dbConfig.getDbTypeId())).thenReturn(Optional.of(dbType));
+        dbController.createDb(dbConfig, mockBindingResult, httpServletResponse);
+    }
+
+    @Test
+    public void testGetDb() throws IOException {
+        DbConfig elecsticsearch = dbController.getDb(1, httpServletResponse);
+        assertEquals(null, elecsticsearch);
+    }
+
+    @Test
+    public void testGetDbTypes() throws IOException {
+        List < DbType > dbTypeList = new ArrayList < > ();
+        DbType dbType = new DbType("ES", "Elasticsearch");
+        Set < Db > dbs = new HashSet < > ();
+        dbs.add(TestUtil.newDb("MongoDB"));
+        dbType.setDbs(dbs);
+        dbTypeList.add(dbType);
+        when(dbTypeRepository.findAll()).thenReturn(dbTypeList);
+        dbController.getDbTypes(httpServletResponse);
     }
 
 }

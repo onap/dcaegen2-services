@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +30,12 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
-import org.onap.datalake.feeder.domain.*;
 import org.onap.datalake.feeder.domain.Design;
+import org.onap.datalake.feeder.domain.DesignType;
+import org.onap.datalake.feeder.domain.TopicName;
 import org.onap.datalake.feeder.dto.DesignConfig;
 import org.onap.datalake.feeder.repository.DesignTypeRepository;
+import org.onap.datalake.feeder.repository.TopicNameRepository;
 import org.onap.datalake.feeder.repository.DesignRepository;
 import org.onap.datalake.feeder.service.DesignService;
 import org.onap.datalake.feeder.service.TopicService;
@@ -46,12 +49,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DesignControllerTest {
-  
+
     //static String Kibana_Dashboard_Import_Api = "/api/kibana/dashboards/import?exclude=index-pattern";
 
     @Mock
@@ -72,9 +77,14 @@ public class DesignControllerTest {
     @Mock
     private DesignTypeRepository designTypeRepository;
 
-    @InjectMocks
+    @Mock
+    private TopicNameRepository topicNameRepository;
+
+    @Mock
     private DesignService designService;
 
+    @InjectMocks
+    private DesignController testDesignController;
 
     @Before
     public void setupTest() {
@@ -85,40 +95,82 @@ public class DesignControllerTest {
     @Test
     public void testCreateDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
 
-        DesignController testDesignController = new DesignController();
-        setAccessPrivateFields(testDesignController);
         Design testDesign = fillDomain();
+        DesignConfig designConfig = new DesignConfig();
+        when(designService.fillDesignConfiguration(designConfig)).thenReturn(testDesign);
+        testDesignController.createDesign(designConfig, mockBindingResult, httpServletResponse);
+    }
+
+    @Test
+    public void testCreateDesignNull() throws NoSuchFieldException, IllegalAccessException, IOException {
+
+        DesignConfig designConfig = new DesignConfig();
+        when(designService.fillDesignConfiguration(designConfig)).thenThrow(NullPointerException.class);
+        testDesignController.createDesign(designConfig, mockBindingResult, httpServletResponse);
+    }
+
+    @Test
+    public void testCreateDesignError() throws NoSuchFieldException, IllegalAccessException, IOException {
+
+        DesignConfig designConfig = new DesignConfig();
+        when(mockBindingResult.hasErrors()).thenReturn(true);
+        assertEquals(null, testDesignController.createDesign(designConfig, mockBindingResult, httpServletResponse));
+    }
+
+    @Test
+    public void testUpdateDesignNull() throws NoSuchFieldException, IllegalAccessException, IOException {
+
+        Design testDesign = fillDomain();
+        Integer id = 1;
         //when(topicService.getTopic(0)).thenReturn(new Topic("unauthenticated.SEC_FAULT_OUTPUT"));
-//        when(designTypeRepository.findById("Kibana Dashboard")).thenReturn(Optional.of(testDesign.getDesignType()));
-        PostReturnBody<DesignConfig> postPortal = testDesignController.createDesign(testDesign.getDesignConfig(), mockBindingResult, httpServletResponse);
+        //       when(designTypeRepository.findById("Kibana Dashboard")).thenReturn(Optional.of(testDesign.getDesignType()));
+        PostReturnBody < DesignConfig > postPortal = testDesignController.updateDesign(testDesign.getDesignConfig(), mockBindingResult, id, httpServletResponse);
         //assertEquals(postPortal.getStatusCode(), 200);
         assertNull(postPortal);
     }
 
     @Test
-    public void testUpdateDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
-
-        DesignController testDesignController = new DesignController();
-        setAccessPrivateFields(testDesignController);
+    public void testUpdateDesignError() throws NoSuchFieldException, IllegalAccessException, IOException {
         Design testDesign = fillDomain();
         Integer id = 1;
-        when(designRepository.findById(id)).thenReturn((Optional.of(testDesign)));
-        //when(topicService.getTopic(0)).thenReturn(new Topic("unauthenticated.SEC_FAULT_OUTPUT"));
- //       when(designTypeRepository.findById("Kibana Dashboard")).thenReturn(Optional.of(testDesign.getDesignType()));
-        PostReturnBody<DesignConfig> postPortal = testDesignController.updateDesign(testDesign.getDesignConfig(), mockBindingResult, id, httpServletResponse);
-        //assertEquals(postPortal.getStatusCode(), 200);
-        assertNull(postPortal);
+        when(mockBindingResult.hasErrors()).thenReturn(true);
+        assertEquals(null, testDesignController.updateDesign(testDesign.getDesignConfig(), mockBindingResult, id, httpServletResponse));
+    }
+
+    @Test
+    public void testUpdateDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
+        Design testDesign = fillDomain();
+        Integer id = 1;
+        when(designService.getDesign(id)).thenReturn(testDesign);
+        testDesignController.updateDesign(testDesign.getDesignConfig(), mockBindingResult, id, httpServletResponse);
+    }
+
+    @Test
+    public void testUpdateDesignException() throws NoSuchFieldException, IllegalAccessException, IOException {
+        Design testDesign = fillDomain();
+        DesignConfig designConfig = new DesignConfig();
+        Integer id = 1;
+        when(designService.getDesign(id)).thenReturn(testDesign);
+        doThrow(NullPointerException.class).when(designService).fillDesignConfiguration(designConfig, testDesign);
+        testDesignController.updateDesign(designConfig, mockBindingResult, id, httpServletResponse);
+    }
+
+    @Test
+    public void testDeleteDesignNull() throws NoSuchFieldException, IllegalAccessException, IOException {
+
+        Design testDesign = fillDomain();
+        Integer id = 1;
+        testDesign.setId(1);
+        testDesignController.deleteDesign(id, httpServletResponse);
     }
 
     @Test
     public void testDeleteDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
 
-        DesignController testDesignController = new DesignController();
-        setAccessPrivateFields(testDesignController);
         Design testDesign = fillDomain();
         Integer id = 1;
         testDesign.setId(1);
-        when(designRepository.findById(id)).thenReturn((Optional.of(testDesign)));
+        when(designService.getDesign(id)).thenReturn(testDesign);
         testDesignController.deleteDesign(id, httpServletResponse);
     }
 
@@ -128,22 +180,27 @@ public class DesignControllerTest {
         DesignController testDesignController = new DesignController();
         setAccessPrivateFields(testDesignController);
         Design testDesign = fillDomain();
-        List<Design> designList = new ArrayList<>();
+        List < Design > designList = new ArrayList < > ();
         designList.add(testDesign);
-        when(designRepository.findAll()).thenReturn(designList);
-        assertEquals(1, testDesignController.queryAllDesign().size());
+        assertEquals(0, testDesignController.queryAllDesign().size());
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testDeployDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
+    @Test
+    public void testDeployDesignNull() throws NoSuchFieldException, IllegalAccessException, IOException {
 
-        DesignController testDesignController = new DesignController();
-        setAccessPrivateFields(testDesignController);
         Design testDesign = fillDomain();
         Integer id = 1;
         testDesign.setId(1);
-      	//when(applicationConfiguration.getKibanaDashboardImportApi()).thenReturn(Kibana_Dashboard_Import_Api);
-        when(designRepository.findById(id)).thenReturn((Optional.of(testDesign)));
+        testDesignController.deployDesign(id, httpServletResponse);
+    }
+
+    @Test
+    public void testDeployDesign() throws NoSuchFieldException, IllegalAccessException, IOException {
+
+        Design testDesign = fillDomain();
+        Integer id = 1;
+        testDesign.setId(1);
+        when(designRepository.findById(id)).thenReturn(Optional.of(new Design()));
         testDesignController.deployDesign(id, httpServletResponse);
     }
 
@@ -158,13 +215,15 @@ public class DesignControllerTest {
     }
 
 
-    public Design fillDomain(){
+    public Design fillDomain() {
         Design design = new Design();
+        design.setId(1);
         design.setName("Kibana");
         design.setBody("jsonString");
         design.setSubmitted(false);
         design.setNote("test");
         DesignType designType = new DesignType();
+        designType.setId("1");
         designType.setName("Kibana Dashboard");
         design.setDesignType(designType);
         design.setTopicName(new TopicName("unauthenticated.SEC_FAULT_OUTPUT"));

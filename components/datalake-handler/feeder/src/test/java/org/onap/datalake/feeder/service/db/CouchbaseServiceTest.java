@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright (C) 2018-2019 Huawei. All rights reserved.
+ * Copyright (C) 2022 Wipro Limited.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +21,12 @@
 
 package org.onap.datalake.feeder.service.db;
 
+import static org.mockito.Mockito.when;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -29,6 +34,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.Db;
@@ -54,6 +61,26 @@ public class CouchbaseServiceTest {
 	protected int carrierPort;
 	protected int httpPort;
 
+	@InjectMocks
+	private CouchbaseService couchbaseService;
+
+	@Mock
+	private ApplicationConfiguration config;
+
+	@Before
+	public void init() throws NoSuchFieldException, IllegalAccessException {
+		Db db = TestUtil.newDb("Couchbasedb");
+		db.setDatabase("database");
+		db.setLogin("login");
+		couchbaseService = new CouchbaseService(db);
+
+		Field configField = CouchbaseService.class.getDeclaredField("config");
+		configField.setAccessible(true);
+		configField.set(couchbaseService, config);
+		couchbaseService.bucket = bucket;
+		couchbaseService.init();
+	}
+
 	protected void getPortInfo(String bucket) throws Exception {
 		httpPort = couchbaseMock.getHttpPort();
 		carrierPort = couchbaseMock.getCarrierPort(bucket);
@@ -74,7 +101,8 @@ public class CouchbaseServiceTest {
 	}
 
 	protected void createClient() {
-		cluster = CouchbaseCluster.create(DefaultCouchbaseEnvironment.builder().bootstrapCarrierDirectPort(carrierPort).bootstrapHttpDirectPort(httpPort).build(), "couchbase://127.0.0.1");
+		cluster = CouchbaseCluster.create(DefaultCouchbaseEnvironment.builder().bootstrapCarrierDirectPort(carrierPort)
+				.bootstrapHttpDirectPort(httpPort).build(), "couchbase://127.0.0.1");
 		bucket = cluster.openBucket("default");
 	}
 
@@ -146,11 +174,8 @@ public class CouchbaseServiceTest {
 
 	@Test
 	public void testCleanupBucket() {
-		// CouchbaseService couchbaseService = new CouchbaseService(new Db());
-		// couchbaseService.bucket = bucket;
-		// ApplicationConfiguration appConfig = new ApplicationConfiguration();
-		// couchbaseService.config = appConfig;
-		// couchbaseService.cleanUp();
+		when(config.getShutdownLock()).thenReturn(new ReentrantReadWriteLock());
+		couchbaseService.cleanUp();
 	}
 
 }
