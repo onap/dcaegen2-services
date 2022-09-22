@@ -3,6 +3,7 @@
  * ONAP : DataLake
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +20,11 @@
  */
 package org.onap.datalake.feeder.dto;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.util.TestUtil;
-
-import static org.junit.Assert.*;
 
 /**
  * Test Kafka

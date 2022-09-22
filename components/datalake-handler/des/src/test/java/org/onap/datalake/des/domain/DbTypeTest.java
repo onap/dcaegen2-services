@@ -3,6 +3,7 @@
  * ONAP : DataLake DES
  * ================================================================================
  * Copyright 2020 China Mobile. All rights reserved.
+ * Copyright (C) 2022 Wipro Limited.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,16 +38,18 @@ public class DbTypeTest {
 
     @Test
     public void test() {
-        DbType dbType = new DbType("ES","Elasticsearch");
+        DbType dbType = new DbType("ES", "Elasticsearch");
 
-        dbType.setTool(false); 
+        dbType.setTool(false);
 
         assertNotNull(dbType.toString());
         assertEquals(dbType, dbType);
         assertNotEquals(dbType, null);
         assertNotEquals(dbType, "ES");
 
-        DbType dbType2 = new DbType("MONGO", "MongoDB");
+        DbType dbType2 = new DbType();
+        dbType2.setId("MONGO");
+        dbType2.setName("MongoDB");
         assertNotEquals(dbType, dbType2);
         assertNotNull(dbType.hashCode());
 
