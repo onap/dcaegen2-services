@@ -23,7 +23,7 @@ package org.onap.slice.analysis.ms.service;
 
 import org.onap.slice.analysis.ms.models.ConfigPolicy;
 import org.onap.slice.analysis.ms.service.ccvpn.CCVPNPmDatastore;
-import org.onap.slice.analysis.ms.utils.SpringContextUtil;
+import org.onap.slice.analysis.ms.utils.BeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ConfigThread extends Thread{
 
-    CCVPNPmDatastore ccvpnPmDatastore = (CCVPNPmDatastore) SpringContextUtil.getBean(CCVPNPmDatastore.class);
+    CCVPNPmDatastore ccvpnPmDatastore = (CCVPNPmDatastore) BeanUtil.getBean(CCVPNPmDatastore.class);
     private static Logger log = LoggerFactory.getLogger(ConfigThread.class);
 
 
