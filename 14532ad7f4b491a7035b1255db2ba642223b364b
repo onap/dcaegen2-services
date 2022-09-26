@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb92a104_ae2327f3",
+        "filename": "releases/slice-analysis-ms-1.1.4-container.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-26T14:53:42Z",
+      "side": 1,
+      "message": "Release yaml submission should be separate patch by itself and not combined with other updates.\nPls also include test/logs for 1.1.4-20220907T014947Z validation in jira",
+      "revId": "14532ad7f4b491a7035b1255db2ba642223b364b",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
