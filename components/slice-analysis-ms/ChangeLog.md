@@ -16,8 +16,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
          - [DCAEGEN2-3255](https://jira.onap.org/browse/DCAEGEN2-3255) - Fix bug of application failed to start
 
          - [DCAEGEN2-3264](https://jira.onap.org/browse/DCAEGEN2-3264) - Fix bug that cll service instance info didn't get updated when a cll service is deleted
-    
+
          - [DCAEGEN2-3240](https://jira.onap.org/browse/DCAEGEN2-3240) - Implement runtime service configuration
+
+         - [DCAEGEN2-3270](https://jira.onap.org/browse/DCAEGEN2-3270) - Dcae slicems startup error
 
 ## [1.1.4] - 2022/07/28
          - [DCAEGEN2-3120](https://jira.onap.org/browse/DCAEGEN2-3120) - Enhance sliceanalysis MS to use DCAE SDK dmaap-client lib
