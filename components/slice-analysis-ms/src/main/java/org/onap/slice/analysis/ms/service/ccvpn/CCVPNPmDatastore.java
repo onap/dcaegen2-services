@@ -25,7 +25,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import lombok.Getter;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -200,15 +199,6 @@ public class CCVPNPmDatastore {
     public void updateCllInstances(Set<String> allValidCllInstances){
         Set<String> invalidCllIds;
         invalidCllIds= filterInvalidCllIds(allValidCllInstances, svcStatus.keySet());
-        svcStatus.keySet().removeAll(invalidCllIds);
-        invalidCllIds = filterInvalidCllIds(allValidCllInstances, endpointToProvBw.keySet());
-        endpointToProvBw.keySet().removeAll(invalidCllIds);
-        invalidCllIds = filterInvalidCllIds(allValidCllInstances, upperBoundBw.keySet());
-        upperBoundBw.keySet().removeAll(invalidCllIds);
-        invalidCllIds = filterInvalidCllIds(allValidCllInstances, endpointToOriginalBw.keySet());
-        endpointToOriginalBw.keySet().removeAll(invalidCllIds);
-        invalidCllIds = filterInvalidCllIds(allValidCllInstances, closedLoopBwAssuranceStatus.keySet());
-        closedLoopBwAssuranceStatus.keySet().removeAll(invalidCllIds);
         for(String invalidCllId : invalidCllIds) {
             log.debug("drop {} from endpointToUsedBw", invalidCllId);
             endpointToUsedBw.entrySet().stream().dropWhile(map -> map.getKey().getCllId().equalsIgnoreCase(invalidCllId));
@@ -220,6 +210,15 @@ public class CCVPNPmDatastore {
                 }
             }
         }
+        svcStatus.keySet().removeAll(invalidCllIds);
+        invalidCllIds = filterInvalidCllIds(allValidCllInstances, endpointToProvBw.keySet());
+        endpointToProvBw.keySet().removeAll(invalidCllIds);
+        invalidCllIds = filterInvalidCllIds(allValidCllInstances, upperBoundBw.keySet());
+        upperBoundBw.keySet().removeAll(invalidCllIds);
+        invalidCllIds = filterInvalidCllIds(allValidCllInstances, endpointToOriginalBw.keySet());
+        endpointToOriginalBw.keySet().removeAll(invalidCllIds);
+        invalidCllIds = filterInvalidCllIds(allValidCllInstances, closedLoopBwAssuranceStatus.keySet());
+        closedLoopBwAssuranceStatus.keySet().removeAll(invalidCllIds);
     }
 
     /**
