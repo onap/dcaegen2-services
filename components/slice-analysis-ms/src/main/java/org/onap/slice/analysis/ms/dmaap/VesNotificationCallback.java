@@ -95,7 +95,6 @@ public class VesNotificationCallback implements NotificationCallback {
             JsonNode node = obj.readTree(msg);
             JsonNode notificationNode = node.get(EVENT).get(NOTIFICATIONFIELDS);
             output = obj.treeToValue(notificationNode, NotificationFields.class);
-
             //Filter out target notification changeIdentifier and changeType
             notifChangeIdentifier = output.getChangeIdentifier();
             notifChangeType = output.getChangeType();
@@ -120,7 +119,7 @@ public class VesNotificationCallback implements NotificationCallback {
      */
     public void updateCllInstance(){
         Set<String> instances = aaiService.fetchAllCllInstances();
-        log.error("instances {}", instances);
+        log.debug("All valid instances are {}", instances);
         ccvpnPmDatastore.updateCllInstances(instances);
     }
 

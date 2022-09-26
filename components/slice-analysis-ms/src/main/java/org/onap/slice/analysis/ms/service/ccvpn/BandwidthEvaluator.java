@@ -109,16 +109,17 @@ public class BandwidthEvaluator {
                     String serviceId = (String) event.subject();
                     Map<String, Integer> maxBandwidthData = aaiService.fetchMaxBandwidthOfService(serviceId);
                     if (maxBandwidthData.get("maxBandwidth") != null){
-                        log.info("Successfully retrieved bandwidth info from AAI; service: {}, bandwidth: {}",
+                        log.debug("Successfully retrieved bandwidth info from AAI; service: {}, bandwidth: {}",
                                 serviceId, maxBandwidthData.get("maxBandwidth"));
                         int bwValue = maxBandwidthData.get("maxBandwidth").intValue();
                         if (ccvpnPmDatastore.getProvBwOfSvc(serviceId) == 0){
                             ccvpnPmDatastore.updateProvBw(serviceId, bwValue, true);
+                            log.debug("Provision bw of cll {} updated from 0 to {}, max bw is {}", serviceId, ccvpnPmDatastore.getProvBwOfSvc(serviceId), bwValue);
                         } else if (ccvpnPmDatastore.getProvBwOfSvc(serviceId) != bwValue) {
-                            log.info("Service modification complete; serviceId: {} with new bandwidth: {}", serviceId, bwValue);
+                            log.debug("Service modification complete; serviceId: {} update prov bw from {} to {}", serviceId, ccvpnPmDatastore.getProvBwOfSvc(serviceId), bwValue);
                             ccvpnPmDatastore.updateProvBw(serviceId, bwValue, true);
                             ccvpnPmDatastore.updateSvcState(serviceId, ServiceState.RUNNING);
-                            log.debug("Service state of {} is changed to running", serviceId);
+                            log.debug("Service state of {} is changed to running, {}", serviceId, ccvpnPmDatastore.getStatusOfSvc(serviceId));
                         }
                     }
                     log.debug("=== Processing AAI network policy query complete ===");
