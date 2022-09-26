@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "fb66b8c3_7f74f19e",
+        "filename": "components/ml-prediction-ms/config/dmaap/MsgRtrApi.properties",
+        "patchSetId": 36
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-26T15:48:40Z",
+      "side": 1,
+      "message": "2020-2022",
+      "range": {
+        "startLine": 5,
+        "startChar": 16,
+        "endLine": 5,
+        "endChar": 21
+      },
+      "revId": "f410fcca4768dcbcfd2eee65e9fd695a622e0e0c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47af3781_e98fe3ba",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 36
