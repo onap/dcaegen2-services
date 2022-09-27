@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2891adc7_17b0fbfa",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-27T17:01:30Z",
+      "side": 1,
+      "message": "No changelog update required for release yaml submission",
+      "revId": "eaaf88d9764e8b8b64f46b6964cf796918db8a90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1827108_cd27c201",
+        "filename": "releases/slice-analysis-ms-1.1.4-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-09-27T17:01:30Z",
+      "side": 1,
+      "message": "When checked with this snapshot, noticed following error but this did not block the application from starting. \n\n16:33:33.144 [parallel-1] INFO  o.o.s.a.ms.models.Configuration:126 - Updating configuration from CBS\n16:33:33.149 [parallel-1] WARN  o.o.s.a.m.c.ConfigFetchFromCbs:112 - Ooops\njava.lang.NullPointerException: null\n        at org.onap.slice.analysis.ms.models.Configuration.updateConfigurationFromJsonObject(Configuration.java:167)\n\nI believe this issue is fixed in 1.1.5 already.. Wondering if we need to release 1.1.4 or address the issue on 1.1.5 and release that version directly. Thoughts?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 37
+      },
+      "revId": "eaaf88d9764e8b8b64f46b6964cf796918db8a90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
