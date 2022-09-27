@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  */
 @Component
 public class FlexibleThresholdStrategy implements EvaluationStrategy{
-    private static Logger log = LoggerFactory.getLogger(FixedUpperBoundStrategy.class);
+    private static Logger log = LoggerFactory.getLogger(FlexibleThresholdStrategy.class);
     private Configuration configuration;
     private static final String TYPE_NAME = "FlexibleThresholdStrategy";
     private static final String SERVICE_INSTANCE_LOCATION_ID = "service-instance-location-id";
@@ -63,7 +63,7 @@ public class FlexibleThresholdStrategy implements EvaluationStrategy{
     private static double precision; // in Mbps;
 
     @Autowired
-    BandwidthEvaluator bandwidthEvaluator;
+    NetworkPolicyMonitor networkPolicyMonitor;
 
     @Autowired
     CCVPNPmDatastore ccvpnPmDatastore;
@@ -174,11 +174,11 @@ public class FlexibleThresholdStrategy implements EvaluationStrategy{
     }
 
     /**
-     * Post/broadcast event to the BandwidthEvaluator
+     * Post/broadcast event to the networkPolicyMonitor
      * @param event event object
      */
     private void post(Event event){
-        bandwidthEvaluator.post(event);
+        networkPolicyMonitor.post(event);
     }
 
     private void loadConfig() {
