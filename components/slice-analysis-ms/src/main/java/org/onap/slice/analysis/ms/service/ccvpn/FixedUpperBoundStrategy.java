@@ -59,7 +59,7 @@ public class FixedUpperBoundStrategy implements EvaluationStrategy{
     private static double precision; // in Mbps;
 
     @Autowired
-    BandwidthEvaluator bandwidthEvaluator;
+    NetworkPolicyMonitor networkPolicyMonitor;
 
     @Autowired
     CCVPNPmDatastore ccvpnPmDatastore;
@@ -166,11 +166,11 @@ public class FixedUpperBoundStrategy implements EvaluationStrategy{
     }
 
     /**
-     * Post/broadcast event to the BandwidthEvaluator
+     * Post/broadcast event to the networkPolicyMonitor
      * @param event event object
      */
     private void post(Event event){
-        bandwidthEvaluator.post(event);
+        networkPolicyMonitor.post(event);
     }
 
     private void loadConfig() {

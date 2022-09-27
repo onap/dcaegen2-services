@@ -35,7 +35,7 @@ public class StrategyFactory {
     private static Logger log = LoggerFactory.getLogger(StrategyFactory.class);
 
     @Autowired
-    List<EvaluationStrategy> strategies;
+    public List<EvaluationStrategy> strategies;
 
     private StrategyFactory() {}
 
