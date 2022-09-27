@@ -3,7 +3,6 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
- *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -19,131 +18,83 @@
  *     ============LICENSE_END=========================================================
  *
  *******************************************************************************/
+
 package org.onap.slice.analysis.ms.service.ccvpn;
 
 import lombok.NonNull;
 import org.onap.slice.analysis.ms.aai.AaiService;
-
-import org.onap.slice.analysis.ms.models.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
- * This class implements the CCVPN PM Closed-loop logical function.
- * A simple actor model design is implemented here.
+ * Actor that processes aai network-policy query request
  */
 @Component
-public class BandwidthEvaluator {
-    private static Logger log = LoggerFactory.getLogger(BandwidthEvaluator.class);
-    private Configuration configuration;
+public class NetworkPolicyMonitor {
+    private static Logger log = LoggerFactory.getLogger(NetworkPolicyMonitor.class);
+    private Loop aaiEventLoop;
+    private static final Event KILL_PILL = new SimpleEvent(null, 0);
 
     @Autowired
-    StrategyFactory strategyFactory;
+    AaiService aaiService;
 
-    private Loop evaluationEventLoop;
-
-    private static final Event KILL_PILL = new SimpleEvent(null, 0);
-    private static final int DEFAULT_EVAL_INTERVAL = 5;
-    private static final String DEFAULT_STRATEGY_NAME = "FixedUpperBoundStrategy";
-    /**
-     * Interval of each round of evaluation, defined in config_all.json
-     */
-    private static int evaluationInterval;
+    @Autowired
+    CCVPNPmDatastore ccvpnPmDatastore;
 
     /**
-     * Bandwidth Evaluation and adjustment strategy.
-     */
-    private static String strategyName;
-
-    private final ScheduledExecutorService executorPool = Executors.newScheduledThreadPool(1);
-
-    /**
-     * Initialize and start the bandwidth evaluator process, schedule a periodic service bandwidth usage check
+     * Initialize and start the NetworkPolicyMonitor.
      */
     @PostConstruct
     public void init() {
-        loadConfig();
-        strategyName = (strategyName != null)? strategyName : DEFAULT_STRATEGY_NAME;
-        evaluationInterval = (evaluationInterval == 0)? DEFAULT_EVAL_INTERVAL : evaluationInterval;
-        EvaluationStrategy strategy = strategyFactory.getStrategy(strategyName);
-        log.info("{} is utilized as the bandwidth evaluatior strategy", strategyName);
-
         /**
-         * Evalution main loop
+         * AAI data consumer loop
          */
-        evaluationEventLoop = new Loop("EvaluationLoop"){
+        aaiEventLoop = new Loop("AAIEventLoop"){
             @Override
             public void process(Event event) {
-                strategy.execute(event);
+                if (event.type() == SimpleEvent.Type.AAI_BW_REQ){
+                    log.debug("=== Processing new AAI network policy query at: {} ===", event.time());
+                    String serviceId = (String) event.subject();
+                    Map<String, Integer> maxBandwidthData = aaiService.fetchMaxBandwidthOfService(serviceId);
+                    if (maxBandwidthData.get("maxBandwidth") != null){
+                        log.debug("Successfully retrieved bandwidth info from AAI; service: {}, bandwidth: {}",
+                                serviceId, maxBandwidthData.get("maxBandwidth"));
+                        int bwValue = maxBandwidthData.get("maxBandwidth").intValue();
+                        if (ccvpnPmDatastore.getProvBwOfSvc(serviceId) == 0){
+                            ccvpnPmDatastore.updateProvBw(serviceId, bwValue, true);
+                            log.debug("Provision bw of cll {} updated from 0 to {}, max bw is {}", serviceId, ccvpnPmDatastore.getProvBwOfSvc(serviceId), bwValue);
+                        } else if (ccvpnPmDatastore.getProvBwOfSvc(serviceId) != bwValue) {
+                            log.debug("Service modification complete; serviceId: {} update prov bw from {} to {}", serviceId, ccvpnPmDatastore.getProvBwOfSvc(serviceId), bwValue);
+                            ccvpnPmDatastore.updateProvBw(serviceId, bwValue, true);
+                            ccvpnPmDatastore.updateSvcState(serviceId, ServiceState.RUNNING);
+                            log.debug("Service state of {} is changed to running, {}", serviceId, ccvpnPmDatastore.getStatusOfSvc(serviceId));
+                        }
+                    }
+                    log.debug("=== Processing AAI network policy query complete ===");
+                }
             }
         };
-
-        scheduleEvaluation();
-    }
-
-    /**
-     * Stop the bandwidth evaluator process including two actors and periodic usage check
-     */
-    @PreDestroy
-    public void stop(){
-        stopScheduleEvaluation();
-        evaluationEventLoop.stop();
-    }
-
-    /**
-     * Start to schedule periodic usage check at fixed rate
-     */
-    private void scheduleEvaluation(){
-        executorPool.scheduleAtFixedRate(new Runnable() {
-                @Override
-                public void run() {
-                    post(new SimpleEvent(SimpleEvent.Type.PERIODIC_CHECK, 1));
-                }
-            }, 0, (evaluationInterval == 0? DEFAULT_EVAL_INTERVAL : evaluationInterval), TimeUnit.SECONDS);
-    }
-
-    /**
-     * Stop periodic bandwidth usage check
-     */
-    private void stopScheduleEvaluation(){
-        executorPool.shutdownNow();
     }
 
     /**
      * Post/broadcast event between Loops
      * @param event event object
      */
-    public void post(@NonNull Event event){
-        log.info("A new event triggered, type: {}, subject: {}, at time: {}",
-                event.type(), event.subject(), event.time());
-        if (event.type() == SimpleEvent.Type.PERIODIC_CHECK) {
-            evaluationEventLoop.add(event);
-        } else if (event.type() == SimpleEvent.Type.ONDEMAND_CHECK) {
-            evaluationEventLoop.add(event);
+    public void post(@NonNull Event event) {
+        if (event.type() == SimpleEvent.Type.AAI_BW_REQ) {
+            aaiEventLoop.add(event);
         }
     }
-
-    // update configuration
-    private void loadConfig() {
-        configuration = Configuration.getInstance();
-        evaluationInterval = configuration.getCcvpnEvalInterval();
-        strategyName = configuration.getCcvpnEvalStrategy();
-        log.info("Evaluation loop configs has been loaded. Strategy {}.", strategyName);
-    }
-
     /**
      * Inner loop implementation. Each loop acts like an actor.
      */
@@ -180,7 +131,7 @@ public class BandwidthEvaluator {
         @Override
         public void run(){
             running = true;
-            log.info("BandwidthEvaluator -- {} initiated", this.name);
+            log.info("NetworkPolicyMonitor -- {} initiated", this.name);
             while (running){
                 try{
                     Event event = eventsQueue.take();
