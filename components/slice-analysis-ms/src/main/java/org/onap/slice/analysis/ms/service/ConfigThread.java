@@ -47,8 +47,7 @@ public class ConfigThread extends Thread{
             try {
                 Thread.sleep(1000);
                 ConfigPolicy configPolicy = ConfigPolicy.getInstance();
-                if(configPolicy != null) {
-                    // config content
+                if(configPolicy.getConfig() != null) {
                     String cllId = null;
                     Boolean clBwAssuranceStatus = null;
                     int originalBw = 0;
@@ -65,7 +64,7 @@ public class ConfigThread extends Thread{
                         ccvpnPmDatastore.updateConfigFromPolicy(cllId, clBwAssuranceStatus, originalBw);
                     }
                 } else {
-                    log.debug("Config policy is empty, nothing to update.");
+                    log.error("Config policy is empty, nothing to update.");
                 }
 
             } catch (Exception e) {
