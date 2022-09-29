@@ -3,6 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *  Copyright (C) 2022 CTC, Inc.
+ *  Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -76,9 +77,6 @@ public class ConsumerThreadTest {
 
         consumerThread = PowerMockito.spy(new ConsumerThread());
 
-
-
-
         MemberModifier.field(ConsumerThread.class, "cpsInterface")
                 .set(consumerThread , cpsInterface);
         MemberModifier.field(ConsumerThread.class, "samples")
@@ -86,25 +84,28 @@ public class ConsumerThreadTest {
     }
 
     @Test
-    public void run1Test(){
+    public void runShouldSuccessTest() throws InterruptedException {
+        Configuration.getInstance().setConfigDbEnabled(true);
         String snssai = "snssai";
         doReturn("snssai").when(pmDataQueue).getSnnsaiFromQueue();
         List<String> nfs = new ArrayList<>();
         when(iConfigDbService.fetchNetworkFunctionsOfSnssai(Mockito.any())).thenReturn(nfs);
         when(pmDataQueue.checkSamplesInQueue(Mockito.any(), Mockito.anyInt())).thenReturn(true);
 
-
         SnssaiSamplesProcessor snssaiSamplesProcessor = PowerMockito.mock(SnssaiSamplesProcessor.class);
         when(BeanUtil.getBean(SnssaiSamplesProcessor.class)).thenReturn(snssaiSamplesProcessor);
         Mockito.when(snssaiSamplesProcessor.processSamplesOfSnnsai(snssai, nfs)).thenReturn(false);
-        Mockito.doNothing().when(pmDataQueue).putSnssaiToQueue(snssai);
         doThrow(new RuntimeException()).when(pmDataQueue).putSnssaiToQueue(snssai);
-        consumerThread.run();
-        assertEquals(1,1);
+
+        Thread thread = new Thread(consumerThread);
+        thread.start();
+        thread.join();
+        Mockito.verify(consumerThread, Mockito.atLeastOnce()).run();
+        assertEquals(pmDataQueue.getSnnsaiFromQueue(), snssai);
     }
 
     @Test
-    public void run2Test(){
+    public void runShouldFailTest() throws InterruptedException {
         Configuration.getInstance().setConfigDbEnabled(false);
         String snssai = "snssai";
         doReturn("snssai").when(pmDataQueue).getSnnsaiFromQueue();
@@ -119,17 +120,20 @@ public class ConsumerThreadTest {
         Mockito.when(snssaiSamplesProcessor.processSamplesOfSnnsai(snssai, nfs)).thenReturn(false);
         Mockito.doNothing().when(pmDataQueue).putSnssaiToQueue(snssai);
         doThrow(new RuntimeException()).when(pmDataQueue).putSnssaiToQueue(snssai);
-        consumerThread.run();
-        assertEquals(1,1);
+
+        Thread thread = new Thread(consumerThread);
+        thread.start();
+        thread.join();
+        Mockito.verify(consumerThread, Mockito.atLeastOnce()).run();
     }
 
     @Test
-    public void checkForEnoughSamplesTest(){
+    public void checkForEnoughSamplesTest() {
         List<String> nfs = new ArrayList<>();
         nfs.add("");
         when(pmDataQueue.checkSamplesInQueue(Mockito.any(), Mockito.anyInt())).thenReturn(false);
         doNothing().when(pmDataQueue).putSnssaiToQueue(Mockito.any());
         assertFalse(consumerThread.checkForEnoughSamples(nfs, ""));
-
     }
+
 }
