@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
          - [DCAEGEN2-3270](https://jira.onap.org/browse/DCAEGEN2-3270) - Dcae slicems startup error, breaking the circular dependency.
 
+         - [DCAEGEN2-3275](https://jira.onap.org/browse/DCAEGEN2-3275) - Add test case
+
 ## [1.1.4] - 2022/07/28
          - [DCAEGEN2-3120](https://jira.onap.org/browse/DCAEGEN2-3120) - Enhance sliceanalysis MS to use DCAE SDK dmaap-client lib
 
