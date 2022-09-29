@@ -1,0 +1,36 @@
+{
+   "service-instance":[
+      {
+         "service-instance-id":"cll802fe-cc49-4874-b12c-03fc2d88b060",
+         "service-instance-name":"sliceprofile_01e56f6e-0481-4654-919f-476734ec8176",
+         "service-role":"slice-profile-instance",
+         "environment-context":"001-100001",
+         "workload-context":"TN-MH",
+         "service-instance-location-id":"[\"460-00\",\"460-01\"]",
+         "resource-version":"1613640076516",
+         "orchestration-status":"deactivated",
+         "service-function":"non-shared",
+         "relationship-list":{
+            "relationship":[
+               {
+                  "related-to":"service-instance",
+                  "relationship-label":"org.onap.relationships.inventory.ComposedOf",
+                  "related-link":"/aai/v21/business/customers/customer/5GCustomer/service-subscriptions/service-subscription/5G/service-instances/service-instance/ab9af40f13f721b5f13539d87484098",
+                  "relationship-data":[
+                     {
+                        "relationship-key":"customer.global-customer-id",
+                        "relationship-value":"5GCustomer"
+                     }
+                  ],
+                  "related-to-property":[
+                     {
+                        "property-key":"service-instance.service-instance-name",
+                        "property-value":"an_sp_1"
+                     }
+                  ]
+               }
+            ]
+         }
+      }
+   ]
+}

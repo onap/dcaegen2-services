@@ -4,6 +4,7 @@
  *  ================================================================================
  *   Copyright (C) 2021-2022 Wipro Limited.
  *   Copyright (C) 2022 CTC, Inc.
+ *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -29,10 +30,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import java.util.Set;
 import org.apache.commons.collections.MapUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -235,4 +239,27 @@ public class AaiInterfaceServiceTest {
         Map<String, Integer> map = aaiService.fetchMaxBandwidthOfService("");
         assertEquals(99, MapUtils.getIntValue(map, "maxBandwidth"));
     }
+
+    @Test
+    public void fetchAllCllInstancesShouldFailTest() {
+        Set<String> cllInstances = new HashSet<>();
+        try {
+            cllInstances = aaiService.fetchAllCllInstances();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Assert.assertTrue(cllInstances.isEmpty());
+    }
+
+    @Test
+    public void fetchAllCllInstancesShouldSuccessTest() throws IOException, IllegalAccessException {
+
+        String serviceInstance =
+            new String(Files.readAllBytes(Paths.get("src/test/resources/aaiDetailsListTest.json")));
+        Mockito.when(restClient.sendGetRequest(Mockito.anyString(), Mockito.any()))
+            .thenReturn(new ResponseEntity<>(serviceInstance, HttpStatus.OK));
+
+        Assert.assertTrue(!aaiService.fetchAllCllInstances().isEmpty());
+    }
+
 }
