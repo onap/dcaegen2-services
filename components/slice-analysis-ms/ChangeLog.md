@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.6] - 2022/10/09
+         - [DCAEGEN2-3275](https://jira.onap.org/browse/DCAEGEN2-3275) - Add test case
+
 ## [1.1.5] - 2022/09/14
          - [DCAEGEN2-3221](https://jira.onap.org/browse/DCAEGEN2-3221) - Slice-Analysis-Ms vulnerability updates
 
