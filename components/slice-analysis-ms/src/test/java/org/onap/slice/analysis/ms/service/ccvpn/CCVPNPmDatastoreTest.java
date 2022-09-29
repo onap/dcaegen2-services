@@ -146,4 +146,34 @@ public class CCVPNPmDatastoreTest {
         assertEquals(datastore.getSvcStatus().keySet().equals(cllId), true);
         assertEquals(datastore.getEndpointToOriginalBw().keySet().equals(cllId), true);
     }
+
+    @Test
+    public void getUpperBoundBwOfSvcTest() {
+        datastore.addUsedBwToEndpoint("cll-01", "uni-n1", "300Mb");
+        datastore.updateUpperBoundBw("cll-01", 300);
+        String cllId = "cll-01";
+        assertTrue(datastore.getUpperBoundBwOfSvc(cllId).equals(300));
+    }
+
+    @Test
+    public void getClosedloopStatusTest() {
+        String cllId = "cll-01";
+        datastore.updateClosedloopStatus(cllId, true);
+        assertTrue(datastore.getClosedloopStatus(cllId));
+    }
+
+    @Test
+    public void getOriginalBwTest() {
+        String cllId = "cll-01";
+        datastore.updateOriginalBw(cllId, 300);
+        assertEquals(datastore.getOriginalBw(cllId), 300);
+    }
+
+    @Test
+    public void updateConfigFromPolicyTest() {
+        String cllId = "cll-01";
+        datastore.updateConfigFromPolicy(cllId, true, 300);
+        Mockito.verify(datastore, Mockito.atLeastOnce()).updateConfigFromPolicy(cllId, true, 300);
+    }
+
 }
