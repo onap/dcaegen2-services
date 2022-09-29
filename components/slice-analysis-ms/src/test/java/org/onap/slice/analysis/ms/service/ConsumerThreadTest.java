@@ -76,9 +76,6 @@ public class ConsumerThreadTest {
 
         consumerThread = PowerMockito.spy(new ConsumerThread());
 
-
-
-
         MemberModifier.field(ConsumerThread.class, "cpsInterface")
                 .set(consumerThread , cpsInterface);
         MemberModifier.field(ConsumerThread.class, "samples")
@@ -86,7 +83,7 @@ public class ConsumerThreadTest {
     }
 
     @Test
-    public void run1Test(){
+    public void run1Test() {
         String snssai = "snssai";
         doReturn("snssai").when(pmDataQueue).getSnnsaiFromQueue();
         List<String> nfs = new ArrayList<>();
@@ -100,11 +97,11 @@ public class ConsumerThreadTest {
         Mockito.doNothing().when(pmDataQueue).putSnssaiToQueue(snssai);
         doThrow(new RuntimeException()).when(pmDataQueue).putSnssaiToQueue(snssai);
         consumerThread.run();
-        assertEquals(1,1);
+        assertEquals(1, 1);
     }
 
     @Test
-    public void run2Test(){
+    public void run2Test() {
         Configuration.getInstance().setConfigDbEnabled(false);
         String snssai = "snssai";
         doReturn("snssai").when(pmDataQueue).getSnnsaiFromQueue();
@@ -120,11 +117,11 @@ public class ConsumerThreadTest {
         Mockito.doNothing().when(pmDataQueue).putSnssaiToQueue(snssai);
         doThrow(new RuntimeException()).when(pmDataQueue).putSnssaiToQueue(snssai);
         consumerThread.run();
-        assertEquals(1,1);
+        assertEquals(1, 1);
     }
 
     @Test
-    public void checkForEnoughSamplesTest(){
+    public void checkForEnoughSamplesTest() {
         List<String> nfs = new ArrayList<>();
         nfs.add("");
         when(pmDataQueue.checkSamplesInQueue(Mockito.any(), Mockito.anyInt())).thenReturn(false);
