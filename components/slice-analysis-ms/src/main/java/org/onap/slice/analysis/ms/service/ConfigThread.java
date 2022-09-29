@@ -32,11 +32,12 @@ import org.slf4j.LoggerFactory;
  */
 public class ConfigThread extends Thread{
 
-    CCVPNPmDatastore ccvpnPmDatastore = BeanUtil.getBean(CCVPNPmDatastore.class);
+    private CCVPNPmDatastore ccvpnPmDatastore;
     private static Logger log = LoggerFactory.getLogger(ConfigThread.class);
 
     public ConfigThread () {
         super();
+        this.ccvpnPmDatastore = BeanUtil.getBean(CCVPNPmDatastore.class);
     }
 
     public void run() {
