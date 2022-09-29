@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
  * This Thread class consumes message from pm data queue and sends onset message to policy
  */
 public class ConsumerThread extends Thread {
+
     private static Logger log = LoggerFactory.getLogger(ConsumerThread.class);
     private PmDataQueue pmDataQueue;
     private IConfigDbService configDbService;
