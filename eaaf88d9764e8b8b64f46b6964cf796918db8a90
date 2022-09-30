@@ -39,6 +39,30 @@
       "revId": "eaaf88d9764e8b8b64f46b6964cf796918db8a90",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23701bf0_053f8d82",
+        "filename": "releases/slice-analysis-ms-1.1.4-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-30T08:38:17Z",
+      "side": 1,
+      "message": "Yes, we can do that. Mention it\u0027s fixed on 1.1.5.",
+      "parentUuid": "c1827108_cd27c201",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 37
+      },
+      "revId": "eaaf88d9764e8b8b64f46b6964cf796918db8a90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
