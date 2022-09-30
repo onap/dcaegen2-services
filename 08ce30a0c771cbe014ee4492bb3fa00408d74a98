@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10443253_766f32ce",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConfigThread.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-30T09:14:56Z",
+      "side": 1,
+      "message": "no need to change",
+      "revId": "08ce30a0c771cbe014ee4492bb3fa00408d74a98",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d416f61_51426d45",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ConfigThread.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-09-30T09:14:56Z",
+      "side": 1,
+      "message": "will cause container failed to start",
+      "revId": "08ce30a0c771cbe014ee4492bb3fa00408d74a98",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
