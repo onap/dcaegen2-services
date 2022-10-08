@@ -5,12 +5,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.5] - 2022/09/14
-         - [DCAEGEN2-3221](https://jira.onap.org/browse/DCAEGEN2-3221) - Slice-Analysis-Ms vulnerability updates
-
-         - [DCAEGEN2-3195](https://jira.onap.org/browse/DCAEGEN2-3195) - CCVPN Kohn Enhancements for Intent-based Cloud Leased Line and Transport Slicing
-
-         - [DCAEGEN2-3239](https://jira.onap.org/browse/DCAEGEN2-3239) - Enhance BandwidthEvaluator to listen on user's bandwidth threshold
-
          - [DCAEGEN2-3238](https://jira.onap.org/browse/DCAEGEN2-3238) - Enhance BandwidthEvaluator in slice-analysis-ms to support detailed bandwidth adjustment
 
          - [DCAEGEN2-3255](https://jira.onap.org/browse/DCAEGEN2-3255) - Fix bug of application failed to start
@@ -30,7 +24,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
          - [DCAEGEN2-3242](https://jira.onap.org/browse/DCAEGEN2-3242) - Fix bug in ConfigFectchFromCbs that fetch will get hung when policy config in pdp engine is empty
 
-         - [DCAEGEN2-3245](https://jira.onap.org/browse/DCAEGEN2-3245) - Fix sent wrong dmaap message issue.
+         - [DCAEGEN2-3245](https://jira.onap.org/browse/DCAEGEN2-3245) - Fix sent wrong dmaap message issue
+
+         - [DCAEGEN2-3221](https://jira.onap.org/browse/DCAEGEN2-3221) - Slice-Analysis-Ms vulnerability updates
+
+         - [DCAEGEN2-3195](https://jira.onap.org/browse/DCAEGEN2-3195) - CCVPN Kohn Enhancements for Intent-based Cloud Leased Line and Transport Slicing
+
+         - [DCAEGEN2-3239](https://jira.onap.org/browse/DCAEGEN2-3239) - Enhance BandwidthEvaluator to listen on user's bandwidth threshold
 
 ## [1.1.3] - 2022/05/11
          - [DCAEGEN2-3156](https://jira.onap.org/browse/DCAEGEN2-3156) - Fix bug in fetching PM data from DES
