@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ba8887a_113c9b3f",
+        "filename": "releases/slice-analysis-ms-1.1.4-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-10-08T07:04:54Z",
+      "side": 1,
+      "message": "The oldest history now is 773, 770 is now 404. Should I label 773 as 1.1.4, and move the 2 changes under 773 from 1.1.5 to 1.1.4?\n\nhttps://jenkins.onap.org/view/dcaegen2/job/dcaegen2-services-slice-analysis-ms-maven-stage-master/773/",
+      "revId": "0952fd44912ac7a55efd912ec8fe888b1f4d36dd",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
