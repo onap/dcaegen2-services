@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e6019c0_c1c46885",
+        "filename": "releases/slice-analysis-ms-1.1.4-container.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-10-08T07:35:46Z",
+      "side": 1,
+      "message": "772 is the oldest build history. 1.1.4 is not found on nexus. Does 1.1.4 still need to be released? If needed, should i release it like this?",
+      "revId": "ba5edcfb4441b278689bd771430878463c7e39c3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
