@@ -34,6 +34,24 @@
       "revId": "ba5edcfb4441b278689bd771430878463c7e39c3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7bb6f6ec_0d5eedfe",
+        "filename": "releases/slice-analysis-ms-1.1.4-container.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-10-11T02:30:30Z",
+      "side": 1,
+      "message": "Got it.",
+      "parentUuid": "338d18ff_03eb1f5c",
+      "revId": "ba5edcfb4441b278689bd771430878463c7e39c3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
