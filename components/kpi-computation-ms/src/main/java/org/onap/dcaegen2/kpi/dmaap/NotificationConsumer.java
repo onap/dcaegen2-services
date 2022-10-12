@@ -1,7 +1,6 @@
 /*-
  * ============LICENSE_START=======================================================
  *  Copyright (C) 2021 China Mobile.
- *  Copyright (C) 2022 Wipro Limited.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,31 +20,26 @@
 
 package org.onap.dcaegen2.kpi.dmaap;
 
-import java.time.Duration;
+import com.att.nsa.cambria.client.CambriaConsumer;
 
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.gson.JsonElement;
 
 /**
  * Consume Notifications from DMAAP events.
  */
 public class NotificationConsumer implements Runnable {
+
     private static Logger log = LoggerFactory.getLogger(NotificationConsumer.class);
-    private MessageRouterSubscriber messageSubscriber;
-    private MessageRouterSubscribeRequest subscriberRequest;
+    private CambriaConsumer cambriaConsumer;
     private NotificationCallback notificationCallback;
 
     /**
      * Parameterized Constructor.
      */
-    public NotificationConsumer(MessageRouterSubscriber messageSubscriber, MessageRouterSubscribeRequest subscriberRequest, NotificationCallback notificationCallback) {
+    public NotificationConsumer(CambriaConsumer cambriaConsumer, NotificationCallback notificationCallback) {
         super();
-        this.messageSubscriber = messageSubscriber;
-        this.subscriberRequest = subscriberRequest;
+        this.cambriaConsumer = cambriaConsumer;
         this.notificationCallback = notificationCallback;
     }
 
@@ -54,14 +48,15 @@ public class NotificationConsumer implements Runnable {
      */
     @Override
     public void run() {
-        messageSubscriber.subscribeForElements(subscriberRequest, Duration.ofMinutes(1))
-            .map(JsonElement::getAsString)
-            .subscribe(msg -> {
+        try {
+            Iterable<String> msgs = cambriaConsumer.fetch();
+            for (String msg : msgs) {
                 log.info(msg);
                 notificationCallback.activateCallBack(msg);
-             },
-                    ex -> {
-                        log.warn("An unexpected error while receiving messages from DMaaP", ex);
-                     });
+            }
+        } catch (Exception e) {
+            log.debug("exception when fetching msgs from dmaap", e);
+        }
+
     }
 }
