@@ -21,6 +21,8 @@
 
 package org.onap.dcaegen2.kpi.dmaap;
 
+import com.att.nsa.cambria.client.CambriaConsumer;
+
 import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -30,10 +32,9 @@ import javax.annotation.PostConstruct;
 
 import org.onap.dcaegen2.kpi.models.Configuration;
 import org.onap.dcaegen2.kpi.utils.DmaapUtils;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.api.MessageRouterSubscriber;
-import org.onap.dcaegen2.services.sdk.rest.services.dmaap.client.model.MessageRouterSubscribeRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -77,13 +78,12 @@ public class DmaapClient {
         String pmTopic = pmTopicSplit[pmTopicSplit.length - 1];
         log.debug("pm topic : {}", pmTopic);
 
-        MessageRouterSubscriber pmNotifSubscriber = dmaapUtils.buildSubscriber();
-        MessageRouterSubscribeRequest subscriberRequest = dmaapUtils.buildSubscriberRequest(configuration, pmTopic);
+        CambriaConsumer pmNotifCambriaConsumer = dmaapUtils.buildConsumer(configuration, pmTopic);
 
         ScheduledExecutorService executorPool;
 
         // create notification consumers for PM
-        NotificationConsumer pmNotificationConsumer = new NotificationConsumer(pmNotifSubscriber, subscriberRequest,
+        NotificationConsumer pmNotificationConsumer = new NotificationConsumer(pmNotifCambriaConsumer,
                 new KpiComputationCallBack());
         // start pm notification consumer threads
         executorPool = Executors.newScheduledThreadPool(10);
