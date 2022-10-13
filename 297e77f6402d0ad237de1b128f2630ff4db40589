@@ -142,6 +142,30 @@
       "revId": "297e77f6402d0ad237de1b128f2630ff4db40589",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7503e2ae_f95f68fe",
+        "filename": "releases/kpi-computation-ms-1.0.9-container.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-10-13T19:00:02Z",
+      "side": 1,
+      "message": "Issue tracked under DCAEGEN2-3267",
+      "parentUuid": "995551df_395ad77f",
+      "range": {
+        "startLine": 4,
+        "startChar": 72,
+        "endLine": 4,
+        "endChar": 78
+      },
+      "revId": "297e77f6402d0ad237de1b128f2630ff4db40589",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
