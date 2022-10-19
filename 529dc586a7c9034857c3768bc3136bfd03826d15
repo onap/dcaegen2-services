@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "43f2a00a_a18bf2f3",
+        "filename": "components/slice-analysis-ms/ChangeLog.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-10-19T02:58:41Z",
+      "side": 1,
+      "message": "Needs more details. So when someone read this line, without reading your code, they can know what modifications this commit excatly did.",
+      "revId": "529dc586a7c9034857c3768bc3136bfd03826d15",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8fcd292_80ab0a64",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/ConfigThreadTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-10-19T02:58:41Z",
+      "side": 1,
+      "message": "Pls rename to inform readers, when they read they can konw, run which function should fail?",
+      "revId": "529dc586a7c9034857c3768bc3136bfd03826d15",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb1be959_3953cf1b",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/ConfigThreadTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-10-19T02:58:41Z",
+      "side": 1,
+      "message": "Same. Pls reaname.",
+      "revId": "529dc586a7c9034857c3768bc3136bfd03826d15",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "716f9f74_62c34e6b",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/ConfigThreadTest.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-10-19T02:58:41Z",
+      "side": 1,
+      "message": "When..thenReturn usually used to mock a result/response from a outter api. In this scenario, Config Policy can be initailized with a fixed value. Then configThread.run() and test the result. Or that in this case, most of the judgement statements are skipped by when...thenReturn, they are not tested.",
+      "revId": "529dc586a7c9034857c3768bc3136bfd03826d15",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab70bc2c_8ea52190",
+        "filename": "components/slice-analysis-ms/src/test/resources/aaiDetailsListTest.json",
+        "patchSetId": 11
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-10-19T02:58:41Z",
+      "side": 1,
+      "message": "This file is not requried. Just use existing resource \"aaiDetailList\" would be enough.",
+      "revId": "529dc586a7c9034857c3768bc3136bfd03826d15",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
