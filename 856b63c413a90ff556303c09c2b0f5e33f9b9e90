@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1aae0301_96e93978",
+        "filename": "components/slice-analysis-ms/src/test/java/org/onap/slice/analysis/ms/service/ConfigThreadTest.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2022-10-21T03:52:31Z",
+      "side": 1,
+      "message": "Wrong annotation. @InjectMocks is used on the class to be tested. @Mock is used on the dependent object of that class.",
+      "revId": "856b63c413a90ff556303c09c2b0f5e33f9b9e90",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
