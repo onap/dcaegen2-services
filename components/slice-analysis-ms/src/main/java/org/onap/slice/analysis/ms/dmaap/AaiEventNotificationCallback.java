@@ -110,8 +110,17 @@ public class AaiEventNotificationCallback implements NotificationCallback {
         if (body == null){
             return;
         }
-        Event event = new SimpleEvent<>(SimpleEvent.Type.ONDEMAND_CHECK, body);
-        bandwidthEvaluator.post(event);
+
+        // hendle different event, depend on service-type
+        String serviceType = body.get("service-type").getAsString();
+        logger.info("recv aai event, service-type=" + serviceType);
+        if("5gs".equalsIgnoreCase(serviceType)) {
+            logger.info("begin handle aai event (5G slice)");
+        } else {
+            Event event = new SimpleEvent<>(SimpleEvent.Type.ONDEMAND_CHECK, body);
+            bandwidthEvaluator.post(event);
+        }
+
     }
 
     private JsonObject getNestedJsonObject(JsonObject obj, String target){
