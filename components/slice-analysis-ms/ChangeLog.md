@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.6] - 2022/10/24
+         - [REQ-1214](https://jira.onap.org/browse/REQ-1214) - Maintenance and Enhancement of Intent-driven Closed-loop Autonomous Networks in R11
+
 ## [1.1.5] - 2022/09/14
          - [DCAEGEN2-3221](https://jira.onap.org/browse/DCAEGEN2-3221) - Slice-Analysis-Ms vulnerability updates
 
