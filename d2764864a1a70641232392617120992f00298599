@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a0c728c_e9d6a11d",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/AaiEventNotificationCallback.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-10-25T00:13:21Z",
+      "side": 1,
+      "message": "does there need to be a copyright line for AsiaInfo ?",
+      "revId": "d2764864a1a70641232392617120992f00298599",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3da6aa1_d42bb1ea",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/dmaap/AaiEventNotificationCallback.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-10-25T00:13:21Z",
+      "side": 1,
+      "message": "hendle \u003d\u003e handle\ndepend \u003d\u003e depending\n\nDoes this code need to actually DO something when the service type is 5gs?",
+      "revId": "d2764864a1a70641232392617120992f00298599",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
