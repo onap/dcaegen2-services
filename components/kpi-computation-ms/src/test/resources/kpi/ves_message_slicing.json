@@ -28,8 +28,8 @@
           },
           "measTypes": {
       "sMeasTypesList": [
-        "SM.PduSessionCreationSucc.0011-0010",
-        "SM.PduSessionCreationReq.0011-0010",
+        "SM.PduSessionCreationSucc.01-B989BD",
+        "SM.PduSessionCreationReq.01-B989BD",
         "SM.PduSessionCreationFail.0"
       ]
           },
