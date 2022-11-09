@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.11]
+### Changed
+* Fix bug in wrong SNSSAI value being appended with MeasType string (DCAEGEN2-3310)
+
 ## [1.0.10]
 ### Changed
 * Revert commit - KPI MS - Switch from Cambria library to dmaap-client library (dcaegen2/sdk) (DCAEGEN2-3180)
