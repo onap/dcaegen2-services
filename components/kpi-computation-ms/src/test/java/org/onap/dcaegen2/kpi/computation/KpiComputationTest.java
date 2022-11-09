@@ -108,7 +108,7 @@ public class KpiComputationTest {
         List<VesEvent> vesList = new KpiComputation().checkAndDoComputation(vesMessage, config);
         VesEvent vesEvent = vesList.get(0);
         assertEquals(vesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
-                .getMeasTypes().getMeasTypesList().get(0), "PDUSessionEstSR.00110010");
+                .getMeasTypes().getMeasTypesList().get(0), "PDUSessionEstSR.01-B989BD");
     }
 
     @Test
@@ -121,9 +121,9 @@ public class KpiComputationTest {
         VesEvent vesEvent = vesList.get(0);
         VesEvent anotherVesEvent = vesList.get(18);
         assertEquals(vesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
-                .getMeasTypes().getMeasTypesList().get(0), "PDUSessionEstSR.00110010");
+                .getMeasTypes().getMeasTypesList().get(0), "PDUSessionEstSR.01-B989BD");
         assertEquals(anotherVesEvent.getEvent().getPerf3gppFields().getMeasDataCollection().getMeasInfoList().get(0)
-                      .getMeasTypes().getMeasTypesList().get(0), "PDUSessionEstSR.00101110");
+                      .getMeasTypes().getMeasTypesList().get(0), "PDUSessionEstSR.01-B989BD");
     }
     
     @Test

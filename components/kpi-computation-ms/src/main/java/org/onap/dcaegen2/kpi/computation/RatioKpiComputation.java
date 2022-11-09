@@ -106,35 +106,21 @@ public class RatioKpiComputation extends BaseKpiComputation {
                    }
                }
 
-                StringBuilder sb = new StringBuilder();
+                String snssai = "";
                 if(!operand.isEmpty()){
-                   char[] chars = operand.toCharArray();
-                   for(char c : chars){
-                      if(Character.isDigit(c)){
-                         sb.append(c);
-                      }
-                   }
+                  snssai = operand.substring(operand.lastIndexOf(".") + 1);
                 }
                 else{
                    logger.info("operand is empty");
                 }
 
-                String snssai = sb.toString();
-
-                StringBuilder sb1 = new StringBuilder();
+                String meas = "";
                 if(!measType.isEmpty()){
-                   char[] chars = measType.toCharArray();
-                   for(char c : chars){
-                      if(!Character.isDigit(c)){
-                        sb1.append(c);
-                      }
-                   }
+                   meas = measType.substring( 0, measType.lastIndexOf(".") + 1);
                 }
                 else{
                    logger.info("measType is empty");
                 }
-
-                String meas = sb1.toString();
                 String measTypes = meas + snssai;
 
                 if (myK2.getValue().compareTo(BigDecimal.ZERO) != 0) {
