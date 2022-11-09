@@ -65,6 +65,7 @@ import org.slf4j.LoggerFactory;
 public class KpiComputation {
 
     private static Logger logger = LoggerFactory.getLogger(KpiComputation.class);
+    String value = "";
 
     /**
      * do KPI computation.
@@ -112,23 +113,20 @@ public class KpiComputation {
                  .map(MeasDataCollection::getMeasInfoList)
                  .orElseThrow(() -> new KpiComputationException("Required Field: MeasInfoList not present"));
 
+  
         StringBuilder sb = new StringBuilder();
         for(MeasInfo measInfo: measInfoList){
            List<String> measTypes = measInfo.getMeasTypes().getMeasTypesList();
            if(!measTypes.isEmpty()){
               String anyString = measTypes.get(0);
-              char[] chars = anyString.toCharArray();
-              for(char c : chars){
-                 if(Character.isDigit(c)){
-                    sb.append(c);
-                 }
-              }
+              value = anyString.substring(anyString.lastIndexOf(".")+ 1);
+              logger.info("The value string is {}",value); 
            }
            else{
               logger.info("MeasTypesList is empty");
            }
         }
-        String snssai = sb.toString();
+        //String snssai = sb.toString();
         // Do computation for each KPI
         List<VesEvent> events = new LinkedList<>();
         List<Kpi> kpis = methodForKpi.getKpis();
@@ -140,7 +138,12 @@ public class KpiComputation {
             }
 
             ControlLoopSchemaType schemaType = methodForKpi.getControlLoopSchemaType();
-            String measType = k.getMeasType() + "." + snssai;
+            sb.append(k.getMeasType());
+            sb.append(".");
+            sb.append(value);
+            String measType = sb.toString();
+            logger.info("measType is {}", measType);
+     
             Operation operation = k.getOperation();
 
             List<VesEvent> kpiVesEvent = CommandHandler.handle(operation.value, pmEvent, schemaType,
