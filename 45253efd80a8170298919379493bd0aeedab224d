@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8418af6a_cd774300",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-11-15T01:23:46Z",
+      "side": 1,
+      "message": "please remove commented-out code",
+      "revId": "45253efd80a8170298919379493bd0aeedab224d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c101d42_46d49612",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-11-15T01:23:46Z",
+      "side": 1,
+      "message": "is it possible for operand to be null here? (if the above for loop never fills it in?) Would it be better to use\n\nStrong operand \u003d \"\";\n\n?",
+      "revId": "45253efd80a8170298919379493bd0aeedab224d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
