@@ -69,6 +69,24 @@
       "revId": "45253efd80a8170298919379493bd0aeedab224d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69949833_e77ad8dd",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-11-16T20:56:01Z",
+      "side": 1,
+      "message": "exactly. And if it is null, then \"operand.isEmpty()\" will generate a NullPointerException. Please fix the code to handle a null value.",
+      "parentUuid": "45181285_88616559",
+      "revId": "45253efd80a8170298919379493bd0aeedab224d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }

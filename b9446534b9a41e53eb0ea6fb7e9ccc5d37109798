@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4de8c60_e5f59578",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-11-16T20:56:01Z",
+      "side": 1,
+      "message": "If there is no \".\" in the string, then you will end up with a complete copy of the string. Is this what you want? Or do you want an empty string as the result?",
+      "revId": "b9446534b9a41e53eb0ea6fb7e9ccc5d37109798",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a5de61c_96256309",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-11-16T20:56:01Z",
+      "side": 1,
+      "message": "If there is no \".\" in the string, then you will end up with a complete copy of the string. Is this what you want? Or do you want an empty string as the result?",
+      "revId": "b9446534b9a41e53eb0ea6fb7e9ccc5d37109798",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
