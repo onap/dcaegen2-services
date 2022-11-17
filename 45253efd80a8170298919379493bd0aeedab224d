@@ -87,6 +87,24 @@
       "revId": "45253efd80a8170298919379493bd0aeedab224d",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "488d63d5_007161ba",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-11-17T08:34:47Z",
+      "side": 1,
+      "message": "I think the isEmpty method will return whether it\u0027s true or false only, so the Exception won\u0027t be thrown and it\u0027ll go the else loop.",
+      "parentUuid": "69949833_e77ad8dd",
+      "revId": "45253efd80a8170298919379493bd0aeedab224d",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }

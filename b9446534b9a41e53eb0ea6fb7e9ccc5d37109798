@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "91fca677_79ff7cfc",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-11-17T08:34:47Z",
+      "side": 1,
+      "message": "I\u0027ve fixed that in Line 122 in the current patchset by checking that condition.",
+      "parentUuid": "a4de8c60_e5f59578",
+      "revId": "b9446534b9a41e53eb0ea6fb7e9ccc5d37109798",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6a5de61c_96256309",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
         "patchSetId": 4
@@ -33,6 +51,24 @@
       "revId": "b9446534b9a41e53eb0ea6fb7e9ccc5d37109798",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6b7f0d5_26885990",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 7661
+      },
+      "writtenOn": "2022-11-17T08:34:47Z",
+      "side": 1,
+      "message": "I\u0027ve fixed that in Line 110 in the current patchset by checking that condition.",
+      "parentUuid": "6a5de61c_96256309",
+      "revId": "b9446534b9a41e53eb0ea6fb7e9ccc5d37109798",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
