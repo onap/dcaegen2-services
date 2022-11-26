@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79f082cf_2f7a0c7d",
+        "filename": "releases/kpi-computation-ms-1.0.11-container.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 93
+      },
+      "writtenOn": "2022-11-26T16:12:13Z",
+      "side": 1,
+      "message": "This is not generated from job#665.. Pls either update the job# or include corresponding snapshot from that job (after local test)",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 37
+      },
+      "revId": "bac287488fc6c77ef999b54ad6b9eceba2d6b83e",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
