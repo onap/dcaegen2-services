@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba4f330a_7fcbba14",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-11-29T13:56:36Z",
+      "side": 1,
+      "message": "You are scanning the end of the string twice (contains() and lastIndexOf(), This can be changed to:\n\nint dotLocation \u003d anyString.lastIndexOf(\".\");\nif (dotLocation !\u003d -1) {\n  value \u003d anyString.substring(dotLocation + 1);",
+      "revId": "a29ec44675ef330e0eb396cf7ab5471036449ca3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abff48cd_261c34d3",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-11-29T13:56:36Z",
+      "side": 1,
+      "message": "There is still a bug here if operand is not assigned a value within the above loop. Probably the easiest fix is to change the operand initialization above to:\n\nString operand \u003d \"\";\n\nAlternatively, test for null explicitly. See the next comment for an alternative that fixes this and another issue.",
+      "revId": "a29ec44675ef330e0eb396cf7ab5471036449ca3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa8f3830_ce626c20",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-11-29T13:56:36Z",
+      "side": 1,
+      "message": "this log message is not the opposite of the test. I suggest changing the order of tests to:\n\nif (operand \u003d\u003d null || operand.isEmpty()) {\n  logger.info(\"operand is empty\");\n} else if (operand.contains(\".\")) {\n  snssai \u003d operand.substring(operand.lastIndexOf(\".\") + 1);\n}\n\nNote that if this is in a tight loop and becomes time-critical, this has the issue that operand is scanning the end of the string twice for \".\". So another formulation would be:\n\nif (operand \u003d\u003d null || operand.isEmpty()) {\n  logger.info(\"operand is empty\");\n} else {\n  int dotLocation \u003d operand.lastIndexOf(\".\");\n  if (dotLocation !\u003d -1) {\n    snssai \u003d operand.substring(dotLocation + 1);\n  }\n}",
+      "revId": "a29ec44675ef330e0eb396cf7ab5471036449ca3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
