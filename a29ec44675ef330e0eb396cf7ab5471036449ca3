@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "67966557_66ad1a0b",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/KpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-12-02T04:02:04Z",
+      "side": 1,
+      "message": "DCAEGEN2-3317 filed",
+      "parentUuid": "ba4f330a_7fcbba14",
+      "revId": "a29ec44675ef330e0eb396cf7ab5471036449ca3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "abff48cd_261c34d3",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "19f1aa78_8fc69c18",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-12-02T04:02:04Z",
+      "side": 1,
+      "message": "DCAEGEN2-3317 filed",
+      "parentUuid": "abff48cd_261c34d3",
+      "revId": "a29ec44675ef330e0eb396cf7ab5471036449ca3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa8f3830_ce626c20",
         "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "a29ec44675ef330e0eb396cf7ab5471036449ca3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "223c4c17_a2612662",
+        "filename": "components/kpi-computation-ms/src/main/java/org/onap/dcaegen2/kpi/computation/RatioKpiComputation.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2022-12-02T04:02:04Z",
+      "side": 1,
+      "message": "DCAEGEN2-3317 filed",
+      "parentUuid": "aa8f3830_ce626c20",
+      "revId": "a29ec44675ef330e0eb396cf7ab5471036449ca3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
