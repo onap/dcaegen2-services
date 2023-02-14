@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============LICENSE_START=======================================================
-#  Copyright (C) 2019 Nordix Foundation.
+#  Copyright (C) 2019-2023 Nordix Foundation.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ PROJECT_ROOT=$(dirname $0)
 
 
 echo "MVN_RELEASE_TAG is set to [$MVN_RELEASE_TAG]"
-RELEASE_TAG=${MVN_RELEASE_TAG:-R6}
+RELEASE_TAG=${MVN_RELEASE_TAG:-R11}
 if [[ "$RELEASE_TAG" != "R1" ]]; then
   RELEASE_TAGGED_DIR="${RELEASE_TAG}/"
 else
