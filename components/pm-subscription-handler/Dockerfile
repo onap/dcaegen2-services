@@ -17,7 +17,7 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-FROM nexus3.onap.org:10001/onap/integration-python:8.0.0 as build
+FROM nexus3.onap.org:10001/onap/integration-python:10.1.0 as build
 LABEL maintainer="lego@est.tech"
 
 USER root
@@ -32,7 +32,7 @@ COPY requirements.txt ./
 RUN pip install --prefix /opt -r requirements.txt --no-cache-dir
 
 # Second stage
-FROM nexus3.onap.org:10001/onap/integration-python:8.0.0
+FROM nexus3.onap.org:10001/onap/integration-python:10.1.0
 
 COPY --from=build /opt /opt
 
@@ -43,7 +43,7 @@ ARG group=onap
 # set PATH & PYTHONPATH vars
 ENV APPDIR="/opt/app/pmsh" \
     LD_LIBRARY_PATH=/opt/lib \
-    PYTHONPATH=${APPDIR}/mod:/opt/lib/python3.9/site-packages \
+    PYTHONPATH=${APPDIR}/mod:/opt/lib/python3.10/site-packages \
     PATH=$PATH:${APPDIR}/bin \
     LOGS_PATH="/var/log/ONAP/dcaegen2/services/pmsh" \
     LOGGER_CONFIG="/opt/app/pmsh/log_config.yaml"

@@ -49,7 +49,8 @@ class ExitHandler:
             logger.info(f'Cancelling thread {thread.name}')
             thread.cancel()
         logger.info('Closing all DB connections')
-        db.session.bind.dispose()
+        if db.session.bind is not None:
+            db.session.bind.dispose()
         db.session.close()
         db.engine.dispose()
         ExitHandler.shutdown_signal_received = True

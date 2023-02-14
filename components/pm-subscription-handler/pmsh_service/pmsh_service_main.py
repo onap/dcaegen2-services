@@ -44,7 +44,7 @@ def main():
         try:
             app = create_app()
             app.app_context().push()
-            db.create_all(app=app)
+            db.create_all()
             pmsh_app_conf = AppConfig()
         except Exception as e:
             logger.error(f'Failed to get config and create application: {e}', exc_info=True)
