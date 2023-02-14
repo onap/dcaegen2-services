@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2019-2022 Nordix Foundation.
+#  Copyright (C) 2019-2023 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ def main():
         try:
             app = create_app()
             app.app_context().push()
-            db.create_all(app=app)
+            db.create_all()
             pmsh_app_conf = AppConfig()
         except Exception as e:
             logger.error(f'Failed to get config and create application: {e}', exc_info=True)

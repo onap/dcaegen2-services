@@ -1,5 +1,5 @@
 # ============LICENSE_START===================================================
-#  Copyright (C) 2020-2022 Nordix Foundation.
+#  Copyright (C) 2020-2023 Nordix Foundation.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,7 +49,8 @@ class ExitHandler:
             logger.info(f'Cancelling thread {thread.name}')
             thread.cancel()
         logger.info('Closing all DB connections')
-        db.session.bind.dispose()
+        if db.session.bind is not None:
+            db.session.bind.dispose()
         db.session.close()
         db.engine.dispose()
         ExitHandler.shutdown_signal_received = True
