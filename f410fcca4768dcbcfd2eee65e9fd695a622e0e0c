@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "c2d86521_a2e491e2",
+        "filename": "components/ml-prediction-ms/docker-compose.yaml",
+        "patchSetId": 36
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2023-02-15T20:14:35Z",
+      "side": 1,
+      "message": "Not supported. DO NOT use",
+      "range": {
+        "startLine": 48,
+        "startChar": 44,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "f410fcca4768dcbcfd2eee65e9fd695a622e0e0c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "47af3781_e98fe3ba",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 36
