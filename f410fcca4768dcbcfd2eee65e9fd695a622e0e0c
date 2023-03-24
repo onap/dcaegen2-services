@@ -72,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "713ee388_24867b0a",
+        "filename": "components/ml-prediction-ms/docker-compose.yaml",
+        "patchSetId": 36
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2023-03-24T10:28:04Z",
+      "side": 1,
+      "message": "DMaaP Message Router is deprecated and should not be used for any new code.\nPlease use kafka native to interact with strimzi kafka in ONAP.\nhttps://docs.confluent.io/kafka-clients/python/current/overview.html\nOr alternatively use the Strimzi Kafka Bridge REST api.\nhttps://strimzi.io/docs/bridge/latest/",
+      "parentUuid": "64333d4f_dc0da04e",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 8
+      },
+      "revId": "f410fcca4768dcbcfd2eee65e9fd695a622e0e0c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c2d86521_a2e491e2",
         "filename": "components/ml-prediction-ms/docker-compose.yaml",
         "patchSetId": 36
