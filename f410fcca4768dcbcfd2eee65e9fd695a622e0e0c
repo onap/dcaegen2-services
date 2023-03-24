@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "bd1ee47d_655500e6",
+        "filename": "components/ml-prediction-ms/docker-compose.yaml",
+        "patchSetId": 36
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2023-03-24T12:06:46Z",
+      "side": 1,
+      "message": "Will convert the existing DMaaP api into Kafka Producer API to update the predicted result into policy engine. Remove this Ddaap Service.\n\nCan you please confirm on PM DATA TOPICS and CONFIG DATA TOPICS are not impacted no change required.",
+      "parentUuid": "713ee388_24867b0a",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 8
+      },
+      "revId": "f410fcca4768dcbcfd2eee65e9fd695a622e0e0c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c2d86521_a2e491e2",
         "filename": "components/ml-prediction-ms/docker-compose.yaml",
         "patchSetId": 36
