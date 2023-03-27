@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bef3015f_455dd66e",
+        "filename": "components/ml-prediction-ms/config/dmaap/MsgRtrApi.properties",
+        "patchSetId": 36
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2023-03-27T19:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb66b8c3_7f74f19e",
+      "range": {
+        "startLine": 5,
+        "startChar": 16,
+        "endLine": 5,
+        "endChar": 21
+      },
+      "revId": "f410fcca4768dcbcfd2eee65e9fd695a622e0e0c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "052e4709_a0887c3a",
         "filename": "components/ml-prediction-ms/docker-compose.yaml",
         "patchSetId": 36
