@@ -264,6 +264,24 @@
       "revId": "f410fcca4768dcbcfd2eee65e9fd695a622e0e0c",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f436a8ff_83c273eb",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 36
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2023-03-27T19:51:01Z",
+      "side": 1,
+      "message": "Ack- quick prediction test script use config file to get server name",
+      "parentUuid": "0bb27378_11adbd9f",
+      "revId": "f410fcca4768dcbcfd2eee65e9fd695a622e0e0c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
