@@ -168,6 +168,30 @@
     },
     {
       "key": {
+        "uuid": "dd0b204f_c4fa0e94",
+        "filename": "components/ml-prediction-ms/docker-compose.yaml",
+        "patchSetId": 36
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2023-03-28T22:12:19Z",
+      "side": 1,
+      "message": "Thank you. Much appreciated.\nRegarding the relevant topics, this is a question for the topic \"owners\".\nFrom what I can see, in ONAP, there is little or no information regarding the topics being used in the system and what they are being used for/contain.\nFrom what I can see the PERFORMANCE_MEAS topic is published to by dcae-pm-mapper.\n\nNote: If this new mS is to use kafka native, the new OOM helm chart will require the necessary Strimzi Kafka User with the appropriate acls to access the required topics. We can sync up on this when the new chart is being added later.",
+      "parentUuid": "bd1ee47d_655500e6",
+      "range": {
+        "startLine": 47,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 8
+      },
+      "revId": "f410fcca4768dcbcfd2eee65e9fd695a622e0e0c",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c2d86521_a2e491e2",
         "filename": "components/ml-prediction-ms/docker-compose.yaml",
         "patchSetId": 36

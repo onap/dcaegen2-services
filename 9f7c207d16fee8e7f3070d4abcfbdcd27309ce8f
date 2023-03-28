@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c621a39_157f2a2e",
+        "filename": "components/ml-prediction-ms/config/dmaap/MsgRtrApi.properties",
+        "patchSetId": 38
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2023-03-28T22:12:19Z",
+      "side": 1,
+      "message": "Is this file still needed?\nCan we remove all refs to dmaap?",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16905185_067941f0",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 38
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2023-03-28T22:12:19Z",
+      "side": 1,
+      "message": "Ideally we should remove any references to dmaap.",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 168,
+        "endChar": 13
+      },
+      "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edced68b_abb16539",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 38
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2023-03-28T22:12:19Z",
+      "side": 1,
+      "message": "Not sure if this is planned to be run as a standalone mS in ONAP but if so the Producer and Consumer conf will need to be extended to support additional security/authentication params.",
+      "range": {
+        "startLine": 565,
+        "startChar": 12,
+        "endLine": 565,
+        "endChar": 16
+      },
+      "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
