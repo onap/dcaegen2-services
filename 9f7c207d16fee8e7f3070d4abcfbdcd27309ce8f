@@ -140,6 +140,30 @@
       "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "92d323a0_44cf7e33",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 38
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2023-03-29T12:51:59Z",
+      "side": 1,
+      "message": "In ONAP we are using Strimzi kafka with the following security requirements for all clients.\nsasl.mechanism\u003dSCRAM-SHA-512\nsecurity.protocol\u003dSASL_PLAINTEXT\n\nfor java apps, the following\n\nsasl.jaas.config\u003dorg.apache.kafka.common.security.scram.ScramLoginModule required username\u003d\"user\" password\u003d\"pass\";\n\nFor python, not sure.\nSomething along these lines maybe:\n\n \u0027sasl.username\u0027: SASL_USERNAME,\n \u0027sasl.password\u0027: SASL_PASSWORD,",
+      "parentUuid": "e5aa0eea_ceec9e75",
+      "range": {
+        "startLine": 565,
+        "startChar": 12,
+        "endLine": 565,
+        "endChar": 16
+      },
+      "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
