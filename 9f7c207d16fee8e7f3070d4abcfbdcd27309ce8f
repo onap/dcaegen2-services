@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "27e41a64_72dd8f42",
+        "filename": "components/ml-prediction-ms/config/dmaap/MsgRtrApi.properties",
+        "patchSetId": 38
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2023-03-29T12:45:03Z",
+      "side": 1,
+      "message": "File removed",
+      "parentUuid": "6c621a39_157f2a2e",
+      "range": {
+        "startLine": 2,
+        "startChar": 12,
+        "endLine": 2,
+        "endChar": 17
+      },
+      "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16905185_067941f0",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 38
