@@ -117,6 +117,30 @@
       "revId": "a357e343ae3d22cdc5af8dacdf7ed34bf5de5b46",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ede76c27_76a8ae94",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 42
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2023-03-29T20:26:52Z",
+      "side": 1,
+      "message": "To resolve roll backed the change on nexus3.onap.org:10001/onap/integration-python:10.1.0 to forceful use of generic python",
+      "parentUuid": "a8031c18_4c8e0fbe",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "a357e343ae3d22cdc5af8dacdf7ed34bf5de5b46",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
