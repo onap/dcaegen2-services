@@ -188,6 +188,30 @@
       "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "519cc5f3_64edb178",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 38
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2023-03-29T18:14:41Z",
+      "side": 1,
+      "message": "Looks like the kafka broker in docker compose isn\u0027t configured with the correct supported mechanisms",
+      "parentUuid": "decdb77c_3f88fbab",
+      "range": {
+        "startLine": 565,
+        "startChar": 12,
+        "endLine": 565,
+        "endChar": 16
+      },
+      "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }

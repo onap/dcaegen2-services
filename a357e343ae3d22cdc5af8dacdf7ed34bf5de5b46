@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "494a291d_86a72a6f",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 42
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2023-03-29T18:14:41Z",
+      "side": 1,
+      "message": "10.1.0",
+      "range": {
+        "startLine": 21,
+        "startChar": 51,
+        "endLine": 21,
+        "endChar": 56
+      },
+      "revId": "a357e343ae3d22cdc5af8dacdf7ed34bf5de5b46",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e933d43_65e91f62",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 42
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 4405
+      },
+      "writtenOn": "2023-03-29T18:14:41Z",
+      "side": 1,
+      "message": "All of the required packages should be installed from your requirements.txt file\nSee here for example - https://gerrit.onap.org/r/gitweb?p\u003ddcaegen2/services.git;a\u003dblob_plain;f\u003dcomponents/pm-subscription-handler/Dockerfile;hb\u003dc7ea15da1edda4281e6d45e621d12a0d0d892bbe",
+      "range": {
+        "startLine": 37,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "a357e343ae3d22cdc5af8dacdf7ed34bf5de5b46",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
