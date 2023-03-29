@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "8082b4a2_be38cd1e",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 38
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2023-03-29T12:44:31Z",
+      "side": 1,
+      "message": "Resolved",
+      "parentUuid": "16905185_067941f0",
+      "range": {
+        "startLine": 168,
+        "startChar": 8,
+        "endLine": 168,
+        "endChar": 13
+      },
+      "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "edced68b_abb16539",
         "filename": "components/ml-prediction-ms/src/run.py",
         "patchSetId": 38
@@ -68,6 +92,30 @@
       "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5aa0eea_ceec9e75",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 38
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2023-03-29T12:44:31Z",
+      "side": 1,
+      "message": "As per my understanding, It is not planned to run in standalone mode. currently it is interacting with external Kafka consumer and producer related to PERFORMANCE_MEASUREMENTS and Policy Topics. When we try to add any sasl_mechanism we can see error messages at Kafka service. So currently i believe security/ authentication are not implemented at external ends.",
+      "parentUuid": "edced68b_abb16539",
+      "range": {
+        "startLine": 565,
+        "startChar": 12,
+        "endLine": 565,
+        "endChar": 16
+      },
+      "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
