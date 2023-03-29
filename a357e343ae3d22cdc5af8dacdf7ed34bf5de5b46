@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "37bae8a8_3af78298",
+        "filename": "components/ml-prediction-ms/Dockerfile",
+        "patchSetId": 42
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2023-03-29T19:35:41Z",
+      "side": 1,
+      "message": "Issue resolved",
+      "parentUuid": "494a291d_86a72a6f",
+      "range": {
+        "startLine": 21,
+        "startChar": 51,
+        "endLine": 21,
+        "endChar": 56
+      },
+      "revId": "a357e343ae3d22cdc5af8dacdf7ed34bf5de5b46",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e933d43_65e91f62",
         "filename": "components/ml-prediction-ms/Dockerfile",
         "patchSetId": 42
