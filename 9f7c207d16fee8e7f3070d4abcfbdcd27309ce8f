@@ -164,6 +164,30 @@
       "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "decdb77c_3f88fbab",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 38
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2023-03-29T17:24:25Z",
+      "side": 1,
+      "message": "There exist certain issue from python library, \nResults in SCRAM-SHA-512 mechanism handshake failed: Broker: Request not valid in current SASL state: broker\u0027s supported mechanisms\n\nrefered https://github.com/confluentinc/confluent-kafka-python/blob/master/examples/sasl_producer.py\n\nfollowing code used\n-------------------\nSECURITY_PROTOCOL \u003d \"SASL_PLAINTEXT\"\nSASL_MECHANISM \u003d \"SCRAM-SHA-512\"\nSERVERS \u003d \"kafka:9092\"\nSASL_USERNAME \u003d \"admin\"\nSASL_PASSWORD \u003d \"1243\"\n\nconf \u003d {\n\n \u0027bootstrap.servers\u0027: SERVERS,\n \u0027sasl.mechanism\u0027: SASL_MECHANISM,\n \u0027security.protocol\u0027: SECURITY_PROTOCOL,\n \u0027sasl.username\u0027: SASL_USERNAME,\n \u0027sasl.password\u0027: SASL_PASSWORD,\n \u0027group.id\u0027: \"222\",\n \u0027auto.offset.reset\u0027: \u0027smallest\u0027 \n }\nproducer \u003d Producer(conf)\ntestData \u003d \"test\"\nproducer.produce(\u0027PERFORMANCE_MEASUREMENTS\u0027, value\u003dtestData.encode(\u0027utf-8\u0027))\nproducer.poll(1)\n\n\nFollowing are the error logs\n-------------------------------\nkafka               | [2023-03-29 16:10:19,381] INFO [broker-1-to-controller-send-thread]: Recorded new controller, from now on will use broker kafka:9092 (id: 1 rack: null) (kafka.server.BrokerToControllerRequestThread)\nkafka               | [2023-03-29 16:10:24,346] INFO [Controller id\u003d1] Processing automatic preferred replica leader election (kafka.controller.KafkaController)\nkafka               | [2023-03-29 16:10:24,347] TRACE [Controller id\u003d1] Checking need to trigger auto leader balancing (kafka.controller.KafkaController)\nml-prediction-ms    | %4|1680106276.260|CONFWARN|rdkafka#producer-1| [thrd:app]: Configuration property group.id is a consumer property and will be ignored by this producer instance\nml-prediction-ms    | %4|1680106276.260|CONFWARN|rdkafka#producer-1| [thrd:app]: Configuration property auto.offset.reset is a consumer property and will be ignored by this producer instance\nml-prediction-ms    | %3|1680106276.279|FAIL|rdkafka#producer-1| [thrd:sasl_plaintext://kafka:9092/bootstrap]: sasl_plaintext://kafka:9092/bootstrap: SASL SCRAM-SHA-512 mechanism handshake failed: Broker: Request not valid in current SASL state: broker\u0027s supported mechanisms:  (after 0ms in state AUTH_HANDSHAKE)\nml-prediction-ms    | %3|1680106276.286|FAIL|rdkafka#consumer-2| [thrd:sasl_plaintext://kafka:9092/bootstrap]: sasl_plaintext://kafka:9092/bootstrap: SASL SCRAM-SHA-512 mechanism handshake failed: Broker: Request not valid in current SASL state: broker\u0027s supported mechanisms:  (after 1ms in state AUTH_HANDSHAKE)",
+      "parentUuid": "92d323a0_44cf7e33",
+      "range": {
+        "startLine": 565,
+        "startChar": 12,
+        "endLine": 565,
+        "endChar": 16
+      },
+      "revId": "9f7c207d16fee8e7f3070d4abcfbdcd27309ce8f",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
