@@ -1,0 +1,231 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ef4c482_6a88f377",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 45
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "atleast \u003d\u003e at least\nverses \u003d\u003e versus\nSuprevisied \u003d\u003e Supervised",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75ee7fed_12adae3a",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 45
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "once \u003d\u003e Once\ntopics. The \u003d\u003e topics, the",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8c6d1e0_489b14d5",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 45
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "where each \u003d\u003e where each\n15 minutes. We need \u003d\u003e 15 minutes, we need",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a67c132_af110eb9",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 45
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "Make the following lines either a bullet list or a numbered list.",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dee3b1de_e2f39ddc",
+        "filename": "components/ml-prediction-ms/README.md",
+        "patchSetId": 45
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "acuisition \u003d\u003e acquisition\ndesinged \u003d\u003e designed",
+      "range": {
+        "startLine": 95,
+        "startChar": 161,
+        "endLine": 95,
+        "endChar": 171
+      },
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b8496ff_785e1621",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 45
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "we do not need to support Python2 anymore",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09b64495_6fc18553",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 45
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "4 time instant \u003d\u003e 4 time instances",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3843ec7_1e1ac11e",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 45
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "4 time instance \u003d\u003e 4 time instances",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bca19e0_07b4cdfb",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 45
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "doc string?",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00b02f9e_eb98597a",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 45
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "doc string?",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "658749cf_376e7b62",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 45
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "doc string?",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ad3a45c_d5269cca",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 45
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "doc string?",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e04f41a0_b9021aae",
+        "filename": "components/ml-prediction-ms/train/ParseTrain.py",
+        "patchSetId": 45
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-03-30T12:24:01Z",
+      "side": 1,
+      "message": "outpu \u003d\u003e output",
+      "revId": "2572d67519193180c96cc4dc8f6f5db5d0f1e806",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
