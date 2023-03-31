@@ -16,6 +16,24 @@
       "revId": "41837f46497dc672a476a2bb8f884348365f6345",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50fa5e02_8cf303f1",
+        "filename": "components/ml-prediction-ms/src/run.py",
+        "patchSetId": 47
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 8012
+      },
+      "writtenOn": "2023-03-31T07:05:51Z",
+      "side": 1,
+      "message": "Resolved",
+      "parentUuid": "a3cc2069_be9020e5",
+      "revId": "41837f46497dc672a476a2bb8f884348365f6345",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
