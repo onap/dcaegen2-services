@@ -1,0 +1,10 @@
+distribution_type: 'container'
+version: '1.2.0'
+project: 'dcaegen2-services-kpi-computation-ms'
+log_dir: 'dcaegen2-services-kpi-computation-ms-maven-docker-stage-master/795/'
+containers:
+  - name: 'org.onap.dcaegen2.services.components.kpi-ms'
+    version: '1.2.0-20230331T035157Z'
+container_release_tag: '1.2.0'
+ref: 'c7ea15da1edda4281e6d45e621d12a0d0d892bbe'
+git_tag: '1.2.0-kpi-computation-ms'
