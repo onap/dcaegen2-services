@@ -64,7 +64,6 @@ public class CCVPNPmDatastore {
     // Assurance Status of each endpoint
     @Getter
     private final ConcurrentMap<String, Boolean> closedLoopBwAssuranceStatus = new ConcurrentHashMap<>();
-
     /**
      * Given a cllId, return a map between Endpointkey and their corresponding UsedBw Queue.
      * All Endpoints belongs to this same service
