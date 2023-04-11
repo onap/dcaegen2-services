@@ -75,6 +75,17 @@
           "client_id": "sdnr-sliceanalysis-1"
         },
         "aaf_username": null
+      },
+      "CCVPN_CL_DCAE_EVENT": {
+        "aaf_password": null,
+        "type": "message-router",
+        "dmaap_info": {
+          "topic_url": "http://message-router.onap.svc.cluster.local:3904/events/unauthenticated.CCVPN_CL_DCAE_EVENT",
+          "client_role": "sliceanalysis-subscriber",
+          "location": "onap",
+          "client_id": "sdnr-sliceanalysis-1"
+        },
+        "aaf_username": null
       }
     },
     "postgres.password": "postgres",
