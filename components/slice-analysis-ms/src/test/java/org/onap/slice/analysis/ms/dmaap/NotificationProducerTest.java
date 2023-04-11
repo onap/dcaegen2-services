@@ -4,6 +4,7 @@
  *  ================================================================================
  *   Copyright (C) 2020 Wipro Limited.
  *   Copyright (C) 2022 CTC, Inc.
+ *   Copyright (C) 2023 Huawei Technologies Co., Ltd.
  *   ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -61,9 +62,7 @@ public class NotificationProducerTest {
                     .builder().items(expectedItems.map(JsonPrimitive::new))
                     .build();
             Flux<MessageRouterPublishResponse> responses = Flux.just(expectedResponse);
-//            Flux<JsonPrimitive> singleMessage = Flux.just("msg").map(JsonPrimitive::new);
             when(publisher.put(any(), any())).thenReturn(responses);
-
             notificationProducer.sendNotification("msg");
     }
 }
