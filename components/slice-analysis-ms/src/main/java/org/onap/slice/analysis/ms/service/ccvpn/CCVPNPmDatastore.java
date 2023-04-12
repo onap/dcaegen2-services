@@ -21,10 +21,12 @@
  *******************************************************************************/
 package org.onap.slice.analysis.ms.service.ccvpn;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -64,6 +66,37 @@ public class CCVPNPmDatastore {
     // Assurance Status of each endpoint
     @Getter
     private final ConcurrentMap<String, Boolean> closedLoopBwAssuranceStatus = new ConcurrentHashMap<>();
+    @Setter
+    @Getter
+    private final ConcurrentMap<String, Date> bwAssuranceStart = new ConcurrentHashMap<>();
+    @Setter
+    @Getter
+    private final ConcurrentMap<String, Date> bwAssuranceEnd = new ConcurrentHashMap<>();
+    @Setter
+    @Getter
+    private final ConcurrentMap<String, Long> bwAssuranceDuration = new ConcurrentHashMap<>();
+
+    /**
+     * Stop calculating
+     */
+    public void stopBwAssurance(String cllId) {
+        Long duration = bwAssuranceStart.get(cllId).getTime() - bwAssuranceEnd.get(cllId).getTime();
+        Long currDuration = bwAssuranceDuration.get(cllId);
+        bwAssuranceDuration.put(cllId, currDuration + duration);
+        bwAssuranceStart.put(cllId, null);
+        bwAssuranceEnd.put(cllId, null);
+    }
+
+    /**
+     * Stop calculating
+     */
+    public void updateBwAssurance(String cllId) {
+        Long duration = bwAssuranceStart.get(cllId).getTime() - bwAssuranceEnd.get(cllId).getTime();
+        Long currDuration = bwAssuranceDuration.get(cllId);
+        bwAssuranceDuration.put(cllId, currDuration + duration);
+        bwAssuranceStart.put(cllId, null);
+        bwAssuranceEnd.put(cllId, null);
+    }
 
     /**
      * Given a cllId, return a map between Endpointkey and their corresponding UsedBw Queue.
