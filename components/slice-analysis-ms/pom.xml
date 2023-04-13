@@ -7,7 +7,7 @@
  *  Copyright (C) 2020-2022 Wipro Limited.
  *  Copyright (C) 2022 Huawei Canada Limited.
  *  Copyright (C) 2022 CTC, Inc.
- *  Copyright (C) 2022 Huawei Technologies Co., Ltd.
+ *  Copyright (C) 2022-2023 Huawei Technologies Co., Ltd. All rights reserved.
  *  Copyright (C) 2023 Deutsche Telekom AG. All rights reserved.
  *  ================================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +37,7 @@
         </parent>
         <groupId>org.onap.dcaegen2.services.components</groupId>
         <artifactId>slice-analysis-ms</artifactId>
-        <version>1.2.1-SNAPSHOT</version>
+        <version>1.2.2-SNAPSHOT</version>
         <name>dcaegen2-services-slice-analysis-ms</name>
         <description>Network slice PM analyser</description>
         <packaging>jar</packaging>
