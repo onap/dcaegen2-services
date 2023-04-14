@@ -3,7 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
- *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
+ *   Copyright (C) 2022-2023 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -66,36 +66,62 @@ public class CCVPNPmDatastore {
     // Assurance Status of each endpoint
     @Getter
     private final ConcurrentMap<String, Boolean> closedLoopBwAssuranceStatus = new ConcurrentHashMap<>();
+    // Start time for a extra provided bandwidth, which is due to the assurance service
     @Setter
     @Getter
     private final ConcurrentMap<String, Date> bwAssuranceStart = new ConcurrentHashMap<>();
+    // End time for a extra provided bandwidth, which is due to the assurance service
     @Setter
     @Getter
     private final ConcurrentMap<String, Date> bwAssuranceEnd = new ConcurrentHashMap<>();
+    // Duration for the extra provided bandwidth for one service
     @Setter
     @Getter
     private final ConcurrentMap<String, Long> bwAssuranceDuration = new ConcurrentHashMap<>();
 
     /**
-     * Stop calculating
+     * When a extra bw is provided, start calculate the service duration
      */
-    public void stopBwAssurance(String cllId) {
-        Long duration = bwAssuranceStart.get(cllId).getTime() - bwAssuranceEnd.get(cllId).getTime();
-        Long currDuration = bwAssuranceDuration.get(cllId);
-        bwAssuranceDuration.put(cllId, currDuration + duration);
+    public void startBwAssurance(String cllId) {
+        if(bwAssuranceStart.get(cllId) == null) {
+            bwAssuranceStart.put(cllId, new Date());
+        }
+        bwAssuranceEnd.put(cllId, new Date());
+    }
+
+    /**
+     * After a extra bw is provided, if the provided bw go backs to normal, stop calculate the assurance service duration
+     */
+    public void endBwAssurance(String cllId) {
+        Long currduration = bwAssuranceEnd.get(cllId).getTime() - bwAssuranceStart.get(cllId).getTime();
+        Long prevDuration = bwAssuranceDuration.get(cllId);
+        bwAssuranceDuration.put(cllId, prevDuration + currduration);
         bwAssuranceStart.put(cllId, null);
         bwAssuranceEnd.put(cllId, null);
     }
 
     /**
-     * Stop calculating
+     * Update the duration of the on going bw assurance service
      */
-    public void updateBwAssurance(String cllId) {
-        Long duration = bwAssuranceStart.get(cllId).getTime() - bwAssuranceEnd.get(cllId).getTime();
-        Long currDuration = bwAssuranceDuration.get(cllId);
-        bwAssuranceDuration.put(cllId, currDuration + duration);
-        bwAssuranceStart.put(cllId, null);
-        bwAssuranceEnd.put(cllId, null);
+    public void updateOnGoingBwAssurance(String cllId) {
+        bwAssuranceEnd.put(cllId, new Date());
+    }
+
+    /**
+     * Calculate the total duration of the on going bw assurance service
+     */
+    public long totalAssuranceTime(String cllId) {
+        Long currduration = bwAssuranceEnd.get(cllId).getTime() - bwAssuranceStart.get(cllId).getTime();
+        return bwAssuranceDuration.get(cllId) + currduration;
+    }
+
+    /**
+     * Judge whether the assurance time has been reached 2h
+     */
+    public boolean ifFullyAssured(String cllId){
+        Long prevDuration = bwAssuranceDuration.get(cllId);
+        Long currduration = bwAssuranceEnd.get(cllId).getTime() - bwAssuranceStart.get(cllId).getTime();
+        return (prevDuration + currduration)/1000 > 432000 ? true:false;
     }
 
     /**

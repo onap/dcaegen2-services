@@ -92,6 +92,6 @@ public class UUIDmaapClientTest {
         Flux<MessageRouterPublishResponse> responses = Flux.just(expectedResponse);
         when(publisher.put(any(), any())).thenReturn(responses);
 
-        uuiDmaapClientTest.sendNotificationToPolicy("msg");
+        uuiDmaapClientTest.sendNotificationToUUI("msg");
     }
 }

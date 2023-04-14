@@ -3,7 +3,7 @@
  *  slice-analysis-ms
  *  ================================================================================
  *   Copyright (C) 2022 Huawei Canada Limited.
- *   Copyright (C) 2022 Huawei Technologies Co., Ltd.
+ *   Copyright (C) 2022-2023 Huawei Technologies Co., Ltd.
  *  ==============================================================================
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ package org.onap.slice.analysis.ms.service.ccvpn;
 import com.google.gson.JsonObject;
 import org.onap.slice.analysis.ms.models.Configuration;
 import org.onap.slice.analysis.ms.service.PolicyService;
+import org.onap.slice.analysis.ms.service.UUIService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,9 @@ public class FixedUpperBoundStrategy implements EvaluationStrategy{
     @Autowired
     PolicyService policyService;
 
+    @Autowired
+    UUIService uuiService;
+
     @PostConstruct
     public void init() {
         loadConfig();
@@ -108,11 +112,41 @@ public class FixedUpperBoundStrategy implements EvaluationStrategy{
                         .getAverage();
                 int provBw = ccvpnPmDatastore.getProvBwOfSvc(serviceId);
                 int upperBw = ccvpnPmDatastore.getUpperBoundBwOfSvc(serviceId);
+
+                if(avg > ccvpnPmDatastore.getOriginalBw(serviceId)) {
+                    ccvpnPmDatastore.updateOnGoingBwAssurance(serviceId);
+                }
+
+                if(ccvpnPmDatastore.ifFullyAssured(serviceId)) {
+                    // send event not fullfilled (first time)
+                    String assuranceResult = "Failed";
+                    String reason = "CLL "+ serviceId + "has been assured with a higher maximum bandwidth for more than 2h, assurance service has been used up.";
+                    uuiService.sendOnsetMessageToUUI(uuiService.formUUIOnsetMessage(serviceId, assuranceResult, reason));
+                    log.info("Service " + serviceId + " has been assured with a higher maximum bandwidth for more than 2h, assurance service has been used up.");
+                    continue;
+                }
+
                 if (needAdjust(serviceId, avg, provBw, upperBw)) {
                     int newBw = needAdjustTo(serviceId, avg, provBw, upperBw);
                     if(Math.abs(newBw - provBw) >= precision){
-                        log.info("CCVPN Evaluator Output: service {}, need adjustment, putting into candidate list", serviceId);
-                        candidate.put(serviceId, newBw);
+                        if(newBw > 2 * ccvpnPmDatastore.getOriginalBw(serviceId)) {
+                            // assure temporallay bw no more than 2 times
+                            // sent event not fullfilled (exceeds original bw too much)
+                            String assuranceResult = "Failed";
+                            String reason = "CLL "+ serviceId + "has already been assured with a higher maximum bandwidth. Assurance bandwidth will be provided with at most 2 times of origin maximum bandwidth.";
+                            uuiService.sendOnsetMessageToUUI(uuiService.formUUIOnsetMessage(serviceId, assuranceResult, reason));
+                            log.info("Service " + serviceId + " has already been assured with a higher maximum bandwidth. Assurance bandwidth will be provided with at most 2 times of origin maximum bandwidth.");
+                            continue;
+                        } else if(newBw < 1.2 * ccvpnPmDatastore.getOriginalBw(serviceId)) {
+                            ccvpnPmDatastore.endBwAssurance(serviceId);
+                            log.info("CCVPN Evaluator Output: service {}, need adjustment, putting into candidate list", serviceId);
+                            candidate.put(serviceId, newBw);
+                        } else {
+                            ccvpnPmDatastore.startBwAssurance(serviceId);
+                            log.info("CCVPN Evaluator Output: service {}, need adjustment, putting into candidate list", serviceId);
+                            candidate.put(serviceId, newBw);
+                        }
+
                     }
                 }
             }
@@ -130,6 +164,7 @@ public class FixedUpperBoundStrategy implements EvaluationStrategy{
                     log.info("CCVPN Evaluator Output: service {} is not under closed loop assurance", cllId);
                     continue;
                 }
+
                 if (isServiceUnderMaintenance(cllId)) {
                     if (newBw == 0){
                         log.info("CCVPN Evaluator Output: service {}," +
@@ -139,6 +174,11 @@ public class FixedUpperBoundStrategy implements EvaluationStrategy{
                             " need an adjustment, but skipped due to in maintenance state", cllId);
                     }
                     post(new SimpleEvent(SimpleEvent.Type.AAI_BW_REQ, cllId));
+                    // send event fullfilled
+                    String assuranceResult = "Success";
+                    String reason = "CLL "+ cllId + "is under assurance. Maximum bandwidth adjust to " + newBw + ".";
+                    uuiService.sendOnsetMessageToUUI(uuiService.formUUIOnsetMessage(cllId, assuranceResult, reason));
+                    log.info("CLL " + cllId + "is under assurance. Maximum bandwidth adjust to " + newBw + ".");
                     continue;
                 }
                 //not in the mid of adjustment; we are free to adjust.
