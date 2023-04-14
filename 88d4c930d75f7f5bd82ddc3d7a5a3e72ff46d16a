@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27afc2ff_e2fce146",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/UUIService.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-04-14T17:41:36Z",
+      "side": 1,
+      "message": "where\u0027re a unit test for these methods?",
+      "revId": "88d4c930d75f7f5bd82ddc3d7a5a3e72ff46d16a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d417b138_e19426f3",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/CCVPNPmDatastore.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-04-14T17:41:36Z",
+      "side": 1,
+      "message": "where is the unit test for these functions?",
+      "revId": "88d4c930d75f7f5bd82ddc3d7a5a3e72ff46d16a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad123fec_a4d632f7",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/CCVPNPmDatastore.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-04-14T17:41:36Z",
+      "side": 1,
+      "message": "getTime() is milliseconds. After /1000, you get seconds.\n2 hours is 2 hours * 60 minutes per hour * 60 seconds per minute \u003d\u003e 7200 seconds\nSo shouldn\u0027t that 432000 be 7200?\nIt might be better to actually write (2 * 60 * 60) instead of 7200, so we know how the value was generated. \nYou could also remove the \"/1000\" and add \"* 1000\" to the above (2*60*60).",
+      "revId": "88d4c930d75f7f5bd82ddc3d7a5a3e72ff46d16a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
