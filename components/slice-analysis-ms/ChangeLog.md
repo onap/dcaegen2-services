@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+## [1.2.3] - 2023/04/14
+         - [DCAEGEN2-3386](https://jira.onap.org/browse/DCAEGEN2-3386) - Time calculating feature for the bandwidthe assurance service, and onset message for UUI through dmaap.
+
 ## [1.2.2] - 2023/04/11
          - [DCAEGEN2-3386](https://jira.onap.org/browse/DCAEGEN2-3386) - create publisher topics for IBN usecase
 

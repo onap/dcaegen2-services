@@ -44,14 +44,13 @@ public class UUIDmaapClient {
      * Method stub for sending notification to UUI intent analysis server.
      */
     @SuppressWarnings("unchecked")
-    public boolean sendNotificationToPolicy(String msg) {
+    public boolean sendNotificationToUUI(String msg) {
         Map<String, Object> streamsPublishes = configuration.getStreamsPublishes();
         String topicUrl = ((Map<String, String>) ((Map<String, Object>) streamsPublishes.get("CCVPN_CL_DCAE_EVENT"))
             .get("dmaap_info")).get("topic_url");
         try {
             MessageRouterPublisher publisher = DcaeDmaapUtil.buildPublisher();
             MessageRouterPublishRequest request = DcaeDmaapUtil.buildPublisherRequest("CCVPN_CL_DCAE_EVENT", topicUrl);
-
             NotificationProducer notificationProducer = new NotificationProducer(publisher, request);
             notificationProducer.sendNotification(msg);
         } catch (IOException e) {
