@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63e2876a_90728e71",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/CCVPNPmDatastore.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 105
+      },
+      "writtenOn": "2023-04-14T17:52:14Z",
+      "side": 1,
+      "message": "are there unit tests for these new functions?",
+      "revId": "374c4ec7ad6462fe88442f9cdfa8698f30cc58ff",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
