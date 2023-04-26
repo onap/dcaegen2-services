@@ -21,7 +21,7 @@
 
 package org.onap.dcaegen2.kpi.dmaap;
 
-import jakarta.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
