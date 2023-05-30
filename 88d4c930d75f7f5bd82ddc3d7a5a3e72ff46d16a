@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "9560b327_261ecae3",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/CCVPNPmDatastore.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2023-05-30T13:06:48Z",
+      "side": 1,
+      "message": "Will add it.",
+      "parentUuid": "d417b138_e19426f3",
+      "revId": "88d4c930d75f7f5bd82ddc3d7a5a3e72ff46d16a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ad123fec_a4d632f7",
         "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/CCVPNPmDatastore.java",
         "patchSetId": 2
@@ -50,6 +68,24 @@
       "revId": "88d4c930d75f7f5bd82ddc3d7a5a3e72ff46d16a",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8bdc450_fe475047",
+        "filename": "components/slice-analysis-ms/src/main/java/org/onap/slice/analysis/ms/service/ccvpn/CCVPNPmDatastore.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 8040
+      },
+      "writtenOn": "2023-05-30T13:06:48Z",
+      "side": 1,
+      "message": "Yeah, thanks!",
+      "parentUuid": "ad123fec_a4d632f7",
+      "revId": "88d4c930d75f7f5bd82ddc3d7a5a3e72ff46d16a",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
     }
   ]
 }
