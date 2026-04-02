@@ -1,6 +1,7 @@
 # ============LICENSE_START=======================================================
 #  Copyright (c) 2019 QCT. All rights reserved.
 #  Copyright (c) 2022 AT&T. All rights reserved.
+#  Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,13 +18,13 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=========================================================
 
-FROM node:alpine AS builder
+FROM node:14-alpine AS builder
 MAINTAINER Ekko Chang <ekko.chang@qct.io>
 
 LABEL org.label-schema.docker.build="docker build -t dl-admin . --no-cache" \
       org.label-schema.docker.run="docker run -p 80:80 --add-host=dl_feeder:your_feeder_ipaddress dl-admin"
 
-ENV NODE_OPTIONS "--openssl-legacy-provider"
+ENV NODE_OPTIONS ""
 
 WORKDIR /app
 COPY ./src .
@@ -50,4 +51,3 @@ RUN chmod 0744 /tmp/run.sh
 USER datalake
 
 CMD ["sh", "-c", "/tmp/run.sh"]
-
