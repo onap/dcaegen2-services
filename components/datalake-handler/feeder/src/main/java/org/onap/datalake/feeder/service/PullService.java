@@ -3,6 +3,7 @@
 * ONAP : DATALAKE
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -38,7 +39,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Service that pulls messages from DMaaP and save them to Big Data DBs
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -46,96 +47,96 @@ import org.springframework.stereotype.Service;
 @Service
 public class PullService {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private boolean isRunning = false;
-	private ExecutorService executorService;
-	private Set<Puller> pullers;
+    private boolean isRunning = false;
+    private ExecutorService executorService;
+    private Set<Puller> pullers;
 
-	@Autowired
-	private KafkaRepository kafkaRepository;
+    @Autowired
+    private KafkaRepository kafkaRepository;
 
-	@Autowired
-	private TopicConfigPollingService topicConfigPollingService;
+    @Autowired
+    private TopicConfigPollingService topicConfigPollingService;
 
-	@Autowired
-	private ApplicationConfiguration config;
+    @Autowired
+    private ApplicationConfiguration config;
 
-	@Autowired
-	private ApplicationContext context;
+    @Autowired
+    private ApplicationContext context;
 
-	/**
-	 * @return the isRunning
-	 */
-	public boolean isRunning() {
-		return isRunning;
-	}
+    /**
+     * @return the isRunning
+     */
+    public boolean isRunning() {
+        return isRunning;
+    }
 
-	/**
-	 * start pulling.
-	 * 
-	 * @throws IOException
-	 */
-	public synchronized void start() {
-		if (isRunning) {
-			return;
-		}
+    /**
+     * start pulling.
+     *
+     * @throws IOException
+     */
+    public synchronized void start() {
+        if (isRunning) {
+            return;
+        }
 
-		logger.info("PullService starting ...");
+        logger.info("PullService starting ...");
 
-		pullers = new HashSet<>();
-		executorService = Executors.newCachedThreadPool();
+        pullers = new HashSet<>();
+        executorService = Executors.newCachedThreadPool();
 
-		Iterable<Kafka> kafkas = kafkaRepository.findAll();
-		for (Kafka kafka : kafkas) {
-			if (kafka.isEnabled()) {
-				doKafka(kafka);
-			}
-		}
+        Iterable<Kafka> kafkas = kafkaRepository.findAll();
+        for (Kafka kafka : kafkas) {
+            if (kafka.isEnabled()) {
+                doKafka(kafka);
+            }
+        }
 
-		executorService.submit(topicConfigPollingService);
-		
-		isRunning = true;
+        executorService.submit(topicConfigPollingService);
 
-		Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
-	}
+        isRunning = true;
 
-	private void doKafka(Kafka kafka) {
-		Puller puller = context.getBean(Puller.class, kafka);
-		pullers.add(puller);
-		for (int i = 0; i < kafka.getConsumerCount(); i++) {
-			executorService.submit(puller);
-		}
-	}
+        Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
+    }
 
-	/**
-	 * stop pulling
-	 */
-	public synchronized void shutdown() {
-		if (!isRunning) {
-			return;
-		}
+    private void doKafka(Kafka kafka) {
+        Puller puller = context.getBean(Puller.class, kafka);
+        pullers.add(puller);
+        for (int i = 0; i < config.getKafkaConsumerCount(); i++) {
+            executorService.submit(puller);
+        }
+    }
 
-		config.getShutdownLock().writeLock().lock();
-		try {
-			logger.info("stop pulling ...");
-			for (Puller puller : pullers) {
-				puller.shutdown();
-			}
+    /**
+     * stop pulling
+     */
+    public synchronized void shutdown() {
+        if (!isRunning) {
+            return;
+        }
 
-			logger.info("stop executorService ...");
-			executorService.shutdown();
-			executorService.awaitTermination(120L, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
-			logger.error("shutdown(): executor.awaitTermination", e);
-			Thread.currentThread().interrupt();
-		} catch (Exception e) {
-			logger.error("shutdown error.", e);
-		} finally {
-			config.getShutdownLock().writeLock().unlock();
-		}
+        config.getShutdownLock().writeLock().lock();
+        try {
+            logger.info("stop pulling ...");
+            for (Puller puller : pullers) {
+                puller.shutdown();
+            }
 
-		isRunning = false;
-	}
+            logger.info("stop executorService ...");
+            executorService.shutdown();
+            executorService.awaitTermination(120L, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            logger.error("shutdown(): executor.awaitTermination", e);
+            Thread.currentThread().interrupt();
+        } catch (Exception e) {
+            logger.error("shutdown error.", e);
+        } finally {
+            config.getShutdownLock().writeLock().unlock();
+        }
+
+        isRunning = false;
+    }
 
 }

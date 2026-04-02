@@ -3,6 +3,7 @@
 * ONAP : DATALAKE
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -32,7 +33,7 @@ import lombok.Setter;
 /**
  * Mapping from src/main/resources/application.properties to Java configuration
  * object
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -43,34 +44,45 @@ import lombok.Setter;
 @EnableAutoConfiguration
 public class ApplicationConfiguration {
 
-	final ReentrantReadWriteLock shutdownLock = new ReentrantReadWriteLock();
-	
-	//App general
-	private boolean async;
-	private boolean enableSSL;
+    final ReentrantReadWriteLock shutdownLock = new ReentrantReadWriteLock();
 
-	private String timestampLabel;
-	private String rawDataLabel;
+    //App general
+    private boolean async;
+    private boolean enableSSL;
 
-	private String defaultTopicName;
+    private String timestampLabel;
+    private String rawDataLabel;
 
-	private long checkTopicInterval; //in millisecond
+    private String defaultTopicName;
 
-	private String elasticsearchType;
+    //Kafka connection
+    private String kafkaBootstrapServers;
+    private String kafkaGroup;
+    private int kafkaConsumerCount;
+    private int kafkaTimeout;
+    private boolean kafkaSecure;
+    private String kafkaLogin;
+    private String kafkaPass;
+    private String kafkaSecurityProtocol;
+    private String kafkaExcludedTopics;
 
-	//HDFS
-	private int hdfsBufferSize;	
-	private long hdfsFlushInterval;
-	private int hdfsBatchSize;
+    private long checkTopicInterval; //in millisecond
 
-	//Version
-	private String datalakeVersion;
-  
-  	//Kibana
-	private String kibanaDashboardImportApi;
-	private Integer kibanaPort;
+    private String elasticsearchType;
 
-	//Elasticsearch
-	private String esTemplateMappingApi;
-	private Integer esPort;
+    //HDFS
+    private int hdfsBufferSize;
+    private long hdfsFlushInterval;
+    private int hdfsBatchSize;
+
+    //Version
+    private String datalakeVersion;
+
+    //Kibana
+    private String kibanaDashboardImportApi;
+    private Integer kibanaPort;
+
+    //Elasticsearch
+    private String esTemplateMappingApi;
+    private Integer esPort;
 }

@@ -3,6 +3,7 @@
 * ONAP : DATALAKE
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -50,136 +51,136 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
  * Service to store messages to varieties of DBs
- * 
- * comment out YAML support, since AML is for config and don't see this data
- * type in DMaaP. Do we need to support XML?
- * 
+ *
+ * comment out YAML support, since YAML is for config and don't see this data
+ * type in Kafka. Do we need to support XML?
+ *
  * @author Guobiao Mo
  *
  */
 @Service
 public class StoreService {
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private ApplicationConfiguration config;
+    @Autowired
+    private ApplicationConfiguration config;
 
-	@Autowired
-	private DbService dbService;
+    @Autowired
+    private DbService dbService;
 
-	@Autowired
-	private TopicConfigPollingService configPollingService;
+    @Autowired
+    private TopicConfigPollingService configPollingService;
 
-	private ObjectMapper yamlReader;
+    private ObjectMapper yamlReader;
 
-	@PostConstruct
-	private void init() {
-		yamlReader = new ObjectMapper(new YAMLFactory());
-	}
+    @PostConstruct
+    private void init() {
+        yamlReader = new ObjectMapper(new YAMLFactory());
+    }
 
-	public void saveMessages(Kafka kafka, String topicStr, List<Pair<Long, String>> messages) {//pair=ts+text
-		if (CollectionUtils.isEmpty(messages)) {
-			return;
-		}
+    public void saveMessages(Kafka kafka, String topicStr, List<Pair<Long, String>> messages) {//pair=ts+text
+        if (CollectionUtils.isEmpty(messages)) {
+            return;
+        }
 
-		Collection<EffectiveTopic> effectiveTopics = configPollingService.getEffectiveTopic(kafka, topicStr);
-		for (EffectiveTopic effectiveTopic : effectiveTopics) {
-			saveMessagesForTopic(effectiveTopic, messages);
-		}
-	}
+        Collection<EffectiveTopic> effectiveTopics = configPollingService.getEffectiveTopic(kafka, topicStr);
+        for (EffectiveTopic effectiveTopic : effectiveTopics) {
+            saveMessagesForTopic(effectiveTopic, messages);
+        }
+    }
 
-	private void saveMessagesForTopic(EffectiveTopic effectiveTopic, List<Pair<Long, String>> messages) {
-		if (!effectiveTopic.getTopic().isEnabled()) {
-			log.error("we should not come here {}", effectiveTopic);
-			return;
-		}
+    private void saveMessagesForTopic(EffectiveTopic effectiveTopic, List<Pair<Long, String>> messages) {
+        if (!effectiveTopic.getTopic().isEnabled()) {
+            log.error("we should not come here {}", effectiveTopic);
+            return;
+        }
 
-		List<JSONObject> docs = new ArrayList<>();
+        List<JSONObject> docs = new ArrayList<>();
 
-		for (Pair<Long, String> pair : messages) {
-			try {
-				docs.add(messageToJson(effectiveTopic, pair));
-			} catch (Exception e) {
-				//may see org.json.JSONException.
-				log.error("Error when converting this message to JSON: " + pair.getRight(), e);
-			}
-		}
+        for (Pair<Long, String> pair : messages) {
+            try {
+                docs.add(messageToJson(effectiveTopic, pair));
+            } catch (Exception e) {
+                //may see org.json.JSONException.
+                log.error("Error when converting this message to JSON: " + pair.getRight(), e);
+            }
+        }
 
-		Set<Db> dbs = effectiveTopic.getTopic().getDbs();
+        Set<Db> dbs = effectiveTopic.getTopic().getDbs();
 
-		for (Db db : dbs) {
-			if (db.isTool() || db.isDruid() || !db.isEnabled()) {
-				continue;
-			}
-			DbStoreService dbStoreService = dbService.findDbStoreService(db);
-			if (dbStoreService != null) {
-				dbStoreService.saveJsons(effectiveTopic, docs);
-			}
-		}
-	}
+        for (Db db : dbs) {
+            if (db.isTool() || db.isDruid() || !db.isEnabled()) {
+                continue;
+            }
+            DbStoreService dbStoreService = dbService.findDbStoreService(db);
+            if (dbStoreService != null) {
+                dbStoreService.saveJsons(effectiveTopic, docs);
+            }
+        }
+    }
 
-	private JSONObject messageToJson(EffectiveTopic effectiveTopic, Pair<Long, String> pair) throws IOException {
+    private JSONObject messageToJson(EffectiveTopic effectiveTopic, Pair<Long, String> pair) throws IOException {
 
-		long timestamp = pair.getLeft();
-		String text = pair.getRight();
+        long timestamp = pair.getLeft();
+        String text = pair.getRight();
 
-		boolean storeRaw = effectiveTopic.getTopic().isSaveRaw();
+        boolean storeRaw = effectiveTopic.getTopic().isSaveRaw();
 
-		JSONObject json = null;
+        JSONObject json = null;
 
-		DataFormat dataFormat = effectiveTopic.getTopic().getDataFormat2();
+        DataFormat dataFormat = effectiveTopic.getTopic().getDataFormat2();
 
-		switch (dataFormat) {
-		case JSON:
-			json = new JSONObject(text);
-			break;
-		case XML://XML and YAML can be directly inserted into ES, we may not need to convert it to JSON 
-			json = XML.toJSONObject(text);
-			break;
-		case YAML:// Do we need to support YAML?
-			Object obj = yamlReader.readValue(text, Object.class);
-			ObjectMapper jsonWriter = new ObjectMapper();
-			String jsonString = jsonWriter.writeValueAsString(obj);
-			json = new JSONObject(jsonString);
-			break;
-		default:
-			json = new JSONObject();
-			storeRaw = true;
-			break;
-		}
+        switch (dataFormat) {
+        case JSON:
+            json = new JSONObject(text);
+            break;
+        case XML://XML and YAML can be directly inserted into ES, we may not need to convert it to JSON
+            json = XML.toJSONObject(text);
+            break;
+        case YAML:// Do we need to support YAML?
+            Object obj = yamlReader.readValue(text, Object.class);
+            ObjectMapper jsonWriter = new ObjectMapper();
+            String jsonString = jsonWriter.writeValueAsString(obj);
+            json = new JSONObject(jsonString);
+            break;
+        default:
+            json = new JSONObject();
+            storeRaw = true;
+            break;
+        }
 
-		//FIXME for debug, to be remove
-		json.remove("_id");
-		json.remove("_dl_text_");
-		json.remove("_dl_type_");
+        //FIXME for debug, to be remove
+        json.remove("_id");
+        json.remove("_dl_text_");
+        json.remove("_dl_type_");
 
-		json.put(config.getTimestampLabel(), timestamp);
-		if (storeRaw) {
-			json.put(config.getRawDataLabel(), text);
-		}
+        json.put(config.getTimestampLabel(), timestamp);
+        if (storeRaw) {
+            json.put(config.getRawDataLabel(), text);
+        }
 
-		if (StringUtils.isNotBlank(effectiveTopic.getTopic().getAggregateArrayPath())) {
-			String[] paths = effectiveTopic.getTopic().getAggregateArrayPath2();
-			for (String path : paths) {
-				JsonUtil.arrayAggregate(path, json);
-			}
-		}
+        if (StringUtils.isNotBlank(effectiveTopic.getTopic().getAggregateArrayPath())) {
+            String[] paths = effectiveTopic.getTopic().getAggregateArrayPath2();
+            for (String path : paths) {
+                JsonUtil.arrayAggregate(path, json);
+            }
+        }
 
-		if (StringUtils.isNotBlank(effectiveTopic.getTopic().getFlattenArrayPath())) {
-			String[] paths = effectiveTopic.getTopic().getFlattenArrayPath2();
-			for (String path : paths) {
-				JsonUtil.flattenArray(path, json);
-			}
-		}
+        if (StringUtils.isNotBlank(effectiveTopic.getTopic().getFlattenArrayPath())) {
+            String[] paths = effectiveTopic.getTopic().getFlattenArrayPath2();
+            for (String path : paths) {
+                JsonUtil.flattenArray(path, json);
+            }
+        }
 
-		return json;
-	}
+        return json;
+    }
 
-	public void flush() { //force flush all buffer 
-		//		hdfsService.flush();
-	}
+    public void flush() { //force flush all buffer
+        //      hdfsService.flush();
+    }
 
-	public void flushStall() { //flush stall buffer
-		//	hdfsService.flushStall();
-	}
+    public void flushStall() { //flush stall buffer
+        //  hdfsService.flushStall();
+    }
 }

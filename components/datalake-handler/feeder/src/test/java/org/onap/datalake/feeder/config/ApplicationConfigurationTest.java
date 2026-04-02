@@ -3,6 +3,7 @@
  * ONAP : DATALAKE
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +40,7 @@ import static org.junit.Assert.assertTrue;
 //@SpringBootTest
 /*
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = Application.class, 
+@ContextConfiguration(classes = Application.class,
                       initializers = ConfigFileApplicationContextInitializer.class)
 */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -52,7 +53,7 @@ public class ApplicationConfigurationTest {
 
     @Test
     public void readConfig() {
-        
+
         assertNotNull(config.isAsync());
         assertNotNull(config.isEnableSSL());
         assertNotNull(config.getDefaultTopicName());
@@ -60,7 +61,7 @@ public class ApplicationConfigurationTest {
         assertNotNull(config.getTimestampLabel());
         assertNotNull(config.getElasticsearchType());
         assertNotNull(config.getDatalakeVersion());
-        
+
       //HDFS
         assertTrue(config.getHdfsBatchSize()>0);
         assertTrue(config.getHdfsBufferSize()>0);
@@ -70,7 +71,7 @@ public class ApplicationConfigurationTest {
         assertNull(config.getKibanaPort());
         assertNull(config.getEsTemplateMappingApi());
         assertNull(config.getEsPort());
-        assertTrue(config.getCheckTopicInterval()==0);
+        assertTrue(config.getCheckTopicInterval()>0);
     }
 
 }
