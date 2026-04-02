@@ -32,7 +32,7 @@ import lombok.Setter;
 /**
  * Mapping from src/main/resources/application.properties to Java configuration
  * object
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -44,7 +44,7 @@ import lombok.Setter;
 public class ApplicationConfiguration {
 
 	final ReentrantReadWriteLock shutdownLock = new ReentrantReadWriteLock();
-	
+
 	//App general
 	private boolean async;
 	private boolean enableSSL;
@@ -54,18 +54,29 @@ public class ApplicationConfiguration {
 
 	private String defaultTopicName;
 
+	//Kafka connection
+	private String kafkaBootstrapServers;
+	private String kafkaGroup;
+	private int kafkaConsumerCount;
+	private int kafkaTimeout;
+	private boolean kafkaSecure;
+	private String kafkaLogin;
+	private String kafkaPass;
+	private String kafkaSecurityProtocol;
+	private String kafkaExcludedTopics;
+
 	private long checkTopicInterval; //in millisecond
 
 	private String elasticsearchType;
 
 	//HDFS
-	private int hdfsBufferSize;	
+	private int hdfsBufferSize;
 	private long hdfsFlushInterval;
 	private int hdfsBatchSize;
 
 	//Version
 	private String datalakeVersion;
-  
+
   	//Kibana
 	private String kibanaDashboardImportApi;
 	private Integer kibanaPort;

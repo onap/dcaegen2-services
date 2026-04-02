@@ -33,7 +33,7 @@ import org.onap.datalake.feeder.controller.domain.PostReturnBody;
 import org.onap.datalake.feeder.dto.TopicConfig;
 import org.onap.datalake.feeder.repository.KafkaRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
-import org.onap.datalake.feeder.service.DmaapService;
+import org.onap.datalake.feeder.service.KafkaAdminService;
 import org.onap.datalake.feeder.service.TopicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,12 +56,12 @@ import io.swagger.annotations.ApiOperation;
 
 /**
  * This controller manages topic settings.
- * 
- * Topic "_DL_DEFAULT_" acts as the default. 
+ *
+ * Topic "_DL_DEFAULT_" acts as the default.
  * If a topic is not present in database, "_DL_DEFAULT_" is used for it.
  * If a topic is present in database, itself should be complete, and no setting from "_DL_DEFAULT_" is used.
  * Topic "_DL_DEFAULT_" is populated at setup by a DB script.
- * 
+ *
  * @author Guobiao Mo
  * @contributor Kate Hsuan @ QCT
  */
@@ -77,20 +77,20 @@ public class TopicController {
 
 	@Autowired
 	private KafkaRepository kafkaRepository;
-	
+
 	@Autowired
 	private TopicRepository topicRepository;
 
 	@Autowired
 	private TopicService topicService;
 
-	@GetMapping("/dmaap/{kafkaId}")
+	@GetMapping("/kafka/{kafkaId}")
 	@ResponseBody
-	@ApiOperation(value = "List all topic names in DMaaP.")
-	public List<String> listDmaapTopics(@PathVariable("kafkaId") int kafkaId ) {
+	@ApiOperation(value = "List all topic names in Kafka.")
+	public List<String> listKafkaTopics(@PathVariable("kafkaId") int kafkaId ) {
 		Kafka kafka = kafkaRepository.findById(kafkaId).get();
-		DmaapService dmaapService = context.getBean(DmaapService.class, kafka); 
-		return dmaapService.getTopics();
+		KafkaAdminService kafkaAdminService = context.getBean(KafkaAdminService.class, kafka);
+		return kafkaAdminService.getTopics();
 	}
 
 	@GetMapping("/default")
@@ -136,7 +136,7 @@ public class TopicController {
 			Topic wTopic = topicService.fillTopicConfiguration(topicConfig);
 			if(wTopic.getTtl() == 0)
 				wTopic.setTtl(3650);
-			topicRepository.save(wTopic); 
+			topicRepository.save(wTopic);
 			return mkPostReturnBody(200, wTopic);
 		//}
 			//FIXME need to connect to Kafka
@@ -205,12 +205,12 @@ public class TopicController {
 		PostReturnBody<TopicConfig> retBody = new PostReturnBody<>();
         retBody.setStatusCode(statusCode);
         retBody.setReturnBody(topic.getTopicConfig());
-        
+
         return retBody;
 	}
-	
+
 	private void sendError(HttpServletResponse response, int sc, String msg) throws IOException {
 		log.info(msg);
-		response.sendError(sc, msg);		
+		response.sendError(sc, msg);
 	}
 }

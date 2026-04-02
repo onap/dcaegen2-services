@@ -47,7 +47,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
- * Thread that pulls messages from DMaaP and save them to Big Data DBs
+ * Thread that pulls messages from Kafka and saves them to Big Data DBs
  *
  * @author Guobiao Mo
  *
@@ -69,13 +69,13 @@ public class Puller implements Runnable {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	//KafkaConsumer is not thread-safe.
-	private ThreadLocal<KafkaConsumer<String, String>> consumerLocal = new ThreadLocal<>(); //<String, String> is key-value type, in our case key is empty, value is JSON text 
+	private ThreadLocal<KafkaConsumer<String, String>> consumerLocal = new ThreadLocal<>(); //<String, String> is key-value type, in our case key is empty, value is JSON text
 
 	private boolean active = false;
 	private boolean async;
-	
+
 	private Kafka kafka;
-	
+
 	public Puller(Kafka kafka) {
 		this.kafka = kafka;
 	}
@@ -88,8 +88,8 @@ public class Puller implements Runnable {
 	private Properties getConsumerConfig() {
 		Properties consumerConfig = new Properties();
 
-		consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBrokerList());
-		consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, kafka.getGroup());
+		consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, config.getKafkaBootstrapServers());
+		consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, config.getKafkaGroup());
 		consumerConfig.put(ConsumerConfig.CLIENT_ID_CONFIG, String.valueOf(Thread.currentThread().getId()));
 		consumerConfig.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 		consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
@@ -97,10 +97,10 @@ public class Puller implements Runnable {
 		consumerConfig.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "org.apache.kafka.clients.consumer.RoundRobinAssignor");
 		consumerConfig.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 
-		if (kafka.isSecure()) {
-			String jaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=" + kafka.getLogin() + " password=" + kafka.getPass() + " serviceName=kafka;";
+		if (config.isKafkaSecure()) {
+			String jaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"" + config.getKafkaLogin() + "\" password=\"" + config.getKafkaPass() + "\";";
 			consumerConfig.put("sasl.jaas.config", jaas);
-			consumerConfig.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, kafka.getSecurityProtocol());
+			consumerConfig.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, config.getKafkaSecurityProtocol());
 			consumerConfig.put("sasl.mechanism", "PLAIN");
 		}
 		return consumerConfig;
@@ -122,7 +122,7 @@ public class Puller implements Runnable {
 		try {
 			while (active) {
 				if (topicConfigPollingService.isActiveTopicsChanged(kafka)) {
-					Collection<String> topics = topicConfigPollingService.getActiveTopics(kafka); 
+					Collection<String> topics = topicConfigPollingService.getActiveTopics(kafka);
 					log.info("Active Topic list is changed, subscribe to the latest topics: {}", topics);
 					consumer.subscribe(topics, rebalanceListener);
 				}
@@ -142,7 +142,7 @@ public class Puller implements Runnable {
 		KafkaConsumer<String, String> consumer = consumerLocal.get();
 
 		log.debug("pulling...");
-		ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(kafka.getTimeout()));
+		ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(config.getKafkaTimeout()));
 		log.debug("done pulling.");
 
 		if (records != null && records.count() > 0) {

@@ -50,10 +50,10 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 /**
  * Service to store messages to varieties of DBs
- * 
- * comment out YAML support, since AML is for config and don't see this data
- * type in DMaaP. Do we need to support XML?
- * 
+ *
+ * comment out YAML support, since YAML is for config and don't see this data
+ * type in Kafka. Do we need to support XML?
+ *
  * @author Guobiao Mo
  *
  */
@@ -133,7 +133,7 @@ public class StoreService {
 		case JSON:
 			json = new JSONObject(text);
 			break;
-		case XML://XML and YAML can be directly inserted into ES, we may not need to convert it to JSON 
+		case XML://XML and YAML can be directly inserted into ES, we may not need to convert it to JSON
 			json = XML.toJSONObject(text);
 			break;
 		case YAML:// Do we need to support YAML?
@@ -175,7 +175,7 @@ public class StoreService {
 		return json;
 	}
 
-	public void flush() { //force flush all buffer 
+	public void flush() { //force flush all buffer
 		//		hdfsService.flush();
 	}
 
