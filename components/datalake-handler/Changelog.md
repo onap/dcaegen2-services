@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.2.0] - 2026/04/03
+
+- Migrate datalake-feeder from message-router/ZooKeeper to Kafka AdminClient
+- Move Kafka connection config from database to application.properties
+- Rename DmaapService to KafkaAdminService
+- Update SQL init scripts for Strimzi Kafka bootstrap servers
+
 ## [1.1.3] - 2026/04/02
 
 - Modernise base Docker image to eclipse-temurin:11-jre-alpine

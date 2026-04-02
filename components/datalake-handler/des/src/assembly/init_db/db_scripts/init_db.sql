@@ -4,6 +4,7 @@
 * ================================================================================
 * Copyright 2020 China Mobile
 * Copyright (C) 2021 Wipro Limited
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -100,7 +101,7 @@ CREATE TABLE kafka (
   secure boolean DEFAULT FALSE,
   security_protocol varchar(255) DEFAULT NULL,
   timeout_sec int DEFAULT 10,
-  zk varchar(255) NOT NULL,
+  zk varchar(255) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 CREATE SEQUENCE topic_seq;
@@ -160,4 +161,3 @@ CREATE TABLE data_exposure (
 );
 
 CREATE INDEX FKf5ps4jxauwawk4ac86t5t6xev ON data_exposure (db_id);
-
