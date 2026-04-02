@@ -1,4 +1,4 @@
-FROM nexus3.onap.org:10001/onap/integration-java11:8.0.0
+FROM eclipse-temurin:11-jre-alpine
 
 LABEL maintainer="Guobiao Mo <guobiaomo@chinamobile.com>"
 
@@ -22,7 +22,7 @@ COPY --chown=$user:$group src/assembly/init_db/scripts/db_init ./db_init/
 COPY --chown=$user:$group src/assembly/init_db/db_scripts/init_db.sql .
 COPY --chown=$user:$group src/assembly/init_db/db_scripts/init_db_data.sql .
 
-RUN chmod -R 0755 *.sql && \
+RUN chmod 0644 *.sql && \
     chmod u+x run.sh && \
     apk add --no-cache postgresql-client curl
 

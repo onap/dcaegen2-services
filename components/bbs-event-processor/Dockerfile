@@ -1,4 +1,4 @@
-FROM nexus3.onap.org:10001/onap/integration-java11:8.0.0
+FROM eclipse-temurin:11-jre-alpine
 
 ARG PROJECT_BUILD_DIR_NAME
 ARG FINAL_JAR
