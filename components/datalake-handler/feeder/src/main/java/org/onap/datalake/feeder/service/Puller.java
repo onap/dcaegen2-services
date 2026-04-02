@@ -3,6 +3,7 @@
 * ONAP : DATALAKE
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -47,7 +48,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
- * Thread that pulls messages from DMaaP and save them to Big Data DBs
+ * Thread that pulls messages from Kafka and saves them to Big Data DBs
  *
  * @author Guobiao Mo
  *
@@ -57,135 +58,135 @@ import org.springframework.stereotype.Service;
 @Scope("prototype")
 public class Puller implements Runnable {
 
-	@Autowired
-	private StoreService storeService;
+    @Autowired
+    private StoreService storeService;
 
-	@Autowired
-	private TopicConfigPollingService topicConfigPollingService;
+    @Autowired
+    private TopicConfigPollingService topicConfigPollingService;
 
-	@Autowired
-	private ApplicationConfiguration config;
+    @Autowired
+    private ApplicationConfiguration config;
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	//KafkaConsumer is not thread-safe.
-	private ThreadLocal<KafkaConsumer<String, String>> consumerLocal = new ThreadLocal<>(); //<String, String> is key-value type, in our case key is empty, value is JSON text 
+    //KafkaConsumer is not thread-safe.
+    private ThreadLocal<KafkaConsumer<String, String>> consumerLocal = new ThreadLocal<>(); //<String, String> is key-value type, in our case key is empty, value is JSON text
 
-	private boolean active = false;
-	private boolean async;
-	
-	private Kafka kafka;
-	
-	public Puller(Kafka kafka) {
-		this.kafka = kafka;
-	}
+    private boolean active = false;
+    private boolean async;
 
-	@PostConstruct
-	private void init() {
-		async = config.isAsync();
-	}
+    private Kafka kafka;
 
-	private Properties getConsumerConfig() {
-		Properties consumerConfig = new Properties();
+    public Puller(Kafka kafka) {
+        this.kafka = kafka;
+    }
 
-		consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafka.getBrokerList());
-		consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, kafka.getGroup());
-		consumerConfig.put(ConsumerConfig.CLIENT_ID_CONFIG, String.valueOf(Thread.currentThread().getId()));
-		consumerConfig.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-		consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-		consumerConfig.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-		consumerConfig.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "org.apache.kafka.clients.consumer.RoundRobinAssignor");
-		consumerConfig.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
+    @PostConstruct
+    private void init() {
+        async = config.isAsync();
+    }
 
-		if (kafka.isSecure()) {
-			String jaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=" + kafka.getLogin() + " password=" + kafka.getPass() + " serviceName=kafka;";
-			consumerConfig.put("sasl.jaas.config", jaas);
-			consumerConfig.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, kafka.getSecurityProtocol());
-			consumerConfig.put("sasl.mechanism", "PLAIN");
-		}
-		return consumerConfig;
-	}
+    private Properties getConsumerConfig() {
+        Properties consumerConfig = new Properties();
 
-	/**
-	 * start pulling.
-	 */
-	@Override
-	public void run() {
-		active = true;
-		Properties consumerConfig = getConsumerConfig();
-		log.info("Kafka: {}, ConsumerConfig: {}", kafka, consumerConfig);
-		KafkaConsumer<String, String> consumer = new KafkaConsumer<>(consumerConfig);
-		consumerLocal.set(consumer);
+        consumerConfig.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, config.getKafkaBootstrapServers());
+        consumerConfig.put(ConsumerConfig.GROUP_ID_CONFIG, config.getKafkaGroup());
+        consumerConfig.put(ConsumerConfig.CLIENT_ID_CONFIG, String.valueOf(Thread.currentThread().getId()));
+        consumerConfig.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        consumerConfig.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        consumerConfig.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        consumerConfig.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "org.apache.kafka.clients.consumer.RoundRobinAssignor");
+        consumerConfig.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 
-		DummyRebalanceListener rebalanceListener = new DummyRebalanceListener();
+        if (config.isKafkaSecure()) {
+            String jaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"" + config.getKafkaLogin() + "\" password=\"" + config.getKafkaPass() + "\";";
+            consumerConfig.put("sasl.jaas.config", jaas);
+            consumerConfig.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, config.getKafkaSecurityProtocol());
+            consumerConfig.put("sasl.mechanism", "PLAIN");
+        }
+        return consumerConfig;
+    }
 
-		try {
-			while (active) {
-				if (topicConfigPollingService.isActiveTopicsChanged(kafka)) {
-					Collection<String> topics = topicConfigPollingService.getActiveTopics(kafka); 
-					log.info("Active Topic list is changed, subscribe to the latest topics: {}", topics);
-					consumer.subscribe(topics, rebalanceListener);
-				}
+    /**
+     * start pulling.
+     */
+    @Override
+    public void run() {
+        active = true;
+        Properties consumerConfig = getConsumerConfig();
+        log.info("Kafka: {}, ConsumerConfig: {}", kafka, consumerConfig);
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(consumerConfig);
+        consumerLocal.set(consumer);
 
-				pull();
-			}
-			storeService.flush(); // force flush all buffer
-		} catch (Exception e) {
-			log.error("Puller run() exception.", e);
-		} finally {
-			consumer.close();
-			log.info("Puller exited run().");
-		}
-	}
+        DummyRebalanceListener rebalanceListener = new DummyRebalanceListener();
 
-	private void pull() {
-		KafkaConsumer<String, String> consumer = consumerLocal.get();
+        try {
+            while (active) {
+                if (topicConfigPollingService.isActiveTopicsChanged(kafka)) {
+                    Collection<String> topics = topicConfigPollingService.getActiveTopics(kafka);
+                    log.info("Active Topic list is changed, subscribe to the latest topics: {}", topics);
+                    consumer.subscribe(topics, rebalanceListener);
+                }
 
-		log.debug("pulling...");
-		ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(kafka.getTimeout()));
-		log.debug("done pulling.");
+                pull();
+            }
+            storeService.flush(); // force flush all buffer
+        } catch (Exception e) {
+            log.error("Puller run() exception.", e);
+        } finally {
+            consumer.close();
+            log.info("Puller exited run().");
+        }
+    }
 
-		if (records != null && records.count() > 0) {
-			List<Pair<Long, String>> messages = new ArrayList<>(records.count());
-			for (TopicPartition partition : records.partitions()) {
-				messages.clear();
-				List<ConsumerRecord<String, String>> partitionRecords = records.records(partition);
-				for (ConsumerRecord<String, String> record : partitionRecords) {
-					messages.add(Pair.of(record.timestamp(), record.value()));
-					//log.debug("threadid={} topic={}, timestamp={} key={}, offset={}, partition={}, value={}", id, record.topic(), record.timestamp(), record.key(), record.offset(), record.partition(), record.value());
-				}
-				storeService.saveMessages(kafka, partition.topic(), messages);
-				log.info("saved to topic={} count={}", partition.topic(), partitionRecords.size());//TODO we may record this number to DB
+    private void pull() {
+        KafkaConsumer<String, String> consumer = consumerLocal.get();
 
-				if (!async) {//for reliability, sync commit offset to Kafka right after saving the data to data store, this slows down a bit
-					long lastOffset = partitionRecords.get(partitionRecords.size() - 1).offset();
-					consumer.commitSync(Collections.singletonMap(partition, new OffsetAndMetadata(lastOffset + 1)));
-				}
-			}
+        log.debug("pulling...");
+        ConsumerRecords<String, String> records = consumer.poll(Duration.ofSeconds(config.getKafkaTimeout()));
+        log.debug("done pulling.");
 
-			if (async) {//for high Throughput, async commit offset in batch to Kafka
-				consumer.commitAsync();
-			}
-		} else {
-			log.debug("no record from this polling.");
-		}
-		storeService.flushStall();
-	}
+        if (records != null && records.count() > 0) {
+            List<Pair<Long, String>> messages = new ArrayList<>(records.count());
+            for (TopicPartition partition : records.partitions()) {
+                messages.clear();
+                List<ConsumerRecord<String, String>> partitionRecords = records.records(partition);
+                for (ConsumerRecord<String, String> record : partitionRecords) {
+                    messages.add(Pair.of(record.timestamp(), record.value()));
+                    //log.debug("threadid={} topic={}, timestamp={} key={}, offset={}, partition={}, value={}", id, record.topic(), record.timestamp(), record.key(), record.offset(), record.partition(), record.value());
+                }
+                storeService.saveMessages(kafka, partition.topic(), messages);
+                log.info("saved to topic={} count={}", partition.topic(), partitionRecords.size());//TODO we may record this number to DB
 
-	public void shutdown() {
-		active = false;
-	}
+                if (!async) {//for reliability, sync commit offset to Kafka right after saving the data to data store, this slows down a bit
+                    long lastOffset = partitionRecords.get(partitionRecords.size() - 1).offset();
+                    consumer.commitSync(Collections.singletonMap(partition, new OffsetAndMetadata(lastOffset + 1)));
+                }
+            }
 
-	private class DummyRebalanceListener implements ConsumerRebalanceListener {
-		@Override
-		public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
-			log.info("Called onPartitionsRevoked with partitions: {}", partitions);
-		}
+            if (async) {//for high Throughput, async commit offset in batch to Kafka
+                consumer.commitAsync();
+            }
+        } else {
+            log.debug("no record from this polling.");
+        }
+        storeService.flushStall();
+    }
 
-		@Override
-		public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
-			log.info("Called onPartitionsAssigned with partitions: {}", partitions);
-		}
-	}
+    public void shutdown() {
+        active = false;
+    }
+
+    private class DummyRebalanceListener implements ConsumerRebalanceListener {
+        @Override
+        public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
+            log.info("Called onPartitionsRevoked with partitions: {}", partitions);
+        }
+
+        @Override
+        public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
+            log.info("Called onPartitionsAssigned with partitions: {}", partitions);
+        }
+    }
 
 }

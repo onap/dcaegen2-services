@@ -4,6 +4,7 @@
  * ================================================================================
  * Copyright (C) 2018-2019 Huawei. All rights reserved.
  * Copyright (C) 2022 Wipro Limited.
+ * Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +36,7 @@ import org.onap.datalake.feeder.repository.KafkaRepository;
 import org.onap.datalake.feeder.repository.TopicNameRepository;
 import org.onap.datalake.feeder.repository.TopicRepository;
 import org.onap.datalake.feeder.service.DbService;
-import org.onap.datalake.feeder.service.DmaapService;
+import org.onap.datalake.feeder.service.KafkaAdminService;
 import org.onap.datalake.feeder.service.TopicService;
 import org.onap.datalake.feeder.util.TestUtil;
 import org.springframework.context.ApplicationContext;
@@ -88,7 +89,7 @@ public class TopicControllerTest {
     private DbService dbService;
 
     @Mock
-    private DmaapService dmaapService;
+    private KafkaAdminService kafkaAdminService;
 
     @Before
     public void setupTest() throws NoSuchFieldException, IllegalAccessException {
@@ -200,13 +201,13 @@ public class TopicControllerTest {
     }
 
     @Test
-    public void testListDmaapTopics() {
+    public void testListKafkaTopics() {
         Kafka kafka = TestUtil.newKafka("test");
         when(kafkaRepository.findById(1)).thenReturn(Optional.of(kafka));
-        DmaapService dmaapService = mock(DmaapService.class);
-        when(context.getBean(DmaapService.class, kafka)).thenReturn(dmaapService);
-        when(dmaapService.getTopics()).thenReturn(null);
-        assertEquals(null, topicController.listDmaapTopics(1));
+        KafkaAdminService kafkaAdminService = mock(KafkaAdminService.class);
+        when(context.getBean(KafkaAdminService.class, kafka)).thenReturn(kafkaAdminService);
+        when(kafkaAdminService.getTopics()).thenReturn(null);
+        assertEquals(null, topicController.listKafkaTopics(1));
     }
 
 }

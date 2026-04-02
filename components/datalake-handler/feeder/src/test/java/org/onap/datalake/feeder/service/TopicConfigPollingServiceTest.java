@@ -4,6 +4,7 @@
  * ================================================================================
  * Copyright 2019 China Mobile
  * Copyright (C) 2022 Wipro Limited.
+ * Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +50,7 @@ import org.onap.datalake.feeder.util.TestUtil;
 
 /**
  * Test TopicConfigPollingService
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -60,7 +61,7 @@ public class TopicConfigPollingServiceTest {
     private ApplicationConfiguration config;
 
     @Mock
-    private DmaapService dmaapService;
+    private KafkaAdminService kafkaAdminService;
 
     @Mock
     private Map < Integer, Map < String, List < EffectiveTopic >>> effectiveTopicMap = new HashMap < > ();
