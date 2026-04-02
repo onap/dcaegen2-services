@@ -43,7 +43,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Service to check topic changes in Kafka and topic setting updates in DB
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -60,20 +60,20 @@ public class TopicConfigPollingService implements Runnable {
 
 	@Autowired
 	private KafkaRepository kafkaRepository;
-	
+
 	@Autowired
 	private TopicNameService topicNameService;
-	
+
 	//effectiveTopic Map, 1st key is kafkaId, 2nd is topic name, the value is a list of EffectiveTopic.
 	private Map<Integer, Map<String, List<EffectiveTopic>>> effectiveTopicMap = new HashMap<>();
 	//private Map<String, TopicConfig> effectiveTopicConfigMap;
 
 	//monitor Kafka topic list changes, key is kafka id, value is active Topics
 	private Map<Integer, Set<String>> activeTopicMap;
-	
+
 	private ThreadLocal<Map<Integer, Integer>> activeTopicsVersionLocal =   ThreadLocal.withInitial(HashMap::new);//kafkaId:version - local 'old' version
 	private Map<Integer, Integer> currentActiveTopicsVersionMap = new HashMap<>();//kafkaId:version - current/latest version
-	private Map<Integer, DmaapService> dmaapServiceMap = new HashMap<>();//kafka id:DmaapService
+	private Map<Integer, KafkaAdminService> kafkaAdminServiceMap = new HashMap<>();
 
 	private boolean active = false;
 
@@ -91,7 +91,7 @@ public class TopicConfigPollingService implements Runnable {
 		int kafkaId = kafka.getId();
 		int currentActiveTopicsVersion = currentActiveTopicsVersionMap.getOrDefault(kafkaId, 1);//init did one version
 		int localActiveTopicsVersion = activeTopicsVersionLocal.get().getOrDefault(kafkaId, 0);
-		
+
 		boolean changed = currentActiveTopicsVersion > localActiveTopicsVersion;
 		log.debug("kafkaId={} isActiveTopicsChanged={}, currentActiveTopicsVersion={} local={}", kafkaId, changed, currentActiveTopicsVersion, localActiveTopicsVersion);
 		if (changed) {
@@ -108,7 +108,7 @@ public class TopicConfigPollingService implements Runnable {
 
 	//get the EffectiveTopics given kafka and topic name
 	public Collection<EffectiveTopic> getEffectiveTopic(Kafka kafka, String topicStr) {
-		Map<String, List<EffectiveTopic>> effectiveTopicMapKafka= effectiveTopicMap.get(kafka.getId());  
+		Map<String, List<EffectiveTopic>> effectiveTopicMapKafka= effectiveTopicMap.get(kafka.getId());
 		return effectiveTopicMapKafka.get(topicStr);
 	}
 
@@ -124,17 +124,17 @@ public class TopicConfigPollingService implements Runnable {
 					break;
 				}
 			} catch (InterruptedException e) {
-				log.error("Thread.sleep(config.getDmaapCheckNewTopicInterval())", e);
+				log.error("Thread.sleep(config.getCheckTopicInterval())", e);
 				Thread.currentThread().interrupt();
 			}
 
 			try {
 				Map<Integer, Set<String>> newTopicsMap = poll();
-				
+
 				for(Map.Entry<Integer, Set<String>> entry:newTopicsMap.entrySet()) {
 					Integer kafkaId = entry.getKey();
 					Set<String>  newTopics = entry.getValue();
-					
+
 					Set<String> activeTopics = activeTopicMap.get(kafkaId);
 
 					if (!CollectionUtils.isEqualCollection(activeTopics, newTopics)) {
@@ -149,7 +149,7 @@ public class TopicConfigPollingService implements Runnable {
 					}
 				}
 			} catch (IOException e) {
-				log.error("dmaapService.getActiveTopics()", e);
+				log.error("kafkaAdminService.getActiveTopics()", e);
 			}
 		}
 
@@ -162,7 +162,7 @@ public class TopicConfigPollingService implements Runnable {
 
 	private Map<Integer, Set<String>>  poll() throws IOException {
 		Set<String> allTopicNames = new HashSet<>();
-		
+
 		Map<Integer, Set<String>> ret = new HashMap<>();
 		Iterable<Kafka> kafkas = kafkaRepository.findAll();
 		for (Kafka kafka : kafkas) {
@@ -172,25 +172,25 @@ public class TopicConfigPollingService implements Runnable {
 				allTopicNames.addAll(topics);
 			}
 		}
-		
+
 		topicNameService.update(allTopicNames);
-		
+
 		return ret;
 	}
 
 	private Set<String> poll(Kafka kafka) throws IOException {
-		log.debug("poll(), use dmaapService to getActiveTopicConfigs...");
+		log.debug("poll(), use kafkaAdminService to getActiveTopicConfigs...");
 
-		DmaapService dmaapService =  dmaapServiceMap.get(kafka.getId());
-		if(dmaapService==null) {
-			dmaapService = context.getBean(DmaapService.class, kafka);
-			dmaapServiceMap.put(kafka.getId(), dmaapService);
+		KafkaAdminService kafkaAdminService =  kafkaAdminServiceMap.get(kafka.getId());
+		if(kafkaAdminService==null) {
+			kafkaAdminService = context.getBean(KafkaAdminService.class, kafka);
+			kafkaAdminServiceMap.put(kafka.getId(), kafkaAdminService);
 		}
-				
-		Map<String, List<EffectiveTopic>> activeEffectiveTopics = dmaapService.getActiveEffectiveTopic();
+
+		Map<String, List<EffectiveTopic>> activeEffectiveTopics = kafkaAdminService.getActiveEffectiveTopic();
 		effectiveTopicMap.put(kafka.getId(), activeEffectiveTopics);
 
-		Set<String> ret = activeEffectiveTopics.keySet(); 
+		Set<String> ret = activeEffectiveTopics.keySet();
 
 		return ret;
 	}

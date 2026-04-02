@@ -38,7 +38,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Service that pulls messages from DMaaP and save them to Big Data DBs
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -73,7 +73,7 @@ public class PullService {
 
 	/**
 	 * start pulling.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public synchronized void start() {
@@ -94,7 +94,7 @@ public class PullService {
 		}
 
 		executorService.submit(topicConfigPollingService);
-		
+
 		isRunning = true;
 
 		Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
@@ -103,7 +103,7 @@ public class PullService {
 	private void doKafka(Kafka kafka) {
 		Puller puller = context.getBean(Puller.class, kafka);
 		pullers.add(puller);
-		for (int i = 0; i < kafka.getConsumerCount(); i++) {
+		for (int i = 0; i < config.getKafkaConsumerCount(); i++) {
 			executorService.submit(puller);
 		}
 	}

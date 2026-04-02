@@ -49,7 +49,7 @@ import org.onap.datalake.feeder.util.TestUtil;
 
 /**
  * Test TopicConfigPollingService
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -60,7 +60,7 @@ public class TopicConfigPollingServiceTest {
     private ApplicationConfiguration config;
 
     @Mock
-    private DmaapService dmaapService;
+    private KafkaAdminService kafkaAdminService;
 
     @Mock
     private Map < Integer, Map < String, List < EffectiveTopic >>> effectiveTopicMap = new HashMap < > ();

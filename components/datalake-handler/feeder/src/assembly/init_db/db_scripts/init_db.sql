@@ -99,7 +99,7 @@ CREATE TABLE kafka (
   secure boolean DEFAULT FALSE,
   security_protocol varchar(255) DEFAULT NULL,
   timeout_sec int DEFAULT 10,
-  zk varchar(255) NOT NULL,
+  zk varchar(255) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 
@@ -153,4 +153,3 @@ CREATE TABLE map_kafka_topic (
 );
 
 CREATE INDEX FKtdrme4h7rxfh04u2i2wqu23g5 ON map_kafka_topic (kafka_id);
-

@@ -21,21 +21,24 @@
 package org.onap.datalake.feeder.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
+import java.util.Properties;
+import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.Watcher.Event.KeeperState;
-import org.apache.zookeeper.ZooKeeper;
+import org.apache.kafka.clients.CommonClientConfigs;
+import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
 import org.onap.datalake.feeder.domain.EffectiveTopic;
 import org.onap.datalake.feeder.domain.Kafka;
@@ -47,13 +50,13 @@ import org.springframework.stereotype.Service;
 
 /**
  * This service will handle all the communication with Kafka
- * 
+ *
  * @author Guobiao Mo
  *
  */
 @Service
 @Scope("prototype")
-public class DmaapService {
+public class KafkaAdminService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -63,22 +66,22 @@ public class DmaapService {
 	@Autowired
 	private TopicService topicService;
 
-	private ZooKeeper zk;
+	private AdminClient adminClient;
 
 	private Kafka kafka;
 
-	public DmaapService(Kafka kafka) {
+	public KafkaAdminService(Kafka kafka) {
 		this.kafka = kafka;
 	}
 
 	@PreDestroy
-	public void cleanUp() throws InterruptedException {
+	public void cleanUp() {
 		config.getShutdownLock().readLock().lock();
 
 		try {
-			if (zk != null) {
-				log.info("cleanUp() called, close zk.");
-				zk.close();
+			if (adminClient != null) {
+				log.info("cleanUp() called, closing AdminClient.");
+				adminClient.close();
 			}
 		} finally {
 			config.getShutdownLock().readLock().unlock();
@@ -86,60 +89,47 @@ public class DmaapService {
 	}
 
 	@PostConstruct
-	private void init() throws IOException, InterruptedException {
-		zk = connect(kafka.getZooKeeper());
+	private void init() {
+		Properties props = new Properties();
+		props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, config.getKafkaBootstrapServers());
+		props.put(AdminClientConfig.REQUEST_TIMEOUT_MS_CONFIG, config.getKafkaTimeout() * 1000);
+
+		if (config.isKafkaSecure()) {
+			String jaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\""
+					+ config.getKafkaLogin() + "\" password=\"" + config.getKafkaPass() + "\";";
+			props.put("sasl.jaas.config", jaas);
+			props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, config.getKafkaSecurityProtocol());
+			props.put("sasl.mechanism", "PLAIN");
+		}
+
+		adminClient = AdminClient.create(props);
 	}
 
-	//get all topic names from Zookeeper
+	//get all topic names from Kafka using AdminClient
 	//This method returns empty list if nothing found.
 	public List<String> getTopics() {
 		try {
-			if (zk == null) {
-				zk = connect(kafka.getZooKeeper());
+			log.info("Listing topics from Kafka bootstrap servers: {}", config.getKafkaBootstrapServers());
+			Set<String> topics = new HashSet<>(adminClient.listTopics().names().get());
+			String excludedTopics = config.getKafkaExcludedTopics();
+			if (excludedTopics != null && !excludedTopics.isEmpty()) {
+				topics.removeAll(Arrays.asList(excludedTopics.split(",")));
 			}
-			log.info("connecting to ZooKeeper {} for a list of topics.", kafka.getZooKeeper());
-			List<String> topics = zk.getChildren("/brokers/topics", false);
-			String[]  excludes = kafka.getExcludedTopic().split(",");
-			topics.removeAll(Arrays.asList(excludes));
 			log.info("list of topics: {}", topics);
-			return topics;
-		} catch (Exception e) {
-			zk = null;
-			log.error("Can not get topic list from Zookeeper, return empty list.", e);
+			return new ArrayList<>(topics);
+		} catch (InterruptedException e) {
+			Thread.currentThread().interrupt();
+			log.error("Interrupted while listing topics from Kafka.", e);
+			return Collections.emptyList();
+		} catch (ExecutionException e) {
+			log.error("Can not get topic list from Kafka, return empty list.", e);
 			return Collections.emptyList();
 		}
 	}
 
-	private ZooKeeper connect(String host) throws IOException, InterruptedException {
-		log.info("connecting to ZooKeeper {} ...", kafka.getZooKeeper());
-		CountDownLatch connectedSignal = new CountDownLatch(1);
-		ZooKeeper ret = new ZooKeeper(host, 10000, new Watcher() {
-			public void process(WatchedEvent we) {
-				if (we.getState() == KeeperState.SyncConnected) {
-					connectedSignal.countDown();
-				}
-			}
-		});
-
-		connectedSignal.await();
-		return ret;
-	}
-
-	/*
-		public List<String> getActiveTopics() throws IOException {
-			log.debug("entering getActiveTopics()...");
-	
-			List<TopicConfig> configList = getActiveTopicConfigs();
-	
-			List<String> ret = new ArrayList<>(configList.size());
-			configList.stream().forEach(topicConfig -> ret.add(topicConfig.getName()));
-	
-			return ret;
-		}
-	*/
 	public Map<String, List<EffectiveTopic>> getActiveEffectiveTopic() throws IOException {
 		log.debug("entering getActiveTopicConfigs()...");
-		List<String> allTopics = getTopics(); //topics in Kafka cluster TODO update table topic_name with new topics
+		List<String> allTopics = getTopics();
 
 		Map<String, List<EffectiveTopic>> ret = new HashMap<>();
 		for (String topicStr : allTopics) {
@@ -150,7 +140,7 @@ public class DmaapService {
 				log.debug("add effectiveTopics  {}:{}.", topicStr, effectiveTopics);
 				ret.put(topicStr , effectiveTopics);
 			}
-			
+
 		}
 		return ret;
 	}
