@@ -4,6 +4,7 @@
 * ================================================================================
 * Copyright 2019 China Mobile
 * Copyright (C) 2021 Wipro Limited
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -39,14 +40,14 @@ INSERT INTO kafka(
   ,3   -- consumer_count - IN int(11)
   ,true   -- enabled - IN bit(1)
   ,'dlgroup'  -- group - IN varchar(255)
-  ,'message-router-kafka:9092'  -- host_port - IN varchar(255)
+  ,'onap-strimzi-kafka-bootstrap:9092'  -- host_port - IN varchar(255)
   ,''  -- included_topic - IN varchar(255)
   ,'admin'  -- login - IN varchar(255)
   ,'admin_secret'  -- pass - IN varchar(255)
   ,false   -- secure - IN bit(1)
   ,'SASL_PLAINTEXT'  -- security_protocol - IN varchar(255)
   ,10   -- timeout_sec - IN int(11)
-  ,'message-router-zookeeper:2181'  -- zk - IN varchar(255)
+  ,''  -- zk - IN varchar(255)
 );
 
 insert into db_type (id, name, tool) values ('CB', 'Couchbase', false);
