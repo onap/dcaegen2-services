@@ -1,5 +1,6 @@
 # ============LICENSE_START===================================================
 #  Copyright (C) 2021 Wipro Limited
+#  Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,14 +17,14 @@
 # SPDX-License-Identifier: Apache-2.0
 # ============LICENSE_END=====================================================
 
-FROM nexus3.onap.org:10001/onap/integration-java11:10.0.0
-ADD /bin/${JAR_FILE} /bin/
-ADD /bin/entry.sh /bin/
+FROM eclipse-temurin:11-jre-alpine
+ARG JAR_FILE
 USER root
-RUN adduser sliceanalysis --disabled-password sliceanalysis
-RUN mv /bin/*.jar /bin/application.jar
-RUN chmod -R 777 /bin
-RUN chmod +x /bin/entry.sh
+COPY /bin/${JAR_FILE} /bin/application.jar
+COPY /bin/entry.sh /bin/entry.sh
+RUN adduser sliceanalysis --disabled-password sliceanalysis && \
+    chmod 644 /bin/application.jar && \
+    chmod 755 /bin/entry.sh
 USER sliceanalysis
 EXPOSE 8080
-ENTRYPOINT /bin/entry.sh
+ENTRYPOINT ["/bin/entry.sh"]
