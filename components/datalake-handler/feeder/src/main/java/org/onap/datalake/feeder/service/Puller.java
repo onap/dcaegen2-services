@@ -99,10 +99,22 @@ public class Puller implements Runnable {
         consumerConfig.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
 
         if (config.isKafkaSecure()) {
-            String jaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"" + config.getKafkaLogin() + "\" password=\"" + config.getKafkaPass() + "\";";
+            String jaasConfig = System.getenv("JAAS_CONFIG");
+            String jaas;
+            String mechanism;
+            if (jaasConfig != null && !jaasConfig.isEmpty()) {
+                jaas = jaasConfig;
+                mechanism = config.getKafkaSaslMechanism() != null ? config.getKafkaSaslMechanism() : "SCRAM-SHA-512";
+            } else {
+                mechanism = config.getKafkaSaslMechanism() != null ? config.getKafkaSaslMechanism() : "PLAIN";
+                String loginModule = "SCRAM-SHA-512".equals(mechanism)
+                        ? "org.apache.kafka.common.security.scram.ScramLoginModule"
+                        : "org.apache.kafka.common.security.plain.PlainLoginModule";
+                jaas = loginModule + " required username=\"" + config.getKafkaLogin() + "\" password=\"" + config.getKafkaPass() + "\";"; 
+            }
             consumerConfig.put("sasl.jaas.config", jaas);
             consumerConfig.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, config.getKafkaSecurityProtocol());
-            consumerConfig.put("sasl.mechanism", "PLAIN");
+            consumerConfig.put("sasl.mechanism", mechanism);
         }
         return consumerConfig;
     }

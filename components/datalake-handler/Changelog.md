@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [DCAEGEN2-3433] Move Kafka connection config from database to application.properties
 - [DCAEGEN2-3433] Rename DmaapService to KafkaAdminService
 - [DCAEGEN2-3433] Update SQL init scripts for Strimzi Kafka bootstrap servers
+- [DCAEGEN2-3439] Fix kafka auth regression in feeder: make SASL mechanism and JAAS config configurable
 
 ## [1.1.3] - 2026/04/02
 

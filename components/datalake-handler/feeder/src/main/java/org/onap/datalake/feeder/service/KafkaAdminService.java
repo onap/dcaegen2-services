@@ -96,11 +96,23 @@ public class KafkaAdminService {
         props.put(AdminClientConfig.REQUEST_TIMEOUT_MS_CONFIG, config.getKafkaTimeout() * 1000);
 
         if (config.isKafkaSecure()) {
-            String jaas = "org.apache.kafka.common.security.plain.PlainLoginModule required username=\""
-                    + config.getKafkaLogin() + "\" password=\"" + config.getKafkaPass() + "\";";
+            String jaasConfig = System.getenv("JAAS_CONFIG");
+            String jaas;
+            String mechanism;
+            if (jaasConfig != null && !jaasConfig.isEmpty()) {
+                jaas = jaasConfig;
+                mechanism = config.getKafkaSaslMechanism() != null ? config.getKafkaSaslMechanism() : "SCRAM-SHA-512";
+            } else {
+                mechanism = config.getKafkaSaslMechanism() != null ? config.getKafkaSaslMechanism() : "PLAIN";
+                String loginModule = "SCRAM-SHA-512".equals(mechanism)
+                        ? "org.apache.kafka.common.security.scram.ScramLoginModule"
+                        : "org.apache.kafka.common.security.plain.PlainLoginModule";
+                jaas = loginModule + " required username=\""
+                        + config.getKafkaLogin() + "\" password=\"" + config.getKafkaPass() + "\";"; 
+            }
             props.put("sasl.jaas.config", jaas);
             props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, config.getKafkaSecurityProtocol());
-            props.put("sasl.mechanism", "PLAIN");
+            props.put("sasl.mechanism", mechanism);
         }
 
         adminClient = AdminClient.create(props);

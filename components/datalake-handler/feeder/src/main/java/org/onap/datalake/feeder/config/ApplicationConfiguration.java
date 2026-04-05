@@ -64,6 +64,7 @@ public class ApplicationConfiguration {
     private String kafkaLogin;
     private String kafkaPass;
     private String kafkaSecurityProtocol;
+    private String kafkaSaslMechanism;
     private String kafkaExcludedTopics;
 
     private long checkTopicInterval; //in millisecond
