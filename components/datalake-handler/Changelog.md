@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [DCAEGEN2-3433] Rename DmaapService to KafkaAdminService
 - [DCAEGEN2-3433] Update SQL init scripts for Strimzi Kafka bootstrap servers
 - [DCAEGEN2-3439] Fix kafka auth regression in feeder: make SASL mechanism and JAAS config configurable
+- [DCAEGEN2-3438] Upgrade feeder to spring-boot 2.7; make JVM MaxRAMPercentage configurable in Dockerfile (default 75%)
 
 ## [1.1.3] - 2026/04/02
 
