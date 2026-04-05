@@ -13,9 +13,9 @@ cmd=`find . -name "*.jar" | grep -E '.*(feeder)-([0-9]+\.[0-9]+\.[0-9]+)(-SNAPSH
 cmd1=`find . -name "*.jar" | grep -E '.*(feeder)-([0-9]+\.[0-9]+\.[0-9]+)(-exec.jar)$'`
 
 if [ -n "$cmd" ]; then
-    java -jar $cmd
+    java -XX:MaxRAMPercentage=${MAX_RAM_PERCENTAGE:-75} -jar $cmd
 elif [ -n "$cmd1" ]; then
-    java -jar $cmd1
+    java -XX:MaxRAMPercentage=${MAX_RAM_PERCENTAGE:-75} -jar $cmd1
 else
     echo "STRING is empty"
     sleep 10000

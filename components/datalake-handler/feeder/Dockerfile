@@ -22,6 +22,9 @@ LABEL maintainer="Guobiao Mo <guobiaomo@chinamobile.com>"
 ARG user=datalake
 ARG group=datalake
 
+ARG MAX_RAM_PERCENTAGE=75
+ENV MAX_RAM_PERCENTAGE=${MAX_RAM_PERCENTAGE}
+
 EXPOSE 1680
 
 USER root
