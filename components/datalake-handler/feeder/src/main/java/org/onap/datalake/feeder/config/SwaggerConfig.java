@@ -3,6 +3,7 @@
 * ONAP : DATALAKE
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -22,39 +23,41 @@ package org.onap.datalake.feeder.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import java.util.function.Predicate;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * For Swagger integration
- * 
+ *
  * @author Guobiao Mo
  *
  */
 
 @Configuration
-@EnableSwagger2
+@EnableOpenApi
 public class SwaggerConfig {
-	@Bean
-	public Docket produceApi() {
-		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("org.onap.datalake.feeder")).paths(paths()).build();
-	}
+    @Bean
+    public Docket produceApi() {
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("org.onap.datalake.feeder")).paths(paths()).build();
+    }
 
-	// Describe your apis
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("DataLake Rest APIs").description("This page lists all the rest apis for DataLake.").version("1.0.0-SNAPSHOT").build();
-	}
+    // Describe your apis
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder().title("DataLake Rest APIs").description("This page lists all the rest apis for DataLake.").version("1.0.0-SNAPSHOT").build();
+    }
 
-	// Only select apis that matches the given Predicates.
-	private Predicate<String> paths() {
-		// Match all paths except /error
-		return Predicates.or(PathSelectors.regex("/dbs.*"), PathSelectors.regex("/topics.*"), PathSelectors.regex("/feeder.*"), PathSelectors.regex("/kafkas.*"));
-	}
+    // Only select apis that matches the given Predicates.
+    private Predicate<String> paths() {
+        // Match all paths except /error
+        return PathSelectors.regex("/dbs.*")
+                .or(PathSelectors.regex("/topics.*"))
+                .or(PathSelectors.regex("/feeder.*"))
+                .or(PathSelectors.regex("/kafkas.*"));
+    }
 }
