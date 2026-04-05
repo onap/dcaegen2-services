@@ -116,9 +116,7 @@ public class MongodbService implements DbStoreService {
 		try {
 			if (StringUtils.isNoneBlank(userName) && StringUtils.isNoneBlank(password)) {
 				credential = MongoCredential.createCredential(userName, databaseName, password.toCharArray());
-				List<MongoCredential> credentialList = new ArrayList<>();
-				credentialList.add(credential);
-				mongoClient = new MongoClient(addrs, credentialList, options);
+				mongoClient = new MongoClient(addrs, credential, options);
 			} else {
 				mongoClient = new MongoClient(addrs, options);
 			}

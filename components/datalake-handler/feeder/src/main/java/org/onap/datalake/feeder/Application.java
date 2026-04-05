@@ -30,7 +30,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * Entry point of the DataLake feeder application
@@ -40,7 +40,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 
 @SpringBootApplication
-@EnableSwagger2
+@EnableOpenApi
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

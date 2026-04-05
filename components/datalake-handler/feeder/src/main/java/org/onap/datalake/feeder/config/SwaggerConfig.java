@@ -22,15 +22,14 @@ package org.onap.datalake.feeder.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
+import java.util.function.Predicate;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
  * For Swagger integration
@@ -40,7 +39,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 
 @Configuration
-@EnableSwagger2
+@EnableOpenApi
 public class SwaggerConfig {
 	@Bean
 	public Docket produceApi() {
@@ -55,6 +54,9 @@ public class SwaggerConfig {
 	// Only select apis that matches the given Predicates.
 	private Predicate<String> paths() {
 		// Match all paths except /error
-		return Predicates.or(PathSelectors.regex("/dbs.*"), PathSelectors.regex("/topics.*"), PathSelectors.regex("/feeder.*"), PathSelectors.regex("/kafkas.*"));
+		return PathSelectors.regex("/dbs.*")
+				.or(PathSelectors.regex("/topics.*"))
+				.or(PathSelectors.regex("/feeder.*"))
+				.or(PathSelectors.regex("/kafkas.*"));
 	}
 }

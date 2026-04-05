@@ -42,7 +42,7 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.xcontent.XContentType;
 import org.elasticsearch.rest.RestStatus;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
@@ -57,8 +57,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
- * Elasticsearch Service for table creation, data submission, as well as data pre-processing. 
- * 
+ * Elasticsearch Service for table creation, data submission, as well as data pre-processing.
+ *
  * @author Guobiao Mo
  *
  */
@@ -67,7 +67,7 @@ import org.springframework.stereotype.Service;
 public class ElasticsearchService implements DbStoreService {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
 	private Db elasticsearch;
 
 	@Autowired
@@ -75,11 +75,11 @@ public class ElasticsearchService implements DbStoreService {
 
 	private RestHighLevelClient client;//thread safe
 	ActionListener<BulkResponse> listener;
-	
+
 	public ElasticsearchService(Db db) {
 		elasticsearch = db;
 	}
-	
+
 	//ES Encrypted communication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_encrypted_communication.html#_encrypted_communication
 	//Basic authentication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_basic_authentication.html
 	@PostConstruct
@@ -124,21 +124,25 @@ public class ElasticsearchService implements DbStoreService {
 	public void ensureTableExist(String topic) throws IOException {
 		String topicLower = topic.toLowerCase();
 
-		GetIndexRequest request = new GetIndexRequest(topicLower);
-
-		boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);
-		if (!exists) {
-			//TODO submit mapping template
-			CreateIndexRequest createIndexRequest = new CreateIndexRequest(topicLower);
-			CreateIndexResponse createIndexResponse = client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
-			log.info("{} : created {}", createIndexResponse.index(), createIndexResponse.isAcknowledged());
+		try {
+			GetIndexRequest request = new GetIndexRequest(topicLower);
+			boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);
+			if (!exists) {
+				CreateIndexRequest createIndexRequest = new CreateIndexRequest(topicLower);
+				CreateIndexResponse createIndexResponse = client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
+				log.info("{} : created {}", createIndexResponse.index(), createIndexResponse.isAcknowledged());
+			}
+		} catch (IOException e) {
+			throw e;
+		} catch (ElasticsearchException e) {
+			throw new IOException("Elasticsearch error: " + e.getMessage(), e);
 		}
 	}
 
 	//TTL is not supported in Elasticsearch 5.0 and later, what can we do? FIXME
 	@Override
 	public void saveJsons(EffectiveTopic effectiveTopic, List<JSONObject> jsons) {
-		
+
 		BulkRequest request = new BulkRequest();
 
 		for (JSONObject json : jsons) {
@@ -147,10 +151,10 @@ public class ElasticsearchService implements DbStoreService {
 				if (found) {
 					continue;
 				}
-			}			
-			
+			}
+
 			String id = effectiveTopic.getTopic().getMessageId(json); //id can be null
-			
+
  			request.add(new IndexRequest(effectiveTopic.getName().toLowerCase(), config.getElasticsearchType(), id).source(json.toString(), XContentType.JSON));
 		}
 
@@ -164,13 +168,13 @@ public class ElasticsearchService implements DbStoreService {
 				if(bulkResponse.hasFailures()) {
 					log.debug(bulkResponse.buildFailureMessage());
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				log.error(effectiveTopic.getName(), e);
 			}
 		}
-		
+
 	}
- 	
+
 	/**
 	 *
 	 * @param topic
