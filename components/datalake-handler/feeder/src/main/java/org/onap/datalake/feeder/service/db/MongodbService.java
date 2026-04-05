@@ -3,6 +3,7 @@
 * ONAP : DATALAKE
 * ================================================================================
 * Copyright 2018 China Mobile
+* Copyright 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -56,7 +57,7 @@ import com.mongodb.client.model.InsertManyOptions;
 
 /**
  * Service for using MongoDB
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -64,119 +65,117 @@ import com.mongodb.client.model.InsertManyOptions;
 @Scope("prototype")
 public class MongodbService implements DbStoreService {
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
-	private Db mongodb;
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private ApplicationConfiguration config;
-	private boolean dbReady = false;
+    private Db mongodb;
 
-	private MongoDatabase database;
-	private MongoClient mongoClient;
-	//MongoCollection is ThreadSafe
-	private Map<String, MongoCollection<Document>> mongoCollectionMap = new HashMap<>();
-	private InsertManyOptions insertManyOptions;
+    @Autowired
+    private ApplicationConfiguration config;
+    private boolean dbReady = false;
 
-	public MongodbService(Db db) {
-		mongodb = db;
-	}
-	
-	@PostConstruct
-	@Override
-	public void init() {
-		String host = mongodb.getHost();
+    private MongoDatabase database;
+    private MongoClient mongoClient;
+    //MongoCollection is ThreadSafe
+    private Map<String, MongoCollection<Document>> mongoCollectionMap = new HashMap<>();
+    private InsertManyOptions insertManyOptions;
 
-		Integer port = mongodb.getPort();
-		if (port == null || port == 0) {
-			port = 27017; //MongoDB default
-		}
+    public MongodbService(Db db) {
+        mongodb = db;
+    }
 
-		String databaseName = mongodb.getDatabase();
-		String userName = mongodb.getLogin();
-		String password = mongodb.getPass();
+    @PostConstruct
+    @Override
+    public void init() {
+        String host = mongodb.getHost();
 
-		MongoCredential credential = null;
-		if (StringUtils.isNoneBlank(userName) && StringUtils.isNoneBlank(password)) {
-			credential = MongoCredential.createCredential(userName, databaseName, password.toCharArray());
-		}
+        Integer port = mongodb.getPort();
+        if (port == null || port == 0) {
+            port = 27017; //MongoDB default
+        }
 
-		Builder builder = MongoClientOptions.builder();
-		builder.serverSelectionTimeout(30000);//server selection timeout, in milliseconds
+        String databaseName = mongodb.getDatabase();
+        String userName = mongodb.getLogin();
+        String password = mongodb.getPass();
 
-		//http://mongodb.github.io/mongo-java-driver/3.0/driver/reference/connecting/ssl/
-		if (config.isEnableSSL()) {
-			builder.sslEnabled(Boolean.TRUE.equals(mongodb.isEncrypt()));// getEncrypt() can be null
-		}
-		MongoClientOptions options = builder.build();
-		List<ServerAddress> addrs = new ArrayList<>();
+        MongoCredential credential = null;
+        if (StringUtils.isNoneBlank(userName) && StringUtils.isNoneBlank(password)) {
+            credential = MongoCredential.createCredential(userName, databaseName, password.toCharArray());
+        }
 
-		addrs.add(new ServerAddress(host, port)); // FIXME should be a list of address
+        Builder builder = MongoClientOptions.builder();
+        builder.serverSelectionTimeout(30000);//server selection timeout, in milliseconds
 
-		try {
-			if (StringUtils.isNoneBlank(userName) && StringUtils.isNoneBlank(password)) {
-				credential = MongoCredential.createCredential(userName, databaseName, password.toCharArray());
-				List<MongoCredential> credentialList = new ArrayList<>();
-				credentialList.add(credential);
-				mongoClient = new MongoClient(addrs, credentialList, options);
-			} else {
-				mongoClient = new MongoClient(addrs, options);
-			}
-		} catch (Exception ex) {
-			dbReady = false;
-			log.error("Fail to initiate MongoDB" + mongodb.getHost());
-			return;
-		}
-		database = mongoClient.getDatabase(mongodb.getDatabase());
+        //http://mongodb.github.io/mongo-java-driver/3.0/driver/reference/connecting/ssl/
+        if (config.isEnableSSL()) {
+            builder.sslEnabled(Boolean.TRUE.equals(mongodb.isEncrypt()));// getEncrypt() can be null
+        }
+        MongoClientOptions options = builder.build();
+        List<ServerAddress> addrs = new ArrayList<>();
 
-		insertManyOptions = new InsertManyOptions();
-		insertManyOptions.ordered(false);
+        addrs.add(new ServerAddress(host, port)); // FIXME should be a list of address
 
-		dbReady = true;
-	}
+        try {
+            if (StringUtils.isNoneBlank(userName) && StringUtils.isNoneBlank(password)) {
+                credential = MongoCredential.createCredential(userName, databaseName, password.toCharArray());
+                mongoClient = new MongoClient(addrs, credential, options);
+            } else {
+                mongoClient = new MongoClient(addrs, options);
+            }
+        } catch (Exception ex) {
+            dbReady = false;
+            log.error("Fail to initiate MongoDB" + mongodb.getHost());
+            return;
+        }
+        database = mongoClient.getDatabase(mongodb.getDatabase());
 
-	@PreDestroy
-	public void cleanUp() {
-		config.getShutdownLock().readLock().lock();
+        insertManyOptions = new InsertManyOptions();
+        insertManyOptions.ordered(false);
 
-		try {
-			log.info("mongoClient.close() at cleanUp.");
-			mongoClient.close();
-		} finally {
-			config.getShutdownLock().readLock().unlock();
-		}
-	}
+        dbReady = true;
+    }
 
-	public void saveJsons(EffectiveTopic effectiveTopic, List<JSONObject> jsons) {
-		if (!dbReady)//TOD throw exception
-			return;
-		List<Document> documents = new ArrayList<>(jsons.size());
-		for (JSONObject json : jsons) {
-			//convert org.json JSONObject to MongoDB Document
-			Document doc = Document.parse(json.toString());
+    @PreDestroy
+    public void cleanUp() {
+        config.getShutdownLock().readLock().lock();
 
-			String id = effectiveTopic.getTopic().getMessageId(json); //id can be null
-			if (id != null) {
-				doc.put("_id", id);
-			}
-			documents.add(doc);
-		}
+        try {
+            log.info("mongoClient.close() at cleanUp.");
+            mongoClient.close();
+        } finally {
+            config.getShutdownLock().readLock().unlock();
+        }
+    }
 
-		String collectionName = effectiveTopic.getName().replaceAll("[^a-zA-Z0-9]", "").toLowerCase();//remove - _ .
-		MongoCollection<Document> collection = mongoCollectionMap.computeIfAbsent(collectionName, k -> database.getCollection(k));
+    public void saveJsons(EffectiveTopic effectiveTopic, List<JSONObject> jsons) {
+        if (!dbReady)//TOD throw exception
+            return;
+        List<Document> documents = new ArrayList<>(jsons.size());
+        for (JSONObject json : jsons) {
+            //convert org.json JSONObject to MongoDB Document
+            Document doc = Document.parse(json.toString());
 
-		try {
-			collection.insertMany(documents, insertManyOptions);
-		} catch (MongoBulkWriteException e) {
-			List<BulkWriteError> bulkWriteErrors = e.getWriteErrors();
-			for (BulkWriteError bulkWriteError : bulkWriteErrors) {
-				log.error("Failed record: {}", bulkWriteError);
-			}
-		} catch (MongoTimeoutException e) {
-			log.error("saveJsons()", e);			
-		}
+            String id = effectiveTopic.getTopic().getMessageId(json); //id can be null
+            if (id != null) {
+                doc.put("_id", id);
+            }
+            documents.add(doc);
+        }
 
-		log.debug("saved text to effectiveTopic = {}, batch count = {} ", effectiveTopic, jsons.size());
-	}
+        String collectionName = effectiveTopic.getName().replaceAll("[^a-zA-Z0-9]", "").toLowerCase();//remove - _ .
+        MongoCollection<Document> collection = mongoCollectionMap.computeIfAbsent(collectionName, k -> database.getCollection(k));
+
+        try {
+            collection.insertMany(documents, insertManyOptions);
+        } catch (MongoBulkWriteException e) {
+            List<BulkWriteError> bulkWriteErrors = e.getWriteErrors();
+            for (BulkWriteError bulkWriteError : bulkWriteErrors) {
+                log.error("Failed record: {}", bulkWriteError);
+            }
+        } catch (MongoTimeoutException e) {
+            log.error("saveJsons()", e);
+        }
+
+        log.debug("saved text to effectiveTopic = {}, batch count = {} ", effectiveTopic, jsons.size());
+    }
 
 }
