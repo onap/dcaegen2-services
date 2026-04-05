@@ -3,6 +3,7 @@
 * ONAP : DATALAKE
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -42,7 +43,7 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.xcontent.XContentType;
 import org.elasticsearch.rest.RestStatus;
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;
@@ -57,8 +58,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
- * Elasticsearch Service for table creation, data submission, as well as data pre-processing. 
- * 
+ * Elasticsearch Service for table creation, data submission, as well as data pre-processing.
+ *
  * @author Guobiao Mo
  *
  */
@@ -66,189 +67,193 @@ import org.springframework.stereotype.Service;
 @Scope("prototype")
 public class ElasticsearchService implements DbStoreService {
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
-	private Db elasticsearch;
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private ApplicationConfiguration config;
+    private Db elasticsearch;
 
-	private RestHighLevelClient client;//thread safe
-	ActionListener<BulkResponse> listener;
-	
-	public ElasticsearchService(Db db) {
-		elasticsearch = db;
-	}
-	
-	//ES Encrypted communication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_encrypted_communication.html#_encrypted_communication
-	//Basic authentication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_basic_authentication.html
-	@PostConstruct
-	@Override
-	public void init() {
-		String elasticsearchHost = elasticsearch.getHost();
+    @Autowired
+    private ApplicationConfiguration config;
 
-		// Initialize the Connection
-		client = new RestHighLevelClient(RestClient.builder(new HttpHost(elasticsearchHost, 9200, "http"), new HttpHost(elasticsearchHost, 9201, "http")));
+    private RestHighLevelClient client;//thread safe
+    ActionListener<BulkResponse> listener;
 
-		log.info("Connected to Elasticsearch Host {}", elasticsearchHost);
+    public ElasticsearchService(Db db) {
+        elasticsearch = db;
+    }
 
-		listener = new ActionListener<BulkResponse>() {
-			@Override
-			public void onResponse(BulkResponse bulkResponse) {
-				if(bulkResponse.hasFailures()) {
-					log.debug(bulkResponse.buildFailureMessage());
-				}
-			}
+    //ES Encrypted communication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_encrypted_communication.html#_encrypted_communication
+    //Basic authentication https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/_basic_authentication.html
+    @PostConstruct
+    @Override
+    public void init() {
+        String elasticsearchHost = elasticsearch.getHost();
 
-			@Override
-			public void onFailure(Exception e) {
-				log.error(e.getMessage());
-			}
-		};
-	}
+        // Initialize the Connection
+        client = new RestHighLevelClient(RestClient.builder(new HttpHost(elasticsearchHost, 9200, "http"), new HttpHost(elasticsearchHost, 9201, "http")));
 
-	@PreDestroy
-	public void cleanUp() throws IOException {
-		config.getShutdownLock().readLock().lock();
+        log.info("Connected to Elasticsearch Host {}", elasticsearchHost);
 
-		try {
-			log.info("cleanUp() closing Elasticsearch client.");
-			client.close();
-		} catch (IOException e) {
-			log.error("client.close() at cleanUp.", e);
-		} finally {
-			config.getShutdownLock().readLock().unlock();
-		}
-	}
+        listener = new ActionListener<BulkResponse>() {
+            @Override
+            public void onResponse(BulkResponse bulkResponse) {
+                if(bulkResponse.hasFailures()) {
+                    log.debug(bulkResponse.buildFailureMessage());
+                }
+            }
 
-	public void ensureTableExist(String topic) throws IOException {
-		String topicLower = topic.toLowerCase();
+            @Override
+            public void onFailure(Exception e) {
+                log.error(e.getMessage());
+            }
+        };
+    }
 
-		GetIndexRequest request = new GetIndexRequest(topicLower);
+    @PreDestroy
+    public void cleanUp() throws IOException {
+        config.getShutdownLock().readLock().lock();
 
-		boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);
-		if (!exists) {
-			//TODO submit mapping template
-			CreateIndexRequest createIndexRequest = new CreateIndexRequest(topicLower);
-			CreateIndexResponse createIndexResponse = client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
-			log.info("{} : created {}", createIndexResponse.index(), createIndexResponse.isAcknowledged());
-		}
-	}
+        try {
+            log.info("cleanUp() closing Elasticsearch client.");
+            client.close();
+        } catch (IOException e) {
+            log.error("client.close() at cleanUp.", e);
+        } finally {
+            config.getShutdownLock().readLock().unlock();
+        }
+    }
 
-	//TTL is not supported in Elasticsearch 5.0 and later, what can we do? FIXME
-	@Override
-	public void saveJsons(EffectiveTopic effectiveTopic, List<JSONObject> jsons) {
-		
-		BulkRequest request = new BulkRequest();
+    public void ensureTableExist(String topic) throws IOException {
+        String topicLower = topic.toLowerCase();
 
-		for (JSONObject json : jsons) {
-			if (effectiveTopic.getTopic().isCorrelateClearedMessage()) {
-				boolean found = correlateClearedMessage(effectiveTopic.getTopic(), json);
-				if (found) {
-					continue;
-				}
-			}			
-			
-			String id = effectiveTopic.getTopic().getMessageId(json); //id can be null
-			
- 			request.add(new IndexRequest(effectiveTopic.getName().toLowerCase(), config.getElasticsearchType(), id).source(json.toString(), XContentType.JSON));
-		}
+        try {
+            GetIndexRequest request = new GetIndexRequest(topicLower);
+            boolean exists = client.indices().exists(request, RequestOptions.DEFAULT);
+            if (!exists) {
+                CreateIndexRequest createIndexRequest = new CreateIndexRequest(topicLower);
+                CreateIndexResponse createIndexResponse = client.indices().create(createIndexRequest, RequestOptions.DEFAULT);
+                log.info("{} : created {}", createIndexResponse.index(), createIndexResponse.isAcknowledged());
+            }
+        } catch (IOException e) {
+            throw e;
+        } catch (ElasticsearchException e) {
+            throw new IOException("Elasticsearch error: " + e.getMessage(), e);
+        }
+    }
 
-		log.debug("saving text to effectiveTopic = {}, batch count = {} ", effectiveTopic, jsons.size());
+    //TTL is not supported in Elasticsearch 5.0 and later, what can we do? FIXME
+    @Override
+    public void saveJsons(EffectiveTopic effectiveTopic, List<JSONObject> jsons) {
 
-		if (config.isAsync()) {
-			client.bulkAsync(request, RequestOptions.DEFAULT, listener);
-		} else {
-			try {
-				BulkResponse bulkResponse = client.bulk(request, RequestOptions.DEFAULT);
-				if(bulkResponse.hasFailures()) {
-					log.debug(bulkResponse.buildFailureMessage());
-				}
-			} catch (IOException e) {
-				log.error(effectiveTopic.getName(), e);
-			}
-		}
-		
-	}
- 	
-	/**
-	 *
-	 * @param topic
-	 * @param json
-	 * @return boolean
-	 *
-	 *         Because of query by id, The search API cannot be used for query. The
-	 *         search API can only query all data or based on the fields in the
-	 *         source. So use the get API, three parameters: index, type, document
-	 *         id
-	 */
-	private boolean correlateClearedMessage(Topic topic, JSONObject json) {
-		boolean found = false;
-		String eName = null;
+        BulkRequest request = new BulkRequest();
 
-		try {
-			eName = json.query("/event/commonEventHeader/eventName").toString();
+        for (JSONObject json : jsons) {
+            if (effectiveTopic.getTopic().isCorrelateClearedMessage()) {
+                boolean found = correlateClearedMessage(effectiveTopic.getTopic(), json);
+                if (found) {
+                    continue;
+                }
+            }
 
-			if (StringUtils.isNotBlank(eName) && eName.endsWith("Cleared")) {
+            String id = effectiveTopic.getTopic().getMessageId(json); //id can be null
 
-				String name = eName.substring(0, eName.length() - 7);
-				String reportingEntityName = json.query("/event/commonEventHeader/reportingEntityName").toString();
-				String specificProblem = json.query("/event/faultFields/specificProblem").toString();
+            request.add(new IndexRequest(effectiveTopic.getName().toLowerCase(), config.getElasticsearchType(), id).source(json.toString(), XContentType.JSON));
+        }
 
-				String id = String.join("^", name, reportingEntityName, specificProblem);//example: id = "aaaa^cccc^bbbbb"
-				String index = topic.getName().toLowerCase();
+        log.debug("saving text to effectiveTopic = {}, batch count = {} ", effectiveTopic, jsons.size());
 
-				//get
-				GetRequest getRequest = new GetRequest(index, config.getElasticsearchType(), id);
+        if (config.isAsync()) {
+            client.bulkAsync(request, RequestOptions.DEFAULT, listener);
+        } else {
+            try {
+                BulkResponse bulkResponse = client.bulk(request, RequestOptions.DEFAULT);
+                if(bulkResponse.hasFailures()) {
+                    log.debug(bulkResponse.buildFailureMessage());
+                }
+            } catch (Exception e) {
+                log.error(effectiveTopic.getName(), e);
+            }
+        }
 
-				GetResponse getResponse = null;
-				try {
-					getResponse = client.get(getRequest, RequestOptions.DEFAULT);
-					if (getResponse != null) {
+    }
 
-						if (getResponse.isExists()) {
-							String sourceAsString = getResponse.getSourceAsString();
-							JSONObject jsonObject = new JSONObject(sourceAsString);
-							jsonObject.getJSONObject("event").getJSONObject("faultFields").put("vfStatus", "closed");
-							String jsonString = jsonObject.toString();
+    /**
+     *
+     * @param topic
+     * @param json
+     * @return boolean
+     *
+     *         Because of query by id, The search API cannot be used for query. The
+     *         search API can only query all data or based on the fields in the
+     *         source. So use the get API, three parameters: index, type, document
+     *         id
+     */
+    private boolean correlateClearedMessage(Topic topic, JSONObject json) {
+        boolean found = false;
+        String eName = null;
 
-							//update
-							IndexRequest request = new IndexRequest(index, config.getElasticsearchType(), id);
-							request.source(jsonString, XContentType.JSON);
-							IndexResponse indexResponse = null;
-							try {
-								indexResponse = client.index(request, RequestOptions.DEFAULT);
-								found = true;
-							} catch (IOException e) {
-								log.error("save failure");
-							}
-						} else {
-							log.error("The getResponse was not exists");
-						}
+        try {
+            eName = json.query("/event/commonEventHeader/eventName").toString();
 
-					} else {
-						log.error("The document for this id was not found");
-					}
+            if (StringUtils.isNotBlank(eName) && eName.endsWith("Cleared")) {
 
-				} catch (ElasticsearchException e) {
-					if (e.status() == RestStatus.NOT_FOUND) {
-						log.error("The document for this id was not found");
-					}
-					if (e.status() == RestStatus.CONFLICT) {
-						log.error("Version conflict");
-					}
-					log.error("Get document exception", e);
-				} catch (IOException e) {
-					log.error(topic.getName(), e);
-				}
+                String name = eName.substring(0, eName.length() - 7);
+                String reportingEntityName = json.query("/event/commonEventHeader/reportingEntityName").toString();
+                String specificProblem = json.query("/event/faultFields/specificProblem").toString();
 
-			}
+                String id = String.join("^", name, reportingEntityName, specificProblem);//example: id = "aaaa^cccc^bbbbb"
+                String index = topic.getName().toLowerCase();
 
-		} catch (Exception e) {
-			log.error("error", e);
-		}
+                //get
+                GetRequest getRequest = new GetRequest(index, config.getElasticsearchType(), id);
 
-		return found;
-	}
+                GetResponse getResponse = null;
+                try {
+                    getResponse = client.get(getRequest, RequestOptions.DEFAULT);
+                    if (getResponse != null) {
+
+                        if (getResponse.isExists()) {
+                            String sourceAsString = getResponse.getSourceAsString();
+                            JSONObject jsonObject = new JSONObject(sourceAsString);
+                            jsonObject.getJSONObject("event").getJSONObject("faultFields").put("vfStatus", "closed");
+                            String jsonString = jsonObject.toString();
+
+                            //update
+                            IndexRequest request = new IndexRequest(index, config.getElasticsearchType(), id);
+                            request.source(jsonString, XContentType.JSON);
+                            IndexResponse indexResponse = null;
+                            try {
+                                indexResponse = client.index(request, RequestOptions.DEFAULT);
+                                found = true;
+                            } catch (IOException e) {
+                                log.error("save failure");
+                            }
+                        } else {
+                            log.error("The getResponse was not exists");
+                        }
+
+                    } else {
+                        log.error("The document for this id was not found");
+                    }
+
+                } catch (ElasticsearchException e) {
+                    if (e.status() == RestStatus.NOT_FOUND) {
+                        log.error("The document for this id was not found");
+                    }
+                    if (e.status() == RestStatus.CONFLICT) {
+                        log.error("Version conflict");
+                    }
+                    log.error("Get document exception", e);
+                } catch (IOException e) {
+                    log.error(topic.getName(), e);
+                }
+
+            }
+
+        } catch (Exception e) {
+            log.error("error", e);
+        }
+
+        return found;
+    }
 
 }
