@@ -3,6 +3,7 @@
  * ONAP : DataLake
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +33,7 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -56,13 +57,13 @@ public class DesignController {
 
     @Autowired
     private DesignRepository designRepository;
-    
+
     @Autowired
     private DesignService designService;
 
 	@PostMapping("")
 	@ResponseBody
-	@ApiOperation(value="Create a design.")
+	@Operation(summary="Create a design.")
     public PostReturnBody<DesignConfig> createDesign(@RequestBody DesignConfig designConfig, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
@@ -86,7 +87,7 @@ public class DesignController {
 
 	@PutMapping("{id}")
 	@ResponseBody
-	@ApiOperation(value="Update a design.")
+	@Operation(summary="Update a design.")
 	public PostReturnBody<DesignConfig> updateDesign(@RequestBody DesignConfig designConfig, BindingResult result, @PathVariable Integer id, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
@@ -116,9 +117,9 @@ public class DesignController {
 
 	@DeleteMapping("/{id}")
 	@ResponseBody
-	@ApiOperation(value="delete a design.")
+	@Operation(summary="delete a design.")
     public void deleteDesign(@PathVariable("id") Integer id, HttpServletResponse response) throws IOException{
-		
+
 		Design oldDesign = designService.getDesign(id);
 		if (oldDesign == null) {
 			sendError(response, 400, "design not found "+id);
@@ -131,7 +132,7 @@ public class DesignController {
 
 	@GetMapping("")
 	@ResponseBody
-	@ApiOperation(value="List all Designs")
+	@Operation(summary="List all Designs")
     public List<DesignConfig> queryAllDesign(){
 		return designService.queryAllDesign();
     }
@@ -139,7 +140,7 @@ public class DesignController {
 
 	@PostMapping("/deploy/{id}")
 	@ResponseBody
-	@ApiOperation(value="Design deploy")
+	@Operation(summary="Design deploy")
 	public Map<Integer, Boolean> deployDesign(@PathVariable Integer id, HttpServletResponse response) throws IOException {
 
 		Optional<Design> designOptional = designRepository.findById(id);
@@ -159,10 +160,10 @@ public class DesignController {
         retBody.setReturnBody(design.getDesignConfig());
         return retBody;
 	}
-    
+
 	private void sendError(HttpServletResponse response, int sc, String msg) throws IOException {
 		log.info(msg);
-		response.sendError(sc, msg);		
+		response.sendError(sc, msg);
 	}
-    
+
 }

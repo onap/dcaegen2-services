@@ -3,6 +3,7 @@
 * ONAP : DataLake
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -40,7 +41,7 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * This controller manages the big data storage settings. All the settings are
@@ -71,7 +72,7 @@ public class DbController {
 	//list all dbs
 	@GetMapping("")
 	@ResponseBody
-	@ApiOperation(value="Get all database id")
+	@Operation(summary="Get all database id")
 	public List<Integer> list() {
 		Iterable<Db> ret = dbRepository.findAll();
 		List<Integer> retString = new ArrayList<>();
@@ -85,7 +86,7 @@ public class DbController {
 
 	@GetMapping("/list")
 	@ResponseBody
-	@ApiOperation(value="Get all tools or dbs")
+	@Operation(summary="Get all tools or dbs")
 	public List<DbConfig> dblistByTool(@RequestParam boolean isDb) {
 		log.info("Search dbs by tool start......");
 		Iterable<DbType> dbType  = dbTypeRepository.findByTool(!isDb);
@@ -100,7 +101,7 @@ public class DbController {
 
 	@GetMapping("/idAndName/{id}")
 	@ResponseBody
-	@ApiOperation(value="Get all databases id and name by designTypeId")
+	@Operation(summary="Get all databases id and name by designTypeId")
 	public Map<Integer, String> listIdAndName(@PathVariable String id) {
 		Optional<DesignType> designType  = designTypeRepository.findById(id);
 		Map<Integer, String> map = new HashMap<>();
@@ -116,7 +117,7 @@ public class DbController {
 	//Create a  DB
 	@PostMapping("")
 	@ResponseBody
-	@ApiOperation(value="Create a new database.")
+	@Operation(summary="Create a new database.")
 	public PostReturnBody<DbConfig> createDb(@RequestBody DbConfig dbConfig, BindingResult result, HttpServletResponse response) throws IOException {
 		if (result.hasErrors()) {
 			sendError(response, 400, "Malformed format of Post body: " + result.toString());
@@ -162,11 +163,11 @@ public class DbController {
 	}
 
 	//Show a db
-	//the topics are missing in the return, since in we use @JsonBackReference on Db's topics 
-	//need to the the following method to retrieve the topic list 
+	//the topics are missing in the return, since in we use @JsonBackReference on Db's topics
+	//need to the the following method to retrieve the topic list
 	@GetMapping("/{dbId}")
 	@ResponseBody
-	@ApiOperation(value="Get a database's details.")
+	@Operation(summary="Get a database's details.")
 	public DbConfig getDb(@PathVariable("dbId") int dbId, HttpServletResponse response) throws IOException {
   		Optional<Db> db = dbRepository.findById(dbId);
   		return db.isPresent() ? db.get().getDbConfig() : null;
@@ -178,7 +179,7 @@ public class DbController {
 	//need to the the following method to retrieve the topic list
 	@DeleteMapping("/{id}")
 	@ResponseBody
-	@ApiOperation(value="Delete a database.")
+	@Operation(summary="Delete a database.")
 	public void deleteDb(@PathVariable("id") int id, HttpServletResponse response) throws IOException {
 
 		Optional<Db> delDb = dbRepository.findById(id);
@@ -196,7 +197,7 @@ public class DbController {
 	//Read topics in a DB
 	@GetMapping("/{dbName}/topics")
 	@ResponseBody
-	@ApiOperation(value="Get a database's all topics.")
+	@Operation(summary="Get a database's all topics.")
 	public Set<Topic> getDbTopics(@PathVariable("dbName") String dbName, HttpServletResponse response) throws IOException {
 		Set<Topic> topics;
 		try {
@@ -213,7 +214,7 @@ public class DbController {
 	//Update Db
 	@PutMapping("/{id}")
 	@ResponseBody
-	@ApiOperation(value="Update a database.")
+	@Operation(summary="Update a database.")
 	public PostReturnBody<DbConfig> updateDb(@PathVariable int id, @RequestBody DbConfig dbConfig, BindingResult result, HttpServletResponse response) throws IOException {
 
 		if (result.hasErrors()) {
@@ -261,16 +262,16 @@ public class DbController {
 	//get db type list
 	@GetMapping("/dbtypes")
 	@ResponseBody
-	@ApiOperation(value="Get a list of all db types.")
+	@Operation(summary="Get a list of all db types.")
 	public Iterable<DbType> getDbTypes(HttpServletResponse response) throws IOException {
 		log.info("Get a list of all db types ......");
-		Iterable<DbType> dbTypes = dbTypeRepository.findAll(); 
+		Iterable<DbType> dbTypes = dbTypeRepository.findAll();
 		return dbTypes;
  	}
 
 	@PostMapping("/verify")
 	@ResponseBody
-	@ApiOperation(value="Database connection verification")
+	@Operation(summary="Database connection verification")
 	public PostReturnBody<DbConfig> verifyDbConnection(@RequestBody DbConfig dbConfig, HttpServletResponse response) throws IOException {
 
 		/*

@@ -3,6 +3,7 @@
  * ONAP : DataLake
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * This controller manages designType settings
@@ -40,15 +41,15 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping(value = "/designTypes", produces = { MediaType.APPLICATION_JSON_VALUE })
 public class DesignTypeController {
-	
+
 	@Autowired
 	private DesignTypeService designTypeService;
-	
+
 	@GetMapping("")
 	@ResponseBody
-	@ApiOperation(value="List all designTypes")
+	@Operation(summary="List all designTypes")
     public List<DesignTypeConfig> getDesignType() {
 		return designTypeService.getDesignTypes();
     }
-    
+
 }

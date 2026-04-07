@@ -3,6 +3,7 @@
 * ONAP : DataLake
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -29,11 +30,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * This controller controls DL data feeder.
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -43,27 +44,27 @@ import io.swagger.annotations.ApiOperation;
 public class FeederController {
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
+
     @Autowired
     private PullService pullService;
 
     @Autowired
     ApplicationConfiguration config;
-    
+
     /**
      * @return message that application is started
-     * @throws IOException 
+     * @throws IOException
      */
     @PostMapping("/start")
     @ResponseBody
-	@ApiOperation(value="Start pulling data.")
+	@Operation(summary="Start pulling data.")
     public String start() throws IOException {
     	log.info("Going to start DataLake feeder ...");
     	if(pullService.isRunning() == false) {
             pullService.start();
         	log.info("DataLake feeder started.");
         }else {
-        	log.info("DataLake feeder already started.");        	
+        	log.info("DataLake feeder already started.");
         }
         return "{\"running\": true}";
     }
@@ -73,7 +74,7 @@ public class FeederController {
      */
     @PostMapping("/stop")
     @ResponseBody
-	@ApiOperation(value="Stop pulling data.")
+	@Operation(summary="Stop pulling data.")
     public String stop() {
     	log.info("Going to stop DataLake feeder ...");
         if(pullService.isRunning() == true)
@@ -89,8 +90,8 @@ public class FeederController {
      * @return feeder status
      */
     @GetMapping("/status")
-	@ApiOperation(value="Retrieve feeder status.")
-    public String status() {    	
+	@Operation(summary="Retrieve feeder status.")
+    public String status() {
     	String status = "Feeder is running: "+pullService.isRunning();
         log.info("sending feeder status ..." + status);//TODO we can send what topics are monitored, how many messages are sent, etc.
 

@@ -28,8 +28,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import springfox.documentation.oas.annotations.EnableOpenApi;
-
 /**
  * Entry point of the DataLake feeder application
  *
@@ -38,7 +36,6 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
  */
 
 @SpringBootApplication
-@EnableOpenApi
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

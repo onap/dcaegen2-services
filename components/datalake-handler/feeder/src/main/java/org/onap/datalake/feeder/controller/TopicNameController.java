@@ -3,6 +3,7 @@
  * ONAP : DataLake
  * ================================================================================
  * Copyright 2019-2020 China Mobile
+ * Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +21,7 @@
 
 package org.onap.datalake.feeder.controller;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.onap.datalake.feeder.domain.TopicName;
 import org.onap.datalake.feeder.repository.TopicNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class TopicNameController {
 
     @GetMapping("")
     @ResponseBody
-    @ApiOperation(value="List all topicNames")
+    @Operation(summary="List all topicNames")
     public List<String> list() {
         Iterable<TopicName> ret = topicNameRepository.findAll();
         List<String> retString = new ArrayList<>();
