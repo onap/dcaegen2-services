@@ -76,6 +76,14 @@
                <groupId>log4j</groupId>
                <artifactId>log4j</artifactId>
             </exclusion>
+            <exclusion>
+               <groupId>org.eclipse.jetty</groupId>
+               <artifactId>*</artifactId>
+            </exclusion>
+            <exclusion>
+               <groupId>org.eclipse.jetty.websocket</groupId>
+               <artifactId>*</artifactId>
+            </exclusion>
          </exclusions>
       </dependency>
 
@@ -187,6 +195,12 @@
          <groupId>io.druid</groupId>
          <artifactId>tranquility-core_2.11</artifactId>
          <version>0.8.3</version>
+         <exclusions>
+            <exclusion>
+               <groupId>org.eclipse.jetty</groupId>
+               <artifactId>*</artifactId>
+            </exclusion>
+         </exclusions>
       </dependency>
 
       <dependency>
