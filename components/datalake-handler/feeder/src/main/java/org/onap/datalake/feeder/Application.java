@@ -22,13 +22,10 @@
 
 package org.onap.datalake.feeder;
 
-import javax.sql.DataSource;
-
 import org.onap.datalake.feeder.service.PullService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 
 import springfox.documentation.oas.annotations.EnableOpenApi;
@@ -50,14 +47,5 @@ public class Application {
     @Bean
     public CommandLineRunner commandLineRunner(PullService pullService) {
         return args -> pullService.start();
-    }
-
-    @Bean
-    public DataSource dataSource() {
-
-        String url = "jdbc:postgresql://" + System.getenv("PG_HOST").trim() + ":" + System.getenv("PG_PORT").trim()
-                + "/datalake";
-        return DataSourceBuilder.create().url(url).username(System.getenv("PG_USER").trim())
-                .password(System.getenv("PG_PASSWORD").trim()).build();
     }
 }
