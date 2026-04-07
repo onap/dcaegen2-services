@@ -21,43 +21,27 @@
 
 package org.onap.datalake.feeder.config;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import java.util.function.Predicate;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
- * For Swagger integration
+ * Springdoc OpenAPI configuration
  *
  * @author Guobiao Mo
  *
  */
 
 @Configuration
-@EnableOpenApi
 public class SwaggerConfig {
+
     @Bean
-    public Docket produceApi() {
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("org.onap.datalake.feeder")).paths(paths()).build();
-    }
-
-    // Describe your apis
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("DataLake Rest APIs").description("This page lists all the rest apis for DataLake.").version("1.0.0-SNAPSHOT").build();
-    }
-
-    // Only select apis that matches the given Predicates.
-    private Predicate<String> paths() {
-        // Match all paths except /error
-        return PathSelectors.regex("/dbs.*")
-                .or(PathSelectors.regex("/topics.*"))
-                .or(PathSelectors.regex("/feeder.*"))
-                .or(PathSelectors.regex("/kafkas.*"));
+    public OpenAPI datalakeOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("DataLake Rest APIs")
+                        .description("This page lists all the rest apis for DataLake.")
+                        .version("1.0.0-SNAPSHOT"));
     }
 }

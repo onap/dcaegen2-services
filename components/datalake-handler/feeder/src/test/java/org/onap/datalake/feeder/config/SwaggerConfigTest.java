@@ -3,6 +3,7 @@
 * ONAP : DATALAKE
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -20,27 +21,25 @@
 
 package org.onap.datalake.feeder.config;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
 
+import io.swagger.v3.oas.models.OpenAPI;
 import org.junit.Test;
 
 /**
  * Test Swagger integration
- * 
+ *
  * @author Guobiao Mo
  *
  */
- 
+
 public class SwaggerConfigTest {
 
     @Test
-	public void test() {
-        try {
-        	SwaggerConfig config = new SwaggerConfig();
-        	config.produceApi();
-        } catch (Exception e) {
-            fail("failed to read configure Swagger.");
-        }
-	}
-
+    public void test() {
+        SwaggerConfig config = new SwaggerConfig();
+        OpenAPI openAPI = config.datalakeOpenAPI();
+        assertNotNull(openAPI);
+        assertNotNull(openAPI.getInfo());
+    }
 }

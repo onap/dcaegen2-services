@@ -3,6 +3,7 @@
 * ONAP : DataLake
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -27,13 +28,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * This controller controls DL data feeder.
- * 
+ *
  * @author Guobiao Mo
  *
  */
@@ -42,28 +47,28 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/feeder", produces = { MediaType.APPLICATION_JSON_VALUE })
 public class FeederController {
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private PullService pullService;
 
     @Autowired
     ApplicationConfiguration config;
-    
+
     /**
      * @return message that application is started
-     * @throws IOException 
+     * @throws IOException
      */
     @PostMapping("/start")
     @ResponseBody
-	@ApiOperation(value="Start pulling data.")
+    @Operation(summary="Start pulling data.")
     public String start() throws IOException {
-    	log.info("Going to start DataLake feeder ...");
-    	if(pullService.isRunning() == false) {
+        log.info("Going to start DataLake feeder ...");
+        if(pullService.isRunning() == false) {
             pullService.start();
-        	log.info("DataLake feeder started.");
+            log.info("DataLake feeder started.");
         }else {
-        	log.info("DataLake feeder already started.");        	
+            log.info("DataLake feeder already started.");
         }
         return "{\"running\": true}";
     }
@@ -73,25 +78,25 @@ public class FeederController {
      */
     @PostMapping("/stop")
     @ResponseBody
-	@ApiOperation(value="Stop pulling data.")
+    @Operation(summary="Stop pulling data.")
     public String stop() {
-    	log.info("Going to stop DataLake feeder ...");
+        log.info("Going to stop DataLake feeder ...");
         if(pullService.isRunning() == true)
         {
             pullService.shutdown();
-        	log.info("DataLake feeder is stopped.");
+            log.info("DataLake feeder is stopped.");
         }else {
-        	log.info("DataLake feeder already stopped.");
+            log.info("DataLake feeder already stopped.");
         }
-    	return "{\"running\": false}";
+        return "{\"running\": false}";
     }
     /**
      * @return feeder status
      */
     @GetMapping("/status")
-	@ApiOperation(value="Retrieve feeder status.")
-    public String status() {    	
-    	String status = "Feeder is running: "+pullService.isRunning();
+    @Operation(summary="Retrieve feeder status.")
+    public String status() {
+        String status = "Feeder is running: "+pullService.isRunning();
         log.info("sending feeder status ..." + status);//TODO we can send what topics are monitored, how many messages are sent, etc.
 
         return "{\"version\": \""+config.getDatalakeVersion()+"\", \"running\": "+pullService.isRunning()+"}";

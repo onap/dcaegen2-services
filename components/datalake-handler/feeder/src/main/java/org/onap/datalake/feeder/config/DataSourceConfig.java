@@ -23,7 +23,6 @@ package org.onap.datalake.feeder.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -33,39 +32,21 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(name = "datalake.pg.enabled", havingValue = "true", matchIfMissing = true)
 public class DataSourceConfig {
 
-    @Value("${datalake.pg.host:#{null}}")
+    @Value("${datalake.pg.host}")
     private String pgHost;
 
-    @Value("${datalake.pg.port:#{null}}")
+    @Value("${datalake.pg.port}")
     private String pgPort;
 
-    @Value("${datalake.pg.user:#{null}}")
+    @Value("${datalake.pg.user}")
     private String pgUser;
 
-    @Value("${datalake.pg.password:#{null}}")
+    @Value("${datalake.pg.password}")
     private String pgPassword;
 
     @Bean
     public DataSource dataSource() {
-        String host = resolve(pgHost, "PG_HOST");
-        String port = resolve(pgPort, "PG_PORT");
-        String user = resolve(pgUser, "PG_USER");
-        String password = resolve(pgPassword, "PG_PASSWORD");
-
-        String url = "jdbc:postgresql://" + host + ":" + port + "/datalake";
-        return DataSourceBuilder.create().url(url).username(user).password(password).build();
-    }
-
-    private static String resolve(String property, String envVar) {
-        if (property != null) {
-            return property.trim();
-        }
-        String env = System.getenv(envVar);
-        if (env == null) {
-            throw new IllegalStateException(
-                    "Neither property 'datalake.pg." + envVar.substring(3).toLowerCase()
-                            + "' nor environment variable '" + envVar + "' is set");
-        }
-        return env.trim();
+        String url = "jdbc:postgresql://" + pgHost.trim() + ":" + pgPort.trim() + "/datalake";
+        return DataSourceBuilder.create().url(url).username(pgUser.trim()).password(pgPassword.trim()).build();
     }
 }

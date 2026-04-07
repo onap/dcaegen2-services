@@ -3,6 +3,7 @@
  * ONAP : DataLake
  * ================================================================================
  * Copyright 2019 China Mobile
+ * Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
  *=================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +21,7 @@
 
 package org.onap.datalake.feeder.controller;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.onap.datalake.feeder.controller.domain.PostReturnBody;
 import org.onap.datalake.feeder.domain.Kafka;
 import org.onap.datalake.feeder.dto.KafkaConfig;
@@ -31,7 +32,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -57,7 +66,7 @@ public class KafkaController {
 
     @PostMapping("")
     @ResponseBody
-    @ApiOperation(value="Create a kafka.")
+    @Operation(summary="Create a kafka.")
     public PostReturnBody<KafkaConfig> createKafka(@RequestBody KafkaConfig kafkaConfig, BindingResult result, HttpServletResponse response) throws IOException {
 
         if (result.hasErrors()) {
@@ -87,7 +96,7 @@ public class KafkaController {
 
     @PutMapping("/{id}")
     @ResponseBody
-    @ApiOperation(value="Update a kafka.")
+    @Operation(summary="Update a kafka.")
     public PostReturnBody<KafkaConfig> updateKafka(@RequestBody KafkaConfig kafkaConfig, BindingResult result, @PathVariable int id, HttpServletResponse response) throws IOException {
 
         if (result.hasErrors()) {
@@ -116,7 +125,7 @@ public class KafkaController {
 
     @DeleteMapping("/{id}")
     @ResponseBody
-    @ApiOperation(value="delete a kafka.")
+    @Operation(summary="delete a kafka.")
     public void deleteKafka(@PathVariable("id") int id, HttpServletResponse response) throws IOException{
 
         Kafka oldKafka = kafkaService.getKafkaById(id);
@@ -130,7 +139,7 @@ public class KafkaController {
 
     /*@GetMapping("")
     @ResponseBody
-    @ApiOperation(value="List all Kafka id")
+    @Operation(summary="List all Kafka id")
     public List<Integer> list() {
         Iterable<Kafka> ret = kafkaRepository.findAll();
         List<Integer> retString = new ArrayList<>();
@@ -143,14 +152,14 @@ public class KafkaController {
 
     @GetMapping("")
     @ResponseBody
-    @ApiOperation(value="List all Kafkas")
+    @Operation(summary="List all Kafkas")
     public List<KafkaConfig> queryAllKafka(){
         return kafkaService.getAllKafka();
     }
 
     @GetMapping("/{id}")
     @ResponseBody
-    @ApiOperation(value="Get detail of kafka by id")
+    @Operation(summary="Get detail of kafka by id")
     public KafkaConfig getKafkaDetail(@PathVariable int id, HttpServletResponse response) throws IOException {
         log.info("Get detail of kafka, ID: " + id);
         Kafka oldKafka = kafkaService.getKafkaById(id);

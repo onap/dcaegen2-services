@@ -53,7 +53,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * This controller manages topic settings.
@@ -87,7 +87,7 @@ public class TopicController {
 
     @GetMapping("/kafka/{kafkaId}")
     @ResponseBody
-    @ApiOperation(value = "List all topic names in Kafka.")
+    @Operation(summary="List all topic names in Kafka.")
     public List<String> listKafkaTopics(@PathVariable("kafkaId") int kafkaId ) {
         Kafka kafka = kafkaRepository.findById(kafkaId).get();
         KafkaAdminService kafkaAdminService = context.getBean(KafkaAdminService.class, kafka);
@@ -96,7 +96,7 @@ public class TopicController {
 
     @GetMapping("/default")
     @ResponseBody
-    @ApiOperation(value = "Get default topic configuration.")
+    @Operation(summary="Get default topic configuration.")
     public TopicConfig getDefaultConfig(HttpServletResponse response) throws IOException {
         Topic topic = topicService.getDefaultTopicFromFeeder();
         if(topic == null) {
@@ -108,7 +108,7 @@ public class TopicController {
 
     @GetMapping("")
     @ResponseBody
-    @ApiOperation(value="List all topic id in database")
+    @Operation(summary="List all topic id in database")
     public List<Integer> list() {
         Iterable<Topic> ret = topicRepository.findAll();
         List<Integer> retString = new ArrayList<>();
@@ -122,7 +122,7 @@ public class TopicController {
 
     @PostMapping("")
     @ResponseBody
-    @ApiOperation(value="Create a new topic.")
+    @Operation(summary="Create a new topic.")
     public PostReturnBody<TopicConfig> createTopic(@RequestBody TopicConfig topicConfig, BindingResult result, HttpServletResponse response) throws IOException {
 
         if (result.hasErrors()) {
@@ -145,7 +145,7 @@ public class TopicController {
 
     @GetMapping("/{topicId}")
     @ResponseBody
-    @ApiOperation(value="Get a topic's settings.")
+    @Operation(summary="Get a topic's settings.")
     public TopicConfig getTopic(@PathVariable("topicId") int topicId, HttpServletResponse response) throws IOException {
         Topic topic = topicService.getTopic(topicId);
         if(topic == null) {
@@ -159,7 +159,7 @@ public class TopicController {
     //One exception is that old DBs are kept
     @PutMapping("/{topicId}")
     @ResponseBody
-    @ApiOperation(value="Update a topic.")
+    @Operation(summary="Update a topic.")
     public PostReturnBody<TopicConfig> updateTopic(@PathVariable("topicId") int topicId, @RequestBody TopicConfig topicConfig, BindingResult result, HttpServletResponse response) throws IOException {
 
         if (result.hasErrors()) {
@@ -186,7 +186,7 @@ public class TopicController {
 
     @DeleteMapping("/{topicId}")
     @ResponseBody
-    @ApiOperation(value="Delete a topic.")
+    @Operation(summary="Delete a topic.")
     public void deleteTopic(@PathVariable("topicId") int topicId, HttpServletResponse response) throws IOException
     {
         Topic oldTopic = topicService.getTopic(topicId);
