@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [DCAEGEN2-3443] Fix feeder startup crash that was introduced in previous change: exclude transitive Jetty from hadoop-client and tranquility-core; override tomcat-embed-core to 9.0.83 to match Spring Boot 2.7.18 and extract DataSource bean from Application to DataSourceConfig; add ApplicationContextTest to catch classpath/startup regressions
 - [DCAEGEN2-3443] Fix feeder startup crash that was introduced in 2.7 change.
   Use springdoc instead of springfox
+- [DCAEGEN2-3458] Fix des startup crash that was introduced in 2.7 change: exclude slf4j-reload4j and Jetty
+  from hadoop-client and tranquility-core, use springdoc instead of springfox, move DataSource bean to
+  DataSourceConfig; add ApplicationContextTest and LoggingBackendTest to catch classpath/startup regressions
 
 ## [1.1.3] - 2026/04/02
 

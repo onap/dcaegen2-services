@@ -3,6 +3,7 @@
 * ONAP : Data Extraction Service
 * ================================================================================
 * Copyright 2020 China Mobile
+* Modifications Copyright (C) 2026 Deutsche Telekom AG
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -20,8 +21,7 @@
 
 package org.onap.datalake.des.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -65,7 +65,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/exposure", produces = { MediaType.APPLICATION_JSON_VALUE })
-@Api(value = "/exposure", consumes = "application/json", produces = "application/json")
 public class DataExposureController {
 
     private final Logger log = LoggerFactory.getLogger(DataExposureController.class);
@@ -95,7 +94,7 @@ public class DataExposureController {
      */
     @PostMapping("/{serviceId}")
     @ResponseBody
-    @ApiOperation(value = "Datalake Data Exposure Service.")
+    @Operation(summary = "Datalake Data Exposure Service.")
     public HashMap<String, Object> serve(@PathVariable String serviceId, @RequestBody Map<String, String> requestMap,
             BindingResult bindingResult, HttpServletResponse response)
             throws IOException, SQLException, ClassNotFoundException {
@@ -148,7 +147,7 @@ public class DataExposureController {
      */
     @GetMapping("")
     @ResponseBody
-    @ApiOperation(value = "Datalake Data Exposure list")
+    @Operation(summary = "Datalake Data Exposure list")
     public List<DataExposureConfig> queryAllDataExposure() {
         return dataExposureService.queryAllDataExposure();
     }
@@ -164,7 +163,7 @@ public class DataExposureController {
      */
     @GetMapping("/{id}")
     @ResponseBody
-    @ApiOperation(value = "Get Detail of DataExposure")
+    @Operation(summary = "Get Detail of DataExposure")
     public DataExposureConfig queryAllDataExposure(@PathVariable String id, HttpServletResponse response)
             throws IOException {
         log.info("Get Detail of DataExposure Starting.....");
@@ -190,7 +189,7 @@ public class DataExposureController {
      */
     @PostMapping("")
     @ResponseBody
-    @ApiOperation(value = "Create a DataExposure.")
+    @Operation(summary = "Create a DataExposure.")
     public PostReturnBody<DataExposureConfig> createDataExposure(@RequestBody DataExposureConfig dataExposureConfig,
             BindingResult result, HttpServletResponse response) throws IOException {
         if (result.hasErrors()) {
@@ -229,7 +228,7 @@ public class DataExposureController {
      */
     @PutMapping("/{id}")
     @ResponseBody
-    @ApiOperation(value = "Update a DataExposure.")
+    @Operation(summary = "Update a DataExposure.")
     public PostReturnBody<DataExposureConfig> updateDataExposure(@RequestBody DataExposureConfig dataExposureConfig,
             BindingResult result, @PathVariable String id, HttpServletResponse response) throws IOException {
         if (result.hasErrors()) {

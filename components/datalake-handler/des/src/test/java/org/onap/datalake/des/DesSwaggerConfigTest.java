@@ -3,6 +3,7 @@
 * ONAP : DATALAKE DES
 * ================================================================================
 * Copyright 2020 China Mobile. All rights reserved.
+* Modifications Copyright (C) 2026 Deutsche Telekom AG.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -20,10 +21,10 @@
 
 package org.onap.datalake.des;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
 
+import io.swagger.v3.oas.models.OpenAPI;
 import org.junit.Test;
-import org.onap.datalake.des.DesSwaggerConfig;
 
 /**
  * Test Swagger integration.
@@ -36,12 +37,8 @@ public class DesSwaggerConfigTest {
 
     @Test
     public void test() {
-        try {
-            DesSwaggerConfig config = new DesSwaggerConfig();
-            config.desProduceApi();
-        } catch (Exception e) {
-            fail("failed to read configure Des Swagger.");
-        }
+        OpenAPI openAPI = new DesSwaggerConfig().desOpenAPI();
+        assertEquals("DataLake Rest APIs", openAPI.getInfo().getTitle());
     }
 
 }

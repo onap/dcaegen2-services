@@ -3,6 +3,7 @@
 * ONAP : Data Extraction Service
 * ================================================================================
 * Copyright 2020 China Mobile
+* Modifications Copyright (C) 2026 Deutsche Telekom AG
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -20,16 +21,10 @@
 
 package org.onap.datalake.des;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * For Swagger integration.
@@ -39,29 +34,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  */
 
 @Configuration
-@EnableSwagger2
 public class DesSwaggerConfig {
 
     /**
-     * des produceApi.
+     * des OpenAPI description.
      *
-     * @return Docket Docket
+     * @return OpenAPI des api info
      *
      */
     @Bean
-    public Docket desProduceApi() {
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(desApiInfo()).select()
-                .apis(RequestHandlerSelectors.basePackage("org.onap.datalake.des")).paths(PathSelectors.any()).build();
-    }
-
-    /**
-     * des Api description.
-     *
-     * @return ApiInfo des api Info
-     *
-     */
-    private ApiInfo desApiInfo() {
-        return new ApiInfoBuilder().title("DataLake Rest APIs")
-                .description("This page lists all the rest apis for DataLake.").version("1.0.0-SNAPSHOT").build();
+    public OpenAPI desOpenAPI() {
+        return new OpenAPI().info(new Info().title("DataLake Rest APIs")
+                .description("This page lists all the rest apis for DataLake.").version("1.0.0-SNAPSHOT"));
     }
 }
