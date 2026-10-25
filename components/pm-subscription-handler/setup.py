@@ -22,7 +22,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pm_subscription_handler",
-    version="2.2.3",
+    version="2.2.4",
     packages=find_packages(),
     author="lego@est.tech",
     author_email="lego@est.tech",
@@ -36,6 +36,7 @@ setup(
         "connexion==2.5.0",
         "flask_sqlalchemy==3.0.1",
         "Flask==2.2",
+        "Werkzeug==2.2.3",
         "tornado==6.1",
         "swagger-ui-bundle==0.0.6",
         "psycopg2-binary==2.9.5",
