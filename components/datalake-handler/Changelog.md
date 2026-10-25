@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - [DCAEGEN2-3458] Fix des startup crash that was introduced in 2.7 change: exclude slf4j-reload4j and Jetty
   from hadoop-client and tranquility-core, use springdoc instead of springfox, move DataSource bean to
   DataSourceConfig; add ApplicationContextTest and LoggingBackendTest to catch classpath/startup regressions
+- [DCAEGEN2-3460] Update admin-ui base image from nginx:1.17.9 to nginx:1.31.8
 
 ## [1.1.3] - 2026/04/02
 

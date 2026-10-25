@@ -33,7 +33,7 @@ RUN npm install && \
     npm run build
 
 
-FROM nginx:1.17.9
+FROM nginx:1.31.8
 
 RUN groupadd -r datalake && useradd -r -g datalake datalake
 
