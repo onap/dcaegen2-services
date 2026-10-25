@@ -2,6 +2,7 @@
 #  Copyright (C) 2019-2023 Nordix Foundation.
 #  Copyright (C) 2021 AT&T Property. All rights reserved.
 #  Copyright 2020 Deutsche Telekom. All rights reserved.
+#  Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 # ================================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +23,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="pm_subscription_handler",
-    version="2.2.3",
+    version="2.2.4",
     packages=find_packages(),
     author="lego@est.tech",
     author_email="lego@est.tech",
@@ -36,6 +37,12 @@ setup(
         "connexion==2.5.0",
         "flask_sqlalchemy==3.0.1",
         "Flask==2.2",
+        "Werkzeug==2.2.3",
+        # greenlet >= 3.2 ships musllinux_1_2 wheels that segfault on the
+        # Alpine 3.15 base image
+        "greenlet==3.1.1",
+        # connexion 2.5.0 imports pkg_resources, which setuptools 82 removed
+        "setuptools<82",
         "tornado==6.1",
         "swagger-ui-bundle==0.0.6",
         "psycopg2-binary==2.9.5",
