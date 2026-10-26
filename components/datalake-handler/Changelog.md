@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   from hadoop-client and tranquility-core, use springdoc instead of springfox, move DataSource bean to
   DataSourceConfig; add ApplicationContextTest and LoggingBackendTest to catch classpath/startup regressions
 - [DCAEGEN2-3460] Update admin-ui base image from nginx:1.17.9 to nginx:1.31.8
+- [DCAEGEN2-3461] Remove 20 dependencies that des never uses (hadoop, tranquility, Elasticsearch, Kafka, MongoDB,
+  Couchbase and others), shrinking the des image from 394 to 79 runtime artifacts
 
 ## [1.1.3] - 2026/04/02
 
