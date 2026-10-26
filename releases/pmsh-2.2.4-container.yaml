@@ -1,0 +1,10 @@
+distribution_type: 'container'
+version: '2.2.4'
+project: 'dcaegen2-services-pmsh'
+log_dir: 'dcaegen2-services-pmsh-docker-merge-master/424/'
+containers:
+  - name: 'org.onap.dcaegen2.services.pmsh'
+    version: '2.2.4-SNAPSHOT-20261026T061422Z'
+container_release_tag: '2.2.4'
+ref: 'a47318aa764aa0bcaabae16b48da28d1102eaa85'
+git_tag: '2.2.4-pmsh'
