@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [2.2.4]
+### Changed
+* Fix image build and startup (DCAEGEN2-3463): pin Werkzeug 2.2.3 (Flask 2.2 cannot import Werkzeug 3),
+  greenlet 3.1.1 (newer musl wheels segfault on the base image) and setuptools<82 (connexion needs
+  pkg_resources); build pyyaml 5.4.1 with Cython < 3
+
 ## [2.2.3]
 ### Changed
 * Fix dependencies and build script process (DCAEGEN2-3353)

@@ -1,6 +1,7 @@
 # ============LICENSE_START===================================================
 #  Copyright (C) 2020-2023 Nordix Foundation.
 #  Copyright 2020 Deutsche Telekom. All rights reserved.
+#  Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 # ============================================================================
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,8 +29,8 @@ RUN set -eux; \
     postgresql-dev
 
 COPY setup.py ./
-COPY requirements.txt ./
-RUN pip install --prefix /opt -r requirements.txt --no-cache-dir
+COPY requirements.txt build-constraints.txt ./
+RUN PIP_CONSTRAINT=build-constraints.txt PIP_BUILD_CONSTRAINT=build-constraints.txt pip install --prefix /opt -r requirements.txt --no-cache-dir
 
 # Second stage
 FROM nexus3.onap.org:10001/onap/integration-python:10.1.0

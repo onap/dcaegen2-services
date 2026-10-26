@@ -1,0 +1,6 @@
+# Constrains the isolated build of pyyaml 5.4.1, which has no wheel for musl
+# or Python 3.10, and whose sdist does not build with Cython 3. Older pip
+# reads this through PIP_CONSTRAINT; pip 25.3+ only through PIP_BUILD_CONSTRAINT.
+# pyyaml cannot move to 6.x, because onappylog 1.0.9 calls yaml.load()
+# without a Loader.
+cython<3
