@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.text.StringSubstitutor;
 import org.onap.datalake.des.domain.DataExposure;

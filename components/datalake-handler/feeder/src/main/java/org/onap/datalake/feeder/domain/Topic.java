@@ -26,17 +26,17 @@ import java.util.Set;
 import java.util.Map;
 import java.util.HashMap;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
@@ -95,7 +95,7 @@ public class Topic {
 	/**
 	 * save raw message text
 	 */
-	@Column(name = "`save_raw`", nullable = false, columnDefinition = " bit(1) DEFAULT 0")
+	@Column(name = "`save_raw`", nullable = false, columnDefinition = "boolean DEFAULT FALSE")
 	private boolean saveRaw;
 
 	/**
@@ -112,7 +112,7 @@ public class Topic {
 	private Integer ttl;
 
 	//if this flag is true, need to correlate alarm cleared message to previous alarm 
-	@Column(name = "`correlate_cleared_message`", nullable = false, columnDefinition = " bit(1) DEFAULT 0")
+	@Column(name = "`correlate_cleared_message`", nullable = false, columnDefinition = "boolean DEFAULT FALSE")
 	private boolean correlateClearedMessage;
 
 	//paths to the values in the JSON that are used to composite DB id, comma separated, example: "/event-header/id,/event-header/entity-type,/entity/product-name"

@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 import org.onap.datalake.feeder.dto.DesignConfig;
 

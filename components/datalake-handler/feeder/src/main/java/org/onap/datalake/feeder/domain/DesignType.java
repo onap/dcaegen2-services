@@ -29,7 +29,7 @@ import org.onap.datalake.feeder.dto.DesignTypeConfig;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * Domain class representing design_type

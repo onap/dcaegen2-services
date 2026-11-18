@@ -41,7 +41,7 @@ import org.onap.datalake.feeder.service.DbService;
 import org.onap.datalake.feeder.util.TestUtil;
 import org.springframework.validation.BindingResult;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;

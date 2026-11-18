@@ -32,7 +32,7 @@ import org.onap.datalake.feeder.repository.KafkaRepository;
 import org.onap.datalake.feeder.service.KafkaService;
 import org.springframework.validation.BindingResult;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
