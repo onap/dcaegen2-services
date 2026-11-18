@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.0] - Unreleased
+
+- [DCAEGEN2-3444] Bump development version to 1.3.0-SNAPSHOT.
+
 ## [1.2.0] - 2026/04/03
 
 - [DCAEGEN2-3433] Migrate datalake-feeder from message-router/ZooKeeper to Kafka AdminClient
