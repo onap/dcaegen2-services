@@ -27,7 +27,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

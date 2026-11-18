@@ -4,6 +4,7 @@
  * ================================================================================
  * Copyright (C) 2018-2019 Huawei. All rights reserved.
  * Copyright (C) 2022 Wipro Limited.
+ * Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +42,7 @@ import org.onap.datalake.feeder.service.DbService;
 import org.onap.datalake.feeder.util.TestUtil;
 import org.springframework.validation.BindingResult;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;

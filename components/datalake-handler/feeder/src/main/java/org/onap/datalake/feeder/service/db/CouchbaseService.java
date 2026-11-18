@@ -26,8 +26,8 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
 import org.json.JSONObject;
 import org.onap.datalake.feeder.config.ApplicationConfiguration;

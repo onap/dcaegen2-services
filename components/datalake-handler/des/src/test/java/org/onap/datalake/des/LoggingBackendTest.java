@@ -23,27 +23,25 @@ package org.onap.datalake.des;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Collections;
 import java.util.List;
+import java.util.ServiceLoader;
 
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
+import org.slf4j.spi.SLF4JServiceProvider;
 
 import ch.qos.logback.classic.LoggerContext;
 
 /**
- * Spring Boot refuses to start when Logback and a second SLF4J binding are both on the classpath.
- * Which binding wins depends on classpath order, so the binding count is asserted directly.
+ * Verify that Logback is the only SLF4J provider on the classpath.
  */
 public class LoggingBackendTest {
 
     @Test
-    public void onlyOneSlf4jBindingIsOnTheClasspath() throws IOException {
-        List<URL> bindings = Collections.list(
-                getClass().getClassLoader().getResources("org/slf4j/impl/StaticLoggerBinder.class"));
-        assertEquals("SLF4J bindings found: " + bindings, 1, bindings.size());
+    public void onlyOneSlf4jProviderIsOnTheClasspath() {
+        List<String> providers = ServiceLoader.load(SLF4JServiceProvider.class).stream()
+                .map(provider -> provider.type().getName()).toList();
+        assertEquals("SLF4J providers found: " + providers, 1, providers.size());
     }
 
     @Test

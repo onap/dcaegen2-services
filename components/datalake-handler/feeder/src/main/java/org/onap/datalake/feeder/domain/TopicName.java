@@ -3,6 +3,7 @@
 * ONAP : DataLake
 * ================================================================================
 * Copyright 2019 China Mobile
+* Copyright (C) 2026 Deutsche Telekom AG. All rights reserved.
 *=================================================================================
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -22,12 +23,12 @@ package org.onap.datalake.feeder.domain;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;

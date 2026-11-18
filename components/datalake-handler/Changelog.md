@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.3.0] - Unreleased
 
 - [DCAEGEN2-3444] Bump development version to 1.3.0-SNAPSHOT.
+- [DCAEGEN2-3212] Upgrade feeder and the exposure service to Spring Boot 3.5 and Java 17, remove unused feeder libraries, and package only the executable JAR in each image.
 
 ## [1.2.0] - 2026/04/03
 
